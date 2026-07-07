@@ -1,7 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/yandex_9e3bfa52eddd5836.html", "destination": "/yandex_9e3bfa52eddd5836.txt" }
+  ],
   "headers": [
+    {
+      "source": "/yandex_9e3bfa52eddd5836.html",
+      "headers": [
+        { "key": "Content-Type", "value": "text/html; charset=UTF-8" }
+      ]
+    },
     {
       "source": "/api/radar-state",
       "headers": [
