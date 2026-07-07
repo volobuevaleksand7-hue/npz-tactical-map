@@ -1,0 +1,41 @@
+# NPZ TACTICAL MAP — VPS cron (routine)
+# Установка:   ( crontab -l 2>/dev/null; cat agents/crontab.txt ) | crontab -
+# Требуется: установленный `claude` CLI (Claude Code) на VPS + git push-доступ к репо.
+#
+TZ=UTC
+MAILTO=root
+#
+# Модели по силе задачи:
+#   collectors (факт-сбор новостей)  -> Haiku  (дёшево), 4 раза в сутки
+#   forecast   (макро-анализ)        -> Opus   (умно),   раз в неделю
+#
+# Сбор новостей 4×/сутки = каждые 6 часов (00,06,12,18 UTC), со сдвигом по минутам,
+# чтобы три агента не толкались при git push.
+
+# A) NPZ-STATUS  (Haiku) — статусы заводов и терминалов  → data/fuel-state.json
+5 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-npz.md npz-status >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+
+# B) FUEL-MARKET (Haiku) — дефицит/баланс/меры          → data/fuel-state.json
+15 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-market.md fuel-market >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+
+# C) HISTORY-CRIMEA (Haiku) — хроника + Крым            → data/history-crimea.json
+25 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-history.md history-crimea >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+
+# E) STRIKES (Haiku) — удары по городам БПЛА/ракетами    → data/strikes.json
+35 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-strikes.md strikes >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+
+# F) ROADS (Haiku) — дороги/топливная логистика, Мариуполь → data/roads.json
+45 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-roads.md roads >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+
+# H) NEWSWATCH (Haiku) — ЧАСОВОЙ fast-lane по ударам.
+# ЖИВЁТ КАК ОБЛАЧНЫЙ Remote-trigger Anthropic (id trig_01PhsFLRt2Q5yijyyVzRHq6D,
+# cron «0 1-5,7-11,13-17,19-23 * * *»), НЕ как VPS-крон. Промпт — agents/update-prompt-newswatch.md.
+# Строки cron здесь нет намеренно: все сборщики карты крутятся в облаке Anthropic, не на VPS.
+
+# D) FORECAST (Opus) — сценарный прогноз, раз в неделю (вс 03:45 UTC) → data/forecast.json
+45 3 * * 0 NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-opus-4-8 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-forecast.md forecast >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+
+# G) WATCHDOG (без LLM) — пересчёт data/health.json и публикация, ежечасно.
+# Фронт читает health.json из GitHub raw («N агентов отстали»), поэтому статус
+# должен регулярно обновляться независимо от того, запускались ли сборщики.
+0 * * * * cd /root/npz-tactical-map && git pull --rebase --quiet >> agents/logs/cron.log 2>&1 && python3 agents/healthcheck.py >> agents/logs/cron.log 2>&1 && bash agents/git-sync.sh "health: watchdog check $(date -u +%Y-%m-%dT%H:%MZ)" >> agents/logs/cron.log 2>&1

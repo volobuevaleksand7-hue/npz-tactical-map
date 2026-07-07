@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Омский НПЗ поражён — первый удар по Сибири | Топливный фронт РФ</title>
+  <meta name="description" content="Вечерняя сводка Топливного фронта РФ за 6 июля 2026: Омский НПЗ, 15 ударов за сутки, ЯНОС — 3-я атака, выбито около 38% мощностей переработки.">
+  <style>
+    :root {
+      --bg:#0d1216;
+      --board:#0f1620;
+      --surface:#16202b;
+      --surface2:#1c2835;
+      --ink:#e2ebef;
+      --ink-dim:#8499a6;
+      --line:rgba(130,170,190,.20);
+      --line2:rgba(130,170,190,.10);
+      --green:#3fe089;
+      --green-d:#2bbf6e;
+      --amber:#ffb443;
+      --red:#ff5247;
+      --crit:#ff3a2c;
+      --teal:#3fd6cf;
+      --gold:#e6c259;
+      --shadow:0 8px 26px rgba(0,0,0,.5);
+      --shadow-sm:0 3px 12px rgba(0,0,0,.45);
+      --card-radius:14px;
+      --disp:"Rubik",system-ui,sans-serif;
+      --mono:"JetBrains Mono",monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 22% 8%, rgba(230,194,89,.13), transparent 34rem),
+        radial-gradient(circle at 88% 18%, rgba(63,214,207,.10), transparent 30rem),
+        linear-gradient(180deg, #0a0f13 0%, var(--bg) 45%, #0a0f13 100%);
+      color: var(--ink);
+      font-family: var(--disp);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    .mono { font-family: var(--mono); }
+    .muted { color: var(--ink-dim); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 6px 9px;
+      background: rgba(22,32,43,.76);
+      color: var(--ink);
+      font: 800 11px/1 var(--mono);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge.red { color: #fff; background: rgba(255,82,71,.18); border-color: rgba(255,82,71,.42); }
+    .badge.green { color: #06180f; background: var(--green); border-color: var(--green); }
+    .badge.amber { color: #241500; background: var(--amber); border-color: var(--amber); }
+
+    .hero {
+      min-height: 82vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(13,18,22,.18), rgba(13,18,22,.76) 52%, var(--bg) 100%),
+        linear-gradient(135deg, rgba(255,180,67,.24), rgba(63,214,207,.08)),
+        url("../../assets/cover-2026-07-06.png") center/cover no-repeat;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.65), transparent 70%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 28vh 0 56px;
+    }
+    .topline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      max-width: 920px;
+      margin: 0;
+      font-size: clamp(38px, 7vw, 86px);
+      line-height: .93;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .lead {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: #d4e0e6;
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.45;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 26px;
+      color: var(--ink-dim);
+      font: 700 12px/1.4 var(--mono);
+    }
+
+    main { padding: 34px 0 56px; }
+    section {
+      margin: 0 0 26px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--card-radius);
+      background: linear-gradient(180deg, rgba(22,32,43,.92), rgba(15,22,32,.92));
+      box-shadow: var(--shadow-sm);
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+    h2 { margin: 0; font-size: clamp(22px, 3vw, 34px); line-height: 1.05; }
+    .section-note { max-width: 620px; margin: 8px 0 0; color: var(--ink-dim); line-height: 1.55; }
+
+    .updates {
+      display: grid;
+      gap: 10px;
+      border-left: 3px solid var(--teal);
+      padding-left: 15px;
+    }
+    .update {
+      display: grid;
+      gap: 5px;
+      padding: 12px 14px;
+      border: 1px solid var(--line2);
+      border-radius: 10px;
+      background: rgba(63,214,207,.07);
+    }
+    .update strong { color: var(--teal); font-family: var(--mono); font-size: 12px; }
+
+    .main-card {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+    .main-card > div {
+      border-radius: 12px;
+      border: 1px solid var(--line2);
+      background: rgba(28,40,53,.72);
+      padding: 18px;
+    }
+    .main-card p { margin: 0 0 13px; line-height: 1.62; }
+    .fact-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .fact-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line2);
+      line-height: 1.35;
+    }
+    .fact-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .strike-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .strike-card {
+      display: grid;
+      gap: 11px;
+      min-height: 198px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(28,40,53,.72);
+    }
+    .strike-card h3 { margin: 0; font-size: 17px; line-height: 1.2; }
+    .strike-card p { margin: 0; color: var(--ink-dim); font-size: 13px; line-height: 1.48; }
+    .strike-top { display: flex; justify-content: space-between; gap: 8px; align-items: start; }
+    .repeat { color: var(--gold); font: 800 11px/1 var(--mono); }
+    .status { font: 800 11px/1 var(--mono); color: var(--green); }
+    .status.reported { color: var(--amber); }
+    .map-link { align-self: end; font: 800 12px/1 var(--mono); }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .metric {
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(28,40,53,.95), rgba(13,18,22,.84));
+    }
+    .metric .n { font: 800 clamp(34px, 5vw, 56px)/.92 var(--mono); color: var(--amber); }
+    .metric .label { margin-top: 11px; color: var(--ink-dim); font-size: 13px; line-height: 1.35; }
+    .metric.red .n { color: var(--red); }
+    .metric.green .n { color: var(--green); }
+    .metric.teal .n { color: var(--teal); }
+
+    .chart-wrap {
+      overflow-x: auto;
+      padding: 10px 4px 0;
+      border-radius: 12px;
+      background: rgba(13,18,22,.45);
+      border: 1px solid var(--line2);
+    }
+    .loss-chart {
+      display: block;
+      width: 100%;
+      min-width: 760px;
+      height: auto;
+      font-family: var(--mono);
+    }
+    .chart-caption {
+      margin: 12px 0 0;
+      color: var(--ink-dim);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .azs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .azs-col {
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(28,40,53,.72);
+    }
+    .azs-col h3 { margin: 0 0 12px; font-size: 17px; }
+    .azs-col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .azs-col li { display: grid; gap: 4px; color: var(--ink); line-height: 1.35; }
+    .azs-col small { color: var(--ink-dim); }
+    .dry { border-top: 4px solid var(--red); }
+    .limited { border-top: 4px solid var(--amber); }
+    .watched { border-top: 4px solid var(--teal); }
+
+    .voices {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 14px;
+    }
+    blockquote {
+      margin: 0;
+      padding: 20px;
+      border-left: 4px solid var(--teal);
+      border-radius: 12px;
+      background: rgba(63,214,207,.08);
+      font-size: clamp(18px, 2.2vw, 25px);
+      line-height: 1.42;
+    }
+    blockquote footer { margin-top: 14px; color: var(--ink-dim); font: 700 13px/1.4 var(--mono); }
+    .voice-side {
+      padding: 18px;
+      border: 1px solid var(--line2);
+      border-radius: 12px;
+      background: rgba(28,40,53,.72);
+      color: var(--ink-dim);
+      line-height: 1.56;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      color: var(--ink-dim);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .footer-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(22,32,43,.82);
+    }
+    .footer-card h3 { margin: 0 0 10px; color: var(--ink); font-size: 15px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 10px 14px; }
+
+    @media (max-width: 880px) {
+      .hero { min-height: 0; height: 40vh; max-height: 40vh; align-items: end; }
+      .hero-inner { padding: 9vh 0 20px; }
+      .hero-meta { display: none; }
+      main { padding-top: 20px; }
+      section { padding: 18px; }
+      .main-card, .voices, .footer { grid-template-columns: 1fr; }
+      .strike-grid, .azs-grid { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .section-head { display: block; }
+      .section-head .badge { margin-top: 12px; }
+    }
+
+    @media (max-width: 520px) {
+      .page { width: min(100% - 20px, 1180px); }
+      .hero { height: 40vh; max-height: 40vh; }
+      .hero-inner { padding: 7vh 0 14px; }
+      h1 { font-size: 30px; line-height: .98; }
+      .lead { font-size: 14px; line-height: 1.32; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .topline { gap: 7px; }
+      .badge { font-size: 10px; padding: 6px 7px; }
+      .metric { padding: 14px; }
+      .metric .n { font-size: 32px; }
+      blockquote { font-size: 17px; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="page hero-inner">
+      <div class="topline">
+        <span class="badge amber">Вечерняя сводка</span>
+        <span class="badge">6 июля 2026 · 20:00 МСК (UTC+3)</span>
+        <span class="badge">Обновлено: 23:20 МСК</span>
+        <span class="badge red">Архив дня</span>
+      </div>
+      <h1>Омский НПЗ поражён — первый удар по Сибири, 2 500 км от границы</h1>
+      <p class="lead">Дроны достигли крупнейшего НПЗ России. На фоне 15 ударов за сутки ЯНОС получает третью атаку, оценочно выбито около 38% мощностей переработки, а розничный дефицит остаётся жёстким в Крыму и на Кубани.</p>
+      <div class="hero-meta">
+        <span>OSINT-сводка · Топливный фронт РФ</span>
+        <span>Обложка: assets/cover-2026-07-06.png</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section id="updates" aria-labelledby="updates-title">
+      <div class="section-head">
+        <div>
+          <h2 id="updates-title">🔄 Лента апдейтов дня</h2>
+          <p class="section-note">Новые строки сводки в течение 6 июля 2026. Все времена указаны по Москве.</p>
+        </div>
+        <span class="badge">digest-updates</span>
+      </div>
+      <div class="updates">
+        <div class="update"><strong>23:20 МСК</strong><span>Белгород: ракеты по ТЭЦ и объектам энергетики, городские районы остались без электричества.</span></div>
+        <div class="update"><strong>17:00 МСК</strong><span>Подтверждён удар по Омскому НПЗ: NASA FIRMS фиксирует пожар на АВТ-10; ELOU-AVT-11 указана как поражённая установка.</span></div>
+        <div class="update"><strong>07:08 МСК</strong><span>Ярославль: ЯНОС — третья атака после 8 мая и 28 июня; объект уже работал на сниженной мощности.</span></div>
+      </div>
+    </section>
+
+    <section id="main" aria-labelledby="main-title">
+      <div class="section-head">
+        <div>
+          <h2 id="main-title">Главное</h2>
+          <p class="section-note">Лид дня с подтверждением и ссылкой на молнию.</p>
+        </div>
+        <span class="badge green">✓ NASA FIRMS · власти Омска</span>
+      </div>
+      <div class="main-card">
+        <div>
+          <p><strong>Омский НПЗ</strong> — крупнейший НПЗ РФ, мощность более 22 млн т/год. Удар стал первым эпизодом кампании по НПЗ в Сибири и расширил географию риска до объектов за 2 500 км от границы.</p>
+          <p>По сводке дня, горят установки АВТ-10 и ELOU-AVT-11; площадка также связана с единственным в РФ производством крекинг-катализаторов. Статус: подтверждено открытыми тепловыми данными и локальными сообщениями.</p>
+          <a class="map-link" href="/news/2026-07-06#omsk">🚨 МОЛНИЯ: удар по Омскому НПЗ</a>
+        </div>
+        <div>
+          <ul class="fact-list">
+            <li><span>Событие дня</span><strong>первый удар по Сибири</strong></li>
+            <li><span>Дистанция</span><strong>~2 500 км</strong></li>
+            <li><span>Удары за сутки</span><strong>15 всего · 8 по НПЗ/энергетике</strong></li>
+            <li><span>Повторность</span><strong>ЯНОС — 3-я атака</strong></li>
+            <li><span>Рынок</span><strong>АИ-95 74 250 ₽/т</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="strikes" aria-labelledby="strikes-title">
+      <div class="section-head">
+        <div>
+          <h2 id="strikes-title">Удары за сутки</h2>
+          <p class="section-note">Карточки показывают объект, тип, статус, повторность и якорь на карту.</p>
+        </div>
+        <span class="badge red">15 эпизодов</span>
+      </div>
+      <div class="strike-grid">
+        <article class="strike-card" id="omsk">
+          <div class="strike-top"><span class="badge red">🏭 НПЗ</span><span class="repeat">1-я атака</span></div>
+          <h3>Омск · Омский НПЗ</h3>
+          <p>Крупнейший НПЗ РФ; горят АВТ-10 и ELOU-AVT-11, удар по сибирскому контуру переработки.</p>
+          <span class="status">✓ подтверждено</span>
+          <a class="map-link" href="/?strike=omsk-npz-2026-07-06">карта →</a>
+        </article>
+        <article class="strike-card">
+          <div class="strike-top"><span class="badge red">🏭 НПЗ</span><span class="repeat">3-я атака</span></div>
+          <h3>Ярославль · ЯНОС</h3>
+          <p>Третья атака после 8.05 и 28.06; один из пяти крупнейших НПЗ РФ работал на сниженной мощности.</p>
+          <span class="status reported">~ сообщается</span>
+          <a class="map-link" href="/?strike=yanos-2026-07-06">карта →</a>
+        </article>
+        <article class="strike-card">
+          <div class="strike-top"><span class="badge">⚡ энергетика</span><span class="repeat">повтор за ночь</span></div>
+          <h3>Белгород · ТЭЦ</h3>
+          <p>Ракетный удар по энергетической инфраструктуре; сообщения о крупном пожаре и отключениях.</p>
+          <span class="status">✓ подтверждено</span>
+          <a class="map-link" href="/?strike=belgorod-tec-2026-07-06">карта →</a>
+        </article>
+        <article class="strike-card">
+          <div class="strike-top"><span class="badge red">🏭 НПЗ</span><span class="repeat">новый объект</span></div>
+          <h3>Калуга · «Первый завод»</h3>
+          <p>Мини-НПЗ в Товарково; ночная атака БПЛА, объект ранее не фигурировал в списке ударов.</p>
+          <span class="status reported">~ сообщается</span>
+          <a class="map-link" href="/?strike=kaluga-first-plant-2026-07-06">карта →</a>
+        </article>
+        <article class="strike-card">
+          <div class="strike-top"><span class="badge red">🏭 НПЗ</span><span class="repeat">1-я атака</span></div>
+          <h3>Орск · Орский НПЗ</h3>
+          <p>Forte Invest, около 6,6 млн т/год; независимое подтверждение на момент сводки не зафиксировано.</p>
+          <span class="status reported">~ сообщается</span>
+          <a class="map-link" href="/?strike=orsk-npz-2026-07-06">карта →</a>
+        </article>
+        <article class="strike-card">
+          <div class="strike-top"><span class="badge">порт</span><span class="repeat">инфраструктура</span></div>
+          <h3>Усть-Луга / Высоцк</h3>
+          <p>Повреждения объектов инфраструктуры в районе портов после массированной атаки по Ленобласти.</p>
+          <span class="status reported">~ сообщается</span>
+          <a class="map-link" href="/?strike=ust-luga-vysotsk-2026-07-06">карта →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="metrics" aria-labelledby="metrics-title">
+      <div class="section-head">
+        <div>
+          <h2 id="metrics-title">Панель метрик</h2>
+          <p class="section-note">Четыре числа для быстрого чтения рыночной картины.</p>
+        </div>
+        <span class="badge">оценочно</span>
+      </div>
+      <div class="metrics">
+        <div class="metric red"><div class="n">38%</div><div class="label">мощностей переработки выбито или недоступно по оценке дня</div></div>
+        <div class="metric amber"><div class="n">10/9</div><div class="label">НПЗ стоят полностью / работают частично</div></div>
+        <div class="metric teal"><div class="n">50+</div><div class="label">регионов с дефицитом, лимитами или жалобами на доступность</div></div>
+        <div class="metric green"><div class="n">74 250</div><div class="label">₽/т за АИ-95 на бирже, без резкой дневной дельты</div></div>
+      </div>
+    </section>
+
+    <section id="loss-chart" aria-labelledby="chart-title">
+      <div class="section-head">
+        <div>
+          <h2 id="chart-title">График потерь переработки</h2>
+          <p class="section-note">Опорные точки: 27.05 → 18%, 20.06 → 25%, 06.07 → 38%.</p>
+        </div>
+        <span class="badge">большой SVG</span>
+      </div>
+      <div class="chart-wrap" role="img" aria-label="График роста потерь мощностей переработки с 18 процентов 27 мая до 38 процентов 6 июля 2026">
+        <svg class="loss-chart" viewBox="0 0 920 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stop-color="#3fd6cf"/>
+              <stop offset=".55" stop-color="#ffb443"/>
+              <stop offset="1" stop-color="#ff5247"/>
+            </linearGradient>
+            <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#ff5247" stop-opacity=".28"/>
+              <stop offset="1" stop-color="#ff5247" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="920" height="420" rx="18" fill="#0d1216"/>
+          <g stroke="rgba(130,170,190,.18)" stroke-width="1">
+            <line x1="82" y1="330" x2="860" y2="330"/>
+            <line x1="82" y1="260" x2="860" y2="260"/>
+            <line x1="82" y1="190" x2="860" y2="190"/>
+            <line x1="82" y1="120" x2="860" y2="120"/>
+            <line x1="82" y1="50" x2="860" y2="50"/>
+          </g>
+          <g fill="#8499a6" font-size="12" font-weight="700">
+            <text x="32" y="334">0%</text>
+            <text x="25" y="264">10%</text>
+            <text x="25" y="194">20%</text>
+            <text x="25" y="124">30%</text>
+            <text x="25" y="54">40%</text>
+          </g>
+          <path d="M110 204 L485 155 L830 64 L830 330 L110 330 Z" fill="url(#areaGrad)"/>
+          <path d="M110 204 C250 185 350 172 485 155 S690 102 830 64" fill="none" stroke="url(#lineGrad)" stroke-width="6" stroke-linecap="round"/>
+          <g fill="#0d1216" stroke-width="5">
+            <circle cx="110" cy="204" r="9" stroke="#3fd6cf"/>
+            <circle cx="485" cy="155" r="9" stroke="#ffb443"/>
+            <circle cx="830" cy="64" r="9" stroke="#ff5247"/>
+          </g>
+          <g fill="#e2ebef" font-size="14" font-weight="800">
+            <text x="88" y="374">27.05</text>
+            <text x="463" y="374">20.06</text>
+            <text x="808" y="374">06.07</text>
+          </g>
+          <g fill="#8499a6" font-size="12">
+            <text x="94" y="392">майская волна ударов</text>
+            <text x="424" y="392">Крым/Капотня/НОРСИ</text>
+            <text x="753" y="392">Омск + ЯНОС</text>
+          </g>
+          <g>
+            <rect x="128" y="134" width="156" height="48" rx="10" fill="#16202b" stroke="rgba(130,170,190,.20)"/>
+            <text x="143" y="154" fill="#3fd6cf" font-size="12" font-weight="800">27.05 · 18%</text>
+            <text x="143" y="172" fill="#8499a6" font-size="11">порог системного риска</text>
+            <rect x="502" y="86" width="164" height="48" rx="10" fill="#16202b" stroke="rgba(130,170,190,.20)"/>
+            <text x="517" y="106" fill="#ffb443" font-size="12" font-weight="800">20.06 · 25%</text>
+            <text x="517" y="124" fill="#8499a6" font-size="11">четверть мощности</text>
+            <rect x="650" y="24" width="190" height="48" rx="10" fill="#16202b" stroke="rgba(255,82,71,.42)"/>
+            <text x="665" y="44" fill="#ff5247" font-size="12" font-weight="800">06.07 · 38%</text>
+            <text x="665" y="62" fill="#8499a6" font-size="11">Омский НПЗ меняет масштаб</text>
+          </g>
+        </svg>
+      </div>
+      <p class="chart-caption">Линия показывает не биржевую цену, а оценку недоступной перерабатывающей мощности. Методика должна пересчитываться из статусов НПЗ; здесь показан эталонный макет по заданным опорным точкам.</p>
+    </section>
+
+    <section id="azs" aria-labelledby="azs-title">
+      <div class="section-head">
+        <div>
+          <h2 id="azs-title">АЗС и цены</h2>
+          <p class="section-note">Регионы сгруппированы по статусам: сухо, лимиты/талоны, наблюдение.</p>
+        </div>
+        <span class="badge">розница</span>
+      </div>
+      <div class="azs-grid">
+        <div class="azs-col dry">
+          <h3>Сухо / критично</h3>
+          <ul>
+            <li><strong>Крым</strong><small>АТАН — 20 л; ТЭС закрыта/по генераторам; чёрный рынок до 350 ₽/л.</small></li>
+            <li><strong>Севастополь</strong><small>лимиты 20 л; отдельные станции работают по спискам и остаткам.</small></li>
+          </ul>
+        </div>
+        <div class="azs-col limited">
+          <h3>Талоны / лимиты</h3>
+          <ul>
+            <li><strong>Кубань</strong><small>20–30 л в бак; запрет канистр; очереди до 6–7 часов.</small></li>
+            <li><strong>Белгородская обл.</strong><small>20–30 л в бак, нехватка АИ-95 на части сетей.</small></li>
+            <li><strong>Курская обл.</strong><small>до 20 л, без отпуска в канистры.</small></li>
+          </ul>
+        </div>
+        <div class="azs-col watched">
+          <h3>Под наблюдением</h3>
+          <ul>
+            <li><strong>Москва / область</strong><small>локальные лимиты 30–100 л, ФАС проверяет цены сетей.</small></li>
+            <li><strong>Ленобласть</strong><small>лимиты до 50 л и жалобы на пустые колонки.</small></li>
+            <li><strong>Иркутск / Забайкалье</strong><small>режим повышенной готовности, задержания перепродавцов.</small></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="voices" aria-labelledby="voices-title">
+      <div class="section-head">
+        <div>
+          <h2 id="voices-title">Голоса</h2>
+          <p class="section-note">Только реальные цитаты из блока fuel-voices за 6 июля.</p>
+        </div>
+        <span class="badge">🗣 Новороссийск</span>
+      </div>
+      <div class="voices">
+        <blockquote>
+          «В Новороссийске таксисты начали массово уходить. Очереди на заправках растягиваются на 6–7 часов. Лимитов по топливу не хватает. Норма в 20 литров на легковушку иногда уходит за пару дней, а надо до 30 литров за сутки.»
+          <footer>— Новороссийск, Краснодарский край · 6 июля 2026</footer>
+        </blockquote>
+        <div class="voice-side">
+          Эта цитата объясняет, как биржевые и инфраструктурные цифры проявляются на земле: водительская смена становится зависимой от очереди, лимита и фактического наличия топлива, а не от цены на табло.
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-card">
+        <h3>Источники и дисклеймер</h3>
+        <p>Данные агрегированы из открытых OSINT-источников: NASA FIRMS, региональные сообщения, Telegram-каналы мониторинга, рыночные сводки и локальные свидетельства. Это оценка, не официальная информация; возможны уточнения задним числом.</p>
+      </div>
+      <div class="footer-card">
+        <h3>Перелинковка</h3>
+        <div class="footer-links">
+          <a href="/news/2026-07-05">← 5 июля</a>
+          <a href="/news/2026-07-07">7 июля →</a>
+          <a href="/news">Все сводки</a>
+          <a href="/">Карта</a>
+          <a href="/radar">Радар</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "NewsArticle",
+        "headline": "Омский НПЗ поражён — первый удар по Сибири, 2 500 км от границы",
+        "description": "Вечерняя сводка Топливного фронта РФ за 6 июля 2026: Омский НПЗ, 15 ударов за сутки, ЯНОС — 3-я атака, выбито около 38% мощностей переработки.",
+        "datePublished": "2026-07-06T20:00:00+03:00",
+        "dateModified": "2026-07-06T23:20:00+03:00",
+        "inLanguage": "ru-RU",
+        "image": "https://npz-tactical-map.vercel.app/assets/cover-2026-07-06.png",
+        "author": {"@type": "Organization", "name": "Топливный фронт РФ"},
+        "publisher": {"@type": "Organization", "name": "Топливный фронт РФ", "url": "https://npz-tactical-map.vercel.app/"},
+        "mainEntityOfPage": "https://npz-tactical-map.vercel.app/news/2026-07-06",
+        "isAccessibleForFree": true
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Карта", "item": "https://npz-tactical-map.vercel.app/"},
+          {"@type": "ListItem", "position": 2, "name": "Сводки", "item": "https://npz-tactical-map.vercel.app/news"},
+          {"@type": "ListItem", "position": 3, "name": "6 июля 2026", "item": "https://npz-tactical-map.vercel.app/news/2026-07-06"}
+        ]
+      }
+    ]
+  }
+  </script>
+</body>
+</html>

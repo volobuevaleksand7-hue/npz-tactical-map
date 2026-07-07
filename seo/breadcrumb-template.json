@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": "https://npz-tactical-map.vercel.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Новости",
+      "item": "https://npz-tactical-map.vercel.app/news"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ARTICLE_TITLE}}",
+      "item": "https://npz-tactical-map.vercel.app/news/{{ARTICLE_SLUG}}"
+    }
+  ]
+}

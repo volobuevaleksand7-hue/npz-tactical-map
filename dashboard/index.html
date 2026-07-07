@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name='robots' content='noindex'>
+<title>НПЗ Тактическая Карта — Панель Агентов</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d1117;--card:#161b22;--border:#30363d;
+  --ready:#8b949e;--running:#d29922;--completed:#3fb950;--blocked:#f85149;
+  --text:#c9d1d9;--text-dim:#8b949e;--accent:#58a6ff;
+  --col-w:260px;
+}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* Header */
+.header{background:linear-gradient(135deg,#161b22 0%,#1a1f29 100%);border-bottom:1px solid var(--border);padding:20px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.header h1{font-size:22px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:10px}
+.header h1 .icon{font-size:26px}
+.header .subtitle{color:var(--text-dim);font-size:13px}
+
+/* Feature flag indicator */
+.feature-flag{margin-left:auto;display:flex;align-items:center;gap:8px}
+.feature-flag label{font-size:12px;color:var(--text-dim)}
+.feature-flag input{accent-color:var(--accent)}
+
+/* Summary badges */
+.summary{display:flex;gap:12px;flex-wrap:wrap}
+.badge{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;border:1px solid}
+.badge .dot{width:10px;height:10px;border-radius:50%}
+.badge.ready{background:rgba(139,148,158,.1);border-color:rgba(139,148,158,.3);color:var(--ready)}
+.badge.ready .dot{background:var(--ready)}
+.badge.running{background:rgba(210,153,34,.1);border-color:rgba(210,153,34,.3);color:var(--running)}
+.badge.running .dot{background:var(--running)}
+.badge.completed{background:rgba(63,185,80,.1);border-color:rgba(63,185,80,.3);color:var(--completed)}
+.badge.completed .dot{background:var(--completed)}
+.badge.blocked{background:rgba(248,81,73,.1);border-color:rgba(248,81,73,.3);color:var(--blocked)}
+.badge.blocked .dot{background:var(--blocked)}
+
+.refresh-info{margin-left:auto;color:var(--text-dim);font-size:12px;text-align:right}
+.refresh-info .countdown{color:var(--accent);font-weight:600}
+
+/* Kanban board */
+.board{display:flex;gap:16px;padding:24px 32px;overflow-x:auto;min-height:calc(100vh - 100px)}
+.column{min-width:var(--col-w);flex:1;max-width:340px}
+.column-header{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:8px 8px 0 0;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1px}
+.column-header .count{margin-left:auto;background:rgba(255,255,255,.1);padding:2px 10px;border-radius:12px;font-size:12px}
+.col-ready .column-header{background:rgba(139,148,158,.15);color:var(--ready)}
+.col-running .column-header{background:rgba(210,153,34,.15);color:var(--running)}
+.col-completed .column-header{background:rgba(63,185,80,.15);color:var(--completed)}
+.col-blocked .column-header{background:rgba(248,81,73,.15);color:var(--blocked)}
+
+.column-body{background:rgba(22,27,34,.5);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:12px;display:flex;flex-direction:column;gap:10px;min-height:200px}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;transition:border-color .2s,box-shadow .2s;position:relative;overflow:hidden;cursor:pointer}
+.card:hover{border-color:var(--accent);box-shadow:0 0 12px rgba(88,166,255,.1)}
+.card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.col-ready .card::before{background:var(--ready)}
+.col-running .card::before{background:var(--running)}
+.col-completed .card::before{background:var(--completed)}
+.col-blocked .card::before{background:var(--blocked)}
+
+.card .agent-name{font-weight:700;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.card .agent-name .pulse{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.col-ready .pulse{background:var(--ready)}
+.col-running .pulse{background:var(--running);animation:pulse-anim 1.5s infinite}
+.col-completed .pulse{background:var(--completed)}
+.col-blocked .pulse{background:var(--blocked);animation:pulse-anim 1s infinite}
+
+@keyframes pulse-anim{0%,100%{opacity:1}50%{opacity:.3}}
+
+.card .detail{font-size:12px;color:var(--text-dim);line-height:1.7}
+.card .detail .label{color:var(--text);font-weight:500}
+.card .status-tag{display:inline-block;margin-top:8px;padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.col-ready .status-tag{background:rgba(139,148,158,.15);color:var(--ready)}
+.col-running .status-tag{background:rgba(210,153,34,.15);color:var(--running)}
+.col-completed .status-tag{background:rgba(63,185,80,.15);color:var(--completed)}
+.col-blocked .status-tag{background:rgba(248,81,73,.15);color:var(--blocked)}
+
+/* Time ago coloring */
+.time-fresh{color:var(--completed)}
+.time-stale{color:var(--running)}
+.time-old{color:var(--blocked)}
+
+/* Expanded card details */
+.card-details{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px}
+.card.expanded .card-details{display:block}
+.card-details .detail-row{display:flex;justify-content:space-between;margin-bottom:4px}
+.card-details .detail-label{color:var(--text-dim)}
+.card-details .detail-value{color:var(--text);font-weight:500}
+
+/* Scanline effect */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9999}
+
+/* Responsive */
+@media(max-width:900px){
+  .header{padding:16px}
+  .board{padding:16px;flex-direction:column}
+  .column{min-width:100%;max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span class="icon">🛢️</span> НПЗ — Панель Агентов</h1>
+  <span class="subtitle">Тактическая карта состояния НПЗ РФ · Мониторинг агентов-сборщиков</span>
+  <div class="summary" id="summary"></div>
+  <div class="feature-flag">
+    <label>
+      <input type="checkbox" id="autoRefresh" checked>
+      Авто-обновление
+    </label>
+  </div>
+  <div class="refresh-info">
+    <div>Обновлено: <span id="updated">—</span></div>
+    <div>Следующее: <span id="countdown" class="countdown">30</span> сек</div>
+  </div>
+</div>
+
+<div class="board" id="board"></div>
+
+<script>
+// Feature flag: set to false to disable auto-refresh
+const AUTO_REFRESH_ENABLED = true;
+const REFRESH_INTERVAL = 30; // seconds
+const HEARTBEAT_URL = '../data/heartbeats.json';
+
+// Agents configuration
+const AGENTS = [
+  {id:'npz-status',        name:'NPZ-STATUS',          file:'data/fuel-state.json',       freq:'3×/день',     desc:'Статусы НПЗ и терминалов'},
+  {id:'fuel-market',       name:'FUEL-MARKET',          file:'data/fuel-state.json',       freq:'3×/день',     desc:'Дефицит, баланс, меры'},
+  {id:'history-crimea',    name:'HISTORY-CRIMEA',       file:'data/history-crimea.json',   freq:'3×/день',     desc:'Хроника + Крым'},
+  {id:'strikes',           name:'STRIKES',              file:'data/strikes.json',          freq:'3×/день',     desc:'Удары БПЛА/ракетами'},
+  {id:'roads',             name:'ROADS',                file:'data/roads.json',            freq:'3×/день',     desc:'Дороги/логистика'},
+  {id:'forecast',          name:'FORECAST',             file:'data/forecast.json',         freq:'1×/неделю',   desc:'Сценарный прогноз'},
+  {id:'economy',           name:'ECONOMY',              file:'data/economy.json',          freq:'1×/неделю',   desc:'Эконом. эффект'},
+  {id:'fuel-availability', name:'FUEL-AVAILABILITY',    file:'data/fuel-availability.json',freq:'4ч',          desc:'АЗС (цены/лимиты)'},
+  {id:'fuel-voices',       name:'FUEL-VOICES',          file:'data/fuel-voices.json',      freq:'8ч',          desc:'Голоса людей'},
+  {id:'grid-status',       name:'GRID-STATUS',          file:'data/grid-state.json',       freq:'3×/день',     desc:'Электросети'},
+  {id:'newswatch',         name:'NEWSWATCH',            file:'data/strikes.json',          freq:'каждый час',  desc:'Срочные удары'},
+  {id:'watchdog',          name:'WATCHDOG',             file:'data/health.json',           freq:'каждый час',  desc:'Мониторинг здоровья'},
+  {id:'covers',            name:'COVERS',               file:'assets/cover-*.png',         freq:'2×/день',     desc:'Генерация обложек'},
+  {id:'publish',           name:'PUBLISH',              file:'data/news-archive.json',     freq:'3×/день',     desc:'Дайджест в Telegram'},
+];
+
+const STATUS_MAP = {
+  ready: {label: 'Готов', color: '#8b949e'},
+  running: {label: 'В работе', color: '#d29922'},
+  completed: {label: 'Завершён', color: '#3fb950'},
+  blocked: {label: 'Заблокирован', color: '#f85149'},
+};
+
+// State
+let autoRefresh = AUTO_REFRESH_ENABLED;
+let countdown = REFRESH_INTERVAL;
+let isTabVisible = true;
+let expandedCard = null;
+
+// Visibility API: pause when tab is hidden
+document.addEventListener('visibilitychange', () => {
+  isTabVisible = !document.hidden;
+  if (isTabVisible && autoRefresh) {
+    tick(); // Refresh immediately when tab becomes visible
+  }
+});
+
+// Feature flag toggle
+document.getElementById('autoRefresh').addEventListener('change', (e) => {
+  autoRefresh = e.target.checked;
+  if (autoRefresh) {
+    countdown = REFRESH_INTERVAL;
+  }
+});
+
+function classifyStatus(heartbeat) {
+  if (!heartbeat) return 'ready';
+  const diff = Date.now() - new Date(heartbeat).getTime();
+  const mins = Math.floor(diff/60000);
+  if (mins < 10) return 'running';
+  return 'completed';
+}
+
+function timeAgo(ts) {
+  if (!ts) return {text: 'никогда', cls: 'time-old'};
+  const diff = Date.now() - new Date(ts).getTime();
+  const mins = Math.floor(diff/60000);
+  if (mins < 1) return {text: 'только что', cls: 'time-fresh'};
+  if (mins < 60) return {text: `${mins} мин назад`, cls: 'time-fresh'};
+  const hours = Math.floor(mins/60);
+  if (hours < 24) return {text: `${hours} ч назад`, cls: hours < 2 ? 'time-fresh' : 'time-stale'};
+  const days = Math.floor(hours/24);
+  return {text: `${days} дн назад`, cls: 'time-old'};
+}
+
+async function fetchHeartbeats() {
+  try {
+    const r = await fetch(HEARTBEAT_URL + '?t=' + Date.now());
+    return await r.json();
+  } catch(e) {
+    console.error('Failed to fetch heartbeats:', e);
+    return {};
+  }
+}
+
+function toggleCard(id) {
+  const card = document.querySelector(`[data-agent-id="${id}"]`);
+  if (card) {
+    card.classList.toggle('expanded');
+    expandedCard = card.classList.contains('expanded') ? id : null;
+  }
+}
+
+function render(heartbeats) {
+  const cols = {ready:[], running:[], completed:[], blocked:[]};
+
+  AGENTS.forEach(agent => {
+    const hb = heartbeats[agent.id];
+    const status = classifyStatus(hb);
+    agent._status = status;
+    agent._heartbeat = hb;
+    agent._time = timeAgo(hb);
+    cols[status].push(agent);
+  });
+
+  // Summary
+  document.getElementById('summary').innerHTML = Object.entries({running:'Выполняется',completed:'Завершён',ready:'Готов',blocked:'Заблокирован'})
+    .map(([k,l]) => `<div class="badge ${k}"><span class="dot"></span>${l}: ${cols[k].length}</div>`).join('');
+
+  document.getElementById('updated').textContent = new Date().toLocaleTimeString('ru-RU');
+
+  // Board
+  const order = ['running','completed','ready','blocked'];
+  const labels = {ready:'Готов',running:'В работе',completed:'Завершён',blocked:'Заблокирован'};
+
+  document.getElementById('board').innerHTML = order.map(col => `
+    <div class="column col-${col}">
+      <div class="column-header">${labels[col]}<span class="count">${cols[col].length}</span></div>
+      <div class="column-body">
+        ${cols[col].length === 0 ? '<div style="color:var(--text-dim);text-align:center;padding:20px;font-size:13px">Нет агентов</div>' : ''}
+        ${cols[col].map(a => `
+          <div class="card ${expandedCard === a.id ? 'expanded' : ''}" data-agent-id="${a.id}" onclick="toggleCard('${a.id}')">
+            <div class="agent-name"><span class="pulse"></span>${a.name}</div>
+            <div class="detail">
+              <span class="label">Файл:</span> ${a.file}<br>
+              <span class="label">Частота:</span> ${a.freq}<br>
+              <span class="label">Обновление:</span> <span class="${a._time.cls}">${a._time.text}</span>
+            </div>
+            <div class="card-details">
+              <div class="detail-row">
+                <span class="detail-label">Описание:</span>
+                <span class="detail-value">${a.desc}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Heartbeat:</span>
+                <span class="detail-value">${a._heartbeat || 'нет'}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Статус:</span>
+                <span class="detail-value">${STATUS_MAP[a._status].label}</span>
+              </div>
+            </div>
+            <span class="status-tag">${STATUS_MAP[a._status].label}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Auto-refresh with pause when tab is hidden
+async function tick() {
+  if (!autoRefresh || !isTabVisible) return;
+  const hb = await fetchHeartbeats();
+  render(hb);
+  countdown = REFRESH_INTERVAL;
+}
+
+// Countdown timer
+setInterval(() => {
+  if (!autoRefresh || !isTabVisible) return;
+  countdown--;
+  document.getElementById('countdown').textContent = countdown;
+  if (countdown <= 0) {
+    tick();
+  }
+}, 1000);
+
+// Initial load
+tick();
+</script>
+</body>
+</html>

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Радар — Угрозы БПЛА по регионам НПЗ | NPZ Tactical Map</title>
+  <meta name="description" content="Радар-карта угроз БПЛА и ракет по регионам России. Мониторинг NPZ-объектов.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/radar">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+
+  <style>
+    :root {
+      --bg:#0d1216; --board:#0f1620; --surface:#16202b; --surface2:#1c2835;
+      --ink:#e2ebef; --ink-dim:#8499a6; --line:rgba(130,170,190,.20);
+      --green:#3fe089; --amber:#ffb443; --red:#ff5247; --crit:#ff3a2c;
+      --teal:#3fd6cf; --gold:#e6c259;
+      --shadow:0 8px 26px rgba(0,0,0,.5); --shadow-sm:0 3px 12px rgba(0,0,0,.45);
+      --card-radius:14px;
+      --disp:"Rubik",system-ui,sans-serif; --mono:"JetBrains Mono",monospace;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{background:var(--bg);color:var(--ink);font-family:var(--disp);overflow:hidden}
+
+    /* Topbar */
+    .topbar{height:52px;display:flex;align-items:center;gap:14px;padding:0 14px;
+      background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm);z-index:30}
+    .brand{display:flex;align-items:center;gap:9px}
+    .brand-ico{font-size:22px}
+    .brand-t{font-weight:800;font-size:15px;letter-spacing:.5px}
+    .brand-s{font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:2px}
+    .nav{display:flex;gap:6px;margin-left:20px}
+    .nav a{border:1px solid var(--line);background:var(--surface2);color:var(--ink-dim);
+      font-weight:700;font-size:12px;padding:6px 14px;border-radius:10px;text-decoration:none;transition:.15s}
+    .nav a:hover{color:var(--ink);transform:translateY(-1px)}
+    .nav a.active{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+    .topctl{margin-left:auto;display:flex;align-items:center;gap:10px}
+    .sync{font-family:var(--mono);font-size:10px;color:var(--ink-dim);text-align:right;line-height:1.4}
+    .sync-next{display:block;color:var(--teal);font-weight:600}
+    .refresh-badge{background:var(--teal);color:#04140b;font-family:var(--mono);
+      font-weight:800;font-size:10px;padding:4px 9px;border-radius:6px}
+
+    /* Map */
+    .map{position:absolute;top:52px;left:0;right:0;bottom:0;z-index:0}
+    .leaflet-container{background:var(--board)!important}
+
+    /* Side panel */
+    .panel{position:absolute;top:66px;left:14px;width:340px;max-height:calc(100% - 80px);
+      z-index:20;background:var(--surface);border:1px solid var(--line);border-radius:var(--card-radius);
+      box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+    .panel-h{font-weight:800;font-size:12px;letter-spacing:1px;padding:11px 14px;
+      background:var(--surface2);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+    .panel-h .dot-live{width:8px;height:8px;border-radius:50%;background:var(--green);
+      animation:pulse 2s infinite}
+    .panel-h .dot-live.loading{background:var(--amber)}
+    .panel-h .dot-live.error{background:var(--red)}
+    .panel-h .dot-live.stale{background:var(--amber)}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .panel-body{flex:1;overflow:auto;padding:10px}
+
+    /* Threat card */
+    .threat-card{border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+      margin-bottom:8px;background:var(--surface2);transition:.12s}
+    .threat-card:hover{border-color:var(--amber)}
+    .threat-card.active{border-left:3px solid var(--red)}
+    .threat-card.clear{border-left:3px solid var(--green);opacity:.7}
+    .tc-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+    .tc-icon{font-size:16px}
+    .tc-region{font-weight:800;font-size:13px;flex:1}
+    .tc-badge{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px}
+    .tc-badge.bpla{background:rgba(255,180,67,.2);color:var(--amber)}
+    .tc-badge.rocket{background:rgba(255,82,71,.2);color:var(--red)}
+    .tc-badge.pvo{background:rgba(63,224,137,.2);color:var(--green)}
+    .tc-badge.stale{background:rgba(255,180,67,.2);color:var(--amber)}
+    .tc-badge.uab{background:rgba(255,82,71,.2);color:var(--red)}
+    .tc-badge.fpv{background:rgba(63,214,207,.2);color:var(--teal)}
+    .tc-badge.aviation{background:rgba(255,58,44,.2);color:var(--crit)}
+    .tc-badge.explosion{background:rgba(255,58,44,.15);color:var(--crit);animation:crit-fade 1.5s infinite}
+    .tc-objects{font-size:11px;color:var(--ink-dim);line-height:1.5;margin-top:4px}
+    .tc-objects b{color:var(--ink);font-weight:600}
+    .tc-time{font-family:var(--mono);font-size:10px;color:var(--ink-dim);margin-top:6px}
+    .state-note{padding:10px;margin-bottom:8px;border-radius:8px;border:1px solid var(--line);
+      background:rgba(63,214,207,.08);font-size:12px;line-height:1.45;color:var(--ink-dim)}
+    .state-note.error{background:rgba(255,82,71,.12);border-color:rgba(255,82,71,.35);color:var(--ink)}
+    .state-note.stale{background:rgba(255,180,67,.12);border-color:rgba(255,180,67,.35);color:var(--ink)}
+
+    /* Bottom ticker */
+    .ticker{position:absolute;bottom:0;left:0;right:0;height:36px;z-index:20;
+      background:var(--surface);border-top:1px solid var(--line);display:flex;align-items:center;overflow:hidden}
+    .ticker-tag{background:var(--amber);color:#241500;font-family:var(--mono);font-weight:800;
+      font-size:10px;letter-spacing:1px;padding:4px 12px;flex:none}
+    .ticker-track{flex:1;overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:11px;
+      color:var(--ink-dim);padding-left:12px}
+
+    /* Disclaimer */
+    .disclaimer{position:absolute;bottom:44px;right:14px;z-index:20;font-family:var(--mono);
+      font-size:9px;color:var(--ink-dim);opacity:.6;text-align:right;max-width:250px}
+
+    /* Custom radar markers */
+    .radar-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;
+      box-shadow:0 0 8px rgba(255,82,71,.6);transition:.3s}
+    .radar-dot.bpla{background:var(--amber);box-shadow:0 0 8px rgba(255,180,67,.6)}
+    .radar-dot.rocket{background:var(--red);box-shadow:0 0 12px rgba(255,82,71,.8)}
+    .radar-dot.both{background:linear-gradient(135deg,var(--amber),var(--red));
+      box-shadow:0 0 12px rgba(255,82,71,.8)}
+    .radar-dot.safe{background:var(--green);box-shadow:0 0 6px rgba(63,224,137,.4);opacity:.5}
+
+    /* Pulse ring on active threats */
+    .radar-pulse{position:relative}
+    .radar-pulse::after{content:"";position:absolute;top:-6px;left:-6px;right:-6px;bottom:-6px;
+      border-radius:50%;border:2px solid var(--red);animation:rpulse 2s ease-out infinite}
+    @keyframes rpulse{0%{transform:scale(.8);opacity:.8}100%{transform:scale(2.2);opacity:0}}
+
+    /* Highlighted region polygons pulse (whole oblast under threat) */
+    .region-hot{animation:regionPulse 2.6s ease-in-out infinite}
+    @keyframes regionPulse{0%,100%{fill-opacity:.26}50%{fill-opacity:.5}}
+
+    /* Responsive */
+    @media(max-width:768px){
+      .panel{width:calc(100% - 28px);max-height:45%;bottom:40px;top:auto}
+      .nav{display:none}
+    }
+
+/* Civilization-style radar icons */
+.radar-civ-icon {
+  background: none !important;
+  border: none !important;
+}
+
+.radar-icon {
+  display: block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.radar-icon-drone {
+  animation: radar-blink 1s infinite;
+}
+
+.radar-icon-rocket {
+  animation: radar-pulse 0.8s infinite;
+}
+
+.radar-icon-pvo {
+  animation: radar-rotate 3s linear infinite;
+}
+
+.radar-icon-combined {
+  animation: radar-blink 0.6s infinite;
+}
+
+@keyframes radar-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes radar-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+@keyframes radar-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Fire/explosion strike markers */
+.strike-fire-icon {
+  background: none !important;
+  border: none !important;
+}
+
+@keyframes fire-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    filter: brightness(1);
+  }
+  50% { 
+    transform: scale(1.2); 
+    filter: brightness(1.5);
+  }
+}
+
+.strike-fire-icon img {
+  animation: fire-pulse 1.5s infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 80, 0, 0.6));
+}
+
+@keyframes crit-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.markercluster-small, .markercluster-medium, .markercluster-large {
+  background: rgba(63, 214, 207, 0.15) !important;
+  border: 2px solid rgba(63, 214, 207, 0.4) !important;
+  border-radius: 50% !important;
+  color: var(--teal) !important;
+  font-family: var(--mono) !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+}
+.markercluster-small div, .markercluster-medium div, .markercluster-large div {
+  background: rgba(63, 214, 207, 0.25) !important;
+  border-radius: 50% !important;
+  color: var(--teal) !important;
+}
+
+.legend-toggle {
+  position: absolute; bottom: 44px; left: 14px; z-index: 20;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; font-family: var(--mono); font-size: 10px; color: var(--ink-dim);
+  box-shadow: var(--shadow-sm);
+}
+.legend-toggle summary {
+  padding: 6px 12px; cursor: pointer; user-select: none; font-weight: 700; color: var(--ink);
+}
+.legend-body { padding: 4px 12px 8px; display: flex; flex-wrap: wrap; gap: 6px 12px; }
+.legend-item { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+@media(max-width:768px){
+  .radar-civ-icon img, .radar-civ-icon svg { width: 40px !important; height: 40px !important; }
+  .legend-toggle { left: 14px; bottom: 84px; max-width: calc(100% - 28px); }
+}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-ico">📡</span>
+      <div>
+        <div class="brand-t">РАДАР УГРОЗ</div>
+        <div class="brand-s">NPZ TACTICAL MAP</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="/">🗺 Карта</a>
+      <a href="/radar" class="active">📡 Радар</a>
+      <a href="/news">📰 Новости</a>
+    </nav>
+    <div class="topctl">
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:#e2ebef">
+        <input type="checkbox" id="toggleStrikes" checked onchange="toggleStrikesLayer()" style="accent-color:#ff5247">
+        🔥 Удары
+      </label>
+      <span class="refresh-badge" id="refreshBadge">Авто: 5 мин</span>
+      <div class="sync">
+        <span id="lastUpdate">—</span>
+        <span class="sync-next" id="nextRefresh">T-05:00</span>
+      </div>
+    </div>
+  </header>
+
+  <div id="map" class="map"></div>
+
+  <aside class="panel">
+    <div class="panel-h">
+      <span>🔴 УГРОЗЫ НПЗ</span>
+      <span class="dot-live" id="liveIndicator"></span>
+    </div>
+    <div class="panel-body" id="threatList">
+      <div style="text-align:center;padding:30px;color:var(--ink-dim)">
+        <div style="font-size:24px;margin-bottom:8px">📡</div>
+        <div>Загрузка данных радара...</div>
+      </div>
+    </div>
+  </aside>
+
+
+  <details class="legend-toggle">
+    <summary>Типы угроз</summary>
+    <div class="legend-body">
+      <span class="legend-item"><span class="legend-swatch" style="background:var(--amber)"></span>БПЛА</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:var(--red)"></span>КАБ</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:var(--teal)"></span>FPV</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:var(--red)"></span>Ракета</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:var(--crit)"></span>Авиация</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:var(--green)"></span>ПВО</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:var(--crit);opacity:.7"></span>Взрыв</span>
+    </div>
+  </details>
+
+  <div class="disclaimer">
+    ОЦЕНКА / ESTIMATE · npz-tactical-map<br>
+    Данные могут запаздывать. Не является официальной информацией.
+  </div>
+
+  <footer class="ticker">
+    <span class="ticker-tag">СВОДКА</span>
+    <div class="ticker-track" id="ticker"></div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script>
+  (function(){
+    "use strict";
+
+    var RADAR_URL = "/api/radar-state";
+    var REFRESH_MS = 5 * 60 * 1000;
+    var TIMER = null;
+    var retryTimer = null;
+    var nextAt = 0;
+
+    // NPZ-relevant regions
+    var NPZ_REGIONS = {
+      "Краснодарский край": { objects: ["Туапсинский НПЗ","Афипский НПЗ","Ильский НПЗ","Славянский НПЗ","Новороссийск","Тамань"], lat: 45.04, lon: 38.98 },
+      "Ленинградская обл.": { objects: ["Кинеф (Кириши)","Усть-Луга","Приморск"], lat: 59.9, lon: 30.3 },
+      "Ярославская обл.": { objects: ["НПЗ ЯНОС"], lat: 57.58, lon: 39.93 },
+      "Москва": { objects: ["Московский НПЗ (Капотня)"], lat: 55.75, lon: 37.62 },
+      "Московская обл.": { objects: ["Московский НПЗ (Капотня)"], lat: 55.6, lon: 37.8 },
+      "Республика Крым": { objects: ["Керченская ТЭЦ","Порт Кавказ"], lat: 45.3, lon: 34.4 },
+      "Запорожская область": { objects: ["Бердянский порт","Мелитопольская логистика"], lat: 47.84, lon: 35.14 },
+      "Луганская Народная Республика": { objects: ["Луганская нефтебаза","Северодонецкий промрайон"], lat: 48.57, lon: 39.31 },
+      "Донецкая Народная Республика": { objects: ["Донецкая агломерация","Мариупольский порт"], lat: 48.02, lon: 37.8 },
+      "г. Севастополь": { objects: ["Порт Севастополь"], lat: 44.6, lon: 33.5 },
+      "Волгоградская обл.": { objects: ["Волгоградский НПЗ"], lat: 48.65, lon: 44.46 },
+      "Самарская обл.": { objects: ["Сызранский НПЗ","Куйбышевский НПЗ","Новокуйбышевский НПЗ"], lat: 53.2, lon: 50.15 },
+      "Саратовская обл.": { objects: ["Саратовский НПЗ"], lat: 51.5, lon: 46.1 },
+      "Ростовская обл.": { objects: ["Новошахтинский НПЗ"], lat: 47.22, lon: 39.72 }
+    };
+
+    // Alias matching
+    var REGION_ALIASES = {
+      "Москва и МО": "Москва", "Москва и Московская обл.": "Москва",
+      "Автономная Республика Крым": "Республика Крым",
+      "Московская область": "Московская обл.", "Ленинградская область": "Ленинградская обл.",
+      "Краснодар": "Краснодарский край", "Краснодарский": "Краснодарский край",
+      "Ростов": "Ростовская обл.", "Ростовская": "Ростовская обл.",
+      "Самара": "Самарская обл.", "Самарская": "Самарская обл.",
+      "Саратов": "Саратовская обл.", "Саратовская": "Саратовская обл.",
+      "Волгоград": "Волгоградская обл.", "Волгоградская": "Волгоградская обл.",
+      "Ярославль": "Ярославская обл.", "Ярославская": "Ярославская обл.",
+      "Крым": "Республика Крым", "Севастополь": "г. Севастополь",
+      "ДНР": "Донецкая Народная Республика", "ЛНР": "Луганская Народная Республика",
+      "Запорожская": "Запорожская область"
+    };
+
+    function norm(s) { return (s || "").toLowerCase().trim(); }
+
+    function matchRegion(name) {
+      if (!name) return null;
+      var n = norm(name);
+      if (NPZ_REGIONS[name]) return name;
+      for (var ak in REGION_ALIASES) {
+        if (norm(ak) === n) return REGION_ALIASES[ak];
+      }
+      for (var ak2 in REGION_ALIASES) {
+        if (n.indexOf(norm(ak2)) === 0) return REGION_ALIASES[ak2];
+      }
+      for (var r in NPZ_REGIONS) {
+        if (norm(r) === n) return r;
+      }
+      for (var r2 in NPZ_REGIONS) {
+        if (n.indexOf(norm(r2)) === 0) return r2;
+      }
+      return null;
+    }
+
+    // ─── Map ───
+    var tileUrl = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+    var map = L.map("map", { center: [55.5, 50], zoom: 4, minZoom: 3, maxZoom: 10, zoomControl: true });
+    L.tileLayer(tileUrl, { attribution: "© OpenStreetMap · CARTO · npz-tactical-map", subdomains: "abcd", maxZoom: 19 }).addTo(map);
+
+    // ─── Region highlight layer: целые области подсвечиваются при пролёте/ударе ───
+    var regionThreatIndex = {};
+    function normReg(s) {
+      return (s || "").toLowerCase().replace(/ё/g, "е")
+        .replace(/народная|республика|область|обл\.?|край|автономный округ|автономная|город|г\./g, "")
+        .replace(/[^а-я]/g, "");
+    }
+    var REGION_THREAT_COLORS = { rocket: "#ff5247", aviation: "#ff3a2c", uab: "#ff5247", explosion: "#ff3a2c", bpla: "#ffb443", fpv: "#3fd6cf", pvo: "#3fe089" };
+    function dominantType(t) {
+      var order = ["rocket", "aviation", "uab", "bpla", "fpv", "pvo"];
+      for (var i = 0; i < order.length; i++) { if (t[order[i]]) return order[i]; }
+      return null;
+    }
+    function regionStyle(f) {
+      var t = regionThreatIndex[normReg(f.properties && f.properties.name)];
+      if (t && t.type) {
+        var c = REGION_THREAT_COLORS[t.type] || "#ffb443";
+        return { color: c, weight: 1.4, opacity: .9, fillColor: c, fillOpacity: .42, className: "region-hot" };
+      }
+      return { color: "#2a3038", weight: .4, opacity: .35, fillColor: "#3a4048", fillOpacity: .04 };
+    }
+    var regionLayer = L.geoJSON(null, { interactive: false, style: regionStyle }).addTo(map);
+    ["/data/russia-regions.geojson", "/data/new-territories.geojson", "/data/crimea-regions.geojson"].forEach(function (url) {
+      fetch(url).then(function (r) { return r.json(); }).then(function (g) { regionLayer.addData(g); regionLayer.setStyle(regionStyle); }).catch(function () {});
+    });
+
+    var npzLayer = L.layerGroup().addTo(map);
+    var cityCluster = (typeof L.markerClusterGroup === "function")
+      ? L.markerClusterGroup({
+          maxClusterRadius: 40,
+          spiderfyOnMaxZoom: true,
+          showCoverageOnHover: false,
+          iconCreateFunction: function(cluster) {
+            var count = cluster.getChildCount();
+            var cls = count < 10 ? "markercluster-small" : count < 30 ? "markercluster-medium" : "markercluster-large";
+            return L.divIcon({ html: "<div>" + count + "</div>", className: cls, iconSize: [36, 36] });
+          }
+        })
+      : L.layerGroup();
+    cityCluster.addTo(map);
+    var strikesLayer = L.layerGroup().addTo(map);
+    var npzMarkers = {};
+
+    // ─── Fetch strikes data ───
+    var STRIKES_URL = "/data/strikes.json";
+    var strikesData = null;
+
+    function fetchStrikes() {
+      return fetch(STRIKES_URL, { cache: "no-store" }).then(function(r){
+        if (!r.ok) throw new Error("strikes " + r.status);
+        return r.json();
+      }).catch(function(e){
+        console.error("strikes fetch error:", e);
+        return null;
+      });
+    }
+
+    function renderStrikes(data) {
+      strikesLayer.clearLayers();
+      if (!data || !data.strikes) return;
+      strikesData = data;
+
+      var now = Date.now() / 1000;
+      var day = 24 * 60 * 60;
+
+      data.strikes.forEach(function(ev) {
+        if (!ev.lat || !ev.lon) return;
+        // Only show strikes from last 48 hours
+        var ts = ev.timestamp || ev.ts || 0;
+        if (!ts && ev.date) {
+          // Parse date string like "2026-07-07"
+          var parts = ev.date.split("-");
+          if (parts.length === 3) {
+            ts = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2])).getTime() / 1000;
+          }
+        }
+        if (ts && (now - ts) > 2 * day) return;
+
+        var isNew = ts && (now - ts) < day;
+        var size = isNew ? 48 : 32;
+        var opacity = isNew ? 1.0 : 0.6;
+
+        // Determine icon based on target type
+        var iconFile = "fire_48.png";
+        if (ev.target_type === "npz" || (ev.target && ev.target.indexOf("НПЗ") !== -1)) {
+          iconFile = "impact_48.png";
+        }
+
+        var icon = L.divIcon({
+          className: "strike-fire-icon",
+          html: '<img src="/assets/radar-icons/' + iconFile + '" style="width:' + size + 'px;height:' + size + 'px;opacity:' + opacity + ';animation:fire-pulse 1.5s infinite">',
+          iconSize: [size, size],
+          iconAnchor: [size/2, size/2]
+        });
+
+        var marker = L.marker([ev.lat, ev.lon], { icon: icon }).addTo(strikesLayer);
+
+        var popup = '<div style="font-family:Rubik,sans-serif;min-width:180px">';
+        popup += '<b style="font-size:14px;color:#ff5247">🔥 ' + (ev.city || ev.region || 'Удар') + '</b><br>';
+        if (ev.target) popup += '<span style="color:#ffb443">Цель: ' + ev.target + '</span><br>';
+        if (ev.detail) popup += '<span style="font-size:11px;color:#8499a6">' + ev.detail + '</span><br>';
+        if (ev.confidence) {
+          var conf = ev.confidence === "confirmed" ? "✅ Подтверждено" : ev.confidence === "high" ? "🟡 Высокая" : "⚪ Слух";
+          popup += '<span style="font-size:11px">' + conf + '</span><br>';
+        }
+        if (ev.source_url) popup += '<a href="' + ev.source_url + '" target="_blank" style="color:#3fd6cf;font-size:11px">Источник →</a>';
+        popup += '</div>';
+        marker.bindPopup(popup);
+      });
+    }
+
+    function toggleStrikesLayer() {
+      var checkbox = document.getElementById("toggleStrikes");
+      if (checkbox.checked) {
+        map.addLayer(strikesLayer);
+      } else {
+        map.removeLayer(strikesLayer);
+      }
+    }
+
+    // ─── Fetch radar data ───
+    function fetchRadar() {
+      return fetch(RADAR_URL, { cache: "no-store" }).then(function(r){
+        if (!r.ok) throw new Error("radar proxy " + r.status);
+        return r.json();
+      });
+    }
+
+    function fetchRadarWithRetry() {
+      return fetchRadar().catch(function(e) {
+        console.error("radar fetch error, retrying in 30s:", e);
+        renderState("error", e.message || "Ошибка загрузки. Повтор через 30 сек...");
+        return new Promise(function(resolve) {
+          retryTimer = setTimeout(function() {
+            fetchRadar().then(resolve).catch(function(e2) {
+              console.error("radar retry failed:", e2);
+              resolve({ __error: true, message: e2.message || "Не удалось загрузить данные радара" });
+            });
+          }, 30000);
+        });
+      });
+    }
+
+    // ─── Inline SVG civ-icons ───
+    var ICON_SVGS = {
+      bpla: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,3 29,27 3,27" fill="#ffb443" fill-opacity="0.85" stroke="#ffb443" stroke-width="2"/></svg>',
+      uab: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="16" cy="18" rx="6" ry="8" fill="#ff5247" fill-opacity="0.85" stroke="#ff5247" stroke-width="2"/><path d="M8 10 L16 4 L24 10" stroke="#ff5247" stroke-width="2" fill="none"/></svg>',
+      fpv: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="7" width="18" height="18" rx="2" transform="rotate(45 16 16)" fill="#3fd6cf" fill-opacity="0.85" stroke="#3fd6cf" stroke-width="2"/></svg>',
+      rocket: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 2 L22 12 L28 24 L16 20 L4 24 L10 12 Z" fill="#ff5247" fill-opacity="0.85" stroke="#ff5247" stroke-width="2"/></svg>',
+      aviation: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 4 L19 10 L28 12 L19 14 L22 28 L16 22 L10 28 L13 14 L4 12 L13 10 Z" fill="#ff3a2c" fill-opacity="0.85" stroke="#ff3a2c" stroke-width="1.5"/></svg>',
+      pvo: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 3 C8 3 3 8 3 16 L3 22 C3 26 8 30 16 30 C24 30 29 26 29 22 L29 16 C29 8 24 3 16 3 Z" fill="#3fe089" fill-opacity="0.2" stroke="#3fe089" stroke-width="2"/><path d="M16 8 L16 24 M8 16 L24 16" stroke="#3fe089" stroke-width="1.5"/></svg>',
+      explosion: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="5" fill="#ff3a2c" fill-opacity="0.4" stroke="#ff3a2c" stroke-width="2"/><circle cx="16" cy="16" r="10" fill="none" stroke="#ff3a2c" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="16" cy="16" r="14" fill="none" stroke="#ff3a2c" stroke-width="1" stroke-dasharray="2 4" opacity="0.5"/></svg>'
+    };
+    var THREAT_PRIORITY = ["rocket", "aviation", "uab", "bpla", "fpv", "pvo", "explosion"];
+
+    function getMainIcon(th) {
+      for (var i = 0; i < THREAT_PRIORITY.length; i++) {
+        if (th[THREAT_PRIORITY[i]]) return THREAT_PRIORITY[i];
+      }
+      return "safe";
+    }
+
+    function markerHtml(type, size, pulse) {
+      var svg = ICON_SVGS[type] || ICON_SVGS.bpla;
+      var border = {bpla:"var(--amber)",uab:"var(--red)",fpv:"var(--teal)",rocket:"var(--red)",aviation:"var(--crit)",pvo:"var(--green)",explosion:"var(--crit)",safe:"var(--green)"}[type] || "var(--ink-dim)";
+      var bg = {bpla:"rgba(255,180,67,.12)",uab:"rgba(255,82,71,.12)",fpv:"rgba(63,214,207,.12)",rocket:"rgba(255,82,71,.12)",aviation:"rgba(255,58,44,.12)",pvo:"rgba(63,224,137,.12)",explosion:"rgba(255,58,44,.15)",safe:"rgba(63,224,137,.08)"}[type] || "transparent";
+      var pulseCls = pulse ? " radar-pulse" : "";
+      return '<div class="radar-civ-icon' + pulseCls + '" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;border:2px solid ' + border + ';background:' + bg + ';display:flex;align-items:center;justify-content:center;overflow:hidden">' + svg + '</div>';
+    }
+
+    // ─── Process & render ───
+    function processRadar(data) {
+      if (!data || data.__error) {
+        renderState("error", data && data.message ? data.message : "Не удалось загрузить данные радара");
+        return;
+      }
+      if (data.poll_interval_sec) {
+        REFRESH_MS = Math.max(60, data.poll_interval_sec) * 1000;
+        document.getElementById("refreshBadge").textContent = "Авто: " + Math.round(REFRESH_MS / 60000) + " мин";
+      }
+      var cities = Array.isArray(data.cities) ? data.cities : Object.keys(data.cities || {}).map(function(k){ return data.cities[k]; });
+      var regions = data.regions || {};
+      var threats = {};
+      var loadedAt = Math.floor(Date.now() / 1000);
+      var maxTs = 0;
+
+      // Process cities
+      cities.forEach(function(c) {
+        var region = matchRegion(c.region) || matchRegion(c.name);
+        if (!region) return;
+        if (!threats[region]) threats[region] = { bpla: false, rocket: false, pvo: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
+        if (c.bpla || c.bplaDim) threats[region].bpla = true;
+        if (c.uab || c.uabDim) threats[region].uab = true;
+        if (c.fpv) threats[region].fpv = true;
+        if (c.rocket || c.rk || c.rocket_level) threats[region].rocket = true;
+        if (c.aviation) threats[region].aviation = true;
+        if (c.pvo) threats[region].pvo = true;
+        if (c.last_event_ts && c.last_event_ts > threats[region].lastTs) {
+          threats[region].lastTs = c.last_event_ts;
+          threats[region].sourceText = c.source_text || "";
+          maxTs = Math.max(maxTs, c.last_event_ts);
+        }
+        if (c.bpla || c.bplaDim || c.rocket || c.rk || c.rocket_level || c.pvo || c.uab || c.uabDim || c.fpv || c.aviation) {
+          threats[region].cities.push(c.name);
+        }
+      });
+
+      // Process regions
+      Object.keys(regions).forEach(function(rName) {
+        var rData = regions[rName] || {};
+        var region = matchRegion(rName);
+        if (!region) return;
+        if (!threats[region]) threats[region] = { bpla: false, rocket: false, pvo: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
+        if (rData.bpla || rData.bplaDim) threats[region].bpla = true;
+        if (rData.uab || rData.uabDim) threats[region].uab = true;
+        if (rData.fpv) threats[region].fpv = true;
+        if (rData.rocket || rData.rocket_level || rData.rocketOnRegion) threats[region].rocket = true;
+        if (rData.aviation) threats[region].aviation = true;
+        if (rData.pvo) threats[region].pvo = true;
+        if (rData.explosionOnRegion) threats[region].explosion = true;
+        if (rData.last_event_ts && rData.last_event_ts > threats[region].lastTs) {
+          threats[region].lastTs = rData.last_event_ts;
+          threats[region].sourceText = rData.source_text || "";
+          maxTs = Math.max(maxTs, rData.last_event_ts);
+        }
+      });
+
+      // Freshness (restored: MiMo refactor dropped these, breaking panel/ticker)
+      var timeStr = formatMsk(maxTs || loadedAt);
+      var stale = maxTs ? (loadedAt - maxTs > 20 * 60) : false;
+
+      // Region highlight: индекс угроз по ЛЮБОМУ региону (не только НПЗ) → заливка полигонов
+      regionThreatIndex = {};
+      Object.keys(regions).forEach(function (rName) {
+        var rd = regions[rName] || {};
+        var t = { rocket: !!(rd.rocket || rd.rocket_level || rd.rocketOnRegion), bpla: !!(rd.bpla || rd.bplaDim), uab: !!(rd.uab || rd.uabDim), fpv: !!rd.fpv, aviation: !!rd.aviation, pvo: !!rd.pvo, explosion: !!rd.explosionOnRegion };
+        var dom = dominantType(t);
+        if (dom) regionThreatIndex[normReg(rName)] = { type: dom };
+      });
+      cities.forEach(function (c) {
+        if (!c.region) return;
+        var t = { rocket: !!(c.rocket || c.rk || c.rocket_level), bpla: !!(c.bpla || c.bplaDim), uab: !!(c.uab || c.uabDim), fpv: !!c.fpv, aviation: !!c.aviation, pvo: !!c.pvo };
+        var dom = dominantType(t);
+        var k = normReg(c.region);
+        if (dom && !regionThreatIndex[k]) regionThreatIndex[k] = { type: dom };
+      });
+      if (typeof regionLayer !== "undefined" && regionLayer) regionLayer.setStyle(regionStyle);
+
+      // Determine sources (escape labels for XSS)
+      var sources = (data.sources || []).map(function(s){ return esc(s.label || s.id); }).filter(Boolean);
+      var srcStr = sources.length ? sources.join(" · ") : "npz-tactical-map";
+
+      // Update map markers
+      npzLayer.clearLayers();
+      cityCluster.clearLayers();
+      var threatCount = 0;
+      var seenCoords = {};
+
+      Object.keys(NPZ_REGIONS).forEach(function(region) {
+        var info = NPZ_REGIONS[region];
+        var th = threats[region];
+        var hasThreat = th && (th.bpla || th.rocket || th.uab || th.fpv || th.aviation || th.explosion);
+
+        var mainType = hasThreat ? getMainIcon(th) : "safe";
+        var icon = L.divIcon({
+          className: "radar-civ-icon",
+          html: markerHtml(mainType, 32, hasThreat),
+          iconSize: [32, 32],
+          iconAnchor: [16, 16]
+        });
+
+        var marker = L.marker([info.lat, info.lon], { icon: icon }).addTo(npzLayer);
+
+        var popupHtml = '<div style="font-family:Rubik,sans-serif;min-width:200px">';
+        popupHtml += '<b style="font-size:14px">' + esc(region) + '</b><br>';
+        if (hasThreat) {
+          popupHtml += '<span style="color:#ff5247;font-weight:700">⚠ УГРОЗА АКТИВНА</span><br>';
+          if (th.bpla) popupHtml += '<span style="color:#ffb443">● БПЛА</span> ';
+          if (th.uab) popupHtml += '<span style="color:#ff5247">● КАБ</span> ';
+          if (th.fpv) popupHtml += '<span style="color:#3fd6cf">● FPV</span> ';
+          if (th.rocket) popupHtml += '<span style="color:#ff5247">● РК</span> ';
+          if (th.aviation) popupHtml += '<span style="color:#ff3a2c">● Авиация</span> ';
+          if (th.pvo) popupHtml += '<span style="color:#3fe089">● ПВО</span> ';
+          if (th.explosion) popupHtml += '<span style="color:#ff3a2c">● Взрыв</span> ';
+          popupHtml += '<br><span style="font-size:11px;color:#8499a6">' + esc(info.objects.join(", ")) + '</span>';
+        } else if (th && th.pvo) {
+          popupHtml += '<span style="color:#3fe089">● Активность ПВО / наблюдение</span><br>';
+          popupHtml += '<span style="font-size:11px;color:#8499a6">' + esc(info.objects.join(", ")) + '</span>';
+        } else {
+          popupHtml += '<span style="color:#3fe089">✓ Нет активных угроз</span><br>';
+          popupHtml += '<span style="font-size:11px;color:#8499a6">' + esc(info.objects.join(", ")) + '</span>';
+        }
+        popupHtml += '</div>';
+        marker.bindPopup(popupHtml);
+
+        npzMarkers[region] = { marker: marker, hasThreat: hasThreat };
+        if (hasThreat) threatCount++;
+      });
+
+      // City markers with dedup and clustering
+      cities.forEach(function(c) {
+        if (!c.lat || !c.lon) return;
+        if (!c.bpla && !c.bplaDim && !c.rocket && !c.rk && !c.rocket_level && !c.pvo && !c.uab && !c.uabDim && !c.fpv && !c.aviation) return;
+        if (matchRegion(c.region) || matchRegion(c.name)) return;
+        var coordKey = Math.round(c.lat * 100) + "," + Math.round(c.lon * 100);
+        if (seenCoords[coordKey]) return;
+        seenCoords[coordKey] = true;
+
+        var cTh = { bpla: c.bpla || c.bplaDim, rocket: c.rocket || c.rk || c.rocket_level, pvo: c.pvo, uab: c.uab || c.uabDim, fpv: c.fpv, aviation: c.aviation };
+        var cType = getMainIcon(cTh);
+
+        var icon = L.divIcon({
+          className: "radar-civ-icon",
+          html: markerHtml(cType, 24, false),
+          iconSize: [24, 24],
+          iconAnchor: [12, 12]
+        });
+        var label = esc(c.name) + '<br>' + esc(c.region || '');
+        var types = [];
+        if (c.bpla || c.bplaDim) types.push('БПЛА');
+        if (c.uab || c.uabDim) types.push('КАБ');
+        if (c.fpv) types.push('FPV');
+        if (c.rocket || c.rk || c.rocket_level) types.push('РК');
+        if (c.aviation) types.push('Авиация');
+        if (c.pvo) types.push('ПВО');
+        L.marker([c.lat, c.lon], { icon: icon }).addTo(cityCluster)
+          .bindPopup('<b>' + label + '</b><br>' + types.join(' '));
+      });
+
+      // Update panel
+      renderPanel(threats, timeStr, srcStr, stale);
+
+      // Update ticker
+      updateTicker(threats, srcStr, timeStr);
+
+      // Update header
+      document.getElementById("lastUpdate").textContent = (stale ? "Устарело: " : "Обновлено: ") + timeStr + " МСК";
+      setIndicator(stale ? "stale" : "live");
+    }
+
+    function renderPanel(threats, timeStr, srcStr, stale) {
+      var panel = document.getElementById("threatList");
+      var html = "";
+      var activeCount = 0;
+
+      Object.keys(NPZ_REGIONS).sort().forEach(function(region) {
+        var info = NPZ_REGIONS[region];
+        var th = threats[region];
+        var hasThreat = th && (th.bpla || th.rocket || th.uab || th.fpv || th.aviation || th.explosion);
+        if (hasThreat) activeCount++;
+
+        var cls = hasThreat ? "active" : "clear";
+        var icon = hasThreat ? (th.rocket || th.aviation ? "🚨" : "🔴") : "🟢";
+
+        html += '<div class="threat-card ' + cls + '">';
+        html += '<div class="tc-head">';
+        html += '<span class="tc-icon">' + icon + '</span>';
+        html += '<span class="tc-region">' + esc(region) + '</span>';
+        if (th && th.bpla) html += '<span class="tc-badge bpla">БПЛА</span>';
+        if (th && th.uab) html += '<span class="tc-badge uab">КАБ</span>';
+        if (th && th.fpv) html += '<span class="tc-badge fpv">FPV</span>';
+        if (th && th.rocket) html += '<span class="tc-badge rocket">РК</span>';
+        if (th && th.aviation) html += '<span class="tc-badge aviation">АВИА</span>';
+        if (th && th.pvo) html += '<span class="tc-badge pvo">ПВО</span>';
+        if (th && th.explosion) html += '<span class="tc-badge explosion">ВЗРЫВ</span>';
+        if (!hasThreat && !(th && th.pvo)) html += '<span class="tc-badge pvo">ЧИСТО</span>';
+        html += '</div>';
+
+        html += '<div class="tc-objects"><b>Объекты:</b> ' + info.objects.join(", ") + '</div>';
+
+        if (hasThreat && th.cities.length) {
+          html += '<div class="tc-time">Города: ' + uniq(th.cities).slice(0, 5).join(", ") + '</div>';
+        }
+        if (th && th.sourceText) html += '<div class="tc-time">' + esc(th.sourceText).split("\n")[0] + '</div>';
+        html += '<div class="tc-time">⏰ ' + (th && th.lastTs ? formatMsk(th.lastTs) : timeStr) + ' МСК · 📡 ' + srcStr + '</div>';
+        html += '</div>';
+      });
+
+      if (stale) {
+        html = '<div class="state-note stale"><b>Данные могут быть устаревшими.</b><br>Последнее событие: ' + timeStr + ' МСК. Не показываем “чисто” как подтвержденный статус.</div>' + html;
+      }
+
+      if (activeCount === 0) {
+        html = '<div style="text-align:center;padding:20px;color:var(--green)">' +
+          '<div style="font-size:28px;margin-bottom:8px">✅</div>' +
+          '<div style="font-weight:700;font-size:14px">Активных угроз по данным радара нет</div>' +
+          '<div style="font-size:11px;color:var(--ink-dim);margin-top:4px">Статус зависит от свежести внешнего источника</div></div>' + html;
+      } else {
+        html = '<div style="text-align:center;padding:10px;margin-bottom:8px;border-radius:8px;' +
+          'background:rgba(255,82,71,.1);border:1px solid rgba(255,82,71,.3)">' +
+          '<div style="font-weight:800;color:var(--red);font-size:13px">⚠ ' + activeCount +
+          ' регион(ов) под угрозой</div></div>' + html;
+      }
+
+      panel.innerHTML = html;
+    }
+
+    function updateTicker(threats, srcStr, timeStr) {
+      var parts = [];
+      Object.keys(threats).forEach(function(r) {
+        var th = threats[r];
+        var active = [];
+        if (th.bpla) active.push("БПЛА");
+        if (th.uab) active.push("КАБ");
+        if (th.fpv) active.push("FPV");
+        if (th.rocket) active.push("РК");
+        if (th.aviation) active.push("АВИА");
+        if (th.explosion) active.push("ВЗРЫВ");
+        if (active.length) parts.push(active.join("+") + " → " + r);
+      });
+      var text = parts.length
+        ? "🔴 " + parts.join(" · ") + " | " + srcStr + " | " + timeStr + " МСК"
+        : "✅ Нет активных угроз | " + srcStr + " | " + timeStr + " МСК";
+      document.getElementById("ticker").textContent = text;
+    }
+
+    function pad(n) { return n < 10 ? "0" + n : "" + n; }
+    function uniq(list) {
+      var seen = {};
+      return (list || []).filter(function(item) {
+        if (!item || seen[item]) return false;
+        seen[item] = true;
+        return true;
+      });
+    }
+    function esc(s) {
+      return String(s || "").replace(/[&<>"']/g, function(ch) {
+        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch];
+      });
+    }
+    function formatMsk(ts) {
+      return new Date(ts * 1000).toLocaleTimeString("ru-RU", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Europe/Moscow"
+      });
+    }
+    function setIndicator(state) {
+      var el = document.getElementById("liveIndicator");
+      el.className = "dot-live" + (state && state !== "live" ? " " + state : "");
+    }
+    function renderState(state, message) {
+      setIndicator(state);
+      document.getElementById("lastUpdate").textContent = state === "loading" ? "Загрузка..." : "Данные недоступны";
+      document.getElementById("threatList").innerHTML =
+        '<div class="state-note ' + (state === "error" ? "error" : state) + '">' +
+        '<b>' + (state === "error" ? "Ошибка загрузки радара" : "Загрузка данных") + '</b><br>' +
+        esc(message || "Пробуем получить свежие данные.") + '</div>';
+      document.getElementById("ticker").textContent = state === "error"
+        ? "⚠ Данные радара недоступны. Повтор через 30 сек..."
+        : "📡 Загружаем данные радара...";
+    }
+
+    // ─── Refresh cycle ───
+    function refresh() {
+      if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
+      renderState("loading", "Получаем данные через /api/radar-state...");
+      fetchRadarWithRetry().then(function(data) {
+        processRadar(data);
+        fetchStrikes().then(function(strikes) {
+          renderStrikes(strikes);
+        });
+        scheduleNext();
+      });
+    }
+
+    function scheduleNext() {
+      nextAt = Date.now() + REFRESH_MS;
+      if (TIMER) clearTimeout(TIMER);
+      TIMER = setTimeout(refresh, REFRESH_MS);
+      updateCountdown();
+    }
+
+    var countdownTimer = null;
+    function updateCountdown() {
+      if (countdownTimer) clearTimeout(countdownTimer);
+      var remaining = Math.max(0, nextAt - Date.now());
+      var min = Math.floor(remaining / 60000);
+      var sec = Math.floor((remaining % 60000) / 1000);
+      document.getElementById("nextRefresh").textContent = "T-" + pad(min) + ":" + pad(sec);
+      if (remaining > 0) countdownTimer = setTimeout(updateCountdown, 1000);
+    }
+
+    // ─── Init ───
+    refresh();
+  })();
+  </script>
+</body>
+</html>

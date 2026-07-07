@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хроника ударов по НПЗ 2026: атаки БПЛА, пострадавшие заводы</title>
+  <meta name="description" content="Полная хроника ударов БПЛА по нефтеперерабатывающим заводам России 2026: даты атак, повреждения, текущий статус НПЗ. Сколько НПЗ пострадало от БПЛА. Данные OSINT.">
+  <meta name="keywords" content="атака на нпз, бпла нпз, удары по нпз, нпз пострадавшие от бпла, сколько нпз пострадало от бпла, удары по нефтеперерабатывающим заводам">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Russian">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/attacks">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Топливный фронт РФ">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/attacks">
+  <meta property="og:title" content="Хроника ударов по НПЗ 2026: атаки БПЛА, пострадавшие заводы">
+  <meta property="og:description" content="Полный список НПЗ, пострадавших от ударов БПЛА: даты, повреждения, текущий статус. Сколько НПЗ остановлено. Данные из открытых источников.">
+  <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Хроника ударов по НПЗ 2026">
+  <meta name="twitter:description" content="Полный список НПЗ, пострадавших от БПЛА: даты, повреждения, статус.">
+  <meta name="twitter:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Сколько НПЗ пострадало от ударов БПЛА в 2026 году?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "По состоянию на 7 июля 2026, из 28 крупных НПЗ России 8 полностью остановлены (Московский, Рязанский, Лукойл-Перм, Сызранский, Туапсинский, Куйбышевский, НОРСИ, ТАНЕКО), ещё 9 работают с ограничениями. Совокупная потеря мощностей — около 38% (126 из 336 млн тонн/год). Пострадали также Омский НПЗ (крупнейший в стране, 6 июля) и Орский НПЗ."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Когда была первая атака на НПЗ в 2026 году?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Первый удар по НПЗ в 2026 году зафиксирован 16 апреля — по Туапсинскому НПЗ (Краснодарский край). Затем 18 апреля — удар по Новокуйбышевскому НПЗ. С мая 2026 атаки стали массированными: Кинеф (5 мая), Рязанский (15 мая), Московский (17 мая) и другие."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Какой НПЗ пострадал сильнее всего?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Московский НПЗ (Капотня) получил наибольшее количество ударов: 17 мая, 16 июня, 18 июня и 22 июня. Завод остановлен как минимум до 2027 года (Reuters, The Moscow Times). Кинеф (Кириши) — повреждены 3 из 4 установок, работает на ~30%. Омский НПЗ — удар 6 июля по крупнейшему заводу страны (22 млн т/год)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Какие НПЗ полностью остановлены?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Полностью остановлены 8+ НПЗ: Московский (Капотня) с 17.05, Рязанский с 15.05, Лукойл-Перм с 07.05, Сызранский с 21.05, Туапсинский с 16.04, Куйбышевский с 10.06, НОРСИ (Кстово) с 02.07, ТАНЕКО с 12.06, Омский с 06.07, Орский с 06.07. Данные: fuel-state.json."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Когда НПЗ возобновят работу после ударов?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Сроки восстановления неизвестны для большинства НПЗ. Московский НПЗ — не раньше 2027 года (Reuters). Туапсинский — ориентировочно ноябрь 2026 (Роснефть). Для остальных заводов сроки не объявлены. По данным FGE (Reuters), полное восстановление поставок не ожидается до 2027 года."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Главная",
+        "item": "https://npz-tactical-map.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Хроника ударов по НПЗ",
+        "item": "https://npz-tactical-map.vercel.app/attacks"
+      }
+    ]
+  }
+  </script>
+
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=830ef8e9">
+  <link rel="stylesheet" href="/news.css?v=a0ea011c">
+  <style>
+    .landing-wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+    .landing-hero{background:linear-gradient(135deg,rgba(210,58,46,.12),rgba(160,29,20,.08));border:1px solid rgba(210,58,46,.25);border-radius:16px;padding:32px 28px;margin-bottom:28px;position:relative;overflow:hidden}
+    .landing-hero::before{content:"";position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(210,58,46,.15),transparent 70%);border-radius:50%}
+    .hero-label{display:inline-block;background:var(--red);color:#fff;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:6px;margin-bottom:12px}
+    .hero-h{font-size:28px;font-weight:800;line-height:1.2;margin-bottom:10px}
+    .hero-sub{font-size:15px;color:var(--ink-dim);line-height:1.6;max-width:680px}
+    .status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:20px}
+    .status-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+    .status-card .val{font-family:var(--mono);font-size:28px;font-weight:800;color:var(--red)}
+    .status-card .lbl{font-size:11px;color:var(--ink-dim);margin-top:4px}
+    .section-h{font-size:20px;font-weight:800;margin:32px 0 14px;display:flex;align-items:center;gap:8px}
+    .section-h .ico{font-size:22px}
+    .refinery-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:16px 0}
+    .refinery-table th{background:var(--surface2);text-align:left;padding:10px;font-size:11px;letter-spacing:.5px;border-bottom:2px solid var(--line)}
+    .refinery-table td{padding:8px 10px;border-bottom:1px solid var(--line2);vertical-align:top}
+    .refinery-table tr td:first-child{font-weight:700}
+    .tag-down{font-family:var(--mono);font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;color:#fff;background:var(--red)}
+    .tag-partial{font-family:var(--mono);font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;color:#fff;background:var(--amber)}
+    .tag-operational{font-family:var(--mono);font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;color:#fff;background:var(--green)}
+    .timeline-wrap{margin:16px 0}
+    .tl-entry{position:relative;padding-left:24px;margin-bottom:16px}
+    .tl-entry::before{content:"";position:absolute;left:6px;top:6px;bottom:-16px;width:2px;background:var(--line)}
+    .tl-entry:last-child::before{display:none}
+    .tl-entry::after{content:"";position:absolute;left:1px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--surface);background:var(--red);z-index:1}
+    .tl-entry.policy::after{background:var(--teal)}.tl-entry.restriction::after{background:var(--amber)}.tl-entry.repair::after{background:var(--green)}
+    .tl-date{font-family:var(--mono);font-size:11px;color:var(--ink-dim);font-weight:700}
+    .tl-text{font-size:13px;line-height:1.55;margin-top:3px}
+    .tl-text a{color:var(--teal);font-weight:700;font-size:12px}
+    .faq-wrap{margin:20px 0}
+    .faq-item{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+    .faq-q{font-weight:700;font-size:14px;padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q::after{content:"▼";font-size:10px;color:var(--ink-dim);transition:transform .2s}
+    .faq-item.open .faq-q::after{transform:rotate(180deg)}
+    .faq-a{padding:0 16px 14px;font-size:13px;line-height:1.6;color:var(--ink-dim);display:none}
+    .faq-item.open .faq-a{display:block}
+    .link-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:16px 0}
+    .link-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;text-decoration:none;color:var(--ink);transition:.15s}
+    .link-card:hover{border-color:var(--teal);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+    .link-card .lc-h{font-weight:700;font-size:13px;margin-bottom:4px}
+    .link-card .lc-d{font-size:11px;color:var(--ink-dim)}
+    .osint-note{margin-top:32px;font-size:11px;color:var(--ink-dim);background:var(--surface2);padding:12px;border-radius:10px;border-left:3px solid var(--amber);line-height:1.6}
+    .news-link-list{margin:12px 0}
+    .news-link{display:block;padding:10px 12px;border-left:3px solid var(--teal);background:var(--surface);border-radius:0 8px 8px 0;margin-bottom:8px;text-decoration:none;color:var(--ink);font-size:13px;font-weight:600;transition:.12s}
+    .news-link:hover{border-left-color:var(--green);background:rgba(63,224,137,.06);transform:translateX(2px)}
+    .news-link .nl-date{font-family:var(--mono);font-size:10px;color:var(--ink-dim);font-weight:700;display:block;margin-bottom:2px}
+    .explainer{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:24px;font-size:14px;line-height:1.7}
+    .explainer strong{color:var(--red)}
+  </style>
+</head>
+<body data-theme="light">
+  <header class="news-header">
+    <div class="news-header-inner">
+      <a href="/news" class="news-logo" title="Все сводки">
+        <span class="news-logo-icon">⛽</span>
+        <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
+      </a>
+      <nav class="news-nav">
+        <a href="/news">📰 Сводки</a>
+        <a href="/">🗺️ Карта НПЗ</a>
+        <a href="/radar">📡 Радар</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal,#00c8c8);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="/crimea">🗓 Дефицит в Крыму</a>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/crisis">🔥 Топливный кризис</a>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ</a>
+          </div>
+        </div>
+        <a href="/sources">📚 Источники</a>
+      </nav>
+    </div>
+  </header>
+  <main class="news-main">
+    <div class="landing-wrap">
+
+      <!-- HERO -->
+      <div class="landing-hero">
+        <span class="hero-label">ХРОНИКА УДАРОВ</span>
+        <h1 class="hero-h">Хроника ударов по НПЗ России: атаки БПЛА 2026</h1>
+        <p class="hero-sub">Полный список нефтеперерабатывающих заводов, пострадавших от ударов БПЛА. Даты атак, оценка повреждений, текущий статус. Данные из открытых OSINT-источников (Reuters, Bloomberg, Meduza, NASA FIRMS).</p>
+        <div class="status-grid">
+          <div class="status-card">
+            <div class="val">17</div>
+            <div class="lbl">НПЗ под ударами</div>
+          </div>
+          <div class="status-card">
+            <div class="val">10</div>
+            <div class="lbl">Полностью остановлены</div>
+          </div>
+          <div class="status-card">
+            <div class="val">38%</div>
+            <div class="lbl">Потеря мощностей</div>
+          </div>
+          <div class="status-card">
+            <div class="val">126</div>
+            <div class="lbl">Млн т/год простаивает</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ОБЪЯСНЕНИЕ -->
+      <h2 class="section-h"><span class="ico">🔍</span> Масштаб атак</h2>
+      <div class="explainer">
+        <p>С апреля 2026 года украинские БПЛА наносят <strong>массированные удары по нефтеперерабатывающей инфраструктуре</strong> России. По данным Energy Intelligence, не менее 50 ударов пришлось на объекты нефтепереработки. Атаки затронули все ключевые нефтеперерабатывающие кластеры: Центральный, Приволжский, Южный, Урало-Башкирский и Западно-Сибирский.</p>
+        <p style="margin-top:10px">6 июля 2026 — удар по Омскому НПЗ, крупнейшему в стране (22 млн т/год). Bloomberg зафиксировал минимальную переработку нефти с 2005 года — <strong>3,91 млн барр./сут.</strong> в июне.</p>
+      </div>
+
+      <!-- ТАБЛИЦА ПОСТРАДАВШИХ НПЗ -->
+      <h2 class="section-h"><span class="ico">🏭</span> Пострадавшие НПЗ</h2>
+      <p style="font-size:13px;color:var(--ink-dim);margin-bottom:12px">НПЗ, по которым зафиксированы удары БПЛА. Статусы из <a href="/refineries" style="color:var(--teal);font-weight:700">списка НПЗ</a>.</p>
+      <div style="overflow-x:auto">
+      <table class="refinery-table">
+        <thead><tr><th>НПЗ</th><th>Регион</th><th>Мощность</th><th>Статус</th><th>Первый удар</th><th>Повреждения</th></tr></thead>
+        <tbody>
+          <tr><td>Московский (Капотня)</td><td>Москва</td><td>12.5 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>17.05</td><td>4 атаки (17.05, 16.06, 18.06, 22.06). Обе ЭЛОУ-АВТ уничтожены. Не раньше 2027 г.</td></tr>
+          <tr><td>Рязанский</td><td>Рязанская обл.</td><td>17.1 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>15.05</td><td>Остановлен после атаки БПЛА.</td></tr>
+          <tr><td>Лукойл-Перм</td><td>Пермский край</td><td>13.1 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>07.05</td><td>Остановлен после атаки.</td></tr>
+          <tr><td>Сызранский</td><td>Самарская обл.</td><td>8.5 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>21.05</td><td>CDU-6 повреждена (>70% мощности). Ремонт ~1 мес.</td></tr>
+          <tr><td>Туапсинский</td><td>Краснодарский край</td><td>12.0 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>16.04</td><td>Остановлен бессрочно. Рестарт ~ноябрь 2026.</td></tr>
+          <tr><td>Куйбышевский</td><td>Самарская обл.</td><td>7.0 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>10.06</td><td>Обе установки первичной перегонки (АТ-1, АТ-2) поражены.</td></tr>
+          <tr><td>НОРСИ (Кстово)</td><td>Нижегородская обл.</td><td>17.0 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>18.05</td><td>Удары 18.05, 20.05, 24.06, 02.07. АВТ-6 уничтожена. 1 погибший.</td></tr>
+          <tr><td>Омский</td><td>Омская обл.</td><td>22.0 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>06.07</td><td>ЭЛОУ-АВТ-11 (8.4 млн т/год) + АВТ-10 горят. NASA FIRMS.</td></tr>
+          <tr><td>ТАНЕКО</td><td>Татарстан</td><td>17.0 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>12.06</td><td>Пожар на АВТ и резервуарных парках. Полная остановка.</td></tr>
+          <tr><td>Орский</td><td>Оренбургская обл.</td><td>6.6 млн т/г</td><td><span class="tag-down">СТОП</span></td><td>06.07</td><td>Удар БПЛА 6 июля. Статус уточняется.</td></tr>
+          <tr><td>Кинеф</td><td>Ленинградская обл.</td><td>20.1 млн т/г</td><td><span class="tag-partial">~30%</span></td><td>05.05</td><td>3 из 4 CDU повреждены. Частичный перезапуск ~30%.</td></tr>
+          <tr><td>ЯНОС</td><td>Ярославская обл.</td><td>15.0 млн т/г</td><td><span class="tag-partial">~15%</span></td><td>08.05</td><td>Удары 08.05, 28.06, 06.07. Масштаб уточняется.</td></tr>
+          <tr><td>Новокуйбышевский</td><td>Самарская обл.</td><td>8.8 млн т/г</td><td><span class="tag-partial">~40%</span></td><td>18.04</td><td>АВТ-11 и АВТ-9 повреждены. Работает ~40%.</td></tr>
+          <tr><td>Уфимская группа</td><td>Башкортостан</td><td>24.0 млн т/г</td><td><span class="tag-partial">~70%</span></td><td>25.06</td><td>Пожар на АВТ-1 «Башнефть-Новойл», повреждения УНПЗ.</td></tr>
+          <tr><td>Саратовский</td><td>Саратовская обл.</td><td>7.0 млн т/г</td><td><span class="tag-partial">~60%</span></td><td>31.05</td><td>Пожар после атаки. Работает с ограничениями.</td></tr>
+          <tr><td>Афипский</td><td>Краснодарский край</td><td>9.0 млн т/г</td><td><span class="tag-partial">~55%</span></td><td>11.06</td><td>Пожар на установке первичной переработки.</td></tr>
+          <tr><td>Славянский</td><td>Краснодарский край</td><td>5.0 млн т/г</td><td><span class="tag-partial">~35%</span></td><td>28.06</td><td>Пожар у резервуаров, повреждены ЛЭП и газовая труба.</td></tr>
+          <tr><td>Новошахтинский</td><td>Ростовская обл.</td><td>7.5 млн т/г</td><td><span class="tag-partial">~50%</span></td><td>—</td><td>Поражения установок АВТ. Текущий статус уточняется.</td></tr>
+          <tr><td>Ильский</td><td>Краснодарский край</td><td>6.6 млн т/г</td><td><span class="tag-partial">~60%</span></td><td>—</td><td>Повторные удары 2024–2026. Текущий статус уточняется.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <!-- ХРОНИКА КЛЮЧЕВЫХ АТАК -->
+      <h2 class="section-h"><span class="ico">📅</span> Хроника ключевых атак</h2>
+      <div class="timeline-wrap">
+        <div class="tl-entry strike">
+          <div class="tl-date">7 июля 2026</div>
+          <div class="tl-text">Повторный удар по мини-НПЗ «Первый Завод» (Калужская обл.). 452 БПЛА перехвачены над Центральной Россией. <a href="/news/2026-07-07">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">6 июля 2026</div>
+          <div class="tl-text">Удар по Омскому НПЗ (крупнейший, 22 млн т/г). Повторный удар по ЯНОС. Удар по Орскому НПЗ. 500+ БПЛА на 20+ регионов. <a href="/news/2026-07-06">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">3 июля 2026</div>
+          <div class="tl-text">НОРСИ (Кстово): повторный удар по АВТ-6. 8-й полностью остановленный НПЗ. <a href="/news/2026-07-03">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">28 июня 2026</div>
+          <div class="tl-text">Повторный удар по ЯНОС (Ярославль). Удар по Славянскому НПЗ (Краснодарский край). <a href="/news/2026-06-28">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">25 июня 2026</div>
+          <div class="tl-text">Удары по Уфимской группе НПЗ (Башнефть-Новойл, УНПЗ). <a href="/news/2026-06-25">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">12 июня 2026</div>
+          <div class="tl-text">Удар по ТАНЕКО (Нижнекамск) в День России. Татнефть ввела лимиты на АЗС. <a href="/news/2026-06-12">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">11 июня 2026</div>
+          <div class="tl-text">Удар по Афипскому НПЗ (Краснодарский край). Пожар на установке первичной переработки. <a href="/news/2026-06-11">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">10 июня 2026</div>
+          <div class="tl-text">Удар по Куйбышевскому НПЗ: обе установки первичной перегонки поражены. <a href="/news/2026-06-10">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">31 мая 2026</div>
+          <div class="tl-text">Удар по Саратовскому НПЗ: пожар. <a href="/news/2026-05-31">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">21 мая 2026</div>
+          <div class="tl-text">Сызранский НПЗ остановлен: повреждена CDU-6. <a href="/news/2026-05-21">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">17 мая 2026</div>
+          <div class="tl-text">Московский НПЗ (Капотня) остановлен — до 40% рынка столицы. <a href="/news/2026-05-17">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">15 мая 2026</div>
+          <div class="tl-text">Рязанский НПЗ остановлен после атаки БПЛА. <a href="/news/2026-05-15">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">7 мая 2026</div>
+          <div class="tl-text">Лукойл-Перм остановлен. <a href="/news/2026-05-08">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">5 мая 2026</div>
+          <div class="tl-text">Удар по Кинефу (Кириши) — крупнейший НПЗ европейской части РФ. <a href="/news/2026-05-08">→ сводка</a></div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">18 апреля 2026</div>
+          <div class="tl-text">Удар по Новокуйбышевскому НПЗ. АВТ-11 и АВТ-9 повреждены.</div>
+        </div>
+        <div class="tl-entry strike">
+          <div class="tl-date">16 апреля 2026</div>
+          <div class="tl-text">Первый удар по Туапсинскому НПЗ — начало кризиса на юге.</div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <h2 class="section-h"><span class="ico">❓</span> Частые вопросы</h2>
+      <div class="faq-wrap">
+        <div class="faq-item open">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Сколько НПЗ пострадало от ударов БПЛА?</div>
+          <div class="faq-a">По состоянию на 7 июля 2026, из 28 крупных НПЗ России 8 полностью остановлены (Московский, Рязанский, Лукойл-Перм, Сызранский, Туапсинский, Куйбышевский, НОРСИ, ТАНЕКО), ещё 9 работают с ограничениями. Совокупная потеря мощностей — около 38% (126 из 336 млн тонн/год). Пострадали также Омский и Орский НПЗ.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Когда была первая атака на НПЗ?</div>
+          <div class="faq-a">Первый удар по НПЗ в 2026 году зафиксирован 16 апреля — по Туапсинскому НПЗ (Краснодарский край). Затем 18 апреля — удар по Новокуйбышевскому НПЗ. С мая 2026 атаки стали массированными: Кинеф (5 мая), Рязанский (15 мая), Московский (17 мая).</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Какой НПЗ пострадал сильнее всего?</div>
+          <div class="faq-a">Московский НПЗ (Капотня) получил наибольшее количество ударов (4 атаки: 17.05, 16.06, 18.06, 22.06). Завод остановлен как минимум до 2027 года. Кинеф — повреждены 3 из 4 установок, работает ~30%. Омский НПЗ — удар по крупнейшему заводу страны (22 млн т/год).</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Когда НПЗ возобновят работу?</div>
+          <div class="faq-a">Сроки восстановления неизвестны для большинства НПЗ. Московский НПЗ — не раньше 2027 года (Reuters). Туапсинский — ориентировочно ноябрь 2026 (Роснефть). По данным FGE (Reuters), полное восстановление поставок не ожидается до 2027 года.</div>
+        </div>
+      </div>
+
+      <!-- СВОДКИ -->
+      <h2 class="section-h"><span class="ico">📰</span> Последние сводки</h2>
+      <div class="news-link-list">
+        <a class="news-link" href="/news/2026-07-07"><span class="nl-date">7 июля 2026</span>Сводка за 7 июля: удар по мини-НПЗ в Калуге, 452 БПЛА</a>
+        <a class="news-link" href="/news/2026-07-06"><span class="nl-date">6 июля 2026</span>Сводка за 6 июля: Омский НПЗ, 500+ БПЛА, ЯНОС</a>
+        <a class="news-link" href="/news/2026-07-05"><span class="nl-date">5 июля 2026</span>Сводка за 5 июля: удар по Гвардейскому, OPEC+</a>
+        <a class="news-link" href="/news/2026-07-03"><span class="nl-date">3 июля 2026</span>Сводка за 3 июля: НОРСИ остановлен, Евро-3</a>
+        <a class="news-link" href="/news/2026-06-25"><span class="nl-date">25 июня 2026</span>Сводка за 25 июня: удары по Уфимской группе НПЗ</a>
+        <a class="news-link" href="/news/2026-06-12"><span class="nl-date">12 июня 2026</span>Сводка за 12 июня: удар по ТАНЕКО в День России</a>
+      </div>
+
+      <!-- СВЯЗАННЫЕ СТРАНИЦЫ -->
+      <h2 class="section-h"><span class="ico">🔗</span> Полезные ссылки</h2>
+      <div class="link-grid">
+        <a class="link-card" href="/refineries"><div class="lc-h">🏭 Список НПЗ России</div><div class="lc-d">Все НПЗ с мощностями, статусами и историей ударов</div></a>
+        <a class="link-card" href="/crisis"><div class="lc-h">🔥 Топливный кризис</div><div class="lc-d">Хроника общенационального топливного кризиса</div></a>
+        <a class="link-card" href="/deficit"><div class="lc-h">🛢️ Дефицит в России</div><div class="lc-d">Причины и хроника дефицита топлива</div></a>
+        <a class="link-card" href="/crimea"><div class="lc-h">📍 Крым</div><div class="lc-d">Дефицит бензина в Крыму: детальная хроника</div></a>
+        <a class="link-card" href="/"><div class="lc-h">🗺️ Карта НПЗ</div><div class="lc-d">Тактическая карта состояния НПЗ России</div></a>
+        <a class="link-card" href="/radar"><div class="lc-h">📡 Радар ударов</div><div class="lc-d">Карта БПЛА-атак и перехватов</div></a>
+        <a class="link-card" href="/news"><div class="lc-h">📰 Ежедневные сводки</div><div class="lc-d">Архив дайджестов ударов и дефицита</div></a>
+        <a class="link-card" href="/sources"><div class="lc-h">📚 Источники</div><div class="lc-d">Методология и перечень OSINT-источников</div></a>
+      </div>
+
+      <!-- ДИСКЛЕЙМЕР -->
+      <div class="osint-note">
+        <strong>⚠️ Дисклеймер:</strong> Все данные на этой странице получены из открытых OSINT-источников (Reuters, Bloomberg, The Moscow Times, Meduza, CNN, Kpler, Energy Intelligence, NASA FIRMS, региональные СМИ). Это <strong>не является официальной или разведывательной информацией</strong>. Инструмент предназначен для аналитиков, журналистов и исследователей. Показатели — оценочные, рассчитанные по паспортным мощностям НПЗ. Точных real-time данных по остаткам топлива публично не существует.
+      </div>
+    </div>
+  </main>
+  <script>
+    // Mobile dropdown toggle
+    document.querySelectorAll('.nav-dropdown > a').forEach(a => {
+      a.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const menu = this.nextElementSibling;
+          menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+    });
+    // Close on outside click
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.style.display = '');
+      }
+    });
+    // Theme sync
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.dataset.theme = saved;
+  </script>
+</body>
+</html>

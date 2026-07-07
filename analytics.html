@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аналитика топливного рынка — NPZ Tactical Map</title>
+  <meta name="description" content="Аналитика топливного кризиса в России 2026: дефицит бензина, атаки на НПЗ, ситуация в Крыму, список нефтеперерабатывающих заводов. OSINT-данные из открытых источников.">
+  <meta name="keywords" content="аналитика топливный рынок, дефицит бензина россия, атаки НПЗ, крым бензин, топливный кризис 2026, НПЗ список">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Russian">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/analytics">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/news.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Топливный фронт РФ">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/analytics">
+  <meta property="og:title" content="Аналитика топливного рынка — NPZ Tactical Map">
+  <meta property="og:description" content="Аналитика топливного кризиса в России 2026: дефицит бензина, атаки на НПЗ, ситуация в Крыму.">
+  <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Аналитика топливного рынка 2026">
+  <meta name="twitter:description" content="Дефицит бензина, атаки на НПЗ, ситуация в Крыму — всё в одном месте.">
+  <meta name="twitter:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Аналитика топливного рынка — NPZ Tactical Map",
+    "description": "Аналитические материалы о топливном кризисе в России 2026",
+    "url": "https://npz-tactical-map.vercel.app/analytics",
+    "publisher": {
+      "@type": "Organization",
+      "name": "NPZ Tactical Map",
+      "url": "https://npz-tactical-map.vercel.app"
+    },
+    "mainEntity": [
+      {"@type": "Article", "name": "Дефицит бензина в Крыму", "url": "https://npz-tactical-map.vercel.app/crimea"},
+      {"@type": "Article", "name": "Почему нет бензина в России", "url": "https://npz-tactical-map.vercel.app/deficit"},
+      {"@type": "Article", "name": "Топливный кризис 2026", "url": "https://npz-tactical-map.vercel.app/crisis"},
+      {"@type": "Article", "name": "Хроника ударов по НПЗ", "url": "https://npz-tactical-map.vercel.app/attacks"},
+      {"@type": "Article", "name": "Список НПЗ России", "url": "https://npz-tactical-map.vercel.app/refineries"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://npz-tactical-map.vercel.app/"},
+      {"@type": "ListItem", "position": 2, "name": "Аналитика", "item": "https://npz-tactical-map.vercel.app/analytics"}
+    ]
+  }
+  </script>
+
+  <style>
+    .analytics-hero{padding:48px 20px 32px;text-align:center}
+    .analytics-hero h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 12px;color:var(--ink,#2c2a24)}
+    .analytics-hero p{color:var(--ink-dim,#857d6c);font-size:15px;max-width:600px;margin:0 auto}
+    .analytics-grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;
+      max-width:1000px;margin:0 auto;padding:0 20px 60px
+    }
+    .analytics-card{
+      background:var(--card,#1e1e30);border:1px solid var(--border,#333);border-radius:12px;
+      overflow:hidden;transition:transform .2s,border-color .2s;text-decoration:none;color:inherit;display:block
+    }
+    .analytics-card:hover{transform:translateY(-3px);border-color:var(--teal,#00c8c8)}
+    .analytics-card .card-cover{width:100%;height:138px;object-fit:cover;display:block;border-bottom:1px solid var(--border,#333)}
+    .analytics-card .card-body{padding:18px 24px 24px}
+    .analytics-card h2{font-size:1.1rem;margin:0 0 8px;color:var(--text,#e0e0e0)}
+    .analytics-card p{color:var(--muted,#999);font-size:13px;margin:0 0 12px;line-height:1.5}
+    .analytics-card .card-meta{font-size:12px;color:var(--teal,#00c8c8);font-weight:600}
+    @media (max-width:640px){
+      .news-header{padding:0 10px}
+      .news-header-inner{height:auto;min-height:70px;align-items:flex-start;gap:8px;padding:10px 0;flex-wrap:wrap}
+      .news-logo{width:100%;font-size:15px}
+      .news-nav{width:100%;gap:7px;flex-wrap:wrap;align-items:center}
+      .news-nav a{font-size:12.5px;line-height:1.1}
+    }
+    .disclaimer{
+      max-width:800px;margin:0 auto 40px;padding:16px 20px;
+      background:var(--card,#1e1e30);border:1px solid var(--border,#333);border-radius:8px;
+      font-size:12px;color:var(--muted,#999);text-align:center;line-height:1.6
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <header class="news-header">
+    <div class="news-header-inner">
+      <a href="/" class="news-logo" title="На карту">
+        <span class="news-logo-icon">⛽</span>
+        <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
+      </a>
+      <nav class="news-nav">
+        <a href="/">🗺️ Карта</a>
+        <a href="/news">📰 Сводки</a>
+        <a href="/radar">📡 Радар</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal,#00c8c8);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="/crimea">🗓 Дефицит в Крыму</a>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/crisis">🔥 Топливный кризис</a>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ</a>
+          </div>
+        </div>
+        <a href="/sources">📚 Источники</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="news-main">
+    <div class="analytics-hero">
+      <h1>📊 Аналитика топливного рынка</h1>
+      <p>Исследования топливного кризиса в России на основе OSINT-данных: дефицит бензина, атаки на НПЗ, региональная ситуация</p>
+    </div>
+
+    <div class="analytics-grid">
+      <a href="/crimea" class="analytics-card">
+        <img class="card-cover" src="/assets/analytics-crimea-generated.png" alt="" loading="eager" fetchpriority="high">
+        <div class="card-body">
+          <h2>Дефицит бензина в Крыму</h2>
+          <p>Ситуация на АЗС Крыма: почему нет топлива, какие заправки работают, цены и ограничения на продажу</p>
+          <div class="card-meta">→ Читать</div>
+        </div>
+      </a>
+
+      <a href="/deficit" class="analytics-card">
+        <img class="card-cover" src="/assets/analytics-deficit-generated.png" alt="" loading="eager" fetchpriority="high">
+        <div class="card-body">
+          <h2>Почему нет бензина в России</h2>
+          <p>Причины дефицита топлива: атаки на НПЗ, экспортный отток, логистические сбои. Когда закончится кризис</p>
+          <div class="card-meta">→ Читать</div>
+        </div>
+      </a>
+
+      <a href="/crisis" class="analytics-card">
+        <img class="card-cover" src="/assets/analytics-crisis-generated.png" alt="" loading="eager" fetchpriority="high">
+        <div class="card-body">
+          <h2>Топливный кризис 2026</h2>
+          <p>Полная хроника кризиса: от первых ударов до дефицита. Региональные последствия и меры правительства</p>
+          <div class="card-meta">→ Читать</div>
+        </div>
+      </a>
+
+      <a href="/attacks" class="analytics-card">
+        <img class="card-cover" src="/assets/analytics-attacks-generated.png" alt="" loading="eager" fetchpriority="high">
+        <div class="card-body">
+          <h2>Хроника ударов по НПЗ</h2>
+          <p>Все атаки БПЛА на нефтеперерабатывающие заводы: даты, масштаб повреждений, текущий статус</p>
+          <div class="card-meta">→ Читать</div>
+        </div>
+      </a>
+
+      <a href="/refineries" class="analytics-card">
+        <img class="card-cover" src="/assets/analytics-refineries-generated.png" alt="" loading="eager" fetchpriority="high">
+        <div class="card-body">
+          <h2>Список НПЗ России</h2>
+          <p>Полная база нефтеперерабатывающих заводов: мощность, загрузка, статус после атак, география</p>
+          <div class="card-meta">→ Читать</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="disclaimer">
+      ⚠️ Данные собраны из открытых источников (OSINT) и носят оценочный характер. Не являются официальной информацией.
+    </div>
+  </main>
+
+  <script>
+    // Mobile dropdown toggle for nav
+    document.querySelectorAll('.nav-dropdown > a').forEach(a => {
+      a.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const menu = this.nextElementSibling;
+          menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+    });
+    // Theme sync
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.dataset.theme = saved;
+  </script>
+</body>
+</html>

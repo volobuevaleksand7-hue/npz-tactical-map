@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Источники данных — Топливный фронт РФ</title>
+  <meta name="description" content="Откуда берутся данные карты НПЗ: методология сбора, список источников, routine-агенты OSINT-мониторинга (9 наборов данных).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/sources">
+
+  <!-- ─── SEARCH-ENGINE VERIFICATION (заполнить владельцу; те же коды, что на главной) ─── -->
+  <meta name="google-site-verification" content="GOOGLE_SEARCH_CONSOLE_CODE">
+  <meta name="yandex-verification" content="YANDEX_WEBMASTER_CODE">
+
+  <!-- ─── ЯНДЕКС.МЕТРИКА (ОТКЛЮЧЕНА до получения ID — тот же номер, что на главной; иначе ReferenceError) ───
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+    ym(YANDEX_METRICA_ID, "init", {clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/YANDEX_METRICA_ID" style="position:absolute;left:-9999px" alt="" /></div></noscript>
+  ─── /ЯНДЕКС.МЕТРИКА ─── -->
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Топливный фронт РФ">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/sources">
+  <meta property="og:title" content="Источники данных — Топливный фронт РФ">
+  <meta property="og:description" content="Методология сбора данных: автоматические routine-агенты обновляют 9 наборов данных из 50+ открытых источников 4 раза в сутки.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#e7e0d0;--board:#efe9db;--surface:#fbf8f1;--surface2:#f3eee2;
+      --ink:#2c2a24;--ink-dim:#857d6c;--line:rgba(70,58,38,.16);
+      --green:#2f9e57;--green-d:#1f7a41;--amber:#df8f17;--red:#d23a2e;
+      --teal:#178585;--gold:#caa24a;
+      --shadow:0 8px 22px rgba(70,52,24,.16);--shadow-sm:0 3px 9px rgba(70,52,24,.14);
+      --card-radius:14px;--disp:"Rubik",system-ui,sans-serif;--mono:"JetBrains Mono",monospace;
+    }
+    [data-theme="dark"]{
+      --bg:#0d1216;--board:#0f1620;--surface:#16202b;--surface2:#1c2835;
+      --ink:#e2ebef;--ink-dim:#8499a6;--line:rgba(130,170,190,.20);
+      --green:#3fe089;--green-d:#2bbf6e;--amber:#ffb443;--red:#ff5247;
+      --teal:#3fd6cf;--gold:#e6c259;
+      --shadow:0 8px 26px rgba(0,0,0,.5);--shadow-sm:0 3px 12px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      background:var(--bg);color:var(--ink);font-family:var(--disp);
+      -webkit-font-smoothing:antialiased;transition:background .3s,color .3s;
+      min-height:100vh;
+    }
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+      background:radial-gradient(circle at 20% 15%,rgba(202,162,74,.10),transparent 45%),
+      radial-gradient(circle at 85% 80%,rgba(23,133,133,.08),transparent 45%);}
+
+    .topbar{height:56px;display:flex;align-items:center;gap:14px;padding:0 14px;
+      background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm);
+      position:sticky;top:0;z-index:30}
+    .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+    .brand-emblem{font-size:26px}
+    .brand-title{font-weight:800;font-size:14px;letter-spacing:1px}
+    .brand-sub{font-family:var(--mono);font-size:9px;color:var(--ink-dim);letter-spacing:2px}
+    .topctl{margin-left:auto;display:flex;align-items:center;gap:10px}
+    .theme-btn{background:none;border:none;font-size:20px;cursor:pointer;padding:4px}
+    .back-btn{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--teal);
+      text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:6px 14px;
+      transition:all .2s}
+    .back-btn:hover{background:var(--teal);color:#fff}
+
+    .page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:32px 20px 60px}
+    .page-h{font-size:28px;font-weight:800;letter-spacing:.5px;margin-bottom:6px}
+    .page-sub{font-size:14px;color:var(--ink-dim);margin-bottom:32px}
+
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--card-radius);
+      box-shadow:var(--shadow-sm);padding:22px 24px;margin-bottom:20px}
+    .card-h{font-weight:700;font-size:15px;letter-spacing:.5px;margin-bottom:12px;
+      padding-bottom:8px;border-bottom:1px solid var(--line)}
+    .card p{font-size:14px;line-height:1.7;color:var(--ink);margin-bottom:8px}
+
+    .pipeline{display:flex;gap:0;margin:20px 0 28px;flex-wrap:wrap}
+    .pipe-step{flex:1;min-width:140px;padding:16px;text-align:center;position:relative;
+      background:var(--surface2);border:1px solid var(--line)}
+    .pipe-step:first-child{border-radius:var(--card-radius) 0 0 var(--card-radius)}
+    .pipe-step:last-child{border-radius:0 var(--card-radius) var(--card-radius) 0}
+    .pipe-step:not(:last-child)::after{content:"";position:absolute;right:-12px;top:50%;
+      transform:translateY(-50%);border:10px solid transparent;border-left:10px solid var(--surface2);z-index:2}
+    .pipe-num{font-family:var(--mono);font-size:22px;font-weight:800;color:var(--teal)}
+    .pipe-lbl{font-size:12px;font-weight:600;margin-top:4px}
+    .pipe-desc{font-size:11px;color:var(--ink-dim);margin-top:2px}
+
+    .agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:16px 0 28px}
+    .agent-card{background:var(--surface2);border:1px solid var(--line);border-radius:12px;
+      padding:16px;transition:transform .15s}
+    .agent-card:hover{transform:translateY(-2px)}
+    .agent-name{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--teal);margin-bottom:4px}
+    .agent-file{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-bottom:6px}
+    .agent-desc{font-size:12px;line-height:1.6}
+
+    .src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:16px}
+    .src-group{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:16px}
+    .src-group-h{font-weight:700;font-size:13px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .src-group-h .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+    .dot-int{background:var(--teal)}.dot-ru{background:var(--amber)}.dot-ua{background:var(--green)}
+    .dot-reg{background:var(--gold)}.dot-gov{background:var(--red)}
+    .src-list{list-style:none;font-size:12px;line-height:2}
+    .src-list a{color:var(--ink);text-decoration:none;border-bottom:1px dashed var(--line);transition:color .2s}
+    .src-list a:hover{color:var(--teal)}
+    .src-count{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-left:4px}
+
+    .note{font-size:12px;color:var(--ink-dim);line-height:1.7;margin-top:24px;padding:14px;
+      background:var(--surface2);border-radius:10px;border-left:3px solid var(--amber)}
+
+    .stats{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0 24px}
+    .stat{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:14px 20px;text-align:center;flex:1;min-width:120px}
+    .stat-num{font-family:var(--mono);font-size:28px;font-weight:800;color:var(--teal)}
+    .stat-lbl{font-size:11px;color:var(--ink-dim);margin-top:2px}
+
+    @media(max-width:600px){
+      .page{padding:20px 14px 40px}
+      .page-h{font-size:22px}
+      .pipeline{flex-direction:column}
+      .pipe-step{border-radius:var(--card-radius)!important}
+      .pipe-step:not(:last-child)::after{display:none}
+      .src-grid{grid-template-columns:1fr}
+      .agents{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <header class="topbar">
+    <a href="/" class="brand">
+      <span class="brand-emblem">⛽</span>
+      <div>
+        <div class="brand-title">ТОПЛИВНЫЙ ФРОНТ РФ</div>
+        <div class="brand-sub">NPZ TACTICAL MAP</div>
+      </div>
+    </a>
+    <div class="topctl">
+      <a href="/" class="back-btn">← Карта</a>
+      <button class="theme-btn" id="themeToggle" title="Тема">☀️</button>
+    </div>
+  </header>
+
+  <div class="page">
+    <h1 class="page-h">Источники данных</h1>
+    <p class="page-sub">Откуда карта берёт информацию, как устроен автоматический сбор и какие наборы данных обновляются</p>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">наборов данных</div></div>
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-lbl">источников</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">обновлений/сутки</div></div>
+      <div class="stat"><div class="stat-num" id="totalUrls">—</div><div class="stat-lbl">ссылок в базе</div></div>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <div class="card">
+      <div class="card-h">Методология</div>
+      <p>Все данные на карте — <b>OSINT-оценка</b>, основанная исключительно на открытых источниках. Мы не используем закрытые или классифицированные данные. Информация агрегируется автоматически набором routine-агентов (по одному на тип данных) и перекрёстно проверяется по нескольким независимым источникам.</p>
+      <p>Каждое событие (удар, изменение статуса НПЗ, ограничение) сохраняется вместе со ссылкой на первоисточник. Если по теме нет подтверждённых новостей — данные не обновляются: агенты никогда не генерируют вымышленные события.</p>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="card">
+      <div class="card-h">Конвейер обновления данных</div>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <div class="pipe-num">1</div>
+          <div class="pipe-lbl">Сбор</div>
+          <div class="pipe-desc">Веб-поиск на русском и английском по 4–6 запросам на агента</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">2</div>
+          <div class="pipe-lbl">Фильтрация</div>
+          <div class="pipe-desc">Дедупликация, проверка по дата+город, отсечение старых записей</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">3</div>
+          <div class="pipe-lbl">Запись</div>
+          <div class="pipe-desc">Обновление JSON-файлов со строгим сохранением схемы</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">4</div>
+          <div class="pipe-lbl">Валидация</div>
+          <div class="pipe-desc">Автоматическая проверка JSON, откат при ошибке</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">5</div>
+          <div class="pipe-lbl">Публикация</div>
+          <div class="pipe-desc">Git push → GitHub → карта читает data/ напрямую из raw</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGENTS -->
+    <div class="card">
+      <div class="card-h">Как собираются данные</div>
+      <p>Данные собирают автоматические routine-агенты — по одному на тип данных, итого <b>9 регулярно обновляемых наборов данных</b> — плюс служебные скрипты: проверка свежести (вотчдог), обновление координат АЗС из OpenStreetMap, подтверждение ударов и валидация АЗС. Рутина запускается каждые 6 часов (4 раза в сутки). Ниже — основные направления мониторинга:</p>
+      <div class="agents">
+        <div class="agent-card">
+          <div class="agent-name">STRIKES</div>
+          <div class="agent-file">→ data/strikes.json</div>
+          <div class="agent-desc">Удары БПЛА и ракетами по российским городам и объектам. Координаты, тип, жертвы, цели. Хранит до 110 последних событий.</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">NPZ-STATUS</div>
+          <div class="agent-file">→ data/fuel-state.json (статусы)</div>
+          <div class="agent-desc">Статус каждого НПЗ и экспортного терминала: operational / partial / down. Мощности, степень повреждений, дата изменения.</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">FUEL-MARKET</div>
+          <div class="agent-file">→ data/fuel-state.json (рынок)</div>
+          <div class="agent-desc">Регионы дефицита, национальный баланс, экспортный бан, биржевые цены. Ограничения на АЗС и объёмы импорта.</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">HISTORY-CRIMEA</div>
+          <div class="agent-file">→ data/history-crimea.json</div>
+          <div class="agent-desc">Хроника событий + отдельный блок по Крыму: талоны, маршруты, статус АЗС, сухопутный коридор.</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">ROADS</div>
+          <div class="agent-file">→ data/roads.json</div>
+          <div class="agent-desc">Топливные артерии: трасса Р-280 «Новороссия», коридор Мариуполь, Чонгар. Удары по бензовозам, статус дорог.</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">ORCHESTRATOR</div>
+          <div class="agent-file">→ все data/*.json</div>
+          <div class="agent-desc">Координирует остальных агентов, управляет git pull/push, валидирует JSON и откатывает битые файлы.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOURCES LIST -->
+    <div class="card">
+      <div class="card-h">Источники новостей</div>
+      <p>Агенты ищут информацию в десятках открытых изданий. Ниже — категоризированный список тех, на которые есть ссылки в текущей базе данных:</p>
+
+      <div class="src-grid">
+        <div class="src-group">
+          <div class="src-group-h"><span class="dot dot-int"></span> Международные СМИ</div>
+          <ul class="src-list">
+            <li><a href="https://themoscowtimes.com" target="_blank" rel="noopener">The Moscow Times</a> <span class="src-count">8</span></li>
+            <li><a href="https://currenttime.tv" target="_blank" rel="noopener">Настоящее время</a> <span class="src-count">3</span></li>
+            <li><a href="https://novayagazeta.eu" target="_blank" rel="noopener">Новая газета Европа</a></li>
+            <li><a href="https://ru.euronews.com" target="_blank" rel="noopener">Euronews</a></li>
+            <li><a href="https://cnn.com" target="_blank" rel="noopener">CNN</a></li>
+            <li><a href="https://npr.org" target="_blank" rel="noopener">NPR</a> <span class="src-count">2</span></li>
+            <li><a href="https://theguardian.com" target="_blank" rel="noopener">The Guardian</a></li>
+            <li><a href="https://rus.err.ee" target="_blank" rel="noopener">ERR (Эстония)</a> <span class="src-count">2</span></li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <div class="src-group-h"><span class="dot dot-ru"></span> Независимые русскоязычные</div>
+          <ul class="src-list">
+            <li><a href="https://meduza.io" target="_blank" rel="noopener">Meduza</a> <span class="src-count">16</span></li>
+            <li><a href="https://fontanka.ru" target="_blank" rel="noopener">Фонтанка.ру</a> <span class="src-count">4</span></li>
+            <li><a href="https://vedomosti.ru" target="_blank" rel="noopener">Ведомости</a> <span class="src-count">2</span></li>
+            <li><a href="https://profile.ru" target="_blank" rel="noopener">Профиль</a></li>
+            <li><a href="https://profinance.ru" target="_blank" rel="noopener">ProFinance.ru</a> <span class="src-count">2</span></li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <div class="src-group-h"><span class="dot dot-reg"></span> Региональные СМИ (Россия)</div>
+          <ul class="src-list">
+            <li><a href="https://ura.news" target="_blank" rel="noopener">URA.news</a> <span class="src-count">11</span></li>
+            <li><a href="https://ptoday.ru" target="_blank" rel="noopener">PToday.ru</a> <span class="src-count">4</span></li>
+            <li><a href="https://mosregtoday.ru" target="_blank" rel="noopener">Mosregtoday</a> <span class="src-count">3</span></li>
+            <li><a href="https://e1.ru" target="_blank" rel="noopener">E1.ru (Екатеринбург)</a> <span class="src-count">2</span></li>
+            <li><a href="https://nn.ru" target="_blank" rel="noopener">NN.ru (Н.Новгород)</a> <span class="src-count">2</span></li>
+            <li><a href="https://neva.today" target="_blank" rel="noopener">Neva.Today</a> <span class="src-count">2</span></li>
+            <li><a href="https://newdaynews.ru" target="_blank" rel="noopener">NewDayNews</a> <span class="src-count">2</span></li>
+            <li><a href="https://msk1.ru" target="_blank" rel="noopener">MSK1.ru</a></li>
+            <li><a href="https://53.ru" target="_blank" rel="noopener">53.ru (Новгород)</a></li>
+            <li><a href="https://kubnews.ru" target="_blank" rel="noopener">Кубанские новости</a></li>
+            <li><a href="https://rostov.aif.ru" target="_blank" rel="noopener">АиФ Ростов</a></li>
+            <li><a href="https://kazan.aif.ru" target="_blank" rel="noopener">АиФ Казань</a></li>
+            <li><a href="https://kuban.aif.ru" target="_blank" rel="noopener">АиФ Кубань</a></li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <div class="src-group-h"><span class="dot dot-gov"></span> Провластные / госСМИ (Россия)</div>
+          <ul class="src-list">
+            <li><a href="https://vz.ru" target="_blank" rel="noopener">Взгляд</a> <span class="src-count">5</span></li>
+            <li><a href="https://ria.ru" target="_blank" rel="noopener">РИА Новости</a></li>
+            <li><a href="https://kp.ru" target="_blank" rel="noopener">Комсомольская правда</a></li>
+            <li><a href="https://eadaily.com" target="_blank" rel="noopener">EADaily</a> <span class="src-count">2</span></li>
+            <li><a href="https://crimea.ria.ru" target="_blank" rel="noopener">РИА Крым</a> <span class="src-count">2</span></li>
+            <li><a href="https://crimea-news.com" target="_blank" rel="noopener">Крым Новости</a> <span class="src-count">2</span></li>
+            <li><a href="https://regions.ru" target="_blank" rel="noopener">Regions.ru</a></li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <div class="src-group-h"><span class="dot dot-ua"></span> Украинские СМИ</div>
+          <ul class="src-list">
+            <li><a href="https://biz.liga.net" target="_blank" rel="noopener">Liga.net Business</a> <span class="src-count">5</span></li>
+            <li><a href="https://unian.net" target="_blank" rel="noopener">УНИАН</a> <span class="src-count">3</span></li>
+            <li><a href="https://pravda.com.ua" target="_blank" rel="noopener">Украинская правда</a> <span class="src-count">2</span></li>
+            <li><a href="https://24tv.ua" target="_blank" rel="noopener">24 канал</a> <span class="src-count">2</span></li>
+            <li><a href="https://glavred.info" target="_blank" rel="noopener">Главред</a> <span class="src-count">2</span></li>
+            <li><a href="https://kyivpost.com" target="_blank" rel="noopener">Kyiv Post</a> <span class="src-count">2</span></li>
+            <li><a href="https://ukrinform.net" target="_blank" rel="noopener">Укринформ</a></li>
+            <li><a href="https://hromadske.ua" target="_blank" rel="noopener">Громадське</a></li>
+            <li><a href="https://censor.net" target="_blank" rel="noopener">Цензор.НЕТ</a></li>
+            <li><a href="https://nv.ua" target="_blank" rel="noopener">НВ</a></li>
+            <li><a href="https://united24media.com" target="_blank" rel="noopener">United24 Media</a></li>
+            <li><a href="https://newsukraine.rbc.ua" target="_blank" rel="noopener">RBC Украина</a></li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <div class="src-group-h"><span class="dot dot-int"></span> Специализированные</div>
+          <ul class="src-list">
+            <li><a href="https://informedclearly.com" target="_blank" rel="noopener">InformedClearly</a></li>
+            <li><a href="https://news.mail.ru" target="_blank" rel="noopener">Новости Mail.ru</a></li>
+            <li>Reuters (цитируется другими)</li>
+            <li>Bloomberg (цитируется другими)</li>
+            <li>S&P Global Commodity Insights</li>
+            <li>Argus Media</li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <div class="src-group-h"><span class="dot dot-int"></span> Карты и геоданные (вкладка АЗС)</div>
+          <ul class="src-list">
+            <li><a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a> — расположение и бренды заправок (Overpass API), © участники OSM, ODbL</li>
+            <li><a href="https://project-osrm.org" target="_blank" rel="noopener">OSRM</a> — построение маршрута «карты поездки»</li>
+            <li><a href="https://nominatim.openstreetmap.org" target="_blank" rel="noopener">Nominatim</a> — геокодинг городов A→B</li>
+            <li><a href="https://carto.com" target="_blank" rel="noopener">CARTO</a> — картографическая подложка</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="note">
+      <b>Важно:</b> Все данные на карте являются оценкой на основе открытых источников (OSINT). Это не официальная статистика. Мощности НПЗ, объёмы выпуска и потери — аналитические оценки. <b>Вкладка «АЗС»:</b> расположение заправок реальное (OpenStreetMap), но наличие топлива — оценка по статусу сети в регионе, <b>не данные по конкретной колонке</b>. <b>Маршрут показывает риск дефицита по регионам и не гарантирует наличие топлива на конкретной АЗС;</b> «карта поездки» носит справочный характер. Агенты работают автоматически и могут ошибаться: при обнаружении неточности пишите через GitHub Issues проекта. Каждое событие в базе данных содержит ссылку на первоисточник — вы можете проверить любой факт самостоятельно.
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle (same as main site)
+    var themeBtn = document.getElementById('themeToggle');
+    function applyTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      document.body.setAttribute('data-theme', t);
+      themeBtn.textContent = t === 'dark' ? '🌙' : '☀️';
+      try { localStorage.setItem('npz-theme', t); } catch(e) {}
+    }
+    themeBtn.addEventListener('click', function() {
+      applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+    try {
+      var saved = localStorage.getItem('npz-theme');
+      if (saved) applyTheme(saved);
+    } catch(e) {}
+
+    // Count total URLs in data files
+    var RAW = 'https://raw.githubusercontent.com/volobuevaleksand7-hue/npz-tactical-map/main/';
+    var files = ['data/strikes.json','data/fuel-state.json','data/history-crimea.json','data/roads.json'];
+    var total = 0;
+    var loaded = 0;
+    files.forEach(function(f) {
+      fetch(RAW + f).then(function(r){return r.text()}).then(function(t) {
+        var m = t.match(/https?:\/\/[^\s"]+/g);
+        if (m) total += m.length;
+        loaded++;
+        if (loaded === files.length) {
+          document.getElementById('totalUrls').textContent = total;
+        }
+      }).catch(function() { loaded++; });
+    });
+  </script>
+  <!-- Vercel Web Analytics (включить в Dashboard → Analytics → Enable) -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1474 @@
+{
+  "meta": {
+    "project": "NPZ Tactical Map / Топливный фронт РФ",
+    "url": "https://npz-tactical-map.vercel.app/",
+    "date": "2026-07-07",
+    "data_source": "Yandex Wordstat via XMLRiver API (real frequencies)",
+    "previous_research": "2026-06-11 (estimated frequencies without Wordstat)"
+  },
+  "existing_site_content": {
+    "pages": [
+      {
+        "url": "/",
+        "type": "dashboard",
+        "description": "Main interactive map with НПЗ statuses, deficit regions, pipeline routes"
+      },
+      {
+        "url": "/radar",
+        "type": "dashboard",
+        "description": "UAV/drone threat radar map for НПЗ regions"
+      },
+      {
+        "url": "/news.html",
+        "type": "archive",
+        "description": "News archive index with all daily briefings"
+      },
+      {
+        "url": "/sources.html",
+        "type": "info",
+        "description": "OSINT sources and methodology page"
+      },
+      {
+        "url": "/dashboard/",
+        "type": "dashboard",
+        "description": "Alternative dashboard view"
+      },
+      {
+        "url": "/news/YYYY-MM-DD.html",
+        "type": "article",
+        "description": "54 daily briefing articles (May 1 - July 7, 2026)"
+      }
+    ],
+    "total_news_articles": 54,
+    "no_dedicated_landing_pages_for": [
+      "Crimea fuel deficit (regional page)",
+      "Fuel prices / gasoline prices (transactional hub)",
+      "НПЗ list with details (encyclopedia/listing page)",
+      "Fuel crisis timeline (evergreen article)",
+      "Diesel shortage (dedicated page)",
+      "Бензин по талонам (how-to/explainer)",
+      "Очереди на заправках (real-time info page)",
+      "Региональные страницы дефицита (per-region pages)"
+    ]
+  },
+  "keyword_clusters": {
+    "high_volume_fuel_deficit": {
+      "description": "Core cluster: 'нет бензина' / fuel deficit — the #1 traffic opportunity",
+      "keywords": [
+        {
+          "query": "почему нет бензина",
+          "frequency": 459353,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "HIGHEST volume query. Site index page partially covers but no dedicated explainer."
+        },
+        {
+          "query": "почему нет бензина на заправках",
+          "frequency": 200043,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "почему нет бензина в россии",
+          "frequency": 81498,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "почему бензина нет в россии на заправках",
+          "frequency": 43205,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему нет бензина в крыму",
+          "frequency": 27574,
+          "intent": "informational/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "почему сегодня нет бензина",
+          "frequency": 25704,
+          "intent": "news",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "почему нет бензина на заправках сегодня",
+          "frequency": 21238,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему нет бензина 2026",
+          "frequency": 5434,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему нет бензина что случилось",
+          "frequency": 4302,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему нет бензина причина",
+          "frequency": 4118,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нет бензина",
+          "frequency": 109142,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "Head term for main cluster. Index page title uses this but no standalone page."
+        },
+        {
+          "query": "нет бензина на заправках",
+          "frequency": 16880,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "landing_page"
+        }
+      ]
+    },
+    "crimea_fuel_cluster": {
+      "description": "Crimea fuel cluster — HUGE volume, site has unique OSINT data but NO dedicated page",
+      "keywords": [
+        {
+          "query": "бензин в крыму",
+          "frequency": 630775,
+          "intent": "informational/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "HIGHEST Crimea query. Massive gap — site has data but no /crimea page."
+        },
+        {
+          "query": "бензин в крыму сегодня",
+          "frequency": 153103,
+          "intent": "news/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "ситуация с бензином в крыму",
+          "frequency": 69422,
+          "intent": "informational/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "где бензин в крыму",
+          "frequency": 48679,
+          "intent": "transactional/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "крым новости бензин",
+          "frequency": 38748,
+          "intent": "news/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "цена бензина в крыму",
+          "frequency": 32555,
+          "intent": "transactional/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "бензин на заправках крыма",
+          "frequency": 30778,
+          "intent": "informational/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "карта бензина в крыму",
+          "frequency": 30144,
+          "intent": "navigational/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "Direct map intent — site HAS a map but no /crimea route."
+        },
+        {
+          "query": "наличие бензина в крыму",
+          "frequency": 23673,
+          "intent": "informational/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "купить бензин в крыму",
+          "frequency": 22995,
+          "intent": "transactional/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "бензин в крыму сейчас",
+          "frequency": 19866,
+          "intent": "news/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "обстановка с бензином в крыму",
+          "frequency": 18919,
+          "intent": "informational/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "ситуация с бензином в крыму на сегодня",
+          "frequency": 17487,
+          "intent": "news/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дефицит топлива в крыму",
+          "frequency": 2081,
+          "intent": "informational/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "бензин в крыму сегодня где есть",
+          "frequency": 10661,
+          "intent": "transactional/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "бензин в крыму сегодня новости",
+          "frequency": 16337,
+          "intent": "news/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "талоны на бензин в крыму",
+          "frequency": 10474,
+          "intent": "informational/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "талоны на бензин в крыму как получить",
+          "frequency": 2337,
+          "intent": "informational/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "FAQ"
+        },
+        {
+          "query": "купить талоны на бензин в крыму",
+          "frequency": 2782,
+          "intent": "transactional/regional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "где взять талон на бензин в крыму",
+          "frequency": 1662,
+          "intent": "informational/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "FAQ"
+        }
+      ]
+    },
+    "fuel_deficit_general": {
+      "description": "General fuel deficit cluster — 'дефицит бензина' / 'дефицит топлива'",
+      "keywords": [
+        {
+          "query": "дефицит бензина",
+          "frequency": 293524,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "High-volume head term. No dedicated landing page."
+        },
+        {
+          "query": "дефицит бензина в россии",
+          "frequency": 108747,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "дефицит топлива",
+          "frequency": 66250,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "почему дефицит бензина",
+          "frequency": 49435,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дефицит бензина сегодня",
+          "frequency": 32359,
+          "intent": "news",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему в россии дефицит бензина",
+          "frequency": 29563,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дефицит бензина в россии сегодня",
+          "frequency": 24107,
+          "intent": "news",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дефицит топлива в россии",
+          "frequency": 18658,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "причины дефицита бензина",
+          "frequency": 12826,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "будет ли дефицит бензина",
+          "frequency": 14449,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "когда закончится дефицит бензина",
+          "frequency": 12379,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дефицит бензина в москве",
+          "frequency": 16744,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему дефицит топлива",
+          "frequency": 6831,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дефицит топлива 2026",
+          "frequency": 3003,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "искусственный дефицит топлива",
+          "frequency": 1624,
+          "intent": "informational",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дефицит дизельного топлива",
+          "frequency": 2093,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "npz_attacks_cluster": {
+      "description": "НПЗ attacks / drone strikes — site's core topic but no detailed page",
+      "keywords": [
+        {
+          "query": "атака на нпз",
+          "frequency": 65028,
+          "intent": "news",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "High-volume news query. Daily articles partially cover but no persistent landing page."
+        },
+        {
+          "query": "бпла нпз",
+          "frequency": 45105,
+          "intent": "news",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "удары по нпз",
+          "frequency": 44206,
+          "intent": "news",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "атака на нпз сегодня",
+          "frequency": 12999,
+          "intent": "news",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз москва атака",
+          "frequency": 14663,
+          "intent": "news/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз после атаки",
+          "frequency": 7444,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атака на московский нпз",
+          "frequency": 6977,
+          "intent": "news/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атака бпла на нпз",
+          "frequency": 6131,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атака дронов на нпз",
+          "frequency": 4819,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атака беспилотников на нпз",
+          "frequency": 4687,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз атака беспилотника сегодня",
+          "frequency": 3496,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атаки на нпз в россии",
+          "frequency": 3320,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атака на нпз в капотне",
+          "frequency": 3300,
+          "intent": "news/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "московский нпз атака бпла",
+          "frequency": 3199,
+          "intent": "news/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "видео атаки на нпз",
+          "frequency": 2078,
+          "intent": "informational",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атаки на нпз 2026",
+          "frequency": 2053,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз россии бпла",
+          "frequency": 14819,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз пострадавшие от бпла",
+          "frequency": 13320,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "Perfect fit for a comprehensive list page."
+        },
+        {
+          "query": "сколько нпз пострадало от бпла",
+          "frequency": 12835,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз россии пострадавшие от бпла",
+          "frequency": 12833,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "сколько нпз пострадало в россии от бпла",
+          "frequency": 12727,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "npz_refinery_info_cluster": {
+      "description": "НПЗ info queries — 'нефтеперерабатывающий завод' / list of refineries",
+      "keywords": [
+        {
+          "query": "нефтеперерабатывающий завод",
+          "frequency": 205845,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "High volume generic term. No detailed refinery database page on site."
+        },
+        {
+          "query": "нефтеперерабатывающие заводы в россии",
+          "frequency": 35969,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "сколько нефтеперерабатывающих заводов",
+          "frequency": 26313,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "сколько нефтеперерабатывающих заводов в россии",
+          "frequency": 18209,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз россии список",
+          "frequency": 15164,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "Perfect for a list/table of all НПЗ with statuses."
+        },
+        {
+          "query": "нефтеперерабатывающий завод взорвали",
+          "frequency": 7319,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нефтеперерабатывающий завод сегодня",
+          "frequency": 6258,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нефтеперерабатывающий завод новости",
+          "frequency": 5025,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "горел нефтеперерабатывающий завод",
+          "frequency": 4149,
+          "intent": "news",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз в россии список по городам",
+          "frequency": 3658,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "крупные нпз россии список",
+          "frequency": 1301,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "нпз россии на карте",
+          "frequency": 9579,
+          "intent": "navigational",
+          "priority": "High",
+          "content_gap": false,
+          "page_type": "landing_page",
+          "notes": "Site main page IS the map, but URL/title may not match this exact query."
+        }
+      ]
+    },
+    "gasoline_prices_cluster": {
+      "description": "Gasoline prices — 'бензин цена' — VERY high volume, partially relevant",
+      "keywords": [
+        {
+          "query": "цены на бензин",
+          "frequency": 1434570,
+          "intent": "transactional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "Huge volume but transactional intent. Site can cover crisis-driven price info."
+        },
+        {
+          "query": "цены на бензин сегодня",
+          "frequency": 555641,
+          "intent": "transactional/news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "95 бензин цена",
+          "frequency": 277676,
+          "intent": "transactional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "92 бензин цена",
+          "frequency": 157116,
+          "intent": "transactional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "цена бензина на заправках",
+          "frequency": 145949,
+          "intent": "transactional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "цены на бензин в россии",
+          "frequency": 65828,
+          "intent": "transactional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "рост цен на топливо",
+          "frequency": 6817,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "рост топлива",
+          "frequency": 9422,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "рост топлива 2026",
+          "frequency": 1335,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "fuel_crisis_cluster": {
+      "description": "Fuel crisis — 'топливный кризис' — strong informational cluster",
+      "keywords": [
+        {
+          "query": "топливный кризис",
+          "frequency": 196369,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "Major cluster. No dedicated page on site."
+        },
+        {
+          "query": "топливный кризис в россии",
+          "frequency": 93550,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "топливный кризис 2026",
+          "frequency": 40234,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливный кризис в россии 2026",
+          "frequency": 34764,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "когда закончится топливный кризис",
+          "frequency": 25657,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "когда закончится топливный кризис в россии",
+          "frequency": 15726,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "причины топливного кризиса",
+          "frequency": 6145,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливный кризис почему",
+          "frequency": 5112,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливный кризис в крыму",
+          "frequency": 5097,
+          "intent": "informational/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливный кризис сегодня",
+          "frequency": 4587,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливный кризис в москве",
+          "frequency": 4130,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливный кризис в россии 2026 когда закончится",
+          "frequency": 3925,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "FAQ"
+        },
+        {
+          "query": "топливный кризис в россии сегодня",
+          "frequency": 3524,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "diesel_fuel_cluster": {
+      "description": "Diesel fuel — 'дизельное топливо' — high volume, less covered on site",
+      "keywords": [
+        {
+          "query": "дизельное топливо",
+          "frequency": 400015,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article",
+          "notes": "High volume generic. Site focuses on gasoline; diesel deficit also important."
+        },
+        {
+          "query": "цена дизельного топлива",
+          "frequency": 45133,
+          "intent": "transactional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дизельное топливо сегодня",
+          "frequency": 24737,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дизельное топливо на заправках",
+          "frequency": 20323,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "дефицит дизельного топлива",
+          "frequency": 2093,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "рост дизельного топлива",
+          "frequency": 1449,
+          "intent": "informational",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "queues_and_rationing_cluster": {
+      "description": "Очереди на заправках / бензин по талонам — rationing and queues",
+      "keywords": [
+        {
+          "query": "очереди на заправках",
+          "frequency": 175524,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page",
+          "notes": "High-volume crisis query. No dedicated page."
+        },
+        {
+          "query": "почему очереди на заправках",
+          "frequency": 26758,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "очереди на заправках в москве",
+          "frequency": 20424,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "бензин по талонам",
+          "frequency": 18598,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "landing_page"
+        },
+        {
+          "query": "очереди на заправках сегодня",
+          "frequency": 16321,
+          "intent": "news",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "есть ли очереди на заправках",
+          "frequency": 10550,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "заправки без бензина",
+          "frequency": 5094,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "regional_fuel_cluster": {
+      "description": "Regional fuel deficit queries — Krasnodar, Rostov, Moscow, etc.",
+      "keywords": [
+        {
+          "query": "бензин в краснодаре",
+          "frequency": 188169,
+          "intent": "regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article",
+          "notes": "Major regional gap. Krasnodar — one of worst-hit regions."
+        },
+        {
+          "query": "бензин в краснодаре сегодня",
+          "frequency": 30621,
+          "intent": "news/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "где есть бензин в краснодаре",
+          "frequency": 23285,
+          "intent": "transactional/regional",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "бензин на заправках краснодара",
+          "frequency": 19744,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "ситуация с бензином в краснодаре",
+          "frequency": 11680,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему в краснодаре нет бензина",
+          "frequency": 4237,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему в краснодарском крае нет бензина",
+          "frequency": 3717,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливо в ростове",
+          "frequency": 8806,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливо в ростове на дону",
+          "frequency": 4376,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему в москве нет бензина",
+          "frequency": 14204,
+          "intent": "regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему в иркутске нет бензина",
+          "frequency": 6071,
+          "intent": "regional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему в ростовской области нет бензина",
+          "frequency": 2688,
+          "intent": "regional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему в ставропольском крае нет бензина",
+          "frequency": 1658,
+          "intent": "regional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему в башкирии нет бензина",
+          "frequency": 4012,
+          "intent": "regional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "specific_npz_queries": {
+      "description": "Specific refinery names in attack context",
+      "keywords": [
+        {
+          "query": "московский нефтеперерабатывающий завод",
+          "frequency": 23685,
+          "intent": "informational/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "капотня нефтеперерабатывающий завод",
+          "frequency": 14143,
+          "intent": "informational/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атака на тюменский нпз",
+          "frequency": 3469,
+          "intent": "news/regional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "атака на нпз в капотне",
+          "frequency": 3300,
+          "intent": "news/regional",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "brand_queries": {
+      "description": "Fuel brand + deficit queries",
+      "keywords": [
+        {
+          "query": "почему на лукойле нет бензина",
+          "frequency": 17185,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему на татнефть нет бензина",
+          "frequency": 4102,
+          "intent": "informational",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему на газпроме нет бензина",
+          "frequency": 3908,
+          "intent": "informational",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему на роснефти нет бензина",
+          "frequency": 3213,
+          "intent": "informational",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "почему на газпромнефть нет бензина",
+          "frequency": 2905,
+          "intent": "informational",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "лукойл цены на бензин",
+          "frequency": 87242,
+          "intent": "transactional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "цена бензина роснефть",
+          "frequency": 106046,
+          "intent": "transactional",
+          "priority": "Low",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "time_sensitive_queries": {
+      "description": "Time-stamped queries — seasonal/monthly peaks",
+      "keywords": [
+        {
+          "query": "почему в июне нет бензина",
+          "frequency": 2926,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article",
+          "notes": "Will shift to 'июле', 'августе' — maintain rolling article."
+        },
+        {
+          "query": "почему нет бензина июнь 2026",
+          "frequency": 2344,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливный кризис 2026",
+          "frequency": 40234,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "топливный кризис в россии 2026",
+          "frequency": 34764,
+          "intent": "informational",
+          "priority": "High",
+          "content_gap": true,
+          "page_type": "article"
+        }
+      ]
+    },
+    "english_osint_cluster": {
+      "description": "English OSINT queries — lower volume but high-value international audience",
+      "keywords": [
+        {
+          "query": "russia oil refinery map",
+          "frequency": null,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": false,
+          "page_type": "landing_page",
+          "notes": "Site partially covers via English meta tags. Estimate 3-6K/mo."
+        },
+        {
+          "query": "russia fuel shortage 2026",
+          "frequency": null,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "russian refinery drone attack",
+          "frequency": null,
+          "intent": "informational",
+          "priority": "Medium",
+          "content_gap": true,
+          "page_type": "article"
+        },
+        {
+          "query": "NPZ Russia OSINT",
+          "frequency": null,
+          "intent": "navigational",
+          "priority": "Low",
+          "content_gap": false,
+          "page_type": "landing_page",
+          "notes": "Site already ranks for this brand query."
+        }
+      ]
+    }
+  },
+  "priority_summary": {
+    "critical_content_gaps": [
+      {
+        "page": "/crimea (Крым — дефицит бензина)",
+        "total_keyword_volume": 1200000,
+        "priority": "CRITICAL",
+        "rationale": "Combined Crimea fuel cluster has 1.2M+ monthly searches. Site has rich OSINT data (history-crimea.json, azs-stations.json) but NO dedicated Crimea page. This is the #1 content gap.",
+        "target_queries": [
+          "бензин в крыму",
+          "бензин в крыму сегодня",
+          "ситуация с бензином в крыму",
+          "карта бензина в крыму",
+          "дефицит топлива в крыму"
+        ]
+      },
+      {
+        "page": "/deficit (Дефицит топлива в России)",
+        "total_keyword_volume": 600000,
+        "priority": "CRITICAL",
+        "rationale": "'дефицит бензина' cluster has 293K + 'нет бензина' has 459K. Site covers this in daily briefings but no evergreen explainer page.",
+        "target_queries": [
+          "почему нет бензина",
+          "дефицит бензина в россии",
+          "почему дефицит бензина",
+          "когда закончится дефицит бензина"
+        ]
+      },
+      {
+        "page": "/crisis (Топливный кризис 2026)",
+        "total_keyword_volume": 196000,
+        "priority": "HIGH",
+        "rationale": "'топливный кризис' cluster is 196K/mo. No dedicated page. Perfect for an evergreen timeline article.",
+        "target_queries": [
+          "топливный кризис",
+          "топливный кризис в россии 2026",
+          "когда закончится топливный кризис"
+        ]
+      },
+      {
+        "page": "/attacks (Хроника ударов по НПЗ)",
+        "total_keyword_volume": 250000,
+        "priority": "HIGH",
+        "rationale": "'атака на нпз' 65K + 'бпла нпз' 45K + 'удары по нпз' 44K + 'нпз пострадавшие от бпла' 13K. Site has data but no persistent attack history page.",
+        "target_queries": [
+          "атака на нпз",
+          "бпла нпз",
+          "удары по нпз",
+          "нпз пострадавшие от бпла",
+          "сколько нпз пострадало от бпла"
+        ]
+      },
+      {
+        "page": "/refineries (Список НПЗ России)",
+        "total_keyword_volume": 260000,
+        "priority": "HIGH",
+        "rationale": "'нефтеперерабатывающий завод' 206K + 'нпз россии список' 15K + related. Site has the data in fuel-state.json but no SEO-optimized listing page.",
+        "target_queries": [
+          "нефтеперерабатывающие заводы в россии",
+          "нпз россии список",
+          "нпз россии на карте",
+          "сколько нефтеперерабатывающих заводов в россии"
+        ]
+      },
+      {
+        "page": "/queues (Очереди на заправках)",
+        "total_keyword_volume": 175000,
+        "priority": "MEDIUM",
+        "rationale": "'очереди на заправках' is 175K/mo. Crisis-driven query with no dedicated page.",
+        "target_queries": [
+          "очереди на заправках",
+          "почему очереди на заправках",
+          "очереди на заправках сегодня"
+        ]
+      },
+      {
+        "page": "/prices (Цены на бензин)",
+        "total_keyword_volume": 1500000,
+        "priority": "MEDIUM",
+        "rationale": "'цены на бензин' is 1.4M/mo — huge but transactional. Site can cover crisis-driven price spikes, not compete with price aggregators.",
+        "target_queries": [
+          "цены на бензин сегодня",
+          "рост цен на топливо",
+          "цены на бензин в россии"
+        ]
+      },
+      {
+        "page": "/diesel (Дизельное топливо дефицит)",
+        "total_keyword_volume": 400000,
+        "priority": "MEDIUM",
+        "rationale": "'дизельное топливо' is 400K/mo generic. Site can target the deficit angle specifically.",
+        "target_queries": [
+          "дизельное топливо на заправках",
+          "дефицит дизельного топлива"
+        ]
+      },
+      {
+        "page": "/krasnodar (Краснодар — дефицит бензина)",
+        "total_keyword_volume": 200000,
+        "priority": "MEDIUM",
+        "rationale": "'бензин в краснодаре' is 188K. Krasnodar is one of hardest-hit regions.",
+        "target_queries": [
+          "бензин в краснодаре сегодня",
+          "где есть бензин в краснодаре",
+          "ситуация с бензином в краснодаре"
+        ]
+      }
+    ],
+    "content_type_recommendations": [
+      {
+        "type": "Landing Pages (evergreen)",
+        "count": 6,
+        "description": "/crimea, /deficit, /crisis, /attacks, /refineries, /queues — each targeting a primary keyword cluster with FAQ schema"
+      },
+      {
+        "type": "Regional Articles",
+        "count": 8,
+        "description": "Krasnodar, Rostov, Moscow, Stavropol, Bashkiria, Irkutsk, etc. — pages targeting 'почему в [REGION] нет бензина'"
+      },
+      {
+        "type": "FAQ Pages",
+        "count": 3,
+        "description": "When will fuel crisis end? How to get fuel coupons in Crimea? Why is there no gasoline? — FAQPage schema for rich snippets"
+      },
+      {
+        "type": "Updated Daily Briefings",
+        "count": "ongoing",
+        "description": "Current news format is good but needs better internal linking to evergreen pages"
+      },
+      {
+        "type": "Refinery Database Pages",
+        "count": "15-20",
+        "description": "Individual pages per major НПЗ (Moscow, Ryazan, Yaroslavl, etc.) — long-tail attack queries"
+      }
+    ],
+    "total_addressable_monthly_search_volume": "8,500,000+",
+    "current_site_coverage_estimate": "~15% (main page + daily news)",
+    "potential_traffic_increase_with_gaps_filled": "5-10x"
+  }
+}

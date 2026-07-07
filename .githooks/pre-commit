@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# NPZ TACTICAL MAP — pre-commit guard.
+# Refuses any commit that would record git conflict / stash markers under data/.
+# Enable with:  git config core.hooksPath .githooks
+# (agents/git-sync.sh enables this automatically on first run.)
+#
+# It inspects the STAGED content (the index), not the working tree, so it catches
+# exactly what is about to be committed.
+set -uo pipefail
+
+PROTECTED_UI_RE='^(index\.html|styles\.css|app\.js|radar\.html|version\.json|CHANGELOG\.md|\.vercelignore)$'
+protected_ui="$(git diff --cached --name-only --diff-filter=ACMR 2>/dev/null | grep -E "$PROTECTED_UI_RE" || true)"
+if [ -n "$protected_ui" ] && [ "${ALLOW_FRONTEND_RELEASE:-}" != "1" ]; then
+  echo "pre-commit: BLOCKED — protected UI/release files are staged:" >&2
+  printf '%s\n' "$protected_ui" | sed 's/^/    /' >&2
+  echo "pre-commit: set ALLOW_FRONTEND_RELEASE=1 only for an intentional UI/release commit." >&2
+  exit 1
+fi
+
+# Files staged for commit under data/ (added/copied/modified/renamed).
+staged="$(git diff --cached --name-only --diff-filter=ACMR -- data/ 2>/dev/null)"
+[ -z "$staged" ] && exit 0
+
+bad=0
+while IFS= read -r f; do
+  [ -z "$f" ] && continue
+  # Read the staged blob (not the working file) and look for conflict markers.
+  if git show ":$f" 2>/dev/null | grep -nE '^(<<<<<<<|=======|>>>>>>>)' >/dev/null; then
+    echo "pre-commit: BLOCKED — $f contains conflict/stash markers:" >&2
+    git show ":$f" 2>/dev/null | grep -nE '^(<<<<<<<|=======|>>>>>>>)' | sed 's/^/    /' >&2
+    bad=1
+  fi
+done <<< "$staged"
+
+if [ "$bad" = "1" ]; then
+  echo "pre-commit: fix the marker(s) above and re-stage. Commit aborted." >&2
+  exit 1
+fi
+exit 0

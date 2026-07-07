@@ -1,0 +1,84 @@
+.radar-icon {
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.radar-icon-drone {
+  width: 32px;
+  height: 32px;
+  background-image: url('drone_32.png');
+  animation: blink 1s infinite;
+}
+
+.radar-icon-rocket {
+  width: 32px;
+  height: 32px;
+  background-image: url('rocket_32.png');
+  animation: pulse 0.5s infinite;
+}
+
+.radar-icon-pvo {
+  width: 32px;
+  height: 32px;
+  background-image: url('pvo_32.png');
+  animation: rotate 2s linear infinite;
+}
+
+.radar-icon-combined {
+  width: 32px;
+  height: 32px;
+  background-image: url('combined_32.png');
+  animation: blink 0.8s infinite;
+}
+
+/* Large icons */
+.radar-icon-drone-lg { width: 48px; height: 48px; background-image: url('drone_48.png'); }
+.radar-icon-rocket-lg { width: 48px; height: 48px; background-image: url('rocket_48.png'); }
+.radar-icon-pvo-lg { width: 48px; height: 48px; background-image: url('pvo_48.png'); }
+.radar-icon-combined-lg { width: 48px; height: 48px; background-image: url('combined_48.png'); }
+
+/* Animations */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Legend */
+.radar-legend {
+  display: flex;
+  gap: 16px;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 8px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.radar-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.radar-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}

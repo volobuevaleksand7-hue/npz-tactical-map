@@ -1,0 +1,64 @@
+# ============================================================================
+# ⚠️  РЕФЕРЕНС-СПЕКА, НЕ УСТАНАВЛИВАТЬ ЭТОТ ФАЙЛ В crontab  ⚠️
+# ----------------------------------------------------------------------------
+# На hermes-vps РАНТАЙМ = Hermes Agent (провайдер Xiaomi MiMo), а НЕ `claude`.
+# `claude` на этой машине НЕ залогинен и ANTHROPIC_API_KEY нет. Поэтому если
+# сделать `crontab hermes/crontab.hermes`, все строки-сборщики ниже, которые
+# зовут run-agent.sh → `claude -p`, будут МОЛЧА ПАДАТЬ (run-agent.sh откатит
+# data/ и не закоммитит). Плюс это создаст ВТОРОГО исполнителя параллельно
+# нативным рутинам Гермеса → гонки за git push.
+#
+# ПРАВИЛЬНО: сбор ведёт Гермес своими рутинами (`hermes cron create ...`,
+# см. ~/.hermes/cron/jobs.json). Ниже — только целевые КАДЕНСЫ и лейблы
+# слоёв как ТЗ: какой слой, как часто, куда пишет, каким heartbeat-ключом
+# коммитить. Реализуй это в своём планировщике, а не в OS-cron.
+#
+# Все времена — UTC (МСК = UTC+3). Инвариант: 1 слой = 1 запуск; агент пишет
+# только свой data/<layer>.json; коммит/пуш ТОЛЬКО через agents/git-sync.sh
+# с правильным heartbeat-ключом; каждое событие — с реальным source_url.
+# ============================================================================
+#
+# ЦЕЛЕВЫЕ СЛОИ И КАДЕНСЫ (реализовать нативными рутинами Гермеса):
+#
+#   слой               файл                         каденс (UTC)      hb-ключ
+#   ------------------ ---------------------------- ----------------- -----------------
+#   npz-status         data/fuel-state.json         каждые 6ч         npz-status
+#   fuel-market        data/fuel-state.json         каждые 6ч         fuel-market
+#   history-crimea     data/history-crimea.json     каждые 6ч         history-crimea
+#   strikes            data/strikes.json            каждые 6ч         strikes
+#   roads              data/roads.json              каждые 6ч         roads
+#   grid-status        data/grid-state.json         каждые 6ч         grid-status        ← ОТСТАЁТ, завести
+#   fuel-availability  data/fuel-availability.json  каждые 4ч         fuel-availability  ← ОТСТАЁТ, завести
+#   fuel-voices        data/fuel-voices.json        каждые 8ч         fuel-voices        ← ОТСТАЁТ, завести
+#   newswatch→strikes  data/strikes.json            ежечасно (день)   strikes  ← НЕ постит в канал сам (редполитика v2, 2026-07-07). Пишет strikes.json, ЗАТЕМ обязан вызвать `python3 hermes/bot/strike_pipeline.py` (БЕЗ --dry-run) — единственный публикатор молнии (TIER1 авто-канал / TIER2 владельцу с кнопками).
+#   strike-confirm     data/strike-confirm.json     каждые 6ч         —  (python3 agents/strike-confirm.py)
+#   forecast           data/forecast.json           вс 03:45          forecast (Opus-класс)
+#   economy            data/economy.json            ср 03:45          economy  (Opus-класс)
+#   news /news         news.html + archive          после волны       —  (bash hermes/publish-vps.sh; НЕ постит в канал — только регенерирует страницы + poll + radar-alerts)
+#   briefing morning   Telegram-сводка (канал+сайт)  05:00             —  (broadcast.py --briefing morning)  = 08:00 МСК
+#   briefing evening   Telegram-сводка (канал+сайт)  17:00             —  (broadcast.py --briefing evening) = 20:00 МСК, финализирует /news/<дата>.html
+#   radar-state         data/radar-state.json        каждые 1-5 мин     radar-state (python3 agents/update-radar-state.py)
+#   radar alerts        Telegram БПЛА alerts         каждые 10 мин     —  (python3 hermes/bot/radar_alerts.py --send)  ← НЕ трогать, отдельный канал алертов
+#   watchdog           data/health.json             ежечасно          —  (python3 agents/healthcheck.py)
+#
+# Единственные публикаторы канала @NPZmap теперь: (1) broadcast.py --briefing
+# (одна утренняя + одна вечерняя сводка/день, + --update для пополнений),
+# (2) strike_pipeline.py/radar_publish.py (молния TIER1/TIER2). Всё остальное
+# (compute_digest/editorial_digest в broadcast.py) — под флагом NPZ_LEGACY=1,
+# по умолчанию не постит. См. docs/agents/jobs-migration-2026-07-07.md.
+#
+# СКРИПТОВЫЕ слои РАБОТАЮТ без claude — их можно гонять хоть OS-cron'ом, хоть рутиной:
+#   cd /root/npz-tactical-map && python3 agents/strike-confirm.py && \
+#     bash agents/git-sync.sh "data(strike-confirm): $(date -u +%Y-%m-%dT%H:%MZ)"
+#   python3 agents/update-radar-state.py && bash agents/git-sync.sh "data(radar): refresh $(date -u +%Y-%m-%dT%H:%MZ)" "radar-state"
+#   python3 agents/healthcheck.py && bash agents/git-sync.sh "health: watchdog $(date -u +%Y-%m-%dT%H:%MZ)"
+#   bash hermes/publish-vps.sh
+#   python3 hermes/bot/broadcast.py --briefing morning|evening
+#   python3 hermes/bot/strike_pipeline.py   (без --dry-run — молния прод)
+#
+# LLM-слои (strikes/npz/market/history/roads/grid/availability/voices/newswatch/
+# forecast/economy) — веди своим MiMo-агентом: git pull → собрать по источникам
+# (Telegram-каналы t.me/s/<ch> + web_search) → записать data/<layer>.json →
+# bash agents/git-sync.sh "<msg>" "<hb-ключ>". Обложки (по событию, не по крону):
+#   python3 hermes/scripts/build-covers.py — город удара + подпись, светло, НЕ мрачно.
+# ============================================================================
