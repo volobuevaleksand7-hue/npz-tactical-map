@@ -144,6 +144,28 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .card-h.crit{background:var(--crit);color:#fff}
 .card-h .count{font-family:var(--mono);font-size:11px;color:var(--ink-dim)}
 .card-b{padding:14px;overflow:auto;flex:1 1 auto;min-height:0}
+/* clickable/expandable panel headers */
+.card-h--clickable{cursor:pointer;justify-content:flex-start;transition:background .15s}
+.card-h--clickable .count{margin-left:6px}
+.card-h--clickable:hover{background:rgba(202,162,74,.16)}
+.card-h--clickable:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+.card-expand{margin-left:auto;padding-left:8px;font-size:14px;line-height:1;color:var(--ink-dim);opacity:.6;transition:.15s;flex:none}
+.card-h--clickable:hover .card-expand{opacity:1;color:var(--teal);transform:scale(1.14)}
+
+/* EXPAND MODAL — read a panel full-size */
+.detail-modal{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);animation:detailFade .16s ease}
+.detail-modal[hidden]{display:none}
+.detail-card{position:relative;width:100%;max-width:640px;max-height:86vh;overflow-y:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px 24px;animation:detailPop .18s cubic-bezier(.2,.8,.3,1)}
+.detail-close{position:absolute;top:12px;right:12px;width:32px;height:32px;border:none;border-radius:9px;background:var(--surface2);color:var(--ink-dim);font-size:16px;line-height:1;cursor:pointer;transition:.12s;z-index:1}
+.detail-close:hover{background:var(--red);color:#fff}
+.exp-title{font-weight:800;font-size:16px;letter-spacing:.5px;margin:0 0 16px;padding-right:36px}
+.exp-body .feed-title{-webkit-line-clamp:unset;display:block;font-size:12.5px}
+.exp-body .feed-item,.exp-body .voice-item{cursor:default}
+.exp-body .feed-item:hover,.exp-body .voice-item:hover{transform:none}
+.exp-body .feed-item:hover{background:rgba(210,58,46,.06)}
+.exp-body .voice-item:hover{background:rgba(23,133,133,.06)}
+@keyframes detailFade{from{opacity:0}to{opacity:1}}
+@keyframes detailPop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
 
 /* BALANCE */
 .bal-big{text-align:center;margin-bottom:14px}

@@ -102,6 +102,7 @@
         initTabs();
         initControls();
         initMobile();
+        initPanelExpand();
         tickClock(); setInterval(tickClock, 1000);
         appStarted = true;
         if (S.state) renderAll();
@@ -853,6 +854,58 @@
     if (s.source_url) h += '<div class="pp-src"><a href="' + safeUrl(s.source_url) + '" target="_blank" rel="noopener">читать новость ↗</a></div>';
     return h;
   }
+  /* ---------- EXPAND PANELS (click a card → read it full-size) ---------- */
+  var _detailPrevFocus = null;
+  function _detailEsc(e) { if (e.key === "Escape") closeDetail(); }
+  function ensureDetail() {
+    var ov = document.getElementById("detailModal");
+    if (ov) return ov;
+    ov = document.createElement("div");
+    ov.id = "detailModal"; ov.className = "detail-modal"; ov.setAttribute("hidden", "");
+    ov.innerHTML = '<div class="detail-card" role="dialog" aria-modal="true">' +
+      '<button type="button" class="detail-close" aria-label="Закрыть">✕</button>' +
+      '<div class="detail-body"></div></div>';
+    document.body.appendChild(ov);
+    ov.addEventListener("click", function (e) { if (e.target === ov) closeDetail(); });
+    ov.querySelector(".detail-close").addEventListener("click", closeDetail);
+    return ov;
+  }
+  function openDetail(html) {
+    var ov = ensureDetail();
+    ov.querySelector(".detail-body").innerHTML = html;
+    _detailPrevFocus = document.activeElement;
+    ov.removeAttribute("hidden");
+    document.addEventListener("keydown", _detailEsc);
+    var c = ov.querySelector(".detail-close"); if (c) c.focus();
+  }
+  function closeDetail() {
+    var ov = document.getElementById("detailModal"); if (!ov) return;
+    ov.setAttribute("hidden", "");
+    document.removeEventListener("keydown", _detailEsc);
+    if (_detailPrevFocus && _detailPrevFocus.focus) { try { _detailPrevFocus.focus(); } catch (e) {} }
+  }
+  function openPanelExpand(bodyEl, title, cls) {
+    if (!bodyEl) return;
+    openDetail('<div class="exp-title">' + esc(title) + '</div>' +
+      '<div class="exp-body ' + (cls || "") + '">' + bodyEl.innerHTML + '</div>');
+  }
+  function initPanelExpand() {
+    [["panelLeft", "НАЦИОНАЛЬНЫЙ БАЛАНС", "balanceBody", ""],
+     ["panelFeed", "📰 ЛЕНТА УДАРОВ", "feedList", "exp-feed"],
+     ["panelVoices", "🗣 ГОЛОСА ЛЮДЕЙ", "voicesList", "exp-voices"]
+    ].forEach(function (p) {
+      var panel = document.getElementById(p[0]); if (!panel) return;
+      var head = panel.querySelector(".card-h"); if (!head) return;
+      if (!head.querySelector(".card-expand")) {
+        var ic = document.createElement("span");
+        ic.className = "card-expand"; ic.setAttribute("aria-hidden", "true"); ic.textContent = "⤢";
+        head.appendChild(ic);
+        head.classList.add("card-h--clickable");
+      }
+      bindButton(head, function () { openPanelExpand(document.getElementById(p[2]), p[1], p[3]); });
+    });
+  }
+
   function strikeList() { return (S.strikes && S.strikes.strikes) || []; }
   function buildStrikeDates() {
     var set = {}; strikeList().forEach(function (s) { set[s.date] = 1; });
