@@ -11,9 +11,19 @@
 | Переменная | Значение | Зачем |
 |---|---|---|
 | `NPZ_BOT_DIR` | `/root/.bpla-alert` | своя папка: token, subscribers.json, poll-state, radar-alert-state |
-| `NPZ_OWNER_CHAT` | `8830414911` (Erhan) | ЛС-уведомление владельцу о каждой новой подписке; пусто = не слать |
+| `NPZ_REPORT_CHAT` | `609952529` (Sergey, основной) | куда слать отчёт о счётчике подписчиков |
+| `NPZ_REPORT_TOKEN` | `/root/.npz-bot/token` | токен бота-отправителя отчётов (@NpzFuel_Bot) |
+| `NPZ_OWNER_CHAT` | *(не задан)* | альт. ЛС-уведомление о каждой подписке через ЭТОГО бота; вытеснено REPORT_* |
 | `NPZ_REPO` | `/root/npz-tactical-map` | общий репозиторий/данные |
 | `NPZ_CHANNEL` | *(пока не задан)* | канал для сводок; включить, когда канал создан (см. ниже) |
+
+### Счётчик подписчиков → отчёт через @NpzFuel_Bot
+
+`poll.py` считает активных подписчиков и на новую подписку шлёт отчёт в
+`NPZ_REPORT_CHAT` через `@NpzFuel_Bot` (`NPZ_REPORT_TOKEN`). Пороги (`_should_report`):
+**≤25 — о каждом · 26–100 — каждый 5-й · 101–500 — каждый 10-й · >500 — каждый 50-й.**
+Водяной знак `last_report_count` в `poll-state.json` — без повторов при колебаниях счётчика.
+Тест логики порогов: `python3 hermes/bot/test_poll_report.py`.
 
 Токен лежит в `/root/.bpla-alert/token` (chmod 600). В git НЕ коммитить.
 
@@ -21,7 +31,7 @@
 
 ```
 # @BPLAlert_bot
-* * * * *    NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.bpla-alert NPZ_OWNER_CHAT=8830414911 /usr/bin/python3 /root/npz-tactical-map/hermes/bot/poll.py >> /root/npz-tactical-map/agents/logs/bpla-bot.log 2>&1
+* * * * *    NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.bpla-alert NPZ_REPORT_CHAT=609952529 NPZ_REPORT_TOKEN=/root/.npz-bot/token /usr/bin/python3 /root/npz-tactical-map/hermes/bot/poll.py >> /root/npz-tactical-map/agents/logs/bpla-bot.log 2>&1
 */10 * * * * NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.bpla-alert /usr/bin/python3 /root/npz-tactical-map/hermes/bot/radar_alerts.py --send >> /root/npz-tactical-map/agents/logs/bpla-bot.log 2>&1
 ```
 
