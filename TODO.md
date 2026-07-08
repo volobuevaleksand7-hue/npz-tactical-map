@@ -10,15 +10,16 @@
 Своё ничего писать не надо — только прокинуть и красиво отрисовать.
 
 ## Active
-- **fable5-main** | task-1..4 (radar revamp v1.5.0) | api/radar-state.js + radar.html | субагенты: proxy (Task 1), icon design (Task 2); main: Tasks 3-4 + интеграция
+(никто не работает)
 
 ## Pending
 
-## Completed (in progress → SHA после релиза)
-- [ ] Task 1: Прокинуть в `api/radar-state.js` отброшенные поля апстрима — `recent_messages`, `sources`, `direction_arrows`, `bpla_icon_fade_sec`
-- [ ] Task 2: Заменить треугольники в `ICON_SVGS` (radar.html) на силуэты-модельки. Яркость: `bpla`→opacity 1, `bplaDim`→0.45 с CSS-transition
-- [ ] Task 3: Светлая/тёмная тема — кнопка ☀/🌙, `[data-theme=light]` + тайлы `dark_all`↔`voyager`, localStorage, дефолт светлая
-- [ ] Task 4: Лента справа из `recent_messages` (канал · время МСК · текст)
+## Completed
+- [x] Task 1: Прокинуты в `api/radar-state.js` поля апстрима — `recent_messages`, `sources`, `direction_arrows`, `bpla_icon_fade_sec` + `last_event_ts`/`source_text` городов (SHA: 2466829, 2026-07-08)
+- [x] Task 2: SVG-модельки вместо треугольников + `safe`-точка; затухание `bplaDim`→opacity .45 (SHA: 2466829, 2026-07-08)
+- [x] Task 3: Тема ☀/🌙 — voyager↔dark_all, localStorage, дефолт светлая, анти-FOUC (SHA: 2466829, 2026-07-08)
+- [x] Task 4: Лента Telegram справа из `recent_messages`, 60 записей, на мобиле скрыта (SHA: 2466829, 2026-07-08)
+- [x] Бонус-фикс: `toggleStrikesLayer` → `window` (чекбокс «Удары» кидал ReferenceError) (SHA: 2466829, 2026-07-08)
 
 ## Completed
 <!-- format: - [x] Task N: description (SHA: abc1234, YYYY-MM-DD) -->
