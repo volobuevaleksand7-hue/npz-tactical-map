@@ -833,14 +833,15 @@ body {
 .nav-dropdown{position:relative;display:inline-block}
 .nav-dropdown-menu{
   display:none;position:absolute;top:100%;left:0;z-index:200;
-  min-width:200px;padding:6px 0;
-  background:var(--bg,#1a1a2e);border:1px solid var(--border,#333);border-radius:8px;
-  box-shadow:0 8px 24px rgba(0,0,0,.4)
+  min-width:210px;padding:6px 0;
+  background:var(--surface,#16202b);border:1px solid var(--line,#333);border-radius:8px;
+  box-shadow:var(--shadow,0 8px 24px rgba(0,0,0,.4))
 }
 .nav-dropdown-menu a{
-  display:block;padding:8px 16px;color:var(--text,#e0e0e0);text-decoration:none;font-size:13px;white-space:nowrap;transition:background .15s
+  display:block;padding:8px 16px;color:var(--ink,#e0e0e0);text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap;transition:background .15s,color .15s
 }
-.nav-dropdown-menu a:hover{background:var(--teal-15,rgba(0,200,200,.12))}
+.nav-dropdown-menu a:hover{background:var(--surface2,rgba(0,200,200,.12));color:var(--teal)}
+.nav-dropdown-menu a[aria-current="page"]{color:var(--teal);background:var(--surface2)}
 .nav-dropdown:hover .nav-dropdown-menu{display:block}
 @media(max-width:768px){
   .nav-dropdown-menu{
