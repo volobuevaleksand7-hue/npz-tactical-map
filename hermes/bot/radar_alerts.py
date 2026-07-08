@@ -169,6 +169,7 @@ def build_notifications(subscribers, radar, prev_state, now_ts=None):
                     "chat_id": str(chat_id),
                     "region": region,
                     "status": status,
+                    "cities": threat.get("cities", []),
                     "text": format_notice(region, threat, status),
                 })
                 last_sent = now_ts
@@ -188,6 +189,23 @@ def send_message(token, chat_id, text):
         return json.loads(response.read().decode("utf-8"))
 
 
+def format_group_text(notices):
+    """Собирает все new/reminder-нотисы одного chat_id в единое сообщение."""
+    msk = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=3)
+    time_str = msk.strftime("%H:%M")
+    lines = ["<b>🔴 Радар: угроза БПЛА / ракет</b>", "⏰ %s МСК" % time_str, "",
+             "⚠️ <b>Активные регионы:</b>"]
+    for n in notices:
+        emoji = "🆕" if n["status"] == "new" else "🔴"
+        region = n["region"]
+        cities = n.get("cities", [])
+        city_str = " (%s)" % ", ".join(cities[:5]) if cities else ""
+        lines.append("%s <b>%s</b>%s" % (emoji, region, city_str))
+    lines.append("")
+    lines.append('📍 <a href="%s/radar.html">открыть карту радара</a>' % SITE)
+    return "\n".join(lines)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Subscriber radar/BPLA alerts.")
     parser.add_argument("--send", action="store_true", help="Actually send Telegram alerts")
@@ -198,21 +216,42 @@ def main():
     radar = jload(os.path.join(DATA, "radar-state.json"), {})
     state = jload(STATE_PATH, {})
     notices, next_state = build_notifications(subs, radar, state)
-    print("radar-alerts: %d notifications" % len(notices))
+    print("radar-alerts: %d raw notifications" % len(notices))
+
+    # Группируем по chat_id: статусы new/reminder в одно сообщение,
+    # clear — пока отдельно (их обычно 0-1 за раз)
+    grouped = {}
+    clears = []
     for notice in notices:
-        print("[%s] %s -> %s" % (notice["status"], notice["chat_id"], notice["region"]))
-        print(notice["text"])
-        print("---")
+        if notice["status"] == "clear":
+            clears.append(notice)
+        else:
+            chat_id = notice["chat_id"]
+            grouped.setdefault(chat_id, []).append(notice)
+
+    print("radar-alerts: %d grouped broadcasts, %d clears" % (len(grouped), len(clears)))
+
     if args.send:
         token = open(os.path.join(BOT_DIR, "token")).read().strip()
         sent = 0
-        for notice in notices:
+        # Шлём групповые (одно сообщение на chat_id)
+        for chat_id, group in grouped.items():
+            text = format_group_text(group)
+            resp = send_message(token, chat_id, text)
+            if resp.get("ok"):
+                sent += 1
+        # Clear-нотисы шлём по-отдельности (их редко)
+        for notice in clears:
             resp = send_message(token, notice["chat_id"], notice["text"])
             if resp.get("ok"):
                 sent += 1
         jsave(STATE_PATH, next_state)
-        print("radar-alerts: sent %d/%d" % (sent, len(notices)))
+        print("radar-alerts: sent %d/%d messages" % (sent, len(grouped) + len(clears)))
     else:
+        for notice in notices:
+            print("[%s] %s -> %s" % (notice["status"], notice["chat_id"], notice["region"]))
+            print(notice["text"])
+            print("---")
         print("radar-alerts: dry-run only; state not saved")
 
 
