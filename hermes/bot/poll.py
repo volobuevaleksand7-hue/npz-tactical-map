@@ -14,13 +14,45 @@ try:
 except Exception:
     _bc = None
 BOT_DIR = os.environ.get("NPZ_BOT_DIR", os.path.join(HOME, ".npz-bot"))
-TOKEN = open(os.path.join(BOT_DIR, "token")).read().strip()
+_TOKEN_PATH = os.path.join(BOT_DIR, "token")
+TOKEN = open(_TOKEN_PATH).read().strip() if os.path.exists(_TOKEN_PATH) else ""  # import-safe (тест)
 SUBS_PATH = os.path.join(BOT_DIR, "subscribers.json")
 STATE_PATH = os.path.join(BOT_DIR, "poll-state.json")
 API = "https://api.telegram.org/bot" + TOKEN
 SITE = "https://npz-tactical-map.vercel.app"
 # Чат владельца для уведомлений о новых подписках (пусто = не слать; задаётся для @BPLAlert_bot)
 OWNER_CHAT = os.environ.get("NPZ_OWNER_CHAT", "").strip()
+# Отчёт о счётчике подписчиков через ДРУГОГО бота (напр. @NpzFuel_Bot → основной чат владельца).
+# NPZ_REPORT_CHAT — куда слать, NPZ_REPORT_TOKEN — путь к токену бота-отправителя.
+REPORT_CHAT = os.environ.get("NPZ_REPORT_CHAT", "").strip()
+REPORT_TOKEN_FILE = os.environ.get("NPZ_REPORT_TOKEN", "").strip()
+
+
+def _should_report(count):
+    """Пороги отчёта по числу подписчиков: ≤25 каждый, ≤100 каждый 5-й,
+    ≤500 каждый 10-й, дальше каждый 50-й."""
+    if count <= 25:
+        return True
+    if count <= 100:
+        return count % 5 == 0
+    if count <= 500:
+        return count % 10 == 0
+    return count % 50 == 0
+
+
+def _report_send(text):
+    """Отправить отчёт через бота-отправителя (REPORT_TOKEN_FILE) в REPORT_CHAT."""
+    if not (REPORT_CHAT and REPORT_TOKEN_FILE and os.path.exists(REPORT_TOKEN_FILE)):
+        return
+    try:
+        tok = open(REPORT_TOKEN_FILE).read().strip()
+        data = urllib.parse.urlencode({
+            "chat_id": REPORT_CHAT, "text": text, "disable_web_page_preview": "true",
+        }).encode()
+        urllib.request.urlopen(
+            "https://api.telegram.org/bot%s/sendMessage" % tok, data=data, timeout=20)
+    except Exception as e:
+        print("report send err", e)
 
 WELCOME = ("✅ Вы подписаны на сводку «Топливный фронт РФ».\n\n"
            "После каждого обновления карты пришлю кратко: новые удары по НПЗ, ситуацию "
@@ -310,6 +342,18 @@ def main():
                          "name": chat.get("first_name") or chat.get("username") or ""})
             subs[cid] = info
             if new: added += 1
+            # отчёт о счётчике подписчиков через @NpzFuel_Bot (пороговый, с водяным знаком)
+            if new and REPORT_CHAT:
+                active_now = sum(1 for v in subs.values() if v.get("status") == "active")
+                if active_now > st.get("last_report_count", 0) and _should_report(active_now):
+                    st["last_report_count"] = active_now
+                    r_un = chat.get("username")
+                    r_who = chat.get("first_name") or r_un or cid
+                    r_uns = f"@{r_un}" if r_un else "—"
+                    r_msk = (datetime.datetime.now(datetime.timezone.utc)
+                             + datetime.timedelta(hours=3)).strftime("%d.%m %H:%M МСК")
+                    _report_send(f"📊 @BPLAlert_bot: {active_now} подписчик(ов)\n"
+                                 f"Новый: {r_who} ({r_uns}) · ID {cid}\n{r_msk}")
             # уведомление владельцу о новой подписке (только если задан NPZ_OWNER_CHAT)
             if new and OWNER_CHAT:
                 uname = chat.get("username")
@@ -390,7 +434,8 @@ def main():
                 reply_markup=json.dumps(kb))
 
     json.dump(subsdoc, open(SUBS_PATH,"w",encoding="utf-8"), ensure_ascii=False, indent=1)
-    json.dump({"offset": offset}, open(STATE_PATH,"w",encoding="utf-8"))
+    st["offset"] = offset  # сохраняем и offset, и last_report_count
+    json.dump(st, open(STATE_PATH,"w",encoding="utf-8"))
     active = sum(1 for v in subs.values() if v.get("status")=="active")
     print("poll: +%d новых, -%d отписок | активных подписчиков: %d" % (added, removed, active))
 
