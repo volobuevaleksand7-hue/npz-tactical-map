@@ -46,24 +46,31 @@ def reason_bad(x):
 
 
 def sanitize(path):
+    """Чистит массив записей под ключом strikes/history (или сам список). Возвращает N удалённых."""
     s = json.load(open(path, encoding="utf-8"))
-    arr = s if isinstance(s, list) else s.get("strikes", [])
-    keep, removed = [], []
-    for x in arr:
-        r = reason_bad(x)
-        (removed if r else keep).append((x, r))
-    if not removed:
-        return 0
-    for x, r in removed:
-        sys.stderr.write("  sanitize: drop %s | %s | %s\n"
-                         % (x.get("date"), str(x.get("city"))[:24], r))
-    newarr = [x for x, _ in keep]
     if isinstance(s, list):
-        s = newarr
+        keys = [None]
     else:
-        s["strikes"] = newarr
-    json.dump(s, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return len(removed)
+        keys = [k for k in ("strikes", "history") if isinstance(s.get(k), list)]
+    total = 0
+    for k in keys:
+        arr = s if k is None else s[k]
+        keep, removed = [], []
+        for x in arr:
+            r = reason_bad(x) if isinstance(x, dict) else None
+            (removed if r else keep).append(x)
+            if r:
+                sys.stderr.write("  sanitize: drop %s | %s | %s\n"
+                                 % (x.get("date"), str(x.get("city"))[:24], r))
+        if removed:
+            total += len(removed)
+            if k is None:
+                s = keep
+            else:
+                s[k] = keep
+    if total:
+        json.dump(s, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    return total
 
 
 if __name__ == "__main__":

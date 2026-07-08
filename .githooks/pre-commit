@@ -41,11 +41,15 @@ fi
 # Ловит ЛЮБОЙ коммит (newswatch, ручной, внешняя модель), т.к. core.hooksPath=.githooks.
 # Санитайзер идемпотентен и авто-перезакладывает очищенный файл — коммит не блокируется,
 # но мусор физически не попадает в data/strikes.json (и на сайт/в Telegram).
-if echo "$staged" | grep -q '^data/strikes\.json$' && [ -f agents/sanitize-strikes.py ] && command -v python3 >/dev/null 2>&1; then
-  python3 agents/sanitize-strikes.py data/strikes.json >&2 || true
-  if ! git diff --quiet -- data/strikes.json 2>/dev/null; then
-    git add data/strikes.json
-    echo "pre-commit: sanitize-strikes очистил strikes.json и перезаложил его в коммит." >&2
-  fi
+if [ -f agents/sanitize-strikes.py ] && command -v python3 >/dev/null 2>&1; then
+  for _f in data/strikes.json data/history-crimea.json; do
+    if echo "$staged" | grep -q "^$_f$"; then
+      python3 agents/sanitize-strikes.py "$_f" >&2 || true
+      if ! git diff --quiet -- "$_f" 2>/dev/null; then
+        git add "$_f"
+        echo "pre-commit: sanitize-strikes очистил $_f и перезаложил его в коммит." >&2
+      fi
+    fi
+  done
 fi
 exit 0

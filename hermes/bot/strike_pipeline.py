@@ -37,6 +37,10 @@ except ImportError:
     classify_news = None
     publish_strike_molniya = None
     publish_strike_tier2 = None
+try:
+    from content_guard import reason_bad
+except ImportError:
+    reason_bad = None  # без гварда лучше публиковать, чем упасть; санитайзер добьёт на коммите
 
 
 def jload(path, default=None):
@@ -131,6 +135,15 @@ def classify_and_publish(new_strikes, dry_run=False, force_major=False):
 
     results = []
     for strike in new_strikes:
+        # ГВАРД НЕЙТРАЛЬНОСТИ: не публиковать укр-вербатим/пропаганду/офф-топик в канал
+        # и подписчикам (это происходит ДО git-commit, т.е. до санитайзера в pre-commit).
+        _bad = reason_bad(strike) if reason_bad else None
+        if _bad:
+            print(f"  [guard] SKIP публикацию — ненейтральный контент ({_bad}): "
+                  f"{strike.get('city', '?')} | {str(strike.get('target', ''))[:50]}")
+            results.append({"strike": strike, "tier": "blocked", "info": {"reason": _bad},
+                            "publish_result": {"blocked": True}})
+            continue
         tier, info = classify_news(strike)
 
         # Force major if requested
