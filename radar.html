@@ -86,7 +86,7 @@
     .tc-badge{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px}
     .tc-badge.bpla{background:rgba(255,180,67,.2);color:var(--amber)}
     .tc-badge.rocket{background:rgba(255,82,71,.2);color:var(--red)}
-    .tc-badge.pvo{background:rgba(63,224,137,.2);color:var(--green)}
+    .tc-badge.clear{background:rgba(63,224,137,.2);color:var(--green)}
     .tc-badge.stale{background:rgba(255,180,67,.2);color:var(--amber)}
     .tc-badge.uab{background:rgba(255,82,71,.2);color:var(--red)}
     .tc-badge.fpv{background:rgba(63,214,207,.2);color:var(--teal)}
@@ -176,10 +176,6 @@
 
 .radar-icon-rocket {
   animation: radar-pulse 0.8s infinite;
-}
-
-.radar-icon-pvo {
-  animation: radar-rotate 3s linear infinite;
 }
 
 .radar-icon-combined {
@@ -324,7 +320,6 @@
       <span class="legend-item"><span class="legend-swatch" style="background:var(--teal)"></span>FPV</span>
       <span class="legend-item"><span class="legend-swatch" style="background:var(--red)"></span>Ракета</span>
       <span class="legend-item"><span class="legend-swatch" style="background:var(--crit)"></span>Авиация</span>
-      <span class="legend-item"><span class="legend-swatch" style="background:var(--green)"></span>ПВО</span>
       <span class="legend-item"><span class="legend-swatch" style="background:var(--crit);opacity:.7"></span>Взрыв</span>
     </div>
   </details>
@@ -432,9 +427,9 @@
         .replace(/народная|республика|область|обл\.?|край|автономный округ|автономная|город|г\./g, "")
         .replace(/[^а-я]/g, "");
     }
-    var REGION_THREAT_COLORS = { rocket: "#ff5247", aviation: "#ff3a2c", uab: "#ff5247", explosion: "#ff3a2c", bpla: "#ffb443", fpv: "#3fd6cf", pvo: "#3fe089" };
+    var REGION_THREAT_COLORS = { rocket: "#ff5247", aviation: "#ff3a2c", uab: "#ff5247", explosion: "#ff3a2c", bpla: "#ffb443", fpv: "#3fd6cf" };
     function dominantType(t) {
-      var order = ["rocket", "aviation", "uab", "bpla", "fpv", "pvo"];
+      var order = ["rocket", "aviation", "uab", "bpla", "fpv"];
       for (var i = 0; i < order.length; i++) { if (t[order[i]]) return order[i]; }
       return null;
     }
@@ -578,11 +573,10 @@
       uab: '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16,29 C13,24 11,18 11,12 C11,7 13,4 16,4 C19,4 21,7 21,12 C21,18 19,24 16,29 Z" fill="#ff5247" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><rect x="3" y="14" width="8" height="3" fill="#ff5247" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><rect x="21" y="14" width="8" height="3" fill="#ff5247" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="12,6 7,3 12,9" fill="#ff5247" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="20,6 25,3 20,9" fill="#ff5247" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/></svg>',
       fpv: '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="15" width="26" height="2" transform="rotate(45 16 16)" fill="#3fd6cf" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><rect x="3" y="15" width="26" height="2" transform="rotate(-45 16 16)" fill="#3fd6cf" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><circle cx="7" cy="7" r="4.5" fill="#3fd6cf" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><circle cx="25" cy="7" r="4.5" fill="#3fd6cf" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><circle cx="7" cy="25" r="4.5" fill="#3fd6cf" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><circle cx="25" cy="25" r="4.5" fill="#3fd6cf" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><rect x="12" y="12" width="8" height="8" fill="#3fd6cf" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/></svg>',
       aviation: '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><polygon points="16,2 18,9 18,24 14,24 14,9" fill="#ff3a2c" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="15,12 2,22 15,20" fill="#ff3a2c" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="17,12 30,22 17,20" fill="#ff3a2c" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="15,21 9,25 15,24" fill="#ff3a2c" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="17,21 23,25 17,24" fill="#ff3a2c" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/></svg>',
-      pvo: '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="22" width="12" height="4" fill="#3fe089" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><path d="M9,22 Q9,10 16,10 Q23,10 23,22 Z" fill="#3fe089" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="15,9 16,2 17,9" fill="#3fe089" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="12,10 6,4 14,11" fill="#3fe089" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><polygon points="20,10 26,4 18,11" fill="#3fe089" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/></svg>',
       explosion: '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><polygon points="16,2 18.1,10.4 23.7,6.8 20.3,13.5 30.8,13.4 22.9,17.2 25.5,21.5 19.2,19.8 20.8,29.2 16,22 11.9,27.3 12.8,19.8 3,23.5 9.1,17.2 5.2,14.1 11.7,13.5 7.6,6 14,10.4" fill="#ff3a2c" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/><circle cx="16" cy="16" r="3" fill="#ff3a2c" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/></svg>',
       safe: '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="6" fill="#3fe089" stroke="rgba(0,0,0,.35)" stroke-width="0.75"/></svg>'
     };
-    var THREAT_PRIORITY = ["rocket", "aviation", "uab", "bpla", "fpv", "pvo", "explosion"];
+    var THREAT_PRIORITY = ["rocket", "aviation", "uab", "bpla", "fpv", "explosion"];
 
     function getMainIcon(th) {
       for (var i = 0; i < THREAT_PRIORITY.length; i++) {
@@ -593,8 +587,8 @@
 
     function markerHtml(type, size, pulse) {
       var svg = ICON_SVGS[type] || ICON_SVGS.bpla;
-      var border = {bpla:"var(--amber)",uab:"var(--red)",fpv:"var(--teal)",rocket:"var(--red)",aviation:"var(--crit)",pvo:"var(--green)",explosion:"var(--crit)",safe:"var(--green)"}[type] || "var(--ink-dim)";
-      var bg = {bpla:"rgba(255,180,67,.12)",uab:"rgba(255,82,71,.12)",fpv:"rgba(63,214,207,.12)",rocket:"rgba(255,82,71,.12)",aviation:"rgba(255,58,44,.12)",pvo:"rgba(63,224,137,.12)",explosion:"rgba(255,58,44,.15)",safe:"rgba(63,224,137,.08)"}[type] || "transparent";
+      var border = {bpla:"var(--amber)",uab:"var(--red)",fpv:"var(--teal)",rocket:"var(--red)",aviation:"var(--crit)",explosion:"var(--crit)",safe:"var(--green)"}[type] || "var(--ink-dim)";
+      var bg = {bpla:"rgba(255,180,67,.12)",uab:"rgba(255,82,71,.12)",fpv:"rgba(63,214,207,.12)",rocket:"rgba(255,82,71,.12)",aviation:"rgba(255,58,44,.12)",explosion:"rgba(255,58,44,.15)",safe:"rgba(63,224,137,.08)"}[type] || "transparent";
       var pulseCls = pulse ? " radar-pulse" : "";
       return '<div class="radar-civ-icon' + pulseCls + '" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;border:2px solid ' + border + ';background:' + bg + ';display:flex;align-items:center;justify-content:center;overflow:hidden">' + svg + '</div>';
     }
@@ -619,19 +613,18 @@
       cities.forEach(function(c) {
         var region = matchRegion(c.region) || matchRegion(c.name);
         if (!region) return;
-        if (!threats[region]) threats[region] = { bpla: false, rocket: false, pvo: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
+        if (!threats[region]) threats[region] = { bpla: false, rocket: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
         if (c.bpla || c.bplaDim) threats[region].bpla = true;
         if (c.uab || c.uabDim) threats[region].uab = true;
         if (c.fpv) threats[region].fpv = true;
         if (c.rocket || c.rk || c.rocket_level) threats[region].rocket = true;
         if (c.aviation) threats[region].aviation = true;
-        if (c.pvo) threats[region].pvo = true;
         if (c.last_event_ts && c.last_event_ts > threats[region].lastTs) {
           threats[region].lastTs = c.last_event_ts;
           threats[region].sourceText = c.source_text || "";
           maxTs = Math.max(maxTs, c.last_event_ts);
         }
-        if (c.bpla || c.bplaDim || c.rocket || c.rk || c.rocket_level || c.pvo || c.uab || c.uabDim || c.fpv || c.aviation) {
+        if (c.bpla || c.bplaDim || c.rocket || c.rk || c.rocket_level || c.uab || c.uabDim || c.fpv || c.aviation) {
           threats[region].cities.push(c.name);
         }
       });
@@ -641,13 +634,12 @@
         var rData = regions[rName] || {};
         var region = matchRegion(rName);
         if (!region) return;
-        if (!threats[region]) threats[region] = { bpla: false, rocket: false, pvo: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
+        if (!threats[region]) threats[region] = { bpla: false, rocket: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
         if (rData.bpla || rData.bplaDim) threats[region].bpla = true;
         if (rData.uab || rData.uabDim) threats[region].uab = true;
         if (rData.fpv) threats[region].fpv = true;
         if (rData.rocket || rData.rocket_level || rData.rocketOnRegion) threats[region].rocket = true;
         if (rData.aviation) threats[region].aviation = true;
-        if (rData.pvo) threats[region].pvo = true;
         if (rData.explosionOnRegion) threats[region].explosion = true;
         if (rData.last_event_ts && rData.last_event_ts > threats[region].lastTs) {
           threats[region].lastTs = rData.last_event_ts;
@@ -664,13 +656,13 @@
       regionThreatIndex = {};
       Object.keys(regions).forEach(function (rName) {
         var rd = regions[rName] || {};
-        var t = { rocket: !!(rd.rocket || rd.rocket_level || rd.rocketOnRegion), bpla: !!(rd.bpla || rd.bplaDim), uab: !!(rd.uab || rd.uabDim), fpv: !!rd.fpv, aviation: !!rd.aviation, pvo: !!rd.pvo, explosion: !!rd.explosionOnRegion };
+        var t = { rocket: !!(rd.rocket || rd.rocket_level || rd.rocketOnRegion), bpla: !!(rd.bpla || rd.bplaDim), uab: !!(rd.uab || rd.uabDim), fpv: !!rd.fpv, aviation: !!rd.aviation, explosion: !!rd.explosionOnRegion };
         var dom = dominantType(t);
         if (dom) regionThreatIndex[normReg(rName)] = { type: dom };
       });
       cities.forEach(function (c) {
         if (!c.region) return;
-        var t = { rocket: !!(c.rocket || c.rk || c.rocket_level), bpla: !!(c.bpla || c.bplaDim), uab: !!(c.uab || c.uabDim), fpv: !!c.fpv, aviation: !!c.aviation, pvo: !!c.pvo };
+        var t = { rocket: !!(c.rocket || c.rk || c.rocket_level), bpla: !!(c.bpla || c.bplaDim), uab: !!(c.uab || c.uabDim), fpv: !!c.fpv, aviation: !!c.aviation };
         var dom = dominantType(t);
         var k = normReg(c.region);
         if (dom && !regionThreatIndex[k]) regionThreatIndex[k] = { type: dom };
@@ -711,12 +703,8 @@
           if (th.fpv) popupHtml += '<span style="color:#3fd6cf">● FPV</span> ';
           if (th.rocket) popupHtml += '<span style="color:#ff5247">● РК</span> ';
           if (th.aviation) popupHtml += '<span style="color:#ff3a2c">● Авиация</span> ';
-          if (th.pvo) popupHtml += '<span style="color:#3fe089">● ПВО</span> ';
           if (th.explosion) popupHtml += '<span style="color:#ff3a2c">● Взрыв</span> ';
           popupHtml += '<br><span style="font-size:11px;color:#8499a6">' + esc(info.objects.join(", ")) + '</span>';
-        } else if (th && th.pvo) {
-          popupHtml += '<span style="color:#3fe089">● Активность ПВО / наблюдение</span><br>';
-          popupHtml += '<span style="font-size:11px;color:#8499a6">' + esc(info.objects.join(", ")) + '</span>';
         } else {
           popupHtml += '<span style="color:#3fe089">✓ Нет активных угроз</span><br>';
           popupHtml += '<span style="font-size:11px;color:#8499a6">' + esc(info.objects.join(", ")) + '</span>';
@@ -731,16 +719,16 @@
       // City markers with dedup and clustering
       cities.forEach(function(c) {
         if (!c.lat || !c.lon) return;
-        if (!c.bpla && !c.bplaDim && !c.rocket && !c.rk && !c.rocket_level && !c.pvo && !c.uab && !c.uabDim && !c.fpv && !c.aviation) return;
+        if (!c.bpla && !c.bplaDim && !c.rocket && !c.rk && !c.rocket_level && !c.uab && !c.uabDim && !c.fpv && !c.aviation) return;
         if (matchRegion(c.region) || matchRegion(c.name)) return;
         var coordKey = Math.round(c.lat * 100) + "," + Math.round(c.lon * 100);
         if (seenCoords[coordKey]) return;
         seenCoords[coordKey] = true;
 
-        var cTh = { bpla: c.bpla || c.bplaDim, rocket: c.rocket || c.rk || c.rocket_level, pvo: c.pvo, uab: c.uab || c.uabDim, fpv: c.fpv, aviation: c.aviation };
+        var cTh = { bpla: c.bpla || c.bplaDim, rocket: c.rocket || c.rk || c.rocket_level, uab: c.uab || c.uabDim, fpv: c.fpv, aviation: c.aviation };
         var cType = getMainIcon(cTh);
         // Затухание: апстрим отдаёт bplaDim/uabDim, когда угроза давно не подтверждалась
-        var isDim = !((c.bpla && !c.bplaDim) || (c.uab && !c.uabDim) || c.fpv || c.rocket || c.rk || c.rocket_level || c.aviation || c.pvo);
+        var isDim = !((c.bpla && !c.bplaDim) || (c.uab && !c.uabDim) || c.fpv || c.rocket || c.rk || c.rocket_level || c.aviation);
 
         var icon = L.divIcon({
           className: "radar-civ-icon" + (isDim ? " radar-dim" : ""),
@@ -755,7 +743,6 @@
         if (c.fpv) types.push('FPV');
         if (c.rocket || c.rk || c.rocket_level) types.push('РК');
         if (c.aviation) types.push('Авиация');
-        if (c.pvo) types.push('ПВО');
         L.marker([c.lat, c.lon], { icon: icon }).addTo(cityCluster)
           .bindPopup('<b>' + label + '</b><br>' + types.join(' '));
       });
@@ -797,9 +784,8 @@
         if (th && th.fpv) html += '<span class="tc-badge fpv">FPV</span>';
         if (th && th.rocket) html += '<span class="tc-badge rocket">РК</span>';
         if (th && th.aviation) html += '<span class="tc-badge aviation">АВИА</span>';
-        if (th && th.pvo) html += '<span class="tc-badge pvo">ПВО</span>';
         if (th && th.explosion) html += '<span class="tc-badge explosion">ВЗРЫВ</span>';
-        if (!hasThreat && !(th && th.pvo)) html += '<span class="tc-badge pvo">ЧИСТО</span>';
+        if (!hasThreat) html += '<span class="tc-badge clear">ЧИСТО</span>';
         html += '</div>';
 
         html += '<div class="tc-objects"><b>Объекты:</b> ' + info.objects.join(", ") + '</div>';
@@ -838,8 +824,10 @@
         list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--ink-dim);font-size:12px">Лента недоступна</div>';
         return;
       }
+      // ПВО не показываем нигде, включая перепечатки сводок в ленте — фильтруем такие сообщения
+      var clean = msgs.filter(function(m) { return !/пво/i.test(m.text || ""); });
       var html = "";
-      msgs.slice(0, 60).forEach(function(m) {
+      clean.slice(0, 60).forEach(function(m) {
         var t = m.time_label || (m.ts ? formatMsk(m.ts) + " МСК" : "");
         html += '<div class="feed-item"><div class="feed-meta">' +
           '<span class="feed-src">' + esc(m.source_label || m.source_id || "?") + '</span>' +
@@ -848,7 +836,7 @@
       });
       list.innerHTML = html;
       var cnt = document.getElementById("feedCount");
-      if (cnt) cnt.textContent = msgs.length;
+      if (cnt) cnt.textContent = clean.length;
     }
 
     function updateTicker(threats, srcStr, timeStr) {

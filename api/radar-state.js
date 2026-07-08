@@ -39,7 +39,6 @@ module.exports = async function handler(req, res) {
         rocket: city.rocket || false,
         rocket_level: city.rocket_level || false,
         aviation: city.aviation || false,
-        pvo: city.pvo || false,
         lat: city.lat || 0,
         lon: city.lon || 0,
         last_event_ts: city.last_event_ts || 0,
@@ -47,10 +46,14 @@ module.exports = async function handler(req, res) {
       };
     }
 
+    // ПВО (air defense) НЕ отдаём — отмечать позиции ПВО на карте нельзя; вырезаем на уровне прокси
+    const regionsSafe = data.regions || {};
+    for (const r of Object.values(regionsSafe)) { if (r && typeof r === "object") delete r.pvo; }
+
     // Build response in our format
     const result = {
       cities: citiesDict,
-      regions: data.regions || {},
+      regions: regionsSafe,
       poll_interval_sec: data.poll_interval_sec || 60,
       recent_messages: Array.isArray(data.recent_messages) ? data.recent_messages.slice(0, 100) : [],
       sources: data.sources || [],
