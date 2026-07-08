@@ -20,6 +20,9 @@
   };
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function safeUrl(u){u=String(u||'');return /^https?:\/\//i.test(u)?u:'#';}
+  // ponytail: single padding tuned for the Russia view's topbar+strikebar overlay; reused on
+  // Crimea/AZS maps too since their overlay is shorter — extra clearance there is harmless.
+  var POPUP_OPTS = { autoPanPaddingTopLeft: [14, 90], autoPanPaddingBottomRight: [14, 60] };
   function bindButton(el, fn) {
     if (!el.hasAttribute("role")) el.setAttribute("role", "button");
     if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "0");
@@ -532,7 +535,7 @@
       return o[a.status] !== o[b.status] ? o[a.status] - o[b.status] : b.capacity_mt_year - a.capacity_mt_year;
     });
     list.forEach(function (r) {
-      var m = L.marker([r.lat, r.lon], { icon: buildPiece(r), riseOnHover: true }).bindPopup(npzPopup(r));
+      var m = L.marker([r.lat, r.lon], { icon: buildPiece(r), riseOnHover: true }).bindPopup(npzPopup(r), POPUP_OPTS);
       r._m = m; m.addTo(L_ru.npz);
     });
     var c = countByStatus();
@@ -558,7 +561,7 @@
     h += '<div class="pp-kv"><span>Регион</span><span>' + esc(r.region) + '</span></div>';
     h += '<div class="pp-kv"><span>Мощность</span><span>' + esc(r.capacity_mt_year) + ' млн т/год</span></div>';
     h += '<div class="pp-kv"><span>Загрузка (оц.)</span><span>' + esc(r.est_output_pct) + '%</span></div>';
-    if (r.status !== "operational" && r.status_since) { var _dd = Math.floor((Date.now() - new Date(r.status_since + "T00:00:00Z").getTime()) / 86400000); h += '<div class="pp-kv"><span>Статус с</span><span>' + esc(r.status_since) + (_dd >= 0 ? ' · <b>' + _dd + ' дн.</b>' : '') + '</span></div>'; }
+    if (r.status !== "operational" && r.status_since) { var _dd = Math.floor((Date.now() - new Date(r.status_since + "T00:00:00Z").getTime()) / 86400000); h += '<div class="pp-kv"><span>Статус с</span><span>' + esc(rusDate(r.status_since)) + (_dd >= 0 ? ' · <b>' + _dd + ' дн.</b>' : '') + '</span></div>'; }
     if (r.damage) h += '<div class="pp-dmg">⚠ ' + esc(r.damage) + '</div>';
     if (r.note) h += '<div class="pp-note">' + esc(r.note) + '</div>';
     if (r.source_url) h += '<div class="pp-src"><a href="' + safeUrl(r.source_url) + '" target="_blank" rel="noopener">источник ↗</a></div>';
@@ -581,7 +584,7 @@
     (S.state.pipelines || []).forEach(function (p) {
       var col = p.type === "product" ? "#178585" : "#8a6d3b";
       L.polyline(p.coords, { color: col, weight: 3, opacity: .65, dashArray: p.type === "product" ? "3,7" : null })
-        .bindPopup('<div class="pp-h">' + esc(p.name) + '</div><div class="pp-kv"><span>Тип</span><span>' + (p.type === "product" ? "нефтепродукты" : "сырая нефть") + '</span></div>')
+        .bindPopup('<div class="pp-h">' + esc(p.name) + '</div><div class="pp-kv"><span>Тип</span><span>' + (p.type === "product" ? "нефтепродукты" : "сырая нефть") + '</span></div>', POPUP_OPTS)
         .addTo(L_ru.logistics);
     });
     (S.state.export_terminals || []).forEach(function (t) {
@@ -589,9 +592,9 @@
       var icon = L.divIcon({ className: "", html: termSVG(hit), iconSize: [34, 34], iconAnchor: [17, 26] });
       var h = '<div class="pp-h">⚓ ' + esc(t.name) + '</div><span class="pp-st ' + (hit ? "hit" : "ok") + '">' + (hit ? "ПОРАЖЁН" : "РАБОТАЕТ") + '</span>';
       h += '<div class="pp-kv"><span>Тип</span><span>' + esc(t.type) + '</span></div><div class="pp-kv"><span>Регион</span><span>' + esc(t.region) + '</span></div>';
-      if (t.status_since) h += '<div class="pp-kv"><span>С</span><span>' + esc(t.status_since) + '</span></div>';
+      if (t.status_since) h += '<div class="pp-kv"><span>С</span><span>' + esc(rusDate(t.status_since)) + '</span></div>';
       if (t.note) h += '<div class="pp-note">' + esc(t.note) + '</div>';
-      L.marker([t.lat, t.lon], { icon: icon }).bindPopup(h).addTo(L_ru.logistics);
+      L.marker([t.lat, t.lon], { icon: icon }).bindPopup(h, POPUP_OPTS).addTo(L_ru.logistics);
     });
   }
 
@@ -619,12 +622,12 @@
       if (rd.status === "threatened") opts = { color: "#d23a2e", weight: 4, opacity: .92, className: "road-threatened" };
       else if (rd.status === "cut") opts = { color: "#7a1610", weight: 4, opacity: .9, dashArray: "2,9" };
       else opts = { color: "#5b5650", weight: 3, opacity: .7 };
-      L.polyline(rd.coords, opts).bindPopup(roadPopup(rd)).addTo(L_ru.roads);
+      L.polyline(rd.coords, opts).bindPopup(roadPopup(rd), POPUP_OPTS).addTo(L_ru.roads);
     });
     (r.hotspots || []).forEach(function (hp) {
       if (typeof hp.lat !== "number") return;
       var icon = L.divIcon({ className: "", html: '<div class="hotspot">⚠️</div>', iconSize: [24, 24], iconAnchor: [12, 12] });
-      L.marker([hp.lat, hp.lon], { icon: icon, zIndexOffset: 550 }).bindPopup(hotspotPopup(hp)).addTo(L_ru.hotspots || L_ru.roads);
+      L.marker([hp.lat, hp.lon], { icon: icon, zIndexOffset: 550 }).bindPopup(hotspotPopup(hp), POPUP_OPTS).addTo(L_ru.hotspots || L_ru.roads);
     });
   }
 
@@ -649,7 +652,7 @@
     if (isF && S.forecast && S.forecast.region_forecast)
       src = S.forecast.region_forecast.map(function (d) { return { region: d.region, level: d.level, note: d.note }; });
     else
-      src = (S.state.deficit_regions || []).map(function (d) { return { region: d.region, level: d.level, note: d.restriction + " (с " + d.since + ")" }; });
+      src = (S.state.deficit_regions || []).map(function (d) { return { region: d.region, level: d.level, note: d.restriction + (d.since ? " (с " + rusDate(d.since) + ")" : "") }; });
     var ord = { low: 1, medium: 2, high: 3, severe: 4, critical: 5 };
     src.forEach(function (d) {
       regKeys(d.region).forEach(function (k) {
@@ -687,7 +690,7 @@
         var st = info ? (info.level === "critical" || info.level === "severe" ? "down" : "partial") : "operational";
         var lbl = info ? info.level.toUpperCase() : "НЕТ НАГРУЗКИ";
         var tag = (f.properties && f.properties.nt) ? ' <span class="pp-st partial">НОВАЯ ТЕРР.</span>' : '';
-        layer.bindPopup('<div class="pp-h">' + esc(f.properties.name) + '</div><span class="pp-st ' + esc(st) + '">' + esc(lbl) + '</span>' + tag + (info && info.note ? '<div class="pp-note">' + esc(info.note) + '</div>' : ''));
+        layer.bindPopup('<div class="pp-h">' + esc(f.properties.name) + '</div><span class="pp-st ' + esc(st) + '">' + esc(lbl) + '</span>' + tag + (info && info.note ? '<div class="pp-note">' + esc(info.note) + '</div>' : ''), POPUP_OPTS);
       }
     }).addTo(L_ru.regions);
   }
@@ -706,7 +709,7 @@
       var p = r.ai95_price_rub; if (!p || typeof r.lat !== "number") return;
       var c = priceColor(p);
       L.marker([r.lat, r.lon], { icon: L.divIcon({ className: "", html: '<div style="background:' + c + ';color:#fff;font:700 11px/1 var(--mono),monospace;padding:3px 5px;border-radius:5px;border:1px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.45);white-space:nowrap">' + p + '₽</div>', iconSize: [36, 18], iconAnchor: [18, 9] }), zIndexOffset: 350 })
-        .bindPopup('<div class="pp-h">💰 ' + esc(r.region) + '</div><div class="pp-kv"><span>АИ-95</span><span>' + esc(p) + ' ₽/л</span></div>' + (r.diesel_price_rub ? '<div class="pp-kv"><span>ДТ</span><span>' + esc(r.diesel_price_rub) + ' ₽/л</span></div>' : '') + (r.queues_hours ? '<div class="pp-kv"><span>Очередь</span><span>~' + esc(r.queues_hours) + ' ч</span></div>' : ''))
+        .bindPopup('<div class="pp-h">💰 ' + esc(r.region) + '</div><div class="pp-kv"><span>АИ-95</span><span>' + esc(p) + ' ₽/л</span></div>' + (r.diesel_price_rub ? '<div class="pp-kv"><span>ДТ</span><span>' + esc(r.diesel_price_rub) + ' ₽/л</span></div>' : '') + (r.queues_hours ? '<div class="pp-kv"><span>Очередь</span><span>~' + esc(r.queues_hours) + ' ч</span></div>' : ''), POPUP_OPTS)
         .addTo(L_ru.prices);
     });
   }
@@ -754,7 +757,7 @@
             var info = effInfo(f, lm);
             var st = info ? (info.level === "critical" || info.level === "severe" ? "down" : "partial") : "operational";
             var lbl = info ? info.level.toUpperCase() : "НЕТ НАГРУЗКИ";
-            layer.bindPopup('<div class="pp-h">' + esc(f.properties.name) + '</div><span class="pp-st ' + esc(st) + '">' + esc(lbl) + '</span>' + (info && info.note ? '<div class="pp-note">' + esc(info.note) + '</div>' : ''));
+            layer.bindPopup('<div class="pp-h">' + esc(f.properties.name) + '</div><span class="pp-st ' + esc(st) + '">' + esc(lbl) + '</span>' + (info && info.note ? '<div class="pp-note">' + esc(info.note) + '</div>' : ''), POPUP_OPTS);
           }
         }).addTo(L_cr.fill);
       }
@@ -762,13 +765,13 @@
       (cr.routes || []).forEach(function (rt) {
         var col = rt.status === "threatened" ? "#d23a2e" : rt.status === "cut" ? "#a01d14" : "#178585";
         L.polyline(rt.coords, { color: col, weight: 4, opacity: .8, dashArray: "6,8" })
-          .bindPopup('<div class="pp-h">' + esc(rt.name) + '</div><span class="pp-st down">' + esc(String(rt.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(rt.note) + '</div>')
+          .bindPopup('<div class="pp-h">' + esc(rt.name) + '</div><span class="pp-st down">' + esc(String(rt.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(rt.note) + '</div>', POPUP_OPTS)
           .addTo(L_cr.layer);
       });
       (cr.stations || []).forEach(function (s) {
         var c = s.status === "dry" ? "#a01d14" : s.status === "ok" ? "#2f9e57" : "#df8f17";
         L.marker([s.lat, s.lon], { icon: L.divIcon({ className: "", html: '<div style="background:' + c + ';color:#fff;font-weight:800;font-size:11px;padding:3px 8px;border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,.35);white-space:nowrap">⛽ ' + esc(s.name) + '</div>', iconSize: [128, 24], iconAnchor: [64, 18] }) })
-          .bindPopup('<div class="pp-h">⛽ ' + esc(s.name) + '</div><span class="pp-st ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(s.note) + '</div>')
+          .bindPopup('<div class="pp-h">⛽ ' + esc(s.name) + '</div><span class="pp-st ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(s.note) + '</div>', POPUP_OPTS)
           .addTo(L_cr.layer);
       });
       // АЗС-сеть — те же иконки/уровни/попапы, что и на вкладке АЗС (data/azs-stations.json)
@@ -777,7 +780,7 @@
         (S.azsStations.stations || []).forEach(function (s) {
           if (!/крым|севастополь/i.test(s.region || "")) return;
           L.marker([s.lat, s.lon], { icon: azsStationIcon(stationLevel(s), false) })
-            .bindPopup(azsStationPopup(s))
+            .bindPopup(azsStationPopup(s), POPUP_OPTS)
             .addTo(L_cr.azs);
         });
       }
@@ -990,7 +993,7 @@
     renderedStrikes = [];
     shown.forEach(function (s) {
       if (typeof s.lat !== "number" || typeof s.lon !== "number") return;
-      var m = L.marker([s.lat, s.lon], { icon: strikeMarker(s, hot), zIndexOffset: 600 }).bindPopup(strikePopup(s));
+      var m = L.marker([s.lat, s.lon], { icon: strikeMarker(s, hot), zIndexOffset: 600 }).bindPopup(strikePopup(s), POPUP_OPTS);
       m.addTo(L_ru.strikes);
       renderedStrikes.push({ s: s, marker: m });
     });
@@ -1218,7 +1221,7 @@
       var lvl = stationLevel(s);
       if (azsState.level && lvl !== azsState.level) return;
       var m = L.marker([s.lat, s.lon], { icon: azsStationIcon(lvl, false) });
-      m.bindPopup(azsStationPopup(s));
+      m.bindPopup(azsStationPopup(s), POPUP_OPTS);
       m._azs = s;
       m._lvl = lvl;
       markers.push(m);
@@ -1288,7 +1291,7 @@
       v.forEach(function (q) {
         if (!q.lat || !q.lon) return;
         L.marker([q.lat, q.lon], { icon: azsCommentPin(), zIndexOffset: 600 })
-          .bindPopup('<div class="azs-pop"><div class="ap-row" style="opacity:.7">' + esc(q.city || q.region || "") + " · " + esc(q.date ? rusDate(q.date) : "") + '</div><div class="ap-quote">«' + esc(q.quote || "") + '»</div>' + (q.source_url ? '<div class="ap-row"><a href="' + safeUrl(q.source_url) + '" target="_blank" rel="noopener">' + esc(q.source || "источник") + ' ↗</a></div>' : "") + '</div>')
+          .bindPopup('<div class="azs-pop"><div class="ap-row" style="opacity:.7">' + esc(q.city || q.region || "") + " · " + esc(q.date ? rusDate(q.date) : "") + '</div><div class="ap-quote">«' + esc(q.quote || "") + '»</div>' + (q.source_url ? '<div class="ap-row"><a href="' + safeUrl(q.source_url) + '" target="_blank" rel="noopener">' + esc(q.source || "источник") + ' ↗</a></div>' : "") + '</div>', POPUP_OPTS)
           .addTo(L_az.comments);
       });
     }
@@ -1454,7 +1457,7 @@
     a.regions.forEach(function (r) {
       if (typeof r.lat !== "number" || typeof r.lon !== "number") return;
       L.marker([r.lat, r.lon], { icon: azsIcon(r), zIndexOffset: 400 })
-        .bindPopup(azsPopup(r)).addTo(L_ru.azs);
+        .bindPopup(azsPopup(r), POPUP_OPTS).addTo(L_ru.azs);
     });
   }
 
@@ -1523,7 +1526,7 @@
     var h = '<div class="pp-h">⚡ ' + esc(s.name) + '</div>';
     h += '<span class="pp-st" style="background:' + c + '">' + esc(lbl) + '</span>';
     if (s.operator) h += '<div class="pp-kv"><span>Оператор</span><span>' + esc(s.operator) + '</span></div>';
-    if (s.status_since) h += '<div class="pp-kv"><span>Статус с</span><span>' + esc(s.status_since) + '</span></div>';
+    if (s.status_since) h += '<div class="pp-kv"><span>Статус с</span><span>' + esc(rusDate(s.status_since)) + '</span></div>';
     if (s.damage) h += '<div class="pp-dmg">⚠ ' + esc(s.damage) + '</div>';
     if (s.source_url) h += '<div class="pp-src"><a href="' + safeUrl(s.source_url) + '" target="_blank" rel="noopener">источник ↗</a></div>';
     return h;
@@ -1535,7 +1538,7 @@
     h += '<span class="pp-st" style="background:' + c + '">' + esc(scope) + '</span>';
     if (b.affected_population) h += '<div class="pp-kv"><span>Затронуто</span><span>' + esc(b.affected_population) + '</span></div>';
     if (b.cause) h += '<div class="pp-kv"><span>Причина</span><span>' + esc(b.cause) + '</span></div>';
-    if (b.since) h += '<div class="pp-kv"><span>С</span><span>' + esc(b.since) + '</span></div>';
+    if (b.since) h += '<div class="pp-kv"><span>С</span><span>' + esc(rusDate(b.since)) + '</span></div>';
     if (b.note) h += '<div class="pp-note">' + esc(b.note) + '</div>';
     if (b.source_url) h += '<div class="pp-src"><a href="' + safeUrl(b.source_url) + '" target="_blank" rel="noopener">источник ↗</a></div>';
     return h;
@@ -1547,13 +1550,13 @@
     (g.substations || []).forEach(function (s) {
       if (typeof s.lat !== "number" || typeof s.lon !== "number") return;
       L.marker([s.lat, s.lon], { icon: gridIcon(s), zIndexOffset: 350 })
-        .bindPopup(gridPopup(s)).addTo(L_ru.grid);
+        .bindPopup(gridPopup(s), POPUP_OPTS).addTo(L_ru.grid);
     });
     (g.blackout_regions || []).forEach(function (b) {
       if (typeof b.lat !== "number" || typeof b.lon !== "number") return;
       var c = BLACKOUT_C[b.scope] || "#df8f17";
       L.circleMarker([b.lat, b.lon], { radius: 18, color: c, weight: 2, fillColor: c, fillOpacity: 0.18, dashArray: "4,4" })
-        .bindPopup(blackoutPopup(b)).addTo(L_ru.grid);
+        .bindPopup(blackoutPopup(b), POPUP_OPTS).addTo(L_ru.grid);
     });
   }
 

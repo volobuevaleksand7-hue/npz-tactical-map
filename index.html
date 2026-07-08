@@ -68,6 +68,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#d23a2e">
 </head>
 <body data-theme="light">
 
@@ -123,6 +125,7 @@
           <span class="sync-next" id="nextSync" title="Обратный отсчёт до следующего обновления данных">T-00:00</span>
         </div>
         <span class="mode-pill" id="modePill">ОЦЕНКА</span>
+        <a href="/install" class="install-link" title="Установить приложение — будь в курсе" aria-label="Установить приложение"><span class="install-ico">📲</span><span class="install-lbl">Установить приложение</span></a>
         <a href="/support" class="donate-link" title="Поддержать проект" aria-label="Поддержать проект"><span class="donate-ico">🤝</span><span class="donate-lbl">Поддержать нас</span></a>
         <button class="theme-btn" id="themeToggle" title="Светлая / тёмная карта" aria-label="Переключить светлую или тёмную карту">☀️</button>
       </div>
@@ -357,5 +360,6 @@
       }
     });
   </script>
+  <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}</script>
 </body>
 </html>

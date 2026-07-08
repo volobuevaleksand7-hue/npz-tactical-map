@@ -103,7 +103,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   transition:background .2s,box-shadow .2s}
 .donate-link .donate-ico{font-size:14px}
 .donate-link:hover{background:rgba(202,162,74,.18);box-shadow:0 0 0 2px rgba(202,162,74,.14)}
-@media(max-width:640px){.donate-link{padding:0 9px}.donate-link .donate-lbl{display:none}}
+.install-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;flex:0 0 auto;height:30px;padding:0 12px;border-radius:8px;font-size:12.5px;font-weight:700;letter-spacing:.2px;line-height:1;white-space:nowrap;color:#fff;border:1px solid var(--teal);background:var(--teal);transition:filter .2s,box-shadow .2s}
+.install-link .install-ico{font-size:14px}
+.install-link:hover{filter:brightness(1.08);box-shadow:0 0 0 2px rgba(23,133,133,.28)}
+@media(max-width:640px){.donate-link{padding:0 9px}.donate-link .donate-lbl{display:none}.install-link{padding:0 9px}.install-link .install-lbl{display:none}}
 
 /* VIEWS */
 .view{flex:1;position:relative;display:none;overflow:hidden}
