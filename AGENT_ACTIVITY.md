@@ -32,3 +32,5 @@
 - 2026-06-11 — init проекта (Fable 5): каркас, фронт (Leaflet HUD), seed-датасет из ресёрча, скрипты cron-агентов (Haiku), vercel.json. Деплой на Vercel — в процессе.
 
 - 2026-07-08 (Claude/Opus): единая шапка radar+sources; «Свежее»-чип на главной (build-nav); единый sitemap-генератор — gen-news зовёт seo/generate-sitemap.py (фикс затирания лендингов), /support исключён. Фронтенд-релиз (index.html) под ALLOW_FRONTEND_RELEASE=1.
+
+- 2026-07-09 (Claude/Opus): новая страница /karta-bpla (tool-воронка на радар, кластер «карта бпла» ~126к/мес из XMLRiver); registry-driven меню/хаб/чип/sitemap обновлены. Фронтенд-релиз (index.html чип+дропдаун) под ALLOW_FRONTEND_RELEASE=1.
