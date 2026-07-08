@@ -21,6 +21,8 @@
 - [x] Task 4: Лента Telegram справа из `recent_messages`, 60 записей, на мобиле скрыта (SHA: 2466829, 2026-07-08)
 - [x] Бонус-фикс: `toggleStrikesLayer` → `window` (чекбокс «Удары» кидал ReferenceError) (SHA: 2466829, 2026-07-08)
 - [x] Task 5 (v1.5.1): ПВО полностью убрано с радара — юридический запрет. Вырезано во фронте + прокси (`delete r.pvo`) + фильтр ленты. ПРАВИЛО: не возвращать ПВО никогда (SHA: 07f42bb, 2026-07-08)
+- [x] Task 6 (v1.6.0): паритет по БПЛА с radar-map.ru — данные тянулись верно, рендер прятал. Убрано схлопывание городов НПЗ-регионов (~14→~56 точек), рендер route/sea/flights, рол-ап districts; прокси прокидывает их + upstream.ok; XSS-фиксы (esc) по ревью Codex (SHA: a098149, 2026-07-08)
+- [x] Task 7 (вариант B): agents/strike-candidates.py — лента→кандидаты в удары (data/strike-candidates.json, не трогает боевой strikes.json). Активация cron на Hermes — по решению владельца (SHA: 0800ace, 2026-07-08)
 
 ## Completed
 <!-- format: - [x] Task N: description (SHA: abc1234, YYYY-MM-DD) -->
