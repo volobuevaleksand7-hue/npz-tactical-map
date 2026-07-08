@@ -72,11 +72,19 @@ def classify(s):
     return "city"
 
 
+def lead_score(s):
+    # ponytail: обложка дня ведёт самым важным ударом — НПЗ > энергетика > прочее,
+    # confirmed важнее reported. При равенстве max() берёт первый (порядок брифа).
+    cls = {"refinery": 2, "grid": 1, "city": 0}.get(classify(s), 0)
+    conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
+    return (cls, conf)
+
+
 def meta_for(date, brief):
     st = brief.get("strikes", [])
     vo = brief.get("voices", [])
     if st:
-        lead = st[0]; city = str(lead.get("city", "")).strip(); kind = classify(lead)
+        lead = max(st, key=lead_score); city = str(lead.get("city", "")).strip(); kind = classify(lead)
         src = lead.get("source_url", "")
     elif vo:
         city = str(vo[0].get("city", "")).strip(); kind = "queue"; src = vo[0].get("source_url", "")
