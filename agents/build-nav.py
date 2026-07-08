@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-"""Единый навбар для всех статей/лендингов — генерится из data/seo-topics.jsonl.
+"""Единый навбар + хаб для всех статей/лендингов — генерится из data/seo-topics.jsonl.
 
-Источник правды один: реестр. Добавил страницу в seo-topics.jsonl (+ подпись в
-LABELS ниже, если хочешь красивый лейбл) → запусти `python3 agents/build-nav.py`
-и она сама появится в выпадашке «Аналитика» в нужной группе на ВСЕХ страницах.
+Источник правды один: реестр. Добавил страницу в seo-topics.jsonl (+ подписи в
+LABELS/HUB ниже, если хочешь красиво) → запусти `python3 agents/build-nav.py` — и
+она сама появляется в ТРЁХ местах:
+  1) выпадашка «Аналитика» на всех лендингах (news-nav),
+  2) дропдаун «АНАЛИТИКА» на ГЛАВНОЙ карте (index.html, tab-dropdown-menu),
+  3) каталог-хаб /analytics (analytics-grid).
 Это убивает сирот навсегда: забыть добавить пункт в меню руками уже нельзя.
+Проверяет целостность `agents/check-ia.py`.
+
+⚠️ index.html — фронтенд-ядро: его коммит требует ALLOW_FRONTEND_RELEASE=1.
 
 Тип страницы (`type` в реестре) → группа меню:
   region → Регионы · explainer → Объяснялки · forecast → Прогноз ·
-  reference → Справочники · object(/npz/*) → в меню не показываем, только через /refineries.
+  reference → Справочники · tool → Карты · object(/npz/*) → скрыт, только через /refineries.
 """
 import json, re, pathlib
 
@@ -19,35 +25,44 @@ REG  = ROOT / "data" / "seo-topics.jsonl"
 TOP      = [("/", "🗺️", "Карта НПЗ"), ("/news", "📰", "Сводки"), ("/radar", "📡", "Радар")]
 TOP_TAIL = [("/sources", "📚", "Источники")]
 
-# Группы выпадашки: (заголовок, [типы из реестра])
+# Группы выпадашки: (заголовок, [типы из реестра]). Порядок = порядок в меню и на хабе.
 GROUPS = [
     ("Регионы",     ["region"]),
     ("Объяснялки",  ["explainer"]),
     ("Прогноз",     ["forecast"]),
     ("Справочники", ["reference"]),
+    ("Карты",       ["tool"]),
 ]
 
 # Подписи пунктов меню: url -> (emoji, label). Нет в списке → берётся primary_kw.
 LABELS = {
-    "/crimea":     ("🗺", "Крым"),
-    "/krasnodar":  ("🌴", "Краснодар"),
-    "/moskva":     ("🏙", "Москва"),
-    "/deficit":    ("⛽", "Почему нет бензина"),
-    "/talony":     ("🎫", "Бензин по талонам"),
-    "/crisis":     ("🔥", "Прогноз кризиса"),
-    "/attacks":    ("💥", "Хроника ударов"),
-    "/refineries": ("🏭", "Список НПЗ · все заводы"),
+    "/crimea":            ("🗺", "Крым"),
+    "/krasnodar":         ("🌴", "Краснодар"),
+    "/moskva":            ("🏙", "Москва"),
+    "/deficit":           ("⛽", "Почему нет бензина"),
+    "/talony":            ("🎫", "Бензин по талонам"),
+    "/crisis":            ("🔥", "Прогноз кризиса"),
+    "/attacks":           ("💥", "Хроника ударов"),
+    "/refineries":        ("🏭", "Список НПЗ · все заводы"),
+    "/karta-benzina-krym": ("🗺️", "Карта бензина Крым"),
+}
+
+# Карточки хаба /analytics: url -> (заголовок, описание, обложка|None).
+# Обложка None → карточка без картинки (сгенерить кавер через Codex → добавить путь).
+HUB = {
+    "/crimea":     ("Дефицит бензина в Крыму", "Ситуация на АЗС Крыма: почему нет топлива, какие заправки работают, цены и ограничения на продажу", "/assets/analytics-crimea-generated.png"),
+    "/krasnodar":  ("Дефицит бензина в Краснодаре", "Топливная ситуация в Краснодарском крае: закрытые АЗС, очереди, цены и причины дефицита", None),
+    "/moskva":     ("Дефицит бензина в Москве", "Очереди на заправках, лимиты по сетям, цены и когда закончится дефицит в столице", None),
+    "/deficit":    ("Почему нет бензина в России", "Причины дефицита топлива: атаки на НПЗ, экспортный отток, логистические сбои. Когда закончится кризис", "/assets/analytics-deficit-generated.png"),
+    "/talony":     ("Бензин по талонам", "Где действуют талоны и лимиты, чем отличаются, как получить топливо в Крыму, Москве и регионах", None),
+    "/crisis":     ("Топливный кризис 2026", "Полная хроника кризиса: от первых ударов до дефицита. Региональные последствия и меры правительства", "/assets/analytics-crisis-generated.png"),
+    "/attacks":    ("Хроника ударов по НПЗ", "Все атаки БПЛА на нефтеперерабатывающие заводы: даты, масштаб повреждений, текущий статус", "/assets/analytics-attacks-generated.png"),
+    "/refineries": ("Список НПЗ России", "Полная база нефтеперерабатывающих заводов: мощность, загрузка, статус после атак, география", "/assets/analytics-refineries-generated.png"),
+    "/karta-benzina-krym": ("Карта бензина в Крыму", "Интерактивная карта наличия топлива: 90+ АЗС Крыма, статус сетей АТАН и ТЭС, лимиты, цены и очереди онлайн", None),
 }
 
 TOP_URLS   = {u for u, _, _ in TOP + TOP_TAIL}
-HIDE_TYPES = {"object"}  # /npz/* — только через /refineries, десятки заводов в меню не льём
-
-# Страницы, получающие полный навбар
-TARGETS = ["analytics.html", "attacks.html", "crimea.html", "crisis.html",
-           "deficit.html", "krasnodar.html", "moskva.html", "refineries.html",
-           "talony.html", "news.html", "npz/omskij-npz.html", "npz/moskovskij-npz.html"]
-
-NAV_RE = re.compile(r'<nav class="news-nav">.*?</nav>', re.DOTALL)
+HIDE_TYPES = {"object"}  # /npz/* — только через /refineries, десятки заводов в меню/хабе не льём
 
 
 def load_reg():
@@ -61,6 +76,23 @@ def load_reg():
 
 def label_for(url, primary_kw):
     return LABELS.get(url, ("📄", (primary_kw or url).capitalize()))
+
+
+def ordered_pages(rows):
+    """Все видимые live-страницы в порядке групп → как в реестре."""
+    out = []
+    for _title, types in GROUPS:
+        for r in rows:
+            if (r.get("status", "live") == "live"
+                    and r.get("type") in types
+                    and r["url"] not in TOP_URLS
+                    and r.get("type") not in HIDE_TYPES):
+                out.append(r)
+    return out
+
+
+# ---- 1) news-nav на лендингах (сгруппированная выпадашка) ----
+NAV_RE = re.compile(r'<nav class="news-nav">.*?</nav>', re.DOTALL)
 
 
 def build_menu(rows, current):
@@ -97,20 +129,77 @@ def build_nav(rows, current):
     return '<nav class="news-nav">\n' + "\n".join(L) + '\n      </nav>'
 
 
+# ---- 2) дропдаун на ГЛАВНОЙ (index.html, плоский список) ----
+INDEX_MENU_RE = re.compile(r'(<div class="tab-dropdown-menu">)(.*?)(</div>)', re.DOTALL)
+
+
+def build_index_menu(rows):
+    lines = ["\n"]
+    for r in ordered_pages(rows):
+        emoji, lab = label_for(r["url"], r.get("primary_kw"))
+        lines.append(f'            <a href="{r["url"]}">{emoji} {lab}</a>\n')
+    return "".join(lines) + "          "
+
+
+# ---- 3) каталог-хаб /analytics (маркеры) ----
+HUB_RE = re.compile(r'(<!-- ANALYTICS-CARDS:START -->)(.*?)(<!-- ANALYTICS-CARDS:END -->)', re.DOTALL)
+
+
+def build_hub(rows):
+    cards = ["\n"]
+    for r in ordered_pages(rows):
+        url = r["url"]
+        title, desc, cover = HUB.get(url, (label_for(url, r.get("primary_kw"))[1], r.get("primary_kw", ""), None))
+        img = f'\n        <img class="card-cover" src="{cover}" alt="" loading="lazy">' if cover else ""
+        cards.append(
+            f'      <a href="{url}" class="analytics-card">{img}\n'
+            f'        <div class="card-body">\n'
+            f'          <h2>{title}</h2>\n'
+            f'          <p>{desc}</p>\n'
+            f'          <div class="card-meta">→ Читать</div>\n'
+            f'        </div>\n'
+            f'      </a>\n\n'
+        )
+    return "".join(cards) + "      "
+
+
 def main():
     rows = load_reg()
     changed = 0
-    for rel in TARGETS:
-        f = ROOT / rel
-        if not f.exists():
-            print("skip missing", rel); continue
+
+    # 1) news-nav на всех лендингах, у которых он есть (авто-обнаружение — не забыть добавить в список больше нельзя)
+    landings = sorted(list(ROOT.glob("*.html")) + list(ROOT.glob("npz/*.html")))
+    for f in landings:
+        if f.name == "index.html":
+            continue
         html = f.read_text(encoding="utf-8")
-        current = "/" + rel[:-5]  # analytics.html -> /analytics
+        if '<nav class="news-nav">' not in html:
+            continue
+        current = "/" + str(f.relative_to(ROOT))[:-5]
         new, n = NAV_RE.subn(build_nav(rows, current), html, count=1)
+        if n and new != html:
+            f.write_text(new, encoding="utf-8"); changed += 1; print("nav updated", f.name)
+
+    # 2) главная — дропдаун (⚠️ фронтенд-ядро, коммит под ALLOW_FRONTEND_RELEASE=1)
+    idx = ROOT / "index.html"
+    if idx.exists():
+        html = idx.read_text(encoding="utf-8")
+        new, n = INDEX_MENU_RE.subn(lambda m: m.group(1) + build_index_menu(rows) + m.group(3), html, count=1)
         if n == 0:
-            print("!! no news-nav in", rel); continue
-        if new != html:
-            f.write_text(new, encoding="utf-8"); changed += 1; print("updated", rel)
+            print("!! no tab-dropdown-menu in index.html")
+        elif new != html:
+            idx.write_text(new, encoding="utf-8"); changed += 1; print("index.html dropdown updated")
+
+    # 3) хаб /analytics — сетка карточек (по маркерам)
+    hub = ROOT / "analytics.html"
+    if hub.exists():
+        html = hub.read_text(encoding="utf-8")
+        new, n = HUB_RE.subn(lambda m: m.group(1) + build_hub(rows) + m.group(3), html, count=1)
+        if n == 0:
+            print("!! no ANALYTICS-CARDS markers in analytics.html")
+        elif new != html:
+            hub.write_text(new, encoding="utf-8"); changed += 1; print("analytics.html hub updated")
+
     print(f"done, {changed} files changed")
 
 
