@@ -22,8 +22,9 @@ module.exports = async function handler(req, res) {
       },
     });
 
+    if (!upstream.ok) throw new Error("upstream " + upstream.status);
     const data = await upstream.json();
-    
+
     // Convert cities from array to dict format
     const citiesDict = {};
     for (const city of (data.cities || [])) {
@@ -47,13 +48,24 @@ module.exports = async function handler(req, res) {
     }
 
     // ПВО (air defense) НЕ отдаём — отмечать позиции ПВО на карте нельзя; вырезаем на уровне прокси
+    const stripPvo = (o) => { if (o && typeof o === "object") delete o.pvo; return o; };
     const regionsSafe = data.regions || {};
-    for (const r of Object.values(regionsSafe)) { if (r && typeof r === "object") delete r.pvo; }
+    for (const r of Object.values(regionsSafe)) stripPvo(r);
+    const districtsSafe = data.districts || {};
+    for (const d of Object.values(districtsSafe)) stripPvo(d);
+    const routeMarkers = Array.isArray(data.route_markers) ? data.route_markers.map(stripPvo) : [];
+    // sea_markers / direction_flights могут нести маркеры БПЛА (над морем / в полёте) во время налётов — прокидываем
+    const seaMarkers = Array.isArray(data.sea_markers) ? data.sea_markers.map(stripPvo) : [];
+    const directionFlights = Array.isArray(data.direction_flights) ? data.direction_flights.map(stripPvo) : [];
 
     // Build response in our format
     const result = {
       cities: citiesDict,
       regions: regionsSafe,
+      districts: districtsSafe,
+      route_markers: routeMarkers,
+      sea_markers: seaMarkers,
+      direction_flights: directionFlights,
       poll_interval_sec: data.poll_interval_sec || 60,
       recent_messages: Array.isArray(data.recent_messages) ? data.recent_messages.slice(0, 100) : [],
       sources: data.sources || [],

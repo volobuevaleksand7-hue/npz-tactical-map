@@ -520,14 +520,15 @@
         var marker = L.marker([ev.lat, ev.lon], { icon: icon }).addTo(strikesLayer);
 
         var popup = '<div style="font-family:Rubik,sans-serif;min-width:180px">';
-        popup += '<b style="font-size:14px;color:#ff5247">🔥 ' + (ev.city || ev.region || 'Удар') + '</b><br>';
-        if (ev.target) popup += '<span style="color:#ffb443">Цель: ' + ev.target + '</span><br>';
-        if (ev.detail) popup += '<span style="font-size:11px;color:#8499a6">' + ev.detail + '</span><br>';
+        popup += '<b style="font-size:14px;color:#ff5247">🔥 ' + esc(ev.city || ev.region || 'Удар') + '</b><br>';
+        if (ev.target) popup += '<span style="color:#ffb443">Цель: ' + esc(ev.target) + '</span><br>';
+        if (ev.detail) popup += '<span style="font-size:11px;color:#8499a6">' + esc(ev.detail) + '</span><br>';
         if (ev.confidence) {
           var conf = ev.confidence === "confirmed" ? "✅ Подтверждено" : ev.confidence === "high" ? "🟡 Высокая" : "⚪ Слух";
           popup += '<span style="font-size:11px">' + conf + '</span><br>';
         }
-        if (ev.source_url) popup += '<a href="' + ev.source_url + '" target="_blank" style="color:#3fd6cf;font-size:11px">Источник →</a>';
+        // безопасный href: только http(s), иначе игнорируем (защита от javascript:)
+        if (ev.source_url && /^https?:\/\//i.test(ev.source_url)) popup += '<a href="' + esc(ev.source_url) + '" target="_blank" rel="noopener" style="color:#3fd6cf;font-size:11px">Источник →</a>';
         popup += '</div>';
         marker.bindPopup(popup);
       });
@@ -648,6 +649,26 @@
         }
       });
 
+      // Districts (районы, GADM-2): точечной геометрии нет — сворачиваем угрозу в регион (панель + свежесть)
+      var districts = data.districts || {};
+      Object.keys(districts).forEach(function(dKey) {
+        var dd = districts[dKey] || {};
+        var region = matchRegion(dd.region_ru);
+        if (!region) return;
+        if (!threats[region]) threats[region] = { bpla: false, rocket: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
+        if (dd.bpla || dd.bplaDim) threats[region].bpla = true;
+        if (dd.uab || dd.uabDim) threats[region].uab = true;
+        if (dd.fpv) threats[region].fpv = true;
+        if (dd.rocket || dd.rocket_level || dd.rocketOnRegion) threats[region].rocket = true;
+        if (dd.aviation) threats[region].aviation = true;
+        if (dd.explosionOnRegion) threats[region].explosion = true;
+        if (dd.last_event_ts && dd.last_event_ts > threats[region].lastTs) {
+          threats[region].lastTs = dd.last_event_ts;
+          threats[region].sourceText = dd.source_text || "";
+          maxTs = Math.max(maxTs, dd.last_event_ts);
+        }
+      });
+
       // Freshness (restored: MiMo refactor dropped these, breaking panel/ticker)
       var timeStr = formatMsk(maxTs || loadedAt);
       var stale = maxTs ? (loadedAt - maxTs > 20 * 60) : false;
@@ -665,6 +686,14 @@
         var t = { rocket: !!(c.rocket || c.rk || c.rocket_level), bpla: !!(c.bpla || c.bplaDim), uab: !!(c.uab || c.uabDim), fpv: !!c.fpv, aviation: !!c.aviation };
         var dom = dominantType(t);
         var k = normReg(c.region);
+        if (dom && !regionThreatIndex[k]) regionThreatIndex[k] = { type: dom };
+      });
+      Object.keys(districts).forEach(function (dKey) {
+        var dd = districts[dKey] || {};
+        if (!dd.region_ru) return;
+        var t = { rocket: !!(dd.rocket || dd.rocket_level || dd.rocketOnRegion), bpla: !!(dd.bpla || dd.bplaDim), uab: !!(dd.uab || dd.uabDim), fpv: !!dd.fpv, aviation: !!dd.aviation, explosion: !!dd.explosionOnRegion };
+        var dom = dominantType(t);
+        var k = normReg(dd.region_ru);
         if (dom && !regionThreatIndex[k]) regionThreatIndex[k] = { type: dom };
       });
       if (typeof regionLayer !== "undefined" && regionLayer) regionLayer.setStyle(regionStyle);
@@ -716,11 +745,15 @@
         if (hasThreat) threatCount++;
       });
 
-      // City markers with dedup and clustering
-      cities.forEach(function(c) {
+      // City + route/sea/flight markers: рисуем КАЖДУЮ точку угрозы (как на radar-map.ru).
+      // Раньше города НПЗ-регионов схлопывались в одну метку региона → побережье было пустым. Теперь показываем все.
+      var pointSources = cities
+        .concat(Array.isArray(data.route_markers) ? data.route_markers : [])
+        .concat(Array.isArray(data.sea_markers) ? data.sea_markers : [])
+        .concat(Array.isArray(data.direction_flights) ? data.direction_flights : []);
+      pointSources.forEach(function(c) {
         if (!c.lat || !c.lon) return;
         if (!c.bpla && !c.bplaDim && !c.rocket && !c.rk && !c.rocket_level && !c.uab && !c.uabDim && !c.fpv && !c.aviation) return;
-        if (matchRegion(c.region) || matchRegion(c.name)) return;
         var coordKey = Math.round(c.lat * 100) + "," + Math.round(c.lon * 100);
         if (seenCoords[coordKey]) return;
         seenCoords[coordKey] = true;
@@ -736,7 +769,8 @@
           iconSize: [24, 24],
           iconAnchor: [12, 12]
         });
-        var label = esc(c.name) + '<br>' + esc(c.region || '');
+        var cname = c.name || (c.from_name && c.to_name ? "Трасса " + c.from_name + "–" + c.to_name : (c.from_name || "Маршрут"));
+        var label = esc(cname) + '<br>' + esc(c.region || '');
         var types = [];
         if (c.bpla || c.bplaDim) types.push('БПЛА');
         if (c.uab || c.uabDim) types.push('КАБ');
@@ -791,7 +825,7 @@
         html += '<div class="tc-objects"><b>Объекты:</b> ' + info.objects.join(", ") + '</div>';
 
         if (hasThreat && th.cities.length) {
-          html += '<div class="tc-time">Города: ' + uniq(th.cities).slice(0, 5).join(", ") + '</div>';
+          html += '<div class="tc-time">Города: ' + uniq(th.cities).slice(0, 5).map(esc).join(", ") + '</div>';
         }
         if (th && th.sourceText) html += '<div class="tc-time">' + esc(th.sourceText).split("\n")[0] + '</div>';
         html += '<div class="tc-time">⏰ ' + (th && th.lastTs ? formatMsk(th.lastTs) : timeStr) + ' МСК · 📡 ' + srcStr + '</div>';
