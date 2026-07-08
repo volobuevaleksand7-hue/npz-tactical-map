@@ -1,6 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/2026-07-07", "destination": "/news/2026-07-07", "permanent": true },
+    { "source": "/news-07-07", "destination": "/news/2026-07-07", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/api/radar-state",

@@ -67,14 +67,14 @@
       max-width:1000px;margin:0 auto;padding:0 20px 60px
     }
     .analytics-card{
-      background:var(--card,#1e1e30);border:1px solid var(--border,#333);border-radius:12px;
+      background:var(--surface,#16202b);border:1px solid var(--line,#333);border-radius:12px;
       overflow:hidden;transition:transform .2s,border-color .2s;text-decoration:none;color:inherit;display:block
     }
     .analytics-card:hover{transform:translateY(-3px);border-color:var(--teal,#00c8c8)}
-    .analytics-card .card-cover{width:100%;height:138px;object-fit:cover;display:block;border-bottom:1px solid var(--border,#333)}
+    .analytics-card .card-cover{width:100%;height:138px;object-fit:cover;display:block;border-bottom:1px solid var(--line,#333)}
     .analytics-card .card-body{padding:18px 24px 24px}
-    .analytics-card h2{font-size:1.1rem;margin:0 0 8px;color:var(--text,#e0e0e0)}
-    .analytics-card p{color:var(--muted,#999);font-size:13px;margin:0 0 12px;line-height:1.5}
+    .analytics-card h2{font-size:1.1rem;margin:0 0 8px;color:var(--ink,#e0e0e0)}
+    .analytics-card p{color:var(--ink-dim,#999);font-size:13px;margin:0 0 12px;line-height:1.5}
     .analytics-card .card-meta{font-size:12px;color:var(--teal,#00c8c8);font-weight:600}
     @media (max-width:640px){
       .news-header{padding:0 10px}
@@ -85,8 +85,8 @@
     }
     .disclaimer{
       max-width:800px;margin:0 auto 40px;padding:16px 20px;
-      background:var(--card,#1e1e30);border:1px solid var(--border,#333);border-radius:8px;
-      font-size:12px;color:var(--muted,#999);text-align:center;line-height:1.6
+      background:var(--surface,#16202b);border:1px solid var(--line,#333);border-radius:8px;
+      font-size:12px;color:var(--ink-dim,#999);text-align:center;line-height:1.6
     }
   </style>
 </head>
@@ -98,18 +98,24 @@
         <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
       </a>
       <nav class="news-nav">
-        <a href="/">🗺️ Карта</a>
+        <a href="/">🗺️ Карта НПЗ</a>
         <a href="/news">📰 Сводки</a>
         <a href="/radar">📡 Радар</a>
         <div class="nav-dropdown" style="position:relative;display:inline-block">
-          <a href="/analytics" style="color:var(--teal,#00c8c8);font-weight:700">📊 Аналитика ▾</a>
+          <a href="/analytics" aria-current="page" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
           <div class="nav-dropdown-menu">
-            <a href="/crimea">🗓 Дефицит в Крыму</a>
-            <a href="/deficit">⛽ Почему нет бензина</a>
-            <a href="/crisis">🔥 Топливный кризис</a>
-            <a href="/attacks">💥 Хроника ударов</a>
-            <a href="/refineries">🏭 Список НПЗ</a>
+            <div class="nav-drop-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
             <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <div class="nav-drop-group">Объяснялки</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <div class="nav-drop-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="nav-drop-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
           </div>
         </div>
         <a href="/sources">📚 Источники</a>

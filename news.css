@@ -842,6 +842,8 @@ body {
 }
 .nav-dropdown-menu a:hover{background:var(--surface2,rgba(0,200,200,.12));color:var(--teal)}
 .nav-dropdown-menu a[aria-current="page"]{color:var(--teal);background:var(--surface2)}
+.nav-drop-group{padding:7px 16px 3px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--ink-dim);opacity:.75}
+.nav-drop-group:first-child{padding-top:2px}
 .nav-dropdown:hover .nav-dropdown-menu{display:block}
 @media(max-width:768px){
   .nav-dropdown-menu{
