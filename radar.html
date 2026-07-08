@@ -824,10 +824,9 @@
         list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--ink-dim);font-size:12px">Лента недоступна</div>';
         return;
       }
-      // ПВО не показываем нигде, включая перепечатки сводок в ленте — фильтруем такие сообщения
-      var clean = msgs.filter(function(m) { return !/пво/i.test(m.text || ""); });
+      // Лента — сырой текст сообщений как есть (в т.ч. новостные сводки). Запрет ПВО касается только МЕТОК на карте, не текста новостей.
       var html = "";
-      clean.slice(0, 60).forEach(function(m) {
+      msgs.slice(0, 60).forEach(function(m) {
         var t = m.time_label || (m.ts ? formatMsk(m.ts) + " МСК" : "");
         html += '<div class="feed-item"><div class="feed-meta">' +
           '<span class="feed-src">' + esc(m.source_label || m.source_id || "?") + '</span>' +
@@ -836,7 +835,7 @@
       });
       list.innerHTML = html;
       var cnt = document.getElementById("feedCount");
-      if (cnt) cnt.textContent = clean.length;
+      if (cnt) cnt.textContent = msgs.length;
     }
 
     function updateTicker(threats, srcStr, timeStr) {
