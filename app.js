@@ -39,6 +39,7 @@
   var nextSyncAt = 0, refreshTimer = null, regionMode = "now", crimeaReady = false, azsReady = false;
   var appStarted = false, azsDataPromise = null, regionsGeoPromise = null;
   var AZS_ROUTE = { line: null, cities: [] };
+  var tripRequestId = 0; // bump on every build/reset so a late OSRM response can be told apart from stale
 
   var STC = { operational: "#2f9e57", partial: "#df8f17", down: "#d23a2e" };
   var LVL = { low: "#7bbf5a", medium: "#e0b020", high: "#df8f17", severe: "#d23a2e", critical: "#a01d14" };
@@ -63,6 +64,7 @@
 
     // Стартуем загрузку данных сразу
     var dataPromise = load();
+    loadVersion();
 
     setTimeout(function () {
       addLine("[ OK ] загрузка игрового поля");
@@ -117,26 +119,7 @@
     var panelRight = document.getElementById("panelRight");
     var viewRu = document.getElementById("view-russia");
 
-    // --- Inject bottom-sheet styles (once) ---
-    if (!document.getElementById("mob-sheet-css")) {
-      var css = document.createElement("style");
-      css.id = "mob-sheet-css";
-      css.textContent = [
-        '.mob-sheet{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:var(--surface1,#1a1d23);border-top:1px solid var(--ink-dim,#444);border-radius:16px 16px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.5);max-height:55vh;display:flex;flex-direction:column;transform:translateY(0);transition:transform .3s cubic-bezier(.4,0,.2,1)}',
-        '.mob-sheet.collapsed{transform:translateY(calc(100% - 44px))}',
-        '.mob-sheet-handle{flex-shrink:0;padding:10px 0 4px;text-align:center;cursor:pointer}',
-        '.mob-sheet-handle span{display:inline-block;width:36px;height:4px;background:var(--ink-dim,#555);border-radius:2px}',
-        '.mob-sheet-tabs{display:flex;gap:0;padding:0 8px 6px;overflow-x:auto;flex-shrink:0}',
-        '.mob-sheet-tab{flex:1;min-width:0;padding:8px 4px;border:none;background:transparent;color:var(--ink-dim,#8b8f96);font:600 12px/1 system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-align:center;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}',
-        '.mob-sheet-tab.active{color:var(--ink,#e8eaed);border-bottom-color:var(--accent,#1b6ef3)}',
-        '.mob-sheet-body{flex:1;overflow-y:auto;padding:0 10px 16px;-webkit-overflow-scrolling:touch}',
-        '.mob-sheet-body .npz-row,.mob-sheet-body .feed-item,.mob-sheet-body .voice-item{cursor:pointer}',
-        '.mob-fab{position:fixed;bottom:20px;right:16px;z-index:2001;width:48px;height:48px;border-radius:50%;border:none;background:var(--accent,#1b6ef3);color:#fff;font-size:20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4);display:none;align-items:center;justify-content:center}',
-        '@media(max-width:820px){.mob-fab{display:flex}}',
-        '@media(min-width:821px){.mob-sheet{display:none}.mob-fab{display:none}}'
-      ].join('\n');
-      document.head.appendChild(css);
-    }
+    // Bottom-sheet/FAB styles live in styles.css (.mob-sheet*/.mob-fab) — single source of truth.
 
     // --- FAB ---
     var fab = document.createElement("button");
@@ -318,7 +301,8 @@
     return L.tileLayer(tileUrl(), { attribution: "© OpenStreetMap · CARTO · OSINT ESTIMATE", subdomains: "abcd", maxZoom: 19 });
   }
   function initRuMap() {
-    maps.ru = L.map("map", { center: [55.5, 55], zoom: 4, minZoom: 3, maxZoom: 9, worldCopyJump: false });
+    maps.ru = L.map("map", { center: [55.5, 55], zoom: 4, minZoom: 3, maxZoom: 9, worldCopyJump: false, zoomControl: false });
+    L.control.zoom({ position: "bottomright" }).addTo(maps.ru);
     tiles.ru = baseTiles().addTo(maps.ru);
     L_ru.regions = L.layerGroup().addTo(maps.ru);   // shading (bottom)
     L_ru.border = L.layerGroup().addTo(maps.ru);    // RF border
@@ -334,6 +318,11 @@
       ? L.markerClusterGroup({ maxClusterRadius: 34, spiderfyOnMaxZoom: true, disableClusteringAtZoom: 6, iconCreateFunction: strikeClusterIcon })
       : L.layerGroup();
     L_ru.strikes.addTo(maps.ru);
+    // Хотспоты (⚠ на дорогах) — кластеризация, часто скучены у одного города
+    L_ru.hotspots = (typeof L.markerClusterGroup === "function")
+      ? L.markerClusterGroup({ maxClusterRadius: 40, spiderfyOnMaxZoom: true, disableClusteringAtZoom: 8 })
+      : L.layerGroup();
+    L_ru.hotspots.addTo(maps.ru);
     L_ru.azs = L.layerGroup();                      // AZS network status — OFF by default (toggle)
     L_ru.grid = L.layerGroup();                     // Electricity grid (substations + blackouts) — OFF by default
     L_ru.prices = L.layerGroup();                   // Price heatmap (АИ-95 по регионам) — OFF by default
@@ -350,15 +339,19 @@
     });
   }
   function initCrMap() {
-    maps.cr = L.map("mapCrimea", { center: [45.25, 34.3], zoom: 7, minZoom: 6, maxZoom: 11 });
+    maps.cr = L.map("mapCrimea", { center: [45.25, 34.3], zoom: 7, minZoom: 6, maxZoom: 11, zoomControl: false });
+    L.control.zoom({ position: "bottomright" }).addTo(maps.cr);
     tiles.cr = baseTiles().addTo(maps.cr);
-    L_cr.layer = L.layerGroup().addTo(maps.cr);
+    L_cr.fill = L.layerGroup().addTo(maps.cr);   // заливка полуострова — как на основной карте
+    L_cr.layer = L.layerGroup().addTo(maps.cr);  // маршруты + опорные точки (history-crimea.json)
+    L_cr.azs = L.layerGroup().addTo(maps.cr);    // АЗС — тот же слой/стиль, что и на вкладке АЗС
     crimeaReady = true;
   }
 
   /* ---------- DATA LOAD ---------- */
   // live=true → raw-CDN ПЕРВЫМ с cache-bust (свежие данные без редеплоя Vercel),
   // фоллбэк на бандл. live=false → бандл первым (быстро, для статичных geojson/станций).
+  var usedFallback = false;
   function fetchJsonPath(path, live) {
     var primary = live ? (RAW + path + "?t=" + Date.now()) : ("/" + path);
     var backup  = live ? ("/" + path) : (RAW + path);
@@ -377,7 +370,7 @@
       });
     }
     return fetchWithTimeout(primary, opt)
-      .catch(function () { return fetchWithTimeout(backup, {}); });
+      .catch(function () { if (live) usedFallback = true; return fetchWithTimeout(backup, {}); });
   }
   // статичные тяжёлые файлы (координаты станций/маршруты) — бандлом; остальные данные — live из raw
   var STATIC_DATA = { azsStations: 1, azsRoutes: 1 };
@@ -436,6 +429,7 @@
     renderAzs(); renderVoices(); renderGrid();
     loadRegionsGeo();
     if (azsReady) loadAzsData().then(renderAzsTab);
+    if (crimeaReady) loadAzsData().then(renderCrimea);
   }
 
   /* ---------- 3D REFINERY PIECE ---------- */
@@ -499,7 +493,7 @@
     var nb = S.state.national_balance || {}, fb = S.state.fuel_balance || {}, c = countByStatus();
     var h = "";
     if (S.health && S.health.meta && S.health.meta.overall === "degraded") h += '<div class="note" style="border-left-color:#d23a2e;color:#d23a2e">⚠ Мониторинг: ' + esc(S.health.meta.dead_count) + ' агент(ов) не на связи (нет обновлений)</div>';
-    h += '<div class="bal-big"><div class="n">' + esc(nb.capacity_offline_pct) + '%</div><div class="u">мощностей переработки выбито<br>~' + esc(nb.capacity_offline_mt_year) + ' из ' + esc(nb.refining_capacity_total_mt_year) + ' млн т/год</div></div>';
+    h += '<div class="bal-big"><div class="n">' + esc(nb.capacity_offline_pct) + '%</div><div class="u">мощностей переработки выбито полностью<br>~' + esc(nb.capacity_offline_mt_year) + ' из ' + esc(nb.refining_capacity_total_mt_year) + ' млн т/год' + (nb.throughput_shortfall_pct ? ' · с учётом частично работающих недобор ~<b style="color:var(--red)">' + esc(nb.throughput_shortfall_pct) + '%</b>' : '') + '</div></div>';
     if (S.capacityTimeline && S.capacityTimeline.timeline && S.capacityTimeline.timeline.length > 1) h += sparkBlock(S.capacityTimeline.timeline);
     h += '<div style="display:flex;gap:6px;text-align:center;margin-bottom:6px">' +
       chip(c.down, "стоит", "red") + chip(c.partial, "частично", "amber") + chip(c.operational, "работает", "green") + '</div>';
@@ -548,7 +542,7 @@
       '<span><i style="background:var(--amber)"></i>частично ' + c.partial + '</span>' +
       '<span><i style="background:var(--green)"></i>работает ' + c.operational + '</span>';
     document.getElementById("npzList").innerHTML = list.map(function (r) {
-      return '<div class="npz-row" role="button" tabindex="0" data-id="' + esc(r.id) + '"><span class="dot ' + esc(r.status) + '"></span><span class="nm">' + esc(r.name) + '</span><span class="cap">' + esc(r.capacity_mt_year) + '</span></div>';
+      return '<div class="npz-row" role="button" tabindex="0" title="' + esc(r.name) + '" data-id="' + esc(r.id) + '"><span class="dot ' + esc(r.status) + '"></span><span class="nm">' + esc(r.name) + '</span><span class="cap">' + esc(r.capacity_mt_year) + '</span></div>';
     }).join("");
     Array.prototype.forEach.call(document.querySelectorAll(".npz-row"), function (row) {
       bindButton(row, function () {
@@ -617,6 +611,7 @@
   function renderRoads() {
     if (!L_ru.roads) return;
     L_ru.roads.clearLayers();
+    if (L_ru.hotspots) L_ru.hotspots.clearLayers();
     var r = S.roads; if (!r) return;
     (r.roads || []).forEach(function (rd) {
       if (!rd.coords || !rd.coords.length) return;
@@ -629,7 +624,7 @@
     (r.hotspots || []).forEach(function (hp) {
       if (typeof hp.lat !== "number") return;
       var icon = L.divIcon({ className: "", html: '<div class="hotspot">⚠️</div>', iconSize: [24, 24], iconAnchor: [12, 12] });
-      L.marker([hp.lat, hp.lon], { icon: icon, zIndexOffset: 550 }).bindPopup(hotspotPopup(hp)).addTo(L_ru.roads);
+      L.marker([hp.lat, hp.lon], { icon: icon, zIndexOffset: 550 }).bindPopup(hotspotPopup(hp)).addTo(L_ru.hotspots || L_ru.roads);
     });
   }
 
@@ -723,14 +718,46 @@
     if (!cr) { body.innerHTML = '<div class="note">Данные по Крыму загружаются…</div>'; return; }
     var h = '<div class="csum">' + esc(cr.summary) + '</div>';
     h += '<div class="sect">ОГРАНИЧЕНИЯ</div>';
-    (cr.restrictions || []).forEach(function (r) { h += '<div class="crow"><span class="ci">⛔</span><span>' + esc(r) + '</span></div>'; });
+    (cr.restrictions || []).forEach(function (r) {
+      var pre = (r && r.date) ? esc(rusDate(r.date)) + ' — ' : '';
+      var src = (r && r.source_url) ? ' <a href="' + safeUrl(r.source_url) + '" target="_blank" rel="noopener" style="font-size:10px;color:var(--teal)">источник ↗</a>' : '';
+      h += '<div class="crow"><span class="ci">⛔</span><span>' + pre + esc(r && r.text ? r.text : r) + src + '</span></div>';
+    });
     h += '<div class="sect">АЗС / ГОРОДА</div><div class="cstations">';
     (cr.stations || []).forEach(function (s) { h += '<div class="cst"><span>📍 ' + esc(s.name) + ' <span style="color:var(--ink-dim);font-size:11px">' + esc(s.note) + '</span></span><span class="cb ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span></div>'; });
     h += '</div>';
+    // C: сводка по сети АЗС Крыма — те же уровни/цвета, что на вкладке АЗС (даёт конкретику на карте)
+    if (S.azsStations && S.azsStations.stations) {
+      var cst = S.azsStations.stations.filter(function (s) { return /крым|севастополь/i.test(s.region || ""); });
+      if (cst.length) {
+        var cc = {}; cst.forEach(function (s) { var lv = stationLevel(s); cc[lv] = (cc[lv] || 0) + 1; });
+        var lo = ["calm", "strained", "limited", "severe", "critical"];
+        var leg = lo.filter(function (k) { return cc[k]; }).map(function (k) { return '<span style="white-space:nowrap"><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:' + AZS_LVL[k] + ';margin-right:3px;vertical-align:middle"></i>' + esc(AZS_LBL[k]) + ' ' + cc[k] + '</span>'; }).join(' · ');
+        if (cc.unknown) leg += (leg ? ' · ' : '') + '<span style="white-space:nowrap"><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:' + AZS_UNKNOWN + ';margin-right:3px;vertical-align:middle"></i>нет данных ' + cc.unknown + '</span>';
+        h += '<div class="sect">СЕТЬ АЗС КРЫМА · ' + cst.length + ' на карте</div><div style="display:flex;flex-wrap:wrap;gap:7px;font-size:11px;padding:2px 0 4px;font-weight:600">' + leg + '</div>';
+      }
+    }
     if (cr.outlook) h += '<div class="coutlook">🔮 ' + esc(cr.outlook) + '</div>';
     body.innerHTML = h;
 
     if (crimeaReady) {
+      // заливка полуострова — та же логика цвета, что и на основной карте (buildLoadMap/effInfo/loadColor)
+      if (S.crimeaGeo && L_cr.fill) {
+        L_cr.fill.clearLayers();
+        var lm = buildLoadMap();
+        L.geoJSON(S.crimeaGeo, {
+          style: function (f) {
+            var info = effInfo(f, lm);
+            return { color: "#7a7e85", weight: 1, fillColor: loadColor(info ? info.level : "normal"), fillOpacity: info ? .5 : .3 };
+          },
+          onEachFeature: function (f, layer) {
+            var info = effInfo(f, lm);
+            var st = info ? (info.level === "critical" || info.level === "severe" ? "down" : "partial") : "operational";
+            var lbl = info ? info.level.toUpperCase() : "НЕТ НАГРУЗКИ";
+            layer.bindPopup('<div class="pp-h">' + esc(f.properties.name) + '</div><span class="pp-st ' + esc(st) + '">' + esc(lbl) + '</span>' + (info && info.note ? '<div class="pp-note">' + esc(info.note) + '</div>' : ''));
+          }
+        }).addTo(L_cr.fill);
+      }
       L_cr.layer.clearLayers();
       (cr.routes || []).forEach(function (rt) {
         var col = rt.status === "threatened" ? "#d23a2e" : rt.status === "cut" ? "#a01d14" : "#178585";
@@ -744,6 +771,16 @@
           .bindPopup('<div class="pp-h">⛽ ' + esc(s.name) + '</div><span class="pp-st ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(s.note) + '</div>')
           .addTo(L_cr.layer);
       });
+      // АЗС-сеть — те же иконки/уровни/попапы, что и на вкладке АЗС (data/azs-stations.json)
+      if (S.azsStations && L_cr.azs) {
+        L_cr.azs.clearLayers();
+        (S.azsStations.stations || []).forEach(function (s) {
+          if (!/крым|севастополь/i.test(s.region || "")) return;
+          L.marker([s.lat, s.lon], { icon: azsStationIcon(stationLevel(s), false) })
+            .bindPopup(azsStationPopup(s))
+            .addTo(L_cr.azs);
+        });
+      }
     }
   }
 
@@ -755,7 +792,7 @@
     var items = S.hist.history.filter(function (e) { return histFilter === "all" || e.type === histFilter; });
     var TL = { strike: "🔥 удар", repair: "🛠 ремонт", restriction: "⛔ ограничение", policy: "📋 мера" };
     box.innerHTML = items.map(function (e) {
-      return '<div class="tl-item ' + esc(e.type) + '"><span class="tl-date">' + esc(e.date) + '</span><span class="tl-type ' + esc(e.type) + '">' + esc(TL[e.type] || e.type) + '</span>' +
+      return '<div class="tl-item ' + esc(e.type) + '"><span class="tl-date">' + esc(rusDate(e.date)) + '</span><span class="tl-type ' + esc(e.type) + '">' + esc(TL[e.type] || e.type) + '</span>' +
         '<div class="tl-title">' + esc(e.title) + '</div><div class="tl-detail">' + esc(e.detail) + (e.region ? ' <i style="color:var(--ink-dim)">· ' + esc(e.region) + '</i>' : "") +
         (e.source_url ? ' <a href="' + safeUrl(e.source_url) + '" target="_blank" rel="noopener">источник ↗</a>' : "") + '</div></div>';
     }).join("") || '<div class="note">Нет событий по фильтру.</div>';
@@ -812,6 +849,7 @@
   /* ---------- STRIKES (by day) ---------- */
   var MONTHS = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
   function fmtDay(d) { if (!d) return "—"; var p = d.split("-"); return parseInt(p[2], 10) + " " + (MONTHS[parseInt(p[1], 10) - 1] || ""); }
+  function rusDate(d) { if (!d) return ""; var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(d)); if (!m) return d; return parseInt(m[3], 10) + " " + (MONTHS[parseInt(m[2], 10) - 1] || "") + " " + m[1]; }
   function plural(n) { var a = n % 10, b = n % 100; if (a === 1 && b !== 11) return ""; if (a >= 2 && a <= 4 && (b < 10 || b >= 20)) return "а"; return "ов"; }
   function explosionPts(cx, cy, spikes, ro, ri) {
     var p = [], step = Math.PI / spikes;
@@ -1046,7 +1084,8 @@
 
   function initAzMap() {
     if (azsReady) return;
-    maps.az = L.map("mapAzs", { center: [49.5, 39.5], zoom: 5, minZoom: 4, maxZoom: 15, worldCopyJump: false });
+    maps.az = L.map("mapAzs", { center: [49.5, 39.5], zoom: 5, minZoom: 4, maxZoom: 15, worldCopyJump: false, zoomControl: false });
+    L.control.zoom({ position: "bottomright" }).addTo(maps.az);
     tiles.az = baseTiles().addTo(maps.az);
     L_az.cluster = (typeof L.markerClusterGroup === "function")
       ? L.markerClusterGroup({ maxClusterRadius: 48, chunkedLoading: true, spiderfyOnMaxZoom: true, iconCreateFunction: azsClusterIcon })
@@ -1104,7 +1143,7 @@
   function azsStationIcon(level, hi) {
     var c = AZS_LVL[level] || AZS_UNKNOWN;
     var ring = hi ? '<circle cx="9" cy="9" r="8" fill="none" stroke="#1b6ef3" stroke-width="2"/>' : "";
-    var html = '<div class="azs-spin"><svg width="18" height="18" viewBox="0 0 18 18">' + ring +
+    var html = '<div><svg width="18" height="18" viewBox="0 0 18 18">' + ring +
       '<circle cx="9" cy="9" r="5.5" fill="' + c + '" stroke="#000" stroke-opacity=".35" stroke-width="1"/></svg></div>';
     return L.divIcon({ className: "azs-divicon", html: html, iconSize: [18, 18], iconAnchor: [9, 9], popupAnchor: [0, -6] });
   }
@@ -1237,7 +1276,7 @@
       v.slice(0, 60).forEach(function (q) {
         var d = document.createElement("div");
         d.className = "voice-item";
-        d.innerHTML = '<div class="voice-meta"><span class="voice-loc">' + esc(q.city || q.region || "") + '</span><span class="voice-date">' + esc(q.date || "") + '</span></div>' +
+        d.innerHTML = '<div class="voice-meta"><span class="voice-loc">' + esc(q.city || q.region || "") + '</span><span class="voice-date">' + esc(q.date ? rusDate(q.date) : "") + '</span></div>' +
           '<div class="voice-quote">«' + esc(q.quote || "") + '»</div>' +
           '<div class="voice-foot">' + esc(q.author_hint || "—") + ' · ' + esc(q.source || "") + (q.source_url ? ' <a href="' + safeUrl(q.source_url) + '" target="_blank" rel="noopener">↗</a>' : "") + '</div>';
         if (q.lat && q.lon) { d.style.cursor = "pointer"; bindButton(d, function () { if (maps.az) maps.az.setView([q.lat, q.lon], 9); }); }
@@ -1249,7 +1288,7 @@
       v.forEach(function (q) {
         if (!q.lat || !q.lon) return;
         L.marker([q.lat, q.lon], { icon: azsCommentPin(), zIndexOffset: 600 })
-          .bindPopup('<div class="azs-pop"><div class="ap-row" style="opacity:.7">' + esc(q.city || q.region || "") + " · " + esc(q.date || "") + '</div><div class="ap-quote">«' + esc(q.quote || "") + '»</div>' + (q.source_url ? '<div class="ap-row"><a href="' + safeUrl(q.source_url) + '" target="_blank" rel="noopener">' + esc(q.source || "источник") + ' ↗</a></div>' : "") + '</div>')
+          .bindPopup('<div class="azs-pop"><div class="ap-row" style="opacity:.7">' + esc(q.city || q.region || "") + " · " + esc(q.date ? rusDate(q.date) : "") + '</div><div class="ap-quote">«' + esc(q.quote || "") + '»</div>' + (q.source_url ? '<div class="ap-row"><a href="' + safeUrl(q.source_url) + '" target="_blank" rel="noopener">' + esc(q.source || "источник") + ' ↗</a></div>' : "") + '</div>')
           .addTo(L_az.comments);
       });
     }
@@ -1306,10 +1345,12 @@
         '<span class="tr-chip" style="background:' + AZS_LVL.critical + ';color:#fff">🔴 ' + bad + '</span>' +
         '<span class="tr-chip" style="background:' + AZS_UNKNOWN + ';color:#fff">⚪ ' + tally.unknown + '</span>' +
         '</div>' +
+        '<div class="tr-row" style="opacity:.6;font-size:10px">' + esc('🟢 доступно · 🟡 лимиты · 🔴 дефицит/сухо · ⚪ нет данных') + '</div>' +
         (bad > 0 ? '<div class="tr-row" style="color:' + AZS_LVL.critical + '">⚠ Есть участки острого дефицита — заправляйтесь заранее.</div>' : '<div class="tr-row" style="color:' + AZS_LVL.calm + '">Топливо вдоль маршрута в целом доступно (оценка).</div>');
     }
   }
   function clearTrip() {
+    tripRequestId++; // invalidate any in-flight geocode/OSRM request from a previous build
     AZS_ROUTE.line = null; AZS_ROUTE.cities = [];
     if (L_az.route) L_az.route.clearLayers();
     var el = document.getElementById("azsTrip"); if (el) el.innerHTML = "";
@@ -1324,6 +1365,7 @@
       var b = document.createElement("button");
       b.textContent = r.name;
       b.addEventListener("click", function () {
+        tripRequestId++; // preset build supersedes any in-flight custom-route request
         Array.prototype.forEach.call(el.querySelectorAll("button"), function (x) { x.classList.remove("active"); });
         b.classList.add("active");
         applyTrip(r.waypoints, r.cities || []);
@@ -1356,9 +1398,14 @@
       if (!f || !t) { if (tripEl) tripEl.innerHTML = '<div class="tr-row" style="color:' + AZS_LVL.severe + '">Укажите оба города.</div>'; return; }
       if (tripEl) tripEl.innerHTML = '<div class="tr-row">Строю маршрут…</div>';
       Array.prototype.forEach.call(document.querySelectorAll("#azsPresets button"), function (b) { b.classList.remove("active"); });
+      var reqId = ++tripRequestId;
       Promise.all([geocode(f), geocode(t)]).then(function (pts) {
-        return osrmRoute(pts[0], pts[1]).then(function (line) { applyTrip(line, [f, t]); });
+        return osrmRoute(pts[0], pts[1]).then(function (line) {
+          if (reqId !== tripRequestId) return; // superseded by a newer build/reset — drop stale response
+          applyTrip(line, [f, t]);
+        });
       }).catch(function (e) {
+        if (reqId !== tripRequestId) return;
         if (tripEl) tripEl.innerHTML = '<div class="tr-row" style="color:' + AZS_LVL.critical + '">Не удалось построить маршрут (' + esc(e.message || "ошибка") + '). Попробуйте пресет-коридор.</div>';
       });
     });
@@ -1441,7 +1488,7 @@
         '<span class="voice-loc">' + esc(q.city || q.region || "") + '</span>' +
         (topic ? '<span class="voice-topic">' + esc(topic) + '</span>' : '') +
         voiceFresh(q) +
-        '<span class="voice-date">' + esc(q.date || "") + '</span></div>' +
+        '<span class="voice-date">' + esc(q.date ? rusDate(q.date) : "") + '</span></div>' +
         '<div class="voice-quote">«' + esc(q.quote || "") + '»</div>' +
         '<div class="voice-foot">' + esc(q.author_hint || "—") + ' · ' + esc(q.source || "") +
         (q.source_url ? ' <a href="' + safeUrl(q.source_url) + '" target="_blank" rel="noopener">↗</a>' : '') + '</div></div>';
@@ -1465,7 +1512,7 @@
   function gridIcon(s) {
     var c = GRID_C[s.status] || "#7a7e85";
     var pulse = s.status === "down" ? '<circle cx="14" cy="14" r="11" fill="none" stroke="' + c + '" stroke-width="1.6" opacity=".6"><animate attributeName="r" values="8;13;8" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="1.8s" repeatCount="indefinite"/></circle>' : '';
-    var html = '<div class="grid-pin"><svg width="28" height="28" viewBox="0 0 28 28">' + pulse +
+    var html = '<div><svg width="28" height="28" viewBox="0 0 28 28">' + pulse +
       '<rect x="4" y="4" width="20" height="20" rx="4" fill="' + c + '" stroke="#fff" stroke-width="2"/>' +
       '<path d="M15 7 L9 15 L13 15 L11 21 L19 12 L14 12 Z" fill="#fff"/>' +
       '</svg></div>';
@@ -1510,12 +1557,44 @@
     });
   }
 
-  /* ---------- TICKER ---------- */
+  /* ---------- TICKER (fade carousel) ---------- */
+  var tkItems = [], tkIdx = 0, tkTimer = null, tkPaused = false, tkWired = false;
   function renderTicker() {
     if (!S.state) return;
-    var ev = (S.state.events || []).map(function (e) { return '<b>' + esc(e.date) + '</b> ' + esc(e.text); }).join('<span class="sep">◆</span>');
+    var items = (S.state.events || []).map(function (e) { return '<b>' + esc(rusDate(e.date)) + '</b> ' + esc(e.text); });
     var df = (S.state.deficit_regions || []).map(function (d) { return esc(d.region) + ' [' + esc(d.level) + ']'; }).join(" · ");
-    document.getElementById("ticker").innerHTML = ev + '<span class="sep">◆</span>ДЕФИЦИТ: ' + df + '<span class="sep">◆</span>';
+    if (df) items.push('<b>ДЕФИЦИТ</b> ' + df);
+    tkItems = items;
+    if (tkIdx >= tkItems.length) tkIdx = 0;
+    tkWire();
+    tkShow();
+    tkStart();
+  }
+  function tkShow() {
+    var el = document.getElementById("ticker");
+    if (el) el.innerHTML = tkItems.length ? tkItems[tkIdx % tkItems.length] : "";
+  }
+  function tkStart() {
+    tkStop();
+    if (tkItems.length < 2) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    tkTimer = setInterval(function () {
+      if (tkPaused) return;
+      var el = document.getElementById("ticker"); if (!el) return;
+      el.classList.add("tk-out");
+      setTimeout(function () {
+        tkIdx = (tkIdx + 1) % tkItems.length;
+        tkShow();
+        el.classList.remove("tk-out");
+      }, 380);
+    }, 4200);
+  }
+  function tkStop() { if (tkTimer) { clearInterval(tkTimer); tkTimer = null; } }
+  function tkWire() {
+    if (tkWired) return; tkWired = true;
+    var f = document.querySelector(".ticker"); if (!f) return;
+    ["mouseenter", "focusin"].forEach(function (ev) { f.addEventListener(ev, function () { tkPaused = true; }); });
+    ["mouseleave", "focusout"].forEach(function (ev) { f.addEventListener(ev, function () { tkPaused = false; }); });
   }
 
   /* ---------- CLOCK ---------- */
@@ -1530,10 +1609,17 @@
     if (!S.state) return;
     var m = S.state.meta || {};
     if (m.generated_at) {
-      var d = new Date(m.generated_at);
-      document.getElementById("lastSync").textContent = "sync " + pad(d.getUTCDate()) + "." + pad(d.getUTCMonth() + 1) + " " + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + "Z";
+      var d = new Date(new Date(m.generated_at).getTime() + 3 * 3600 * 1000); // МСК = UTC+3
+      document.getElementById("lastSync").textContent = "sync " + pad(d.getUTCDate()) + "." + pad(d.getUTCMonth() + 1) + " " + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + " МСК";
     }
     if (m.data_mode) document.getElementById("modePill").textContent = m.data_mode.split("/")[0].trim();
+    var fb = document.getElementById("ssFallback"); if (fb) fb.classList.toggle("hidden", !usedFallback);
+  }
+  function loadVersion() {
+    fetch("/version.json").then(function (r) { return r.json(); }).then(function (data) {
+      var el = document.getElementById("ssVersion");
+      if (el && data && data.version) el.textContent = "v" + data.version;
+    }).catch(function () {});
   }
 
   /* ---------- TABS + CONTROLS ---------- */
@@ -1547,7 +1633,7 @@
         Array.prototype.forEach.call(document.querySelectorAll(".view"), function (v) { v.classList.remove("active"); });
         document.getElementById("view-" + view).classList.add("active");
         if (view === "russia") setTimeout(function () { maps.ru.invalidateSize(); }, 60);
-        if (view === "crimea") { if (!crimeaReady) { initCrMap(); renderCrimea(); } setTimeout(function () { maps.cr.invalidateSize(); }, 60); }
+        if (view === "crimea") { if (!crimeaReady) { initCrMap(); renderCrimea(); } loadAzsData().then(renderCrimea); setTimeout(function () { maps.cr.invalidateSize(); }, 60); }
         if (view === "azs") {
           if (!azsReady) initAzMap();
           loadAzsData().then(function () {
@@ -1578,6 +1664,12 @@
           var bar = document.getElementById("strikeBar");
           if (on) { maps.ru.addLayer(lg); renderStrikes(); bar.classList.remove("hidden"); }
           else { maps.ru.removeLayer(lg); stopPlay(); bar.classList.add("hidden"); }
+          return;
+        }
+        if (name === "roads") {
+          // хотспоты кластеризуются отдельным слоем — прячем/показываем вместе с дорогами
+          if (on) { maps.ru.addLayer(lg); if (L_ru.hotspots) maps.ru.addLayer(L_ru.hotspots); }
+          else { maps.ru.removeLayer(lg); if (L_ru.hotspots) maps.ru.removeLayer(L_ru.hotspots); }
           return;
         }
         if (on) maps.ru.addLayer(lg); else maps.ru.removeLayer(lg);

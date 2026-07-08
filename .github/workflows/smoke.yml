@@ -1,0 +1,38 @@
+name: Smoke test
+
+# Отдельный от деплоя воркфлоу (T21): валидирует data/*.json и после деплоя
+# дёргает ключевые URL прод-сайта. Не блокирует и не изменяет deploy.yml.
+on:
+  push:
+    branches: [main]
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON files
+        run: |
+          set -e
+          for f in data/*.json; do
+            python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f" || { echo "Invalid JSON: $f"; exit 1; }
+          done
+
+  check-urls:
+    needs: validate-json
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel deploy
+        run: sleep 30
+      - name: Check key URLs return 200
+        run: |
+          set -e
+          for url in \
+            https://npz-tactical-map.vercel.app/ \
+            https://npz-tactical-map.vercel.app/news \
+            https://npz-tactical-map.vercel.app/crimea \
+            https://npz-tactical-map.vercel.app/karta-benzina-krym \
+            https://npz-tactical-map.vercel.app/api/radar-state ; do
+            echo "Checking $url"
+            curl --fail --silent --show-error --retry 5 --retry-delay 10 -o /dev/null "$url"
+          done
