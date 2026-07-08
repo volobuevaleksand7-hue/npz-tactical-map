@@ -125,6 +125,23 @@
       "last_event_ts": 1783501730,
       "source_text": "08.07.2026 11:02 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n08.07.2026 12:08 МСК\nЛуганск и область ЛНР Опасность по БПЛА"
     },
+    "Краснодарский край": {
+      "bpla": false,
+      "bplaDim": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1783506635,
+      "source_text": "08.07.2026 13:30 МСК\nКраснодарский край Опасность по БПЛА"
+    },
     "Мордовия": {
       "bpla": false,
       "bplaDim": false,
@@ -258,8 +275,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1783506183,
-      "source_text": "08.07.2026 13:23 МСК\nТульская область Калужская область внимание по бпла"
+      "last_event_ts": 1783506672,
+      "source_text": "08.07.2026 13:31 МСК\nКалуга Калужская область Сбитие БПЛА Меры безопасности"
     },
     "Запорожская область": {
       "bpla": false,
@@ -538,26 +555,6 @@
       "source_text": "08.07.2026 11:32 МСК\nМыс Херсонес, Фиолент Балаклава Бухты Казачья, Камышовая, Стрелецкая, Севастопольская С моря тревога по БПЛА"
     },
     {
-      "key": "раздольное|автономная республика крым",
-      "name": "Раздольное",
-      "lat": 45.77083,
-      "lon": 33.48777,
-      "region": "Автономная Республика Крым",
-      "bpla": true,
-      "bplaDim": true,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1783485387,
-      "source_text": "08.07.2026 07:36 МСК\nРаздольное - Кормовое/Останино и далее примерно на Гвардейское, Симферополь тревога по БПЛА. Большое количество"
-    },
-    {
       "key": "донецк|донецкая народная республика",
       "name": "Донецк",
       "lat": 48.023,
@@ -798,6 +795,26 @@
       "source_text": "08.07.2026 11:33 МСК\nПесчаное Табачное Вилино Угловое и близлежащие Опасность по БПЛА с моря Республика Крым"
     },
     {
+      "key": "калуга|калужская область",
+      "name": "Калуга",
+      "lat": 54.53063,
+      "lon": 36.27,
+      "region": "Калужская область",
+      "bpla": true,
+      "bplaDim": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": true,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1783506672,
+      "source_text": "08.07.2026 13:31 МСК\nКалуга Калужская область Сбитие БПЛА Меры безопасности"
+    },
+    {
       "key": "родинское|донецкая народная республика",
       "name": "Родинское",
       "lat": 48.35415,
@@ -824,7 +841,7 @@
       "lon": 36.0791,
       "region": "Орловская область",
       "bpla": true,
-      "bplaDim": false,
+      "bplaDim": true,
       "uab": false,
       "uabDim": false,
       "fpv": false,
@@ -1423,15 +1440,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1783506247,
-  "last_event_at": "2026-07-08T10:24:07Z",
-  "fetched_at": "2026-07-08T10:30:03.683838Z",
+  "timestamp": 1783506672,
+  "last_event_at": "2026-07-08T10:31:12Z",
+  "fetched_at": "2026-07-08T10:40:04.333638Z",
   "poll_interval_sec": 10,
   "meta": {
-    "generated_at": "2026-07-08T10:30:03.683838Z",
-    "source_age_seconds": 356,
+    "generated_at": "2026-07-08T10:40:04.333638Z",
+    "source_age_seconds": 532,
     "city_count": 46,
-    "region_count": 17,
+    "region_count": 18,
     "feed_count": 0
   }
 }
