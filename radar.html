@@ -4,10 +4,18 @@
   <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("radar-theme")||"light")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Радар — Угрозы БПЛА по регионам НПЗ | NPZ Tactical Map</title>
-  <meta name="description" content="Радар-карта угроз БПЛА и ракет по регионам России. Мониторинг NPZ-объектов.">
+  <title>БПЛА сегодня — карта воздушных тревог и ракетной опасности в реальном времени</title>
+  <meta name="description" content="Где сейчас объявлена воздушная тревога и угроза БПЛА: живой радар атак дронов и ракетной опасности по регионам России, обновление каждые ~5 минут. Данные OSINT — оценка, не официальное оповещение.">
+  <meta name="keywords" content="бпла сегодня, воздушная тревога сейчас, ракетная опасность, карта тревог, где сейчас тревога, атаки дронов сегодня, угроза бпла по регионам">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://npz-tactical-map.vercel.app/radar">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="БПЛА сегодня — карта воздушных тревог и ракетной опасности">
+  <meta property="og:description" content="Живой радар угроз БПЛА и ракетной опасности по регионам России. Обновление каждые ~5 минут. OSINT-оценка.">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/radar">
+  <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,11 +65,20 @@
     .theme-btn:hover{transform:translateY(-1px)}
 
     /* Map */
-    .map{position:absolute;top:52px;left:0;right:0;bottom:0;z-index:0}
+    .map{position:absolute;top:86px;left:0;right:0;bottom:0;z-index:0}
+    /* SEO strip под топбаром: видимый h1 + freshness-подпись */
+    .seo-strip{position:absolute;top:52px;left:0;right:0;height:34px;display:flex;align-items:center;
+      gap:12px;padding:0 14px;background:var(--surface);border-bottom:1px solid var(--line);z-index:25;overflow:hidden}
+    .seo-h1{font-family:var(--disp);font-weight:700;font-size:13px;color:var(--ink);line-height:1.2;margin:0;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .seo-upd{font-family:var(--mono);font-size:10px;color:var(--ink-dim);white-space:nowrap;flex-shrink:0}
+    .seo-upd a{color:var(--teal);text-decoration:none}
+    .seo-upd a:hover{text-decoration:underline}
+    @media(max-width:768px){.seo-h1{font-size:11px}.seo-upd{display:none}}
     .leaflet-container{background:var(--board)!important}
 
     /* Side panel */
-    .panel{position:absolute;top:66px;left:14px;width:340px;max-height:calc(100% - 80px);
+    .panel{position:absolute;top:100px;left:14px;width:340px;max-height:calc(100% - 114px);
       z-index:20;background:var(--surface);border:1px solid var(--line);border-radius:var(--card-radius);
       box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
     .panel-h{font-weight:800;font-size:12px;letter-spacing:1px;padding:11px 14px;
@@ -101,7 +118,7 @@
     .state-note.stale{background:rgba(255,180,67,.12);border-color:rgba(255,180,67,.35);color:var(--ink)}
 
     /* Telegram feed (right) */
-    .feed{position:absolute;top:66px;right:14px;width:320px;max-height:calc(100% - 130px);
+    .feed{position:absolute;top:100px;right:14px;width:320px;max-height:calc(100% - 164px);
       z-index:20;background:var(--surface);border:1px solid var(--line);border-radius:var(--card-radius);
       box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
     .feed-h{font-weight:800;font-size:12px;letter-spacing:1px;padding:11px 14px;
@@ -255,9 +272,24 @@
 .legend-item { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
 .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
+.about-radar {
+  position: absolute; bottom: 88px; right: 14px; z-index: 20; max-width: 300px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.about-radar summary {
+  padding: 6px 12px; cursor: pointer; user-select: none; font-weight: 700;
+  font-size: 11px; font-family: var(--mono); color: var(--ink);
+}
+.about-body { padding: 2px 12px 10px; font-size: 12px; line-height: 1.5; color: var(--ink-dim); }
+.about-body p { margin: 6px 0; }
+.about-body a { color: var(--teal); text-decoration: none; }
+.about-body a:hover { text-decoration: underline; }
+
 @media(max-width:768px){
   .radar-civ-icon img, .radar-civ-icon svg { width: 40px !important; height: 40px !important; }
   .legend-toggle { left: 14px; bottom: 84px; max-width: calc(100% - 28px); }
+  .about-radar { display: none; }
 }
   </style>
 </head>
@@ -290,6 +322,11 @@
       </div>
     </div>
   </header>
+
+  <div class="seo-strip">
+    <h1 class="seo-h1">Карта тревог: где сейчас БПЛА и ракетная опасность по регионам России</h1>
+    <span class="seo-upd">обновление ~5 мин · <a href="/karta-bpla">о карте</a> · <a href="/news">сводки</a></span>
+  </div>
 
   <div id="map" class="map"></div>
 
@@ -327,6 +364,14 @@
       <span class="legend-item"><span class="legend-swatch" style="background:var(--red)"></span>Ракета</span>
       <span class="legend-item"><span class="legend-swatch" style="background:var(--crit)"></span>Авиация</span>
       <span class="legend-item"><span class="legend-swatch" style="background:var(--crit);opacity:.7"></span>Взрыв</span>
+    </div>
+  </details>
+
+  <details class="about-radar">
+    <summary>ℹ️ О карте тревог</summary>
+    <div class="about-body">
+      <p><strong>Живой радар угроз БПЛА и ракетной опасности.</strong> Карта показывает, где по регионам России сейчас отмечены воздушная тревога, атаки дронов, угроза баллистических и крылатых ракет. Слой обновляется примерно каждые 5 минут по открытым OSINT-источникам.</p>
+      <p>Это <strong>оценка, а не официальное оповещение</strong> — данные могут запаздывать и не заменяют предупреждения МЧС и региональных властей. Смотрите также <a href="/karta-bpla">карту БПЛА онлайн</a>, ежедневные <a href="/news">сводки</a> и <a href="/attacks">хронику ударов по НПЗ</a>.</p>
     </div>
   </details>
 
@@ -727,7 +772,8 @@
           iconAnchor: [16, 16]
         });
 
-        var marker = L.marker([info.lat, info.lon], { icon: icon }).addTo(npzLayer);
+        // ponytail: NPZ markers join cityCluster (not npzLayer) so they cluster/spiderfy on zoom like city markers
+        var marker = L.marker([info.lat, info.lon], { icon: icon }).addTo(cityCluster);
 
         var popupHtml = '<div style="font-family:Rubik,sans-serif;min-width:200px">';
         popupHtml += '<b style="font-size:14px">' + esc(region) + '</b><br>';
