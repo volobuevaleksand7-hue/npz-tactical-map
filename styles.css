@@ -93,8 +93,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .mode-pill{background:var(--amber);color:#241500;font-family:var(--mono);font-weight:800;font-size:9px;letter-spacing:1px;padding:4px 8px;border-radius:6px}
 .topctl .tg-subscribe{padding:5px 10px!important;border-radius:7px!important;font-size:11px!important}
 .theme-btn{border:1px solid var(--line);background:var(--surface2);border-radius:8px;width:34px;height:30px;font-size:15px}
-/* Нейтральность: скрываем украинский флаг из подписи Leaflet (добавлен в Leaflet ≥1.8) */
-.leaflet-attribution-flag{display:none!important}
+/* Нейтральность: убираем ссылку и флаг Leaflet из подписи карты, оставляем только © источников данных (OSM/CARTO) */
+.leaflet-control-attribution a,
+.leaflet-control-attribution span[aria-hidden="true"]{display:none!important}
 .donate-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;
   flex:0 0 auto;height:30px;padding:0 12px;border-radius:8px;font-size:12.5px;font-weight:600;
   letter-spacing:.2px;line-height:1;white-space:nowrap;color:var(--gold);
