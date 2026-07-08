@@ -36,4 +36,16 @@ if [ "$bad" = "1" ]; then
   echo "pre-commit: fix the marker(s) above and re-stage. Commit aborted." >&2
   exit 1
 fi
+
+# ---- neutral-OSINT guard: вычистить пропаганду / укр-вербатим / офф-топик из strikes ----
+# Ловит ЛЮБОЙ коммит (newswatch, ручной, внешняя модель), т.к. core.hooksPath=.githooks.
+# Санитайзер идемпотентен и авто-перезакладывает очищенный файл — коммит не блокируется,
+# но мусор физически не попадает в data/strikes.json (и на сайт/в Telegram).
+if echo "$staged" | grep -q '^data/strikes\.json$' && [ -f agents/sanitize-strikes.py ] && command -v python3 >/dev/null 2>&1; then
+  python3 agents/sanitize-strikes.py data/strikes.json >&2 || true
+  if ! git diff --quiet -- data/strikes.json 2>/dev/null; then
+    git add data/strikes.json
+    echo "pre-commit: sanitize-strikes очистил strikes.json и перезаложил его в коммит." >&2
+  fi
+fi
 exit 0
