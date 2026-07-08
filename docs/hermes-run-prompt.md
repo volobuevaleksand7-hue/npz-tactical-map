@@ -25,6 +25,10 @@
    Эти правки идут отдельными строками в том же дне (частично это П7, но для достижимости делаем сразу).
 4. **Валидируй JSON-LD** через `python3 -c "import json; ..."` перед коммитом — три-четыре блока должны парситься.
 
+## Обложки — ТОЛЬКО через Codex
+
+Обложка сводки (город удара + подпись, едина для сайта `/news` и Telegram) генерируется **только Codex**: `python3 hermes/scripts/build-covers.py` (внутри `codex exec image_gen`, img2img по реальному фото события). НЕ рисовать обложку самому и НЕ звать другую модель. PIL-фолбэк `agents/gen_cover_today.py` — только аварийно, когда у Codex кончились image-кредиты: пометить GENFAIL, сказать оператору пополнить кредиты, generic-обложку молча не отгружать. Оператор дал стоячее разрешение вызывать Codex для обложек без переспроса.
+
 ## Доставка и деплой
 
 - Живой репо — **анонимный** `volobuevaleksand7-hue/npz-tactical-map`. Push идёт с VPS (deploy-key `github-npznew`). Перед push: `git pull --rebase --autostash`. Один коммит = одна страница. Не трогать защищённые pre-commit хуком: `index.html / styles.css / app.js / radar.html / version.json / CHANGELOG.md`.
