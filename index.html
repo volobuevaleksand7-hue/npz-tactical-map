@@ -96,13 +96,13 @@
         <button data-view="russia" class="tab-item active" role="tab" aria-selected="true"><span class="tab-ico">🗺</span><span class="tab-lbl">РОССИЯ</span></button>
         <button data-view="crimea" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">⚠</span><span class="tab-lbl">КРЫМ</span></button>
         <button data-view="azs" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">⛽</span><span class="tab-lbl">АЗС</span></button>
-        <a href="/radar" class="tab-item tab-link" role="tab" aria-selected="false"><span class="tab-ico">📡</span><span class="tab-lbl">РАДАР</span></a>
-        <a href="/news" class="tab-item tab-link" role="tab" aria-selected="false"><span class="tab-ico">📰</span><span class="tab-lbl">НОВОСТИ</span></a>
+        <a href="/radar" class="tab-item tab-link"><span class="tab-ico">📡</span><span class="tab-lbl">РАДАР</span></a>
+        <a href="/news" class="tab-item tab-link"><span class="tab-ico">📰</span><span class="tab-lbl">НОВОСТИ</span></a>
         <button data-view="history" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">🕑</span><span class="tab-lbl">ИСТОРИЯ</span></button>
         <button data-view="forecast" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">📈</span><span class="tab-lbl">ПРОГНОЗ</span></button>
         <button data-view="economy" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">💰</span><span class="tab-lbl">ДОХОДЫ</span></button>
-        <div class="tab-dropdown" role="tab">
-          <a href="/analytics" class="tab-link-inner"><span class="tab-ico">📊</span><span class="tab-lbl">АНАЛИТИКА ▾</span></a>
+        <div class="tab-dropdown">
+          <a href="/analytics" class="tab-link-inner" aria-haspopup="true"><span class="tab-ico">📊</span><span class="tab-lbl">АНАЛИТИКА ▾</span></a>
           <div class="tab-dropdown-menu">
             <a href="/crimea">🗺 Крым</a>
             <a href="/krasnodar">🌴 Краснодар</a>
@@ -120,7 +120,7 @@
       <div class="topctl">
         <div class="sync">
           <span id="lastSync">—</span>
-          <span class="sync-next" id="nextSync">T-00:00</span>
+          <span class="sync-next" id="nextSync" title="Обратный отсчёт до следующего обновления данных">T-00:00</span>
         </div>
         <span class="mode-pill" id="modePill">ОЦЕНКА</span>
         <a href="/support" class="donate-link" title="Поддержать проект" aria-label="Поддержать проект"><span class="donate-ico">🤝</span><span class="donate-lbl">Поддержать нас</span></a>
@@ -128,11 +128,12 @@
       </div>
     </header>
 
-    <!-- UI-SHELL LOCK v1.4.3: do not edit/deploy this block without AGENT_ACTIVITY entry + ALLOW_FRONTEND_RELEASE=1 -->
+    <!-- UI-SHELL LOCK v1.6.0: do not edit/deploy this block without AGENT_ACTIVITY entry + ALLOW_FRONTEND_RELEASE=1 -->
     <!-- OSINT STATUS STRIP + FIRST-SCREEN FRAMING -->
     <div class="status-strip" id="statusStrip">
       <span class="ss-mode">ОЦЕНКА OSINT</span>
-      <a class="ss-version" href="/version.json" title="Версия сайта">v1.4.3</a>
+      <a class="ss-version" id="ssVersion" href="/version.json" title="Версия сайта">v…</a>
+      <span class="ss-fallback hidden" id="ssFallback" title="Часть данных отдана из резервной копии">⚠ резервная копия</span>
       <h1 class="ss-title">Нет бензина в России — карта НПЗ и дефицита топлива</h1>
       <span class="ss-txt">автообновление <span class="ss-num">4×/сутки</span> · <span class="ss-num">9</span> наборов данных</span>
       <nav class="ss-nav" aria-label="Ссылки карты">
@@ -142,6 +143,27 @@
       </nav>
     </div>
 
+    <!-- Telegram alert bot promo (closeable, remembered in localStorage) -->
+    <div class="tg-alert-banner" id="tgAlertBanner" hidden>
+      <a class="tgb-link" href="https://t.me/BPLAlert_bot" target="_blank" rel="noopener">
+        <span class="tgb-ico">🚨</span>
+        <span class="tgb-txt"><b>Тревоги БПЛА в Telegram</b> — оповещения об опасности по вашему региону, интервал 10 мин…24 ч</span>
+        <span class="tgb-cta">Подписаться →</span>
+      </a>
+      <button class="tgb-close" id="tgAlertClose" type="button" aria-label="Закрыть">✕</button>
+    </div>
+    <script>
+      (function () {
+        var b = document.getElementById('tgAlertBanner');
+        if (!b) return;
+        if (!localStorage.getItem('tgAlertClosed')) b.hidden = false;
+        document.getElementById('tgAlertClose').addEventListener('click', function () {
+          b.hidden = true;
+          try { localStorage.setItem('tgAlertClosed', '1'); } catch (e) {}
+        });
+      })();
+    </script>
+
     <!-- ===== VIEW: RUSSIA ===== -->
     <section class="view active" id="view-russia">
       <div id="map" class="map"></div>
@@ -149,22 +171,22 @@
       <div class="col col-left">
         <aside class="card" id="panelLeft">
           <div class="card-h">НАЦИОНАЛЬНЫЙ БАЛАНС</div>
-          <div class="card-b" id="balanceBody"></div>
+          <div class="card-b" id="balanceBody"><div class="skel" style="height:52px"></div><div class="skel"></div><div class="skel short"></div><div class="skel"></div></div>
         </aside>
         <aside class="card feed-card" id="panelFeed">
           <div class="card-h">📰 ЛЕНТА УДАРОВ <span class="count" id="feedCount"></span></div>
-          <div class="feed" id="feedList"></div>
+          <div class="feed" id="feedList"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
         </aside>
         <aside class="card feed-card" id="panelVoices">
           <div class="card-h">🗣 ГОЛОСА ЛЮДЕЙ <span class="count" id="voicesCount"></span></div>
-          <div class="voices" id="voicesList"></div>
+          <div class="voices" id="voicesList"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
         </aside>
       </div>
 
       <aside class="card card-right" id="panelRight">
         <div class="card-h">ОБЪЕКТЫ · НПЗ <span class="count" id="npzCount"></span></div>
         <div class="legend" id="legend"></div>
-        <div class="npz-list" id="npzList"></div>
+        <div class="npz-list" id="npzList"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
       </aside>
 
       <div class="map-ctl">
@@ -178,13 +200,13 @@
           <button data-layer="roads" class="active">🛣 Дороги</button>
           <button data-layer="regions" class="active">Регионы</button>
           <button data-layer="strikes" class="active">💥 Удары</button>
-          <button data-layer="azs">⛽ АЗС</button>
+          <button data-layer="azs" title="Слой сети АЗС на карте (не путать со вкладкой «АЗС»)">⛽ Сеть АЗС</button>
           <button data-layer="grid">⚡ Свет</button>
           <button data-layer="prices">💰 Цены</button>
         </div>
       </div>
 
-      <!-- UI-SHELL LOCK v1.4.3: compact strikebar, do not expand without explicit UI-release -->
+      <!-- UI-SHELL LOCK v1.6.0: compact strikebar, do not expand without explicit UI-release -->
       <!-- DAY TIMELINE for strikes layer -->
       <div class="strikebar" id="strikeBar">
         <span class="sb-h">💥 Удары</span>
@@ -308,7 +330,7 @@
     <!-- TICKER -->
     <footer class="ticker">
       <span class="ticker-tag">СВОДКА</span>
-      <div class="ticker-track" id="ticker"></div>
+      <div class="ticker-track" id="ticker" aria-live="polite" aria-atomic="true"></div>
     </footer>
   </div>
 

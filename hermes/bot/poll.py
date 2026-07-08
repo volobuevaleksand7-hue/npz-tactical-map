@@ -19,6 +19,8 @@ SUBS_PATH = os.path.join(BOT_DIR, "subscribers.json")
 STATE_PATH = os.path.join(BOT_DIR, "poll-state.json")
 API = "https://api.telegram.org/bot" + TOKEN
 SITE = "https://npz-tactical-map.vercel.app"
+# Чат владельца для уведомлений о новых подписках (пусто = не слать; задаётся для @BPLAlert_bot)
+OWNER_CHAT = os.environ.get("NPZ_OWNER_CHAT", "").strip()
 
 WELCOME = ("✅ Вы подписаны на сводку «Топливный фронт РФ».\n\n"
            "После каждого обновления карты пришлю кратко: новые удары по НПЗ, ситуацию "
@@ -29,21 +31,21 @@ BYE = "Вы отписались. Вернуться — /start."
 
 # ─── Inline-кнопки таймера угроз ───
 TIMER_OPTIONS = [
-    (10, "10м"), (30, "30м"), (60, "1ч"),
-    (180, "3ч"), (360, "6ч"), (720, "12ч"),
+    (10, "10м"), (30, "30м"), (60, "1ч"), (120, "2ч"),
+    (360, "6ч"), (720, "12ч"), (1440, "24ч"),
 ]
 
 def _timer_keyboard(current_interval=60):
-    """Inline-кнопки выбора интервала угроз."""
-    row = []
+    """Inline-кнопки выбора интервала угроз (по 4 в ряд, чтобы влезало на мобиле)."""
+    buttons = []
     for minutes, label in TIMER_OPTIONS:
         prefix = "✅ " if minutes == current_interval else ""
-        row.append({"text": f"{prefix}{label}", "callback_data": f"timer|{minutes}"})
-    # Добавить кнопку «только изменения»
+        buttons.append({"text": f"{prefix}{label}", "callback_data": f"timer|{minutes}"})
     changes_active = current_interval == 0
     prefix = "✅ " if changes_active else ""
-    row.append({"text": f"{prefix}🔔 По изменениям", "callback_data": "timer|changes"})
-    return {"inline_keyboard": [row]}
+    buttons.append({"text": f"{prefix}🔔 По изменениям", "callback_data": "timer|changes"})
+    rows = [buttons[i:i + 4] for i in range(0, len(buttons), 4)]
+    return {"inline_keyboard": rows}
 
 def _interval_text(interval_min):
     """Человекочитаемый интервал."""
@@ -308,6 +310,17 @@ def main():
                          "name": chat.get("first_name") or chat.get("username") or ""})
             subs[cid] = info
             if new: added += 1
+            # уведомление владельцу о новой подписке (только если задан NPZ_OWNER_CHAT)
+            if new and OWNER_CHAT:
+                uname = chat.get("username")
+                who = chat.get("first_name") or uname or cid
+                uns = f"@{uname}" if uname else "—"
+                msk = (datetime.datetime.now(datetime.timezone.utc)
+                       + datetime.timedelta(hours=3)).strftime("%d.%m %H:%M МСК")
+                api("sendMessage", chat_id=OWNER_CHAT,
+                    text=(f"🆕 Новая подписка\n{who} ({uns})\nID: {cid}\n"
+                          f"Источник: {info.get('src') or 'бот'}\n{msk}"),
+                    disable_web_page_preview="true")
             api("sendMessage", chat_id=cid, text=WELCOME, disable_web_page_preview="true")
             # мгновенная стартовая сводка новому подписчику (свежие данные, без ожидания прогона)
             if new and _bc is not None:
