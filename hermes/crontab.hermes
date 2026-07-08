@@ -32,6 +32,7 @@
 #   fuel-voices        data/fuel-voices.json        каждые 8ч         fuel-voices        ← ОТСТАЁТ, завести
 #   newswatch→strikes  data/strikes.json            ежечасно (день)   strikes  ← НЕ постит в канал сам (редполитика v2, 2026-07-07). Пишет strikes.json, ЗАТЕМ обязан вызвать `python3 hermes/bot/strike_pipeline.py` (БЕЗ --dry-run) — единственный публикатор молнии (TIER1 авто-канал / TIER2 владельцу с кнопками).
 #   strike-confirm     data/strike-confirm.json     каждые 6ч         —  (python3 agents/strike-confirm.py)
+#   strike-candidates  data/strike-candidates.json  ежечасно :20      —  (python3 agents/strike-candidates.py) вариант B: лента radar-map→кандидаты в удары. НЕ трогает strikes.json, НЕ постит; пишет кандидатов confidence:rumor для ручной/Hermes-верификации. УЖЕ в OS-cron VPS (строка K).
 #   forecast           data/forecast.json           вс 03:45          forecast (Opus-класс)
 #   economy            data/economy.json            ср 03:45          economy  (Opus-класс)
 #   news /news         news.html + archive          после волны       —  (bash hermes/publish-vps.sh; НЕ постит в канал — только регенерирует страницы + poll + radar-alerts)
