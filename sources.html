@@ -72,6 +72,11 @@
       text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:6px 14px;
       transition:all .2s}
     .back-btn:hover{background:var(--teal);color:#fff}
+    .src-nav{display:flex;gap:6px;margin-left:18px;flex-wrap:wrap}
+    .src-nav a{font-family:var(--mono);font-size:11px;color:var(--ink-dim);text-decoration:none;border:1px solid var(--line);background:var(--surface2);border-radius:7px;padding:5px 10px;transition:.15s}
+    .src-nav a:hover{color:var(--ink);border-color:var(--teal)}
+    .src-nav a.active{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+    @media(max-width:680px){.src-nav{display:none}}
 
     .page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:32px 20px 60px}
     .page-h{font-size:28px;font-weight:800;letter-spacing:.5px;margin-bottom:6px}
@@ -142,8 +147,14 @@
         <div class="brand-sub">NPZ TACTICAL MAP</div>
       </div>
     </a>
+    <nav class="src-nav">
+      <a href="/">🗺 Карта</a>
+      <a href="/news">📰 Сводки</a>
+      <a href="/radar">📡 Радар</a>
+      <a href="/analytics">📊 Аналитика</a>
+      <a href="/sources" class="active">📚 Источники</a>
+    </nav>
     <div class="topctl">
-      <a href="/" class="back-btn">← Карта</a>
       <button class="theme-btn" id="themeToggle" title="Тема">☀️</button>
     </div>
   </header>
