@@ -93,6 +93,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .mode-pill{background:var(--amber);color:#241500;font-family:var(--mono);font-weight:800;font-size:9px;letter-spacing:1px;padding:4px 8px;border-radius:6px}
 .topctl .tg-subscribe{padding:5px 10px!important;border-radius:7px!important;font-size:11px!important}
 .theme-btn{border:1px solid var(--line);background:var(--surface2);border-radius:8px;width:34px;height:30px;font-size:15px}
+.donate-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  flex:0 0 auto;border:1px solid var(--line);background:var(--surface2);border-radius:8px;
+  width:34px;height:30px;min-width:34px;font-size:15px;line-height:1;
+  transition:border-color .2s,box-shadow .2s}
+.donate-link:hover{border-color:var(--gold);box-shadow:0 0 0 2px rgba(202,162,74,.18)}
 
 /* VIEWS */
 .view{flex:1;position:relative;display:none;overflow:hidden}
