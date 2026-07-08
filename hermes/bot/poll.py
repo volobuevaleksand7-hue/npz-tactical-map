@@ -40,6 +40,16 @@ def _should_report(count):
     return count % 50 == 0
 
 
+def _fmt_sub(chat, cid):
+    """(имя, @username|—, время МСК) для строки отчёта."""
+    un = chat.get("username")
+    who = chat.get("first_name") or un or cid
+    uns = f"@{un}" if un else "—"
+    msk = (datetime.datetime.now(datetime.timezone.utc)
+           + datetime.timedelta(hours=3)).strftime("%d.%m %H:%M МСК")
+    return who, uns, msk
+
+
 def _report_send(text):
     """Отправить отчёт через бота-отправителя (REPORT_TOKEN_FILE) в REPORT_CHAT."""
     if not (REPORT_CHAT and REPORT_TOKEN_FILE and os.path.exists(REPORT_TOKEN_FILE)):
@@ -347,11 +357,7 @@ def main():
                 active_now = sum(1 for v in subs.values() if v.get("status") == "active")
                 if active_now > st.get("last_report_count", 0) and _should_report(active_now):
                     st["last_report_count"] = active_now
-                    r_un = chat.get("username")
-                    r_who = chat.get("first_name") or r_un or cid
-                    r_uns = f"@{r_un}" if r_un else "—"
-                    r_msk = (datetime.datetime.now(datetime.timezone.utc)
-                             + datetime.timedelta(hours=3)).strftime("%d.%m %H:%M МСК")
+                    r_who, r_uns, r_msk = _fmt_sub(chat, cid)
                     _report_send(f"📊 @BPLAlert_bot: {active_now} подписчик(ов)\n"
                                  f"Новый: {r_who} ({r_uns}) · ID {cid}\n{r_msk}")
             # уведомление владельцу о новой подписке (только если задан NPZ_OWNER_CHAT)
@@ -374,8 +380,15 @@ def main():
                 except Exception as e:
                     print("welcome-digest err", e)
         elif text.startswith("/stop"):
-            if subs.get(cid, {}).get("status") == "active":
+            was_active = subs.get(cid, {}).get("status") == "active"
+            if was_active:
                 subs[cid]["status"] = "stopped"; removed += 1
+                # отчёт об отписке — о каждой (без порога)
+                if REPORT_CHAT:
+                    active_now = sum(1 for v in subs.values() if v.get("status") == "active")
+                    s_who, s_uns, s_msk = _fmt_sub(chat, cid)
+                    _report_send(f"👋 Отписка @BPLAlert_bot: осталось {active_now}\n"
+                                 f"Ушёл: {s_who} ({s_uns}) · ID {cid}\n{s_msk}")
             api("sendMessage", chat_id=cid, text=BYE)
         elif text.startswith("/status"):
             active = subs.get(cid, {}).get("status") == "active"
