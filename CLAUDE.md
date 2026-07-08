@@ -1,5 +1,17 @@
 # npz-tactical-map — project memory
 
+## 📍 КАНОН РАСПОЛОЖЕНИЯ (деанон-миграция 2026-07-07 — ЧИТАЙ ПЕРВЫМ)
+
+Видишь где-то старый путь/аккаунт — он УСТАРЕЛ, верь этому блоку.
+
+- **Локальный клон (Mac):** `~/Documents/npz-tactical-map` — единственный. НЕ `Alarm NPZ/`, НЕ `Projects/`.
+- **Репозиторий:** `github.com/volobuevaleksand7-hue/npz-tactical-map` (public). Старый `sergeyramas/npz-tactical-map` теперь **PRIVATE-бэкап — им НЕ пользоваться**.
+- **GitHub-аккаунт для push:** анонимный `volobuevaleksand7-hue` (`gh auth switch --user volobuevaleksand7-hue` если не активен). Коммит-identity анонимная — **НИКОГДА не коммить под реальным именем/почтой**.
+- **Клон на VPS:** `/root/npz-tactical-map` на `hermes-vps`, push через ssh-алиас `github-npznew` (ключ `~/.ssh/npz_deploy_new`).
+- **Данные сайта (RAW):** `raw.githubusercontent.com/volobuevaleksand7-hue/npz-tactical-map/main/`.
+- **Деплой:** push в `main` (кроме `data/**`) → GitHub Action `deploy.yml` → Vercel (проект на аккаунте `sergeyramas`, деплой по токен-секрету на новом репо).
+- **Кто пишет данные:** ТОЛЬКО Hermes VPS-крон (`npz-agent-hermes`). Облачные RemoteTrigger-рутины ВЫКЛючены и всё ещё указывают на СТАРЫЙ репо — **не включать без перенацеливания на новый репо + новый PAT**.
+
 ## Identity
 Тактическая дашборд-карта состояния НПЗ РФ (удары/мощности/баланс/логистика/дефицит). Статический сайт на Vercel, данные в `data/fuel-state.json`, обновляются cron-агентами на VPS.
 
