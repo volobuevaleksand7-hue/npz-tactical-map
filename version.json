@@ -1,7 +1,7 @@
 {
-  "version": "1.4.16",
-  "releasedAt": "2026-07-07",
-  "codename": "Yandex Webmaster meta (anon)",
-  "summary": "Верификация Яндекс.Вебмастера переведена на мета-тег анонимного аккаунта (код 9e3bfa52eddd5836); файловый метод не работает на Vercel из-за cleanUrls. Старая верификация убрана.",
+  "version": "1.5.0",
+  "releasedAt": "2026-07-08",
+  "codename": "Radar revamp (radar-map parity)",
+  "summary": "Радар приближен к radar-map.ru малой кровью: SVG-модельки угроз вместо треугольников (Герань/ракета/КАБ/FPV/авиация/ПВО/взрыв), лента Telegram-сообщений справа (recent_messages из апстрима), светлая/тёмная тема с переключателем и voyager-тайлами (дефолт светлая), затухание неподтверждённых угроз (bplaDim → opacity .45). Прокси /api/radar-state прокидывает recent_messages, sources, direction_arrows, bpla_icon_fade_sec, last_event_ts/source_text городов.",
   "site": "https://npz-tactical-map.vercel.app"
 }

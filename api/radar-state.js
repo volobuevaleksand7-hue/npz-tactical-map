@@ -41,7 +41,9 @@ module.exports = async function handler(req, res) {
         aviation: city.aviation || false,
         pvo: city.pvo || false,
         lat: city.lat || 0,
-        lon: city.lon || 0
+        lon: city.lon || 0,
+        last_event_ts: city.last_event_ts || 0,
+        source_text: city.source_text || ""
       };
     }
 
@@ -50,6 +52,10 @@ module.exports = async function handler(req, res) {
       cities: citiesDict,
       regions: data.regions || {},
       poll_interval_sec: data.poll_interval_sec || 60,
+      recent_messages: Array.isArray(data.recent_messages) ? data.recent_messages.slice(0, 100) : [],
+      sources: data.sources || [],
+      direction_arrows: data.direction_arrows || [],
+      bpla_icon_fade_sec: data.bpla_icon_fade_sec || 10800,
       timestamp: Date.now() / 1000,
       fetched_at: new Date().toISOString()
     };
