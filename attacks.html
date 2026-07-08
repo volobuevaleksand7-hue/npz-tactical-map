@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Хроника ударов по НПЗ 2026: атаки БПЛА, пострадавшие заводы</title>
-  <meta name="description" content="Полная хроника ударов БПЛА по нефтеперерабатывающим заводам России 2026: даты атак, повреждения, текущий статус НПЗ. Сколько НПЗ пострадало от БПЛА. Данные OSINT.">
-  <meta name="keywords" content="атака на нпз, бпла нпз, удары по нпз, нпз пострадавшие от бпла, сколько нпз пострадало от бпла, удары по нефтеперерабатывающим заводам">
+  <meta name="description" content="Хроника ударов БПЛА по НПЗ России 2026: даты атак, повреждения, статус заводов. Атака на НПЗ сегодня — живой статус угроз на карте-радаре. Данные OSINT.">
+  <meta name="keywords" content="атака на нпз, атака на нпз сегодня, бпла нпз, удары по нпз, нпз пострадавшие от бпла, сколько нпз пострадало от бпла, удары по нефтеперерабатывающим заводам">
   <meta name="robots" content="index, follow">
   <meta name="language" content="Russian">
   <link rel="canonical" href="https://npz-tactical-map.vercel.app/attacks">
@@ -67,6 +67,14 @@
           "@type": "Answer",
           "text": "Сроки восстановления неизвестны для большинства НПЗ. Московский НПЗ — не раньше 2027 года (Reuters). Туапсинский — ориентировочно ноябрь 2026 (Роснефть). Для остальных заводов сроки не объявлены. По данным FGE (Reuters), полное восстановление поставок не ожидается до 2027 года."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Была ли атака на НПЗ сегодня?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Живой статус угроз БПЛА по регионам и самые свежие сообщения об ударах отслеживаются на карте-радаре и в ежедневных сводках — они обновляются по мере поступления данных из открытых источников. Хроника на этой странице содержит архив подтверждённых ударов; чтобы узнать обстановку на сегодня, откройте радар."
+        }
       }
     ]
   }
@@ -114,6 +122,12 @@
     .status-card .lbl{font-size:11px;color:var(--ink-dim);margin-top:4px}
     .section-h{font-size:20px;font-weight:800;margin:32px 0 14px;display:flex;align-items:center;gap:8px}
     .section-h .ico{font-size:22px}
+    .map-cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:18px 0 4px;padding:16px 22px;background:var(--red);color:#fff;font-weight:800;font-size:16px;border-radius:12px;text-decoration:none;box-shadow:0 6px 20px rgba(210,58,46,.3);transition:.15s}
+    .map-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(210,58,46,.45)}
+    .map-cta .mc-ico{font-size:20px}
+    .map-cta.inline{margin:20px 0;background:var(--surface);color:var(--ink);border:1.5px solid var(--red);box-shadow:none}
+    .map-cta.inline:hover{background:rgba(210,58,46,.08);transform:translateY(-1px)}
+    .live-lead{font-size:14px;line-height:1.7;color:var(--ink);margin:4px 0 0}
     .refinery-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:16px 0}
     .refinery-table th{background:var(--surface2);text-align:left;padding:10px;font-size:11px;letter-spacing:.5px;border-bottom:2px solid var(--line)}
     .refinery-table td{padding:8px 10px;border-bottom:1px solid var(--line2);vertical-align:top}
@@ -177,6 +191,8 @@
             <div class="nav-drop-group">Справочники</div>
             <a href="/attacks" aria-current="page">💥 Хроника ударов</a>
             <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <div class="nav-drop-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
           </div>
         </div>
         <a href="/sources">📚 Источники</a>
@@ -210,6 +226,14 @@
           </div>
         </div>
       </div>
+
+      <!-- РАДАР CTA + FRESHNESS -->
+      <a class="map-cta" href="/radar"><span class="mc-ico">📡</span> Смотреть угрозы БПЛА по регионам сейчас — радар →</a>
+
+      <!-- АТАКИ СЕГОДНЯ -->
+      <h2 class="section-h"><span class="ico">📡</span> Атаки на НПЗ сегодня: где смотреть живую обстановку</h2>
+      <p class="live-lead">Свежие удары по НПЗ и текущий статус угроз БПЛА по регионам отслеживаются на <a href="/radar" style="color:var(--teal);font-weight:700">карте-радаре</a> и в <a href="/news" style="color:var(--teal);font-weight:700">ежедневных сводках</a> — они обновляются по мере поступления данных. Хроника ниже — это архив подтверждённых ударов; чтобы узнать, была ли атака на НПЗ сегодня, открывайте радар: там угрозы по регионам в реальном времени.</p>
+      <a class="map-cta inline" href="/radar"><span class="mc-ico">🗺️</span> Открыть радар угроз БПЛА →</a>
 
       <!-- ОБЪЯСНЕНИЕ -->
       <h2 class="section-h"><span class="ico">🔍</span> Масштаб атак</h2>
@@ -335,6 +359,10 @@
         <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Когда НПЗ возобновят работу?</div>
           <div class="faq-a">Сроки восстановления неизвестны для большинства НПЗ. Московский НПЗ — не раньше 2027 года (Reuters). Туапсинский — ориентировочно ноябрь 2026 (Роснефть). По данным FGE (Reuters), полное восстановление поставок не ожидается до 2027 года.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Была ли атака на НПЗ сегодня?</div>
+          <div class="faq-a">Живой статус угроз БПЛА по регионам и самые свежие сообщения об ударах смотрите на <a href="/radar">карте-радаре</a> и в <a href="/news">ежедневных сводках</a> — они обновляются по мере поступления данных. Хроника ниже — архив подтверждённых ударов; чтобы узнать обстановку на сегодня, откройте радар.</div>
         </div>
       </div>
 
