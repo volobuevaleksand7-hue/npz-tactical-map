@@ -341,37 +341,95 @@ async def on_region_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     )
 
 
+TIMER_OPTIONS = [
+    (10, "⏱ 10м"), (30, "⏱ 30м"), (60, "⏱ 1ч"),
+    (180, "⏱ 3ч"), (360, "⏱ 6ч"), (720, "⏱ 12ч"),
+]
+
+def build_timer_keyboard(current_interval=60):
+    """Inline-кнопки выбора интервала."""
+    row = []
+    for minutes, label in TIMER_OPTIONS:
+        prefix = "✅ " if minutes == current_interval else ""
+        row.append(InlineKeyboardButton(f"{prefix}{label}", callback_data=f"timer:{minutes}"))
+    changes_prefix = "✅ " if current_interval == 0 else ""
+    row.append(InlineKeyboardButton(f"{changes_prefix}🔔 По изменениям", callback_data="timer:changes"))
+    return InlineKeyboardMarkup([row])
+
+
+def interval_text(interval_min):
+    """Человекочитаемый интервал."""
+    if interval_min == 0:
+        return "только при изменениях"
+    if interval_min < 60:
+        return f"каждые {interval_min} мин"
+    hours = interval_min // 60
+    return f"каждые {hours} ч" if hours > 1 else "каждый час"
+
+
+async def on_timer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обработка нажатий на кнопки таймера."""
+    query = update.callback_query
+    await query.answer()
+    _, chat_id = user_display(update)
+    data = query.data  # "timer:30" or "timer:changes"
+
+    raw = data.split(":", 1)[1]
+    subs = load_subs()
+    sub = ensure_sub(chat_id, "")
+
+    if raw == "changes":
+        sub["alerts"]["interval_min"] = 0
+        new_interval = 0
+    else:
+        try:
+            new_interval = int(raw)
+        except ValueError:
+            new_interval = 60
+        sub["alerts"]["interval_min"] = new_interval
+
+    save_subs(subs)
+
+    # Обновить клавиатуру
+    kb = build_timer_keyboard(new_interval)
+    await query.edit_message_reply_markup(reply_markup=kb)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text=f"⏱ Интервал: {interval_text(new_interval)}",
+    )
+
+
 async def cmd_interval(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
     name, chat_id = user_display(update)
 
-    if not args:
-        subs = load_subs()
-        sub = subs["subscribers"].get(str(chat_id), {})
-        interval = sub.get("alerts", {}).get("interval_min", 60)
-        await update.message.reply_text(
-            f"Интервал напоминаний: каждые {interval} мин.\n"
-            f"Изменить: /interval 30"
-        )
-        return
-
-    try:
-        val = int(args[0])
-        if val < 5:
-            await update.message.reply_text("Минимальный интервал — 5 минут.")
-            return
-        if val > 1440:
-            await update.message.reply_text("Максимальный интервал — 1440 мин (24 часа).")
-            return
-    except ValueError:
-        await update.message.reply_text("Пример: /interval 30")
-        return
-
     subs = load_subs()
     sub = ensure_sub(chat_id, name)
-    sub["alerts"]["interval_min"] = val
-    save_subs(subs)
-    await update.message.reply_text(f"✅ Интервал: каждые {val} мин.")
+
+    # Если передан аргумент — изменить интервал (обратная совместимость)
+    if args:
+        try:
+            val = int(args[0])
+            if val < 5:
+                await update.message.reply_text("Минимальный интервал — 5 минут.")
+                return
+            if val > 1440:
+                await update.message.reply_text("Максимальный интервал — 1440 мин (24 часа).")
+                return
+        except ValueError:
+            await update.message.reply_text("Пример: /interval 30")
+            return
+        sub["alerts"]["interval_min"] = val
+        save_subs(subs)
+
+    interval = sub.get("alerts", {}).get("interval_min", 60)
+    kb = build_timer_keyboard(interval)
+    await update.message.reply_text(
+        f"⏱ Интервал напоминаний: {interval_text(interval)}.\n"
+        f"Нажми кнопку чтобы изменить:",
+        reply_markup=kb,
+    )
 
 
 async def cmd_pause(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -450,6 +508,7 @@ def main():
     app.add_handler(CommandHandler("unsubscribe", cmd_unsubscribe))
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(CallbackQueryHandler(on_region_callback, pattern="^reg:"))
+    app.add_handler(CallbackQueryHandler(on_timer_callback, pattern="^timer:"))
 
     logger.info("Starting @NpzFuel_Bot polling...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)

@@ -27,6 +27,33 @@ WELCOME = ("✅ Вы подписаны на сводку «Топливный �
            "БПЛА-оповещения: /alerts\nОтписаться: /stop")
 BYE = "Вы отписались. Вернуться — /start."
 
+# ─── Inline-кнопки таймера угроз ───
+TIMER_OPTIONS = [
+    (10, "10м"), (30, "30м"), (60, "1ч"),
+    (180, "3ч"), (360, "6ч"), (720, "12ч"),
+]
+
+def _timer_keyboard(current_interval=60):
+    """Inline-кнопки выбора интервала угроз."""
+    row = []
+    for minutes, label in TIMER_OPTIONS:
+        prefix = "✅ " if minutes == current_interval else ""
+        row.append({"text": f"{prefix}{label}", "callback_data": f"timer|{minutes}"})
+    # Добавить кнопку «только изменения»
+    changes_active = current_interval == 0
+    prefix = "✅ " if changes_active else ""
+    row.append({"text": f"{prefix}🔔 По изменениям", "callback_data": "timer|changes"})
+    return {"inline_keyboard": [row]}
+
+def _interval_text(interval_min):
+    """Человекочитаемый интервал."""
+    if interval_min == 0:
+        return "только при изменениях"
+    if interval_min < 60:
+        return f"каждые {interval_min} мин"
+    hours = interval_min // 60
+    return f"каждые {hours} ч" if hours > 1 else "каждый час"
+
 # ─── /radar command ───
 REPO = os.environ.get("NPZ_REPO", os.path.expanduser("~/npz-tactical-map"))
 RADAR_CACHE = os.path.join(REPO, "data", "radar-cache.json")
@@ -226,9 +253,40 @@ def main():
     for u in resp.get("result", []):
         offset = u["update_id"] + 1
 
-        # ── inline-кнопки (МОЛНИЯ TIER 2: Опубликовать/Отклонить) ──
+        # ── inline-кнопки ──
         cbq = u.get("callback_query")
         if cbq:
+            data = cbq.get("data") or ""
+            cb_chat = cbq.get("message") or {}
+            cb_cid = str((cb_chat.get("chat") or {}).get("id") or "")
+
+            # Таймер угроз: timer|10, timer|30, timer|60, etc.
+            if data.startswith("timer|"):
+                raw = data.split("|", 1)[1]
+                info = subs.setdefault(cb_cid, {"status": "active", "since": now_utc(), "name": ""})
+                _, _, update_alerts = _alert_helpers()
+                if raw == "changes":
+                    update_alerts(info, enabled=True, interval_min=0)
+                    new_interval = 0
+                else:
+                    try:
+                        new_interval = int(raw)
+                    except ValueError:
+                        new_interval = 60
+                    update_alerts(info, enabled=True, interval_min=new_interval)
+                # Ответ на callback (уведомление внизу экрана)
+                api("answerCallbackQuery", callback_query_id=cbq["id"],
+                    text=f"⏱ Интервал: {_interval_text(new_interval)}")
+                # Обновить сообщение с новой клавиатурой
+                interval_now = int(info.get("alerts", {}).get("interval_min", 60))
+                kb = _timer_keyboard(interval_now)
+                api("editMessageReplyMarkup",
+                    chat_id=cb_cid,
+                    message_id=cb_chat.get("message_id"),
+                    reply_markup=json.dumps(kb))
+                continue
+
+            # Опубликовать/Отклонить (из radar_publish)
             try:
                 sys.path.insert(0, os.path.dirname(__file__))
                 from radar_publish import handle_callback
@@ -276,7 +334,11 @@ def main():
             info = subs.setdefault(cid, {"status": "active", "since": now_utc(), "name": chat.get("first_name") or chat.get("username") or ""})
             _, _, update_alerts = _alert_helpers()
             update_alerts(info, enabled=True)
-            api("sendMessage", chat_id=cid, text=_alerts_help(info))
+            interval = int(info.get("alerts", {}).get("interval_min", 60))
+            kb = _timer_keyboard(interval)
+            help_text = _alerts_help(info)
+            api("sendMessage", chat_id=cid, text=help_text,
+                reply_markup=json.dumps(kb))
         elif text.startswith("/regions"):
             regions, _, _ = _alert_helpers()
             api("sendMessage", chat_id=cid, text="Доступные регионы:\n• " + "\n• ".join(regions) + "\n\nВсе регионы: /region all")
@@ -294,22 +356,25 @@ def main():
             update_alerts(info, enabled=True, regions=[region])
             api("sendMessage", chat_id=cid, text=_alerts_help(info))
         elif text.startswith("/interval"):
-            value = (msg.get("text") or "").strip().split(None, 1)
-            if len(value) < 2:
-                api("sendMessage", chat_id=cid, text="Частота: /interval 30, /interval 60 или /interval changes")
-                continue
-            raw = value[1].strip().lower()
-            if raw in ("changes", "change", "изменения", "только изменения"):
-                interval = 0
-            elif raw in ("30", "60"):
-                interval = int(raw)
-            else:
-                api("sendMessage", chat_id=cid, text="Доступно: /interval 30, /interval 60 или /interval changes")
-                continue
             info = subs.setdefault(cid, {"status": "active", "since": now_utc(), "name": chat.get("first_name") or chat.get("username") or ""})
             _, _, update_alerts = _alert_helpers()
-            update_alerts(info, enabled=True, interval_min=interval)
-            api("sendMessage", chat_id=cid, text=_alerts_help(info))
+            # Поддержка текстового ввода /interval 30 для обратной совместимости
+            value = (msg.get("text") or "").strip().split(None, 1)
+            if len(value) >= 2:
+                raw = value[1].strip().lower()
+                if raw in ("changes", "change", "изменения"):
+                    interval = 0
+                else:
+                    try:
+                        interval = int(raw)
+                    except ValueError:
+                        interval = None
+                if interval is not None:
+                    update_alerts(info, enabled=True, interval_min=interval)
+            current_interval = int(info.get("alerts", {}).get("interval_min", 60))
+            kb = _timer_keyboard(current_interval)
+            api("sendMessage", chat_id=cid, text=_alerts_help(info),
+                reply_markup=json.dumps(kb))
 
     json.dump(subsdoc, open(SUBS_PATH,"w",encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump({"offset": offset}, open(STATE_PATH,"w",encoding="utf-8"))
