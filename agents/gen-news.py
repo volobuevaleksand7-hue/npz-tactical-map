@@ -21,6 +21,7 @@ import json
 import html
 import os
 import hashlib
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -780,9 +781,12 @@ def main():
             gen_date_page(d, archive, prev_date, next_date), encoding="utf-8")
     print(f"[gen-news] ✅ news/<date>.html — {len(dates)} страниц")
 
-    # sitemap
-    SITEMAP_OUT.write_text(gen_sitemap(archive), encoding="utf-8")
-    print(f"[gen-news] ✅ {SITEMAP_OUT.name} ({len(dates) + 3} URL)")
+    # sitemap — единый полный генератор (индекс + ВСЕ лендинги + архив news),
+    # чтобы новостная сборка НЕ затирала посадочные (фикс 2026-07-08).
+    _r = subprocess.run(["python3", str(ROOT / "seo" / "generate-sitemap.py")], capture_output=True, text=True)
+    if _r.returncode != 0:
+        raise RuntimeError("generate-sitemap.py failed:\n" + _r.stderr)
+    print(f"[gen-news] ✅ {SITEMAP_OUT.name} (полный, через seo/generate-sitemap.py)")
     print(f"[gen-news] Готово. Свежая сводка: {rus_date(dates[0]) if dates else '—'}")
 
 

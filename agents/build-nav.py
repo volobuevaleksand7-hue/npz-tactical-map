@@ -141,6 +141,26 @@ def build_index_menu(rows):
     return "".join(lines) + "          "
 
 
+# ---- 2b) «Свежее»-чип на ГЛАВНОЙ (в status-strip → .ss-nav) ----
+FRESH_RE  = re.compile(r'<!-- FRESH:START -->.*?<!-- FRESH:END -->', re.DOTALL)
+SSNAV_RE  = re.compile(r'(<nav class="ss-nav"[^>]*>)')
+
+def newest_page(rows):
+    # «новейшая» = последняя добавленная в реестр live-страница (не объект, не top-nav)
+    cands = [r for r in rows if r.get("status", "live") == "live"
+             and r.get("type") not in HIDE_TYPES and r["url"] not in TOP_URLS]
+    return cands[-1] if cands else None
+
+def build_fresh_chip(rows):
+    r = newest_page(rows)
+    if not r:
+        return "<!-- FRESH:START --><!-- FRESH:END -->"
+    _, lab = label_for(r["url"], r.get("primary_kw"))
+    return ('<!-- FRESH:START --><a class="ss-src ss-fresh" href="%s" '
+            'style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">'
+            '🆕 Новое: %s →</a><!-- FRESH:END -->') % (r["url"], lab)
+
+
 # ---- 3) каталог-хаб /analytics (маркеры) ----
 HUB_RE = re.compile(r'(<!-- ANALYTICS-CARDS:START -->)(.*?)(<!-- ANALYTICS-CARDS:END -->)', re.DOTALL)
 
@@ -187,8 +207,16 @@ def main():
         new, n = INDEX_MENU_RE.subn(lambda m: m.group(1) + build_index_menu(rows) + m.group(3), html, count=1)
         if n == 0:
             print("!! no tab-dropdown-menu in index.html")
-        elif new != html:
-            idx.write_text(new, encoding="utf-8"); changed += 1; print("index.html dropdown updated")
+        # «Свежее»-чип: обновить между маркерами, либо вставить первым в .ss-nav
+        chip = build_fresh_chip(rows)
+        if FRESH_RE.search(new):
+            new = FRESH_RE.sub(chip, new, count=1)
+        elif SSNAV_RE.search(new):
+            new = SSNAV_RE.sub(lambda m: m.group(1) + "\n        " + chip, new, count=1)
+        else:
+            print("!! no .ss-nav in index.html (chip skipped)")
+        if new != html:
+            idx.write_text(new, encoding="utf-8"); changed += 1; print("index.html dropdown + fresh chip updated")
 
     # 3) хаб /analytics — сетка карточек (по маркерам)
     hub = ROOT / "analytics.html"
