@@ -67,7 +67,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=133db8e9">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#d23a2e">
 </head>
@@ -106,27 +106,38 @@
         <div class="tab-dropdown">
           <a href="/analytics" class="tab-link-inner" aria-haspopup="true"><span class="tab-ico">📊</span><span class="tab-lbl">АНАЛИТИКА ▾</span></a>
           <div class="tab-dropdown-menu">
+            <!-- INDEX-MENU:START -->
+            <div class="tdm-group">Регионы</div>
             <a href="/crimea">🗺 Крым</a>
             <a href="/krasnodar">🌴 Краснодар</a>
             <a href="/moskva">🏙 Москва</a>
-            <a href="/raketnaya-opasnost-volgograd">🚀 Ракетная опасность: Волгоград</a>
-            <a href="/raketnaya-opasnost-cheboksary">🚀 Ракетная опасность: Чебоксары</a>
-            <a href="/raketnaya-opasnost-omsk">🚀 Ракетная опасность: Омск</a>
-            <a href="/raketnaya-opasnost-ulyanovsk">🚀 Ракетная опасность: Ульяновск</a>
-            <a href="/raketnaya-opasnost-kazan">🚀 Ракетная опасность: Казань</a>
-            <a href="/raketnaya-opasnost-moskovskaya-oblast">🚀 Ракетная опасность: Московская обл.</a>
-            <a href="/raketnaya-opasnost-penza">🚀 Ракетная опасность: Пенза</a>
-            <a href="/raketnaya-opasnost-samara">🚀 Ракетная опасность: Самара</a>
+            <details class="tdm-sub">
+              <summary>🚀 Ракетная опасность</summary>
+              <a href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
+              <a href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
+              <a href="/raketnaya-opasnost-omsk">📍 Омск</a>
+              <a href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
+              <a href="/raketnaya-opasnost-kazan">📍 Казань</a>
+              <a href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
+              <a href="/raketnaya-opasnost-penza">📍 Пенза</a>
+              <a href="/raketnaya-opasnost-samara">📍 Самара</a>
+            </details>
+            <div class="tdm-group">Топливо</div>
             <a href="/deficit">⛽ Почему нет бензина</a>
             <a href="/talony">🎫 Бензин по талонам</a>
             <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
             <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <div class="tdm-group">Прогноз</div>
             <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="tdm-group">Справочники</div>
             <a href="/attacks">💥 Хроника ударов</a>
             <a href="/refineries">🏭 Список НПЗ · все заводы</a>
             <a href="/help">❓ Как пользоваться</a>
+            <div class="tdm-group">Карты</div>
             <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
             <a href="/karta-bpla">📡 Карта БПЛА</a>
+            <a class="tdm-all" href="/analytics">📊 Все статьи · каталог →</a>
+          <!-- INDEX-MENU:END -->
           </div>
         </div>
       </nav>
@@ -166,19 +177,31 @@
         <a class="ndp-item" href="/sources">📚 Источники</a>
         <a class="ndp-item" href="/help">❓ Как пользоваться</a>
         <div class="ndp-group">Аналитика</div>
-        <a class="ndp-item" href="/crimea">🗺 Крым</a>
-        <a class="ndp-item" href="/krasnodar">🌴 Краснодар</a>
-        <a class="ndp-item" href="/moskva">🏙 Москва</a>
-        <a class="ndp-item" href="/raketnaya-opasnost-volgograd">🚀 Ракетная опасность: Волгоград</a>
-        <a class="ndp-item" href="/deficit">⛽ Почему нет бензина</a>
-        <a class="ndp-item" href="/talony">🎫 Бензин по талонам</a>
-        <a class="ndp-item" href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
-        <a class="ndp-item" href="/gde-dizel">🛢️ Где найти дизель</a>
-        <a class="ndp-item" href="/crisis">🔥 Прогноз кризиса</a>
-        <a class="ndp-item" href="/attacks">💥 Хроника ударов</a>
-        <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
-        <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
-        <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
+        <!-- DRAWER-ANALYTICS:START -->
+      <a class="ndp-item" href="/crimea">🗺 Крым</a>
+      <a class="ndp-item" href="/krasnodar">🌴 Краснодар</a>
+      <a class="ndp-item" href="/moskva">🏙 Москва</a>
+      <details class="ndp-sub">
+        <summary class="ndp-item">🚀 Ракетная опасность</summary>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-omsk">📍 Омск</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-kazan">📍 Казань</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-penza">📍 Пенза</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-samara">📍 Самара</a>
+      </details>
+      <a class="ndp-item" href="/deficit">⛽ Почему нет бензина</a>
+      <a class="ndp-item" href="/talony">🎫 Бензин по талонам</a>
+      <a class="ndp-item" href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+      <a class="ndp-item" href="/gde-dizel">🛢️ Где найти дизель</a>
+      <a class="ndp-item" href="/crisis">🔥 Прогноз кризиса</a>
+      <a class="ndp-item" href="/attacks">💥 Хроника ударов</a>
+      <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
+      <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+      <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
+      <!-- DRAWER-ANALYTICS:END -->
         <div class="ndp-group">Ещё</div>
         <a class="ndp-item" href="/install">📲 Установить приложение</a>
         <a class="ndp-item" href="/support">🤝 Поддержать нас</a>
@@ -393,7 +416,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=e4b7683a"></script>
   <!-- Vercel Web Analytics (нужно включить в Dashboard → Analytics → Enable, иначе /_vercel/insights/* = 404) -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -425,21 +448,18 @@
     });
   </script>
   <script>
-    // Mobile dropdown toggle for АНАЛИТИКА
+    // АНАЛИТИКА: клик закрепляет меню (класс .open) на всех экранах — не залипает
+    // на hover и не схлопывается при движении мыши к пунктам. Закрытие — клик вне / Esc.
     document.querySelectorAll('.tab-dropdown > .tab-link-inner').forEach(a => {
       a.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-          e.preventDefault();
-          const menu = this.nextElementSibling;
-          menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
+        e.preventDefault();  // не уводим на /analytics — каталог доступен пунктом в меню
+        this.closest('.tab-dropdown').classList.toggle('open');
       });
     });
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.tab-dropdown')) {
-        document.querySelectorAll('.tab-dropdown-menu').forEach(m => m.style.display = '');
-      }
-    });
+    const closeDrops = () => document.querySelectorAll('.tab-dropdown.open')
+      .forEach(d => d.classList.remove('open'));
+    document.addEventListener('click', e => { if (!e.target.closest('.tab-dropdown')) closeDrops(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrops(); });
   </script>
   <script>
   if('serviceWorker' in navigator){window.addEventListener('load',function(){

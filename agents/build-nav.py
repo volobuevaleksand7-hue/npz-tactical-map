@@ -13,10 +13,11 @@ LABELS/HUB ниже, если хочешь красиво) → запусти `p
 ⚠️ index.html — фронтенд-ядро: его коммит требует ALLOW_FRONTEND_RELEASE=1.
 
 Тип страницы (`type` в реестре) → группа меню:
-  region → Регионы · explainer → Объяснялки · forecast → Прогноз ·
-  reference → Справочники · tool → Карты · object(/npz/*) → скрыт, только через /refineries.
+  region → Регионы · region + /raketnaya-opasnost-* → свёрнутый блок «Ракетная опасность» ·
+  explainer → Топливо · forecast → Прогноз · reference → Справочники · tool → Карты ·
+  object(/npz/*) → скрыт, только через /refineries.
 """
-import json, re, pathlib
+import json, re, pathlib, hashlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REG  = ROOT / "data" / "seo-topics.jsonl"
@@ -25,13 +26,22 @@ REG  = ROOT / "data" / "seo-topics.jsonl"
 TOP      = [("/", "🗺️", "Карта НПЗ"), ("/news", "📰", "Сводки"), ("/radar", "📡", "Радар БПЛА")]
 TOP_TAIL = [("/sources", "📚", "Источники")]
 
-# Группы выпадашки: (заголовок, [типы из реестра]). Порядок = порядок в меню и на хабе.
+ROCKET_PREFIX = "/raketnaya-opasnost-"
+
+
+def is_rocket(r):
+    return r["url"].startswith(ROCKET_PREFIX)
+
+
+# Группы выпадашки: (заголовок, предикат(row)->bool, collapse). Порядок = порядок в меню и на хабе.
+# collapse=True → группа рисуется свёрнутым <details> (город-лонгтейлы не раздувают меню).
 GROUPS = [
-    ("Регионы",     ["region"]),
-    ("Объяснялки",  ["explainer"]),
-    ("Прогноз",     ["forecast"]),
-    ("Справочники", ["reference"]),
-    ("Карты",       ["tool"]),
+    ("Регионы",            lambda r: r.get("type") == "region" and not is_rocket(r), False),
+    ("Ракетная опасность", is_rocket,                                                True),
+    ("Топливо",            lambda r: r.get("type") == "explainer",                   False),
+    ("Прогноз",            lambda r: r.get("type") == "forecast",                    False),
+    ("Справочники",        lambda r: r.get("type") == "reference",                   False),
+    ("Карты",              lambda r: r.get("type") == "tool",                        False),
 ]
 
 # Подписи пунктов меню: url -> (emoji, label). Нет в списке → берётся primary_kw.
@@ -59,30 +69,39 @@ LABELS = {
     "/help":              ("❓", "Как пользоваться"),
 }
 
-# Карточки хаба /analytics: url -> (заголовок, описание, обложка|None).
-# Обложка None → карточка без картинки (сгенерить кавер через Codex → добавить путь).
+# Карточки хаба /analytics: url -> (заголовок, описание).
+# Обложка НЕ прописывается руками: build_hub берёт /assets/analytics-<slug>-generated.png,
+# если файл существует (cover_for). Сгенерил кавер через Codex в это имя → карточка сама
+# его подхватит; нет файла → карточка без картинки (без битых <img>).
 HUB = {
-    "/crimea":     ("Дефицит бензина в Крыму", "Ситуация на АЗС Крыма: почему нет топлива, какие заправки работают, цены и ограничения на продажу", "/assets/analytics-crimea-generated.png"),
-    "/krasnodar":  ("Дефицит бензина в Краснодаре", "Топливная ситуация в Краснодарском крае: закрытые АЗС, очереди, цены и причины дефицита", "/assets/analytics-krasnodar-generated.png"),
-    "/moskva":     ("Дефицит бензина в Москве", "Очереди на заправках, лимиты по сетям, цены и когда закончится дефицит в столице", "/assets/analytics-moskva-generated.png"),
-    "/raketnaya-opasnost-volgograd": ("Ракетная опасность: Волгоград", "Что означают сигналы воздушной тревоги и ракетной опасности в Волгограде и области, чем отличаются, где смотреть обстановку по региону", None),
-    "/raketnaya-opasnost-ulyanovsk": ("Ракетная опасность: Ульяновск", "Сигналы воздушной тревоги и ракетной опасности в Ульяновске: что означают, что такое отбой, где следить за обстановкой по региону", None),
-    "/raketnaya-opasnost-kazan":     ("Ракетная опасность: Казань", "Воздушная тревога и ракетная опасность в Казани и Татарстане: разбор сигналов ГО и карта-радар обстановки по региону", None),
-    "/raketnaya-opasnost-omsk":      ("Ракетная опасность: Омск", "Сигналы воздушной тревоги и ракетной опасности в Омске и области: что означают, что такое отбой, где смотреть обстановку по региону", None),
-    "/raketnaya-opasnost-cheboksary": ("Ракетная опасность: Чебоксары", "Воздушная тревога и ракетная опасность в Чебоксарах и Чувашии: разбор сигналов ГО и карта-радар обстановки по региону", None),
-    "/raketnaya-opasnost-moskovskaya-oblast": ("Ракетная опасность: Московская область", "Сигналы воздушной тревоги и ракетной опасности в Московской области: что означают, чем отличаются, где следить за обстановкой по региону", None),
-    "/raketnaya-opasnost-penza":     ("Ракетная опасность: Пенза", "Воздушная тревога и ракетная опасность в Пензе и области: что означают сигналы ГО, что такое отбой, где смотреть обстановку", None),
-    "/raketnaya-opasnost-samara":    ("Ракетная опасность: Самара", "Сигналы воздушной тревоги и ракетной опасности в Самаре и области: разбор, отбой и карта-радар обстановки по региону", None),
-    "/deficit":    ("Почему нет бензина в России", "Причины дефицита топлива: атаки на НПЗ, экспортный отток, логистические сбои. Когда закончится кризис", "/assets/analytics-deficit-generated.png"),
-    "/talony":     ("Бензин по талонам", "Где действуют талоны и лимиты, чем отличаются, как получить топливо в Крыму, Москве и регионах", "/assets/analytics-talony-generated.png"),
-    "/benzin-na-trasse": ("Бензин на трассе", "Где заправиться в пути во время дефицита: как найти рабочую АЗС на федеральной трассе, что с наличием АИ-95/92 по маршруту", None),
-    "/gde-dizel":  ("Где найти дизель", "Наличие дизельного топлива на АЗС во время дефицита: где смотреть ДТ, чем ситуация с дизелем отличается от бензина, очереди и лимиты", None),
-    "/crisis":     ("Топливный кризис 2026", "Полная хроника кризиса: от первых ударов до дефицита. Региональные последствия и меры правительства", "/assets/analytics-crisis-generated.png"),
-    "/attacks":    ("Хроника ударов по НПЗ", "Все атаки БПЛА на нефтеперерабатывающие заводы: даты, масштаб повреждений, текущий статус", "/assets/analytics-attacks-generated.png"),
-    "/refineries": ("Список НПЗ России", "Полная база нефтеперерабатывающих заводов: мощность, загрузка, статус после атак, география", "/assets/analytics-refineries-generated.png"),
-    "/karta-benzina-krym": ("Карта бензина в Крыму", "Интерактивная карта наличия топлива: 90+ АЗС Крыма, статус сетей АТАН и ТЭС, лимиты, цены и очереди онлайн", "/assets/analytics-karta-benzina-krym-generated.png"),
-    "/karta-bpla": ("Карта БПЛА и тревог", "Карта-радар угроз БПЛА и ракет по регионам России: воздушная тревога, ракетная опасность, отбой — онлайн, оценка по OSINT", "/assets/analytics-karta-bpla-generated.png"),
+    "/crimea":     ("Дефицит бензина в Крыму", "Ситуация на АЗС Крыма: почему нет топлива, какие заправки работают, цены и ограничения на продажу"),
+    "/krasnodar":  ("Дефицит бензина в Краснодаре", "Топливная ситуация в Краснодарском крае: закрытые АЗС, очереди, цены и причины дефицита"),
+    "/moskva":     ("Дефицит бензина в Москве", "Очереди на заправках, лимиты по сетям, цены и когда закончится дефицит в столице"),
+    "/raketnaya-opasnost-volgograd": ("Ракетная опасность: Волгоград", "Что означают сигналы воздушной тревоги и ракетной опасности в Волгограде и области, чем отличаются, где смотреть обстановку по региону"),
+    "/raketnaya-opasnost-ulyanovsk": ("Ракетная опасность: Ульяновск", "Сигналы воздушной тревоги и ракетной опасности в Ульяновске: что означают, что такое отбой, где следить за обстановкой по региону"),
+    "/raketnaya-opasnost-kazan":     ("Ракетная опасность: Казань", "Воздушная тревога и ракетная опасность в Казани и Татарстане: разбор сигналов ГО и карта-радар обстановки по региону"),
+    "/raketnaya-opasnost-omsk":      ("Ракетная опасность: Омск", "Сигналы воздушной тревоги и ракетной опасности в Омске и области: что означают, что такое отбой, где смотреть обстановку по региону"),
+    "/raketnaya-opasnost-cheboksary": ("Ракетная опасность: Чебоксары", "Воздушная тревога и ракетная опасность в Чебоксарах и Чувашии: разбор сигналов ГО и карта-радар обстановки по региону"),
+    "/raketnaya-opasnost-moskovskaya-oblast": ("Ракетная опасность: Московская область", "Сигналы воздушной тревоги и ракетной опасности в Московской области: что означают, чем отличаются, где следить за обстановкой по региону"),
+    "/raketnaya-opasnost-penza":     ("Ракетная опасность: Пенза", "Воздушная тревога и ракетная опасность в Пензе и области: что означают сигналы ГО, что такое отбой, где смотреть обстановку"),
+    "/raketnaya-opasnost-samara":    ("Ракетная опасность: Самара", "Сигналы воздушной тревоги и ракетной опасности в Самаре и области: разбор, отбой и карта-радар обстановки по региону"),
+    "/deficit":    ("Почему нет бензина в России", "Причины дефицита топлива: атаки на НПЗ, экспортный отток, логистические сбои. Когда закончится кризис"),
+    "/talony":     ("Бензин по талонам", "Где действуют талоны и лимиты, чем отличаются, как получить топливо в Крыму, Москве и регионах"),
+    "/benzin-na-trasse": ("Бензин на трассе", "Где заправиться в пути во время дефицита: как найти рабочую АЗС на федеральной трассе, что с наличием АИ-95/92 по маршруту"),
+    "/gde-dizel":  ("Где найти дизель", "Наличие дизельного топлива на АЗС во время дефицита: где смотреть ДТ, чем ситуация с дизелем отличается от бензина, очереди и лимиты"),
+    "/crisis":     ("Топливный кризис 2026", "Полная хроника кризиса: от первых ударов до дефицита. Региональные последствия и меры правительства"),
+    "/attacks":    ("Хроника ударов по НПЗ", "Все атаки БПЛА на нефтеперерабатывающие заводы: даты, масштаб повреждений, текущий статус"),
+    "/refineries": ("Список НПЗ России", "Полная база нефтеперерабатывающих заводов: мощность, загрузка, статус после атак, география"),
+    "/karta-benzina-krym": ("Карта бензина в Крыму", "Интерактивная карта наличия топлива: 90+ АЗС Крыма, статус сетей АТАН и ТЭС, лимиты, цены и очереди онлайн"),
+    "/karta-bpla": ("Карта БПЛА и тревог", "Карта-радар угроз БПЛА и ракет по регионам России: воздушная тревога, ракетная опасность, отбой — онлайн, оценка по OSINT"),
 }
+
+
+def cover_for(url):
+    """Обложка карточки по конвенции имени, только если файл реально есть на диске."""
+    slug = url.strip("/").replace("/", "-")
+    p = ROOT / "assets" / f"analytics-{slug}-generated.png"
+    return f"/assets/{p.name}" if p.exists() else None
 
 TOP_URLS   = {u for u, _, _ in TOP + TOP_TAIL}
 HIDE_TYPES = {"object"}  # /npz/* — только через /refineries, десятки заводов в меню/хабе не льём
@@ -101,16 +120,26 @@ def label_for(url, primary_kw):
     return LABELS.get(url, ("📄", (primary_kw or url).capitalize()))
 
 
+def pick(rows, pred):
+    """Видимые live-страницы группы (по предикату), исключая верхний уровень и /npz/*."""
+    return [r for r in rows
+            if r.get("status", "live") == "live"
+            and pred(r)
+            and r["url"] not in TOP_URLS
+            and r.get("type") not in HIDE_TYPES]
+
+
+def short_label(url, primary_kw):
+    """Подпись внутри блока «Ракетная опасность» — только город (префикс не дублируем)."""
+    emoji, lab = label_for(url, primary_kw)
+    return emoji, lab.replace("Ракетная опасность: ", "")
+
+
 def ordered_pages(rows):
-    """Все видимые live-страницы в порядке групп → как в реестре."""
+    """Все видимые live-страницы в порядке групп (плоско, для хаба/drawer)."""
     out = []
-    for _title, types in GROUPS:
-        for r in rows:
-            if (r.get("status", "live") == "live"
-                    and r.get("type") in types
-                    and r["url"] not in TOP_URLS
-                    and r.get("type") not in HIDE_TYPES):
-                out.append(r)
+    for _title, pred, _collapse in GROUPS:
+        out.extend(pick(rows, pred))
     return out
 
 
@@ -120,19 +149,26 @@ NAV_RE = re.compile(r'<nav class="news-nav">.*?</nav>', re.DOTALL)
 
 def build_menu(rows, current):
     out = []
-    for title, types in GROUPS:
-        picked = [r for r in rows
-                  if r.get("status", "live") == "live"
-                  and r.get("type") in types
-                  and r["url"] not in TOP_URLS
-                  and r.get("type") not in HIDE_TYPES]
+    for title, pred, collapse in GROUPS:
+        picked = pick(rows, pred)
         if not picked:
             continue
-        out.append(f'            <div class="nav-drop-group">{title}</div>')
-        for r in picked:
-            emoji, lab = label_for(r["url"], r.get("primary_kw"))
-            cur = ' aria-current="page"' if r["url"] == current else ""
-            out.append(f'            <a href="{r["url"]}"{cur}>{emoji} {lab}</a>')
+        if collapse:
+            # свёрнутый блок; авто-раскрыт, если открыта одна из его страниц
+            op = " open" if any(r["url"] == current for r in picked) else ""
+            out.append(f'            <details class="nav-drop-sub"{op}>')
+            out.append(f'              <summary>🚀 {title}</summary>')
+            for r in picked:
+                _e, lab = short_label(r["url"], r.get("primary_kw"))
+                cur = ' aria-current="page"' if r["url"] == current else ""
+                out.append(f'              <a href="{r["url"]}"{cur}>📍 {lab}</a>')
+            out.append('            </details>')
+        else:
+            out.append(f'            <div class="nav-drop-group">{title}</div>')
+            for r in picked:
+                emoji, lab = label_for(r["url"], r.get("primary_kw"))
+                cur = ' aria-current="page"' if r["url"] == current else ""
+                out.append(f'            <a href="{r["url"]}"{cur}>{emoji} {lab}</a>')
     return "\n".join(out)
 
 
@@ -174,30 +210,55 @@ def apply_footer(html, fname):
     return html
 
 
-# ---- 2) дропдаун на ГЛАВНОЙ (index.html, плоский список) ----
-INDEX_MENU_RE = re.compile(r'(<div class="tab-dropdown-menu">)(.*?)(</div>)', re.DOTALL)
+# ---- 2) дропдаун на ГЛАВНОЙ (index.html) — сгруппирован по маркерам ----
+# Маркеры (а не regex по <div>) потому что группы содержат вложенные </div>/<details>.
+INDEX_MENU_RE = re.compile(r'(<!-- INDEX-MENU:START -->)(.*?)(<!-- INDEX-MENU:END -->)', re.DOTALL)
 
 
 def build_index_menu(rows):
     lines = ["\n"]
-    for r in ordered_pages(rows):
-        emoji, lab = label_for(r["url"], r.get("primary_kw"))
-        lines.append(f'            <a href="{r["url"]}">{emoji} {lab}</a>\n')
+    for title, pred, collapse in GROUPS:
+        picked = pick(rows, pred)
+        if not picked:
+            continue
+        if collapse:
+            lines.append('            <details class="tdm-sub">\n')
+            lines.append(f'              <summary>🚀 {title}</summary>\n')
+            for r in picked:
+                _e, lab = short_label(r["url"], r.get("primary_kw"))
+                lines.append(f'              <a href="{r["url"]}">📍 {lab}</a>\n')
+            lines.append('            </details>\n')
+        else:
+            lines.append(f'            <div class="tdm-group">{title}</div>\n')
+            for r in picked:
+                emoji, lab = label_for(r["url"], r.get("primary_kw"))
+                lines.append(f'            <a href="{r["url"]}">{emoji} {lab}</a>\n')
+    lines.append('            <a class="tdm-all" href="/analytics">📊 Все статьи · каталог →</a>\n')
     return "".join(lines) + "          "
 
 
-# ---- 2c) мобильный drawer в radar.html — плоский список «Аналитика» (по маркерам) ----
+# ---- 2c) мобильный drawer в radar.html — «Аналитика» (плоско + свёрнутая ракетная, по маркерам) ----
 DRAWER_RE = re.compile(r'(<!-- DRAWER-ANALYTICS:START -->)(.*?)(<!-- DRAWER-ANALYTICS:END -->)', re.DOTALL)
 DRAWER_SKIP = {"/help"}  # /help закреплён в группе «Разделы» drawer'а — не дублируем в «Аналитике»
 
 
 def build_drawer_analytics(rows):
     lines = ["\n"]
-    for r in ordered_pages(rows):
-        if r["url"] in DRAWER_SKIP:
+    for _title, pred, collapse in GROUPS:
+        picked = [r for r in pick(rows, pred) if r["url"] not in DRAWER_SKIP]
+        if not picked:
             continue
-        emoji, lab = label_for(r["url"], r.get("primary_kw"))
-        lines.append(f'      <a class="ndp-item" href="{r["url"]}">{emoji} {lab}</a>\n')
+        if collapse:
+            lines.append('      <details class="ndp-sub">\n')
+            lines.append('        <summary class="ndp-item">🚀 Ракетная опасность</summary>\n')
+            for r in picked:
+                _e, lab = short_label(r["url"], r.get("primary_kw"))
+                lines.append(f'        <a class="ndp-item ndp-subitem" href="{r["url"]}">📍 {lab}</a>\n')
+            lines.append('      </details>\n')
+        else:
+            for r in picked:
+                emoji, lab = label_for(r["url"], r.get("primary_kw"))
+                lines.append(f'      <a class="ndp-item" href="{r["url"]}">{emoji} {lab}</a>\n')
     return "".join(lines) + "      "
 
 
@@ -232,7 +293,8 @@ def build_hub(rows):
     cards = ["\n"]
     for r in ordered_pages(rows):
         url = r["url"]
-        title, desc, cover = HUB.get(url, (label_for(url, r.get("primary_kw"))[1], r.get("primary_kw", ""), None))
+        title, desc = HUB.get(url, (label_for(url, r.get("primary_kw"))[1], r.get("primary_kw", "")))
+        cover = cover_for(url)  # обложка по конвенции имени, только если файл есть на диске
         # ponytail: alt = заголовок карточки (осмысленный, не decorative) — было alt="" на всех обложках
         img = f'\n        <img class="card-cover" src="{cover}" alt="{title}" loading="lazy">' if cover else ""
         cards.append(
@@ -245,6 +307,25 @@ def build_hub(rows):
             f'      </a>\n\n'
         )
     return "".join(cards) + "      "
+
+
+# ---- 4) cache-busting ассетов в index.html ----
+# Лендинги штампует gen-news.py (?v=md5[:8]); index.html их не касался → у вернувшихся
+# посетителей висел кэш styles.css/app.js и правки шапки/меню не доезжали. Штампуем тут,
+# на каждом regenerate — само-заживает: правка styles.css → новый хэш → браузер перекачает.
+# опциональный ведущий слэш: index.html линкует "styles.css", лендинги — "/styles.css".
+ASSET_RE = re.compile(r'(href|src)="(/?)(styles\.css|news\.css|app\.js)(\?v=[0-9a-f]+)?"')
+
+
+def stamp_assets(html):
+    def repl(m):
+        attr, slash, fname = m.group(1), m.group(2), m.group(3)
+        p = ROOT / fname
+        if not p.exists():
+            return m.group(0)
+        h = hashlib.md5(p.read_bytes()).hexdigest()[:8]
+        return f'{attr}="{slash}{fname}?v={h}"'
+    return ASSET_RE.sub(repl, html)
 
 
 def main():
@@ -264,6 +345,7 @@ def main():
         new = NAV_RE.sub(build_nav(rows, current), html, count=1)
         new = apply_footer(new, f.name)
         new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
+        new = stamp_assets(new)  # освежить ?v на styles.css/news.css — иначе правка CSS не доедет до вернувшихся
         if new != html:
             f.write_text(new, encoding="utf-8"); changed += 1; print("nav/footer updated", f.relative_to(ROOT))
 
@@ -282,8 +364,11 @@ def main():
             new = SSNAV_RE.sub(lambda m: m.group(1) + "\n        " + chip, new, count=1)
         else:
             print("!! no .ss-nav in index.html (chip skipped)")
+        # мобильный drawer «Аналитика» — из того же реестра (был hand-maintained → дрейфовал)
+        new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
+        new = stamp_assets(new)  # ?v=<хэш> на styles.css/app.js — иначе кэш прячет правки шапки
         if new != html:
-            idx.write_text(new, encoding="utf-8"); changed += 1; print("index.html dropdown + fresh chip updated")
+            idx.write_text(new, encoding="utf-8"); changed += 1; print("index.html dropdown + drawer + fresh chip + asset ver updated")
 
     # 3) хаб /analytics — сетка карточек (по маркерам)
     hub = ROOT / "analytics.html"
