@@ -169,6 +169,9 @@ def build_menu(rows, current):
                 emoji, lab = label_for(r["url"], r.get("primary_kw"))
                 cur = ' aria-current="page"' if r["url"] == current else ""
                 out.append(f'            <a href="{r["url"]}"{cur}>{emoji} {lab}</a>')
+    # каталог-хаб последним — /analytics достижим, т.к. клик по самому «Аналитика ▾» теперь
+    # открывает меню (preventDefault в nav-dropdown.js), а не переходит на хаб.
+    out.append('            <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>')
     return "\n".join(out)
 
 
@@ -314,7 +317,7 @@ def build_hub(rows):
 # посетителей висел кэш styles.css/app.js и правки шапки/меню не доезжали. Штампуем тут,
 # на каждом regenerate — само-заживает: правка styles.css → новый хэш → браузер перекачает.
 # опциональный ведущий слэш: index.html линкует "styles.css", лендинги — "/styles.css".
-ASSET_RE = re.compile(r'(href|src)="(/?)(styles\.css|news\.css|app\.js)(\?v=[0-9a-f]+)?"')
+ASSET_RE = re.compile(r'(href|src)="(/?)(styles\.css|news\.css|app\.js|nav-dropdown\.js)(\?v=[0-9a-f]+)?"')
 
 
 def stamp_assets(html):
@@ -326,6 +329,32 @@ def stamp_assets(html):
         h = hashlib.md5(p.read_bytes()).hexdigest()[:8]
         return f'{attr}="{slash}{fname}?v={h}"'
     return ASSET_RE.sub(repl, html)
+
+
+# ---- 5) единая клик-выпадашка «Аналитика» на лендингах ----
+# Инлайн-JS дропдауна дрейфовал по 30+ страницам (4 разных копии), а сводки/npz были вовсе
+# без JS (hover-only → не открыть на тач-планшетах >768). Теперь один shared /nav-dropdown.js
+# (клик-фиксация .open + клик-вне/Esc, зеркалит index.html). Здесь вырезаем СТАРЫЕ инлайн-
+# конструкции дропдауна (тему/SW/прочее в том же <script> НЕ трогаем) и линкуем shared-скрипт.
+# ponytail: регэкспы бьют по 4 известным формам инлайна; генераторы их больше не эмитят, 5-я не заведётся.
+DROP_FOREACH_RE = re.compile(
+    r"[ \t]*(?://[^\n]*\n[ \t]*)?document\.querySelectorAll\((['\"])\.nav-dropdown > a\1\)"
+    r"\.forEach\(.*?\}\);\s*\}\);\n?",
+    re.DOTALL)
+DROP_OUTSIDE_RE = re.compile(
+    r"[ \t]*(?://[^\n]*\n[ \t]*)?document\.addEventListener\((['\"])click\1,\s*function\(e\)\s*\{\s*"
+    r"if\s*\(!e\.target\.closest\((['\"])\.nav-dropdown\2\)\).*?\}\);\n?",
+    re.DOTALL)
+DROP_SCRIPT_TAG = '  <script defer src="/nav-dropdown.js"></script>\n'
+
+
+def wire_dropdown(html):
+    """Срезать старый инлайн-JS дропдауна и вставить shared /nav-dropdown.js перед </body>."""
+    html = DROP_FOREACH_RE.sub("", html)
+    html = DROP_OUTSIDE_RE.sub("", html)
+    if "/nav-dropdown.js" not in html and "</body>" in html:
+        html = html.replace("</body>", DROP_SCRIPT_TAG + "</body>", 1)
+    return html
 
 
 def main():
@@ -345,7 +374,8 @@ def main():
         new = NAV_RE.sub(build_nav(rows, current), html, count=1)
         new = apply_footer(new, f.name)
         new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
-        new = stamp_assets(new)  # освежить ?v на styles.css/news.css — иначе правка CSS не доедет до вернувшихся
+        new = wire_dropdown(new)  # срезать старый инлайн-JS дропдауна + линковать shared /nav-dropdown.js
+        new = stamp_assets(new)  # освежить ?v на styles.css/news.css/nav-dropdown.js — иначе правка не доедет до вернувшихся
         if new != html:
             f.write_text(new, encoding="utf-8"); changed += 1; print("nav/footer updated", f.relative_to(ROOT))
 

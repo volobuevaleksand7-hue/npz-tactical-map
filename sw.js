@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v8';   // bump → форсит подмену закешированных styles.css/app.js (v1.13.0: сгруппированная выпадашка «Аналитика» + клик-фиксация + ?v на ассеты index.html)
+var CACHE = 'npz-shell-v9';   // bump → форсит подмену закешированного shell (v1.13.1: клик-фиксация выпадашки «Аналитика» на лендингах — shared /nav-dropdown.js, hover-фикс для тач-планшетов)
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

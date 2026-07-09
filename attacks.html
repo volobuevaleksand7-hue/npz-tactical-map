@@ -108,7 +108,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css?v=133db8e9">
-  <link rel="stylesheet" href="/news.css?v=e5dc45b5">
+  <link rel="stylesheet" href="/news.css?v=e2bbf493">
   <style>
     .landing-wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
     .landing-hero{background:linear-gradient(135deg,rgba(210,58,46,.12),rgba(160,29,20,.08));border:1px solid rgba(210,58,46,.25);border-radius:16px;padding:32px 28px;margin-bottom:28px;position:relative;overflow:hidden}
@@ -208,6 +208,7 @@
             <div class="nav-drop-group">Карты</div>
             <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
             <a href="/karta-bpla">📡 Карта БПЛА</a>
+            <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>
           </div>
         </div>
         <a href="/sources">📚 Источники</a>
@@ -420,25 +421,10 @@
   </footer>
 
   <script>
-    // Mobile dropdown toggle
-    document.querySelectorAll('.nav-dropdown > a').forEach(a => {
-      a.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-          e.preventDefault();
-          const menu = this.nextElementSibling;
-          menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-      });
-    });
-    // Close on outside click
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.nav-dropdown')) {
-        document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.style.display = '');
-      }
-    });
     // Theme sync
     const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
+  <script defer src="/nav-dropdown.js?v=06476ddc"></script>
 </body>
 </html>

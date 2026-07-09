@@ -854,7 +854,11 @@ body {
 .nav-drop-sub[open]>summary::after{transform:rotate(90deg)}
 .nav-drop-sub>summary:hover{background:var(--surface2,rgba(0,200,200,.12));color:var(--teal)}
 .nav-drop-sub>a{padding-left:34px;font-size:12.5px;opacity:.92}
-.nav-dropdown:hover .nav-dropdown-menu{display:block}
+/* каталог-хаб последним пунктом — /analytics достижим после preventDefault на самом «Аналитика ▾» */
+.nav-dropdown-menu a.nav-drop-all{margin-top:5px;border-top:1px solid var(--line,#333);color:var(--teal);font-weight:700}
+/* клик-фиксация (nav-dropdown.js): :hover ненадёжен на тач-планшетах, .open открывает на всех вьюпортах */
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu{display:block}
 @media(max-width:768px){
   .nav-dropdown-menu{
     position:fixed;top:48px;left:0;right:0;border-radius:0;max-height:60vh;overflow-y:auto

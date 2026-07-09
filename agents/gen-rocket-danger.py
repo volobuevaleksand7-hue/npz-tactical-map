@@ -312,23 +312,10 @@ TEMPLATE = """<!DOCTYPE html>
     </div>
   </main>
   <script>
-    document.querySelectorAll('.nav-dropdown > a').forEach(a => {{
-      a.addEventListener('click', function(e) {{
-        if (window.innerWidth <= 768) {{
-          e.preventDefault();
-          const menu = this.nextElementSibling;
-          menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }}
-      }});
-    }});
-    document.addEventListener('click', function(e) {{
-      if (!e.target.closest('.nav-dropdown')) {{
-        document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.style.display = '');
-      }}
-    }});
     const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
+  <script defer src="/nav-dropdown.js"></script>
 </body>
 </html>
 """
