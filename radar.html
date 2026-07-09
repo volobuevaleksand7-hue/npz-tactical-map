@@ -482,6 +482,7 @@
       light: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
     };
     function curTheme() { return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light"; }
+    L.Control.Attribution.prototype.options.prefix = "Leaflet"; // нейтральная атрибуция: без дефолтного префикса (флаг+ссылка)
     var map = L.map("map", { center: [55.5, 50], zoom: 4, minZoom: 3, maxZoom: 10, zoomControl: true });
     var tiles = L.tileLayer(TILE_URLS[curTheme()], { attribution: "© OpenStreetMap · CARTO · npz-tactical-map", subdomains: "abcd", maxZoom: 19 }).addTo(map);
 

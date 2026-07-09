@@ -150,8 +150,7 @@
     // --- Bottom sheet ---
     var sheet = document.createElement("div");
     sheet.className = "mob-sheet collapsed";
-    sheet.setAttribute("role", "dialog");
-    sheet.setAttribute("aria-modal", "true");
+    sheet.setAttribute("role", "dialog"); // немодальный: карта и навигация остаются доступны, aria-modal не ставим
     sheet.setAttribute("aria-label", "Аналитическая панель");
     sheet.innerHTML =
       '<div class="mob-sheet-handle"><span></span></div>' +
@@ -326,6 +325,13 @@
   }
 
   /* ---------- PWA INSTALL ---------- */
+  // слушатель — сразу при загрузке скрипта: браузер может выстрелить beforeinstallprompt
+  // до initPwaInstall (он ждёт boot), а событие одноразовое
+  var deferredPrompt = null;
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
   function initPwaInstall() {
     var btn = document.getElementById("installBtn");
     if (!btn) return;
@@ -333,11 +339,6 @@
       btn.classList.add("hidden");
       return;
     }
-    var deferredPrompt = null;
-    window.addEventListener("beforeinstallprompt", function (e) {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
     btn.addEventListener("click", function (e) {
       if (!deferredPrompt) return; // нет сохранённого события (iOS/десктоп) — обычная ссылка на /install
       e.preventDefault();
@@ -352,6 +353,8 @@
   }
 
   /* ---------- MAPS ---------- */
+  // нейтральная атрибуция: без дефолтного префикса Leaflet (флаг+ссылка)
+  L.Control.Attribution.prototype.options.prefix = "Leaflet";
   function baseTiles() {
     return L.tileLayer(tileUrl(), { attribution: "© OpenStreetMap · CARTO · OSINT ESTIMATE", subdomains: "abcd", maxZoom: 19 });
   }
@@ -1058,8 +1061,7 @@
   }
   // маркер+попап на удар пересоздавать дорого (архив ~150) — кэшируем по id, таймлайн просто
   // переключает видимость (addLayer/removeLayer) вместо clearLayers+пересборки на каждый шаг.
-  // ponytail: кэш не инвалидируется при правке уже опубликованного удара (архив практически
-  // неизменяем задним числом) — если коллекторы начнут патчить старые записи, сюда нужен hash-чек.
+  // fp = снимок записи: правка опубликованного удара (sanitize и т.п.) обновляет маркер, а не отдаёт кэш.
   var strikeMarkerCache = {};
   function renderStrikes() {
     if (!L_ru.strikes) return;
@@ -1072,9 +1074,13 @@
       var id = s.id || (s.date + "|" + s.lat + "|" + s.lon + "|" + (s.time || ""));
       shownIds[id] = 1;
       var cached = strikeMarkerCache[id];
+      var fp = JSON.stringify(s);
       if (!cached) {
         var m = L.marker([s.lat, s.lon], { icon: strikeMarker(s, hot), zIndexOffset: 600 }).bindPopup(strikePopup(s), POPUP_OPTS);
-        cached = strikeMarkerCache[id] = { marker: m, hot: hot };
+        cached = strikeMarkerCache[id] = { marker: m, hot: hot, fp: fp };
+      } else if (cached.fp !== fp) {
+        cached.marker.setLatLng([s.lat, s.lon]).setIcon(strikeMarker(s, hot)).setPopupContent(strikePopup(s));
+        cached.hot = hot; cached.fp = fp;
       } else if (cached.hot !== hot) {
         cached.marker.setIcon(strikeMarker(s, hot));
         cached.hot = hot;
