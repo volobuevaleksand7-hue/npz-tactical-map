@@ -1,7 +1,7 @@
 {
-  "version": "1.14.0",
+  "version": "1.14.1",
   "releasedAt": "2026-07-10",
-  "codename": "Полка C: self-host перф, RSS-фид, «Методология»",
-  "summary": "Три идеи из backlog (#10/#7/#9), всё на статике. ПЕРФ: leaflet 1.9.4 + markercluster (unpkg) и шрифты Rubik/JetBrains Mono (Google Fonts) → self-hosted (/vendor + /fonts.css, SRI сохранён и сверен), 4 внешних хоста убраны из критического пути; og-image 401→57 КБ (pngquant); замена во всех 98 страницах + 3 генераторах (gen-news/gen-fuel-pages/gen-rocket-danger); woff2 → immutable-кэш. RSS: agents/gen-rss.py строит rss.xml (50 сводок) + news-sitemap.xml (окно 48ч) из news-archive, автозапуск вшит в gen-news, 2-й Sitemap в robots. Страница /metodologiya (E-E-A-T/YMYL): источники, статусы НПЗ/АЗС, проверка ударов (confidence), частота обновления. SW-кеш v9→v10.",
+  "codename": "audit H2: safeUrl экранирует URL перед вставкой в href",
+  "summary": "Аудит Fable5 2026-07-08 (H2): safeUrl(u) в app.js проверял только схему http(s)://, но возвращал URL как есть — строка вида https://x/\" onmouseover=\"alert(1) проходила проверку и ломала атрибут href в попапах (НПЗ/АЗС/дороги/голоса/Крым), исполняя произвольный JS при наведении. Теперь safeUrl оборачивает прошедший проверку URL в существующий esc(), как и остальные поля попапов. Затронуты все ~12 мест, где safeUrl вставляется в href — все чинятся одним изменением функции.",
   "site": "https://npz-tactical-map.vercel.app"
 }

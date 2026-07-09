@@ -20,7 +20,7 @@
     candidates: "data/strike-candidates.json"
   };
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function safeUrl(u){u=String(u||'');return /^https?:\/\//i.test(u)?u:'#';}
+  function safeUrl(u){u=String(u||'');return /^https?:\/\//i.test(u)?esc(u):'#';}
   // ponytail: single padding tuned for the Russia view's topbar+strikebar overlay; reused on
   // Crimea/AZS maps too since their overlay is shorter — extra clearance there is harmless.
   var POPUP_OPTS = { autoPanPaddingTopLeft: [14, 90], autoPanPaddingBottomRight: [14, 60] };
