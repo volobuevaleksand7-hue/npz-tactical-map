@@ -242,10 +242,32 @@ def brief_headline(date: str, strikes: list) -> str:
         c = str(s.get("city", "")).strip()
         if c and c not in cities:
             cities.append(c)
+    # Лид дня — самый значимый удар, а не первый в списке. Трёхуровневая
+    # классификация как у обложки (hermes/scripts/build-covers.py): НПЗ/нефтебаза
+    # (2) > энергетика/газотранспорт (1) > прочее (0); при равенстве — confirmed
+    # важнее reported. Иначе, напр., 08.07 вела подстанцией «Нижнегорская»
+    # (is_refinery ложно=1) вместо Саратовского НПЗ (confirmed).
+    _REF_K = ("нпз", "нефтеперераб", "нефтебаз", "нефтехим", "терминал",
+              "нефтепрод", "нефтеузел", "гпз", "перекачк", "нпс")
+    _GRID_K = ("подстанц", "тэц", "тэс", "грэс", "энергет", "электро",
+               "компрессор", "газопровод")
+
+    def _cls(s):
+        t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
+        if any(k in t for k in _REF_K):
+            return 2
+        if any(k in t for k in _GRID_K):
+            return 1
+        return 0
+
+    def _lead_key(s):
+        conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
+        return (_cls(s), conf)
     refs = [s for s in strikes if is_refinery(s)]
     if refs:
-        rc = str(refs[0].get("city", "")).strip()
-        label = infra_label(refs[0])
+        lead = max(strikes, key=_lead_key)
+        rc = str(lead.get("city", "")).strip()
+        label = infra_label(lead)
         rest = n - 1
         if rest > 0:
             return f"Удар по {label} в {rc} и ещё {rest} {plural(rest, 'удар', 'удара', 'ударов')}"
