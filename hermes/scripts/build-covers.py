@@ -18,13 +18,16 @@ image_gen (img2img по референсу; если реального фото
 скрипт честно пометит GENFAIL; пополни кредиты и перезапусти.
 """
 import argparse
+import ipaddress
 import json
 import os
 import re
+import socket
 import subprocess
 import sys
 import urllib.request
 from pathlib import Path
+from urllib.parse import urlparse
 
 HOME = Path.home()
 REPO = Path(os.environ.get("NPZ_REPO", str(HOME / "npz-tactical-map")))
@@ -118,10 +121,34 @@ def meta_for(date, brief):
     return {"city": city, "event": event, "date_rus": rus(date), "prompt": prompt, "src": src}
 
 
+def _is_public_url(url):
+    """ponytail SSRF guard (audit H13): source_url/og:image come from external OSINT
+    articles across dozens of ever-changing news domains, so a fixed host allowlist
+    would be too brittle here (real allowlist for a real domain set — see the
+    is_ru/allowlist ideas elsewhere in this codebase — isn't practical for arbitrary
+    news sites). Instead: require http(s) and require every IP the host resolves to be
+    publicly routable, which blocks 169.254.169.254 (cloud metadata), 127.0.0.1,
+    10/172.16/192.168.x, ::1 etc. while still allowing any real public news site.
+    Ceiling: resolves once and doesn't pin the connection to the checked IP, so a
+    DNS-rebinding attacker with exact timing could still slip through — acceptable for
+    an OSINT auto-fetch script, upgrade to a pinned-IP fetch if this becomes a real
+    adversarial target."""
+    try:
+        parsed = urlparse(url)
+        if parsed.scheme not in ("http", "https") or not parsed.hostname:
+            return False
+        for info in socket.getaddrinfo(parsed.hostname, None):
+            if not ipaddress.ip_address(info[4][0]).is_global:
+                return False
+        return True
+    except Exception:
+        return False
+
+
 def fetch_ref(src_url, out_path):
     """Достаём og:image из статьи-первоисточника и качаем как референс.
     Возвращает путь при успехе + прохождении гейта качества, иначе None."""
-    if not src_url:
+    if not src_url or not _is_public_url(src_url):
         return None
     try:
         req = urllib.request.Request(src_url, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"})
@@ -134,7 +161,7 @@ def fetch_ref(src_url, out_path):
              or re.search(r'content=["\']([^"\']+)["\'][^>]*(?:property|name)=["\']' + prop, html))
         if m:
             img = m.group(1); break
-    if not img:
+    if not img or not _is_public_url(img):
         return None
     low = img.lower()
     if any(bad in low for bad in ("logo", "default", "avatar", "placeholder", "sprite", "icon")):
@@ -218,6 +245,23 @@ def _selftest():
         assert len(out) <= 80, (raw, out)
     assert sanitize_for_prompt("Москва") == "Москва"
     print("OK: sanitize_for_prompt selftest passed (control chars/newlines/backticks stripped, length capped)")
+
+    # audit H13 — SSRF guard. Literal IPs so this doesn't need network/DNS to run.
+    blocked = [
+        "http://169.254.169.254/latest/meta-data/",  # cloud metadata
+        "http://127.0.0.1:8080/admin",                 # loopback
+        "http://10.0.0.5/internal",                    # RFC1918
+        "http://192.168.1.1/",                          # RFC1918
+        "http://[::1]/",                                 # loopback v6
+        "file:///etc/passwd",                            # non-http(s) scheme
+        "not a url",
+        "",
+        None,
+    ]
+    for u in blocked:
+        assert not _is_public_url(u), u
+    assert _is_public_url("http://8.8.8.8/robots.txt")  # public IP literal, no DNS needed
+    print("OK: _is_public_url selftest passed (metadata/loopback/private/file:// blocked, public IP allowed)")
 
 
 def main():
