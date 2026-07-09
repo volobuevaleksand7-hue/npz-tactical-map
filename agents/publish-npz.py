@@ -130,8 +130,14 @@ def main(argv):
            f"Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>")
     subprocess.run(["git", "commit", "-m", msg], cwd=ROOT, check=True,
                    env={**os.environ, "ALLOW_FRONTEND_RELEASE": "1"})
-    sh(["git", "pull", "--rebase", "--autostash", "origin", "main"])
-    sh(["git", "push", "origin", "main"])
+    # безопасный пуш (протокол HERMES.md §0): дерево чистое после commit →
+    # plain --rebase, НИКОГДА --autostash (он молча сносит чужие uncommitted правки)
+    for _ in range(4):
+        if subprocess.run(["git", "push", "origin", "main"], cwd=ROOT).returncode == 0:
+            break
+        subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=ROOT, check=True)
+    else:
+        raise RuntimeError("push отклонён после 4 попыток — синхронизировать вручную")
     print(f"\n✅ опубликовано: {names}\n"
           f"⚠️ добавить обратную ссылку-карточку с /refineries и из ближайшей сводки (ручной шаг реоптa).")
 

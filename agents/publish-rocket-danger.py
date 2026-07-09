@@ -3,7 +3,7 @@
 
 Идемпотентно: генерит HTML в корень, добавляет live-строку в реестр и запись в
 sitemap.xml (если ещё нет), перегенерит навбар, проверяет IA, коммитит с гейтом
-и пушит с rebase-autostash (git-sync делает hard-reset — надо сразу в origin).
+и пушит безопасно: commit-first → git pull --rebase (БЕЗ --autostash, протокол HERMES.md §0).
 
   python3 agents/publish-rocket-danger.py volgograd            # опубликовать
   python3 agents/publish-rocket-danger.py volgograd --dry-run   # без commit/push
@@ -77,8 +77,14 @@ def main(argv):
     import os
     e = {**os.environ, **env}
     subprocess.run(["git", "commit", "-m", msg], cwd=ROOT, check=True, env=e)
-    sh(["git", "pull", "--rebase", "--autostash", "origin", "main"])
-    sh(["git", "push", "origin", "main"])
+    # безопасный пуш (протокол HERMES.md §0): дерево чистое после commit →
+    # plain --rebase, НИКОГДА --autostash (он молча сносит чужие uncommitted правки)
+    for _ in range(4):
+        if subprocess.run(["git", "push", "origin", "main"], cwd=ROOT).returncode == 0:
+            break
+        subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=ROOT, check=True)
+    else:
+        raise RuntimeError("push отклонён после 4 попыток — синхронизировать вручную")
     print(f"\n✅ опубликовано: {SITE}{slug_url}")
 
 
