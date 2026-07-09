@@ -287,15 +287,10 @@
     var rt;
     window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(applyMode, 150); });
 
-    // First mobile load: auto-open Баланс tab
-    if (isMobile) {
-      setTimeout(function () {
-        sheet.classList.remove("collapsed");
-        fab.innerHTML = "✕";
-        fab.setAttribute("aria-label", "Закрыть аналитическую панель");
-        switchTab("balance");
-      }, 500);
-    }
+    // ponytail: авто-открытие панели на мобиле УБРАНО — она закрывала карту при каждой загрузке
+    // (жалоба владельца, 50% трафика мобильный; карта = приоритет). Панель стартует свёрнутой,
+    // открывается кнопкой 📊. Предзагружаем «Баланс», чтобы первое открытие было мгновенным.
+    if (isMobile) switchTab("balance");
   }
 
   /* ---------- THEME ---------- */
