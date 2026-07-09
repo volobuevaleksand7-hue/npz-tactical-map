@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как пользоваться картой — Топливный фронт РФ</title>
+  <meta name="description" content="Справка по карте «Топливный фронт РФ»: вкладки и навигация, раскраска регионов, мобильная версия, таймлайн ударов, слои АЗС, радар угроз БПЛА и установка приложения.">
+  <meta name="keywords" content="как пользоваться картой, справка карта НПЗ, инструкция топливный фронт">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Russian">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/help">
+  <meta name="theme-color" content="#d23a2e">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  <!-- ─── ЯНДЕКС.МЕТРИКА ─── -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110490245', 'ym');
+
+      ym(110490245, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/110490245" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- ─── /ЯНДЕКС.МЕТРИКА ─── -->
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Топливный фронт РФ">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/help">
+  <meta property="og:title" content="Как пользоваться картой — Топливный фронт РФ">
+  <meta property="og:description" content="Справка: вкладки, раскраска регионов, мобильная версия, таймлайн ударов, слои АЗС, радар угроз и установка приложения.">
+  <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как пользоваться картой — Топливный фронт РФ">
+  <meta name="twitter:description" content="Справка по карте НПЗ, ударов, АЗС и радара угроз.">
+  <meta name="twitter:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://npz-tactical-map.vercel.app/"},
+      {"@type": "ListItem", "position": 2, "name": "Как пользоваться картой", "item": "https://npz-tactical-map.vercel.app/help"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/news.css">
+  <style>
+    body{overflow:auto}
+    .help-wrap{max-width:820px;margin:0 auto;padding:36px 20px 60px}
+    .help-hero{margin-bottom:22px}
+    .help-badge{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1px;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:3px 8px;margin-bottom:12px}
+    .help-h{font-size:26px;font-weight:800;letter-spacing:.3px;line-height:1.2;margin-bottom:10px}
+    .help-sub{color:var(--ink-dim);font-size:14.5px;line-height:1.65;max-width:700px}
+
+    .help-acc{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm);margin-bottom:14px;overflow:hidden}
+    .help-acc summary{list-style:none;cursor:pointer;min-height:44px;padding:13px 18px;font-weight:800;font-size:15.5px;display:flex;align-items:center;gap:10px;background:var(--surface2);border-bottom:1px solid transparent;transition:background .15s}
+    .help-acc summary::-webkit-details-marker{display:none}
+    .help-acc summary:hover{background:rgba(202,162,74,.16)}
+    .help-acc summary:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+    .help-acc summary::after{content:'▾';margin-left:auto;font-size:14px;color:var(--ink-dim);opacity:.6;transition:.15s transform}
+    .help-acc[open] summary{border-bottom-color:var(--line)}
+    .help-acc[open] summary::after{transform:rotate(180deg)}
+    .help-acc-body{padding:16px 20px}
+    .help-acc-body p{font-size:13.5px;line-height:1.7;color:var(--ink);margin-bottom:10px}
+    .help-acc-body p:last-child{margin-bottom:0}
+    .help-acc-body ul,.help-acc-body ol{margin:0 0 10px;padding-left:20px}
+    .help-acc-body li{font-size:13.5px;line-height:1.7;color:var(--ink);margin-bottom:6px}
+    .help-acc-body li:last-child{margin-bottom:0}
+    .help-acc-body b{color:var(--red)}
+    .help-acc-body a{color:var(--teal);font-weight:700}
+    .swatch{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+    .sw-g{background:var(--green,#2f9e57)}
+    .sw-o{background:var(--amber,#df8f17)}
+    .sw-r{background:var(--red,#d23a2e)}
+    .help-note{background:color-mix(in srgb,var(--teal) 12%,var(--surface));border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:10px;padding:13px 16px;font-size:13.5px;line-height:1.6;color:var(--ink);margin:24px 0}
+    .help-note a{color:var(--teal);font-weight:700}
+  </style>
+</head>
+<body data-theme="light">
+  <header class="news-header">
+    <div class="news-header-inner">
+      <a href="/" class="news-logo" title="На карту">
+        <span class="news-logo-icon">⛽</span>
+        <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
+      </a>
+      <nav class="news-nav">
+        <a href="/">🗺️ Карта НПЗ</a>
+        <a href="/news">📰 Сводки</a>
+        <a href="/radar">📡 Радар</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <div class="nav-drop-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
+            <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <a href="/raketnaya-opasnost-volgograd">🚀 Ракетная опасность: Волгоград</a>
+            <div class="nav-drop-group">Объяснялки</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+            <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <div class="nav-drop-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="nav-drop-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help" aria-current="page">❓ Как пользоваться</a>
+            <div class="nav-drop-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+            <a href="/karta-bpla">📡 Карта БПЛА</a>
+          </div>
+        </div>
+        <a href="/sources">📚 Источники</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="help-wrap">
+    <div class="help-hero">
+      <div class="help-badge">СПРАВКА</div>
+      <h1 class="help-h">❓ Как пользоваться картой</h1>
+      <p class="help-sub">«Топливный фронт РФ» — интерактивная карта нефтеперерабатывающих заводов России, ударов БПЛА по НПЗ, дефицита топлива, сети АЗС и радара угроз. Все данные — оценка по открытым источникам (OSINT), обновляются автоматически несколько раз в сутки и не заменяют официальные оповещения.</p>
+    </div>
+
+    <details class="help-acc" open>
+      <summary>🗂 Вкладки и навигация</summary>
+      <div class="help-acc-body">
+        <p>Вверху сайта — панель вкладок с разделами карты:</p>
+        <ul>
+          <li><b>РОССИЯ</b> — основная карта: НПЗ по всей стране, регионы, удары, слои.</li>
+          <li><b>КРЫМ</b> — отдельный ТВД: топливная обстановка на полуострове.</li>
+          <li><b>АЗС</b> — карта заправок, маршрут поездки, фильтр по сетям.</li>
+          <li><b>РАДАР</b> и <b>НОВОСТИ</b> — открывают отдельные страницы <a href="/radar">/radar</a> и <a href="/news">/news</a>.</li>
+          <li><b>ИСТОРИЯ</b> — хроника событий с фильтром по типу (удары, ремонты, ограничения, меры).</li>
+          <li><b>ПРОГНОЗ</b> — сценарии развития кризиса и таблица по горизонтам.</li>
+          <li><b>ДОХОДЫ</b> — откуда бюджет получает нефтяные доходы и как по ним бьют удары.</li>
+          <li><b>📊 АНАЛИТИКА ▾</b> — выпадающее меню со статьями по регионам («Крым», «Краснодар», «Москва»), объяснялками («Почему нет бензина», «Бензин по талонам») и справочниками (хроника ударов, список НПЗ).</li>
+        </ul>
+        <p>Справа в шапке — время последнего обновления данных, отсчёт до следующего, метка «ОЦЕНКА», кнопка установки приложения 📲, поддержки проекта 🤝 и переключатель светлой/тёмной темы ☀️/🌙.</p>
+      </div>
+    </details>
+
+    <details class="help-acc">
+      <summary>🗺 Карта: раскраска регионов, маркеры, попапы</summary>
+      <div class="help-acc-body">
+        <p>Регионы на вкладке «Россия» закрашены по уровню дефицита топлива:</p>
+        <ul>
+          <li><span class="swatch sw-g"></span><b>Зелёный</b> — норма, топливо доступно свободно.</li>
+          <li><span class="swatch sw-o"></span><b>Оранжевый</b> — нагрузка, возможны ограничения и очереди.</li>
+          <li><span class="swatch sw-r"></span><b>Красный</b> — критический дефицит.</li>
+        </ul>
+        <p>Переключатель «Сейчас / Прогноз ⚠» над картой меняет раскраску между текущей обстановкой и прогнозной. Ниже — кнопки слоёв: НПЗ, Трубы/порты, 🛣 Дороги, Регионы, 💥 Удары, ⛽ Сеть АЗС, ⚡ Свет, 💰 Цены — каждый можно включить или выключить отдельно.</p>
+        <p>Точки на карте — заводы (НПЗ) и удары по ним. Клик по метке открывает попап с деталями объекта или события; список НПЗ и легенда цветов дублируются в правой панели.</p>
+      </div>
+    </details>
+
+    <details class="help-acc">
+      <summary>📱 Мобильная версия</summary>
+      <div class="help-acc-body">
+        <p>На телефоне боковые панели прячутся, их заменяет плавающая кнопка <b>📊</b> (FAB) в углу экрана. Тап по ней открывает выдвижную снизу панель аналитики с вкладками <b>Баланс / Удары / НПЗ / Голоса</b>.</p>
+        <p>Панель можно свернуть, потянув за ручку-полоску вверху панели вниз, или повторным тапом по кнопке (она превращается в ✕ «Закрыть аналитическую панель»).</p>
+        <p>Панель вкладок с разделами («Россия», «Крым», «АЗС» и т.д.) на узких экранах закрепляется внизу экрана как нижняя навигация — вместо верхней шапки.</p>
+      </div>
+    </details>
+
+    <details class="help-acc">
+      <summary>💥 Таймлайн ударов</summary>
+      <div class="help-acc-body">
+        <p>Под картой на вкладке «Россия» — панель «💥 Удары» с быстрыми периодами: <b>Сегодня</b>, <b>7 дней</b>, <b>30 дней</b>, <b>Все</b>. Раздел «Даты» открывает свой диапазон (в т.ч. пресет «Пр. месяц») с полями «от» и «до».</p>
+        <p>Раздел «Таймлайн» даёт пошаговую перемотку по дням: кнопки ‹ и › — шаг назад/вперёд, ползунок — быстрый переход к дате, кнопка <b>▶</b> — автопроигрывание ударов по дням. Слой «💥 Удары» на карте должен быть включён, иначе точки не отображаются.</p>
+      </div>
+    </details>
+
+    <details class="help-acc">
+      <summary>⛽ Слои и фильтры АЗС</summary>
+      <div class="help-acc-body">
+        <p>На вкладке «АЗС» — карта заправок (расположение реальное, по OpenStreetMap; наличие топлива — оценка по сети и региону, не по конкретной колонке).</p>
+        <p>Блок «🚗 Карта поездки»: быстрые пресеты маршрутов, поля «Откуда» / «Куда» и кнопка «Маршрут» строят линию поездки с заправками по пути; ✕ сбрасывает маршрут.</p>
+        <p>Блок «Фильтр сети» — пилюли брендов АЗС, по клику включают/выключают показ конкретной сети на карте. Справа — панель с комментариями с мест.</p>
+      </div>
+    </details>
+
+    <details class="help-acc">
+      <summary>📡 Радар (/radar)</summary>
+      <div class="help-acc-body">
+        <p>Отдельная страница <a href="/radar">/radar</a> — живой радар угроз БПЛА и ракетной опасности по регионам, обновляется примерно каждые 5 минут.</p>
+        <p>Раздел «Типы угроз» (сворачиваемый) поясняет цвета меток: БПЛА, КАБ, FPV, Ракета, Авиация, Взрыв. Рядом — лента «📨 ЛЕНТА» с текстовыми сообщениями источников и ссылка на Telegram-бота тревог.</p>
+        <p>Блок «ℹ️ О карте тревог» объясняет, что это оценка по OSINT, а не официальное оповещение МЧС.</p>
+      </div>
+    </details>
+
+    <details class="help-acc">
+      <summary>📲 Установка приложения</summary>
+      <div class="help-acc-body">
+        <p>Карту можно поставить на телефон или компьютер прямо из браузера — без App Store и Google Play. Кнопка <b>«Установить приложение»</b> в шапке сайта запускает установку (на iPhone работает только через Safari — «Поделиться» → «На экран «Домой»»).</p>
+        <p>Подробная пошаговая инструкция с разбивкой по iOS / Android / Desktop — на странице <a href="/install">/install</a>.</p>
+      </div>
+    </details>
+
+    <div class="help-note">
+      ⚠️ Все данные на карте — оценка по открытым источникам (OSINT) и носят справочный характер. Не являются официальным оповещением МЧС или региональных властей.
+    </div>
+
+    <a class="ins-back" href="/" style="display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#fff;background:var(--red);font-weight:700;font-size:14px;padding:10px 18px;border-radius:10px">← Открыть карту</a>
+  </main>
+
+  <footer class="news-footer">
+    <div class="news-footer-inner">
+      <p>Топливный фронт РФ · OSINT-дашборд · <span class="mono">npz-tactical-map.vercel.app</span></p>
+      <p class="footer-disc">Не является официальной информацией. Данные из открытых источников.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){try{var t=localStorage.getItem('npz-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);document.body.setAttribute('data-theme',t);}catch(e){}})();
+    if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
+    document.querySelectorAll('.nav-dropdown > a').forEach(function(a){
+      a.addEventListener('click', function(e){
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          var menu = this.nextElementSibling;
+          menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

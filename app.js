@@ -32,6 +32,18 @@
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn.call(el, e); }
     });
   }
+  // ponytail: минимальный toast — приложение не имеет своего менеджера уведомлений
+  function showToast(text) {
+    var t = document.createElement("div");
+    t.className = "pwa-toast";
+    t.textContent = text;
+    document.body.appendChild(t);
+    requestAnimationFrame(function () { t.classList.add("show"); }); // .pwa-toast скрыт без .show
+    setTimeout(function () {
+      t.classList.remove("show");
+      setTimeout(function () { t.remove(); }, 300);
+    }, 4000);
+  }
 
   var S = { state: null, hist: null, forecast: null, economy: null, strikes: null, roads: null, availability: null, voices: null, grid: null, regionsGeo: null, outlineGeo: null, azsStations: null, azsRoutes: null, capacityTimeline: null, health: null };
   var SK = { dates: [], idx: 0, mode: "7d", from: "", to: "", playing: false, timer: null };
@@ -99,20 +111,24 @@
     document.getElementById("app").classList.remove("hidden");
     // Тяжёлую инициализацию карт откладываем на после первого кадра,
     // чтобы #app отрисовался без задержки
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        initTheme();
-        initRuMap();
-        loadGeo();
-        initTabs();
-        initControls();
-        initMobile();
-        initPanelExpand();
-        tickClock(); setInterval(tickClock, 1000);
-        appStarted = true;
-        if (S.state) renderAll();
-      });
-    });
+    var inited = false;
+    function initAll() {
+      if (inited) return;
+      inited = true;
+      initTheme();
+      initPwaInstall();
+      initRuMap();
+      loadGeo();
+      initTabs();
+      initControls();
+      initMobile();
+      initPanelExpand();
+      tickClock(); setInterval(tickClock, 1000);
+      appStarted = true;
+      if (S.state) renderAll();
+    }
+    requestAnimationFrame(function () { requestAnimationFrame(initAll); });
+    setTimeout(initAll, 400); // rAF не стреляет в скрытой вкладке — без фолбэка приложение не инициализируется до фокуса
   }
 
   function initMobile() {
@@ -135,6 +151,7 @@
     var sheet = document.createElement("div");
     sheet.className = "mob-sheet collapsed";
     sheet.setAttribute("role", "dialog");
+    sheet.setAttribute("aria-modal", "true");
     sheet.setAttribute("aria-label", "Аналитическая панель");
     sheet.innerHTML =
       '<div class="mob-sheet-handle"><span></span></div>' +
@@ -223,30 +240,37 @@
       tab.addEventListener("click", function () { switchTab(this.dataset.tab); });
     });
 
+    // open/close helpers — минимальный focus-management: фокус внутрь при открытии, назад на FAB при закрытии
+    function closeSheet() {
+      if (sheet.classList.contains("collapsed")) return;
+      sheet.classList.add("collapsed");
+      fab.innerHTML = "📊";
+      fab.setAttribute("aria-label", "Открыть аналитическую панель");
+      fab.focus();
+    }
+    function openSheet() {
+      sheet.classList.remove("collapsed");
+      fab.innerHTML = "✕";
+      fab.setAttribute("aria-label", "Закрыть аналитическую панель");
+      var active = sheet.querySelector(".mob-sheet-tab.active");
+      switchTab(active ? active.dataset.tab : "balance");
+      var handle = sheet.querySelector(".mob-sheet-handle");
+      if (handle) handle.focus();
+    }
+
     // FAB toggles sheet
     fab.addEventListener("click", function () {
-      var isOpen = !sheet.classList.contains("collapsed");
-      if (isOpen) {
-        sheet.classList.add("collapsed");
-        fab.innerHTML = "📊";
-        fab.setAttribute("aria-label", "Открыть аналитическую панель");
-      } else {
-        sheet.classList.remove("collapsed");
-        fab.innerHTML = "✕";
-        fab.setAttribute("aria-label", "Закрыть аналитическую панель");
-        var active = sheet.querySelector(".mob-sheet-tab.active");
-        switchTab(active ? active.dataset.tab : "balance");
-      }
+      if (sheet.classList.contains("collapsed")) openSheet(); else closeSheet();
     });
 
-    // Handle click to collapse
-    sheet.querySelector(".mob-sheet-handle").addEventListener("click", function () {
-      if (!sheet.classList.contains("collapsed")) {
-        sheet.classList.add("collapsed");
-        fab.innerHTML = "📊";
-        fab.setAttribute("aria-label", "Открыть аналитическую панель");
-      }
+    // Escape closes sheet
+    sheet.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeSheet();
     });
+
+    // Handle: клик/тап + Enter/Space сворачивает панель
+    bindButton(sheet.querySelector(".mob-sheet-handle"), function () { closeSheet(); });
+    sheet.querySelector(".mob-sheet-handle").setAttribute("aria-label", "Свернуть/развернуть панель");
 
     // Resize: show/hide desktop panels vs mobile sheet
     function applyMode() {
@@ -257,9 +281,7 @@
       } else {
         colLeft.classList.remove("mob-hidden");
         panelRight.classList.remove("mob-hidden");
-        sheet.classList.add("collapsed");
-        fab.innerHTML = "📊";
-        fab.setAttribute("aria-label", "Открыть аналитическую панель");
+        closeSheet();
       }
     }
     applyMode();
@@ -286,16 +308,46 @@
     var saved = null;
     try { saved = localStorage.getItem("npz-theme"); } catch (e) {}
     document.documentElement.setAttribute("data-theme", saved || "light");
-    document.getElementById("themeToggle").textContent = (saved === "dark") ? "🌙" : "☀️";
-    document.getElementById("themeToggle").addEventListener("click", function () {
+    // иконка = куда переключит: в светлой теме показываем 🌙 (переключит на тёмную), в тёмной — ☀️
+    var themeBtn = document.getElementById("themeToggle");
+    themeBtn.textContent = (saved === "dark") ? "☀️" : "🌙";
+    themeBtn.setAttribute("aria-pressed", saved === "dark" ? "true" : "false");
+    themeBtn.addEventListener("click", function () {
       var dark = document.documentElement.getAttribute("data-theme") === "dark";
       var next = dark ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem("npz-theme", next); } catch (e) {}
-      this.textContent = next === "dark" ? "🌙" : "☀️";
+      this.textContent = next === "dark" ? "☀️" : "🌙";
+      this.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
       [["ru", tiles.ru], ["cr", tiles.cr]].forEach(function (p) {
         if (p[1]) p[1].setUrl(tileUrl());
       });
+    });
+  }
+
+  /* ---------- PWA INSTALL ---------- */
+  function initPwaInstall() {
+    var btn = document.getElementById("installBtn");
+    if (!btn) return;
+    if (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) {
+      btn.classList.add("hidden");
+      return;
+    }
+    var deferredPrompt = null;
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+    btn.addEventListener("click", function (e) {
+      if (!deferredPrompt) return; // нет сохранённого события (iOS/десктоп) — обычная ссылка на /install
+      e.preventDefault();
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.finally(function () { deferredPrompt = null; });
+    });
+    window.addEventListener("appinstalled", function () {
+      btn.classList.add("hidden");
+      deferredPrompt = null;
+      showToast("✅ Приложение установлено");
     });
   }
 
@@ -305,6 +357,7 @@
   }
   function initRuMap() {
     maps.ru = L.map("map", { center: [55.5, 55], zoom: 4, minZoom: 3, maxZoom: 9, worldCopyJump: false, zoomControl: false });
+    maps.ru.on("click", closeAnalyticsDropdown);
     L.control.zoom({ position: "bottomright" }).addTo(maps.ru);
     tiles.ru = baseTiles().addTo(maps.ru);
     L_ru.regions = L.layerGroup().addTo(maps.ru);   // shading (bottom)
@@ -343,6 +396,7 @@
   }
   function initCrMap() {
     maps.cr = L.map("mapCrimea", { center: [45.25, 34.3], zoom: 7, minZoom: 6, maxZoom: 11, zoomControl: false });
+    maps.cr.on("click", closeAnalyticsDropdown);
     L.control.zoom({ position: "bottomright" }).addTo(maps.cr);
     tiles.cr = baseTiles().addTo(maps.cr);
     L_cr.fill = L.layerGroup().addTo(maps.cr);   // заливка полуострова — как на основной карте
@@ -897,7 +951,16 @@
   }
   /* ---------- EXPAND PANELS (click a card → read it full-size) ---------- */
   var _detailPrevFocus = null;
-  function _detailEsc(e) { if (e.key === "Escape") closeDetail(); }
+  function _detailKeydown(e) {
+    if (e.key === "Escape") { closeDetail(); return; }
+    if (e.key !== "Tab") return;
+    var ov = document.getElementById("detailModal"); if (!ov) return;
+    var focusable = ov.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
   function ensureDetail() {
     var ov = document.getElementById("detailModal");
     if (ov) return ov;
@@ -916,13 +979,13 @@
     ov.querySelector(".detail-body").innerHTML = html;
     _detailPrevFocus = document.activeElement;
     ov.removeAttribute("hidden");
-    document.addEventListener("keydown", _detailEsc);
+    document.addEventListener("keydown", _detailKeydown);
     var c = ov.querySelector(".detail-close"); if (c) c.focus();
   }
   function closeDetail() {
     var ov = document.getElementById("detailModal"); if (!ov) return;
     ov.setAttribute("hidden", "");
-    document.removeEventListener("keydown", _detailEsc);
+    document.removeEventListener("keydown", _detailKeydown);
     if (_detailPrevFocus && _detailPrevFocus.focus) { try { _detailPrevFocus.focus(); } catch (e) {} }
   }
   function openPanelExpand(bodyEl, title, cls) {
@@ -993,17 +1056,36 @@
     var r = modeRange();
     return list.filter(function (s) { return s.date >= r.from && s.date <= r.to; });
   }
+  // маркер+попап на удар пересоздавать дорого (архив ~150) — кэшируем по id, таймлайн просто
+  // переключает видимость (addLayer/removeLayer) вместо clearLayers+пересборки на каждый шаг.
+  // ponytail: кэш не инвалидируется при правке уже опубликованного удара (архив практически
+  // неизменяем задним числом) — если коллекторы начнут патчить старые записи, сюда нужен hash-чек.
+  var strikeMarkerCache = {};
   function renderStrikes() {
     if (!L_ru.strikes) return;
     buildStrikeDates();
-    L_ru.strikes.clearLayers();
     var shown = shownStrikes(), hot = SK.mode === "day" || SK.mode === "today";
+    var shownIds = {};
     renderedStrikes = [];
     shown.forEach(function (s) {
       if (typeof s.lat !== "number" || typeof s.lon !== "number") return;
-      var m = L.marker([s.lat, s.lon], { icon: strikeMarker(s, hot), zIndexOffset: 600 }).bindPopup(strikePopup(s), POPUP_OPTS);
-      m.addTo(L_ru.strikes);
-      renderedStrikes.push({ s: s, marker: m });
+      var id = s.id || (s.date + "|" + s.lat + "|" + s.lon + "|" + (s.time || ""));
+      shownIds[id] = 1;
+      var cached = strikeMarkerCache[id];
+      if (!cached) {
+        var m = L.marker([s.lat, s.lon], { icon: strikeMarker(s, hot), zIndexOffset: 600 }).bindPopup(strikePopup(s), POPUP_OPTS);
+        cached = strikeMarkerCache[id] = { marker: m, hot: hot };
+      } else if (cached.hot !== hot) {
+        cached.marker.setIcon(strikeMarker(s, hot));
+        cached.hot = hot;
+      }
+      if (!L_ru.strikes.hasLayer(cached.marker)) L_ru.strikes.addLayer(cached.marker);
+      renderedStrikes.push({ s: s, marker: cached.marker });
+    });
+    Object.keys(strikeMarkerCache).forEach(function (id) {
+      if (shownIds[id]) return;
+      var mk = strikeMarkerCache[id].marker;
+      if (L_ru.strikes.hasLayer(mk)) L_ru.strikes.removeLayer(mk);
     });
     updateStrikeBar();
   }
@@ -1096,6 +1178,7 @@
   function initAzMap() {
     if (azsReady) return;
     maps.az = L.map("mapAzs", { center: [49.5, 39.5], zoom: 5, minZoom: 4, maxZoom: 15, worldCopyJump: false, zoomControl: false });
+    maps.az.on("click", closeAnalyticsDropdown);
     L.control.zoom({ position: "bottomright" }).addTo(maps.az);
     tiles.az = baseTiles().addTo(maps.az);
     L_az.cluster = (typeof L.markerClusterGroup === "function")
@@ -1633,13 +1716,21 @@
     }).catch(function () {});
   }
 
+  /* ---------- ANALYTICS DROPDOWN (закрытие по тапу вне меню, включая карту) ---------- */
+  // ponytail: index.html уже закрывает меню по клику на document, но клики внутри Leaflet-карты
+  // до document не долетают (Leaflet глушит propagation своим click-delay механизмом) —
+  // поэтому вешаем закрытие напрямую на map 'click' в местах, где карты создаются.
+  function closeAnalyticsDropdown() {
+    document.querySelectorAll(".tab-dropdown-menu").forEach(function (m) { m.style.display = ""; });
+  }
+
   /* ---------- TABS + CONTROLS ---------- */
   function initTabs() {
     Array.prototype.forEach.call(document.querySelectorAll("#tabs button"), function (b) {
       b.addEventListener("click", function () {
-        Array.prototype.forEach.call(document.querySelectorAll("#tabs button"), function (x) { x.classList.remove("active"); x.setAttribute("aria-selected", "false"); });
+        Array.prototype.forEach.call(document.querySelectorAll("#tabs button"), function (x) { x.classList.remove("active"); x.removeAttribute("aria-current"); });
         b.classList.add("active");
-        b.setAttribute("aria-selected", "true");
+        b.setAttribute("aria-current", "true");
         var view = b.dataset.view;
         Array.prototype.forEach.call(document.querySelectorAll(".view"), function (v) { v.classList.remove("active"); });
         document.getElementById("view-" + view).classList.add("active");

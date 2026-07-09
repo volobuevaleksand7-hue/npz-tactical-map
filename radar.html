@@ -65,8 +65,11 @@
     .theme-btn:hover{transform:translateY(-1px)}
 
     /* Map */
-    .map{position:absolute;top:86px;left:0;right:0;bottom:0;z-index:0}
+    /* ponytail: z-index:auto (было 0) — z:0 создавал stacking context, запиравший попапы Leaflet (z-index:700 внутри) под panel/feed (z:20) */
+    .map{position:absolute;top:86px;left:0;right:0;bottom:0;z-index:auto}
     /* SEO strip под топбаром: видимый h1 + freshness-подпись */
+    /* ponytail: разведена с .panel по позиции (strip top:52-86, panel top:100 на desktop/tablet,
+       bottom-anchored на ≤768px) И по z-index (25 > 20) — оверлапа нет, панель никогда не залезает выше 86px */
     .seo-strip{position:absolute;top:52px;left:0;right:0;height:34px;display:flex;align-items:center;
       gap:12px;padding:0 14px;background:var(--surface);border-bottom:1px solid var(--line);z-index:25;overflow:hidden}
     .seo-h1{font-family:var(--disp);font-weight:700;font-size:13px;color:var(--ink);line-height:1.2;margin:0;
@@ -76,6 +79,10 @@
     .seo-upd a:hover{text-decoration:underline}
     @media(max-width:768px){.seo-h1{font-size:11px}.seo-upd{display:none}}
     .leaflet-container{background:var(--board)!important}
+    /* ponytail: попапы Leaflet раньше оставались белыми в тёмной теме — теперь следуют теме */
+    .leaflet-popup-content-wrapper{background:var(--surface)!important;color:var(--ink)!important}
+    .leaflet-popup-tip{background:var(--surface)!important}
+    .leaflet-popup-close-button{color:var(--ink-dim)!important}
 
     /* Side panel */
     .panel{position:absolute;top:100px;left:14px;width:340px;max-height:calc(100% - 114px);
@@ -150,7 +157,8 @@
     /* Disclaimer */
     .disclaimer{position:absolute;bottom:44px;right:348px;z-index:20;font-family:var(--mono);
       font-size:9px;color:var(--ink-dim);opacity:.6;text-align:right;max-width:250px}
-    @media(max-width:768px){.disclaimer{right:14px}}
+    /* ponytail: на мобильных прячем — текст дублируется в seo-strip, а полноширинный .panel всё равно перекрывает эту зону */
+    @media(max-width:768px){.disclaimer{display:none}}
 
     /* Custom radar markers */
     .radar-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;
@@ -172,6 +180,11 @@
     @keyframes regionPulse{0%,100%{fill-opacity:.26}50%{fill-opacity:.5}}
 
     /* Responsive */
+    /* ponytail: закрывает провал 769-1024px (planshet/узкий десктоп) — panel 340 + feed 320 давили карту */
+    @media(min-width:769px) and (max-width:1024px){
+      .panel{width:280px}
+      .feed{display:none}
+    }
     @media(max-width:768px){
       .panel{width:calc(100% - 28px);max-height:45%;bottom:40px;top:auto}
       .panel.collapsed{max-height:none;height:auto}
@@ -271,6 +284,7 @@
   box-shadow: var(--shadow-sm);
 }
 .legend-toggle summary {
+  min-height: 44px; display: flex; align-items: center;
   padding: 6px 12px; cursor: pointer; user-select: none; font-weight: 700; color: var(--ink);
 }
 .legend-body { padding: 4px 12px 8px; display: flex; flex-wrap: wrap; gap: 6px 12px; }
@@ -283,6 +297,7 @@
   overflow: hidden; box-shadow: var(--shadow-sm);
 }
 .about-radar summary {
+  min-height: 44px; display: flex; align-items: center;
   padding: 6px 12px; cursor: pointer; user-select: none; font-weight: 700;
   font-size: 11px; font-family: var(--mono); color: var(--ink);
 }
@@ -294,7 +309,8 @@
 @media(max-width:768px){
   .radar-civ-icon img, .radar-civ-icon svg { width: 40px !important; height: 40px !important; }
   .legend-toggle { left: 14px; bottom: 84px; max-width: calc(100% - 28px); }
-  .about-radar { display: none; }
+  /* ponytail: было display:none (справка терялась) — теперь свёрнутый accordion, доступен по тапу */
+  .about-radar { right: 14px; bottom: 84px; max-width: calc(50% - 21px); }
 }
   </style>
 </head>
@@ -315,8 +331,8 @@
       <a href="/sources">📚 Источники</a>
     </nav>
     <div class="topctl">
-      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:#e2ebef">
-        <input type="checkbox" id="toggleStrikes" checked onchange="toggleStrikesLayer()" style="accent-color:#ff5247">
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--ink)">
+        <input type="checkbox" id="toggleStrikes" checked onchange="toggleStrikesLayer()" style="accent-color:var(--red)">
         🔥 Удары
       </label>
       <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Светлая/тёмная тема">🌙</button>
@@ -336,7 +352,7 @@
   <div id="map" class="map"></div>
 
   <aside class="panel">
-    <div class="panel-h">
+    <div class="panel-h" role="button" tabindex="0" aria-expanded="true" aria-controls="threatList">
       <span>🔴 УГРОЗЫ НПЗ</span>
       <span style="display:flex;align-items:center;gap:8px">
         <span class="dot-live" id="liveIndicator"></span>
@@ -580,16 +596,16 @@
 
         var marker = L.marker([ev.lat, ev.lon], { icon: icon }).addTo(strikesLayer);
 
-        var popup = '<div style="font-family:Rubik,sans-serif;min-width:180px">';
-        popup += '<b style="font-size:14px;color:#ff5247">🔥 ' + esc(ev.city || ev.region || 'Удар') + '</b><br>';
-        if (ev.target) popup += '<span style="color:#ffb443">Цель: ' + esc(ev.target) + '</span><br>';
-        if (ev.detail || ev.description) popup += '<span style="font-size:11px;color:#8499a6">' + esc(ev.detail || ev.description) + '</span><br>';
+        var popup = '<div style="font-family:var(--disp),sans-serif;min-width:180px">';
+        popup += '<b style="font-size:14px;color:var(--red)">🔥 ' + esc(ev.city || ev.region || 'Удар') + '</b><br>';
+        if (ev.target) popup += '<span style="color:var(--amber)">Цель: ' + esc(ev.target) + '</span><br>';
+        if (ev.detail || ev.description) popup += '<span style="font-size:11px;color:var(--ink-dim)">' + esc(ev.detail || ev.description) + '</span><br>';
         if (ev.confidence) {
           var conf = ev.confidence === "confirmed" ? "✅ Подтверждено" : ev.confidence === "high" ? "🟡 Высокая" : "⚪ Слух";
           popup += '<span style="font-size:11px">' + conf + '</span><br>';
         }
         // безопасный href: только http(s), иначе игнорируем (защита от javascript:)
-        if (ev.source_url && /^https?:\/\//i.test(ev.source_url)) popup += '<a href="' + esc(ev.source_url) + '" target="_blank" rel="noopener" style="color:#3fd6cf;font-size:11px">Источник →</a>';
+        if (ev.source_url && /^https?:\/\//i.test(ev.source_url)) popup += '<a href="' + esc(ev.source_url) + '" target="_blank" rel="noopener" style="color:var(--teal);font-size:11px">Источник →</a>';
         popup += '</div>';
         marker.bindPopup(popup);
       });
@@ -652,7 +668,9 @@
       var border = {bpla:"var(--amber)",uab:"var(--red)",fpv:"var(--teal)",rocket:"var(--red)",aviation:"var(--crit)",explosion:"var(--crit)",safe:"var(--green)"}[type] || "var(--ink-dim)";
       var bg = {bpla:"rgba(255,180,67,.12)",uab:"rgba(255,82,71,.12)",fpv:"rgba(63,214,207,.12)",rocket:"rgba(255,82,71,.12)",aviation:"rgba(255,58,44,.12)",explosion:"rgba(255,58,44,.15)",safe:"rgba(63,224,137,.08)"}[type] || "transparent";
       var pulseCls = pulse ? " radar-pulse" : "";
-      return '<div class="radar-civ-icon' + pulseCls + '" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;border:2px solid ' + border + ';background:' + bg + ';display:flex;align-items:center;justify-content:center;overflow:hidden">' + svg + '</div>';
+      // ponytail: класс "radar-icon-shell" (не "radar-civ-icon") — иначе .radar-civ-icon{background:none!important}
+      // (нужен для сброса дефолтной обёртки Leaflet-маркера) убивал inline border/background этой же оболочки
+      return '<div class="radar-icon-shell' + pulseCls + '" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;border:2px solid ' + border + ';background:' + bg + ';display:flex;align-items:center;justify-content:center;overflow:hidden">' + svg + '</div>';
     }
 
     // ─── Process & render ───
@@ -785,20 +803,20 @@
         // ponytail: NPZ markers join cityCluster (not npzLayer) so they cluster/spiderfy on zoom like city markers
         var marker = L.marker([info.lat, info.lon], { icon: icon }).addTo(cityCluster);
 
-        var popupHtml = '<div style="font-family:Rubik,sans-serif;min-width:200px">';
+        var popupHtml = '<div style="font-family:var(--disp),sans-serif;min-width:200px">';
         popupHtml += '<b style="font-size:14px">' + esc(region) + '</b><br>';
         if (hasThreat) {
-          popupHtml += '<span style="color:#ff5247;font-weight:700">⚠ УГРОЗА АКТИВНА</span><br>';
-          if (th.bpla) popupHtml += '<span style="color:#ffb443">● БПЛА</span> ';
-          if (th.uab) popupHtml += '<span style="color:#ff5247">● КАБ</span> ';
-          if (th.fpv) popupHtml += '<span style="color:#3fd6cf">● FPV</span> ';
-          if (th.rocket) popupHtml += '<span style="color:#ff5247">● РК</span> ';
-          if (th.aviation) popupHtml += '<span style="color:#ff3a2c">● Авиация</span> ';
-          if (th.explosion) popupHtml += '<span style="color:#ff3a2c">● Взрыв</span> ';
-          popupHtml += '<br><span style="font-size:11px;color:#8499a6">' + esc(info.objects.join(", ")) + '</span>';
+          popupHtml += '<span style="color:var(--red);font-weight:700">⚠ УГРОЗА АКТИВНА</span><br>';
+          if (th.bpla) popupHtml += '<span style="color:var(--amber)">● БПЛА</span> ';
+          if (th.uab) popupHtml += '<span style="color:var(--red)">● КАБ</span> ';
+          if (th.fpv) popupHtml += '<span style="color:var(--teal)">● FPV</span> ';
+          if (th.rocket) popupHtml += '<span style="color:var(--red)">● РК</span> ';
+          if (th.aviation) popupHtml += '<span style="color:var(--crit)">● Авиация</span> ';
+          if (th.explosion) popupHtml += '<span style="color:var(--crit)">● Взрыв</span> ';
+          popupHtml += '<br><span style="font-size:11px;color:var(--ink-dim)">' + esc(info.objects.join(", ")) + '</span>';
         } else {
-          popupHtml += '<span style="color:#3fe089">✓ Нет активных угроз</span><br>';
-          popupHtml += '<span style="font-size:11px;color:#8499a6">' + esc(info.objects.join(", ")) + '</span>';
+          popupHtml += '<span style="color:var(--green)">✓ Нет активных угроз</span><br>';
+          popupHtml += '<span style="font-size:11px;color:var(--ink-dim)">' + esc(info.objects.join(", ")) + '</span>';
         }
         popupHtml += '</div>';
         marker.bindPopup(popupHtml);
@@ -1022,9 +1040,18 @@
       document.getElementById("nextRefresh").textContent = "T-" + pad(min) + ":" + pad(sec);
       if (remaining > 0) countdownTimer = setTimeout(updateCountdown, 1000);
     }
-    // ─── Panel toggle ───
-    document.querySelector('.panel-h').addEventListener('click', function() {
-      document.querySelector('.panel').classList.toggle('collapsed');
+    // ─── Panel toggle (клик + Enter/Space, aria-expanded) ───
+    var panelHEl = document.querySelector('.panel-h');
+    function togglePanel() {
+      var collapsed = document.querySelector('.panel').classList.toggle('collapsed');
+      panelHEl.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    }
+    panelHEl.addEventListener('click', togglePanel);
+    panelHEl.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        togglePanel();
+      }
     });
 
     // ─── Init ───

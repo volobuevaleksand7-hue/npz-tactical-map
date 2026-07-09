@@ -77,7 +77,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 
 /* UI-SHELL LOCK v1.2.0: protected top navigation; see AGENT_ACTIVITY.md before edits. */
 /* TOP BAR */
-.topbar{flex:none;height:44px;display:flex;align-items:center;gap:10px;padding:0 12px;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm);z-index:30;overflow:visible}
+.topbar{flex:none;height:calc(44px + env(safe-area-inset-top));display:flex;align-items:center;gap:10px;padding:env(safe-area-inset-top) 12px 0;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm);z-index:30;overflow:visible}
 .brand{display:flex;align-items:center;gap:8px;min-width:235px}
 .brand-emblem{font-size:22px}
 .brand-title{font-weight:800;font-size:14px;letter-spacing:.4px;line-height:1}
@@ -113,7 +113,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .view.active{display:block;animation:viewfade .2s ease}
 @keyframes viewfade{from{opacity:.35}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.view.active{animation:none}}
-.map{position:absolute;inset:0;z-index:0}/* own stacking context so Leaflet panes stay below cards */
+.map{position:absolute;inset:0;z-index:auto}/* no own stacking context — Leaflet popups (z-index:700 in leaflet.css) must escape above cards (z:20) */
 .leaflet-container{background:var(--board)!important;font-family:var(--mono)!important}
 .leaflet-control-attribution{background:rgba(255,255,255,.55)!important;font-size:9px!important}
 [data-theme="dark"] .leaflet-control-attribution{background:rgba(0,0,0,.5)!important;color:#5a7a6e!important}
@@ -414,7 +414,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .tab-lbl{font-size:11px;display:block}
 
 /* --- MOBILE FABs (card toggles, shown only on mobile via initMobile()) --- */
-.mob-fab{position:absolute;z-index:25;right:16px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);font-size:19px;display:none;align-items:center;justify-content:center;transition:.15s;bottom:72px}
+.mob-fab{position:absolute;z-index:2500;right:16px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);font-size:19px;display:none;align-items:center;justify-content:center;transition:.15s;bottom:72px}/* above .mob-sheet (2000) so FAB can always close the sheet */
 .mob-fab.mob-fab-l{left:10px}
 .mob-fab.mob-fab-r{right:10px}
 .mob-fab.mob-fab-active{background:var(--ink);border-color:var(--ink)}
@@ -480,11 +480,12 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 /* RESPONSIVE — mobile + portrait tablet */
 @media(max-width:820px){
   /* Topbar compact */
-  .topbar{height:48px;padding:0 8px;gap:6px;flex-wrap:nowrap;overflow:hidden}
+  .topbar{height:calc(48px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 8px 0;gap:6px;flex-wrap:nowrap;overflow:hidden}
   .brand{min-width:auto}
   .brand-text,.sync{display:none}
   .brand-emblem{font-size:20px}
-  .topctl{min-width:auto;gap:5px;flex-shrink:1;overflow:hidden}
+  .topctl{min-width:auto;gap:5px;flex-shrink:1;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .topctl::-webkit-scrollbar{display:none}
 
   /* Крым-панель на мобиле: узкая шторка сверху, не закрывает карту (T4) */
   #crimeaPanel{top:10px;left:10px;right:10px;width:auto;max-height:40%}
@@ -496,11 +497,12 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   /* Bottom nav bar — replaces inline tabs */
   .tabs{
     position:fixed;bottom:0;left:0;right:0;z-index:100;
-    height:56px;order:0;width:100%;
+    height:calc(56px + env(safe-area-inset-bottom));order:0;width:100%;
     background:var(--surface);border-top:2px solid var(--line);
     box-shadow:0 -3px 14px rgba(0,0,0,.18);
     display:flex;flex-direction:row;flex-wrap:nowrap;
-    justify-content:space-around;align-items:stretch;padding:0
+    justify-content:space-around;align-items:stretch;
+    padding:0 0 env(safe-area-inset-bottom)
   }
   .tabs .tab-item{
     flex:1;border:0;background:transparent;
@@ -512,22 +514,24 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .tabs .tab-item.active,.tabs .tab-item[aria-current="page"]{background:transparent;color:var(--ink);box-shadow:none;border-top:2px solid var(--ink)}
   [data-theme="dark"] .tabs .tab-item.active,[data-theme="dark"] .tabs .tab-item[aria-current="page"]{color:var(--green);border-top-color:var(--green);background:transparent}
   .tab-ico{font-size:20px}
-  .tab-lbl{font-size:9px;letter-spacing:0}
+  .tab-lbl{font-size:9px;letter-spacing:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tab-dropdown{min-width:0}
+  .tab-dropdown .tab-link-inner{min-width:0;max-width:100%;overflow:hidden}
 
   /* App padding for bottom nav + hide ticker */
-  .app{padding-bottom:56px}
+  .app{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
   .ticker{display:none}
 
-  /* Cards: hidden by default on mobile (FABs toggle them) */
-  .col-left{top:10px;left:10px;right:10px;width:auto;bottom:auto;max-height:52vh}
+  /* Cards: hidden by default on mobile (FABs toggle them); vh caps kept below ~90% combined so both can coexist on short viewports */
+  .col-left{top:10px;left:10px;right:10px;width:auto;bottom:auto;max-height:45vh}
   #panelLeft{max-height:50%}
   .feed-card{min-height:80px}
-  .card-right{top:10px;right:10px;left:10px;width:auto;bottom:auto;max-height:52vh}
+  .card-right{top:10px;right:10px;left:10px;width:auto;bottom:auto;max-height:45vh}
 
   /* FABs: show on mobile */
   .mob-fab{display:flex}
-  /* шит докуется НАД нижней навигацией (56px), а не поверх неё — иначе вкладки не видны и не нажимаются */
-  .mob-sheet{display:flex;bottom:56px}
+  /* шит докуется НАД нижней навигацией (56px + safe-area), а не поверх неё — иначе вкладки не видны и не нажимаются */
+  .mob-sheet{display:flex;bottom:calc(56px + env(safe-area-inset-bottom))}
 
   /* Balance */
   .bal-big .n{font-size:26px}
@@ -535,15 +539,16 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   /* Map controls — спрятать на мобиле (слои всё равно все включены) */
   .map-ctl{display:none}
 
-  /* Strike bar — компактная сверху */
-  .strikebar{top:6px;left:8px;right:8px;transform:none;max-width:none;gap:4px;padding:4px 6px;border-radius:8px}
+  /* Strike bar — компактная сверху; опущена ниже status-strip/livebar (48px) чтобы не заходить на них */
+  .strikebar{top:48px;left:8px;right:8px;transform:none;max-width:none;gap:4px;padding:4px 6px;border-radius:8px}
   .strikebar .sb-h{display:none}
   .strikebar input[type=range]{flex:1;min-width:0;width:auto}
   .strikebar .sb-lbl{min-width:0;flex:none;font-size:10px}
-  .strikebar .sb-btn{min-width:26px;height:24px;font-size:12px}
+  /* real tap-zone >=44px (WCAG); visual stays compact via font-size, only the box grows */
+  .strikebar .sb-btn{min-width:44px;height:44px;font-size:12px}
 
-  /* FAB-кнопки выше нижнего нава */
-  .mob-fab{bottom:64px;width:46px;height:46px;font-size:21px}
+  /* FAB-кнопки выше нижнего нава + safe-area */
+  .mob-fab{bottom:calc(64px + env(safe-area-inset-bottom));width:46px;height:46px;font-size:21px}
 
   /* Pages */
   .page{padding:12px}
@@ -645,7 +650,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 }
 /* ===== VERY SMALL SCREENS (≤400px) ===== */
 @media(max-width:400px){
-  .topbar{height:44px;padding:0 6px;gap:4px}
+  .topbar{height:calc(44px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 6px 0;gap:4px}
   .brand-emblem{font-size:18px}
   .topctl{gap:4px}
   .mode-pill{font-size:9px;padding:3px 6px}
@@ -656,11 +661,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .tabs .tab-item{padding:3px 1px}
   .tab-ico{font-size:18px}
   .tab-lbl{font-size:8px}
-  .tabs{height:50px}
-  .app{padding-bottom:50px}
-  .mob-sheet{bottom:50px}
+  .tabs{height:calc(50px + env(safe-area-inset-bottom))}
+  .app{padding-bottom:calc(50px + env(safe-area-inset-bottom))}
+  .mob-sheet{bottom:calc(50px + env(safe-area-inset-bottom))}
   .strikebar .sb-preset{padding:0 7px;font-size:10.5px}
-  .strikebar .sb-btn{min-width:24px;height:22px;font-size:11px}
+  .strikebar .sb-btn{min-width:44px;height:44px;font-size:11px}
 }
 
 /* ===== A11Y: visible keyboard focus (review item 11) ===== */
@@ -668,7 +673,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 [data-theme="dark"] :focus-visible{outline-color:var(--green)}
 .status-strip .ss-src:focus-visible,.status-strip .ss-report:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .tabs .tab-item:focus-visible,.seg button:focus-visible,.theme-btn:focus-visible,
-.mob-fab:focus-visible,.back-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.back-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.mob-fab:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}/* inward offset: .view has overflow:hidden and clips an outward outline near the edge */
 [data-theme="dark"] .tabs .tab-item:focus-visible,
 [data-theme="dark"] .seg button:focus-visible,
 [data-theme="dark"] .theme-btn:focus-visible,
@@ -713,6 +719,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .topctl{min-width:auto;gap:5px}
   .topctl .tg-subscribe{font-size:0!important;width:32px;justify-content:center;padding:5px 0!important}
   .topctl .tg-subscribe::before{content:"✈";font-size:14px}
+  .install-link{padding:0 9px}
+  .install-link .install-lbl{display:none}
 }
 
 @media(max-width:1040px) and (min-width:821px){
@@ -749,3 +757,39 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .tgb-close{flex:none;background:none;border:0;color:var(--ink-dim);font-size:15px;line-height:1;cursor:pointer;padding:4px 6px;border-radius:6px}
 .tgb-close:hover{background:var(--surface2);color:var(--ink)}
 @media(max-width:640px){.tgb-txt{font-size:12px}.tgb-cta{padding:4px 9px;font-size:11px}}
+
+/* ===== Installed PWA: hide install prompts (app is already installed) ===== */
+@media(display-mode:standalone){
+  .install-link,.tg-alert-banner{display:none!important}
+}
+
+/* ===== PWA install toast ("✅ Приложение установлено" etc, shown by JS via .show) ===== */
+.pwa-toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:2600;
+  background:rgba(20,20,20,.92);color:#fff;padding:9px 16px;border-radius:999px;
+  font-size:12.5px;font-weight:600;box-shadow:var(--shadow);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity .25s ease}
+.pwa-toast.show{opacity:1}
+@media(max-width:820px){.pwa-toast{bottom:calc(66px + env(safe-area-inset-bottom))}}
+
+/* ===== Landscape phones (short viewport): maximize map, compact chrome ===== */
+@media(orientation:landscape) and (max-height:500px){
+  .topbar{height:calc(38px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
+  .status-strip{min-height:30px;padding:3px 8px}
+  .livebar{display:none}
+  .ticker{display:none}
+  .strikebar{top:34px;padding:3px 5px}
+  .col-left,.card-right{max-height:70vh}
+  .mob-sheet{max-height:78vh}
+  .tabs{height:calc(42px + env(safe-area-inset-bottom))}
+  .tab-ico{font-size:16px}
+  .tab-lbl{display:none}
+  .app{padding-bottom:calc(42px + env(safe-area-inset-bottom))}
+  .mob-fab{bottom:calc(48px + env(safe-area-inset-bottom));width:38px;height:38px;font-size:17px}
+}
+
+/* ===== Tap-target >=44px for AZS presets/brand filters on mobile (7.2.2 / 7.2.3) ===== */
+@media(max-width:820px){
+  .azs-presets button{min-height:44px}
+  .azs-ab #azsRouteBtn,.azs-ab #azsRouteClear{min-height:44px}
+  .azs-brands label{min-height:44px;padding:6px 10px;font-size:12px}
+}

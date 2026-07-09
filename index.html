@@ -3,7 +3,7 @@
 <head>
   <!-- ─── BASIC / SEO META ─── -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Нет бензина в России — карта НПЗ и дефицита топлива</title>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -94,15 +94,15 @@
           <div class="brand-sub">NPZ TACTICAL MAP</div>
         </div>
       </div>
-      <nav class="tabs" id="tabs" role="tablist">
-        <button data-view="russia" class="tab-item active" role="tab" aria-selected="true"><span class="tab-ico">🗺</span><span class="tab-lbl">РОССИЯ</span></button>
-        <button data-view="crimea" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">⚠</span><span class="tab-lbl">КРЫМ</span></button>
-        <button data-view="azs" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">⛽</span><span class="tab-lbl">АЗС</span></button>
+      <nav class="tabs" id="tabs" aria-label="Разделы карты">
+        <button data-view="russia" class="tab-item active" aria-current="true"><span class="tab-ico">🗺</span><span class="tab-lbl">РОССИЯ</span></button>
+        <button data-view="crimea" class="tab-item"><span class="tab-ico">⚠</span><span class="tab-lbl">КРЫМ</span></button>
+        <button data-view="azs" class="tab-item"><span class="tab-ico">⛽</span><span class="tab-lbl">АЗС</span></button>
         <a href="/radar" class="tab-item tab-link"><span class="tab-ico">📡</span><span class="tab-lbl">РАДАР</span></a>
         <a href="/news" class="tab-item tab-link"><span class="tab-ico">📰</span><span class="tab-lbl">НОВОСТИ</span></a>
-        <button data-view="history" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">🕑</span><span class="tab-lbl">ИСТОРИЯ</span></button>
-        <button data-view="forecast" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">📈</span><span class="tab-lbl">ПРОГНОЗ</span></button>
-        <button data-view="economy" class="tab-item" role="tab" aria-selected="false"><span class="tab-ico">💰</span><span class="tab-lbl">ДОХОДЫ</span></button>
+        <button data-view="history" class="tab-item"><span class="tab-ico">🕑</span><span class="tab-lbl">ИСТОРИЯ</span></button>
+        <button data-view="forecast" class="tab-item"><span class="tab-ico">📈</span><span class="tab-lbl">ПРОГНОЗ</span></button>
+        <button data-view="economy" class="tab-item"><span class="tab-ico">💰</span><span class="tab-lbl">ДОХОДЫ</span></button>
         <div class="tab-dropdown">
           <a href="/analytics" class="tab-link-inner" aria-haspopup="true"><span class="tab-ico">📊</span><span class="tab-lbl">АНАЛИТИКА ▾</span></a>
           <div class="tab-dropdown-menu">
@@ -117,6 +117,7 @@
             <a href="/crisis">🔥 Прогноз кризиса</a>
             <a href="/attacks">💥 Хроника ударов</a>
             <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help">❓ Как пользоваться</a>
             <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
             <a href="/karta-bpla">📡 Карта БПЛА</a>
           </div>
@@ -128,7 +129,7 @@
           <span class="sync-next" id="nextSync" title="Обратный отсчёт до следующего обновления данных">T-00:00</span>
         </div>
         <span class="mode-pill" id="modePill">ОЦЕНКА</span>
-        <a href="/install" class="install-link" title="Установить приложение — будь в курсе" aria-label="Установить приложение"><span class="install-ico">📲</span><span class="install-lbl">Установить приложение</span></a>
+        <a href="/install" id="installBtn" class="install-link" title="Установить приложение — будь в курсе" aria-label="Установить приложение"><span class="install-ico">📲</span><span class="install-lbl">Установить приложение</span></a>
         <a href="/support" class="donate-link" title="Поддержать проект" aria-label="Поддержать проект"><span class="donate-ico">🤝</span><span class="donate-lbl">Поддержать нас</span></a>
         <button class="theme-btn" id="themeToggle" title="Светлая / тёмная карта" aria-label="Переключить светлую или тёмную карту">☀️</button>
       </div>
@@ -143,7 +144,7 @@
       <h1 class="ss-title">Нет бензина в России — карта НПЗ и дефицита топлива</h1>
       <span class="ss-txt">автообновление <span class="ss-num">4×/сутки</span> · <span class="ss-num">9</span> наборов данных</span>
       <nav class="ss-nav" aria-label="Ссылки карты">
-        <!-- FRESH:START --><a class="ss-src ss-fresh" href="/gde-dizel" style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">🆕 Новое: Где найти дизель →</a><!-- FRESH:END -->
+        <!-- FRESH:START --><a class="ss-src ss-fresh" href="/help" style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">🆕 Новое: Как пользоваться →</a><!-- FRESH:END -->
         <a class="ss-src" href="/news">Новости</a>
         <a class="ss-src" href="/sources">Источники</a>
       </nav>
@@ -363,6 +364,20 @@
       }
     });
   </script>
-  <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}</script>
+  <script>
+  if('serviceWorker' in navigator){window.addEventListener('load',function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(e){console.warn('SW:',e);});
+    // sw.js делает skipWaiting+claim → смена контроллера = новая версия уже активна
+    var hadSW=!!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange',function(){
+      if(!hadSW){hadSW=true;return;} // первая установка — не «обновление»
+      var t=document.createElement('div');t.className='pwa-toast';t.setAttribute('role','status');
+      t.textContent='🔄 Доступна новая версия — нажмите, чтобы обновить';
+      t.style.cursor='pointer';t.style.pointerEvents='auto';t.onclick=function(){location.reload();};
+      document.body.appendChild(t);requestAnimationFrame(function(){t.classList.add('show');});
+      setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},300);},8000);
+    });
+  });}
+  </script>
 </body>
 </html>

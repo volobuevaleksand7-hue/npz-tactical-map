@@ -5,8 +5,9 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v1';
+var CACHE = 'npz-shell-v2';
 var SHELL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest',
+             '/radar', '/news', '/install',
              '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
 
 self.addEventListener('install', function (e) {
