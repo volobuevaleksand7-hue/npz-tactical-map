@@ -594,6 +594,7 @@
       return o[a.status] !== o[b.status] ? o[a.status] - o[b.status] : b.capacity_mt_year - a.capacity_mt_year;
     });
     list.forEach(function (r) {
+      if (typeof r.lat !== "number" || typeof r.lon !== "number") return;
       var m = L.marker([r.lat, r.lon], { icon: buildPiece(r), riseOnHover: true }).bindPopup(npzPopup(r), POPUP_OPTS);
       r._m = m; m.addTo(L_ru.npz);
     });
@@ -641,12 +642,14 @@
     if (!S.state) return;
     L_ru.logistics.clearLayers();
     (S.state.pipelines || []).forEach(function (p) {
+      if (!Array.isArray(p.coords) || !p.coords.length) return;
       var col = p.type === "product" ? "#178585" : "#8a6d3b";
       L.polyline(p.coords, { color: col, weight: 3, opacity: .65, dashArray: p.type === "product" ? "3,7" : null })
         .bindPopup('<div class="pp-h">' + esc(p.name) + '</div><div class="pp-kv"><span>Тип</span><span>' + (p.type === "product" ? "нефтепродукты" : "сырая нефть") + '</span></div>', POPUP_OPTS)
         .addTo(L_ru.logistics);
     });
     (S.state.export_terminals || []).forEach(function (t) {
+      if (typeof t.lat !== "number" || typeof t.lon !== "number") return;
       var hit = t.status === "hit";
       var icon = L.divIcon({ className: "", html: termSVG(hit), iconSize: [34, 34], iconAnchor: [17, 26] });
       var h = '<div class="pp-h">⚓ ' + esc(t.name) + '</div><span class="pp-st ' + (hit ? "hit" : "ok") + '">' + (hit ? "ПОРАЖЁН" : "РАБОТАЕТ") + '</span>';
@@ -822,12 +825,14 @@
       }
       L_cr.layer.clearLayers();
       (cr.routes || []).forEach(function (rt) {
+        if (!Array.isArray(rt.coords) || !rt.coords.length) return;
         var col = rt.status === "threatened" ? "#d23a2e" : rt.status === "cut" ? "#a01d14" : "#178585";
         L.polyline(rt.coords, { color: col, weight: 4, opacity: .8, dashArray: "6,8" })
           .bindPopup('<div class="pp-h">' + esc(rt.name) + '</div><span class="pp-st down">' + esc(String(rt.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(rt.note) + '</div>', POPUP_OPTS)
           .addTo(L_cr.layer);
       });
       (cr.stations || []).forEach(function (s) {
+        if (typeof s.lat !== "number" || typeof s.lon !== "number") return;
         var c = s.status === "dry" ? "#a01d14" : s.status === "ok" ? "#2f9e57" : "#df8f17";
         L.marker([s.lat, s.lon], { icon: L.divIcon({ className: "", html: '<div style="background:' + c + ';color:#fff;font-weight:800;font-size:11px;padding:3px 8px;border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,.35);white-space:nowrap">⛽ ' + esc(s.name) + '</div>', iconSize: [128, 24], iconAnchor: [64, 18] }) })
           .bindPopup('<div class="pp-h">⛽ ' + esc(s.name) + '</div><span class="pp-st ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(s.note) + '</div>', POPUP_OPTS)

@@ -1,7 +1,7 @@
 {
-  "version": "1.14.1",
+  "version": "1.14.2",
   "releasedAt": "2026-07-10",
-  "codename": "audit H2: safeUrl экранирует URL перед вставкой в href",
-  "summary": "Аудит Fable5 2026-07-08 (H2): safeUrl(u) в app.js проверял только схему http(s)://, но возвращал URL как есть — строка вида https://x/\" onmouseover=\"alert(1) проходила проверку и ломала атрибут href в попапах (НПЗ/АЗС/дороги/голоса/Крым), исполняя произвольный JS при наведении. Теперь safeUrl оборачивает прошедший проверку URL в существующий esc(), как и остальные поля попапов. Затронуты все ~12 мест, где safeUrl вставляется в href — все чинятся одним изменением функции.",
+  "codename": "audit H3: type-check lat/lon для НПЗ/логистики/Крыма",
+  "summary": "Аудит Fable5 2026-07-08 (H3): маркеры/полилинии НПЗ (renderNpz), логистики (renderLogistics: pipelines+export_terminals) и Крыма (renderCrimea: routes+stations) строились из lat/lon/coords без проверки типа — в отличие от strikes/azs/grid, которые эту проверку уже делают. Один объект с нечисловыми координатами или пустым/отсутствующим coords кидает исключение внутри L.marker/L.polyline и прерывает весь renderAll() каждые 60с (повторяющаяся «ОШИБКА ЗАГРУЗКИ» вместо остальной карты). Добавлены те же guard'ы (typeof===\"number\" / Array.isArray+length), что уже используются для strikes/azs/grid — просто пропускаем битую запись, а не рушим весь рендер.",
   "site": "https://npz-tactical-map.vercel.app"
 }
