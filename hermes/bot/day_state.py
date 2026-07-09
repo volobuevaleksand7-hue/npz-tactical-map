@@ -57,8 +57,17 @@ def _jsave(path, payload):
     os.replace(tmp, path)
 
 
+def _msk_now():
+    """МСК = UTC+3 круглый год (без DST) — тот же приём, что уже в _now_msk_str()
+    ниже и в agents/strike-candidates.py. Без zoneinfo/pytz, т.к. смещение фиксировано."""
+    return datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=3)
+
+
 def today_iso():
-    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    """Дата дня по МСК (audit H7): продукт МСК-native (редполитика v2, §7), день
+    рвётся в 00:00 МСК. Раньше считали по UTC — событие 00:30-02:59 МСК попадало
+    под вчерашний дедуп-ключ. Дедуп/ensure_today/day-rollover — всё через эту дату."""
+    return _msk_now().strftime("%Y-%m-%d")
 
 
 def now_iso():
@@ -139,8 +148,7 @@ def add_update_line(state, line_html, max_lines=MAX_UPDATE_LINES):
 
 
 def _now_msk_str():
-    msk = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=3)
-    return msk.strftime("%H:%M")
+    return _msk_now().strftime("%H:%M")
 
 
 def add_molniya_ref(state, headline, url, key):
@@ -227,7 +235,22 @@ def is_strike_published(state, strike):
     return is_published(state, legacy_bkey)
 
 
+def _selftest_msk():
+    """ponytail: assert-based smoke test (no pytest suite for hermes/bot/*.py) — proves
+    today_iso()/_now_msk_str() are computed from MSK (UTC+3), not raw UTC (audit H7)."""
+    utc = datetime.datetime.now(datetime.timezone.utc)
+    expected_date = (utc + datetime.timedelta(hours=3)).strftime("%Y-%m-%d")
+    expected_hm = (utc + datetime.timedelta(hours=3)).strftime("%H:%M")
+    assert today_iso() == expected_date, (today_iso(), expected_date)
+    assert _now_msk_str() == expected_hm, (_now_msk_str(), expected_hm)
+    print("OK: today_iso()/_now_msk_str() selftest passed (MSK = UTC+3, not raw UTC)")
+
+
 if __name__ == "__main__":
+    import sys
+    if "--selftest" in sys.argv:
+        _selftest_msk()
+        raise SystemExit(0)
     st = load_state()
     st = ensure_today(st)
     print(json.dumps(st, ensure_ascii=False, indent=2))

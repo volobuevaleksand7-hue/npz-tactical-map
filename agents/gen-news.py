@@ -22,7 +22,8 @@ import html
 import os
 import hashlib
 import subprocess
-from datetime import datetime, timezone
+import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent  # корень проекта
@@ -98,7 +99,10 @@ def weekday_ru(iso: str) -> str:
 
 
 def today_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    """Дата дня по МСК (audit H7): продукт МСК-native — раньше считали по UTC, событие
+    00:00-02:59 МСК могло получить вчерашнюю дату архива/sitemap. МСК = UTC+3 без DST
+    (тот же приём, что и в hermes/bot/day_state.py::_msk_now)."""
+    return (datetime.now(timezone.utc) + timedelta(hours=3)).strftime("%Y-%m-%d")
 
 
 def escape(s) -> str:
