@@ -161,6 +161,11 @@ def main():
     print(text)
     print()
 
+    # load prev state for interval tracking
+    STATE_PATH = os.path.join(BOT_DIR, "threat-digest-state.json")
+    prev_state = jload(STATE_PATH, {})
+    now_ts = int(datetime.datetime.now(datetime.timezone.utc).timestamp())
+
     # send to subscribers with active alerts
     subs_doc = jload(SUBS_PATH, {"subscribers": {}})
     subscribers = subs_doc.get("subscribers", {})
@@ -171,10 +176,24 @@ def main():
         alerts = info.get("alerts") or {}
         if not alerts.get("enabled"):
             continue
+
+        # check interval
+        interval_min = int(alerts.get("interval_min", 60))
+        last_sent = int(prev_state.get(cid, {}).get("last_sent_ts", 0))
+        if interval_min > 0 and (now_ts - last_sent) < interval_min * 60:
+            continue
+
         resp = api_send(cid, text)
         if resp.get("ok"):
             sent += 1
-        print(f"  → {cid} ({info.get('name', '?')}): {'ok' if resp.get('ok') else 'fail'}")
+            prev_state[cid] = {"last_sent_ts": now_ts}
+        print(f"  -> {cid} ({info.get('name', '?')}): {'ok' if resp.get('ok') else 'fail'}")
+
+    # save state
+    try:
+        json.dump(prev_state, open(STATE_PATH, "w"), ensure_ascii=False)
+    except Exception:
+        pass
 
     print(f"\nОтправлено: {sent}")
 
