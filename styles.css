@@ -424,6 +424,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 /* --- MOBILE BOTTOM SHEET (analytics drawer, built by initMobile()) --- */
 .mob-sheet{position:fixed;bottom:0;left:0;right:0;z-index:2000;display:none;flex-direction:column;background:var(--surface);border-top:1px solid var(--ink-dim);border-radius:16px 16px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.5);max-height:55vh;transform:translateY(0);transition:transform .3s cubic-bezier(.4,0,.2,1)}
 .mob-sheet.collapsed{transform:translateY(calc(100% - 44px))}
+/* свёрнутый шит съезжает вниз transform'ом и его тело нависает над нижней навигацией — тапы должны проходить сквозь, живой остаётся только ручка */
+.mob-sheet.collapsed{pointer-events:none}
+.mob-sheet.collapsed .mob-sheet-handle{pointer-events:auto}
 .mob-sheet-handle{flex-shrink:0;padding:10px 0 4px;text-align:center;cursor:pointer}
 .mob-sheet-handle span{display:inline-block;width:36px;height:4px;background:var(--ink-dim);border-radius:2px}
 .mob-sheet-tabs{display:flex;gap:0;padding:0 8px 6px;overflow-x:auto;flex-shrink:0}
@@ -523,7 +526,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 
   /* FABs: show on mobile */
   .mob-fab{display:flex}
-  .mob-sheet{display:flex}
+  /* шит докуется НАД нижней навигацией (56px), а не поверх неё — иначе вкладки не видны и не нажимаются */
+  .mob-sheet{display:flex;bottom:56px}
 
   /* Balance */
   .bal-big .n{font-size:26px}
@@ -654,6 +658,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .tab-lbl{font-size:8px}
   .tabs{height:50px}
   .app{padding-bottom:50px}
+  .mob-sheet{bottom:50px}
   .strikebar .sb-preset{padding:0 7px;font-size:10.5px}
   .strikebar .sb-btn{min-width:24px;height:22px;font-size:11px}
 }
