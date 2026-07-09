@@ -72,6 +72,11 @@ def build_sitemap():
     # Collect all .html files
     all_html = []
     for root, dirs, files in os.walk(PROJECT_ROOT):
+        # Exclude hidden directories and development/ignored/draft folders
+        dirs[:] = [d for d in dirs if not d.startswith('.') and d not in {
+            "drafts", "docs", "dashboard", "agents", "seo", ".git", ".github", 
+            ".venv", ".vercel", "__pycache__", "node_modules", "temp"
+        }]
         for f in files:
             if not f.endswith(".html"):
                 continue

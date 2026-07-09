@@ -1,7 +1,7 @@
 {
-  "version": "1.10.4",
+  "version": "1.10.5",
   "releasedAt": "2026-07-09",
-  "codename": "устойчивый precache SW (Codex-ревью)",
-  "summary": "По финальному Codex-ревью релиза: устойчивая установка service worker — критичная оболочка (/, index, styles, app, manifest) кешируется обязательно, остальные страницы/иконки best-effort; один 404 больше не активирует пустой SW с удалением старого кэша (не ломает офлайн). Остальные 6 областей ревью — чисто.",
+  "codename": "исправление sitemap и индексации в GSC",
+  "summary": "Исправлена ошибка индексации в Google Search Console («Не удалось обработать файл Sitemap»): из sitemap.xml исключены черновики (drafts/) и недоступные страницы (dashboard/, docs/), которые давали 404 ошибки на проде.",
   "site": "https://npz-tactical-map.vercel.app"
 }
