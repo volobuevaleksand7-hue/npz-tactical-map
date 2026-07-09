@@ -37,6 +37,20 @@ if [ "$bad" = "1" ]; then
   exit 1
 fi
 
+# ---- archive-shrink guard: strikes.json — полный архив, коллекторы только дописывают ----
+# Дважды (июнь: 168→110, 08.07: 147→5) облачный коллектор перезаписывал архив свежим
+# снапшотом. Блокируем коммит, если число strikes падает >10%. Обход: ALLOW_STRIKES_SHRINK=1.
+if echo "$staged" | grep -q '^data/strikes\.json$' && [ "${ALLOW_STRIKES_SHRINK:-}" != "1" ] && command -v python3 >/dev/null 2>&1; then
+  old_n="$(git show HEAD:data/strikes.json 2>/dev/null | python3 -c 'import json,sys;print(len(json.load(sys.stdin).get("strikes",[])))' 2>/dev/null || echo 0)"
+  new_n="$(git show :data/strikes.json 2>/dev/null | python3 -c 'import json,sys;print(len(json.load(sys.stdin).get("strikes",[])))' 2>/dev/null || echo 0)"
+  if [ "$old_n" -gt 20 ] && [ "$new_n" -lt "$((old_n * 9 / 10))" ]; then
+    echo "pre-commit: BLOCKED — data/strikes.json усыхает: $old_n → $new_n записей." >&2
+    echo "pre-commit: strikes.json — ПОЛНЫЙ архив, коллекторы только дописывают." >&2
+    echo "pre-commit: осознанная чистка → ALLOW_STRIKES_SHRINK=1." >&2
+    exit 1
+  fi
+fi
+
 # ---- neutral-OSINT guard: вычистить пропаганду / укр-вербатим / офф-топик из strikes ----
 # Ловит ЛЮБОЙ коммит (newswatch, ручной, внешняя модель), т.к. core.hooksPath=.githooks.
 # Санитайзер идемпотентен и авто-перезакладывает очищенный файл — коммит не блокируется,
