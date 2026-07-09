@@ -88,6 +88,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .tabs .tab-item.active,.tabs .tab-item[aria-current="page"]{background:var(--ink);color:var(--surface);border-color:var(--ink);box-shadow:var(--shadow-sm)}
 [data-theme="dark"] .tabs .tab-item.active,[data-theme="dark"] .tabs .tab-item[aria-current="page"]{background:var(--green);color:#04140b;border-color:var(--green)}
 .topctl{display:flex;align-items:center;gap:6px;min-width:220px;justify-content:flex-end}
+.hdr-quick{display:none}/* быстрые чипы РАДАР/АЗС — только на мобиле (десктоп имеет полный ряд вкладок) */
 .sync{font-family:var(--mono);font-size:10px;color:var(--ink-dim);text-align:right;line-height:1.4}
 .sync-next{display:block;color:var(--teal);font-weight:600}
 .mode-pill{background:var(--amber);color:#241500;font-family:var(--mono);font-weight:800;font-size:9px;letter-spacing:1px;padding:4px 8px;border-radius:6px}
@@ -486,6 +487,12 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .brand-emblem{font-size:20px}
   .topctl{min-width:auto;gap:5px;flex-shrink:1;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .topctl::-webkit-scrollbar{display:none}
+  /* Быстрые чипы РАДАР/АЗС в шапке — прямой доступ на мобиле, без бургера */
+  .hdr-quick{display:inline-flex;align-items:center;gap:5px;height:40px;padding:0 11px;border-radius:8px;
+    border:1px solid var(--teal);background:var(--surface);color:var(--teal);
+    font-weight:800;font-size:11px;letter-spacing:.3px;text-decoration:none;white-space:nowrap;flex:0 0 auto;transition:.15s}
+  .hdr-quick .hq-ico{font-size:15px;line-height:1}
+  .hdr-quick:active{background:var(--teal);color:#fff}
 
   /* Крым-панель на мобиле: узкая шторка сверху, не закрывает карту (T4) */
   #crimeaPanel{top:10px;left:10px;right:10px;width:auto;max-height:40%}

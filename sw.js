@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v6';   // bump → форсит подмену закешированных styles.css/app.js (v1.12.0 аудит-пасс: тач-зоны ≥40px, сворачивание панелей Крым/АЗС/radar, единый футер)
+var CACHE = 'npz-shell-v7';   // bump → форсит подмену закешированных styles.css/app.js (v1.12.1: быстрые чипы РАДАР/АЗС в шапке на мобиле)
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

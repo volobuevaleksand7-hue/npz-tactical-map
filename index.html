@@ -138,6 +138,8 @@
         <span class="mode-pill" id="modePill">ОЦЕНКА</span>
         <a href="/install" id="installBtn" class="install-link" title="Установить приложение — будь в курсе" aria-label="Установить приложение"><span class="install-ico">📲</span><span class="install-lbl">Установить приложение</span></a>
         <a href="/support" class="donate-link" title="Поддержать проект" aria-label="Поддержать проект"><span class="donate-ico">🤝</span><span class="donate-lbl">Поддержать нас</span></a>
+        <a href="/radar" class="hdr-quick" title="Радар БПЛА — карта воздушных тревог" aria-label="Радар БПЛА"><span class="hq-ico">📡</span><span class="hq-lbl">РАДАР</span></a>
+        <button type="button" class="hdr-quick" data-view="azs" title="АЗС — карта заправок" aria-label="АЗС — карта заправок"><span class="hq-ico">⛽</span><span class="hq-lbl">АЗС</span></button>
         <button class="theme-btn" id="themeToggle" title="Светлая / тёмная карта" aria-label="Переключить светлую или тёмную карту">☀️</button>
         <button class="nav-burger" id="navBurger" type="button" aria-label="Меню разделов" aria-expanded="false" aria-controls="navDrawer">☰</button>
       </div>
@@ -412,6 +414,15 @@
       d.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var vi = e.target.closest('.ndp-item[data-view]'); if (vi) vi.click(); } });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !d.hidden) close(); });
     })();
+  </script>
+  <script>
+    // Header quick-chips (mobile): АЗС проксирует на реальную кнопку вкладки #tabs; РАДАР — обычная ссылка
+    document.querySelectorAll('.hdr-quick[data-view]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var t = document.querySelector('#tabs button[data-view="' + el.dataset.view + '"]');
+        if (t) t.click();
+      });
+    });
   </script>
   <script>
     // Mobile dropdown toggle for АНАЛИТИКА
