@@ -191,7 +191,17 @@
       .nav{display:none}
       .feed{display:none} /* ponytail: на мобиле ленту прячем; вкладки панель/лента — если попросят */
       .nav-burger{display:inline-flex}
-      .sync{display:none}          /* declutter topbar; burger carries navigation */
+      .sync,.refresh-badge{display:none}   /* burger заменяет зелёную плашку «Авто» */
+      /* бренд не должен обрезаться/переноситься */
+      .topbar{gap:8px;padding:0 10px}
+      .brand{min-width:0;flex-shrink:1;overflow:hidden}
+      .brand-ico{font-size:19px}
+      .brand-t{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .brand-s{display:none}
+      .topctl{gap:7px}
+      /* топ-кнопки помельче, чтобы не маячили */
+      .theme-btn,.nav-burger{width:34px;height:34px;padding:0;font-size:17px}
+      #toggleStrikes~*,label:has(#toggleStrikes){font-size:11px}
     }
 
     /* ===== MOBILE NAV DRAWER (☰) ===== */
@@ -333,11 +343,19 @@
 .about-body a { color: var(--teal); text-decoration: none; }
 .about-body a:hover { text-decoration: underline; }
 
+/* открытый accordion показывает ✕, чтобы было понятно как закрыть (кнопка уезжает вверх при раскрытии) */
+.legend-toggle[open] > summary::after,
+.about-radar[open] > summary::after { content:"✕"; margin-left:auto; padding-left:10px; font-weight:800; opacity:.65; }
+.legend-toggle > summary, .about-radar > summary { gap:6px; }
+
 @media(max-width:768px){
   .radar-civ-icon img, .radar-civ-icon svg { width: 40px !important; height: 40px !important; }
-  .legend-toggle { left: 14px; bottom: 84px; max-width: calc(100% - 28px); }
+  .legend-toggle { left: 12px; bottom: 76px; max-width: calc(100% - 24px); }
   /* ponytail: было display:none (справка терялась) — теперь свёрнутый accordion, доступен по тапу */
-  .about-radar { right: 14px; bottom: 84px; max-width: calc(50% - 21px); }
+  .about-radar { right: 12px; bottom: 76px; max-width: calc(60% - 18px); }
+  /* кнопки мельче, чтобы не маячили */
+  .legend-toggle > summary, .about-radar > summary { min-height:34px; padding:5px 10px; font-size:10px; }
+  .about-body { font-size: 11px; line-height: 1.45; }
 }
   </style>
 </head>
@@ -1135,6 +1153,16 @@
       b.addEventListener('click', open);
       d.addEventListener('click', function (e) { if (e.target.hasAttribute('data-close')) { close(); return; } if (e.target.closest('.ndp-item[href]')) close(); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !d.hidden) close(); });
+    })();
+
+    // Accordions «Типы угроз» / «О карте тревог»: закрывать по тапу вне (capture ловит и тап по карте — Leaflet глушит всплытие), один открыт за раз
+    (function () {
+      var dets = Array.prototype.slice.call(document.querySelectorAll('.about-radar, .legend-toggle'));
+      if (!dets.length) return;
+      function closeAll(except) { dets.forEach(function (x) { if (x !== except) x.open = false; }); }
+      dets.forEach(function (x) { x.addEventListener('toggle', function () { if (x.open) closeAll(x); }); });
+      document.addEventListener('pointerdown', function (e) { if (!e.target.closest('.about-radar, .legend-toggle')) closeAll(null); }, true);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(null); });
     })();
   </script>
 </body>
