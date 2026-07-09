@@ -154,6 +154,7 @@
 
       <h2 class="section-h"><span class="ico">📋</span> Где действуют талоны и лимиты на бензин</h2>
       <p style="font-size:14px;line-height:1.7;color:var(--ink-dim);margin-bottom:8px">Сводная таблица по ключевым регионам на 8 июля 2026. Важно различать две разные меры: <strong>талон</strong> — право на покупку с приоритетом для спецтранспорта (свободно «купить» нельзя), <strong>лимит</strong> — просто ограничение объёма за одну заправку при свободной продаже за деньги.</p>
+      <div style="overflow-x:auto">
       <table class="talon-table">
         <thead>
           <tr><th>Регион</th><th>Сеть АЗС</th><th>Лимит</th><th>Режим</th><th>Цена</th></tr>
@@ -167,6 +168,7 @@
           <tr><td>Москва</td><td>Татнефть</td><td>30 л (АИ-95)</td><td><span class="tag-limit">ЛИМИТ</span></td><td>—</td></tr>
         </tbody>
       </table>
+      </div>
       <p style="font-size:11px;color:var(--ink-dim)">Источник: агрегация OSINT-данных (Reuters, The Moscow Times, Guardian, Crimeanwind, региональные СМИ) на 8 июля 2026. Актуальный статус по всем регионам — на <a href="/" style="color:var(--teal);font-weight:700">карте топливного дефицита</a>.</p>
 
       <h2 class="section-h"><span class="ico">🎫</span> Талоны в Крыму: как получить и какой лимит</h2>
@@ -245,6 +247,14 @@
       </div>
     </div>
   </main>
+
+  <footer class="news-footer">
+    <div class="news-footer-inner">
+      <p>Топливный фронт РФ · <a href="/">🗺️ Карта НПЗ</a> · OSINT-дашборд · <span class="mono">npz-tactical-map.vercel.app</span></p>
+      <p class="footer-disc">Не является официальной информацией. Данные из открытых источников.</p>
+    </div>
+  </footer>
+
   <script>
     const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.dataset.theme = saved;

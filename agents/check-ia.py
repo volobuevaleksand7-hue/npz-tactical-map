@@ -4,8 +4,13 @@
 Каждая live-страница из data/seo-topics.jsonl обязана иметь: файл на диске,
 запись в sitemap.xml и место в меню «Аналитика» (кроме top-nav и /npz/*).
 Падает с exit 1, если что-то оторвано. Гонять перед пушем / в CI.
+
+Обратный проход: каждый <loc> из sitemap.xml обязан быть либо top-nav
+(TOP_URLS), либо в реестре, либо в ручном списке инфра-страниц (KNOWN_EXTRA_URLS)
+/ архивом /news/YYYY-MM-DD. Иначе — не fail, а warning про осиротевший/чужой URL
+в sitemap (так утекли exilenova.html/radarrusiia.html и дубль moskovskij-npz).
 """
-import sys, pathlib, importlib.util
+import sys, re, pathlib, importlib.util
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -14,11 +19,26 @@ spec = importlib.util.spec_from_file_location("buildnav", HERE / "build-nav.py")
 bn = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(bn)
 
+# Страницы, которые живут в sitemap, но не идут через реестр seo-topics.jsonl —
+# добавлять сюда руками при появлении новой фиксированной страницы вне registry.
+KNOWN_EXTRA_URLS = {"/analytics", "/install"}
+NEWS_ARCHIVE_RE = re.compile(r"^/news/\d{4}-\d{2}-\d{2}$")
+LOC_RE = re.compile(r"<loc>https?://[^/]+(/[^<]*)</loc>")
+
 
 def file_for(url):
     if url == "/":
         return ROOT / "index.html"
     return ROOT / (url.lstrip("/") + ".html")
+
+
+def check_orphans(sitemap, rows):
+    known = bn.TOP_URLS | KNOWN_EXTRA_URLS | {r["url"] for r in rows}
+    warnings = []
+    for url in LOC_RE.findall(sitemap):
+        if url not in known and not NEWS_ARCHIVE_RE.match(url):
+            warnings.append(f"{url}: есть в sitemap.xml, но не в реестре/TOP_URLS — осиротевший/мусорный URL?")
+    return warnings
 
 
 def main():
@@ -43,6 +63,13 @@ def main():
         for p in problems:
             print("  -", p)
         sys.exit(1)
+
+    warnings = check_orphans(sitemap, rows)
+    if warnings:
+        print("IA CHECK WARNINGS (не блокирует):")
+        for w in warnings:
+            print("  -", w)
+
     print(f"IA check OK — {live} live-страниц: файлы, sitemap и меню на месте.")
 
 

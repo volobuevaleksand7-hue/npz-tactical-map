@@ -3,7 +3,7 @@
 <head>
   <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("radar-theme")||"light")}catch(e){}</script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>БПЛА сегодня — карта воздушных тревог и ракетной опасности в реальном времени</title>
   <meta name="description" content="Где сейчас объявлена воздушная тревога и угроза БПЛА: живой радар атак дронов и ракетной опасности по регионам России, обновление каждые ~5 минут. Данные OSINT — оценка, не официальное оповещение.">
   <meta name="keywords" content="бпла сегодня, воздушная тревога сейчас, ракетная опасность, карта тревог, где сейчас тревога, атаки дронов сегодня, угроза бпла по регионам">
@@ -50,11 +50,21 @@
     .brand-ico{font-size:22px}
     .brand-t{font-weight:800;font-size:15px;letter-spacing:.5px}
     .brand-s{font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:2px}
-    .nav{display:flex;gap:6px;margin-left:20px}
-    .nav a{border:1px solid var(--line);background:var(--surface2);color:var(--ink-dim);
+    .news-nav{display:flex;gap:6px;margin-left:20px}
+    .news-nav a{border:1px solid var(--line);background:var(--surface2);color:var(--ink-dim);
       font-weight:700;font-size:12px;padding:6px 14px;border-radius:10px;text-decoration:none;transition:.15s}
-    .nav a:hover{color:var(--ink);transform:translateY(-1px)}
-    .nav a.active{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+    .news-nav a:hover{color:var(--ink);transform:translateY(-1px)}
+    .news-nav a.active,.news-nav a[aria-current="page"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+    /* дропдаун «Аналитика» — унифицирован с news-nav на остальных лендингах (news.css) */
+    .nav-dropdown{position:relative;display:inline-block}
+    .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;z-index:200;min-width:210px;padding:6px 0;
+      background:var(--surface,#16202b);border:1px solid var(--line,#333);border-radius:8px;box-shadow:var(--shadow-sm)}
+    .nav-dropdown-menu a{display:block;padding:8px 16px;color:var(--ink);text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap;transition:background .15s,color .15s}
+    .nav-dropdown-menu a:hover{background:var(--surface2);color:var(--teal)}
+    .nav-dropdown-menu a[aria-current="page"]{color:var(--teal);background:var(--surface2)}
+    .nav-drop-group{padding:7px 16px 3px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--ink-dim);opacity:.75}
+    .nav-drop-group:first-child{padding-top:2px}
+    .nav-dropdown:hover .nav-dropdown-menu{display:block}
     .topctl{margin-left:auto;display:flex;align-items:center;gap:10px}
     .sync{font-family:var(--mono);font-size:10px;color:var(--ink-dim);text-align:right;line-height:1.4}
     .sync-next{display:block;color:var(--teal);font-weight:600}
@@ -188,9 +198,9 @@
     @media(max-width:768px){
       .panel{width:calc(100% - 28px);max-height:45%;bottom:40px;top:auto}
       .panel.collapsed{max-height:none;height:auto}
-      .nav{display:none}
+      .news-nav{display:none}
       .feed{display:none} /* ponytail: на мобиле ленту прячем; вкладки панель/лента — если попросят */
-      .nav-burger{display:inline-flex}
+      .nav-burger{display:inline-flex!important} /* ponytail-fix: базовый .nav-burger{display:none} ниже по файлу (строка ~220) той же специфичности перебивал это правило — бургер никогда не показывался на мобиле */
       .sync,.refresh-badge{display:none}   /* burger заменяет зелёную плашку «Авто» */
       /* бренд не должен обрезаться/переноситься */
       .topbar{gap:8px;padding:0 10px}
@@ -200,8 +210,10 @@
       .brand-s{display:none}
       .topctl{gap:7px}
       /* топ-кнопки помельче, чтобы не маячили */
-      .theme-btn,.nav-burger{width:34px;height:34px;padding:0;font-size:17px}
+      .theme-btn,.nav-burger{width:40px;height:40px;padding:0;font-size:17px}
       #toggleStrikes~*,label:has(#toggleStrikes){font-size:11px}
+      /* Leaflet zoom control default 26-30px — ниже тач-таргета 44px; !important бьёт .leaflet-touch .leaflet-bar a (та же специфичность, но грузится раньше) */
+      .leaflet-control-zoom a{width:40px!important;height:40px!important;line-height:40px!important;font-size:18px!important}
     }
 
     /* ===== MOBILE NAV DRAWER (☰) ===== */
@@ -368,13 +380,43 @@
         <div class="brand-s">NPZ TACTICAL MAP</div>
       </div>
     </div>
-    <nav class="nav">
-      <a href="/">🗺 Карта</a>
-      <a href="/news">📰 Сводки</a>
-      <a href="/radar" class="active">📡 Радар БПЛА</a>
-      <a href="/analytics">📊 Аналитика</a>
-      <a href="/sources">📚 Источники</a>
-    </nav>
+    <nav class="news-nav">
+        <a href="/">🗺️ Карта НПЗ</a>
+        <a href="/news">📰 Сводки</a>
+        <a href="/radar" aria-current="page">📡 Радар БПЛА</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <div class="nav-drop-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
+            <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <a href="/raketnaya-opasnost-volgograd">🚀 Ракетная опасность: Волгоград</a>
+            <a href="/raketnaya-opasnost-cheboksary">🚀 Ракетная опасность: Чебоксары</a>
+            <a href="/raketnaya-opasnost-omsk">🚀 Ракетная опасность: Омск</a>
+            <a href="/raketnaya-opasnost-ulyanovsk">🚀 Ракетная опасность: Ульяновск</a>
+            <a href="/raketnaya-opasnost-kazan">🚀 Ракетная опасность: Казань</a>
+            <a href="/raketnaya-opasnost-moskovskaya-oblast">🚀 Ракетная опасность: Московская обл.</a>
+            <a href="/raketnaya-opasnost-penza">🚀 Ракетная опасность: Пенза</a>
+            <a href="/raketnaya-opasnost-samara">🚀 Ракетная опасность: Самара</a>
+            <div class="nav-drop-group">Объяснялки</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+            <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <div class="nav-drop-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="nav-drop-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help">❓ Как пользоваться</a>
+            <div class="nav-drop-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+            <a href="/karta-bpla">📡 Карта БПЛА</a>
+          </div>
+        </div>
+        <a href="/sources">📚 Источники</a>
+      </nav>
     <div class="topctl">
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--ink)">
         <input type="checkbox" id="toggleStrikes" checked onchange="toggleStrikesLayer()" style="accent-color:var(--red)">
@@ -390,7 +432,7 @@
     </div>
   </header>
 
-  <!-- MOBILE NAV DRAWER (☰) — desktop uses .nav; mobile uses this -->
+  <!-- MOBILE NAV DRAWER (☰) — desktop uses .news-nav; mobile uses this -->
   <div class="nav-drawer" id="navDrawer" hidden>
     <div class="nav-drawer-scrim" data-close></div>
     <nav class="nav-drawer-panel" aria-label="Разделы">
@@ -409,10 +451,19 @@
       <a class="ndp-item" href="/sources">📚 Источники</a>
       <a class="ndp-item" href="/help">❓ Как пользоваться</a>
       <div class="ndp-group">Аналитика</div>
+      <!-- ↓ генерится agents/build-nav.py из data/seo-topics.jsonl — руками не править -->
+      <!-- DRAWER-ANALYTICS:START -->
       <a class="ndp-item" href="/crimea">🗺 Крым</a>
       <a class="ndp-item" href="/krasnodar">🌴 Краснодар</a>
       <a class="ndp-item" href="/moskva">🏙 Москва</a>
       <a class="ndp-item" href="/raketnaya-opasnost-volgograd">🚀 Ракетная опасность: Волгоград</a>
+      <a class="ndp-item" href="/raketnaya-opasnost-cheboksary">🚀 Ракетная опасность: Чебоксары</a>
+      <a class="ndp-item" href="/raketnaya-opasnost-omsk">🚀 Ракетная опасность: Омск</a>
+      <a class="ndp-item" href="/raketnaya-opasnost-ulyanovsk">🚀 Ракетная опасность: Ульяновск</a>
+      <a class="ndp-item" href="/raketnaya-opasnost-kazan">🚀 Ракетная опасность: Казань</a>
+      <a class="ndp-item" href="/raketnaya-opasnost-moskovskaya-oblast">🚀 Ракетная опасность: Московская обл.</a>
+      <a class="ndp-item" href="/raketnaya-opasnost-penza">🚀 Ракетная опасность: Пенза</a>
+      <a class="ndp-item" href="/raketnaya-opasnost-samara">🚀 Ракетная опасность: Самара</a>
       <a class="ndp-item" href="/deficit">⛽ Почему нет бензина</a>
       <a class="ndp-item" href="/talony">🎫 Бензин по талонам</a>
       <a class="ndp-item" href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
@@ -422,6 +473,7 @@
       <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
       <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
       <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
+      <!-- DRAWER-ANALYTICS:END -->
       <div class="ndp-group">Ещё</div>
       <a class="ndp-item" href="/install">📲 Установить приложение</a>
       <a class="ndp-item" href="/support">🤝 Поддержать нас</a>
@@ -674,7 +726,7 @@
 
         var icon = L.divIcon({
           className: "strike-fire-icon",
-          html: '<img src="/assets/radar-icons/' + iconFile + '" style="width:' + size + 'px;height:' + size + 'px;opacity:' + opacity + ';animation:fire-pulse 1.5s infinite">',
+          html: '<img src="/assets/radar-icons/' + iconFile + '" alt="Удар: ' + esc(ev.city || ev.region || 'событие') + '" style="width:' + size + 'px;height:' + size + 'px;opacity:' + opacity + ';animation:fire-pulse 1.5s infinite">',
           iconSize: [size, size],
           iconAnchor: [size/2, size/2]
         });
@@ -1130,6 +1182,12 @@
     function togglePanel() {
       var collapsed = document.querySelector('.panel').classList.toggle('collapsed');
       panelHEl.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    }
+    // ponytail: на мобиле панель стартует свёрнутой — иначе накрывает карту (39% видно на 375px),
+    // как уже сделано для шторки на табе «Россия» (app.js initMobile)
+    if (window.innerWidth <= 768) {
+      document.querySelector('.panel').classList.add('collapsed');
+      panelHEl.setAttribute('aria-expanded', 'false');
     }
     panelHEl.addEventListener('click', togglePanel);
     panelHEl.addEventListener('keydown', function(e) {

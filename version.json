@@ -1,7 +1,7 @@
 {
-  "version": "1.11.1",
+  "version": "1.12.0",
   "releasedAt": "2026-07-09",
-  "codename": "Слой кандидатов в удары (radar tripwire)",
-  "summary": "Новый слой-тоггл «❓ Кандидаты»: возможные удары с ленты radar-map.ru (status:candidate, confidence:rumor), амбер-пунктирный маркер, попап «не подтверждён · требует GDELT/FIRMS». Off по умолчанию, читает data/strike-candidates.json live. В боевой strikes.json не вливается — только сигнал «где искать». Наполняется VPS-кроном strike-candidates.py.",
+  "codename": "Аудит-пасс: SEO-чистка, единая навигация, мобайл/десктоп UX",
+  "summary": "Пакет фиксов по аудиту 07–08.07. SEO: удалены чужие снепшоты exilenova/radarrusiia и корневой дубль moskovskij-npz (+301), закрыт /seo/ от индексации, добавлена кастомная 404. Навигация: единое меню+футер через build-nav.py на все 56 сводок и лендинги, radar получил групповой дропдаун «Аналитика». Мобайл: панели Крым/АЗС/radar стартуют свёрнутыми, тач-зоны ≥40px, устранён горизонтальный overflow (talony). Десктоп: сжатие хедера 1280–1440, OG/h1 на install/support/sources. SW-кеш v5→v6.",
   "site": "https://npz-tactical-map.vercel.app"
 }

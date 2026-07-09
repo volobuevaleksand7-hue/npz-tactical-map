@@ -441,12 +441,7 @@ def header_html(date_badge: str) -> str:
         <span class="news-logo-icon">⛽</span>
         <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
       </a>
-      <nav class="news-nav">
-        <a href="/news">📰 Сводки</a>
-        <a href="/">🗺️ Карта НПЗ</a>
-        <a href="/?view=azs">⛽ Карта АЗС</a>
-        <a href="/sources">📚 Источники</a>
-      </nav>
+      <nav class="news-nav"><!-- сгенерит agents/build-nav.py --></nav>
       <span class="news-date-badge">{date_badge}</span>
     </div>
   </header>
@@ -762,6 +757,10 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
         {nav_next}
       </nav>
 """)
+    parts.append('      <p class="section-note">📊 По теме: '
+                 '<a href="/deficit">почему нет бензина</a> · '
+                 '<a href="/attacks">хроника ударов по НПЗ</a> · '
+                 '<a href="/crisis">прогноз кризиса</a>.</p>\n')
     parts.append(CTA_HTML)
     parts.append('\n    </div>\n  </main>\n\n')
     parts.append(FOOTER_HTML)
@@ -834,6 +833,14 @@ def main():
         (NEWS_DIR / f"{d}.html").write_text(
             gen_date_page(d, archive, prev_date, next_date), encoding="utf-8")
     print(f"[gen-news] ✅ news/<date>.html — {len(dates)} страниц")
+
+    # nav/footer в news.html + news/*.html — заполняет плейсхолдер выше единым
+    # меню/футером из реестра (иначе свежесгенеренные страницы теряют
+    # Радар/Аналитику до ручного перезапуска build-nav.py).
+    _r = subprocess.run(["python3", str(ROOT / "agents" / "build-nav.py")], capture_output=True, text=True)
+    if _r.returncode != 0:
+        raise RuntimeError("build-nav.py failed:\n" + _r.stderr)
+    print("[gen-news] ✅ nav/footer (agents/build-nav.py)")
 
     # sitemap — единый полный генератор (индекс + ВСЕ лендинги + архив news),
     # чтобы новостная сборка НЕ затирала посадочные (фикс 2026-07-08).

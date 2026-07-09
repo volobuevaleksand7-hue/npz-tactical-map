@@ -124,6 +124,7 @@
       initControls();
       initMobile();
       initPanelExpand();
+      initCardCollapse();
       tickClock(); setInterval(tickClock, 1000);
       appStarted = true;
       if (S.state) renderAll();
@@ -355,7 +356,11 @@
     return L.tileLayer(tileUrl(), { attribution: "© OpenStreetMap · CARTO · OSINT ESTIMATE", subdomains: "abcd", maxZoom: 19 });
   }
   function initRuMap() {
-    maps.ru = L.map("map", { center: [55.5, 55], zoom: 4, minZoom: 3, maxZoom: 9, worldCopyJump: false, zoomControl: false });
+    // ponytail: на узком экране тот же zoom показывает меньше градусов по ширине — центр
+    // [55.5,55] (десктоп) уводит европейскую часть РФ (удары/НПЗ) за левый край, в кадре
+    // остаётся Казахстан. На мобиле сдвигаем центр западнее, к плотности целей (Крым/Волгоград/Самара).
+    var ruCenter = (window.innerWidth <= 768) ? [55, 47] : [55.5, 55];
+    maps.ru = L.map("map", { center: ruCenter, zoom: 4, minZoom: 3, maxZoom: 9, worldCopyJump: false, zoomControl: false });
     maps.ru.on("click", closeAnalyticsDropdown);
     L.control.zoom({ position: "bottomright" }).addTo(maps.ru);
     tiles.ru = baseTiles().addTo(maps.ru);
@@ -993,6 +998,20 @@
     openDetail('<div class="exp-title">' + esc(title) + '</div>' +
       '<div class="exp-body ' + (cls || "") + '">' + bodyEl.innerHTML + '</div>');
   }
+  // ponytail: Крым/АЗС карточки не сворачивались на мобиле (до 74% экрана перманентно закрыто);
+  // клик по заголовку сворачивает тело (как .panel-h в radar.html), на мобиле стартуют свёрнутыми
+  function initCardCollapse() {
+    ["crimeaPanel", "azsPanel", "azsCommentsCard"].forEach(function (id) {
+      var card = document.getElementById(id); if (!card) return;
+      var head = card.querySelector(".card-h"); if (!head) return;
+      if (window.innerWidth <= 820) card.classList.add("collapsed");
+      head.setAttribute("aria-expanded", card.classList.contains("collapsed") ? "false" : "true");
+      bindButton(head, function () {
+        var collapsed = card.classList.toggle("collapsed");
+        head.setAttribute("aria-expanded", collapsed ? "false" : "true");
+      });
+    });
+  }
   function initPanelExpand() {
     [["panelLeft", "НАЦИОНАЛЬНЫЙ БАЛАНС", "balanceBody", ""],
      ["panelFeed", "📰 ЛЕНТА УДАРОВ", "feedList", "exp-feed"],
@@ -1282,9 +1301,11 @@
   function azsStationIcon(level, hi) {
     var c = AZS_LVL[level] || AZS_UNKNOWN;
     var ring = hi ? '<circle cx="9" cy="9" r="8" fill="none" stroke="#1b6ef3" stroke-width="2"/>' : "";
-    var html = '<div><svg width="18" height="18" viewBox="0 0 18 18">' + ring +
+    // ponytail: видимая точка остаётся 18×18 (не трогаем визуал), хит-зона расширена прозрачным
+    // паддингом до 36×36 — иначе тач-таргет был в 2.4× меньше рекомендуемых 44px
+    var html = '<div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 18 18">' + ring +
       '<circle cx="9" cy="9" r="5.5" fill="' + c + '" stroke="#000" stroke-opacity=".35" stroke-width="1"/></svg></div>';
-    return L.divIcon({ className: "azs-divicon", html: html, iconSize: [18, 18], iconAnchor: [9, 9], popupAnchor: [0, -6] });
+    return L.divIcon({ className: "azs-divicon", html: html, iconSize: [36, 36], iconAnchor: [18, 18], popupAnchor: [0, -6] });
   }
   // Кластер красится по «худшей» точке внутри (а не по count). Серый "unknown" не повышает уровень — иначе серость съест предупреждение.
   var AZS_LVL_ORD = { unknown: 0, calm: 1, strained: 2, limited: 3, severe: 4, critical: 5 };

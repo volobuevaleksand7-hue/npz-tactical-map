@@ -152,6 +152,28 @@ def build_nav(rows, current):
     return '<nav class="news-nav">\n' + "\n".join(L) + '\n      </nav>'
 
 
+# ---- 1b) единый брендированный футер на SEO-лендингах + /analytics ----
+FOOTER_HTML = ('  <footer class="news-footer">\n'
+               '    <div class="news-footer-inner">\n'
+               '      <p>Топливный фронт РФ · <a href="/">🗺️ Карта НПЗ</a> · OSINT-дашборд · '
+               '<span class="mono">npz-tactical-map.vercel.app</span></p>\n'
+               '      <p class="footer-disc">Не является официальной информацией. Данные из открытых источников.</p>\n'
+               '    </div>\n'
+               '  </footer>\n')
+FOOTER_RE = re.compile(r'[ \t]*<footer class="news-footer">.*?</footer>\n?', re.DOTALL)
+FOOTER_SKIP = {"radar.html"}  # тикер живых сводок, не SEO-футер — не трогаем
+
+
+def apply_footer(html, fname):
+    if fname in FOOTER_SKIP:
+        return html
+    if FOOTER_RE.search(html):
+        return FOOTER_RE.sub(FOOTER_HTML, html, count=1)
+    if "</main>" in html:
+        return html.replace("</main>", "</main>\n\n" + FOOTER_HTML, 1)
+    return html
+
+
 # ---- 2) дропдаун на ГЛАВНОЙ (index.html, плоский список) ----
 INDEX_MENU_RE = re.compile(r'(<div class="tab-dropdown-menu">)(.*?)(</div>)', re.DOTALL)
 
@@ -164,14 +186,32 @@ def build_index_menu(rows):
     return "".join(lines) + "          "
 
 
+# ---- 2c) мобильный drawer в radar.html — плоский список «Аналитика» (по маркерам) ----
+DRAWER_RE = re.compile(r'(<!-- DRAWER-ANALYTICS:START -->)(.*?)(<!-- DRAWER-ANALYTICS:END -->)', re.DOTALL)
+DRAWER_SKIP = {"/help"}  # /help закреплён в группе «Разделы» drawer'а — не дублируем в «Аналитике»
+
+
+def build_drawer_analytics(rows):
+    lines = ["\n"]
+    for r in ordered_pages(rows):
+        if r["url"] in DRAWER_SKIP:
+            continue
+        emoji, lab = label_for(r["url"], r.get("primary_kw"))
+        lines.append(f'      <a class="ndp-item" href="{r["url"]}">{emoji} {lab}</a>\n')
+    return "".join(lines) + "      "
+
+
 # ---- 2b) «Свежее»-чип на ГЛАВНОЙ (в status-strip → .ss-nav) ----
 FRESH_RE  = re.compile(r'<!-- FRESH:START -->.*?<!-- FRESH:END -->', re.DOTALL)
 SSNAV_RE  = re.compile(r'(<nav class="ss-nav"[^>]*>)')
 
+FRESH_TYPES = {"region", "explainer", "forecast", "tool"}  # не reference/object — те не «свежий контент»
+
+
 def newest_page(rows):
-    # «новейшая» = последняя добавленная в реестр live-страница (не объект, не top-nav)
+    # «новейшая» = последняя добавленная в реестр live-страница из контентных типов
     cands = [r for r in rows if r.get("status", "live") == "live"
-             and r.get("type") not in HIDE_TYPES and r["url"] not in TOP_URLS]
+             and r.get("type") in FRESH_TYPES and r["url"] not in TOP_URLS]
     return cands[-1] if cands else None
 
 def build_fresh_chip(rows):
@@ -193,7 +233,8 @@ def build_hub(rows):
     for r in ordered_pages(rows):
         url = r["url"]
         title, desc, cover = HUB.get(url, (label_for(url, r.get("primary_kw"))[1], r.get("primary_kw", ""), None))
-        img = f'\n        <img class="card-cover" src="{cover}" alt="" loading="lazy">' if cover else ""
+        # ponytail: alt = заголовок карточки (осмысленный, не decorative) — было alt="" на всех обложках
+        img = f'\n        <img class="card-cover" src="{cover}" alt="{title}" loading="lazy">' if cover else ""
         cards.append(
             f'      <a href="{url}" class="analytics-card">{img}\n'
             f'        <div class="card-body">\n'
@@ -210,8 +251,9 @@ def main():
     rows = load_reg()
     changed = 0
 
-    # 1) news-nav на всех лендингах, у которых он есть (авто-обнаружение — не забыть добавить в список больше нельзя)
-    landings = sorted(list(ROOT.glob("*.html")) + list(ROOT.glob("npz/*.html")))
+    # 1) news-nav + футер на всех лендингах, у которых он есть (авто-обнаружение —
+    # не забыть добавить в список больше нельзя); news/*.html — архив сводок.
+    landings = sorted(list(ROOT.glob("*.html")) + list(ROOT.glob("npz/*.html")) + list(ROOT.glob("news/*.html")))
     for f in landings:
         if f.name == "index.html":
             continue
@@ -219,9 +261,11 @@ def main():
         if '<nav class="news-nav">' not in html:
             continue
         current = "/" + str(f.relative_to(ROOT))[:-5]
-        new, n = NAV_RE.subn(build_nav(rows, current), html, count=1)
-        if n and new != html:
-            f.write_text(new, encoding="utf-8"); changed += 1; print("nav updated", f.name)
+        new = NAV_RE.sub(build_nav(rows, current), html, count=1)
+        new = apply_footer(new, f.name)
+        new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
+        if new != html:
+            f.write_text(new, encoding="utf-8"); changed += 1; print("nav/footer updated", f.relative_to(ROOT))
 
     # 2) главная — дропдаун (⚠️ фронтенд-ядро, коммит под ALLOW_FRONTEND_RELEASE=1)
     idx = ROOT / "index.html"

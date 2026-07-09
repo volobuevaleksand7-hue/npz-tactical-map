@@ -30,6 +30,7 @@ EXCLUDE = {
     "2026-07-07.html",       # stray file at root (duplicate of news/2026-07-07.html)
     "seo/meta-tags.html",    # internal template, not public
     "support.html",          # скрытая страница донатов — НЕ индексировать
+    "404.html",              # кастомная 404 (noindex) — не место в sitemap
 }
 
 

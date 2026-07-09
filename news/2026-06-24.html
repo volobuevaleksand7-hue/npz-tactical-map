@@ -36,8 +36,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=48cca0d6">
-  <link rel="stylesheet" href="/news.css?v=0fae2fb7">
+  <link rel="stylesheet" href="/styles.css?v=0089b43d">
+  <link rel="stylesheet" href="/news.css?v=9eaff5bb">
 </head>
 <body data-theme="light">
   <header class="news-header">
@@ -47,9 +47,40 @@
         <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
       </a>
       <nav class="news-nav">
-        <a href="/news">📰 Сводки</a>
         <a href="/">🗺️ Карта НПЗ</a>
-        <a href="/?view=azs">⛽ Карта АЗС</a>
+        <a href="/news">📰 Сводки</a>
+        <a href="/radar">📡 Радар БПЛА</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <div class="nav-drop-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
+            <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <a href="/raketnaya-opasnost-volgograd">🚀 Ракетная опасность: Волгоград</a>
+            <a href="/raketnaya-opasnost-cheboksary">🚀 Ракетная опасность: Чебоксары</a>
+            <a href="/raketnaya-opasnost-omsk">🚀 Ракетная опасность: Омск</a>
+            <a href="/raketnaya-opasnost-ulyanovsk">🚀 Ракетная опасность: Ульяновск</a>
+            <a href="/raketnaya-opasnost-kazan">🚀 Ракетная опасность: Казань</a>
+            <a href="/raketnaya-opasnost-moskovskaya-oblast">🚀 Ракетная опасность: Московская обл.</a>
+            <a href="/raketnaya-opasnost-penza">🚀 Ракетная опасность: Пенза</a>
+            <a href="/raketnaya-opasnost-samara">🚀 Ракетная опасность: Самара</a>
+            <div class="nav-drop-group">Объяснялки</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+            <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <div class="nav-drop-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="nav-drop-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help">❓ Как пользоваться</a>
+            <div class="nav-drop-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+            <a href="/karta-bpla">📡 Карта БПЛА</a>
+          </div>
+        </div>
         <a href="/sources">📚 Источники</a>
       </nav>
       <span class="news-date-badge">Сводка за 24.06.2026</span>
@@ -142,6 +173,7 @@
         <a class="brief-nav-btn center" href="/news">Все сводки</a>
         <a class="brief-nav-btn next" href="/news/2026-06-25">25 июня →</a>
       </nav>
+      <p class="section-note">📊 По теме: <a href="/deficit">почему нет бензина</a> · <a href="/attacks">хроника ударов по НПЗ</a> · <a href="/crisis">прогноз кризиса</a>.</p>
       <section class="news-cta">
         <div class="cta-card">
           <h2>🗺️ Открыть интерактивную карту</h2>
@@ -158,7 +190,7 @@
 
   <footer class="news-footer">
     <div class="news-footer-inner">
-      <p>Топливный фронт РФ · OSINT-дашборд · <span class="mono">npz-tactical-map.vercel.app</span></p>
+      <p>Топливный фронт РФ · <a href="/">🗺️ Карта НПЗ</a> · OSINT-дашборд · <span class="mono">npz-tactical-map.vercel.app</span></p>
       <p class="footer-disc">Не является официальной информацией. Данные из открытых источников.</p>
     </div>
   </footer>

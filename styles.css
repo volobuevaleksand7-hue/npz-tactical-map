@@ -92,18 +92,18 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .sync-next{display:block;color:var(--teal);font-weight:600}
 .mode-pill{background:var(--amber);color:#241500;font-family:var(--mono);font-weight:800;font-size:9px;letter-spacing:1px;padding:4px 8px;border-radius:6px}
 .topctl .tg-subscribe{padding:5px 10px!important;border-radius:7px!important;font-size:11px!important}
-.theme-btn{border:1px solid var(--line);background:var(--surface2);border-radius:8px;width:34px;height:30px;font-size:15px}
+.theme-btn{border:1px solid var(--line);background:var(--surface2);border-radius:8px;width:34px;height:40px;font-size:15px}
 /* Нейтральность: убираем ссылку и флаг Leaflet из подписи карты, оставляем только © источников данных (OSM/CARTO) */
 .leaflet-control-attribution a,
 .leaflet-control-attribution span[aria-hidden="true"]{display:none!important}
 .donate-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;
-  flex:0 0 auto;height:30px;padding:0 12px;border-radius:8px;font-size:12.5px;font-weight:600;
+  flex:0 0 auto;height:40px;padding:0 12px;border-radius:8px;font-size:12.5px;font-weight:600;
   letter-spacing:.2px;line-height:1;white-space:nowrap;color:var(--gold);
   border:1px solid var(--gold);background:rgba(202,162,74,.10);
   transition:background .2s,box-shadow .2s}
 .donate-link .donate-ico{font-size:14px}
 .donate-link:hover{background:rgba(202,162,74,.18);box-shadow:0 0 0 2px rgba(202,162,74,.14)}
-.install-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;flex:0 0 auto;height:30px;padding:0 12px;border-radius:8px;font-size:12.5px;font-weight:700;letter-spacing:.2px;line-height:1;white-space:nowrap;color:#fff;border:1px solid var(--teal);background:var(--teal);transition:filter .2s,box-shadow .2s}
+.install-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;flex:0 0 auto;height:40px;padding:0 12px;border-radius:8px;font-size:12.5px;font-weight:700;letter-spacing:.2px;line-height:1;white-space:nowrap;color:#fff;border:1px solid var(--teal);background:var(--teal);transition:filter .2s,box-shadow .2s}
 .install-link .install-ico{font-size:14px}
 .install-link:hover{filter:brightness(1.08);box-shadow:0 0 0 2px rgba(23,133,133,.28)}
 @media(max-width:640px){.donate-link{padding:0 9px}.donate-link .donate-lbl{display:none}.install-link{padding:0 9px}.install-link .install-lbl{display:none}}
@@ -490,6 +490,14 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   /* Крым-панель на мобиле: узкая шторка сверху, не закрывает карту (T4) */
   #crimeaPanel{top:10px;left:10px;right:10px;width:auto;max-height:40%}
 
+  /* ponytail: Крым/АЗС карточки сворачиваются кликом по заголовку (паттерн radar.html .panel-h),
+     свой bottom-sheet как на «Россия» не строим — тут по одной-две карточки, а не 3 вкладки */
+  #crimeaPanel .card-h,#azsPanel .card-h,#azsCommentsCard .card-h{position:relative;cursor:pointer;padding-right:30px}
+  #crimeaPanel .card-h::after,#azsPanel .card-h::after,#azsCommentsCard .card-h::after{
+    content:"▾";position:absolute;right:12px;top:50%;transform:translateY(-50%);transition:transform .15s;font-size:11px;opacity:.85}
+  #crimeaPanel.collapsed .card-h::after,#azsPanel.collapsed .card-h::after,#azsCommentsCard.collapsed .card-h::after{transform:translateY(-50%) rotate(-180deg)}
+  #crimeaPanel.collapsed>*:not(.card-h),#azsPanel.collapsed>*:not(.card-h),#azsCommentsCard.collapsed>*:not(.card-h){display:none}
+
   /* Live banner */
   .livebar{font-size:10px;padding:4px 10px;gap:6px}
   .live-meta{display:none}
@@ -655,7 +663,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .topctl{gap:4px}
   .mode-pill{font-size:9px;padding:3px 6px}
   .topctl .tg-subscribe{padding:4px 6px;font-size:10px}
-  .theme-btn{width:34px;height:30px;font-size:14px}
+  .theme-btn{width:34px;height:40px;font-size:14px}
   .status-strip .ss-mode{display:none}
   .status-strip .ss-title{font-size:11px}
   .tabs .tab-item{padding:3px 1px}
@@ -709,8 +717,13 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   }
 }
 
-/* ===== Tablet topbar compression ===== */
-@media(max-width:1240px) and (min-width:821px){
+/* ===== Tablet topbar compression =====
+   ponytail: верхняя граница поднята с 1240 до 1700 — .brand(235)+gap+.tabs(нужно ~812
+   на полный набор вкладок)+gap+.topctl(~594 при полной подписи) не помещаются меньше
+   ~1685px, поэтому на 1280-1440px «РОССИЯ» наезжала на лого. 1240 был правилен для
+   старого набора вкладок, для нынешнего — мало. Порог пересчитан, а не просто раздвинут
+   под жалобу. Переиспользуем готовую компрессию, а не пишем новую. */
+@media(max-width:1700px) and (min-width:821px){
   .topbar{gap:6px;padding:0 8px}
   .brand{min-width:auto}
   .brand-text,.sync{display:none}
