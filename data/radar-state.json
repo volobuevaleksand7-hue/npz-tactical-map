@@ -20,8 +20,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1783559539,
-      "source_text": "09.07.2026 04:12 МСК\nМариуполь и близлежащие, тревога по БПЛА сохраняется ДНН"
+      "last_event_ts": 1783577944,
+      "source_text": "09.07.2026 09:19 МСК\nПрогресс, Очеретино ДНР Опасность по БПЛА Хорнет"
     },
     "Курская область": {
       "bpla": false,
@@ -37,7 +37,7 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1783577137,
+      "last_event_ts": 1783576914,
       "source_text": "09.07.2026 09:01 МСК\n⚠️ Курская область: ракетная опасность! Если вы находитесь дома, необходимо укрыться в помещениях без окон со сплошными стенами: в коридоре, ванной, кладовой. Если вы находитесь на улице — зайдите в ближайшее здание или подходящее укрытие."
     },
     "Луганская Народная Республика": {
@@ -71,8 +71,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1783574666,
-      "source_text": "09.07.2026 08:24 МСК\nБелгородский район Опасность по БПЛА"
+      "last_event_ts": 1783577390,
+      "source_text": "09.07.2026 09:09 МСК\nНа Корочу - Белгород от 4 БПЛА с юго востока. Тревога по БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -131,16 +131,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1783577157,
-      "source_text": "09.07.2026 08:07 МСК\nПогарский район и близлежащие Тревога по БПЛА Сохраняется Брянская область"
+      "fill": "#dc2626",
+      "last_event_ts": 1783577864,
+      "source_text": "09.07.2026 09:17 МСК\nБрянская область Ракетная опасность\n\n09.07.2026 08:07 МСК\nПогарский район и близлежащие Тревога по БПЛА Сохраняется Брянская область"
     },
     "Липецкая область": {
       "bpla": false,
@@ -182,6 +182,26 @@
       "source_text": "09.07.2026 09:01 МСК\n⚠️ Курская область: ракетная опасность! Если вы находитесь дома, необходимо укрыться в помещениях без окон со сплошными стенами: в коридоре, ванной, кладовой. Если вы находитесь на улице — зайдите в ближайшее здание или подходящее укрытие."
     },
     {
+      "key": "белгород|белгородская область",
+      "name": "Белгород",
+      "lat": 50.5955595,
+      "lon": 36.5873394,
+      "region": "Белгородская область",
+      "bpla": true,
+      "bplaDim": true,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1783577390,
+      "source_text": "09.07.2026 09:09 МСК\nНа Корочу - Белгород от 4 БПЛА с юго востока. Тревога по БПЛА"
+    },
+    {
       "key": "республика крым|автономная республика крым",
       "name": "Республика Крым",
       "lat": 44.948237,
@@ -200,26 +220,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1783560828,
       "source_text": "09.07.2026 04:33 МСК\nКерчь и близлежащие, тревога по БПЛА, повторно Республика Крым"
-    },
-    {
-      "key": "севск|брянская область",
-      "name": "Севск",
-      "lat": 52.14904,
-      "lon": 34.49347,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "uab": true,
-      "uabDim": true,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1783577157,
-      "source_text": "09.07.2026 09:05 МСК\nСевск и близлежащие внимание по УАБ"
     },
     {
       "key": "мариуполь|донецкая народная республика",
@@ -362,26 +362,6 @@
       "last_event_ts": 1783573647,
       "source_text": "09.07.2026 08:07 МСК\nПогарский район и близлежащие Тревога по БПЛА Сохраняется Брянская область"
     },
-    "RUS.37.9_1": {
-      "gid_2": "RUS.37.9_1",
-      "name_ru": "Хомутовский район",
-      "region_ru": "Курская область",
-      "bpla": false,
-      "bplaDim": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#e3421a",
-      "last_event_ts": 1783577137,
-      "source_text": "09.07.2026 09:05 МСК\nХомутовский район тревога по УАБ"
-    },
     "RUS.7.4_1": {
       "gid_2": "RUS.7.4_1",
       "name_ru": "Белгородский район",
@@ -424,13 +404,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1783577157,
-  "last_event_at": "2026-07-09T06:05:57Z",
-  "fetched_at": "2026-07-09T06:10:03.490385Z",
+  "timestamp": 1783577944,
+  "last_event_at": "2026-07-09T06:19:04Z",
+  "fetched_at": "2026-07-09T06:20:04.228974Z",
   "poll_interval_sec": 10,
   "meta": {
-    "generated_at": "2026-07-09T06:10:03.490385Z",
-    "source_age_seconds": 246,
+    "generated_at": "2026-07-09T06:20:04.228974Z",
+    "source_age_seconds": 60,
     "city_count": 8,
     "region_count": 9,
     "feed_count": 0
