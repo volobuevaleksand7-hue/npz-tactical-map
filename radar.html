@@ -81,8 +81,12 @@
     .panel{position:absolute;top:100px;left:14px;width:340px;max-height:calc(100% - 114px);
       z-index:20;background:var(--surface);border:1px solid var(--line);border-radius:var(--card-radius);
       box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
-    .panel-h{font-weight:800;font-size:12px;letter-spacing:1px;padding:11px 14px;
+    .panel-h{font-weight:800;font-size:12px;letter-spacing:1px;padding:11px 14px;cursor:pointer;
       background:var(--surface2);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+    .panel-h .chevron{font-size:10px;transition:transform .2s}
+    .panel.collapsed .panel-body{display:none}
+    .panel.collapsed .panel-h{border-bottom:none}
+    .panel.collapsed .chevron{transform:rotate(-90deg)}
     .panel-h .dot-live{width:8px;height:8px;border-radius:50%;background:var(--green);
       animation:pulse 2s infinite}
     .panel-h .dot-live.loading{background:var(--amber)}
@@ -170,6 +174,7 @@
     /* Responsive */
     @media(max-width:768px){
       .panel{width:calc(100% - 28px);max-height:45%;bottom:40px;top:auto}
+      .panel.collapsed{max-height:none;height:auto}
       .nav{display:none}
       .feed{display:none} /* ponytail: на мобиле ленту прячем; вкладки панель/лента — если попросят */
     }
@@ -333,7 +338,10 @@
   <aside class="panel">
     <div class="panel-h">
       <span>🔴 УГРОЗЫ НПЗ</span>
-      <span class="dot-live" id="liveIndicator"></span>
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="dot-live" id="liveIndicator"></span>
+        <span class="chevron">▼</span>
+      </span>
     </div>
     <div class="panel-body" id="threatList">
       <div style="text-align:center;padding:30px;color:var(--ink-dim)">
@@ -1009,6 +1017,10 @@
       document.getElementById("nextRefresh").textContent = "T-" + pad(min) + ":" + pad(sec);
       if (remaining > 0) countdownTimer = setTimeout(updateCountdown, 1000);
     }
+    // ─── Panel toggle ───
+    document.querySelector('.panel-h').addEventListener('click', function() {
+      document.querySelector('.panel').classList.toggle('collapsed');
+    });
 
     // ─── Init ───
     refresh();
