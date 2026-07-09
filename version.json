@@ -1,7 +1,7 @@
 {
-  "version": "1.10.5",
+  "version": "1.10.6",
   "releasedAt": "2026-07-09",
-  "codename": "исправление sitemap и индексации в GSC",
-  "summary": "Исправлена ошибка индексации в Google Search Console («Не удалось обработать файл Sitemap»): из sitemap.xml исключены черновики (drafts/) и недоступные страницы (dashboard/, docs/), которые давали 404 ошибки на проде.",
+  "codename": "SEO: оптимизация кэширования и индексации",
+  "summary": "Техническая SEO-оптимизация: добавлено кэширование max-age=0 для sitemap.xml и robots.txt в vercel.json, в robots.txt добавлены правила Disallow для служебных папок (drafts/, docs/, dashboard/).",
   "site": "https://npz-tactical-map.vercel.app"
 }
