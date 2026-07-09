@@ -132,8 +132,49 @@
         <a href="/install" id="installBtn" class="install-link" title="Установить приложение — будь в курсе" aria-label="Установить приложение"><span class="install-ico">📲</span><span class="install-lbl">Установить приложение</span></a>
         <a href="/support" class="donate-link" title="Поддержать проект" aria-label="Поддержать проект"><span class="donate-ico">🤝</span><span class="donate-lbl">Поддержать нас</span></a>
         <button class="theme-btn" id="themeToggle" title="Светлая / тёмная карта" aria-label="Переключить светлую или тёмную карту">☀️</button>
+        <button class="nav-burger" id="navBurger" type="button" aria-label="Меню разделов" aria-expanded="false" aria-controls="navDrawer">☰</button>
       </div>
     </header>
+
+    <!-- MOBILE NAV DRAWER (☰) — desktop uses .tabs; mobile uses this -->
+    <div class="nav-drawer" id="navDrawer" hidden>
+      <div class="nav-drawer-scrim" data-close></div>
+      <nav class="nav-drawer-panel" aria-label="Разделы">
+        <div class="ndp-head">
+          <span class="ndp-brand">⛽ ТОПЛИВНЫЙ ФРОНТ РФ</span>
+          <button class="ndp-x" type="button" data-close aria-label="Закрыть меню">✕</button>
+        </div>
+        <div class="ndp-group">Карта</div>
+        <a class="ndp-item" data-view="russia" role="button" tabindex="0">🗺 Россия</a>
+        <a class="ndp-item" data-view="crimea" role="button" tabindex="0">⚠ Крым</a>
+        <a class="ndp-item" data-view="azs" role="button" tabindex="0">⛽ АЗС · заправки</a>
+        <a class="ndp-item" data-view="history" role="button" tabindex="0">🕑 История</a>
+        <a class="ndp-item" data-view="forecast" role="button" tabindex="0">📈 Прогноз</a>
+        <a class="ndp-item" data-view="economy" role="button" tabindex="0">💰 Доходы</a>
+        <div class="ndp-group">Разделы</div>
+        <a class="ndp-item" href="/radar">📡 Радар БПЛА</a>
+        <a class="ndp-item" href="/news">📰 Новости</a>
+        <a class="ndp-item" href="/sources">📚 Источники</a>
+        <a class="ndp-item" href="/help">❓ Как пользоваться</a>
+        <div class="ndp-group">Аналитика</div>
+        <a class="ndp-item" href="/crimea">🗺 Крым</a>
+        <a class="ndp-item" href="/krasnodar">🌴 Краснодар</a>
+        <a class="ndp-item" href="/moskva">🏙 Москва</a>
+        <a class="ndp-item" href="/raketnaya-opasnost-volgograd">🚀 Ракетная опасность: Волгоград</a>
+        <a class="ndp-item" href="/deficit">⛽ Почему нет бензина</a>
+        <a class="ndp-item" href="/talony">🎫 Бензин по талонам</a>
+        <a class="ndp-item" href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+        <a class="ndp-item" href="/gde-dizel">🛢️ Где найти дизель</a>
+        <a class="ndp-item" href="/crisis">🔥 Прогноз кризиса</a>
+        <a class="ndp-item" href="/attacks">💥 Хроника ударов</a>
+        <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
+        <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+        <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
+        <div class="ndp-group">Ещё</div>
+        <a class="ndp-item" href="/install">📲 Установить приложение</a>
+        <a class="ndp-item" href="/support">🤝 Поддержать нас</a>
+      </nav>
+    </div>
 
     <!-- UI-SHELL LOCK v1.6.0: do not edit/deploy this block without AGENT_ACTIVITY entry + ALLOW_FRONTEND_RELEASE=1 -->
     <!-- OSINT STATUS STRIP + FIRST-SCREEN FRAMING -->
@@ -347,6 +388,24 @@
   <!-- Vercel Web Analytics (нужно включить в Dashboard → Analytics → Enable, иначе /_vercel/insights/* = 404) -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    // Mobile nav drawer (☰) — proxies map views to the real #tabs buttons, lets <a> links navigate
+    (function () {
+      var d = document.getElementById('navDrawer'), b = document.getElementById('navBurger');
+      if (!d || !b) return;
+      function open() { d.hidden = false; void d.offsetWidth; /* commit closed state so the slide-in transition plays (rAF is throttled in bg tabs) */ d.classList.add('open'); b.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+      function close() { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; setTimeout(function () { d.hidden = true; }, 260); }
+      b.addEventListener('click', open);
+      d.addEventListener('click', function (e) {
+        if (e.target.hasAttribute('data-close')) { close(); return; }
+        var vi = e.target.closest('.ndp-item[data-view]');
+        if (vi) { e.preventDefault(); var t = document.querySelector('#tabs button[data-view="' + vi.dataset.view + '"]'); if (t) t.click(); close(); return; }
+        if (e.target.closest('.ndp-item[href]')) close(); // let the link navigate
+      });
+      d.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var vi = e.target.closest('.ndp-item[data-view]'); if (vi) vi.click(); } });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !d.hidden) close(); });
+    })();
+  </script>
   <script>
     // Mobile dropdown toggle for АНАЛИТИКА
     document.querySelectorAll('.tab-dropdown > .tab-link-inner').forEach(a => {
