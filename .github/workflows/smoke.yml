@@ -2,9 +2,25 @@ name: Smoke test
 
 # Отдельный от деплоя воркфлоу (T21): валидирует data/*.json и после деплоя
 # дёргает ключевые URL прод-сайта. Не блокирует и не изменяет deploy.yml.
+#
+# NB: НЕ запускаем на машинных heartbeat-пушах VPS (радар каждые 10 мин, watchdog,
+# last-sync, позиции Яндекса) — они давали ~6-10 прогонов/час, и при любом сбое
+# провижининга раннеров GitHub слали шквал «Run failed» на почту. Реальный контент
+# (strikes/fuel/news/код) по-прежнему валидируется.
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'data/radar-state.json'
+      - 'data/health.json'
+      - 'data/heartbeats.json'
+      - 'data/last-sync.txt'
+      - 'data/yandex-positions.json'
+
+# Схлопывать пачку близких пушей в один прогон — меньше очередь, меньше писем.
+concurrency:
+  group: smoke-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate-json:
