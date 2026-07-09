@@ -136,6 +136,30 @@ def is_refinery(s: dict) -> bool:
     return any(k in t for k in REFINERY_KW)
 
 
+def infra_label(s: dict) -> str:
+    """Точная категория цели для заголовка — нефтебаза ≠ НПЗ (редполитика §3)."""
+    t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
+    if "нпз" in t or "нефтеперерабат" in t:
+        return "НПЗ и инфраструктуре"
+    if "нефтебаз" in t:
+        return "нефтебазе"
+    if "терминал" in t:
+        return "терминалу"
+    return "топливной инфраструктуре"
+
+
+def normalize_strike(s: dict) -> dict:
+    """Схема strikes.json дрейфует между сборщиками (detail/description,
+    lat+lon/location[]). Нормализуем на входе — единственное место, откуда
+    все секции (gen_strikes, gen_index) читают удары."""
+    s = dict(s)
+    if not s.get("detail") and s.get("description"):
+        s["detail"] = s["description"]
+    if "lat" not in s and isinstance(s.get("location"), (list, tuple)) and len(s["location"]) == 2:
+        s["lat"], s["lon"] = s["location"]
+    return s
+
+
 def level_label(level: str) -> str:
     return {
         "severe": "🔴 Критическая",
@@ -157,7 +181,7 @@ def build_archive() -> dict:
     archive = load_json("news-archive.json", {}) if ARCHIVE_PATH.exists() else {}
     briefs = archive.get("briefs", {})
 
-    strikes = load_json("strikes.json").get("strikes", [])
+    strikes = [normalize_strike(s) for s in load_json("strikes.json").get("strikes", [])]
     voices = load_json("fuel-voices.json").get("voices", [])
 
     # группируем по дате
@@ -199,6 +223,7 @@ def build_archive() -> dict:
         "exchange": availability.get("exchange", {}),
         "refinery_counts": counts,
         "timeline": timeline,
+        "deficit_regions_count": len(fuel_state.get("deficit_regions", [])),
     }
     archive["briefs"] = briefs
     archive["updated"] = today_iso()
@@ -220,10 +245,11 @@ def brief_headline(date: str, strikes: list) -> str:
     refs = [s for s in strikes if is_refinery(s)]
     if refs:
         rc = str(refs[0].get("city", "")).strip()
+        label = infra_label(refs[0])
         rest = n - 1
         if rest > 0:
-            return f"Удар по НПЗ и инфраструктуре в {rc} и ещё {rest} {plural(rest, 'удар', 'удара', 'ударов')}"
-        return f"Удар по НПЗ и инфраструктуре в {rc}"
+            return f"Удар по {label} в {rc} и ещё {rest} {plural(rest, 'удар', 'удара', 'ударов')}"
+        return f"Удар по {label} в {rc}"
     head = ", ".join(cities[:3])
     if len(cities) > 3:
         head += f" и ещё {len(cities) - 3}"
@@ -305,8 +331,10 @@ def gen_azs(regions: list, exchange: dict) -> str:
         ai92 = exchange.get("ai92_spb_rub_t")
         dt = exchange.get("diesel_spb_rub_t")
         ex_updated = rus_date(exchange.get("updated", ""))
+        trend_arrow = {"rising": "↑", "falling": "↓"}.get(exchange.get("trend", ""), "")
+        trend_col = {"rising": "var(--crit)", "falling": "var(--green)"}.get(exchange.get("trend", ""), "var(--ink-dim)")
         ex_html = f"""<div class="exchange-block">
-  <h3>📊 Биржа СПбМТСБ (на {ex_updated})</h3>
+  <h3>📊 Биржа СПбМТСБ (на {ex_updated}){f' <span style="color:{trend_col}">{trend_arrow}</span>' if trend_arrow else ''}</h3>
   <div class="exchange-prices">
     <span class="ex-item">АИ-95: <strong>{f"{ai95:,} ₽/т".replace(',', ' ') if ai95 else "—"}</strong></span>
     <span class="ex-item">АИ-92: <strong>{f"{ai92:,} ₽/т".replace(',', ' ') if ai92 else "—"}</strong></span>
@@ -479,12 +507,16 @@ def balance_section(snapshot: dict) -> str:
     shortfall_line = (f" · с учётом частично работающих недобор ~{shortfall}%" if shortfall else "")
 
     spark = spark_svg(timeline)
+    deficit_n = snapshot.get("deficit_regions_count")
     chips = ""
     if counts:
+        deficit_chip = (f'<div class="bchip amber"><span class="bchip-n">{deficit_n}</span>'
+                         f'<span class="bchip-l">регионов в дефиците</span></div>' if deficit_n else "")
         chips = f"""        <div class="balance-chips">
           <div class="bchip red"><span class="bchip-n">{counts.get('down', 0)}</span><span class="bchip-l">стоит</span></div>
           <div class="bchip amber"><span class="bchip-n">{counts.get('partial', 0)}</span><span class="bchip-l">частично</span></div>
           <div class="bchip green"><span class="bchip-n">{counts.get('operational', 0)}</span><span class="bchip-l">работает</span></div>
+          {deficit_chip}
         </div>
 """
     return f"""      <section class="news-section" id="balance">
