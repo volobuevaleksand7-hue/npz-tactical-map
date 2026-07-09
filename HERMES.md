@@ -161,6 +161,20 @@ bash hermes/publish-vps.sh
 Оба вызываются из `publish-vps.sh` после каждой волны. Ручной тест:
 `python3 hermes/bot/broadcast.py --dry-run`.
 
+**Telegram-бот `@BPLAlert_bot`** (анонимный алерт-бот, v1.7.0, 2026-07-09) —
+🔴 **ВТОРОЙ ИНСТАНС ТОГО ЖЕ `poll.py`**, не форк. Отдельный анонимный аккаунт
+(владелец Erhan08263), публичное лицо не связано с Серёгой. Разница только в env:
+`NPZ_BOT_DIR=/root/.bpla-alert` (свои token/подписчики/state, вне репо). Крутится
+на VPS через свой cron (см. `hermes/crontab.hermes` и live `crontab -l`): `poll.py`
+каждую минуту + `radar_alerts.py --send` каждые 10 мин. Счётчик подписчиков шлёт
+отчёты через `@NpzFuel_Bot` владельцу в основной чат (`NPZ_REPORT_CHAT`/
+`NPZ_REPORT_TOKEN`): подписки по порогам (≤25 каждый · ≤100 5-й · ≤500 10-й · далее
+50-й), отписки — о каждой. **Полный runbook: `docs/agents/bpla-alert-bot.md`.**
+🔴 Правишь `poll.py` — помни, он общий для ОБОИХ ботов; поведение развязано через env.
+Токены в git НЕ коммитить. Плашки подписки на сайте (`index.html`/`radar.html`) →
+`t.me/BPLAlert_bot`. Канал сводок — отложен (владелец создаёт вручную, потом
+`NPZ_CHANNEL=@...`).
+
 ---
 
 ## 5. Публикация и деплой

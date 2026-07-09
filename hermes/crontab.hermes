@@ -40,6 +40,9 @@
 #   briefing evening   Telegram-сводка (канал+сайт)  17:00             —  (broadcast.py --briefing evening) = 20:00 МСК, финализирует /news/<дата>.html
 #   radar-state         data/radar-state.json        каждые 1-5 мин     radar-state (python3 agents/update-radar-state.py)
 #   radar alerts        Telegram БПЛА alerts         каждые 10 мин     —  (python3 hermes/bot/radar_alerts.py --send)  ← НЕ трогать, отдельный канал алертов
+#   @BPLAlert_bot       анонимный алерт-бот          poll.py 1 мин + radar_alerts 10 мин  ← 2-й инстанс poll.py (НЕ форк). env: NPZ_BOT_DIR=/root/.bpla-alert NPZ_REPORT_CHAT=609952529 NPZ_REPORT_TOKEN=/root/.npz-bot/token. Счётчик подписок→@NpzFuel_Bot. Runbook: docs/agents/bpla-alert-bot.md. Токены НЕ коммитить. Уже в live `crontab -l`.
+#     * * * * *    NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.bpla-alert NPZ_REPORT_CHAT=609952529 NPZ_REPORT_TOKEN=/root/.npz-bot/token python3 hermes/bot/poll.py
+#     */10 * * * * NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.bpla-alert python3 hermes/bot/radar_alerts.py --send
 #   watchdog           data/health.json             ежечасно          —  (python3 agents/healthcheck.py)
 #
 # Единственные публикаторы канала @NPZmap теперь: (1) broadcast.py --briefing
