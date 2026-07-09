@@ -739,7 +739,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .region-legend{left:10px;bottom:64px;max-width:calc(100vw - 20px);font-size:10px;padding:6px 9px}
   .mob-sheet{display:flex!important}
   .mob-sheet.collapsed{transform:translateY(100%)!important}
-  .mob-fab{display:flex!important;position:absolute!important;bottom:66px!important;width:42px;height:42px}
+  /* нижнего нава больше нет (v1.10.7) → кнопку-открывалку панели опускаем в угол */
+  .mob-fab{display:flex!important;position:absolute!important;bottom:calc(14px + env(safe-area-inset-bottom))!important;width:46px;height:46px}
   .mob-fab.mob-fab-l{left:10px}
   .mob-fab.mob-fab-r{right:10px}
 }
