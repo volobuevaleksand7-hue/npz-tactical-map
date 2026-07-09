@@ -947,7 +947,15 @@
     });
   }
 
-  function strikeList() { return (S.strikes && S.strikes.strikes) || []; }
+  function strikeList() {
+    var arr = (S.strikes && S.strikes.strikes) || [];
+    // новые коллекторы пишут location:[lat,lon] и description — нормализуем к старой схеме (lat/lon, detail)
+    arr.forEach(function (s) {
+      if (typeof s.lat !== "number" && s.location && s.location.length === 2) { s.lat = +s.location[0]; s.lon = +s.location[1]; }
+      if (!s.detail && s.description) s.detail = s.description;
+    });
+    return arr;
+  }
   function buildStrikeDates() {
     var set = {}; strikeList().forEach(function (s) { set[s.date] = 1; });
     SK.dates = Object.keys(set).sort();

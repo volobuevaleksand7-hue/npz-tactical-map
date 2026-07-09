@@ -547,6 +547,8 @@
       var day = 24 * 60 * 60;
 
       data.strikes.forEach(function(ev) {
+        // новая схема коллекторов: location:[lat,lon] вместо lat/lon
+        if (!ev.lat && ev.location && ev.location.length === 2) { ev.lat = +ev.location[0]; ev.lon = +ev.location[1]; }
         if (!ev.lat || !ev.lon) return;
         // Only show strikes from last 48 hours
         var ts = ev.timestamp || ev.ts || 0;
@@ -565,7 +567,7 @@
 
         // Determine icon based on target type
         var iconFile = "fire_48.png";
-        if (ev.target_type === "npz" || (ev.target && ev.target.indexOf("НПЗ") !== -1)) {
+        if (ev.target_type === "npz" || ev.category === "type/npz" || (ev.target && ev.target.indexOf("НПЗ") !== -1)) {
           iconFile = "impact_48.png";
         }
 
@@ -581,7 +583,7 @@
         var popup = '<div style="font-family:Rubik,sans-serif;min-width:180px">';
         popup += '<b style="font-size:14px;color:#ff5247">🔥 ' + esc(ev.city || ev.region || 'Удар') + '</b><br>';
         if (ev.target) popup += '<span style="color:#ffb443">Цель: ' + esc(ev.target) + '</span><br>';
-        if (ev.detail) popup += '<span style="font-size:11px;color:#8499a6">' + esc(ev.detail) + '</span><br>';
+        if (ev.detail || ev.description) popup += '<span style="font-size:11px;color:#8499a6">' + esc(ev.detail || ev.description) + '</span><br>';
         if (ev.confidence) {
           var conf = ev.confidence === "confirmed" ? "✅ Подтверждено" : ev.confidence === "high" ? "🟡 Высокая" : "⚪ Слух";
           popup += '<span style="font-size:11px">' + conf + '</span><br>';
@@ -858,13 +860,15 @@
     function renderPanel(threats, timeStr, srcStr, stale) {
       var panel = document.getElementById("threatList");
       var html = "";
-      var activeCount = 0;
+      var activeCount = 0, bplaCount = 0, rocketCount = 0;
 
       Object.keys(NPZ_REGIONS).sort().forEach(function(region) {
         var info = NPZ_REGIONS[region];
         var th = threats[region];
         var hasThreat = th && (th.bpla || th.rocket || th.uab || th.fpv || th.aviation || th.explosion);
         if (hasThreat) activeCount++;
+        if (th && th.bpla) bplaCount++;
+        if (th && th.rocket) rocketCount++;
 
         var cls = hasThreat ? "active" : "clear";
         var icon = hasThreat ? (th.rocket || th.aviation ? "🚨" : "🔴") : "🟢";
@@ -905,7 +909,9 @@
         html = '<div style="text-align:center;padding:10px;margin-bottom:8px;border-radius:8px;' +
           'background:rgba(255,82,71,.1);border:1px solid rgba(255,82,71,.3)">' +
           '<div style="font-weight:800;color:var(--red);font-size:13px">⚠ ' + activeCount +
-          ' регион(ов) под угрозой</div></div>' + html;
+          ' регион(ов) под угрозой</div>' +
+          '<div style="font-size:12px;margin-top:4px;color:var(--ink)">🛩 БПЛА: ' + bplaCount +
+          ' · 🚀 Ракетная: ' + rocketCount + '</div></div>' + html;
       }
 
       panel.innerHTML = html;
@@ -992,11 +998,10 @@
     function refresh() {
       if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
       renderState("loading", "Получаем данные через /api/radar-state...");
+      // удары — независимо от радар-прокси: сбой /api/radar-state не должен прятать слой ударов
+      fetchStrikes().then(renderStrikes);
       fetchRadarWithRetry().then(function(data) {
         processRadar(data);
-        fetchStrikes().then(function(strikes) {
-          renderStrikes(strikes);
-        });
         scheduleNext();
       });
     }
