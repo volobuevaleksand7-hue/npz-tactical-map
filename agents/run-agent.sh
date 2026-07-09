@@ -18,6 +18,17 @@ LABEL="${2:?label required}"
 cd "$REPO" || { echo "repo not found: $REPO"; exit 1; }
 mkdir -p agents/logs
 
+# --- Serialize all LLM agent runs onto the single vCPU (sequential, no overlap).
+# flock waits up to NPZ_LOCK_WAIT sec for the previous agent to finish; on timeout
+# it logs a labelled SKIP and exits 0 so cron stays quiet. Per-label logs + this
+# SKIP line show exactly which agent stalled. Non-LLM crons do not use this script.
+# ponytail: one global lock; fine while everything shares a single vCPU.
+exec 9>/var/lock/npz-agent.lock
+if ! flock -w "${NPZ_LOCK_WAIT:-1900}" 9; then
+  echo "=== [$LABEL] SKIP: another agent held the lock >${NPZ_LOCK_WAIT:-1900}s $(date -u +%FT%TZ) ==="
+  exit 0
+fi
+
 echo "=== [$LABEL] model=$MODEL $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
 git pull --rebase --quiet 2>/dev/null || git pull --quiet 2>/dev/null || true
 
