@@ -6,16 +6,25 @@
      self.addEventListener('notificationclick', e => { ... });
 */
 var CACHE = 'npz-shell-v3';
-var SHELL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest',
-             '/radar', '/news', '/install', '/help',
-             '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
+// CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
+var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
+// OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.
+var OPTIONAL = ['/radar', '/news', '/install', '/help',
+                '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
+function reload(u) { return new Request(u, { cache: 'reload' }); }
 
 self.addEventListener('install', function (e) {
   e.waitUntil(
     caches.open(CACHE)
-      .then(function (c) { return c.addAll(SHELL.map(function (u) { return new Request(u, { cache: 'reload' }); })); })
-      .catch(function () {})
-      .then(function () { return self.skipWaiting(); })
+      .then(function (c) {
+        return c.addAll(CRITICAL.map(reload))                 // падение здесь = install reject = старый SW жив
+          .then(function () {
+            return Promise.all(OPTIONAL.map(function (u) {     // опциональные — по отдельности, ошибку глотаем
+              return c.add(reload(u)).catch(function () {});
+            }));
+          });
+      })
+      .then(function () { return self.skipWaiting(); })         // только если CRITICAL закеширован
   );
 });
 
