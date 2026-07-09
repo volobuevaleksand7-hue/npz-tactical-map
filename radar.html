@@ -190,7 +190,44 @@
       .panel.collapsed{max-height:none;height:auto}
       .nav{display:none}
       .feed{display:none} /* ponytail: на мобиле ленту прячем; вкладки панель/лента — если попросят */
+      .nav-burger{display:inline-flex}
+      .sync,.refresh-badge{display:none}   /* burger заменяет зелёную плашку «Авто» */
+      /* бренд не должен обрезаться/переноситься */
+      .topbar{gap:8px;padding:0 10px}
+      .brand{min-width:0;flex-shrink:1;overflow:hidden}
+      .brand-ico{font-size:19px}
+      .brand-t{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .brand-s{display:none}
+      .topctl{gap:7px}
+      /* топ-кнопки помельче, чтобы не маячили */
+      .theme-btn,.nav-burger{width:34px;height:34px;padding:0;font-size:17px}
+      #toggleStrikes~*,label:has(#toggleStrikes){font-size:11px}
     }
+
+    /* ===== MOBILE NAV DRAWER (☰) ===== */
+    .nav-burger{display:none;align-items:center;justify-content:center;width:40px;height:40px;flex:none;
+      border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:10px;
+      font-size:20px;line-height:1;cursor:pointer;transition:.15s}
+    .nav-burger:active{transform:scale(.94)}
+    .nav-drawer{position:fixed;inset:0;z-index:1000}
+    .nav-drawer[hidden]{display:none}
+    .nav-drawer-scrim{position:absolute;inset:0;background:rgba(0,0,0,.44);opacity:0;transition:opacity .25s}
+    .nav-drawer.open .nav-drawer-scrim{opacity:1}
+    .nav-drawer-panel{position:absolute;top:0;right:0;height:100%;width:min(86vw,330px);
+      background:var(--surface);box-shadow:-8px 0 28px rgba(0,0,0,.30);
+      transform:translateX(100%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+      display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;
+      padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+    .nav-drawer.open .nav-drawer-panel{transform:translateX(0)}
+    .ndp-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;
+      padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:var(--surface);border-bottom:1px solid var(--line)}
+    .ndp-brand{font-weight:800;font-size:13px;letter-spacing:.3px}
+    .ndp-x{border:0;background:transparent;color:var(--ink-dim);font-size:20px;line-height:1;cursor:pointer;padding:4px 6px}
+    .ndp-group{font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+      color:var(--ink-dim);padding:15px 16px 5px}
+    .ndp-item{display:flex;align-items:center;gap:10px;min-height:48px;padding:11px 16px;font-size:15px;font-weight:600;
+      color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(127,127,127,.10);cursor:pointer}
+    .ndp-item:active{background:var(--surface2)}
 
 /* Civilization-style radar icons */
 .radar-civ-icon {
@@ -306,11 +343,19 @@
 .about-body a { color: var(--teal); text-decoration: none; }
 .about-body a:hover { text-decoration: underline; }
 
+/* открытый accordion показывает ✕, чтобы было понятно как закрыть (кнопка уезжает вверх при раскрытии) */
+.legend-toggle[open] > summary::after,
+.about-radar[open] > summary::after { content:"✕"; margin-left:auto; padding-left:10px; font-weight:800; opacity:.65; }
+.legend-toggle > summary, .about-radar > summary { gap:6px; }
+
 @media(max-width:768px){
   .radar-civ-icon img, .radar-civ-icon svg { width: 40px !important; height: 40px !important; }
-  .legend-toggle { left: 14px; bottom: 84px; max-width: calc(100% - 28px); }
+  .legend-toggle { left: 12px; bottom: 76px; max-width: calc(100% - 24px); }
   /* ponytail: было display:none (справка терялась) — теперь свёрнутый accordion, доступен по тапу */
-  .about-radar { right: 14px; bottom: 84px; max-width: calc(50% - 21px); }
+  .about-radar { right: 12px; bottom: 76px; max-width: calc(60% - 18px); }
+  /* кнопки мельче, чтобы не маячили */
+  .legend-toggle > summary, .about-radar > summary { min-height:34px; padding:5px 10px; font-size:10px; }
+  .about-body { font-size: 11px; line-height: 1.45; }
 }
   </style>
 </head>
@@ -341,8 +386,47 @@
         <span id="lastUpdate">—</span>
         <span class="sync-next" id="nextRefresh">T-05:00</span>
       </div>
+      <button class="nav-burger" id="navBurger" type="button" aria-label="Меню разделов" aria-expanded="false" aria-controls="navDrawer">☰</button>
     </div>
   </header>
+
+  <!-- MOBILE NAV DRAWER (☰) — desktop uses .nav; mobile uses this -->
+  <div class="nav-drawer" id="navDrawer" hidden>
+    <div class="nav-drawer-scrim" data-close></div>
+    <nav class="nav-drawer-panel" aria-label="Разделы">
+      <div class="ndp-head">
+        <span class="ndp-brand">📡 РАДАР УГРОЗ</span>
+        <button class="ndp-x" type="button" data-close aria-label="Закрыть меню">✕</button>
+      </div>
+      <div class="ndp-group">Карта</div>
+      <a class="ndp-item" href="/">🗺 Россия</a>
+      <a class="ndp-item" href="/?view=crimea">⚠ Крым</a>
+      <a class="ndp-item" href="/?view=azs">⛽ АЗС · заправки</a>
+      <div class="ndp-group">Разделы</div>
+      <a class="ndp-item" href="/radar">📡 Радар БПЛА</a>
+      <a class="ndp-item" href="/news">📰 Новости</a>
+      <a class="ndp-item" href="/analytics">📊 Аналитика</a>
+      <a class="ndp-item" href="/sources">📚 Источники</a>
+      <a class="ndp-item" href="/help">❓ Как пользоваться</a>
+      <div class="ndp-group">Аналитика</div>
+      <a class="ndp-item" href="/crimea">🗺 Крым</a>
+      <a class="ndp-item" href="/krasnodar">🌴 Краснодар</a>
+      <a class="ndp-item" href="/moskva">🏙 Москва</a>
+      <a class="ndp-item" href="/raketnaya-opasnost-volgograd">🚀 Ракетная опасность: Волгоград</a>
+      <a class="ndp-item" href="/deficit">⛽ Почему нет бензина</a>
+      <a class="ndp-item" href="/talony">🎫 Бензин по талонам</a>
+      <a class="ndp-item" href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+      <a class="ndp-item" href="/gde-dizel">🛢️ Где найти дизель</a>
+      <a class="ndp-item" href="/crisis">🔥 Прогноз кризиса</a>
+      <a class="ndp-item" href="/attacks">💥 Хроника ударов</a>
+      <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
+      <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+      <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
+      <div class="ndp-group">Ещё</div>
+      <a class="ndp-item" href="/install">📲 Установить приложение</a>
+      <a class="ndp-item" href="/support">🤝 Поддержать нас</a>
+    </nav>
+  </div>
 
   <div class="seo-strip">
     <h1 class="seo-h1">Карта тревог: где сейчас БПЛА и ракетная опасность по регионам России</h1>
@@ -1058,6 +1142,28 @@
     // ─── Init ───
     refresh();
   })();
+  </script>
+  <script>
+    // Mobile nav drawer (☰)
+    (function () {
+      var d = document.getElementById('navDrawer'), b = document.getElementById('navBurger');
+      if (!d || !b) return;
+      function open() { d.hidden = false; void d.offsetWidth; d.classList.add('open'); b.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+      function close() { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; setTimeout(function () { d.hidden = true; }, 260); }
+      b.addEventListener('click', open);
+      d.addEventListener('click', function (e) { if (e.target.hasAttribute('data-close')) { close(); return; } if (e.target.closest('.ndp-item[href]')) close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !d.hidden) close(); });
+    })();
+
+    // Accordions «Типы угроз» / «О карте тревог»: закрывать по тапу вне (capture ловит и тап по карте — Leaflet глушит всплытие), один открыт за раз
+    (function () {
+      var dets = Array.prototype.slice.call(document.querySelectorAll('.about-radar, .legend-toggle'));
+      if (!dets.length) return;
+      function closeAll(except) { dets.forEach(function (x) { if (x !== except) x.open = false; }); }
+      dets.forEach(function (x) { x.addEventListener('toggle', function () { if (x.open) closeAll(x); }); });
+      document.addEventListener('pointerdown', function (e) { if (!e.target.closest('.about-radar, .legend-toggle')) closeAll(null); }, true);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(null); });
+    })();
   </script>
 </body>
 </html>
