@@ -16,7 +16,8 @@
     azsStations: "data/azs-stations.json",
     azsRoutes: "data/azs-routes.json",
     capacityTimeline: "data/capacity-timeline.json",
-    health: "data/health.json"
+    health: "data/health.json",
+    candidates: "data/strike-candidates.json"
   };
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function safeUrl(u){u=String(u||'');return /^https?:\/\//i.test(u)?u:'#';}
@@ -380,6 +381,7 @@
     L_ru.azs = L.layerGroup();                      // AZS network status — OFF by default (toggle)
     L_ru.grid = L.layerGroup();                     // Electricity grid (substations + blackouts) — OFF by default
     L_ru.prices = L.layerGroup();                   // Price heatmap (АИ-95 по регионам) — OFF by default
+    L_ru.candidates = L.layerGroup();               // Кандидаты в удары с ленты radar-map.ru (rumor) — OFF by default
   }
   function loadGeo() {
     Promise.all([
@@ -1091,6 +1093,48 @@
     updateStrikeBar();
   }
 
+  /* ---------- STRIKE CANDIDATES (radar tripwire, unconfirmed rumor) ---------- */
+  // ponytail: маркер полностью инлайн (без classов), чтобы не трогать styles.css.
+  // Амбер + пунктир + «?» = сигнал «возможный удар, НЕ подтверждён» — визуально отделён от
+  // сплошного красного пламени подтверждённых ударов.
+  function candidateMarker() {
+    var flame = "M16 1.5 C20.5 7 25 11 24 17.5 C23 24 18.5 27.5 16 31 C13.5 27.5 9 24 8 17.5 C7 11 11.5 7 16 1.5 Z";
+    var html = '<div class="strike-cand" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))">' +
+      '<svg width="26" height="26" viewBox="0 0 32 32">' +
+      '<path d="' + flame + '" fill="rgba(240,165,0,.16)" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/>' +
+      '<path d="' + flame + '" fill="rgba(240,165,0,.16)" stroke="#f0a500" stroke-width="2" stroke-dasharray="3 2.4" stroke-linejoin="round"/>' +
+      '<text x="16" y="21" text-anchor="middle" font-size="15" font-weight="800" fill="#f0a500" font-family="system-ui,Arial,sans-serif">?</text>' +
+      '</svg></div>';
+    return L.divIcon({ className: "", html: html, iconSize: [26, 26], iconAnchor: [13, 20], popupAnchor: [0, -16] });
+  }
+  function candidatePopup(c) {
+    var h = '<div class="pp-h">' + esc(c.city || "город не определён") + (c.region ? ' · ' + esc(c.region) : "") + '</div>';
+    h += '<span class="pp-st partial" style="background:rgba(240,165,0,.18);color:#f0a500;border-color:#f0a500">❓ КАНДИДАТ · НЕ ПОДТВЕРЖДЁН</span>';
+    h += '<div class="pp-kv"><span>Когда</span><span>' + esc(fmtDay(c.date)) + (c.time_local ? ', ' + esc(c.time_local) : (c.time ? ', ' + esc(c.time) : '')) + '</span></div>';
+    if (c.target) h += '<div class="pp-kv"><span>Цель</span><span>' + esc(c.target) + '</span></div>';
+    if (c.detail) h += '<div class="pp-note">' + esc(c.detail) + '</div>';
+    h += '<div class="pp-src" style="opacity:.85">🛰 сигнал с ленты <b>radar-map.ru</b> · требует подтверждения (GDELT/FIRMS)</div>';
+    return h;
+  }
+  function renderCandidates() {
+    if (!L_ru.candidates) return;
+    L_ru.candidates.clearLayers();
+    var arr = (S.candidates && S.candidates.candidates) || [];
+    arr.forEach(function (c) {
+      if (typeof c.lat !== "number" || typeof c.lon !== "number") return;
+      L.marker([c.lat, c.lon], { icon: candidateMarker(), zIndexOffset: 500 })
+        .bindPopup(candidatePopup(c), POPUP_OPTS)
+        .addTo(L_ru.candidates);
+    });
+  }
+  function loadCandidates() {
+    // live=true → raw github первым (cache-bust), как strikes: слой подхватывает свежих
+    // кандидатов, которые VPS-крон strike-candidates.py пушит ежечасно, без редеплоя сайта.
+    return fetchJsonPath(FILES.candidates, true)
+      .then(function (j) { S.candidates = j; renderCandidates(); })
+      .catch(function () { /* нет файла/пусто — слой просто пустой */ });
+  }
+
   /* ---------- STRIKE NEWS FEED (column tied to map) ---------- */
   function typeShort(t) { return t === "missile" ? "ракета" : t === "both" ? "БПЛА+ракета" : "БПЛА"; }
   function renderFeed() {
@@ -1778,6 +1822,24 @@
         if (on) maps.ru.addLayer(lg); else maps.ru.removeLayer(lg);
       });
     });
+    // Кандидаты в удары (radar tripwire) — тоггл добавляем из JS, чтобы не править index.html
+    (function initCandidatesToggle() {
+      var box = document.getElementById("layerToggles");
+      if (box && !box.querySelector("[data-layer=candidates]")) {
+        var btn = document.createElement("button");
+        btn.setAttribute("data-layer", "candidates");
+        btn.textContent = "❓ Кандидаты";
+        btn.title = "Возможные удары с ленты radar-map.ru — НЕ подтверждено, требует проверки";
+        btn.addEventListener("click", function () {
+          var on = btn.classList.toggle("active");
+          if (!L_ru.candidates) return;
+          if (on) { maps.ru.addLayer(L_ru.candidates); renderCandidates(); }
+          else maps.ru.removeLayer(L_ru.candidates);
+        });
+        box.appendChild(btn);
+      }
+      loadCandidates();
+    })();
     // strike day-timeline controls
     var sl = document.getElementById("dayslider");
     if (sl) sl.addEventListener("input", function () { stopPlay(); SK.mode = "day"; SK.idx = +this.value; renderStrikes(); });

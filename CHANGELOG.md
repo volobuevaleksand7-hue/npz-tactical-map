@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.11.1 - 2026-07-09
+
+**Слой «кандидаты в удары» (radar tripwire).**
+
+- Новый тоггл **«❓ Кандидаты»** на карте России (off по умолчанию). Показывает возможные удары с ленты `radar-map.ru` — амбер-пунктирный маркер «?», попап «КАНДИДАТ · НЕ ПОДТВЕРЖДЁН · сигнал с radar-map.ru · требует GDELT/FIRMS».
+- Данные: `data/strike-candidates.json` (`status:candidate`, `confidence:rumor`), читается live с raw github. Наполняется VPS-кроном `agents/strike-candidates.py` (ежечасно). **В боевой `strikes.json` НЕ вливается** — только сигнал «где искать», подтверждение через `strike-confirm.py`.
+- Реализация целиком в `app.js` (маркер инлайн, тоггл инжектится из JS) — `index.html`/`styles.css` не тронуты.
+- Follow-up (фильтр даёт 0 при терсовых тревогах): см. `docs/agents/TZ_strike-candidates-pipeline.md`.
+
 ## v1.11.0 - 2026-07-09
 
 **Мобильный UX-пасс — карта стала главным экраном (50% трафика мобильный).**
