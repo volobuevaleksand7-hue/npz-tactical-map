@@ -1,11 +1,93 @@
 {
-  "updated": "2026-07-08T05:00:00Z",
-  "source": "@NPZmap (Telegram)",
+  "updated": "2026-07-09T01:30:00Z",
+  "source": "@NPZmap (Telegram) / The Moscow Times / Reuters / Exilenova+",
   "summary": {
-    "total_last_12h": 4,
-    "active_fires": 2,
-    "contained": 1,
-    "unknown_status": 1
+    "total_last_12h": 5,
+    "active_fires": 3,
+    "contained": 0,
+    "unknown_status": 2,
+    "period": "2026-07-08T17:00Z — 2026-07-09T01:30Z"
   },
-  "strikes": []
+  "strikes": [
+    {
+      "id": "тверь-20260709-1",
+      "date": "2026-07-09",
+      "time": "ночь",
+      "city": "Тверь",
+      "region": "Тверская область",
+      "location": [56.860, 35.913],
+      "type": "drone",
+      "count": null,
+      "target": "нефтебаза «Тверьнефтепродукт»",
+      "category": "type/npz",
+      "impact": "active_fire",
+      "description": "В ночь на 9 июля БПЛА атаковали нефтебазу «Тверьнефтепродукт» в Твери. Местные жители сообщают о пожаре в районе одного из резервуаров. (Exilenova+ Telegram, 9 июля)",
+      "source_url": "https://t.me/exilenova_plus",
+      "confidence": "reported"
+    },
+    {
+      "id": "михайловск-20260709-1",
+      "date": "2026-07-09",
+      "time": "ночь",
+      "city": "Михайловск",
+      "region": "Ставропольский край",
+      "location": [45.128, 42.024],
+      "type": "drone",
+      "count": null,
+      "target": "нефтебаза",
+      "category": "type/npz",
+      "impact": "active_fire",
+      "description": "В ночь на 9 июля БПЛА атаковали нефтебазу в Михайловске (Ставропольский край). Зафиксирован пожар. (Exilenova+ Telegram, 9 июля)",
+      "source_url": "https://t.me/exilenova_plus",
+      "confidence": "reported"
+    },
+    {
+      "id": "краснодарская-20260708-1",
+      "date": "2026-07-08",
+      "time": "вечер",
+      "city": "Крымский район",
+      "region": "Краснодарский край",
+      "location": [44.894, 37.318],
+      "type": "drone",
+      "count": null,
+      "target": "компрессорная станция «Краснодарская» (газопровод «Голубой поток») — категория: type/gas",
+      "category": "type/gas",
+      "impact": "damaged",
+      "description": "8 июля «Газпром» подтвердил атаку БПЛА на компрессорную станцию «Краснодарская», обеспечивающую подачу газа в Турцию по газопроводу «Голубой поток». Экспорт не нарушен. (The Moscow Times, 8 июля)",
+      "source_url": "https://www.themoscowtimes.com/2026/07/08/at-least-2-killed-in-russia-as-ukraine-hits-multiple-oil-refineries-a93193",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "таганрог-20260708-1",
+      "date": "2026-07-08",
+      "time": "вечер",
+      "city": "Таганрогский залив",
+      "region": "Ростовская область",
+      "location": [47.05, 38.80],
+      "type": "drone",
+      "count": 2,
+      "target": "танкеры (пустые) в акватории Таганрогского залива",
+      "category": "type/npz",
+      "impact": "damaged",
+      "description": "8 июля губернатор Ростовской области Слюсарь сообщил о повреждении двух пустых танкеров в Таганрогском заливе (Азовское море). Суда следовали в Ростов-на-Дону. Двое раненых лёгкой степени. (The Moscow Times, Reuters, 8 июля)",
+      "source_url": "https://www.themoscowtimes.com/2026/07/08/at-least-2-killed-in-russia-as-ukraine-hits-multiple-oil-refineries-a93193",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "рф-20260708-1",
+      "date": "2026-07-08",
+      "time": "",
+      "city": "Москва",
+      "region": "РФ (федеральный уровень)",
+      "location": [55.755, 37.617],
+      "type": "policy",
+      "count": 0,
+      "target": "запрет экспорта дизельного топлива",
+      "category": "type/policy",
+      "impact": "restriction",
+      "description": "8 июля правительство РФ ввело запрет на экспорт дизельного топлива до 31 июля 2026 г. Мера направлена на обеспечение внутреннего рынка на фоне дефицита, вызванного украинскими атаками на НПЗ. (The Moscow Times, 8 июля)",
+      "source_url": "https://www.themoscowtimes.com/2026/07/08/russia-bans-diesel-exports-to-ensure-domestic-supply-after-targeted-ukrainian-drone-strikes-a93202",
+      "confidence": "confirmed"
+    }
+  ]
 }
