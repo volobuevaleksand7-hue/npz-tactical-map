@@ -65,8 +65,8 @@
     .theme-btn:hover{transform:translateY(-1px)}
 
     /* Map */
-    /* ponytail: z-index:auto (было 0) — z:0 создавал stacking context, запиравший попапы Leaflet (z-index:700 внутри) под panel/feed (z:20) */
-    .map{position:absolute;top:86px;left:0;right:0;bottom:0;z-index:auto}
+    /* z:0 создаёт stacking context — слои Leaflet заперты внутри и НЕ накрывают panel/feed (z:20); попап у угла панели автопанорамируется */
+    .map{position:absolute;top:86px;left:0;right:0;bottom:0;z-index:0}
     /* SEO strip под топбаром: видимый h1 + freshness-подпись */
     /* ponytail: разведена с .panel по позиции (strip top:52-86, panel top:100 на desktop/tablet,
        bottom-anchored на ≤768px) И по z-index (25 > 20) — оверлапа нет, панель никогда не залезает выше 86px */
@@ -326,7 +326,7 @@
     <nav class="nav">
       <a href="/">🗺 Карта</a>
       <a href="/news">📰 Сводки</a>
-      <a href="/radar" class="active">📡 Радар</a>
+      <a href="/radar" class="active">📡 Радар БПЛА</a>
       <a href="/analytics">📊 Аналитика</a>
       <a href="/sources">📚 Источники</a>
     </nav>
