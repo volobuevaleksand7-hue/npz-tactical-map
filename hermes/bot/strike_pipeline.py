@@ -53,10 +53,13 @@ def jload(path, default=None):
 
 
 def jsave(path, data):
-    """Save JSON to file."""
+    """Save JSON atomically (tmp + os.replace) so a crash mid-write can't truncate
+    the state file into `{}` and mass-rebroadcast every historical strike (audit H9)."""
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, path)
 
 
 def _strike_id(strike):

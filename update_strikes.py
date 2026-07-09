@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import json
+import os
 from datetime import datetime
 
-with open('data/strikes.json', 'r') as f:
+with open('data/strikes.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 strikes = data['strikes']
@@ -262,6 +263,10 @@ json_str = json.dumps(data, ensure_ascii=False, indent=2)
 json.loads(json_str)
 print("JSON valid")
 
-with open('data/strikes.json', 'w') as f:
+# ponytail: atomic tmp+replace + utf-8 — bare 'w' truncates the sole archive on open,
+# so a UnicodeEncodeError on a non-UTF-8 locale would wipe it with no backup (audit C3)
+tmp = 'data/strikes.json.tmp'
+with open(tmp, 'w', encoding='utf-8') as f:
     f.write(json_str)
+os.replace(tmp, 'data/strikes.json')
 print("Written to data/strikes.json")
