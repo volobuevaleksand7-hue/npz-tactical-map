@@ -195,7 +195,8 @@ TEMPLATE = """<!DOCTYPE html>
 <html lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#d23a2e">
   <title>{title}</title>
   <meta name="description" content="{desc}">
   <meta name="keywords" content="{kw}">
@@ -252,7 +253,7 @@ TEMPLATE = """<!DOCTYPE html>
 <body data-theme="light">
   <header class="news-header">
     <div class="news-header-inner">
-      <a href="/news" class="news-logo" title="Все сводки">
+      <a href="/" class="news-logo" title="На карту">
         <span class="news-logo-icon">⛽</span>
         <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
       </a>

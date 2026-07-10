@@ -194,6 +194,27 @@ def build_nav(rows, current):
     return '<nav class="news-nav">\n' + "\n".join(L) + '\n      </nav>'
 
 
+# ---- 1a) единая шапка (лого + nav) на news-header-лендингах ----
+# build-nav владеет всем <header class="news-header">, а не только внутренним <nav>:
+# логотип больше не копируется руками (был разнобой — 86 страниц вели логотипом на /news,
+# 4 на /). radar.html (topbar) и index.html (tab-бар) — свои шапки, их не трогаем (у них
+# управляется только внутренний nav, ниже в main()).
+HEADER_RE = re.compile(r'<header class="news-header">.*?</header>', re.DOTALL)
+LOGO_HTML = ('      <a href="/" class="news-logo" title="На карту">\n'
+             '        <span class="news-logo-icon">⛽</span>\n'
+             '        <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>\n'
+             '      </a>')
+
+
+def build_header(rows, current):
+    return ('<header class="news-header">\n'
+            '    <div class="news-header-inner">\n'
+            + LOGO_HTML + '\n'
+            '      ' + build_nav(rows, current) + '\n'
+            '    </div>\n'
+            '  </header>')
+
+
 # ---- 1b) единый брендированный футер на SEO-лендингах + /analytics ----
 FOOTER_HTML = ('  <footer class="news-footer">\n'
                '    <div class="news-footer-inner">\n'
@@ -371,10 +392,18 @@ def main():
         if f.name == "index.html":
             continue
         html = f.read_text(encoding="utf-8")
-        if '<nav class="news-nav">' not in html:
+        # обрабатываем страницу, если есть ЛЮБОЙ маркер: news-header (build-nav наполнит
+        # шапку целиком — так новая страница = пустой <header class="news-header"></header>)
+        # или news-nav без header (radar — только внутренний nav).
+        if '<nav class="news-nav">' not in html and '<header class="news-header">' not in html:
             continue
         current = "/" + str(f.relative_to(ROOT))[:-5]
-        new = NAV_RE.sub(build_nav(rows, current), html, count=1)
+        # news-header-лендинги → build-nav владеет всей шапкой (лого + nav);
+        # radar (topbar, без news-header) → только внутренний nav, как раньше.
+        if '<header class="news-header">' in html:
+            new = HEADER_RE.sub(build_header(rows, current), html, count=1)
+        else:
+            new = NAV_RE.sub(build_nav(rows, current), html, count=1)
         new = apply_footer(new, f.name)
         new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
         new = wire_dropdown(new)  # срезать старый инлайн-JS дропдауна + линковать shared /nav-dropdown.js

@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v13';   // bump → форсит подмену закешированного shell (v1.15.2: честная дата обновления региона в попапе + цвет strained)
+var CACHE = 'npz-shell-v14';   // bump → v1.16.0: единая шапка через build-nav, head-линт, viewport-fit/theme-colornav, head-линт, viewport-fit/theme-color)
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

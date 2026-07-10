@@ -394,7 +394,8 @@ def head_html(title, description, canonical, cover_url, jsonld="") -> str:
 <html lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#d23a2e">
   <title>{escape(title)}</title>
   <meta name="description" content="{escape(description)}">
   <meta name="keywords" content="{escape(SEO_KEYWORDS)}">
@@ -437,7 +438,7 @@ def head_html(title, description, canonical, cover_url, jsonld="") -> str:
 def header_html(date_badge: str) -> str:
     return f"""  <header class="news-header">
     <div class="news-header-inner">
-      <a href="/news" class="news-logo" title="Все сводки">
+      <a href="/" class="news-logo" title="На карту">
         <span class="news-logo-icon">⛽</span>
         <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
       </a>

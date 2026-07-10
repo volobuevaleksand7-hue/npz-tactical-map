@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.16.0 - 2026-07-10
+
+**Полка A / идея #1: build-nav владеет всей шапкой + head-линт.**
+
+- **Единый генератор шапки:** `build-nav.py` заменяет весь `<header class="news-header">` (лого + nav), а не только внутренний `<nav>`. Логотип централизован (`LOGO_HTML`/`build_header`); убран разнобой — 86 страниц вели логотипом на `/news`, теперь все на `/` («На карту»; /news доступен пунктом «Сводки»). Новая hand-страница = пустой `<header class="news-header"></header>` → build-nav наполняет лого+меню+футер. `radar`/`index` (свои шапки topbar/tab-бар) не тронуты — у них управляется только внутренний nav.
+- **Head-линт в `check-ia.py`:** для лендингов проверяются обязательные head-элементы (`canonical`, `og:*`, `twitter:card`, `viewport-fit`, `theme-color`, `/fonts.css`, `/styles.css`) — не блокирует, warnings. Ловит head-находки аудита без рискованной централизации head.
+- **Починка по линту:** `viewport-fit=cover` + `theme-color` добавлены на все лендинги + шаблоны генераторов (97 файлов); `/fonts.css` дослан на `analytics`/`install` (рендерились системным шрифтом вместо Rubik). Остаток — 3 known-warning: `404` (og — отдельная идея #3), `sources`/`support` (legacy/скрытая со своими inline-стилями).
+- **Генераторы** `gen-news`/`gen-fuel-pages`/`gen-rocket-danger`: логотип + `viewport-fit` + `theme-color` в шаблонах — новые страницы рождаются согласованными.
+- **SW-кеш** `v12 → v13`.
+
+
 ## v1.15.0 - 2026-07-10
 
 **Карта АЗС получила отдельную страницу `/karta-azs` (как `/radar`).**

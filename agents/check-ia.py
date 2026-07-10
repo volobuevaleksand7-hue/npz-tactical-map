@@ -41,6 +41,37 @@ def check_orphans(sitemap, rows):
     return warnings
 
 
+# Обязательные head-элементы для лендингов/инфо-страниц. Ловит head-находки аудита
+# (install/support без OG, нет viewport-fit) без рискованной централизации head.
+# index.html/radar.html исключены — у них своя шапка/голова (карта, гейт).
+HEAD_CHECKS = [
+    ("canonical",      'rel="canonical"'),
+    ("og:type",        'property="og:type"'),
+    ("og:url",         'property="og:url"'),
+    ("og:title",       'property="og:title"'),
+    ("og:description", 'property="og:description"'),
+    ("og:image",       'property="og:image"'),
+    ("twitter:card",   'name="twitter:card"'),
+    ("viewport-fit",   'viewport-fit=cover'),
+    ("theme-color",    'name="theme-color"'),
+    ("/fonts.css",     '/fonts.css'),
+    ("styles.css",     'styles.css'),
+]
+HEAD_SKIP = {"index.html", "radar.html"}
+
+
+def check_head_meta():
+    warnings = []
+    for f in sorted(ROOT.glob("*.html")):
+        if f.name in HEAD_SKIP:
+            continue
+        head = f.read_text(encoding="utf-8").split("</head>", 1)[0]
+        missing = [label for label, needle in HEAD_CHECKS if needle not in head]
+        if missing:
+            warnings.append(f"{f.name}: нет head-элементов: {', '.join(missing)}")
+    return warnings
+
+
 def main():
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     rows = bn.load_reg()
@@ -68,6 +99,12 @@ def main():
     if warnings:
         print("IA CHECK WARNINGS (не блокирует):")
         for w in warnings:
+            print("  -", w)
+
+    head_warnings = check_head_meta()
+    if head_warnings:
+        print("HEAD-META WARNINGS (не блокирует):")
+        for w in head_warnings:
             print("  -", w)
 
     print(f"IA check OK — {live} live-страниц: файлы, sitemap и меню на месте.")
