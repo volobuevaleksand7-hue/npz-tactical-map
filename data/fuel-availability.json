@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-07-09T20:00:00Z",
+  "generated_at": "2026-07-10T12:30:00Z",
   "data_mode": "ОЦЕНКА / ESTIMATE",
   "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ). Не official.",
   "refresh_seconds": 240,
@@ -572,8 +572,8 @@
    "region": "Самарская обл.",
    "lat": 53.2,
    "lon": 50.15,
-   "level": "severe",
-   "updated": "2026-07-01",
+   "level": "limited",
+   "updated": "2026-07-08",
    "networks": [
     {
      "name": "Роснефть",
@@ -608,7 +608,9 @@
     "https://samaraonline24.ru/samara/view/na-azs-tatnefti-v-samare-vveli-limit-benzina-20-litrov",
     "https://www.banki.ru/news/daytheme/?id=11025071",
     "https://absatz.media/obshestvo/168356-situaciya-s-toplivom-20-iyunya-limity-v-regionah-svobodnaya-prodazha-v-krymu-i-proverki-fas",
-    "https://ircity.ru/text/economics/2026/06/25/76497155/"
+    "https://ircity.ru/text/economics/2026/06/25/76497155/",
+    "https://www.samara.kp.ru/daily/277793.4/5270564/",
+    "https://63.ru/text/auto/2026/07/08/76523213/"
    ]
   },
   {
@@ -731,24 +733,25 @@
    "lat": 56.85,
    "lon": 53.2,
    "level": "strained",
-   "updated": "2026-07-05",
+   "updated": "2026-07-09",
    "networks": [
     {
      "name": "Татнефть",
      "status": "limited",
      "limit_l": 30,
-     "note": "16.06: «Татнефть» — единый лимит по РФ ≤30 л бензина (ранее 20 л), оплата только наличными. | 17.06: сеть СНЯЛА ограничения на отпуск АИ-92 и дизеля по всей РФ — лимит сохраняется только на АИ-95 (≤30 л/ТС). | 30.06–03.07: в Ижевске/Нефтекамске длинные очереди на АЗС; кофейни выдают 3–5 л АИ-95 за покупки от 1500 ₽ (oil_capital 25984, Meduza).",
+     "note": "16.06: «Татнефть» — единый лимит по РФ ≤30 л бензина (ранее 20 л), оплата только наличными. | 17.06: сеть СНЯЛА ограничения на отпуск АИ-92 и дизеля по всей РФ — лимит сохраняется только на АИ-95 (≤30 л/ТС). | 30.06–03.07: в Ижевске/Нефтекамске длинные очереди на АЗС; кофейни выдают 3–5 л АИ-95 за покупки от 1500 ₽ (oil_capital 25984, Meduza). | 09.07: сети удвоили поставки топлива в Удмуртию, логистические цепочки восстанавливаются.",
      "level": "limited"
     }
    ],
-   "queues_hours": 1.0,
-   "ai95_price_rub": null,
-   "diesel_price_rub": null,
+   "queues_hours": 0.5,
+   "ai95_price_rub": 75,
+   "diesel_price_rub": 82,
    "source_urls": [
     "https://kazan.aif.ru/society/bez-paniki-v-tatarstane-13-iyunya-vveli-vremennye-limity-na-toplivo-na-azs",
     "https://www.m24.ru/news/17062026/911473",
     "https://t.me/oil_capital/25984",
-    "https://meduza.io/en/feature/2026/06/30/what-does-a-russian-summer-look-like-without-gasoline-imagine-18-hour-lines-national-guard-patrols-and-brodsky-parodies"
+    "https://meduza.io/en/feature/2026/06/30/what-does-a-russian-summer-look-like-without-gasoline-imagine-18-hour-lines-national-guard-patrols-and-brodsky-parodies",
+    "https://www.interfax-russia.ru/volga/news/ryad-setey-azs-udvoili-postavki-topliva-v-udmurtiyu-vlasti"
    ]
   },
   {
@@ -906,13 +909,13 @@
    "lat": 57.82,
    "lon": 28.33,
    "level": "limited",
-   "updated": "2026-06-22",
+   "updated": "2026-07-10",
    "networks": [
     {
      "name": "Роснефть",
      "status": "limited",
      "limit_l": 20,
-     "note": "С начала июня на АЗС «Роснефти» — лимит ~20 л бензина на одну покупку; ограничения в одном ряду с Курской и Белгородской обл. | 22.06 (STALE-проверка): ограничения сохраняются, новых региональных событий не зафиксировано.",
+     "note": "С начала июня на АЗС «Роснефти» — лимит ~20 л бензина на одну покупку; ограничения в одном ряду с Курской и Белгородской обл. | 10.07: введена система ограничения заправки по номерным знакам — машины с чётными цифрами госномера могут заезжать только в чётные дни месяца (oil_capital).",
      "level": "limited"
     },
     {
@@ -924,12 +927,13 @@
     }
    ],
    "queues_hours": 1.0,
-   "ai95_price_rub": null,
-   "diesel_price_rub": null,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 80,
    "source_urls": [
     "https://ru.themoscowtimes.com/2026/06/04/ogranicheniya-na-prodazhu-benzina-ohvatili-20-regionov-a197285",
     "https://nv.ua/world/countries/deficit-topliva-v-rossii-ogranicheniya-na-prodazhu-v-15-regionah-i-okkupirovannyh-territoriyah-50613411.html",
-    "https://novayagazeta.eu/articles/2026/06/04/ogranicheniia-na-prodazhu-benzina-vveli-minimum-v-15-regionakh-rossii-news"
+    "https://novayagazeta.eu/articles/2026/06/04/ogranicheniia-na-prodazhu-benzina-vveli-minimum-v-15-regionakh-rossii-news",
+    "https://t.me/oil_capital"
    ]
   },
   {
@@ -1131,8 +1135,8 @@
    "region": "Волгоградская обл.",
    "lat": 48.71,
    "lon": 44.51,
-   "level": "limited",
-   "updated": "2026-07-03",
+   "level": "strained",
+   "updated": "2026-07-06",
    "networks": [
     {
      "name": "Татнефть",
@@ -1146,7 +1150,7 @@
      "status": "limited",
      "level": "limited",
      "limit_l": 30,
-     "note": "23.06 (АиФ Волгоград, Волжская правда): «Лукойл» с 23 июня ввёл лимиты в Волгоградской обл. — в городе до 30 л бензина/60 л дизеля за одну заправку; на трассах — до 60 л бензина/200 л дизеля. Канистры не отпускаются. | 24.06 (Ведомости): лимит 30 л бензин, 60 л дизель (на трассах — 200 л/ТС)."
+     "note": "23.06 (АиФ Волгоград, Волжская правда): «Лукойл» с 23 июня ввёл лимиты в Волгоградской обл. — в городе до 30 л бензина/60 л дизеля за одну заправку; на трассах — до 60 л бензина/200 л дизеля. Канистры не отпускаются. | 24.06 (Ведомости): лимит 30 л бензин, 60 л дизель (на трассах — 200 л/ТС). | 06.07: ситуация постепенно улучшается."
     },
     {
      "name": "Региональные АЗС",
@@ -1157,8 +1161,8 @@
     }
    ],
    "queues_hours": 0.5,
-   "ai95_price_rub": null,
-   "diesel_price_rub": null,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 76,
    "source_urls": [
     "https://v1.ru/text/gorod/2026/06/17/76483195/",
     "https://www.volgograd.kp.ru/daily/277789.4/5262277/",
@@ -1166,7 +1170,8 @@
     "https://vlg.aif.ru/auto/trans/po-30-v-ruki-kompaniya-lukoyl-ogranichila-prodazhu-benzina-v-volgograde",
     "https://gazeta-vp.ru/23-iyunya-lukojl-vvel-ogranicheniya-na-otpusk-topliva/",
     "https://www.vedomosti.ru/business/articles/2026/06/24/1208285-ob-ogranicheniyah-benzina",
-    "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/"
+    "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
+    "https://www.volgograd.kp.ru/daily/277794/5271974/"
    ]
   },
   {
@@ -2579,6 +2584,18 @@
   }
  ],
  "policy_events": [
+  {
+   "date": "2026-07-10",
+   "region": "РФ — торги на СПбМТСБ упали до исторического минимума",
+   "text": "10.07 (nefte_baza): на Санкт-Петербургской бирже торговля бензином практически прекратилась — реализовано всего 8,1 тыс. тонн АИ-92 и АИ-95. Это исторический минимум. Причина: власти вытесняют биржевых трейдеров, переориентируя топливо напрямую на потребителей (ФГУП). Снижение норматива обязательной продажи с 15% до 10%.",
+   "source_url": "https://t.me/nefte_baza"
+  },
+  {
+   "date": "2026-07-10",
+   "region": "Псковская обл. — чётные-нечётные при отпуске бензина",
+   "text": "10.07 (oil_capital): введена система лимитирования заправки по госномерам — машины с чётными цифрами номера могут заезжать на АЗС только в чётные дни месяца (аналогично Орловской обл.). Дополнительно: ограничение отпуска по количеству литров.",
+   "source_url": "https://t.me/oil_capital"
+  },
   {
    "date": "2026-07-09",
    "region": "Крым — ночная атака: Сакская ТЭЦ, склады ГСМ, 12 танкеров",
