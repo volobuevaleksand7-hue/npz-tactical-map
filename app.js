@@ -31,7 +31,7 @@
     if(!u) return '';
     if(!srcBlocked(u)) return '<div class="pp-src"><a href="'+safeUrl(u)+'" target="_blank" rel="noopener">'+esc(label||'источник')+' ↗</a></div>';
     return '<div class="pp-src pp-src--off">🔒 <a href="'+safeUrl(u)+'" target="_blank" rel="noopener">'+esc(srcHost(u))+' — недоступно из РФ</a></div>'+
-      '<div class="pp-vpn"><div class="pp-vpn-h">🛡<div class="pp-vpn-t"><b>Источник заблокирован в РФ</b><span>Открыть можно через VPN — работает в РФ, оплата криптой</span></div></div>'+
+      '<div class="pp-vpn"><div class="pp-vpn-h">🛡<div class="pp-vpn-t"><b>Источник заблокирован в РФ</b><span>Открыть можно через VPN — работает в РФ</span></div></div>'+
       '<a class="pp-vpn-btn" href="https://hidemn.club/#6a514a15942d6" target="_blank" rel="noopener nofollow sponsored" onclick="try{ym(110490245,&#39;reachGoal&#39;,&#39;vpn_click&#39;)}catch(e){}">Получить доступ через hidemy →</a></div>';
   }
   // ponytail: single padding tuned for the Russia view's topbar+strikebar overlay; reused on
