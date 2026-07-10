@@ -2,15 +2,15 @@
  "snapshot": {
   "balance": {
    "refining_capacity_total_mt_year": 335.6,
-   "capacity_offline_mt_year": 115.8,
-   "capacity_offline_pct": 35,
+   "capacity_offline_mt_year": 122.8,
+   "capacity_offline_pct": 37,
    "gasoline_output_loss_pct": 38,
    "diesel_output_loss_pct": 38,
    "export_ban_gasoline": true,
    "export_ban_kerosene": true,
    "import_from_belarus": true,
-   "notes": "Выбито ~35% нефтепереработки РФ: 9 НПЗ полностью остановлены (~115,8 из 335,6 млн т/год: Рязанский, Московский, Пермский, Сызранский, Туапсинский, Куйбышевский, НОРСИ, Омский, Орский); с учётом частично работающих текущий недобор переработки (throughput_shortfall) ~57%. (Прим.: ранее в этом поле ошибочно стояло взвешенное значение throughput_shortfall — 192,4/57% — вместо суммы «down»-заводов; исправлено.) 8 июля правительство ввело полный запрет экспорта дизтоплива, судового топлива и газойлей до 31 июля 2026 (кроме межправсоглашений) — ранее лишь рассматривался. АИ-95 на СПбМТСБ/рознице — около 71,7 ₽/л, вблизи максимумов с начала года. По данным на 1 июля, в базе ограничений 61 регион (48 — жёсткие лимиты, 13 — локальные сигналы); Novaya Gazeta Europe (2 июля): дефицит охватил 78 из 83 регионов + Крым/Севастополь. Минэнерго ожидает улучшения в первой половине июля после завершения ремонтов ряда крупных НПЗ; аналитики прогнозируют существенное снижение дефицита к середине июля. По данным CNN (6 июля), проблемы с топливом фиксируются в 50+ из 83 регионов РФ (официальные заявления губернаторов/мэров + СМИ); неофициально — практически во всех. Kpler: производство бензина на ~20% ниже внутреннего спроса. 6 июля Путин в телеинтервью признал «определённые дефициты, хотя не критические». Reuters (3 июля): Россия начала импортировать реактивное топливо из Северной Азии. Бензин импортируется из Индии (~60 000 т) и Казахстана (50 000 т); планы — до 400 000 т/мес. Экспорт бензина и керосина запрещён. 3 июля разрешён выпуск бензина «Евро-3» до конца 2026 г. В ряде регионов запрещена заправка в канистры. Розничные цены: рекордный годовой рост +20%; в Крыму/Севастополе до 199–300 ₽/л, чёрный рынок ~350 ₽/л. OPEC+ (6 июля) согласовал увеличение квот добычи.",
-   "throughput_shortfall_pct": 57,
+   "notes": "Выбито ~37% нефтепереработки РФ: минимум 10 НПЗ полностью остановлены (~122,8 из 335,6 млн т/год: Рязанский, Московский, Пермский, Сызранский, Туапсинский, Куйбышевский, НОРСИ Кстово, Омский, Орский, Саратовский); с учётом частично работающих текущий недобор переработки (throughput_shortfall) ~59%. 8 июля правительство ввело полный запрет экспорта дизтоплива, судового топлива и газойлей до 31 июля 2026 (кроме межправсоглашений). По данным на 10 июля, дефицит охватил 50+ регионов из 83 РФ (официальные источники); неофициально — почти все. Kpler: производство бензина на ~20% ниже внутреннего спроса. Розничные цены АИ-95 вблизи исторических максимумов (66,8–78,8 ₽/л оптовая, розница выше). Биржевые цены на АИ-95 установили новый исторический рекорд в июле 2026. Бензин импортируется из Индии и Казахстана (до 400 000 т/мес); реактивное топливо — из Северной Азии. Ожидается улучшение ситуации к середине июля после завершения ремонтов ряда крупных НПЗ.",
+   "throughput_shortfall_pct": 59,
    "method": "capacity_offline = сумма мощностей НПЗ со status=down / суммарная мощность; throughput_shortfall = взвешено по est_output_pct (учитывает частично работающие). Пересчитывать из refineries[], не вести вручную."
   },
   "regions": [
@@ -570,8 +570,8 @@
     "region": "Самарская обл.",
     "lat": 53.2,
     "lon": 50.15,
-    "level": "severe",
-    "updated": "2026-07-01",
+    "level": "limited",
+    "updated": "2026-07-08",
     "networks": [
      {
       "name": "Роснефть",
@@ -606,7 +606,9 @@
      "https://samaraonline24.ru/samara/view/na-azs-tatnefti-v-samare-vveli-limit-benzina-20-litrov",
      "https://www.banki.ru/news/daytheme/?id=11025071",
      "https://absatz.media/obshestvo/168356-situaciya-s-toplivom-20-iyunya-limity-v-regionah-svobodnaya-prodazha-v-krymu-i-proverki-fas",
-     "https://ircity.ru/text/economics/2026/06/25/76497155/"
+     "https://ircity.ru/text/economics/2026/06/25/76497155/",
+     "https://www.samara.kp.ru/daily/277793.4/5270564/",
+     "https://63.ru/text/auto/2026/07/08/76523213/"
     ]
    },
    {
@@ -729,24 +731,25 @@
     "lat": 56.85,
     "lon": 53.2,
     "level": "strained",
-    "updated": "2026-07-05",
+    "updated": "2026-07-09",
     "networks": [
      {
       "name": "Татнефть",
       "status": "limited",
       "limit_l": 30,
-      "note": "16.06: «Татнефть» — единый лимит по РФ ≤30 л бензина (ранее 20 л), оплата только наличными. | 17.06: сеть СНЯЛА ограничения на отпуск АИ-92 и дизеля по всей РФ — лимит сохраняется только на АИ-95 (≤30 л/ТС). | 30.06–03.07: в Ижевске/Нефтекамске длинные очереди на АЗС; кофейни выдают 3–5 л АИ-95 за покупки от 1500 ₽ (oil_capital 25984, Meduza).",
+      "note": "16.06: «Татнефть» — единый лимит по РФ ≤30 л бензина (ранее 20 л), оплата только наличными. | 17.06: сеть СНЯЛА ограничения на отпуск АИ-92 и дизеля по всей РФ — лимит сохраняется только на АИ-95 (≤30 л/ТС). | 30.06–03.07: в Ижевске/Нефтекамске длинные очереди на АЗС; кофейни выдают 3–5 л АИ-95 за покупки от 1500 ₽ (oil_capital 25984, Meduza). | 09.07: сети удвоили поставки топлива в Удмуртию, логистические цепочки восстанавливаются.",
       "level": "limited"
      }
     ],
-    "queues_hours": 1.0,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "queues_hours": 0.5,
+    "ai95_price_rub": 75,
+    "diesel_price_rub": 82,
     "source_urls": [
      "https://kazan.aif.ru/society/bez-paniki-v-tatarstane-13-iyunya-vveli-vremennye-limity-na-toplivo-na-azs",
      "https://www.m24.ru/news/17062026/911473",
      "https://t.me/oil_capital/25984",
-     "https://meduza.io/en/feature/2026/06/30/what-does-a-russian-summer-look-like-without-gasoline-imagine-18-hour-lines-national-guard-patrols-and-brodsky-parodies"
+     "https://meduza.io/en/feature/2026/06/30/what-does-a-russian-summer-look-like-without-gasoline-imagine-18-hour-lines-national-guard-patrols-and-brodsky-parodies",
+     "https://www.interfax-russia.ru/volga/news/ryad-setey-azs-udvoili-postavki-topliva-v-udmurtiyu-vlasti"
     ]
    },
    {
@@ -904,13 +907,13 @@
     "lat": 57.82,
     "lon": 28.33,
     "level": "limited",
-    "updated": "2026-06-22",
+    "updated": "2026-07-10",
     "networks": [
      {
       "name": "Роснефть",
       "status": "limited",
       "limit_l": 20,
-      "note": "С начала июня на АЗС «Роснефти» — лимит ~20 л бензина на одну покупку; ограничения в одном ряду с Курской и Белгородской обл. | 22.06 (STALE-проверка): ограничения сохраняются, новых региональных событий не зафиксировано.",
+      "note": "С начала июня на АЗС «Роснефти» — лимит ~20 л бензина на одну покупку; ограничения в одном ряду с Курской и Белгородской обл. | 10.07: введена система ограничения заправки по номерным знакам — машины с чётными цифрами госномера могут заезжать только в чётные дни месяца (oil_capital).",
       "level": "limited"
      },
      {
@@ -922,12 +925,13 @@
      }
     ],
     "queues_hours": 1.0,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "ai95_price_rub": 72,
+    "diesel_price_rub": 80,
     "source_urls": [
      "https://ru.themoscowtimes.com/2026/06/04/ogranicheniya-na-prodazhu-benzina-ohvatili-20-regionov-a197285",
      "https://nv.ua/world/countries/deficit-topliva-v-rossii-ogranicheniya-na-prodazhu-v-15-regionah-i-okkupirovannyh-territoriyah-50613411.html",
-     "https://novayagazeta.eu/articles/2026/06/04/ogranicheniia-na-prodazhu-benzina-vveli-minimum-v-15-regionakh-rossii-news"
+     "https://novayagazeta.eu/articles/2026/06/04/ogranicheniia-na-prodazhu-benzina-vveli-minimum-v-15-regionakh-rossii-news",
+     "https://t.me/oil_capital"
     ]
    },
    {
@@ -1129,8 +1133,8 @@
     "region": "Волгоградская обл.",
     "lat": 48.71,
     "lon": 44.51,
-    "level": "limited",
-    "updated": "2026-07-03",
+    "level": "strained",
+    "updated": "2026-07-06",
     "networks": [
      {
       "name": "Татнефть",
@@ -1144,7 +1148,7 @@
       "status": "limited",
       "level": "limited",
       "limit_l": 30,
-      "note": "23.06 (АиФ Волгоград, Волжская правда): «Лукойл» с 23 июня ввёл лимиты в Волгоградской обл. — в городе до 30 л бензина/60 л дизеля за одну заправку; на трассах — до 60 л бензина/200 л дизеля. Канистры не отпускаются. | 24.06 (Ведомости): лимит 30 л бензин, 60 л дизель (на трассах — 200 л/ТС)."
+      "note": "23.06 (АиФ Волгоград, Волжская правда): «Лукойл» с 23 июня ввёл лимиты в Волгоградской обл. — в городе до 30 л бензина/60 л дизеля за одну заправку; на трассах — до 60 л бензина/200 л дизеля. Канистры не отпускаются. | 24.06 (Ведомости): лимит 30 л бензин, 60 л дизель (на трассах — 200 л/ТС). | 06.07: ситуация постепенно улучшается."
      },
      {
       "name": "Региональные АЗС",
@@ -1155,8 +1159,8 @@
      }
     ],
     "queues_hours": 0.5,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "ai95_price_rub": 72,
+    "diesel_price_rub": 76,
     "source_urls": [
      "https://v1.ru/text/gorod/2026/06/17/76483195/",
      "https://www.volgograd.kp.ru/daily/277789.4/5262277/",
@@ -1164,7 +1168,8 @@
      "https://vlg.aif.ru/auto/trans/po-30-v-ruki-kompaniya-lukoyl-ogranichila-prodazhu-benzina-v-volgograde",
      "https://gazeta-vp.ru/23-iyunya-lukojl-vvel-ogranicheniya-na-otpusk-topliva/",
      "https://www.vedomosti.ru/business/articles/2026/06/24/1208285-ob-ogranicheniyah-benzina",
-     "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/"
+     "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
+     "https://www.volgograd.kp.ru/daily/277794/5271974/"
     ]
    },
    {
@@ -2586,8 +2591,8 @@
    "notes": "08.07 (nefte_baza): Brent >$75/барр — рост на фоне эскалации США-Иран. Вице-премьер Новак объявил о полном запрете экспорта дизтоплива до 31.07. | 09.07 (nefte_baza): Новак объявил о переориентации топлива с биржи напрямую потребителям, исключая трейдеров. Brent упал до ~$72/барр на фоне решения ОПЕК+ увеличить добычу на 188 тыс. барр/сут."
   },
   "refinery_counts": {
-   "down": 9,
-   "partial": 10,
+   "down": 10,
+   "partial": 9,
    "operational": 13
   },
   "timeline": [
@@ -2634,7 +2639,7 @@
     "diesel_loss_pct": 25
    }
   ],
-  "deficit_regions_count": 37
+  "deficit_regions_count": 38
  },
  "briefs": {
   "2026-05-30": {
@@ -7550,6 +7555,94 @@
      "detail": "Утром 10 июля нефтехимический комплекс «Нижнекамскнефтехим» в Татарстане атакован БПЛА повторно (после массированной атаки 8 июля). Зафиксирован пожар на территории. (Exilenova+, 10 июля 08:23 UTC)",
      "lat": 55.6369,
      "lon": 51.8253
+    },
+    {
+     "id": "илский-20260710-1",
+     "date": "2026-07-10",
+     "time": "ночь",
+     "city": "Приморско-Ахтарск",
+     "region": "Краснодарский край",
+     "location": [
+      45.18,
+      37.9
+     ],
+     "type": "drone",
+     "count": null,
+     "target": "Ильский НПЗ (Роснефть) — нефтеперерабатывающий завод (~138 тыс. барр/сутки)",
+     "category": "type/npz",
+     "impact": "active_fire",
+     "description": "В ночь на 10 июля Ильский НПЗ на Кубани атакован БПЛА. На территории завода зафиксирован пожар. Это один из крупнейших НПЗ на юге РФ, подвергался ударам несколько раз с начала года. (24tv.ua, The Moscow Times, EADaily, 10 июля)",
+     "source_url": "https://24tv.ua/ru/vzryvy-v-rossii-10-ijulja-pod-udarom-okazalis-neftjanye-obekty-v-chastnosti-ilskij-npz_n3103132\nhttps://ru.themoscowtimes.com/2026/07/10/ukraina-udarila-po-ilskomu-npz-na-kubani-neftyanomu-terminalu-neftebaze-i-krupnomu-oboronnomu-zavodu-v-rostovskoi-oblasti-a200459",
+     "confidence": "confirmed",
+     "detail": "В ночь на 10 июля Ильский НПЗ на Кубани атакован БПЛА. На территории завода зафиксирован пожар. Это один из крупнейших НПЗ на юге РФ, подвергался ударам несколько раз с начала года. (24tv.ua, The Moscow Times, EADaily, 10 июля)",
+     "lat": 45.18,
+     "lon": 37.9
+    },
+    {
+     "id": "таганрог-20260710-1",
+     "date": "2026-07-10",
+     "time": "ночь",
+     "city": "Таганрог",
+     "region": "Ростовская область",
+     "location": [
+      47.23,
+      38.9
+     ],
+     "type": "drone",
+     "count": null,
+     "target": "Портовый нефтяной терминал ООО «Курганнефтепродукт» в порту Таганрога — морская инфраструктура экспорта топлива",
+     "category": "type/npz",
+     "impact": "damaged",
+     "description": "В ночь на 10 июля портовый нефтяной терминал в Таганроге атакован БПЛА. Поражён терминал ООО «Курганнефтепродукт». Произошла эвакуация жителей из зоны ЧС. (Украинская правда, Mentoday, 10 июля)",
+     "source_url": "https://www.pravda.com.ua/rus/news/2026/07/10/8043347/\nhttps://www.mentoday.ru/life/news/10-07-2026/evakuaciya-v-taganroge-i-pojar-na-ilskom-npz-bpla-atakovali-yug-rossii-chto-izvestno/",
+     "confidence": "reported",
+     "detail": "В ночь на 10 июля портовый нефтяной терминал в Таганроге атакован БПЛА. Поражён терминал ООО «Курганнефтепродукт». Произошла эвакуация жителей из зоны ЧС. (Украинская правда, Mentoday, 10 июля)",
+     "lat": 47.23,
+     "lon": 38.9
+    },
+    {
+     "id": "азов-20260710-1",
+     "date": "2026-07-10",
+     "time": "ночь",
+     "city": "Азов",
+     "region": "Ростовская область",
+     "location": [
+      47.11,
+      39.42
+     ],
+     "type": "drone",
+     "count": 5,
+     "target": "Пять нефтебаз (объекты хранения нефтепродуктов) в Азове, оптико-механический завод",
+     "category": "type/npz",
+     "impact": "damaged",
+     "description": "В ночь на 10 июля в Азове (Ростовская область) поражены пять нефтебаз — объекты хранения и распределения нефтепродуктов. Также атакован оптико-механический завод. Масштабный удар по топливной инфраструктуре региона. (Украинская правда, 10 июля)",
+     "source_url": "https://www.pravda.com.ua/rus/news/2026/07/10/8043347/",
+     "confidence": "reported",
+     "detail": "В ночь на 10 июля в Азове (Ростовская область) поражены пять нефтебаз — объекты хранения и распределения нефтепродуктов. Также атакован оптико-механический завод. Масштабный удар по топливной инфраструктуре региона. (Украинская правда, 10 июля)",
+     "lat": 47.11,
+     "lon": 39.42
+    },
+    {
+     "id": "азовское-море-20260710-1",
+     "date": "2026-07-10",
+     "time": "ночь",
+     "city": "Азовское море (акватория)",
+     "region": "Азовское море / Ростовская область",
+     "location": [
+      46.0,
+      36.5
+     ],
+     "type": "drone",
+     "count": 17,
+     "target": "17 судов теневого флота в Азовском море (12 танкеров, 4 сухогруза, 1 буксир) — нефтетранспортная инфраструктура",
+     "category": "type/npz",
+     "impact": "damaged",
+     "description": "В ночь на 10 июля в Азовском море поражены 17 судов теневого флота: 12 танкеров и 4 сухогруза и 1 буксир. По данным каналов наблюдения, продолжается систематическая кампания по прерыванию морских поставок топлива. (Exilenova+, United24media, 10 июля)",
+     "source_url": "https://t.me/exilenova_plus/25022\nhttps://united24media.com/war-in-ukraine/ukraine-strikes-taganrog-oil-terminal-and-azov-fuel-depot-as-russias-fuel-network-takes-another-hit-20640",
+     "confidence": "reported",
+     "detail": "В ночь на 10 июля в Азовском море поражены 17 судов теневого флота: 12 танкеров и 4 сухогруза и 1 буксир. По данным каналов наблюдения, продолжается систематическая кампания по прерыванию морских поставок топлива. (Exilenova+, United24media, 10 июля)",
+     "lat": 46.0,
+     "lon": 36.5
     }
    ],
    "voices": []
