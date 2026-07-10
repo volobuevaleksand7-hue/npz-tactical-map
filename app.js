@@ -21,6 +21,19 @@
   };
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function safeUrl(u){u=String(u||'');return /^https?:\/\//i.test(u)?u:'#';}
+  // Media inaccessible from RF without a VPN — matched against the source host.
+  var RF_BLOCKED = /(^|\.)(meduza\.io|themoscowtimes\.com|svoboda\.org|currenttime\.tv|theins\.ru|mediazona\.care|zona\.media|novayagazeta\.eu|verstka\.media|holod\.media|istories\.media|agents\.media|proekt\.media|republic\.ru|tvrain\.tv|bbc\.com|bbc\.co\.uk|dw\.com|reuters\.com|theguardian\.com|cnn\.com|euronews\.com|kyivindependent\.com|kyivpost\.com|pravda\.com\.ua|nv\.ua|focus\.ua|hromadske\.ua|liga\.net|err\.ee|sovanews\.tv)$/i;
+  function srcBlocked(u){try{return RF_BLOCKED.test(new URL(u).hostname);}catch(e){return false;}}
+  function srcHost(u){try{return new URL(u).hostname.replace(/^www\./,'');}catch(e){return'';}}
+  // Source line for a popup. RF-blocked sources render struck-through + a native VPN promo
+  // (monetized hidemy.name affiliate via Admitad); normal sources render the plain link.
+  function srcHtml(u,label){
+    if(!u) return '';
+    if(!srcBlocked(u)) return '<div class="pp-src"><a href="'+safeUrl(u)+'" target="_blank" rel="noopener">'+esc(label||'источник')+' ↗</a></div>';
+    return '<div class="pp-src pp-src--off">🔒 <a href="'+safeUrl(u)+'" target="_blank" rel="noopener">'+esc(srcHost(u))+' — недоступно из РФ</a></div>'+
+      '<div class="pp-vpn"><div class="pp-vpn-h">🛡<div class="pp-vpn-t"><b>Источник заблокирован в РФ</b><span>Открыть можно через VPN — работает в РФ, оплата криптой</span></div></div>'+
+      '<a class="pp-vpn-btn" href="https://hidemn.club/#6a514a15942d6" target="_blank" rel="noopener nofollow sponsored" onclick="try{ym(110490245,&#39;reachGoal&#39;,&#39;vpn_click&#39;)}catch(e){}">Получить доступ через hidemy →</a></div>';
+  }
   // ponytail: single padding tuned for the Russia view's topbar+strikebar overlay; reused on
   // Crimea/AZS maps too since their overlay is shorter — extra clearance there is harmless.
   var POPUP_OPTS = { autoPanPaddingTopLeft: [14, 90], autoPanPaddingBottomRight: [14, 60] };
@@ -623,7 +636,7 @@
     if (r.status !== "operational" && r.status_since) { var _dd = Math.floor((Date.now() - new Date(r.status_since + "T00:00:00Z").getTime()) / 86400000); h += '<div class="pp-kv"><span>Статус с</span><span>' + esc(rusDate(r.status_since)) + (_dd >= 0 ? ' · <b>' + _dd + ' дн.</b>' : '') + '</span></div>'; }
     if (r.damage) h += '<div class="pp-dmg">⚠ ' + esc(r.damage) + '</div>';
     if (r.note) h += '<div class="pp-note">' + esc(r.note) + '</div>';
-    if (r.source_url) h += '<div class="pp-src"><a href="' + safeUrl(r.source_url) + '" target="_blank" rel="noopener">источник ↗</a></div>';
+    if (r.source_url) h += srcHtml(r.source_url, 'источник');
     return h;
   }
 
@@ -662,12 +675,12 @@
     var st = { threatened: "ПОД УДАРАМИ", cut: "ПЕРЕРЕЗАНА", ok: "РАБОТАЕТ" }[rd.status] || rd.status;
     var h = '<div class="pp-h">🛣 ' + esc(rd.name) + '</div><span class="pp-st ' + (rd.status === "ok" ? "operational" : rd.status === "cut" ? "down" : "partial") + '">' + esc(st) + '</span>';
     if (rd.note) h += '<div class="pp-dmg">' + esc(rd.note) + '</div>';
-    if (rd.source_url) h += '<div class="pp-src"><a href="' + safeUrl(rd.source_url) + '" target="_blank" rel="noopener">источник ↗</a></div>';
+    if (rd.source_url) h += srcHtml(rd.source_url, 'источник');
     return h;
   }
   function hotspotPopup(hp) {
     var h = '<div class="pp-h">⚠ ' + esc(hp.name) + '</div><div class="pp-dmg">' + esc(hp.note || "") + '</div>';
-    if (hp.source_url) h += '<div class="pp-src"><a href="' + safeUrl(hp.source_url) + '" target="_blank" rel="noopener">новость ↗</a></div>';
+    if (hp.source_url) h += srcHtml(hp.source_url, 'новость');
     return h;
   }
   function renderRoads() {
@@ -951,7 +964,7 @@
     if (s.casualties) h += '<div class="pp-kv"><span>Последствия</span><span>' + esc(s.casualties) + '</span></div>';
     if (s.title) h += '<div class="pp-dmg">' + esc(s.title) + '</div>';
     if (s.detail) h += '<div class="pp-note">' + esc(s.detail) + '</div>';
-    if (s.source_url) h += '<div class="pp-src"><a href="' + safeUrl(s.source_url) + '" target="_blank" rel="noopener">читать новость ↗</a></div>';
+    if (s.source_url) h += srcHtml(s.source_url, 'читать новость');
     return h;
   }
   /* ---------- EXPAND PANELS (click a card → read it full-size) ---------- */
@@ -1663,7 +1676,7 @@
       });
     }
     if (r.source_urls && r.source_urls.length)
-      h += '<div class="pp-src"><a href="' + safeUrl(r.source_urls[0]) + '" target="_blank" rel="noopener">источник ↗</a></div>';
+      h += srcHtml(r.source_urls[0], 'источник');
     return h;
   }
   function renderAzs() {
@@ -1744,7 +1757,7 @@
     if (s.operator) h += '<div class="pp-kv"><span>Оператор</span><span>' + esc(s.operator) + '</span></div>';
     if (s.status_since) h += '<div class="pp-kv"><span>Статус с</span><span>' + esc(rusDate(s.status_since)) + '</span></div>';
     if (s.damage) h += '<div class="pp-dmg">⚠ ' + esc(s.damage) + '</div>';
-    if (s.source_url) h += '<div class="pp-src"><a href="' + safeUrl(s.source_url) + '" target="_blank" rel="noopener">источник ↗</a></div>';
+    if (s.source_url) h += srcHtml(s.source_url, 'источник');
     return h;
   }
   function blackoutPopup(b) {
@@ -1756,7 +1769,7 @@
     if (b.cause) h += '<div class="pp-kv"><span>Причина</span><span>' + esc(b.cause) + '</span></div>';
     if (b.since) h += '<div class="pp-kv"><span>С</span><span>' + esc(rusDate(b.since)) + '</span></div>';
     if (b.note) h += '<div class="pp-note">' + esc(b.note) + '</div>';
-    if (b.source_url) h += '<div class="pp-src"><a href="' + safeUrl(b.source_url) + '" target="_blank" rel="noopener">источник ↗</a></div>';
+    if (b.source_url) h += srcHtml(b.source_url, 'источник');
     return h;
   }
   function renderGrid() {

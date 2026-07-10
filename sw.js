@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v15';   // bump → v1.17.0: внутренний поиск, «АЗС рядом» (геолокация+фильтр), /azs-ryadom
+var CACHE = 'npz-shell-v16';   // bump -> v1.18.0: VPN-блок у заблокированных источников (попапы карты + статические страницы), vpn-nudge.js
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

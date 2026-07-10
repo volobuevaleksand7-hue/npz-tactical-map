@@ -260,6 +260,15 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .pp-dmg{color:var(--amber);margin-top:6px;font-size:12px;font-weight:600}
 .pp-note{color:var(--ink-dim);margin-top:5px;font-size:11px}
 .pp-src a{color:var(--teal);font-size:11px;font-weight:700}
+.pp-src--off a{color:var(--ink-dim);text-decoration:line-through;opacity:.75;font-weight:600}
+.vpn-off{color:var(--ink-dim);font-size:.82em;white-space:nowrap}
+.pp-vpn{margin-top:8px;padding:10px;border-radius:9px;background:rgba(23,133,133,.09);border:1px solid var(--line2)}
+.pp-vpn-h{display:flex;gap:7px;font-size:15px;line-height:1.2}
+.pp-vpn-t{font-size:11.5px;line-height:1.35}
+.pp-vpn-t b{display:block;color:var(--teal);font-size:12px;margin-bottom:2px}
+.pp-vpn-t span{color:var(--ink-dim)}
+.pp-vpn-btn{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:7px 12px;border-radius:8px;background:var(--teal);color:#fff!important;font-size:12px;font-weight:700;text-decoration:none}
+.pp-vpn-btn:hover{filter:brightness(1.08)}
 
 /* ---------- CRIMEA PANEL ---------- */
 #crimeaBody .csum{font-size:12.5px;line-height:1.55;background:var(--surface2);padding:10px;border-radius:9px;margin-bottom:10px}
