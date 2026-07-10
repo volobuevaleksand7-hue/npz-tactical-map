@@ -74,8 +74,8 @@ def caption_cover(in_path, out_path, city, event, date_rus):
 
     d.text((pad, y_city), city, font=f_city, fill=CREAM)
     d.text((pad, y_event), event, font=f_event, fill=DIM)
-    # дата — янтарным, с точкой-разделителем
-    d.text((pad, y_date), "● " + date_rus + " 2026", font=f_date, fill=AMBER)
+    # дата — янтарным, с точкой-разделителем; date_rus уже с годом (контракт callers)
+    d.text((pad, y_date), "● " + date_rus, font=f_date, fill=AMBER)
 
     img.save(out_path, "PNG")
     return out_path

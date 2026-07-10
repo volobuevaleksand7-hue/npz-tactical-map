@@ -91,7 +91,7 @@ def generate_cover_auto():
     from datetime import datetime
     dt = datetime.strptime(date_str, "%Y-%m-%d")
     months = {6: "июня", 7: "июля"}
-    date_rus = f"{dt.day} {months.get(dt.month, str(dt.month))}"
+    date_rus = f"{dt.day} {months.get(dt.month, str(dt.month))} {dt.year}"
 
     print(f"Selected: {city} | {event} | {date_rus}")
     print(f"Confidence: {strike['confidence']}, Score: {strike['score']}")

@@ -56,7 +56,7 @@ CITY_LOOK = {
 
 def rus(d):
     y, m, dd = d.split("-")
-    return f"{int(dd)} {MONTHS[int(m)]}"
+    return f"{int(dd)} {MONTHS[int(m)]} {int(y)}"
 
 
 def look(c):
