@@ -42,8 +42,11 @@
       var box = firstBlocked.closest('li,p,article,section,div') || firstBlocked.parentNode;
       box.insertAdjacentElement('afterend', promo(true));
     } else {
-      var main = document.querySelector('main, article, .content, .container, .wrap') || document.body;
-      main.appendChild(promo(false));
+      // No blocked source on the page → place ONE block high (right after the hero/stats),
+      // so it's near the fold on the fat SEO pages instead of buried at the bottom.
+      var anchor = document.querySelector('.status-grid, .landing-hero, main section, main h2');
+      if (anchor) anchor.insertAdjacentElement('afterend', promo(false));
+      else (document.querySelector('main, article, .content, .container, .wrap') || document.body).appendChild(promo(false));
     }
   });
 })();

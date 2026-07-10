@@ -348,7 +348,7 @@ def build_hub(rows):
 # посетителей висел кэш styles.css/app.js и правки шапки/меню не доезжали. Штампуем тут,
 # на каждом regenerate — само-заживает: правка styles.css → новый хэш → браузер перекачает.
 # опциональный ведущий слэш: index.html линкует "styles.css", лендинги — "/styles.css".
-ASSET_RE = re.compile(r'(href|src)="(/?)(styles\.css|news\.css|app\.js|nav-dropdown\.js|search\.css|search\.js)(\?v=[0-9a-f]+)?"')
+ASSET_RE = re.compile(r'(href|src)="(/?)(styles\.css|news\.css|app\.js|nav-dropdown\.js|search\.css|search\.js|vpn-nudge\.js)(\?v=[0-9a-f]+)?"')
 
 
 # ---- 4a) единый инжект поиска (search.css/search.js) в <head> на всех страницах ----
