@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-07-10T16:37:56Z",
+  "generated_at": "2026-07-10T17:46:52Z",
   "data_mode": "ОЦЕНКА / ESTIMATE",
   "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ). Не official.",
   "refresh_seconds": 240,
-  "updated_by": "agent:fuel-availability"
+  "updated_by": "manual:claude-osint"
  },
  "exchange": {
   "ai95_spb_rub_t": 73600,
@@ -703,31 +703,32 @@
    "lat": 56.13,
    "lon": 47.25,
    "level": "severe",
-   "updated": "2026-06-23",
+   "updated": "2026-07-10",
    "networks": [
     {
      "name": "Татнефть",
      "status": "limited",
+     "level": "severe",
      "limit_l": 20,
-     "note": "Лимит 20 л бензина / 40 л дизеля (легк.) / 200 л (груз.); причина — удар БПЛА по НПЗ в Нижнекамске (ТАНЕКО), мобильные приложения сети не работали.",
-     "level": "severe"
+     "note": "10.07: бензин ≤20 л, дизель ≤40 л (легковые) / ≤200 л (грузовые); отпуск в канистры приостановлен."
     },
     {
      "name": "Прочие / независимые",
-     "status": "closed",
+     "status": "limited",
+     "level": "severe",
      "limit_l": null,
-     "note": "По сообщениям с мест (23.06): в Чебоксарах бензин остался в свободной продаже лишь на отдельных АЗС, на остальных — пусто; на частных АЗС резкий рост цен.",
-     "level": "severe"
+     "note": "Очереди и пустые табло на части АЗС, жёсткий дефицит АИ-95; в центре республики ситуация мягче."
     }
    ],
-   "queues_hours": 1.0,
+   "queues_hours": 1.5,
    "ai95_price_rub": null,
    "diesel_price_rub": null,
    "source_urls": [
-    "https://chv.aif.ru/auto/v-chuvashii-ogranichili-prodazhu-benzina",
-    "https://novayagazeta.eu/articles/2026/06/23/toplivnyi-krizis-okhvatyvaet-rossiiu",
-    "https://www.banki.ru/news/daytheme/?id=11025071"
-   ]
+    "https://chv.aif.ru/auto/details/-postoyu-v-ocheredi-za-vash-schyot-chuvashiya-stolknulas-s-deficitom-goryuchego",
+    "https://pg21.ru/news/124445",
+    "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+   ],
+   "note": "10.07: массовые очереди на АЗС, пустые табло, жёсткий дефицит АИ-95. Татнефть ограничила отпуск (≤20 л бензин, канистры закрыты). Власти Чувашии дефицит подтверждают, прогноз улучшения — к середине июля."
   },
   {
    "region": "Удмуртия",
@@ -1137,8 +1138,8 @@
    "region": "Волгоградская обл.",
    "lat": 48.71,
    "lon": 44.51,
-   "level": "strained",
-   "updated": "2026-07-06",
+   "level": "limited",
+   "updated": "2026-07-10",
    "networks": [
     {
      "name": "Татнефть",
@@ -1152,7 +1153,7 @@
      "status": "limited",
      "level": "limited",
      "limit_l": 30,
-     "note": "23.06 (АиФ Волгоград, Волжская правда): «Лукойл» с 23 июня ввёл лимиты в Волгоградской обл. — в городе до 30 л бензина/60 л дизеля за одну заправку; на трассах — до 60 л бензина/200 л дизеля. Канистры не отпускаются. | 24.06 (Ведомости): лимит 30 л бензин, 60 л дизель (на трассах — 200 л/ТС). | 06.07: ситуация постепенно улучшается."
+     "note": "С 23.06: ≤30 л бензин / ≤60 л ДТ в черте города, до 200 л ДТ на трассах."
     },
     {
      "name": "Региональные АЗС",
@@ -1173,8 +1174,11 @@
     "https://gazeta-vp.ru/23-iyunya-lukojl-vvel-ogranicheniya-na-otpusk-topliva/",
     "https://www.vedomosti.ru/business/articles/2026/06/24/1208285-ob-ogranicheniyah-benzina",
     "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
-    "https://www.volgograd.kp.ru/daily/277794/5271974/"
-   ]
+    "https://www.volgograd.kp.ru/daily/277794/5271974/",
+    "https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-69216968/",
+    "https://expertsouth.ru/articles/kvazi-defitsit-topliva-na-yuge-pochemu-ocheredi-k-azs-voznikli-ot-dona-do-kaspiya/"
+   ],
+   "note": "Лукойл с 23.06 ввёл лимиты на отпуск (город: ≤30 л бензин, ≤60 л ДТ). Очереди на АЗС в рамках общей ситуации на юге."
   },
   {
    "region": "Свердловская обл.",
@@ -1911,16 +1915,24 @@
    "region": "Астраханская обл.",
    "lat": 46.35,
    "lon": 48.04,
-   "level": "strained",
-   "updated": "2026-06-23",
-   "networks": [],
-   "queues_hours": null,
+   "level": "severe",
+   "updated": "2026-07-10",
+   "networks": [
+    {
+     "name": "Все сети (регион)",
+     "status": "limited",
+     "level": "severe",
+     "limit_l": null,
+     "note": "С 09.07 продажа топлива по последней цифре госномера: нечётные даты — номера на 1/3/5/7/9, чётные — на 0/2/4/6/8."
+    }
+   ],
+   "queues_hours": 1.0,
    "ai95_price_rub": null,
    "diesel_price_rub": null,
-   "estimate": true,
-   "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
+   "note": "09.07: введено нормирование продажи топлива по номерам авто (чёт/нечёт по дате) — мера сдерживания ажиотажного спроса. Очереди на АЗС.",
    "source_urls": [
-    "https://www.banki.ru/news/daytheme/?id=11025071"
+    "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
+    "https://pronedra.ru/otpusk-na-yug-upersya-v-benzin-i-ocheredi-824559.html"
    ]
   },
   {
