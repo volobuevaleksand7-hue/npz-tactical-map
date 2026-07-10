@@ -531,7 +531,7 @@ def build_card_payload():
     azsdoc  = load("fuel-availability.json") or {}
     azs     = azsdoc.get("regions", [])
     exch    = azsdoc.get("exchange", {})
-    today_iso = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    today_iso = DS.today_iso()  # audit H7: было UTC напрямую здесь, а не через day_state (МСК)
 
     def spaced(v):
         s = str(v)

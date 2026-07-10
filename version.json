@@ -1,7 +1,7 @@
 {
-  "version": "1.14.0",
+  "version": "1.14.2",
   "releasedAt": "2026-07-10",
-  "codename": "Полка C: self-host перф, RSS-фид, «Методология»",
-  "summary": "Три идеи из backlog (#10/#7/#9), всё на статике. ПЕРФ: leaflet 1.9.4 + markercluster (unpkg) и шрифты Rubik/JetBrains Mono (Google Fonts) → self-hosted (/vendor + /fonts.css, SRI сохранён и сверен), 4 внешних хоста убраны из критического пути; og-image 401→57 КБ (pngquant); замена во всех 98 страницах + 3 генераторах (gen-news/gen-fuel-pages/gen-rocket-danger); woff2 → immutable-кэш. RSS: agents/gen-rss.py строит rss.xml (50 сводок) + news-sitemap.xml (окно 48ч) из news-archive, автозапуск вшит в gen-news, 2-й Sitemap в robots. Страница /metodologiya (E-E-A-T/YMYL): источники, статусы НПЗ/АЗС, проверка ударов (confidence), частота обновления. SW-кеш v9→v10.",
+  "codename": "audit H3: type-check lat/lon для НПЗ/логистики/Крыма",
+  "summary": "Аудит Fable5 2026-07-08 (H3): маркеры/полилинии НПЗ (renderNpz), логистики (renderLogistics: pipelines+export_terminals) и Крыма (renderCrimea: routes+stations) строились из lat/lon/coords без проверки типа — в отличие от strikes/azs/grid, которые эту проверку уже делают. Один объект с нечисловыми координатами или пустым/отсутствующим coords кидает исключение внутри L.marker/L.polyline и прерывает весь renderAll() каждые 60с (повторяющаяся «ОШИБКА ЗАГРУЗКИ» вместо остальной карты). Добавлены те же guard'ы (typeof===\"number\" / Array.isArray+length), что уже используются для strikes/azs/grid — просто пропускаем битую запись, а не рушим весь рендер.",
   "site": "https://npz-tactical-map.vercel.app"
 }
