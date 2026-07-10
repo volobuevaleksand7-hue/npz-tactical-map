@@ -137,7 +137,13 @@ def main(argv):
     if dry:
         print("--dry-run: коммит/пуш пропущены"); return
 
-    sh(["git", "add", "-A"])
+    # точечная выкладка: только выпускаемые артефакты, НИКОГДА git add -A —
+    # он засасывал в коммит публикации весь untracked-мусор дерева.
+    # -u берёт все изменённые/удалённые ОТСЛЕЖИВАЕМЫЕ файлы: реестр, sitemap,
+    # nav/footer-правки build-nav.py (все html уже в репо) и удаление drafts/npz/<slug>.
+    # Новые npz/<slug>.html ещё не отслеживаются — добавляем явно.
+    sh(["git", "add", "-u"])
+    sh(["git", "add", "--"] + [f"npz/{s}.html" for s in slugs])
     names = ", ".join(f"/npz/{s}" for s in slugs)
     msg = (f"seo: НПЗ-страница ({names})\n\n"
            f"Выкачено из drafts/npz/ (контент по ТЗ tz-articles-2026-07-08 + data/*),\n"
