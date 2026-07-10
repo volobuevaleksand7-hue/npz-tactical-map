@@ -126,15 +126,21 @@ def normalize(payload):
     }
 
 
-def main():
-    payload = fetch_json(URL)
-    state = normalize(payload)
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    tmp = OUT + ".tmp"
+def save(state, out=None):
+    """Atomic write (tmp + os.replace): a reader never observes a truncated/partial file."""
+    out = out or OUT
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    tmp = out + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(state, f, ensure_ascii=False, indent=2)
         f.write("\n")
-    os.replace(tmp, OUT)
+    os.replace(tmp, out)
+
+
+def main():
+    payload = fetch_json(URL)
+    state = normalize(payload)
+    save(state)
     print("radar-state: %s events, source age %ss, wrote %s" % (
         state["meta"]["feed_count"], state["meta"]["source_age_seconds"], OUT))
 

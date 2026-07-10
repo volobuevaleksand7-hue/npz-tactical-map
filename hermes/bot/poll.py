@@ -373,7 +373,10 @@ def main():
                     disable_web_page_preview="true")
             api("sendMessage", chat_id=cid, text=WELCOME, disable_web_page_preview="true")
             # мгновенная стартовая сводка новому подписчику (свежие данные, без ожидания прогона)
-            if new and _bc is not None:
+            # ponytail: compute_digest() — LEGACY (см. шапку broadcast.py); везде в проекте
+            # он гейтится NPZ_LEGACY=1, кроме этого места — новый подписчик минуя флаг
+            # получал pre-v2 дайджест без preflight/редполитики v2. Гейтим так же, как main().
+            if new and _bc is not None and os.environ.get("NPZ_LEGACY") == "1":
                 try:
                     txt, _ = _bc.compute_digest(force_latest=True)
                     _bc.send(cid, txt)
