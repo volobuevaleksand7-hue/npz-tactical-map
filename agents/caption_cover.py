@@ -81,6 +81,63 @@ def caption_cover(in_path, out_path, city, event, date_rus):
     return out_path
 
 
+# --- lead strike selection (PIL-fallback cover) ---------------------------
+# ponytail: константы дублируют hermes/scripts/build-covers.py — маленький дуб
+# лучше, чем импорт модуля из другого каталога через оба дерева. Правишь один
+# список ключей — синхронизируй второй.
+from datetime import datetime, timedelta
+
+_REF = ("нпз", "нефт", "терминал", "переработ", "нефтебаз", "нефтехим", "гпз", "перекачк")
+_GRID = ("тэц", "тэс", "грэс", "подстанц", "энергет", "электро", "водоснаб")
+
+
+def _classify(s):
+    t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
+    if any(k in t for k in _REF):
+        return "refinery"
+    if any(k in t for k in _GRID):
+        return "grid"
+    return "city"
+
+
+def _lead_score(s):
+    # НПЗ > энергетика > прочее; confirmed важнее reported (как в build-covers.py)
+    cls = {"refinery": 2, "grid": 1, "city": 0}.get(_classify(s), 0)
+    conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
+    return (cls, conf)
+
+
+def pick_top_strike(strikes_path, hours=24):
+    """Ведущий удар за последние `hours` для обложки-фолбэка.
+
+    strikes.json — {"strikes": [...]} (или голый список). Даты дневной точности,
+    поэтому окно считаем по дате: удар дня D в окне, если D >= (now - hours).date().
+    Приоритет: сначала свежее, при равной дате НПЗ>энергетика>прочее и
+    confirmed>reported. В возвращённый dict кладём "score" = (cls, conf).
+    Возвращает None, если в окне ничего нет.
+    """
+    import json
+    with open(strikes_path, encoding="utf-8") as f:
+        data = json.load(f)
+    strikes = data["strikes"] if isinstance(data, dict) else data
+
+    cutoff = (datetime.now() - timedelta(hours=hours)).date()
+    fresh = []
+    for s in strikes:
+        try:
+            d = datetime.strptime(s["date"], "%Y-%m-%d").date()
+        except (KeyError, ValueError):
+            continue
+        if d >= cutoff:
+            fresh.append((d, s))
+    if not fresh:
+        return None
+
+    d, lead = max(fresh, key=lambda ds: (ds[0], _lead_score(ds[1])))
+    lead = dict(lead)
+    lead["score"] = _lead_score(lead)
+    return lead
+
 if __name__ == "__main__":
     if len(sys.argv) != 6:
         print("usage: caption_cover.py <in.png> <out.png> <city> <event> <date_rus>", file=sys.stderr)
