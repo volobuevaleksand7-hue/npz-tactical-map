@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v12';   // bump → форсит подмену закешированного shell (v1.15.1: вкладка «АЗС» теперь пишет адрес #azs + back/forward)
+var CACHE = 'npz-shell-v13';   // bump → форсит подмену закешированного shell (v1.15.2: честная дата обновления региона в попапе + цвет strained)
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

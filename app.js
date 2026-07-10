@@ -1573,7 +1573,7 @@
 
   /* ---------- AZS (fuel availability) ---------- */
   /* Чистый градиент: зелёный → лайм → жёлтый → оранжевый → красный */
-  var AZS_LVL = { calm: "#2f9e57", strained: "#9fc63a", limited: "#e8b020", severe: "#e07a18", critical: "#d23a2e" };
+  var AZS_LVL = { calm: "#2f9e57", strained: "#e8c520", limited: "#ef9a1a", severe: "#dd4f1c", critical: "#d23a2e" };
   var AZS_LBL = { calm: "штатно", strained: "перебои", limited: "лимиты", severe: "острый дефицит", critical: "сухо" };
   function azsIcon(r) {
     var c = AZS_LVL[r.level] || "#7a7e85";
@@ -1589,6 +1589,14 @@
     var h = '<div class="pp-h">⛽ ' + esc(r.region) + '</div>';
     h += '<span class="pp-st" style="background:' + c + '">' + esc(lbl) + '</span>';
     if (r.estimate) h += '<span class="pp-st" style="background:#5a5f66;margin-left:4px">ОЦЕНКА</span>';
+    // честная свежесть: дата обновления именно этого региона (не общий штамп файла) + пометка «устарело» >7 дн.
+    var _upd = (r.updated || "").slice(0, 10);
+    if (_upd) {
+      var _ud = new Date(_upd + "T00:00:00Z");
+      var _age = isNaN(_ud.getTime()) ? -1 : Math.floor((Date.now() - _ud.getTime()) / 86400000);
+      var _stale = _age > 7;
+      h += '<div class="pp-kv" style="' + (_stale ? "color:#c9760a;font-weight:700" : "opacity:.65") + '"><span>Обновлено</span><span>' + esc(rusDate(_upd)) + (_age >= 0 ? " · " + (_age === 0 ? "сегодня" : _age === 1 ? "вчера" : _age + " дн. назад") : "") + (_stale ? " ⚠" : "") + '</span></div>';
+    }
     if (r.note) h += '<div class="pp-note" style="margin:4px 0;font-size:11px;opacity:.85">' + esc(r.note) + '</div>';
     if (typeof r.queues_hours === "number" && r.queues_hours > 0)
       h += '<div class="pp-kv"><span>Очереди</span><span>~' + esc(r.queues_hours) + ' ч</span></div>';
