@@ -1,7 +1,7 @@
 {
-  "version": "1.14.0",
+  "version": "1.15.0",
   "releasedAt": "2026-07-10",
-  "codename": "Полка C: self-host перф, RSS-фид, «Методология»",
-  "summary": "Три идеи из backlog (#10/#7/#9), всё на статике. ПЕРФ: leaflet 1.9.4 + markercluster (unpkg) и шрифты Rubik/JetBrains Mono (Google Fonts) → self-hosted (/vendor + /fonts.css, SRI сохранён и сверен), 4 внешних хоста убраны из критического пути; og-image 401→57 КБ (pngquant); замена во всех 98 страницах + 3 генераторах (gen-news/gen-fuel-pages/gen-rocket-danger); woff2 → immutable-кэш. RSS: agents/gen-rss.py строит rss.xml (50 сводок) + news-sitemap.xml (окно 48ч) из news-archive, автозапуск вшит в gen-news, 2-й Sitemap в robots. Страница /metodologiya (E-E-A-T/YMYL): источники, статусы НПЗ/АЗС, проверка ударов (confidence), частота обновления. SW-кеш v9→v10.",
+  "codename": "Карта АЗС — отдельная страница /karta-azs",
+  "summary": "Интерактивная карта АЗС вынесена из вкладки SPA на собственный URL /karta-azs (по образцу /radar): свой SEO-<head> (title/canonical/OG/Twitter/schema + АЗС-FAQ), свой H1, загрузка сразу во вкладку АЗС через существующий #azs deep-link в app.js — карта НЕ переписана, тот же app.js, ноль дублирования логики. Раньше карта жила только на / (аналитика видела всё как /, не было индексируемой посадочной под «карта азс»). Зарегистрирована в data/seo-topics.jsonl (type=tool, «карта азс») → авто в sitemap + меню всех страниц; лейбл ⛽ Карта АЗС в build-nav.py. Все ссылки на старый /?view=azs переведены на /karta-azs: воронки (karta-benzina-krym, crimea, radar, zakrytye-azs), шаблон CTA сводок в gen-news.py (news.html + 57 архивных страниц) и Telegram-кнопка broadcast.py. Аудит остальных SPA-вкладок (history/forecast/economy) по Wordstat: отдельных страниц не требуют. SW-кеш v10→v11.",
   "site": "https://npz-tactical-map.vercel.app"
 }

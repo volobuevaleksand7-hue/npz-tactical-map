@@ -75,7 +75,7 @@ def is_ru(q):
 def kb():
     return {"inline_keyboard": [[
         {"text":"🗺 Открыть карту", "url": SITE + "/"},
-        {"text":"⛽ Карта АЗС", "url": SITE + "/?view=azs"},
+        {"text":"⛽ Карта АЗС", "url": SITE + "/karta-azs"},
     ]]}
 
 def send(chat_id, text):

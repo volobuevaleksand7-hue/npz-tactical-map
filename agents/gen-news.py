@@ -468,7 +468,7 @@ CTA_HTML = """      <section class="news-cta">
           <p>Все НПЗ России, удары БПЛА, состояние АЗС, дефицит по регионам — с геопривязкой и фильтрацией.</p>
           <div class="cta-buttons">
             <a href="/" class="cta-btn primary">Открыть карту НПЗ →</a>
-            <a href="/?view=azs" class="cta-btn secondary">Карта АЗС →</a>
+            <a href="/karta-azs" class="cta-btn secondary">Карта АЗС →</a>
           </div>
         </div>
       </section>
@@ -747,7 +747,7 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
         <h2>⛽ Ситуация на АЗС по регионам</h2>
         <p class="section-sub">Актуальный срез: ограничения продажи топлива, лимиты, очереди и цены АИ-95.</p>
         {gen_azs(snap.get("regions", []), snap.get("exchange", {}))}
-        <p class="section-note">📍 Все точки АЗС — на <a href="/?view=azs">карте АЗС</a>.</p>
+        <p class="section-note">📍 Все точки АЗС — на <a href="/karta-azs">карте АЗС</a>.</p>
       </section>
 """)
 

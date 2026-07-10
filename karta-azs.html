@@ -4,15 +4,15 @@
   <!-- ─── BASIC / SEO META ─── -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Нет бензина в России — карта НПЗ и дефицита топлива</title>
+  <title>Карта АЗС России — где есть бензин и дизель на заправках сейчас</title>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <meta name="description" content="Интерактивная карта: НПЗ России, удары БПЛА по нефтезаводам, дефицит бензина в Крыму и регионах. Талоны, очереди, ситуация на заправках онлайн.">
-  <meta name="keywords" content="нет бензина, дефицит бензина, топливо в Крыму, бензин по талонам, НПЗ России, атака на НПЗ, дефицит топлива, удары по НПЗ, цены на бензин, топливный кризис Россия">
+  <meta name="description" content="Карта АЗС России: где сейчас есть бензин и дизель, фильтр по сетям (Лукойл, Газпром, Роснефть, Татнефть), заправки по маршруту поездки и отзывы водителей. OSINT-оценка наличия по региону и сети.">
+  <meta name="keywords" content="карта азс, карта заправок, где есть бензин, где заправиться, азс россии, заправки на карте, есть ли бензин, карта азс лукойл, заправки по маршруту, где есть дизель">
   <meta name="robots" content="index, follow">
   <meta name="language" content="Russian">
-  <link rel="canonical" href="https://npz-tactical-map.vercel.app/">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/karta-azs">
 
   <!-- ─── SEARCH-ENGINE VERIFICATION (заполнить владельцу) ─── -->
   <!-- Google Search Console: Settings → Ownership verification → HTML tag. Вставить content-код ниже. -->
@@ -38,9 +38,9 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:site_name" content="Топливный фронт РФ">
-  <meta property="og:url" content="https://npz-tactical-map.vercel.app/">
-  <meta property="og:title" content="Нет бензина в России — карта НПЗ и дефицита топлива">
-  <meta property="og:description" content="Интерактивная карта: НПЗ России, удары БПЛА, дефицит бензина в Крыму и регионах. Талоны, очереди, ситуация на заправках онлайн.">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/karta-azs">
+  <meta property="og:title" content="Карта АЗС России — где есть бензин и дизель сейчас">
+  <meta property="og:description" content="Карта заправок России: фильтр по сетям, АЗС по маршруту поездки, отзывы водителей о наличии топлива. OSINT-оценка.">
   <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
   <meta property="og:image:alt" content="Тактическая карта НПЗ России — Топливный фронт РФ">
   <meta property="og:image:width" content="1200">
@@ -48,17 +48,17 @@
 
   <!-- ─── TWITTER ─── -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Нет бензина в России — карта НПЗ и дефицита топлива">
-  <meta name="twitter:description" content="НПЗ России, удары БПЛА, дефицит бензина в Крыму и регионах. Талоны, очереди, ситуация на заправках онлайн.">
+  <meta name="twitter:title" content="Карта АЗС России — где есть бензин и дизель сейчас">
+  <meta name="twitter:description" content="Карта заправок России: фильтр по сетям, АЗС по маршруту, отзывы водителей о наличии топлива.">
   <meta name="twitter:image" content="https://npz-tactical-map.vercel.app/og-image.png">
   <meta name="twitter:image:alt" content="NPZ Tactical Map — Russia Fuel Crisis Dashboard">
 
   <!-- ─── STRUCTURED DATA ─── -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebApplication","name":"Топливный фронт РФ // NPZ Tactical Map","alternateName":"NPZ Tactical Map","url":"https://npz-tactical-map.vercel.app/","description":"Интерактивная тактическая карта состояния российских НПЗ: выбывшие мощности, дефицит топлива по регионам, удары БПЛА, отдельная карта Крыма, история и прогноз.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","inLanguage":["ru","en"],"isAccessibleForFree":true,"keywords":"НПЗ, нефтепереработка, топливный кризис, удары БПЛА, дефицит бензина, карта НПЗ России","dateModified":"2026-06-11"}
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Топливный фронт РФ // NPZ Tactical Map","alternateName":"NPZ Tactical Map","url":"https://npz-tactical-map.vercel.app/karta-azs","description":"Карта АЗС России: наличие бензина и дизеля по сетям и регионам, заправки по маршруту поездки, отзывы водителей. OSINT-оценка.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","inLanguage":["ru","en"],"isAccessibleForFree":true,"keywords":"НПЗ, нефтепереработка, топливный кризис, удары БПЛА, дефицит бензина, карта НПЗ России","dateModified":"2026-06-11"}
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Какие НПЗ России были атакованы в 2026 году?","acceptedAnswer":{"@type":"Answer","text":"В мае–июне 2026 года удары пришлись по восьми из десяти крупнейших российских НПЗ, включая заводы в Рязани, Ярославле, Киришах, Туапсе и Самарском кластере. Актуальный список с геолокацией показан на карте."}},{"@type":"Question","name":"Насколько упала нефтепереработка в России из-за ударов дронов?","acceptedAnswer":{"@type":"Answer","text":"Совокупные выбывшие мощности превышают 83 млн тонн/год — более 25% общероссийской мощности первичной переработки; потери выпуска бензина свыше 30%, дизеля около 25%."}},{"@type":"Question","name":"Где в России дефицит бензина и ограничения на продажу топлива?","acceptedAnswer":{"@type":"Answer","text":"По состоянию на июнь 2026 ограничения действуют более чем в 15 регионах, включая Москву, Крым и Севастополь (талоны/QR-коды), Краснодарский край. Лимит отпуска — от 20 до 100 литров на заправку."}},{"@type":"Question","name":"Откуда берутся данные на карте НПЗ?","acceptedAnswer":{"@type":"Answer","text":"Данные агрегируются из открытых OSINT-источников: Reuters, Bloomberg, The Moscow Times, «Новая газета Европа», Meduza и региональные СМИ. Это оценка, а не официальные данные."}}]}
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как узнать, на какой АЗС сейчас есть бензин?","acceptedAnswer":{"@type":"Answer","text":"На карте АЗС заправки подсвечены по оценке наличия топлива для своей сети и региона. Можно отфильтровать по сети (Лукойл, Газпром нефть, Роснефть, Татнефть) и посмотреть отзывы водителей. Это OSINT-оценка по сети и региону, а не данные с конкретной колонки."}},{"@type":"Question","name":"Можно ли построить маршрут и увидеть заправки по пути?","acceptedAnswer":{"@type":"Answer","text":"Да. В блоке «Карта поездки» укажите город отправления и назначения — на карте отобразятся АЗС вдоль маршрута с оценкой наличия топлива."}},{"@type":"Question","name":"Откуда берётся расположение заправок?","acceptedAnswer":{"@type":"Answer","text":"Координаты АЗС — реальные, из OpenStreetMap. Наличие топлива — оценка по сети и региону на основе OSINT-данных, а не показания конкретной АЗС."}}]}
   </script>
 
   <link rel="stylesheet" href="/fonts.css">
@@ -125,7 +125,6 @@
             <a href="/talony">🎫 Бензин по талонам</a>
             <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
             <a href="/gde-dizel">🛢️ Где найти дизель</a>
-            <a href="/zakrytye-azs">📄 Какие азс закрылись</a>
             <div class="tdm-group">Прогноз</div>
             <a href="/crisis">🔥 Прогноз кризиса</a>
             <div class="tdm-group">Справочники</div>
@@ -137,7 +136,6 @@
             <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
             <a href="/karta-bpla">📡 Карта БПЛА</a>
             <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
-            <a href="/karta-azs">⛽ Карта АЗС</a>
             <a class="tdm-all" href="/analytics">📊 Все статьи · каталог →</a>
           <!-- INDEX-MENU:END -->
           </div>
@@ -198,7 +196,6 @@
       <a class="ndp-item" href="/talony">🎫 Бензин по талонам</a>
       <a class="ndp-item" href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
       <a class="ndp-item" href="/gde-dizel">🛢️ Где найти дизель</a>
-      <a class="ndp-item" href="/zakrytye-azs">📄 Какие азс закрылись</a>
       <a class="ndp-item" href="/crisis">🔥 Прогноз кризиса</a>
       <a class="ndp-item" href="/attacks">💥 Хроника ударов</a>
       <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
@@ -206,7 +203,6 @@
       <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
       <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
       <a class="ndp-item" href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
-      <a class="ndp-item" href="/karta-azs">⛽ Карта АЗС</a>
       <!-- DRAWER-ANALYTICS:END -->
         <div class="ndp-group">Ещё</div>
         <a class="ndp-item" href="/install">📲 Установить приложение</a>
@@ -220,10 +216,10 @@
       <span class="ss-mode">ОЦЕНКА OSINT</span>
       <a class="ss-version" id="ssVersion" href="/version.json" title="Версия сайта">v…</a>
       <span class="ss-fallback hidden" id="ssFallback" title="Часть данных отдана из резервной копии">⚠ резервная копия</span>
-      <h1 class="ss-title">Нет бензина в России — карта НПЗ и дефицита топлива</h1>
+      <h1 class="ss-title">Карта АЗС России — где есть бензин и дизель на заправках</h1>
       <span class="ss-txt">автообновление <span class="ss-num">4×/сутки</span> · <span class="ss-num">9</span> наборов данных</span>
       <nav class="ss-nav" aria-label="Ссылки карты">
-        <!-- FRESH:START --><a class="ss-src ss-fresh" href="/karta-azs" style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">🆕 Новое: Карта АЗС →</a><!-- FRESH:END -->
+        <!-- FRESH:START --><a class="ss-src ss-fresh" href="/gde-est-benzin" style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">🆕 Новое: Где есть бензин сейчас →</a><!-- FRESH:END -->
         <a class="ss-src" href="/news">Новости</a>
         <a class="ss-src" href="/sources">Источники</a>
       </nav>
@@ -422,6 +418,10 @@
 
   <script src="/vendor/leaflet-1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="/vendor/leaflet-markercluster-1.5.3/leaflet.markercluster.js"></script>
+  <!-- ponytail: /karta-azs = index shell booted into the АЗС tab via app.js deep-link (#azs).
+       Reuses app.js unchanged — no АЗС logic is duplicated. Body markup is cloned from
+       index.html; if the SPA shell changes structurally, re-sync this file (diff vs index.html). -->
+  <script>if(!location.hash&&!location.search)history.replaceState(null,"","#azs");</script>
   <script src="app.js?v=e4b7683a"></script>
   <!-- Vercel Web Analytics (нужно включить в Dashboard → Analytics → Enable, иначе /_vercel/insights/* = 404) -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>

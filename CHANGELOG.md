@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.15.0 - 2026-07-10
+
+**Карта АЗС получила отдельную страницу `/karta-azs` (как `/radar`).**
+
+Раньше интерактивная карта заправок жила только вкладкой SPA на `/` — аналитика (Яндекс.Метрика + Vercel) видела все визиты как `/`, отделить трафик «карты АЗС» было нечем, и не было индексируемой посадочной под запросы «карта азс / карта заправок / где заправиться».
+
+- **`/karta-azs` — новая посадочная.** `karta-azs.html` = каркас `index.html` со своим SEO-`<head>` (title/description/keywords/canonical/OG/Twitter, schema `WebApplication` + АЗС-`FAQPage`) и своим `<h1>`. Инлайн `history.replaceState(null,"","#azs")` перед `app.js` → страница грузится сразу во вкладку АЗС через **уже существующий** `?view=`/`#hash` deep-link в `app.js` (`app.js:1814`). Карту **не переписывали** — тот же `app.js`, ноль дублирования логики (в отличие от `/radar`, который standalone). `cleanUrls` даёт чистый `/karta-azs`. Синхронизированы `?v=` ассетов с `index.html`.
+- **Регистрация и внутренняя перелинковка.** Запись в `data/seo-topics.jsonl` (`type=tool`, `primary_kw="карта азс"`, отделена от `/gde-est-benzin` freshness и `/karta-benzina-krym` гео-Крым против каннибализации) → авто в `sitemap.xml` и в меню всех страниц (`build-nav.py`, лейбл `⛽ Карта АЗС`). Все ссылки со старого `/?view=azs` переведены на `/karta-azs`: ручные `karta-benzina-krym.html`, `crimea.html`, `radar.html`, `zakrytye-azs.html`; шаблон CTA сводок в `agents/gen-news.py` → `news.html` + 57 архивных `news/*.html`; Telegram-кнопка `hermes/bot/broadcast.py`. Проверено: **0** `view=azs` в HTML-выводе, `check-ia.py` ✓ (32 live).
+- **Аудит остальных вкладок.** `history` / `forecast` / `economy` проверены против `seo/semantic-core.json` + `wordstat-*`: `history`→уже покрыта `/attacks`, `forecast`→уже покрыта `/crisis`, `economy`→нулевой поисковый спрос. Отдельных страниц не требуют — АЗС была единственной реальной дырой.
+- **SW-кеш** `npz-shell-v10 → v11` (форс-обновление precached shell — сменилось меню на всех страницах).
+
 ## v1.14.0 - 2026-07-10
 
 **Полка C: производительность (self-host), RSS-фид, страница «Методология».**
