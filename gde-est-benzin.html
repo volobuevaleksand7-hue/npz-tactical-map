@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Где есть бензин сейчас: карта работающих АЗС и наличие топлива</title>
+  <meta name="description" content="Где есть бензин сейчас: единой госкарты нет, но есть банковские сервисы, краудсорс-карты и бесплатная оценка наличия топлива по сетям и регионам России.">
+  <meta name="keywords" content="где есть бензин сейчас, карта работающих азс, где заправиться прямо сейчас, азс с бензином рядом, работающие заправки сегодня, где купить бензин без очереди">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Russian">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/gde-est-benzin">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Топливный фронт РФ">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/gde-est-benzin">
+  <meta property="og:title" content="Где есть бензин сейчас: карта работающих АЗС и наличие топлива">
+  <meta property="og:description" content="Где есть бензин сейчас: единой госкарты нет, но есть банковские сервисы, краудсорс-карты и бесплатная оценка наличия топлива по сетям и регионам России.">
+  <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Где есть бензин сейчас: карта работающих АЗС и наличие топлива">
+  <meta name="twitter:description" content="Где есть бензин сейчас: единой госкарты нет, но есть банковские сервисы, краудсорс-карты и бесплатная оценка наличия топлива по сетям и регионам России.">
+  <meta name="twitter:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Где есть бензин сейчас: карта работающих АЗС и наличие топлива",
+    "datePublished": "2026-07-10",
+    "dateModified": "2026-07-10",
+    "image": ["https://npz-tactical-map.vercel.app/og-image.png"],
+    "author": {"@type": "Organization", "name": "Топливный фронт РФ"},
+    "publisher": {"@type": "Organization", "name": "Топливный фронт РФ", "url": "https://npz-tactical-map.vercel.app/"},
+    "description": "Где есть бензин сейчас: единой госкарты нет, но есть банковские сервисы, краудсорс-карты и бесплатная оценка наличия топлива по сетям и регионам России.",
+    "mainEntityOfPage": "https://npz-tactical-map.vercel.app/gde-est-benzin",
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Есть ли официальная карта наличия бензина в реальном времени?", "acceptedAnswer": {"@type": "Answer", "text": "Нет, единого государственного сервиса с данными о статусе каждой колонки не существует. Доступны только косвенные и частные источники — банковская аналитика, краудсорс-карты и агрегаторы открытых данных вроде нашей карты."}},
+      {"@type": "Question", "name": "Как банковские приложения понимают, что на АЗС есть бензин?", "acceptedAnswer": {"@type": "Answer", "text": "Обычно это не прямые данные с колонки, а активность транзакций на заправке за последнее время — если картой недавно платили, значит станция как минимум работает, но это не подтверждает наличие конкретной марки топлива."}},
+      {"@type": "Question", "name": "Можно ли доверять краудсорс-картам с отметками водителей?", "acceptedAnswer": {"@type": "Answer", "text": "Как ориентир — да, но с поправкой на задержку: отметка могла появиться несколько часов назад, а ситуация на заправке уже изменилась. Лучше сверять с 1-2 источниками перед поездкой."}},
+      {"@type": "Question", "name": "Чем ваша карта отличается от банковских и краудсорс-сервисов?", "acceptedAnswer": {"@type": "Answer", "text": "Это бесплатная карта НПЗ и дефицита без регистрации и звонков — она сводит открытые данные по сетям и регионам в одну оценку по статусу топлива, а не показывает статус каждой отдельной колонки."}},
+      {"@type": "Question", "name": "Что делать, если на ближайшей АЗС бензина не оказалось?", "acceptedAnswer": {"@type": "Answer", "text": "Стоит заранее держать в уме соседние заправки на маршруте — подборка для дальних поездок есть в статье «Бензин на трассе», а если на дизеле — в материале «Где найти дизель». Общий контекст по перебоям — в статье «Почему нет бензина»."}}
+    ]
+  }
+  </script>
+
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/styles.css?v=133db8e9">
+  <link rel="stylesheet" href="/news.css?v=e2bbf493">
+  <style>
+    .landing-wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+    .landing-hero{background:linear-gradient(135deg,rgba(230,194,89,.14),rgba(138,109,59,.08));border:1px solid rgba(230,194,89,.3);border-radius:16px;padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden}
+    .landing-hero::before{content:"";position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(230,194,89,.18),transparent 70%);border-radius:50%}
+    .hero-label{display:inline-block;background:var(--gold,#e6c259);color:#2a2100;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:6px;margin-bottom:12px}
+    .hero-h{font-size:28px;font-weight:800;line-height:1.2;margin-bottom:10px}
+    .hero-sub{font-size:15px;color:var(--ink-dim);line-height:1.6;max-width:680px}
+    .map-cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:18px 0 4px;padding:16px 22px;background:var(--teal,#12a594);color:#fff;font-weight:800;font-size:16px;border-radius:12px;text-decoration:none;box-shadow:0 6px 20px rgba(18,165,148,.3);transition:.15s}
+    .map-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(18,165,148,.45)}
+    .map-cta .mc-ico{font-size:22px}
+    .map-cta.inline{margin:20px 0;background:var(--surface);color:var(--ink);border:1.5px solid var(--teal,#12a594);box-shadow:none}
+    .map-cta.inline:hover{background:rgba(18,165,148,.08);transform:translateY(-1px)}
+    .status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:20px}
+    .status-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+    .status-card .val{font-family:var(--mono);font-size:20px;font-weight:800;color:var(--gold,#b8892b)}
+    .status-card .lbl{font-size:11px;color:var(--ink-dim);margin-top:4px}
+    .section-h{font-size:20px;font-weight:800;margin:32px 0 14px;display:flex;align-items:center;gap:8px}
+    .section-h .ico{font-size:22px}
+    .lead-p{font-size:14px;line-height:1.7;color:var(--ink);margin-bottom:8px}
+    .faq-wrap{margin:20px 0}
+    .faq-item{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+    .faq-q{font-weight:700;font-size:14px;padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q::after{content:"▼";font-size:10px;color:var(--ink-dim);transition:transform .2s}
+    .faq-item.open .faq-q::after{transform:rotate(180deg)}
+    .faq-a{padding:0 16px 14px;font-size:13px;line-height:1.6;color:var(--ink-dim);display:none}
+    .faq-item.open .faq-a{display:block}
+    .link-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:16px 0}
+    .link-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;text-decoration:none;color:var(--ink);transition:.15s}
+    .link-card:hover{border-color:var(--teal);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+    .link-card .lc-h{font-weight:700;font-size:13px;margin-bottom:4px}
+    .link-card .lc-d{font-size:11px;color:var(--ink-dim)}
+    .osint-note{margin-top:32px;font-size:11px;color:var(--ink-dim);background:var(--surface2);padding:12px;border-radius:10px;border-left:3px solid var(--amber);line-height:1.6}
+    .updated-line{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:6px}
+</style>
+</head>
+<body data-theme="light">
+  <header class="news-header">
+    <div class="news-header-inner">
+      <a href="/news" class="news-logo" title="Все сводки">
+        <span class="news-logo-icon">⛽</span>
+        <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
+      </a>
+      <nav class="news-nav">
+        <a href="/">🗺️ Карта НПЗ</a>
+        <a href="/news">📰 Сводки</a>
+        <a href="/radar">📡 Радар БПЛА</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <div class="nav-drop-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
+            <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <details class="nav-drop-sub">
+              <summary>🚀 Ракетная опасность</summary>
+              <a href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
+              <a href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
+              <a href="/raketnaya-opasnost-omsk">📍 Омск</a>
+              <a href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
+              <a href="/raketnaya-opasnost-kazan">📍 Казань</a>
+              <a href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
+              <a href="/raketnaya-opasnost-penza">📍 Пенза</a>
+              <a href="/raketnaya-opasnost-samara">📍 Самара</a>
+            </details>
+            <div class="nav-drop-group">Топливо</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+            <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <div class="nav-drop-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="nav-drop-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help">❓ Как пользоваться</a>
+            <a href="/metodologiya">🔬 Методология</a>
+            <div class="nav-drop-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+            <a href="/karta-bpla">📡 Карта БПЛА</a>
+            <a href="/gde-est-benzin" aria-current="page">📄 Где есть бензин сейчас</a>
+            <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>
+          </div>
+        </div>
+        <a href="/sources">📚 Источники</a>
+      </nav>
+    </div>
+  </header>
+  <main class="news-main">
+    <div class="landing-wrap">
+
+      <div class="landing-hero">
+        <span class="hero-label">БЕНЗИН СЕЙЧАС</span>
+        <h1 class="hero-h">Где есть бензин сейчас: карта работающих АЗС</h1>
+        <p class="hero-sub">Единого государственного сервиса, который в реальном времени показывает остаток бензина на каждой колонке, в России не существует — ниже разбор, какие способы вообще есть, и оценка по открытым источникам, а не гарантия наличия топлива на конкретной АЗС.</p>
+        <a class="map-cta" href="/"><span class="mc-ico">⛽</span> Смотреть карту наличия топлива →</a>
+        <div class="status-grid">
+          <div class="status-card"><div class="val">Банк-карты</div><div class="lbl">статус по геоданным транзакций на заправках сети</div></div>
+          <div class="status-card"><div class="val">Краудсорс</div><div class="lbl">отметки водителей в приложениях и чатах</div></div>
+          <div class="status-card"><div class="val">Наша карта</div><div class="lbl">оценка по сетям и регионам без регистрации</div></div>
+          <div class="status-card"><div class="val">0 ₽</div><div class="lbl">бесплатный доступ, без звонков на АЗС</div></div>
+        </div>
+        <div class="updated-line">Обновлено 10 июля 2026, МСК</div>
+      </div>
+
+      <h2 class="section-h"><span class="ico">⛽</span> Почему нет единой карты бензина в реальном времени</h2>
+      <p class="lead-p">В России нет государственного сервиса, который агрегировал бы данные с колонок всех сетей АЗС и показывал остаток топлива онлайн — у каждой сети своя внутренняя система учёта, и наружу эти данные почти никогда не выходят.</p>
+      <p class="lead-p">Из-за этого информация о наличии бензина всегда собирается косвенно и с задержкой — через отзывы водителей, банковскую аналитику или открытые источники. Причины перебоев на конкретных заправках подробнее разобраны в материале <a href="/deficit">«Почему нет бензина»</a>.</p>
+      <h2 class="section-h"><span class="ico">📱</span> Какие сервисы подскажут, где сейчас есть бензин</h2>
+      <p class="lead-p">Банковские приложения иногда показывают активность на АЗС по геоданным транзакций — если на заправке недавно расплачивались картой, это косвенный сигнал, что колонки работают, но не гарантия, что есть нужная марка топлива.</p>
+      <p class="lead-p">Краудсорс-карты и чаты с отметками водителей дают более живую картину, но зависят от того, кто и когда оставил отметку — на трассе информация может устареть за пару часов. Бесплатная альтернатива без регистрации — <a href="/">карта НПЗ и дефицита</a>, которая сводит открытые данные по сетям и регионам в одном месте.</p>
+      <h2 class="section-h"><span class="ico">🗺️</span> Как правильно пользоваться картой наличия топлива</h2>
+      <p class="lead-p">Любая карта наличия бензина — это оценка по открытым источникам на момент обновления, а не показания датчика в баке колонки, поэтому перед дальней поездкой стоит закладывать запас и держать в уме соседние АЗС на случай, если ближайшая окажется без нужного топлива.</p>
+      <p class="lead-p">Для отдельных сценариев на сайте есть более узкие подборки: жителям и гостям полуострова пригодится <a href="/karta-benzina-krym">карта бензина Крыма</a>, водителям на дизеле — <a href="/gde-dizel">«Где найти дизель»</a>, а тем, кто планирует маршрут между городами — <a href="/benzin-na-trasse">«Бензин на трассе»</a>.</p>
+      <a class="map-cta inline" href="/"><span class="mc-ico">🗺️</span> Смотреть наличие топлива по регионам →</a>
+
+      <h2 class="section-h"><span class="ico">❓</span> Частые вопросы</h2>
+      <div class="faq-wrap">
+        <div class="faq-item open">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Есть ли официальная карта наличия бензина в реальном времени?</div>
+          <div class="faq-a">Нет, единого государственного сервиса с данными о статусе каждой колонки не существует. Доступны только косвенные и частные источники — банковская аналитика, краудсорс-карты и агрегаторы открытых данных вроде нашей карты.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Как банковские приложения понимают, что на АЗС есть бензин?</div>
+          <div class="faq-a">Обычно это не прямые данные с колонки, а активность транзакций на заправке за последнее время — если картой недавно платили, значит станция как минимум работает, но это не подтверждает наличие конкретной марки топлива.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Можно ли доверять краудсорс-картам с отметками водителей?</div>
+          <div class="faq-a">Как ориентир — да, но с поправкой на задержку: отметка могла появиться несколько часов назад, а ситуация на заправке уже изменилась. Лучше сверять с 1-2 источниками перед поездкой.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Чем ваша карта отличается от банковских и краудсорс-сервисов?</div>
+          <div class="faq-a">Это бесплатная <a href="/">карта НПЗ и дефицита</a> без регистрации и звонков — она сводит открытые данные по сетям и регионам в одну оценку по статусу топлива, а не показывает статус каждой отдельной колонки.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Что делать, если на ближайшей АЗС бензина не оказалось?</div>
+          <div class="faq-a">Стоит заранее держать в уме соседние заправки на маршруте — подборка для дальних поездок есть в статье <a href="/benzin-na-trasse">«Бензин на трассе»</a>, а если на дизеле — в материале <a href="/gde-dizel">«Где найти дизель»</a>. Общий контекст по перебоям — в статье <a href="/deficit">«Почему нет бензина»</a>.</div>
+        </div>
+      </div>
+
+      <h2 class="section-h"><span class="ico">🔗</span> Смотрите также</h2>
+      <div class="link-grid">
+        <a class="link-card" href="/"><div class="lc-h">🗺️ Карта НПЗ и дефицита</div><div class="lc-d">Наличие топлива по сетям АЗС и регионам</div></a>
+        <a class="link-card" href="/karta-benzina-krym"><div class="lc-h">🗺️ Карта бензина Крым</div><div class="lc-d">90+ АЗС Крыма: наличие, лимиты, цены</div></a>
+        <a class="link-card" href="/deficit"><div class="lc-h">⛽ Почему нет бензина</div><div class="lc-d">Причины дефицита и прогноз</div></a>
+        <a class="link-card" href="/talony"><div class="lc-h">🎫 Бензин по талонам</div><div class="lc-d">Где действуют талоны и лимиты</div></a>
+        <a class="link-card" href="/news"><div class="lc-h">📰 Сводки</div><div class="lc-d">Ежедневный архив обстановки</div></a>
+        <a class="link-card" href="/sources"><div class="lc-h">📚 Источники</div><div class="lc-d">Методология и OSINT-источники</div></a>
+      </div>
+
+      <div class="osint-note">
+        <strong>⚠️ Дисклеймер:</strong> Данные — <strong>оценка по открытым источникам</strong> (сообщения СМИ, данные сетей АЗС, публичный мониторинг). Это не официальная информация и <strong>не гарантия наличия топлива на конкретной заправке</strong>. Ситуация меняется быстро; при планировании поездки ориентируйтесь на свежие данные и официальные сообщения. Страница носит справочно-аналитический характер.
+      </div>
+    </div>
+  </main>
+
+  <footer class="news-footer">
+    <div class="news-footer-inner">
+      <p>Топливный фронт РФ · <a href="/">🗺️ Карта НПЗ</a> · OSINT-дашборд · <span class="mono">npz-tactical-map.vercel.app</span></p>
+      <p class="footer-disc">Не является официальной информацией. Данные из открытых источников.</p>
+    </div>
+  </footer>
+
+  <script>
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.dataset.theme = saved;
+  </script>
+  <script defer src="/nav-dropdown.js?v=06476ddc"></script>
+</body>
+</html>
