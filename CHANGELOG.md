@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.17.0 - 2026-07-10
+
+**Три фичи из бэклога: внутренний поиск (#4), «АЗС рядом» (#2), SEO-статья `/azs-ryadom` (#3).**
+
+- **Внутренний поиск (идея #4):** статический JS-индекс `data/search-index.json` (города/статьи/удары/НПЗ) из `data/seo-topics.jsonl` + `data/strikes.json` + `refineries.html` через `agents/build-search-index.py` (идемпотентно, без сети; `--check`). Оверлей 🔍 в шапке всех страниц (кнопка / клавиша «/» / Ctrl-K), результаты сгруппированы, навигация ↑↓/Enter/Esc. Тот же поиск встроен в `404.html`. `build-nav.py` — единый владелец: инжектит `search.css`/`search.js` в `<head>` каждой страницы (`ensure_search_assets`) + кнопку 🔍 в `build_header()`; `search.*` добавлены в `ASSET_RE` (cache-busting).
+- **«АЗС рядом» (флагман, идея #2):** на карте АЗС (`/karta-azs`, вкладка АЗС) — кнопка «📍 Рядом со мной» (`navigator.geolocation` → центр + маркер «вы здесь» + расстояние в км в попапе) и тумблер «⛽ Только где есть топливо» (`azsState.hasFuelOnly` → отсекает severe/critical/unknown). Честная OSINT-оценка по сети/региону, без подделки статуса колонок. Логика в `app.js` (`haversineKm`/`azsLevelHasFuel` + self-check), разметка синхронизирована `index.html` + `karta-azs.html`.
+- **SEO-статья `/azs-ryadom`:** посадочная под кластер «азс рядом со мной / заправки рядом / ближайшая азс», воронка на `/karta-azs`, кросс-ссылки на `/gde-est-benzin` без каннибализации (`agents/azs-pages.py`).
+- **SW-кеш** `v14 → v15`; `search.css`/`search.js` в OPTIONAL-прекеше.
+
+
+
 ## v1.16.0 - 2026-07-10
 
 **Полка A / идея #1: build-nav владеет всей шапкой + head-линт.**

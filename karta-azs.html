@@ -68,6 +68,8 @@
   <link rel="stylesheet" href="styles.css?v=133db8e9">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#d23a2e">
+  <link rel="stylesheet" href="/search.css">
+  <script defer src="/search.js"></script>
 </head>
 <body data-theme="light">
 
@@ -125,6 +127,9 @@
             <a href="/talony">🎫 Бензин по талонам</a>
             <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
             <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <a href="/zakrytye-azs">📄 Какие азс закрылись</a>
+            <a href="/ocheredi-na-azs">📄 Очереди на азс</a>
+            <a href="/draki-na-azs">📄 Драки на азс</a>
             <div class="tdm-group">Прогноз</div>
             <a href="/crisis">🔥 Прогноз кризиса</a>
             <div class="tdm-group">Справочники</div>
@@ -136,6 +141,8 @@
             <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
             <a href="/karta-bpla">📡 Карта БПЛА</a>
             <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
+            <a href="/karta-azs">⛽ Карта АЗС</a>
+            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
             <a class="tdm-all" href="/analytics">📊 Все статьи · каталог →</a>
           <!-- INDEX-MENU:END -->
           </div>
@@ -151,6 +158,7 @@
         <a href="/support" class="donate-link" title="Поддержать проект" aria-label="Поддержать проект"><span class="donate-ico">🤝</span><span class="donate-lbl">Поддержать нас</span></a>
         <a href="/radar" class="hdr-quick" title="Радар БПЛА — карта воздушных тревог" aria-label="Радар БПЛА"><span class="hq-ico">📡</span><span class="hq-lbl">РАДАР</span></a>
         <button type="button" class="hdr-quick" data-view="azs" title="АЗС — карта заправок" aria-label="АЗС — карта заправок"><span class="hq-ico">⛽</span><span class="hq-lbl">АЗС</span></button>
+        <button type="button" class="nav-search-btn hdr-quick" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
         <button class="theme-btn" id="themeToggle" title="Светлая / тёмная карта" aria-label="Переключить светлую или тёмную карту">☀️</button>
         <button class="nav-burger" id="navBurger" type="button" aria-label="Меню разделов" aria-expanded="false" aria-controls="navDrawer">☰</button>
       </div>
@@ -196,6 +204,9 @@
       <a class="ndp-item" href="/talony">🎫 Бензин по талонам</a>
       <a class="ndp-item" href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
       <a class="ndp-item" href="/gde-dizel">🛢️ Где найти дизель</a>
+      <a class="ndp-item" href="/zakrytye-azs">📄 Какие азс закрылись</a>
+      <a class="ndp-item" href="/ocheredi-na-azs">📄 Очереди на азс</a>
+      <a class="ndp-item" href="/draki-na-azs">📄 Драки на азс</a>
       <a class="ndp-item" href="/crisis">🔥 Прогноз кризиса</a>
       <a class="ndp-item" href="/attacks">💥 Хроника ударов</a>
       <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
@@ -203,6 +214,8 @@
       <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
       <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
       <a class="ndp-item" href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
+      <a class="ndp-item" href="/karta-azs">⛽ Карта АЗС</a>
+      <a class="ndp-item" href="/azs-ryadom">📍 АЗС рядом со мной</a>
       <!-- DRAWER-ANALYTICS:END -->
         <div class="ndp-group">Ещё</div>
         <a class="ndp-item" href="/install">📲 Установить приложение</a>
@@ -339,6 +352,13 @@
       <aside class="card card-left azs-ctl" id="azsPanel">
         <div class="card-h">⛽ ЗАПРАВКИ <span class="count" id="azsCount"></span></div>
         <div class="azs-note" id="azsNote">Расположение — реальное (OSM). Наличие — оценка по сети/региону, не по колонке.</div>
+
+        <div class="azs-block">
+          <button id="azsLocateBtn" class="azs-locate-btn" type="button">📍 Рядом со мной</button>
+          <div class="azs-geo-msg" id="azsGeoMsg" role="status" aria-live="polite"></div>
+          <label class="azs-fuel-toggle"><input type="checkbox" id="azsFuelOnly"> ⛽ Только где есть топливо</label>
+          <div class="azs-fuel-note">Честная OSINT-оценка по сети/региону — без подделки статуса каждой колонки, как у части карт-конкурентов.</div>
+        </div>
 
         <div class="azs-block">
           <div class="azs-block-h">🚗 Карта поездки</div>

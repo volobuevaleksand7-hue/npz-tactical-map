@@ -53,7 +53,7 @@
   </script>
 
   <link rel="stylesheet" href="/fonts.css">
-  <link rel="stylesheet" href="/styles.css?v=133db8e9">
+  <link rel="stylesheet" href="/styles.css?v=9795507a">
   <link rel="stylesheet" href="/news.css?v=e2bbf493">
   <style>
     body{overflow:auto}
@@ -86,6 +86,8 @@
     .help-note{background:color-mix(in srgb,var(--teal) 12%,var(--surface));border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:10px;padding:13px 16px;font-size:13.5px;line-height:1.6;color:var(--ink);margin:24px 0}
     .help-note a{color:var(--teal);font-weight:700}
   </style>
+  <link rel="stylesheet" href="/search.css?v=5a32b7c1">
+  <script defer src="/search.js?v=8b14567c"></script>
 </head>
 <body data-theme="light">
   <header class="news-header">
@@ -136,11 +138,13 @@
             <a href="/karta-bpla">📡 Карта БПЛА</a>
             <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
             <a href="/karta-azs">⛽ Карта АЗС</a>
+            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
             <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>
           </div>
         </div>
         <a href="/sources">📚 Источники</a>
       </nav>
+      <button type="button" class="nav-search-btn" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
     </div>
   </header>
 

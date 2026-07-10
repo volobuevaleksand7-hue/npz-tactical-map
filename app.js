@@ -1236,7 +1236,7 @@
 
   /* ---------- AZS TAB (separate map: stations + trip + comments) ---------- */
   var AZS_UNKNOWN = "#7a7e85";
-  var azsState = { brands: null, level: null };
+  var azsState = { brands: null, level: null, hasFuelOnly: false, userPos: null };
   var AZS_STATUS2LVL = { ok: "calm", normal: "calm", available: "calm", open: "calm", minor: "strained", some: "strained", limited: "limited", talony: "limited", severe: "severe", shortage: "severe", critical: "critical", dry: "critical", none: "critical", closed: "critical" };
 
   function initAzMap() {
@@ -1251,6 +1251,7 @@
     L_az.cluster.addTo(maps.az);
     L_az.comments = L.layerGroup().addTo(maps.az);
     L_az.route = L.layerGroup().addTo(maps.az);
+    L_az.me = L.layerGroup().addTo(maps.az);
     azsReady = true;
   }
   var azsBound = false;
@@ -1350,10 +1351,24 @@
     }
     return out;
   }
-  function azsStationPopup(st) {
+  // Great-circle distance (haversine), km. Pure — see __selfcheck at bottom of file.
+  function haversineKm(lat1, lon1, lat2, lon2) {
+    var R = 6371, toRad = Math.PI / 180;
+    var dLat = (lat2 - lat1) * toRad, dLon = (lon2 - lon1) * toRad;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * toRad) * Math.cos(lat2 * toRad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+  // «Есть топливо» — честная OSINT-оценка: калм/перебои/лимиты считаем «есть», severe/critical/unknown — нет.
+  function azsLevelHasFuel(lvl) { return lvl === "calm" || lvl === "strained" || lvl === "limited"; }
+
+  function azsStationPopup(st, distKm) {
     var lvl = stationLevel(st), c = AZS_LVL[lvl] || AZS_UNKNOWN, lbl = (AZS_LBL[lvl] || "нет данных").toUpperCase();
     var reg = azsRegionEntry(st.region);
     var html = '<div class="azs-pop"><div class="ap-brand">' + esc(st.brand_label || "АЗС") + '</div>';
+    if (typeof distKm === "number") {
+      html += '<div class="ap-row" style="font-weight:700">📍 ' + (distKm < 1 ? Math.round(distKm * 1000) + " м" : distKm.toFixed(1) + " км") + ' от вас</div>';
+    }
     html += '<div class="ap-row"><span class="ap-status" style="background:' + c + '">' + esc(lbl) + '</span></div>';
     if (st.addr) html += '<div class="ap-row">📍 ' + esc(st.addr) + (st.city ? ", " + esc(st.city) : "") + '</div>';
     else if (st.city) html += '<div class="ap-row">📍 ' + esc(st.city) + '</div>';
@@ -1364,7 +1379,9 @@
     }
     var cm = nearestComments(st, 2);
     cm.forEach(function (q) { html += '<div class="ap-quote">«' + esc(q.quote || "") + '»</div>'; });
-    html += '<div class="ap-row" style="opacity:.55;font-size:10px;margin-top:5px">Наличие — оценка по сети/региону. Точка — OSM.</div></div>';
+    html += '<div class="ap-row" style="opacity:.55;font-size:10px;margin-top:5px">Наличие — оценка по сети/региону. Точка — OSM.</div>';
+    if (azsState.hasFuelOnly) html += '<div class="ap-row" style="opacity:.55;font-size:10px">Фильтр «есть топливо»: честная OSINT-оценка, без подделки статуса колонок.</div>';
+    html += '</div>';
     return html;
   }
 
@@ -1377,8 +1394,10 @@
       if (azsState.brands && !azsState.brands.has(s.brand)) return;
       var lvl = stationLevel(s);
       if (azsState.level && lvl !== azsState.level) return;
+      if (azsState.hasFuelOnly && !azsLevelHasFuel(lvl)) return;
+      var dist = azsState.userPos ? haversineKm(azsState.userPos.lat, azsState.userPos.lon, s.lat, s.lon) : null;
       var m = L.marker([s.lat, s.lon], { icon: azsStationIcon(lvl, false) });
-      m.bindPopup(azsStationPopup(s), POPUP_OPTS);
+      m.bindPopup(azsStationPopup(s, dist), POPUP_OPTS);
       m._azs = s;
       m._lvl = lvl;
       markers.push(m);
@@ -1387,6 +1406,30 @@
     if (L_az.cluster.addLayers) L_az.cluster.addLayers(markers);
     else markers.forEach(function (m) { L_az.cluster.addLayer(m); });
     var cnt = document.getElementById("azsCount"); if (cnt) cnt.textContent = shown;
+  }
+
+  function azsMeIcon() {
+    return L.divIcon({ className: "azs-divicon", html: '<div class="azs-me-pin">📍</div>', iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -12] });
+  }
+  function locateAzsUser() {
+    var msgEl = document.getElementById("azsGeoMsg");
+    if (!navigator.geolocation) { if (msgEl) msgEl.textContent = "Геолокация не поддерживается браузером."; showToast("Геолокация не поддерживается браузером."); return; }
+    if (msgEl) msgEl.textContent = "Определяю местоположение…";
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      azsState.userPos = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+      if (msgEl) msgEl.textContent = "";
+      if (L_az.me) {
+        L_az.me.clearLayers();
+        L.marker([azsState.userPos.lat, azsState.userPos.lon], { icon: azsMeIcon(), zIndexOffset: 900 })
+          .bindPopup("Вы здесь").addTo(L_az.me);
+      }
+      if (maps.az) maps.az.setView([azsState.userPos.lat, azsState.userPos.lon], 12);
+      renderAzsStations();
+    }, function (err) {
+      var msg = (err && err.code === 1) ? "Доступ к геолокации запрещён — разрешите его в настройках браузера." : "Не удалось определить местоположение.";
+      if (msgEl) msgEl.textContent = msg;
+      showToast(msg);
+    }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 });
   }
 
   function renderAzsBrandFilter() {
@@ -1549,6 +1592,14 @@
     });
   }
   function bindAzsRouteUI() {
+    var locBtn = document.getElementById("azsLocateBtn");
+    if (locBtn) bindButton(locBtn, locateAzsUser);
+    var fuelChk = document.getElementById("azsFuelOnly");
+    if (fuelChk) fuelChk.addEventListener("change", function () {
+      azsState.hasFuelOnly = fuelChk.checked;
+      renderAzsStations();
+      if (AZS_ROUTE.line) recomputeTripStations();
+    });
     var btn = document.getElementById("azsRouteBtn"), clr = document.getElementById("azsRouteClear");
     var fromEl = document.getElementById("azsFrom"), toEl = document.getElementById("azsTo");
     var tripEl = document.getElementById("azsTrip");

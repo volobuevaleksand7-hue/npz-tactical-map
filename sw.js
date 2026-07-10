@@ -5,11 +5,11 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v14';   // bump → v1.16.0: единая шапка через build-nav, head-линт, viewport-fit/theme-colornav, head-линт, viewport-fit/theme-color)
+var CACHE = 'npz-shell-v15';   // bump → v1.17.0: внутренний поиск, «АЗС рядом» (геолокация+фильтр), /azs-ryadom
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.
-var OPTIONAL = ['/radar', '/news', '/install', '/help',
+var OPTIONAL = ['/radar', '/news', '/install', '/help', '/search.css', '/search.js',
                 '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
 function reload(u) { return new Request(u, { cache: 'reload' }); }
 

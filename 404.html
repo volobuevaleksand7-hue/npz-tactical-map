@@ -10,18 +10,24 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/fonts.css">
-  <link rel="stylesheet" href="/styles.css?v=133db8e9">
+  <link rel="stylesheet" href="/styles.css?v=9795507a">
   <link rel="stylesheet" href="/news.css?v=e2bbf493">
+  <link rel="stylesheet" href="/search.css?v=5a32b7c1">
   <style>
     body{overflow:auto}
     .nf-wrap{max-width:640px;margin:60px auto;padding:36px 20px 60px;text-align:center}
     .nf-code{font-family:var(--mono);font-size:13px;font-weight:800;letter-spacing:2px;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:3px 10px;display:inline-block;margin-bottom:16px}
     .nf-h{font-size:26px;font-weight:800;letter-spacing:.3px;line-height:1.2;margin-bottom:10px}
     .nf-sub{color:var(--ink-dim);font-size:14.5px;line-height:1.65;margin-bottom:28px}
+    .nf-search{max-width:440px;margin:0 auto 28px;text-align:left}
     .nf-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
     .nf-btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#fff;background:var(--red);font-weight:700;font-size:14px;padding:10px 18px;border-radius:10px}
     .nf-btn:hover{filter:brightness(1.06)}
     .nf-btn.alt{background:var(--teal)}
+    .nf-top5{max-width:440px;margin:32px auto 0;text-align:left}
+    .nf-top5-h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--ink-dim);font-weight:700;text-transform:uppercase;margin-bottom:8px}
+    .nf-top5 a{display:block;padding:8px 10px;border-radius:9px;text-decoration:none;color:var(--ink);font-size:13.5px;font-weight:600}
+    .nf-top5 a:hover{background:var(--surface2);color:var(--teal)}
   </style>
 </head>
 <body data-theme="light">
@@ -73,21 +79,35 @@
             <a href="/karta-bpla">📡 Карта БПЛА</a>
             <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
             <a href="/karta-azs">⛽ Карта АЗС</a>
+            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
             <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>
           </div>
         </div>
         <a href="/sources">📚 Источники</a>
       </nav>
+      <button type="button" class="nav-search-btn" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
     </div>
   </header>
 
   <main class="nf-wrap">
     <div class="nf-code">ОШИБКА 404</div>
     <h1 class="nf-h">Такого раздела нет</h1>
-    <p class="nf-sub">Страница удалена или адрес введён неверно. Вот главное, что точно работает:</p>
+    <p class="nf-sub">Страница удалена или адрес введён неверно. Попробуйте поиск — или один из разделов ниже:</p>
+
+    <div class="nf-search" id="searchInlineMount"></div>
+
     <div class="nf-actions">
       <a class="nf-btn" href="/">🗺️ Открыть карту</a>
       <a class="nf-btn alt" href="/radar">📡 Радар БПЛА</a>
+    </div>
+
+    <div class="nf-top5">
+      <div class="nf-top5-h">Популярные разделы</div>
+      <a href="/">🗺️ Карта НПЗ России</a>
+      <a href="/karta-azs">⛽ Карта АЗС</a>
+      <a href="/radar">📡 Радар БПЛА</a>
+      <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+      <a href="/news">📰 Сводки</a>
     </div>
   </main>
 
@@ -102,5 +122,6 @@
     (function(){try{var t=localStorage.getItem('npz-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);document.body.setAttribute('data-theme',t);}catch(e){}})();
   </script>
   <script defer src="/nav-dropdown.js?v=06476ddc"></script>
+  <script defer src="/search.js?v=8b14567c"></script>
 </body>
 </html>

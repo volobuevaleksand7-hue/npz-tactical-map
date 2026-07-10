@@ -67,6 +67,7 @@ LABELS = {
     "/karta-benzina-krym": ("🗺️", "Карта бензина Крым"),
     "/karta-bpla":          ("📡", "Карта БПЛА"),
     "/karta-azs":           ("⛽", "Карта АЗС"),
+    "/azs-ryadom":          ("📍", "АЗС рядом со мной"),
     "/help":              ("❓", "Как пользоваться"),
     "/metodologiya":      ("🔬", "Методология"),
 }
@@ -97,6 +98,7 @@ HUB = {
     "/karta-benzina-krym": ("Карта бензина в Крыму", "Интерактивная карта наличия топлива: 90+ АЗС Крыма, статус сетей АТАН и ТЭС, лимиты, цены и очереди онлайн"),
     "/karta-bpla": ("Карта БПЛА и тревог", "Карта-радар угроз БПЛА и ракет по регионам России: воздушная тревога, ракетная опасность, отбой — онлайн, оценка по OSINT"),
     "/metodologiya": ("Методология оценки данных", "Как карта считает статусы НПЗ и АЗС, откуда берутся данные, как перепроверяются удары и как часто всё обновляется — открытая методология OSINT-агрегации"),
+    "/azs-ryadom": ("АЗС рядом со мной", "Как найти ближайшую работающую заправку через геолокацию: бесплатная карта с фильтром «есть топливо» — честная OSINT-оценка по сети и региону, без фейковых статусов колонок"),
 }
 
 
@@ -206,11 +208,16 @@ LOGO_HTML = ('      <a href="/" class="news-logo" title="На карту">\n'
              '      </a>')
 
 
+SEARCH_BTN = ('<button type="button" class="nav-search-btn" id="searchOpenBtn" '
+              'title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>')
+
+
 def build_header(rows, current):
     return ('<header class="news-header">\n'
             '    <div class="news-header-inner">\n'
             + LOGO_HTML + '\n'
             '      ' + build_nav(rows, current) + '\n'
+            '      ' + SEARCH_BTN + '\n'
             '    </div>\n'
             '  </header>')
 
@@ -341,7 +348,22 @@ def build_hub(rows):
 # посетителей висел кэш styles.css/app.js и правки шапки/меню не доезжали. Штампуем тут,
 # на каждом regenerate — само-заживает: правка styles.css → новый хэш → браузер перекачает.
 # опциональный ведущий слэш: index.html линкует "styles.css", лендинги — "/styles.css".
-ASSET_RE = re.compile(r'(href|src)="(/?)(styles\.css|news\.css|app\.js|nav-dropdown\.js)(\?v=[0-9a-f]+)?"')
+ASSET_RE = re.compile(r'(href|src)="(/?)(styles\.css|news\.css|app\.js|nav-dropdown\.js|search\.css|search\.js)(\?v=[0-9a-f]+)?"')
+
+
+# ---- 4a) единый инжект поиска (search.css/search.js) в <head> на всех страницах ----
+# build-nav — единственный владелец: добавил страницу → поиск на ней есть автоматически.
+# Идемпотентно (если /search.js уже линкован — не трогаем; stamp_assets потом навесит ?v).
+SEARCH_HEAD = ('  <link rel="stylesheet" href="/search.css">\n'
+               '  <script defer src="/search.js"></script>\n')
+
+
+def ensure_search_assets(html):
+    if '/search.js' in html:
+        return html
+    if '</head>' in html:
+        return html.replace('</head>', SEARCH_HEAD + '</head>', 1)
+    return html
 
 
 def stamp_assets(html):
@@ -407,6 +429,7 @@ def main():
         new = apply_footer(new, f.name)
         new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
         new = wire_dropdown(new)  # срезать старый инлайн-JS дропдауна + линковать shared /nav-dropdown.js
+        new = ensure_search_assets(new)  # search.css/search.js в <head> (поиск на всех страницах)
         new = stamp_assets(new)  # освежить ?v на styles.css/news.css/nav-dropdown.js — иначе правка не доедет до вернувшихся
         if new != html:
             f.write_text(new, encoding="utf-8"); changed += 1; print("nav/footer updated", f.relative_to(ROOT))
@@ -428,6 +451,7 @@ def main():
             print("!! no .ss-nav in index.html (chip skipped)")
         # мобильный drawer «Аналитика» — из того же реестра (был hand-maintained → дрейфовал)
         new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
+        new = ensure_search_assets(new)  # search.css/search.js в <head>
         new = stamp_assets(new)  # ?v=<хэш> на styles.css/app.js — иначе кэш прячет правки шапки
         if new != html:
             idx.write_text(new, encoding="utf-8"); changed += 1; print("index.html dropdown + drawer + fresh chip + asset ver updated")

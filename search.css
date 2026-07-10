@@ -1,0 +1,135 @@
+/* Внутренний поиск — оверлей + инлайн-режим (404.html). Использует CSS-переменные из
+   styles.css (--surface/--ink/--line/--mono/--teal/...), которые уже подключены на всех
+   страницах вместе с этим файлом — своих цветов/тем здесь не заводим. */
+
+.nav-search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  background: var(--surface2);
+  color: var(--ink);
+  border-radius: 9px;
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  flex: none;
+}
+.nav-search-btn:hover { color: var(--teal); border-color: var(--teal); }
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 6000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 8vh 16px 16px;
+}
+.search-overlay[hidden] { display: none; }
+.search-overlay-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  backdrop-filter: blur(3px);
+}
+.search-overlay-inner {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius, 14px);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: searchPop .16s cubic-bezier(.2, .8, .3, 1);
+}
+@keyframes searchPop {
+  from { opacity: 0; transform: translateY(-8px) scale(.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.search-ico { font-size: 18px; flex: none; }
+.search-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--disp);
+  font-size: 16px;
+  outline: none;
+}
+.search-input::placeholder { color: var(--ink-dim); }
+.search-close {
+  border: 0;
+  background: var(--surface2);
+  color: var(--ink-dim);
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  flex: none;
+}
+.search-close:hover { color: var(--ink); }
+
+.search-results { max-height: 56vh; overflow-y: auto; }
+.search-group-h {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--ink-dim);
+  font-weight: 700;
+  padding: 10px 16px 4px;
+  text-transform: uppercase;
+}
+.search-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: var(--ink);
+  border-left: 3px solid transparent;
+}
+.search-item:hover, .search-item.active { background: var(--surface2); border-left-color: var(--teal); }
+.search-item-title { font-weight: 700; font-size: 13.5px; }
+.search-item-url { font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); }
+.search-empty { padding: 20px 16px; color: var(--ink-dim); font-size: 13px; text-align: center; }
+.search-hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-dim);
+  padding: 8px 16px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+body.search-lock { overflow: hidden; }
+
+/* инлайн-режим (404.html): тот же движок без fixed-оверлея, встроен прямо в поток страницы */
+.search-box-inline {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.search-results-inline { max-height: none; margin-top: 8px; text-align: left; }
+.search-results-inline .search-item { border-radius: 9px; }
+.search-results-inline .search-group-h { padding-left: 2px; }
+
+@media (max-width: 600px) {
+  .search-overlay { padding: 4vh 10px 10px; }
+  .search-input { font-size: 15px; }
+}

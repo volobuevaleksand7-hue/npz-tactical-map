@@ -65,9 +65,11 @@
   <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.css">
   <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.Default.css">
-  <link rel="stylesheet" href="styles.css?v=133db8e9">
+  <link rel="stylesheet" href="styles.css?v=9795507a">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#d23a2e">
+  <link rel="stylesheet" href="/search.css?v=5a32b7c1">
+  <script defer src="/search.js?v=8b14567c"></script>
 </head>
 <body data-theme="light">
 
@@ -140,6 +142,7 @@
             <a href="/karta-bpla">📡 Карта БПЛА</a>
             <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
             <a href="/karta-azs">⛽ Карта АЗС</a>
+            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
             <a class="tdm-all" href="/analytics">📊 Все статьи · каталог →</a>
           <!-- INDEX-MENU:END -->
           </div>
@@ -155,6 +158,7 @@
         <a href="/support" class="donate-link" title="Поддержать проект" aria-label="Поддержать проект"><span class="donate-ico">🤝</span><span class="donate-lbl">Поддержать нас</span></a>
         <a href="/radar" class="hdr-quick" title="Радар БПЛА — карта воздушных тревог" aria-label="Радар БПЛА"><span class="hq-ico">📡</span><span class="hq-lbl">РАДАР</span></a>
         <button type="button" class="hdr-quick" data-view="azs" title="АЗС — карта заправок" aria-label="АЗС — карта заправок"><span class="hq-ico">⛽</span><span class="hq-lbl">АЗС</span></button>
+        <button type="button" class="nav-search-btn hdr-quick" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
         <button class="theme-btn" id="themeToggle" title="Светлая / тёмная карта" aria-label="Переключить светлую или тёмную карту">☀️</button>
         <button class="nav-burger" id="navBurger" type="button" aria-label="Меню разделов" aria-expanded="false" aria-controls="navDrawer">☰</button>
       </div>
@@ -211,6 +215,7 @@
       <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
       <a class="ndp-item" href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
       <a class="ndp-item" href="/karta-azs">⛽ Карта АЗС</a>
+      <a class="ndp-item" href="/azs-ryadom">📍 АЗС рядом со мной</a>
       <!-- DRAWER-ANALYTICS:END -->
         <div class="ndp-group">Ещё</div>
         <a class="ndp-item" href="/install">📲 Установить приложение</a>
@@ -227,7 +232,7 @@
       <h1 class="ss-title">Нет бензина в России — карта НПЗ и дефицита топлива</h1>
       <span class="ss-txt">автообновление <span class="ss-num">4×/сутки</span> · <span class="ss-num">9</span> наборов данных</span>
       <nav class="ss-nav" aria-label="Ссылки карты">
-        <!-- FRESH:START --><a class="ss-src ss-fresh" href="/draki-na-azs" style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">🆕 Новое: Драки на азс →</a><!-- FRESH:END -->
+        <!-- FRESH:START --><a class="ss-src ss-fresh" href="/azs-ryadom" style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">🆕 Новое: АЗС рядом со мной →</a><!-- FRESH:END -->
         <a class="ss-src" href="/news">Новости</a>
         <a class="ss-src" href="/sources">Источники</a>
       </nav>
@@ -349,6 +354,13 @@
         <div class="azs-note" id="azsNote">Расположение — реальное (OSM). Наличие — оценка по сети/региону, не по колонке.</div>
 
         <div class="azs-block">
+          <button id="azsLocateBtn" class="azs-locate-btn" type="button">📍 Рядом со мной</button>
+          <div class="azs-geo-msg" id="azsGeoMsg" role="status" aria-live="polite"></div>
+          <label class="azs-fuel-toggle"><input type="checkbox" id="azsFuelOnly"> ⛽ Только где есть топливо</label>
+          <div class="azs-fuel-note">Честная OSINT-оценка по сети/региону — без подделки статуса каждой колонки, как у части карт-конкурентов.</div>
+        </div>
+
+        <div class="azs-block">
           <div class="azs-block-h">🚗 Карта поездки</div>
           <div class="azs-presets" id="azsPresets"></div>
           <div class="azs-ab">
@@ -426,7 +438,7 @@
 
   <script src="/vendor/leaflet-1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="/vendor/leaflet-markercluster-1.5.3/leaflet.markercluster.js"></script>
-  <script src="app.js?v=cf4e699e"></script>
+  <script src="app.js?v=803d04d8"></script>
   <!-- Vercel Web Analytics (нужно включить в Dashboard → Analytics → Enable, иначе /_vercel/insights/* = 404) -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
   <script defer src="/_vercel/insights/script.js"></script>
