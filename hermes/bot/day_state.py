@@ -22,6 +22,7 @@
 #   add_update_line(state, line_html, max_lines=3) -> state
 #   migrate_legacy(state) -> state  (одноразовая миграция старых стейтов, идемпотентна)
 import datetime
+import fcntl
 import json
 import os
 
@@ -31,6 +32,7 @@ REPO = os.environ.get("NPZ_REPO", "/root/npz-tactical-map")
 DATA_DIR = os.path.join(REPO, "data")
 
 DAY_STATE_PATH = os.path.join(BOT_DIR, "day-state.json")
+LOCK_PATH = os.path.join(BOT_DIR, "day-state.lock")
 
 # Легаси-пути для одноразовой миграции.
 LEGACY_PIPELINE_STATE = os.path.join(DATA_DIR, "pipeline-state.json")
@@ -55,6 +57,31 @@ def _jsave(path, payload):
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=1)
     os.replace(tmp, path)
+
+
+_lock_fh = None  # process-lifetime handle: held from load_state() to save_state()
+
+
+def _acquire_lock():
+    """audit H8: day-state.json has no file lock, so independent one-shot processes
+    (broadcast.py, radar_publish.py, strike_pipeline.py) can race a load->mutate->save
+    and lose each other's writes (the tmp+rename in _jsave — H9, already fixed — only
+    makes each individual write atomic, it doesn't serialize the read-modify-write
+    cycle across processes). Exclusive flock held from load_state() until the matching
+    save_state(); re-acquiring in the same process is a harmless no-op. If a caller
+    never calls save_state(), the lock is released when the process exits — fine for
+    these one-shot cron scripts, would need a context manager for a long-lived daemon."""
+    global _lock_fh
+    os.makedirs(BOT_DIR, exist_ok=True)
+    if _lock_fh is None:
+        _lock_fh = open(LOCK_PATH, "w")
+    fcntl.flock(_lock_fh, fcntl.LOCK_EX)
+
+
+def _release_lock():
+    global _lock_fh
+    if _lock_fh is not None:
+        fcntl.flock(_lock_fh, fcntl.LOCK_UN)
 
 
 def _msk_now():
@@ -91,6 +118,7 @@ def new_day_state(date_iso=None):
 
 
 def load_state():
+    _acquire_lock()
     state = _jload(DAY_STATE_PATH, None)
     if state is None:
         state = new_day_state()
@@ -101,6 +129,7 @@ def load_state():
 
 def save_state(state):
     _jsave(DAY_STATE_PATH, state)
+    _release_lock()
 
 
 def ensure_today(state=None, date_iso=None):
@@ -246,10 +275,54 @@ def _selftest_msk():
     print("OK: today_iso()/_now_msk_str() selftest passed (MSK = UTC+3, not raw UTC)")
 
 
+def _selftest_lock():
+    """ponytail: assert-based smoke test (no pytest suite for hermes/bot/*.py) — proves
+    the flock actually serializes concurrent load->mutate->save cycles instead of
+    letting independent processes race and lose each other's writes (audit H8). Uses
+    os.fork() (POSIX only, same as this whole codebase) so the children inherit the
+    monkeypatched paths below via copy-on-write, no pickling/spawn complications."""
+    global BOT_DIR, DAY_STATE_PATH, LOCK_PATH
+    global LEGACY_PIPELINE_STATE, LEGACY_BROADCAST_STATE, LEGACY_EDITORIAL_STATE
+    import tempfile
+    import time
+
+    BOT_DIR = tempfile.mkdtemp(prefix="day_state_selftest_")
+    DAY_STATE_PATH = os.path.join(BOT_DIR, "day-state.json")
+    LOCK_PATH = os.path.join(BOT_DIR, "day-state.lock")
+    # migrate_legacy() reads these on first load_state() — point them at nonexistent
+    # files in the temp dir so this test doesn't pick up real ~/.npz-bot/ state.
+    LEGACY_PIPELINE_STATE = os.path.join(BOT_DIR, "no-such-pipeline-state.json")
+    LEGACY_BROADCAST_STATE = os.path.join(BOT_DIR, "no-such-broadcast-state.json")
+    LEGACY_EDITORIAL_STATE = os.path.join(BOT_DIR, "no-such-editorial-state.json")
+
+    n = 5
+    pids = []
+    for i in range(n):
+        pid = os.fork()
+        if pid == 0:  # child
+            state = load_state()
+            state.setdefault("published_keys", [])
+            time.sleep(0.05)  # widen the race window a lock would need to close
+            state["published_keys"].append("k%d" % i)
+            save_state(state)
+            os._exit(0)
+        pids.append(pid)
+    for pid in pids:
+        os.waitpid(pid, 0)
+
+    final = _jload(DAY_STATE_PATH, {})
+    keys = final.get("published_keys", [])
+    assert len(keys) == n, "lost update: expected %d keys, got %r" % (n, keys)
+    print("OK: flock serialized %d concurrent load->mutate->save cycles, no lost update" % n)
+
+
 if __name__ == "__main__":
     import sys
     if "--selftest" in sys.argv:
         _selftest_msk()
+        raise SystemExit(0)
+    if "--selftest-lock" in sys.argv:
+        _selftest_lock()
         raise SystemExit(0)
     st = load_state()
     st = ensure_today(st)
