@@ -17,12 +17,10 @@
   <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.css">
+  <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.Default.css">
 
   <style>
     :root {
@@ -413,6 +411,7 @@
             <a href="/attacks">💥 Хроника ударов</a>
             <a href="/refineries">🏭 Список НПЗ · все заводы</a>
             <a href="/help">❓ Как пользоваться</a>
+            <a href="/metodologiya">🔬 Методология</a>
             <div class="nav-drop-group">Карты</div>
             <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
             <a href="/karta-bpla">📡 Карта БПЛА</a>
@@ -478,6 +477,7 @@
       <a class="ndp-item" href="/crisis">🔥 Прогноз кризиса</a>
       <a class="ndp-item" href="/attacks">💥 Хроника ударов</a>
       <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
+      <a class="ndp-item" href="/metodologiya">🔬 Методология</a>
       <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
       <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
       <!-- DRAWER-ANALYTICS:END -->
@@ -552,8 +552,8 @@
     <div class="ticker-track" id="ticker"></div>
   </footer>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="/vendor/leaflet-1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/vendor/leaflet-markercluster-1.5.3/leaflet.markercluster.js"></script>
   <script>
   (function(){
     "use strict";

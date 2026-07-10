@@ -419,14 +419,14 @@ def head_html(title, description, canonical, cover_url, jsonld="") -> str:
   <meta name="twitter:image" content="{cover_url}">
   <meta name="twitter:image:alt" content="NPZ Tactical Map — Russia Fuel Crisis Daily Brief">
 
+  <link rel="alternate" type="application/rss+xml" title="Топливный фронт РФ — сводки (RSS)" href="https://npz-tactical-map.vercel.app/rss.xml">
+
   {jsonld}
 
   <script>window.va = window.va || function () {{ (window.vaq = window.vaq || []).push(arguments); }};</script>
   <script defer src="/_vercel/insights/script.js"></script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
   <link rel="stylesheet" href="{asset_ver('styles.css')}">
   <link rel="stylesheet" href="{asset_ver('news.css')}">
 </head>
@@ -848,6 +848,12 @@ def main():
     if _r.returncode != 0:
         raise RuntimeError("generate-sitemap.py failed:\n" + _r.stderr)
     print(f"[gen-news] ✅ {SITEMAP_OUT.name} (полный, через seo/generate-sitemap.py)")
+
+    # RSS-фид + Google News sitemap для сводок (agents/gen-rss.py).
+    _r = subprocess.run(["python3", str(ROOT / "agents" / "gen-rss.py")], capture_output=True, text=True)
+    if _r.returncode != 0:
+        raise RuntimeError("gen-rss.py failed:\n" + _r.stderr)
+    print("[gen-news] ✅ rss.xml + news-sitemap.xml (agents/gen-rss.py)")
     print(f"[gen-news] Готово. Свежая сводка: {rus_date(dates[0]) if dates else '—'}")
 
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.14.0 - 2026-07-10
+
+**Полка C: производительность (self-host), RSS-фид, страница «Методология».**
+
+Три идеи из `docs/backlog-top10-ideas.md` (#10, #7, #9) — без бэкенда, на чистой статике.
+
+- **Перф — 4 внешних хоста убраны из критического пути.** Leaflet 1.9.4 + markercluster 1.5.3 (unpkg) и шрифты Rubik / JetBrains Mono (Google Fonts) теперь self-hosted: `/vendor/leaflet-*` (SRI-хэши сохранены и побайтово сверены) и `/fonts.css` + `/assets/fonts/*.woff2`. Замена во **всех 98 страницах** + 3 генераторах (`gen-news`, `gen-fuel-pages`, `gen-rocket-danger`), чтобы новые страницы рождались без CDN. `og-image.png` ужат **401 → 57 КБ** (pngquant, −86%). woff2 → `immutable`-кэш в `vercel.json`.
+- **RSS + Google News sitemap.** Новый `agents/gen-rss.py` строит `rss.xml` (последние 50 сводок) и `news-sitemap.xml` (окно 48ч) из `news-archive.json`, переиспользуя `brief_headline`/`brief_teaser` (фид и структурированные данные не расходятся). Автозапуск вшит в `gen-news.py`. `<link rel="alternate">` на сводках, 2-й `Sitemap:` в `robots.txt`.
+- **Страница «Методология» (`/metodologiya`)** — E-E-A-T для YMYL: откуда данные, как считаются статусы НПЗ (СТОП / ОГРАНИЧЕНО / РАБОТАЕТ) и АЗС, как перепроверяются удары (`confidence`: подтверждено / сообщается / слух), частота обновления. Зарегистрирована через реестр → `build-nav.py` → sitemap (check-ia OK). Клон каркаса `help.html`, `styles.css` не тронут.
+- **SW-кеш** `npz-shell-v9 → v10` (обновление precached shell).
+
+
 ## v1.13.1 - 2026-07-10
 
 **Клик-фиксация выпадашки «Аналитика» на лендингах (порт фикса v1.13.0 с главной).**
