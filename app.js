@@ -31,8 +31,8 @@
     if(!u) return '';
     if(!srcBlocked(u)) return '<div class="pp-src"><a href="'+safeUrl(u)+'" target="_blank" rel="noopener">'+esc(label||'источник')+' ↗</a></div>';
     return '<div class="pp-src pp-src--off">🔒 <a href="'+safeUrl(u)+'" target="_blank" rel="noopener">'+esc(srcHost(u))+' — недоступно из РФ</a></div>'+
-      '<div class="pp-vpn"><div class="pp-vpn-h">🛡<div class="pp-vpn-t"><b>Источник заблокирован в РФ</b><span>Открыть можно через VPN — работает в РФ</span></div></div>'+
-      '<a class="pp-vpn-btn" href="https://hidemn.club/#6a514a15942d6" target="_blank" rel="noopener nofollow sponsored" onclick="try{ym(110490245,&#39;reachGoal&#39;,&#39;vpn_click&#39;)}catch(e){}">Получить доступ через hidemy →</a></div>';
+      '<div class="pp-vpn"><div class="pp-vpn-h"><span class="pp-vpn-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20 5.6 V11 c0 5-3.4 8-8 10.4 C8.4 19 4 16 4 11 V5.6 Z"/><circle cx="12" cy="10.4" r="1.7"/><path d="M12 12.1 V14.8"/></svg></span><div class="pp-vpn-t"><span class="pp-vpn-tag">доступ через VPN</span><b>Источник заблокирован в РФ</b><div class="pp-vpn-b">Открыть можно через VPN — работает в РФ</div></div></div>'+
+      '<a class="pp-vpn-btn" href="https://hidemn.club/#6a514a15942d6" target="_blank" rel="noopener nofollow sponsored" onclick="try{ym(110490245,&#39;reachGoal&#39;,&#39;vpn_click&#39;)}catch(e){}">→ Получить доступ через hidemy</a></div>';
   }
   // ponytail: single padding tuned for the Russia view's topbar+strikebar overlay; reused on
   // Crimea/AZS maps too since their overlay is shorter — extra clearance there is harmless.

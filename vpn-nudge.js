@@ -19,12 +19,15 @@
     var body = contextual
       ? 'Открыть можно через VPN — работает в РФ'
       : 'Первоисточники по теме (западные СМИ) заблокированы в РФ. Открыть через VPN — работает в РФ';
+    var shield = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20 5.6 V11 c0 5-3.4 8-8 10.4 C8.4 19 4 16 4 11 V5.6 Z"/><circle cx="12" cy="10.4" r="1.7"/><path d="M12 12.1 V14.8"/></svg>';
     var d = document.createElement('div');
     d.className = 'pp-vpn';
     d.style.cssText = 'max-width:560px;margin:16px auto';
     d.innerHTML =
-      '<div class="pp-vpn-h">🛡<div class="pp-vpn-t"><b>' + head + '</b><span>' + body + '</span></div></div>' +
-      '<a class="pp-vpn-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">Получить доступ через hidemy →</a>';
+      '<div class="pp-vpn-h"><span class="pp-vpn-ic">' + shield + '</span>' +
+        '<div class="pp-vpn-t"><span class="pp-vpn-tag">доступ через VPN</span>' +
+        '<b>' + head + '</b><div class="pp-vpn-b">' + body + '</div></div></div>' +
+      '<a class="pp-vpn-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">→ Получить доступ через hidemy</a>';
     d.querySelector('.pp-vpn-btn').addEventListener('click', track);
     return d;
   }

@@ -262,12 +262,13 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .pp-src a{color:var(--teal);font-size:11px;font-weight:700}
 .pp-src--off a{color:var(--ink-dim);text-decoration:line-through;opacity:.75;font-weight:600}
 .vpn-off{color:var(--ink-dim);font-size:.82em;white-space:nowrap}
-.pp-vpn{margin-top:8px;padding:10px;border-radius:9px;background:rgba(23,133,133,.09);border:1px solid var(--line2)}
-.pp-vpn-h{display:flex;gap:7px;font-size:15px;line-height:1.2}
-.pp-vpn-t{font-size:11.5px;line-height:1.35}
-.pp-vpn-t b{display:block;color:var(--teal);font-size:12px;margin-bottom:2px}
-.pp-vpn-t span{color:var(--ink-dim)}
-.pp-vpn-btn{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:7px 12px;border-radius:8px;background:var(--teal);color:#fff!important;font-size:12px;font-weight:700;text-decoration:none}
+.pp-vpn{margin-top:8px;padding:14px 15px;border-radius:11px;background:var(--surface);border:1px solid var(--line)}
+.pp-vpn-h{display:flex;gap:11px;align-items:flex-start}
+.pp-vpn-ic{flex:none;color:var(--teal);margin-top:1px;line-height:0}
+.pp-vpn-tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:1.5px;font-weight:800;text-transform:uppercase;color:var(--teal);border:1px solid var(--line);border-radius:5px;padding:2px 7px;margin-bottom:8px}
+.pp-vpn-t b{display:block;color:var(--ink);font-size:13.5px;font-weight:800;margin-bottom:3px;line-height:1.25}
+.pp-vpn-b{display:block;color:var(--ink-dim);font-size:12px;line-height:1.4}
+.pp-vpn-btn{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:9px 14px;border-radius:9px;background:var(--teal);color:#fff!important;font-size:12.5px;font-weight:800;text-decoration:none;font-family:var(--disp)}
 .pp-vpn-btn:hover{filter:brightness(1.08)}
 
 /* ---------- CRIMEA PANEL ---------- */
