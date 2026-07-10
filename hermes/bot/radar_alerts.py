@@ -14,6 +14,7 @@ DATA = os.path.join(REPO, "data")
 SUBS_PATH = os.path.join(BOT_DIR, "subscribers.json")
 STATE_PATH = os.path.join(BOT_DIR, "radar-alert-state.json")
 SITE = "https://npz-tactical-map.vercel.app"
+TELEGRAM_MSG_LIMIT = 4096
 
 NPZ_REGIONS = [
     "Краснодарский край", "Ленинградская обл.", "Ярославская обл.",
@@ -177,6 +178,30 @@ def build_notifications(subscribers, radar, prev_state, now_ts=None):
     return notices, next_state
 
 
+def split_message(text, limit=TELEGRAM_MSG_LIMIT):
+    """Split text into <=limit chunks on line boundaries (H11: Telegram sendMessage hard-caps
+    `text` at 4096 chars; an over-limit message otherwise fails with 400 'message too long')."""
+    if len(text) <= limit:
+        return [text]
+    chunks = []
+    cur = ""
+    for line in text.split("\n"):
+        candidate = (cur + "\n" + line) if cur else line
+        if len(candidate) <= limit:
+            cur = candidate
+            continue
+        if cur:
+            chunks.append(cur)
+            cur = ""
+        while len(line) > limit:  # single line longer than the limit on its own
+            chunks.append(line[:limit])
+            line = line[limit:]
+        cur = line
+    if cur:
+        chunks.append(cur)
+    return chunks
+
+
 def send_message(token, chat_id, text):
     data = urllib.parse.urlencode({
         "chat_id": chat_id,
@@ -187,6 +212,21 @@ def send_message(token, chat_id, text):
     req = urllib.request.Request("https://api.telegram.org/bot%s/sendMessage" % token, data=data)
     with urllib.request.urlopen(req, timeout=30) as response:
         return json.loads(response.read().decode("utf-8"))
+
+
+def send_text(token, chat_id, text):
+    """H11 preflight: split oversized text across multiple sendMessage calls.
+    H10: never let urlopen exceptions escape — caller treats any exception as a failed send."""
+    ok_all = True
+    last_err = None
+    for chunk in split_message(text):
+        try:
+            resp = send_message(token, chat_id, chunk)
+            ok_all = ok_all and bool(resp.get("ok"))
+        except Exception as exc:
+            ok_all = False
+            last_err = exc
+    return ok_all, last_err
 
 
 def format_group_text(notices):
@@ -215,7 +255,9 @@ def main():
     subs = jload(SUBS_PATH, {"subscribers": {}}).get("subscribers", {})
     radar = jload(os.path.join(DATA, "radar-state.json"), {})
     state = jload(STATE_PATH, {})
-    notices, next_state = build_notifications(subs, radar, state)
+    # next_state (fully precomputed "if everything sends OK") is intentionally unused for
+    # --send below — see the incremental `persisted` save in that branch (H10).
+    notices, _next_state = build_notifications(subs, radar, state)
     print("radar-alerts: %d raw notifications" % len(notices))
 
     # Группируем по chat_id: статусы new/reminder в одно сообщение,
@@ -234,19 +276,41 @@ def main():
     if args.send:
         token = open(os.path.join(BOT_DIR, "token")).read().strip()
         sent = 0
+        failed = 0
+        # H10: persist to disk after EVERY send, starting from what's actually on disk —
+        # not the fully-precomputed next_state — so a single 429/400 mid-batch only costs
+        # that one notice a retry next run, instead of resending the whole batch (state
+        # was never being saved before the loop finished, so any exception mid-loop lost
+        # every earlier "sent" state along with it).
+        persisted = state
         # Шлём групповые (одно сообщение на chat_id)
         for chat_id, group in grouped.items():
             text = format_group_text(group)
-            resp = send_message(token, chat_id, text)
-            if resp.get("ok"):
+            ok, err = send_text(token, chat_id, text)
+            if ok:
                 sent += 1
+                now_ts = int(time.time())
+                for notice in group:
+                    persisted.setdefault(notice["chat_id"], {}).setdefault("regions", {})[notice["region"]] = {
+                        "active": True, "last_sent_ts": now_ts,
+                    }
+                jsave(STATE_PATH, persisted)
+            else:
+                failed += 1
+                print("radar-alerts: send failed for %s: %s" % (chat_id, err))
         # Clear-нотисы шлём по-отдельности (их редко)
         for notice in clears:
-            resp = send_message(token, notice["chat_id"], notice["text"])
-            if resp.get("ok"):
+            ok, err = send_text(token, notice["chat_id"], notice["text"])
+            if ok:
                 sent += 1
-        jsave(STATE_PATH, next_state)
-        print("radar-alerts: sent %d/%d messages" % (sent, len(grouped) + len(clears)))
+                persisted.setdefault(notice["chat_id"], {}).setdefault("regions", {})[notice["region"]] = {
+                    "active": False, "last_sent_ts": int(time.time()),
+                }
+                jsave(STATE_PATH, persisted)
+            else:
+                failed += 1
+                print("radar-alerts: send failed for %s: %s" % (notice["chat_id"], err))
+        print("radar-alerts: sent %d/%d messages (%d failed)" % (sent, len(grouped) + len(clears), failed))
     else:
         for notice in notices:
             print("[%s] %s -> %s" % (notice["status"], notice["chat_id"], notice["region"]))
