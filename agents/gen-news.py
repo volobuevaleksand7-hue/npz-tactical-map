@@ -179,6 +179,38 @@ def level_css(level: str) -> str:
 
 # ═══════════════════════════════ архив ═══════════════════════════════
 
+def _selftest_archive_guard():
+    """ponytail: assert-based smoke test (no pytest suite for agents/*.py) — proves
+    build_archive() keeps the previous snapshot when fuel-state.json is unreadable/empty
+    instead of silently zeroing out the national balance (audit H4). Monkeypatches the
+    module-level DATA_DIR/ARCHIVE_PATH so it never touches the real repo data/."""
+    import shutil
+    import tempfile
+    global DATA_DIR, ARCHIVE_PATH
+
+    tmp = Path(tempfile.mkdtemp(prefix="gen_news_selftest_"))
+    try:
+        DATA_DIR = tmp
+        ARCHIVE_PATH = tmp / "news-archive.json"
+
+        (tmp / "fuel-state.json").write_text(
+            json.dumps({"national_balance": {"capacity_offline_pct": 35}, "refineries": []}), encoding="utf-8"
+        )
+        good = build_archive()
+        assert good["snapshot"]["balance"] == {"capacity_offline_pct": 35}, good["snapshot"]
+
+        # simulate a torn/partial write: load_json() will hit a JSONDecodeError and
+        # silently return {} — exactly the failure mode the audit describes.
+        (tmp / "fuel-state.json").write_text("{not valid json", encoding="utf-8")
+        bad = build_archive()
+        assert bad["snapshot"]["balance"] == {"capacity_offline_pct": 35}, (
+            "snapshot balance was wiped instead of preserved: %r" % (bad["snapshot"],)
+        )
+        print("OK: build_archive() keeps previous snapshot when fuel-state.json is unreadable")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 def build_archive() -> dict:
     """Слить текущие strikes/voices в накопительный архив по датам и обновить снапшот.
     Старые даты, уже осевшие в архиве, сохраняются даже если источник обновился частично."""
@@ -215,20 +247,27 @@ def build_archive() -> dict:
     availability = load_json("fuel-availability.json")
     fuel_state = load_json("fuel-state.json")
     timeline = load_json("capacity-timeline.json").get("timeline", [])
-    # счётчики НПЗ по статусу (как на карте: стоит/частично/работает)
-    counts = {"down": 0, "partial": 0, "operational": 0}
-    for r in fuel_state.get("refineries", []):
-        st = r.get("status")
-        if st in counts:
-            counts[st] += 1
-    archive["snapshot"] = {
-        "balance": fuel_state.get("national_balance", {}),
-        "regions": availability.get("regions", []),
-        "exchange": availability.get("exchange", {}),
-        "refinery_counts": counts,
-        "timeline": timeline,
-        "deficit_regions_count": len(fuel_state.get("deficit_regions", [])),
-    }
+    # audit H4 guard: load_json() глотает ошибки чтения/парсинга и отдаёт {} молча.
+    # Если это только что случилось с fuel-state.json (обрыв записи, частичный файл),
+    # не даём национальному балансу схлопнуться в нули — оставляем снапшот архива как
+    # был (уже лежит в archive из load_json(...) выше) и говорим об этом в лог.
+    if fuel_state.get("national_balance") or fuel_state.get("refineries"):
+        # счётчики НПЗ по статусу (как на карте: стоит/частично/работает)
+        counts = {"down": 0, "partial": 0, "operational": 0}
+        for r in fuel_state.get("refineries", []):
+            st = r.get("status")
+            if st in counts:
+                counts[st] += 1
+        archive["snapshot"] = {
+            "balance": fuel_state.get("national_balance", {}),
+            "regions": availability.get("regions", []),
+            "exchange": availability.get("exchange", {}),
+            "refinery_counts": counts,
+            "timeline": timeline,
+            "deficit_regions_count": len(fuel_state.get("deficit_regions", [])),
+        }
+    else:
+        print("WARN build_archive: fuel-state.json пуст/не читается — снапшот оставлен из предыдущего запуска", file=sys.stderr)
     archive["briefs"] = briefs
     archive["updated"] = today_iso()
 
@@ -862,4 +901,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--selftest" in sys.argv:
+        _selftest_archive_guard()
+    else:
+        main()
