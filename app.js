@@ -1800,6 +1800,12 @@
         var view = b.dataset.view;
         Array.prototype.forEach.call(document.querySelectorAll(".view"), function (v) { v.classList.remove("active"); });
         document.getElementById("view-" + view).classList.add("active");
+        // отдельный адрес для вкладки: #azs / #crimea… (russia = чистый путь). Клик пишет URL → ссылкой можно делиться.
+        // guard по URL: клик, вызванный из popstate, не пишет дубль истории.
+        try {
+          var _u = location.pathname + (view === "russia" ? "" : "#" + view);
+          if (location.pathname + location.hash !== _u) history.pushState(null, "", _u);
+        } catch (e) {}
         if (view === "russia") setTimeout(function () { maps.ru.invalidateSize(); }, 60);
         if (view === "crimea") { if (!crimeaReady) { initCrMap(); renderCrimea(); } loadAzsData().then(renderCrimea); setTimeout(function () { maps.cr.invalidateSize(); }, 60); }
         if (view === "azs") {
@@ -1816,6 +1822,12 @@
       var _dv = (new URLSearchParams(location.search).get("view") || (location.hash || "").replace("#","")).toLowerCase();
       if (_dv) { var _tb = document.querySelector('#tabs button[data-view="' + _dv + '"]'); if (_tb) _tb.click(); }
     } catch (e) {}
+    // back/forward: восстанавливаем вкладку из адреса (click-guard выше не даст дубль истории)
+    window.addEventListener("popstate", function () {
+      var v = ((location.hash || "").replace("#", "").toLowerCase()) || "russia";
+      var tb = document.querySelector('#tabs button[data-view="' + v + '"]');
+      if (tb && !tb.classList.contains("active")) tb.click();
+    });
   }
   function initControls() {
     Array.prototype.forEach.call(document.querySelectorAll("#regionMode button"), function (b) {

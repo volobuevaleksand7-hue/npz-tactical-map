@@ -1,7 +1,7 @@
 {
-  "version": "1.15.0",
+  "version": "1.15.1",
   "releasedAt": "2026-07-10",
-  "codename": "Карта АЗС — отдельная страница /karta-azs",
-  "summary": "Интерактивная карта АЗС вынесена из вкладки SPA на собственный URL /karta-azs (по образцу /radar): свой SEO-<head> (title/canonical/OG/Twitter/schema + АЗС-FAQ), свой H1, загрузка сразу во вкладку АЗС через существующий #azs deep-link в app.js — карта НЕ переписана, тот же app.js, ноль дублирования логики. Раньше карта жила только на / (аналитика видела всё как /, не было индексируемой посадочной под «карта азс»). Зарегистрирована в data/seo-topics.jsonl (type=tool, «карта азс») → авто в sitemap + меню всех страниц; лейбл ⛽ Карта АЗС в build-nav.py. Все ссылки на старый /?view=azs переведены на /karta-azs: воронки (karta-benzina-krym, crimea, radar, zakrytye-azs), шаблон CTA сводок в gen-news.py (news.html + 57 архивных страниц) и Telegram-кнопка broadcast.py. Аудит остальных SPA-вкладок (history/forecast/economy) по Wordstat: отдельных страниц не требуют. SW-кеш v10→v11.",
+  "codename": "Вкладка АЗС получила адрес #azs",
+  "summary": "Клик по вкладке «АЗС» (и любой другой вкладке карты) теперь пишет адрес в строку: #azs / #crimea / #history / #forecast / #economy (russia = чистый путь). Раньше вкладки переключали вид внутри / без смены URL — казалось, что «отдельного адреса нет», хотя SEO-страница /karta-azs (v1.15.0) уже существовала; разрыв был именно в шапке. Теперь на in-page вкладку можно дать ссылку/закладку, а back/forward браузера корректно переключает вкладку (popstate-обработчик; guard по URL не плодит дублей истории). Deep-link ?view=azs/#azs на загрузке как был. Правка только в app.js (initTabs), карта не тронута. SW-кеш v11→v12.",
   "site": "https://npz-tactical-map.vercel.app"
 }
