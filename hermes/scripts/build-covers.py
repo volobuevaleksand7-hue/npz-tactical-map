@@ -14,10 +14,11 @@ image_gen (img2img по референсу; если реального фото
   python3 build-covers.py --all            # перегенерить все
   python3 build-covers.py --dates 2026-07-05,2026-07-04
 
-ТРЕБУЕТ: рабочие image-кредиты Codex (codex exec image_gen). Если «out of credits» —
-скрипт честно пометит GENFAIL; пополни кредиты и перезапусти.
+PRIMARY-бэкенд: OpenRouter (nano-banana, hermes/gen-cover-openrouter.py) — платный, обходит
+обнулённые free-tier квоты. ФОЛБЭК: codex exec image_gen, если у OpenRouter нет ключа/ошибка.
 """
 import argparse
+import importlib.util
 import json
 import os
 import re
@@ -32,6 +33,7 @@ TMP = HOME / ".hermes" / "covers-tmp"          # codex image_gen sandbox tmp
 ARCHIVE = REPO / "data" / "news-archive.json"
 ASSETS = REPO / "assets"
 CAPTION = REPO / "agents" / "caption_cover.py"
+OPENROUTER_SCRIPT = REPO / "hermes" / "gen-cover-openrouter.py"
 
 MONTHS = ["", "января", "февраля", "марта", "апреля", "мая", "июня",
           "июля", "августа", "сентября", "октября", "ноября", "декабря"]
@@ -152,30 +154,55 @@ def codex_gen(instruction):
         print("  codex error:", e)
 
 
+def openrouter_gen(m, ref, raw):
+    """PRIMARY: сгенерить сырую обложку через OpenRouter (nano-banana). True при успехе (raw записан)."""
+    if not OPENROUTER_SCRIPT.exists():
+        return False
+    key = os.environ.get("OPENROUTER_API_KEY")
+    if not key:
+        kf = HOME / ".openrouter" / "api_key"
+        key = kf.read_text().strip() if kf.exists() else None
+    if not key:
+        return False
+    try:
+        spec = importlib.util.spec_from_file_location("gen_cover_openrouter", OPENROUTER_SCRIPT)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        prompt = mod.build_prompt(m["city"], m["event"])
+        data = mod.openrouter_image(key, prompt, "google/gemini-2.5-flash-image", str(ref) if ref else None)
+        raw.write_bytes(data)
+        return raw.exists()
+    except Exception as e:
+        print(f"  openrouter fail: {e}")
+        return False
+
+
 def build_one(date, m):
     raw = TMP / f"raw-{date}.png"
     out = ASSETS / f"cover-{date}.png"
     raw.unlink(missing_ok=True)
 
     ref = fetch_ref(m["src"], TMP / f"ref-{date}.png")
-    if ref:
-        instr = (f"Use your image_gen tool in EDIT / image-to-image mode. Input reference: {ref} "
-                 f"(real photo of the event). Derive a NEW photorealistic 1200x630 horizontal cover that KEEPS "
-                 f"the composition and subject (city skyline, smoke, industrial background), bright documentary "
-                 f"daylight, our clean style. Remove any watermark/text — NO letters or logos. "
-                 f"Save to exactly {raw} then ls -la it.")
-        mode = "real-ref"
-    else:
-        instr = (f"Use your image_gen tool to generate a photorealistic 1200x630 horizontal image. {m['prompt']} "
-                 f"Save to exactly {raw} then ls -la it.")
-        mode = "generated"
 
-    codex_gen(instr)
+    mode = "openrouter" + ("+ref" if ref else "")
+    if not openrouter_gen(m, ref, raw):
+        if ref:
+            instr = (f"Use your image_gen tool in EDIT / image-to-image mode. Input reference: {ref} "
+                     f"(real photo of the event). Derive a NEW photorealistic 1200x630 horizontal cover that KEEPS "
+                     f"the composition and subject (city skyline, smoke, industrial background), bright documentary "
+                     f"daylight, our clean style. Remove any watermark/text — NO letters or logos. "
+                     f"Save to exactly {raw} then ls -la it.")
+            mode = "codex-ref"
+        else:
+            instr = (f"Use your image_gen tool to generate a photorealistic 1200x630 horizontal image. {m['prompt']} "
+                     f"Save to exactly {raw} then ls -la it.")
+            mode = "codex-generated"
+        codex_gen(instr)
     if ref:
         try: ref.unlink(missing_ok=True)
         except Exception: pass
     if not raw.exists():
-        print(f"GENFAIL {date}  ({mode}) — нет картинки (проверь image-кредиты Codex)")
+        print(f"GENFAIL {date}  ({mode}) — нет картинки (OpenRouter без ключа/ошибка И Codex недоступен)")
         return False
     subprocess.run(["python3", str(CAPTION), str(raw), str(out), m["city"], m["event"], m["date_rus"]],
                    capture_output=True)
