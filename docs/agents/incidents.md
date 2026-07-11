@@ -30,13 +30,3 @@ opened: <дата МСК> — <кто/что завёл>
 ```
 
 <!-- INCIDENTS BELOW (newest first) -->
-
-## [RESOLVED] card-missing-2099-01-01
-status: RESOLVED
-opened: 2026-07-11 16:27 МСК — summary-watchdog
-На живом /news НЕТ карточки-сводки за 2099-01-01.
-Что сделать:
-- если в data/strikes.json уже есть удары за 2099-01-01 → `python3 agents/gen-news.py` + git-sync + деплой;
-- если ударов за 2099-01-01 нет → прогони сборщик strikes (agents/update-prompt-strikes.md) за эту дату, затем gen-news;
-- проверь https://npz-tactical-map.vercel.app/news
-resolved: 2026-07-11 16:27 МСК — проблема исчезла (авто, сторож)
