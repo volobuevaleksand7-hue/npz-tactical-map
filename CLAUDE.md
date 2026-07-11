@@ -6,7 +6,7 @@
 
 - **Локальный клон (Mac):** `~/Documents/npz-tactical-map` — единственный. НЕ `Alarm NPZ/`, НЕ `Projects/`.
 - **Репозиторий:** `github.com/volobuevaleksand7-hue/npz-tactical-map` (public). Старый `sergeyramas/npz-tactical-map` теперь **PRIVATE-бэкап — им НЕ пользоваться**.
-- **GitHub-аккаунт для push:** анонимный `volobuevaleksand7-hue` (`gh auth switch --user volobuevaleksand7-hue` если не активен). Коммит-identity анонимная — **НИКОГДА не коммить под реальным именем/почтой**.
+- **GitHub-аккаунт для push:** анонимный `volobuevaleksand7-hue`, токен подставлять ТОЛЬКО точечно на команду: `GH_TOKEN=$(gh auth token -u volobuevaleksand7-hue) git -c credential.helper= -c credential.helper='!gh auth git-credential' push origin main`. 🔴 **`gh auth switch` НЕ ИСПОЛЬЗОВАТЬ НИКОГДА** — он меняет глобальный дефолт машины и ломает параллельные сессии других проектов. Коммит-identity анонимная — **НИКОГДА не коммить под реальным именем/почтой**.
 - **Клон на VPS:** `/root/npz-tactical-map` на `hermes-vps`, push через ssh-алиас `github-npznew` (ключ `~/.ssh/npz_deploy_new`).
 - **Данные сайта (RAW):** `raw.githubusercontent.com/volobuevaleksand7-hue/npz-tactical-map/main/`.
 - **Деплой:** push в `main` (кроме `data/**`) → GitHub Action `deploy.yml` → Vercel (проект на аккаунте `sergeyramas`, деплой по токен-секрету на новом репо).

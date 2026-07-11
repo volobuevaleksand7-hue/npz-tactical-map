@@ -8,7 +8,7 @@
 
 ## ⚠️ Первым делом
 - Работать в **`~/Documents/npz-tactical-map`**, НЕ в `~/Documents/Alarm NPZ` (устаревшая копия, сессия открывается там).
-- Origin двигается каждые ~10 мин (data Гермеса) → перед push всегда `git rebase origin/main`; пуш: `gh auth switch --user volobuevaleksand7-hue` + inline-хелпер `gh auth token -u volobuevaleksand7-hue`. Push в main = авто-деплой в прод.
+- Origin двигается каждые ~10 мин (data Гермеса) → перед push всегда `git rebase origin/main`; пуш: `GH_TOKEN=$(gh auth token -u volobuevaleksand7-hue) git -c credential.helper= -c credential.helper='!gh auth git-credential' push origin main` (`gh auth switch` НЕ использовать — глобальный, ломает другие проекты). Push в main = авто-деплой в прод.
 - Гейт pre-commit (7 файлов): `index.html·styles.css·app.js·radar.html·version.json·CHANGELOG.md·.vercelignore` → `ALLOW_FRONTEND_RELEASE=1`.
 
 ## Read first (in order)

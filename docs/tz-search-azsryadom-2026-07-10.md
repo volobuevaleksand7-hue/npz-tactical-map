@@ -60,5 +60,5 @@ index.html в build-фазе пишет только B (АЗС-view регион
 3. `build-nav.py` + `check-ia.py` — целостность IA.
 4. Браузер-верификация (preview `npz-verify`, порт 8811): поиск-оверлей, АЗС геолокация+фильтр, новая статья + пункт в меню.
 5. Релиз: `version.json` + `CHANGELOG.md` + SW-bump (`?v=` хэши + `sw.js`), `ALLOW_FRONTEND_RELEASE=1`,
-   `git rebase origin/main`, push (`gh auth switch --user volobuevaleksand7-hue`).
+   `git rebase origin/main`, push (`GH_TOKEN=$(gh auth token -u volobuevaleksand7-hue) git -c credential.helper= -c credential.helper='!gh auth git-credential' push origin main`; `gh auth switch` не использовать).
 6. Верификация прода.
