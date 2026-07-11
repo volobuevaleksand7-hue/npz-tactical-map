@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "project": "npz-tactical-map",
+    "purpose": "In-repo source of truth for the Yandex/Google search-position tracker. The VPS watchdog routine that writes data/yandex-positions.json must read its keyword list from here (or an equivalent NPZ set) instead of its own misconfigured config. Previous config tracked 'обслуживание итп' queries belonging to an unrelated project (logika-itp).",
+    "created": "2026-07-11",
+    "curated_from": [
+      "seo/semantic-core.json (real Wordstat via XMLRiver)",
+      "seo/wordstat-extended.json",
+      "seo/wordstat-regional.json",
+      "seo/popular-queries-extracted.json",
+      "data/seo-topics.jsonl (URL/intent registry)"
+    ],
+    "note": "freq = real Yandex Wordstat monthly frequency where found in the source files above; null = no direct Wordstat entry yet (editorial/brand/long-tail pick, still tied to a live target_url in seo-topics.jsonl)."
+  },
+  "queries": [
+    { "query": "топливный фронт", "target_url": "/", "cluster": "brand", "freq": null },
+    { "query": "npz tactical map", "target_url": "/", "cluster": "brand", "freq": null },
+
+    { "query": "бензин в крыму", "target_url": "/crimea", "cluster": "crimea", "freq": 630775 },
+    { "query": "бензин в крыму сегодня", "target_url": "/crimea", "cluster": "crimea", "freq": 153103 },
+    { "query": "наличие бензина в крыму", "target_url": "/crimea", "cluster": "crimea", "freq": 23673 },
+    { "query": "карта бензина в крыму", "target_url": "/karta-benzina-krym", "cluster": "crimea", "freq": 30144 },
+    { "query": "талоны на бензин в крыму", "target_url": "/talony", "cluster": "crimea", "freq": 10474 },
+
+    { "query": "почему нет бензина", "target_url": "/deficit", "cluster": "deficit", "freq": 459353 },
+    { "query": "дефицит бензина", "target_url": "/deficit", "cluster": "deficit", "freq": 293524 },
+    { "query": "дефицит топлива", "target_url": "/deficit", "cluster": "deficit", "freq": 66250 },
+    { "query": "почему нет бензина в россии", "target_url": "/deficit", "cluster": "deficit", "freq": 81498 },
+
+    { "query": "топливный кризис", "target_url": "/crisis", "cluster": "crisis", "freq": 196369 },
+    { "query": "когда закончится топливный кризис", "target_url": "/crisis", "cluster": "crisis", "freq": 25657 },
+
+    { "query": "атака на нпз", "target_url": "/attacks", "cluster": "attacks", "freq": 65028 },
+    { "query": "атака на нпз сегодня", "target_url": "/attacks", "cluster": "attacks", "freq": 12999 },
+    { "query": "удары по нпз", "target_url": "/attacks", "cluster": "attacks", "freq": 44206 },
+    { "query": "бпла нпз", "target_url": "/attacks", "cluster": "attacks", "freq": 45105 },
+    { "query": "нпз пострадавшие от бпла", "target_url": "/attacks", "cluster": "attacks", "freq": 13320 },
+    { "query": "нпз россии список", "target_url": "/refineries", "cluster": "attacks", "freq": 15164 },
+    { "query": "нефтеперерабатывающие заводы в россии", "target_url": "/refineries", "cluster": "attacks", "freq": 35969 },
+
+    { "query": "атака на московский нпз", "target_url": "/npz/moskovskij-npz", "cluster": "object", "freq": 6977 },
+    { "query": "омский нпз бпла", "target_url": "/npz/omskij-npz", "cluster": "object", "freq": 589 },
+    { "query": "рязанский нпз атака бпла", "target_url": "/npz/ryazanskij-npz", "cluster": "object", "freq": 90 },
+    { "query": "куйбышевский нпз атака бпла", "target_url": "/npz/kujbyshevskij-npz", "cluster": "object", "freq": 415 },
+    { "query": "саратовский нпз атака бпла", "target_url": "/npz/saratovskij-npz", "cluster": "object", "freq": 34 },
+
+    { "query": "бензин в краснодаре", "target_url": "/krasnodar", "cluster": "regional", "freq": 188169 },
+    { "query": "где есть бензин в краснодаре", "target_url": "/krasnodar", "cluster": "regional", "freq": 23285 },
+    { "query": "дефицит бензина в москве", "target_url": "/moskva", "cluster": "regional", "freq": 16744 },
+    { "query": "почему в москве нет бензина", "target_url": "/moskva", "cluster": "regional", "freq": 14204 },
+    { "query": "почему в иркутске нет бензина", "target_url": "/", "cluster": "regional", "freq": 6071, "note": "no dedicated /irkutsk page yet — points at the main map hub" },
+
+    { "query": "бпла сегодня", "target_url": "/radar", "cluster": "radar", "freq": null },
+    { "query": "воздушная тревога сейчас", "target_url": "/radar", "cluster": "radar", "freq": null },
+    { "query": "карта бпла онлайн", "target_url": "/karta-bpla", "cluster": "radar", "freq": null, "note": "~280k/mo per data/seo-topics.jsonl note, no raw Wordstat entry captured yet" },
+    { "query": "ракетная опасность волгоград", "target_url": "/raketnaya-opasnost-volgograd", "cluster": "radar", "freq": null },
+    { "query": "ракетная опасность самара", "target_url": "/raketnaya-opasnost-samara", "cluster": "radar", "freq": null },
+
+    { "query": "карта азс", "target_url": "/karta-azs", "cluster": "azs", "freq": null },
+    { "query": "где есть бензин сейчас", "target_url": "/gde-est-benzin", "cluster": "azs", "freq": null },
+    { "query": "какие азс закрылись", "target_url": "/zakrytye-azs", "cluster": "azs", "freq": null },
+    { "query": "очереди на азс", "target_url": "/ocheredi-na-azs", "cluster": "azs", "freq": 175524, "note": "matched via 'очереди на заправках' cluster in seo/semantic-core.json" },
+    { "query": "лимит продажи топлива", "target_url": "/talony", "cluster": "azs", "freq": null, "note": "/talony page explicitly covers лимиты vs талоны distinction" }
+  ]
+}
