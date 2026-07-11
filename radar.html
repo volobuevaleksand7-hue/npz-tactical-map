@@ -162,6 +162,11 @@
       font-size:10px;letter-spacing:1px;padding:4px 12px;flex:none}
     .ticker-track{flex:1;overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:11px;
       color:var(--ink-dim);padding-left:12px}
+    /* бегущая строка: две одинаковые копии, translateX 0→-50% = бесшовный цикл; длительность считает JS под медленную скорость */
+    .tk-move{display:inline-flex;white-space:nowrap;will-change:transform;animation:tk-scroll linear infinite}
+    .tk-seg{padding-right:3rem}
+    @keyframes tk-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @media(prefers-reduced-motion:reduce){.tk-move{animation:none}}
 
     /* Disclaimer */
     .disclaimer{position:absolute;bottom:44px;right:348px;z-index:20;font-family:var(--mono);
@@ -339,15 +344,16 @@
 .legend-item { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
 .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
+/* слева над «Типы угроз», чтобы не налезать на кнопку подписки в ленте справа */
 .about-radar {
-  position: absolute; bottom: 88px; right: 14px; z-index: 20; max-width: 300px;
+  position: absolute; bottom: 92px; left: 14px; z-index: 20; max-width: 240px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
   overflow: hidden; box-shadow: var(--shadow-sm);
 }
 .about-radar summary {
-  min-height: 44px; display: flex; align-items: center;
-  padding: 6px 12px; cursor: pointer; user-select: none; font-weight: 700;
-  font-size: 11px; font-family: var(--mono); color: var(--ink);
+  min-height: 34px; display: flex; align-items: center;
+  padding: 5px 10px; cursor: pointer; user-select: none; font-weight: 700;
+  font-size: 10px; font-family: var(--mono); color: var(--ink);
 }
 .about-body { padding: 2px 12px 10px; font-size: 12px; line-height: 1.5; color: var(--ink-dim); }
 .about-body p { margin: 6px 0; }
@@ -363,7 +369,7 @@
   .radar-civ-icon img, .radar-civ-icon svg { width: 40px !important; height: 40px !important; }
   .legend-toggle { left: 12px; bottom: 76px; max-width: calc(100% - 24px); }
   /* ponytail: было display:none (справка терялась) — теперь свёрнутый accordion, доступен по тапу */
-  .about-radar { right: 12px; bottom: 76px; max-width: calc(60% - 18px); }
+  .about-radar { left: auto; right: 12px; bottom: 76px; max-width: calc(60% - 18px); }
   /* кнопки мельче, чтобы не маячили */
   .legend-toggle > summary, .about-radar > summary { min-height:34px; padding:5px 10px; font-size:10px; }
   .about-body { font-size: 11px; line-height: 1.45; }
@@ -1141,7 +1147,22 @@
       var text = parts.length
         ? "🔴 " + parts.join(" · ") + " | " + srcStr + " | " + timeStr + " МСК"
         : "✅ Нет активных угроз | " + srcStr + " | " + timeStr + " МСК";
-      document.getElementById("ticker").textContent = text;
+      setTicker(text);
+    }
+
+    // бегущая строка: дублируем текст и задаём длительность так, чтобы скорость была медленной (~30 px/с)
+    function setTicker(text) {
+      var el = document.getElementById("ticker");
+      if (!el) return;
+      var move = document.createElement("span");
+      move.className = "tk-move";
+      var a = document.createElement("span"); a.className = "tk-seg"; a.textContent = text;
+      var b = a.cloneNode(true); b.setAttribute("aria-hidden", "true");
+      move.appendChild(a); move.appendChild(b);
+      el.textContent = "";
+      el.appendChild(move);
+      var seg = move.scrollWidth / 2;           // ширина одной копии
+      move.style.animationDuration = Math.max(20, seg / 30) + "s";
     }
 
     function pad(n) { return n < 10 ? "0" + n : "" + n; }
@@ -1176,9 +1197,9 @@
         '<div class="state-note ' + (state === "error" ? "error" : state) + '">' +
         '<b>' + (state === "error" ? "Ошибка загрузки радара" : "Загрузка данных") + '</b><br>' +
         esc(message || "Пробуем получить свежие данные.") + '</div>';
-      document.getElementById("ticker").textContent = state === "error"
+      setTicker(state === "error"
         ? "⚠ Данные радара недоступны. Повтор через 30 сек..."
-        : "📡 Загружаем данные радара...";
+        : "📡 Загружаем данные радара...");
     }
 
     // ─── Refresh cycle ───
