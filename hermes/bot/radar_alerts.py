@@ -6,6 +6,7 @@ import os
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 
 HOME = os.path.expanduser("~")
 BOT_DIR = os.environ.get("NPZ_BOT_DIR", os.path.join(HOME, ".npz-bot"))
@@ -237,14 +238,20 @@ def main():
         # Шлём групповые (одно сообщение на chat_id)
         for chat_id, group in grouped.items():
             text = format_group_text(group)
-            resp = send_message(token, chat_id, text)
-            if resp.get("ok"):
-                sent += 1
+            try:
+                resp = send_message(token, chat_id, text)
+                if resp.get("ok"):
+                    sent += 1
+            except urllib.error.HTTPError as e:
+                print("FAIL chat=%s: HTTP Error %d" % (chat_id, e.code))
         # Clear-нотисы шлём по-отдельности (их редко)
         for notice in clears:
-            resp = send_message(token, notice["chat_id"], notice["text"])
-            if resp.get("ok"):
-                sent += 1
+            try:
+                resp = send_message(token, notice["chat_id"], notice["text"])
+                if resp.get("ok"):
+                    sent += 1
+            except urllib.error.HTTPError as e:
+                print("FAIL chat=%s: HTTP Error %d" % (notice["chat_id"], e.code))
         jsave(STATE_PATH, next_state)
         print("radar-alerts: sent %d/%d messages" % (sent, len(grouped) + len(clears)))
     else:
