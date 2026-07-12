@@ -1254,7 +1254,7 @@
 
   function initAzMap() {
     if (azsReady) return;
-    maps.az = L.map("mapAzs", { center: [63, 95], zoom: 3, minZoom: 3, maxZoom: 15, worldCopyJump: false, zoomControl: false });
+    maps.az = L.map("mapAzs", { center: [58, 85], zoom: 3, minZoom: 3, maxZoom: 15, worldCopyJump: false, zoomControl: false });
     maps.az.on("click", closeAnalyticsDropdown);
     L.control.zoom({ position: "bottomright" }).addTo(maps.az);
     tiles.az = baseTiles().addTo(maps.az);
@@ -1884,12 +1884,7 @@
           if (!azsReady) initAzMap();
           loadAzsData().then(function () {
             renderAzsTab();
-            setTimeout(function () {
-              maps.az.invalidateSize();
-              // один раз при первом открытии кадрируем на всю РФ (Калининград→Камчатка);
-              // страна широкая — fitBounds сам подбирает зум под ширину экрана. Дальше юзер панит сам.
-              if (!maps.az._fitDone) { maps.az._fitDone = true; maps.az.fitBounds([[41, 19], [68, 178]], { padding: [16, 16] }); }
-            }, 60);
+            setTimeout(function () { maps.az.invalidateSize(); }, 60);
           });
         }
       });
