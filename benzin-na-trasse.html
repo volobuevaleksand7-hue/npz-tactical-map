@@ -57,8 +57,8 @@
   <script defer src="/_vercel/insights/script.js"></script>
 
   <link rel="stylesheet" href="/fonts.css">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/news.css">
+  <link rel="stylesheet" href="/styles.css?v=353e9aa9">
+  <link rel="stylesheet" href="/news.css?v=e2bbf493">
   <style>
     .landing-wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
     .landing-hero{background:linear-gradient(135deg,rgba(230,194,89,.14),rgba(138,109,59,.08));border:1px solid rgba(230,194,89,.3);border-radius:16px;padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden}
@@ -106,6 +106,8 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/110490245" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Яндекс.Метрика -->
+  <link rel="stylesheet" href="/search.css?v=5a32b7c1">
+  <script defer src="/search.js?v=8b14567c"></script>
 </head>
 <body data-theme="light">
   <header class="news-header">
@@ -114,7 +116,66 @@
         <span class="news-logo-icon">⛽</span>
         <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
       </a>
-      <nav class="news-nav"><!-- сгенерит agents/build-nav.py --></nav>
+      <nav class="news-nav">
+        <a href="/">🗺️ Карта НПЗ</a>
+        <a href="/news">📰 Сводки</a>
+        <a href="/radar">📡 Радар БПЛА</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <div class="nav-drop-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
+            <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <details class="nav-drop-sub">
+              <summary>🚀 Ракетная опасность</summary>
+              <a href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
+              <a href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
+              <a href="/raketnaya-opasnost-omsk">📍 Омск</a>
+              <a href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
+              <a href="/raketnaya-opasnost-kazan">📍 Казань</a>
+              <a href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
+              <a href="/raketnaya-opasnost-penza">📍 Пенза</a>
+              <a href="/raketnaya-opasnost-samara">📍 Самара</a>
+              <a href="/raketnaya-opasnost-belgorod">📍 Ракетная опасность белгород</a>
+            </details>
+            <div class="nav-drop-group">Топливо</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <a href="/benzin-na-trasse" aria-current="page">🛣️ Бензин на трассе</a>
+            <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <a href="/zakrytye-azs">📄 Какие азс закрылись</a>
+            <a href="/ocheredi-na-azs">📄 Очереди на азс</a>
+            <a href="/draki-na-azs">📄 Драки на азс</a>
+            <a href="/azhiotazh-na-azs">📄 Ажиотаж на азс</a>
+            <a href="/gde-ai95">📄 Где найти аи-95</a>
+            <a href="/zapas-benzina-kanistry">📄 Запас бензина в канистрах</a>
+            <a href="/gde-gaz-azs">📄 Где заправить газ</a>
+            <a href="/tankery-ekonomika-rf">📄 Как удары по танкерам ударят по экономике россии</a>
+            <a href="/tenevoj-flot">📄 Теневой флот россии простыми словами</a>
+            <a href="/tankery-azovskoe-more">📄 Танкеры в азовском море</a>
+            <a href="/vozmozhen-li-golod">📄 Будет ли голод в россии</a>
+            <div class="nav-drop-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="nav-drop-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help">❓ Как пользоваться</a>
+            <a href="/metodologiya">🔬 Методология</a>
+            <a href="/udary-po-tankeram">📄 Удары по танкерам теневого флота</a>
+            <a href="/udary-azovskoe-more">📄 Удары по азовскому морю</a>
+            <div class="nav-drop-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+            <a href="/karta-bpla">📡 Карта БПЛА</a>
+            <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
+            <a href="/karta-azs">⛽ Карта АЗС</a>
+            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
+            <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>
+          </div>
+        </div>
+        <a href="/sources">📚 Источники</a>
+      </nav>
+      <button type="button" class="nav-search-btn" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
     </div>
   </header>
   <main class="news-main">
@@ -184,10 +245,18 @@
       </div>
     </div>
   </main>
+
+  <footer class="news-footer">
+    <div class="news-footer-inner">
+      <p>Топливный фронт РФ · <a href="/">🗺️ Карта НПЗ</a> · OSINT-дашборд · <span class="mono">npz-tactical-map.vercel.app</span></p>
+      <p class="footer-disc">Не является официальной информацией. Данные из открытых источников.</p>
+    </div>
+  </footer>
+
   <script>
     const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
-  <script defer src="/nav-dropdown.js"></script>
+  <script defer src="/nav-dropdown.js?v=06476ddc"></script>
 </body>
 </html>
