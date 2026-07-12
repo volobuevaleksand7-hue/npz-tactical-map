@@ -486,6 +486,18 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text)
 
 
+# ─── inline-кнопки публикации молнии TIER2 (pub_to_group|/reject|/publish_to_group/{json}) ───
+# radar_publish.handle_callback ждёт raw-dict Telegram callback_query; PTB даёт объект → .to_dict().
+# Раньше эти кнопки дренил poll.py из publish-vps.sh, конфликтуя с ЭТИМ демоном за getUpdates
+# (один токен = один потребитель getUpdates → 409). Теперь обрабатывает сам демон, в реальном времени.
+async def on_publish_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        from radar_publish import handle_callback
+        handle_callback(update.callback_query.to_dict())
+    except Exception as e:
+        logger.error(f"publish callback error: {e}")
+
+
 # ─── main ───
 def main():
     token_path = os.path.join(BOT_DIR, "token")
@@ -509,6 +521,8 @@ def main():
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(CallbackQueryHandler(on_region_callback, pattern="^reg:"))
     app.add_handler(CallbackQueryHandler(on_timer_callback, pattern="^timer:"))
+    app.add_handler(CallbackQueryHandler(
+        on_publish_callback, pattern=r"^(pub_to_group\||reject\||publish_to_group|\{)"))
 
     logger.info("Starting @NpzFuel_Bot polling...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)

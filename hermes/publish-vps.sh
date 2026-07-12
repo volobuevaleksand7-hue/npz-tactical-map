@@ -68,8 +68,10 @@ fi
 #    только собирает подписчиков (poll), гоняет alerts и регенерирует /news —
 #    сама в канал НЕ пишет.
 if [ -f "$BOT_DIR/token" ] && [ -f "$BOT/broadcast.py" ]; then
-  echo "publish-vps: Telegram — poll (подписчики + inline-кнопки молнии) + radar-alerts…"
-  NPZ_REPO="$REPO" NPZ_BOT_DIR="$BOT_DIR" python3 "$BOT/poll.py" 2>/dev/null || true
+  # poll.py убран 2026-07-12: его getUpdates конфликтовал с демоном poll_bot.py за один
+  # токен (409). /start, кнопки регионов/таймера И кнопки публикации молнии теперь
+  # обрабатывает сам демон в реальном времени (poll_bot.on_publish_callback). Здесь — только alerts.
+  echo "publish-vps: Telegram — radar-alerts…"
   NPZ_REPO="$REPO" NPZ_BOT_DIR="$BOT_DIR" python3 "$BOT/radar_alerts.py" --send 2>/dev/null || true
 else
   echo "publish-vps: бот не настроен ($BOT_DIR/token нет) — Telegram пропущен"
