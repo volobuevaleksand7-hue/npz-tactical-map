@@ -1,69 +1,73 @@
 # @BPLAlert_bot — анонимный алерт-бот (runbook)
 
-Второй инстанс того же `hermes/bot/poll.py`, что и `@NpzFuel_Bot`, но под отдельным
-анонимным Telegram-аккаунтом (Erhan08263) и со своей папкой данных. Публичное лицо
-проекта не связано с владельцем. `@NpzFuel_Bot` продолжает работать параллельно.
+Публичный анонимный бот тревог/ударов проекта «Топливный фронт РФ» под отдельным
+Telegram-аккаунтом (Erhan08263). `@NpzFuel_Bot` работает параллельно (приватный).
 
-Развёрнут на Hermes VPS 2026-07-09 (v1.7.0). Кода не форкали — разница только в env.
+> ⚠️ **Актуализировано 2026-07-12.** Раньше бот был «2-м инстансом `poll.py`» на cron.
+> Сейчас архитектура другая — см. ниже. Старую схему (`poll.py` + `.bpla-alert`) не воскрешать.
 
-## Конфигурация (env)
+## Архитектура (что реально крутится)
 
-| Переменная | Значение | Зачем |
+| Компонент | Что | Данные |
 |---|---|---|
-| `NPZ_BOT_DIR` | `/root/.bpla-alert` | своя папка: token, subscribers.json, poll-state, radar-alert-state |
-| `NPZ_REPORT_CHAT` | `609952529` (Sergey, основной) | куда слать отчёт о счётчике подписчиков |
-| `NPZ_REPORT_TOKEN` | `/root/.npz-bot/token` | токен бота-отправителя отчётов (@NpzFuel_Bot) |
-| `NPZ_OWNER_CHAT` | *(не задан)* | альт. ЛС-уведомление о каждой подписке через ЭТОГО бота; вытеснено REPORT_* |
-| `NPZ_REPO` | `/root/npz-tactical-map` | общий репозиторий/данные |
-| `NPZ_CHANNEL` | *(пока не задан)* | канал для сводок; включить, когда канал создан (см. ниже) |
+| **Демон** | systemd `npz-bpl-bot.service` → `hermes/bot/poll_bpl.py` (python-telegram-bot, long-poll) | обрабатывает `/start`, `/status`, `/radar`, `/regions`, `/interval`, `/alerts`, тумблеры, `/pause`, `/unsubscribe` |
+| **Угрозы (радар)** | cron `*/2` `radar_alerts.py --send` | `data/radar-state.json` → подписчикам с активным регионом |
+| **Удары (подтверждённые)** | cron `*/3` `strike_alerts.py --send` | `data/strikes.json` → подписчикам с `alerts.attacks` |
 
-### Счётчик подписчиков → отчёт через @NpzFuel_Bot
+**Каноническая папка данных: `/root/.npz-bot-bpl/`** (`subscribers.json`, токен→`/root/.npz-bot/token-bplalert`, `radar-alert-state.json`, `strike-alert-state.json`). Демон: `Environment=NPZ_BPL_DIR=/root/.npz-bot-bpl`.
 
-`poll.py` считает активных подписчиков и на новую подписку шлёт отчёт в
-`NPZ_REPORT_CHAT` через `@NpzFuel_Bot` (`NPZ_REPORT_TOKEN`). Пороги (`_should_report`):
-**≤25 — о каждом · 26–100 — каждый 5-й · 101–500 — каждый 10-й · >500 — каждый 50-й.**
-Водяной знак `last_report_count` в `poll-state.json` — без повторов при колебаниях счётчика.
-Тест логики порогов: `python3 hermes/bot/test_poll_report.py`.
+Устаревшие папки `/root/.bpla-alert`, `/root/.bpl-bot`, `/root/.npz-bot/bpl` — их
+`subscribers.json` **симлинкнуты на канон** (2026-07-12, чтобы стрей-скрипт не разъехался
+по базам). Бэкап перед сведением: `/root/bpl-dirs.backup.*.tgz`.
 
-Токен лежит в `/root/.bpla-alert/token` (chmod 600). В git НЕ коммитить.
-
-## Cron (уже установлен, `crontab -l`)
+## Cron (live, `crontab -l`)
 
 ```
-# @BPLAlert_bot
-* * * * *    NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.bpla-alert NPZ_REPORT_CHAT=609952529 NPZ_REPORT_TOKEN=/root/.npz-bot/token /usr/bin/python3 /root/npz-tactical-map/hermes/bot/poll.py >> /root/npz-tactical-map/agents/logs/bpla-bot.log 2>&1
-*/10 * * * * NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.bpla-alert /usr/bin/python3 /root/npz-tactical-map/hermes/bot/radar_alerts.py --send >> /root/npz-tactical-map/agents/logs/bpla-bot.log 2>&1
+*/2 * * * * NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.npz-bot-bpl python3 .../radar_alerts.py --send   >> agents/logs/bpla-bot.log 2>&1
+*/3 * * * * NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.npz-bot-bpl python3 .../strike_alerts.py --send  >> agents/logs/bpla-bot.log 2>&1
 ```
 
-- `poll.py` каждую минуту — обрабатывает `/start`, кнопки таймера/регионов, шлёт
-  владельцу уведомление о новой подписке.
-- `radar_alerts.py --send` каждые 10 минут — рассылает подписчикам тревоги по их
-  региону и интервалу (10м/30м/1ч/2ч/6ч/12ч/24ч).
+⚠️ Строка ежеминутного `poll.py` с `NPZ_BOT_DIR=/root/.bpla-alert` **закомментирована**
+(2026-07-12): она конфликтовала с демоном за один токен (`getUpdates` → 409). Не включать.
 
-Лог: `agents/logs/bpla-bot.log`. Бэкап crontab перед правкой: `/root/crontab.backup.*`.
+## Значки в сообщениях (единый визуальный язык)
 
-## Канал (сводки) — включить, когда создан
+- Угроза: 🛩 БПЛА · 🚀 ракеты · 🛩🚀 вместе. Удар (уже прилетело): 💥🛩 / 💥🚀. Отбой: 🟢.
+- Групповой алерт угроз — по значку на каждый регион + адаптивная шапка (`radar_alerts.format_group_text`).
+- Удары — `strike_alerts.format_strike` (город, объект, дата рус + время МСК, карта).
 
-Механизм уже есть в `broadcast.py` (env `NPZ_CHANNEL`). Бот сам создать канал не
-может — владелец создаёт его вручную с аккаунта Erhan08263 и добавляет `@BPLAlert_bot`
-**админом**. После этого добавить в crontab (сводки 08:00/20:00 МСК = 05:00/17:00 UTC):
+## Типы уведомлений и интервал
 
-```
-0 5,17 * * * NPZ_REPO=/root/npz-tactical-map NPZ_BOT_DIR=/root/.bpla-alert NPZ_CHANNEL=@<username_канала> /usr/bin/python3 /root/npz-tactical-map/hermes/bot/broadcast.py --briefing morning >> /root/npz-tactical-map/agents/logs/bpla-bot.log 2>&1
-```
+`alerts.threats` (угрозы-радар) / `alerts.attacks` (удары) — тумблеры `/alerts`.
+Интервал напоминаний — `/interval` или кнопки (10м…24ч / по изменениям).
+**Сохранение настроек починено 2026-07-12** (`ensure_sub(subs=)` — был баг двойной загрузки).
+Регресс-тест: `hermes/bot/test_poll_bpl_persist.py` (venv).
 
-(В канал уходят только сводки/редкие посты — основной поток тревог идёт в личку бота.)
+## Дедуп ударов / устойчивость
+
+- `strike_alerts`: дедуп по `id` (или `date|time|city|target`), state `strike-alert-state.json`,
+  init-guard (первый запуск засевает архив, историю не рассылает). Тест `test_strike_alerts.py`.
+- `radar_alerts`: при 429/5xx/сети `last_sent` откатывается → повтор в след. прогоне; 403
+  (заблокировал) не зацикливаем; не-HTTP ошибка не роняет прогон. Тест `test_radar_alerts.py`.
+
+## Канал (сводки) — отложен
+
+Бот сам канал не создаёт. Владелец создаёт с Erhan08263, добавляет `@BPLAlert_bot` админом,
+даёт `@username` → включить `NPZ_CHANNEL=@...` в broadcast-cron (механизм в `broadcast.py`).
 
 ## Плашки на сайте → бот
 
-- `index.html`: закрываемый баннер над картой (localStorage `tgAlertClosed`).
-- `radar.html`: CTA в подвале ленты (`.feed-cta`).
-- Обе ведут на `https://t.me/BPLAlert_bot`.
+`index.html` (баннер над картой, localStorage `tgAlertClosed`) и `radar.html` (`.feed-cta`) → `https://t.me/BPLAlert_bot`.
 
 ## Проверка
 
 ```
-curl -s "https://api.telegram.org/bot$(cat /root/.bpla-alert/token)/getMe"   # @BPLAlert_bot
+systemctl status npz-bpl-bot.service
 tail -f /root/npz-tactical-map/agents/logs/bpla-bot.log
-cat /root/.bpla-alert/subscribers.json
+NPZ_BOT_DIR=/root/.npz-bot-bpl python3 hermes/bot/radar_alerts.py --dry-run    # кому уйдут угрозы
+NPZ_BOT_DIR=/root/.npz-bot-bpl python3 hermes/bot/strike_alerts.py --dry-run   # кому уйдут удары
+cat /root/.npz-bot-bpl/subscribers.json
 ```
+
+⚠️ Токены в git НЕ коммитить (репо публичный). Известная мелочь: cron `sub-report.sh`
+ссылается на несуществующий файл — задача молчит (не критично).
