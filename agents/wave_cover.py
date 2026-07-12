@@ -196,7 +196,7 @@ def _svg_card(event):
         f'{mreg} {_plural(mreg, "регион", "региона", "регионов")}</text>'
         f'{pills}'
         f'<text x="70" y="600" font-size="20" fill="rgba(255,255,255,.6)" '
-        f'font-family="sans-serif">по данным публичного мониторинга radar-map.ru</text>'
+        f'font-family="sans-serif">по данным открытых источников</text>'
         f'</svg>')
 
 
