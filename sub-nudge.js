@@ -65,13 +65,11 @@
     var d = build();
     document.body.appendChild(d);
     wireDock(d, false);
-    // двойной rAF, чтобы transition от начального translateX сработал
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        d.classList.add("in");
-        setTimeout(function () { d.classList.add("blink"); }, 500);
-      });
-    });
+    // форс-reflow фиксирует стартовый transform → CSS-переход играет надёжно.
+    // (двойной rAF в фоновой/неактивной вкладке не всегда срабатывал → карточка не въезжала)
+    void d.offsetWidth;
+    d.classList.add("in");
+    setTimeout(function () { d.classList.add("blink"); }, 500);
   }
 
   // на загрузке пользователь ранее свернул попап → показываем сразу язычком
