@@ -54,8 +54,8 @@
       'width:34px;height:64px;border:1px solid var(--line,#e4e4e7);border-left:none;border-radius:0 12px 12px 0;' +
       'background:var(--surface,#fff);color:var(--teal,#12a594);cursor:pointer;box-shadow:3px 3px 14px rgba(0,0,0,.16);' +
       'transform:translateX(-100%);line-height:0}' +
-      // язычок всегда виден целиком у левого края — кликабельный щит; карточку сам не открывает, только по клику
-      '.nudge-tab.show{display:flex;transform:translateX(0)}' +
+      // язычок виден целиком; периодически «подмигивает» — заезжает на половину и выезжает (фаза сдвинута per-tab → поочерёдно)
+      '.nudge-tab.show{display:flex;transform:translateX(0);animation:tabPeek 12s ease-in-out infinite}' +
       '.nudge-tab.show:hover{transform:translateX(0)!important;transition:transform .3s ease}' +
       '.guard-face{width:28px;height:28px;color:inherit;overflow:visible}' +
       '.guard-face .sh-body{fill:currentColor}' +
@@ -63,11 +63,13 @@
       '.guard-face .eye{fill:#fff;transform-box:fill-box;transform-origin:center;animation:gBlink 30s infinite}' +
       '.guard-face .brow,.guard-face .mouth{stroke:#fff;stroke-width:1.3;stroke-linecap:round;fill:none}' +
       '.guard-face .plane{fill:#fff}' +
-      '.nudge-tab.show:hover .eye,.nudge-tab.show:hover .face{animation:none}' +
+      '.nudge-tab.show:hover,.nudge-tab.show:hover .eye,.nudge-tab.show:hover .face{animation:none}' +
       // моргает и коротко «смотрит по сторонам» только когда снаружи (80–90% цикла)
       '@keyframes gBlink{0%,83%,86%,89%,100%{transform:scaleY(1)}84.5%,87.5%{transform:scaleY(.12)}}' +
       '@keyframes gScan{0%,80%,92%,100%{transform:translateX(0)}84%{transform:translateX(-1.2px)}89%{transform:translateX(1.2px)}}' +
-      '@media(prefers-reduced-motion:reduce){.nudge-tab.show{animation:none;transform:translateX(-90%)}' +
+      // подмигивание язычка: покой снаружи → заехать на половину → выехать обратно (1 раз за 12с)
+      '@keyframes tabPeek{0%,86%,100%{transform:translateX(0)}93%{transform:translateX(-50%)}}' +
+      '@media(prefers-reduced-motion:reduce){.nudge-tab.show{animation:none;transform:translateX(0)}' +
       '.guard-face .eye,.guard-face .face{animation:none}}';
     document.head.appendChild(s);
   }
@@ -78,6 +80,7 @@
     tab.type = 'button'; tab.className = 'nudge-tab';
     tab.setAttribute('aria-label', opts.label || 'Открыть');
     tab.style.cssText = (opts.pos || '') + (opts.accent ? ';color:' + opts.accent : '');
+    tab.style.animationDelay = (reg.length % 2 ? '-6s' : '0s'); // сдвиг фазы: язычки подмигивают поочерёдно, не разом
     tab.innerHTML = opts.icon;
     document.body.appendChild(tab);
     function persist(v) { try { v ? localStorage.setItem(opts.key, 'dock') : localStorage.removeItem(opts.key); } catch (e) {} }
