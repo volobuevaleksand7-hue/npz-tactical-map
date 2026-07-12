@@ -203,6 +203,7 @@ def format_group_text(notices):
         city_str = " (%s)" % ", ".join(cities[:5]) if cities else ""
         lines.append("%s <b>%s</b>%s" % (emoji, region, city_str))
     lines.append("")
+    lines.append("🔔 <b>Если вы в этих регионах — примите меры безопасности.</b>")
     lines.append('📍 <a href="%s/radar.html">открыть карту радара</a>' % SITE)
     return "\n".join(lines)
 
