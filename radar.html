@@ -340,15 +340,26 @@
 .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
 .about-radar {
+  /* десктоп: низ-право (верх-право занят лентой). Свёрнуто — маленький кружок «?» */
   position: absolute; bottom: 88px; right: 14px; z-index: 20; max-width: 300px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
   overflow: hidden; box-shadow: var(--shadow-sm);
 }
 .about-radar summary {
-  min-height: 44px; display: flex; align-items: center;
+  min-height: 32px; display: flex; align-items: center;
   padding: 6px 12px; cursor: pointer; user-select: none; font-weight: 700;
   font-size: 11px; font-family: var(--mono); color: var(--ink);
+  list-style: none;
 }
+.about-radar summary::-webkit-details-marker { display: none; }
+/* свёрнуто = маленькая круглая кнопка «?» в углу карты */
+.about-radar:not([open]) { border-radius: 50%; }
+.about-radar:not([open]) summary {
+  width: 32px; height: 32px; min-height: 32px; padding: 0;
+  justify-content: center; font-size: 16px; font-weight: 800;
+}
+.about-radar:not([open]) .ar-label { display: none; }
+.about-radar[open] .ar-q { display: none; }
 .about-body { padding: 2px 12px 10px; font-size: 12px; line-height: 1.5; color: var(--ink-dim); }
 .about-body p { margin: 6px 0; }
 .about-body a { color: var(--teal); text-decoration: none; }
@@ -362,10 +373,11 @@
 @media(max-width:768px){
   .radar-civ-icon img, .radar-civ-icon svg { width: 40px !important; height: 40px !important; }
   .legend-toggle { left: 12px; bottom: 76px; max-width: calc(100% - 24px); }
-  /* ponytail: было display:none (справка терялась) — теперь свёрнутый accordion, доступен по тапу */
-  .about-radar { right: 12px; bottom: 76px; max-width: calc(60% - 18px); }
+  /* мобайл: лента скрыта — «?» в верх-правом углу карты (как на скрине) */
+  .about-radar { right: 10px; top: 92px; bottom: auto; max-width: calc(80% - 18px); }
   /* кнопки мельче, чтобы не маячили */
-  .legend-toggle > summary, .about-radar > summary { min-height:34px; padding:5px 10px; font-size:10px; }
+  .legend-toggle > summary { min-height:34px; padding:5px 10px; font-size:10px; }
+  .about-radar[open] > summary { min-height:34px; padding:5px 10px; font-size:10px; }
   .about-body { font-size: 11px; line-height: 1.45; }
 }
   </style>
@@ -585,7 +597,7 @@
   </details>
 
   <details class="about-radar">
-    <summary>ℹ️ О карте тревог</summary>
+    <summary title="О карте тревог" aria-label="О карте тревог"><span class="ar-q">?</span><span class="ar-label">ℹ️ О карте тревог</span></summary>
     <div class="about-body">
       <p><strong>Живой радар угроз БПЛА и ракетной опасности.</strong> Карта показывает, где по регионам России сейчас отмечены воздушная тревога, атаки дронов, угроза баллистических и крылатых ракет. Слой обновляется примерно каждые 5 минут по открытым OSINT-источникам.</p>
       <p>Это <strong>оценка, а не официальное оповещение</strong> — данные могут запаздывать и не заменяют предупреждения МЧС и региональных властей. Смотрите также <a href="/karta-bpla">карту БПЛА онлайн</a>, ежедневные <a href="/news">сводки</a> и <a href="/attacks">хронику ударов по НПЗ</a>.</p>
@@ -1281,6 +1293,6 @@
     })();
   </script>
   <script defer src="/nav-dropdown.js?v=06476ddc"></script>
-  <script defer src="/vpn-nudge.js?v=6a37c3e7"></script>
+  <script defer src="/vpn-nudge.js?v=6a37c3f0"></script>
 </body>
 </html>

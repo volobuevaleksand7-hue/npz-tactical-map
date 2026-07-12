@@ -31,31 +31,64 @@
     return d;
   }
 
-  // Small dismissible floating card for map pages (main map, /karta-bpla, /karta-azs) —
-  // those have no in-content anchor, so the promo lives in a corner instead of the flow.
+  // Dock: свернуть плавающую карточку у левого края в вертикальный «язычок» (не удалять) —
+  // тап по язычку возвращает карточку. Общий для vpn-nudge и sub-nudge (экспортим в window).
+  function injectDockCSS() {
+    if (document.getElementById('nudge-dock-css')) return;
+    var s = document.createElement('style'); s.id = 'nudge-dock-css';
+    s.textContent =
+      '.nudge-out{transform:translateX(-135%)!important;opacity:0!important;pointer-events:none!important;' +
+      'transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .32s ease!important}' +
+      '.nudge-tab{position:fixed;left:0;z-index:1200;display:none;flex-direction:column;align-items:center;gap:5px;' +
+      'width:30px;padding:12px 0;border:1px solid var(--line,#e4e4e7);border-left:none;border-radius:0 11px 11px 0;' +
+      'background:var(--surface,#fff);color:var(--teal,#12a594);cursor:pointer;box-shadow:3px 3px 14px rgba(0,0,0,.16);' +
+      'transform:translateX(-100%);transition:transform .3s ease;line-height:0}' +
+      '.nudge-tab.show{display:flex;transform:translateX(0)}' +
+      '.nudge-tab .nt-chev{font-size:12px;color:var(--ink-dim,#8a8a8a)}';
+    document.head.appendChild(s);
+  }
+  function dock(card, opts) {
+    injectDockCSS();
+    var tab = document.createElement('button');
+    tab.type = 'button'; tab.className = 'nudge-tab';
+    tab.setAttribute('aria-label', opts.label || 'Открыть');
+    if (opts.pos) tab.style.cssText = opts.pos;
+    tab.innerHTML = opts.icon + '<span class="nt-chev">›</span>';
+    document.body.appendChild(tab);
+    function persist(v) { try { v ? localStorage.setItem(opts.key, 'dock') : localStorage.removeItem(opts.key); } catch (e) {} }
+    function collapse() { card.classList.add('nudge-out'); persist(true); setTimeout(function () { tab.classList.add('show'); }, 180); }
+    function expand() { tab.classList.remove('show'); card.classList.remove('nudge-out'); persist(false); }
+    tab.addEventListener('click', expand);
+    if (opts.startDocked) tab.classList.add('show'); // card уже с .nudge-out (без анимации на загрузке)
+    return { collapse: collapse, expand: expand };
+  }
+  window.__nudgeDock = dock;
+
+  // Floating card for map pages (main map, /karta-bpla, /karta-azs) — no in-content anchor,
+  // so the promo lives in a corner. Крестик сворачивает в язычок (dock), не удаляет.
   function floatPromo() {
-    var K = 'vpn_float_x';
-    try { if (localStorage.getItem(K)) return null; } catch (e) {}
     var d = document.createElement('div');
     d.className = 'pp-vpn-float';
     d.innerHTML =
-      '<button type="button" class="pp-vpn-float-x" aria-label="Закрыть">×</button>' +
+      '<button type="button" class="pp-vpn-float-x" aria-label="Свернуть">×</button>' +
       '<span class="pp-vpn-ic">' + SHIELD + '</span>' +
       '<div class="pp-vpn-float-t"><b>Источники недоступны в РФ?</b>' +
         '<span>Западные СМИ по теме — через VPN</span></div>' +
       '<a class="pp-vpn-float-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">Открыть через VPN →</a>';
     d.querySelector('.pp-vpn-float-btn').addEventListener('click', track);
-    d.querySelector('.pp-vpn-float-x').addEventListener('click', function () {
-      try { localStorage.setItem(K, '1'); } catch (e) {}
-      d.remove();
-    });
     return d;
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     if (document.getElementById('map')) {
+      var K = 'vpn_float_x';
+      var startDocked = false;
+      try { startDocked = !!localStorage.getItem(K); } catch (e) {}
       var f = floatPromo();
-      if (f) document.body.appendChild(f);
+      if (startDocked) f.classList.add('nudge-out'); // до вставки в DOM — без анимации-мигания
+      document.body.appendChild(f);
+      var d = dock(f, { key: K, label: 'Доступ через VPN', icon: SHIELD, pos: 'bottom:14px', startDocked: startDocked });
+      f.querySelector('.pp-vpn-float-x').addEventListener('click', d.collapse);
       return;
     }
     var links = [].slice.call(document.querySelectorAll('a[href^="http"]'));

@@ -260,26 +260,7 @@
       </nav>
     </div>
 
-    <!-- Telegram alert bot promo (closeable, remembered in localStorage) -->
-    <div class="tg-alert-banner" id="tgAlertBanner" hidden>
-      <a class="tgb-link" href="https://t.me/BPLAlert_bot" target="_blank" rel="noopener">
-        <span class="tgb-ico">🚨</span>
-        <span class="tgb-txt"><b>Тревоги БПЛА в Telegram</b> — оповещения об опасности по вашему региону, интервал 10 мин…24 ч</span>
-        <span class="tgb-cta">Подписаться →</span>
-      </a>
-      <button class="tgb-close" id="tgAlertClose" type="button" aria-label="Закрыть">✕</button>
-    </div>
-    <script>
-      (function () {
-        var b = document.getElementById('tgAlertBanner');
-        if (!b) return;
-        if (!localStorage.getItem('tgAlertClosed')) b.hidden = false;
-        document.getElementById('tgAlertClose').addEventListener('click', function () {
-          b.hidden = true;
-          try { localStorage.setItem('tgAlertClosed', '1'); } catch (e) {}
-        });
-      })();
-    </script>
+    <!-- Статичный TG-баннер ретайрен: подписку теперь ведёт отложенный friendly-попап sub-nudge.js -->
 
     <!-- ===== VIEW: RUSSIA ===== -->
     <section class="view active" id="view-russia">
@@ -520,6 +501,7 @@
     });
   });}
   </script>
-  <script defer src="/vpn-nudge.js?v=6a37c3e7"></script>
+  <script defer src="/vpn-nudge.js?v=6a37c3f0"></script>
+  <script defer src="/sub-nudge.js?v=a1b2c3d2"></script>
 </body>
 </html>
