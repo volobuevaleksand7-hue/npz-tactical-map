@@ -14,16 +14,20 @@ image_gen (img2img по референсу; если реального фото
   python3 build-covers.py --all            # перегенерить все
   python3 build-covers.py --dates 2026-07-05,2026-07-04
 
-PRIMARY-бэкенд: codex exec image_gen (бесплатно на Codex-воркспейсе — правило проекта
-covers-via-codex). ФОЛБЭК: OpenRouter (nano-banana, ПЛАТНЫЙ ~$0.04/картинка) — только если
-Codex не смог И явно задан env NPZ_COVERS_ALLOW_OPENROUTER=1 (иначе OpenRouter не трогаем,
-чтобы не жечь деньги: 2026-07 весь $10-лимит ключа утёк именно на nano-banana-обложки).
+Цепочка бэкендов (env NPZ_COVER_BACKENDS, дефолт "codex-vps,codex-local,openrouter"):
+  1. codex-vps   — Codex на VPS (всегда включён). На самом VPS = локальный codex; с Мака —
+                   codex по ssh на VPS + картинку тащим обратно (env NPZ_VPS_SSH, деф. hermes-vps).
+  2. codex-local — Codex на этой машине (на Маке — Mac-Codex).
+  3. openrouter  — платный nano-banana (~$0.04/шт), последний рубеж. Ключ capped $10 → без
+                   денег просто 403 (в 2026-07 весь $10-лимит утёк именно на эти обложки).
+Отключить платный OpenRouter: NPZ_COVER_BACKENDS="codex-vps,codex-local".
 """
 import argparse
 import importlib.util
 import json
 import os
 import re
+import shlex
 import subprocess
 import sys
 import urllib.request
@@ -36,6 +40,13 @@ ARCHIVE = REPO / "data" / "news-archive.json"
 ASSETS = REPO / "assets"
 CAPTION = REPO / "agents" / "caption_cover.py"
 OPENROUTER_SCRIPT = REPO / "hermes" / "gen-cover-openrouter.py"
+
+# Порядок бэкендов обложки: Codex@VPS → Codex@локально(Mac) → OpenRouter (правило владельца).
+# codex-vps: сами на VPS → локальный codex; на Маке → codex по ssh на VPS + картинка обратно.
+IS_VPS = str(REPO).startswith("/root")
+VPS_SSH = os.environ.get("NPZ_VPS_SSH", "hermes-vps")
+VPS_TMP = "/root/.hermes/covers-tmp"
+DEFAULT_BACKENDS = "codex-vps,codex-local,openrouter"
 
 MONTHS = ["", "января", "февраля", "марта", "апреля", "мая", "июня",
           "июля", "августа", "сентября", "октября", "ноября", "декабря"]
@@ -147,13 +158,50 @@ def fetch_ref(src_url, out_path):
         return None
 
 
-def codex_gen(instruction):
-    """Запустить codex exec image_gen. True/False по факту создания файла проверяет вызывающий."""
+def _codex_instr(raw_path, ref_path, m):
+    """Инструкция codex image_gen под заданный путь вывода (локальный или удалённый)."""
+    if ref_path:
+        return (f"Use your image_gen tool in EDIT / image-to-image mode. Input reference: {ref_path} "
+                f"(real photo of the event). Derive a NEW photorealistic 1200x630 horizontal cover that KEEPS "
+                f"the composition and subject (city skyline, smoke, industrial background), bright documentary "
+                f"daylight, our clean style. Remove any watermark/text — NO letters or logos. "
+                f"Save to exactly {raw_path} then ls -la it.")
+    return (f"Use your image_gen tool to generate a photorealistic 1200x630 horizontal image. {m['prompt']} "
+            f"Save to exactly {raw_path} then ls -la it.")
+
+
+def codex_local(m, ref, raw):
+    """Codex на ЭТОЙ машине (на VPS = VPS-Codex, на Маке = Mac-Codex). True если raw записан."""
+    instr = _codex_instr(str(raw), str(ref) if ref else None, m)
     try:
-        subprocess.run(["codex", "exec", "--dangerously-bypass-approvals-and-sandbox", instruction],
+        subprocess.run(["codex", "exec", "--dangerously-bypass-approvals-and-sandbox", instr],
                        cwd=str(TMP), timeout=280, capture_output=True, text=True)
-    except Exception as e:
-        print("  codex error:", e)
+    except Exception as e:  # noqa: BLE001
+        print("  codex-local error:", e)
+    return raw.exists()
+
+
+def codex_vps(m, ref, raw):
+    """Codex на VPS. На самом VPS = локальный codex; с Мака — по ssh на VPS + забрать картинку."""
+    if IS_VPS:
+        return codex_local(m, ref, raw)
+    date = raw.stem.replace("raw-", "")
+    r_raw = f"{VPS_TMP}/raw-{date}.png"
+    r_ref = f"{VPS_TMP}/ref-{date}.png" if ref else None
+    ssh_o = ["-o", "ConnectTimeout=15"]
+    try:
+        subprocess.run(["ssh", *ssh_o, VPS_SSH, f"mkdir -p {VPS_TMP}; rm -f {r_raw}"],
+                       timeout=25, capture_output=True)
+        if ref and subprocess.run(["scp", "-q", *ssh_o, str(ref), f"{VPS_SSH}:{r_ref}"],
+                                  timeout=60).returncode != 0:
+            r_ref = None  # референс не доехал — сгенерим без него
+        instr = _codex_instr(r_raw, r_ref, m)
+        cmd = f"cd {VPS_TMP} && codex exec --dangerously-bypass-approvals-and-sandbox {shlex.quote(instr)}"
+        subprocess.run(["ssh", *ssh_o, VPS_SSH, cmd], timeout=300, capture_output=True, text=True)
+        subprocess.run(["scp", "-q", *ssh_o, f"{VPS_SSH}:{r_raw}", str(raw)], timeout=60, capture_output=True)
+    except Exception as e:  # noqa: BLE001
+        print(f"  codex-vps fail: {e}")
+    return raw.exists()
 
 
 def openrouter_gen(m, ref, raw):
@@ -186,30 +234,22 @@ def build_one(date, m):
 
     ref = fetch_ref(m["src"], TMP / f"ref-{date}.png")
 
-    # PRIMARY: Codex (правило проекта — обложки через Codex; бесплатно на воркспейсе).
-    if ref:
-        instr = (f"Use your image_gen tool in EDIT / image-to-image mode. Input reference: {ref} "
-                 f"(real photo of the event). Derive a NEW photorealistic 1200x630 horizontal cover that KEEPS "
-                 f"the composition and subject (city skyline, smoke, industrial background), bright documentary "
-                 f"daylight, our clean style. Remove any watermark/text — NO letters or logos. "
-                 f"Save to exactly {raw} then ls -la it.")
-        mode = "codex-ref"
-    else:
-        instr = (f"Use your image_gen tool to generate a photorealistic 1200x630 horizontal image. {m['prompt']} "
-                 f"Save to exactly {raw} then ls -la it.")
-        mode = "codex-generated"
-    codex_gen(instr)
+    # Цепочка бэкендов по порядку (дефолт: codex-vps → codex-local → openrouter).
+    order = [b.strip() for b in os.environ.get("NPZ_COVER_BACKENDS", DEFAULT_BACKENDS).split(",") if b.strip()]
+    mode = ""
+    for be in order:
+        if be == "codex-vps" and codex_vps(m, ref, raw):
+            mode = "codex@vps" + ("(local)" if IS_VPS else "(ssh)"); break
+        if be == "codex-local" and codex_local(m, ref, raw):
+            mode = "codex@vps" if IS_VPS else "codex@mac"; break
+        if be == "openrouter" and openrouter_gen(m, ref, raw):  # платный; ключ capped $10 → сам 403
+            mode = "openrouter"; break
 
-    # FALLBACK: OpenRouter (nano-banana, ПЛАТНЫЙ) — только если Codex не смог И явно разрешено
-    # env-флагом. По умолчанию НЕ трогаем, чтобы не жечь деньги (см. правило covers-via-codex).
-    if not raw.exists() and os.environ.get("NPZ_COVERS_ALLOW_OPENROUTER") == "1":
-        if openrouter_gen(m, ref, raw):
-            mode += "+openrouter"
     if ref:
         try: ref.unlink(missing_ok=True)
         except Exception: pass
     if not raw.exists():
-        print(f"GENFAIL {date}  ({mode}) — нет картинки (OpenRouter без ключа/ошибка И Codex недоступен)")
+        print(f"GENFAIL {date} — ни один бэкенд ({'→'.join(order)}) не дал картинку")
         return False
     subprocess.run(["python3", str(CAPTION), str(raw), str(out), m["city"], m["event"], m["date_rus"]],
                    capture_output=True)
