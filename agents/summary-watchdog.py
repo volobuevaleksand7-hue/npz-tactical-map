@@ -110,11 +110,13 @@ def incident_body(kind: str, day: str) -> str:
                 "(agents/update-prompt-strikes.md) за эту дату, затем gen-news;\n"
                 f"- проверь {NEWS_URL}")
     return (f"Карточка за {day} на месте, но обложка = заглушка og-image. "
-            "VPS сам обложку НЕ соберёт (OpenRouter 403 + Codex недоступен) — "
-            "нужен прогон на МАКЕ (там Codex работает).\n"
-            "Что сделать (с Мака):\n"
-            f"- `NPZ_REPO=~/Documents/npz-tactical-map python3 hermes/scripts/build-covers.py --dates {day}` "
-            "(Codex) → `python3 agents/gen-news.py` → git-sync + деплой.")
+            "Обычно самолечение чинит само (Codex работает и на VPS, и на Маке); "
+            "если висит — вероятно кончились image-кредиты Codex-воркспейса.\n"
+            "Что сделать:\n"
+            f"- `python3 hermes/scripts/build-covers.py --dates {day}` "
+            "(Codex-first) → `python3 agents/gen-news.py` → git-sync + деплой;\n"
+            "- если Codex «out of credits» — пополнить воркспейс, либо разово "
+            f"`NPZ_COVERS_ALLOW_OPENROUTER=1` при живом OpenRouter-ключе.")
 
 
 # ---- Инбокс инцидентов (docs/agents/incidents.md) ---------------------------
@@ -218,9 +220,9 @@ def _run(cmd, timeout=300, env=None):
 def heal(day: str):
     """Дособрать сводку за сегодня и запушить.
     -> (card_ok, cover_ok): card_ok — карточка собралась и запушилась (гарантия),
-    cover_ok — реальная обложка (не заглушка). На VPS обложка обычно НЕ собирается
-    (OpenRouter 403 + Codex недоступен) — это ок: карточка всё равно выходит с
-    og-image, реальную обложку дорисует прогон на Маке."""
+    cover_ok — реальная обложка (не заглушка). Codex работает и на VPS (0.144.0),
+    и на Маке — обложка обычно собирается. Если Codex «out of credits», карточка
+    всё равно выходит с og-image (best-effort), обложку дорисуют позже."""
     env = {**os.environ, "NPZ_REPO": str(ROOT)}
     coverf = ROOT / "assets" / f"cover-{day}.png"
     try:
@@ -295,17 +297,17 @@ def main() -> int:
         return 2
 
     # ===== ТОЛЬКО обложка-заглушка (карточка на месте) =====
-    # Косметика. На VPS обложку не собрать → не спамим: тихо пробуем (на Маке
-    # сработает), заводим долг-инцидент один раз, без пинга.
+    # Косметика: пробуем собрать обложку (Codex-first, обычно чинит). Не смогли
+    # (Codex out of credits) → долг-инцидент один раз, без пинга/спама.
     if problems == ["cover-fallback"]:
         _, cover_ok = heal(day)
         if cover_ok:
             update_incidents([], day)
-            log(f"обложку за {day} досоздал (Codex доступен)")
+            log(f"обложку за {day} досоздал (Codex)")
             return 0
         if update_incidents(["cover-fallback"], day):
-            git_sync(f"watchdog: обложка за {day} — заглушка, нужен Mac-Codex (долг)")
-        log(f"карточка за {day} на месте; обложка ждёт Mac-Codex (VPS не умеет)")
+            git_sync(f"watchdog: обложка за {day} — заглушка, Codex не смог (долг)")
+        log(f"карточка за {day} на месте; обложка-заглушка (Codex out of credits?)")
         return 0
 
     # ===== Карточки нет, но события есть → КРИТИЧНО: самолечение =====
