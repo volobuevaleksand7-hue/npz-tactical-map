@@ -26,7 +26,7 @@
       '<div class="pp-vpn-h"><span class="pp-vpn-ic">' + SHIELD + '</span>' +
         '<div class="pp-vpn-t"><span class="pp-vpn-tag">доступ через VPN</span>' +
         '<b>' + head + '</b><div class="pp-vpn-b">' + body + '</div></div></div>' +
-      '<a class="pp-vpn-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">→ Получить доступ через hidemy</a>';
+      '<a class="pp-vpn-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">→ Открыть источник</a>';
     d.querySelector('.pp-vpn-btn').addEventListener('click', track);
     return d;
   }
@@ -54,11 +54,9 @@
       'width:34px;height:64px;border:1px solid var(--line,#e4e4e7);border-left:none;border-radius:0 12px 12px 0;' +
       'background:var(--surface,#fff);color:var(--teal,#12a594);cursor:pointer;box-shadow:3px 3px 14px rgba(0,0,0,.16);' +
       'transform:translateX(-100%);line-height:0}' +
-      // язычок стоит скрытым (виден ~4px край), раз в 30с плавно выезжает: половина → пауза → полностью → назад
-      '.nudge-tab.show{display:flex;animation:peekGuard 30s ease-in-out infinite}' +
+      // язычок всегда виден целиком у левого края — кликабельный щит; карточку сам не открывает, только по клику
+      '.nudge-tab.show{display:flex;transform:translateX(0)}' +
       '.nudge-tab.show:hover{transform:translateX(0)!important;transition:transform .3s ease}' +
-      '@keyframes peekGuard{0%,55%{transform:translateX(-90%)}63%,70%{transform:translateX(-48%)}' +
-      '80%,90%{transform:translateX(0)}100%{transform:translateX(-90%)}}' +
       '.guard-face{width:28px;height:28px;color:inherit;overflow:visible}' +
       '.guard-face .sh-body{fill:currentColor}' +
       '.guard-face .face{transform-box:fill-box;transform-origin:center;animation:gScan 30s ease-in-out infinite}' +
@@ -75,6 +73,7 @@
   }
   function dock(card, opts) {
     injectDockCSS();
+    var reg = window.__nudgeDocks || (window.__nudgeDocks = []);
     var tab = document.createElement('button');
     tab.type = 'button'; tab.className = 'nudge-tab';
     tab.setAttribute('aria-label', opts.label || 'Открыть');
@@ -83,10 +82,15 @@
     document.body.appendChild(tab);
     function persist(v) { try { v ? localStorage.setItem(opts.key, 'dock') : localStorage.removeItem(opts.key); } catch (e) {} }
     function collapse() { card.classList.add('nudge-out'); persist(true); setTimeout(function () { tab.classList.add('show'); }, 180); }
-    function expand() { tab.classList.remove('show'); card.classList.remove('nudge-out'); persist(false); }
+    function expand() {
+      reg.forEach(function (d) { if (d !== api) d.collapse(); }); // одна карточка открыта за раз — не перекрываются
+      tab.classList.remove('show'); card.classList.remove('nudge-out'); persist(false);
+    }
     tab.addEventListener('click', expand);
     if (opts.startDocked) tab.classList.add('show'); // card уже с .nudge-out (без анимации на загрузке)
-    return { collapse: collapse, expand: expand };
+    var api = { collapse: collapse, expand: expand };
+    reg.push(api);
+    return api;
   }
   window.__nudgeDock = dock;
 
@@ -100,7 +104,7 @@
       '<span class="pp-vpn-ic">' + SHIELD + '</span>' +
       '<div class="pp-vpn-float-t"><b>Источники недоступны в РФ?</b>' +
         '<span>Западные СМИ по теме — через VPN</span></div>' +
-      '<a class="pp-vpn-float-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">Открыть через VPN →</a>';
+      '<a class="pp-vpn-float-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">Открыть источник →</a>';
     d.querySelector('.pp-vpn-float-btn').addEventListener('click', track);
     return d;
   }
@@ -113,7 +117,7 @@
       var f = floatPromo();
       if (startDocked) f.classList.add('nudge-out'); // до вставки в DOM — без анимации-мигания
       document.body.appendChild(f);
-      var d = dock(f, { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'top:52%', startDocked: startDocked });
+      var d = dock(f, { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'bottom:96px', startDocked: startDocked });
       f.querySelector('.pp-vpn-float-x').addEventListener('click', d.collapse);
       return;
     }
