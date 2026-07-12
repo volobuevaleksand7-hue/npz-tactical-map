@@ -23,6 +23,7 @@ spec.loader.exec_module(bn)
 # добавлять сюда руками при появлении новой фиксированной страницы вне registry.
 KNOWN_EXTRA_URLS = {"/analytics", "/install"}
 NEWS_ARCHIVE_RE = re.compile(r"^/news/\d{4}-\d{2}(-\d{2})?$")  # день YYYY-MM-DD или месячный хаб YYYY-MM
+WAVE_SNAPSHOT_RE = re.compile(r"^/volna-dronov/\d{4}-\d{2}-\d{2}-\d{4}$")  # вечный снимок волны, не в реестре
 LOC_RE = re.compile(r"<loc>https?://[^/]+(/[^<]*)</loc>")
 
 
@@ -36,7 +37,7 @@ def check_orphans(sitemap, rows):
     known = bn.TOP_URLS | KNOWN_EXTRA_URLS | {r["url"] for r in rows}
     warnings = []
     for url in LOC_RE.findall(sitemap):
-        if url not in known and not NEWS_ARCHIVE_RE.match(url):
+        if url not in known and not NEWS_ARCHIVE_RE.match(url) and not WAVE_SNAPSHOT_RE.match(url):
             warnings.append(f"{url}: есть в sitemap.xml, но не в реестре/TOP_URLS — осиротевший/мусорный URL?")
     return warnings
 
