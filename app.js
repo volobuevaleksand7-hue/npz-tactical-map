@@ -1254,7 +1254,7 @@
 
   function initAzMap() {
     if (azsReady) return;
-    maps.az = L.map("mapAzs", { center: [49.5, 39.5], zoom: 5, minZoom: 4, maxZoom: 15, worldCopyJump: false, zoomControl: false });
+    maps.az = L.map("mapAzs", { center: [63, 95], zoom: 3, minZoom: 3, maxZoom: 15, worldCopyJump: false, zoomControl: false });
     maps.az.on("click", closeAnalyticsDropdown);
     L.control.zoom({ position: "bottomright" }).addTo(maps.az);
     tiles.az = baseTiles().addTo(maps.az);
