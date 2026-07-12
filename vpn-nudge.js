@@ -108,12 +108,12 @@
   document.addEventListener('DOMContentLoaded', function () {
     if (document.getElementById('map')) {
       var K = 'vpn_float_x';
-      var startDocked = false;
-      try { startDocked = !!localStorage.getItem(K); } catch (e) {}
+      // Всегда стартуем свёрнутым язычком слева: плавающая карточка перекрывала мобильный KPI-бар (v1.19.1).
+      var startDocked = true;
       var f = floatPromo();
       if (startDocked) f.classList.add('nudge-out'); // до вставки в DOM — без анимации-мигания
       document.body.appendChild(f);
-      var d = dock(f, { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'bottom:14px', startDocked: startDocked });
+      var d = dock(f, { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'top:52%', startDocked: startDocked });
       f.querySelector('.pp-vpn-float-x').addEventListener('click', d.collapse);
       return;
     }

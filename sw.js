@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v19';   // bump -> v1.19.0: хвост бэклога (мобильный KPI-бар, месячные хабы /news/YYYY-MM, embed /embed/radar, живой 404)
+var CACHE = 'npz-shell-v20';   // bump -> v1.19.1: VPN-нудж на картах свёрнут в левый язычок (не перекрывает мобильный KPI-бар)
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.
