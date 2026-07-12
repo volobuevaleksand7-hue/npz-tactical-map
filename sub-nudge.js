@@ -3,7 +3,7 @@
   // Friendly, one-time subscribe nudge for the main map. Replaces the static
   // #tgAlertBanner: slides in from the left AFTER the reader engages with the
   // map (pan/zoom/click) — i.e. once they're a bit loyal, gdebenz-style — with
-  // a 90s fallback so a purely passive reader still sees it once.
+  // a 45s fallback so a purely passive reader still sees it once.
   // Self-contained (injects its own CSS) so it can drop onto any map page.
   // ponytail: shown-once + dismiss tracked in localStorage; edit the 3 copy
   // constants below to tune. BOT is a single line to swap if the handle changes.
@@ -97,7 +97,7 @@
     }
     map.addEventListener("pointerdown", trigger, true); // пан/клик по метке
     map.addEventListener("wheel", trigger, { passive: true }); // зум колесом
-    t = setTimeout(trigger, 90000); // ponytail: fallback — пассивный читатель тоже увидит 1 раз
+    t = setTimeout(trigger, 45000); // ponytail: fallback — пассивный читатель тоже увидит 1 раз
   }
 
   var css = document.createElement("style");
