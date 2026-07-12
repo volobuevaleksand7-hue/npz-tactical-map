@@ -109,13 +109,12 @@ def incident_body(kind: str, day: str) -> str:
                 f"- если ударов за {day} нет → прогони сборщик strikes "
                 "(agents/update-prompt-strikes.md) за эту дату, затем gen-news;\n"
                 f"- проверь {NEWS_URL}")
-    return (f"Карточка за {day} есть, но обложка = заглушка og-image "
-            "(gen-news отработал раньше Codex-обложки).\n"
-            "Что сделать:\n"
-            f"- если assets/cover-{day}.png существует → `python3 agents/gen-news.py` "
-            "+ git-sync (подхватит обложку, деплой автоматом);\n"
-            f"- если файла нет → `python3 hermes/scripts/build-covers.py --dates {day}` "
-            "(Codex image_gen), затем gen-news.")
+    return (f"Карточка за {day} на месте, но обложка = заглушка og-image. "
+            "VPS сам обложку НЕ соберёт (OpenRouter 403 + Codex недоступен) — "
+            "нужен прогон на МАКЕ (там Codex работает).\n"
+            "Что сделать (с Мака):\n"
+            f"- `NPZ_REPO=~/Documents/npz-tactical-map python3 hermes/scripts/build-covers.py --dates {day}` "
+            "(Codex) → `python3 agents/gen-news.py` → git-sync + деплой.")
 
 
 # ---- Инбокс инцидентов (docs/agents/incidents.md) ---------------------------
@@ -216,44 +215,49 @@ def _run(cmd, timeout=300, env=None):
                           timeout=timeout, env=env)
 
 
-def heal(day: str) -> bool:
-    """Дособрать сводку за сегодня и запушить. -> True если карточка собралась
-    локально И git-sync запушил (деплой подхватит автоматически)."""
+def heal(day: str):
+    """Дособрать сводку за сегодня и запушить.
+    -> (card_ok, cover_ok): card_ok — карточка собралась и запушилась (гарантия),
+    cover_ok — реальная обложка (не заглушка). На VPS обложка обычно НЕ собирается
+    (OpenRouter 403 + Codex недоступен) — это ок: карточка всё равно выходит с
+    og-image, реальную обложку дорисует прогон на Маке."""
     env = {**os.environ, "NPZ_REPO": str(ROOT)}
     coverf = ROOT / "assets" / f"cover-{day}.png"
     try:
         _run([sys.executable, "agents/gen-news.py"])                  # карточка + архив
         if not coverf.exists():
-            # Codex есть и на VPS; фолбэк OpenRouter внутри build-covers. Best-effort.
+            # best-effort: на Маке Codex сделает обложку, на VPS — молча GENFAIL
             _run([sys.executable, "hermes/scripts/build-covers.py", "--dates", day],
                  timeout=600, env=env)
-            _run([sys.executable, "agents/gen-news.py"])              # вшить обложку
+            if coverf.exists():
+                _run([sys.executable, "agents/gen-news.py"])          # вшить обложку
     except Exception as e:  # noqa: BLE001
         log(f"самолечение: сборка упала: {e}")
-        return False
+        return False, False
 
-    card_built = (ROOT / "news" / f"{day}.html").exists() and \
+    card_ok = (ROOT / "news" / f"{day}.html").exists() and \
         f"news/{day}" in (ROOT / "news.html").read_text(encoding="utf-8")
-    if not card_built:
+    cover_ok = coverf.exists()
+    if not card_ok:
         log("самолечение: gen-news не создал карточку (нет данных за сегодня?)")
-        return False
+        return False, cover_ok
 
-    # застейджить сгенерённое и запушить штатным git-sync
     files = ["news.html", "news", "news-sitemap.xml", "rss.xml", "sitemap.xml",
              "data/news-archive.json"]
-    if coverf.exists():
+    if cover_ok:
         files.append(f"assets/cover-{day}.png")
     _run(["git", "-C", str(ROOT), "add", "--", *files])
     gs = ROOT / "agents" / "git-sync.sh"
     if not gs.exists():
         log("самолечение: git-sync.sh нет — собрал, но не запушил")
-        return False
+        return False, cover_ok
     r = _run(["bash", str(gs), f"watchdog self-heal: сводка за {day} досгенерена"],
              timeout=150)
-    pushed = "pushed" in (r.stdout + r.stderr) or "nothing" in (r.stdout + r.stderr)
-    log("самолечение git-sync: " + ((r.stdout + r.stderr).strip().splitlines()[-1]
-                                    if (r.stdout + r.stderr).strip() else f"rc={r.returncode}"))
-    return pushed
+    out = r.stdout + r.stderr
+    pushed = "pushed" in out or "nothing" in out
+    log("самолечение git-sync: " + (out.strip().splitlines()[-1] if out.strip()
+                                    else f"rc={r.returncode}"))
+    return pushed, cover_ok
 
 
 # ---- main -------------------------------------------------------------------
@@ -286,28 +290,45 @@ def main() -> int:
         log(f"OK: за {day} пока нет событий — сводка не нужна (тихий день)")
         return 0
 
-    what = "; ".join({"card-missing": "нет карточки", "cover-fallback": "обложка-заглушка"}
-                     .get(k, k) for k in problems)
     if dry:
-        log(f"[dry-run] нашёл проблему: {what}; чинил бы самолечением")
+        log(f"[dry-run] нашёл: {', '.join(problems)}; чинил бы самолечением")
         return 2
 
-    # САМОЛЕЧЕНИЕ
-    log(f"проблема: {what} — запускаю самолечение сводки за {day}")
-    if heal(day):
-        update_incidents([], day)                       # закрыть инцидент, если был
-        tg_send(f"🛠 Топливный фронт: сводка за {day} не вышла по расписанию — "
-                f"досгенерил автоматически, живая.\n{NEWS_URL}")
-        log(f"САМОЛЕЧЕНИЕ УСПЕШНО: сводка за {day} собрана и запушена")
+    # ===== ТОЛЬКО обложка-заглушка (карточка на месте) =====
+    # Косметика. На VPS обложку не собрать → не спамим: тихо пробуем (на Маке
+    # сработает), заводим долг-инцидент один раз, без пинга.
+    if problems == ["cover-fallback"]:
+        _, cover_ok = heal(day)
+        if cover_ok:
+            update_incidents([], day)
+            log(f"обложку за {day} досоздал (Codex доступен)")
+            return 0
+        if update_incidents(["cover-fallback"], day):
+            git_sync(f"watchdog: обложка за {day} — заглушка, нужен Mac-Codex (долг)")
+        log(f"карточка за {day} на месте; обложка ждёт Mac-Codex (VPS не умеет)")
         return 0
 
-    # не смогли починить — громкий алерт + инцидент-страховка
-    changed = update_incidents(problems, day)
-    tg_send(f"🔴 Топливный фронт — сводка за {day} НЕ вышла и самолечение НЕ помогло: "
-            f"{what}. Нужны руки.\n{NEWS_URL}")
+    # ===== Карточки нет, но события есть → КРИТИЧНО: самолечение =====
+    log(f"проблема: нет карточки за {day} (события есть) — самолечение")
+    card_ok, cover_ok = heal(day)
+    if card_ok:
+        update_incidents([], day)                       # закрыть card-инцидент
+        note = "" if cover_ok else " (обложка-заглушка, дорисуется на Маке)"
+        tg_send(f"🛠 Топливный фронт: сводка за {day} не вышла по расписанию — "
+                f"досгенерил автоматически, живая{note}.\n{NEWS_URL}")
+        if not cover_ok:                                # оставить долг по обложке
+            update_incidents(["cover-fallback"], day)
+        log(f"САМОЛЕЧЕНИЕ УСПЕШНО: карточка за {day} собрана; обложка="
+            f"{'реальная' if cover_ok else 'заглушка'}")
+        return 0
+
+    # карточку собрать не смогли — громкий алерт + инцидент
+    changed = update_incidents(["card-missing"], day)
+    tg_send(f"🔴 Топливный фронт — сводка за {day} НЕ вышла и самолечение НЕ помогло. "
+            f"Нужны руки.\n{NEWS_URL}")
     if changed:
         git_sync(f"watchdog: сводка за {day} — самолечение не помогло, инцидент")
-    log(f"ПРОВАЛ: {what} | самолечение не помогло | инцидент {'заведён' if changed else 'был'}")
+    log(f"ПРОВАЛ: карточка за {day} не собралась | инцидент {'заведён' if changed else 'был'}")
     return 2
 
 
