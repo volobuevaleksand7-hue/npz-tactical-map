@@ -87,9 +87,11 @@ def format_strike(strike):
     target = strike.get("target") or ""
     # target бывает длинным с описанием установок — берём до первого « — »
     target_short = target.split(" — ")[0].strip() if target else ""
-    kind = "ракетный удар" if strike.get("type") == "rocket" else "удар БПЛА"
+    is_rocket = strike.get("type") == "rocket"
+    kind = "Ракетный удар" if is_rocket else "Удар БПЛА"
+    weapon = "🚀" if is_rocket else "🛩"
     when = "%s, %s" % (rudate(strike.get("date")), msk_time(strike.get("time")))
-    lines = ["<b>💥 Зафиксирован %s</b>" % kind]
+    lines = ["<b>💥%s %s</b>" % (weapon, kind)]
     head = city
     if target_short:
         head = "%s — %s" % (city, target_short) if city else target_short

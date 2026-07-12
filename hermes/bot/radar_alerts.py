@@ -113,6 +113,28 @@ def selected_regions(alerts):
     return [r for r in regions if r in NPZ_REGIONS]
 
 
+def threat_icon(bpla, rocket):
+    """Значок по типу воздушной угрозы: БПЛА — 🛩, ракеты — 🚀, вместе — 🛩🚀."""
+    if bpla and rocket:
+        return "🛩🚀"
+    if rocket:
+        return "🚀"
+    if bpla:
+        return "🛩"
+    return "🔴"
+
+
+def threat_words(bpla, rocket):
+    """Словами: «БПЛА», «ракеты», «БПЛА и ракеты»."""
+    if bpla and rocket:
+        return "БПЛА и ракеты"
+    if rocket:
+        return "ракеты"
+    if bpla:
+        return "БПЛА"
+    return "опасность"
+
+
 def threat_label(threat):
     parts = []
     if threat.get("bpla"):
@@ -126,10 +148,11 @@ def format_notice(region, threat, status):
     msk = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=3)
     time_str = msk.strftime("%H:%M")
     cities = ", ".join(threat.get("cities", [])[:5])
+    icon = threat_icon(threat.get("bpla"), threat.get("rocket"))
     if status == "new":
-        head = "🔴 %s: опасность %s" % (region, threat_label(threat))
+        head = "%s %s: опасность %s" % (icon, region, threat_label(threat))
     elif status == "reminder":
-        head = "🔴 %s: напоминание, опасность сохраняется" % region
+        head = "%s %s: напоминание, опасность %s сохраняется" % (icon, region, threat_words(threat.get("bpla"), threat.get("rocket")))
     else:
         head = "🟢 %s: отбой опасности" % region
     lines = ["<b>%s</b>" % head, "⏰ %s МСК" % time_str]
@@ -170,6 +193,8 @@ def build_notifications(subscribers, radar, prev_state, now_ts=None):
                     "chat_id": str(chat_id),
                     "region": region,
                     "status": status,
+                    "bpla": bool(threat.get("bpla")),
+                    "rocket": bool(threat.get("rocket")),
                     "cities": threat.get("cities", []),
                     "text": format_notice(region, threat, status),
                 })
@@ -191,17 +216,28 @@ def send_message(token, chat_id, text):
 
 
 def format_group_text(notices):
-    """Собирает все new/reminder-нотисы одного chat_id в единое сообщение."""
+    """Собирает все new/reminder-нотисы одного chat_id в единое сообщение.
+    Значок у каждого региона — по типу угрозы (🛩 БПЛА / 🚀 ракеты), шапка адаптивная."""
     msk = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=3)
     time_str = msk.strftime("%H:%M")
-    lines = ["<b>🔴 Радар: угроза БПЛА / ракет</b>", "⏰ %s МСК" % time_str, "",
-             "⚠️ <b>Активные регионы:</b>"]
+    any_b = any(n.get("bpla") for n in notices)
+    any_r = any(n.get("rocket") for n in notices)
+    if any_b and any_r:
+        header = "🛩🚀 Радар: угроза с воздуха (БПЛА и ракеты)"
+    elif any_r:
+        header = "🚀 Радар: ракетная опасность"
+    elif any_b:
+        header = "🛩 Радар: угроза БПЛА"
+    else:
+        header = "🔴 Радар: воздушная опасность"
+    lines = ["<b>%s</b>" % header, "⏰ %s МСК" % time_str, "", "<b>Активные регионы:</b>"]
     for n in notices:
-        emoji = "🆕" if n["status"] == "new" else "🔴"
-        region = n["region"]
+        icon = threat_icon(n.get("bpla"), n.get("rocket"))
+        label = threat_words(n.get("bpla"), n.get("rocket"))
+        new_mark = " 🆕" if n["status"] == "new" else ""
         cities = n.get("cities", [])
         city_str = " (%s)" % ", ".join(cities[:5]) if cities else ""
-        lines.append("%s <b>%s</b>%s" % (emoji, region, city_str))
+        lines.append("%s <b>%s</b> — %s%s%s" % (icon, n["region"], label, city_str, new_mark))
     lines.append("")
     lines.append("🔔 <b>Если вы в этих регионах — примите меры безопасности.</b>")
     lines.append('📍 <a href="%s/radar.html">открыть карту радара</a>' % SITE)

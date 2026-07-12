@@ -64,9 +64,10 @@ def test_format_and_time():
     assert msk_time("23:30 UTC") == "02:30 МСК"  # перелив за полночь
     txt = format_strike(STRIKES[0])
     assert "Сызрань" in txt and "Сызранский НПЗ" in txt and "16:34 МСК" in txt
-    assert "удар БПЛА" in txt
-    assert "ракетный удар" in format_strike(STRIKES[1])
-    print("ok: format + time")
+    assert "Удар БПЛА" in txt and "💥🛩" in txt          # БПЛА-удар: дрон-значок
+    rock = format_strike(STRIKES[1])
+    assert "Ракетный удар" in rock and "💥🚀" in rock       # ракетный удар: ракета-значок
+    print("ok: format + time + icons")
 
 
 def test_region_norm():
