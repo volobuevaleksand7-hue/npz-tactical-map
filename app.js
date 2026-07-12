@@ -1884,7 +1884,12 @@
           if (!azsReady) initAzMap();
           loadAzsData().then(function () {
             renderAzsTab();
-            setTimeout(function () { maps.az.invalidateSize(); }, 60);
+            setTimeout(function () {
+              maps.az.invalidateSize();
+              // один раз при первом открытии кадрируем на всю РФ (Калининград→Камчатка);
+              // страна широкая — fitBounds сам подбирает зум под ширину экрана. Дальше юзер панит сам.
+              if (!maps.az._fitDone) { maps.az._fitDone = true; maps.az.fitBounds([[41, 19], [68, 178]], { padding: [16, 16] }); }
+            }, 60);
           });
         }
       });
