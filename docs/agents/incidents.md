@@ -31,9 +31,10 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
-## [OPEN] card-missing-2026-07-12
-status: OPEN
+## [RESOLVED] card-missing-2026-07-12
+status: RESOLVED
 opened: 2026-07-12 08:15 МСК — summary-watchdog
+resolved: 2026-07-12 11:55 МСК — Opus/Mac: причина — пайплайн пропустил пересборку (последний gen-news 00:55Z, до удара по Сызрани). Сгенерил обложку (Codex) + `gen-news.py` + деплой. Карточка за 12.07 живая.
 На живом /news НЕТ карточки-сводки за 2026-07-12.
 Что сделать:
 - если в data/strikes.json уже есть удары за 2026-07-12 → `python3 agents/gen-news.py` + git-sync + деплой;
