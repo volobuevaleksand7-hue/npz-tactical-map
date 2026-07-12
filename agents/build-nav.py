@@ -366,6 +366,23 @@ def ensure_search_assets(html):
     return html
 
 
+# ---- 4b) единый инжект VPN-баннера (vpn-nudge.js) на всех статических страницах ----
+# build-nav — единственный владелец: добавил страницу → баннер на ней есть автоматически и
+# переживает любой regenerate (раньше баннер вставляли вручную → рутины его затирали при
+# пересборке news/SEO). Идемпотентно. Карту (app.js) НЕ трогаем — там баннер уже в попапах.
+VPN_SCRIPT_TAG = '  <script defer src="/vpn-nudge.js"></script>\n'
+# app.js ЗАГРУЖЕН как скрипт (карта) — не по упоминанию в комменте (radar пишет «app.js initMobile»).
+APP_JS_LOADED = re.compile(r'src="[^"]*app\.js')
+
+
+def ensure_vpn_asset(html):
+    if 'vpn-nudge.js' in html or APP_JS_LOADED.search(html):
+        return html
+    if '</body>' in html:
+        return html.replace('</body>', VPN_SCRIPT_TAG + '</body>', 1)
+    return html
+
+
 def stamp_assets(html):
     def repl(m):
         attr, slash, fname = m.group(1), m.group(2), m.group(3)
@@ -430,6 +447,7 @@ def main():
         new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
         new = wire_dropdown(new)  # срезать старый инлайн-JS дропдауна + линковать shared /nav-dropdown.js
         new = ensure_search_assets(new)  # search.css/search.js в <head> (поиск на всех страницах)
+        new = ensure_vpn_asset(new)  # vpn-nudge.js перед </body> (VPN-баннер на всех статических страницах)
         new = stamp_assets(new)  # освежить ?v на styles.css/news.css/nav-dropdown.js — иначе правка не доедет до вернувшихся
         if new != html:
             f.write_text(new, encoding="utf-8"); changed += 1; print("nav/footer updated", f.relative_to(ROOT))
