@@ -14,8 +14,10 @@ image_gen (img2img по референсу; если реального фото
   python3 build-covers.py --all            # перегенерить все
   python3 build-covers.py --dates 2026-07-05,2026-07-04
 
-PRIMARY-бэкенд: OpenRouter (nano-banana, hermes/gen-cover-openrouter.py) — платный, обходит
-обнулённые free-tier квоты. ФОЛБЭК: codex exec image_gen, если у OpenRouter нет ключа/ошибка.
+PRIMARY-бэкенд: codex exec image_gen (бесплатно на Codex-воркспейсе — правило проекта
+covers-via-codex). ФОЛБЭК: OpenRouter (nano-banana, ПЛАТНЫЙ ~$0.04/картинка) — только если
+Codex не смог И явно задан env NPZ_COVERS_ALLOW_OPENROUTER=1 (иначе OpenRouter не трогаем,
+чтобы не жечь деньги: 2026-07 весь $10-лимит ключа утёк именно на nano-banana-обложки).
 """
 import argparse
 import importlib.util
@@ -155,7 +157,7 @@ def codex_gen(instruction):
 
 
 def openrouter_gen(m, ref, raw):
-    """PRIMARY: сгенерить сырую обложку через OpenRouter (nano-banana). True при успехе (raw записан)."""
+    """FALLBACK (платный, opt-in): сгенерить обложку через OpenRouter (nano-banana). True при успехе."""
     if not OPENROUTER_SCRIPT.exists():
         return False
     key = os.environ.get("OPENROUTER_API_KEY")
@@ -184,20 +186,25 @@ def build_one(date, m):
 
     ref = fetch_ref(m["src"], TMP / f"ref-{date}.png")
 
-    mode = "openrouter" + ("+ref" if ref else "")
-    if not openrouter_gen(m, ref, raw):
-        if ref:
-            instr = (f"Use your image_gen tool in EDIT / image-to-image mode. Input reference: {ref} "
-                     f"(real photo of the event). Derive a NEW photorealistic 1200x630 horizontal cover that KEEPS "
-                     f"the composition and subject (city skyline, smoke, industrial background), bright documentary "
-                     f"daylight, our clean style. Remove any watermark/text — NO letters or logos. "
-                     f"Save to exactly {raw} then ls -la it.")
-            mode = "codex-ref"
-        else:
-            instr = (f"Use your image_gen tool to generate a photorealistic 1200x630 horizontal image. {m['prompt']} "
-                     f"Save to exactly {raw} then ls -la it.")
-            mode = "codex-generated"
-        codex_gen(instr)
+    # PRIMARY: Codex (правило проекта — обложки через Codex; бесплатно на воркспейсе).
+    if ref:
+        instr = (f"Use your image_gen tool in EDIT / image-to-image mode. Input reference: {ref} "
+                 f"(real photo of the event). Derive a NEW photorealistic 1200x630 horizontal cover that KEEPS "
+                 f"the composition and subject (city skyline, smoke, industrial background), bright documentary "
+                 f"daylight, our clean style. Remove any watermark/text — NO letters or logos. "
+                 f"Save to exactly {raw} then ls -la it.")
+        mode = "codex-ref"
+    else:
+        instr = (f"Use your image_gen tool to generate a photorealistic 1200x630 horizontal image. {m['prompt']} "
+                 f"Save to exactly {raw} then ls -la it.")
+        mode = "codex-generated"
+    codex_gen(instr)
+
+    # FALLBACK: OpenRouter (nano-banana, ПЛАТНЫЙ) — только если Codex не смог И явно разрешено
+    # env-флагом. По умолчанию НЕ трогаем, чтобы не жечь деньги (см. правило covers-via-codex).
+    if not raw.exists() and os.environ.get("NPZ_COVERS_ALLOW_OPENROUTER") == "1":
+        if openrouter_gen(m, ref, raw):
+            mode += "+openrouter"
     if ref:
         try: ref.unlink(missing_ok=True)
         except Exception: pass
