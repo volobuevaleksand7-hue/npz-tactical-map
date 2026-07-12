@@ -1,23 +1,27 @@
 #!/usr/bin/env python3
-"""Сторож дневной сводки /news.
+"""Сторож-генератор дневной сводки /news.
 
-Проверяет ЖИВОЙ сайт (не git): вышла ли карточка-сводка за сегодня и стоит ли
-на ней реальная обложка (а не заглушка og-image). При провале:
-  1) пингует владельцу в Telegram;
-  2) заводит OPEN-инцидент в docs/agents/incidents.md с конкретными шагами фикса
-     и коммитит его через git-sync -> Hermes подхватит на следующем `git pull`
-     (см. HERMES.md §0, шаг 1a) и починит.
-Когда проблема исчезает — сам закрывает свой инцидент (RESOLVED (авто)).
-Ставится в cron на 8:15 и 20:15 МСК — после плановых сводок 08:00 / 20:00.
+Не просто следит, а САМ ЧИНИТ. Ставится в cron на VPS на 8:15 и 20:15 МСК
+(после плановых сводок 08:00/20:00). Проверяет живой /news и, если сводки за
+сегодня нет / обложка-заглушка, — сам дособерёт и запушит (деплой автоматом):
 
-Ловит два реальных провала из практики 11.07.2026:
-  card-missing  — карточки за сегодня нет на живом /news;
-  cover-fallback— карточка есть, но обложка = og-image (гонка cover->news).
+  1. решает, есть ли вообще события за сегодня (data/strikes.json + fuel-voices.json).
+     Нет событий → тихий день, это НЕ провал, ничего не делаем;
+  2. есть события, но карточки/обложки на живом сайте нет → САМОЛЕЧЕНИЕ:
+     build-covers.py (Codex — есть и на VPS) → gen-news.py → git-sync push;
+  3. успех → короткий пинг «досгенерил автоматически» + закрывает инцидент;
+  4. собрать НЕ смог (нет данных совсем / push упал) → ГРОМКИЙ пинг + OPEN-инцидент
+     в docs/agents/incidents.md (страховка).
+
+Почему генератор, а не «позови Гермеса»: инцидент-инбокс сам не исполняется —
+запущенные рутины (сборщики по слоям) не читают incidents.md, а полной сессии
+Гермеса по HERMES.md §0 в кроне нет. 12.07 сторож поймал провал в 08:15, но
+чинить было некому → сводка не вышла. Теперь чинит сам.
 
 Токен: env NPZ_BOT_TOKEN -> ~/.npz-bot/token. Чат: env NPZ_OWNER_CHAT -> 609952529.
-Запуск:  python3 agents/summary-watchdog.py         # тихо; пинг+инцидент только при проблеме
-         python3 agents/summary-watchdog.py --test  # тестовый пинг, без инцидента/git
-         python3 agents/summary-watchdog.py --selfcheck
+Запуск:  python3 agents/summary-watchdog.py            # проверка + самолечение
+         python3 agents/summary-watchdog.py --dry-run  # проверка без правок/push
+         python3 agents/summary-watchdog.py --test / --selfcheck
 """
 import json
 import os
@@ -193,6 +197,65 @@ def git_sync(msg: str) -> None:
         log(f"git-sync не выполнен: {e}")
 
 
+# ---- есть ли вообще события за сегодня (тихий день vs провал) ----------------
+def data_has_today(day: str) -> bool:
+    for fn, key in (("strikes.json", "strikes"), ("fuel-voices.json", "voices")):
+        try:
+            d = json.loads((ROOT / "data" / fn).read_text(encoding="utf-8"))
+            items = d.get(key, []) if isinstance(d, dict) else d
+            if any(str(x.get("date", ""))[:10] == day for x in items):
+                return True
+        except Exception:  # noqa: BLE001
+            pass
+    return False
+
+
+# ---- самолечение: собрать сводку и запушить ---------------------------------
+def _run(cmd, timeout=300, env=None):
+    return subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True,
+                          timeout=timeout, env=env)
+
+
+def heal(day: str) -> bool:
+    """Дособрать сводку за сегодня и запушить. -> True если карточка собралась
+    локально И git-sync запушил (деплой подхватит автоматически)."""
+    env = {**os.environ, "NPZ_REPO": str(ROOT)}
+    coverf = ROOT / "assets" / f"cover-{day}.png"
+    try:
+        _run([sys.executable, "agents/gen-news.py"])                  # карточка + архив
+        if not coverf.exists():
+            # Codex есть и на VPS; фолбэк OpenRouter внутри build-covers. Best-effort.
+            _run([sys.executable, "hermes/scripts/build-covers.py", "--dates", day],
+                 timeout=600, env=env)
+            _run([sys.executable, "agents/gen-news.py"])              # вшить обложку
+    except Exception as e:  # noqa: BLE001
+        log(f"самолечение: сборка упала: {e}")
+        return False
+
+    card_built = (ROOT / "news" / f"{day}.html").exists() and \
+        f"news/{day}" in (ROOT / "news.html").read_text(encoding="utf-8")
+    if not card_built:
+        log("самолечение: gen-news не создал карточку (нет данных за сегодня?)")
+        return False
+
+    # застейджить сгенерённое и запушить штатным git-sync
+    files = ["news.html", "news", "news-sitemap.xml", "rss.xml", "sitemap.xml",
+             "data/news-archive.json"]
+    if coverf.exists():
+        files.append(f"assets/cover-{day}.png")
+    _run(["git", "-C", str(ROOT), "add", "--", *files])
+    gs = ROOT / "agents" / "git-sync.sh"
+    if not gs.exists():
+        log("самолечение: git-sync.sh нет — собрал, но не запушил")
+        return False
+    r = _run(["bash", str(gs), f"watchdog self-heal: сводка за {day} досгенерена"],
+             timeout=150)
+    pushed = "pushed" in (r.stdout + r.stderr) or "nothing" in (r.stdout + r.stderr)
+    log("самолечение git-sync: " + ((r.stdout + r.stderr).strip().splitlines()[-1]
+                                    if (r.stdout + r.stderr).strip() else f"rc={r.returncode}"))
+    return pushed
+
+
 # ---- main -------------------------------------------------------------------
 def main() -> int:
     day = today()
@@ -200,32 +263,51 @@ def main() -> int:
         tg_send(f"✅ Тест сторожа сводки. Проверяю {NEWS_URL} за {day}.")
         log("тестовый пинг отправлен")
         return 0
+    dry = "--dry-run" in sys.argv
     try:
         html = fetch(NEWS_URL)
     except Exception as e:  # noqa: BLE001
         log(f"НЕ достучался до /news: {e}")
-        tg_send(f"⚠️ Сторож сводки не смог открыть {NEWS_URL} ({e}).")
+        if not dry:
+            tg_send(f"⚠️ Сторож сводки не смог открыть {NEWS_URL} ({e}).")
         return 1
 
     problems = check(day, html)
-    incidents_changed = update_incidents(problems, day)
 
+    # всё на месте — закрыть возможный вчерашний инцидент и выйти
     if not problems:
-        if incidents_changed:      # что-то авто-зарезолвилось
-            git_sync(f"watchdog: сводка за {day} восстановлена — закрыл инцидент(ы)")
-            log(f"OK: сводка за {day} на месте; закрыл прежний инцидент")
-        else:
-            log(f"OK: сводка за {day} на месте, обложка живая")
+        if update_incidents([], day) and not dry:
+            git_sync(f"watchdog: сводка за {day} на месте — закрыл инцидент(ы)")
+        log(f"OK: сводка за {day} на месте, обложка живая")
         return 0
 
-    labels = {"card-missing": "нет карточки-сводки",
-              "cover-fallback": "обложка = заглушка og-image"}
-    what = "; ".join(labels.get(k, k) for k in problems)
-    tg_send(f"🔴 Топливный фронт — сводка за {day} НЕ вышла: {what}.\n"
-            f"Завёл инцидент Гермесу (docs/agents/incidents.md), починит на heartbeat.\n{NEWS_URL}")
-    if incidents_changed:
-        git_sync(f"watchdog: сводка за {day} не вышла ({what}) — инцидент Гермесу")
-    log(f"ПРОБЛЕМА: {what} | инцидент {'заведён' if incidents_changed else 'уже был'}")
+    # карточки нет, но и событий за сегодня нет → тихий день, это НЕ провал
+    if problems == ["card-missing"] and not data_has_today(day):
+        log(f"OK: за {day} пока нет событий — сводка не нужна (тихий день)")
+        return 0
+
+    what = "; ".join({"card-missing": "нет карточки", "cover-fallback": "обложка-заглушка"}
+                     .get(k, k) for k in problems)
+    if dry:
+        log(f"[dry-run] нашёл проблему: {what}; чинил бы самолечением")
+        return 2
+
+    # САМОЛЕЧЕНИЕ
+    log(f"проблема: {what} — запускаю самолечение сводки за {day}")
+    if heal(day):
+        update_incidents([], day)                       # закрыть инцидент, если был
+        tg_send(f"🛠 Топливный фронт: сводка за {day} не вышла по расписанию — "
+                f"досгенерил автоматически, живая.\n{NEWS_URL}")
+        log(f"САМОЛЕЧЕНИЕ УСПЕШНО: сводка за {day} собрана и запушена")
+        return 0
+
+    # не смогли починить — громкий алерт + инцидент-страховка
+    changed = update_incidents(problems, day)
+    tg_send(f"🔴 Топливный фронт — сводка за {day} НЕ вышла и самолечение НЕ помогло: "
+            f"{what}. Нужны руки.\n{NEWS_URL}")
+    if changed:
+        git_sync(f"watchdog: сводка за {day} — самолечение не помогло, инцидент")
+    log(f"ПРОВАЛ: {what} | самолечение не помогло | инцидент {'заведён' if changed else 'был'}")
     return 2
 
 
