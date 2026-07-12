@@ -221,17 +221,6 @@ def compute_radar_status():
             sources.append(label)
     src_str = " · ".join(sources) if sources else ""
 
-    # Recent changes from radar-state.json (last 30 min)
-    prev_state = jload(RADAR_STATE, {"cities": {}, "timestamp": 0})
-    recent_changes = []
-    cutoff = time.time() - 1800  # 30 minutes
-    if prev_state.get("timestamp", 0) > cutoff:
-        prev_cities = prev_state.get("cities", {})
-        for key, state in prev_cities.items():
-            if state.get("bpla") or state.get("rocket"):
-                # Check if this was previously inactive (became active recently)
-                recent_changes.append(state.get("name", key.split("|")[0]))
-
     # Build message
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     msk = now_utc + datetime.timedelta(hours=3)
@@ -257,12 +246,6 @@ def compute_radar_status():
 
     if active_count == 0:
         lines.insert(2, "✅ <b>Нет активных угроз</b> — все NPZ-регионы чисты.\n")
-
-    if recent_changes:
-        lines.append("📋 <b>Изменения за 30 мин:</b>")
-        for c in recent_changes[:5]:
-            lines.append(f"  • {c}")
-        lines.append("")
 
     lines.append(f"🔗 <a href=\"{SITE}/radar.html\">Открыть карту радара</a>")
     if from_cache:

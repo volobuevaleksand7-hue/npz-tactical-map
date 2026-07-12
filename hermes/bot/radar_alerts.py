@@ -272,25 +272,39 @@ def main():
     if args.send:
         token = open(os.path.join(BOT_DIR, "token")).read().strip()
         sent = 0
-        # Шлём групповые (одно сообщение на chat_id)
-        for chat_id, group in grouped.items():
-            text = format_group_text(group)
+        retry = set()  # chat_id с транзиентным сбоем (429/5xx/сеть) → откатить состояние, повторить
+
+        def _deliver(chat_id, text):
+            nonlocal sent
             try:
                 resp = send_message(token, chat_id, text)
                 if resp.get("ok"):
                     sent += 1
             except urllib.error.HTTPError as e:
                 print("FAIL chat=%s: HTTP Error %d" % (chat_id, e.code))
-        # Clear-нотисы шлём по-отдельности (их редко)
+                if e.code != 403:  # 403 = заблокировал бота: не повторяем; прочее (429/5xx) — повтор
+                    retry.add(str(chat_id))
+            except Exception as e:  # таймаут/сеть: НЕ роняем весь прогон (иначе дубли всем на след. запуске)
+                print("FAIL chat=%s: %s" % (chat_id, e))
+                retry.add(str(chat_id))
+
+        # Групповые (одно сообщение на chat_id) + clear-нотисы по-отдельности
+        for chat_id, group in grouped.items():
+            _deliver(chat_id, format_group_text(group))
         for notice in clears:
-            try:
-                resp = send_message(token, notice["chat_id"], notice["text"])
-                if resp.get("ok"):
-                    sent += 1
-            except urllib.error.HTTPError as e:
-                print("FAIL chat=%s: HTTP Error %d" % (notice["chat_id"], e.code))
+            _deliver(notice["chat_id"], notice["text"])
+
+        # Откат last_sent для неудачных чатов → на след. прогоне повторим, алерт не теряется.
+        # ponytail: откат по всему чату, а не по региону; при смешанном успех+сбой одного чата
+        # возможен один повтор успевшей части — редко, дешевле точечной пер-региональной бухгалтерии.
+        for chat_id in retry:
+            if chat_id in state:
+                next_state[chat_id] = state[chat_id]
+            else:
+                next_state.pop(chat_id, None)
+
         jsave(STATE_PATH, next_state)
-        print("radar-alerts: sent %d/%d messages" % (sent, len(grouped) + len(clears)))
+        print("radar-alerts: sent %d/%d messages (%d к повтору)" % (sent, len(grouped) + len(clears), len(retry)))
     else:
         for notice in notices:
             print("[%s] %s -> %s" % (notice["status"], notice["chat_id"], notice["region"]))

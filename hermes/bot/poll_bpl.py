@@ -120,8 +120,14 @@ def normalize_region(name):
     return None
 
 
-def ensure_sub(chat_id, name=""):
-    subs = load_subs()
+def ensure_sub(chat_id, name="", subs=None):
+    """Вернуть (создав при необходимости) запись подписчика.
+    Если передан subs — работаем ПО НЕМУ и НЕ сохраняем (сохранит вызывающий тем же subs);
+    иначе — сами load+save. Это чинит баг «настройки не сохраняются»: раньше хендлер делал
+    load_subs() и ensure_sub() (со своим load), правил вторую копию, а сохранял первую."""
+    own = subs is None
+    if own:
+        subs = load_subs()
     sub = subs["subscribers"].setdefault(str(chat_id), {
         "status": "active",
         "since": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
@@ -134,7 +140,8 @@ def ensure_sub(chat_id, name=""):
     sub.setdefault("alerts", {"enabled": True, "regions": ["all"], "interval_min": 60, "threats": True, "attacks": True})
     sub["alerts"].setdefault("threats", True)
     sub["alerts"].setdefault("attacks", True)
-    save_subs(subs)
+    if own:
+        save_subs(subs)
     return sub
 
 
@@ -380,7 +387,7 @@ async def on_timer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     raw = data.split(":", 1)[1]
     subs = load_subs()
-    sub = ensure_sub(chat_id, "")
+    sub = ensure_sub(chat_id, "", subs=subs)
 
     if raw == "changes":
         sub["alerts"]["interval_min"] = 0
@@ -409,7 +416,7 @@ async def cmd_interval(update: Update, context: ContextTypes.DEFAULT_TYPE):
     name, chat_id = user_display(update)
 
     subs = load_subs()
-    sub = ensure_sub(chat_id, name)
+    sub = ensure_sub(chat_id, name, subs=subs)
 
     # Если передан аргумент — изменить интервал (обратная совместимость)
     if args:
@@ -493,7 +500,7 @@ async def on_alerts_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     field = data.split(":")[1]
 
     subs = load_subs()
-    sub = ensure_sub(chat_id, "")
+    sub = ensure_sub(chat_id, "", subs=subs)
     alerts = sub.setdefault("alerts", {})
     current = alerts.get(field, True)
     alerts[field] = not current
