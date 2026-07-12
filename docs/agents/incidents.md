@@ -30,3 +30,12 @@ opened: <дата МСК> — <кто/что завёл>
 ```
 
 <!-- INCIDENTS BELOW (newest first) -->
+
+## [OPEN] card-missing-2026-07-12
+status: OPEN
+opened: 2026-07-12 08:15 МСК — summary-watchdog
+На живом /news НЕТ карточки-сводки за 2026-07-12.
+Что сделать:
+- если в data/strikes.json уже есть удары за 2026-07-12 → `python3 agents/gen-news.py` + git-sync + деплой;
+- если ударов за 2026-07-12 нет → прогони сборщик strikes (agents/update-prompt-strikes.md) за эту дату, затем gen-news;
+- проверь https://npz-tactical-map.vercel.app/news
