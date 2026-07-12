@@ -445,12 +445,16 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 
 /* --- MOBILE BOTTOM SHEET (analytics drawer, built by initMobile()) --- */
 .mob-sheet{position:fixed;bottom:0;left:0;right:0;z-index:2000;display:none;flex-direction:column;background:var(--surface);border-top:1px solid var(--ink-dim);border-radius:16px 16px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.5);max-height:55vh;transform:translateY(0);transition:transform .3s cubic-bezier(.4,0,.2,1)}
-.mob-sheet.collapsed{transform:translateY(calc(100% - 44px))}
-/* свёрнутый шит съезжает вниз transform'ом и его тело нависает над нижней навигацией — тапы должны проходить сквозь, живой остаётся только ручка */
+.mob-sheet.collapsed{transform:translateY(calc(100% - 80px))}/* peek = handle + KPI strip (#6) */
+/* свёрнутый шит съезжает вниз transform'ом и его тело нависает над нижней навигацией — тапы должны проходить сквозь, живыми остаются только ручка и KPI-полоса */
 .mob-sheet.collapsed{pointer-events:none}
-.mob-sheet.collapsed .mob-sheet-handle{pointer-events:auto}
+.mob-sheet.collapsed .mob-sheet-handle,.mob-sheet.collapsed .mob-sheet-kpi{pointer-events:auto}
+/* 80px peek is a touch taller than handle+kpi content — hide tabs/body outright instead of tuning a magic pixel number that'd drift with font rendering */
+.mob-sheet.collapsed .mob-sheet-tabs,.mob-sheet.collapsed .mob-sheet-body{display:none}
 .mob-sheet-handle{flex-shrink:0;padding:10px 0 4px;text-align:center;cursor:pointer}
 .mob-sheet-handle span{display:inline-block;width:36px;height:4px;background:var(--ink-dim);border-radius:2px}
+.mob-sheet-kpi{flex-shrink:0;padding:2px 14px 12px;text-align:center;font:600 13px/1.3 system-ui,sans-serif;color:var(--ink);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mob-sheet-kpi b{color:var(--teal)}
 .mob-sheet-tabs{display:flex;gap:0;padding:0 8px 6px;overflow-x:auto;flex-shrink:0}
 .mob-sheet-tab{flex:1;min-width:0;padding:8px 4px;border:none;background:transparent;color:var(--ink-dim);font:600 12px/1 system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-align:center;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
 .mob-sheet-tab.active{color:var(--ink);border-bottom-color:var(--ink)}
@@ -897,8 +901,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   /* очистка хвостов от удалённого нижнего нав-бара */
   .app{padding-bottom:env(safe-area-inset-bottom)!important}
   .mob-sheet{bottom:env(safe-area-inset-bottom)!important}
-  /* свёрнутая панель прячется ПОЛНОСТЬЮ (без 44px-грабера) — карта чистая, открывает кнопка 📊 */
-  .mob-sheet.collapsed{transform:translateY(101%)!important}
+  /* collapsed-transform override removed (#6): identical to base rule at :448, dead weight */
 
   /* СТРАЙКБАР: из громоздкого 2-рядного блока → тонкая прокручиваемая полоса */
   .strikebar{

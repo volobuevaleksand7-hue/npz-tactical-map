@@ -1,0 +1,211 @@
+<!-- Встроить виджет на свой сайт:
+<iframe src="https://npz-tactical-map.vercel.app/embed/radar" width="340" height="180" style="border:0;border-radius:10px" loading="lazy" title="Радар угроз — Топливный фронт РФ"></iframe>
+-->
+<meta charset="utf-8">
+<title>Радар угроз — виджет</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<style>
+  :root{color-scheme:light dark}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:13px;line-height:1.4;color:#1a1a1a;background:#fff;
+    padding:10px 12px;overflow-x:hidden;
+  }
+  @media (prefers-color-scheme:dark){
+    body{color:#e8e8e8;background:#16181c}
+  }
+  .card{max-width:100%}
+  .headline{font-size:15px;font-weight:700;margin:0 0 4px;display:flex;align-items:center;gap:6px}
+  .headline.clear{color:#1a8a3e}
+  .headline.active{color:#c62828}
+  @media (prefers-color-scheme:dark){
+    .headline.clear{color:#4fd07a}
+    .headline.active{color:#ff6b6b}
+  }
+  .regions{margin:0 0 6px;color:inherit;opacity:.85;word-break:break-word}
+  .meta{font-size:11px;opacity:.6;margin:0 0 4px}
+  .disclaimer{font-size:10px;opacity:.55;margin:0 0 8px}
+  .backlink{
+    display:inline-block;font-size:12px;font-weight:600;text-decoration:none;
+    color:#0b5fff;border-top:1px solid rgba(127,127,127,.25);padding-top:6px;width:100%;
+  }
+  @media (prefers-color-scheme:dark){
+    .backlink{color:#6ea8ff}
+  }
+  .backlink:hover{text-decoration:underline}
+</style>
+
+<div class="card">
+  <p class="headline" id="headline">Загрузка…</p>
+  <p class="regions" id="regionsLine"></p>
+  <p class="meta" id="updatedLine"></p>
+  <p class="disclaimer">OSINT-оценка, не официальное оповещение.</p>
+  <a class="backlink" href="https://npz-tactical-map.vercel.app/radar" target="_blank" rel="noopener">
+    Топливный фронт РФ · радар угроз →
+  </a>
+</div>
+
+<script>
+(function(){
+  var REGION_CAP = 6;
+  var REFRESH_MS = 120000; // ponytail: intentionally tighter than radar.html's ~5min poll — a framed embed benefits from fresher counts
+
+  // источник истины: radar.html renderPanel/activeCount (~L618-1123) — держать в синхроне.
+  // Widget must show the SAME number/set the /radar panel shows, not a raw all-regions count —
+  // that panel is scoped to the 14 NPZ_REGIONS via alias-matching (raw JSON keys differ,
+  // e.g. "Ростовская область" vs "Ростовская обл.").
+  var NPZ_REGIONS = [
+    "Краснодарский край", "Ленинградская обл.", "Ярославская обл.", "Москва",
+    "Московская обл.", "Республика Крым", "Запорожская область",
+    "Луганская Народная Республика", "Донецкая Народная Республика",
+    "г. Севастополь", "Волгоградская обл.", "Самарская обл.",
+    "Саратовская обл.", "Ростовская обл."
+  ];
+  var REGION_ALIASES = {
+    "Москва и МО": "Москва", "Москва и Московская обл.": "Москва",
+    "Автономная Республика Крым": "Республика Крым",
+    "Московская область": "Московская обл.", "Ленинградская область": "Ленинградская обл.",
+    "Краснодар": "Краснодарский край", "Краснодарский": "Краснодарский край",
+    "Ростов": "Ростовская обл.", "Ростовская": "Ростовская обл.",
+    "Самара": "Самарская обл.", "Самарская": "Самарская обл.",
+    "Саратов": "Саратовская обл.", "Саратовская": "Саратовская обл.",
+    "Волгоград": "Волгоградская обл.", "Волгоградская": "Волгоградская обл.",
+    "Ярославль": "Ярославская обл.", "Ярославская": "Ярославская обл.",
+    "Крым": "Республика Крым", "Севастополь": "г. Севастополь",
+    "ДНР": "Донецкая Народная Республика", "ЛНР": "Луганская Народная Республика",
+    "Запорожская": "Запорожская область"
+  };
+  var NPZ_SET = {};
+  NPZ_REGIONS.forEach(function(r){ NPZ_SET[r] = true; });
+
+  function norm(s){ return (s || "").toLowerCase().trim(); }
+
+  function matchRegion(name){
+    if (!name) return null;
+    var n = norm(name);
+    if (NPZ_SET[name]) return name;
+    for (var ak in REGION_ALIASES){
+      if (norm(ak) === n) return REGION_ALIASES[ak];
+    }
+    for (var ak2 in REGION_ALIASES){
+      if (n.indexOf(norm(ak2)) === 0) return REGION_ALIASES[ak2];
+    }
+    for (var i = 0; i < NPZ_REGIONS.length; i++){
+      if (norm(NPZ_REGIONS[i]) === n) return NPZ_REGIONS[i];
+    }
+    for (var j = 0; j < NPZ_REGIONS.length; j++){
+      if (n.indexOf(norm(NPZ_REGIONS[j])) === 0) return NPZ_REGIONS[j];
+    }
+    return null;
+  }
+
+  function emptyThreat(){ return { bpla:false, rocket:false, uab:false, fpv:false, aviation:false, explosion:false }; }
+
+  // ponytail: no pvo field anywhere here — pvo is NEVER a threat signal per project policy
+  // (radar.html excludes it from hasThreat/activeCount too; confirmed by reading its source).
+  //
+  // radar.html's three source blocks are NOT identical (cities ~L887-903 vs regions ~L907-922
+  // vs districts ~L927-943): only regions/districts read rocketOnRegion/explosionOnRegion and
+  // set `explosion`. Mirror that split exactly rather than one shared merge.
+  function mergeCity(t, c){
+    if (c.bpla || c.bplaDim) t.bpla = true;
+    if (c.uab || c.uabDim) t.uab = true;
+    if (c.fpv) t.fpv = true;
+    if (c.rocket || c.rk || c.rocket_level) t.rocket = true;
+    if (c.aviation) t.aviation = true;
+  }
+  function mergeRegionLike(t, rd){
+    if (rd.bpla || rd.bplaDim) t.bpla = true;
+    if (rd.uab || rd.uabDim) t.uab = true;
+    if (rd.fpv) t.fpv = true;
+    if (rd.rocket || rd.rocket_level || rd.rocketOnRegion) t.rocket = true;
+    if (rd.aviation) t.aviation = true;
+    if (rd.explosionOnRegion) t.explosion = true;
+  }
+
+  function hasThreat(t){ return !!(t && (t.bpla || t.rocket || t.uab || t.fpv || t.aviation || t.explosion)); }
+
+  // Faithful port of radar.html processRadar's threats[] build (cities + regions + districts, ~L880-943)
+  function buildThreats(data){
+    var threats = {};
+    var cities = Array.isArray(data.cities) ? data.cities : Object.keys(data.cities || {}).map(function(k){ return data.cities[k]; });
+    cities.forEach(function(c){
+      var region = matchRegion(c.region) || matchRegion(c.name);
+      if (!region) return;
+      if (!threats[region]) threats[region] = emptyThreat();
+      mergeCity(threats[region], c);
+    });
+    var regions = data.regions || {};
+    Object.keys(regions).forEach(function(rName){
+      var region = matchRegion(rName);
+      if (!region) return;
+      if (!threats[region]) threats[region] = emptyThreat();
+      mergeRegionLike(threats[region], regions[rName] || {});
+    });
+    var districts = data.districts || {};
+    Object.keys(districts).forEach(function(dKey){
+      var dd = districts[dKey] || {};
+      var region = matchRegion(dd.region_ru);
+      if (!region) return;
+      if (!threats[region]) threats[region] = emptyThreat();
+      mergeRegionLike(threats[region], dd);
+    });
+    return threats;
+  }
+
+  function formatMsk(ts){
+    return new Date(ts * 1000).toLocaleTimeString("ru-RU", {
+      hour: "2-digit", minute: "2-digit", timeZone: "Europe/Moscow"
+    });
+  }
+
+  function render(data){
+    var threats = buildThreats(data || {});
+    var active = NPZ_REGIONS.filter(function(r){ return hasThreat(threats[r]); });
+    var n = active.length;
+
+    var headline = document.getElementById("headline");
+    var regionsLine = document.getElementById("regionsLine");
+    var updatedLine = document.getElementById("updatedLine");
+
+    if (n === 0){
+      headline.className = "headline clear";
+      headline.textContent = "⛽ Регионы НПЗ: угроз нет";
+      regionsLine.textContent = "";
+    } else {
+      headline.className = "headline active";
+      headline.textContent = "⛽ Регионы НПЗ под угрозой: " + n;
+      var shown = active.slice(0, REGION_CAP);
+      var rest = n - shown.length;
+      regionsLine.textContent = shown.join(", ") + (rest > 0 ? " +" + rest + " ещё" : "");
+    }
+
+    var ts = data && data.timestamp;
+    updatedLine.textContent = (typeof ts === "number" && isFinite(ts))
+      ? "обновлено " + formatMsk(ts) + " МСК"
+      : "";
+  }
+
+  function showFallback(hadPriorData){
+    if (hadPriorData) return; // keep last-known render on screen
+    document.getElementById("headline").className = "headline";
+    document.getElementById("headline").textContent = "⚠ Данные недоступны";
+    document.getElementById("regionsLine").textContent = "";
+    document.getElementById("updatedLine").textContent = "";
+  }
+
+  var gotDataOnce = false;
+  function load(){
+    fetch("/data/radar-state.json", { cache: "no-store" })
+      .then(function(r){ if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+      .then(function(data){ gotDataOnce = true; render(data); })
+      .catch(function(){ showFallback(gotDataOnce); });
+  }
+
+  load();
+  setInterval(load, REFRESH_MS);
+})();
+</script>

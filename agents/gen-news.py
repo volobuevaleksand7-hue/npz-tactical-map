@@ -38,6 +38,11 @@ MONTHS = [
     "", "января", "февраля", "марта", "апреля", "мая", "июня",
     "июля", "августа", "сентября", "октября", "ноября", "декабря"
 ]
+# именительный падеж — для заголовков месячных хабов («Июнь 2026», а не «Июня 2026»)
+MONTHS_NOM = [
+    "", "январь", "февраль", "март", "апрель", "май", "июнь",
+    "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"
+]
 
 SEO_KEYWORDS = (
     "дефицит бензина, лимиты АЗС, удары по НПЗ, "
@@ -95,6 +100,19 @@ def weekday_ru(iso: str) -> str:
                 "пятница", "суббота", "воскресенье"][d.weekday()]
     except (ValueError, IndexError):
         return ""
+
+
+def month_label(ym: str) -> str:
+    """2026-06 → июнь 2026 (именительный, для заголовков)."""
+    try:
+        y, m = ym.split("-")
+        return f"{MONTHS_NOM[int(m)]} {y}"
+    except (ValueError, IndexError):
+        return ym
+
+
+def cap(s: str) -> str:
+    return s[:1].upper() + s[1:] if s else s
 
 
 def today_iso() -> str:
@@ -230,6 +248,36 @@ def build_archive() -> dict:
 
     ARCHIVE_PATH.write_text(json.dumps(archive, ensure_ascii=False, indent=1), encoding="utf-8")
     return archive
+
+
+def briefs_by_month(briefs: dict) -> dict:
+    """Группирует даты архива по месяцу 'YYYY-MM' → список дат внутри месяца
+    (новые сверху, как и общий порядок архива)."""
+    out = {}
+    for d in briefs:
+        out.setdefault(d[:7], []).append(d)
+    for ym in out:
+        out[ym].sort(reverse=True)
+    return out
+
+
+def month_stats(dates: list, briefs: dict) -> dict:
+    """Сводные цифры месяца для SEO-блока хаба: удары, из них по НПЗ/энергетике,
+    дней в архиве, топ городов."""
+    strikes_all = []
+    for d in dates:
+        strikes_all.extend(briefs.get(d, {}).get("strikes", []))
+    n_ref = sum(1 for s in strikes_all if is_refinery(s))
+    city_counts = {}
+    for s in strikes_all:
+        c = str(s.get("city", "")).strip()
+        if c:
+            city_counts[c] = city_counts.get(c, 0) + 1
+    top_cities = sorted(city_counts.items(), key=lambda kv: (-kv[1], kv[0]))[:5]
+    return {
+        "n_strikes": len(strikes_all), "n_refinery": n_ref,
+        "n_days": len(dates), "top_cities": top_cities,
+    }
 
 
 def brief_headline(date: str, strikes: list) -> str:
@@ -553,6 +601,44 @@ def balance_section(snapshot: dict) -> str:
 """
 
 
+def brief_card_html(d: str, b: dict, is_latest: bool = False) -> str:
+    """Карточка одной даты — общая для ленты /news и месячных хабов."""
+    st = b.get("strikes", [])
+    vo = b.get("voices", [])
+    c_rel, c_ex = cover_for(d)
+    c_path = asset_ver(c_rel) if c_ex else "/og-image.png"
+    n_ref = sum(1 for s in st if is_refinery(s))
+    meta_bits = [f"{len(st)} {plural(len(st), 'удар', 'удара', 'ударов')}"]
+    if n_ref:
+        meta_bits.append(f"🛢 {n_ref} по НПЗ/энергетике")
+    if vo:
+        meta_bits.append(f"🗣 {len(vo)} {plural(len(vo), 'голос', 'голоса', 'голосов')}")
+    return f"""        <a class="brief-card{' is-latest' if is_latest else ''}" href="/news/{d}">
+          <div class="brief-card-cover" style="background-image:url('{c_path}')">
+            <span class="brief-card-date">{rus_date_nodots(d)}</span>
+          </div>
+          <div class="brief-card-body">
+            <h3 class="brief-card-title">{escape(brief_headline(d, st))}</h3>
+            <p class="brief-card-teaser">{escape(brief_teaser(st, vo))}</p>
+            <div class="brief-card-meta">{' · '.join(escape(m) for m in meta_bits)}</div>
+          </div>
+        </a>"""
+
+
+def month_archive_row(months: dict) -> str:
+    """Компактный ряд ссылок на месячные хабы (новые месяцы слева)."""
+    yms = sorted(months.keys(), reverse=True)
+    chips = [f'<a class="brief-nav-btn" href="/news/{ym}">{cap(month_label(ym))} '
+             f'<span style="opacity:.6">({len(months[ym])})</span></a>' for ym in yms]
+    return f"""      <section class="news-section news-archive-months">
+        <h2>🗓 Архив по месяцам</h2>
+        <div class="brief-nav" style="flex-wrap:wrap">
+{chr(10).join(chips)}
+        </div>
+      </section>
+"""
+
+
 # ═══════════════════════════════ ИНДЕКС /news ═══════════════════════════════
 
 def gen_index(archive: dict) -> str:
@@ -604,30 +690,7 @@ def gen_index(archive: dict) -> str:
 """
 
     # карточки архива (кроме свежей — она в герое)
-    cards = []
-    for d in dates:
-        b = briefs[d]
-        st = b.get("strikes", [])
-        vo = b.get("voices", [])
-        c_rel, c_ex = cover_for(d)
-        c_path = asset_ver(c_rel) if c_ex else "/og-image.png"
-        n_ref = sum(1 for s in st if is_refinery(s))
-        meta_bits = [f"{len(st)} {plural(len(st), 'удар', 'удара', 'ударов')}"]
-        if n_ref:
-            meta_bits.append(f"🛢 {n_ref} по НПЗ/энергетике")
-        if vo:
-            meta_bits.append(f"🗣 {len(vo)} {plural(len(vo), 'голос', 'голоса', 'голосов')}")
-        is_latest = (d == latest)
-        cards.append(f"""        <a class="brief-card{' is-latest' if is_latest else ''}" href="/news/{d}">
-          <div class="brief-card-cover" style="background-image:url('{c_path}')">
-            <span class="brief-card-date">{rus_date_nodots(d)}</span>
-          </div>
-          <div class="brief-card-body">
-            <h3 class="brief-card-title">{escape(brief_headline(d, st))}</h3>
-            <p class="brief-card-teaser">{escape(brief_teaser(st, vo))}</p>
-            <div class="brief-card-meta">{' · '.join(escape(m) for m in meta_bits)}</div>
-          </div>
-        </a>""")
+    cards = [brief_card_html(d, briefs[d], d == latest) for d in dates]
 
     archive_grid = f"""      <section class="news-section news-archive">
         <h2>🗓 Все сводки по дням</h2>
@@ -638,6 +701,8 @@ def gen_index(archive: dict) -> str:
       </section>
 """
 
+    months_row = month_archive_row(briefs_by_month(briefs))
+
     return (
         head_html(title, description, f"{SITE}/news", cover_url, jsonld)
         + header_html(f"Сводок в архиве: {len(dates)}")
@@ -645,6 +710,7 @@ def gen_index(archive: dict) -> str:
         + hero
         + f'      {DISCLAIMER_HTML}\n'
         + balance_section(snapshot)
+        + months_row
         + archive_grid
         + CTA_HTML
         + '\n    </div>\n  </main>\n\n'
@@ -686,13 +752,15 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
     }
     jsonld = f'<script type="application/ld+json">{json.dumps(news_article, ensure_ascii=False)}</script>'
 
-    # JSON-LD BreadcrumbList (Главная / Сводки / дата)
+    # JSON-LD BreadcrumbList (Главная / Сводки / Месяц / дата)
+    month_ym = date[:7]
     breadcrumb = {
         "@context": "https://schema.org", "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Топливный фронт РФ", "item": SITE + "/"},
             {"@type": "ListItem", "position": 2, "name": "Сводки", "item": SITE + "/news"},
-            {"@type": "ListItem", "position": 3, "name": date_rus, "item": f"{SITE}/news/{date}"},
+            {"@type": "ListItem", "position": 3, "name": cap(month_label(month_ym)), "item": f"{SITE}/news/{month_ym}"},
+            {"@type": "ListItem", "position": 4, "name": date_rus, "item": f"{SITE}/news/{date}"},
         ],
     }
     jsonld += f'\n  <script type="application/ld+json">{json.dumps(breadcrumb, ensure_ascii=False)}</script>'
@@ -712,7 +780,7 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
         head_html(title, description, f"{SITE}/news/{date}", cover_url, jsonld),
         header_html(f"Сводка за {rus_date_short(date)}"),
         '  <main class="news-main">\n    <div class="news-container">\n',
-        f"""      <nav class="brief-crumb"><a href="/news">📰 Все сводки</a> <span>/</span> {date_rus}</nav>
+        f"""      <nav class="brief-crumb"><a href="/news">📰 Все сводки</a> <span>/</span> <a href="/news/{month_ym}">{cap(month_label(month_ym))}</a> <span>/</span> {date_rus}</nav>
       <section class="news-hero">
         <img class="news-hero-image" src="{cover_path}" alt="Сводка за {date_rus}" width="1200" height="630" loading="eager">
         <span class="hero-kicker">{weekday_ru(date)}, {rus_date_short(date)}</span>
@@ -766,6 +834,106 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
     parts.append(CTA_HTML)
     parts.append('\n    </div>\n  </main>\n\n')
     parts.append(FOOTER_HTML)
+    return "".join(parts)
+
+
+# ═══════════════════════════════ хаб /news/YYYY-MM ═══════════════════════════════
+
+def gen_month_page(ym: str, dates: list, archive: dict, prev_ym, next_ym) -> str:
+    """Месячный архив-хаб: SEO-лендинг «удары по НПЗ <месяц> <год>» + список дней
+    месяца, ссылающихся на уже существующие /news/<date> страницы."""
+    briefs = archive.get("briefs", {})
+    stats = month_stats(dates, briefs)
+    label = month_label(ym)          # "июнь 2026"
+    label_cap = cap(label)           # "Июнь 2026"
+    n_strikes_word = plural(stats["n_strikes"], "удар", "удара", "ударов")
+    n_days_word = plural(stats["n_days"], "день", "дня", "дней")
+    canonical = f"{SITE}/news/{ym}"
+
+    cover_rel, cover_exists = cover_for(dates[0]) if dates else ("", False)
+    cover_path = asset_ver(cover_rel) if cover_exists else "/og-image.png"
+    cover_url = SITE + cover_path
+
+    title = f"Удары по НПЗ и топливная обстановка — {label} | Топливный фронт РФ"
+    description = (f"Архив сводок за {label}: {stats['n_strikes']} {n_strikes_word} по РФ, "
+                    f"из них {stats['n_refinery']} по НПЗ/энергетике, за {stats['n_days']} {n_days_word} "
+                    f"в архиве. Хроника по дням с картой и источниками.")[:300]
+
+    # JSON-LD: CollectionPage со списком дневных сводок месяца
+    item_list = {
+        "@type": "ItemList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "url": f"{SITE}/news/{d}", "name": f"Сводка за {rus_date(d)}"}
+            for i, d in enumerate(dates)
+        ],
+    }
+    collection = {
+        "@context": "https://schema.org", "@type": "CollectionPage",
+        "name": title, "description": description, "url": canonical,
+        "mainEntity": item_list,
+    }
+    jsonld = f'<script type="application/ld+json">{json.dumps(collection, ensure_ascii=False)}</script>'
+    breadcrumb = {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Топливный фронт РФ", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Сводки", "item": SITE + "/news"},
+            {"@type": "ListItem", "position": 3, "name": label_cap, "item": canonical},
+        ],
+    }
+    jsonld += f'\n  <script type="application/ld+json">{json.dumps(breadcrumb, ensure_ascii=False)}</script>'
+
+    top_cities_str = ", ".join(f"{escape(c)} ({n})" for c, n in stats["top_cities"])
+    lead_extra = f", основные цели — {top_cities_str}" if top_cities_str else ""
+
+    chips = f"""        <div class="balance-chips">
+          <div class="bchip red"><span class="bchip-n">{stats['n_strikes']}</span><span class="bchip-l">{n_strikes_word} за месяц</span></div>
+          <div class="bchip amber"><span class="bchip-n">{stats['n_refinery']}</span><span class="bchip-l">по НПЗ/энергетике</span></div>
+          <div class="bchip green"><span class="bchip-n">{stats['n_days']}</span><span class="bchip-l">{n_days_word} в архиве</span></div>
+        </div>
+"""
+
+    nav_prev = (f'<a class="brief-nav-btn prev" href="/news/{prev_ym}">← {cap(month_label(prev_ym))}</a>'
+                if prev_ym else '<span class="brief-nav-btn disabled">← раньше</span>')
+    nav_next = (f'<a class="brief-nav-btn next" href="/news/{next_ym}">{cap(month_label(next_ym))} →</a>'
+                if next_ym else '<span class="brief-nav-btn disabled">позже →</span>')
+
+    cards = [brief_card_html(d, briefs.get(d, {"strikes": [], "voices": []})) for d in dates]
+
+    parts = [
+        head_html(title, description, canonical, cover_url, jsonld),
+        header_html(f"Архив за {label}"),
+        '  <main class="news-main">\n    <div class="news-container">\n',
+        f"""      <nav class="brief-crumb"><a href="/news">📰 Все сводки</a> <span>/</span> {label_cap}</nav>
+      <section class="news-hero">
+        <img class="news-hero-image" src="{cover_path}" alt="Архив сводок за {label}" width="1200" height="630" loading="eager">
+        <span class="hero-kicker">Архив по месяцам</span>
+        <h1>Удары по НПЗ и топливная обстановка — {label}</h1>
+        <p class="section-sub">Хроника ударов и дефицита топлива за {label}: {stats['n_strikes']} {n_strikes_word} за {stats['n_days']} {n_days_word}{lead_extra}.</p>
+        {DISCLAIMER_HTML}
+      </section>
+""",
+        f"""      <section class="news-section" id="month-stats">
+        <h2>📊 Итоги месяца — {label}</h2>
+{chips}      </section>
+""",
+        f"""      <section class="news-section news-archive">
+        <h2>🗓 Сводки по дням — {label}</h2>
+        <div class="brief-grid">
+{chr(10).join(cards)}
+        </div>
+      </section>
+""",
+        f"""      <nav class="brief-nav">
+        {nav_prev}
+        <a class="brief-nav-btn center" href="/news">Все сводки</a>
+        {nav_next}
+      </nav>
+""",
+        CTA_HTML,
+        '\n    </div>\n  </main>\n\n',
+        FOOTER_HTML,
+    ]
     return "".join(parts)
 
 
@@ -835,6 +1003,16 @@ def main():
         (NEWS_DIR / f"{d}.html").write_text(
             gen_date_page(d, archive, prev_date, next_date), encoding="utf-8")
     print(f"[gen-news] ✅ news/<date>.html — {len(dates)} страниц")
+
+    # месячные архив-хабы news/<YYYY-MM>.html — SEO-лендинги «удары по нпз <месяц> <год>»
+    months = briefs_by_month(archive.get("briefs", {}))
+    yms = sorted(months.keys())  # по возрастанию — для соседей prev/next по месяцу
+    for i, ym in enumerate(yms):
+        prev_ym = yms[i - 1] if i - 1 >= 0 else None   # старее
+        next_ym = yms[i + 1] if i + 1 < len(yms) else None  # свежее
+        (NEWS_DIR / f"{ym}.html").write_text(
+            gen_month_page(ym, months[ym], archive, prev_ym, next_ym), encoding="utf-8")
+    print(f"[gen-news] ✅ news/<YYYY-MM>.html — {len(yms)} месячных хабов ({', '.join(yms)})")
 
     # nav/footer в news.html + news/*.html — заполняет плейсхолдер выше единым
     # меню/футером из реестра (иначе свежесгенеренные страницы теряют

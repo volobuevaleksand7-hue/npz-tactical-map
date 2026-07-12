@@ -169,6 +169,7 @@
     sheet.setAttribute("aria-label", "Аналитическая панель");
     sheet.innerHTML =
       '<div class="mob-sheet-handle"><span></span></div>' +
+      '<div class="mob-sheet-kpi" role="button" tabindex="0" aria-label="Свернуть/развернуть панель"></div>' +
       '<div class="mob-sheet-tabs">' +
         '<button class="mob-sheet-tab active" data-tab="balance" aria-label="Национальный баланс">Баланс</button>' +
         '<button class="mob-sheet-tab" data-tab="strikes" aria-label="Лента ударов">Удары</button>' +
@@ -272,10 +273,12 @@
       if (handle) handle.focus();
     }
 
-    // FAB toggles sheet
-    fab.addEventListener("click", function () {
+    // FAB / KPI strip toggle sheet (same logic, no duplication)
+    function toggleSheet() {
       if (sheet.classList.contains("collapsed")) openSheet(); else closeSheet();
-    });
+    }
+    fab.addEventListener("click", toggleSheet);
+    bindButton(sheet.querySelector(".mob-sheet-kpi"), toggleSheet);
 
     // Escape closes sheet
     sheet.addEventListener("keydown", function (e) {
@@ -498,7 +501,7 @@
   }
 
   function renderAll() {
-    renderBalance(); renderNpz(); renderLogistics(); renderRegions();
+    renderBalance(); renderKpiBar(); renderNpz(); renderLogistics(); renderRegions();
     renderTicker(); renderSyncMeta();
     renderRoads(); renderCrimea(); renderHistory(); renderForecast(); renderEconomy(); renderStrikes(); renderFeed(); renderPrices();
     renderAzs(); renderVoices(); renderGrid();
@@ -560,6 +563,22 @@
     var c = { down: 0, partial: 0, operational: 0 };
     (S.state.refineries || []).forEach(function (r) { c[r.status] = (c[r.status] || 0) + 1; });
     return c;
+  }
+
+  /* ---------- MOBILE KPI STRIP ---------- */
+  // компактная сводка в свёрнутом .mob-sheet (первый экран мобилки) — те же цифры, что в десктопной левой колонке
+  function renderKpiBar() {
+    var el = document.querySelector(".mob-sheet-kpi");
+    if (!el) return;
+    var nb = S.state && S.state.national_balance;
+    var pct = (nb && nb.capacity_offline_pct != null) ? esc(nb.capacity_offline_pct) + "%" : "—";
+    var down = S.state ? esc(countByStatus().down) : "—";
+    var d7 = "—";
+    if (S.strikes) {
+      var cutoff = isoMinusDays(todayISO(), 6);
+      d7 = strikeList().filter(function (s) { return s.date && s.date >= cutoff; }).length;
+    }
+    el.innerHTML = '<b>' + pct + '</b> выбито · <b>' + down + '</b> стоит · <b>' + esc(d7) + '</b> уд./7д';
   }
 
   /* ---------- BALANCE ---------- */

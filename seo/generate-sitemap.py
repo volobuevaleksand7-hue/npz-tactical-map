@@ -31,6 +31,7 @@ EXCLUDE = {
     "seo/meta-tags.html",    # internal template, not public
     "support.html",          # скрытая страница донатов — НЕ индексировать
     "404.html",              # кастомная 404 (noindex) — не место в sitemap
+    "embed/radar.html",      # встраиваемый виджет (noindex) — фрагмент для iframe, не самостоятельная страница
 }
 
 

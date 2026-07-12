@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/fonts.css">
-  <link rel="stylesheet" href="/styles.css?v=3d5a1fd6">
+  <link rel="stylesheet" href="/styles.css?v=4b441cca">
   <link rel="stylesheet" href="/news.css?v=e2bbf493">
   <link rel="stylesheet" href="/search.css?v=5a32b7c1">
   <style>
@@ -28,6 +28,13 @@
     .nf-top5-h{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--ink-dim);font-weight:700;text-transform:uppercase;margin-bottom:8px}
     .nf-top5 a{display:block;padding:8px 10px;border-radius:9px;text-decoration:none;color:var(--ink);font-size:13.5px;font-weight:600}
     .nf-top5 a:hover{background:var(--surface2);color:var(--teal)}
+    .nf-status{max-width:440px;margin:0 auto 20px;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:13px}
+    .nf-status[hidden]{display:none}
+    .nf-status a{text-decoration:none;color:var(--ink);font-weight:700;padding:6px 11px;border-radius:8px;background:var(--surface2);border:1px solid var(--line)}
+    .nf-status a:hover{color:var(--teal)}
+    .nf-status a.nf-status-down{color:var(--red)}
+    .nf-status a.nf-status-strikes{color:var(--amber)}
+    .nf-status-sep{color:var(--ink-dim)}
   </style>
   <script src="/metrika.js" async></script>
 </head>
@@ -106,6 +113,12 @@
     <h1 class="nf-h">Такого раздела нет</h1>
     <p class="nf-sub">Страница удалена или адрес введён неверно. Попробуйте поиск — или один из разделов ниже:</p>
 
+    <div class="nf-status" id="nfStatus" hidden>
+      <a href="/refineries" class="nf-status-down" id="nfStatusDown"></a>
+      <span class="nf-status-sep" id="nfStatusSep">·</span>
+      <a href="/news" class="nf-status-strikes" id="nfStatusStrikes"></a>
+    </div>
+
     <div class="nf-search" id="searchInlineMount"></div>
 
     <div class="nf-actions">
@@ -135,6 +148,58 @@
   </script>
   <script defer src="/nav-dropdown.js?v=06476ddc"></script>
   <script defer src="/search.js?v=8b14567c"></script>
-  <script defer src="/vpn-nudge.js?v=6a37c401"></script>
+  <script defer src="/vpn-nudge.js?v=7fe02e2b"></script>
+  <script>
+    // ponytail: mini-status strip, progressive enhancement — same date math as app.js renderKpiBar()
+    (function () {
+      var downCount = null, strikeCount = null;
+      function plural(n, one, few, many) {
+        n = Math.abs(n) % 100;
+        var n1 = n % 10;
+        if (n > 10 && n < 20) return many;
+        if (n1 > 1 && n1 < 5) return few;
+        if (n1 === 1) return one;
+        return many;
+      }
+      function todayISO() { return new Date().toISOString().slice(0, 10); }
+      function isoMinusDays(iso, n) {
+        var d = new Date(iso + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() - n);
+        return d.toISOString().slice(0, 10);
+      }
+      function reveal() {
+        var wrap = document.getElementById("nfStatus");
+        var down = document.getElementById("nfStatusDown");
+        var strikes = document.getElementById("nfStatusStrikes");
+        var visible = 0;
+        if (Number.isFinite(downCount)) {
+          down.hidden = false; visible++;
+          down.textContent = downCount + " НПЗ остановлено";
+        } else down.hidden = true;
+        if (Number.isFinite(strikeCount)) {
+          strikes.hidden = false; visible++;
+          strikes.textContent = strikeCount + " " + plural(strikeCount, "удар", "удара", "ударов") + " за 7 дней";
+        } else strikes.hidden = true;
+        document.getElementById("nfStatusSep").hidden = visible < 2;
+        wrap.hidden = visible === 0;
+      }
+      fetch("/data/fuel-state.json")
+        .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function (d) {
+          if (!d || !Array.isArray(d.refineries)) throw 0;
+          downCount = d.refineries.filter(function (r) { return r && r.status === "down"; }).length;
+        })
+        .catch(function () { downCount = null; })
+        .then(reveal);
+      fetch("/data/strikes.json")
+        .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function (d) {
+          if (!d || !Array.isArray(d.strikes)) throw 0;
+          var cutoff = isoMinusDays(todayISO(), 6);
+          strikeCount = d.strikes.filter(function (s) { return s.date && s.date >= cutoff; }).length;
+        })
+        .catch(function () { strikeCount = null; })
+        .then(reveal);
+    })();
+  </script>
 </body>
 </html>

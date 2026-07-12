@@ -22,7 +22,7 @@ spec.loader.exec_module(bn)
 # Страницы, которые живут в sitemap, но не идут через реестр seo-topics.jsonl —
 # добавлять сюда руками при появлении новой фиксированной страницы вне registry.
 KNOWN_EXTRA_URLS = {"/analytics", "/install"}
-NEWS_ARCHIVE_RE = re.compile(r"^/news/\d{4}-\d{2}-\d{2}$")
+NEWS_ARCHIVE_RE = re.compile(r"^/news/\d{4}-\d{2}(-\d{2})?$")  # день YYYY-MM-DD или месячный хаб YYYY-MM
 LOC_RE = re.compile(r"<loc>https?://[^/]+(/[^<]*)</loc>")
 
 
