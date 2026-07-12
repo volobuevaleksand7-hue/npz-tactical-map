@@ -13,7 +13,16 @@
   var BODY  = "Сайт могут заблокировать. В Telegram всегда рабочая ссылка на карту, оповещения о тревогах и сводки об ударах и дефиците топлива.";
 
   var K = "sub_nudge_x";
-  var TG_ICON = '<span style="font-size:15px">✈️</span>';
+  // Telegram-сторож: синий диск, серьёзные глаза/брови, самолётик снизу (сибling к guard-щиту VPN)
+  var TG_ICON =
+    '<svg class="guard-face" viewBox="0 0 26 26" aria-hidden="true">' +
+      '<circle class="sh-body" cx="13" cy="13" r="11"/>' +
+      '<g class="face">' +
+        '<path class="brow" d="M8 9.6 L11 10.5"/><path class="brow" d="M18 9.6 L15 10.5"/>' +
+        '<circle class="eye" cx="9.9" cy="12.2" r="1.5"/><circle class="eye" cx="16.1" cy="12.2" r="1.5"/>' +
+        '<path class="plane" d="M7.6 17.6 L18.6 14.3 L13.3 19.9 L12.3 17 Z"/>' +
+      '</g>' +
+    '</svg>';
   var st; try { st = localStorage.getItem(K); } catch (e) {}
   if (st === "done") return; // уже подписался / поставил на экран — больше не показываем
 
@@ -42,7 +51,7 @@
     var xbtn = card.querySelector(".sub-nudge-x");
     var dockFn = window.__nudgeDock;
     if (dockFn) {
-      var d = dockFn(card, { key: K, label: "Подписка в Telegram", icon: TG_ICON, pos: "top:38%", startDocked: !!sd });
+      var d = dockFn(card, { key: K, label: "Подписка в Telegram", icon: TG_ICON, pos: "top:38%", accent: "#2AABEE", startDocked: !!sd });
       xbtn.addEventListener("click", d.collapse);
     } else {
       xbtn.addEventListener("click", function () { done(); card.remove(); });

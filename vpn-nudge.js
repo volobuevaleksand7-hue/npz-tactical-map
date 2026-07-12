@@ -33,18 +33,44 @@
 
   // Dock: свернуть плавающую карточку у левого края в вертикальный «язычок» (не удалять) —
   // тап по язычку возвращает карточку. Общий для vpn-nudge и sub-nudge (экспортим в window).
+  // Guard-щит с серьёзным лицом (глаза моргают, брови сдвинуты) — иконка VPN-язычка.
+  var GUARD_SHIELD =
+    '<svg class="guard-face" viewBox="0 0 24 26" aria-hidden="true">' +
+      '<path class="sh-body" d="M12 2.4 20 5.4 V11 c0 5.4-3.4 8.6-8 11 C8.4 19.6 4 16.4 4 11 V5.4 Z"/>' +
+      '<g class="face">' +
+        '<path class="brow" d="M8.5 8.1 L11 9"/><path class="brow" d="M15.5 8.1 L13 9"/>' +
+        '<circle class="eye" cx="9.7" cy="11" r="1.45"/><circle class="eye" cx="14.3" cy="11" r="1.45"/>' +
+        '<path class="mouth" d="M10.4 14.6 L13.6 14.6"/>' +
+      '</g>' +
+    '</svg>';
+
   function injectDockCSS() {
     if (document.getElementById('nudge-dock-css')) return;
     var s = document.createElement('style'); s.id = 'nudge-dock-css';
     s.textContent =
       '.nudge-out{transform:translateX(-135%)!important;opacity:0!important;pointer-events:none!important;' +
       'transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .32s ease!important}' +
-      '.nudge-tab{position:fixed;left:0;z-index:1200;display:none;flex-direction:column;align-items:center;gap:5px;' +
-      'width:30px;padding:12px 0;border:1px solid var(--line,#e4e4e7);border-left:none;border-radius:0 11px 11px 0;' +
+      '.nudge-tab{position:fixed;left:0;z-index:1200;display:none;align-items:center;justify-content:center;' +
+      'width:34px;height:64px;border:1px solid var(--line,#e4e4e7);border-left:none;border-radius:0 12px 12px 0;' +
       'background:var(--surface,#fff);color:var(--teal,#12a594);cursor:pointer;box-shadow:3px 3px 14px rgba(0,0,0,.16);' +
-      'transform:translateX(-100%);transition:transform .3s ease;line-height:0}' +
-      '.nudge-tab.show{display:flex;transform:translateX(0)}' +
-      '.nudge-tab .nt-chev{font-size:12px;color:var(--ink-dim,#8a8a8a)}';
+      'transform:translateX(-100%);line-height:0}' +
+      // язычок стоит скрытым (виден ~4px край), раз в 30с плавно выезжает: половина → пауза → полностью → назад
+      '.nudge-tab.show{display:flex;animation:peekGuard 30s ease-in-out infinite}' +
+      '.nudge-tab.show:hover{transform:translateX(0)!important;transition:transform .3s ease}' +
+      '@keyframes peekGuard{0%,55%{transform:translateX(-90%)}63%,70%{transform:translateX(-48%)}' +
+      '80%,90%{transform:translateX(0)}100%{transform:translateX(-90%)}}' +
+      '.guard-face{width:28px;height:28px;color:inherit;overflow:visible}' +
+      '.guard-face .sh-body{fill:currentColor}' +
+      '.guard-face .face{transform-box:fill-box;transform-origin:center;animation:gScan 30s ease-in-out infinite}' +
+      '.guard-face .eye{fill:#fff;transform-box:fill-box;transform-origin:center;animation:gBlink 30s infinite}' +
+      '.guard-face .brow,.guard-face .mouth{stroke:#fff;stroke-width:1.3;stroke-linecap:round;fill:none}' +
+      '.guard-face .plane{fill:#fff}' +
+      '.nudge-tab.show:hover .eye,.nudge-tab.show:hover .face{animation:none}' +
+      // моргает и коротко «смотрит по сторонам» только когда снаружи (80–90% цикла)
+      '@keyframes gBlink{0%,83%,86%,89%,100%{transform:scaleY(1)}84.5%,87.5%{transform:scaleY(.12)}}' +
+      '@keyframes gScan{0%,80%,92%,100%{transform:translateX(0)}84%{transform:translateX(-1.2px)}89%{transform:translateX(1.2px)}}' +
+      '@media(prefers-reduced-motion:reduce){.nudge-tab.show{animation:none;transform:translateX(-90%)}' +
+      '.guard-face .eye,.guard-face .face{animation:none}}';
     document.head.appendChild(s);
   }
   function dock(card, opts) {
@@ -52,8 +78,8 @@
     var tab = document.createElement('button');
     tab.type = 'button'; tab.className = 'nudge-tab';
     tab.setAttribute('aria-label', opts.label || 'Открыть');
-    if (opts.pos) tab.style.cssText = opts.pos;
-    tab.innerHTML = opts.icon + '<span class="nt-chev">›</span>';
+    tab.style.cssText = (opts.pos || '') + (opts.accent ? ';color:' + opts.accent : '');
+    tab.innerHTML = opts.icon;
     document.body.appendChild(tab);
     function persist(v) { try { v ? localStorage.setItem(opts.key, 'dock') : localStorage.removeItem(opts.key); } catch (e) {} }
     function collapse() { card.classList.add('nudge-out'); persist(true); setTimeout(function () { tab.classList.add('show'); }, 180); }
@@ -87,7 +113,7 @@
       var f = floatPromo();
       if (startDocked) f.classList.add('nudge-out'); // до вставки в DOM — без анимации-мигания
       document.body.appendChild(f);
-      var d = dock(f, { key: K, label: 'Доступ через VPN', icon: SHIELD, pos: 'bottom:14px', startDocked: startDocked });
+      var d = dock(f, { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'bottom:14px', startDocked: startDocked });
       f.querySelector('.pp-vpn-float-x').addEventListener('click', d.collapse);
       return;
     }
