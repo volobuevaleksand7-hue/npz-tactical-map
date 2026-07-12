@@ -1,116 +1,64 @@
-# Инструкция Гермесу: слой-трипвайр «Newsader» (быстрый источник кандидатов)
+# Трипвайр внешних каналов → кандидаты в удары (реализовано)
 
-**Дата:** 2026-07-11 · **Автор:** оркестратор (Mac) · **Статус:** ТЗ, к реализации на VPS
-**Куда встраивается:** соседний rumor-источник к [[TZ_strike-candidates-pipeline]] — НЕ боевой слой.
+**Дата:** 2026-07-12 · **Автор:** оркестратор (Mac) · **Статус:** код готов и протестирован на Маке; Гермесу — поставить крон на VPS + учитывать на сводке.
+**Родственный слой:** [[TZ_strike-candidates-pipeline]] (radar-map.ru). Это ВТОРОЙ источник в ту же воронку.
 
-## Идея
+## Архитектура (одна воронка, каналы — сменные источники)
 
-YouTube-канал **Newsader** (`channel_id UCS-cgYslpMpH5FkxJ2e0Vpg`) очень быстро выкладывает
-ролики о свежих ударах по РФ: нефтебазы, НПЗ, портовые терминалы, суда теневого флота, мосты,
-энергообъекты. Заголовки уже несут «город + тип цели» (напр. «ПЫЛАЮТ В ТВЕРИ И ПОД СТАВРОПОЛЕМ»,
-«Ильский НПЗ», «ТАГАНРОГ… нефтебаза»). Нам нужен **трипвайр**: тянуть заголовки, вытаскивать
-город+цель, класть как `confidence:"rumor"` кандидатов. В `strikes.json` — только после
-ручного/Гермес-подтверждения, как и radar-кандидаты.
-
-⚠️ Канал проукраинский и кликбейтный («ВСУ размазывают», «минус 18 судов»). Берём ТОЛЬКО факт
-«что и где», в нейтральной формулировке. Триумфализм/пропаганду не тащим ([[npz-neutral-osint-guard]]).
-
-## Жёсткое ограничение доступа (проверено 2026-07-11)
-
-- ✅ **RSS-лента работает без авторизации, headless-безопасно** — это основной механизм на VPS:
-  `https://www.youtube.com/feeds/videos.xml?channel_id=UCS-cgYslpMpH5FkxJ2e0Vpg`
-  Отдаёт 15 последних: `<yt:videoId>`, `<title>`, `<published>` (ISO). Ни cookies, ни ключа.
-- ❌ **Субтитры через yt-dlp на VPS блокируются** — «Sign in to confirm you're not a bot».
-  yt-dlp без cookies не тянет ни метаданные, ни авто-титры. Субтитры — ТОЛЬКО опционально
-  и только при наличии cookies-файла (см. ниже). Для трипвайра субтитры НЕ обязательны —
-  заголовков достаточно.
-
-## Что построить: `agents/newsader-watch.py`
-
-Скриптовый слой (без claude), переиспользует хелперы из `agents/strike-candidates.py`
-(`geocode_city`, `_city_pattern`, фетч `cities` с radar-map.ru). Логика:
-
-1. Фетч RSS (urllib, UA задан), распарсить `videoId + title + published` (stdlib
-   `xml.etree.ElementTree`, неймспейсы `yt:` и atom).
-2. Для каждого нового videoId (дедуп по `data/newsader-seen.json` — множество id):
-   - матч `NEWSADER_TARGET_RE` по ЗАГОЛОВКУ (список целей шире топливного — добавь суда/мост/энерго);
-   - `geocode_city(title, cities)` — поставить город/координаты; без города всё равно кандидат
-     (`geocoded:false`, «город уточняется»);
-   - выпустить кандидат в схеме `to_candidate` из strike-candidates, но с:
-     `source_label:"newsader"`, `source_url:"https://www.youtube.com/watch?v=<id>"`,
-     `confidence:"rumor"`, `status:"candidate"`, `date/time` из `published` (+3ч → МСК),
-     `target` = matched keyword, `title` нейтральный: «Сообщение о ударе по <город>» — БЕЗ
-     копирования кликбейта из ролика.
-3. Писать `data/newsader-candidates.json` (та же обёртка `generated_at/disclaimer/candidates[]`,
-   что у strike-candidates). НЕ трогать `strikes.json`.
-4. Пуш через `bash agents/git-sync.sh "data(newsader): $(date -u +%Y-%m-%dT%H:%MZ)"`
-   (autostash-safe, см. [[npz-git-sync-hard-reset-hazard]]).
-
-Расширенный фильтр целей (цели канала шире, чем только топливо):
-```python
-NEWSADER_TARGET_RE = re.compile(
-  r"нпз|нефтезавод|нефтеперераб|нефтебаз|нефтехранил|нефтетерминал|нефтеналив|"
-  r"терминал|топлив|бензин|гсм|"
-  r"танкер|судн|суда|флот|порт|"
-  r"мост|"
-  r"энергообъект|энергомост|подстанц|грэс|тэц|электро|"
-  r"впк|завод|склад", re.IGNORECASE)
 ```
-Признак удара (STRIKE_RE) по заголовку НЕ требуй — весь канал про удары; хватает
-цель-ключ ИЛИ геокодированный город + один из глаголов канала («горит/взорв/сожгл/пылают/поражен»).
-
-### RSS-парсер (готовый кусок — вставить как есть)
-```python
-import urllib.request, xml.etree.ElementTree as ET
-RSS = "https://www.youtube.com/feeds/videos.xml?channel_id=UCS-cgYslpMpH5FkxJ2e0Vpg"
-NS = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015"}
-def fetch_rss():
-    req = urllib.request.Request(RSS, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=25) as r:
-        root = ET.fromstring(r.read())
-    out = []
-    for e in root.findall("a:entry", NS):
-        out.append({
-            "id": e.find("yt:videoId", NS).text,
-            "title": e.find("a:title", NS).text,
-            "published": e.find("a:published", NS).text,  # ISO8601 UTC
-        })
-    return out
+sources.json (реестр)  →  collect.py  →  data/strike-candidates.json (общее озеро, rumor)
+                                              │
+                          radar: strike-candidates.py  ─┘  (льёт в то же озеро)
+                                              ▼
+                     ПОДТВЕРЖДЕНИЕ (Гермес на сводке 08:00/20:00):
+                     GDELT (strike-confirm.py) + корреляция источников + ручная оценка
+                                              ▼
+                          промоушен → data/strikes.json → gen-news сводка
 ```
 
-## Крон (VPS)
+- **`agents/sources.json`** — реестр каналов. Добавить канал = дописать объект (`type:"youtube_rss"`
+  сейчас; `telegram` — TODO). Первый: Newsader (`UCS-cgYslpMpH5FkxJ2e0Vpg`).
+- **`agents/collect.py`** — стадия сбора. Тянет **публичную RSS** канала (headless, БЕЗ авторизации —
+  в отличие от yt-dlp, который на VPS ловит бот-чек), фильтрует заголовки по целям
+  (топливо/суда/мосты/энерго), геокодит город справочником radar-map.ru, **мержит в то же
+  `data/strike-candidates.json`**, что и radar (дедуп по videoId и город+дата). В `strikes.json` НЕ пишет.
 
-Каждые 20 мин — RSS дёшев, канал частит:
+## Что Гермесу сделать на VPS
+
+**1. Крон** (сдвиг от radar-кандидатов на :20, чтобы не писать файл одновременно):
 ```cron
-*/20 * * * * cd /root/npz-tactical-map && python3 agents/newsader-watch.py >> /root/logs/newsader.log 2>&1
+5 * * * * cd /root/npz-tactical-map && python3 agents/collect.py && \
+  bash agents/git-sync.sh "data(collect): $(date -u +%Y-%m-%dT%H:%MZ)"
 ```
-Добавить `newsader-watch` в `healthcheck.py` WATCH-карту (порог ~60 мин), чтобы отставание
-светилось на `health.json`.
+Частота — раз в час (RSS дёшев, ночной удар успевает в озеро до 08:00-сводки). Не 2ч — иначе
+теряется «быстрый» смысл канала.
 
-## Опционально: обогащение субтитрами (за cookies-гейтом)
+**2. Healthcheck**: добавить `collect` в WATCH-карту `healthcheck.py` (порог ~90 мин) →
+отставание видно на `health.json`.
 
-Только если оператор решит завести cookies. НЕ делать по умолчанию.
-- Механизм (проверен на Маке): `yt-dlp --cookies <file> --write-auto-subs --sub-langs ru-orig,ru
-  --sub-format vtt --skip-download` → снять таймкоды/теги → плоский текст.
-- На Маке уже есть рабочий хелпер-образец: `~/Documents/Alarm NPZ/newsader.sh`
-  (`list` / `subs <id>`, использует `--cookies-from-browser chrome`).
-- ⚠️ **cookies YouTube = доступ к Google-сессии оператора.** Это чувствительно — решение оператора,
-  не делегируй его. Если заводить: экспорт cookies.txt (Netscape) с Мака →
-  `~/.newsader/cookies.txt` на VPS, `--cookies` вместо `--cookies-from-browser`; протухают —
-  нужен рецепт обновления. Пока файла нет — скрипт работает в режиме «только заголовки».
+**3. На сводке (08:00/20:00) — корреляция источников (это и есть «проверка»):**
+   - взять свежие `candidates` из `strike-candidates.json`, сгруппировать по городу+ночи;
+   - **2+ независимых источника (radar + newsader + …) на один город+ночь → уверенность↑**;
+   - сверить с `strike-confirm.json` (GDELT) и, если есть, FIRMS;
+   - подтверждённое — нейтрально переписать и промоутить в `strikes.json` (sanitize в pre-commit);
+   - кликбейт канала НЕ тащить в текст ([[npz-neutral-osint-guard]]).
 
-## Инварианты (не нарушать)
+## Инварианты
 
-- `newsader-candidates.json` — НЕ боевой слой: `status:"candidate"`, `confidence:"rumor"`.
-  В `strikes.json` авто-НЕ вливается; промоушен только через подтверждение (GDELT/FIRMS/ручное).
-- Нейтральный тон, кликбейт канала не копировать в `title` кандидата ([[npz-neutral-osint-guard]],
-  sanitize-strikes в pre-commit срежет вербатим/пропаганду при коммите).
-- Запрет ПВО-меток в силе ([[npz-no-pvo-marking]]).
-- Дедуп по videoId обязателен (иначе каждый прогон плодит дубли).
-- Изоляция от боевого архива: shrink-guard strikes.json Newsader НЕ касается.
+- `strike-candidates.json` — НЕ боевой слой: `status:"candidate"`, `confidence:"rumor"`. Авто в
+  `strikes.json` не вливается; промоушен только через подтверждение.
+- Дедуп по `msg_id`=videoId (идемпотентно) + по (город,дата) — кросс-источниковый.
+- Запрет ПВО-меток ([[npz-no-pvo-marking]]); shrink-guard strikes.json трипвайра не касается.
 
-## Проверка после реализации
+## Известные ограничения / follow-up
 
-`python3 agents/newsader-watch.py --dry-run` на ночи с реальными ударами должен дать
-≥1 кандидат с городом (Таганрог/Азов/Тверь/Ильский и т.п.). Пустой результат при явных
-ударных заголовках = баг фильтра/геокодера.
+- **Низкий авто-геокод** (~1 из 8): справочник radar = 71 город (Крым/приграничье), а Newsader
+  бьёт по всей нефтяной географии (Тверь/Таганрог/Ставрополь/Ильский — координат в локальных
+  данных нет). Город берётся из `detail` (полный заголовок) при подтверждении. Апгрейд —
+  подключить статический газетир нефтегородов РФ (отдельная задача, не блокер).
+- **Дата = дата загрузки ролика**, может быть на сутки позже ночного удара — Гермес уточняет.
+- **Субтитры** (детальнее заголовка) на VPS требуют cookies YouTube (сессия оператора,
+  чувствительно) — НЕ реализовано намеренно; заголовков для трипвайра достаточно. Ручной
+  глубокий разбор транскриптов — Mac-хелпер `~/Documents/Alarm NPZ/newsader.sh`.
+- **Корреляция как код** (авто-буст уверенности при 2+ источниках) — пока делает Гермес глазами;
+  автоматизировать, когда источников станет ≥3.

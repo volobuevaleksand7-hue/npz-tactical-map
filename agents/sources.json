@@ -1,0 +1,14 @@
+{
+  "_comment": "Реестр внешних каналов-источников для трипвайра кандидатов в удары. Добавить канал = дописать объект. collect.py итерирует enabled-источники. type: youtube_rss (headless, без авторизации) | telegram (TODO). weight — субъективная надёжность (для будущей корреляции).",
+  "sources": [
+    {
+      "id": "newsader",
+      "type": "youtube_rss",
+      "label": "Newsader",
+      "channel_id": "UCS-cgYslpMpH5FkxJ2e0Vpg",
+      "weight": 0.4,
+      "enabled": true,
+      "note": "Проукраинский, быстрый, кликбейт. Заголовки несут город+цель. Уровень доверия — слух."
+    }
+  ]
+}
