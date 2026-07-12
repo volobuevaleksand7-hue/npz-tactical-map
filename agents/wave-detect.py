@@ -245,6 +245,16 @@ def main():
         _append_event(result["event"])
 
     if publish and action in ("start", "end"):
+        # Kill-switch первого раскатывания: без NPZ_WAVE_AUTOPUBLISH детектор
+        # считает, пишет wave-state.json/wave-events.json и логирует, но НЕ
+        # генерит статьи — режим наблюдения для калибровки порога над реальной
+        # волной. Задать NPZ_WAVE_AUTOPUBLISH=1 → боевой автопаблиш.
+        if not os.environ.get("NPZ_WAVE_AUTOPUBLISH"):
+            print("wave-detect: [observe] волна %s (%s городов / %s регионов) — "
+                  "статьи НЕ публикуются (задай NPZ_WAVE_AUTOPUBLISH=1 для автопаблиша)" % (
+                      action, result["new_state"].get("cities", 0),
+                      result["new_state"].get("regions", 0)), file=sys.stderr)
+            return
         # gen-wave.py строит страницы, но НЕ вшивает навигацию (это делает
         # build-nav.py — иначе живая /volna-dronov регенерится без меню/шапки/
         # vpn-nudge). Гоняем обе последовательно; git-sync крона запушит итог.
