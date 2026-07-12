@@ -66,6 +66,11 @@ def msk_time(t):
         return str(t or "")
 
 
+def strike_key(strike):
+    """Стабильный ключ дедупа: id, а если его нет (старый архив/сбой) — date|time|city|target."""
+    return strike.get("id") or "|".join(str(strike.get(k, "")) for k in ("date", "time", "city", "target"))
+
+
 def strike_region(strike):
     """Каноничный NPZ-регион удара или None.
     strikes.json даёт полную форму («Самарская область»), а NPZ_REGIONS — «Самарская обл.»;
@@ -117,8 +122,8 @@ def build_strike_notifications(strikes, subscribers, seen):
     new_seen = set(seen)
     notices = []
     for s in strikes:
-        sid = s.get("id")
-        if not sid or sid in seen:
+        sid = strike_key(s)
+        if sid in seen:
             continue
         new_seen.add(sid)
         canonical = strike_region(s)
@@ -143,7 +148,7 @@ def main():
 
     # Init-guard: первого state нет → засеять все id, ничего не слать.
     if state is None:
-        seed = [s.get("id") for s in strikes if s.get("id")]
+        seed = [strike_key(s) for s in strikes]
         jsave(STATE_PATH, {"seen": seed})
         print("strike-alerts: init — засеяно %d id, рассылка архива пропущена" % len(seed))
         return
