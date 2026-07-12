@@ -158,14 +158,14 @@
 
       <div class="landing-hero">
         <span class="hero-label">ВОЛНА ДРОНОВ · LIVE</span>
-        <div id="waveActive" style="display:none">
-          <h1 class="hero-h" id="waveTitle"></h1>
+        <div id="waveActive" style="">
+          <h1 class="hero-h" id="waveTitle">🛩 Волна дронов идёт прямо сейчас — 31 город в 11 регионах</h1>
           <p class="hero-sub">Оценка по открытому мониторингу radar-map.ru, не официальное оповещение. Обновляется автоматически.</p>
-          
-          <div class="wave-region-chips" id="waveChips"></div>
-          <div class="updated-line" id="waveUpdated"></div>
+          <img class="wave-cover-img" src="/assets/wave-cover-2026-07-12.png" alt="Волна дронов" loading="lazy">
+          <div class="wave-region-chips" id="waveChips"><span class="wave-chip">Автономная Республика Крым</span><span class="wave-chip">Брянская область</span><span class="wave-chip">Донецкая Народная Республика</span><span class="wave-chip">Краснодарский край</span><span class="wave-chip">Москва</span><span class="wave-chip">Московская область</span><span class="wave-chip">Орловская область</span><span class="wave-chip">Ростовская область</span><span class="wave-chip">Рязанская область</span><span class="wave-chip">Тульская область</span><span class="wave-chip">Херсонская область</span></div>
+          <div class="updated-line" id="waveUpdated">Обновлено 13 июля 2026, 00:00 МСК</div>
         </div>
-        <div id="waveQuiet" style="">
+        <div id="waveQuiet" style="display:none">
           <h1 class="hero-h">Крупных волн дронов сейчас не зафиксировано</h1>
           <p class="hero-sub">Последняя волна повышенной активности БПЛА: <b id="waveLastDate">нет данных</b>. Обстановка может меняться быстро — смотрите живой радар.</p>
         </div>
@@ -182,7 +182,7 @@
       <a class="map-cta inline" href="https://t.me/BPLAlert_bot" target="_blank" rel="noopener"><span class="mc-ico">🚨</span> Подписаться на оповещения о волнах в Telegram-боте →</a>
 
       <h2 class="section-h"><span class="ico">🗂</span> Лента волн — архив</h2>
-      <div class="archive-empty">Волн повышенной активности пока не зафиксировано.</div>
+      <div class="archive-grid"><a class="archive-card" href="/volna-dronov/2026-07-12-2237"><div class="ac-live">ИДЁТ СЕЙЧАС</div><div class="ac-date">12 июля 2026, 22:37 МСК</div><div class="ac-h">31 город · 11 регионов</div><div class="ac-regions">Автономная Республика Крым, Брянская область, Донецкая Народная Республика, Краснодарский край и ещё 7 · длительность 1 ч 51 мин</div></a></div>
 
       <h2 class="section-h"><span class="ico">🔗</span> Смотрите также</h2>
       <div class="link-grid">
@@ -224,6 +224,7 @@
       function p(n) { return (n < 10 ? "0" : "") + n; }
       return rusDate(iso) + ", " + p(d.getUTCHours()) + ":" + p(d.getUTCMinutes()) + " МСК";
     }
+    function plu(n, o, f, m) { n = Math.abs(n | 0); var a = n % 10, b = n % 100; if (a === 1 && b !== 11) return o; if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return f; return m; }
     function render(state) {
       var activeEl = document.getElementById("waveActive");
       var quietEl = document.getElementById("waveQuiet");
@@ -232,7 +233,8 @@
         activeEl.style.display = "";
         quietEl.style.display = "none";
         var t = document.getElementById("waveTitle");
-        if (t) t.textContent = "\ud83d\udee9 Волна дронов идёт прямо сейчас — " + (state.cities || 0) + " городов в " + (state.regions || 0) + " регионах";
+        var nc = state.cities || 0, nr = state.regions || 0;
+        if (t) t.textContent = "\ud83d\udee9 Волна дронов идёт прямо сейчас — " + nc + " " + plu(nc, "город", "города", "городов") + " в " + nr + " " + plu(nr, "регионе", "регионах", "регионах");
         var chipsWrap = document.getElementById("waveChips");
         if (chipsWrap && Array.isArray(state.region_list)) {
           chipsWrap.innerHTML = state.region_list.map(function (r) { return '<span class="wave-chip">' + esc(r) + '</span>'; }).join("");

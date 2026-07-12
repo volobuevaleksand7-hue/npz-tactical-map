@@ -204,6 +204,12 @@ def _svg_card(event):
 
 def build_card(event, out_dir):
     os.makedirs(out_dir, exist_ok=True)
+    # Переиспользуем готовую обложку этой даты (не гонять Codex повторно при
+    # регенерации страниц build-nav'ом/текстовыми правками; подпись = дата,
+    # для той же даты валидна).
+    existing = pathlib.Path(out_dir) / f"wave-cover-{event.get('date', 'x')}.png"
+    if existing.exists() and existing.stat().st_size > 1000:
+        return {"inline_svg": None, "png_path": str(existing)}
     png = _run_codex_with_timeout(event, out_dir)
     if png:
         return {"inline_svg": None, "png_path": png}

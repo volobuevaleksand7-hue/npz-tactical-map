@@ -71,6 +71,20 @@ def regions_n(n):
     return f"{n} {plural(n, 'регион', 'региона', 'регионов')}"
 
 
+def regions_in(n):
+    """Предложный: «в 1 регионе / в 4 регионах / в 11 регионах»."""
+    return f"{n} {plural(n, 'регионе', 'регионах', 'регионах')}"
+
+
+def punkt_n(n):
+    return f"{n} {plural(n, 'населённый пункт', 'населённых пункта', 'населённых пунктов')}"
+
+
+def punkt_in(n):
+    """Предложный: «в 1 населённом пункте / в 5 населённых пунктах»."""
+    return f"{n} {plural(n, 'населённом пункте', 'населённых пунктах', 'населённых пунктах')}"
+
+
 def parse_iso(s):
     return datetime.datetime.fromisoformat(s.replace("Z", "+00:00"))
 
@@ -340,8 +354,8 @@ def build_live_page(state, events):
             "started_at": state.get("started_at"),
         }
         cover = build_cover(cover_event)
-        active_title = (f'🛩 Волна дронов идёт прямо сейчас — {state.get("cities", 0)} городов '
-                         f'в {state.get("regions", 0)} регионах')
+        active_title = (f'🛩 Волна дронов идёт прямо сейчас — {cities_n(state.get("cities", 0))} '
+                         f'в {regions_in(state.get("regions", 0))}')
         chips = "".join(f'<span class="wave-chip">{esc(r)}</span>' for r in (state.get("region_list") or []))
         updated = f'Обновлено {rus_datetime_msk(state["updated_at"])}' if state.get("updated_at") else ""
         active_style, quiet_style = "", "display:none"
@@ -437,17 +451,17 @@ def build_snapshot_page(ev):
     is_live = not ev.get("ended_at")
     status_label = "идёт сейчас" if is_live else "завершена"
 
-    title = f"Волна дронов {rdate}: {ev.get('peak_cities', 0)} городов в {ev.get('peak_regions', 0)} регионах"
-    desc = (f"Волна активности БПЛА {rdate}: {ev.get('peak_cities', 0)} населённых пунктов, "
+    title = f"Волна дронов {rdate}: {cities_n(ev.get('peak_cities', 0))} в {regions_in(ev.get('peak_regions', 0))}"
+    desc = (f"Волна активности БПЛА {rdate}: {punkt_n(ev.get('peak_cities', 0))}, "
             f"{regions_n(ev.get('peak_regions', 0))} — {regions_str}. Оценка по открытому OSINT-мониторингу.")
     keywords = f"волна дронов {rdate}, куда летели дроны {rdate}, бпла {rdate}"
     canonical = f"{SITE}/volna-dronov/{slug}"
-    og_title = f"Волна дронов {rdate} — {ev.get('peak_cities', 0)} городов"
+    og_title = f"Волна дронов {rdate} — {cities_n(ev.get('peak_cities', 0))}"
     og_desc = desc
 
     article_text = (f"По данным публичного мониторинга radar-map.ru, {tod} {rdate} фиксируется "
-                     f"повышенная активность БПЛА: отметки в {ev.get('peak_cities', 0)} населённых "
-                     f"пунктах {regions_n(ev.get('peak_regions', 0))} — {regions_str}. Это "
+                     f"повышенная активность БПЛА: отметки в {punkt_in(ev.get('peak_cities', 0))} "
+                     f"{regions_n(ev.get('peak_regions', 0))} — {regions_str}. Это "
                      f"предварительные данные мониторинга, не официальная сводка. Следите за "
                      f"официальными оповещениями МЧС и региональных властей.")
 
@@ -526,6 +540,7 @@ HERO_SCRIPT = """  <script>
       function p(n) { return (n < 10 ? "0" : "") + n; }
       return rusDate(iso) + ", " + p(d.getUTCHours()) + ":" + p(d.getUTCMinutes()) + " МСК";
     }
+    function plu(n, o, f, m) { n = Math.abs(n | 0); var a = n % 10, b = n % 100; if (a === 1 && b !== 11) return o; if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return f; return m; }
     function render(state) {
       var activeEl = document.getElementById("waveActive");
       var quietEl = document.getElementById("waveQuiet");
@@ -534,7 +549,8 @@ HERO_SCRIPT = """  <script>
         activeEl.style.display = "";
         quietEl.style.display = "none";
         var t = document.getElementById("waveTitle");
-        if (t) t.textContent = "\\ud83d\\udee9 Волна дронов идёт прямо сейчас — " + (state.cities || 0) + " городов в " + (state.regions || 0) + " регионах";
+        var nc = state.cities || 0, nr = state.regions || 0;
+        if (t) t.textContent = "\\ud83d\\udee9 Волна дронов идёт прямо сейчас — " + nc + " " + plu(nc, "город", "города", "городов") + " в " + nr + " " + plu(nr, "регионе", "регионах", "регионах");
         var chipsWrap = document.getElementById("waveChips");
         if (chipsWrap && Array.isArray(state.region_list)) {
           chipsWrap.innerHTML = state.region_list.map(function (r) { return '<span class="wave-chip">' + esc(r) + '</span>'; }).join("");
