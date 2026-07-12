@@ -73,6 +73,8 @@
       border:1px solid rgba(255,180,67,.42);border-radius:8px;background:rgba(255,180,67,.12);
       color:var(--ink);font-family:var(--mono);font-weight:800;font-size:12px;line-height:1}
     .bpla-counter img{width:22px;height:22px;object-fit:contain}
+    .bpla-counter.rocket-counter{border-color:rgba(255,82,71,.42);background:rgba(255,82,71,.11)}
+    .bpla-counter.air-counter{border-color:rgba(63,214,207,.42);background:rgba(63,214,207,.11)}
     .theme-btn{border:1px solid var(--line);background:var(--surface2);color:var(--ink);
       font-size:15px;line-height:1;padding:6px 10px;border-radius:10px;cursor:pointer;transition:.15s}
     .theme-btn:hover{transform:translateY(-1px)}
@@ -464,6 +466,8 @@
         🔥 Удары
       </label>
       <span class="bpla-counter" id="bplaCounter" aria-label="Активные БПЛА"><img src="/assets/radar/threat-drone-3d.webp" alt="">—</span>
+      <span class="bpla-counter rocket-counter" id="rocketCounter" aria-label="Активные ракеты"><img src="/assets/radar/threat-rocket.webp" alt="">—</span>
+      <span class="bpla-counter air-counter" id="airCounter" aria-label="КАБ, FPV и авиация"><img src="/assets/radar/threat-air.webp" alt="">—</span>
       <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Светлая/тёмная тема">🌙</button>
       <span class="refresh-badge" id="refreshBadge">Авто: 5 мин</span>
       <div class="sync">
@@ -1104,7 +1108,7 @@
     function renderPanel(threats, timeStr, srcStr, stale) {
       var panel = document.getElementById("threatList");
       var html = "";
-      var activeCount = 0, bplaCount = 0, rocketCount = 0;
+      var activeCount = 0, bplaCount = 0, rocketCount = 0, airCount = 0;
 
       // Все регионы с угрозой (НПЗ и прочие) + НПЗ-регионы «чисто» — как на radar-map.ru.
       var keys = Object.keys(threats);
@@ -1136,6 +1140,7 @@
         if (hasThreat) activeCount++;
         if (th && th.bpla) bplaCount++;
         if (th && th.rocket) rocketCount++;
+        if (th && (th.uab || th.fpv || th.aviation)) airCount++;
 
         var cls = hasThreat ? "active" : "clear";
         var icon = hasThreat ? ((th.rocket || th.aviation) ? "🚨" : "🔴") : "🟢";
@@ -1166,6 +1171,12 @@
       var bplaCounter = document.getElementById("bplaCounter");
       bplaCounter.lastChild.nodeValue = bplaCount;
       bplaCounter.setAttribute("aria-label", "Активные БПЛА: " + bplaCount);
+      var rocketCounter = document.getElementById("rocketCounter");
+      rocketCounter.lastChild.nodeValue = rocketCount;
+      rocketCounter.setAttribute("aria-label", "Активные ракеты: " + rocketCount);
+      var airCounter = document.getElementById("airCounter");
+      airCounter.lastChild.nodeValue = airCount;
+      airCounter.setAttribute("aria-label", "КАБ, FPV и авиация: " + airCount);
 
       if (stale) {
         html = '<div class="state-note stale"><b>Данные могут быть устаревшими.</b><br>Последнее событие: ' + timeStr + ' МСК. Не показываем “чисто” как подтвержденный статус.</div>' + html;
