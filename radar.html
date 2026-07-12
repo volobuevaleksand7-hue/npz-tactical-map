@@ -867,6 +867,26 @@
       return '<div class="radar-icon-shell' + pulseCls + '" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;border:2px solid ' + border + ';background:' + bg + ';display:flex;align-items:center;justify-content:center;overflow:hidden">' + svg + '</div>';
     }
 
+    // ─── Threat model (все регионы, не только НПЗ — паритет с radar-map.ru) ───
+    // НПЗ-регион → каноничное имя (isNpz:true, есть карточка «Объекты»); прочие → сырое имя субъекта.
+    // Имя субъекта РФ (а не города): по словам-типам, не по подстроке — иначе «Крымск» ловится как «Крым».
+    function isSubjectName(s) {
+      var n = norm(s);
+      return /(?:^|\s)(?:область|обл\.?|край|округ)$/.test(n) || /республик/.test(n)
+        || n === "крым" || n === "севастополь" || n === "г. севастополь";
+    }
+    function threatKeyFor(rawName) {
+      var canon = matchRegion(rawName);
+      if (canon) return { key: canon, name: canon, isNpz: true };
+      var nm = (rawName || "").trim();
+      if (!nm) return null;
+      return { key: "x:" + normReg(nm), name: nm, isNpz: false };
+    }
+    function ensureThreat(threats, tk) {
+      if (!threats[tk.key]) threats[tk.key] = { name: tk.name, isNpz: tk.isNpz, bpla: false, rocket: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
+      return threats[tk.key];
+    }
+
     // ─── Process & render ───
     function processRadar(data) {
       if (!data || data.__error) {
@@ -883,41 +903,44 @@
       var loadedAt = Math.floor(Date.now() / 1000);
       var maxTs = 0;
 
-      // Process cities
+      // Process cities (все регионы). Мусор апстрима — «город» с именем субъекта, но другим
+      // region (кривые координаты, напр. «Калужская область» с координатами Брянска) —
+      // засчитываем как угрозу его же субъекта, точку не рисуем (см. point-loop ниже).
       cities.forEach(function(c) {
-        var region = matchRegion(c.region) || matchRegion(c.name);
-        if (!region) return;
-        if (!threats[region]) threats[region] = { bpla: false, rocket: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
-        if (c.bpla || c.bplaDim) threats[region].bpla = true;
-        if (c.uab || c.uabDim) threats[region].uab = true;
-        if (c.fpv) threats[region].fpv = true;
-        if (c.rocket || c.rk || c.rocket_level) threats[region].rocket = true;
-        if (c.aviation) threats[region].aviation = true;
-        if (c.last_event_ts && c.last_event_ts > threats[region].lastTs) {
-          threats[region].lastTs = c.last_event_ts;
-          threats[region].sourceText = c.source_text || "";
+        var rawRegion = (c.name && isSubjectName(c.name)) ? c.name : (c.region || c.name);
+        var tk = threatKeyFor(rawRegion);
+        if (!tk) return;
+        var t = ensureThreat(threats, tk);
+        if (c.bpla || c.bplaDim) t.bpla = true;
+        if (c.uab || c.uabDim) t.uab = true;
+        if (c.fpv) t.fpv = true;
+        if (c.rocket || c.rk || c.rocket_level) t.rocket = true;
+        if (c.aviation) t.aviation = true;
+        if (c.last_event_ts && c.last_event_ts > t.lastTs) {
+          t.lastTs = c.last_event_ts;
+          t.sourceText = c.source_text || "";
           maxTs = Math.max(maxTs, c.last_event_ts);
         }
-        if (c.bpla || c.bplaDim || c.rocket || c.rk || c.rocket_level || c.uab || c.uabDim || c.fpv || c.aviation) {
-          threats[region].cities.push(c.name);
+        if ((c.bpla || c.bplaDim || c.rocket || c.rk || c.rocket_level || c.uab || c.uabDim || c.fpv || c.aviation) && c.name && !isSubjectName(c.name)) {
+          t.cities.push(c.name);
         }
       });
 
-      // Process regions
+      // Process regions (все)
       Object.keys(regions).forEach(function(rName) {
         var rData = regions[rName] || {};
-        var region = matchRegion(rName);
-        if (!region) return;
-        if (!threats[region]) threats[region] = { bpla: false, rocket: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
-        if (rData.bpla || rData.bplaDim) threats[region].bpla = true;
-        if (rData.uab || rData.uabDim) threats[region].uab = true;
-        if (rData.fpv) threats[region].fpv = true;
-        if (rData.rocket || rData.rocket_level || rData.rocketOnRegion) threats[region].rocket = true;
-        if (rData.aviation) threats[region].aviation = true;
-        if (rData.explosionOnRegion) threats[region].explosion = true;
-        if (rData.last_event_ts && rData.last_event_ts > threats[region].lastTs) {
-          threats[region].lastTs = rData.last_event_ts;
-          threats[region].sourceText = rData.source_text || "";
+        var tk = threatKeyFor(rName);
+        if (!tk) return;
+        var t = ensureThreat(threats, tk);
+        if (rData.bpla || rData.bplaDim) t.bpla = true;
+        if (rData.uab || rData.uabDim) t.uab = true;
+        if (rData.fpv) t.fpv = true;
+        if (rData.rocket || rData.rocket_level || rData.rocketOnRegion) t.rocket = true;
+        if (rData.aviation) t.aviation = true;
+        if (rData.explosionOnRegion) t.explosion = true;
+        if (rData.last_event_ts && rData.last_event_ts > t.lastTs) {
+          t.lastTs = rData.last_event_ts;
+          t.sourceText = rData.source_text || "";
           maxTs = Math.max(maxTs, rData.last_event_ts);
         }
       });
@@ -926,18 +949,18 @@
       var districts = data.districts || {};
       Object.keys(districts).forEach(function(dKey) {
         var dd = districts[dKey] || {};
-        var region = matchRegion(dd.region_ru);
-        if (!region) return;
-        if (!threats[region]) threats[region] = { bpla: false, rocket: false, uab: false, fpv: false, aviation: false, explosion: false, cities: [], lastTs: 0, sourceText: "" };
-        if (dd.bpla || dd.bplaDim) threats[region].bpla = true;
-        if (dd.uab || dd.uabDim) threats[region].uab = true;
-        if (dd.fpv) threats[region].fpv = true;
-        if (dd.rocket || dd.rocket_level || dd.rocketOnRegion) threats[region].rocket = true;
-        if (dd.aviation) threats[region].aviation = true;
-        if (dd.explosionOnRegion) threats[region].explosion = true;
-        if (dd.last_event_ts && dd.last_event_ts > threats[region].lastTs) {
-          threats[region].lastTs = dd.last_event_ts;
-          threats[region].sourceText = dd.source_text || "";
+        var tk = threatKeyFor(dd.region_ru);
+        if (!tk) return;
+        var t = ensureThreat(threats, tk);
+        if (dd.bpla || dd.bplaDim) t.bpla = true;
+        if (dd.uab || dd.uabDim) t.uab = true;
+        if (dd.fpv) t.fpv = true;
+        if (dd.rocket || dd.rocket_level || dd.rocketOnRegion) t.rocket = true;
+        if (dd.aviation) t.aviation = true;
+        if (dd.explosionOnRegion) t.explosion = true;
+        if (dd.last_event_ts && dd.last_event_ts > t.lastTs) {
+          t.lastTs = dd.last_event_ts;
+          t.sourceText = dd.source_text || "";
           maxTs = Math.max(maxTs, dd.last_event_ts);
         }
       });
@@ -1028,6 +1051,8 @@
       pointSources.forEach(function(c) {
         if (!c.lat || !c.lon) return;
         if (!c.bpla && !c.bplaDim && !c.rocket && !c.rk && !c.rocket_level && !c.uab && !c.uabDim && !c.fpv && !c.aviation) return;
+        // Мусор апстрима: «город» с именем субъекта ≠ его region → координаты недостоверны, точку не рисуем
+        if (c.name && isSubjectName(c.name) && normReg(c.name) !== normReg(c.region || "")) return;
         var coordKey = Math.round(c.lat * 100) + "," + Math.round(c.lon * 100);
         if (seenCoords[coordKey]) return;
         seenCoords[coordKey] = true;
@@ -1074,21 +1099,44 @@
       var html = "";
       var activeCount = 0, bplaCount = 0, rocketCount = 0;
 
-      Object.keys(NPZ_REGIONS).sort().forEach(function(region) {
-        var info = NPZ_REGIONS[region];
-        var th = threats[region];
-        var hasThreat = th && (th.bpla || th.rocket || th.uab || th.fpv || th.aviation || th.explosion);
+      // Все регионы с угрозой (НПЗ и прочие) + НПЗ-регионы «чисто» — как на radar-map.ru.
+      var keys = Object.keys(threats);
+      Object.keys(NPZ_REGIONS).forEach(function(r) { if (keys.indexOf(r) === -1) keys.push(r); });
+
+      var cards = keys.map(function(key) {
+        var th = threats[key];
+        var isNpz = NPZ_REGIONS[key] ? true : !!(th && th.isNpz);
+        return {
+          key: key, th: th, isNpz: isNpz,
+          name: (th && th.name) || key,
+          hasThreat: !!(th && (th.bpla || th.rocket || th.uab || th.fpv || th.aviation || th.explosion)),
+          lastTs: (th && th.lastTs) || 0
+        };
+      }).filter(function(c) { return c.hasThreat || c.isNpz; }); // чистые НЕ-НПЗ регионы не показываем
+
+      // Порядок: активные первыми (НПЗ выше, затем по свежести); чистые НПЗ — внизу
+      cards.sort(function(a, b) {
+        if (a.hasThreat !== b.hasThreat) return a.hasThreat ? -1 : 1;
+        if (a.hasThreat) {
+          if (a.isNpz !== b.isNpz) return a.isNpz ? -1 : 1;
+          return b.lastTs - a.lastTs;
+        }
+        return a.name.localeCompare(b.name, "ru");
+      });
+
+      cards.forEach(function(c) {
+        var th = c.th, info = NPZ_REGIONS[c.key], hasThreat = c.hasThreat;
         if (hasThreat) activeCount++;
         if (th && th.bpla) bplaCount++;
         if (th && th.rocket) rocketCount++;
 
         var cls = hasThreat ? "active" : "clear";
-        var icon = hasThreat ? (th.rocket || th.aviation ? "🚨" : "🔴") : "🟢";
+        var icon = hasThreat ? ((th.rocket || th.aviation) ? "🚨" : "🔴") : "🟢";
 
         html += '<div class="threat-card ' + cls + '">';
         html += '<div class="tc-head">';
         html += '<span class="tc-icon">' + icon + '</span>';
-        html += '<span class="tc-region">' + esc(region) + '</span>';
+        html += '<span class="tc-region">' + esc(c.name) + '</span>';
         if (th && th.bpla) html += '<span class="tc-badge bpla">БПЛА</span>';
         if (th && th.uab) html += '<span class="tc-badge uab">КАБ</span>';
         if (th && th.fpv) html += '<span class="tc-badge fpv">FPV</span>';
@@ -1098,7 +1146,7 @@
         if (!hasThreat) html += '<span class="tc-badge clear">ЧИСТО</span>';
         html += '</div>';
 
-        html += '<div class="tc-objects"><b>Объекты:</b> ' + info.objects.join(", ") + '</div>';
+        if (info) html += '<div class="tc-objects"><b>Объекты:</b> ' + esc(info.objects.join(", ")) + '</div>';
 
         if (hasThreat && th.cities.length) {
           html += '<div class="tc-time">Города: ' + uniq(th.cities).slice(0, 5).map(esc).join(", ") + '</div>';
@@ -1161,7 +1209,7 @@
         if (th.rocket) active.push("РК");
         if (th.aviation) active.push("АВИА");
         if (th.explosion) active.push("ВЗРЫВ");
-        if (active.length) parts.push(active.join("+") + " → " + r);
+        if (active.length) parts.push(active.join("+") + " → " + (th.name || r));
       });
       var text = parts.length
         ? "🔴 " + parts.join(" · ") + " | " + srcStr + " | " + timeStr + " МСК"
