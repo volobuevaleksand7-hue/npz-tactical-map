@@ -672,23 +672,23 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .status-strip.stale .ss-mode{background:var(--red);color:#fff}
 
 /* ===== Telegram резервный канал ===== */
-.subscription-alert{position:relative;z-index:28;flex:none;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:13px;
-  width:calc(100% - 28px);max-width:800px;margin:5px auto 4px;padding:12px 218px 12px 12px;
-  background:rgba(255,255,255,.96);border:1px solid rgba(210,58,46,.82);border-radius:12px;
+.subscription-alert{position:relative;z-index:28;flex:none;display:flex;align-items:center;gap:9px;
+  width:calc(100% - 28px);max-width:800px;margin:5px auto 4px;padding:6px 10px;
+  background:rgba(255,255,255,.96);border:1px solid rgba(210,58,46,.82);border-radius:9px;
   box-shadow:0 0 8px rgba(217,46,40,.22),0 0 18px rgba(217,46,40,.12);color:var(--ink);
   animation:subscriptionAlertPulse 2.8s ease-in-out infinite}
-.subscription-alert-tag{display:grid;place-items:center;align-self:stretch;min-width:92px;border-radius:8px;
-  background:#a51e20;color:#fff;font-size:12px;font-weight:900;letter-spacing:.45px}
-.subscription-alert-copy{display:grid;gap:4px;margin:0;min-width:0;font-weight:700}
-.subscription-alert-warning{color:#a51e20;font-size:18px;font-weight:900;line-height:1.05;
+.subscription-alert-tag{display:grid;place-items:center;min-width:76px;min-height:32px;border-radius:7px;
+  background:#a51e20;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px}
+.subscription-alert-copy{display:flex;align-items:baseline;gap:5px;flex:1;margin:0;min-width:0;overflow:hidden;white-space:nowrap}
+.subscription-alert-warning{flex:none;color:#a51e20;font-size:15px;font-weight:900;line-height:1.1;
   animation:subscriptionAlertWarningBlink 2.8s ease-in-out infinite}
-.subscription-alert-sub{font-size:15px;font-weight:750;line-height:1.15}
-.subscription-alert-cta{position:absolute;top:14px;right:52px;display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 13px;
+.subscription-alert-sub{overflow:hidden;font-size:13px;font-weight:750;line-height:1.1;text-overflow:ellipsis;white-space:nowrap}
+.subscription-alert-cta{position:static;flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 10px;
   border:1px solid rgba(210,58,46,.75);border-radius:7px;background:#fff;color:#a51e20;text-decoration:none;
   font-size:12px;font-weight:800;white-space:nowrap}
 .subscription-alert-cta-short{display:none}
 .subscription-alert-cta:hover{background:#fff2f0;color:#7e1014}
-.subscription-alert-close{position:absolute;top:9px;right:10px;width:28px;height:28px;
+.subscription-alert-close{position:static;flex:none;width:24px;height:28px;padding:0;
   border:0;border-radius:7px;background:transparent;color:#a51e20;font-size:23px;line-height:1;cursor:pointer;opacity:.78}
 .subscription-alert-close:hover{background:#fff0ee;opacity:1}
 @keyframes subscriptionAlertPulse{
