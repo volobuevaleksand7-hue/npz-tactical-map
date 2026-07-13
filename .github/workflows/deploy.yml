@@ -19,15 +19,16 @@ jobs:
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_CLI_VERSION: 55.0.0
     steps:
       - uses: actions/checkout@v4
       - name: Install Vercel CLI
         run: npm install -g vercel@${{ env.VERCEL_CLI_VERSION }}
       - name: Pull Vercel project settings
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Validate prebuilt artifact
         run: bash scripts/verify-release-output.sh
       - name: Deploy candidate

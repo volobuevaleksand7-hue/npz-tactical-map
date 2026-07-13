@@ -72,4 +72,23 @@ done
 test "$ready" -eq 1 || { echo "Test HTTP server did not restart" >&2; exit 1; }
 
 expect_failure "$root_dir/scripts/verify-release-url.sh" "http://127.0.0.1:$port"
+
+workflow_file="$root_dir/.github/workflows/deploy.yml"
+grep -q 'vercel pull --yes --environment=preview' "$workflow_file" || {
+  echo "Workflow must build a preview candidate" >&2
+  exit 1
+}
+grep -q 'vercel build --token=' "$workflow_file" || {
+  echo "Workflow must build the preview target" >&2
+  exit 1
+}
+if grep -q 'vercel build --prod' "$workflow_file"; then
+  echo "Workflow must not build production output before candidate validation" >&2
+  exit 1
+fi
+grep -q 'VERCEL_TOKEN: \${{ secrets.VERCEL_TOKEN }}' "$workflow_file" || {
+  echo "Workflow must expose VERCEL_TOKEN to the candidate URL guard" >&2
+  exit 1
+}
+
 echo "release guard tests passed"
