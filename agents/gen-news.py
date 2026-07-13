@@ -225,6 +225,11 @@ def build_archive() -> dict:
         entry.setdefault("voices", [])
         briefs[d] = entry
 
+    # ВСЕГДА включаем сегодняшнюю дату (даже если нет ударов/голосов)
+    today = today_iso()
+    if today not in briefs:
+        briefs[today] = {"strikes": [], "voices": []}
+
     # текущий снапшот общестрановой ситуации (баланс/АЗС/биржа) — только последняя версия
     availability = load_json("fuel-availability.json")
     fuel_state = load_json("fuel-state.json")
