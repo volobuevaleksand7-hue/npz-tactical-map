@@ -7,9 +7,9 @@ style_file="$root_dir/styles.css"
 script_file="$root_dir/subscription-alert.js"
 
 grep -q 'id="subscriptionAlert"' "$index_file"
-grep -q 'Не потеряйте карту:' "$index_file"
-grep -q 'Резервная ссылка и новые сводки — в Telegram\.' "$index_file"
-grep -q 'class="subscription-alert-warning">сайт подвергается атакам\.' "$index_file"
+grep -q 'class="subscription-alert-tag"' "$index_file"
+grep -q 'class="subscription-alert-warning">Сайт подвергается атакам\.' "$index_file"
+grep -q 'class="subscription-alert-sub">Сохраните резервную ссылку в Telegram\.' "$index_file"
 grep -q 'href="https://t.me/bplalarm"' "$index_file"
 grep -q 'Сохранить доступ' "$index_file"
 grep -q 'id="subscriptionAlertClose"' "$index_file"
@@ -20,9 +20,12 @@ if grep -q '/sub-nudge.js' "$index_file"; then
 fi
 
 grep -q '\.subscription-alert' "$style_file"
-grep -q 'max-width:1240px' "$style_file"
+grep -q 'max-width:800px' "$style_file"
+grep -q 'position:absolute;top:calc(84px + env(safe-area-inset-top))' "$style_file"
 grep -q 'background:rgba(255,255,255,.96)' "$style_file"
 grep -q '\.subscription-alert-warning' "$style_file"
+grep -q '@media(max-width:700px)' "$style_file"
+grep -q 'subscription-alert-cta-short' "$style_file"
 grep -q 'subscriptionAlertPulse' "$style_file"
 grep -q 'prefers-reduced-motion:reduce' "$style_file"
 
