@@ -66,6 +66,26 @@ def load_json(name: str, default=None):
         return default if default is not None else {}
 
 
+def get_wave_links(date: str) -> list:
+    """Возвращает список (wave_id, label) для волн БПЛА за указанную дату."""
+    try:
+        waves = load_json("wave-events.json", [])
+    except Exception:
+        return []
+    results = []
+    seen = set()
+    for w in waves:
+        wid = w.get("id", "")
+        wdate = str(w.get("date", ""))[:10]
+        if wdate == date and wid not in seen:
+            seen.add(wid)
+            cities = w.get("peak_cities", 0)
+            regions = w.get("peak_regions", 0)
+            label = f"Волна дронов: {cities} {plural(cities, 'город', 'города', 'городов')} · {regions} {plural(regions, 'регион', 'региона', 'регионов')}"
+            results.append((wid, label))
+    return results
+
+
 def rus_date(iso: str) -> str:
     """2026-07-04 → 4 июля 2026."""
     try:
@@ -817,6 +837,19 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
       </section>
 """,
     ]
+
+    wave_links = get_wave_links(date)
+    if wave_links:
+        wave_html = "".join(
+            f'<a class="brief-nav-btn" href="/volna-dronov/{escape(wid)}" style="background:var(--surface2);border-color:var(--red);margin:4px 0">🛩 {escape(label)} →</a>'
+            for wid, label in wave_links
+        )
+        parts.append(f"""      <section class="news-section" id="wave">
+        <h2>🛩 Итоги волны БПЛА</h2>
+        <p class="section-sub">Массированная атака беспилотников — сводка последствий.</p>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">{wave_html}</div>
+      </section>
+""")
 
     if voices:
         parts.append(f"""      <section class="news-section" id="voices">

@@ -68,6 +68,18 @@
     .archive-card .ac-h{font-weight:800;font-size:15px;margin-bottom:6px}
     .archive-card .ac-regions{font-size:12px;color:var(--ink-dim);line-height:1.5}
     .archive-empty{padding:20px;text-align:center;color:var(--ink-dim);background:var(--surface);border:1px dashed var(--line);border-radius:12px}
+    .wave-summary-section{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+    .wave-summary-section .ws-head{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .wave-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px}
+    .wave-summary-card{background:var(--surface2);border-radius:8px;padding:12px;text-align:center}
+    .wave-summary-card .ws-val{font-family:var(--mono);font-size:18px;font-weight:800;color:var(--ink)}
+    .wave-summary-card .ws-lbl{font-size:11px;color:var(--ink-dim);margin-top:3px}
+    .wave-summary-strikes{margin-top:8px}
+    .wave-summary-strike{background:var(--surface2);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:8px;font-size:13px;line-height:1.5}
+    .wave-summary-strike .ws-city{font-weight:700}
+    .wave-summary-strike .ws-cas{color:var(--red);font-weight:600}
+    .wave-summary-sources{margin-top:12px;font-size:11px;color:var(--ink-dim)}
+    .wave-summary-text{font-size:13px;line-height:1.6;color:var(--ink);margin:12px 0 0;padding:12px;background:var(--surface2);border-radius:8px}
 </style>
   <script src="/metrika.js" async></script>
   <link rel="stylesheet" href="/search.css?v=5a32b7c1">
@@ -158,16 +170,16 @@
 
       <div class="landing-hero">
         <span class="hero-label">ВОЛНА ДРОНОВ · LIVE</span>
-        <div id="waveActive" style="">
-          <h1 class="hero-h" id="waveTitle">🛩 Волна дронов идёт прямо сейчас — 31 город в 11 регионах</h1>
+        <div id="waveActive" style="display:none">
+          <h1 class="hero-h" id="waveTitle"></h1>
           <p class="hero-sub">Оценка по открытым источникам (мониторинговые чаты и каналы), не официальное оповещение. Обновляется автоматически.</p>
-          <img class="wave-cover-img" src="/assets/wave-cover-2026-07-12.png" alt="Волна дронов" loading="lazy">
-          <div class="wave-region-chips" id="waveChips"><span class="wave-chip">Автономная Республика Крым</span><span class="wave-chip">Брянская область</span><span class="wave-chip">Донецкая Народная Республика</span><span class="wave-chip">Краснодарский край</span><span class="wave-chip">Москва</span><span class="wave-chip">Московская область</span><span class="wave-chip">Орловская область</span><span class="wave-chip">Ростовская область</span><span class="wave-chip">Рязанская область</span><span class="wave-chip">Тульская область</span><span class="wave-chip">Херсонская область</span></div>
-          <div class="updated-line" id="waveUpdated">Обновлено 13 июля 2026, 00:00 МСК</div>
+          
+          <div class="wave-region-chips" id="waveChips"></div>
+          <div class="updated-line" id="waveUpdated"></div>
         </div>
-        <div id="waveQuiet" style="display:none">
+        <div id="waveQuiet" style="">
           <h1 class="hero-h">Крупных волн дронов сейчас не зафиксировано</h1>
-          <p class="hero-sub">Последняя волна повышенной активности БПЛА: <b id="waveLastDate">нет данных</b>. Обстановка может меняться быстро — смотрите живой радар.</p>
+          <p class="hero-sub">Последняя волна повышенной активности БПЛА: <b id="waveLastDate">12 июля 2026</b>. Обстановка может меняться быстро — смотрите живой радар.</p>
         </div>
         <a class="map-cta" href="/radar"><span class="mc-ico">📡</span> Радар угроз в реальном времени →</a>
         <a class="map-cta inline" href="/karta-bpla"><span class="mc-ico">🗺️</span> Карта БПЛА онлайн →</a>
@@ -182,7 +194,7 @@
       <a class="map-cta inline" href="https://t.me/BPLAlert_bot" target="_blank" rel="noopener"><span class="mc-ico">🚨</span> Подписаться на оповещения о волнах в Telegram-боте →</a>
 
       <h2 class="section-h"><span class="ico">🗂</span> Лента волн — архив</h2>
-      <div class="archive-grid"><a class="archive-card" href="/volna-dronov/2026-07-12-2237"><div class="ac-live">ИДЁТ СЕЙЧАС</div><div class="ac-date">12 июля 2026, 22:37 МСК</div><div class="ac-h">31 город · 11 регионов</div><div class="ac-regions">Автономная Республика Крым, Брянская область, Донецкая Народная Республика, Краснодарский край и ещё 7 · длительность 2 ч 50 мин</div></a></div>
+      <div class="archive-grid"><a class="archive-card" href="/volna-dronov/2026-07-12-2300"><div class="ac-live">ИДЁТ СЕЙЧАС</div><div class="ac-date">13 июля 2026, 02:00 МСК</div><div class="ac-h">25 городов · 10 регионов</div><div class="ac-regions">Автономная Республика Крым, Владимирская область, Донецкая Народная Республика, Калужская область и ещё 6 · длительность 11 ч 14 мин</div></a><a class="archive-card" href="/volna-dronov/2026-07-12-2300"><div class="ac-date">13 июля 2026, 02:00 МСК</div><div class="ac-h">32 города · 11 регионов</div><div class="ac-regions">Автономная Республика Крым, Адыгея, Владимирская область, Донецкая Народная Республика и ещё 8 · длительность 49 мин</div></a><a class="archive-card" href="/volna-dronov/2026-07-12-2237"><div class="ac-live">ИДЁТ СЕЙЧАС</div><div class="ac-date">12 июля 2026, 22:37 МСК</div><div class="ac-h">31 город · 11 регионов</div><div class="ac-regions">Автономная Республика Крым, Брянская область, Донецкая Народная Республика, Краснодарский край и ещё 7 · длительность 14 ч 37 мин</div></a><a class="archive-card" href="/volna-dronov/2026-07-12-2237"><div class="ac-date">12 июля 2026, 22:37 МСК</div><div class="ac-h">31 город · 11 регионов</div><div class="ac-regions">Автономная Республика Крым, Брянская область, Донецкая Народная Республика, Калужская область и ещё 8 · длительность 2 ч 52 мин</div></a></div>
 
       <h2 class="section-h"><span class="ico">🔗</span> Смотрите также</h2>
       <div class="link-grid">

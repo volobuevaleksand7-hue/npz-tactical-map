@@ -147,6 +147,15 @@ def load_json(p, default):
     return json.loads(p.read_text(encoding="utf-8"))
 
 
+SUMMARIES_PATH = ROOT / "data" / "wave-summaries.json"
+
+
+def load_wave_summary(wave_id):
+    """Загружает сводку итогов волны из wave-summaries.json, если есть."""
+    summaries = load_json(SUMMARIES_PATH, {})
+    return summaries.get(wave_id)
+
+
 # ───────────────────────── обложка (agents/wave_cover.py, контракт ТЗ §3) ─────────────────────────
 
 def build_cover(event_for_cover):
@@ -218,6 +227,18 @@ CSS_BLOCK = """
     .archive-card .ac-h{font-weight:800;font-size:15px;margin-bottom:6px}
     .archive-card .ac-regions{font-size:12px;color:var(--ink-dim);line-height:1.5}
     .archive-empty{padding:20px;text-align:center;color:var(--ink-dim);background:var(--surface);border:1px dashed var(--line);border-radius:12px}
+    .wave-summary-section{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+    .wave-summary-section .ws-head{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .wave-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px}
+    .wave-summary-card{background:var(--surface2);border-radius:8px;padding:12px;text-align:center}
+    .wave-summary-card .ws-val{font-family:var(--mono);font-size:18px;font-weight:800;color:var(--ink)}
+    .wave-summary-card .ws-lbl{font-size:11px;color:var(--ink-dim);margin-top:3px}
+    .wave-summary-strikes{margin-top:8px}
+    .wave-summary-strike{background:var(--surface2);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:8px;font-size:13px;line-height:1.5}
+    .wave-summary-strike .ws-city{font-weight:700}
+    .wave-summary-strike .ws-cas{color:var(--red);font-weight:600}
+    .wave-summary-sources{margin-top:12px;font-size:11px;color:var(--ink-dim)}
+    .wave-summary-text{font-size:13px;line-height:1.6;color:var(--ink);margin:12px 0 0;padding:12px;background:var(--surface2);border-radius:8px}
 """
 
 HEADER_HTML = """  <header class="news-header">
@@ -452,6 +473,48 @@ def build_snapshot_page(ev):
     is_live = not ev.get("ended_at")
     status_label = "идёт сейчас" if is_live else "завершена"
 
+    # ── итоги волны (wave-summaries.json) ──
+    summary = load_wave_summary(slug)
+    summary_html = ""
+    if summary:
+        cas = summary.get("casualties", {})
+        strikes_html = ""
+        for s in summary.get("strikes", []):
+            d = s.get("destroyed", 0)
+            de = s.get("dead", 0)
+            inj = s.get("injured", 0)
+            cas_str = ""
+            parts = []
+            if de:
+                parts.append(f'<span class="ws-cas">{de} погиб.</span>')
+            if inj:
+                parts.append(f'<span class="ws-cas">{inj} ран.</span>')
+            if parts:
+                cas_str = " · ".join(parts)
+            destroyed_str = f" — {d} {plural(d, 'дом разрушен', 'дома разрушено', 'домов разрушено')}" if d else ""
+            strikes_html += (
+                f'<div class="wave-summary-strike">'
+                f'<span class="ws-city">📍 {esc(s.get("city", "?"))}</span>'
+                f': {esc(s.get("target", ""))}{destroyed_str}'
+                f'{(" · " + cas_str) if cas_str else ""}'
+                f'</div>'
+            )
+        sources_str = ", ".join(summary.get("sources", [])) if summary.get("sources") else ""
+        summary_html = f"""
+      <section class="wave-summary-section">
+        <div class="ws-head">📊 Итоги волны</div>
+        <div class="wave-summary-grid">
+          <div class="wave-summary-card"><div class="ws-val">{summary.get("total_drones", "?")}</div><div class="ws-lbl">Всего БПЛА</div></div>
+          <div class="wave-summary-card"><div class="ws-val">{summary.get("shot_down", "?")}</div><div class="ws-lbl">Сбито</div></div>
+          <div class="wave-summary-card"><div class="ws-val">{summary.get("reached_targets", "?")}</div><div class="ws-lbl">Нас. пунктов</div></div>
+          <div class="wave-summary-card"><div class="ws-val">{cas.get("dead", 0) + cas.get("injured", 0)}</div><div class="ws-lbl">Пострадавших</div></div>
+        </div>
+        <div class="wave-summary-strikes">{strikes_html}</div>
+        {f'<div class="wave-summary-text">{esc(summary.get("summary_text", ""))}</div>' if summary.get("summary_text") else ""}
+        {f'<div class="wave-summary-sources">Источники: {esc(sources_str)}</div>' if sources_str else ""}
+      </section>
+"""
+
     title = f"Волна дронов {rdate}: {cities_n(ev.get('peak_cities', 0))} в {regions_in(ev.get('peak_regions', 0))}"
     desc = (f"Волна активности БПЛА {rdate}: {punkt_n(ev.get('peak_cities', 0))}, "
             f"{regions_n(ev.get('peak_regions', 0))} — {regions_str}. Оценка по открытому OSINT-мониторингу.")
@@ -499,7 +562,7 @@ def build_snapshot_page(ev):
         </div>
         <div class="updated-line">Началась {esc(when)}</div>
       </div>
-
+{summary_html}
       <h2 class="section-h"><span class="ico">🔔</span> Узнавать о волнах первым</h2>
       {SUBSCRIBE_CTA}
 
