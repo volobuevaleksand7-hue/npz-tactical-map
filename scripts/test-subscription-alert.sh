@@ -18,6 +18,8 @@ if grep -q '/sub-nudge.js' "$index_file"; then
 fi
 
 grep -q '\.subscription-alert' "$style_file"
+grep -q 'max-width:1240px' "$style_file"
+grep -q 'background:rgba(255,255,255,.96)' "$style_file"
 grep -q 'subscriptionAlertPulse' "$style_file"
 grep -q 'prefers-reduced-motion:reduce' "$style_file"
 
