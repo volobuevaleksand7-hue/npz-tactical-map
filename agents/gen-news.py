@@ -731,6 +731,20 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
     b = briefs.get(date, {"strikes": [], "voices": []})
     strikes = b.get("strikes", [])
     voices = b.get("voices", [])
+    
+    # Для сегодняшней даты — добавить удары за предыдущий день (24-часовое окно)
+    from datetime import datetime, timedelta
+    try:
+        d = datetime.strptime(date, "%Y-%m-%d")
+        prev_d = d - timedelta(days=1)
+        prev_date_str = prev_d.strftime("%Y-%m-%d")
+        if prev_date_str in briefs:
+            prev_strikes = briefs[prev_date_str].get("strikes", [])
+            # Добавляем вчерашние удары в начало (они идут первыми)
+            strikes = prev_strikes + strikes
+    except Exception:
+        pass
+    
     date_rus = rus_date(date)
     is_latest = (next_date is None)
 
