@@ -7,7 +7,9 @@ style_file="$root_dir/styles.css"
 script_file="$root_dir/subscription-alert.js"
 
 grep -q 'id="subscriptionAlert"' "$index_file"
-grep -q 'Не потеряйте карту: сайт подвергается атакам\. Резервная ссылка и новые сводки — в Telegram\.' "$index_file"
+grep -q 'Не потеряйте карту:' "$index_file"
+grep -q 'Резервная ссылка и новые сводки — в Telegram\.' "$index_file"
+grep -q 'class="subscription-alert-warning">сайт подвергается атакам\.' "$index_file"
 grep -q 'href="https://t.me/bplalarm"' "$index_file"
 grep -q 'Сохранить доступ' "$index_file"
 grep -q 'id="subscriptionAlertClose"' "$index_file"
@@ -20,6 +22,7 @@ fi
 grep -q '\.subscription-alert' "$style_file"
 grep -q 'max-width:1240px' "$style_file"
 grep -q 'background:rgba(255,255,255,.96)' "$style_file"
+grep -q '\.subscription-alert-warning' "$style_file"
 grep -q 'subscriptionAlertPulse' "$style_file"
 grep -q 'prefers-reduced-motion:reduce' "$style_file"
 
