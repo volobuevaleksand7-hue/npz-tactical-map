@@ -53,7 +53,7 @@
   <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.css">
   <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.Default.css">
-  <link rel="stylesheet" href="styles.css?v=9c563463">
+  <link rel="stylesheet" href="styles.css?v=1.20.0">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#d23a2e">
   <link rel="stylesheet" href="/search.css?v=5a32b7c1">
@@ -250,7 +250,12 @@
       </nav>
     </div>
 
-    <!-- Статичный TG-баннер ретайрен: подписку теперь ведёт отложенный friendly-попап sub-nudge.js -->
+    <aside class="subscription-alert" id="subscriptionAlert" aria-label="Резервный канал карты" hidden>
+      <span class="subscription-alert-icon" aria-hidden="true">⚠️</span>
+      <p class="subscription-alert-copy">Не потеряйте карту: сайт подвергается атакам. Резервная ссылка и новые сводки — в Telegram.</p>
+      <a class="subscription-alert-cta" href="https://t.me/bplalarm" target="_blank" rel="noopener">Сохранить доступ</a>
+      <button class="subscription-alert-close" id="subscriptionAlertClose" type="button" aria-label="Закрыть уведомление">×</button>
+    </aside>
 
     <!-- ===== VIEW: RUSSIA ===== -->
     <section class="view active" id="view-russia">
@@ -492,6 +497,6 @@
   });}
   </script>
   <script defer src="/vpn-nudge.js?v=c0646279"></script>
-  <script defer src="/sub-nudge.js?v=ce26bfdd"></script>
+  <script src="/subscription-alert.js?v=1.20.0"></script>
 </body>
 </html>
