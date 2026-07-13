@@ -27,8 +27,8 @@
   <script defer src="/_vercel/insights/script.js"></script>
 
   <link rel="stylesheet" href="/fonts.css">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/news.css">
+  <link rel="stylesheet" href="/styles.css?v=4217c40d">
+  <link rel="stylesheet" href="/news.css?v=e2bbf493">
   <style>
     .landing-wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
     .landing-hero{background:linear-gradient(135deg,rgba(210,58,46,.12),rgba(160,29,20,.08));border:1px solid rgba(210,58,46,.25);border-radius:16px;padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden}
@@ -68,20 +68,10 @@
     .archive-card .ac-h{font-weight:800;font-size:15px;margin-bottom:6px}
     .archive-card .ac-regions{font-size:12px;color:var(--ink-dim);line-height:1.5}
     .archive-empty{padding:20px;text-align:center;color:var(--ink-dim);background:var(--surface);border:1px dashed var(--line);border-radius:12px}
-    .wave-summary-section{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
-    .wave-summary-section .ws-head{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-    .wave-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px}
-    .wave-summary-card{background:var(--surface2);border-radius:8px;padding:12px;text-align:center}
-    .wave-summary-card .ws-val{font-family:var(--mono);font-size:18px;font-weight:800;color:var(--ink)}
-    .wave-summary-card .ws-lbl{font-size:11px;color:var(--ink-dim);margin-top:3px}
-    .wave-summary-strikes{margin-top:8px}
-    .wave-summary-strike{background:var(--surface2);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:8px;font-size:13px;line-height:1.5}
-    .wave-summary-strike .ws-city{font-weight:700}
-    .wave-summary-strike .ws-cas{color:var(--red);font-weight:600}
-    .wave-summary-sources{margin-top:12px;font-size:11px;color:var(--ink-dim)}
-    .wave-summary-text{font-size:13px;line-height:1.6;color:var(--ink);margin:12px 0 0;padding:12px;background:var(--surface2);border-radius:8px}
 </style>
   <script src="/metrika.js" async></script>
+  <link rel="stylesheet" href="/search.css?v=5a32b7c1">
+  <script defer src="/search.js?v=8b14567c"></script>
 </head>
 <body data-theme="light">
   <header class="news-header">
@@ -90,7 +80,67 @@
         <span class="news-logo-icon">⛽</span>
         <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
       </a>
-      <nav class="news-nav"><!-- сгенерит agents/build-nav.py --></nav>
+      <nav class="news-nav">
+        <a href="/">🗺️ Карта НПЗ</a>
+        <a href="/news">📰 Сводки</a>
+        <a href="/radar">📡 Радар БПЛА</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <div class="nav-drop-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
+            <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <details class="nav-drop-sub">
+              <summary>🚀 Ракетная опасность</summary>
+              <a href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
+              <a href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
+              <a href="/raketnaya-opasnost-omsk">📍 Омск</a>
+              <a href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
+              <a href="/raketnaya-opasnost-kazan">📍 Казань</a>
+              <a href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
+              <a href="/raketnaya-opasnost-penza">📍 Пенза</a>
+              <a href="/raketnaya-opasnost-samara">📍 Самара</a>
+              <a href="/raketnaya-opasnost-belgorod">📍 Ракетная опасность белгород</a>
+            </details>
+            <div class="nav-drop-group">Топливо</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+            <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <a href="/zakrytye-azs">📄 Какие азс закрылись</a>
+            <a href="/ocheredi-na-azs">📄 Очереди на азс</a>
+            <a href="/draki-na-azs">📄 Драки на азс</a>
+            <a href="/azhiotazh-na-azs">📄 Ажиотаж на азс</a>
+            <a href="/gde-ai95">📄 Где найти аи-95</a>
+            <a href="/zapas-benzina-kanistry">📄 Запас бензина в канистрах</a>
+            <a href="/gde-gaz-azs">📄 Где заправить газ</a>
+            <a href="/tankery-ekonomika-rf">📄 Как удары по танкерам ударят по экономике россии</a>
+            <a href="/tenevoj-flot">📄 Теневой флот россии простыми словами</a>
+            <a href="/tankery-azovskoe-more">📄 Танкеры в азовском море</a>
+            <a href="/vozmozhen-li-golod">📄 Будет ли голод в россии</a>
+            <div class="nav-drop-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="nav-drop-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help">❓ Как пользоваться</a>
+            <a href="/metodologiya">🔬 Методология</a>
+            <a href="/udary-po-tankeram">📄 Удары по танкерам теневого флота</a>
+            <a href="/udary-azovskoe-more">📄 Удары по азовскому морю</a>
+            <a href="/volna-dronov">🛩 Волна дронов сейчас</a>
+            <div class="nav-drop-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+            <a href="/karta-bpla">📡 Карта БПЛА</a>
+            <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
+            <a href="/karta-azs">⛽ Карта АЗС</a>
+            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
+            <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>
+          </div>
+        </div>
+        <a href="/sources">📚 Источники</a>
+      </nav>
+      <button type="button" class="nav-search-btn" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
     </div>
   </header>
   <main class="news-main">
@@ -137,19 +187,6 @@
         <div class="updated-line">Началась 12 июля 2026, 22:37 МСК</div>
       </div>
 
-      <section class="wave-summary-section">
-        <div class="ws-head">📊 Итоги волны</div>
-        <div class="wave-summary-grid">
-          <div class="wave-summary-card"><div class="ws-val">350</div><div class="ws-lbl">Всего БПЛА</div></div>
-          <div class="wave-summary-card"><div class="ws-val">342</div><div class="ws-lbl">Сбито</div></div>
-          <div class="wave-summary-card"><div class="ws-val">5</div><div class="ws-lbl">Нас. пунктов</div></div>
-          <div class="wave-summary-card"><div class="ws-val">8</div><div class="ws-lbl">Пострадавших</div></div>
-        </div>
-        <div class="wave-summary-strikes"><div class="wave-summary-strike"><span class="ws-city">📍 Истра (Пионерский)</span>: частные жилые дома — 7 домов разрушено · <span class="ws-cas">3 погиб.</span> · <span class="ws-cas">5 ран.</span></div><div class="wave-summary-strike"><span class="ws-city">📍 Солнечногорск</span>: многоквартирный жилой дом · <span class="ws-cas">2 ран.</span></div><div class="wave-summary-strike"><span class="ws-city">📍 Истра (Бабкино)</span>: частные дома — 2 дома разрушено</div><div class="wave-summary-strike"><span class="ws-city">📍 Можайск</span>: многоквартирный дом (повреждения)</div><div class="wave-summary-strike"><span class="ws-city">📍 Владимир</span>: многоэтажный жилой дом (окна)</div></div>
-        <div class="wave-summary-text">В ночь на 13 июля Москву и Подмосковье атаковали более 350 беспилотников. По данным Минобороны РФ, средствами ПВО сбито 342 дрона над регионами. Мэр Москвы Собянин сообщил о более чем 300 БПЛА на столицу, из которых 50 уничтожены на подлёте. Губернатор Воробьёв заявил о 81 сбитом/подавленном БПЛА над Подмосковьем в 14 округах.</div>
-        <div class="wave-summary-sources">Источники: Минобороны РФ, Сергей Собянин, Андрей Воробьёв, Александр Авдеев</div>
-      </section>
-
       <h2 class="section-h"><span class="ico">🔔</span> Узнавать о волнах первым</h2>
       <a class="map-cta inline" href="https://t.me/BPLAlert_bot" target="_blank" rel="noopener"><span class="mc-ico">🚨</span> Подписаться на оповещения о волнах в Telegram-боте →</a>
 
@@ -165,11 +202,19 @@
       </div>
     </div>
   </main>
+
+  <footer class="news-footer">
+    <div class="news-footer-inner">
+      <p>Топливный фронт РФ · <a href="/">🗺️ Карта НПЗ</a> · OSINT-дашборд · <span class="mono">npz-tactical-map.vercel.app</span></p>
+      <p class="footer-disc">Не является официальной информацией. Данные из открытых источников.</p>
+    </div>
+  </footer>
+
   <script>
     const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
-  <script defer src="/nav-dropdown.js"></script>
+  <script defer src="/nav-dropdown.js?v=06476ddc"></script>
   <script defer src="/vpn-nudge.js?v=c0646279"></script>
   <!-- ponytail: sub-nudge.js инертен без #map (arm() ищет getElementById('map')) — на этой
        странице подписку тянет статичный CTA-блок выше; скрипт подключён для консистентности
