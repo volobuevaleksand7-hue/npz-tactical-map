@@ -145,15 +145,28 @@
       .then(function (j) {
         if (!j || !j.briefs) return;
         var dates = Object.keys(j.briefs).sort().reverse();
-        if (!dates.length) return;
-        var date = dates[0];
-        var title = makeTitle(j.briefs[date]);
-        var st = seenState();
-        if (st === "seen:" + date) { arm(date, title, true); return; }   // эту дату уже видел → язычком
-        if (st === "dock") { arm(date, title, true); return; }           // ранее свернул → язычком
-        arm(date, title, false);                                         // новая дата → показать
+        resolveCover(dates, j.briefs, 0);
       })
       .catch(function () {});
+  }
+
+  // Свежайшая дата, у которой РЕАЛЬНО есть обложка: сводка Гермеса может опережать
+  // генерацию обложки (build-covers). Пре-probe детач-картинкой — показываем карточку
+  // только когда обложка загрузилась (значит и в DOM отрисуется мгновенно, из кеша).
+  // ponytail: окно отставания обложки ≤1 сутки → 3 попытки с запасом.
+  function resolveCover(dates, briefs, i) {
+    if (i >= dates.length || i >= 3) return; // обложек нет в разумном окне → карточку не показываем
+    var date = dates[i];
+    var probe = new Image();
+    probe.onload = function () { dispatch(date, makeTitle(briefs[date])); };
+    probe.onerror = function () { resolveCover(dates, briefs, i + 1); };
+    probe.src = "/assets/cover-" + date + ".png";
+  }
+
+  function dispatch(date, title) {
+    var st = seenState();
+    var docked = (st === "seen:" + date || st === "dock"); // видел эту дату / ранее свернул → язычком
+    arm(date, title, docked);
   }
 
   // показать после первого взаимодействия (пан/скролл/клик) или через 10с —
