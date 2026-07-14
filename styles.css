@@ -680,6 +680,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   box-shadow:0 1px 8px rgba(217,46,40,.14);
   animation:subscriptionAlertPulse 2.8s ease-in-out infinite}
 [data-theme="dark"] .subscription-alert{background:rgba(32,22,22,.96)}
+/* display:flex выше перебивал бы [hidden]{display:none} → крестик/hidden не прятал бы полосу */
+.subscription-alert[hidden]{display:none}
 .subscription-alert-inner{display:flex;align-items:center;justify-content:center;gap:10px;
   width:100%;max-width:920px;min-width:0}
 .subscription-alert-tag{flex:none;display:grid;place-items:center;min-height:26px;padding:0 9px;border-radius:7px;
