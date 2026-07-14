@@ -14,6 +14,20 @@ grep -q 'href="https://t.me/bplalarm"' "$index_file"
 grep -q 'Сохранить доступ' "$index_file"
 grep -q 'id="subscriptionAlertClose"' "$index_file"
 grep -q '/subscription-alert.js' "$index_file"
+grep -q '<h1 class="ss-title">Нет бензина в России — карта НПЗ и дефицита топлива</h1>' "$index_file"
+if grep -q 'class="ss-txt"' "$index_file"; then
+  echo "The status strip must replace its auto-refresh text with the subscription alert" >&2
+  exit 1
+fi
+node - "$index_file" <<'NODE'
+const html = require("fs").readFileSync(process.argv[2], "utf8");
+const statusStart = html.indexOf('<div class="status-strip"');
+const statusEnd = html.indexOf("</div>", statusStart);
+const alertStart = html.indexOf('id="subscriptionAlert"');
+if (statusStart < 0 || alertStart < statusStart || alertStart > statusEnd) {
+  throw new Error("Subscription alert must be inside the status strip, replacing auto-refresh text");
+}
+NODE
 if grep -q '/sub-nudge.js' "$index_file"; then
   echo "The retired subscription popup must not load beside the alert banner" >&2
   exit 1
@@ -21,14 +35,18 @@ fi
 
 grep -q '\.subscription-alert' "$style_file"
 grep -q 'max-width:800px' "$style_file"
-grep -q 'position:absolute;top:calc(142px + env(safe-area-inset-top))' "$style_file"
-grep -q 'top:calc(188px + env(safe-area-inset-top))' "$style_file"
+grep -q 'position:relative;left:auto;transform:none' "$style_file"
+if grep -q 'top:calc(142px + env(safe-area-inset-top))' "$style_file"; then
+  echo "Subscription alert must not overlay the map" >&2
+  exit 1
+fi
 grep -q 'background:rgba(255,255,255,.96)' "$style_file"
 grep -q '\.subscription-alert-warning' "$style_file"
 grep -q '@media(max-width:700px)' "$style_file"
 grep -q 'subscription-alert-cta-short' "$style_file"
 grep -q 'subscriptionAlertPulse' "$style_file"
 grep -q 'prefers-reduced-motion:reduce' "$style_file"
+grep -q 'order:3;flex:1 0 100%' "$style_file"
 
 grep -q 'subscription_alert_hidden_until' "$script_file"
 grep -q '14 \* 24 \* 60 \* 60 \* 1000' "$script_file"

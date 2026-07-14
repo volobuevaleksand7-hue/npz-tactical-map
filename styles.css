@@ -656,7 +656,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .status-strip .ss-fallback{font-family:var(--mono);font-weight:700;font-size:9px;letter-spacing:.3px;
   color:var(--amber);border:1px solid var(--amber);background:var(--surface2);
   padding:3px 7px;border-radius:6px;white-space:nowrap}
-.status-strip .ss-title{font-weight:800;font-size:15px;line-height:1.1;letter-spacing:.2px;white-space:nowrap;min-width:0}
+.status-strip .ss-title{flex:1 1 380px;overflow:hidden;font-weight:800;font-size:15px;line-height:1.1;letter-spacing:.2px;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .status-strip .ss-txt{line-height:1.35;min-width:0;color:var(--ink-dim);white-space:nowrap}
 .status-strip .ss-num{font-family:var(--mono);font-weight:700;color:var(--teal)}
 .status-strip .ss-nav{margin-left:auto;display:flex;align-items:center;gap:10px}
@@ -671,9 +671,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .status-strip.stale{background:linear-gradient(90deg,rgba(210,58,46,.16),rgba(223,143,23,.10))}
 .status-strip.stale .ss-mode{background:var(--red);color:#fff}
 
-/* ===== Telegram резервный канал ===== */
-.subscription-alert{position:absolute;top:calc(142px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:29;display:flex;align-items:center;gap:9px;
-  width:calc(100% - 28px);max-width:800px;margin:5px 0 0;padding:6px 10px;
+/* ===== Telegram резервный канал в строке статуса ===== */
+.subscription-alert{position:relative;left:auto;transform:none;z-index:29;display:flex;align-items:center;gap:9px;flex:1 1 360px;
+  width:auto;max-width:800px;margin:0;padding:6px 10px;
   background:rgba(255,255,255,.96);border:1px solid rgba(210,58,46,.82);border-radius:9px;
   box-shadow:0 0 8px rgba(217,46,40,.22),0 0 18px rgba(217,46,40,.12);color:var(--ink);
   animation:subscriptionAlertPulse 2.8s ease-in-out infinite}
@@ -699,7 +699,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 @media(prefers-reduced-motion:reduce){.subscription-alert,.subscription-alert-warning{animation:none}}
 
 @media(max-width:700px){
-  .subscription-alert{top:calc(188px + env(safe-area-inset-top));display:flex;align-items:center;gap:5px;width:calc(100% - 16px);max-width:none;margin:3px 0 0;padding:5px 6px;border-radius:9px;white-space:nowrap}
+  .subscription-alert{display:flex;align-items:center;gap:5px;width:100%;max-width:none;margin:0;padding:5px 6px;border-radius:9px;white-space:nowrap}
   .subscription-alert-tag{display:block;align-self:auto;min-width:0;background:transparent;color:transparent;font-size:0;line-height:1}
   .subscription-alert-tag::before{content:"⚠";color:#a51e20;font-size:15px}
   .subscription-alert-copy{display:block;flex:1;overflow:hidden;white-space:nowrap}
@@ -715,8 +715,17 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .strikebar{max-width:calc(100vw - 36px);flex-wrap:wrap}
 }
 
+@media(max-width:1600px) and (min-width:1251px){
+  .subscription-alert{max-width:520px}
+}
+
+@media(max-width:1250px){
+  .status-strip{flex-wrap:wrap}
+  .subscription-alert{order:3;flex:1 0 100%;max-width:none}
+}
+
 @media(max-width:820px){
-  .status-strip{font-size:10px;padding:5px 8px;gap:6px;min-height:38px;overflow:hidden}
+  .status-strip{flex-wrap:wrap;font-size:10px;padding:5px 8px;gap:6px;min-height:38px;overflow:hidden}
   .status-strip .ss-title{flex:1;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .status-strip .ss-version{display:none}
   .status-strip .ss-txt{display:none}
@@ -725,6 +734,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   .status-strip .ss-src:nth-child(2){display:none}
   .status-strip .ss-report{font-size:0;min-width:28px;padding:0}
   .status-strip .ss-report::before{content:"!" ;font-size:13px}
+  .subscription-alert{order:3;flex:1 0 100%}
   .topctl .tg-subscribe{padding:5px 8px;font-size:11px;gap:4px}
 }
 /* ===== VERY SMALL SCREENS (≤400px) ===== */
