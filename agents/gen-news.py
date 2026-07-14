@@ -315,7 +315,12 @@ def brief_headline(date: str, strikes: list) -> str:
 
     def _lead_key(s):
         conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
-        return (_cls(s), conf)
+        # Бонус за свежесть: сегодняшние удары приоритетнее
+        sdate = str(s.get("date", ""))[:10]
+        recency = 0
+        if sdate == date:
+            recency = 10
+        return (_cls(s), conf, recency)
     refs = [s for s in strikes if is_refinery(s)]
     if refs:
         lead = max(strikes, key=_lead_key)

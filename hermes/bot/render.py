@@ -141,6 +141,7 @@ def _pick_lead(strikes, molniya_ref=None):
     if not strikes:
         return None
     # Простая эвристика: подтверждённые удары по НПЗ/энергетике вперёд, дальше по свежести.
+    today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     def score(s):
         text = (str(s.get("target", "")) + str(s.get("title", ""))).lower()
         sc = 0
@@ -149,6 +150,12 @@ def _pick_lead(strikes, molniya_ref=None):
         if any(k in text for k in ("тэц", "подстанц", "электр")):
             sc += 30
         sc += {"confirmed": 20, "reported": 10}.get(s.get("confidence"), 0)
+        # Бонус за свежесть: удары сегодняшнего дня +100, вчерашнего +50
+        sdate = str(s.get("date", ""))[:10]
+        if sdate == today:
+            sc += 100
+        elif sdate >= (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)).strftime("%Y-%m-%d"):
+            sc += 50
         return sc
     return max(strikes, key=score)
 
