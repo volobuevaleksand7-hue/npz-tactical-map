@@ -672,7 +672,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .status-strip.stale .ss-mode{background:var(--red);color:#fff}
 
 /* ===== Telegram резервный канал ===== */
-.subscription-alert{position:absolute;top:calc(84px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:29;display:flex;align-items:center;gap:9px;
+.subscription-alert{position:absolute;top:calc(142px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:29;display:flex;align-items:center;gap:9px;
   width:calc(100% - 28px);max-width:800px;margin:5px 0 0;padding:6px 10px;
   background:rgba(255,255,255,.96);border:1px solid rgba(210,58,46,.82);border-radius:9px;
   box-shadow:0 0 8px rgba(217,46,40,.22),0 0 18px rgba(217,46,40,.12);color:var(--ink);
@@ -699,7 +699,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 @media(prefers-reduced-motion:reduce){.subscription-alert,.subscription-alert-warning{animation:none}}
 
 @media(max-width:700px){
-  .subscription-alert{top:calc(82px + env(safe-area-inset-top));display:flex;align-items:center;gap:5px;width:calc(100% - 16px);max-width:none;margin:3px 0 0;padding:5px 6px;border-radius:9px;white-space:nowrap}
+  .subscription-alert{top:calc(188px + env(safe-area-inset-top));display:flex;align-items:center;gap:5px;width:calc(100% - 16px);max-width:none;margin:3px 0 0;padding:5px 6px;border-radius:9px;white-space:nowrap}
   .subscription-alert-tag{display:block;align-self:auto;min-width:0;background:transparent;color:transparent;font-size:0;line-height:1}
   .subscription-alert-tag::before{content:"⚠";color:#a51e20;font-size:15px}
   .subscription-alert-copy{display:block;flex:1;overflow:hidden;white-space:nowrap}

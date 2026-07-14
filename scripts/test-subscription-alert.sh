@@ -21,7 +21,8 @@ fi
 
 grep -q '\.subscription-alert' "$style_file"
 grep -q 'max-width:800px' "$style_file"
-grep -q 'position:absolute;top:calc(84px + env(safe-area-inset-top))' "$style_file"
+grep -q 'position:absolute;top:calc(142px + env(safe-area-inset-top))' "$style_file"
+grep -q 'top:calc(188px + env(safe-area-inset-top))' "$style_file"
 grep -q 'background:rgba(255,255,255,.96)' "$style_file"
 grep -q '\.subscription-alert-warning' "$style_file"
 grep -q '@media(max-width:700px)' "$style_file"
