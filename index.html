@@ -53,7 +53,7 @@
   <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.css">
   <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.Default.css">
-  <link rel="stylesheet" href="styles.css?v=1.20.6">
+  <link rel="stylesheet" href="styles.css?v=1.20.7">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#d23a2e">
   <link rel="stylesheet" href="/search.css?v=5a32b7c1">
@@ -242,18 +242,22 @@
       <a class="ss-version" id="ssVersion" href="/version.json" title="Версия сайта">v…</a>
       <span class="ss-fallback hidden" id="ssFallback" title="Часть данных отдана из резервной копии">⚠ резервная копия</span>
       <h1 class="ss-title">Нет бензина в России — карта НПЗ и дефицита топлива</h1>
-      <aside class="subscription-alert" id="subscriptionAlert" aria-label="Резервный канал карты" hidden>
-        <span class="subscription-alert-tag" aria-hidden="true">⚠ АТАКИ</span>
-        <p class="subscription-alert-copy"><strong class="subscription-alert-warning">Сайт подвергается атакам.</strong><span class="subscription-alert-sub">Сохраните резервную ссылку в Telegram.</span></p>
-        <a class="subscription-alert-cta" href="https://t.me/bplalarm" target="_blank" rel="noopener" aria-label="Сохранить доступ"><span class="subscription-alert-cta-full">Сохранить доступ</span><span class="subscription-alert-cta-short" aria-hidden="true">Сохранить</span></a>
-        <button class="subscription-alert-close" id="subscriptionAlertClose" type="button" aria-label="Закрыть уведомление">×</button>
-      </aside>
       <nav class="ss-nav" aria-label="Ссылки карты">
         <!-- FRESH:START --><a class="ss-src ss-fresh" href="/vozmozhen-li-golod" style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">🆕 Новое: Будет ли голод в россии →</a><!-- FRESH:END -->
         <a class="ss-src" href="/news">Новости</a>
         <a class="ss-src" href="/sources">Источники</a>
       </nav>
     </div>
+
+    <!-- Резервный TG-канал: своя тонкая полоса под строкой статуса (вынесена из потока заголовка) -->
+    <aside class="subscription-alert" id="subscriptionAlert" aria-label="Резервный канал карты" hidden>
+      <div class="subscription-alert-inner">
+        <span class="subscription-alert-tag" aria-hidden="true">⚠ АТАКИ</span>
+        <p class="subscription-alert-copy"><strong class="subscription-alert-warning">Сайт подвергается атакам.</strong><span class="subscription-alert-sub">Сохраните резервную ссылку в Telegram.</span></p>
+        <a class="subscription-alert-cta" href="https://t.me/bplalarm" target="_blank" rel="noopener" aria-label="Сохранить доступ"><span class="subscription-alert-cta-full">Сохранить доступ</span><span class="subscription-alert-cta-short" aria-hidden="true">Сохранить</span></a>
+      </div>
+      <button class="subscription-alert-close" id="subscriptionAlertClose" type="button" aria-label="Закрыть уведомление">×</button>
+    </aside>
 
     <!-- ===== VIEW: RUSSIA ===== -->
     <section class="view active" id="view-russia">
