@@ -18,12 +18,15 @@
   // чтобы попадал под шапку на любой ширине; body.has-alert опускает фильтр-бар карты.
   function place() {
     var strip = document.querySelector(".status-strip");
-    banner.style.top = (strip ? Math.round(strip.getBoundingClientRect().bottom) + 6 : 90) + "px";
+    var b = strip ? strip.getBoundingClientRect().bottom : 0;
+    if (b > 0) { banner.style.top = Math.round(b) + 6 + "px"; return true; }
+    return false; // .app ещё под бут-экраном (display:none) → rect нулевой, ретраим
   }
+  function tryPlace(n) { if (place() || n <= 0) return; requestAnimationFrame(function () { tryPlace(n - 1); }); }
 
   banner.hidden = false;
   document.body.classList.add("has-alert");
-  place();
+  tryPlace(300);
   window.addEventListener("resize", place);
 
   closeButton.addEventListener("click", function () {
