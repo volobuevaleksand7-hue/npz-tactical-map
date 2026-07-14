@@ -34,6 +34,7 @@ HOME = os.path.expanduser("~")
 BOT_DIR = os.environ.get("NPZ_BOT_DIR", os.path.join(HOME, ".npz-bot"))
 REPO = os.environ.get("NPZ_REPO", os.path.join(HOME, "npz-tactical-map"))
 SUBS_PATH = os.path.join(BOT_DIR, "subscribers.json")
+CHANNEL_ID = "-1004491068477"  # @NPZmap
 RADAR_DATA = os.path.join(REPO, "data", "radar-state.json")
 SITE = "https://npz-tactical-map.vercel.app"
 
@@ -505,6 +506,50 @@ async def on_publish_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         logger.error(f"publish callback error: {e}")
 
 
+# ─── digest callback ───
+async def on_digest_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обработка кнопок ✅ Опубликовать / ✏️ Править / ❌ Отклонить."""
+    query = update.callback_query
+    await query.answer()
+    data = query.data or ""
+    # digest_pub|1234567890 | digest_edit|... | digest_reject|...
+    payload_id = data.split("|", 1)[1] if "|" in data else ""
+
+    if data.startswith("digest_pub"):
+        # Читаем сохранённый текст
+        payload_path = os.path.join(BOT_DIR, f"digest-pending-{payload_id}.json")
+        if os.path.exists(payload_path):
+            payload = json.load(open(payload_path, encoding="utf-8"))
+            text = payload.get("text", "")
+            # Публикуем в канал @NPZmap
+            resp = context.bot.send_message(
+                chat_id=CHANNEL_ID,
+                text=text,
+                parse_mode="HTML",
+                disable_web_page_preview=True,
+            )
+            os.remove(payload_path)
+            kb = InlineKeyboardMarkup([[InlineKeyboardButton("✅ Опубликовано", callback_data="done")]])
+            await query.edit_message_reply_markup(reply_markup=kb)
+            await query.message.reply_text("✅ Опубликовано в @NPZmap!")
+        else:
+            await query.message.reply_text("⚠️ Текст не найден (устарел).")
+
+    elif data.startswith("digest_reject"):
+        payload_path = os.path.join(BOT_DIR, f"digest-pending-{payload_id}.json")
+        if os.path.exists(payload_path):
+            os.remove(payload_path)
+        kb = InlineKeyboardMarkup([[InlineKeyboardButton("❌ Отклонено", callback_data="done")]])
+        await query.edit_message_reply_markup(reply_markup=kb)
+        await query.message.reply_text("❌ Отклонено.")
+
+    elif data.startswith("digest_edit"):
+        await query.message.reply_text(
+            "✏️ Режим правки. Пришлите исправленный текст (или /cancel для отмены)."
+        )
+        context.user_data["awaiting_edit"] = payload_id
+
+
 # ─── main ───
 def main():
     token_path = os.path.join(BOT_DIR, "token")
@@ -528,6 +573,7 @@ def main():
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(CallbackQueryHandler(on_region_callback, pattern="^reg:"))
     app.add_handler(CallbackQueryHandler(on_timer_callback, pattern="^timer:"))
+    app.add_handler(CallbackQueryHandler(on_digest_callback, pattern="^digest_"))
     app.add_handler(CallbackQueryHandler(
         on_publish_callback, pattern=r"^(pub_to_group\||reject\||publish_to_group|\{)"))
 
