@@ -674,8 +674,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 /* ===== Резервный TG-канал — своя тонкая полоса под строкой статуса ===== */
 /* Одна раскладка на все ширины: полноширинная полоса, контент центрирован в max-width,
    крестик абсолютом в углу. Никакого flex:1-растяжения и «дыры» на широких мониторах. */
-.subscription-alert{position:relative;z-index:27;display:flex;align-items:center;justify-content:center;overflow:hidden;
-  width:fit-content;max-width:calc(100% - 24px);margin:8px auto;
+/* fixed-оверлей: баннер НЕ в потоке → карта занимает полную высоту (не сжимается).
+   top ставит JS по низу строки статуса (робастно на всех ширинах), 90px — фолбэк. */
+.subscription-alert{position:fixed;left:50%;top:90px;transform:translateX(-50%);z-index:30;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  width:fit-content;max-width:calc(100% - 24px);
   padding:6px 42px 6px 14px;color:var(--ink);
   background:rgba(255,255,255,.96);border:1px solid rgba(210,58,46,.6);border-radius:10px;
   box-shadow:0 2px 12px rgba(217,46,40,.16);
@@ -683,6 +686,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 [data-theme="dark"] .subscription-alert{background:rgba(32,22,22,.96)}
 /* display:flex выше перебивал бы [hidden]{display:none} → крестик/hidden не прятал бы полосу */
 .subscription-alert[hidden]{display:none}
+/* когда баннер виден — опускаем фильтр-бар карты, чтобы он не оказался под баннером */
+body.has-alert .strikebar{top:66px}
 .subscription-alert-inner{display:flex;align-items:center;justify-content:center;gap:10px;min-width:0}
 .subscription-alert-tag{flex:none;display:grid;place-items:center;min-height:26px;padding:0 9px;border-radius:7px;
   background:#a51e20;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px;white-space:nowrap}
