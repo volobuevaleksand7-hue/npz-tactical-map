@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <!-- ─── BASIC / SEO META ─── -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>[LAB] Карта АЗС — тест наличия топлива (скрытая песочница)</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="description" content="Карта АЗС России: где сейчас есть бензин и дизель, фильтр по сетям (Лукойл, Газпром, Роснефть, Татнефть), заправки по маршруту поездки и отзывы водителей. OSINT-оценка наличия по региону и сети.">
+  <meta name="keywords" content="карта азс, карта заправок, где есть бензин, где заправиться, азс россии, заправки на карте, есть ли бензин, карта азс лукойл, заправки по маршруту, где есть дизель">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="language" content="Russian">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/karta-azs-lab">
+
+  <!-- ─── SEARCH-ENGINE VERIFICATION (заполнить владельцу) ─── -->
+  <!-- Google Search Console: Settings → Ownership verification → HTML tag. Вставить content-код ниже. -->
+  <meta name="google-site-verification" content="kawGMc_7WeiQ-fTGk3TcwM7luFAK7S_HZsd76OSpwlM">
+  <!-- Яндекс.Вебмастер: webmaster.yandex.ru → добавить сайт → Мета-тег. Вставить content-код ниже. -->
+  <meta name="yandex-verification" content="9e3bfa52eddd5836">
+
+  <script src="/metrika.js" async></script>
+
+  <!-- ─── OPEN GRAPH ─── -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Топливный фронт РФ">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/karta-azs">
+  <meta property="og:title" content="Карта АЗС России — где есть бензин и дизель сейчас">
+  <meta property="og:description" content="Карта заправок России: фильтр по сетям, АЗС по маршруту поездки, отзывы водителей о наличии топлива. OSINT-оценка.">
+  <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+  <meta property="og:image:alt" content="Тактическая карта НПЗ России — Топливный фронт РФ">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- ─── TWITTER ─── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Карта АЗС России — где есть бензин и дизель сейчас">
+  <meta name="twitter:description" content="Карта заправок России: фильтр по сетям, АЗС по маршруту, отзывы водителей о наличии топлива.">
+  <meta name="twitter:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+  <meta name="twitter:image:alt" content="NPZ Tactical Map — Russia Fuel Crisis Dashboard">
+
+  <!-- ─── STRUCTURED DATA ─── -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Топливный фронт РФ // NPZ Tactical Map","alternateName":"NPZ Tactical Map","url":"https://npz-tactical-map.vercel.app/karta-azs","description":"Карта АЗС России: наличие бензина и дизеля по сетям и регионам, заправки по маршруту поездки, отзывы водителей. OSINT-оценка.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","inLanguage":["ru","en"],"isAccessibleForFree":true,"keywords":"НПЗ, нефтепереработка, топливный кризис, удары БПЛА, дефицит бензина, карта НПЗ России","dateModified":"2026-06-11"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как узнать, на какой АЗС сейчас есть бензин?","acceptedAnswer":{"@type":"Answer","text":"На карте АЗС заправки подсвечены по оценке наличия топлива для своей сети и региона. Можно отфильтровать по сети (Лукойл, Газпром нефть, Роснефть, Татнефть) и посмотреть отзывы водителей. Это OSINT-оценка по сети и региону, а не данные с конкретной колонки."}},{"@type":"Question","name":"Можно ли построить маршрут и увидеть заправки по пути?","acceptedAnswer":{"@type":"Answer","text":"Да. В блоке «Карта поездки» укажите город отправления и назначения — на карте отобразятся АЗС вдоль маршрута с оценкой наличия топлива."}},{"@type":"Question","name":"Откуда берётся расположение заправок?","acceptedAnswer":{"@type":"Answer","text":"Координаты АЗС — реальные, из OpenStreetMap. Наличие топлива — оценка по сети и региону на основе OSINT-данных, а не показания конкретной АЗС."}}]}
+  </script>
+
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.css">
+  <link rel="stylesheet" href="/vendor/leaflet-markercluster-1.5.3/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="styles.css?v=3d5a1fd6">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#d23a2e">
+  <link rel="stylesheet" href="/search.css">
+  <script defer src="/search.js"></script>
+</head>
+<body data-theme="light">
+
+  <!-- BOOT -->
+  <div id="boot" class="boot">
+    <div class="boot-card">
+      <div class="boot-emblem">⛽</div>
+      <div class="boot-title">ТОПЛИВНЫЙ ФРОНТ РФ</div>
+      <div class="boot-sub">NPZ TACTICAL MAP · OSINT ESTIMATE</div>
+      <div class="boot-bar"><div class="boot-bar-fill" id="bootFill"></div></div>
+      <div class="boot-log" id="bootLog"></div>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-emblem">⛽</span>
+        <div class="brand-text">
+          <div class="brand-title">ТОПЛИВНЫЙ ФРОНТ РФ</div>
+          <div class="brand-sub">NPZ TACTICAL MAP</div>
+        </div>
+      </div>
+      <nav class="tabs" id="tabs" aria-label="Разделы карты">
+        <button data-view="russia" class="tab-item active" aria-current="true"><span class="tab-ico">🗺</span><span class="tab-lbl">РОССИЯ</span></button>
+        <button data-view="crimea" class="tab-item"><span class="tab-ico">⚠</span><span class="tab-lbl">КРЫМ</span></button>
+        <button data-view="azs" class="tab-item"><span class="tab-ico">⛽</span><span class="tab-lbl">АЗС</span></button>
+        <a href="/radar" class="tab-item tab-link"><span class="tab-ico">📡</span><span class="tab-lbl">РАДАР&nbsp;БПЛА</span></a>
+        <a href="/news" class="tab-item tab-link"><span class="tab-ico">📰</span><span class="tab-lbl">НОВОСТИ</span></a>
+        <button data-view="history" class="tab-item"><span class="tab-ico">🕑</span><span class="tab-lbl">ИСТОРИЯ</span></button>
+        <button data-view="forecast" class="tab-item"><span class="tab-ico">📈</span><span class="tab-lbl">ПРОГНОЗ</span></button>
+        <button data-view="economy" class="tab-item"><span class="tab-ico">💰</span><span class="tab-lbl">ДОХОДЫ</span></button>
+        <div class="tab-dropdown">
+          <a href="/analytics" class="tab-link-inner" aria-haspopup="true"><span class="tab-ico">📊</span><span class="tab-lbl">АНАЛИТИКА ▾</span></a>
+          <div class="tab-dropdown-menu">
+            <!-- INDEX-MENU:START -->
+            <div class="tdm-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
+            <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <details class="tdm-sub">
+              <summary>🚀 Ракетная опасность</summary>
+              <a href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
+              <a href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
+              <a href="/raketnaya-opasnost-omsk">📍 Омск</a>
+              <a href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
+              <a href="/raketnaya-opasnost-kazan">📍 Казань</a>
+              <a href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
+              <a href="/raketnaya-opasnost-penza">📍 Пенза</a>
+              <a href="/raketnaya-opasnost-samara">📍 Самара</a>
+            </details>
+            <div class="tdm-group">Топливо</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+            <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <a href="/zakrytye-azs">📄 Какие азс закрылись</a>
+            <a href="/ocheredi-na-azs">📄 Очереди на азс</a>
+            <a href="/draki-na-azs">📄 Драки на азс</a>
+            <div class="tdm-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="tdm-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help">❓ Как пользоваться</a>
+            <a href="/metodologiya">🔬 Методология</a>
+            <div class="tdm-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+            <a href="/karta-bpla">📡 Карта БПЛА</a>
+            <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
+            <a href="/karta-azs">⛽ Карта АЗС</a>
+            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
+            <a class="tdm-all" href="/analytics">📊 Все статьи · каталог →</a>
+          <!-- INDEX-MENU:END -->
+          </div>
+        </div>
+      </nav>
+      <div class="topctl">
+        <div class="sync">
+          <span id="lastSync">—</span>
+          <span class="sync-next" id="nextSync" title="Обратный отсчёт до следующего обновления данных">T-00:00</span>
+        </div>
+        <span class="mode-pill" id="modePill">ОЦЕНКА</span>
+        <a href="/install" id="installBtn" class="install-link" title="Установить приложение — будь в курсе" aria-label="Установить приложение"><span class="install-ico">📲</span><span class="install-lbl">Установить приложение</span></a>
+        <a href="/support" class="donate-link" title="Поддержать проект" aria-label="Поддержать проект"><span class="donate-ico">🤝</span><span class="donate-lbl">Поддержать нас</span></a>
+        <a href="/radar" class="hdr-quick" title="Радар БПЛА — карта воздушных тревог" aria-label="Радар БПЛА"><span class="hq-ico">📡</span><span class="hq-lbl">РАДАР</span></a>
+        <button type="button" class="hdr-quick" data-view="azs" title="АЗС — карта заправок" aria-label="АЗС — карта заправок"><span class="hq-ico">⛽</span><span class="hq-lbl">АЗС</span></button>
+        <button type="button" class="nav-search-btn hdr-quick" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
+        <button class="theme-btn" id="themeToggle" title="Светлая / тёмная карта" aria-label="Переключить светлую или тёмную карту">☀️</button>
+        <button class="nav-burger" id="navBurger" type="button" aria-label="Меню разделов" aria-expanded="false" aria-controls="navDrawer">☰</button>
+      </div>
+    </header>
+
+    <!-- MOBILE NAV DRAWER (☰) — desktop uses .tabs; mobile uses this -->
+    <div class="nav-drawer" id="navDrawer" hidden>
+      <div class="nav-drawer-scrim" data-close></div>
+      <nav class="nav-drawer-panel" aria-label="Разделы">
+        <div class="ndp-head">
+          <span class="ndp-brand">⛽ ТОПЛИВНЫЙ ФРОНТ РФ</span>
+          <button class="ndp-x" type="button" data-close aria-label="Закрыть меню">✕</button>
+        </div>
+        <div class="ndp-group">Карта</div>
+        <a class="ndp-item" data-view="russia" role="button" tabindex="0">🗺 Россия</a>
+        <a class="ndp-item" data-view="crimea" role="button" tabindex="0">⚠ Крым</a>
+        <a class="ndp-item" data-view="azs" role="button" tabindex="0">⛽ АЗС · заправки</a>
+        <a class="ndp-item" data-view="history" role="button" tabindex="0">🕑 История</a>
+        <a class="ndp-item" data-view="forecast" role="button" tabindex="0">📈 Прогноз</a>
+        <a class="ndp-item" data-view="economy" role="button" tabindex="0">💰 Доходы</a>
+        <div class="ndp-group">Разделы</div>
+        <a class="ndp-item" href="/radar">📡 Радар БПЛА</a>
+        <a class="ndp-item" href="/news">📰 Новости</a>
+        <a class="ndp-item" href="/sources">📚 Источники</a>
+        <a class="ndp-item" href="/help">❓ Как пользоваться</a>
+        <div class="ndp-group">Аналитика</div>
+        <!-- DRAWER-ANALYTICS:START -->
+      <a class="ndp-item" href="/crimea">🗺 Крым</a>
+      <a class="ndp-item" href="/krasnodar">🌴 Краснодар</a>
+      <a class="ndp-item" href="/moskva">🏙 Москва</a>
+      <details class="ndp-sub">
+        <summary class="ndp-item">🚀 Ракетная опасность</summary>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-omsk">📍 Омск</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-kazan">📍 Казань</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-penza">📍 Пенза</a>
+        <a class="ndp-item ndp-subitem" href="/raketnaya-opasnost-samara">📍 Самара</a>
+      </details>
+      <a class="ndp-item" href="/deficit">⛽ Почему нет бензина</a>
+      <a class="ndp-item" href="/talony">🎫 Бензин по талонам</a>
+      <a class="ndp-item" href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+      <a class="ndp-item" href="/gde-dizel">🛢️ Где найти дизель</a>
+      <a class="ndp-item" href="/zakrytye-azs">📄 Какие азс закрылись</a>
+      <a class="ndp-item" href="/ocheredi-na-azs">📄 Очереди на азс</a>
+      <a class="ndp-item" href="/draki-na-azs">📄 Драки на азс</a>
+      <a class="ndp-item" href="/crisis">🔥 Прогноз кризиса</a>
+      <a class="ndp-item" href="/attacks">💥 Хроника ударов</a>
+      <a class="ndp-item" href="/refineries">🏭 Список НПЗ · все заводы</a>
+      <a class="ndp-item" href="/metodologiya">🔬 Методология</a>
+      <a class="ndp-item" href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+      <a class="ndp-item" href="/karta-bpla">📡 Карта БПЛА</a>
+      <a class="ndp-item" href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
+      <a class="ndp-item" href="/karta-azs">⛽ Карта АЗС</a>
+      <a class="ndp-item" href="/azs-ryadom">📍 АЗС рядом со мной</a>
+      <!-- DRAWER-ANALYTICS:END -->
+        <div class="ndp-group">Ещё</div>
+        <a class="ndp-item" href="/install">📲 Установить приложение</a>
+        <a class="ndp-item" href="/support">🤝 Поддержать нас</a>
+      </nav>
+    </div>
+
+    <!-- UI-SHELL LOCK v1.6.0: do not edit/deploy this block without AGENT_ACTIVITY entry + ALLOW_FRONTEND_RELEASE=1 -->
+    <!-- OSINT STATUS STRIP + FIRST-SCREEN FRAMING -->
+    <div class="status-strip" id="statusStrip">
+      <span class="ss-mode">ОЦЕНКА OSINT</span>
+      <a class="ss-version" id="ssVersion" href="/version.json" title="Версия сайта">v…</a>
+      <span class="ss-fallback hidden" id="ssFallback" title="Часть данных отдана из резервной копии">⚠ резервная копия</span>
+      <h1 class="ss-title">Карта АЗС России — где есть бензин и дизель на заправках</h1>
+      <span class="ss-txt">автообновление <span class="ss-num">4×/сутки</span> · <span class="ss-num">9</span> наборов данных</span>
+      <nav class="ss-nav" aria-label="Ссылки карты">
+        <!-- FRESH:START --><a class="ss-src ss-fresh" href="/gde-est-benzin" style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">🆕 Новое: Где есть бензин сейчас →</a><!-- FRESH:END -->
+        <a class="ss-src" href="/news">Новости</a>
+        <a class="ss-src" href="/sources">Источники</a>
+      </nav>
+    </div>
+
+    <!-- Telegram alert bot promo (closeable, remembered in localStorage) -->
+    <div class="tg-alert-banner" id="tgAlertBanner" hidden>
+      <a class="tgb-link" href="https://t.me/BPLAlert_bot" target="_blank" rel="noopener">
+        <span class="tgb-ico">🚨</span>
+        <span class="tgb-txt"><b>Тревоги БПЛА в Telegram</b> — оповещения об опасности по вашему региону, интервал 10 мин…24 ч</span>
+        <span class="tgb-cta">Подписаться →</span>
+      </a>
+      <button class="tgb-close" id="tgAlertClose" type="button" aria-label="Закрыть">✕</button>
+    </div>
+    <script>
+      (function () {
+        var b = document.getElementById('tgAlertBanner');
+        if (!b) return;
+        if (!localStorage.getItem('tgAlertClosed')) b.hidden = false;
+        document.getElementById('tgAlertClose').addEventListener('click', function () {
+          b.hidden = true;
+          try { localStorage.setItem('tgAlertClosed', '1'); } catch (e) {}
+        });
+      })();
+    </script>
+
+    <!-- ===== VIEW: RUSSIA ===== -->
+    <section class="view active" id="view-russia">
+      <div id="map" class="map"></div>
+
+      <div class="col col-left">
+        <aside class="card" id="panelLeft">
+          <div class="card-h">НАЦИОНАЛЬНЫЙ БАЛАНС</div>
+          <div class="card-b" id="balanceBody"><div class="skel" style="height:52px"></div><div class="skel"></div><div class="skel short"></div><div class="skel"></div></div>
+        </aside>
+        <aside class="card feed-card" id="panelFeed">
+          <div class="card-h">📰 ЛЕНТА УДАРОВ <span class="count" id="feedCount"></span></div>
+          <div class="feed" id="feedList"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+        </aside>
+        <aside class="card feed-card" id="panelVoices">
+          <div class="card-h">🗣 ГОЛОСА ЛЮДЕЙ <span class="count" id="voicesCount"></span></div>
+          <div class="voices" id="voicesList"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+        </aside>
+      </div>
+
+      <aside class="card card-right" id="panelRight">
+        <div class="card-h">ОБЪЕКТЫ · НПЗ <span class="count" id="npzCount"></span></div>
+        <div class="legend" id="legend"></div>
+        <div class="npz-list" id="npzList"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+      </aside>
+
+      <div class="map-ctl">
+        <div class="seg" id="regionMode">
+          <button data-mode="now" class="active">Сейчас</button>
+          <button data-mode="forecast">Прогноз ⚠</button>
+        </div>
+        <div class="seg" id="layerToggles">
+          <button data-layer="npz" class="active">НПЗ</button>
+          <button data-layer="logistics" class="active">Трубы/порты</button>
+          <button data-layer="roads" class="active">🛣 Дороги</button>
+          <button data-layer="regions" class="active">Регионы</button>
+          <button data-layer="strikes" class="active">💥 Удары</button>
+          <button data-layer="azs" title="Слой сети АЗС на карте (не путать со вкладкой «АЗС»)">⛽ Сеть АЗС</button>
+          <button data-layer="grid">⚡ Свет</button>
+          <button data-layer="prices">💰 Цены</button>
+        </div>
+      </div>
+
+      <!-- UI-SHELL LOCK v1.6.0: compact strikebar, do not expand without explicit UI-release -->
+      <!-- DAY TIMELINE for strikes layer -->
+      <div class="strikebar" id="strikeBar">
+        <span class="sb-h">💥 Удары</span>
+        <span class="sb-presets" aria-label="Быстрый период ударов">
+          <button class="sb-btn sb-preset" data-preset="today" id="presetToday" title="Только сегодня">Сегодня</button>
+          <button class="sb-btn sb-preset active" data-preset="7d" id="preset7d" title="Последние 7 дней">7 дней</button>
+          <button class="sb-btn sb-preset" data-preset="30d" id="preset30d" title="Последние 30 дней">30 дней</button>
+          <button class="sb-btn sb-preset" data-preset="all" id="dayAll" title="Все удары в базе">Все</button>
+        </span>
+        <details class="sb-menu sb-custom">
+          <summary class="sb-btn" title="Свой диапазон дат">Даты</summary>
+          <span class="sb-range">
+            <button class="sb-btn sb-preset" data-preset="prevmonth" id="presetPrevM" title="Весь прошлый календарный месяц">Пр. месяц</button>
+            <input type="date" id="dayFrom" class="sb-date" aria-label="Дата от">
+            <span class="sb-dash">–</span>
+            <input type="date" id="dayTo" class="sb-date" aria-label="Дата до">
+          </span>
+        </details>
+        <details class="sb-menu sb-timeline">
+          <summary class="sb-btn" title="Таймлайн по дням">Таймлайн</summary>
+          <span class="sb-stepper">
+            <button class="sb-btn" id="dayPrev" title="Предыдущий день">‹</button>
+            <input type="range" id="dayslider" min="0" max="0" value="0">
+            <button class="sb-btn" id="dayNext" title="Следующий день">›</button>
+            <button class="sb-btn" id="dayPlay" title="Проиграть по дням">▶</button>
+          </span>
+        </details>
+        <span class="sb-lbl" id="dayLabel">—</span>
+      </div>
+      <div class="region-legend">
+        <b>Регионы:</b><i class="g"></i>норма<i class="o"></i>нагрузка<i class="r"></i>критич.<span class="rl-border">— граница РФ</span>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: CRIMEA ===== -->
+    <section class="view" id="view-crimea">
+      <div id="mapCrimea" class="map"></div>
+      <aside class="card card-left wide" id="crimeaPanel">
+        <div class="card-h crit">КРЫМ · ОТДЕЛЬНЫЙ ТВД</div>
+        <div class="card-b" id="crimeaBody"></div>
+      </aside>
+    </section>
+
+    <!-- ===== VIEW: AZS ===== -->
+    <section class="view" id="view-azs">
+      <div id="mapAzs" class="map"></div>
+
+      <aside class="card card-left azs-ctl" id="azsPanel">
+        <div class="card-h">⛽ ЗАПРАВКИ <span class="count" id="azsCount"></span></div>
+        <div class="azs-note" id="azsNote">Расположение — реальное (OSM). Наличие — оценка по сети/региону, не по колонке.</div>
+
+        <div class="azs-block">
+          <button id="azsLocateBtn" class="azs-locate-btn" type="button">📍 Рядом со мной</button>
+          <div class="azs-geo-msg" id="azsGeoMsg" role="status" aria-live="polite"></div>
+          <label class="azs-fuel-toggle"><input type="checkbox" id="azsFuelOnly"> ⛽ Только где есть топливо</label>
+          <div class="azs-fuel-note">Честная OSINT-оценка по сети/региону — без подделки статуса каждой колонки, как у части карт-конкурентов.</div>
+        </div>
+
+        <div class="azs-block">
+          <div class="azs-block-h">🚗 Карта поездки</div>
+          <div class="azs-presets" id="azsPresets"></div>
+          <div class="azs-ab">
+            <input type="text" id="azsFrom" placeholder="Откуда (город)" autocomplete="off" aria-label="Откуда, город">
+            <input type="text" id="azsTo" placeholder="Куда (город)" autocomplete="off" aria-label="Куда, город">
+            <button id="azsRouteBtn">Маршрут</button>
+            <button id="azsRouteClear" title="Сбросить">✕</button>
+          </div>
+          <div class="azs-trip" id="azsTrip"></div>
+        </div>
+
+        <div class="azs-block">
+          <div class="azs-block-h">Фильтр сети</div>
+          <div class="azs-brands" id="azsBrands"></div>
+        </div>
+
+        <div class="azs-legend" id="azsLegend"></div>
+      </aside>
+
+      <aside class="card card-right" id="azsCommentsCard">
+        <div class="card-h">🗣 КОММЕНТАРИИ <span class="count" id="azsCommentsCount"></span></div>
+        <div class="voices" id="azsComments"></div>
+      </aside>
+    </section>
+
+    <!-- ===== VIEW: HISTORY ===== -->
+    <section class="view" id="view-history">
+      <div class="page">
+        <h2 class="page-h">🕑 Хроника с начала мая 2026</h2>
+        <div class="hist-filter" id="histFilter">
+          <button data-f="all" class="active">Все</button>
+          <button data-f="strike">🔥 Удары</button>
+          <button data-f="repair">🛠 Ремонты</button>
+          <button data-f="restriction">⛔ Ограничения</button>
+          <button data-f="policy">📋 Меры</button>
+        </div>
+        <div class="timeline" id="timeline"></div>
+        <div class="repaired-box" id="repairedBox"></div>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: FORECAST ===== -->
+    <section class="view" id="view-forecast">
+      <div class="page">
+        <h2 class="page-h">📈 Прогноз: к чему приведут продолжающиеся удары</h2>
+        <div class="scenarios" id="scenarios"></div>
+        <h3 class="sub-h">Сценарий «удары продолжаются» — по горизонтам</h3>
+        <div class="ftable-wrap"><table class="ftable" id="forecastTable"></table></div>
+        <h3 class="sub-h">Экономическая цепочка последствий</h3>
+        <div class="chain" id="econChain"></div>
+        <div class="fhint">🗺 Прогнозную раскраску регионов смотри на вкладке <b>РОССИЯ</b> → переключатель «Прогноз ⚠».</div>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: ECONOMY ===== -->
+    <section class="view" id="view-economy">
+      <div class="page">
+        <h2 class="page-h">💰 Откуда Россия получает доходы — и насколько всё завязано на нефть</h2>
+        <div class="eco-grid">
+          <div class="eco-card" id="ecoBudget"></div>
+          <div class="eco-card" id="ecoExports"></div>
+        </div>
+        <h3 class="sub-h">⚠ Под ударом: как удары по НПЗ бьют по доходам</h3>
+        <div class="eco-impact" id="ecoImpact"></div>
+        <div class="eco-highlight" id="ecoHighlight"></div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <footer class="ticker">
+      <span class="ticker-tag">СВОДКА</span>
+      <div class="ticker-track" id="ticker" aria-live="polite" aria-atomic="true"></div>
+    </footer>
+  </div>
+
+  <script src="/vendor/leaflet-1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/vendor/leaflet-markercluster-1.5.3/leaflet.markercluster.js"></script>
+  <!-- ponytail: /karta-azs = index shell booted into the АЗС tab via app.js deep-link (#azs).
+       Reuses app.js unchanged — no АЗС logic is duplicated. Body markup is cloned from
+       index.html; if the SPA shell changes structurally, re-sync this file (diff vs index.html). -->
+  <script>if(!location.hash&&!location.search)history.replaceState(null,"","#azs");</script>
+  <script src="app.js?v=e4b7683a"></script>
+  <!-- Vercel Web Analytics (нужно включить в Dashboard → Analytics → Enable, иначе /_vercel/insights/* = 404) -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    // Mobile nav drawer (☰) — proxies map views to the real #tabs buttons, lets <a> links navigate
+    (function () {
+      var d = document.getElementById('navDrawer'), b = document.getElementById('navBurger');
+      if (!d || !b) return;
+      function open() { d.hidden = false; void d.offsetWidth; /* commit closed state so the slide-in transition plays (rAF is throttled in bg tabs) */ d.classList.add('open'); b.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+      function close() { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; setTimeout(function () { d.hidden = true; }, 260); }
+      b.addEventListener('click', open);
+      d.addEventListener('click', function (e) {
+        if (e.target.hasAttribute('data-close')) { close(); return; }
+        var vi = e.target.closest('.ndp-item[data-view]');
+        if (vi) { e.preventDefault(); var t = document.querySelector('#tabs button[data-view="' + vi.dataset.view + '"]'); if (t) t.click(); close(); return; }
+        if (e.target.closest('.ndp-item[href]')) close(); // let the link navigate
+      });
+      d.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var vi = e.target.closest('.ndp-item[data-view]'); if (vi) vi.click(); } });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !d.hidden) close(); });
+    })();
+  </script>
+  <script>
+    // Header quick-chips (mobile): АЗС проксирует на реальную кнопку вкладки #tabs; РАДАР — обычная ссылка
+    document.querySelectorAll('.hdr-quick[data-view]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var t = document.querySelector('#tabs button[data-view="' + el.dataset.view + '"]');
+        if (t) t.click();
+      });
+    });
+  </script>
+  <script>
+    // АНАЛИТИКА: клик закрепляет меню (класс .open) на всех экранах — не залипает
+    // на hover и не схлопывается при движении мыши к пунктам. Закрытие — клик вне / Esc.
+    document.querySelectorAll('.tab-dropdown > .tab-link-inner').forEach(a => {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();  // не уводим на /analytics — каталог доступен пунктом в меню
+        this.closest('.tab-dropdown').classList.toggle('open');
+      });
+    });
+    const closeDrops = () => document.querySelectorAll('.tab-dropdown.open')
+      .forEach(d => d.classList.remove('open'));
+    document.addEventListener('click', e => { if (!e.target.closest('.tab-dropdown')) closeDrops(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrops(); });
+  </script>
+  <script>
+  if('serviceWorker' in navigator){window.addEventListener('load',function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(e){console.warn('SW:',e);});
+    // sw.js делает skipWaiting+claim → смена контроллера = новая версия уже активна
+    var hadSW=!!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange',function(){
+      if(!hadSW){hadSW=true;return;} // первая установка — не «обновление»
+      var t=document.createElement('div');t.className='pwa-toast';t.setAttribute('role','status');
+      t.textContent='🔄 Доступна новая версия — нажмите, чтобы обновить';
+      t.style.cursor='pointer';t.style.pointerEvents='auto';t.onclick=function(){location.reload();};
+      document.body.appendChild(t);requestAnimationFrame(function(){t.classList.add('show');});
+      setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},300);},8000);
+    });
+  });}
+  </script>
+  <script defer src="/vpn-nudge.js?v=6a37c401"></script>
+  <!-- LAB-ONLY: код новых фич наличия топлива живёт здесь, прод app.js/karta-azs не трогаем. -->
+  <script defer src="/azs-lab.js?v=1"></script>
+</body>
+</html>
