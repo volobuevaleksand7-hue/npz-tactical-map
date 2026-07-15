@@ -16,6 +16,7 @@ sanitize-strikes.py — детерминированный фильтр каче
 Запуск:  python3 agents/sanitize-strikes.py [путь]   (по умолчанию data/strikes.json)
 """
 import json
+import re
 import sys
 
 UA_CHARS = set("іїєґ")
@@ -23,6 +24,38 @@ UA_MARK = ["Повітр", "Слава Україн", "Гарні новини",
            "відмінусували", "Дякуємо", "ворожий", "збитий в бою", "Твір на тему",
            "ЗСУ переможе", "русн", "орки", "кацап", "москаль"]
 VALID_CONF = {"confirmed", "reported", "rumored"}
+
+# Русскоязычные оценочные эпитеты. UA_MARK их не ловил (это не украинский и не брань),
+# поэтому «в оккупированном Севастополе» вербатимом из заголовка УП доезжало до прода —
+# к 15.07 накопилось 9 таких записей начиная с 09.06.
+# Режем ЭПИТЕТ, а не запись: событие реальное и по теме. Через reason_bad такая запись
+# удалилась бы целиком — это ровно тот усыхающий архив (11.07: 172→67).
+SCRUB = [
+    (r"(?i)\bвременно\s+оккупированн\w*\s+", ""),
+    (r"(?i)\bв\s+оккупированном\s+", "в "),
+    (r"(?i)\bв\s+аннексированном\s+", "в "),
+    (r"(?i)\bоккупированн\w*\s+", ""),
+    (r"(?i)\bаннексированн\w*\s+", ""),
+    (r"(?i)\bоккупант\w*\s+", ""),
+]
+SCRUB_FIELDS = ("detail", "target", "title", "city", "region")
+
+
+def scrub(x):
+    """Вычищает оценочные эпитеты из текстовых полей. True, если что-то изменилось."""
+    changed = False
+    for f in SCRUB_FIELDS:
+        v = x.get(f)
+        if not isinstance(v, str):
+            continue
+        orig = v
+        for pat, rep in SCRUB:
+            v = re.sub(pat, rep, v)
+        v = re.sub(r"\s{2,}", " ", v).strip()
+        if v != orig:
+            x[f] = v
+            changed = True
+    return changed
 JET_WORDS = ["су-3", "су-5", "миг-", "истребител", "льотчик", "лётчик", "самолёт", "самолет"]
 FUEL_WORDS = ["нпз", "нефт", "топлив", "нефтебаз", "терминал", "азс", "гпз", "энергет",
               "подстанц", "тэц", "тэс", "грэс", "нпс", "нефтехим"]
@@ -53,10 +86,15 @@ def sanitize(path):
     else:
         keys = [k for k in ("strikes", "history") if isinstance(s.get(k), list)]
     total = 0
+    scrubbed = 0
     for k in keys:
         arr = s if k is None else s[k]
         keep, removed = [], []
         for x in arr:
+            if isinstance(x, dict) and scrub(x):
+                scrubbed += 1
+                sys.stderr.write("  sanitize: scrub эпитетов | %s | %s\n"
+                                 % (x.get("date"), str(x.get("city"))[:24]))
             r = reason_bad(x) if isinstance(x, dict) else None
             (removed if r else keep).append(x)
             if r:
@@ -68,7 +106,7 @@ def sanitize(path):
                 s = keep
             else:
                 s[k] = keep
-    if total:
+    if total or scrubbed:
         json.dump(s, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     return total
 

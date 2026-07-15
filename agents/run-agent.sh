@@ -34,6 +34,13 @@ git pull --rebase --quiet 2>/dev/null || git pull --quiet 2>/dev/null || true
 
 PROMPT="$(cat "$PROMPT_FILE")"
 
+# Снимок data/ ДО прогона. Сравнение до/после отличает «агент поработал» от
+# «агент вышел с RC=0, не сделав ничего». Чужие правки, лежавшие тут заранее,
+# в дельту не попадут.
+# ponytail: снимок до/после, а не маппинг label→файл; чужой коммит ВО ВРЕМЯ прогона
+# всё ещё может замаскировать пустой прогон — тогда нужен per-label целевой файл.
+DATA_BEFORE="$(git status --porcelain data/ 2>/dev/null)"
+
 # Hard cap the agent run so a hung CLI can't block the cron slot forever.
 # `timeout` exits 124 on timeout (treated as failure below). Skip the wrapper
 # if `timeout` is unavailable (e.g. stock macOS without coreutils).
@@ -83,6 +90,13 @@ fi
 # сообщениями «update AZS statuses» / «health: watchdog», хотя guard честно
 # блокировал коммит самого агента. Откатываем: забракованные данные не должны
 # пережить свой запуск.
+DATA_AFTER="$(git status --porcelain data/ 2>/dev/null)"
+if [ "$DATA_BEFORE" = "$DATA_AFTER" ]; then
+  echo "!! [$LABEL] ПУСТОЙ ПРОГОН: RC=0, но data/ не тронут — heartbeat НЕ пишем."
+  echo "   Ответ агента (для разбора): $(head -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
+  exit 0
+fi
+
 if ! bash agents/git-sync.sh "data(${LABEL}): sync $(date -u +%Y-%m-%dT%H:%MZ)" "$LABEL"; then
   echo "!! git-sync отказал (guard?) — откатываю data/, чтобы сосед не закоммитил чужое"
   git checkout -- data/ 2>/dev/null || true
