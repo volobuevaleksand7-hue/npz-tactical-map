@@ -40,6 +40,15 @@ PROMPT="$(cat "$PROMPT_FILE")"
 # ponytail: снимок до/после, а не маппинг label→файл; чужой коммит ВО ВРЕМЯ прогона
 # всё ещё может замаскировать пустой прогон — тогда нужен per-label целевой файл.
 DATA_BEFORE="$(git status --porcelain data/ 2>/dev/null)"
+RUN_START_TS="$(date +%s)"
+
+# Файл, который агент ОБЯЗАН записать, даже если ничего не нашёл (пустым массивом).
+# Для сборщиков ударов это inbox: архив им трогать нельзя (Read его не вмещает,
+# Write перезаписывает целиком → усыхание), см. agents/merge-strikes-inbox.py.
+AGENT_OUT=""
+case "$LABEL" in
+  strikes|newswatch) AGENT_OUT="data/strikes-inbox.json" ;;
+esac
 
 # Hard cap the agent run so a hung CLI can't block the cron slot forever.
 # `timeout` exits 124 on timeout (treated as failure below). Skip the wrapper
@@ -90,8 +99,32 @@ fi
 # сообщениями «update AZS statuses» / «health: watchdog», хотя guard честно
 # блокировал коммит самого агента. Откатываем: забракованные данные не должны
 # пережить свой запуск.
+# Сборщик ударов: признак работы — записанный inbox, а НЕ diff по data/.
+# «Новых ударов нет» → агент пишет [] поверх [] → содержимое не изменилось, но прогон
+# честный. А вот нетронутый файл = агент не работал (15.07: просил разрешение, RC=0).
+if [ -n "$AGENT_OUT" ]; then
+  _out_ts="$( [ -f "$AGENT_OUT" ] && stat -c %Y "$AGENT_OUT" 2>/dev/null || echo 0 )"
+  if [ "$_out_ts" -lt "$RUN_START_TS" ]; then
+    echo "!! [$LABEL] ПУСТОЙ ПРОГОН: RC=0, но агент не записал $AGENT_OUT — heartbeat НЕ пишем."
+    echo "   Ответ агента (для разбора): $(head -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
+    exit 0
+  fi
+  # Влить найденное в полный архив: дедуп + пересчёт summary, без LLM.
+  # Мерджер же обновляет data/strikes-recent.json — хвост, который читает агент.
+  if ! python3 agents/merge-strikes-inbox.py; then
+    echo "!! [$LABEL] merge-strikes-inbox отказал — откатываю data/, не коммитим"
+    git checkout HEAD -- data/ 2>/dev/null || true
+    exit 1
+  fi
+fi
+
 DATA_AFTER="$(git status --porcelain data/ 2>/dev/null)"
 if [ "$DATA_BEFORE" = "$DATA_AFTER" ]; then
+  if [ -n "$AGENT_OUT" ]; then
+    echo "=== [$LABEL] отработал, новых ударов нет — коммитить нечего, heartbeat пишем."
+    bash agents/git-sync.sh "data(${LABEL}): heartbeat $(date -u +%Y-%m-%dT%H:%MZ)" "$LABEL" || true
+    exit 0
+  fi
   echo "!! [$LABEL] ПУСТОЙ ПРОГОН: RC=0, но data/ не тронут — heartbeat НЕ пишем."
   echo "   Ответ агента (для разбора): $(head -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
   exit 0
