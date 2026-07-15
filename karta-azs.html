@@ -429,7 +429,9 @@
   <!-- ponytail: /karta-azs = index shell booted into the АЗС tab via app.js deep-link (#azs).
        Reuses app.js unchanged — no АЗС logic is duplicated. Body markup is cloned from
        index.html; if the SPA shell changes structurally, re-sync this file (diff vs index.html). -->
-  <script>if(!location.hash&&!location.search)history.replaceState(null,"","#azs");</script>
+  <!-- ponytail: гейт только по hash. "#azs" — фрагментная ссылка: query сохраняется сама (RFC 3986 §5.3),
+       поэтому UTM доезжает до Метрики. Не добавлять сюда !location.search — любая utm-метка ломала вкладку. -->
+  <script>if(!location.hash)history.replaceState(null,"","#azs");</script>
   <script src="app.js?v=e4b7683a"></script>
   <!-- Vercel Web Analytics (нужно включить в Dashboard → Analytics → Enable, иначе /_vercel/insights/* = 404) -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
