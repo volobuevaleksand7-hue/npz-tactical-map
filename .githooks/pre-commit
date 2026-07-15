@@ -51,6 +51,25 @@ if echo "$staged" | grep -q '^data/strikes\.json$' && [ "${ALLOW_STRIKES_SHRINK:
   fi
 fi
 
+# ---- archive-shrink guard: fuel-voices.json — накопительный архив голосов ----
+# 15.07: 96 → 67 → 0. Обнулил НЕ сам fuel-voices: git-sync делает `git add data/` и сгребает
+# пустой/недописанный файл с диска (обнуление прилетело в коммите data(radar)), а следующий
+# прогон агента читает уже пустое и увековечивает. Здесь НЕ блокируем (в отличие от strikes):
+# коммит с голосами делают и другие рутины, а radar тикает каждые 5 мин — блок заклинил бы
+# публикацию. Вместо этого восстанавливаем архив из HEAD и перезакладываем — данные целы,
+# конвейер жив. Осознанная чистка → ALLOW_VOICES_SHRINK=1.
+if echo "$staged" | grep -q '^data/fuel-voices\.json$' && [ "${ALLOW_VOICES_SHRINK:-}" != "1" ] && command -v python3 >/dev/null 2>&1; then
+  v_old="$(git show HEAD:data/fuel-voices.json 2>/dev/null | python3 -c 'import json,sys;print(len(json.load(sys.stdin).get("voices",[])))' 2>/dev/null || echo 0)"
+  v_new="$(git show :data/fuel-voices.json 2>/dev/null | python3 -c 'import json,sys;print(len(json.load(sys.stdin).get("voices",[])))' 2>/dev/null || echo 0)"
+  if [ "$v_old" -gt 20 ] && [ "$v_new" -lt "$((v_old * 9 / 10))" ]; then
+    if git show HEAD:data/fuel-voices.json > data/fuel-voices.json 2>/dev/null; then
+      git add data/fuel-voices.json
+      echo "pre-commit: fuel-voices.json усыхал ($v_old → $v_new голосов) — АРХИВ ВОССТАНОВЛЕН из HEAD и перезаложен." >&2
+      echo "pre-commit: осознанная чистка → ALLOW_VOICES_SHRINK=1." >&2
+    fi
+  fi
+fi
+
 # ---- neutral-OSINT guard: вычистить пропаганду / укр-вербатим / офф-топик из strikes ----
 # Ловит ЛЮБОЙ коммит (newswatch, ручной, внешняя модель), т.к. core.hooksPath=.githooks.
 # Санитайзер идемпотентен и авто-перезакладывает очищенный файл — коммит не блокируется,
