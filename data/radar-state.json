@@ -12,16 +12,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1784056806,
-      "source_text": "14.07.2026 22:20 МСК\nХерсонская область РФ Тревога по БПЛА от реки Днепр"
+      "fill": "#dc2626",
+      "last_event_ts": 1784093305,
+      "source_text": "15.07.2026 08:28 МСК\nСеверо-запад Крыма, Херсонская область РФ авиационная ракетная бомбовая опасность Одесса в море самолёты с УАБ или Штормами\n\n14.07.2026 22:20 МСК\nХерсонская область РФ Тревога по БПЛА от реки Днепр"
     },
     "Курская область": {
       "bpla": false,
@@ -207,8 +207,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1784076573,
-      "source_text": "15.07.2026 03:49 МСК\nКирилловка и близлежащие Опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1784093208,
+      "source_text": "15.07.2026 08:26 МСК\nВеликая Белозерка и далее в направлении Мелитополь опасность по БПЛА"
     },
     "Ставропольский край": {
       "bpla": false,
@@ -544,26 +544,6 @@
       "source_text": "15.07.2026 06:19 МСК\nКрымский район Краснодарский край Фиксация БПЛА"
     },
     {
-      "key": "майкоп|адыгея",
-      "name": "Майкоп",
-      "lat": 44.60789,
-      "lon": 40.10242,
-      "region": "Адыгея",
-      "bpla": true,
-      "bplaDim": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1784071616,
-      "source_text": "15.07.2026 02:26 МСК\nМайкоп, все районы Республика Адыгея внимание по БПЛА"
-    },
-    {
       "key": "докучаевск|донецкая народная республика",
       "name": "Докучаевск",
       "lat": 47.7522,
@@ -724,6 +704,46 @@
       "source_text": "15.07.2026 02:32 МСК\nКарачев И ближайшие Опасность по БПЛА Брянская область"
     },
     {
+      "key": "великая белозерка|запорожская область",
+      "name": "Великая Белозерка",
+      "lat": 47.27572,
+      "lon": 34.68457,
+      "region": "Запорожская область",
+      "bpla": true,
+      "bplaDim": true,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1784093208,
+      "source_text": "15.07.2026 08:26 МСК\nВеликая Белозерка и далее в направлении Мелитополь опасность по БПЛА"
+    },
+    {
+      "key": "мелитополь|запорожская область",
+      "name": "Мелитополь",
+      "lat": 46.84735,
+      "lon": 35.38196,
+      "region": "Запорожская область",
+      "bpla": true,
+      "bplaDim": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1784093208,
+      "source_text": "15.07.2026 08:26 МСК\nВеликая Белозерка и далее в направлении Мелитополь опасность по БПЛА"
+    },
+    {
       "key": "белгород|белгородская область",
       "name": "Белгород",
       "lat": 50.5955595,
@@ -762,26 +782,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1784089836,
       "source_text": "15.07.2026 07:30 МСК\nАрмавир Краснодарский край Опасность по БПЛА"
-    },
-    {
-      "key": "брянск|брянская область",
-      "name": "Брянск",
-      "lat": 53.27096,
-      "lon": 34.32143,
-      "region": "Брянская область",
-      "bpla": true,
-      "bplaDim": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1784071660,
-      "source_text": "15.07.2026 02:27 МСК\nБрянск и близлежащие Тревога по БПЛА Брянская область"
     },
     {
       "key": "старобешево|донецкая народная республика",
@@ -947,13 +947,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1784092350,
-  "last_event_at": "2026-07-15T05:12:30Z",
-  "fetched_at": "2026-07-15T05:20:03.271776Z",
+  "timestamp": 1784093305,
+  "last_event_at": "2026-07-15T05:28:25Z",
+  "fetched_at": "2026-07-15T05:30:02.601716Z",
   "poll_interval_sec": 10,
   "meta": {
-    "generated_at": "2026-07-15T05:20:03.271776Z",
-    "source_age_seconds": 453,
+    "generated_at": "2026-07-15T05:30:02.601716Z",
+    "source_age_seconds": 97,
     "city_count": 28,
     "region_count": 15,
     "feed_count": 0
