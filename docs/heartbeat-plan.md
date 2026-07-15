@@ -69,11 +69,16 @@ json.dump(d, open(f, 'w'), indent=1)
 
 ## Status Semantics (per file in `health.json`)
 
+> **Обновлено 15.07.2026.** Данные и живость агента — ДВЕ ОРТОГОНАЛЬНЫЕ оси.
+> Раньше `ok` ставился при свежих данных независимо от heartbeat, из-за чего
+> мёртвый агент был невиден, пока его данные не успевали протухнуть.
+
 | Status | Data age | Heartbeat age | Meaning | Alert? |
 |-|-|-|-|-|
-| `ok` | within threshold | any | Data fresh | No |
-| `stale_alive` | over threshold | within 72h | Agent ran, no new data | **No** (suppress alert) |
-| `stale_dead` | over threshold | >72h or missing | Agent likely dead | **Yes** |
+| `ok` | within threshold | within window | Data fresh, agent reporting | No |
+| `dead` | within threshold | over window or missing | **Agent not reporting**, data merely hasn't expired yet (or another writer bumped `generated_at`) | **Yes** |
+| `stale_alive` | over threshold | within window | Agent ran, no new data | **No** (suppress alert) |
+| `stale_dead` | over threshold | over window or missing | Agent likely dead | **Yes** |
 | `unknown` | no `generated_at` | any | Cannot determine data age | No |
 
 ## Thresholds (unchanged)
@@ -88,16 +93,41 @@ No changes to WATCH thresholds in this iteration. Proposals below for future con
 
 The Telegram alert should key off `dead_count`, **not** `stale_count`.
 
-- `stale_count` includes `stale_alive` agents that are working fine but produced no new data.
-- `dead_count` only counts `stale_dead` agents that haven't checked in within the heartbeat window.
-- `overall: "degraded"` is set only when `dead_count > 0`.
+- `stale_count` — данные старше своего порога (включая `stale_alive`, где агент жив и просто нет новостей). Информационный.
+- `dead_count` — агенты, **не вышедшие на связь** (heartbeat протух/отсутствует), НЕЗАВИСИМО от возраста их данных: `dead` + `stale_dead`.
+- `overall: "degraded"` — только при `dead_count > 0`.
+- `heartbeat_dead_count` — back-compat алиас `dead_count` (историческое поле, то же число).
+
+**Почему изменено (15.07.2026):** раньше `dead_count` считал только `stale_dead`,
+т.е. требовал, чтобы данные ТОЖЕ успели протухнуть. Флот, лежавший 19ч на
+протухшем OAuth, показывал в баннере «1 агент не на связи» вместо десяти —
+данные были в пределах порогов 18–36ч. Плюс `fuel-state.json` пишут два агента
+(`npz-status` и `fuel-market`): живой `fuel-market` бампал `generated_at` и
+маскировал мёртвый `npz-status`. Баннер (`app.js:589`) печатает `dead_count`
+и подписан «не на связи» — теперь смысл поля совпадает с подписью.
 
 ## Heartbeat Freshness Window
 
-**72 hours** (`HEARTBEAT_FRESHNESS_HOURS = 72`).
+**Per-agent, ≈2× cron-интервала + буфер** (таблица `WATCH` в `agents/healthcheck.py`).
 
-Rationale: agents run at most daily (forecast is weekly). 72h covers 3 missed daily runs or
-a full week's slack for forecast, with margin for VPS downtime or cron delays.
+Глобальные **72ч** убраны 15.07.2026. Их обоснование — «agents run at most daily
+(forecast is weekly)» — устарело: в crontab давно 6-часовые рутины
+(`0,6,12,18`), `fuel-availability` `*/4`, `fuel-voices` `*/8`, radar `*/10мин`, а
+`forecast`/`economy` бегают **ежедневно** (03:30/04:30), а не раз в неделю. 72ч
+для 6-часового агента — это 12× интервала: авария становилась видна только через
+трое суток.
+
+| Агент | Cron | Окно |
+|-|-|-|
+| strikes / npz-status / history-crimea / roads / grid-status | `0,6,12,18` (6ч) | 15ч |
+| fuel-availability | `*/4` | 10ч |
+| fuel-voices | `*/8` | 20ч |
+| radar-state | `*/10мин` | 2ч |
+| forecast / economy | ежедневно 03:30 / 04:30 | 50ч |
+
+🔴 **Держать в синхроне с crontab.** Меняешь расписание агента — меняй окно,
+иначе watchdog либо слепнет, либо начнёт ложно краснеть.
+Проверка логики: `python3 agents/healthcheck.py --selfcheck`.
 
 ## Files
 
