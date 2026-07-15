@@ -736,20 +736,15 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
     b = briefs.get(date, {"strikes": [], "voices": []})
     strikes = b.get("strikes", [])
     voices = b.get("voices", [])
-    
-    # Для сегодняшней даты — добавить удары за предыдущий день (24-часовое окно)
-    from datetime import datetime, timedelta
-    try:
-        d = datetime.strptime(date, "%Y-%m-%d")
-        prev_d = d - timedelta(days=1)
-        prev_date_str = prev_d.strftime("%Y-%m-%d")
-        if prev_date_str in briefs:
-            prev_strikes = briefs[prev_date_str].get("strikes", [])
-            # Добавляем вчерашние удары в начало (они идут первыми)
-            strikes = prev_strikes + strikes
-    except Exception:
-        pass
-    
+
+    # ponytail: НЕ подмешивать удары за предыдущий день. Раньше сюда клеился
+    # «24-часовой окно» prev_strikes + strikes, но применялось это ко ВСЕМ датам,
+    # а не только к сегодняшней: страница «Удары за 15 июля» показывала карточки
+    # от 14-го, один и тот же удар попадал на две даты (дубль-контент), а в дни
+    # простоя сборщиков сводка выглядела живой на чужих данных. Пустой день
+    # обрабатывается корректно и без костыля: brief_headline() -> «без
+    # подтверждённых ударов», gen_strikes([]) -> «За эту дату ... ударов нет».
+
     date_rus = rus_date(date)
     is_latest = (next_date is None)
 
