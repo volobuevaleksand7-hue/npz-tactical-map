@@ -485,8 +485,11 @@ def main():
         if not FRESH_RE.search(html):
             continue
         new = FRESH_RE.sub(fresh_chip, html, count=1)
+        # эти же страницы цикл выше не штампует → их ?v протухал молча (karta-azs тянула
+        # старый vpn-nudge). Штампуем здесь, иначе правки ассетов до них не доезжают.
+        new = stamp_assets(new)
         if new != html:
-            f.write_text(new, encoding="utf-8"); changed += 1; print("fresh chip updated", f.relative_to(ROOT))
+            f.write_text(new, encoding="utf-8"); changed += 1; print("fresh chip + asset ver updated", f.relative_to(ROOT))
 
     # 2) главная — дропдаун (⚠️ фронтенд-ядро, коммит под ALLOW_FRONTEND_RELEASE=1)
     idx = ROOT / "index.html"

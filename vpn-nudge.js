@@ -88,7 +88,13 @@
       '@keyframes gScan{0%,80%,92%,100%{transform:translateX(0)}84%{transform:translateX(-1.2px)}89%{transform:translateX(1.2px)}}' +
       // подмигивание язычка: покой снаружи → заехать на половину → выехать обратно (1 раз за 12с)
       '@keyframes tabPeek{0%,86%,100%{transform:translateX(0)}93%{transform:translateX(-50%)}}' +
-      '@media(prefers-reduced-motion:reduce){.nudge-tab.show{animation:none;transform:translateX(0)}' +
+      // side-right: для карточек, выезжающих СПРАВА (art-nudge). Без этого язычок вылезал слева,
+      // а карточка справа. Зеркалим: кромка, скругление, направление подмигивания.
+      '.nudge-tab.side-right{left:auto;right:0;border-left:1px solid var(--line,#e4e4e7);border-right:none;' +
+      'border-radius:12px 0 0 12px;transform:translateX(100%)}' +
+      '.nudge-tab.side-right.show{transform:translateX(0);animation:tabPeekRight 12s ease-in-out infinite}' +
+      '@keyframes tabPeekRight{0%,86%,100%{transform:translateX(0)}93%{transform:translateX(50%)}}' +
+      '@media(prefers-reduced-motion:reduce){.nudge-tab.show,.nudge-tab.side-right.show{animation:none;transform:translateX(0)}' +
       '.guard-face .eye,.guard-face .face{animation:none}}';
     document.head.appendChild(s);
   }
@@ -96,7 +102,7 @@
     injectDockCSS();
     var reg = window.__nudgeDocks || (window.__nudgeDocks = []);
     var tab = document.createElement('button');
-    tab.type = 'button'; tab.className = 'nudge-tab';
+    tab.type = 'button'; tab.className = 'nudge-tab' + (opts.side === 'right' ? ' side-right' : '');
     tab.setAttribute('aria-label', opts.label || 'Открыть');
     tab.style.cssText = (opts.pos || '') + (opts.accent ? ';color:' + opts.accent : '');
     tab.style.animationDelay = (reg.length % 2 ? '-6s' : '0s'); // сдвиг фазы: язычки подмигивают поочерёдно, не разом
@@ -134,6 +140,10 @@
   document.addEventListener('DOMContentLoaded', function () {
     trackBotInterest(); // до раннего return для карт — CTA бота есть и на radar/karta-azs
     if (document.getElementById('map')) {
+      // 15.07 («пока что»): VPN-плашка на КАРТАХ отключена — её место заняла карточка свежей
+      // сводки (article-nudge.js), внутренняя перелинковка вместо партнёрской. Вернуть =
+      // раскомментировать блок ниже. На контентных страницах VPN-промо (ниже) работает как было.
+      /*
       var K = 'vpn_float_x';
       // Всегда стартуем свёрнутым язычком слева: плавающая карточка перекрывала мобильный KPI-бар (v1.19.1).
       var startDocked = true;
@@ -142,6 +152,7 @@
       document.body.appendChild(f);
       var d = dock(f, { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'bottom:96px', startDocked: startDocked });
       f.querySelector('.pp-vpn-float-x').addEventListener('click', d.collapse);
+      */
       return;
     }
     var links = [].slice.call(document.querySelectorAll('a[href^="http"]'));

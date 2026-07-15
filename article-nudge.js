@@ -74,7 +74,7 @@
     var xbtn = card.querySelector(".art-nudge-x");
     var dockFn = window.__nudgeDock;
     if (dockFn) {
-      var d = dockFn(card, { key: K, label: "Свежая сводка", icon: NEWS_ICON,
+      var d = dockFn(card, { key: K, label: "Свежая сводка", icon: NEWS_ICON, side: "right",
                              pos: "top:60%", accent: "#d23a2e", startDocked: !!startDocked });
       xbtn.addEventListener("click", d.collapse);
     } else {
