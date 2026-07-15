@@ -430,6 +430,22 @@
        Reuses app.js unchanged — no АЗС logic is duplicated. Body markup is cloned from
        index.html; if the SPA shell changes structurally, re-sync this file (diff vs index.html). -->
   <script>if(!location.hash&&!location.search)history.replaceState(null,"","#azs");</script>
+  <!-- LAB-ONLY shim: ловит инстанс карты АЗС (app.js держит его в закрытом замыкании),
+       чтобы azs-lab.js подписался на popupopen. Только запоминает ссылку, поведение не меняет. -->
+  <script>
+    (function () {
+      if (!window.L || !L.map) return;
+      var orig = L.map;
+      L.map = function (el) {
+        var m = orig.apply(this, arguments);
+        if (el === "mapAzs" || (el && el.id === "mapAzs")) {
+          window.__azsMap = m;
+          window.dispatchEvent(new Event("azsmapready"));
+        }
+        return m;
+      };
+    })();
+  </script>
   <script src="app.js?v=e4b7683a"></script>
   <!-- Vercel Web Analytics (нужно включить в Dashboard → Analytics → Enable, иначе /_vercel/insights/* = 404) -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
@@ -492,6 +508,6 @@
   </script>
   <script defer src="/vpn-nudge.js?v=6a37c401"></script>
   <!-- LAB-ONLY: код новых фич наличия топлива живёт здесь, прод app.js/karta-azs не трогаем. -->
-  <script defer src="/azs-lab.js?v=1"></script>
+  <script defer src="/azs-lab.js?v=3"></script>
 </body>
 </html>
