@@ -140,10 +140,9 @@
   document.addEventListener('DOMContentLoaded', function () {
     trackBotInterest(); // до раннего return для карт — CTA бота есть и на radar/karta-azs
     if (document.getElementById('map')) {
-      // 15.07 («пока что»): VPN-плашка на КАРТАХ отключена — её место заняла карточка свежей
-      // сводки (article-nudge.js), внутренняя перелинковка вместо партнёрской. Вернуть =
-      // раскомментировать блок ниже. На контентных страницах VPN-промо (ниже) работает как было.
-      /*
+      // На картах живут ОБЕ плашки (решение Серёги 15.07): VPN — язычок слева внизу,
+      // карточка свежей сводки (article-nudge.js) — справа. Не конфликтуют: разные стороны
+      // дока (side:'right' у сводки) + реестр __nudgeDocks сдвигает фазы подмигивания.
       var K = 'vpn_float_x';
       // Всегда стартуем свёрнутым язычком слева: плавающая карточка перекрывала мобильный KPI-бар (v1.19.1).
       var startDocked = true;
@@ -152,7 +151,6 @@
       document.body.appendChild(f);
       var d = dock(f, { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'bottom:96px', startDocked: startDocked });
       f.querySelector('.pp-vpn-float-x').addEventListener('click', d.collapse);
-      */
       return;
     }
     var links = [].slice.call(document.querySelectorAll('a[href^="http"]'));
