@@ -302,7 +302,10 @@ def build_drawer_analytics(rows):
 FRESH_RE  = re.compile(r'<!-- FRESH:START -->.*?<!-- FRESH:END -->', re.DOTALL)
 SSNAV_RE  = re.compile(r'(<nav class="ss-nav"[^>]*>)')
 
-FRESH_TYPES = {"region", "explainer", "forecast", "tool"}  # не reference/object — те не «свежий контент»
+# Все контентные типы: раньше было {region, explainer, forecast, tool}, из-за чего чип застревал
+# на старой статье — всё, что выходило после неё (НПЗ-страницы = object, разборы = reference),
+# отсекалось по типу. Свежесть = порядок строк в реестре (дат в нём нет), TOP_URLS отсеиваются ниже.
+FRESH_TYPES = {"region", "explainer", "forecast", "tool", "object", "reference"}
 
 
 def newest_page(rows):
@@ -318,7 +321,7 @@ def build_fresh_chip(rows):
     _, lab = label_for(r["url"], r.get("primary_kw"))
     return ('<!-- FRESH:START --><a class="ss-src ss-fresh" href="%s" '
             'style="background:var(--teal,#12a594);color:#fff;font-weight:700;border-radius:8px">'
-            '🆕 Новое: %s →</a><!-- FRESH:END -->') % (r["url"], lab)
+            '🆕 %s →</a><!-- FRESH:END -->') % (r["url"], lab)
 
 
 # ---- 3) каталог-хаб /analytics (маркеры) ----
@@ -425,6 +428,10 @@ def wire_dropdown(html):
 def main():
     rows = load_reg()
     changed = 0
+    # «Свежее»-чип считаем один раз и применяем ко ВСЕМ страницам с маркерами (не только к
+    # index): у karta-azs / karta-azs-lab свои FRESH-маркеры, и раньше их не обновлял никто —
+    # чип там застревал навсегда.
+    fresh_chip = build_fresh_chip(rows)
 
     # 1) news-nav + футер на всех лендингах, у которых он есть (авто-обнаружение —
     # не забыть добавить в список больше нельзя); news/*.html — архив сводок,
@@ -456,6 +463,19 @@ def main():
         if new != html:
             f.write_text(new, encoding="utf-8"); changed += 1; print("nav/footer updated", f.relative_to(ROOT))
 
+    # 1b) «Свежее»-чип на НЕ-index страницах с маркерами. Отдельным проходом, потому что цикл
+    # выше пропускает страницы без news-nav/news-header (karta-azs* — карты, у них topbar),
+    # а FRESH-маркеры у них есть → чип там застревал навсегда (был /gde-est-benzin).
+    for f in landings:
+        if f.name == "index.html":
+            continue
+        html = f.read_text(encoding="utf-8")
+        if not FRESH_RE.search(html):
+            continue
+        new = FRESH_RE.sub(fresh_chip, html, count=1)
+        if new != html:
+            f.write_text(new, encoding="utf-8"); changed += 1; print("fresh chip updated", f.relative_to(ROOT))
+
     # 2) главная — дропдаун (⚠️ фронтенд-ядро, коммит под ALLOW_FRONTEND_RELEASE=1)
     idx = ROOT / "index.html"
     if idx.exists():
@@ -464,7 +484,7 @@ def main():
         if n == 0:
             print("!! no tab-dropdown-menu in index.html")
         # «Свежее»-чип: обновить между маркерами, либо вставить первым в .ss-nav
-        chip = build_fresh_chip(rows)
+        chip = fresh_chip
         if FRESH_RE.search(new):
             new = FRESH_RE.sub(chip, new, count=1)
         elif SSNAV_RE.search(new):
