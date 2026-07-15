@@ -99,6 +99,13 @@ fi
 
 if ! bash agents/git-sync.sh "data(${LABEL}): sync $(date -u +%Y-%m-%dT%H:%MZ)" "$LABEL"; then
   echo "!! git-sync отказал (guard?) — откатываю data/, чтобы сосед не закоммитил чужое"
-  git checkout -- data/ 2>/dev/null || true
+  # 🔴 ЗДЕСЬ текла дыра усыхания архива. git-sync уже сделал `git add data/`, guard
+  # заблокировал commit — файл остался В ИНДЕКСЕ. Прежний `git checkout -- data/`
+  # восстанавливал ИЗ ИНДЕКСА, т.е. возвращал забракованный файл обратно в дерево.
+  # Дерево оставалось грязным → сосед заметал брак своим `git add data/` под своим
+  # сообщением («refresh radar state», «health: watchdog»). Так архив утекал в прод
+  # 4 раза, хотя guard честно блокировал коммит самого агента.
+  # HEAD чинит и дерево, и индекс. Проверено 15.07: 197→55 от newswatch, откат вернул 197.
+  git checkout HEAD -- data/ 2>/dev/null || true
   exit 1
 fi

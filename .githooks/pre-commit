@@ -66,4 +66,26 @@ if [ -f agents/sanitize-strikes.py ] && command -v python3 >/dev/null 2>&1; then
     fi
   done
 fi
+
+# ---- future-dates guard: событие не может произойти позже момента записи ----
+# 15.07 агент записал удар по Балаклавской ТЭС как «15.07 23:10», когда было 13:44 МСК
+# (реально — ночь на 14.07). Модель текущего времени не знает и берёт дату из головы.
+# Метаполя (generated_at) скрипт чинит сам и молча; запись из будущего — БЛОКИРУЕТ:
+# правильного времени мы не знаем, а угадать = подделать. Удалять запись тоже нельзя
+# (усыхание архива). Осознанный бэкфилл → ALLOW_FUTURE_DATES=1.
+# Идёт ПОСЛЕ санитайзера: тот перезакладывает файл, проверять надо итог.
+if [ -f agents/check-future-dates.py ] && command -v python3 >/dev/null 2>&1; then
+  for _f in data/strikes.json data/history-crimea.json; do
+    if echo "$staged" | grep -q "^$_f$"; then
+      if ! python3 agents/check-future-dates.py "$_f" >&2; then
+        echo "pre-commit: BLOCKED — даты из будущего в $_f (см. выше). Commit aborted." >&2
+        exit 1
+      fi
+      if ! git diff --quiet -- "$_f" 2>/dev/null; then
+        git add "$_f"
+        echo "pre-commit: check-future-dates поправил метку времени в $_f." >&2
+      fi
+    fi
+  done
+fi
 exit 0
