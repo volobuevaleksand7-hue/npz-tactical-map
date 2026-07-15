@@ -503,7 +503,7 @@
     "lat": 54.62,
     "lon": 39.74,
     "level": "severe",
-    "updated": "2026-07-05",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Роснефть",
@@ -546,7 +546,7 @@
     "lat": 55.8,
     "lon": 49.1,
     "level": "limited",
-    "updated": "2026-07-05",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Татнефть",
@@ -556,8 +556,8 @@
       "level": "limited"
      }
     ],
-    "queues_hours": 1.5,
-    "ai95_price_rub": null,
+    "queues_hours": 2.0,
+    "ai95_price_rub": 67.07,
     "diesel_price_rub": null,
     "source_urls": [
      "https://www.svoboda.org/a/v-tatarstane-posle-ataki-dronov-gorit-neftepererabatyvayuschiy-zavod/33778916.html",
@@ -567,8 +567,10 @@
      "https://www.fontanka.ru/2026/06/17/76483031/",
      "https://www.forbes.ru/biznes/563165-tatneft-otmenila-ogranicenia-na-otpusk-ai-92-i-dizela-na-svoih-azs",
      "https://t.me/nefte_baza/7944",
-     "https://meduza.io/en/feature/2026/06/29/ukrainian-drones-have-struck-nearly-every-major-russian-refinery-which-facilities-have-yet-to-be-hit"
-    ]
+     "https://meduza.io/en/feature/2026/06/29/ukrainian-drones-have-struck-nearly-every-major-russian-refinery-which-facilities-have-yet-to-be-hit",
+     "https://kazan.aif.ru/society/toplivo-pod-kontrolem-benzin-v-tatarstane-ocheredi-na-azs-limity-i-ceny"
+    ],
+    "note": "15.07: ПИК АЖИОТАЖА — водители покупают 15 т бензина за 6 часов вместо суточной нормы. Очереди максимальны. Цена АИ-95: 67.07 ₽/л. ТАИФ-НК с 13.07 не продаёт в канистры. Дефицит топлива по всей республике."
    },
    {
     "region": "Самарская обл.",
@@ -868,7 +870,7 @@
     "lat": 56.01,
     "lon": 92.85,
     "level": "strained",
-    "updated": "2026-06-24",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Роснефть",
@@ -892,14 +894,21 @@
       "level": "calm"
      },
      {
-      "name": "Независимые АЗС (КНП)",
-      "status": "open",
+      "name": "КНП (Краснояскнефтепродукт)",
+      "status": "limited",
       "limit_l": null,
-      "note": "23.06 (ngs24.ru): «Красноярскнефтепродукт» (КНП) — краевая сеть — не предвидит проблем. AI-95 подорожал с 66,9 руб/л (30 мая) до ~70,9 руб/л (20 июня).",
-      "level": "strained"
+      "note": "13.07: Введена талонная система продажи АИ-95. Ачинский НПЗ перестал поставлять топливо краевой сети.",
+      "level": "limited"
+     },
+     {
+      "name": "Газпром нефть",
+      "status": "limited",
+      "limit_l": 40,
+      "note": "Лимит 40л бензина / 60л дизеля. Завод работает с нагрузкой.",
+      "level": "limited"
      }
     ],
-    "queues_hours": 0.0,
+    "queues_hours": 0.5,
     "ai95_price_rub": 71,
     "diesel_price_rub": null,
     "source_urls": [
@@ -908,8 +917,11 @@
      "https://ircity.ru/text/transport/2026/06/24/76492983/",
      "https://thebell.io/dvukhglavyy-toplivnyy-krizis-pochemu-nekhvatka",
      "https://ru.themoscowtimes.com/2026/06/16/defitsit-benzina-ohvatil-bolshe-50-regionov-rossii-a198333",
-     "https://krsk.aif.ru/society/vlasti-krasnoyarskogo-kraya-vzyali-pod-kontrol-situaciyu-s-toplivom"
-    ]
+     "https://krsk.aif.ru/society/vlasti-krasnoyarskogo-kraya-vzyali-pod-kontrol-situaciyu-s-toplivom",
+     "https://ngs24.ru/text/transport/2026/07/09/76522228/",
+     "https://ngs24.ru/text/economics/2026/07/13/76530723/"
+    ],
+    "note": "13.07: На сети КНП введена талонная система (талоны на АИ-95). Ачинский НПЗ прекратил поставки. На Газпромнефти: 40л бензин / 60л дизель."
    },
    {
     "region": "Псковская обл.",
@@ -957,7 +969,7 @@
     "lat": 68.97,
     "lon": 33.08,
     "level": "limited",
-    "updated": "2026-06-25",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -973,8 +985,10 @@
     "source_urls": [
      "https://www.thebarentsobserver.com/news/gasoline-sales-are-being-restricted-along-kola-highway-amid-the-fuel-crisis-in-russia/452470",
      "https://ru.themoscowtimes.com/2026/06/10/defitsit-benzina-ohvatil-25-rossiiskih-regionov-a197895",
-     "https://finance.mail.ru/article/eshe-bolshe-regionov-ogranichili-prodazhu-benzina-69214929/"
-    ]
+     "https://finance.mail.ru/article/eshe-bolshe-regionov-ogranichili-prodazhu-benzina-69214929/",
+     "https://news.ati.su/news/2026/07/13/situatsiju-s-toplivom-v-murmanskoj-oblasti-nazvali-kontroliruemoj-960141/"
+    ],
+    "note": "13.07: Ситуация контролируемая, ручной режим управления. На Лукойле: 30л/60л ДТ. На Роснефти: 99л. На Газпромнефти: 30л/30л или 60л с картой. Интерактивная карта АЗС запущена."
    },
    {
     "region": "Архангельская обл.",
@@ -1062,7 +1076,7 @@
     "lat": 55.35,
     "lon": 86.09,
     "level": "limited",
-    "updated": "2026-06-25",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Форус",
@@ -1087,7 +1101,7 @@
      }
     ],
     "queues_hours": 1.0,
-    "ai95_price_rub": null,
+    "ai95_price_rub": 71,
     "diesel_price_rub": null,
     "source_urls": [
      "https://charter97.org/ru/news/2026/6/14/687734",
@@ -1134,7 +1148,7 @@
     "lat": 52.97,
     "lon": 36.07,
     "level": "limited",
-    "updated": "2026-07-03",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -1144,13 +1158,15 @@
       "level": "limited"
      }
     ],
-    "queues_hours": 1.0,
+    "queues_hours": 0.0,
     "ai95_price_rub": null,
     "diesel_price_rub": null,
     "source_urls": [
      "https://focus.ua/world/756591-deficit-topliva-v-rossii-v-14-ti-regionah-rossii-vveli-ogranicheniya-na-prodazhu-benzina",
-     "https://t.me/oil_capital/25984"
-    ]
+     "https://t.me/oil_capital/25984",
+     "https://www.vesti.ru/ns/v-orlovskoj-oblasti-sokhranili-prodazhu-benzina-po-chetnym-nechetnym-dnyam"
+    ],
+    "note": "08.07: Оперштаб сохранил систему чет-нечет. 10.07: После введения режима (04.07) очереди полностью исчезли. Система показала эффективность."
    },
    {
     "region": "Волгоградская обл.",
@@ -1203,7 +1219,7 @@
     "lat": 56.84,
     "lon": 60.65,
     "level": "limited",
-    "updated": "2026-07-05",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Газпром нефть",
@@ -1318,7 +1334,7 @@
     "lat": 54.19,
     "lon": 37.62,
     "level": "limited",
-    "updated": "2026-07-03",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Роснефть",
@@ -1387,8 +1403,8 @@
     "region": "Брянская обл.",
     "lat": 53.24,
     "lon": 34.36,
-    "level": "strained",
-    "updated": "2026-06-25",
+    "level": "limited",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Региональные АЗС (AlexOil)",
@@ -1774,7 +1790,7 @@
     "lat": 54.51,
     "lon": 36.27,
     "level": "limited",
-    "updated": "2026-07-04",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Газпром нефть",
@@ -1791,12 +1807,14 @@
       "note": "04.07: на АЗС «Лукойл» разрешено до 40 л бензина в одни руки, из них до 10 л можно залить в канистру."
      }
     ],
-    "queues_hours": 1.0,
-    "ai95_price_rub": null,
+    "queues_hours": 1.5,
+    "ai95_price_rub": 71.22,
     "diesel_price_rub": null,
     "source_urls": [
-     "https://kaluga.bezformata.com/listnews/na-prodazhu-benzina/161339641/"
-    ]
+     "https://kaluga.bezformata.com/listnews/na-prodazhu-benzina/161339641/",
+     "https://www.kaluga.kp.ru/daily/277797.5/5274729/"
+    ],
+    "note": "10.07: Очереди 20-30 мин. На сетевых АЗС 40л (10л в канистру). Онлайн-карта: только на 2 АЗС полное топливо (Мстихино, Сосновый Бор)."
    },
    {
     "region": "Смоленская обл.",
@@ -1919,8 +1937,8 @@
     "region": "Республика Адыгея",
     "lat": 44.61,
     "lon": 40.1,
-    "level": "limited",
-    "updated": "2026-06-25",
+    "level": "severe",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -1931,8 +1949,8 @@
      }
     ],
     "queues_hours": null,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "ai95_price_rub": 125,
+    "diesel_price_rub": 105,
     "source_urls": [
      "https://news.mail.ru/economics/71391449/",
      "https://finance.mail.ru/article/eshe-bolshe-regionov-ogranichili-prodazhu-benzina-69214929/"
@@ -2162,11 +2180,11 @@
     "region": "Чеченская Республика",
     "lat": 43.32,
     "lon": 45.69,
-    "level": "strained",
-    "updated": "2026-06-23",
+    "level": "severe",
+    "updated": "2026-07-15",
     "networks": [],
     "queues_hours": null,
-    "ai95_price_rub": null,
+    "ai95_price_rub": 73,
     "diesel_price_rub": null,
     "estimate": true,
     "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
@@ -2302,7 +2320,7 @@
     "lat": 55.44,
     "lon": 65.34,
     "level": "limited",
-    "updated": "2026-06-25",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Газпром нефть",
@@ -2313,8 +2331,8 @@
      }
     ],
     "queues_hours": null,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "ai95_price_rub": 66,
+    "diesel_price_rub": 71,
     "source_urls": [
      "https://www.banki.ru/news/daytheme/?id=11025071",
      "https://ircity.ru/text/economics/2026/06/25/76497155/"
@@ -2325,7 +2343,7 @@
     "lat": 57.15,
     "lon": 65.53,
     "level": "limited",
-    "updated": "2026-06-25",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Газпром нефть",
@@ -2336,8 +2354,8 @@
      }
     ],
     "queues_hours": null,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "ai95_price_rub": 84,
+    "diesel_price_rub": 89,
     "source_urls": [
      "https://www.banki.ru/news/daytheme/?id=11025071",
      "https://ircity.ru/text/economics/2026/06/25/76497155/"
@@ -2348,7 +2366,7 @@
     "lat": 61.0,
     "lon": 69.0,
     "level": "limited",
-    "updated": "2026-06-25",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Газпром нефть",
@@ -2366,8 +2384,8 @@
      }
     ],
     "queues_hours": null,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "ai95_price_rub": 71,
+    "diesel_price_rub": 85,
     "source_urls": [
      "https://meduza.io/en/news/2026/06/23/the-region-that-produces-40-of-russia-s-oil-is-now-rationing-fuel",
      "https://www.banki.ru/news/daytheme/?id=11025071"
@@ -2378,7 +2396,7 @@
     "lat": 66.53,
     "lon": 66.61,
     "level": "calm",
-    "updated": "2026-06-23",
+    "updated": "2026-07-15",
     "networks": [],
     "queues_hours": null,
     "ai95_price_rub": null,
@@ -2394,7 +2412,7 @@
     "lat": 51.96,
     "lon": 85.96,
     "level": "limited",
-    "updated": "2026-07-01",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -2482,7 +2500,7 @@
     "lat": 56.49,
     "lon": 84.95,
     "level": "strained",
-    "updated": "2026-06-25",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Элке Авто",
@@ -2500,8 +2518,8 @@
      }
     ],
     "queues_hours": null,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "ai95_price_rub": 72,
+    "diesel_price_rub": 81,
     "source_urls": [
      "https://www.riatomsk.ru/article/20260625/postavki-benzina-na-tomskuyu-set-nestabilni-iz-za-vneshnih-prichin"
     ]
@@ -2559,8 +2577,8 @@
     "region": "Забайкальский край",
     "lat": 52.03,
     "lon": 113.5,
-    "level": "severe",
-    "updated": "2026-06-25",
+    "level": "limited",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Роснефть",
@@ -2622,7 +2640,7 @@
     "lat": 48.48,
     "lon": 135.08,
     "level": "strained",
-    "updated": "2026-06-25",
+    "updated": "2026-07-15",
     "networks": [
      {
       "name": "Региональные АЗС (Советско-Гаванский / Ванинский р-ны)",
@@ -2702,7 +2720,7 @@
     "lat": 64.73,
     "lon": 177.51,
     "level": "calm",
-    "updated": "2026-06-23",
+    "updated": "2026-07-15",
     "networks": [],
     "queues_hours": null,
     "ai95_price_rub": null,
@@ -2719,13 +2737,13 @@
    "ai92_spb_rub_t": null,
    "diesel_spb_rub_t": 81900,
    "trend": "rising",
-   "updated": "2026-07-14",
+   "updated": "2026-07-15",
    "source_url": "https://finacia.net/economy/44303/",
    "notes": "10.07 (Neftegaz.RU): биржевые цены на бензин и ДТ за неделю снизились менее чем на 1%. 10.07 (nefte_baza): АИ-92 — 71,3 тыс. руб/т, АИ-95 — 73,6 тыс. руб/т, летнее ДТ — 74,0 тыс. руб/т. Цены почти не изменились за день. 10.07 (Пруфы): правительство развернуло комплекс мер — импорт из Китая и Индии, 2 танкера (60 тыс. тонн) из Индии уже в пути. 10.07 (Meduza, DW): Новак впервые официально признал дефицит из-за ударов по НПЗ. 10.07 (Neftegaz.RU): Цивилев — потребности АПК в топливе обеспечиваются в приоритетном порядке. 12.07 (nefte_baza): топливный кризис добрался до госзакупок — в Самарской обл. сорвана закупка 8,5 тыс. л для медцентра. 13.07 (nefte_baza): продажи белорусского бензина на бирже упали с 7 тыс. т до 400 т. Росстат: в июне бензин подорожал на 6,7% (год к году — почти на 20%). 13.07 (Коммерсантъ, Чек Индекс): медианные цены 1-9 июля — АИ-92 70,5 руб/л (+20% г/г), АИ-95 77,5 руб/л (+24% г/г). 13.07 (Коммерсантъ): Шохин призвал ЦБ не повышать ключевую ставку из-за роста цен на топливо. 13.07 (Коммерсантъ): Путин пообещал постепенное решение проблем с топливом."
   },
   "refinery_counts": {
    "down": 10,
-   "partial": 9,
+   "partial": 10,
    "operational": 12
   },
   "timeline": [
@@ -9038,6 +9056,70 @@
      "lat": 43.3,
      "lon": 34.0,
      "detail": "В ночь на 15 июля в акватории Чёрного моря заявлено о поражении 20 судов, которые украинская сторона относит к «теневому флоту»: 17 нефтяных танкеров, 2 газовоза и буксир. Об этом сообщил командующий Силами беспилотных систем ВСУ Роберт Бровди. Российская сторона заявление не комментировала, независимого подтверждения числа поражённых судов нет; детали повреждений не приводятся. Ранее удары по судам наносились в акватории Азовского моря. (NEWSru, Настоящее Время, 15 июля)"
+    },
+    {
+     "date": "2026-07-15",
+     "time": "night",
+     "city": "Керчь",
+     "region": "Республика Крым",
+     "lat": 45.3577,
+     "lon": 36.4661,
+     "type": "drone",
+     "count": null,
+     "target": "Энергетическая инфраструктура города — подстанции",
+     "casualties": 0,
+     "title": "Полная отключение электроснабжения Керчи",
+     "detail": "Удар украинских БПЛА по объектам энергетической инфраструктуры Керчи привёл к полному отключению электроснабжения. Органы жизнеобеспечения города перешли на резервные источники питания. Подтверждено мэром города и оператором электросети Крымэнерго.",
+     "source_url": "https://lenta.ru/news/2026/07/15/kerch-okazalas-polnostyu-obestochena-iz-za-nochnoy-ataki-vsu/",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-07-15",
+     "time": "night",
+     "city": "Ростов-на-Дону",
+     "region": "Ростовская область",
+     "lat": 47.2313,
+     "lon": 39.7077,
+     "type": "drone",
+     "count": 1,
+     "target": "Жилой сектор — частный дом в Железнодорожном районе",
+     "casualties": 0,
+     "title": "Удар по жилому дому в Ростове-на-Дону",
+     "detail": "Фрагмент сбитого украинского БПЛА упал на крышу частного дома в Железнодорожном районе города. Крыша получила механические повреждения. Боеголовка не сработала, пострадавших нет.",
+     "source_url": "https://rg.ru/2026/07/15/reg-ufo/bitye-stekla-i-kryshi-kak-v-rostovskoj-oblasti-nochiu-15-iiulia-otrazili-udar-bpla.html",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-07-15",
+     "time": "night",
+     "city": "Грайворон",
+     "region": "Белгородская область",
+     "lat": 50.6656,
+     "lon": 36.7492,
+     "type": "drone",
+     "count": 1,
+     "target": "Гражданские лица — детонация FPV-дрона",
+     "casualties": 2,
+     "title": "Удар по городу Грайворон",
+     "detail": "При детонации FPV-дрона в городе Грайворон получили ранения мужчина и женщина — множественные осколочные ранения. Оказана помощь в Грайворонской центральной районной больнице; пострадавшие переведены в городскую больницу № 2 Белгорода.",
+     "source_url": "https://news.mail.ru/incident/71636303/",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-07-15",
+     "time": "утро",
+     "city": "Николское",
+     "region": "Белгородская область",
+     "lat": 50.4,
+     "lon": 36.52,
+     "type": "drone",
+     "count": 1,
+     "target": "Жилой сектор — частный дом",
+     "casualties": 1,
+     "title": "Удар по частному дому в селе Николское",
+     "detail": "Украинский БПЛА атаковал частный дом в селе Николское Белгородского района. Мужчина получил осколочное ранение неглубокого характера в грудь, доставлен в городскую больницу Белгорода.",
+     "source_url": "https://rg.ru/2026/07/15/reg-cfo/tri-cheloveka-postradali-v-rezultate-ataki-bpla-vsu-na-belgorodskuiu-oblast.html",
+     "confidence": "reported"
     }
    ],
    "voices": []
