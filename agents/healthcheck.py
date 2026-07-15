@@ -25,18 +25,27 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Фактический крон: 0,6,12,18 -> 6ч; fuel-availability */4; fuel-voices */8;
 # radar */10мин; forecast/economy — ЕЖЕДНЕВНО 03:30/04:30 (доки врут про «weekly»).
 # Статичные файлы (azs-*, geojson) не проверяем.
-WATCH = {
-    "strikes.json":           ("npz-data (strikes)",   18, "strikes",           15),
-    "fuel-state.json":        ("npz-data (npz)",        24, "npz-status",        15),
-    "history-crimea.json":    ("npz-data (history)",    36, "history-crimea",    15),
-    "roads.json":             ("npz-data (roads)",      36, "roads",             15),
-    "fuel-availability.json": ("fuel-availability",     18, "fuel-availability", 10),
-    "fuel-voices.json":       ("fuel-voices",           24, "fuel-voices",       20),
-    "grid-state.json":        ("grid-status",           18, "grid-status",       15),
-    "radar-state.json":       ("radar-state",          0.5, "radar-state",        2),
-    "forecast.json":          ("forecast-economy",     200, "forecast",          50),
-    "economy.json":           ("forecast-economy",     200, "economy",           50),
-}
+# Список, а не dict: файл больше НЕ уникальный ключ — data/fuel-state.json пишут
+# ДВА агента (npz-status — статусы НПЗ; fuel-market — рыночная часть), и следить
+# надо за каждым. Строка = (файл, агент, порог данных ч | None, hb-key, окно hb ч).
+WATCH = [
+    ("strikes.json",           "npz-data (strikes)",   18, "strikes",           15),
+    ("fuel-state.json",        "npz-data (npz)",        24, "npz-status",        15),
+    ("history-crimea.json",    "npz-data (history)",    36, "history-crimea",    15),
+    ("roads.json",             "npz-data (roads)",      36, "roads",             15),
+    ("fuel-availability.json", "fuel-availability",     18, "fuel-availability", 10),
+    ("fuel-voices.json",       "fuel-voices",           24, "fuel-voices",       20),
+    ("grid-state.json",        "grid-status",           18, "grid-status",       15),
+    ("radar-state.json",       "radar-state",          0.5, "radar-state",        2),
+    ("forecast.json",          "forecast-economy",     200, "forecast",          50),
+    ("economy.json",           "forecast-economy",     200, "economy",           50),
+    # thr=None — у агента НЕТ своего файла: он пишет секцию чужого, и свежесть
+    # этого файла ему приписать нельзя (её бампает сосед). Следим только за связью.
+    # Именно fuel-market 15.07 маскировал мёртвый npz-status, обновляя generated_at
+    # общего fuel-state.json: данные выглядели свежими на 2.3ч при агенте,
+    # молчавшем 21.5ч. Cron: 15 0,6,12,18 (6ч) -> окно 15ч.
+    ("fuel-state.json",        "fuel-market",         None, "fuel-market",       15),
+]
 
 # Дефолт для агентов, по которым per-file порог не задан.
 HEARTBEAT_FRESHNESS_HOURS = 72
@@ -93,6 +102,9 @@ def classify(data_age_h, thr_h, hb_age_h, hb_fresh_h):
     доказывает, что агент жив: соседний bulk-коммит мог обновить generated_at.
     """
     hb_dead = hb_age_h is None or hb_age_h > hb_fresh_h
+    if thr_h is None:
+        # агент без собственного файла (пишет секцию чужого) — только связь
+        return ("dead" if hb_dead else "ok"), False, hb_dead
     if data_age_h is None:
         return "unknown", False, False
     data_stale = data_age_h > thr_h
@@ -118,7 +130,16 @@ def selfcheck():
     assert classify(6.7, 18, 19, 15) == ("dead", False, True)
     # forecast: ежедневная рутина, 30ч данных при пороге 200ч и окне 50ч — норма
     assert classify(30, 200, 21, 50) == ("ok", False, False)
-    print("healthcheck selfcheck: ok")
+    # агент без своего файла (thr=None) — судим ТОЛЬКО по связи, возраст данных
+    # чужого файла ни на что не влияет (его бампает сосед)
+    assert classify(0.1, None, 1, 15) == ("ok", False, False)
+    assert classify(0.1, None, 40, 15) == ("dead", False, True)
+    assert classify(999, None, 1, 15) == ("ok", False, False)
+    # каждая строка WATCH распаковывается и hb-key уникален
+    assert all(len(row) == 5 for row in WATCH)
+    hb_keys = [row[3] for row in WATCH]
+    assert len(hb_keys) == len(set(hb_keys)), "дублирующийся heartbeat-key в WATCH"
+    print("healthcheck selfcheck: ok (%d агентов)" % len(WATCH))
 
 
 def main():
@@ -127,7 +148,7 @@ def main():
     files = []
     stale_count = 0
     dead_count = 0
-    for fn, (agent, thr_h, hb_key, hb_fresh_h) in WATCH.items():
+    for fn, agent, thr_h, hb_key, hb_fresh_h in WATCH:
         ts = gen_at(os.path.join(ROOT, "data", fn))
         dt = parse(ts)
         # Клипуем отрицательный возраст: агент может писать generated_at на минуты
