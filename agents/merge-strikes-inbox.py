@@ -138,6 +138,17 @@ def main():
         else:
             print("merge-inbox: inbox пуст — нечего вливать", file=sys.stderr)
 
+    # total дрейфует и без нас (санитайзер его не пересчитывает, ручные правки тоже):
+    # застали 196 при 197 записях. Чиним всегда, а не только при вливании — но пишем
+    # файл лишь при реальном расхождении, чтобы не плодить пустые коммиты.
+    summ = archive.get("summary")
+    if isinstance(summ, dict) and summ.get("total") != len(archive["strikes"]) and not added:
+        print("merge-inbox: summary.total рассинхронен (%s → %d) — пересчитан"
+              % (summ.get("total"), len(archive["strikes"])), file=sys.stderr)
+        summ["total"] = len(archive["strikes"])
+        with open(ARCHIVE, "w", encoding="utf-8") as f:
+            json.dump(archive, f, ensure_ascii=False, indent=1)
+
     with open(RECENT, "w", encoding="utf-8") as f:
         json.dump(build_recent(archive), f, ensure_ascii=False, indent=1)
 
@@ -188,8 +199,16 @@ def selfcheck():
     main()
     assert len(json.load(open(ARCHIVE, encoding="utf-8"))["strikes"]) == 3, "дубль просочился"
 
+    # рассинхрон total чинится и без вливания
+    a = json.load(open(ARCHIVE, encoding="utf-8"))
+    a["summary"]["total"] = 42
+    json.dump(a, open(ARCHIVE, "w", encoding="utf-8"), ensure_ascii=False)
+    json.dump([], open(INBOX, "w", encoding="utf-8"))
+    main()
+    assert json.load(open(ARCHIVE, encoding="utf-8"))["summary"]["total"] == 3, "total не починен"
+
     print("selfcheck OK: влито новое, 2 дубля и мусор отсечены, total пересчитан, "
-          "inbox очищен, повтор не дублирует")
+          "inbox очищен, повтор не дублирует, дрейф total чинится без вливания")
     return 0
 
 
