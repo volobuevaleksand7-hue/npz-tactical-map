@@ -321,10 +321,20 @@ def brief_headline(date: str, strikes: list) -> str:
         if sdate == date:
             recency = 10
         return (_cls(s), conf, recency)
+    # ponytail: предложный падеж только для акваторий — их пара штук и они ломают
+    # заголовок в глаза («в Чёрное море»). Полный склонятор городов не тащим.
+    _PREP = {
+        "Чёрное море (акватория)": "Чёрном море",
+        "Азовское море (акватория)": "Азовском море",
+        "Балтийское море (акватория)": "Балтийском море",
+        "Каспийское море (акватория)": "Каспийском море",
+    }
+
     refs = [s for s in strikes if is_refinery(s)]
     if refs:
         lead = max(strikes, key=_lead_key)
         rc = str(lead.get("city", "")).strip()
+        rc = _PREP.get(rc, rc)
         label = infra_label(lead)
         rest = n - 1
         if rest > 0:
