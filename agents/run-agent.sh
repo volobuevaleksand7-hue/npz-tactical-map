@@ -76,4 +76,15 @@ fi
 # heartbeats.json), so liveness can never be silently dropped.
 # Commit/push via the safe helper: atomic data/last-sync.txt stamp, conflict-marker
 # guard, clean-tree rebase retry (never --autostash). See agents/git-sync.sh.
-bash agents/git-sync.sh "data(${LABEL}): sync $(date -u +%Y-%m-%dT%H:%MZ)" "$LABEL"
+# Если git-sync отказал (pre-commit guard забраковал результат — например, агент
+# обрезал архив strikes.json), рабочее дерево ОСТАЁТСЯ грязным. Соседняя рутина
+# через минуту делает `git add data/` и заметает чужой забракованный файл в свой
+# коммит — так 11.07 (172→67) и 12.07 (75→2) архив ударов утёк в прод под чужими
+# сообщениями «update AZS statuses» / «health: watchdog», хотя guard честно
+# блокировал коммит самого агента. Откатываем: забракованные данные не должны
+# пережить свой запуск.
+if ! bash agents/git-sync.sh "data(${LABEL}): sync $(date -u +%Y-%m-%dT%H:%MZ)" "$LABEL"; then
+  echo "!! git-sync отказал (guard?) — откатываю data/, чтобы сосед не закоммитил чужое"
+  git checkout -- data/ 2>/dev/null || true
+  exit 1
+fi
