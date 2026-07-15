@@ -329,7 +329,7 @@ TEMPLATE = """<!DOCTYPE html>
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
   <script defer src="/nav-dropdown.js"></script>
-  <script defer src="/vpn-nudge.js?v=6a37c3e7"></script>
+  <script defer src="/vpn-nudge.js?v=c0646280"></script>
 </body>
 </html>
 """

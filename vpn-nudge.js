@@ -14,6 +14,25 @@
     try { if (window.va) va('event', { name: 'vpn_click' }); } catch (e) {}
   }
 
+  // Аккаунт @BPLAlert_bot заморожен (15.07.2026), но CTA на него оставлены до разморозки.
+  // Считаем клики — это замер реального интереса к подписке (цель bot_click_frozen, параметр
+  // page = какая страница даёт спрос). ponytail: живёт здесь, а не отдельным файлом, потому что
+  // vpn-nudge.js уже инжектится на ВСЕ страницы (build-nav + gen-rocket-danger + gen-wave) —
+  // значит переживает регенерацию. Снять вместе с разморозкой бота.
+  function trackBotInterest() {
+    var links = [].slice.call(document.querySelectorAll('a[href*="t.me/BPLAlert_bot"]'));
+    if (!links.length) return;
+    var page = location.pathname;
+    links.forEach(function (a) {
+      if (a.dataset._bot) return;
+      a.dataset._bot = '1';
+      a.addEventListener('click', function () {
+        try { if (window.ym) ym(110490245, 'reachGoal', 'bot_click_frozen', { page: page }); } catch (e) {}
+        try { if (window.va) va('event', { name: 'bot_click_frozen', data: { page: page } }); } catch (e) {}
+      });
+    });
+  }
+
   function promo(contextual) {
     var head = contextual ? 'Источник заблокирован в РФ' : 'Часть источников недоступна в РФ';
     var body = contextual
@@ -113,6 +132,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    trackBotInterest(); // до раннего return для карт — CTA бота есть и на radar/karta-azs
     if (document.getElementById('map')) {
       var K = 'vpn_float_x';
       // Всегда стартуем свёрнутым язычком слева: плавающая карточка перекрывала мобильный KPI-бар (v1.19.1).
