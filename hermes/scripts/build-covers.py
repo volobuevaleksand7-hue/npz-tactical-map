@@ -50,9 +50,12 @@ DEFAULT_BACKENDS = "codex-vps,codex-local,openrouter"
 
 MONTHS = ["", "января", "февраля", "марта", "апреля", "мая", "июня",
           "июля", "августа", "сентября", "октября", "ноября", "декабря"]
+SEA = ("танкер", "судно", "судов", "теневого флота", "паром", "буксир", "газовоз", "акватори")
 REF = ("нпз", "нефт", "терминал", "переработ", "нефтебаз", "нефтехим", "гпз", "перекачк")
 GRID = ("тэц", "тэс", "грэс", "подстанц", "энергет", "электро", "водоснаб")
 CITY_LOOK = {
+    "Чёрное море (акватория)": "открытая акватория Чёрного моря, морской горизонт, вдали силуэты судов",
+    "Азовское море (акватория)": "открытая акватория Азовского моря, морской горизонт, вдали силуэты судов",
     "Москва": "узнаваемый силуэт Москвы: высотки Москва-Сити и застройка",
     "Санкт-Петербург": "Санкт-Петербург: шпили, Нева, портовые краны",
     "Кстово": "промышленный Кстово с нефтезаводом на окраине",
@@ -80,6 +83,9 @@ def look(c):
 
 def classify(s):
     t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
+    # ponytail: sea вперёд REF — "морская нефтетранспортная" иначе ловится на "нефт"
+    if any(k in t for k in SEA):
+        return "sea"
     if any(k in t for k in REF):
         return "refinery"
     if any(k in t for k in GRID):
@@ -90,7 +96,7 @@ def classify(s):
 def lead_score(s):
     # ponytail: обложка дня ведёт самым важным ударом — НПЗ > энергетика > прочее,
     # confirmed важнее reported. При равенстве max() берёт первый (порядок брифа).
-    cls = {"refinery": 2, "grid": 1, "city": 0}.get(classify(s), 0)
+    cls = {"refinery": 3, "sea": 2, "grid": 1, "city": 0}.get(classify(s), 0)
     conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
     return (cls, conf)
 
@@ -105,7 +111,9 @@ def meta_for(date, brief):
         city = str(vo[0].get("city", "")).strip(); kind = "queue"; src = vo[0].get("source_url", "")
     else:
         city = "Россия"; kind = "city"; src = ""
-    if kind == "refinery":
+    if kind == "sea":
+        event = "удар по судам теневого флота"; scene = "открытое море, на горизонте горящий танкер, столб дыма над водой"
+    elif kind == "refinery":
         event = "удар по НПЗ"; scene = "на дальнем плане столб дыма над нефтезаводом"
     elif kind == "grid":
         event = "удар по энергетике"; scene = "вдалеке дым над подстанцией, часть города без света"
@@ -232,7 +240,7 @@ def build_one(date, m):
     out = ASSETS / f"cover-{date}.png"
     raw.unlink(missing_ok=True)
 
-    ref = fetch_ref(m["src"], TMP / f"ref-{date}.png")
+    ref = None if m.get("no_ref") else fetch_ref(m["src"], TMP / f"ref-{date}.png")
 
     # Цепочка бэкендов по порядку (дефолт: codex-vps → codex-local → openrouter).
     order = [b.strip() for b in os.environ.get("NPZ_COVER_BACKENDS", DEFAULT_BACKENDS).split(",") if b.strip()]
@@ -266,6 +274,7 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--missing", action="store_true")
     ap.add_argument("--dates", default="")
+    ap.add_argument("--no-ref", action="store_true", help="не тащить og:image статьи как референс (когда он не по делу)")
     a = ap.parse_args()
 
     archive = json.loads(ARCHIVE.read_text(encoding="utf-8"))
@@ -286,7 +295,9 @@ def main():
     print(f"build-covers: {len(dates)} дат → {dates[0]} … {dates[-1]}")
     ok = 0
     for d in dates:
-        if build_one(d, meta_for(d, briefs[d])):
+        meta = meta_for(d, briefs[d])
+        meta["no_ref"] = a.no_ref
+        if build_one(d, meta):
             ok += 1
     print(f"build-covers: готово {ok}/{len(dates)}. Дальше — python3 agents/gen-news.py + publish.")
 
