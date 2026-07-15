@@ -71,6 +71,12 @@ LABELS = {
     "/azs-ryadom":          ("📍", "АЗС рядом со мной"),
     "/help":              ("❓", "Как пользоваться"),
     "/metodologiya":      ("🔬", "Методология"),
+    # без записи здесь label_for берёт SEO-ключ и делает .capitalize() — а он гасит все
+    # остальные заглавные («удары по азовскому морю» → «Удары по азовскому морю»)
+    "/udary-azovskoe-more":  ("💥", "Удары по Азовскому морю"),
+    "/tankery-azovskoe-more": ("🚢", "Танкеры в Азовском море"),
+    "/vozmozhen-li-golod":   ("🌾", "Будет ли голод в России"),
+    "/udary-po-tankeram":    ("🚢", "Удары по танкерам теневого флота"),
 }
 
 # Карточки хаба /analytics: url -> (заголовок, описание).
@@ -302,16 +308,22 @@ def build_drawer_analytics(rows):
 FRESH_RE  = re.compile(r'<!-- FRESH:START -->.*?<!-- FRESH:END -->', re.DOTALL)
 SSNAV_RE  = re.compile(r'(<nav class="ss-nav"[^>]*>)')
 
-# Все контентные типы: раньше было {region, explainer, forecast, tool}, из-за чего чип застревал
-# на старой статье — всё, что выходило после неё (НПЗ-страницы = object, разборы = reference),
-# отсекалось по типу. Свежесть = порядок строк в реестре (дат в нём нет), TOP_URLS отсеиваются ниже.
-FRESH_TYPES = {"region", "explainer", "forecast", "tool", "object", "reference"}
+# 🆕-чип светит ТОЛЬКО статьи, фичи не светим (решение 15.07).
+# reference нужен ради разборов (/udary-azovskoe-more, /udary-po-tankeram) — но в нём же лежат
+# фича-страница и служебные разделы, тип их не различает → отсекаем поимённо ниже.
+# tool = ВСЕ карты (/karta-bpla, /radar, /karta-azs, /gde-est-benzin…) = фичи → не светим.
+# object = страницы НПЗ → не статьи.
+# Свежесть = ПОРЯДОК СТРОК в реестре (дат в нём нет), TOP_URLS отсеиваются ниже.
+FRESH_TYPES = {"region", "explainer", "forecast", "reference"}
+FRESH_EXCLUDE = {"/volna-dronov", "/help", "/metodologiya"}  # лежат как reference, но не статьи
 
 
 def newest_page(rows):
     # «новейшая» = последняя добавленная в реестр live-страница из контентных типов
     cands = [r for r in rows if r.get("status", "live") == "live"
-             and r.get("type") in FRESH_TYPES and r["url"] not in TOP_URLS]
+             and r.get("type") in FRESH_TYPES
+             and r["url"] not in TOP_URLS
+             and r["url"] not in FRESH_EXCLUDE]
     return cands[-1] if cands else None
 
 def build_fresh_chip(rows):
