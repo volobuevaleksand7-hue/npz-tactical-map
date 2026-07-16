@@ -225,6 +225,25 @@ def render_top5(R):
     return f'        <p style="margin-top:10px">\n{body}\n        </p>\n{tail}'
 
 
+def render_cards(R):
+    """Грид ссылок на объектные карточки /npz/* — перелинковка вглубь для глубины
+    визита. /refineries получил трафик (реопт 12.07), но утыкался в тупик (глубина
+    1.49, время 100с — худшие на сайте). Ведём читателя на карточку конкретного
+    завода. Только заводы, у которых карточка реально есть (CARDS)."""
+    have = sorted((r for r in R if r["id"] in CARDS), key=lambda r: -r["capacity_mt_year"])
+    out = ['      <div class="reg-grid">']
+    for r in have:
+        _cls, label = TAG[r["status"]]
+        out.append(
+            f'        <a class="reg-item" href="/npz/{CARDS[r["id"]]}" '
+            f'style="text-decoration:none;color:inherit;display:block">'
+            f'<div class="reg-name"><span class="dot {DOT[r["status"]]}"></span>{short(r["name"])}</div>'
+            f'<div class="reg-plants" style="font-size:12px;margin-top:4px">'
+            f'{r["capacity_mt_year"]} млн т/год · {label} →</div></a>')
+    out.append("      </div>")
+    return "\n".join(out)
+
+
 BLOCKS = {
     "table": render_table,
     "regions": render_regions,
@@ -232,6 +251,7 @@ BLOCKS = {
     "working": lambda R, m: render_working(R, m),
     "summary": lambda R, m: render_summary(R, m),
     "top5": render_top5,
+    "cards": render_cards,
 }
 
 
@@ -407,6 +427,11 @@ def selftest():
 
     s = render_summary(R, meta)
     assert "1 полностью остановлены" in s and "3 крупных" in s
+
+    cards = render_cards(R)
+    assert '/npz/omskij-npz' in cards, "завод с карточкой должен линковаться"
+    assert '/npz/' not in cards.replace('/npz/omskij-npz', ''), "заводы без карточки не выводятся"
+    assert 'Омский НПЗ' in cards and 'СТОП' in cards
 
     t5 = render_top5(R)
     assert "Один из пяти" in t5 and "Остановлен с 6 июля 2026" in t5
