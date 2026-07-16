@@ -52,6 +52,9 @@ CARDS = {
     "ufa": "bashneft-ufa",
     "saratov": "saratovskij-npz",
     "ilsky": "ilskij-npz",
+    "tuapse": "tuapsinskij-npz",
+    "syzran": "syzranskij-npz",
+    "afipsky": "afipskij-npz",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
