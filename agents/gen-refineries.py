@@ -235,12 +235,94 @@ BLOCKS = {
 }
 
 
+# ── Динамический FAQ + JSON-LD ────────────────────────────────────────────
+# FAQ и JSON-LD раньше были рукописными и дрейфовали от данных (16.07: страница
+# «14 июля, 9/13» при данных «16 июля, 10/12»), а check-страж это молча пропускал.
+# Теперь 4 динамических ответа (счётчики/дата/списки) генерятся из fuel-state —
+# ОДИН источник и для видимого FAQ (GEN-маркеры), и для JSON-LD acceptedAnswer,
+# поэтому разъехаться они больше не могут. Статические вопросы («где находятся»,
+# «какой самый большой») остаются рукописными — они не зависят от статусов.
+
+def faq_texts(R, meta):
+    """{вопрос: plain-текст ответа} для 4 динамических FAQ. Списки заводов — через
+    short(), состав всегда из данных (как в GEN-блоках working/table)."""
+    down = sorted((r for r in R if r["status"] == "down"), key=lambda r: -r["capacity_mt_year"])
+    part = sorted((r for r in R if r["status"] == "partial"), key=lambda r: -r["capacity_mt_year"])
+    oper = sorted((r for r in R if r["status"] == "operational"), key=lambda r: -r["capacity_mt_year"])
+    tot = len(R)
+    date = rus_date(meta["generated_at"][:10])
+    cap_all = sum(r["capacity_mt_year"] for r in R)
+    cap_oper = sum(r["capacity_mt_year"] for r in oper)
+    d_list = ", ".join(short(r["name"]) for r in down)
+    p_list = ", ".join(
+        f'{short(r["name"])} (~{r["est_output_pct"]}%)' if r.get("est_output_pct") is not None
+        else short(r["name"]) for r in part)
+    o_list = ", ".join(f'{short(r["name"])} ({r["capacity_mt_year"]})' for r in oper)
+    return {
+        "Сколько нефтеперерабатывающих заводов в России?":
+            (f"В России {tot} крупных нефтеперерабатывающих завода общей мощностью около "
+             f"{cap_all:.0f} млн тонн нефти в год — крупнейшая нефтеперерабатывающая система в "
+             f"Европе. На {date} из них {len(down)} остановлены, {len(part)} работают с "
+             f"ограничениями и {len(oper)} — в штатном режиме. Крупнейший отдельный НПЗ — Омский "
+             f"(22 млн т/год, Газпром нефть), крупнейшая площадка — Уфимская группа "
+             f"(24 млн т/год суммарно)."),
+        "Сколько НПЗ выведено из строя в России на сегодня?":
+            (f"На {date} полностью остановлены (выведены из строя) {len(down)} НПЗ и ещё "
+             f"{len(part)} работают с ограничениями по загрузке — итого {len(down) + len(part)} "
+             f"из {tot} заводов затронуты, это более половины нефтеперерабатывающих мощностей "
+             f"страны. Точное число зависит от трактовки: часть остановок связана с "
+             f"подтверждёнными ударами БПЛА, часть — с ремонтом и логистикой."),
+        "Какие НПЗ остановлены в 2026 году?":
+            (f"По состоянию на {date}, полностью остановлены {len(down)} НПЗ: {d_list}. "
+             f"Ещё {len(part)} работают с ограничениями: {p_list}."),
+        "Какие НПЗ работают в России сейчас?":
+            (f"По состоянию на {date} в штатном режиме работают {len(oper)} из {tot} заводов "
+             f"суммарной мощностью {cap_oper:.1f} млн т/год (около {cap_oper / cap_all * 100:.0f}% "
+             f"мощностей страны): {o_list}."),
+    }
+
+
+# вопрос -> имя inline-GEN-маркера в видимом FAQ
+FAQ_MARK = {
+    "Сколько нефтеперерабатывающих заводов в России?": "faq-total",
+    "Сколько НПЗ выведено из строя в России на сегодня?": "faq-disabled",
+    "Какие НПЗ остановлены в 2026 году?": "faq-stopped",
+    "Какие НПЗ работают в России сейчас?": "faq-working",
+}
+
+
 def splice(html, name, body):
     """Заменить содержимое между <!-- GEN:name --> и <!-- /GEN:name -->."""
     pat = re.compile(rf"(<!-- GEN:{name} -->\n).*?(\n\s*<!-- /GEN:{name} -->)", re.S)
     if not pat.search(html):
         sys.exit(f"нет маркеров GEN:{name} в refineries.html")
     return pat.sub(lambda m: m.group(1) + body + m.group(2), html)
+
+
+def splice_inline(html, name, body):
+    """Как splice, но маркеры на одной строке (внутри <div class=faq-a>)."""
+    pat = re.compile(rf"(<!-- GEN:{name} -->).*?(<!-- /GEN:{name} -->)", re.S)
+    if not pat.search(html):
+        sys.exit(f"нет inline-маркеров GEN:{name} в refineries.html")
+    return pat.sub(lambda m: m.group(1) + body + m.group(2), html)
+
+
+def update_jsonld_faq(html, texts):
+    """Обновить acceptedAnswer.text в JSON-LD FAQPage по имени вопроса. Маркеры
+    внутри <script ld+json> невозможны (сломают JSON) — правим программно."""
+    def repl(m):
+        try:
+            obj = json.loads(m.group(1))
+        except Exception:
+            return m.group(0)
+        if obj.get("@type") != "FAQPage":
+            return m.group(0)
+        for q in obj.get("mainEntity", []):
+            if q.get("name") in texts:
+                q["acceptedAnswer"]["text"] = texts[q["name"]]
+        return ('<script type="application/ld+json">'
+                + json.dumps(obj, ensure_ascii=False, indent=2) + "</script>")
+    return re.sub(r'<script type="application/ld\+json">(.*?)</script>', repl, html, flags=re.S)
 
 
 def check(R, meta, html):
@@ -357,6 +439,24 @@ def selftest():
     ps = check(R, meta, drift)
     assert any("Второй НПЗ" in p for p in ps), ps      # он partial, а не down
     assert any("Омский" in p for p in ps), ps          # он down, но не перечислен
+
+    # FAQ-генерация: тексты несут актуальные счётчики/дату/списки из данных
+    ft = faq_texts(R, meta)
+    assert "1 остановлены, 1 работают с ограничениями и 1" in ft["Сколько нефтеперерабатывающих заводов в России?"]
+    fw = ft["Какие НПЗ работают в России сейчас?"]
+    assert "14 июля 2026" in fw
+    assert "Тестовый НПЗ (10.0)" in fw and "(Сити)" not in fw  # short() убирает «(Сити)», мощность из данных
+    assert "Второй НПЗ (~40%)" in ft["Какие НПЗ остановлены в 2026 году?"]  # partial с %
+    assert "Омский НПЗ" in ft["Какие НПЗ остановлены в 2026 году?"]         # down в списке
+    # splice_inline (inline-маркеры)
+    hi = 'x<!-- GEN:faq-total -->OLD<!-- /GEN:faq-total -->y'
+    assert splice_inline(hi, "faq-total", "NEW") == 'x<!-- GEN:faq-total -->NEW<!-- /GEN:faq-total -->y'
+    # update_jsonld_faq (программная замена acceptedAnswer.text по name)
+    hj = ('<script type="application/ld+json">{"@type":"FAQPage","mainEntity":'
+          '[{"@type":"Question","name":"Какие НПЗ работают в России сейчас?",'
+          '"acceptedAnswer":{"@type":"Answer","text":"OLD"}}]}</script>')
+    out = update_jsonld_faq(hj, {"Какие НПЗ работают в России сейчас?": "NEW"})
+    assert '"text": "NEW"' in out and '"OLD"' not in out, out
     print("selftest OK")
 
 
@@ -377,8 +477,13 @@ def main():
         for name, fn in BLOCKS.items():
             body = fn(R, meta) if fn.__code__.co_argcount == 2 else fn(R)
             html = splice(html, name, body)
+        # динамический FAQ + JSON-LD из тех же данных (один источник → не разъедутся)
+        texts = faq_texts(R, meta)
+        for q, mark in FAQ_MARK.items():
+            html = splice_inline(html, mark, texts[q])
+        html = update_jsonld_faq(html, texts)
         open(PAGE, "w", encoding="utf-8").write(html)
-        print("блоки перегенерены:", ", ".join(BLOCKS))
+        print("блоки перегенерены:", ", ".join(BLOCKS), "+ FAQ/JSON-LD")
 
     problems = check(R, meta, html)
     if problems:
