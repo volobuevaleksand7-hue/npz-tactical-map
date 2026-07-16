@@ -55,6 +55,10 @@ CARDS = {
     "tuapse": "tuapsinskij-npz",
     "syzran": "syzranskij-npz",
     "afipsky": "afipskij-npz",
+    "volgograd": "volgogradskij-npz",
+    "angarsk": "angarskij-npz",
+    "novokuibyshevsk": "novokujbyshevskij-npz",
+    "astrakhan-gpz": "astrahanskij-gpz",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
