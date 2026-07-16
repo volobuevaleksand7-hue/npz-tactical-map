@@ -708,7 +708,7 @@
     "lat": 56.13,
     "lon": 47.25,
     "level": "severe",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Татнефть",
@@ -1370,7 +1370,7 @@
     "lat": 55.16,
     "lon": 61.4,
     "level": "limited",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Татнефть",
@@ -1590,7 +1590,7 @@
     "lat": 51.53,
     "lon": 46.03,
     "level": "severe",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -1622,43 +1622,35 @@
     "region": "Омская обл.",
     "lat": 54.99,
     "lon": 73.37,
-    "level": "critical",
-    "updated": "2026-07-11T00:40:22Z",
+    "level": "limited",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Региональные АЗС",
-      "status": "closed",
+      "status": "limited",
       "limit_l": 40,
-      "level": "critical",
-      "note": "08.07 (sevastopol.su): после удара по НПЗ сеть заправок полностью прекратила продажу бензина. На табло нули."
+      "level": "limited",
+      "note": "14.07: ситуация нормализуется. На трассах 40л бензин/200л ДТ, в городах 40л бензин/80л ДТ. Запрет на отпуск в канистры отменён 06.07. Очереди на АЗС уменьшаются."
      }
     ],
-    "queues_hours": null,
+    "queues_hours": 0.5,
     "ai95_price_rub": null,
     "diesel_price_rub": null,
     "source_urls": [
-     "https://www.kommersant.ru/doc/8762449",
-     "https://aif.ru/incidents/hocenko-v-omskoy-oblasti-vvodyat-ogranicheniya-na-prodazhu-topliva-na-azs",
-     "https://ngs55.ru/text/auto/2026/06/22/76492847/",
      "https://omskinform.ru/news/222773",
-     "https://www.vedomosti.ru/business/articles/2026/06/24/1208285-ob-ogranicheniyah-benzina",
-     "https://meduza.io/en/feature/2026/06/30/what-does-a-russian-summer-look-like-without-gasoline-imagine-18-hour-lines-national-guard-patrols-and-brodsky-parodies",
-     "https://www.reuters.com/business/energy/russias-largest-oil-refinery-halts-processing-after-drone-attack-sources-say-2026-07-07/",
-     "https://www.themoscowtimes.com/2026/07/07/russias-largest-oil-refinery-halts-production-after-drone-attack-sources-say-a93190",
-     "https://sevastopol.su/news/posle-udara-po-npz-set-zapravok-v-omske-polnostyu-prekratila-prodazhu-benzina",
-     "https://www.politico.eu/article/russian-largest-oil-refinery-first-time-hit-by-ukraine-drones/",
-     "https://www.cnbc.com/2026/07/07/ukraine-russia-omsk-oil-refinery-putin-nato.html",
-     "https://t.me/nefte_baza/7967",
-     "https://gorod55.ru/"
+     "https://ngs55.ru/text/transport/2026/07/14/76532503/",
+     "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
+     "https://www.fontanka.ru/2026/07/06/76517665/",
+     "https://omsk.aif.ru/money/gde-nayti-benzin-v-omske-nalichie-na-azs-onlayn-gde-toplivo-prilozheniya"
     ],
-    "note": "10.07 (Gorod55): обзор — где и за сколько купить бензин в Омской обл. Дефицит и рост цен. Ранее: 09.07 — уровень critical, длинные очереди на АЗС."
+    "note": "16.07: УЛУЧШЕНИЕ. Очереди на АЗС стают меньше. Запрет на канистры отменён. Лимиты сохраняются: 40л город / 40л-200л трасса. Уровень: limited."
    },
    {
     "region": "Тамбовская обл.",
     "lat": 52.73,
     "lon": 41.44,
     "level": "severe",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Роснефть",
@@ -1709,7 +1701,7 @@
     "lat": 54.99,
     "lon": 82.89,
     "level": "severe",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Газпром нефть",
@@ -1869,7 +1861,7 @@
     "lat": 59.22,
     "lon": 39.89,
     "level": "severe",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Лукойл",
@@ -1976,25 +1968,40 @@
     "region": "Астраханская обл.",
     "lat": 46.35,
     "lon": 48.04,
-    "level": "severe",
-    "updated": "2026-07-11T00:40:22Z",
+    "level": "limited",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
-      "name": "Все сети (регион)",
+      "name": "ЛУКОЙЛ",
       "status": "limited",
-      "level": "severe",
+      "level": "limited",
+      "limit_l": 30,
+      "note": "14.07: лимит увеличен до 30л бензина. Запасы топлива рассчитаны на 10 суток."
+     },
+     {
+      "name": "Газпром нефть",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 30,
+      "note": "30л бензин / 60л ДТ за одну заправку (город)."
+     },
+     {
+      "name": "Чёт-нечет система",
+      "status": "limited",
+      "level": "limited",
       "limit_l": null,
-      "note": "С 09.07 продажа топлива по последней цифре госномера: нечётные даты — номера на 1/3/5/7/9, чётные — на 0/2/4/6/8."
+      "note": "С 09.07: продажа по последней цифре номера — нечётные даты (1/3/5/7/9), чётные — (0/2/4/6/8)."
      }
     ],
-    "queues_hours": 1.0,
+    "queues_hours": 0.5,
     "ai95_price_rub": null,
     "diesel_price_rub": null,
-    "note": "10.07 (BBC, Милосердие): Астраханская обл. — введена заправка по чётным/нечётным дням. Ранее: уровень limited.",
+    "note": "16.07: УЛУЧШЕНИЕ. Система чет-нечет эффективна. ЛУКОЙЛ повысил лимит до 30л. Запасы на 10 дней. Уровень: limited.",
     "source_urls": [
-     "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-     "https://pronedra.ru/otpusk-na-yug-upersya-v-benzin-i-ocheredi-824559.html",
-     "https://www.bbc.com/russian"
+     "https://abnews.ru/ug/news/astrakhan/2026/7/14/v-astrahani-uvelichili-limit-zapravki-na-azs-lukojl",
+     "https://astrakhan.aif.ru/society/limit-na-azs-lukoyl-v-astrahanskoy-oblasti-vyros-do-30-litrov-benzina",
+     "https://rg.ru/2026/07/06/reg-ufo/v-astrahani-uvelichat-obemy-topliva-na-mestnyh-azs.html",
+     "https://expertsouth.ru/articles/kvazi-defitsit-topliva-na-yuge-pochemu-ocheredi-k-azs-voznikli-ot-dona-do-kaspiya/"
     ]
    },
    {
@@ -2252,7 +2259,7 @@
     "lat": 54.18,
     "lon": 45.18,
     "level": "critical",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Все сети (регион)",
@@ -2277,17 +2284,33 @@
     "region": "Пермский край",
     "lat": 58.01,
     "lon": 56.25,
-    "level": "severe",
-    "updated": "2026-07-11T00:40:22Z",
-    "networks": [],
-    "queues_hours": null,
-    "ai95_price_rub": null,
+    "level": "limited",
+    "updated": "2026-07-16T16:20Z",
+    "networks": [
+     {
+      "name": "ЛУКОЙЛ",
+      "status": "limited",
+      "limit_l": null,
+      "level": "limited",
+      "note": "Поставки в Пермский край увеличены на 30% по сравнению с предыдущей неделей."
+     },
+     {
+      "name": "Крупные сети",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": null,
+      "note": "91 АЗС имеют топливо, 11 с ограниченными поставками, 41 без топлива (на 16.07)."
+     }
+    ],
+    "queues_hours": 1.5,
+    "ai95_price_rub": 79.95,
     "diesel_price_rub": null,
-    "estimate": true,
-    "note": "10.07 (Properm.ru): обзор ситуации с топливом в Пермском крае. 07.07 (59.ru): на части АЗС обнулились табло — бензин отсутствует. Цены выросли. Ранее: уровень limited с точечными перебоями.",
+    "note": "16.07: поставки топлива растут. ЛУКОЙЛ +30% объёмы. Карта ГдеБЕНЗ популярна. Уровень: limited. Цены АИ-95 79.95 ₽/л.",
     "source_urls": [
-     "https://www.banki.ru/news/daytheme/?id=11025071",
-     "https://properm.ru/"
+     "https://permnews.ru/novosti/economy/2026/07/08/de_est_benzin__ermi_zapustili_narodnuyu_kartu_zapravok__gde_est_toplivo/",
+     "https://rg.ru/2026/07/07/reg-pfo/v-prikame-postaviat-dopolnitelnye-obemy-avtomobilnogo-topliva.html",
+     "https://perm.aif.ru/society/seti-azs-narastili-postavki-topliva-v-permskiy-kray",
+     "https://echoperm.ru/news/261/178949/"
     ]
    },
    {
@@ -2434,7 +2457,7 @@
     "lat": 53.36,
     "lon": 83.76,
     "level": "limited",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -2529,7 +2552,7 @@
     "lat": 51.83,
     "lon": 107.58,
     "level": "limited",
-    "updated": "2026-07-11T04:31:49Z",
+    "updated": "2026-07-16T16:20Z",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -2733,13 +2756,13 @@
    }
   ],
   "exchange": {
-   "ai95_spb_rub_t": 75600,
-   "ai92_spb_rub_t": 71829,
-   "diesel_spb_rub_t": 81500,
+   "ai95_spb_rub_t": 67383,
+   "ai92_spb_rub_t": 61767,
+   "diesel_spb_rub_t": 60344,
    "trend": "stable",
-   "updated": "2026-07-16T08:30Z",
-   "source_url": "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-   "notes": "10.07 (Neftegaz.RU): биржевые цены на бензин и ДТ за неделю снизились менее чем на 1%. 10.07 (nefte_baza): АИ-92 — 71,3 тыс. руб/т, АИ-95 — 73,6 тыс. руб/т, летнее ДТ — 74,0 тыс. руб/т. Цены почти не изменились за день. 10.07 (Пруфы): правительство развернуло комплекс мер — импорт из Китая и Индии, 2 танкера (60 тыс. тонн) из Индии уже в пути. 10.07 (Meduza, DW): Новак впервые официально признал дефицит из-за ударов по НПЗ. 10.07 (Neftegaz.RU): Цивилев — потребности АПК в топливе обеспечиваются в приоритетном порядке. 12.07 (nefte_baza): топливный кризис добрался до госзакупок — в Самарской обл. сорвана закупка 8,5 тыс. л для медцентра. 13.07 (nefte_baza): продажи белорусского бензина на бирже упали с 7 тыс. т до 400 т. Росстат: в июне бензин подорожал на 6,7% (год к году — почти на 20%). 13.07 (Коммерсантъ, Чек Индекс): медианные цены 1-9 июля — АИ-92 70,5 руб/л (+20% г/г), АИ-95 77,5 руб/л (+24% г/г). 13.07 (Коммерсантъ): Шохин призвал ЦБ не повышать ключевую ставку из-за роста цен на топливо. 13.07 (Коммерсантъ): Путин пообещал постепенное решение проблем с топливом."
+   "updated": "2026-07-16T16:20Z",
+   "source_url": "https://finacia.net/economy/44303/",
+   "notes": "16.07 (СПбМТСБ): АИ-92 61,767 ₽/т, АИ-95 67,383 ₽/т, летнее ДТ 60,344 ₽/т. 15.07 (Росстат): 7-13 июля потребительские цены выросли на 2,3% на бензин, 3,2% на дизель. 14.07 (Меduza): объёмы торгов на СПбМТСБ сократились из-за дефицита, продажи упали на 40%. 13.07: в 13+ регионах РФ очереди начали исчезать, система чет-нечет показала эффект. 11-12.07: в 6+ регионах введена система заправки по чётным/нечётным номерам. 10.07 (Пруфы): импорт из Индии, 2 танкера (60 тыс. тонн) уже в пути. Первые признаки улучшения ожидаются в августе."
   },
   "refinery_counts": {
    "down": 10,
@@ -9349,6 +9372,20 @@
      "detail": "По данным СБУ, морские дроны атаковали танкеры Louise 1 и Banda, занятые в обходе санкций и экспорте нефти из портов Балтики и Чёрного моря. Louise 1 экспортировал ежегодно примерно 3 млн тонн уральской сырой нефти. Banda транспортировала нефть из портов Усть-Луга, Керчь, Новороссийск и Находка.",
      "source_url": "https://unn.ua/ru/news/sbu-podtverdila-porazhenie-dronami-yeshche-dvukh-tankerov-tenevogo-flota-rf-v-chernom-more",
      "confidence": "confirmed"
+    },
+    {
+     "date": "2026-07-16",
+     "time": "12:28",
+     "city": "Салават",
+     "region": "Республика Башкортостан",
+     "lat": 53.3611,
+     "lon": 55.9553,
+     "type": "drone",
+     "count": 1,
+     "target": "Газпром Нефтехим-Салават — нефтехимический комплекс (установка АВТ-6)",
+     "detail": "По спутниковым снимкам: повреждена установка АВТ-6, техническая инфраструктура и трубопроводы",
+     "source_url": "https://t.me/exilenova_plus/25435",
+     "confidence": "reported"
     }
    ],
    "voices": [
