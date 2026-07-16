@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-07-16T16:30Z",
+    "generated_at": "2026-07-16T12:15Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Reuters/Bloomberg/Meduza/Moscow Times/The Bell/Новая газета/CNN). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики.",
     "refresh_seconds": 300,
-    "updated_by": "agent:npz-status"
+    "updated_by": "agent:fuel-market"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 335.6,
@@ -1108,6 +1108,15 @@
       "restriction": "Нечётные/чётные дни по номеру авто (система введена 10 июля по ФЗ). Расширение федеральной системы рационирования.",
       "since": "2026-07-10",
       "source_url": "https://www.themoscowtimes.com/2026/07/10/russian-regions-begin-odd-even-gasoline-rationing-a93220"
+    },
+    {
+      "region": "Челябинская обл.",
+      "lat": 55.16,
+      "lon": 61.43,
+      "level": "high",
+      "restriction": "Нечётные/чётные дни по номеру авто (система введена 10 июля по ФЗ). Очереди в десятки часов на АЗС. На 15 июля зафиксирован вооружённый конфликт между водителями в очереди за бензином (по данным Meduza).",
+      "since": "2026-07-10",
+      "source_url": "https://meduza.io/en/news/2026/07/15/driver-shoots-motorist-in-dispute-over-gas-station-line-in-chelyabinsk-amid-russia-s-fuel-crisis"
     }
   ],
   "events": [
