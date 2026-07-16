@@ -37,6 +37,9 @@ from collections import Counter, defaultdict
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data", "fuel-state.json")
 PAGE = os.path.join(ROOT, "refineries.html")
+# Вторая страница из тех же данных: рейтинг по мощности (интент «крупнейшие/по
+# мощности» ~3500 показов, поз 6-10 — отдельный от «сколько/статусы» /refineries).
+RANK_PAGE = os.path.join(ROOT, "krupnejshie-npz-rossii.html")
 
 # id завода → слаг карточки /npz/. Только те, у кого карточка реально есть.
 # Нет в словаре → в таблице обычным текстом (карточки пока нет).
@@ -266,6 +269,40 @@ def render_cards(R):
     return "\n".join(out)
 
 
+def render_ranking(R):
+    """Таблица рейтинга всех НПЗ по мощности для /krupnejshie-npz-rossii. Мощности
+    из fuel-state (канон), доля от суммарной, статус-дот. Заводы с карточкой — ссылкой."""
+    rk = sorted(R, key=lambda r: (-r["capacity_mt_year"], r["name"]))
+    tot = sum(r["capacity_mt_year"] for r in R)
+    out = []
+    for i, r in enumerate(rk, 1):
+        slug = CARDS.get(r["id"])
+        nm = f'<a href="/npz/{slug}">{r["name"]}</a>' if slug else r["name"]
+        _cls, label = TAG[r["status"]]
+        out.append(
+            f'          <tr><td>{i}</td><td>{nm}</td>'
+            f'<td>{r["capacity_mt_year"]} млн т/год</td>'
+            f'<td>{r["capacity_mt_year"] / tot * 100:.1f}%</td>'
+            f'<td>{r["operator"]}</td><td>{r["region"]}</td>'
+            f'<td><span class="dot {DOT[r["status"]]}"></span>{label}</td></tr>')
+    return "\n".join(out)
+
+
+def render_ranksummary(R, meta):
+    """Прямой ответ для страницы рейтинга: крупнейший + топ-3 по мощности. Число+
+    сущность в начале (featured snippet «крупнейший нпз россии»)."""
+    rk = sorted(R, key=lambda r: (-r["capacity_mt_year"], r["name"]))
+    tot = sum(r["capacity_mt_year"] for r in R)
+    date = rus_date(meta["generated_at"][:10])
+    top = rk[0]
+    t3 = "; ".join(f'{short(r["name"])} ({r["capacity_mt_year"]} млн т/год)' for r in rk[:3])
+    return (f'        <p><strong>Крупнейший НПЗ России — {short(top["name"])} '
+            f'({top["capacity_mt_year"]} млн т/год)</strong>. По данным на {date}, в стране '
+            f'{len(R)} крупных нефтеперерабатывающих заводов суммарной мощностью ~{tot:.0f} млн т/год. '
+            f'Тройка лидеров по мощности переработки: {t3}. Полный рейтинг всех {len(R)} заводов '
+            f'с оператором, регионом и текущим статусом — в таблице ниже.</p>')
+
+
 BLOCKS = {
     "table": render_table,
     "regions": render_regions,
@@ -456,6 +493,12 @@ def selftest():
     assert 'color:var(--red)">1</div>' in hs          # 1 остановлен
     assert 'color:var(--amber)">1</div>' in hs        # 1 с ограничениями
 
+    rank = render_ranking(R)
+    assert rank.index("Омский") < rank.index("Второй НПЗ"), "рейтинг по мощности убыв."
+    assert "<td>1</td>" in rank and "22.0 млн т/год" in rank  # место + мощность
+    rs = render_ranksummary(R, meta)
+    assert "Крупнейший НПЗ России — Омский НПЗ (22.0 млн т/год)" in rs
+
     cards = render_cards(R)
     assert '/npz/omskij-npz' in cards, "завод с карточкой должен линковаться"
     assert '/npz/' not in cards.replace('/npz/omskij-npz', ''), "заводы без карточки не выводятся"
@@ -537,6 +580,14 @@ def main():
         html = update_jsonld_faq(html, texts)
         open(PAGE, "w", encoding="utf-8").write(html)
         print("блоки перегенерены:", ", ".join(BLOCKS), "+ FAQ/JSON-LD")
+
+        # вторая страница из тех же данных — рейтинг по мощности
+        if os.path.exists(RANK_PAGE):
+            rh = open(RANK_PAGE, encoding="utf-8").read()
+            rh = splice(rh, "ranking", render_ranking(R))
+            rh = splice(rh, "ranksummary", render_ranksummary(R, meta))
+            open(RANK_PAGE, "w", encoding="utf-8").write(rh)
+            print("krupnejshie-npz-rossii: ranking + ranksummary перегенерены")
 
     problems = check(R, meta, html)
     if problems:
