@@ -38,7 +38,13 @@ fi
 if [ -f agents/gen-news.py ]; then
   echo "publish-vps: регенерирую news.html…"
   if python3 agents/gen-news.py >/dev/null 2>&1; then
-    if ! git add news.html sitemap.xml news/ data/news-archive.json assets/cover-*.png 2>/dev/null; then
+    # ВСЕ артефакты gen-news (он внутри зовёт seo/generate-sitemap.py + agents/gen-rss.py):
+    # news.html, sitemap.xml, news-sitemap.xml, rss.xml, news/, news-archive.json.
+    # Раньше здесь не было news-sitemap.xml/rss.xml — gen-rss переписывал их каждый
+    # прогон, но они НЕ коммитились -> вечно modified -> блокировали git-sync всех
+    # агентов (pull --rebase на грязном дереве), публикация вставала на часы каждые 6ч.
+    # Список синхронен с эталоном в agents/summary-watchdog.py:heal().
+    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png 2>/dev/null; then
       echo "publish-vps: ОШИБКА — git add не удался" >&2
       exit 4
     fi
