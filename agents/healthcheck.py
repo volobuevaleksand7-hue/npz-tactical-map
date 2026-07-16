@@ -10,9 +10,14 @@
   stale_dead  — данные просрочены и heartbeat просрочен/отсутствует (агент мёртв)
   unknown     — generated_at не найден
 """
-import json, os, datetime
+import json, os, datetime, subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Непушенные коммиты старше этого = публикация встала (данные не доходят до сайта).
+# Агенты пушут постоянно (radar */10мин), поэтому даже 1.5ч задержки — аномалия,
+# но запас гасит короткие сетевые заминки. См. publish_status().
+PUBLISH_LAG_THRESHOLD_H = 1.5
 
 # файл -> (агент, порог свежести данных в часах, heartbeat-key, порог свежести heartbeat в часах).
 # heartbeat-key совпадает с label в run-agent.sh.
@@ -142,8 +147,36 @@ def selfcheck():
     print("healthcheck selfcheck: ok (%d агентов)" % len(WATCH))
 
 
+def publish_status(now):
+    """Доходят ли локальные коммиты до origin. До 16.07 health.json смотрел ТОЛЬКО
+    локальные mtime данных — 15.07 публикация встала на ~6ч (грязное дерево
+    publish-vps блокировало git-sync всех агентов): данные были свежими локально,
+    сайт кормился origin'ом 6-8ч давности, а watchdog печатал healthy. Теперь
+    сверяем HEAD с origin/main: сколько коммитов не запушено и как стар самый старый.
+    Возвращает (unpushed:int|None, lag_h:float|None, stuck:bool|None).
+    None = git/сеть недоступны — не роняем watchdog, помечаем публикацию unknown."""
+    def git(*a):
+        return subprocess.run(("git",) + a, cwd=ROOT,
+                              capture_output=True, text=True, timeout=30)
+    try:
+        git("fetch", "origin", "main", "-q")
+        r = git("rev-list", "--count", "origin/main..HEAD")
+        unpushed = int(r.stdout.strip()) if r.returncode == 0 and r.stdout.strip() else 0
+        if unpushed == 0:
+            return 0, 0.0, False
+        # committer-time самого старого непушенного коммита -> возраст задержки
+        r = git("log", "origin/main..HEAD", "--format=%ct")
+        cts = [int(x) for x in r.stdout.split()]
+        lag_h = round((now.timestamp() - min(cts)) / 3600, 1) if cts else None
+        stuck = lag_h is not None and lag_h > PUBLISH_LAG_THRESHOLD_H
+        return unpushed, lag_h, stuck
+    except Exception:
+        return None, None, None
+
+
 def main():
     now = datetime.datetime.now(datetime.timezone.utc)
+    unpushed, publish_lag_h, publish_stuck = publish_status(now)
     heartbeats = load_heartbeats()
     files = []
     stale_count = 0
@@ -184,10 +217,15 @@ def main():
             # показывал «1 агент не на связи» вместо десяти. Баннер в app.js:589
             # печатает именно dead_count и подписан «не на связи» — теперь совпадает.
             "checked_at": now.strftime("%Y-%m-%dT%H:%MZ"),
-            "overall": "degraded" if dead_count else "healthy",
+            "overall": "degraded" if (dead_count or publish_stuck) else "healthy",
             "stale_count": stale_count,
             "dead_count": dead_count,
             "heartbeat_dead_count": dead_count,  # back-compat: то же, что dead_count
+            # Публикация: свежесть данных ЛОКАЛЬНО ≠ данные доехали до сайта.
+            # publish_stuck=None -> git/сеть недоступны, статус неизвестен.
+            "unpushed_commits": unpushed,
+            "publish_lag_hours": publish_lag_h,
+            "publish_stuck": bool(publish_stuck),
             "total": len(WATCH),
         },
         "files": files,
@@ -196,6 +234,11 @@ def main():
     json.dump(health, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("health: %s | stale %d/%d | dead %d | hb_dead %d" % (
         health["meta"]["overall"], stale_count, len(WATCH), dead_count, dead_count))
+    if publish_stuck:
+        print("  🚫 ПУБЛИКАЦИЯ ВСТАЛА: %d коммит(ов) не запушено, старейший %s ч — origin (сайт) отстаёт" % (
+            unpushed, publish_lag_h))
+    elif publish_stuck is None:
+        print("  ? publish-check: git/сеть недоступны — статус публикации неизвестен")
     for f in files:
         if f["status"] != "ok":
             print("  ⚠ %s (%s): %s, data_age=%s h, hb_age=%s h" % (
