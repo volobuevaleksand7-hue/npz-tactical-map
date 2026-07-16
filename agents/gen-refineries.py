@@ -182,14 +182,36 @@ def render_summary(R, meta):
     down, part, oper, tot = counts(R)
     cap = sum(r["capacity_mt_year"] for r in R)
     date = rus_date(meta["generated_at"][:10])
-    return (f'        <p><strong>Сколько НПЗ в России на сегодня:</strong> по состоянию на {date}, '
-            f'в каталоге ниже — <strong>{tot} крупных нефтеперерабатывающих завода</strong> суммарной '
-            f'мощностью ~{cap:.0f} млн т/год. Из них на сегодня '
+    # Первое предложение — короткий прямой ответ, число+сущность в начале: цель —
+    # быстрый ответ Яндекса (featured snippet) по «сколько НПЗ в России». Детали следом.
+    return (f'        <p><strong>В России {tot} крупных нефтеперерабатывающих завода</strong> '
+            f'(по данным на {date}) суммарной мощностью ~{cap:.0f} млн т/год. Из них на сегодня '
             f'<strong style="color:var(--red)">{down} полностью остановлены</strong> (выведены из строя), '
             f'<strong style="color:var(--amber)">{part} работают с ограничениями</strong> по загрузке и '
             f'<strong style="color:var(--green)">{oper} работают в штатном режиме</strong> — статусы и даты '
-            f'по каждому заводу указаны в таблице и обновляются по мере поступления данных '
+            f'по каждому заводу указаны в таблице ниже и обновляются по мере поступления данных '
             f'OSINT-мониторинга.</p>')
+
+
+def render_herostats(R, meta):
+    """4 плитки в hero: всего заводов / суммарная мощность / остановлено / ограничено.
+    Были захардкожены и разошлись с данными (16.07 hero «9 огранич» при данных «10») —
+    Яндекс видел противоречие на самой странице про «сколько НПЗ». Теперь из данных."""
+    down, part, oper, tot = counts(R)
+    cap = sum(r["capacity_mt_year"] for r in R)
+    tiles = [
+        (str(tot), "НПЗ в таблице ниже", ""),
+        (f"{cap:.0f}", "Млн т/год (суммарно)", ""),
+        (str(down), "Остановлено (красный)", "color:var(--red)"),
+        (str(part), "С ограничениями (жёлтый)", "color:var(--amber)"),
+    ]
+    out = ['        <div class="status-grid">']
+    for val, lbl, style in tiles:
+        sattr = f' style="{style}"' if style else ""
+        out.append(f'          <div class="status-card"><div class="val"{sattr}>{val}</div>'
+                   f'<div class="lbl">{lbl}</div></div>')
+    out.append("        </div>")
+    return "\n".join(out)
 
 
 def render_top5(R):
@@ -250,6 +272,7 @@ BLOCKS = {
     "operators": render_operators,
     "working": lambda R, m: render_working(R, m),
     "summary": lambda R, m: render_summary(R, m),
+    "herostats": lambda R, m: render_herostats(R, m),
     "top5": render_top5,
     "cards": render_cards,
 }
@@ -426,7 +449,12 @@ def selftest():
     assert "<strong>1 из 3</strong>" in w and "14 июля 2026" in w
 
     s = render_summary(R, meta)
-    assert "1 полностью остановлены" in s and "3 крупных" in s
+    assert "1 полностью остановлены" in s and "В России 3 крупных" in s
+
+    hs = render_herostats(R, meta)
+    assert '<div class="val">3</div>' in hs           # всего заводов
+    assert 'color:var(--red)">1</div>' in hs          # 1 остановлен
+    assert 'color:var(--amber)">1</div>' in hs        # 1 с ограничениями
 
     cards = render_cards(R)
     assert '/npz/omskij-npz' in cards, "завод с карточкой должен линковаться"
