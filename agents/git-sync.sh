@@ -68,7 +68,7 @@ stamp_last_sync() {
 stamp_heartbeats() {
   [ -z "$HB_KEYS" ] && return 0
   python3 - "$HB_KEYS" <<'PY'
-import json, sys, datetime
+import json, os, subprocess, sys, datetime
 
 VALID_AGENTS = {
     "npz-status", "fuel-market", "history-crimea", "strikes", "roads",
@@ -80,13 +80,45 @@ keys = [k for k in sys.argv[1].split() if k in VALID_AGENTS]
 skipped = [k for k in sys.argv[1].split() if k not in VALID_AGENTS]
 now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
 p = "data/heartbeats.json"
-try:
-    hb = json.load(open(p, encoding="utf-8"))
-except Exception:
-    hb = {}
+
+
+def _load_heartbeats():
+    """Последнее хорошее состояние. Пустой словарь — только если файла нет вовсе.
+
+    16.07: битый/полузаписанный файл ронял json.load, `except: {}` и агент стирал
+    чужие 11 ключей своим одним — watchdog объявил живых агентов мёртвыми. Читаем
+    fallback из git HEAD: потерять чужой heartbeat хуже, чем не обновить свой.
+    """
+    try:
+        with open(p, encoding="utf-8") as f:
+            d = json.load(f)
+        if isinstance(d, dict):
+            return d
+    except FileNotFoundError:
+        return {}
+    except Exception:
+        pass
+    try:
+        out = subprocess.run(["git", "show", "HEAD:data/heartbeats.json"],
+                             capture_output=True, text=True, timeout=10)
+        d = json.loads(out.stdout)
+        if isinstance(d, dict):
+            print("git-sync: heartbeats.json битый — подняли версию из HEAD (%d ключей)" % len(d))
+            return d
+    except Exception:
+        pass
+    print("git-sync: heartbeats.json битый и HEAD не помог — стартуем с пустого")
+    return {}
+
+
+hb = _load_heartbeats()
 for k in keys:
     hb[k] = now
-json.dump(hb, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+# Атомарно: сосед-читатель никогда не увидит полуфайл (radar-cron вне flock).
+tmp = p + ".tmp.%d" % os.getpid()
+with open(tmp, "w", encoding="utf-8") as f:
+    json.dump(hb, f, ensure_ascii=False, indent=1)
+os.replace(tmp, p)
 if keys:
     print("git-sync: heartbeat", ", ".join(keys), "->", now)
 if skipped:
