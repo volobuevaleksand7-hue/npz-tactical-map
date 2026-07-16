@@ -3,7 +3,12 @@
 strike_pipeline.py — Unified pipeline: detect → classify → publish → update map → git push
 
 Usage:
-  python3 strike_pipeline.py [--dry-run] [--force-major]
+  python3 strike_pipeline.py [--dry-run] [--force-major] [--backfill]
+
+  --backfill — разовый прогон ПЕРЕД включением автопубликации: помечает весь
+  текущий беклог как обработанный БЕЗ отправки. Без него первый крон-прогон
+  выплюнет в канал молнии задним числом (16.07 состояние стояло с 08.07 —
+  накопилось 53 таких удара). Флаг был, но в этой строке не значился.
 
 Workflow:
   1. detect_new_strikes()    Compare strikes.json vs pipeline-state.json, find new entries
