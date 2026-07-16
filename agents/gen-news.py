@@ -33,6 +33,22 @@ INDEX_OUT = ROOT / "news.html"
 SITEMAP_OUT = ROOT / "sitemap.xml"
 SITE = "https://npz-tactical-map.vercel.app"
 
+# Предложный падеж для заголовка: «Удар по НПЗ в Саратове», а не «в Саратов».
+# Склонятор — agents/prep_case.py (без внешних зависимостей, проверен на 102
+# топонимах архива). Файл недоступен — отдаём город как есть: кривой падеж
+# лучше упавшей генерации всех сводок.
+try:
+    import importlib.util as _ilu
+    _spec = _ilu.spec_from_file_location(
+        "prep_case", os.path.join(os.path.dirname(os.path.abspath(__file__)), "prep_case.py"))
+    _pc = _ilu.module_from_spec(_spec)
+    _spec.loader.exec_module(_pc)
+    _prep_city = _pc.prep
+except Exception:
+    def _prep_city(c):
+        return c
+
+
 # ─── Русские названия месяцев ───
 MONTHS = [
     "", "января", "февраля", "марта", "апреля", "мая", "июня",
@@ -321,20 +337,11 @@ def brief_headline(date: str, strikes: list) -> str:
         if sdate == date:
             recency = 10
         return (_cls(s), conf, recency)
-    # ponytail: предложный падеж только для акваторий — их пара штук и они ломают
-    # заголовок в глаза («в Чёрное море»). Полный склонятор городов не тащим.
-    _PREP = {
-        "Чёрное море (акватория)": "Чёрном море",
-        "Азовское море (акватория)": "Азовском море",
-        "Балтийское море (акватория)": "Балтийском море",
-        "Каспийское море (акватория)": "Каспийском море",
-    }
-
     refs = [s for s in strikes if is_refinery(s)]
     if refs:
         lead = max(strikes, key=_lead_key)
         rc = str(lead.get("city", "")).strip()
-        rc = _PREP.get(rc, rc)
+        rc = _prep_city(rc)
         label = infra_label(lead)
         rest = n - 1
         if rest > 0:
