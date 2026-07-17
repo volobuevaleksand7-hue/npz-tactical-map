@@ -243,6 +243,45 @@ def _append_event(event):
     _write_json(WAVE_EVENTS_PATH, events)
 
 
+# Страницы, которые генерит пара gen-wave→build-nav. При провале откатываются
+# к HEAD, чтобы git-sync крона не выкатил полуфабрикат.
+WAVE_PAGES = ["volna-dronov.html", "volna-dronov"]
+
+
+def publish_pages(runner=None, restore=None):
+    """Гоняет gen-wave.py → build-nav.py, следя за кодом возврата.
+
+    🔴 Почему не просто subprocess.run(check=False), как было: gen-wave.py в
+    одиночку ДЕСТРУКТИВЕН — он вырезает из страниц nav, ?v-кэшбастеры и
+    search.css/js (их вшивает build-nav.py, пара обязана отработать целиком).
+    При check=False падение build-nav проходило МОЛЧА, покоцанные страницы
+    оставались на диске, и git-sync крона коммитил их в прод.
+
+    Теперь при любом провале страницы откатываются к HEAD: лучше остаться без
+    свежего снимка волны (заметно в логе), чем выкатить сайт без навигации.
+
+    runner/restore инжектятся в тестах. Возвращает True при успехе.
+    """
+    run = runner or (lambda cmd: subprocess.run(cmd, cwd=ROOT).returncode)
+    undo = restore or (lambda: subprocess.run(
+        ["git", "checkout", "--"] + WAVE_PAGES, cwd=ROOT, check=False))
+
+    for script in ("gen-wave.py", "build-nav.py"):
+        try:
+            rc = run([sys.executable, os.path.join(ROOT, "agents", script)])
+        except Exception as exc:
+            print("wave-detect: ERROR %s не запустился: %s" % (script, exc),
+                  file=sys.stderr)
+            rc = -1
+        if rc != 0:
+            print("wave-detect: ERROR %s вернул rc=%s — откатываю страницы, "
+                  "публикация волны пропущена (брак без nav в прод не уедет)"
+                  % (script, rc), file=sys.stderr)
+            undo()
+            return False
+    return True
+
+
 def main():
     radar_state = _read_json(RADAR_PATH)
     if not radar_state:
@@ -277,17 +316,7 @@ def main():
                       action, result["new_state"].get("cities", 0),
                       result["new_state"].get("regions", 0)), file=sys.stderr)
             return
-        # gen-wave.py строит страницы, но НЕ вшивает навигацию (это делает
-        # build-nav.py — иначе живая /volna-dronov регенерится без меню/шапки/
-        # vpn-nudge). Гоняем обе последовательно; git-sync крона запушит итог.
-        for script in ("gen-wave.py", "build-nav.py"):
-            try:
-                subprocess.run(
-                    [sys.executable, os.path.join(ROOT, "agents", script)],
-                    check=False)
-            except Exception as exc:
-                print("wave-detect: WARNING %s failed: %s" % (script, exc),
-                      file=sys.stderr)
+        publish_pages()
 
 
 if __name__ == "__main__":

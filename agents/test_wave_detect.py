@@ -182,6 +182,59 @@ def test_empty_cities_noop():
     print("  PASS: test_empty_cities_noop")
 
 
+def test_publish_pages_ok():
+    """Обе отработали (rc=0) → True, отката нет."""
+    calls, undone = [], []
+    ok = _mod.publish_pages(
+        runner=lambda cmd: (calls.append(cmd[-1].split("/")[-1]), 0)[1],
+        restore=lambda: undone.append(True))
+    assert ok is True
+    assert calls == ["gen-wave.py", "build-nav.py"], "порядок пары: %s" % calls
+    assert not undone, "при успехе откатывать нечего"
+    print("  PASS: test_publish_pages_ok")
+
+
+def test_publish_pages_buildnav_fail_rolls_back():
+    """🔴 Ядро фикса: build-nav упал → откат страниц, брак не уезжает."""
+    undone = []
+
+    def runner(cmd):
+        return 0 if cmd[-1].endswith("gen-wave.py") else 1
+
+    ok = _mod.publish_pages(runner=runner, restore=lambda: undone.append(True))
+    assert ok is False, "провал build-nav должен возвращать False"
+    assert undone == [True], "страницы обязаны откатиться (иначе git-sync выкатит брак)"
+    print("  PASS: test_publish_pages_buildnav_fail_rolls_back")
+
+
+def test_publish_pages_genwave_fail_stops_pair():
+    """gen-wave упал → build-nav не запускаем, откатываемся."""
+    calls, undone = [], []
+
+    def runner(cmd):
+        calls.append(cmd[-1].split("/")[-1])
+        return 1
+
+    ok = _mod.publish_pages(runner=runner, restore=lambda: undone.append(True))
+    assert ok is False
+    assert calls == ["gen-wave.py"], "после провала gen-wave пара обрывается: %s" % calls
+    assert undone == [True]
+    print("  PASS: test_publish_pages_genwave_fail_stops_pair")
+
+
+def test_publish_pages_exception_rolls_back():
+    """Скрипт не запустился вовсе (исключение) → тоже откат, не молчим."""
+    undone = []
+
+    def runner(cmd):
+        raise OSError("no interpreter")
+
+    ok = _mod.publish_pages(runner=runner, restore=lambda: undone.append(True))
+    assert ok is False
+    assert undone == [True]
+    print("  PASS: test_publish_pages_exception_rolls_back")
+
+
 if __name__ == "__main__":
     test_rise_publish()
     test_update_no_publish()
@@ -189,4 +242,8 @@ if __name__ == "__main__":
     test_stale_noop()
     test_below_rise_noop()
     test_empty_cities_noop()
+    test_publish_pages_ok()
+    test_publish_pages_buildnav_fail_rolls_back()
+    test_publish_pages_genwave_fail_stops_pair()
+    test_publish_pages_exception_rolls_back()
     print("OK")
