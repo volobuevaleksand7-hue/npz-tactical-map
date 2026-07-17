@@ -2,16 +2,16 @@
  "snapshot": {
   "balance": {
    "refining_capacity_total_mt_year": 335.6,
-   "capacity_offline_mt_year": 200.1,
-   "capacity_offline_pct": 60,
-   "gasoline_output_loss_pct": 41,
-   "diesel_output_loss_pct": 44,
+   "capacity_offline_mt_year": 141.9,
+   "capacity_offline_pct": 42,
+   "gasoline_output_loss_pct": 42,
+   "diesel_output_loss_pct": 45,
    "export_ban_gasoline": true,
    "export_ban_kerosine": true,
    "import_from_belarus": true,
-   "notes": "Выбито ~34,5% нефтепереработки РФ полностью (11 НПЗ остановлены). Дополнительно ~10 НПЗ работают в режиме пониженной загрузки (20–55% мощности). По оценкам CNN и Novaya Gazeta Europe (2–6 июля): дефицит охватил 78 из 83 регионов РФ (35% населения страны, ~50 млн чел); только 5 регионов РФ не сообщили о кризисе. Ежедневный дефицит ~25 тыс т/день при спросе ~110 тыс т/день и производстве ~85 тыс т/день. Импорт: из Индии поступило 60+ тыс т бензина (два танкера по 30–40 тыс т), Казахстан отправляет 50 тыс т официально как гуманитарная помощь / коммерческие поставки (июль–август). Плановый импорт бензина из всех источников до 400 тыс т/месяц. Розничные цены АИ-95 на 15-17 июля: в среднем по РФ ~77,5 ₽/л (варьируются от 74–82 ₽/л по регионам). Розница в Москве 67–97 ₽/л, СПб 55–90 ₽/л, независимые АЗС 80–100+ ₽/л, Крым 170+ ₽/л. Дизель на 15–17 июля: ~81,90 ₽/л (+3,2% за неделю). Запреты на экспорт: бензин и дизель — до 31 июля 2026; авиатопливо — до 30 ноября 2026. Система чётных/нечётных дней действует в 60+ регионах (расширена 9-10 июля). По Ukraine's General Staff: 42,74% мощности переработки нефти выведено из строя на начало июля.",
-   "throughput_shortfall_pct": 60,
-   "method": "capacity_offline = сумма мощностей полностью остановленных НПЗ (down); throughput_shortfall включает взвешенную оценку частичных потерь (partial status). Пересчитано из refineries[] на 17 июля 2026 в 06:15Z."
+   "notes": "Выбито ~34,5% нефтепереработки РФ полностью (11 НПЗ остановлены). Дополнительно 9 НПЗ работают в режиме пониженной загрузки (20–55% мощности). По оценкам CNN и Novaya Gazeta Europe: дефицит охватил 78–79 из 83 регионов РФ (35% населения страны, ~50 млн чел). Ежедневный дефицит ~25–30 тыс т/день при спросе ~110 тыс т/день и производстве ~80–85 тыс т/день. Импорт: из Индии поступило 60+ тыс т бензина (два танкера по 30–40 тыс т), Казахстан отправляет ~50 тыс т официально (июль–август). Плановый импорт бензина из всех источников до 400 тыс т/месяц. Розничные цены АИ-95 на 15-17 июля: в среднем по РФ ~77,5 ₽/л (медиана). Биржевая цена АИ-95 на 17 июля: 79 654 ₽/тонну (+4,45% за неделю). Розница в Москве 67–97 ₽/л, СПб 55–90 ₽/л, независимые АЗС 80–100+ ₽/л, Крым 170+ ₽/л. Дизель на 17 июля: рост цен продолжается. Запреты на экспорт: бензин и дизель — до 31 июля 2026; авиатопливо — до 30 ноября 2026. Система чётных/нечётных дней действует в 60+ регионах (расширена 9-10 июля и далее на дополнительные субъекты). По Ukraine's General Staff: 42,74% мощности переработки нефти выведено из строя на начало июля. На 17 июля ситуация остаётся критичной и системной.",
+   "throughput_shortfall_pct": 62,
+   "method": "capacity_offline = сумма мощностей полностью остановленных НПЗ (down); throughput_shortfall включает взвешенную оценку частичных потерь (partial status). Пересчитано из refineries[] на 17 июля 2026 в 16:45Z."
   },
   "regions": [
    {
@@ -156,7 +156,7 @@
     "lat": 45.04,
     "lon": 38.98,
     "level": "severe",
-    "updated": "2026-07-16T00:20Z",
+    "updated": "2026-07-17T12:30Z",
     "networks": [
      {
       "name": "Кубаньнефтепродукт",
@@ -233,8 +233,8 @@
     "region": "Москва",
     "lat": 55.75,
     "lon": 37.62,
-    "level": "severe",
-    "updated": "2026-07-16T00:20Z",
+    "level": "limited",
+    "updated": "2026-07-17T12:30Z",
     "networks": [
      {
       "name": "Лукойл",
@@ -272,9 +272,9 @@
       "level": "limited"
      }
     ],
-    "queues_hours": 2.0,
-    "ai95_price_rub": 77.5,
-    "diesel_price_rub": 80,
+    "queues_hours": 1.0,
+    "ai95_price_rub": 71.54,
+    "diesel_price_rub": 79.8,
     "source_urls": [
      "https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-moskve-1-ijulja-2026-goda-novye-pravila-na-azs-limity-aktualnye-ceny_1760801",
      "https://ru.themoscowtimes.com/2026/06/29/gazprom-neft-i-lukoil-nachali-ogranichivat-prodazhu-benzina-v-moskve-i-podmoskove-a199450",
@@ -355,7 +355,7 @@
     "lat": 59.94,
     "lon": 30.31,
     "level": "limited",
-    "updated": "2026-07-16T12:15Z",
+    "updated": "2026-07-17T12:30Z",
     "networks": [
      {
       "name": "Сургутнефтегаз",
@@ -400,7 +400,7 @@
       "note": "03.07 (forpost-sz, официально): бензин до 40 л в бак, дизель до 80 л, канистры запрещены. Существенный рост числа клиентов."
      }
     ],
-    "queues_hours": 1.0,
+    "queues_hours": 0.5,
     "ai95_price_rub": 71,
     "diesel_price_rub": 81,
     "source_urls": [
@@ -426,7 +426,7 @@
     "lat": 50.6,
     "lon": 36.6,
     "level": "limited",
-    "updated": "2026-07-16T12:15Z",
+    "updated": "2026-07-17T12:30Z",
     "networks": [
      {
       "name": "Газпром нефть",
@@ -539,7 +539,7 @@
     "lat": 55.8,
     "lon": 49.1,
     "level": "limited",
-    "updated": "2026-07-17T00:25Z",
+    "updated": "2026-07-17T12:30Z",
     "networks": [
      {
       "name": "Татнефть",
@@ -614,8 +614,8 @@
     "region": "Ростовская обл.",
     "lat": 47.22,
     "lon": 39.72,
-    "level": "severe",
-    "updated": "2026-07-16T00:20Z",
+    "level": "limited",
+    "updated": "2026-07-17T12:30Z",
     "networks": [
      {
       "name": "Роснефть",
@@ -1110,7 +1110,7 @@
     "lat": 51.66,
     "lon": 39.2,
     "level": "limited",
-    "updated": "2026-07-16T12:15Z",
+    "updated": "2026-07-17T12:30Z",
     "networks": [
      {
       "name": "Лукойл",
@@ -2739,8 +2739,8 @@
    "notes": "17.07 (СПбМТСБ): АИ-92 61,767 ₽/т, АИ-95 67,383 ₽/т, летнее ДТ 60,344 ₽/т. Розничные цены по регионам: АИ-95 72-77 ₽/л, АИ-92 66-71 ₽/л. 16.07 (Финаналия): очереди начали исчезать в 13+ регионах РФ. 15.07 (Росстат): потребительские цены выросли на 2,3% на бензин, 3,2% на дизель (7-13 июля). Импорт из Индии — 2 танкера (60 тыс. тонн) уже в пути. Прогноз улучшения — август 2026."
   },
   "refinery_counts": {
-   "down": 9,
-   "partial": 11,
+   "down": 11,
+   "partial": 9,
    "operational": 12
   },
   "timeline": [
@@ -4511,8 +4511,10 @@
      "casualties": "Данных о пострадавших нет",
      "title": "Ночь на 6 июля: пожар на авиабазе в Гвардейском (Крым)",
      "detail": "Зафиксирован пожар на территории авиабазы Гвардейское во Крыму. Авиабаза является важным военным объектом для российской авиации.",
-     "source_url": "https://t.me/exilenova_plus/24513",
-     "confidence": "reported"
+     "source_url": "",
+     "confidence": "reported",
+     "source_dead": "https://t.me/exilenova_plus/24513",
+     "source_dead_reason": "пост Telegram удалён"
     },
     {
      "date": "2026-07-06",
@@ -4527,8 +4529,10 @@
      "casualties": "Данных о пострадавших нет",
      "title": "Ночь на 6 июля: пожар на подстанции в Симферополе",
      "detail": "Сервис NASA FIRMS фиксирует пожар на электроподстанции ПС «Симферополь» 330 кВ. Также пожар зафиксирован в районе мобильной газотурбинной электростанции. Это часть систематического воздействия на энергосистему Крыма.",
-     "source_url": "https://t.me/exilenova_plus/24512",
-     "confidence": "confirmed"
+     "source_url": "",
+     "confidence": "confirmed",
+     "source_dead": "https://t.me/exilenova_plus/24512",
+     "source_dead_reason": "пост Telegram удалён"
     },
     {
      "date": "2026-07-06",
@@ -4543,8 +4547,10 @@
      "casualties": "Данных о пострадавших нет",
      "title": "Ночь на 6 июля: удар БПЛА по порту в Керчи",
      "detail": "Сегодня ночью был атакован порт в Керчи. Местные жители фиксируют пожар на территории порта. Атака является частью массированной ночной операции по объектам инфраструктуры в Крыму.",
-     "source_url": "https://t.me/exilenova_plus/24511",
-     "confidence": "reported"
+     "source_url": "",
+     "confidence": "reported",
+     "source_dead": "https://t.me/exilenova_plus/24511",
+     "source_dead_reason": "пост Telegram удалён"
     },
     {
      "date": "2026-07-06",
@@ -6673,14 +6679,17 @@
      "lon": 36.4744,
      "title": "Удар по порту в Керчи — пожар на территории",
      "detail": "NASA FIRMS зафиксировал пожар на территории порта. Местные жители фиксируют пожар на территории порта. Атака произошла ночью 7 июля. Источник: exilenova_plus. Спутниковые снимки (Maxar) подтвердили полное уничтожение центрального резервуарного парка нефтяного терминала в порту Керчи. (NOELREPORTS, 9 июля 12:08 UTC)",
-     "source_url": "https://t.me/exilenova_plus/24628\nhttps://t.me/noel_reports/49100",
+     "source_url": "https://t.me/exilenova_plus/24628",
      "source_channel": "exilenova_plus",
      "confidence": "confirmed",
      "type": "drone",
      "id": "керчь-20260707-1",
      "target": "Нефтяной терминал в порту Керчи — центральный резервуарный парк полностью уничтожен (подтверждено спутниковыми снимками)",
      "category": "type/npz",
-     "impact": "destroyed"
+     "impact": "destroyed",
+     "source_url_alt": [
+      "https://t.me/noel_reports/49100"
+     ]
     },
     {
      "city": "Симферополь",
@@ -6739,9 +6748,12 @@
      "casualties": null,
      "title": "Удар по компрессорной станции «Краснодарская» — пожар на газотранспортной инфраструктуре",
      "detail": "В Краснодарском крае атакована компрессорная станция «Краснодарская». По данным exilenova_plus и noel_reports, на объекте наблюдается возгорание. Станция входит в систему магистрального газопровода «Голубой поток» (Россия–Турция).",
-     "source_url": "https://t.me/exilenova_plus/24668 | https://t.me/noel_reports/49016",
+     "source_url": "https://t.me/exilenova_plus/24668",
      "confidence": "confirmed",
-     "source_channel": "exilenova_plus, noel_reports"
+     "source_channel": "exilenova_plus, noel_reports",
+     "source_url_alt": [
+      "https://t.me/noel_reports/49016"
+     ]
     },
     {
      "date": "2026-07-07",
@@ -6789,8 +6801,11 @@
      "casualties": "8 танкеров поражены",
      "title": "Удар по теневому флоту РФ в Азовском море — 8 танкеров поражены за ночь",
      "detail": "В ночь на 7 июля пилоты БПЛА «Кайрос» 414-й отдельной бригады «Птахи Мадяра» нанесли удар по танкерам теневого флота РФ в Азовском море. Поражены 8 танкеров, задействованных в снабжении Крыма топливом. Битва за бензин для Крыма в Азовском море вышла на промышленный уровень. 8 июля губернатор Ростовской области подтвердил атаку на 2 танкера (exilenova_plus/24758).",
-     "source_url": "https://t.me/exilenova_plus/24644\nhttps://t.me/exilenova_plus/24758",
-     "confidence": "reported"
+     "source_url": "https://t.me/exilenova_plus/24644",
+     "confidence": "reported",
+     "source_url_alt": [
+      "https://t.me/exilenova_plus/24758"
+     ]
     },
     {
      "date": "2026-07-07",
@@ -6991,8 +7006,11 @@
      "casualties": "нет данных",
      "title": "Удар БПЛА по нефтехимическому комплексу «Нижнекамскнефтехим» — несколько очагов возгорания на территории",
      "detail": "В ночь на 8 июля Нижнекамск (Татарстан) атакован БПЛА. Поражён нефтехимический комплекс «Нижнекамскнефтехим» — один из крупнейших в Европе, включает НПЗ ТАНЕКО и производства СИБУРа. Кадры из города: несколько очагов возгорания на территории предприятия. Пожар виден с соседних городов. Атака продолжается, работа ПВО в регионе. Местные жители сообщают о зареве в районе промзоны. Источники: exilenova_plus (фото/видео прилётов, сводки с мест) + radarrussiia (работа ПВО, сбития, готовность к сбитию). Масштаб повреждений уточняется. По данным exilenova_plus, зафиксировано масштабное горение установки ЭЛОУ-АВТ-7 (мощность 7,3 млн т/год), технологических эстакад и резервуаров НПЗ и этиленового производства. Поражение АВТ-7 — наиболее результативное среди ударов 8 июля: установка обеспечивала 4–5 тыс. т бензиновых фракций в сутки.",
-     "source_url": "https://t.me/exilenova_plus/24741\nhttps://t.me/exilenova_plus/24814",
-     "confidence": "reported"
+     "source_url": "https://t.me/exilenova_plus/24741",
+     "confidence": "reported",
+     "source_url_alt": [
+      "https://t.me/exilenova_plus/24814"
+     ]
     },
     {
      "date": "2026-07-08",
@@ -7055,8 +7073,11 @@
      "casualties": "неизвестно",
      "title": "СБУ: удар по нефтеперекачивающей станции «Черкассы» в Башкортостане",
      "detail": "СБУ заявила об ударе подразделений «Альфы» по нефтеперекачивающей станции «Черкассы» в Башкортостане — ключевому объекту «Транснефть-Урал», расположенному в 1500 км от Украины. Не менее 8 дронов СБУ поразили объект, зафиксированы возгорания у резервуарного парка и производственных сооружений. noel_reports.",
-     "source_url": "https://t.me/noel_reports/49050\nhttps://t.me/noel_reports/49051",
-     "confidence": "reported"
+     "source_url": "https://t.me/noel_reports/49050",
+     "confidence": "reported",
+     "source_url_alt": [
+      "https://t.me/noel_reports/49051"
+     ]
     },
     {
      "date": "2026-07-08",
@@ -7122,8 +7143,11 @@
      "casualties": "неизвестно",
      "title": "Атака ударных БПЛА на Азов Ростовской области",
      "detail": "Вечером 8 июля Азов Ростовской области подвергся атаке ударных БПЛА. По данным exilenova_plus и radarrussiia, в городе и окрестностях (Батайск, Таганрогский залив) объявлена опасность по БПЛА, зафиксирована работа ПВО. Одновременно БПЛА фиксировались в Таганроге, Миллерово и Ростове-на-Дону. Масштаб повреждений уточняется.",
-     "source_url": "https://t.me/exilenova_plus/24817\nhttps://t.me/radarrussiia/80819",
-     "confidence": "reported"
+     "source_url": "https://t.me/exilenova_plus/24817",
+     "confidence": "reported",
+     "source_url_alt": [
+      "https://t.me/radarrussiia/80819"
+     ]
     },
     {
      "id": "краснодарская-20260708-1",
@@ -7188,8 +7212,11 @@
      "casualties": "1 погибший, несколько раненых (губернатор Р. Бусаргин)",
      "title": "Ночь на 8 июля: повторный удар БПЛА по Саратовской области — 1 погибший, повреждены промобъекты",
      "detail": "В ночь на 8 июля Саратовская область подверглась повторной атаке БПЛА (первая волна — 7 июля в 23:39). Губернатор Роман Бусаргин сообщил об 1 погибшем и нескольких раненых; повреждены гражданские промышленные объекты. Reuters подтверждает удары по Саратовскому и Татарстану. Саратовский НПЗ (Роснефть, мощность ~7 млн т/год) атакован второй раз за сутки. Минобороны РФ заявило об уничтожении 415 БПЛА за 12 часов. Анализ exilenova_plus подтвердил поражение установки изомеризации пентан-гексановой фракции (координаты: 51.456835, 45.940629), горение коммуникаций в районе ЭЛОУ-АВТ-6 и резервуарного парка. Результат — остановка завода на инспекцию, потеря компонентов изомеризации, снижение качества бензина.",
-     "source_url": "https://www.globalbankingandfinance.com/ukrainian-drones-kill-one-person-damage-two-empty-oil/\nhttps://t.me/exilenova_plus/24814",
-     "confidence": "confirmed"
+     "source_url": "https://www.globalbankingandfinance.com/ukrainian-drones-kill-one-person-damage-two-empty-oil/",
+     "confidence": "confirmed",
+     "source_url_alt": [
+      "https://t.me/exilenova_plus/24814"
+     ]
     },
     {
      "id": "борисоглебск-20260708-1",
@@ -7202,11 +7229,15 @@
      "target": "Резервуарный парк ГСМ (топливное хранилище) на авиабазе Борисоглебск — уничтожен",
      "category": "type/npz",
      "impact": "destroyed",
-     "source_url": "https://riavrn.ru/news/v-voronezhskoj-oblasti-iz-za-ataki-bpla-v-noch-na-8-iyulya-na-infrastrukturnom-obuekte-voznik-pozhar/\nhttps://www.kommersant.ru/doc/8798688\nhttps://t.me/noel_reports",
+     "source_url": "https://riavrn.ru/news/v-voronezhskoj-oblasti-iz-za-ataki-bpla-v-noch-na-8-iyulya-na-infrastrukturnom-obuekte-voznik-pozhar/",
      "confidence": "confirmed",
      "lat": 51.3833,
      "lon": 42.0667,
-     "detail": "В ночь на 8 июля на авиабазе Борисоглебск (Воронежская область) в результате атаки БПЛА уничтожен резервуарный парк ГСМ, построенный зимой 2023 года. Подтверждено спутниковыми снимками. (noel_reports, 10 июля 2026, 12:29 UTC)"
+     "detail": "В ночь на 8 июля на авиабазе Борисоглебск (Воронежская область) в результате атаки БПЛА уничтожен резервуарный парк ГСМ, построенный зимой 2023 года. Подтверждено спутниковыми снимками. (noel_reports, 10 июля 2026, 12:29 UTC)",
+     "source_url_alt": [
+      "https://www.kommersant.ru/doc/8798688",
+      "https://t.me/noel_reports"
+     ]
     }
    ],
    "voices": [
@@ -7469,11 +7500,14 @@
      "target": "нефтебаза «Тверьнефтепродукт»",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://t.me/exilenova_plus/24890\nhttps://t.me/noel_reports/49165",
+     "source_url": "https://t.me/exilenova_plus/24890",
      "confidence": "confirmed",
      "lat": 56.86,
      "lon": 35.913,
-     "detail": "В ночь на 9 июля БПЛА атаковали нефтебазу «Тверьнефтепродукт» в Твери. По состоянию на 14:30 UTC 9 июля пожар продолжался — опровергнуты данные о локализации. (Exilenova+, NOELREPORTS, 9 июля, 14:30 UTC)"
+     "detail": "В ночь на 9 июля БПЛА атаковали нефтебазу «Тверьнефтепродукт» в Твери. По состоянию на 14:30 UTC 9 июля пожар продолжался — опровергнуты данные о локализации. (Exilenova+, NOELREPORTS, 9 июля, 14:30 UTC)",
+     "source_url_alt": [
+      "https://t.me/noel_reports/49165"
+     ]
     },
     {
      "id": "михайловск-20260709-1",
@@ -7486,11 +7520,14 @@
      "target": "нефтебаза",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://t.me/exilenova_plus\nhttps://t.me/radarrussiia/80914",
+     "source_url": "https://t.me/exilenova_plus",
      "confidence": "confirmed",
      "lat": 45.106,
      "lon": 41.952,
-     "detail": "В ночь на 9 июля БПЛА атаковали нефтебазу «Лукойл-Югнефтепродукт» в Михайловске (Ставропольский край). Зафиксирован пожар, который продолжается по состоянию на утро 9 июля. (Exilenova+ Telegram, radarrussiia, 9 июля)"
+     "detail": "В ночь на 9 июля БПЛА атаковали нефтебазу «Лукойл-Югнефтепродукт» в Михайловске (Ставропольский край). Зафиксирован пожар, который продолжается по состоянию на утро 9 июля. (Exilenova+ Telegram, radarrussiia, 9 июля)",
+     "source_url_alt": [
+      "https://t.me/radarrussiia/80914"
+     ]
     },
     {
      "id": "таганрог-20260709-1",
@@ -7503,11 +7540,15 @@
      "target": "Два порожних танкера в акватории Таганрогского залива (маршрут снабжения топливом)",
      "category": null,
      "impact": "active_fire",
-     "source_url": "https://www.fontanka.ru/2026/07/09/76523943/\nhttps://www.kommersant.ru/doc/8799397\nhttps://ura.news/news/1053108078",
+     "source_url": "https://www.fontanka.ru/2026/07/09/76523943/",
      "confidence": "reported",
      "lat": 47.2313,
      "lon": 38.904,
-     "detail": "Вторую ночь подряд атака на танкеры в Таганрогском заливе (эпизод, отдельный от инцидента ~8 июля с двумя ранеными). В ночь на 9 июля вновь атакованы два порожних танкера — механические повреждения, пожары (один потушен), экипажи эвакуированы, пострадавших нет, разлива нефтепродуктов не было. (Fontanka, Коммерсантъ, ura.news, 9 июля)"
+     "detail": "Вторую ночь подряд атака на танкеры в Таганрогском заливе (эпизод, отдельный от инцидента ~8 июля с двумя ранеными). В ночь на 9 июля вновь атакованы два порожних танкера — механические повреждения, пожары (один потушен), экипажи эвакуированы, пострадавших нет, разлива нефтепродуктов не было. (Fontanka, Коммерсантъ, ura.news, 9 июля)",
+     "source_url_alt": [
+      "https://www.kommersant.ru/doc/8799397",
+      "https://ura.news/news/1053108078"
+     ]
     },
     {
      "id": "саки-20260709-1",
@@ -7520,11 +7561,14 @@
      "target": "Сакская ТЭЦ, три склада/базы ГСМ, два МТС — топливная и энергетическая инфраструктура Крыма",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://t.me/exilenova_plus/24882\nhttps://t.me/Crimeanwind/104299",
+     "source_url": "https://t.me/exilenova_plus/24882",
      "confidence": "reported",
      "lat": 45.132,
      "lon": 33.599,
-     "detail": "В ночь на 9 июля в ходе массированной атаки на Крым поражены Сакская ТЭЦ, три склада/базы горюче-смазочных материалов (ГСМ), два магистральных топливопровода (МТС), станция радиоэлектронной борьбы «Житель», вышки связи, топливозаправщики. Данные из сводки Сил беспилотных систем (Птахи СБС/Мадяр). (Exilenova+, Crimeanwind, 9 июля)"
+     "detail": "В ночь на 9 июля в ходе массированной атаки на Крым поражены Сакская ТЭЦ, три склада/базы горюче-смазочных материалов (ГСМ), два магистральных топливопровода (МТС), станция радиоэлектронной борьбы «Житель», вышки связи, топливозаправщики. Данные из сводки Сил беспилотных систем (Птахи СБС/Мадяр). (Exilenova+, Crimeanwind, 9 июля)",
+     "source_url_alt": [
+      "https://t.me/Crimeanwind/104299"
+     ]
     },
     {
      "id": "чёрное-море-ктк-20260709-1",
@@ -7537,11 +7581,14 @@
      "target": "Четыре нефтеналивных танкера в районе морского терминала Каспийского трубопроводного консорциума (КТК) у побережья Краснодарского края — танкеры Yasa Polaris, Matilda (Chevron), и др. Инфраструктура экспорта нефти через КТК",
      "category": "type/npz",
      "impact": "damaged",
-     "source_url": "https://www.themoscowtimes.com\nhttps://neftegaz.ru",
+     "source_url": "https://www.themoscowtimes.com",
      "confidence": "confirmed",
      "lat": 44.716,
      "lon": 37.8,
-     "detail": "9 июля морские дроны атаковали четыре нефтеналивных танкера в районе терминала КТК (Каспийский трубопроводный консорциум) в Чёрном море, в 100 км от Анапы. Среди поражённых — танкер Matilda (под charter Chevron), танкер Yasa Polaris. По данным Минобороны РФ, удар беспилотников пришёлся по танкеру Matilda. Атака затронула инфраструктуру экспорта казахстанской нефти через КТК. (The Moscow Times, Neftegaz, Fontanka, 9 июля)"
+     "detail": "9 июля морские дроны атаковали четыре нефтеналивных танкера в районе терминала КТК (Каспийский трубопроводный консорциум) в Чёрном море, в 100 км от Анапы. Среди поражённых — танкер Matilda (под charter Chevron), танкер Yasa Polaris. По данным Минобороны РФ, удар беспилотников пришёлся по танкеру Matilda. Атака затронула инфраструктуру экспорта казахстанской нефти через КТК. (The Moscow Times, Neftegaz, Fontanka, 9 июля)",
+     "source_url_alt": [
+      "https://neftegaz.ru"
+     ]
     }
    ],
    "voices": [
@@ -7686,11 +7733,15 @@
      "target": "13 судов теневого флота РФ (танкеры и вспомогательные суда) в Азовском море и у пролива Керчь — нефтетранспортная инфраструктура",
      "category": "type/npz",
      "impact": "damaged",
-     "source_url": "https://www.kyivpost.com/post/79846\nhttps://euromaidanpress.com/2026/07/10/ukraines-deep-and-mid-range-strikes-converge-on-crimea-and-russias-azov-coast/\nhttps://news-pravda.com/world/2026/07/10/2431649.html",
+     "source_url": "https://www.kyivpost.com/post/79846",
      "confidence": "confirmed",
      "lat": 46.0,
      "lon": 36.5,
-     "detail": "10 июля украинские БПЛА нанесли удар по танкерам теневого флота в Азовском море и у Керчского пролива. По данным ЗСУ, 13 судов получили повреждения (10 танкеров, 1 сухогруз, 1 паром, 1 буксир). Всего за 120 часов поражены 48 единиц судов, в том числе 21 танкер. Спутниковые снимки Planet Labs подтвердили горящий танкер и другое повреждённое судно у Керчского пролива. Данная кампания направлена на отрезание топливоснабжения Крыма. (Kyiv Post, Euromaidan Press, Ukrainian Armed Forces, 10 июля)"
+     "detail": "10 июля украинские БПЛА нанесли удар по танкерам теневого флота в Азовском море и у Керчского пролива. По данным ЗСУ, 13 судов получили повреждения (10 танкеров, 1 сухогруз, 1 паром, 1 буксир). Всего за 120 часов поражены 48 единиц судов, в том числе 21 танкер. Спутниковые снимки Planet Labs подтвердили горящий танкер и другое повреждённое судно у Керчского пролива. Данная кампания направлена на отрезание топливоснабжения Крыма. (Kyiv Post, Euromaidan Press, Ukrainian Armed Forces, 10 июля)",
+     "source_url_alt": [
+      "https://euromaidanpress.com/2026/07/10/ukraines-deep-and-mid-range-strikes-converge-on-crimea-and-russias-azov-coast/",
+      "https://news-pravda.com/world/2026/07/10/2431649.html"
+     ]
     },
     {
      "id": "капотня-20260710-1",
@@ -7737,11 +7788,15 @@
      "target": "13 судов теневого флота (10 танкеров, 1 сухогруз, 1 паром, 1 буксир) и 5 электроподстанций (ПС 110 кВ «Береговое» пгт Молочное, ПС 110 кВ «Саки», ПС 110 кВ «Майнаки» Евпатория, ПС 110 кВ «Новоозёрное» с. Медведево, ПС 35 кВ «Медведево» с. Медведево)",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://t.me/exilenova_plus/25054\nhttps://t.me/noel_reports/49318\nhttps://t.me/noel_reports/49319",
+     "source_url": "https://t.me/exilenova_plus/25054",
      "confidence": "confirmed",
      "lat": 45.2,
      "lon": 33.8,
-     "detail": "10 июля СБС ВСУ нанесли комбинированный удар по морской и энергетической инфраструктуре Крыма. Поражены 13 судов теневого флота (10 танкеров, 1 сухогруз, 1 паром, 1 буксир) на подходах к полуострову — все идентифицированы и находятся под международными санкциями. Также выведены из строя 5 электроподстанций в рамках проекта «Крымский рубильник off». Зафиксирован горящий танкер у Керченского порта вблизи Крымского моста; ещё одно горящее судно зафиксировано в Азовском море. Всего за 120 часов СБС поражены 48 судов теневого флота. Генштаб ВСУ (18:33 UTC 10 июля) подтвердил удары по 18 судам РФ (включая 13 танкеров). (Exilenova+ / СБС Мадяр, 16:10 UTC; NOELREPORTS, 18:27-18:33 UTC). Генштаб ВСУ также подтвердил удары по комплексу НОВАТЭК в Усть-Луге и топливному хранилищу в Розовке (Запорожская область)."
+     "detail": "10 июля СБС ВСУ нанесли комбинированный удар по морской и энергетической инфраструктуре Крыма. Поражены 13 судов теневого флота (10 танкеров, 1 сухогруз, 1 паром, 1 буксир) на подходах к полуострову — все идентифицированы и находятся под международными санкциями. Также выведены из строя 5 электроподстанций в рамках проекта «Крымский рубильник off». Зафиксирован горящий танкер у Керченского порта вблизи Крымского моста; ещё одно горящее судно зафиксировано в Азовском море. Всего за 120 часов СБС поражены 48 судов теневого флота. Генштаб ВСУ (18:33 UTC 10 июля) подтвердил удары по 18 судам РФ (включая 13 танкеров). (Exilenova+ / СБС Мадяр, 16:10 UTC; NOELREPORTS, 18:27-18:33 UTC). Генштаб ВСУ также подтвердил удары по комплексу НОВАТЭК в Усть-Луге и топливному хранилищу в Розовке (Запорожская область).",
+     "source_url_alt": [
+      "https://t.me/noel_reports/49318",
+      "https://t.me/noel_reports/49319"
+     ]
     },
     {
      "id": "усть-луга-новятэк-20260710-1",
@@ -7754,11 +7809,13 @@
      "target": "Комплекс НОВАТЭК в Усть-Луге — газоперерабатывающий и газохимический комплекс по переработке газового конденсата",
      "category": "type/gas",
      "impact": "unknown",
-     "source_url": "https://t.me/noel_reports/49315",
+     "source_url": "",
      "confidence": "confirmed",
      "lat": 59.66,
      "lon": 28.29,
-     "detail": "Генштаб ВСУ (18:33 UTC 10 июля) подтвердил удар по комплексу НОВАТЭК в Усть-Луге (Ленинградская область). Объект является крупнейшим на Балтике газоперерабатывающим комплексом. Детали поражения и масштаб повреждений уточняются. (NOELREPORTS, 10 июля 16:21 UTC)"
+     "detail": "Генштаб ВСУ (18:33 UTC 10 июля) подтвердил удар по комплексу НОВАТЭК в Усть-Луге (Ленинградская область). Объект является крупнейшим на Балтике газоперерабатывающим комплексом. Детали поражения и масштаб повреждений уточняются. (NOELREPORTS, 10 июля 16:21 UTC)",
+     "source_dead": "https://t.me/noel_reports/49315",
+     "source_dead_reason": "пост Telegram удалён"
     },
     {
      "id": "розовка-ховил-20260710-1",
@@ -7771,11 +7828,13 @@
      "target": "Топливное хранилище (нефтепродуктное хранилище) в районе Розовки",
      "category": "type/npz",
      "impact": "unknown",
-     "source_url": "https://t.me/noel_reports/49315",
+     "source_url": "",
      "confidence": "reported",
      "lat": 47.34,
      "lon": 36.88,
-     "detail": "Генштаб ВСУ (18:33 UTC 10 июля) подтвердил удар по топливному хранилищу в районе Розовки (Запорожская область). Объект используется для обеспечения ГСМ. Детали поражения и масштаб повреждений уточняются. (NOELREPORTS, 10 июля 16:21 UTC)"
+     "detail": "Генштаб ВСУ (18:33 UTC 10 июля) подтвердил удар по топливному хранилищу в районе Розовки (Запорожская область). Объект используется для обеспечения ГСМ. Детали поражения и масштаб повреждений уточняются. (NOELREPORTS, 10 июля 16:21 UTC)",
+     "source_dead": "https://t.me/noel_reports/49315",
+     "source_dead_reason": "пост Telegram удалён"
     },
     {
      "id": "таганрог-20260710-1",
@@ -7788,11 +7847,15 @@
      "target": "Нефтяной терминал Таганрога (нефтепродуктная инфраструктура)",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://www.pravda.com.ua/eng/news/2026/07/10/8043347/\nhttps://united24media.com/war-in-ukraine/ukraine-strikes-taganrog-oil-terminal-and-azov-fuel-depot-as-russias-fuel-network-takes-another-hit-20640\nhttps://militarnyi.com/en/news/drones-set-fire-to-oil-terminal-in-taganrog-and-oil-depot-in-azov/",
+     "source_url": "https://www.pravda.com.ua/eng/news/2026/07/10/8043347/",
      "confidence": "confirmed",
      "lat": 47.23,
      "lon": 38.9,
-     "detail": "10 июля БПЛА атаковали нефтяной терминал в Таганроге. На объекте зафиксирован пожар. Атака является частью продолжающейся кампании Украины по уничтожению российской нефтетранспортной инфраструктуры. (Pravda, United24media, Militarny.com, 10 июля)"
+     "detail": "10 июля БПЛА атаковали нефтяной терминал в Таганроге. На объекте зафиксирован пожар. Атака является частью продолжающейся кампании Украины по уничтожению российской нефтетранспортной инфраструктуры. (Pravda, United24media, Militarny.com, 10 июля)",
+     "source_url_alt": [
+      "https://united24media.com/war-in-ukraine/ukraine-strikes-taganrog-oil-terminal-and-azov-fuel-depot-as-russias-fuel-network-takes-another-hit-20640",
+      "https://militarnyi.com/en/news/drones-set-fire-to-oil-terminal-in-taganrog-and-oil-depot-in-azov/"
+     ]
     },
     {
      "id": "илский-20260710-1",
@@ -7805,11 +7868,14 @@
      "target": "Ильский НПЗ (Роснефть) — нефтеперерабатывающий завод (~138 тыс. барр/сутки)",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://24tv.ua/ru/vzryvy-v-rossii-10-ijulja-pod-udarom-okazalis-neftjanye-obekty-v-chastnosti-ilskij-npz_n3103132\nhttps://ru.themoscowtimes.com/2026/07/10/ukraina-udarila-po-ilskomu-npz-na-kubani-neftyanomu-terminalu-neftebaze-i-krupnomu-oboronnomu-zavodu-v-rostovskoi-oblasti-a200459",
+     "source_url": "https://24tv.ua/ru/vzryvy-v-rossii-10-ijulja-pod-udarom-okazalis-neftjanye-obekty-v-chastnosti-ilskij-npz_n3103132",
      "confidence": "confirmed",
      "lat": 45.18,
      "lon": 37.9,
-     "detail": "В ночь на 10 июля Ильский НПЗ на Кубани атакован БПЛА. На территории завода зафиксирован пожар. Это один из крупнейших НПЗ на юге РФ, подвергался ударам несколько раз с начала года. (24tv.ua, The Moscow Times, EADaily, 10 июля)"
+     "detail": "В ночь на 10 июля Ильский НПЗ на Кубани атакован БПЛА. На территории завода зафиксирован пожар. Это один из крупнейших НПЗ на юге РФ, подвергался ударам несколько раз с начала года. (24tv.ua, The Moscow Times, EADaily, 10 июля)",
+     "source_url_alt": [
+      "https://ru.themoscowtimes.com/2026/07/10/ukraina-udarila-po-ilskomu-npz-na-kubani-neftyanomu-terminalu-neftebaze-i-krupnomu-oboronnomu-zavodu-v-rostovskoi-oblasti-a200459"
+     ]
     },
     {
      "id": "таганрог-20260710-1",
@@ -7822,11 +7888,14 @@
      "target": "Портовый нефтяной терминал ООО «Курганнефтепродукт» в порту Таганрога — морская инфраструктура экспорта топлива",
      "category": "type/npz",
      "impact": "damaged",
-     "source_url": "https://www.pravda.com.ua/rus/news/2026/07/10/8043347/\nhttps://www.mentoday.ru/life/news/10-07-2026/evakuaciya-v-taganroge-i-pojar-na-ilskom-npz-bpla-atakovali-yug-rossii-chto-izvestno/",
+     "source_url": "https://www.pravda.com.ua/rus/news/2026/07/10/8043347/",
      "confidence": "reported",
      "lat": 47.23,
      "lon": 38.9,
-     "detail": "В ночь на 10 июля портовый нефтяной терминал в Таганроге атакован БПЛА. Поражён терминал ООО «Курганнефтепродукт». Произошла эвакуация жителей из зоны ЧС. (Украинская правда, Mentoday, 10 июля)"
+     "detail": "В ночь на 10 июля портовый нефтяной терминал в Таганроге атакован БПЛА. Поражён терминал ООО «Курганнефтепродукт». Произошла эвакуация жителей из зоны ЧС. (Украинская правда, Mentoday, 10 июля)",
+     "source_url_alt": [
+      "https://www.mentoday.ru/life/news/10-07-2026/evakuaciya-v-taganroge-i-pojar-na-ilskom-npz-bpla-atakovali-yug-rossii-chto-izvestno/"
+     ]
     },
     {
      "id": "азов-20260710-1",
@@ -7856,11 +7925,14 @@
      "target": "17 судов теневого флота в Азовском море (12 танкеров, 4 сухогруза, 1 буксир) — нефтетранспортная инфраструктура",
      "category": "type/npz",
      "impact": "damaged",
-     "source_url": "https://t.me/exilenova_plus/25022\nhttps://united24media.com/war-in-ukraine/ukraine-strikes-taganrog-oil-terminal-and-azov-fuel-depot-as-russias-fuel-network-takes-another-hit-20640",
+     "source_url": "https://t.me/exilenova_plus/25022",
      "confidence": "reported",
      "lat": 46.0,
      "lon": 36.5,
-     "detail": "В ночь на 10 июля в Азовском море поражены 17 судов теневого флота: 12 танкеров и 4 сухогруза и 1 буксир. По данным каналов наблюдения, продолжается систематическая кампания по прерыванию морских поставок топлива. (Exilenova+, United24media, 10 июля)"
+     "detail": "В ночь на 10 июля в Азовском море поражены 17 судов теневого флота: 12 танкеров и 4 сухогруза и 1 буксир. По данным каналов наблюдения, продолжается систематическая кампания по прерыванию морских поставок топлива. (Exilenova+, United24media, 10 июля)",
+     "source_url_alt": [
+      "https://united24media.com/war-in-ukraine/ukraine-strikes-taganrog-oil-terminal-and-azov-fuel-depot-as-russias-fuel-network-takes-another-hit-20640"
+     ]
     },
     {
      "id": "ильский-20260710-1",
@@ -7873,11 +7945,14 @@
      "target": "Ильский НПЗ — нефтеперерабатывающий завод (6,6 млн т/год)",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://ru.themoscowtimes.com/2026/07/10/ukraina-udarila-po-ilskomu-npz-na-kubani-neftyanomu-terminalu-neftebaze-i-krupnomu-oboronnomu-zavodu-v-rostovskoi-oblasti-a200459\nhttps://censor.net/ru/news/4012874/sily-oborony-porazili-18-sudov-rf-npz-i-neftyanye-terminaly",
+     "source_url": "https://ru.themoscowtimes.com/2026/07/10/ukraina-udarila-po-ilskomu-npz-na-kubani-neftyanomu-terminalu-neftebaze-i-krupnomu-oboronnomu-zavodu-v-rostovskoi-oblasti-a200459",
      "confidence": "confirmed",
      "lat": 44.86,
      "lon": 38.609,
-     "detail": "В ночь на 10 июля БПЛА атаковали Ильский НПЗ в Краснодарском крае. На объекте зафиксирован пожар. Завод проектной мощностью до 6,6 млн тонн нефти в год — один из крупнейших на юге РФ. По данным оперштаба региона, возгорание произошло из-за падения обломков БПЛА. Ильский НПЗ попадает под удар в пятый раз с начала 2026 года. (The Moscow Times, Censor.net/Генштаб ВСУ, istories.media, 10 июля)"
+     "detail": "В ночь на 10 июля БПЛА атаковали Ильский НПЗ в Краснодарском крае. На объекте зафиксирован пожар. Завод проектной мощностью до 6,6 млн тонн нефти в год — один из крупнейших на юге РФ. По данным оперштаба региона, возгорание произошло из-за падения обломков БПЛА. Ильский НПЗ попадает под удар в пятый раз с начала 2026 года. (The Moscow Times, Censor.net/Генштаб ВСУ, istories.media, 10 июля)",
+     "source_url_alt": [
+      "https://censor.net/ru/news/4012874/sily-oborony-porazili-18-sudov-rf-npz-i-neftyanye-terminaly"
+     ]
     },
     {
      "id": "азов-20260710-1",
@@ -7890,11 +7965,15 @@
      "target": "Нефтяной депо Azovnefteprodukt (нефтепродуктное хранилище)",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://www.kyivindependent.com/major-russian-oil-refinery-reportedly-struck-by-ukraine/\nhttps://www.pravda.com.ua/eng/news/2026/07/10/8043347/\nhttps://united24media.com/war-in-ukraine/ukraine-strikes-taganrog-oil-terminal-and-azov-fuel-depot-as-russias-fuel-network-takes-another-hit-20640",
+     "source_url": "https://www.kyivindependent.com/major-russian-oil-refinery-reportedly-struck-by-ukraine/",
      "confidence": "confirmed",
      "lat": 47.1,
      "lon": 39.4,
-     "detail": "Утром 10 июля БПЛА атаковали нефтяной депо Azovnefteprodukt в Азове. На объекте возник пожар. Российские войска предприняли попытку защитить цистерны сетками против БПЛА, но они не помешали удару. (Kyiv Independent, Pravda, United24media, 10 июля)"
+     "detail": "Утром 10 июля БПЛА атаковали нефтяной депо Azovnefteprodukt в Азове. На объекте возник пожар. Российские войска предприняли попытку защитить цистерны сетками против БПЛА, но они не помешали удару. (Kyiv Independent, Pravda, United24media, 10 июля)",
+     "source_url_alt": [
+      "https://www.pravda.com.ua/eng/news/2026/07/10/8043347/",
+      "https://united24media.com/war-in-ukraine/ukraine-strikes-taganrog-oil-terminal-and-azov-fuel-depot-as-russias-fuel-network-takes-another-hit-20640"
+     ]
     },
     {
      "id": "евпатория-20260710-1",
@@ -7907,11 +7986,13 @@
      "target": "Электроподстанция в Евпатории — энергоснабжение западного Крыма",
      "category": "type/npz",
      "impact": "active_fire",
-     "source_url": "https://apostrophe.ua/news/society/2026-07-10/v-krymu-iz-za-ataki-dronov-voznik-pojar-na-podstantsii-v-evpatorii/350401",
+     "source_url": "",
      "confidence": "reported",
      "lat": 45.195,
      "lon": 33.37,
-     "detail": "Утром 10 июля в результате атаки БПЛА возник пожар на электроподстанции в Евпатории (западный Крым). Пожар на подстанции мог усугубить и без того критический дефицит электроснабжения в регионе. (Апостроф, 10 июля, 07:44 UTC)"
+     "detail": "Утром 10 июля в результате атаки БПЛА возник пожар на электроподстанции в Евпатории (западный Крым). Пожар на подстанции мог усугубить и без того критический дефицит электроснабжения в регионе. (Апостроф, 10 июля, 07:44 UTC)",
+     "source_dead": "https://apostrophe.ua/news/society/2026-07-10/v-krymu-iz-za-ataki-dronov-voznik-pojar-na-podstantsii-v-evpatorii/350401",
+     "source_dead_reason": "404/410 — страницы нет"
     },
     {
      "id": "капотня-20260710-2",
@@ -8199,11 +8280,14 @@
      "target": "34 судна теневого флота в Азовском море (за сутки с 00:00 11 июля) — нефтетранспортная инфраструктура снабжения Крыма топливом",
      "category": "type/npz",
      "impact": "damaged",
-     "source_url": "https://t.me/exilenova_plus/25085\nhttps://t.me/exilenova_plus/25087",
+     "source_url": "https://t.me/exilenova_plus/25085",
      "confidence": "reported",
      "lat": 46.0,
      "lon": 36.5,
-     "detail": "По данным Exilenova+, за период с 00:00 11 июля поражены ещё 34 судна теневого флота в Азовском море. Третий день подряд продолжается блокада Азовского моря. (Exilenova+, 11 июля 2026)"
+     "detail": "По данным Exilenova+, за период с 00:00 11 июля поражены ещё 34 судна теневого флота в Азовском море. Третий день подряд продолжается блокада Азовского моря. (Exilenova+, 11 июля 2026)",
+     "source_url_alt": [
+      "https://t.me/exilenova_plus/25087"
+     ]
     },
     {
      "id": "керченский-пролив-20260711-1",
@@ -8267,12 +8351,15 @@
      "target": "4 судна в Таганрогском заливе (1 танкер с метанолом, техническое судно, суда различного назначения) — морская инфраструктура снабжения",
      "category": "type/npz",
      "impact": "damaged",
-     "source_url": "https://news-pravda.com/russia/2026/07/11/2433685.html\nhttps://news-pravda.com/world/2026/07/11/2433695.html",
+     "source_url": "https://news-pravda.com/russia/2026/07/11/2433685.html",
      "confidence": "confirmed",
      "casualties": "1 погибший (моряк)",
      "lat": 47.23,
      "lon": 38.9,
-     "detail": "В ночь на 11 июля украинские БПЛА атаковали четыре судна в Таганрогском заливе. По данным губернатора Ростовской области Юрия Слюсаря, атакованы суда различного назначения, в том числе танкер, перевозящий метанол. При отражении воздушной атаки ПВО сбила более 15 беспилотников. На техническом судне произошла гибель одного моряка. Повреждения судов оценены как незначительные, утечки вещества не зафиксированы. Атаки затронули Таганрог, Азовский и Неклиновский районы Ростовской области. (Правда, 11 июля 2026)"
+     "detail": "В ночь на 11 июля украинские БПЛА атаковали четыре судна в Таганрогском заливе. По данным губернатора Ростовской области Юрия Слюсаря, атакованы суда различного назначения, в том числе танкер, перевозящий метанол. При отражении воздушной атаки ПВО сбила более 15 беспилотников. На техническом судне произошла гибель одного моряка. Повреждения судов оценены как незначительные, утечки вещества не зафиксированы. Атаки затронули Таганрог, Азовский и Неклиновский районы Ростовской области. (Правда, 11 июля 2026)",
+     "source_url_alt": [
+      "https://news-pravda.com/world/2026/07/11/2433695.html"
+     ]
     }
    ],
    "voices": [
@@ -8749,8 +8836,10 @@
      "casualties": 0,
      "title": "Удар по порту Кавказ — пожар на железнодорожной станции и резервуарном парке",
      "detail": "13 июля NASA FIRMS зафиксировал пожары на инфраструктуре железнодорожной станции Кавказ и резервуарном парке порта Кавказ в Краснодарском крае. Порт Кавказ — один из ключевых логистических узлов, обеспечивающих сообщение с Крымом через Керченский пролив. Атака продолжает системную кампанию по изоляции полуострова.",
-     "source_url": "https://t.me/exilenova_plus/25137",
-     "confidence": "reported"
+     "source_url": "",
+     "confidence": "reported",
+     "source_dead": "https://t.me/exilenova_plus/25137",
+     "source_dead_reason": "пост Telegram удалён"
     }
    ],
    "voices": [
@@ -9422,6 +9511,34 @@
      "detail": "БПЛА поразили Омский нефтеперерабатывающий завод в промышленной зоне Северный промузел города Омска",
      "source_url": "https://t.me/exilenova_plus",
      "confidence": "reported"
+    },
+    {
+     "date": "2026-07-17",
+     "time": "ночь",
+     "city": "Чёрное море",
+     "region": "Чёрное море (акватория)",
+     "lat": 43.5,
+     "lon": 33.5,
+     "type": "drone",
+     "count": 12,
+     "target": "12 судов теневого флота РФ (9 сухогрузов, 1 нефтяной танкер, 1 танкер-газовоз, 1 буксир) — операция МОЛОЧКА (Moskva lyazhet iz-za Kryma) — морская нефтетранспортная инфраструктура",
+     "detail": "Силы беспилотных систем поразили 12 судов в Чёрном море в рамках операции МОЛОЧКА. За 12 дней операции поражено всего 159 судов теневого флота. Операция нацелена на разрушение логистики снабжения Крыма топливом.",
+     "source_url": "https://24tv.ua/ru/sbs-prodolzhajut-unichtozhat-flot-protivnika-kakoj-ulov-za-poslednie-sutki_n3107253",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-07-17",
+     "time": "ночь",
+     "city": "Чёрное море (терминал КТК)",
+     "region": "Краснодарский край / Чёрное море",
+     "lat": 45.0,
+     "lon": 37.5,
+     "type": "drone",
+     "count": 1,
+     "target": "Танкер Nordic Zenith (Suezmax-класс, теневой флот) — две ночные атаки, пожар на судне, эвакуация экипажа. Судно следовало для погрузки нефти на терминал Каспийского трубопроводного консорциума (КТК)",
+     "detail": "Танкер Nordic Zenith атакован два раза беспилотниками возле терминала КТК в Чёрном море. На судне начался пожар, который был потушен экипажем. 13 членов экипажа эвакуированы на судах КТК, 9 остались на борту. Судно стало непригодным для погрузки нефти. КТК — крупнейший маршрут экспорта нефти из Каспия (83 млн тонн/год).",
+     "source_url": "https://vz.ru/news/2026/7/17/1435594.html",
+     "confidence": "confirmed"
     }
    ],
    "voices": []
