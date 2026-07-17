@@ -51,9 +51,12 @@ DEFAULT_BACKENDS = "codex-vps,codex-local,openrouter"
 
 MONTHS = ["", "января", "февраля", "марта", "апреля", "мая", "июня",
           "июля", "августа", "сентября", "октября", "ноября", "декабря"]
-SEA = ("танкер", "судно", "судов", "теневого флота", "паром", "буксир", "газовоз", "акватори")
-REF = ("нпз", "нефт", "терминал", "переработ", "нефтебаз", "нефтехим", "гпз", "перекачк")
-GRID = ("тэц", "тэс", "грэс", "подстанц", "энергет", "электро", "водоснаб")
+# Классификация удара — единый источник agents/strike_class.py (см. его docstring:
+# копий было две, разъехались за два дня и PIL-фолбэк подписывал море как «удар по НПЗ»).
+_sc_spec = importlib.util.spec_from_file_location("strike_class", str(REPO / "agents" / "strike_class.py"))
+_sc = importlib.util.module_from_spec(_sc_spec)
+_sc_spec.loader.exec_module(_sc)
+classify, lead_score, EVENT_LABEL = _sc.classify, _sc.lead_score, _sc.EVENT_LABEL
 CITY_LOOK = {
     "Чёрное море (акватория)": "открытая акватория Чёрного моря, морской горизонт, вдали силуэты судов",
     "Азовское море (акватория)": "открытая акватория Азовского моря, морской горизонт, вдали силуэты судов",
@@ -80,26 +83,6 @@ def rus(d):
 
 def look(c):
     return CITY_LOOK.get(c, f"российский город {c}")
-
-
-def classify(s):
-    t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
-    # ponytail: sea вперёд REF — "морская нефтетранспортная" иначе ловится на "нефт"
-    if any(k in t for k in SEA):
-        return "sea"
-    if any(k in t for k in REF):
-        return "refinery"
-    if any(k in t for k in GRID):
-        return "grid"
-    return "city"
-
-
-def lead_score(s):
-    # ponytail: обложка дня ведёт самым важным ударом — НПЗ > энергетика > прочее,
-    # confirmed важнее reported. При равенстве max() берёт первый (порядок брифа).
-    cls = {"refinery": 3, "sea": 2, "grid": 1, "city": 0}.get(classify(s), 0)
-    conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
-    return (cls, conf)
 
 
 def lead_from_archive(date):
@@ -140,15 +123,16 @@ def meta_for(date, brief):
     if not city:
         return None
     if kind == "sea":
-        event = "удар по судам теневого флота"; scene = "открытое море, на горизонте горящий танкер, столб дыма над водой"
+        scene = "открытое море, на горизонте горящий танкер, столб дыма над водой"
     elif kind == "refinery":
-        event = "удар по НПЗ"; scene = "на дальнем плане столб дыма над нефтезаводом"
+        scene = "на дальнем плане столб дыма над нефтезаводом"
     elif kind == "grid":
-        event = "удар по энергетике"; scene = "вдалеке дым над подстанцией, часть города без света"
+        scene = "вдалеке дым над подстанцией, часть города без света"
     elif kind == "queue":
-        event = "дефицит топлива, очереди"; scene = "длинная очередь машин на заправке"
+        scene = "длинная очередь машин на заправке"
     else:
-        event = "атака дронов"; scene = "в небе следы ПВО и далёкий дым на горизонте"
+        scene = "в небе следы ПВО и далёкий дым на горизонте"
+    event = "дефицит топлива, очереди" if kind == "queue" else EVENT_LABEL[kind]
     prompt = (f"Дневной документальный новостной фотоснимок: {look(city)}. {scene}. "
               f"Светлая ясная атмосфера, дневной свет/золотой час, фотожурналистика, НЕ мрачно и НЕ ночь. "
               f"Реализм, широкий городской план 1200x630 горизонталь. БЕЗ текста и букв.")

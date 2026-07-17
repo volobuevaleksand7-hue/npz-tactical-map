@@ -10,6 +10,7 @@ CLI:  python3 agents/caption_cover.py <in.png> <out.png> "<Город>" "<соб
 API:  caption_cover(in_path, out_path, city, event, date_rus)
 """
 import sys
+import importlib.util as _ilu
 from PIL import Image, ImageDraw, ImageFont
 
 W, H = 1200, 630
@@ -82,29 +83,18 @@ def caption_cover(in_path, out_path, city, event, date_rus):
 
 
 # --- lead strike selection (PIL-fallback cover) ---------------------------
-# ponytail: константы дублируют hermes/scripts/build-covers.py — маленький дуб
-# лучше, чем импорт модуля из другого каталога через оба дерева. Правишь один
-# список ключей — синхронизируй второй.
+# Классификация — из общего agents/strike_class.py. Раньше здесь лежала копия
+# констант с припиской «синхронизируй второй список»: не сработало — 15.07 в
+# build-covers добавили класс sea, сюда не перенесли, и фолбэк подписывал удар
+# по танкерам как «удар по НПЗ». Один список на оба пути.
+import os as _os
 from datetime import datetime, timedelta
 
-_REF = ("нпз", "нефт", "терминал", "переработ", "нефтебаз", "нефтехим", "гпз", "перекачк")
-_GRID = ("тэц", "тэс", "грэс", "подстанц", "энергет", "электро", "водоснаб")
-
-
-def _classify(s):
-    t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
-    if any(k in t for k in _REF):
-        return "refinery"
-    if any(k in t for k in _GRID):
-        return "grid"
-    return "city"
-
-
-def _lead_score(s):
-    # НПЗ > энергетика > прочее; confirmed важнее reported (как в build-covers.py)
-    cls = {"refinery": 2, "grid": 1, "city": 0}.get(_classify(s), 0)
-    conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
-    return (cls, conf)
+_sc_spec = _ilu.spec_from_file_location(
+    "strike_class", _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "strike_class.py"))
+_sc = _ilu.module_from_spec(_sc_spec)
+_sc_spec.loader.exec_module(_sc)
+_classify, _lead_score = _sc.classify, _sc.lead_score
 
 
 def pick_top_strike(strikes_path, hours=24):
