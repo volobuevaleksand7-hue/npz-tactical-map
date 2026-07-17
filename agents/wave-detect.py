@@ -26,7 +26,16 @@ WAVE_EVENTS_PATH = os.path.join(ROOT, "data", "wave-events.json")
 RISE_CITIES = 25
 RISE_REGIONS = 4
 FALL_CITIES = 15
-FRESH_SEC = 45 * 60
+# Окно «свежести» яркого города: событие моложе этого порога. 90 мин, не 45 —
+# в затяжной широкой волне алерты приходят вразнобой: город остаётся подсвечен
+# (bpla, not bplaDim) часами, но его last_event_ts стареет за 45 мин и он
+# выпадает из счёта. Реплей по git-истории radar-state за ночь 16→17.07.2026:
+# при 45 мин пик одновременно-свежих держался ~20 (< RISE 25) и волна из 9
+# регионов не детектилась вовсе; при 90 мин — чистая одиночная волна (пик 27
+# городов / 9 регионов) при дневном штиле ≤11.
+# ponytail: калибровочный узел, верхняя граница ~120 мин — дальше штиль
+# подползает к 25 и ловит ложняк.
+FRESH_SEC = 90 * 60
 COOLDOWN_SEC = 6 * 3600
 STALE_SEC = 30 * 60
 
@@ -72,6 +81,19 @@ def evaluate(radar_state, prev_state, now_ts):
 
     # STALE guard
     if fetched_ts and (now_ts - fetched_ts) > STALE_SEC:
+        return {
+            "publish": False,
+            "action": "noop",
+            "new_state": prev_state,
+            "event": None,
+        }
+
+    # EMPTY guard: radar-state.json пишут два источника — основной (city-level,
+    # cities[] заполнен) и запасной region-schema (cities[] пуст, данные в
+    # regions{}). ~16% коммитнутых снимков за ночь 16→17.07 были с пустым
+    # cities[]. Пустой список — это плохой/частичный read, а НЕ признак конца
+    # волны: не давать ему обнулить счёт и ложно закрыть активную волну.
+    if not radar_state.get("cities"):
         return {
             "publish": False,
             "action": "noop",

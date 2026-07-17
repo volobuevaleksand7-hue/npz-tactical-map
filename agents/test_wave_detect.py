@@ -160,10 +160,33 @@ def test_below_rise_noop():
     print("  PASS: test_below_rise_noop")
 
 
+def test_empty_cities_noop():
+    """Пустой cities[] (снимок запасного region-писателя) → noop, активная
+    волна НЕ закрывается ложно."""
+    radar = _radar([], fetched_ago_sec=60)
+    prev = _wave_state(
+        active=True,
+        cities=30,
+        regions=6,
+        started_at=_to_iso(NOW - 3600),
+        peak_cities=40,
+        peak_regions=8,
+        current_event_id="2026-07-16-2050",
+    )
+
+    r = evaluate(radar, prev, NOW)
+    assert r["action"] == "noop", "expected noop on empty cities, got %s" % r["action"]
+    assert r["publish"] is False
+    assert r["new_state"] is prev, "state must be untouched (wave stays active)"
+    assert r["new_state"]["active"] is True
+    print("  PASS: test_empty_cities_noop")
+
+
 if __name__ == "__main__":
     test_rise_publish()
     test_update_no_publish()
     test_fall_end()
     test_stale_noop()
     test_below_rise_noop()
+    test_empty_cities_noop()
     print("OK")
