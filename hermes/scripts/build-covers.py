@@ -184,7 +184,19 @@ def fetch_ref(src_url, out_path):
     if not img:
         return None
     low = img.lower()
-    if any(bad in low for bad in ("logo", "default", "avatar", "placeholder", "sprite", "icon")):
+    # Мусорные маркеры ищем в ИМЕНИ ФАЙЛА, а не во всём URL: «default» иначе бракует
+    # легитимный /sites/default/files/ — стандартный путь Drupal, на котором сидит масса
+    # СМИ. Так гейт молча выбрасывал нормальные фото событий (проверено 17.07 на iz.ru).
+    _name = low.rsplit("/", 1)[-1].split("?")[0]
+    _junk_name = ("logo", "default", "avatar", "placeholder", "sprite", "icon",
+                  "twitter-card", "og-image", "og_image")
+    # «/share/» — каталог соцсеточных карточек издания: заголовок статьи текстом на фоне
+    # + ЛОГОТИП редакции вместо фото события. Размеры (1200x632) гейт проходили, имя —
+    # рандомный хеш. Поймано 17.07: обложка Ярославля собиралась по share-карточке
+    # «Важных историй». Codex её проигнорировал, но занеси он логотип чужого издания на
+    # нашу анонимную обложку — чужая атрибуция и деанон-риск. Как референс бесполезна.
+    _junk_path = ("/share/", "/social/", "/opengraph/")
+    if any(b in _name for b in _junk_name) or any(b in low for b in _junk_path):
         return None
     try:
         req = urllib.request.Request(img, headers={"User-Agent": "Mozilla/5.0"})
