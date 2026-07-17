@@ -315,28 +315,57 @@ def breadcrumb_jsonld(name, url):
 
 # ───────────────────────── лента архива (серверный рендер) ─────────────────────────
 
-def render_archive_cards(events):
+def dedupe_events(events):
+    """Архив append-only: детектор пишет строку и на start (ended_at=null), и на
+    end (ended_at заполнен) — с ОДНИМ id. Без схлопывания одна волна и рендерится
+    дважды, и start-заглушка выдаёт себя за «идёт сейчас». Завершённая запись
+    вытесняет start-заглушку того же id."""
+    by_id = {}
+    for ev in events:
+        k = ev.get("id", "")
+        prev = by_id.get(k)
+        if prev is None or (ev.get("ended_at") and not prev.get("ended_at")):
+            by_id[k] = ev
+    return sorted(by_id.values(), key=lambda e: e.get("started_at", ""), reverse=True)
+
+
+def is_live_event(ev, state):
+    """«Идёт сейчас» — ТОЛЬКО по живому wave-state, а НЕ по пустому ended_at.
+    Осиротевшая start-строка (детектор перезапустился и end не записал) иначе
+    вечно висит «идёт сейчас», а duration_str считает от now: на проде так
+    висели 4 волны с длительностью до 97 ч."""
+    state = state or {}
+    return bool(state.get("active")) and ev.get("id") == state.get("current_event_id")
+
+
+def render_archive_cards(events, state=None):
     if not events:
         return '<div class="archive-empty">Волн повышенной активности пока не зафиксировано.</div>'
-    items = sorted(events, key=lambda e: e.get("started_at", ""), reverse=True)
+    items = dedupe_events(events)
     cards = []
     for ev in items:
         slug = ev.get("id", "")
-        is_live = not ev.get("ended_at")
+        is_live = is_live_event(ev, state)
         badge = '<div class="ac-live">ИДЁТ СЕЙЧАС</div>' if is_live else ""
         region_list = ev.get("region_list") or []
         preview = ", ".join(region_list[:4])
         extra = len(region_list) - 4
         if extra > 0:
             preview += f" и ещё {extra}"
-        dur = duration_str(ev.get("started_at"), ev.get("ended_at"))
         when = rus_datetime_msk(ev["started_at"]) if ev.get("started_at") else ""
+        # Длительность известна у завершённой волны и у реально идущей. У
+        # осиротевшей (end не записан, волна не активна) — неизвестна, не выдумываем.
+        if ev.get("ended_at") or is_live:
+            dur = duration_str(ev.get("started_at"), ev.get("ended_at"))
+            tail = f' · длительность {esc(dur)}'
+        else:
+            tail = ""
         cards.append(
             f'<a class="archive-card" href="/volna-dronov/{esc(slug)}">'
             f'{badge}'
             f'<div class="ac-date">{esc(when)}</div>'
             f'<div class="ac-h">{cities_n(ev.get("peak_cities", 0))} · {regions_n(ev.get("peak_regions", 0))}</div>'
-            f'<div class="ac-regions">{esc(preview)} · длительность {esc(dur)}</div>'
+            f'<div class="ac-regions">{esc(preview)}{tail}</div>'
             f'</a>'
         )
     return '<div class="archive-grid">' + "".join(cards) + '</div>'
@@ -416,7 +445,7 @@ def build_live_page(state, events):
       {SUBSCRIBE_CTA}
 
       <h2 class="section-h"><span class="ico">🗂</span> Лента волн — архив</h2>
-      {render_archive_cards(events)}
+      {render_archive_cards(events, state)}
 
       <h2 class="section-h"><span class="ico">🔗</span> Смотрите также</h2>
 {LINK_GRID}
@@ -433,7 +462,7 @@ def build_live_page(state, events):
 
 # ───────────────────────── /volna-dronov/<id> (вечный снимок события) ─────────────────────────
 
-def build_snapshot_page(ev):
+def build_snapshot_page(ev, state=None):
     slug = ev["id"]
     cover_event = {
         "date": ev.get("date"),
@@ -448,8 +477,8 @@ def build_snapshot_page(ev):
     when = rus_datetime_msk(ev["started_at"]) if ev.get("started_at") else ""
     tod = time_of_day_msk(ev["started_at"]) if ev.get("started_at") else ""
     rdate = rus_date(ev["date"]) if ev.get("date") else ""
+    is_live = is_live_event(ev, state)
     dur = duration_str(ev.get("started_at"), ev.get("ended_at"))
-    is_live = not ev.get("ended_at")
     status_label = "идёт сейчас" if is_live else "завершена"
 
     title = f"Волна дронов {rdate}: {cities_n(ev.get('peak_cities', 0))} в {regions_in(ev.get('peak_regions', 0))}"
@@ -581,7 +610,9 @@ HERO_SCRIPT = """  <script>
 
 def main():
     state = load_json(STATE_PATH, {"active": False, "current_event_id": None})
-    events = load_json(EVENTS_PATH, [])
+    # схлопнуть start/end-пары ОДИН раз в источнике: иначе одна волна
+    # рендерится дважды и снимок пишется дважды (start-заглушкой поверх end)
+    events = dedupe_events(load_json(EVENTS_PATH, []))
 
     live_html = build_live_page(state, events)
     live_html = live_html.replace("</main>", "</main>\n" + HERO_SCRIPT, 1)
@@ -591,7 +622,7 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for ev in events:
         out = OUT_DIR / f"{ev['id']}.html"
-        out.write_text(build_snapshot_page(ev), encoding="utf-8")
+        out.write_text(build_snapshot_page(ev, state), encoding="utf-8")
         print(f"написано: {out.relative_to(ROOT)}")
 
 
