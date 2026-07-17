@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-07-17T12:35Z",
+    "generated_at": "2026-07-17T16:30Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ). Не official.",
     "refresh_seconds": 240,
@@ -1905,8 +1905,8 @@
       "region": "Республика Адыгея",
       "lat": 44.61,
       "lon": 40.1,
-      "level": "severe",
-      "updated": "2026-07-15",
+      "level": "limited",
+      "updated": "2026-07-17T16:30Z",
       "networks": [
         {
           "name": "Региональные АЗС",
@@ -1916,9 +1916,9 @@
           "note": "24.06 (news.mail.ru, finance.mail.ru): Республика Адыгея вошла в число регионов, объявивших об ограничениях на продажу топлива 24 июня 2026. Конкретные лимиты в литрах по отдельным сетям не детализированы; регион испытывает общий краснодарский фон повышенного спроса — находится внутри Краснодарского края. На АЗС Лукойл действует лимит Краснодарского края."
         }
       ],
-      "queues_hours": null,
-      "ai95_price_rub": 125,
-      "diesel_price_rub": 105,
+      "queues_hours": 1.0,
+      "ai95_price_rub": 73,
+      "diesel_price_rub": 79,
       "source_urls": [
         "https://news.mail.ru/economics/71391449/",
         "https://finance.mail.ru/article/eshe-bolshe-regionov-ogranichili-prodazhu-benzina-69214929/"
@@ -1984,8 +1984,8 @@
       "region": "Донецкая обл.",
       "lat": 48.02,
       "lon": 37.8,
-      "level": "severe",
-      "updated": "2026-07-15",
+      "level": "unknown",
+      "updated": "2026-07-17T16:30Z",
       "networks": [],
       "queues_hours": null,
       "ai95_price_rub": null,
@@ -2000,10 +2000,10 @@
       "region": "Запорожская обл.",
       "lat": 47.06,
       "lon": 35.14,
-      "level": "severe",
-      "updated": "2026-07-15T12:23Z",
+      "level": "limited",
+      "updated": "2026-07-17T16:30Z",
       "networks": [],
-      "queues_hours": null,
+      "queues_hours": 1.0,
       "ai95_price_rub": null,
       "diesel_price_rub": null,
       "estimate": true,
@@ -2164,11 +2164,11 @@
       "lat": 43.32,
       "lon": 45.69,
       "level": "severe",
-      "updated": "2026-07-15",
+      "updated": "2026-07-17T16:30Z",
       "networks": [],
-      "queues_hours": null,
+      "queues_hours": 2.0,
       "ai95_price_rub": 73,
-      "diesel_price_rub": null,
+      "diesel_price_rub": 79,
       "estimate": true,
       "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
       "source_urls": [
@@ -2319,7 +2319,7 @@
       "lat": 55.44,
       "lon": 65.34,
       "level": "limited",
-      "updated": "2026-07-15",
+      "updated": "2026-07-17T16:30Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -2329,9 +2329,9 @@
           "note": "25.06 (ircity.ru): «Газпром нефть» — лимит 40 л бензина (города), 200 л дизеля (трассы) в Курганской обл."
         }
       ],
-      "queues_hours": null,
-      "ai95_price_rub": 66,
-      "diesel_price_rub": 71,
+      "queues_hours": 0.25,
+      "ai95_price_rub": 72,
+      "diesel_price_rub": 79,
       "source_urls": [
         "https://www.banki.ru/news/daytheme/?id=11025071",
         "https://ircity.ru/text/economics/2026/06/25/76497155/"
@@ -2342,7 +2342,7 @@
       "lat": 57.15,
       "lon": 65.53,
       "level": "limited",
-      "updated": "2026-07-15",
+      "updated": "2026-07-17T16:30Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -2353,8 +2353,8 @@
         }
       ],
       "queues_hours": null,
-      "ai95_price_rub": 84,
-      "diesel_price_rub": 89,
+      "ai95_price_rub": 82,
+      "diesel_price_rub": 86,
       "source_urls": [
         "https://www.banki.ru/news/daytheme/?id=11025071",
         "https://ircity.ru/text/economics/2026/06/25/76497155/"
@@ -2365,7 +2365,7 @@
       "lat": 61.0,
       "lon": 69.0,
       "level": "limited",
-      "updated": "2026-07-15",
+      "updated": "2026-07-17T16:30Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -2384,7 +2384,7 @@
       ],
       "queues_hours": null,
       "ai95_price_rub": 71,
-      "diesel_price_rub": 85,
+      "diesel_price_rub": 81,
       "source_urls": [
         "https://meduza.io/en/news/2026/06/23/the-region-that-produces-40-of-russia-s-oil-is-now-rationing-fuel",
         "https://www.banki.ru/news/daytheme/?id=11025071"
@@ -2394,12 +2394,12 @@
       "region": "Ямало-Ненецкий АО",
       "lat": 66.53,
       "lon": 66.61,
-      "level": "calm",
-      "updated": "2026-07-15",
+      "level": "limited",
+      "updated": "2026-07-17T16:30Z",
       "networks": [],
-      "queues_hours": null,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
+      "queues_hours": 0.25,
+      "ai95_price_rub": 72,
+      "diesel_price_rub": 80,
       "estimate": true,
       "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
       "source_urls": [
@@ -2410,8 +2410,8 @@
       "region": "Республика Алтай",
       "lat": 51.96,
       "lon": 85.96,
-      "level": "limited",
-      "updated": "2026-07-15",
+      "level": "severe",
+      "updated": "2026-07-17T16:30Z",
       "networks": [
         {
           "name": "Региональные АЗС",
@@ -2422,8 +2422,8 @@
         }
       ],
       "queues_hours": null,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
+      "ai95_price_rub": 74,
+      "diesel_price_rub": 82,
       "source_urls": [
         "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/"
       ]
@@ -2498,8 +2498,8 @@
       "region": "Томская обл.",
       "lat": 56.49,
       "lon": 84.95,
-      "level": "strained",
-      "updated": "2026-07-15",
+      "level": "limited",
+      "updated": "2026-07-17T16:30Z",
       "networks": [
         {
           "name": "Элке Авто",
@@ -2702,12 +2702,12 @@
       "region": "Еврейская АО",
       "lat": 48.79,
       "lon": 132.92,
-      "level": "strained",
-      "updated": "2026-07-15",
+      "level": "limited",
+      "updated": "2026-07-17T16:30Z",
       "networks": [],
-      "queues_hours": null,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
+      "queues_hours": 0.5,
+      "ai95_price_rub": 75,
+      "diesel_price_rub": 79,
       "estimate": true,
       "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
       "source_urls": [
@@ -2719,11 +2719,11 @@
       "lat": 64.73,
       "lon": 177.51,
       "level": "calm",
-      "updated": "2026-07-15",
+      "updated": "2026-07-17T16:30Z",
       "networks": [],
-      "queues_hours": null,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
+      "queues_hours": 0.0,
+      "ai95_price_rub": 78,
+      "diesel_price_rub": 85,
       "estimate": true,
       "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
       "source_urls": [
@@ -2732,6 +2732,12 @@
     }
   ],
   "policy_events": [
+    {
+      "date": "2026-07-17",
+      "region": "Российская Федерация",
+      "text": "Ситуация улучшается: очереди↓ в 13+ регионах. Биржевые цены стабильны (АИ-95: 67.383 руб/т, АИ-92: 61.767 руб/т, ДТ: 60.344 руб/т). Дефицит исчезнет к августу.",
+      "source_url": "https://www.mentoday.ru/life/news/15-07-2026/ocheredi-umenshayutsya-a-ceny-rastut-chto-proishodit-na-azs-v-rossii-pryamo-seichas/"
+    },
     {
       "date": "2026-07-11",
       "region": "Новосибирск — режим повышенной готовности",
