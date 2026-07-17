@@ -37,6 +37,7 @@ HOME = Path.home()
 REPO = Path(os.environ.get("NPZ_REPO", str(HOME / "npz-tactical-map")))
 TMP = HOME / ".hermes" / "covers-tmp"          # codex image_gen sandbox tmp
 ARCHIVE = REPO / "data" / "news-archive.json"
+STRIKES = REPO / "data" / "strikes.json"
 ASSETS = REPO / "assets"
 CAPTION = REPO / "agents" / "caption_cover.py"
 OPENROUTER_SCRIPT = REPO / "hermes" / "gen-cover-openrouter.py"
@@ -101,16 +102,43 @@ def lead_score(s):
     return (cls, conf)
 
 
+def lead_from_archive(date):
+    """Лид-удар за дату из полного архива data/strikes.json.
+
+    Зачем: бриф может быть ещё ПУСТ на момент сборки обложки. Доказанная гонка
+    (16.07): watchdog самолечил сводку в 05:16 UTC, а сборщик долил удары в
+    07:01 — обложка успела собраться по пустому брифу и навсегда осталась
+    генерической («Россия / атака дронов»), потому что --missing не пересобирает
+    уже существующий файл. strikes.json к тому моменту удары обычно уже содержит.
+    """
+    try:
+        data = json.loads(STRIKES.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    ss = data["strikes"] if isinstance(data, dict) else data
+    day = [s for s in ss if str(s.get("date", "")).strip() == date]
+    return max(day, key=lead_score) if day else None
+
+
 def meta_for(date, brief):
+    """Мета обложки. None = лида нет → обложку НЕ выдумываем (см. main)."""
     st = brief.get("strikes", [])
     vo = brief.get("voices", [])
-    if st:
-        lead = max(st, key=lead_score); city = str(lead.get("city", "")).strip(); kind = classify(lead)
+    lead = max(st, key=lead_score) if st else lead_from_archive(date)
+    if lead:
+        city = str(lead.get("city", "")).strip(); kind = classify(lead)
         src = lead.get("source_url", "")
     elif vo:
         city = str(vo[0].get("city", "")).strip(); kind = "queue"; src = vo[0].get("source_url", "")
     else:
-        city = "Россия"; kind = "city"; src = ""
+        # ponytail: раньше тут было city="Россия"; kind="city" → обложка «Россия /
+        # атака дронов». Это враньё в проде: подпись обещает конкретный объект,
+        # которого нет, и на день без данных мы утверждали атаку. Лучше не собрать
+        # обложку вовсе — watchdog увидит её отсутствие и пересоберёт позже,
+        # когда удары приедут.
+        return None
+    if not city:
+        return None
     if kind == "sea":
         event = "удар по судам теневого флота"; scene = "открытое море, на горизонте горящий танкер, столб дыма над водой"
     elif kind == "refinery":
@@ -293,13 +321,19 @@ def main():
         return
     ASSETS.mkdir(exist_ok=True)
     print(f"build-covers: {len(dates)} дат → {dates[0]} … {dates[-1]}")
-    ok = 0
+    ok = skipped = 0
     for d in dates:
         meta = meta_for(d, briefs[d])
+        if meta is None:
+            skipped += 1
+            print(f"SKIP {d} — лид-удара нет ни в брифе, ни в strikes.json; генерическую "
+                  f"обложку не выдумываем, соберётся следующим прогоном")
+            continue
         meta["no_ref"] = a.no_ref
         if build_one(d, meta):
             ok += 1
-    print(f"build-covers: готово {ok}/{len(dates)}. Дальше — python3 agents/gen-news.py + publish.")
+    tail = f", пропущено {skipped}" if skipped else ""
+    print(f"build-covers: готово {ok}/{len(dates)}{tail}. Дальше — python3 agents/gen-news.py + publish.")
 
 
 if __name__ == "__main__":
