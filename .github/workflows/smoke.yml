@@ -40,15 +40,29 @@ jobs:
     steps:
       - name: Wait for Vercel deploy
         run: sleep 30
-      - name: Check key URLs return 200
+      - name: Check key static URLs return 200
         run: |
           set -e
           for url in \
             https://npz-tactical-map.vercel.app/ \
             https://npz-tactical-map.vercel.app/news \
             https://npz-tactical-map.vercel.app/crimea \
-            https://npz-tactical-map.vercel.app/karta-benzina-krym \
-            https://npz-tactical-map.vercel.app/api/radar-state ; do
+            https://npz-tactical-map.vercel.app/karta-benzina-krym ; do
             echo "Checking $url"
             curl --fail --silent --show-error --retry 5 --retry-delay 10 -o /dev/null "$url"
           done
+
+      # /api/radar-state — serverless-прокси к стороннему radar-map.ru. Флапает по причинам
+      # ВНЕ нашего кода (upstream 5xx / рантайм-сбои Vercel типа EnvFileReadError), а smoke
+      # бежит на каждый data-синк → любой флап слал шквал «Run failed» на почту (17.07).
+      # Проверяем МЯГКО: пишем warning, но НЕ роняем прогон. Живость радара стережёт
+      # VPS-watchdog по свежести radar-state, а не деплойный smoke.
+      - name: Check live radar API (non-fatal)
+        run: |
+          code=$(curl --silent --output /dev/null --write-out '%{http_code}' --max-time 25 \
+                 https://npz-tactical-map.vercel.app/api/radar-state || echo 000)
+          if [ "$code" = "200" ]; then
+            echo "/api/radar-state OK (200)"
+          else
+            echo "::warning title=radar-api::/api/radar-state вернул $code — не роняем smoke (сторонний upstream/рантайм)"
+          fi
