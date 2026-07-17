@@ -57,23 +57,6 @@
       "last_event_ts": 1784270264,
       "source_text": "17.07.2026 09:37 МСК\nСмоленская область внимание по бпла"
     },
-    "Херсонская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1784281021,
-      "source_text": "17.07.2026 10:40 МСК\nХерсонская область РФ авиационная ракетная бомбовая опасность\n\n17.07.2026 12:37 МСК\nрайоне перекрестка на трассе Серогозы-Ивановка Херсонская область Тревога по БПЛА Хорнет"
-    },
     "Курская область": {
       "bpla": false,
       "bplaDim": false,
@@ -107,6 +90,23 @@
       "fill": "#d8c06a",
       "last_event_ts": 1784271168,
       "source_text": "17.07.2026 09:52 МСК\nНижегородская область внимание по бпла"
+    },
+    "Тульская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1784269812,
+      "source_text": "17.07.2026 09:30 МСК\nТульская область Рязанская область Тамбовская область внимание по бпла"
     },
     "Адыгея": {
       "bpla": false,
@@ -258,8 +258,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1784278490,
-      "source_text": "17.07.2026 11:54 МСК\nГотня Белгородская область Тревога по БПЛА"
+      "last_event_ts": 1784281207,
+      "source_text": "17.07.2026 12:40 МСК\nИвня и район Меры безопасности Опасность по БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -533,22 +533,22 @@
       "last_event_ts": 1784277189,
       "source_text": "17.07.2026 11:33 МСК\nАстраханская область внимание по бпла"
     },
-    "Тульская область": {
+    "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1784269812,
-      "source_text": "17.07.2026 09:30 МСК\nТульская область Рязанская область Тамбовская область внимание по бпла"
+      "fill": "#dc2626",
+      "last_event_ts": 1784281657,
+      "source_text": "17.07.2026 12:47 МСК\nХерсонская область повторно авиационная ракетная бомбовая опасность\n\n17.07.2026 12:37 МСК\nрайоне перекрестка на трассе Серогозы-Ивановка Херсонская область Тревога по БПЛА Хорнет"
     }
   },
   "cities": [
@@ -611,6 +611,26 @@
       "fill": "#d8c06a",
       "last_event_ts": 1784278410,
       "source_text": "17.07.2026 11:53 МСК\nУразово, Дальний Валуйского района Опасность по БПЛА"
+    },
+    {
+      "key": "ивня|белгородская область",
+      "name": "Ивня",
+      "lat": 51.05758,
+      "lon": 36.14802,
+      "region": "Белгородская область",
+      "bpla": true,
+      "bplaDim": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1784281207,
+      "source_text": "17.07.2026 12:40 МСК\nИвня и район Меры безопасности Опасность по БПЛА"
     },
     {
       "key": "мариуполь|донецкая народная республика",
@@ -1218,7 +1238,7 @@
       "lon": 33.29061,
       "region": "Херсонская область",
       "bpla": true,
-      "bplaDim": false,
+      "bplaDim": true,
       "uab": false,
       "uabDim": false,
       "fpv": false,
@@ -1435,14 +1455,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1784281062,
-  "last_event_at": "2026-07-17T09:37:42Z",
-  "fetched_at": "2026-07-17T09:40:02.944642Z",
+  "timestamp": 1784281657,
+  "last_event_at": "2026-07-17T09:47:37Z",
+  "fetched_at": "2026-07-17T09:50:03.100022Z",
   "poll_interval_sec": 10,
   "meta": {
-    "generated_at": "2026-07-17T09:40:02.944642Z",
-    "source_age_seconds": 140,
-    "city_count": 39,
+    "generated_at": "2026-07-17T09:50:03.100022Z",
+    "source_age_seconds": 146,
+    "city_count": 40,
     "region_count": 32,
     "feed_count": 0
   }
