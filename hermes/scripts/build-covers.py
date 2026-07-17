@@ -57,6 +57,7 @@ _sc_spec = importlib.util.spec_from_file_location("strike_class", str(REPO / "ag
 _sc = importlib.util.module_from_spec(_sc_spec)
 _sc_spec.loader.exec_module(_sc)
 classify, lead_score, EVENT_LABEL = _sc.classify, _sc.lead_score, _sc.EVENT_LABEL
+event_label = _sc.event_label   # уточняет refinery: нефтебаза ≠ НПЗ (редполитика §3)
 CITY_LOOK = {
     "Чёрное море (акватория)": "открытая акватория Чёрного моря, морской горизонт, вдали силуэты судов",
     "Азовское море (акватория)": "открытая акватория Азовского моря, морской горизонт, вдали силуэты судов",
@@ -150,7 +151,7 @@ def meta_for(date, brief):
         scene = "длинная очередь машин на заправке"
     else:
         scene = "в небе следы ПВО и далёкий дым на горизонте"
-    event = "дефицит топлива, очереди" if kind == "queue" else EVENT_LABEL[kind]
+    event = "дефицит топлива, очереди" if kind == "queue" else event_label(lead)
     # для моря кадр морской: «широкий городской план» тянул генератор к застройке
     frame = "широкий морской план" if kind == "sea" else "широкий городской план"
     prompt = (f"Дневной документальный новостной фотоснимок: {look(city, kind)}. {scene}. "
