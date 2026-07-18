@@ -282,6 +282,47 @@ def publish_pages(runner=None, restore=None):
     return True
 
 
+def commit_artifacts(event, runner=None):
+    """Коммитит артефакты автопаблиша ВОЛНЫ, чтобы они доехали в прод.
+
+    🔴 Инцидент 17.07: автопаблиш сгенерил волну (страница + снимок + обложка),
+    но git-sync крона стейджит только `git add data/` — а volna-dronov.html,
+    volna-dronov/<id>.html и assets/wave-cover-*.png не коммитил НИКТО. Они
+    копились modified → `git pull --rebase` падал у ВСЕХ агентов → публикация
+    вставала. Первая же боевая волна застряла в дереве VPS и не доехала.
+
+    Теперь автопаблиш коммитит свои файлы сам. Push НЕ делаем — его выполнит
+    git-sync, идущий следом в cron-radar-refresh.sh (pull --rebase + push).
+    Коммитим ДО него, поэтому дерево к моменту его pull уже чистое.
+
+    data/wave-*.json намеренно НЕ включаем — их застейджит git-sync (`git add
+    data/`); дубль безвреден, но пусть каждый владеет своим срезом.
+    """
+    run = runner or (lambda cmd: subprocess.run(
+        cmd, cwd=ROOT, env={**os.environ, "ALLOW_FRONTEND_RELEASE": "1"}).returncode)
+    paths = ["volna-dronov.html", "volna-dronov"]
+    date = event.get("date") or (event.get("started_at") or "")[:10]
+    if date:
+        cover = os.path.join("assets", "wave-cover-%s.png" % date)
+        if os.path.exists(os.path.join(ROOT, cover)):
+            paths.append(cover)
+    if run(["git", "add"] + paths) != 0:
+        print("wave-detect: WARNING git add артефактов волны не удался",
+              file=sys.stderr)
+        return False
+    # --quiet + сообщение; если нечего коммитить (идемпотентный ре-ран) — не падаем
+    rc = run(["git", "commit", "-m",
+              "wave: снимок волны %s (автопаблиш)" % (event.get("id") or date),
+              "--quiet"])
+    if rc != 0:
+        print("wave-detect: WARNING коммит артефактов волны rc=%s "
+              "(возможно нечего коммитить) — git-sync подберёт" % rc,
+              file=sys.stderr)
+        return False
+    print("wave-detect: артефакты волны закоммичены (git-sync запушит)")
+    return True
+
+
 def main():
     radar_state = _read_json(RADAR_PATH)
     if not radar_state:
@@ -316,7 +357,8 @@ def main():
                       action, result["new_state"].get("cities", 0),
                       result["new_state"].get("regions", 0)), file=sys.stderr)
             return
-        publish_pages()
+        if publish_pages():
+            commit_artifacts(result.get("event") or {})
 
 
 if __name__ == "__main__":

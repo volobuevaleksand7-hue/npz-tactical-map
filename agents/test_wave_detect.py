@@ -235,6 +235,39 @@ def test_publish_pages_exception_rolls_back():
     print("  PASS: test_publish_pages_exception_rolls_back")
 
 
+def test_commit_artifacts_stages_wave_pages():
+    """Автопаблиш коммитит СВОИ файлы (страница+снимок+обложка) — иначе их не
+    коммитит никто и pull всех агентов встаёт (инцидент 17.07)."""
+    cmds = []
+
+    def runner(cmd):
+        cmds.append(cmd)
+        return 0
+
+    ok = _mod.commit_artifacts({"id": "2026-07-17-2020", "date": "2026-07-17"},
+                               runner=runner)
+    assert ok is True
+    add = next(c for c in cmds if c[:2] == ["git", "add"])
+    assert "volna-dronov.html" in add, "страница волны должна стейджиться"
+    assert "volna-dronov" in add, "каталог снимков должен стейджиться"
+    assert any(c[:2] == ["git", "commit"] for c in cmds), "должен быть commit"
+    print("  PASS: test_commit_artifacts_stages_wave_pages")
+
+
+def test_commit_artifacts_add_fail_no_commit():
+    """git add упал → commit не зовём, не падаем жёстко."""
+    calls = []
+
+    def runner(cmd):
+        calls.append(cmd[:2])
+        return 1 if cmd[:2] == ["git", "add"] else 0
+
+    ok = _mod.commit_artifacts({"id": "x", "date": "2026-07-17"}, runner=runner)
+    assert ok is False
+    assert ["git", "commit"] not in calls, "после провала add коммит не зовём"
+    print("  PASS: test_commit_artifacts_add_fail_no_commit")
+
+
 if __name__ == "__main__":
     test_rise_publish()
     test_update_no_publish()
@@ -246,4 +279,6 @@ if __name__ == "__main__":
     test_publish_pages_buildnav_fail_rolls_back()
     test_publish_pages_genwave_fail_stops_pair()
     test_publish_pages_exception_rolls_back()
+    test_commit_artifacts_stages_wave_pages()
+    test_commit_artifacts_add_fail_no_commit()
     print("OK")

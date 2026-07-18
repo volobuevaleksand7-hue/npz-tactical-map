@@ -49,7 +49,9 @@ if [ -f agents/gen-news.py ]; then
     # прогон, но они НЕ коммитились -> вечно modified -> блокировали git-sync всех
     # агентов (pull --rebase на грязном дереве), публикация вставала на часы каждые 6ч.
     # Список синхронен с эталоном в agents/summary-watchdog.py:heal().
-    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png refineries.html 2>/dev/null; then
+    # krupnejshie-npz-rossii.html — вторая RANK_PAGE gen-refineries.py; без неё
+    # в git add файл вечно modified → блокирует pull всех агентов (инцидент 17.07).
+    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png refineries.html krupnejshie-npz-rossii.html 2>/dev/null; then
       echo "publish-vps: ОШИБКА — git add не удался" >&2
       exit 4
     fi
