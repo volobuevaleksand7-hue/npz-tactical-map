@@ -19,6 +19,7 @@
 """
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 
@@ -41,6 +42,22 @@ def key(x):
         str(x.get("time", "")).strip().lower(),
         str(x.get("target", "")).strip().lower()[:60],
     )
+
+
+def _same_event(a, b):
+    """Настоящий дубль = одно событие: совпали КОГДА и ГДЕ (date+city+time).
+    Формулировку target не сверяем — у re-report того же удара она переписана."""
+    return all(str(a.get(f, "")).strip().lower() == str(b.get(f, "")).strip().lower()
+               for f in ("date", "city", "time"))
+
+
+def _bump_id(base, taken):
+    """Уникализируем id: корень (без хвоста -N) + первый свободный -2, -3, … в taken."""
+    root = re.sub(r"-\d+$", "", str(base).strip())
+    n = 2
+    while ("%s-%d" % (root, n)).lower() in taken:
+        n += 1
+    return "%s-%d" % (root, n)
 
 
 def load(path, default):
@@ -67,16 +84,41 @@ def as_list(d):
 def merge(archive, incoming):
     """Возвращает (архив, добавлено, пропущено_дублей). Архив только РАСТЁТ."""
     strikes = archive.setdefault("strikes", [])
-    seen = {key(x) for x in strikes if isinstance(x, dict)}
+    seen = {}                       # key -> уже лежащая запись (нужна для сверки события)
+    ids = set()                     # все id архива в lower — чтобы уникализировать хвост
+    for x in strikes:
+        if isinstance(x, dict):
+            seen.setdefault(key(x), x)
+            if x.get("id"):
+                ids.add(str(x["id"]).strip().lower())
     added = dupes = 0
     for x in incoming:
         if not isinstance(x, dict) or not str(x.get("date", "")).strip():
             continue
         k = key(x)
-        if k in seen:
+        prev = seen.get(k)
+        if prev is not None:
+            # Коллизия по id ≠ обязательно дубль: коллектор пишет id руками и мог
+            # переиспользовать суффикс для ДРУГОГО удара того же города/дня (утро/день/
+            # ночь) — так утекли 3 пары 10.07. Настоящий дубль — то же событие
+            # (date+city+time). Если событие иное — не роняем: инкрементируем суффикс.
+            # ponytail: различитель = (date,city,time); два реальных удара в один город,
+            #   день И то же время суток всё ещё схлопнутся — калибровать суффикс руками.
+            if k[0] == "id" and not _same_event(prev, x):
+                x = dict(x)
+                x["id"] = _bump_id(x["id"], ids)
+                ids.add(x["id"].lower())
+                seen[key(x)] = x
+                strikes.append(x)
+                added += 1
+                print("merge-inbox: ложная коллизия id %r — сохранён как %r"
+                      % (prev.get("id"), x["id"]), file=sys.stderr)
+                continue
             dupes += 1
             continue
-        seen.add(k)
+        seen[k] = x
+        if x.get("id"):
+            ids.add(str(x["id"]).strip().lower())
         strikes.append(x)
         added += 1
     # total рассинхронивался (196 при 197 записях): санитайзер его не пересчитывает.
@@ -207,8 +249,21 @@ def selfcheck():
     main()
     assert json.load(open(ARCHIVE, encoding="utf-8"))["summary"]["total"] == 3, "total не починен"
 
+    # ложная коллизия id: тот же id old-1, но ДРУГОЕ событие (другое время) — не дубль,
+    # сохраняется с инкрементом суффикса, а не роняется молча (баг 3 пар 10.07).
+    n0 = len(json.load(open(ARCHIVE, encoding="utf-8"))["strikes"])
+    json.dump([{"id": "old-1", "date": "2026-07-01", "time": "ночь",
+                "city": "Рязань", "target": "нефтебаза"}],
+              open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
+    main()
+    a = json.load(open(ARCHIVE, encoding="utf-8"))
+    assert len(a["strikes"]) == n0 + 1, "ложная коллизия id потеряна: %d" % len(a["strikes"])
+    ryazan_ids = sorted(s.get("id") for s in a["strikes"] if s.get("city") == "Рязань")
+    assert ryazan_ids == ["old-1", "old-2"], "id не инкрементирован: %s" % ryazan_ids
+
     print("selfcheck OK: влито новое, 2 дубля и мусор отсечены, total пересчитан, "
-          "inbox очищен, повтор не дублирует, дрейф total чинится без вливания")
+          "inbox очищен, повтор не дублирует, дрейф total чинится без вливания, "
+          "ложная коллизия id сохранена с инкрементом суффикса")
     return 0
 
 
