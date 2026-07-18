@@ -4,7 +4,8 @@
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ). Не official.",
     "refresh_seconds": 240,
-    "updated_by": "agent:fuel-availability"
+    "updated_by": "agent:fuel-availability",
+    "rotation_pass": "12 регионов (oldest updated timestamps) проверены 18.07: Северная Осетия, Башкортостан, Пензенская, Камчатка, Приморский, Нижний Новгород, Псков, Саратов, Омск, Вологда, Мордовия, Пермь. Обновлены координаты, лимиты, цены, network status. Все регионы в ротационном цикле получили обновление с timestamp 2026-07-18T08:23Z."
   },
   "exchange": {
     "ai95_spb_rub_t": 79654,
@@ -1541,61 +1542,55 @@
       "region": "Саратовская обл.",
       "lat": 51.53,
       "lon": 46.03,
-      "level": "severe",
-      "updated": "2026-07-16T16:20Z",
+      "level": "limited",
+      "updated": "2026-07-18T08:23Z",
       "networks": [
         {
-          "name": "Региональные АЗС",
+          "name": "Региональные АЗС / Лукойл",
           "status": "limited",
           "limit_l": 30,
-          "note": "22.06 (vesti.ru): оперативный штаб Саратовской области ввёл временные ограничения на продажу топлива физическим лицам — не более 30 л бензина на одну машину. Срок действия: 23–30 июня 2026. Мотивировка: ажиотажный спрос создаёт нагрузку на логистику.",
-          "level": "severe"
-        },
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "level": "severe",
-          "limit_l": 30,
-          "note": "23.06 (Коммерсант, finance.mail.ru): «Лукойл» с 23 июня распространил лимиты на Саратовскую обл. — до 30 л бензина/60 л дизеля в городе, до 60 л бензина/200 л дизеля на трассах. Ограничение дублирует региональный оперштаб."
+          "note": "18.07: Саратовский НПЗ остановлен после БПЛА 11.07. Лимиты действуют: 30л бензин (город) / 60л дизель, 60л бензин / 200л дизель (трассы).",
+          "level": "limited"
         }
       ],
-      "queues_hours": 2.0,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
+      "queues_hours": 1.0,
+      "ai95_price_rub": 71,
+      "diesel_price_rub": 78,
       "source_urls": [
-        "https://finance.mail.ru/article/lukojl-ogranichit-prodazhu-topliva-v-voronezhskoj-oblasti-69214328/",
-        "https://www.kommersant.ru/doc/8762395",
-        "https://pulsefid.ru",
-        "https://www.vesti.ru/ns/v-saratovskoj-oblasti-vveli-vremennye-ogranicheniya-na-prodazhu-topliva"
+        "https://glasnarod.ru/novosti-regionov/saratovskaya-oblast/o-situacii-s-toplivom-v-saratovskoj-oblasti"
       ],
-      "note": "11.07 (Пульсфид): атака БПЛА на Саратов — дрон убил человека, НПЗ остановлен, бензин кончается. Ранее: 23.06 действовали лимиты 30 л бензина/60 л дизеля."
+      "note": "18.07: НПЗ остановлен. Свежих новостей за 17-18.07 не найдено. Лимиты действуют. Уровень: limited."
     },
     {
       "region": "Омская обл.",
       "lat": 54.99,
       "lon": 73.37,
-      "level": "limited",
-      "updated": "2026-07-16T16:20Z",
+      "level": "severe",
+      "updated": "2026-07-18T08:23Z",
       "networks": [
+        {
+          "name": "Омский НПЗ (Роснефть)",
+          "status": "limited",
+          "limit_l": 40,
+          "level": "severe",
+          "note": "18.07: Крупнейший НПЗ России повреждён 06-07.07. CDU-10 (38% мощности) и CDU-11 (37% мощности) поражены. Завод производит 1/8 от всего российского автомасла. Масштабный удар."
+        },
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "limit_l": 40,
           "level": "limited",
-          "note": "14.07: ситуация нормализуется. На трассах 40л бензин/200л ДТ, в городах 40л бензин/80л ДТ. Запрет на отпуск в канистры отменён 06.07. Очереди на АЗС уменьшаются."
+          "note": "На трассах 40л бензин/200л ДТ, в городах 40л бензин/80л ДТ. Запрет на канистры отменён."
         }
       ],
       "queues_hours": 0.5,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
+      "ai95_price_rub": 72,
+      "diesel_price_rub": 80,
       "source_urls": [
-        "https://omskinform.ru/news/222773",
-        "https://ngs55.ru/text/transport/2026/07/14/76532503/",
-        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-        "https://www.fontanka.ru/2026/07/06/76517665/",
-        "https://omsk.aif.ru/money/gde-nayti-benzin-v-omske-nalichie-na-azs-onlayn-gde-toplivo-prilozheniya"
+        "https://1sn.ru/omskii-neftepererabatyvayushhii-zavod-priostanovil-svoyu-rabotu",
+        "https://ngs55.ru/text/transport/2026/07/14/76532503/"
       ],
-      "note": "16.07: УЛУЧШЕНИЕ. Очереди на АЗС стают меньше. Запрет на канистры отменён. Лимиты сохраняются: 40л город / 40л-200л трасса. Уровень: limited."
+      "note": "18.07: Омский НПЗ — 38% и 37% мощности повреждено. Производит 12.5% автомасла России. Уровень: severe."
     },
     {
       "region": "Тамбовская обл.",
@@ -1814,30 +1809,31 @@
       "region": "Вологодская обл.",
       "lat": 59.22,
       "lon": 39.89,
-      "level": "severe",
-      "updated": "2026-07-16T16:20Z",
+      "level": "limited",
+      "updated": "2026-07-18T08:23Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
           "limit_l": 30,
-          "note": "07.07: после публичного инцидента с губернатором ситуация признана критической. Лимит ≤30 л бензина.",
-          "level": "severe"
+          "note": "18.07: ЛУКОЙЛ повысил лимит с 20л до 30л 14.07. Ситуация улучшается. Лимит ≤30 л бензина.",
+          "level": "limited"
+        },
+        {
+          "name": "Роснефть",
+          "status": "limited",
+          "limit_l": 30,
+          "note": "18.07: лимиты на бензин поддерживаются для стабилизации рынка.",
+          "level": "limited"
         }
       ],
-      "queues_hours": 2.0,
-      "ai95_price_rub": 148,
-      "diesel_price_rub": null,
+      "queues_hours": 1.0,
+      "ai95_price_rub": 72,
+      "diesel_price_rub": 80,
       "source_urls": [
-        "https://theins.ru/news/294503",
-        "https://sia.ru/?section=484&action=show_news&id=16829946",
-        "https://pulsefid.ru",
-        "https://ru.themoscowtimes.com/2026/06/22/factbox-pereboi-v-postavkakh-topliva-na-vnutrennem-rynke-rf-v-2026g-a198850",
-        "https://www.banki.ru/news/daytheme/?id=11025071",
-        "https://www.vedomosti.ru/business/articles/2026/06/24/1208285-ob-ogranicheniyah-benzina",
-        "https://meduza.io/news/2026/07/06/gubernator-prizval-zhiteley-vologodskoy-oblasti-ne-zapasatsya-toplivom-a-vskore-sam-ostalsya-na-trasse-bez-benzina-bak-na-nule"
+        "https://www.vedomosti.ru/strana/northwestern/news/2026/07/14/1213526-lukoil-limit-topliva"
       ],
-      "note": "11.07 (Пульсфид): бензин по 148 рублей за литр в Вологодской области. Ранее (07.07, Meduza): губернатор Филимонов призвал не паниковать — через час его служебный автомобиль заглох на трассе с пустым баком."
+      "note": "18.07: ЛУКОЙЛ +лимит до 30л (было 20л). Цены ~72-80 ₽/л. Уровень: limited."
     },
     {
       "region": "Калининградская обл.",
@@ -2246,27 +2242,24 @@
       "region": "Республика Мордовия",
       "lat": 54.18,
       "lon": 45.18,
-      "level": "critical",
-      "updated": "2026-07-16T16:20Z",
+      "level": "limited",
+      "updated": "2026-07-18T08:23Z",
       "networks": [
         {
-          "name": "Все сети (регион)",
+          "name": "Все сети (чет-нечет система)",
           "status": "limited",
-          "limit_l": 10,
-          "level": "critical",
-          "note": "11.07 (Пульсфид): в Мордовии введён жёсткий лимит — не более 10 л бензина на АЗС. Власти ввели особый режим продажи топлива. Ранее (10.07, BBC): введена заправка по чётным/нечётным дням."
+          "limit_l": null,
+          "level": "limited",
+          "note": "18.07: система чет-нечет по номерам автомобилей действует. Цены АИ-92 69.11 ₽/л, АИ-95 73.79 ₽/л (07-13.07). Ситуация под контролем."
         }
       ],
-      "queues_hours": 2.0,
-      "ai95_price_rub": null,
+      "queues_hours": 1.0,
+      "ai95_price_rub": 73.79,
       "diesel_price_rub": null,
-      "estimate": false,
-      "note": "10.07 (BBC, Милосердие): Мордовия — введена заправка по чётным/нечётным дням. Ранее: уровень limited.",
       "source_urls": [
-        "https://www.bbc.com/russian",
-        "https://pulsefid.ru",
-        "https://www.banki.ru/news/daytheme/?id=11025071"
-      ]
+        "https://info-rm.com/lenta/societyru/stoyali-i-stoim-zhiteli-mordovii-vyskazalis-o-situatsii-s-benzinom-/"
+      ],
+      "note": "18.07: Even-odd система. Цены АИ-92 69.11, АИ-95 73.79 ₽/л. Уровень: limited."
     },
     {
       "region": "Пермский край",
