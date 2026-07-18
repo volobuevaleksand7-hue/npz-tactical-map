@@ -182,6 +182,33 @@ def infra_label(s: dict) -> str:
     return "топливной инфраструктуре"
 
 
+# Классификация лида сводки — своя, шире strike_class.py (см. его шапку):
+# «нефтепрод», «нпс» ловятся тут, но не там. НПЗ/нефтебаза (2) > энергетика (1) >
+# прочее (0). Массовая гибель (>=5) поднимает удар над классом — гражданский
+# объект с погибшими ведёт день (Котовск 18.07: склад Wildberries, 7 погибших).
+_REF_K = ("нпз", "нефтеперераб", "нефтебаз", "нефтехим", "терминал",
+          "нефтепрод", "нефтеузел", "гпз", "перекачк", "нпс")
+_GRID_K = ("подстанц", "тэц", "тэс", "грэс", "энергет", "электро",
+           "компрессор", "газопровод")
+
+
+def _casualties(s: dict) -> int:
+    try:
+        return int(s.get("casualties") or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def strike_rank(s: dict) -> tuple:
+    """Вес удара для выбора лида дня и порядка карточек. Массовые жертвы (>=5) >
+    класс цели (НПЗ>энергетика>прочее) > confirmed. ponytail: порог 5 — ручка."""
+    t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
+    cls = 2 if any(k in t for k in _REF_K) else (1 if any(k in t for k in _GRID_K) else 0)
+    mass = 1 if _casualties(s) >= 5 else 0
+    conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
+    return (mass, cls, conf)
+
+
 def normalize_strike(s: dict) -> dict:
     """Схема strikes.json дрейфует между сборщиками (detail/description,
     lat+lon/location[]). Нормализуем на входе — единственное место, откуда
@@ -224,6 +251,11 @@ def build_archive() -> dict:
         d = str(s.get("date", ""))[:10]
         if d:
             strikes_by_date.setdefault(d, []).append(s)
+    # лид дня — первым в списке: и teaser (strikes[0]), и лента карточек ведут
+    # самым важным ударом (массовые жертвы > НПЗ > энергетика). stable-sort
+    # сохраняет исходный порядок внутри одного веса.
+    for d in strikes_by_date:
+        strikes_by_date[d].sort(key=strike_rank, reverse=True)
     voices_by_date = {}
     for v in voices:
         d = str(v.get("date", ""))[:10]
@@ -311,42 +343,21 @@ def brief_headline(date: str, strikes: list) -> str:
         c = str(s.get("city", "")).strip()
         if c and c not in cities:
             cities.append(c)
-    # Лид дня — самый значимый удар, а не первый в списке. Трёхуровневая
-    # классификация как у обложки (hermes/scripts/build-covers.py): НПЗ/нефтебаза
-    # (2) > энергетика/газотранспорт (1) > прочее (0); при равенстве — confirmed
-    # важнее reported. Иначе, напр., 08.07 вела подстанцией «Нижнегорская»
-    # (is_refinery ложно=1) вместо Саратовского НПЗ (confirmed).
-    _REF_K = ("нпз", "нефтеперераб", "нефтебаз", "нефтехим", "терминал",
-              "нефтепрод", "нефтеузел", "гпз", "перекачк", "нпс")
-    _GRID_K = ("подстанц", "тэц", "тэс", "грэс", "энергет", "электро",
-               "компрессор", "газопровод")
-
-    def _cls(s):
-        t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
-        if any(k in t for k in _REF_K):
-            return 2
-        if any(k in t for k in _GRID_K):
-            return 1
-        return 0
-
-    def _lead_key(s):
-        conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
-        # Бонус за свежесть: сегодняшние удары приоритетнее
-        sdate = str(s.get("date", ""))[:10]
-        recency = 0
-        if sdate == date:
-            recency = 10
-        return (_cls(s), conf, recency)
-    refs = [s for s in strikes if is_refinery(s)]
-    if refs:
-        lead = max(strikes, key=_lead_key)
-        rc = str(lead.get("city", "")).strip()
-        rc = _prep_city(rc)
+    # Лид дня — самый значимый удар (strike_rank): массовые жертвы > НПЗ/нефтебаза
+    # > энергетика > прочее; при равенстве confirmed важнее reported. Иначе, напр.,
+    # 08.07 вела подстанцией вместо Саратовского НПЗ.
+    lead = max(strikes, key=strike_rank)
+    rest = n - 1
+    tail = f" и ещё {rest} {plural(rest, 'удар', 'удара', 'ударов')}" if rest > 0 else ""
+    # Массовая гибель на гражданском объекте (не топл. инфраструктура): ведём
+    # готовым заголовком удара — он точнее любого шаблона (Котовск 18.07:
+    # «Удар БПЛА по складу Wildberries в Котовске»).
+    if _casualties(lead) >= 5 and not is_refinery(lead) and lead.get("title"):
+        return str(lead["title"]).rstrip(".") + tail
+    if is_refinery(lead):
+        rc = _prep_city(str(lead.get("city", "")).strip())
         label = infra_label(lead)
-        rest = n - 1
-        if rest > 0:
-            return f"Удар по {label} в {rc} и ещё {rest} {plural(rest, 'удар', 'удара', 'ударов')}"
-        return f"Удар по {label} в {rc}"
+        return f"Удар по {label} в {rc}{tail}"
     head = ", ".join(cities[:3])
     if len(cities) > 3:
         head += f" и ещё {len(cities) - 3}"

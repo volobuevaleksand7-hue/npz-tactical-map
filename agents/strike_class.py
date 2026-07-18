@@ -40,9 +40,21 @@ def classify(s):
 
 
 def lead_score(s):
-    """Вес для выбора лида дня. confirmed важнее reported; при равенстве max() берёт первый."""
+    """Вес для выбора лида дня. Массовая гибель людей > класс цели > confirmed.
+
+    Удар по гражданскому объекту с погибшими — главная новость дня, а не пожар
+    на нефтебазе без жертв (Котовск 18.07: склад Wildberries, 7 погибших, вёл бы
+    день, но classify=city проигрывал Ногинской нефтебазе). Порог 5 = «массовые
+    жертвы»; ниже — не смещаем редакционный фокус карты с топливной инфраструктуры.
+    ponytail: порог 5 — калибровочная ручка, правь если фокус поедет.
+    """
+    try:
+        cas = int(s.get("casualties") or 0)
+    except (TypeError, ValueError):
+        cas = 0
+    mass = 1 if cas >= 5 else 0
     conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
-    return (CLS_WEIGHT.get(classify(s), 0), conf)
+    return (mass, CLS_WEIGHT.get(classify(s), 0), conf)
 
 
 # Подпись под классом — общая для обоих путей, чтобы Codex и PIL не расходились в словах.
@@ -93,6 +105,12 @@ def selfcheck():
     assert lead_score(npz) > lead_score(sea) > lead_score(grid) > lead_score(city)
     # confirmed весомее при том же классе
     assert lead_score({"target": "НПЗ", "confidence": "confirmed"}) > lead_score({"target": "НПЗ"})
+    # массовые жертвы (>=5) ведут день поверх класса цели: склад Wildberries с
+    # 7 погибшими важнее нефтебазы без жертв (Котовск 18.07)
+    assert lead_score({"target": "логистический центр Wildberries", "casualties": 7}) \
+        > lead_score({"target": "нефтебаза", "confidence": "confirmed"})
+    # единичные жертвы фокус карты не смещают — топл. инфраструктура всё ещё лид
+    assert lead_score({"target": "жилой дом", "casualties": 2}) < lead_score({"target": "НПЗ"})
 
     # подпись: нефтебаза ≠ НПЗ (редполитика §3). Регресс 17.07: обложка подписала
     # удар по нефтебазе в Керчи как «удар по НПЗ», хотя НПЗ в Керчи нет.
