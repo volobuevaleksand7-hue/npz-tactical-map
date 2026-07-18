@@ -87,6 +87,38 @@ def _parse_iso(s):
     return dt.datetime.fromisoformat(s.replace("Z", "+00:00")).astimezone(dt.timezone.utc)
 
 
+STALE_DAYS = 2
+
+
+def prune_stale(candidates, now, max_age_days=STALE_DAYS):
+    """Авто-истечение застойных НЕактируемых кандидатов.
+
+    🔴 Инцидент 18.07: очередь копилась вечно — нет шага, помечающего кандидат
+    обработанным (Hermes-подтверждение на сводке де-факто не работает). Хуже
+    того, из кликбейт-заголовков Newsader город обычно не извлекается
+    («объект уточняется») → кандидат неактируем: ни на карту (нет lat/lon),
+    ни подтвердить. 13 из 14 висевших были именно такими, за 09–15.07, и все
+    дублировали события, уже попавшие в strikes.json из нормальных источников.
+
+    Правило: кандидат в статусе `candidate`, БЕЗ геокода, старше max_age_days →
+    status `expired`. merge() их не воскрешает (msg_id остаётся в файле), но из
+    активной очереди они уходят. Геокодированные (есть реальный город) НЕ
+    трогаем — их ещё можно проверить и вынести на карту.
+    """
+    n = 0
+    for c in candidates:
+        if c.get("status") != "candidate":
+            continue
+        if c.get("geocoded") or c.get("lat") is not None:
+            continue
+        age = (now - _parse_iso(c.get("date") or c.get("published") or "")).days
+        if age >= max_age_days:
+            c["status"] = "expired"
+            c["expired_reason"] = "негеокодированный кандидат старше %dд — неактируем" % max_age_days
+            n += 1
+    return n
+
+
 def to_candidate(entry, src, city):
     utc = _parse_iso(entry.get("published"))
     msk = utc + dt.timedelta(hours=3)
@@ -167,7 +199,18 @@ def demo():
     # дедуп по videoId идемпотентен
     m1, a1 = sc.merge([], [c]); m2, a2 = sc.merge(m1, [c])
     assert a1 == 1 and a2 == 0 and len(m2) == 1
-    print("[self-check] OK: фильтр, маппинг, дедуп")
+    # prune_stale: негеокодированный старше 2д → expired; геокодированный и свежий — нет
+    now = dt.datetime(2026, 7, 18, tzinfo=dt.timezone.utc)
+    old_nogeo = {"status": "candidate", "geocoded": False, "lat": None, "date": "2026-07-10"}
+    fresh_nogeo = {"status": "candidate", "geocoded": False, "lat": None, "date": "2026-07-18"}
+    old_geo = {"status": "candidate", "geocoded": True, "lat": 50.6, "date": "2026-07-10"}
+    pool = [old_nogeo, fresh_nogeo, old_geo]
+    assert prune_stale(pool, now) == 1, "истечь должен ровно 1 (старый без гео)"
+    assert old_nogeo["status"] == "expired"
+    assert fresh_nogeo["status"] == "candidate", "свежий не трогаем"
+    assert old_geo["status"] == "candidate", "геокодированный не трогаем (можно проверить)"
+    assert prune_stale(pool, now) == 0, "идемпотентно — второй прогон ничего не истекает"
+    print("[self-check] OK: фильтр, маппинг, дедуп, prune_stale")
 
 
 def main():
@@ -184,9 +227,11 @@ def main():
     new = collect(sources, cities)
     doc = load_full()
     merged, added = sc.merge(doc.get("candidates", []), new)
+    expired = prune_stale(merged, dt.datetime.now(dt.timezone.utc))
     geo = sum(1 for c in new if c.get("geocoded"))
-    print("collect: %d кандидатов (%d с гео), %d новых после дедупа, всего %d" % (
-        len(new), geo, added, len(merged)))
+    active = sum(1 for c in merged if c.get("status") == "candidate")
+    print("collect: %d кандидатов (%d с гео), %d новых после дедупа, %d истекло, "
+          "активных %d, всего %d" % (len(new), geo, added, expired, active, len(merged)))
 
     if dry:
         print("--dry-run: не сохраняю")
