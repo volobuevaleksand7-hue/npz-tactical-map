@@ -704,33 +704,31 @@
       "lat": 56.13,
       "lon": 47.25,
       "level": "severe",
-      "updated": "2026-07-16T16:20Z",
+      "updated": "2026-07-18T08:23Z",
       "networks": [
         {
           "name": "Татнефть",
           "status": "limited",
-          "level": "severe",
-          "limit_l": 20,
-          "note": "10.07: бензин ≤20 л, дизель ≤40 л (легковые) / ≤200 л (грузовые); отпуск в канистры приостановлен."
+          "level": "limited",
+          "limit_l": 30,
+          "note": "18.07: АИ-95 ≤30л, АИ-92/ДТ без ограничений. Очереди ↓."
         },
         {
-          "name": "Прочие / независимые",
+          "name": "Лукойл",
           "status": "limited",
           "level": "severe",
-          "limit_l": null,
-          "note": "Очереди и пустые табло на части АЗС, жёсткий дефицит АИ-95; в центре республики ситуация мягче."
+          "limit_l": 20,
+          "note": "18.07: ≤20л бензина."
         }
       ],
-      "queues_hours": 1.5,
+      "queues_hours": 0.5,
       "ai95_price_rub": 130,
       "diesel_price_rub": null,
       "source_urls": [
         "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-        "https://pulsefid.ru",
-        "https://chv.aif.ru/auto/details/-postoyu-v-ocheredi-za-vash-schyot-chuvashiya-stolknulas-s-deficitom-goryuchego",
-        "https://pg21.ru/news/124445"
+        "https://chv.aif.ru/auto/details/-postoyu-v-ocheredi-za-vash-schyot-chuvashiya-stolknulas-s-deficitom-goryuchego"
       ],
-      "note": "11.07 (Пульсфид): Чувашия тонет в топливном кризисе — бензин по 130 рублей за литр, километровые очереди. Власти вводят особый режим. Ранее (10.07): массовые очереди на АЗС, пустые табло, жёсткий дефицит АИ-95. Татнефть ограничила отпуск (≤20 л бензин, канистры закрыты)."
+      "note": "18.07: Кризис идёт на спад. Очереди сокращаются. Татнефть поднял лимит с 20 до 30л."
     },
     {
       "region": "Удмуртия",
