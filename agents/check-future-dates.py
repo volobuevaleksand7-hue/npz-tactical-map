@@ -99,7 +99,13 @@ def check(path, now_utc=None):
     with open(path, encoding="utf-8") as f:
         d = json.load(f)
 
+    # Метаполя чиним и на верхнем уровне, и во вложенном meta{} — fuel-state.json
+    # держит generated_at именно в meta{} (был баг: fuel-state с generated_at из
+    # будущего 23:59 просачивался, т.к. clamp_meta смотрел только топ-уровень, а
+    # health по нему считал age=0 → маскировал протухание).
     fixed = clamp_meta(d, now_utc)
+    if isinstance(d, dict) and isinstance(d.get("meta"), dict):
+        fixed += clamp_meta(d["meta"], now_utc)
     if fixed:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(d, f, ensure_ascii=False, indent=1)
@@ -118,6 +124,7 @@ def selfcheck():
     now = datetime(2026, 7, 15, 10, 44, tzinfo=timezone.utc)   # 13:44 МСК
     data = {
         "generated_at": "2026-07-15T23:45:00+00:00",           # +13ч → чиним
+        "meta": {"generated_at": "2026-07-15T22:00:00+00:00"},  # вложенное (fuel-state) → тоже чиним
         "strikes": [
             {"date": "2026-07-14", "time": "ночь", "city": "Афипский"},      # ок
             {"date": "2026-07-15", "time": "09:10", "city": "прошедшее"},    # ок
@@ -131,13 +138,16 @@ def selfcheck():
         p = f.name
 
     fixed, bad = check(p, now_utc=now)
-    assert len(fixed) == 1 and fixed[0][0] == "generated_at", fixed
+    keys = sorted(f[0] for f in fixed)
+    assert keys == ["generated_at", "generated_at"], fixed  # топ + вложенное meta
     cities = sorted(x.get("city") for x, _ in bad)
     assert cities == ["Севастополь", "завтра"], cities
-    assert json.load(open(p, encoding="utf-8"))["generated_at"] == "2026-07-15T10:44:00+00:00"
-    assert len(json.load(open(p, encoding="utf-8"))["strikes"]) == 5, "записи не удаляем"
+    out = json.load(open(p, encoding="utf-8"))
+    assert out["generated_at"] == "2026-07-15T10:44:00+00:00"
+    assert out["meta"]["generated_at"] == "2026-07-15T10:44:00+00:00", "вложенное meta.generated_at должно чиниться"
+    assert len(out["strikes"]) == 5, "записи не удаляем"
     os.unlink(p)
-    print("selfcheck OK: метаполе починено, 2 записи из будущего пойманы, ничего не удалено")
+    print("selfcheck OK: метаполя (топ+meta) починены, 2 записи из будущего пойманы, ничего не удалено")
 
 
 def main():
