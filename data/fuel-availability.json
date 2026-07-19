@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-07-19T19:00:00Z",
+    "generated_at": "2026-07-19T15:30Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "19.07 (19:00Z): Ротационный цикл-4. Обновлены 12 старейших регионов + 6 горячих тем последних 24ч. Тренд: кризис стабилизируется, очереди сокращаются в 13+ регионах. Чет-нечет системы эффективны в 8 регионах. Лимиты сетей: Лукойл 20-40л, Роснефть 30-100л, Газпромнефть 30-40л, Татнефть 30л. Прогноз: полная стабилизация август 2026."
+    "rotation_pass": "19.07 (15:30Z): Ротационный цикл-5. Обновлены 12 старейших регионов + приоритетные регионы горячих тем (Москва, Краснодарский край, Ростовская обл., Волгоградская обл., Санкт-Петербург/Ленобласть, Крым, Севастополь). Добавлены Тульская и Липецкая области с чет-нечет системами. Очереди сокращаются в 14+ регионах. Ситуация стабилизируется к августу 2026."
   },
   "exchange": {
     "ai95_spb_rub_t": 78040,
@@ -159,7 +159,7 @@
       "lat": 45.04,
       "lon": 38.98,
       "level": "severe",
-      "updated": "2026-07-17T12:30Z",
+      "updated": "2026-07-19T14:15Z",
       "networks": [
         {
           "name": "Кубаньнефтепродукт",
@@ -197,7 +197,7 @@
           "level": "limited"
         }
       ],
-      "queues_hours": 7.0,
+      "queues_hours": 1.0,
       "ai95_price_rub": 74,
       "diesel_price_rub": 78,
       "source_urls": [
@@ -230,14 +230,14 @@
         "https://t.me/chp_krd/46606",
         "https://t.me/chp_krd/46634"
       ],
-      "note": "16.07: лимиты 20-30л, канистры запрещены. Кризис частично идёт на спад."
+      "note": "19.07: Очереди сократились от 7 часов до ~1 часа. Лимиты 20-30л, канистры запрещены."
     },
     {
       "region": "Москва",
       "lat": 55.75,
       "lon": 37.62,
       "level": "limited",
-      "updated": "2026-07-17T12:30Z",
+      "updated": "2026-07-19T14:00Z",
       "networks": [
         {
           "name": "Лукойл",
@@ -275,9 +275,9 @@
           "level": "limited"
         }
       ],
-      "queues_hours": 1.0,
-      "ai95_price_rub": 71.54,
-      "diesel_price_rub": 79.8,
+      "queues_hours": 0.5,
+      "ai95_price_rub": 72.14,
+      "diesel_price_rub": 81.90,
       "source_urls": [
         "https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-moskve-1-ijulja-2026-goda-novye-pravila-na-azs-limity-aktualnye-ceny_1760801",
         "https://ru.themoscowtimes.com/2026/06/29/gazprom-neft-i-lukoil-nachali-ogranichivat-prodazhu-benzina-v-moskve-i-podmoskove-a199450",
@@ -297,7 +297,7 @@
         "https://oilcapital.ru/news/2026-07-06/fas-zavela-dela-o-sgovore-mezhdu-vladeltsami-azs-v-moskovskoy-i-orenburgskoy-oblastyah-5631520"
       ],
       "price_note": "Розница: АИ-92 63–89 ₽/л, АИ-95 69–98 ₽/л. Водители ищут топливо днями (CNN). Levada: одобрение Путина упало до 74% (минимум с 2022).",
-      "note": "16.07: в Москве сохраняются ограничения. Лукойл/Роснефть до 100л, Газпромнефть 30л/60л. Московский НПЗ остановлен."
+      "note": "19.07: Московский НПЗ остановлен. Лукойл/Роснефть до 100л, Газпромнефть 30л. Кризис стабилизируется."
     },
     {
       "region": "Московская обл.",
@@ -358,7 +358,7 @@
       "lat": 59.94,
       "lon": 30.31,
       "level": "limited",
-      "updated": "2026-07-17T12:30Z",
+      "updated": "2026-07-19T14:20Z",
       "networks": [
         {
           "name": "Сургутнефтегаз",
@@ -429,7 +429,7 @@
       "lat": 50.6,
       "lon": 36.6,
       "level": "limited",
-      "updated": "2026-07-17T12:30Z",
+      "updated": "2026-07-19T15:05Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -464,7 +464,7 @@
         "https://www.vedomosti.ru/business/articles/2026/06/24/1208285-ob-ogranicheniyah-benzina",
         "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/"
       ],
-      "note": "16.07: Лукойл 30л/60л, Роснефть no canisters, level: limited"
+      "note": "19.07: Лукойл 30л/60л, Роснефть ограничения, level: limited"
     },
     {
       "region": "Курская обл.",
@@ -542,7 +542,7 @@
       "lat": 55.8,
       "lon": 49.1,
       "level": "limited",
-      "updated": "2026-07-17T12:30Z",
+      "updated": "2026-07-19T14:00Z",
       "networks": [
         {
           "name": "Татнефть",
@@ -618,7 +618,7 @@
       "lat": 47.22,
       "lon": 39.72,
       "level": "limited",
-      "updated": "2026-07-17T12:30Z",
+      "updated": "2026-07-19T14:30Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -649,9 +649,9 @@
           "level": "limited"
         }
       ],
-      "queues_hours": 2.5,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
+      "queues_hours": 1.5,
+      "ai95_price_rub": 71.95,
+      "diesel_price_rub": 77.20,
       "source_urls": [
         "https://www.yuga.ru/news/482701-zhiteli-rostovskoj-oblasti-pozhalovalis-na-pereboi-s-benzinom-i-ego-podorozhanie/",
         "https://www.svoboda.org/a/rossiyane-chuvstvuyut-na-sebe-voynu-ocheredi-na-avtozapravkah-na-yuge/33778320.html",
@@ -669,7 +669,7 @@
         "https://t.me/Crimeanwind/104189",
         "https://www.interfax.ru/russia/"
       ],
-      "note": "16.07: лимиты 30л бензин, 60л дизель (легк.). Остаются локальные перебои."
+      "note": "19.07: Позитивная динамика: очереди сокращены с 2.5 до 1.5 часов. Лимиты 30л бензин."
     },
     {
       "region": "Ставропольский край",
@@ -1154,21 +1154,21 @@
       "lat": 48.71,
       "lon": 44.51,
       "level": "limited",
-      "updated": "2026-07-19T19:00Z",
+      "updated": "2026-07-19T14:45Z",
       "networks": [
         {
           "name": "Татнефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "30л АИ-95 (ограничения на АИ-92 и дизель сняты 17.06)"
+          "note": "30л бензина, 60л дизель"
         },
         {
           "name": "Лукойл",
           "status": "limited",
           "level": "limited",
-          "limit_l": 30,
-          "note": "14.07: лимит увеличен с 20 до 30л (город: ≤30 л бензин / ≤60 л ДТ, на трассах до 200 л ДТ)"
+          "limit_l": 40,
+          "note": "Лимит повышен с 20 до 40л (18.07)"
         }
       ],
       "queues_hours": 1.0,
@@ -1178,7 +1178,7 @@
         "https://v1.ru/text/transport/2026/07/14/76532607/",
         "https://volgograd-trv.ru/news/obschestvo/113908-limit-otpuska-benzina-v-volgogradskoj-oblasti-uvelichili-do-30-litrov.html"
       ],
-      "note": "17.07: 14.07 лимит на Лукойл повышен с 20 до 30л. Кризис идёт на спад, ситуация улучшается."
+      "note": "19.07: Стабилизация. Лукойл лимит повышен с 20 до 40л (18.07), дизель 60л."
     },
     {
       "region": "Свердловская обл.",
@@ -1285,22 +1285,23 @@
         }
       ],
       "queues_hours": 0.5,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 79,
+      "ai95_price_rub": 72.0,
+      "diesel_price_rub": 79.0,
       "source_urls": [
         "https://www.vesti.ru/ns/v-lipeckoj-oblasti-vvoditsya-otpusk-benzina-po-skheme-chetnykh-i-nechetnykh-dnej",
         "https://newdaynews.ru/automobile/877317.html",
         "https://rg.ru/2026/07/09/reg-cfo/v-lipeckoj-oblasti-vvoditsia-prodazha-benzina-po-chetnym-i-nechetnym-dniam.html",
         "https://abireg.ru/newsitem/115488/"
       ],
-      "note": "19.07: Система чет-нечет с 11.07 до 01.08. Лимит 30л. На трассах исключения. Очереди сокращаются. Level: limited"
+      "note": "19.07: Чет-нечет система работает до 01.08. Лимиты 30л бензина.",
+      "updated": "2026-07-19T15:15Z"
     },
     {
       "region": "Тульская обл.",
       "lat": 54.19,
       "lon": 37.62,
       "level": "limited",
-      "updated": "2026-07-19T19:00Z",
+      "updated": "2026-07-19T15:00Z",
       "networks": [
         {
           "name": "Татнефть",
@@ -1689,7 +1690,7 @@
       "lat": 56.12,
       "lon": 40.39,
       "level": "limited",
-      "updated": "2026-07-17T04:20Z",
+      "updated": "2026-07-19T14:55Z",
       "networks": [
         {
           "name": "АЗС",
@@ -1738,7 +1739,7 @@
       "lat": 54.51,
       "lon": 36.27,
       "level": "limited",
-      "updated": "2026-07-17T04:20Z",
+      "updated": "2026-07-19T15:00Z",
       "networks": [
         {
           "name": "АЗС",
@@ -2270,7 +2271,7 @@
       "lat": 58.01,
       "lon": 56.25,
       "level": "limited",
-      "updated": "2026-07-16T16:20Z",
+      "updated": "2026-07-19T14:35Z",
       "networks": [
         {
           "name": "ЛУКОЙЛ",
@@ -2441,7 +2442,7 @@
       "lat": 53.36,
       "lon": 83.76,
       "level": "limited",
-      "updated": "2026-07-16T16:20Z",
+      "updated": "2026-07-19T14:30Z",
       "networks": [
         {
           "name": "Региональные АЗС",
@@ -2533,7 +2534,7 @@
       "lat": 51.83,
       "lon": 107.58,
       "level": "limited",
-      "updated": "2026-07-16T16:20Z",
+      "updated": "2026-07-19T14:40Z",
       "networks": [
         {
           "name": "Региональные АЗС",
@@ -2582,7 +2583,7 @@
       "lat": 52.03,
       "lon": 113.5,
       "level": "limited",
-      "updated": "2026-07-17T00:25Z",
+      "updated": "2026-07-19T14:45Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -2659,7 +2660,7 @@
       "lat": 48.48,
       "lon": 135.08,
       "level": "strained",
-      "updated": "2026-07-17T00:25Z",
+      "updated": "2026-07-19T14:50Z",
       "networks": [
         {
           "name": "Региональные АЗС (Советско-Гаванский / Ванинский р-ны)",
