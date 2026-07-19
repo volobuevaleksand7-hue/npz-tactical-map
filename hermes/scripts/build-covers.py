@@ -146,11 +146,12 @@ def meta_for(date, brief):
                              "склад", "логистическ", "распределительн", "маркетплейс", "фулфилмент"))
     if is_warehouse:
         brand = "Wildberries" if "wildberries" in tgt_l else ("Ozon" if ("ozon" in tgt_l or "озон" in tgt_l) else "")
-        scene = ("В КАДРЕ ГЛАВНОЕ — крупный горящий складской логистический комплекс: "
-                 "длинный ангар-склад объят пламенем, густой чёрный дым поднимается над "
-                 "распределительным центром, работают пожарные расчёты и техника")
+        scene = ("В КАДРЕ КРУПНО, НА ПЕРЕДНЕМ ПЛАНЕ — горящий складской логистический "
+                 "комплекс: огромный длинный ангар-склад объят пламенем, стена огня и "
+                 "густой чёрный дым во весь кадр, обрушенная кровля, работают пожарные "
+                 "расчёты и техника. Склад занимает бОльшую часть кадра, без городской панорамы")
         event = f"удар по складу {brand}".strip() if brand else "удар по логистическому складу"
-        frame = "широкий городской план"
+        frame = "крупный план горящего склада-ангара во весь кадр, репортажный ракурс с земли"
         prompt = (f"Дневной документальный новостной фотоснимок: {look(city, kind)}. {scene}. "
                   f"Светлая ясная атмосфера, дневной свет/золотой час, фотожурналистика, НЕ мрачно и НЕ ночь. "
                   f"Реализм, {frame} 1200x630 горизонталь. БЕЗ текста и букв.")
@@ -243,8 +244,8 @@ def _codex_instr(raw_path, ref_path, m):
     if ref_path:
         return (f"Use your image_gen tool in EDIT / image-to-image mode. Input reference: {ref_path} "
                 f"(real photo of the event). Derive a NEW photorealistic 1200x630 horizontal cover that KEEPS "
-                f"the composition and subject (city skyline, smoke, industrial background), bright documentary "
-                f"daylight, our clean style. Remove any watermark/text — NO letters or logos. "
+                f"the composition, main subject and framing of the reference. Target scene: {m['prompt']} "
+                f"Bright documentary daylight, our clean style. Remove any watermark/text — NO letters or logos. "
                 f"Save to exactly {raw_path} then ls -la it.")
     return (f"Use your image_gen tool to generate a photorealistic 1200x630 horizontal image. {m['prompt']} "
             f"Save to exactly {raw_path} then ls -la it.")
