@@ -984,13 +984,13 @@
     "lat": 64.54,
     "lon": 40.52,
     "level": "severe",
-    "updated": "2026-07-18T08:23Z",
+    "updated": "2026-07-19T00:00Z",
     "networks": [
      {
       "name": "Региональные АЗС",
       "status": "limited",
-      "limit_l": null,
-      "note": "Введены ограничения на продажу бензина (по сообщению АиФ Архангельск); конкретные лимиты по литрам не детализированы. Регион в зоне распространения дефицита на Северо-Запад. | 22.06 (STALE-проверка, 29.ru): уточнено — на АЗС «Роснефти» в регионе лимит до 100 л на один автомобиль (29.ru, 04.06.2026); на малых частных АЗС — до 20 л/ТС.",
+      "limit_l": 100,
+      "note": "19.07: Бензин АИ-92/АИ-95 доставлены 06.07. На Роснефти отпуск до 100л на один автомобиль. На частных АЗС до 20л/ТС. Запрет на продажу в канистры сохраняется.",
       "level": "limited"
      },
      {
@@ -998,12 +998,12 @@
       "status": "limited",
       "level": "limited",
       "limit_l": 100,
-      "note": "04.06.2026 (29.ru): на АЗС «Роснефти» в Архангельской обл. отпуск до 100 л бензина на один автомобиль."
+      "note": "19.07: Бензин АИ-92/АИ-95 доставлены 06.07 в регион. Отпуск до 100л бензина на один автомобиль. Запрет на канистры."
      }
     ],
     "queues_hours": 1.0,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "ai95_price_rub": 71,
+    "diesel_price_rub": 81,
     "source_urls": [
      "https://arh.aif.ru/society/v-arhangelskoy-oblasti-vveli-ogranicheniya-na-prodazhu-benzina",
      "https://ru.themoscowtimes.com/2026/06/10/defitsit-benzina-ohvatil-25-rossiiskih-regionov-a197895",
@@ -1015,7 +1015,7 @@
     "lat": 56.33,
     "lon": 44.0,
     "level": "severe",
-    "updated": "2026-07-18T08:23Z",
+    "updated": "2026-07-19T00:00Z",
     "networks": [
      {
       "name": "Лукойл",
@@ -1257,34 +1257,40 @@
     "lat": 52.61,
     "lon": 39.59,
     "level": "limited",
-    "updated": "2026-07-18T08:23Z",
+    "updated": "2026-07-19T00:00Z",
     "networks": [
      {
       "name": "Роснефть",
       "status": "limited",
-      "limit_l": null,
-      "note": "С середины июня отменена опция «заправка до полного бака» (в одном ряду с Краснодарским краем, Ростовской, Воронежской и Тульской обл.); на части АЗС перебои с АИ-95. 23.06 (STALE-проверка, theins.ru/news/293785): ограничения Роснефти подтверждены — регион входит в 53 региона РФ с действующими лимитами.",
+      "limit_l": 30,
+      "note": "19.07: Система чет-нечет с 11.07. На четные даты — авто с чётными цифрами номера (0,2,4,6,8), на нечетные — с нечётными (1,3,5,7,9). Лимит 30л бензина. На трассах М-4, Р-119, А-133 без ограничений по дням. Дизель без ограничений. Действует до 01.08.",
       "level": "limited"
      },
      {
       "name": "Татнефть",
       "status": "limited",
       "limit_l": 30,
-      "note": "23.06 (STALE-проверка): действует общесетевой лимит «Татнефти» ≤30 л АИ-95 на ТС по всей РФ (ограничения на АИ-92 и дизель сняты 17.06). Регион входит в зону действия единого лимита.",
+      "note": "19.07: Система чет-нечет. Лимит ≤30 л АИ-95 (АИ-92 и дизель без ограничений). Разрешена продажа в канистры в пределах лимита.",
+      "level": "limited"
+     },
+     {
+      "name": "Другие сети",
+      "status": "limited",
+      "limit_l": 30,
+      "note": "19.07: Система чет-нечет распространяется на Лукойл, Газпром, Tebóil и другие сети. На трассах исключения из системы.",
       "level": "limited"
      }
     ],
-    "queues_hours": 1.0,
-    "ai95_price_rub": 73,
-    "diesel_price_rub": 80,
+    "queues_hours": 0.5,
+    "ai95_price_rub": 72,
+    "diesel_price_rub": 79,
     "source_urls": [
-     "https://www.svoboda.org/a/rossiyane-chuvstvuyut-na-sebe-voynu-ocheredi-na-avtozapravkah-na-yuge/33778320.html",
-     "https://www.yuga.ru/news/482701-zhiteli-rostovskoj-oblasti-pozhalovalis-na-pereboi-s-benzinom-i-ego-podorozhanie/",
-     "https://theins.ru/news/293785",
-     "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
-     "https://www.interfax.ru/russia/"
+     "https://www.vesti.ru/ns/v-lipeckoj-oblasti-vvoditsya-otpusk-benzina-po-skheme-chetnykh-i-nechetnykh-dnej",
+     "https://newdaynews.ru/automobile/877317.html",
+     "https://rg.ru/2026/07/09/reg-cfo/v-lipeckoj-oblasti-vvoditsia-prodazha-benzina-po-chetnym-i-nechetnym-dniam.html",
+     "https://abireg.ru/newsitem/115488/"
     ],
-    "note": "16.07: even-odd system, 30л, level: limited"
+    "note": "19.07: Система чет-нечет с 11.07 до 01.08. Лимит 30л. На трассах исключения. Очереди сокращаются. Level: limited"
    },
    {
     "region": "Тульская обл.",
@@ -2750,13 +2756,13 @@
    }
   ],
   "exchange": {
-   "ai95_spb_rub_t": 79654,
-   "ai92_spb_rub_t": 69960,
-   "diesel_spb_rub_t": 75577,
+   "ai95_spb_rub_t": 78040,
+   "ai92_spb_rub_t": 72060,
+   "diesel_spb_rub_t": 91210,
    "trend": "stable",
-   "updated": "2026-07-18T08:23Z",
+   "updated": "2026-07-19T00:00Z",
    "source_url": "https://finacia.net/economy/44303/",
-   "notes": "17.07 (СПбМТСБ): АИ-95 79.654 руб/т (+4.45%), АИ-92 69.960 руб/т (-0.19%), ДТ летнее 75.577 руб/т (+0.21%). Розничные цены: АИ-95 72-79 руб/л (в центральной России). Очереди сокращаются в 13+ регионах. Импорт из Индии восполняет дефицит. Прогноз нормализации — август 2026."
+   "notes": "18-19.07 (Росстат/СПбМТСБ): розничные цены АИ-92 72.06 ₽/л, АИ-95 78.04 ₽/л, ДТ 91.21 ₽/л. Оптовые СПбМТСБ: АИ-95 78.04 тыс.₽/т, АИ-92 72.06 т.р./т, ДТ 91.21 т.р./т. Рост цен замедлился. Очереди сокращаются в 13+ регионах. Система чет-нечет введена в 8 регионах. Прогноз стабилизации — август 2026."
   },
   "refinery_counts": {
    "down": 11,
@@ -9684,6 +9690,20 @@
     },
     {
      "date": "2026-07-18",
+     "time": "20:30",
+     "city": "Ногинск",
+     "region": "Московская область",
+     "lat": 55.8,
+     "lon": 37.68,
+     "type": "drone",
+     "count": 370,
+     "target": "Нефтебаза Нафто-Сервис",
+     "detail": "Вечерняя волна атаки БПЛА на Московскую область с 20:30 МСК. Масштабная волна 370+ беспилотников, более 64 перехвачены на подлете к Москве. Пожар на нефтебазе, двое пострадали в Ногинске.",
+     "source_url": "https://nv.ua/ukraine/events/ataka-na-moskovskuyu-oblast-18-iyulya-vsu-podtverdili-porazhenie-neftebazy-v-noginske-50625383.html",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-07-18",
      "time": "03:40",
      "city": "Электросталь",
      "region": "Московская область",
@@ -9718,48 +9738,122 @@
    "voices": [
     {
      "date": "2026-07-18",
-     "seen": "2026-07-18",
-     "region": "Якутия",
-     "city": "Якутск",
-     "lat": 62.0397,
-     "lon": 129.6732,
-     "quote": "Бензин отпускается ограниченно — от 20 до 30 литров на одну машину. Цена варьируется в пределах 81–88 рублей за литр в зависимости от марки. Логистические трудности остаются серьёзным препятствием для поступления новых партий топлива.",
+     "seen": "2026-07-19",
+     "region": "Новосибирская область",
+     "city": "Новосибирск",
+     "lat": 55.0415,
+     "lon": 82.9346,
+     "quote": "«Газпром» на Никитина — есть весь бензин, кроме 100-го. Очередь на полтора-два часа.",
      "sentiment": "complaint",
+     "topic": "queue",
+     "source": "СМИ",
+     "source_url": "https://ngs.ru/text/auto/2026/07/18/76541268/",
+     "author_hint": "водитель"
+    },
+    {
+     "date": "2026-07-18",
+     "seen": "2026-07-19",
+     "region": "Новосибирская область",
+     "city": "Новосибирск",
+     "lat": 55.0415,
+     "lon": 82.9346,
+     "quote": "Есть 92-й. На колонках 95-го нет. Простояли час, инвалидов пропускают вне очереди.",
+     "sentiment": "complaint",
+     "topic": "queue",
+     "source": "СМИ",
+     "source_url": "https://ngs.ru/text/auto/2026/07/18/76541268/",
+     "author_hint": "водитель"
+    },
+    {
+     "date": "2026-07-18",
+     "seen": "2026-07-19",
+     "region": "Свердловская область",
+     "city": "Екатеринбург",
+     "lat": 56.8389,
+     "lon": 60.6057,
+     "quote": "На «Газпромнефти» на Космонавтов очередь огромная. В очередь не попадешь без скандала.",
+     "sentiment": "complaint",
+     "topic": "queue",
+     "source": "СМИ",
+     "source_url": "https://www.e1.ru/text/gorod/2026/07/18/76541212/",
+     "author_hint": "водитель"
+    },
+    {
+     "date": "2026-07-18",
+     "seen": "2026-07-19",
+     "region": "Свердловская область",
+     "city": "Екатеринбург",
+     "lat": 56.8389,
+     "lon": 60.6057,
+     "quote": "На «Лукойле» на Водительском весь бензин есть, очереди минимальны.",
+     "sentiment": "relief",
+     "topic": "available",
+     "source": "СМИ",
+     "source_url": "https://www.e1.ru/text/gorod/2026/07/18/76541212/",
+     "author_hint": "водитель"
+    },
+    {
+     "date": "2026-07-18",
+     "seen": "2026-07-19",
+     "region": "Свердловская область",
+     "city": "Екатеринбург",
+     "lat": 56.8389,
+     "lon": 60.6057,
+     "quote": "Видим люди заправляются небольшими порциями. Иногда всего на 7–10 литров за раз.",
+     "sentiment": "info",
      "topic": "limit",
-     "source": "КП.РУ",
-     "source_url": "https://www.yakutia.kp.ru/daily/277797.5/5275183/",
-     "author_hint": "местный водитель"
+     "source": "СМИ",
+     "source_url": "https://www.e1.ru/text/gorod/2026/07/18/76541212/",
+     "author_hint": "наблюдатель"
     },
     {
      "date": "2026-07-18",
-     "seen": "2026-07-18",
-     "region": "Дальневосточный федеральный округ",
-     "city": "Хабаровск",
-     "lat": 48.4584,
-     "lon": 135.0701,
-     "quote": "В Советско-Гаванском и Ванинском районах Хабаровского края около половины АЗС полностью ограничили отпуск топлива физическим лицам. Приоритет отдан машинам скорой помощи, МЧС и пожарной охраны.",
-     "sentiment": "panic",
-     "topic": "empty",
-     "source": "VLADIVOSTOK1.ru",
-     "source_url": "https://vladivostok1.ru/text/transport/2026/06/24/76495210/",
-     "author_hint": "местные власти"
+     "seen": "2026-07-19",
+     "region": "Свердловская область",
+     "city": "Екатеринбург",
+     "lat": 56.8389,
+     "lon": 60.6057,
+     "quote": "Цена 95-го бензина в пригороде поднялась до 115 рублей за литр — на 30% дороже, чем в городе.",
+     "sentiment": "complaint",
+     "topic": "price",
+     "source": "СМИ",
+     "source_url": "https://www.e1.ru/text/gorod/2026/07/18/76541212/",
+     "author_hint": "водитель"
     },
     {
      "date": "2026-07-18",
-     "seen": "2026-07-18",
-     "region": "Россия",
-     "city": "Москва",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "quote": "По оценке Novaya Gazeta Europe, топливный кризис распространился на минимум 78 из 83 регионов РФ. Дефицит бензина составляет примерно 20%, стране ежемесячно не хватает 350-400 тыс. тонн топлива из-за ударов по НПЗ.",
-     "sentiment": "panic",
-     "topic": "empty",
-     "source": "Novaya Gazeta Europe",
-     "source_url": "https://novayagazeta.eu/articles/2026/07/02/toplivnyi-krizis-rf",
+     "seen": "2026-07-19",
+     "region": "Астраханская область",
+     "city": "Астрахань",
+     "lat": 46.3481,
+     "lon": 48.0333,
+     "quote": "На АЗС ЛУКОЙЛ повысили лимит с 30 до 40 литров на одного водителя — смягчение ограничений продолжается.",
+     "sentiment": "relief",
+     "topic": "limit",
+     "source": "СМИ",
+     "source_url": "https://astrakhan.aif.ru/society/40-litrov-v-odni-ruki-na-astrahanskih-azs-lukoyl-povysili-limit-benzina",
      "author_hint": "аналитик"
+    },
+    {
+     "date": "2026-07-18",
+     "seen": "2026-07-19",
+     "region": "Свердловская область",
+     "city": "Алапаевск",
+     "lat": 57.7983,
+     "lon": 61.5661,
+     "quote": "В Алапаевске приходится стоять две часа в очереди, чтобы заправить машину.",
+     "sentiment": "complaint",
+     "topic": "queue",
+     "source": "СМИ",
+     "source_url": "https://rzn.aif.ru/society/benzinovaya-ochered-kak-lyudi-prisposablivayutsya-k-azhiotazhu-s-toplivom",
+     "author_hint": "водитель"
     }
    ]
+  },
+  "2026-07-19": {
+   "strikes": [],
+   "voices": []
   }
  },
- "updated": "2026-07-18"
+ "updated": "2026-07-19"
 }
