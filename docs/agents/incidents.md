@@ -31,14 +31,15 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
-## [OPEN] cover-fallback-2026-07-19
-status: OPEN
+## [RESOLVED] cover-fallback-2026-07-19
+status: RESOLVED
 opened: 2026-07-19 08:15 МСК — summary-watchdog
 Карточка за 2026-07-19 на месте, но обложка = заглушка og-image. Обычно самолечение чинит само (Codex работает и на VPS, и на Маке); если висит — вероятно кончились image-кредиты Codex-воркспейса.
 Что сделать:
 - `python3 hermes/scripts/build-covers.py --dates 2026-07-19` (Codex-first) → `python3 agents/gen-news.py` → git-sync + деплой;
 - если Codex «out of credits» — пополнить воркспейс, либо разово `NPZ_COVERS_ALLOW_OPENROUTER=1` при живом OpenRouter-ключе.
 
+resolved: 2026-07-19 20:15 МСК — проблема исчезла (авто, сторож)
 ## [RESOLVED] card-missing-2026-07-12
 status: RESOLVED
 opened: 2026-07-12 08:15 МСК — summary-watchdog
