@@ -432,6 +432,22 @@
   <!-- ponytail: гейт только по hash. "#azs" — фрагментная ссылка: query сохраняется сама (RFC 3986 §5.3),
        поэтому UTM доезжает до Метрики. Не добавлять сюда !location.search — любая utm-метка ломала вкладку. -->
   <script>if(!location.hash)history.replaceState(null,"","#azs");</script>
+  <!-- «Я тут»: ловим инстанс карты АЗС (app.js держит его в закрытом замыкании),
+       чтобы azs-live.js подписался на popupopen. Только запоминает ссылку — поведение app.js не меняет. -->
+  <script>
+    (function () {
+      if (!window.L || !L.map) return;
+      var orig = L.map;
+      L.map = function (el) {
+        var m = orig.apply(this, arguments);
+        if (el === "mapAzs" || (el && el.id === "mapAzs")) {
+          window.__azsMap = m;
+          window.dispatchEvent(new Event("azsmapready"));
+        }
+        return m;
+      };
+    })();
+  </script>
   <script src="app.js?v=18c30208"></script>
   <!-- Vercel Web Analytics (нужно включить в Dashboard → Analytics → Enable, иначе /_vercel/insights/* = 404) -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
@@ -494,5 +510,7 @@
   </script>
   <script defer src="/vpn-nudge.js?v=7009410b"></script>
   <script defer src="/article-nudge.js?v=a3"></script>
+  <!-- «Я тут»: краудсорс реального наличия топлива (device-local + /api/azs-votes), overlay поверх app.js. -->
+  <script defer src="/azs-live.js?v=1"></script>
 </body>
 </html>
