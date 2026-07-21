@@ -93,12 +93,25 @@
     .seo-upd a{color:var(--teal);text-decoration:none}
     .seo-upd a:hover{text-decoration:underline}
     @media(max-width:768px){.seo-h1{font-size:11px}.seo-upd{display:none}}
-    /* embed-режим (?embed=1) — iframe на /karta-bpla: только карта+панель+легенда+тикер */
-    html.embed .topbar,html.embed .seo-strip,html.embed .nav-drawer,html.embed .feed,
+    /* embed-режим (?embed=1) — iframe на /karta-bpla: компактная шапка (счётчики угроз + выходы),
+       карта, панель, легенда, тикер. Прячем текстовую обвязку и нуджи. */
+    html.embed .seo-strip,html.embed .nav-drawer,html.embed .feed,
     html.embed .about-radar,html.embed .disclaimer,
     html.embed .art-nudge,html.embed .nudge-tab,html.embed .pp-vpn,html.embed .pp-vpn-float{display:none!important}
-    html.embed .map{top:0}
-    html.embed .panel{top:14px;max-height:calc(100% - 90px)}
+    /* из шапки в embed оставляем только счётчики + embed-навигацию */
+    html.embed .brand,html.embed .news-nav,html.embed .nav-burger,html.embed #themeBtn,
+    html.embed .refresh-badge,html.embed .sync,html.embed label:has(#toggleStrikes){display:none!important}
+    html.embed .embed-nav{display:flex}
+    html.embed .bpla-counter{display:flex!important}   /* перебиваем мобильный hide шапки (media ≤768, стр.~215) */
+    html.embed .map{top:52px}
+    /* панель двигаем только на десктопе; на мобиле у неё свой нижний док (media ≤768) — не трогаем */
+    @media(min-width:769px){html.embed .panel{top:66px;max-height:calc(100% - 80px)}}
+    /* embed-навигация: выходы на главную карту НПЗ и на статью (target=_top ломает фрейм) */
+    .embed-nav{display:none;align-items:center;gap:6px}
+    .embed-nav a{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--surface2);
+      color:var(--ink);font-weight:700;font-size:12px;padding:6px 12px;border-radius:10px;text-decoration:none;white-space:nowrap;transition:.15s}
+    .embed-nav a:hover{transform:translateY(-1px);color:var(--teal)}
+    @media(max-width:768px){.embed-nav{gap:5px}.embed-nav a{padding:6px 10px;font-size:11px}}
     .leaflet-container{background:var(--board)!important}
     /* ponytail: попапы Leaflet раньше оставались белыми в тёмной теме — теперь следуют теме */
     .leaflet-popup-content-wrapper{background:var(--surface)!important;color:var(--ink)!important}
@@ -468,6 +481,10 @@
           </div>
         </div>
         <a href="/sources">📚 Источники</a>
+      </nav>
+      <nav class="embed-nav" aria-label="Навигация карты">
+        <a href="/" target="_top" title="Главная интерактивная карта НПЗ">🗺️ <span class="en-label">Карта НПЗ</span></a>
+        <a href="/karta-bpla" target="_top" title="Статья: карта БПЛА онлайн">📄 <span class="en-label">Статья</span></a>
       </nav>
     <div class="topctl">
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--ink)">
