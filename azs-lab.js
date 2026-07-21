@@ -136,9 +136,12 @@
   }
 
   // Пороги слияния §4.5 — калибровочные ручки, поднять при спаме/шуме.
-  var MIN_VOTES = 1;   // сколько свежих отметок, чтобы вообще перебить регион-оценку
+  var MIN_VOTES = 1;   // сколько свежих отметок, чтобы вообще перебить регион-оценку (для попап-вердикта)
   var CONF_MIN = 0.3;  // порог confidence (1 единодушная свежая ≈0.33 — на грани, помечаем «1 водитель»)
   var NEAR_TIE = 0.6;  // доля веса победителя ниже → «мнения расходятся»
+  var RECOLOR_MIN_VOTES = 2; // #1: ПЕРЕКРАСКА маркера требует ≥2 РАЗНЫХ cid. Один анонимный тап не
+                             // должен красить станцию на карте как «уверенные данные» (тема ударов).
+                             // Попап-вердикт остаётся с 1 голосом, честно помеченным «1 отметка».
   function verdictClass(k) { return k === "yes" ? "azs-lab-v-yes" : k === "no" ? "azs-lab-v-no" : "azs-lab-v-warn"; }
 
   // Общий агрегат из бэкенда + вердикт слияния (§4.5): живое бьёт регион-оценку,
@@ -256,7 +259,8 @@
       b.addEventListener("click", function () {
         saveVote(station.id, s.k);       // на устройстве — мгновенно
         postVote(station.id, s.k);       // в общий бэкенд — фоном (ошибка не критична)
-        cacheDrop(station.id);           // свой голос — сброс кэша, чтобы recolor увидел смену
+        cacheDrop(station.id);           // свой голос — сброс кэша агрегата
+        invalidateActive();              // и активного сета: станция могла стать активной
         renderSelf(self, comm, station, popup);
         loadCommunity(comm, station, popup); // подтянуть свежий агрегат с учётом своей отметки
         if (scheduleRecolor) scheduleRecolor(); // маркер может сменить цвет от своей отметки
@@ -305,6 +309,28 @@
   function cachePut(id, agg, now) { aggCache[id] = { agg: agg, at: now || Date.now() }; }
   function cacheDrop(id) { delete aggCache[id]; }
 
+  // #3 Индекс активных станций: recolorVisible раньше делал HGETALL по КАЖДОЙ видимой
+  // станции, хотя почти все пустые. Теперь один запрос ?active=1 (маленький список id
+  // со свежими отметками) кэшируем на 60с и агрегаты тянем только для активных ∩ видимых →
+  // на старте (сет пуст) перекраска стоит ~1 обращение вместо ~50/вьюпорт.
+  var ACTIVE_TTL_MS = 60 * 1000;
+  var activeCache = null;                         // { set:{id:true}, at }
+  function invalidateActive() { activeCache = null; }
+  function fetchActiveSet() {
+    var now = Date.now();
+    if (activeCache && now - activeCache.at < ACTIVE_TTL_MS) return Promise.resolve(activeCache.set);
+    return fetch(API + "?active=1")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.ids) return null;            // рубильник: API недоступен
+        var set = {};
+        for (var i = 0; i < j.ids.length; i++) set[j.ids[i]] = true;
+        activeCache = { set: set, at: now };
+        return set;
+      })
+      .catch(function () { return null; });
+  }
+
   function liveIcon(status) {
     var c = LIVE_COLORS[status] || "#7a7e85";
     var html = '<div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center">'
@@ -317,7 +343,7 @@
 
   // Чистая победа живого (не near-tie) — только тогда трогаем цвет маркера.
   function winsClean(agg) {
-    return agg && agg.count >= MIN_VOTES && agg.confidence >= CONF_MIN && agg.top_share >= NEAR_TIE;
+    return agg && agg.count >= RECOLOR_MIN_VOTES && agg.confidence >= CONF_MIN && agg.top_share >= NEAR_TIE;
   }
 
   function clusterGroup() {
@@ -340,9 +366,17 @@
     });
     var ids = Object.keys(byId);
     if (!ids.length) return;
-    for (var i = 0; i < ids.length; i += 50) {         // сервер режет ids до 60 — чанкуем по 50
-      applyChunk(byId, ids.slice(i, i + 50));
-    }
+    fetchActiveSet().then(function (active) {
+      if (!active) return;                       // рубильник: API недоступен → маркеры как есть
+      var need = [];
+      ids.forEach(function (id) {
+        if (active[id]) need.push(id);           // есть свежие отметки → запросим агрегат
+        else if (byId[id]._liveStatus) applyAgg(byId[id], null); // отметок больше нет → откат на регион-иконку
+      });
+      for (var i = 0; i < need.length; i += 50) {  // сервер режет ids до 60 — чанкуем по 50
+        applyChunk(byId, need.slice(i, i + 50));
+      }
+    });
   }
   // Применить один агрегат к маркеру: чистая победа живого → live-иконка + гало,
   // иначе (протухло/near-tie/пусто) откат на регион-иконку. Идемпотентно (гард по _liveStatus).
@@ -410,6 +444,9 @@
     console.assert(cacheGet("__c__", now + AGG_TTL_MS + 1) === null, "[azs-lab] кэш: протухший всё ещё отдаётся");
     cacheDrop("__c__");
     console.assert(cacheGet("__c__", now) === null, "[azs-lab] кэш: drop не очистил");
+    // #1 перекраска маркера: 1 голос НЕ красит, 2 согласных — красят
+    console.assert(winsClean({ count: 1, confidence: 0.33, top_share: 1 }) === false, "[azs] 1 голос не должен красить маркер");
+    console.assert(winsClean({ count: 2, confidence: 0.66, top_share: 1 }) === true, "[azs] 2 согласных голоса красят маркер");
     var v = loadVotes(); delete v[id];
     try { localStorage.setItem(VOTES_KEY, JSON.stringify(v)); } catch (_) {}
     console.info("[azs-lab] self-test done — молчание ассертов выше = логика цела");

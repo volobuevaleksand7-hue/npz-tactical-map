@@ -66,6 +66,14 @@ module.exports = async function handler(req, res) {
 
   try {
     if (req.method === "GET") {
+      // ?active=1 → id станций со свежими (≤ окна агрегата) отметками. Клиент опрашивает
+      // агрегаты только для них ∩ видимых, а не для всех видимых (на старте почти все пустые).
+      if (req.query && req.query.active) {
+        var t0 = Date.now();
+        var az = await upstash([["ZRANGEBYSCORE", "azs:active", String(t0 - WINDOW_MS), "+inf"]]);
+        res.status(200).json({ ids: (az[0] && az[0].result) || [], as_of: t0 });
+        return;
+      }
       var raw = (req.query && req.query.ids) || "";
       var ids = String(raw).split(",").map(function (s) { return s.trim(); })
         .filter(validId).slice(0, MAX_IDS);
@@ -90,8 +98,17 @@ module.exports = async function handler(req, res) {
       // анти-спам: 1 отметка с cid на станцию в RL_SEC (не логируем IP)
       var rl = await upstash([["SET", "rl:" + cid + ":" + id, "1", "NX", "EX", String(RL_SEC)]]);
       if (!(rl[0] && rl[0].result === "OK")) { res.status(429).json({ error: "too-soon" }); return; }
-      var val = JSON.stringify({ s: status, t: Date.now() });
-      await upstash([["HSET", "av:" + id, cid, val], ["EXPIRE", "av:" + id, String(TTL_SEC)]]);
+      var t = Date.now();
+      var val = JSON.stringify({ s: status, t: t });
+      await upstash([
+        ["HSET", "av:" + id, cid, val],
+        ["EXPIRE", "av:" + id, String(TTL_SEC)],
+        // индекс активных станций (ZSET score=время голоса): клиент дёшево спрашивает
+        // «у кого вообще есть свежие отметки», не делая HGETALL по каждой видимой станции.
+        ["ZADD", "azs:active", String(t), id],
+        ["ZREMRANGEBYSCORE", "azs:active", "0", String(t - TTL_SEC * 1000)], // старьё за окном TTL
+        ["EXPIRE", "azs:active", String(TTL_SEC)]                            // сет тухнет, если голоса иссякли
+      ]);
       res.status(200).json({ ok: true });
       return;
     }
