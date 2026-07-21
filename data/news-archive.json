@@ -1107,31 +1107,31 @@
     "lat": 48.71,
     "lon": 44.51,
     "level": "limited",
-    "updated": "2026-07-19T14:45Z",
+    "updated": "2026-07-21T04:25Z",
     "networks": [
      {
       "name": "Татнефть",
       "status": "limited",
       "level": "limited",
       "limit_l": 30,
-      "note": "30л бензина, 60л дизель"
+      "note": "21.07: 30л бензина, 60л дизель"
      },
      {
       "name": "Лукойл",
       "status": "limited",
       "level": "limited",
       "limit_l": 40,
-      "note": "Лимит повышен с 20 до 40л (18.07)"
+      "note": "21.07: Лимит 40л (повышен с 20 на 18.07). Дизель 60л."
      }
     ],
     "queues_hours": 1.0,
-    "ai95_price_rub": 75.0,
-    "diesel_price_rub": 79.0,
+    "ai95_price_rub": 75,
+    "diesel_price_rub": 79,
     "source_urls": [
      "https://v1.ru/text/transport/2026/07/14/76532607/",
-     "https://volgograd-trv.ru/news/obschestvo/113908-limit-otpuska-benzina-v-volgogradskoj-oblasti-uvelichili-do-30-litrov.html"
+     "https://v1.ru/text/gorod/2026/07/18/76541282/"
     ],
-    "note": "19.07: Стабилизация. Лукойл лимит повышен с 20 до 40л (18.07), дизель 60л."
+    "note": "21.07: Стабилизация. Лукойл 40л/60л ДТ. Татнефть 30л/60л ДТ. Положительная динамика."
    },
    {
     "region": "Свердловская обл.",
@@ -1579,24 +1579,23 @@
     "lat": 50.27,
     "lon": 127.54,
     "level": "strained",
-    "updated": "2026-07-19T19:00Z",
+    "updated": "2026-07-21T04:25Z",
     "networks": [
      {
-      "name": "АЗС",
-      "status": "limited",
+      "name": "Крупные сети / Региональные АЗС",
+      "status": "open",
       "limit_l": null,
-      "level": "limited",
-      "note": "17.07: 140 АЗС с запретом канистр, fill to full allowed, ДТ 100/200L"
+      "level": "strained",
+      "note": "21.07: Штатный режим на крупных сетях (полный бак). Остальные - регламентированный отпуск для предотвращения спекуляций. Запрет на канистры."
      }
     ],
-    "queues_hours": 1.0,
-    "ai95_price_rub": 78,
-    "diesel_price_rub": 85,
+    "queues_hours": 0.5,
+    "ai95_price_rub": 73,
+    "diesel_price_rub": 80,
     "source_urls": [
-     "https://asn24.ru/news/society/iskusstvennyy-azhiotazh-v-toplivnykh-kompaniyakh-prokommentirovali-ogranicheniya-prodazhi-benzina-v--23-06-2026/",
-     "https://www.kommersant.ru/doc/8761786"
+     "https://ampravda.ru/2026/06/26/ograniceniia-preventivnogo-xaraktera-v-pravitelstve-priamuria-prokommentirovali-situaciiu-s-benzinom-i-dizelem-na-azs/"
     ],
-    "note": "17.07: 140 АЗС с запретом канистр, ДТ 100/200L. Level: strained"
+    "note": "21.07: Ситуация под контролем. Крупные сети - полный бак. Регламентированный отпуск на остальных. Запрет на канистры."
    },
    {
     "region": "Новосибирская обл.",
@@ -1636,24 +1635,24 @@
     "lat": 56.12,
     "lon": 40.39,
     "level": "limited",
-    "updated": "2026-07-19T14:55Z",
+    "updated": "2026-07-21T04:25Z",
     "networks": [
      {
-      "name": "АЗС",
+      "name": "Лукойл / Роснефть",
       "status": "limited",
-      "limit_l": 40,
-      "note": "17.07: 40min queues, special hours 07-10 для ЖКХ, priority на общтранспорт",
+      "limit_l": 30,
+      "note": "21.07: АИ-95 до 30л через кассу, полный бак через мобильное приложение. Прочие лимиты 20-40л. Очереди уменьшились.",
       "level": "limited"
      }
     ],
-    "queues_hours": 0.67,
-    "ai95_price_rub": 71,
-    "diesel_price_rub": 76,
+    "queues_hours": 0.5,
+    "ai95_price_rub": 72,
+    "diesel_price_rub": 79,
     "source_urls": [
-     "https://msk1.ru/text/world/2026/06/23/76492962/",
-     "https://www.interfax.ru/business/1097597"
+     "https://vlad.aif.ru/society/toplivo-pod-kontrolem-situaciya-na-azs-vladimira-ocheredi-limity-specchasy",
+     "https://33live.ru/novosti/15-07-2026-situaciya-na-azs-vladimira-ocheredi-limity-specchasy.html"
     ],
-    "note": "17.07: 40min queues, special hours 07-10 для ЖКХ. Level: limited"
+    "note": "21.07: Очереди исчезли (0.5ч). Лимит 30л АИ-95 через кассу, полный бак через приложение. Приоритет для ОТ и ЖКХ."
    },
    {
     "region": "Ивановская обл.",
@@ -1685,24 +1684,24 @@
     "lat": 54.51,
     "lon": 36.27,
     "level": "limited",
-    "updated": "2026-07-19T15:00Z",
+    "updated": "2026-07-21T04:25Z",
     "networks": [
      {
-      "name": "АЗС",
+      "name": "Региональные сети",
       "status": "limited",
       "level": "limited",
-      "limit_l": 30,
-      "note": "17.07: 30L лимит, цены ~100 rub, Gazprom empty (критич)"
+      "limit_l": 25,
+      "note": "21.07: Нет региональных ограничений, но сети АЗС вводят собственные лимиты (20-30л). Мониторинг через Яндекс/2ГИС/Т-Банк."
      }
     ],
-    "queues_hours": 1.5,
-    "ai95_price_rub": 100,
-    "diesel_price_rub": 105,
+    "queues_hours": 0.5,
+    "ai95_price_rub": 71,
+    "diesel_price_rub": 78,
     "source_urls": [
-     "https://kaluga.bezformata.com/listnews/na-prodazhu-benzina/161339641/",
-     "https://www.kaluga.kp.ru/daily/277797.5/5274729/"
+     "https://www.kaluga.kp.ru/daily/277795.5/5272317/",
+     "https://kaluga.aif.ru/auto/trans/bez-paniki-toplivo-v-kaluzhskoy-oblasti-est-otmetil-gubernator"
     ],
-    "note": "17.07: 30L лимит, цены ~100 rub, Gazprom empty. Level: limited/severe"
+    "note": "21.07: Очереди исчезли. Сети АЗС вводят внутренние лимиты (20-30л). Мониторинг доступен онлайн."
    },
    {
     "region": "Смоленская обл.",
@@ -2390,24 +2389,25 @@
     "lat": 53.36,
     "lon": 83.76,
     "level": "limited",
-    "updated": "2026-07-19T14:30Z",
+    "updated": "2026-07-21T04:25Z",
     "networks": [
      {
-      "name": "Региональные АЗС",
+      "name": "БРК / Региональные АЗС",
       "status": "limited",
-      "limit_l": null,
+      "limit_l": 30,
       "level": "limited",
-      "note": "11.07 (Пульсфид): в Алтайском крае запустили жёсткие лимиты — бензин по СТС и в одни руки. Регион переходит на режим строгой экономии топлива."
+      "note": "21.07: Система контроля отпуска топлива (КОТ). Горно-Алтайск/Майминский/Чемальский: 30л бензина/50л ДТ. Чойский/Турочакский: 30л/50л в сутки. Регистрация ТС обязательна, повторная заправка в течение суток невозможна. Лимит действует до 1 сентября."
      }
     ],
-    "queues_hours": 1.5,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
-    "estimate": false,
-    "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
+    "queues_hours": 1.0,
+    "ai95_price_rub": 72,
+    "diesel_price_rub": 79,
+    "note": "21.07: Система КОТ контролирует отпуск через номер машины. Лимиты действуют по районам. Отпуск в канистры до 10л при свидетельстве ТС.",
     "source_urls": [
-     "https://pulsefid.ru",
-     "https://www.banki.ru/news/daytheme/?id=11025071"
+     "https://altai.news/2026/07/15/92673.html",
+     "https://www.bankfax.ru/news/166846/",
+     "https://ngs.ru/text/economics/2026/07/09/76524039/",
+     "https://www.vedomosti.ru/business/news/2026/07/08/1212191-ogranichili-zapravku/"
     ]
    },
    {
@@ -2481,25 +2481,23 @@
     "region": "Республика Бурятия",
     "lat": 51.83,
     "lon": 107.58,
-    "level": "limited",
-    "updated": "2026-07-19T14:40Z",
+    "level": "strained",
+    "updated": "2026-07-21T04:25Z",
     "networks": [
      {
-      "name": "Региональные АЗС",
-      "status": "limited",
+      "name": "БРК / Крупные сети",
+      "status": "open",
       "limit_l": null,
-      "level": "limited",
-      "note": "11.07 (Пульсфид): в Бурятии введено рационирование топлива на фоне праздников. Штормовое предупреждение. Конкретные лимиты в литрах не детализированы."
+      "level": "strained",
+      "note": "21.07: БРК и крупные сети (Бурятнефтепродукт, ННК-Байкалнефтепродукт) работают в штатном режиме. Запрет на отпуск топлива в канистры. Локальные ограничения на мелких АЗС."
      }
     ],
-    "queues_hours": 1.0,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
-    "estimate": false,
-    "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
+    "queues_hours": 0.5,
+    "ai95_price_rub": 71,
+    "diesel_price_rub": 79,
+    "note": "21.07: Ситуация нормализуется. Мелкие АЗС имеют локальные ограничения. Запрет на канистры сохраняется.",
     "source_urls": [
-     "https://pulsefid.ru",
-     "https://www.banki.ru/news/daytheme/?id=11025071"
+     "https://baikalskieogni.ru/articles/media/2026/7/2/v-buryatii-slozhilas-napryazhyonnaya-situatsiya-s-toplivom-est-li-povod-dlya-paniki/"
     ]
    },
    {
@@ -2531,30 +2529,30 @@
     "lat": 52.03,
     "lon": 113.5,
     "level": "limited",
-    "updated": "2026-07-19T14:45Z",
+    "updated": "2026-07-21T04:25Z",
     "networks": [
      {
-      "name": "Роснефть",
+      "name": "БРК",
       "status": "limited",
-      "limit_l": 15,
-      "level": "severe",
-      "note": "25.06 (finance.mail.ru): введён режим повышенной готовности с 18:00 25 июня; бензин — не более 15 л только в баки транспортных средств (канистры запрещены). Ранее (утром 25.06, ircity.ru) лимит был 20–60 л в зависимости от станции — в вечерние часы ужесточён."
+      "limit_l": 30,
+      "level": "limited",
+      "note": "21.07: БРК - до 30л бензина. Система лимитов продолжает работать."
      },
      {
-      "name": "Региональные АЗС",
+      "name": "Эталон / Роснефть",
       "status": "limited",
-      "limit_l": 15,
-      "level": "severe",
-      "note": "25.06 (finance.mail.ru): в режиме повышенной готовности — ≤15 л бензина только в бак ТС. Утром ircity.ru фиксировал ограничение ≤20 л на части АЗС Читы."
+      "limit_l": 20,
+      "level": "limited",
+      "note": "21.07: На АЗС Эталон и части Роснефти - до 20л бензина. На части станций лимит 60л."
      }
     ],
-    "queues_hours": null,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "queues_hours": 2.0,
+    "ai95_price_rub": 74,
+    "diesel_price_rub": 80,
     "source_urls": [
-     "https://www.banki.ru/news/daytheme/?id=11025071",
-     "https://ircity.ru/text/economics/2026/06/25/76497155/",
-     "https://finance.mail.ru/article/eshe-bolshe-regionov-ogranichili-prodazhu-benzina-69214929/"
+     "https://sibirnews.ru/news/2026-06-20-v-sosednem-s-irkutskoy-oblastyu-zabaykalskom-krae-ocheredi-na-zapravkakh-azs-vveli-limity-na-benzin/",
+     "https://runews24.ru/chita/14/07/2026/v-zabajkale-nezavisimyie-azs-poluchat-limitirovannyie-obemyi-topliva",
+     "https://novayagazeta.eu/amp/articles/2026/07/06/kak-zabaikale-zhivet-v-usloviiakh-tiazheleishego-toplivnogo-krizisa"
     ]
    },
    {
@@ -2608,22 +2606,22 @@
     "lat": 48.48,
     "lon": 135.08,
     "level": "strained",
-    "updated": "2026-07-19T14:50Z",
+    "updated": "2026-07-21T04:25Z",
     "networks": [
      {
-      "name": "Региональные АЗС (Советско-Гаванский / Ванинский р-ны)",
+      "name": "DV Region / NNK-Khabarovsknefteproduct",
       "status": "limited",
       "limit_l": 30,
       "level": "strained",
-      "note": "25.06 (dvobozrenie.ru): в Советско-Гаванском и Ванинском районах Хабаровского края введён лимит не более 30 л бензина на один автомобиль. В остальной части края системных ограничений не зафиксировано — ситуация локальная."
+      "note": "21.07: На 34 АЗС действуют ограничения. DV Region - до 30л бензина. Некоторые АЗС работают только с организациями. Лимит на канистры 20л."
      }
     ],
-    "queues_hours": null,
-    "ai95_price_rub": null,
-    "diesel_price_rub": null,
+    "queues_hours": 2.0,
+    "ai95_price_rub": 73,
+    "diesel_price_rub": 81,
     "source_urls": [
-     "https://dvobozrenie.ru/news/29137/benzin-azs-habarovskij-kraj/",
-     "https://finance.mail.ru/article/eshe-bolshe-regionov-ogranichili-prodazhu-benzina-69214929/"
+     "https://profile.ru/news/economy/topliva-dostatochno-na-108-iz-178-azs-habarovskogo-kraya-soobshhil-gubernator-demeshin-1875405/",
+     "https://vladivostok1.ru/text/transport/2026/07/16/76536078/"
     ]
    },
    {
@@ -9112,23 +9110,6 @@
      "confidence": "confirmed"
     },
     {
-     "id": "chernoe-more-20260715-1",
-     "date": "2026-07-15",
-     "time": "ночь",
-     "city": "Чёрное море (акватория)",
-     "region": "Чёрное море",
-     "type": "drone",
-     "count": 20,
-     "target": "20 судов «теневого флота» (17 нефтяных танкеров, 2 газовоза, буксир) — морская нефтетранспортная инфраструктура",
-     "category": "type/npz",
-     "impact": "damaged",
-     "source_url": "https://www.newsru.co.il/world/15jul2026/madyar_120.html",
-     "confidence": "reported",
-     "lat": 43.3,
-     "lon": 34.0,
-     "detail": "В ночь на 15 июля в акватории Чёрного моря заявлено о поражении 20 судов, которые украинская сторона относит к «теневому флоту»: 17 нефтяных танкеров, 2 газовоза и буксир. Об этом сообщил командующий Силами беспилотных систем ВСУ Роберт Бровди. Российская сторона заявление не комментировала, независимого подтверждения числа поражённых судов нет; детали повреждений не приводятся. Ранее удары по судам наносились в акватории Азовского моря. (NEWSru, Настоящее Время, 15 июля)"
-    },
-    {
      "date": "2026-07-15",
      "time": "night",
      "city": "Ростов-на-Дону",
@@ -9159,6 +9140,23 @@
      "detail": "При детонации FPV-дрона в городе Грайворон получили ранения мужчина и женщина — множественные осколочные ранения. Оказана помощь в Грайворонской центральной районной больнице; пострадавшие переведены в городскую больницу № 2 Белгорода.",
      "source_url": "https://news.mail.ru/incident/71636303/",
      "confidence": "reported"
+    },
+    {
+     "id": "chernoe-more-20260715-1",
+     "date": "2026-07-15",
+     "time": "ночь",
+     "city": "Чёрное море (акватория)",
+     "region": "Чёрное море",
+     "type": "drone",
+     "count": 20,
+     "target": "20 судов «теневого флота» (17 нефтяных танкеров, 2 газовоза, буксир) — морская нефтетранспортная инфраструктура",
+     "category": "type/npz",
+     "impact": "damaged",
+     "source_url": "https://www.newsru.co.il/world/15jul2026/madyar_120.html",
+     "confidence": "reported",
+     "lat": 43.3,
+     "lon": 34.0,
+     "detail": "В ночь на 15 июля в акватории Чёрного моря заявлено о поражении 20 судов, которые украинская сторона относит к «теневому флоту»: 17 нефтяных танкеров, 2 газовоза и буксир. Об этом сообщил командующий Силами беспилотных систем ВСУ Роберт Бровди. Российская сторона заявление не комментировала, независимого подтверждения числа поражённых судов нет; детали повреждений не приводятся. Ранее удары по судам наносились в акватории Азовского моря. (NEWSru, Настоящее Время, 15 июля)"
     },
     {
      "date": "2026-07-15",
@@ -9296,20 +9294,6 @@
    "strikes": [
     {
      "date": "2026-07-16",
-     "time": "утро",
-     "city": "Ярославль",
-     "region": "Ярославская область",
-     "type": "drone",
-     "count": 1,
-     "target": "НПЗ «Славнефть-ЯНОС» (Ярославский нефтеперерабатывающий завод)",
-     "casualties": 1,
-     "title": "Атака БПЛА на Ярославский НПЗ",
-     "detail": "По данным губернатора М. Евраева, в результате атаки дронов на НПЗ произошла гибель одного человека и ранения четырёх. Над территорией завода зафиксирован дым. Перекрыт выезд из города в сторону Москвы.",
-     "source_url": "https://istories.media/news/2026/07/16/rossiya-nanesla-udar-po-skladam-v-kieve-a-ukraina-po-aerodromu-engelsa/",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-07-16",
      "time": "12:28",
      "city": "Салават",
      "region": "Республика Башкортостан",
@@ -9320,6 +9304,20 @@
      "target": "Газпром Нефтехим-Салават — нефтехимический комплекс (установка АВТ-6)",
      "detail": "По спутниковым снимкам: повреждена установка АВТ-6, техническая инфраструктура и трубопроводы",
      "source_url": "https://t.me/exilenova_plus/25435",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-07-16",
+     "time": "утро",
+     "city": "Ярославль",
+     "region": "Ярославская область",
+     "type": "drone",
+     "count": 1,
+     "target": "НПЗ «Славнефть-ЯНОС» (Ярославский нефтеперерабатывающий завод)",
+     "casualties": 1,
+     "title": "Атака БПЛА на Ярославский НПЗ",
+     "detail": "По данным губернатора М. Евраева, в результате атаки дронов на НПЗ произошла гибель одного человека и ранения четырёх. Над территорией завода зафиксирован дым. Перекрыт выезд из города в сторону Москвы.",
+     "source_url": "https://istories.media/news/2026/07/16/rossiya-nanesla-udar-po-skladam-v-kieve-a-ukraina-po-aerodromu-engelsa/",
      "confidence": "reported"
     },
     {
@@ -9400,36 +9398,6 @@
     },
     {
      "date": "2026-07-17",
-     "time": "ночь",
-     "city": "Чёрное море (терминал КТК)",
-     "region": "Краснодарский край / Чёрное море",
-     "lat": 45.0,
-     "lon": 37.5,
-     "type": "drone",
-     "count": 1,
-     "target": "Танкер Nordic Zenith (Suezmax-класс, теневой флот) — две ночные атаки, пожар на судне, эвакуация экипажа. Судно следовало для погрузки нефти на терминал Каспийского трубопроводного консорциума (КТК)",
-     "detail": "Танкер Nordic Zenith атакован два раза беспилотниками возле терминала КТК в Чёрном море. На судне начался пожар, который был потушен экипажем. 13 членов экипажа эвакуированы на судах КТК, 9 остались на борту. Судно стало непригодным для погрузки нефти. КТК — крупнейший маршрут экспорта нефти из Каспия (83 млн тонн/год).",
-     "source_url": "https://vz.ru/news/2026/7/17/1435594.html",
-     "confidence": "confirmed"
-    },
-    {
-     "date": "2026-07-17",
-     "time": "ночь",
-     "city": "Ярославль",
-     "region": "Ярославская область",
-     "lat": 57.6261,
-     "lon": 39.8939,
-     "target": "НПЗ «Славнефть-ЯНОС» (Ярославский нефтеперерабатывающий завод) — повторный удар",
-     "type": "drone",
-     "count": 1,
-     "casualties": null,
-     "title": "Второй удар по Ярославскому НПЗ за три дня",
-     "detail": "Нефтеперерабатывающий завод подвергся повторной атаке в ночь 17-18 июля (после предыдущего удара 16 июля утром).",
-     "source_url": "https://kyivindependent.com",
-     "confidence": "confirmed"
-    },
-    {
-     "date": "2026-07-17",
      "time": "01:00",
      "city": "Горячеводский / Кавказ",
      "region": "Краснодарский край",
@@ -9458,6 +9426,36 @@
      "title": "Удар по подстанции Щебетивка — блокада энергоснабжения Крыма",
      "detail": "Украинские БПЛА поразили ключевую электроподстанцию 110/35/6 кВ. Результат: массовые отключения электроэнергии в Феодосии, Коктебеле и прилегающих районах, включая объекты нефтяной инфраструктуры, зависящие от электроснабжения. Подтверждено спутниковыми снимками и локальными источниками.",
      "source_url": "https://kyivindependent.com/fires-drone-strikes-reported-overnight-across-occupied-crimea",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-07-17",
+     "time": "ночь",
+     "city": "Чёрное море (терминал КТК)",
+     "region": "Краснодарский край / Чёрное море",
+     "lat": 45.0,
+     "lon": 37.5,
+     "type": "drone",
+     "count": 1,
+     "target": "Танкер Nordic Zenith (Suezmax-класс, теневой флот) — две ночные атаки, пожар на судне, эвакуация экипажа. Судно следовало для погрузки нефти на терминал Каспийского трубопроводного консорциума (КТК)",
+     "detail": "Танкер Nordic Zenith атакован два раза беспилотниками возле терминала КТК в Чёрном море. На судне начался пожар, который был потушен экипажем. 13 членов экипажа эвакуированы на судах КТК, 9 остались на борту. Судно стало непригодным для погрузки нефти. КТК — крупнейший маршрут экспорта нефти из Каспия (83 млн тонн/год).",
+     "source_url": "https://vz.ru/news/2026/7/17/1435594.html",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-07-17",
+     "time": "ночь",
+     "city": "Ярославль",
+     "region": "Ярославская область",
+     "lat": 57.6261,
+     "lon": 39.8939,
+     "target": "НПЗ «Славнефть-ЯНОС» (Ярославский нефтеперерабатывающий завод) — повторный удар",
+     "type": "drone",
+     "count": 1,
+     "casualties": null,
+     "title": "Второй удар по Ярославскому НПЗ за три дня",
+     "detail": "Нефтеперерабатывающий завод подвергся повторной атаке в ночь 17-18 июля (после предыдущего удара 16 июля утром).",
+     "source_url": "https://kyivindependent.com",
      "confidence": "confirmed"
     },
     {
@@ -9922,22 +9920,6 @@
     },
     {
      "date": "2026-07-19",
-     "time": "09:25",
-     "city": "Курск",
-     "region": "Курская область",
-     "lat": 51.7373,
-     "lon": 36.1874,
-     "type": "drone",
-     "count": null,
-     "target": "Многоквартирные жилые дома (просп. Победы, ул. Мыльникова, просп. Дериглазова)",
-     "casualties": 2,
-     "title": "Удар БПЛА по жилым домам в Курске",
-     "detail": "Утром 19 июля в Курске повреждены четыре многоквартирных дома. По данным областных властей — двое пострадавших.",
-     "source_url": "https://ria.ru/20260719/kurskaya-2105672874.html",
-     "confidence": "confirmed"
-    },
-    {
-     "date": "2026-07-19",
      "time": null,
      "city": "Льгов",
      "region": "Курская область",
@@ -9966,6 +9948,22 @@
      "title": "Падение обломков БПЛА в Ростовской области",
      "detail": "19 июля в нескольких районах Ростовской области при падении обломков БПЛА возникли пожары сухой растительности и полей, повреждены кровля частного дома и остекление квартиры. Пострадавших не заявлено.",
      "source_url": "https://iz.ru/2134928/2026-07-19/v-rostovskoi-oblasti-iz-za-padeniia-oblomkov-bpla-proizoshlo-neskolko-vozgoranii",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-07-19",
+     "time": "09:25",
+     "city": "Курск",
+     "region": "Курская область",
+     "lat": 51.7373,
+     "lon": 36.1874,
+     "type": "drone",
+     "count": null,
+     "target": "Многоквартирные жилые дома (просп. Победы, ул. Мыльникова, просп. Дериглазова)",
+     "casualties": 2,
+     "title": "Удар БПЛА по жилым домам в Курске",
+     "detail": "Утром 19 июля в Курске повреждены четыре многоквартирных дома. По данным областных властей — двое пострадавших.",
+     "source_url": "https://ria.ru/20260719/kurskaya-2105672874.html",
      "confidence": "confirmed"
     },
     {
@@ -10246,6 +10244,20 @@
    "strikes": [
     {
      "date": "2026-07-20",
+     "time": "12:38",
+     "city": "Новороссийск (терминал КТК)",
+     "region": "Краснодарский край",
+     "lat": 44.6503,
+     "lon": 37.6494,
+     "type": "drone",
+     "count": null,
+     "target": "морской нефтетерминал / танкер NELSA",
+     "detail": "Беспилотник поразил танкер NELSA у причала ВПУ-1 морского терминала КТК; пожар в кормовой части, экипаж эвакуирован, погрузка нефти остановлена. Вторая атака на терминал за два дня.",
+     "source_url": "https://www.fontanka.ru/2026/07/20/76542847/",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-07-20",
      "time": "день",
      "city": "Нижнекамск",
      "region": "Республика Татарстан",
@@ -10298,6 +10310,34 @@
     },
     {
      "date": "2026-07-20",
+     "time": "ночь",
+     "city": "Ейск",
+     "region": "Краснодарский край",
+     "lat": 46.7106,
+     "lon": 38.277,
+     "type": "drone",
+     "count": null,
+     "target": "военный аэродром / склад топлива",
+     "detail": "БПЛА атаковали военный аэродром в Ейске; пожар зафиксирован в районе топливного склада, один пострадавший, повреждены семь частных домов.",
+     "source_url": "https://ru.themoscowtimes.com/2026/07/20/ukrainskie-droni-atakovali-voennii-aerodrom-na-kubani-7-elektropodstantsii-v-krimu-i-azs-v-belgorode-a201222",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-07-20",
+     "time": "ночь",
+     "city": "Белгород",
+     "region": "Белгородская область",
+     "lat": 50.5977,
+     "lon": 36.5856,
+     "type": "drone",
+     "count": null,
+     "target": "АЗС",
+     "detail": "Дрон поразил АЗС «Роснефти» на пересечении улиц Щорса и проезда Автомобилистов, повреждены навес и остекление; задеты также АЗС «Лукойла» и «Газпрома». Два человека получили осколочные ранения.",
+     "source_url": "https://ru.themoscowtimes.com/2026/07/20/ukrainskie-droni-atakovali-voennii-aerodrom-na-kubani-7-elektropodstantsii-v-krimu-i-azs-v-belgorode-a201222",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-07-20",
      "time": "04:30",
      "city": "Домодедово",
      "region": "Московская область",
@@ -10333,7 +10373,22 @@
      "author_hint": "аналитик"
     }
    ],
-   "strikes": []
+   "strikes": [
+    {
+     "date": "2026-07-21",
+     "time": "ночь",
+     "city": "Липецк",
+     "region": "Липецкая область",
+     "lat": 52.61,
+     "lon": 39.63,
+     "type": "drone",
+     "count": null,
+     "target": "энергетика (район ТЭЦ-2)",
+     "detail": "В ночь на 21 июля в промзоне Липецка (ул. Передельческая) возник пожар площадью около 2,5 тыс. кв. м, предположительно в районе ТЭЦ-2. Тепловая аномалия подтверждена NASA FIRMS; официальные подробности о цели не раскрыты.",
+     "source_url": "https://war.obozrevatel.com/v-rossijskom-lipetske-progremela-seriya-vzryivov-na-mestnoj-tets-bushuet-pozhar-foto-i-video.htm",
+     "confidence": "probable"
+    }
+   ]
   }
  },
  "updated": "2026-07-21"
