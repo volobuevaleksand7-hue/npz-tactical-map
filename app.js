@@ -806,19 +806,34 @@
   }
 
   /* ---------- CRIMEA ---------- */
+  // data-drift защита: генератор history-crimea.json (Haiku, agents/update-prompt-history.md) иногда
+  // отдаёт restrictions объектом вместо массива → .forEach падал в цикле рендера. Терпим любую форму
+  // и раскладываем объект в строки, ничего не теряя. ponytail: корень — в промпте генератора, тут страховка на фронте.
+  var CRIMEA_R_LBL = { fuel_rationing: "Нормирование топлива", max_liters_per_day: "Лимит, л/сутки", sales_status: "Продажи", official_price_rub_per_liter: "Офиц. цена, ₽/л", black_market_price_rub_per_liter: "Чёрный рынок, ₽/л", priority_allocation: "Приоритетный отпуск", effective_since: "Действует с" };
+  function crimeaRestrictions(cr) {
+    var r = cr.restrictions;
+    if (Array.isArray(r)) return r;
+    if (r && typeof r === "object") return Object.keys(r).map(function (k) {
+      var v = r[k];
+      if (Array.isArray(v)) v = v.join(", "); else if (typeof v === "boolean") v = v ? "да" : "нет";
+      return { text: (CRIMEA_R_LBL[k] || k.replace(/_/g, " ")) + ": " + v };
+    });
+    if (typeof r === "string" && r) return [r];
+    return [];
+  }
   function renderCrimea() {
     var cr = S.hist && S.hist.crimea;
     var body = document.getElementById("crimeaBody");
     if (!cr) { body.innerHTML = '<div class="note">Данные по Крыму загружаются…</div>'; return; }
     var h = '<div class="csum">' + esc(cr.summary) + '</div>';
     h += '<div class="sect">ОГРАНИЧЕНИЯ</div>';
-    (cr.restrictions || []).forEach(function (r) {
+    crimeaRestrictions(cr).forEach(function (r) {
       var pre = (r && r.date) ? esc(rusDate(r.date)) + ' — ' : '';
       var src = (r && r.source_url) ? ' <a href="' + safeUrl(r.source_url) + '" target="_blank" rel="noopener" style="font-size:10px;color:var(--teal)">источник ↗</a>' : '';
       h += '<div class="crow"><span class="ci">⛔</span><span>' + pre + esc(r && r.text ? r.text : r) + src + '</span></div>';
     });
     h += '<div class="sect">АЗС / ГОРОДА</div><div class="cstations">';
-    (cr.stations || []).forEach(function (s) { h += '<div class="cst"><span>📍 ' + esc(s.name) + ' <span style="color:var(--ink-dim);font-size:11px">' + esc(s.note) + '</span></span><span class="cb ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span></div>'; });
+    (cr.stations || []).forEach(function (s) { h += '<div class="cst"><span>📍 ' + esc(s.name) + ' <span style="color:var(--ink-dim);font-size:11px">' + esc(s.note || s.details) + '</span></span><span class="cb ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span></div>'; });
     h += '</div>';
     // C: сводка по сети АЗС Крыма — те же уровни/цвета, что на вкладке АЗС (даёт конкретику на карте)
     if (S.azsStations && S.azsStations.stations) {
@@ -854,15 +869,17 @@
       }
       L_cr.layer.clearLayers();
       (cr.routes || []).forEach(function (rt) {
+        if (!Array.isArray(rt.coords)) return; // drift: маршрут без coords — на карте не рисуем (текст всё равно в списке выше)
         var col = rt.status === "threatened" ? "#d23a2e" : rt.status === "cut" ? "#a01d14" : "#178585";
         L.polyline(rt.coords, { color: col, weight: 4, opacity: .8, dashArray: "6,8" })
-          .bindPopup('<div class="pp-h">' + esc(rt.name) + '</div><span class="pp-st down">' + esc(String(rt.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(rt.note) + '</div>', POPUP_OPTS)
+          .bindPopup('<div class="pp-h">' + esc(rt.name) + '</div><span class="pp-st down">' + esc(String(rt.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(rt.note || rt.details) + '</div>', POPUP_OPTS)
           .addTo(L_cr.layer);
       });
       (cr.stations || []).forEach(function (s) {
+        if (typeof s.lat !== "number" || typeof s.lon !== "number") return; // drift: станция без координат — только в списке выше
         var c = s.status === "dry" ? "#a01d14" : s.status === "ok" ? "#2f9e57" : "#df8f17";
         L.marker([s.lat, s.lon], { icon: L.divIcon({ className: "", html: '<div style="background:' + c + ';color:#fff;font-weight:800;font-size:11px;padding:3px 8px;border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,.35);white-space:nowrap">⛽ ' + esc(s.name) + '</div>', iconSize: [128, 24], iconAnchor: [64, 18] }) })
-          .bindPopup('<div class="pp-h">⛽ ' + esc(s.name) + '</div><span class="pp-st ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(s.note) + '</div>', POPUP_OPTS)
+          .bindPopup('<div class="pp-h">⛽ ' + esc(s.name) + '</div><span class="pp-st ' + esc(s.status) + '">' + esc(String(s.status || "").toUpperCase()) + '</span><div class="pp-note">' + esc(s.note || s.details) + '</div>', POPUP_OPTS)
           .addTo(L_cr.layer);
       });
       // АЗС-сеть — те же иконки/уровни/попапы, что и на вкладке АЗС (data/azs-stations.json)
