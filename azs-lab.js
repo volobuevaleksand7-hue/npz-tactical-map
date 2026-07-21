@@ -256,6 +256,7 @@
       b.addEventListener("click", function () {
         saveVote(station.id, s.k);       // на устройстве — мгновенно
         postVote(station.id, s.k);       // в общий бэкенд — фоном (ошибка не критична)
+        cacheDrop(station.id);           // свой голос — сброс кэша, чтобы recolor увидел смену
         renderSelf(self, comm, station, popup);
         loadCommunity(comm, station, popup); // подтянуть свежий агрегат с учётом своей отметки
         if (scheduleRecolor) scheduleRecolor(); // маркер может сменить цвет от своей отметки
@@ -285,6 +286,24 @@
   // «live» на карте). Протухли/перестали побеждать → откат на исходную регион-иконку.
   var LIVE_COLORS = { yes: "#2f9e57", no: "#d23a2e", queue: "#ef9a1a", limit: "#e8c520" };
   var scheduleRecolor = null;
+
+  // ─── клиентский кэш агрегатов для перекраски ─────────────────────────────────
+  // recolorVisible гоняется на каждый moveend/zoomend; при панораме одни и те же
+  // станции (в основном пустые) перезапрашивались десятками → жгли Upstash
+  // (free ~10k команд/день). Кэшируем агрегат по станции на короткое окно: повторный
+  // проход по уже виденным = 0 обращений к API. Свой голос сбрасывает запись (cacheDrop).
+  // Попап (fetchAgg) намеренно НЕ кэшируем — он редкий, ручной, и должен быть максимально
+  // свежим (свежее «нет» под ударами). Жжёт лимит именно bulk-перекраска, её и кэшируем.
+  // ponytail: TTL 60с — калибровочная ручка; голоса капают медленно, но свежесть не душим.
+  //           Кэш ограничен числом станций (~9609 мелких записей) — прунинг не нужен.
+  var AGG_TTL_MS = 60 * 1000;
+  var aggCache = {};                              // id → { agg, at }
+  function cacheGet(id, now) {
+    var e = aggCache[id];
+    return (e && (now || Date.now()) - e.at < AGG_TTL_MS) ? e : null;
+  }
+  function cachePut(id, agg, now) { aggCache[id] = { agg: agg, at: now || Date.now() }; }
+  function cacheDrop(id) { delete aggCache[id]; }
 
   function liveIcon(status) {
     var c = LIVE_COLORS[status] || "#7a7e85";
@@ -325,22 +344,36 @@
       applyChunk(byId, ids.slice(i, i + 50));
     }
   }
+  // Применить один агрегат к маркеру: чистая победа живого → live-иконка + гало,
+  // иначе (протухло/near-tie/пусто) откат на регион-иконку. Идемпотентно (гард по _liveStatus).
+  function applyAgg(m, agg) {
+    if (!m || !m.setIcon) return;
+    if (winsClean(agg)) {
+      if (m._liveStatus !== agg.top_status) {
+        if (!m._origIcon) m._origIcon = m.getIcon ? m.getIcon() : m.options.icon;
+        m.setIcon(liveIcon(agg.top_status));
+        m._liveStatus = agg.top_status;
+      }
+    } else if (m._liveStatus) {              // перестало побеждать/протухло → назад на регион-иконку
+      if (m._origIcon) m.setIcon(m._origIcon);
+      m._liveStatus = null;
+    }
+  }
+
   function applyChunk(byId, chunk) {
-    fetchAggMany(chunk).then(function (res) {
-      if (!res) return; // рубильник: сеть недоступна → маркеры остаются регион-цветом
-      chunk.forEach(function (id) {
-        var m = byId[id]; if (!m || !m.setIcon) return;
-        var agg = res[id];
-        if (winsClean(agg)) {
-          if (m._liveStatus !== agg.top_status) {
-            if (!m._origIcon) m._origIcon = m.getIcon ? m.getIcon() : m.options.icon;
-            m.setIcon(liveIcon(agg.top_status));
-            m._liveStatus = agg.top_status;
-          }
-        } else if (m._liveStatus) {           // перестало побеждать/протухло → назад на регион-иконку
-          if (m._origIcon) m.setIcon(m._origIcon);
-          m._liveStatus = null;
-        }
+    var now = Date.now(), toFetch = [];
+    chunk.forEach(function (id) {
+      var hit = cacheGet(id, now);
+      if (hit) applyAgg(byId[id], hit.agg);   // из кэша — без сети
+      else toFetch.push(id);
+    });
+    if (!toFetch.length) return;              // всё из кэша — ни одного обращения к API
+    fetchAggMany(toFetch).then(function (res) {
+      if (!res) return;                       // рубильник: сеть недоступна → маркеры регион-цветом
+      var t = Date.now();
+      toFetch.forEach(function (id) {
+        cachePut(id, res[id], t);
+        applyAgg(byId[id], res[id]);
       });
     });
   }
@@ -371,6 +404,12 @@
     console.assert(ago(now, now + 5 * 60000) === "5 мин назад", "[azs-lab] ago(5m)");
     console.assert(ago(now, now + 3 * 3600000) === "3 ч назад", "[azs-lab] ago(3h)");
     console.assert(cid() === cid() && cid().length > 3, "[azs-lab] cid пустой/нестабилен");
+    // кэш агрегатов перекраски: hit в окне TTL, miss после TTL, drop чистит
+    cachePut("__c__", { count: 2 }, now);
+    console.assert(cacheGet("__c__", now + 1000) && cacheGet("__c__", now + 1000).agg.count === 2, "[azs-lab] кэш: свежий hit потерян");
+    console.assert(cacheGet("__c__", now + AGG_TTL_MS + 1) === null, "[azs-lab] кэш: протухший всё ещё отдаётся");
+    cacheDrop("__c__");
+    console.assert(cacheGet("__c__", now) === null, "[azs-lab] кэш: drop не очистил");
     var v = loadVotes(); delete v[id];
     try { localStorage.setItem(VOTES_KEY, JSON.stringify(v)); } catch (_) {}
     console.info("[azs-lab] self-test done — молчание ассертов выше = логика цела");
