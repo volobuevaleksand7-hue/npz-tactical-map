@@ -1,8 +1,13 @@
 // api/azs-votes.js — общий краудсорс наличия топлива для слоя АЗС.
 // GET  /api/azs-votes?ids=osm-1,osm-2  → агрегат отметок по станциям.
+// GET  /api/azs-votes?active=1         → id станций со свежими отметками (для перекраски).
+// GET  /api/azs-votes?stats=1          → health+бюджет: активные станции + оценка команд/сутки.
 // POST /api/azs-votes  { station_id, status, cid }  → записать отметку.
 // Хранилище: Upstash Redis через REST (env KV_REST_API_URL / KV_REST_API_TOKEN,
 // подключены к проекту через Vercel Marketplace). Без зависимостей — как radar-state.js.
+// Анти-абьюз (#2): 1/cid/станцию/30с + лимит по IP (соль-хэш, IP не храним) + same-origin гейт.
+// Мониторинг (#5): выборочный счётчик команд + Telegram-алерт при пороге бюджета Upstash.
+// Опц. env: AZS_IP_SALT, AZS_CMD_ALERT_AT, AZS_ALLOWED_ORIGIN, AZS_ALERT_BOT_TOKEN, AZS_ALERT_CHAT_ID.
 // ТЗ: docs/agents/tz-fuel-availability-2026-07.md (фаза 2). Приватность: IP не логируем.
 
 var STATUSES = ["yes", "no", "queue", "limit"];
@@ -10,6 +15,20 @@ var WINDOW_MS = 6 * 60 * 60 * 1000;   // свежее окно для агрег
 var TTL_SEC = 24 * 60 * 60;           // авто-очистка ключа станции
 var RL_SEC = 30;                      // 1 отметка с cid на станцию в 30 сек
 var MAX_IDS = 60;                     // потолок станций на один GET
+
+// #2 анти-абьюз: помимо 1/cid/станцию/30с — лимит по IP. IP НЕ храним: только соль-хэш
+// с TTL (ephemeral rate-limit-токен, не привязан к личности — приватность ТЗ §4 цела).
+var crypto = require("crypto");
+var IP_LIMIT = 40;                    // отметок с одного IP за окно
+var IP_WINDOW_SEC = 60 * 60;          // окно IP-лимита (1ч, фиксированное)
+var IP_SALT = process.env.AZS_IP_SALT || "azs-v1";
+
+// #5 мониторинг бюджета Upstash (free ~10k команд/день). Команды считаем ВЫБОРОЧНО
+// (M_SAMPLE) и домножаем на 1/выборку — иначе счётчик сам съест бюджет, который стережёт.
+var M_SAMPLE = 0.05;                                              // доля запросов в учёте
+var CMD_ALERT_AT = Number(process.env.AZS_CMD_ALERT_AT || 8000);  // порог алерта (~80% free)
+function mDay() { return new Date().toISOString().slice(0, 10); } // UTC-сутки, ключ счётчика
+function justCrossed(est, inc, at) { return est >= at && (est - inc) < at; } // порог пройден именно сейчас
 
 // ─── чистая логика агрегата (тестируется ниже без сети) ──────────────────────
 // entries: { cid: '{"s":"queue","t":1699999999999}' } (как HGETALL из Redis)
@@ -48,13 +67,47 @@ function validCid(c) { return typeof c === "string" && c.length >= 3 && c.length
 async function upstash(commands) {
   var url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!url || !token) throw new Error("no-store");
+  // #5 выборочный учёт команд бюджета: домешиваем счётчик в тот же round-trip, редко.
+  var track = commands.length && Math.random() < M_SAMPLE;
+  var day = track ? mDay() : null;
+  var inc = track ? Math.round(commands.length / M_SAMPLE) : 0;
+  var body = track ? commands.concat([
+    ["INCRBY", "azs:m:cmd:" + day, String(inc)],
+    ["EXPIRE", "azs:m:cmd:" + day, "172800", "NX"]
+  ]) : commands;
   var r = await fetch(url.replace(/\/$/, "") + "/pipeline", {
     method: "POST",
     headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
-    body: JSON.stringify(commands)
+    body: JSON.stringify(body)
   });
   if (!r.ok) throw new Error("upstash " + r.status);
-  return r.json(); // [{result:...}, ...]
+  var out = await r.json(); // [{result:...}, ...]
+  if (track) {
+    var est = out[commands.length] && out[commands.length].result;      // результат INCRBY
+    if (typeof est === "number" && justCrossed(est, inc, CMD_ALERT_AT)) await maybeAlert(day, est);
+    out = out.slice(0, commands.length);   // команды метрики наверх не отдаём (контракт цел)
+  }
+  return out;
+}
+
+// #5 алерт в Telegram при пересечении порога бюджета — раз в сутки (SET NX), тихо если
+// канал не настроен. RAW-fetch мимо upstash(), чтобы не пересчитывать метрику саму на себя.
+async function maybeAlert(day, est) {
+  try {
+    var url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
+    var once = await fetch(url.replace(/\/$/, "") + "/pipeline", {
+      method: "POST", headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+      body: JSON.stringify([["SET", "azs:m:alerted:" + day, "1", "NX", "EX", "172800"]])
+    }).then(function (r) { return r.ok ? r.json() : null; });
+    if (!once || !(once[0] && once[0].result === "OK")) return;   // уже алертили сегодня
+    var bot = process.env.AZS_ALERT_BOT_TOKEN, chat = process.env.AZS_ALERT_CHAT_ID;
+    if (!bot || !chat) return;                                     // канал не настроен — тихо
+    await fetch("https://api.telegram.org/bot" + bot + "/sendMessage", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chat,
+        text: "⚠️ azs-votes: ~" + est + " команд Upstash за " + day + " (порог " + CMD_ALERT_AT + ", free ~10k/день). Проверь бюджет." })
+    });
+  } catch (_) { /* мониторинг не должен ронять запись голоса */ }
 }
 
 module.exports = async function handler(req, res) {
@@ -66,6 +119,18 @@ module.exports = async function handler(req, res) {
 
   try {
     if (req.method === "GET") {
+      // ?stats=1 → лёгкий health+бюджет: число активных станций + оценка команд за сутки.
+      if (req.query && req.query.stats) {
+        var day = mDay();
+        var s = await upstash([["GET", "azs:m:cmd:" + day], ["ZCARD", "azs:active"]]);
+        res.status(200).json({
+          ok: true, day: day,
+          cmds_today_est: Number((s[0] && s[0].result) || 0),
+          active_stations: Number((s[1] && s[1].result) || 0),
+          alert_at: CMD_ALERT_AT, as_of: Date.now()
+        });
+        return;
+      }
       // ?active=1 → id станций со свежими (≤ окна агрегата) отметками. Клиент опрашивает
       // агрегаты только для них ∩ видимых, а не для всех видимых (на старте почти все пустые).
       if (req.query && req.query.active) {
@@ -95,6 +160,22 @@ module.exports = async function handler(req, res) {
       if (!validId(id) || STATUSES.indexOf(status) < 0 || !validCid(cid)) {
         res.status(400).json({ error: "bad-input" }); return;
       }
+      // #2 same-origin гейт: браузер шлёт Origin на POST всегда (даже same-origin). Пускаем
+      // только со своего домена (Origin.host === Host — работает и на кастомном домене/preview);
+      // без Origin (curl) — уходит в IP-лимит ниже. Не панацея (Origin подделывается), но
+      // режет кросс-сайт-вброс через чужие вкладки.
+      var origin = req.headers.origin;
+      if (origin) {
+        var oh = ""; try { oh = new URL(origin).host; } catch (_) {}
+        var allowed = oh && (oh === (req.headers.host || "") ||
+          (process.env.AZS_ALLOWED_ORIGIN || "").split(",").indexOf(oh) >= 0);
+        if (!allowed) { res.status(403).json({ error: "bad-origin" }); return; }
+      }
+      // #2 лимит по IP (соль-хэш + TTL, IP не храним): режет вброс ротацией cid с одного адреса.
+      var ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "0";
+      var iph = crypto.createHash("sha256").update(IP_SALT + ip).digest("hex").slice(0, 24);
+      var ipc = await upstash([["INCR", "ripc:" + iph], ["EXPIRE", "ripc:" + iph, String(IP_WINDOW_SEC), "NX"]]);
+      if ((ipc[0] && ipc[0].result) > IP_LIMIT) { res.status(429).json({ error: "rate-limited" }); return; }
       // анти-спам: 1 отметка с cid на станцию в RL_SEC (не логируем IP)
       var rl = await upstash([["SET", "rl:" + cid + ":" + id, "1", "NX", "EX", String(RL_SEC)]]);
       if (!(rl[0] && rl[0].result === "OK")) { res.status(429).json({ error: "too-soon" }); return; }
@@ -162,5 +243,10 @@ if (require.main === module) {
   assert.strictEqual(validId("a b"), false);
   assert.strictEqual(validCid("cid-12345"), true);
   assert.strictEqual(validCid("xx"), false);
+  // #5 монитор: «порог пройден именно сейчас» + формат суток
+  assert.strictEqual(justCrossed(8005, 10, 8000), true, "пересёк порог на этом инкременте");
+  assert.strictEqual(justCrossed(8005, 2, 8000), false, "уже был за порогом (prev 8003)");
+  assert.strictEqual(justCrossed(50, 10, 8000), false, "далеко до порога");
+  assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(mDay()), "mDay = YYYY-MM-DD");
   console.log("[azs-votes] self-test OK");
 }
