@@ -65,6 +65,23 @@
     return Math.floor(h / 24) + " дн назад";
   }
 
+  // ─── общий бэкенд (Upstash через /api/azs-votes) ─────────────────────────────
+  // Рубильник: любая ошибка сети/сервера → null, виджет остаётся device-local,
+  // карта не пустеет (нет SPOF на бэкенде).
+  var API = "/api/azs-votes";
+  function fetchAgg(id) {
+    return fetch(API + "?ids=" + encodeURIComponent(id))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { return j ? j[id] : null; })
+      .catch(function () { return null; });
+  }
+  function postVote(id, status) {
+    return fetch(API, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ station_id: id, status: status, cid: cid() })
+    }).catch(function () { /* локально уже сохранено */ });
+  }
+
   // ─── css ───────────────────────────────────────────────────────────────────
   function injectCss() {
     if (document.getElementById("azs-lab-css")) return;
@@ -83,7 +100,9 @@
       ".azs-lab-edit{cursor:pointer;text-decoration:underline;opacity:.6;font-weight:400}",
       ".azs-lab-stale{color:#8a6d00;background:#fff6d5;border-radius:5px;padding:4px 6px;",
       "font-size:10px;margin-bottom:5px}",
-      ".azs-lab-note{font-size:10px;opacity:.55;margin-top:4px}"
+      ".azs-lab-note{font-size:10px;opacity:.55;margin-top:4px}",
+      ".azs-lab-comm{margin-bottom:7px}",
+      ".azs-lab-comm-line{font-size:11px;font-weight:700}"
     ].join("");
     document.head.appendChild(s);
   }
@@ -97,11 +116,49 @@
     try { if (popup._adjustPan) popup._adjustPan(); } catch (_) {}
   }
 
+  // box = комм-строка (общий агрегат) + self-блок (своя отметка/кнопки), обновляются раздельно.
   function render(box, station, popup) {
     box.textContent = "";
+    var comm = document.createElement("div"); comm.className = "azs-lab-comm"; box.appendChild(comm);
+    var self = document.createElement("div"); self.className = "azs-lab-self"; box.appendChild(self);
+    renderSelf(self, comm, station, popup);
+    loadCommunity(comm, station, popup);
+  }
+
+  // Общий агрегат из бэкенда. Ошибка → пусто (рубильник, device-local сохраняется).
+  function loadCommunity(comm, station, popup) {
+    fetchAgg(station.id).then(function (agg) {
+      comm.textContent = "";
+      if (!agg) return; // API недоступен — молча остаёмся на своих отметках
+      var line = document.createElement("div");
+      line.className = "azs-lab-comm-line";
+      if (!agg.count) {
+        line.textContent = "👥 За 6 ч отметок ещё нет — будьте первым.";
+      } else {
+        var segs = STATUSES.filter(function (s) { return agg.breakdown[s.k]; })
+          .map(function (s) { return s.icon + agg.breakdown[s.k]; }).join("  ");
+        line.textContent = "👥 За 6 ч: " + segs;
+        if (agg.last_observed_at) {
+          var a = document.createElement("span");
+          a.className = "azs-lab-age";
+          a.textContent = "  · последняя " + ago(agg.last_observed_at);
+          line.appendChild(a);
+        }
+      }
+      comm.appendChild(line);
+      var note = document.createElement("div");
+      note.className = "azs-lab-note";
+      note.textContent = "Сообщения водителей, не гарантия.";
+      comm.appendChild(note);
+      reflow(popup);
+    });
+  }
+
+  function renderSelf(self, comm, station, popup) {
+    self.textContent = "";
     var vote = getVote(station.id);
     var stale = vote && isStale(vote);
-    if (!vote || stale) { renderButtons(box, station, popup, stale ? vote : null); return; }
+    if (!vote || stale) { renderButtons(self, comm, station, popup, stale ? vote : null); return; }
 
     var st = statusBy(vote.status);
     var mine = document.createElement("div");
@@ -114,30 +171,26 @@
     var edit = document.createElement("span");
     edit.className = "azs-lab-edit";
     edit.textContent = "изменить";
-    edit.addEventListener("click", function () { renderButtons(box, station, popup, null); });
+    edit.addEventListener("click", function () { renderButtons(self, comm, station, popup, null); });
     mine.appendChild(edit);
-    box.appendChild(mine);
-    var note = document.createElement("div");
-    note.className = "azs-lab-note";
-    note.textContent = "Отметка видна только вам на этом устройстве.";
-    box.appendChild(note);
+    self.appendChild(mine);
     reflow(popup);
   }
 
-  function renderButtons(box, station, popup, staleVote) {
-    box.textContent = "";
+  function renderButtons(self, comm, station, popup, staleVote) {
+    self.textContent = "";
     if (staleVote) {
       var warn = document.createElement("div");
       warn.className = "azs-lab-stale";
       var sv = statusBy(staleVote.status);
       warn.textContent = "Ваша отметка «" + (sv ? sv.short : staleVote.status) + "» устарела ("
         + ago(staleVote.observed_at) + ") — неподтверждено, отметьте заново.";
-      box.appendChild(warn);
+      self.appendChild(warn);
     }
     var q = document.createElement("div");
     q.className = "azs-lab-q";
     q.textContent = "Вы здесь? Отметьте за 2 сек:";
-    box.appendChild(q);
+    self.appendChild(q);
 
     var row = document.createElement("div");
     row.className = "azs-lab-btns";
@@ -147,13 +200,14 @@
       b.className = "azs-lab-b";
       b.textContent = s.icon + " " + s.label;
       b.addEventListener("click", function () {
-        saveVote(station.id, s.k);
-        cid(); // анонимный id устройства заводим при первой отметке
-        render(box, station, popup);
+        saveVote(station.id, s.k);       // на устройстве — мгновенно
+        postVote(station.id, s.k);       // в общий бэкенд — фоном (ошибка не критична)
+        renderSelf(self, comm, station, popup);
+        loadCommunity(comm, station, popup); // подтянуть свежий агрегат с учётом своей отметки
       });
       row.appendChild(b);
     });
-    box.appendChild(row);
+    self.appendChild(row);
     reflow(popup);
   }
 
