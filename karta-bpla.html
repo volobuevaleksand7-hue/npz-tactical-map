@@ -87,6 +87,11 @@
     .hero-label{display:inline-block;background:var(--red);color:#fff;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:6px;margin-bottom:12px}
     .hero-h{font-size:28px;font-weight:800;line-height:1.2;margin-bottom:10px}
     .hero-sub{font-size:15px;color:var(--ink-dim);line-height:1.6;max-width:680px}
+    /* живая карта (iframe /radar?embed=1) */
+    .live-map-wrap{margin:18px 0 8px}
+    .live-map{display:block;width:100%;height:70vh;min-height:420px;max-height:760px;border:1px solid var(--line,rgba(40,70,90,.18));border-radius:14px;background:var(--board,#dfe8ec)}
+    .live-map-wrap .map-cta{margin-top:10px}
+    @media(max-width:768px){.live-map{height:62vh;min-height:360px}}
     .map-cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:18px 0 4px;padding:16px 22px;background:var(--red);color:#fff;font-weight:800;font-size:16px;border-radius:12px;text-decoration:none;box-shadow:0 6px 20px rgba(210,58,46,.3);transition:.15s}
     .map-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(210,58,46,.45)}
     .map-cta .mc-ico{font-size:22px}
@@ -213,7 +218,14 @@
           <div class="status-card"><div class="val">БПЛА · ✷</div><div class="lbl">Типы: дрон / ракета</div></div>
           <div class="status-card"><div class="val">OSINT</div><div class="lbl">Оценка, не оповещение</div></div>
         </div>
-        <div class="updated-line">Обновлено 15 июля 2026, МСК</div>
+        <div class="updated-line">Обновлено 21 июля 2026, МСК</div>
+      </div>
+
+      <!-- ЖИВАЯ КАРТА — embed /radar. Интент «карта бпла» = сама карта, не текст о ней:
+           весь топ выдачи — живые карты, статья без карты упирается в поведенческие (поз ~7). -->
+      <div class="live-map-wrap">
+        <iframe class="live-map" src="/radar?embed=1" title="Живая карта БПЛА и воздушных тревог по регионам России"></iframe>
+        <a class="map-cta inline" href="/radar"><span class="mc-ico">📡</span> Открыть радар на весь экран →</a>
       </div>
 
       <!-- ПЕРВОИСТОЧНИКИ -->

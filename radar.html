@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" data-theme="light">
 <head>
-  <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("radar-theme")||"light")}catch(e){}</script>
+  <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("radar-theme")||"light");if(new URLSearchParams(location.search).has("embed"))document.documentElement.classList.add("embed")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#d23a2e">
@@ -93,6 +93,12 @@
     .seo-upd a{color:var(--teal);text-decoration:none}
     .seo-upd a:hover{text-decoration:underline}
     @media(max-width:768px){.seo-h1{font-size:11px}.seo-upd{display:none}}
+    /* embed-режим (?embed=1) — iframe на /karta-bpla: только карта+панель+легенда+тикер */
+    html.embed .topbar,html.embed .seo-strip,html.embed .nav-drawer,html.embed .feed,
+    html.embed .about-radar,html.embed .disclaimer,
+    html.embed .art-nudge,html.embed .nudge-tab,html.embed .pp-vpn,html.embed .pp-vpn-float{display:none!important}
+    html.embed .map{top:0}
+    html.embed .panel{top:14px;max-height:calc(100% - 90px)}
     .leaflet-container{background:var(--board)!important}
     /* ponytail: попапы Leaflet раньше оставались белыми в тёмной теме — теперь следуют теме */
     .leaflet-popup-content-wrapper{background:var(--surface)!important;color:var(--ink)!important}
