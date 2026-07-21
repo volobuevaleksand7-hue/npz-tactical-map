@@ -484,7 +484,7 @@
       </nav>
       <nav class="embed-nav" aria-label="Навигация карты">
         <a href="/" target="_top" title="Главная интерактивная карта НПЗ">🗺️ <span class="en-label">Карта НПЗ</span></a>
-        <a href="/karta-bpla" target="_top" title="Статья: карта БПЛА онлайн">📄 <span class="en-label">Статья</span></a>
+        <a href="/karta-bpla" target="_top" title="К тексту статьи" onclick="if(window.top!==window.self){window.parent.postMessage('npz:scroll-article','*');return false}">📄 <span class="en-label">Статья</span></a>
       </nav>
     <div class="topctl">
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--ink)">

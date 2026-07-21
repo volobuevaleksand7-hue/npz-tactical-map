@@ -227,9 +227,14 @@
         <iframe class="live-map" src="/radar?embed=1" title="Живая карта БПЛА и воздушных тревог по регионам России"></iframe>
         <a class="map-cta inline" href="/radar"><span class="mc-ico">📡</span> Открыть радар на весь экран →</a>
       </div>
+      <script>
+      /* embed-карта (/radar?embed=1) шлёт сигнал «к статье» — скроллим сами, в своём контексте
+         (кросс-контекстный scrollIntoView из iframe не работает) */
+      addEventListener("message",function(e){if(e.origin===location.origin&&e.data==="npz:scroll-article"){var a=document.getElementById("article");if(a)a.scrollIntoView({behavior:"smooth",block:"start"});}});
+      </script>
 
-      <!-- ПЕРВОИСТОЧНИКИ -->
-      <div class="osint-note" style="border-left-color:var(--teal)">
+      <!-- ПЕРВОИСТОЧНИКИ (якорь #article — кнопка «Статья» из embed-карты скроллит сюда) -->
+      <div class="osint-note" id="article" style="border-left-color:var(--teal);scroll-margin-top:16px">
         <strong>📚 Первоисточники (недоступны в РФ):</strong> удары БПЛА по НПЗ подтверждают независимые СМИ —
         <a href="https://meduza.io/news/2026/06/12/ukrainskie-drony-sbili-nad-15-regionami-rossii-v-samarskoy-oblasti-v-rezultate-ataki-bespilotnikov-proizoshel-pozhar-na-neftehimicheskom-zavode-tolyattikauchuk" target="_blank" rel="noopener noreferrer">Meduza: пожар на НПЗ в Тольятти после атаки дронов</a>,
         <a href="https://www.themoscowtimes.com/2026/06/16/ukrainian-drone-attacks-spark-fires-at-moscow-refinery-and-krasnodar-region-fuel-depot-a93023" target="_blank" rel="noopener noreferrer">The Moscow Times: атаки дронов вызвали пожары на НПЗ в Москве и топливной базе на Кубани</a>,
