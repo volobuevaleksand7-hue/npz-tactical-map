@@ -13,19 +13,32 @@ var MAX_IDS = 60;                     // потолок станций на од
 
 // ─── чистая логика агрегата (тестируется ниже без сети) ──────────────────────
 // entries: { cid: '{"s":"queue","t":1699999999999}' } (как HGETALL из Redis)
+// top_status — победитель по СВЕЖЕСТИ (recency-вес), не по сырому count: заправка
+// пустеет за час, «нет» 5 мин назад важнее «есть» 3ч назад (ТЗ §4.5).
 function aggregate(entries, now) {
   var breakdown = { yes: 0, no: 0, queue: 0, limit: 0 };
-  var count = 0, last = 0;
+  var weight = { yes: 0, no: 0, queue: 0, limit: 0 };
+  var count = 0, last = 0, totalW = 0;
   Object.keys(entries || {}).forEach(function (cid) {
     var v; try { v = JSON.parse(entries[cid]); } catch (_) { return; }
     if (!v || STATUSES.indexOf(v.s) < 0 || typeof v.t !== "number") return;
-    if (now - v.t > WINDOW_MS) return;            // протухло — не считаем
-    breakdown[v.s]++; count++;
+    var age = now - v.t;
+    if (age > WINDOW_MS) return;                 // протухло — не считаем
+    var w = 1 - age / WINDOW_MS;                 // свежесть: 1 (сейчас) → 0 (край окна)
+    if (w < 0) w = 0;
+    breakdown[v.s]++; weight[v.s] += w; totalW += w; count++;
     if (v.t > last) last = v.t;
   });
-  var top = null, best = 0;
-  STATUSES.forEach(function (s) { if (breakdown[s] > best) { best = breakdown[s]; top = s; } });
-  return { count: count, breakdown: breakdown, top_status: top, last_observed_at: last || null };
+  var top = null, bestW = 0;
+  STATUSES.forEach(function (s) { if (weight[s] > bestW) { bestW = weight[s]; top = s; } });
+  var topShare = totalW > 0 ? bestW / totalW : 0;      // единодушие (доля веса победителя)
+  var volume = Math.min(1, count / 3);                 // объём: 1 голос слабо, 3+ полно
+  var confidence = Math.round(topShare * volume * 100) / 100;
+  return {
+    count: count, breakdown: breakdown, top_status: top,
+    confidence: confidence, top_share: Math.round(topShare * 100) / 100,
+    last_observed_at: last || null
+  };
 }
 
 function validId(id) { return typeof id === "string" && /^[a-z0-9:_-]{1,48}$/i.test(id); }
@@ -114,9 +127,19 @@ if (require.main === module) {
   assert.strictEqual(agg.breakdown.queue, 2);
   assert.strictEqual(agg.breakdown.yes, 1);
   assert.strictEqual(agg.breakdown.no, 0, "протухшее no не в счёте");
-  assert.strictEqual(agg.top_status, "queue", "преобладает queue");
+  assert.strictEqual(agg.top_status, "queue", "преобладает queue (по весу свежести)");
   assert.strictEqual(agg.last_observed_at, now - 1000);
-  assert.deepStrictEqual(aggregate({}, now), { count: 0, breakdown: { yes: 0, no: 0, queue: 0, limit: 0 }, top_status: null, last_observed_at: null });
+  assert.ok(agg.confidence > 0.6 && agg.confidence <= 1, "confidence высокий при 3 свежих единодушных-ish: " + agg.confidence);
+  assert.ok(agg.top_share > 0.6, "queue держит большинство веса: " + agg.top_share);
+  // одна свежая отметка: top верный, но confidence низкий (помечаем «1 водитель»)
+  var one = aggregate({ a: JSON.stringify({ s: "no", t: now - 1000 }) }, now);
+  assert.strictEqual(one.top_status, "no");
+  assert.ok(one.confidence <= 0.34, "1 голос — низкая уверенность: " + one.confidence);
+  // свежее «нет» перебивает старое «есть» по весу
+  var beats = aggregate({ a: JSON.stringify({ s: "yes", t: now - (WINDOW_MS * 0.9) }),
+                          b: JSON.stringify({ s: "no", t: now - 1000 }) }, now);
+  assert.strictEqual(beats.top_status, "no", "свежее 'нет' бьёт старое 'есть'");
+  assert.deepStrictEqual(aggregate({}, now), { count: 0, breakdown: { yes: 0, no: 0, queue: 0, limit: 0 }, top_status: null, confidence: 0, top_share: 0, last_observed_at: null });
   assert.deepStrictEqual(hgetallToObj(["x", "1", "y", "2"]), { x: "1", y: "2" });
   assert.strictEqual(validId("osm-40889936"), true);
   assert.strictEqual(validId("a b"), false);

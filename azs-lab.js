@@ -102,7 +102,12 @@
       "font-size:10px;margin-bottom:5px}",
       ".azs-lab-note{font-size:10px;opacity:.55;margin-top:4px}",
       ".azs-lab-comm{margin-bottom:7px}",
-      ".azs-lab-comm-line{font-size:11px;font-weight:700}"
+      ".azs-lab-comm-line{font-size:11px;font-weight:700}",
+      ".azs-lab-verdict{font-size:12px;font-weight:800;padding:5px 7px;border-radius:6px;margin-bottom:5px}",
+      ".azs-lab-vsub{display:block;font-size:10px;font-weight:500;opacity:.85;margin-top:2px}",
+      ".azs-lab-v-yes{background:#e7f5ec;color:#1a7f37}",
+      ".azs-lab-v-no{background:#fce9e7;color:#c0271a}",
+      ".azs-lab-v-warn{background:#fff6d5;color:#8a6d00}"
     ].join("");
     document.head.appendChild(s);
   }
@@ -125,27 +130,71 @@
     loadCommunity(comm, station, popup);
   }
 
-  // Общий агрегат из бэкенда. Ошибка → пусто (рубильник, device-local сохраняется).
+  // Пороги слияния §4.5 — калибровочные ручки, поднять при спаме/шуме.
+  var MIN_VOTES = 1;   // сколько свежих отметок, чтобы вообще перебить регион-оценку
+  var CONF_MIN = 0.3;  // порог confidence (1 единодушная свежая ≈0.33 — на грани, помечаем «1 водитель»)
+  var NEAR_TIE = 0.6;  // доля веса победителя ниже → «мнения расходятся»
+  function verdictClass(k) { return k === "yes" ? "azs-lab-v-yes" : k === "no" ? "azs-lab-v-no" : "azs-lab-v-warn"; }
+
+  // Общий агрегат из бэкенда + вердикт слияния (§4.5): живое бьёт регион-оценку,
+  // если свежих отметок достаточно и они согласованы. Ошибка → пусто (рубильник).
   function loadCommunity(comm, station, popup) {
     fetchAgg(station.id).then(function (agg) {
       comm.textContent = "";
       if (!agg) return; // API недоступен — молча остаёмся на своих отметках
+      if (!agg.count) {
+        var empty = document.createElement("div");
+        empty.className = "azs-lab-comm-line";
+        empty.textContent = "👥 За 6 ч отметок ещё нет — будьте первым.";
+        comm.appendChild(empty);
+        reflow(popup);
+        return;
+      }
+
+      var wins = agg.count >= MIN_VOTES && agg.confidence >= CONF_MIN;
+      var st = statusBy(agg.top_status);
+
+      // 1) вердикт — только когда живое перебивает регион-оценку
+      if (wins) {
+        var v = document.createElement("div");
+        if (agg.top_share < NEAR_TIE) {
+          v.className = "azs-lab-verdict azs-lab-v-warn";
+          v.textContent = "⚠️ Свежие отметки расходятся — ситуация меняется";
+        } else {
+          v.className = "azs-lab-verdict " + verdictClass(agg.top_status);
+          v.appendChild(document.createTextNode("⛽ Сейчас: " + (st ? st.icon + " " + st.short : agg.top_status)));
+          var sub = document.createElement("span");
+          sub.className = "azs-lab-vsub";
+          sub.textContent = "по отметкам водителей · " + agg.count + (agg.count === 1 ? " отметка" : "")
+            + (agg.last_observed_at ? " · " + ago(agg.last_observed_at) : "");
+          v.appendChild(sub);
+        }
+        comm.appendChild(v);
+      }
+
+      // 2) детальная строка
+      var segs = STATUSES.filter(function (s) { return agg.breakdown[s.k]; })
+        .map(function (s) { return s.icon + agg.breakdown[s.k]; }).join("  ");
       var line = document.createElement("div");
       line.className = "azs-lab-comm-line";
-      if (!agg.count) {
-        line.textContent = "👥 За 6 ч отметок ещё нет — будьте первым.";
-      } else {
-        var segs = STATUSES.filter(function (s) { return agg.breakdown[s.k]; })
-          .map(function (s) { return s.icon + agg.breakdown[s.k]; }).join("  ");
-        line.textContent = "👥 За 6 ч: " + segs;
-        if (agg.last_observed_at) {
-          var a = document.createElement("span");
-          a.className = "azs-lab-age";
-          a.textContent = "  · последняя " + ago(agg.last_observed_at);
-          line.appendChild(a);
-        }
+      line.textContent = "👥 За 6 ч: " + segs;
+      if (agg.last_observed_at) {
+        var a = document.createElement("span");
+        a.className = "azs-lab-age";
+        a.textContent = "  · последняя " + ago(agg.last_observed_at);
+        line.appendChild(a);
       }
       comm.appendChild(line);
+
+      // 3) живого мало — честно указываем на регион-оценку выше (нативный бейдж попапа)
+      if (!wins) {
+        var hint = document.createElement("div");
+        hint.className = "azs-lab-note";
+        hint.textContent = "Пока мало отметок — ориентир: оценка по сети/региону выше.";
+        comm.appendChild(hint);
+      }
+
+      // 4) дисклеймер
       var note = document.createElement("div");
       note.className = "azs-lab-note";
       note.textContent = "Сообщения водителей, не гарантия.";
