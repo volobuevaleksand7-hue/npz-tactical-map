@@ -81,6 +81,11 @@
       body: JSON.stringify({ station_id: id, status: status, cid: cid() })
     }).catch(function () { /* локально уже сохранено */ });
   }
+  function fetchAggMany(ids) {
+    return fetch(API + "?ids=" + encodeURIComponent(ids.join(",")))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; }); // рубильник
+  }
 
   // ─── css ───────────────────────────────────────────────────────────────────
   function injectCss() {
@@ -253,6 +258,7 @@
         postVote(station.id, s.k);       // в общий бэкенд — фоном (ошибка не критична)
         renderSelf(self, comm, station, popup);
         loadCommunity(comm, station, popup); // подтянуть свежий агрегат с учётом своей отметки
+        if (scheduleRecolor) scheduleRecolor(); // маркер может сменить цвет от своей отметки
       });
       row.appendChild(b);
     });
@@ -273,10 +279,81 @@
     render(box, mk._azs, e.popup);
   }
 
+  // ─── перекраска маркеров по слитому статусу (§4.5) ───────────────────────────
+  // Маркеры строит app.js (регион-оценка). Здесь снаружи перекрашиваем ВИДИМЫЕ
+  // станции, где живое чисто побеждает: тот же кружок + яркое кольцо-гало (провенанс
+  // «live» на карте). Протухли/перестали побеждать → откат на исходную регион-иконку.
+  var LIVE_COLORS = { yes: "#2f9e57", no: "#d23a2e", queue: "#ef9a1a", limit: "#e8c520" };
+  var scheduleRecolor = null;
+
+  function liveIcon(status) {
+    var c = LIVE_COLORS[status] || "#7a7e85";
+    var html = '<div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center">'
+      + '<svg width="18" height="18" viewBox="0 0 18 18">'
+      + '<circle cx="9" cy="9" r="8" fill="none" stroke="' + c + '" stroke-opacity=".9" stroke-width="2"/>'
+      + '<circle cx="9" cy="9" r="5" fill="' + c + '" stroke="#000" stroke-opacity=".35" stroke-width="1"/>'
+      + '</svg></div>';
+    return L.divIcon({ className: "azs-divicon azs-lab-live", html: html, iconSize: [36, 36], iconAnchor: [18, 18], popupAnchor: [0, -6] });
+  }
+
+  // Чистая победа живого (не near-tie) — только тогда трогаем цвет маркера.
+  function winsClean(agg) {
+    return agg && agg.count >= MIN_VOTES && agg.confidence >= CONF_MIN && agg.top_share >= NEAR_TIE;
+  }
+
+  function clusterGroup() {
+    var g = null;
+    window.__azsMap.eachLayer(function (l) {
+      if (g || !l || typeof l.getLayers !== "function") return;
+      var ls = l.getLayers();
+      if (ls.length && ls.some(function (k) { return k && k._azs; })) g = l;
+    });
+    return g;
+  }
+
+  function recolorVisible() {
+    if (!window.__azsMap) return;
+    var grp = clusterGroup();
+    if (!grp) return;
+    var byId = {};
+    grp.getLayers().forEach(function (m) {
+      if (m._azs && m._azs.id && m._icon) byId[m._azs.id] = m; // только реально отрисованные (не в кластере)
+    });
+    var ids = Object.keys(byId);
+    if (!ids.length) return;
+    for (var i = 0; i < ids.length; i += 50) {         // сервер режет ids до 60 — чанкуем по 50
+      applyChunk(byId, ids.slice(i, i + 50));
+    }
+  }
+  function applyChunk(byId, chunk) {
+    fetchAggMany(chunk).then(function (res) {
+      if (!res) return; // рубильник: сеть недоступна → маркеры остаются регион-цветом
+      chunk.forEach(function (id) {
+        var m = byId[id]; if (!m || !m.setIcon) return;
+        var agg = res[id];
+        if (winsClean(agg)) {
+          if (m._liveStatus !== agg.top_status) {
+            if (!m._origIcon) m._origIcon = m.getIcon ? m.getIcon() : m.options.icon;
+            m.setIcon(liveIcon(agg.top_status));
+            m._liveStatus = agg.top_status;
+          }
+        } else if (m._liveStatus) {           // перестало побеждать/протухло → назад на регион-иконку
+          if (m._origIcon) m.setIcon(m._origIcon);
+          m._liveStatus = null;
+        }
+      });
+    });
+  }
+
   function bind() {
     if (!window.__azsMap) return false;
     window.__azsMap.on("popupopen", onPopupOpen);
-    console.info("[azs-lab] «Я тут» подключён к карте АЗС (TTL " + Math.round(TTL_MS / 1000) + "s)");
+    var t;
+    scheduleRecolor = function () { clearTimeout(t); t = setTimeout(recolorVisible, 400); };
+    window.__azsMap.on("moveend", scheduleRecolor);
+    window.__azsMap.on("zoomend", scheduleRecolor);
+    setTimeout(recolorVisible, 1500); // первичный проход после отрисовки станций
+    console.info("[azs-lab] «Я тут» подключён к карте АЗС (TTL " + Math.round(TTL_MS / 1000) + "s), перекраска маркеров вкл");
     return true;
   }
 
