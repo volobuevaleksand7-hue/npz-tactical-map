@@ -125,8 +125,23 @@ if [ "$DATA_BEFORE" = "$DATA_AFTER" ]; then
     bash agents/git-sync.sh "data(${LABEL}): heartbeat $(date -u +%Y-%m-%dT%H:%MZ)" "$LABEL" || true
     exit 0
   fi
-  echo "!! [$LABEL] ПУСТОЙ ПРОГОН: RC=0, но data/ не тронут — heartbeat НЕ пишем."
-  echo "   Ответ агента (для разбора): $(head -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
+  # Не-strike агент отработал вхолостую (RC=0, data/ не изменился). РАНЬШЕ heartbeat НЕ
+  # писали → через 15ч ложное «мёртв», хотя агент ЖИВОЙ (просто нет новостей для
+  # обновления — напр. npz-status: «новых ударов нет»). Теперь пишем.
+  # Почему безопасно (не возвращает маскировку 15.07): тот баг был про агента, который
+  # НЕ ЗАПУСКАЛСЯ (крон стоял, сосед fuel-market освежал generated_at) — это ловится
+  # по-прежнему: не запустился = не отметился. Сюда попадаем ТОЛЬКО после чистого RC=0
+  # + валидного JSON; хэнг = timeout RC=124 (обработан выше), а в headless `claude -p`
+  # застрять на разрешении нельзя. Гард от мгновенного тихого краха: прогон длился ≥5с
+  # (реальная работа с Read/WebFetch), иначе — подозрительно, heartbeat придерживаем.
+  _dur=$(( $(date +%s) - RUN_START_TS ))
+  if [ "$_dur" -ge 5 ]; then
+    echo "=== [$LABEL] отработал вхолостую (RC=0, новых данных нет, ${_dur}с) — heartbeat пишем (жив)."
+    bash agents/git-sync.sh "data(${LABEL}): heartbeat $(date -u +%Y-%m-%dT%H:%MZ)" "$LABEL" || true
+  else
+    echo "!! [$LABEL] МГНОВЕННЫЙ ПУСТОЙ ПРОГОН (${_dur}с): подозрение на тихий крах — heartbeat НЕ пишем."
+    echo "   Ответ агента (для разбора): $(head -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
+  fi
   exit 0
 fi
 

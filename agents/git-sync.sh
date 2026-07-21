@@ -145,6 +145,24 @@ if ! guard_no_markers; then
   exit 3
 fi
 
+# ---- расклин: сбросить protected-UI правки, которые VPS НЕ имеет права коммитить ----
+# build-nav при дрейфе ?v перештамповывает index.html (и др. protected); pre-commit гейт
+# блокирует их коммит без ALLOW_FRONTEND_RELEASE → остаются грязными → `git pull --rebase`
+# в push_with_retry падает («cannot pull with rebase: unstaged changes») → заклинивает
+# синк ВСЕХ агентов → heartbeat'ы не долетают → баннер «N агентов не на связи» (21.07).
+# VPS фронт не коммитит (это делают с Mac под гейтом) → эти правки тут только вредят.
+# Сбрасываем к HEAD (валидное состояние из origin; дрейф чинится бампом ?v на Mac).
+# НЕ трогаем rss/sitemap/news/karta-* — их коммитят свои владельцы (новостной пайплайн).
+if [ "${ALLOW_FRONTEND_RELEASE:-}" != "1" ]; then
+  PROTECTED_UI_RE='^(index\.html|styles\.css|app\.js|radar\.html|version\.json|CHANGELOG\.md|\.vercelignore)$'
+  prot="$(git diff --name-only 2>/dev/null | grep -E "$PROTECTED_UI_RE" || true)"
+  if [ -n "$prot" ]; then
+    echo "git-sync: сбрасываю protected-UI правки (VPS их не коммитит — иначе заклинит pull):" >&2
+    printf '%s\n' "$prot" | sed 's/^/    /' >&2
+    printf '%s\n' "$prot" | while IFS= read -r _f; do git checkout -- "$_f" 2>/dev/null || true; done
+  fi
+fi
+
 # Nothing staged-worthy? still commit (heartbeat + stamp change every run).
 git add data/
 
