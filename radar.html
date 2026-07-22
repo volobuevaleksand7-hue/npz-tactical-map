@@ -785,7 +785,9 @@
     var npzMarkers = {};
 
     // ─── Fetch strikes data ───
-    var STRIKES_URL = "/data/strikes.json";
+    // ponytail: raw.githubusercontent, а не /data/ — deploy.yml имеет paths-ignore: data/**,
+    // поэтому статика на Vercel замерзает на момент последнего code-деплоя (тот же источник, что app.js)
+    var STRIKES_URL = "https://raw.githubusercontent.com/volobuevaleksand7-hue/npz-tactical-map/main/data/strikes.json";
     var strikesData = null;
 
     function fetchStrikes() {

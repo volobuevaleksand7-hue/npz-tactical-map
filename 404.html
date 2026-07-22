@@ -199,7 +199,7 @@
         })
         .catch(function () { downCount = null; })
         .then(reveal);
-      fetch("/data/strikes.json")
+      fetch("https://raw.githubusercontent.com/volobuevaleksand7-hue/npz-tactical-map/main/data/strikes.json")
         .then(function (r) { if (!r.ok) throw 0; return r.json(); })
         .then(function (d) {
           if (!d || !Array.isArray(d.strikes)) throw 0;
