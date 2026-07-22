@@ -87,6 +87,124 @@
       .catch(function () { return null; }); // рубильник
   }
 
+  // ─── живая лента отметок «Я тут» в правой карточке КОММЕНТАРИИ ────────────────
+  // Оверлей: своя секция наверху #azsCommentsCard, app.js её НЕ перерисовывает (его
+  // renderAzsComments трогает только #azsComments ниже). Опрос ?feed=1 только когда вкладка
+  // АЗС видима — щадим бюджет Upstash. Свой голос → оптимистичный prepend + рефетч.
+  var FEED_POLL_MS = 45 * 1000;
+  var FEED_WINDOW_MS = 6 * 60 * 60 * 1000;   // показываем отметки не старше 6ч (окно агрегата)
+  var FEED_SHOW = 12;                        // максимум станций в ленте
+  var stationMeta = null;                    // id → {label, city, lat, lon}, лениво из azs-stations.json
+  var lastFeed = [];                         // последние серверные события
+  var feedTimer = null;
+
+  function escHtml(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function loadStationMeta() {
+    if (stationMeta) return Promise.resolve(stationMeta);
+    return fetch("data/azs-stations.json")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        var m = {}, arr = (j && j.stations) || [];
+        for (var i = 0; i < arr.length; i++) {
+          var s = arr[i]; if (!s || !s.id) continue;
+          m[s.id] = { label: s.brand_label || s.brand || "АЗС", city: s.city || s.region || "", lat: s.lat, lon: s.lon };
+        }
+        stationMeta = m; return m;
+      })
+      .catch(function () { stationMeta = {}; return stationMeta; });
+  }
+  function feedVisible() {                    // вкладка АЗС на экране?
+    if (document.hidden) return false;
+    var card = document.getElementById("azsCommentsCard");
+    return !!(card && card.offsetParent !== null);
+  }
+  function feedBox() {                        // своя секция наверху карточки (создаём один раз)
+    var card = document.getElementById("azsCommentsCard");
+    if (!card) return null;
+    var box = document.getElementById("azs-live-feed");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "azs-live-feed";
+      box.className = "azs-live-feed";
+      var head = card.querySelector(".card-h");
+      if (head && head.nextSibling) card.insertBefore(box, head.nextSibling);
+      else card.insertBefore(box, card.firstChild);
+    }
+    return box;
+  }
+  // события уже newest-first (LPUSH) → одна свежая запись на станцию, в окне 6ч
+  function collapseFeed(events, now) {
+    var seen = {}, out = [];
+    for (var i = 0; i < events.length; i++) {
+      var e = events[i];
+      if (!e || !e.id || (now - e.t) > FEED_WINDOW_MS) continue;
+      if (seen[e.id]) continue;
+      seen[e.id] = 1; out.push(e);
+      if (out.length >= FEED_SHOW) break;
+    }
+    return out;
+  }
+  function renderFeed(events) {
+    injectCss();
+    var box = feedBox(); if (!box) return;
+    var now = Date.now(), list = collapseFeed(events || [], now), meta = stationMeta || {};
+    box.textContent = "";
+    var h = document.createElement("div");
+    h.className = "azs-live-h";
+    h.innerHTML = '<span class="azs-live-dot"></span>Отметки водителей на карте · живое';
+    box.appendChild(h);
+    if (!list.length) {
+      var em = document.createElement("div");
+      em.className = "azs-live-empty";
+      em.textContent = "Пока никто не отмечал за 6 ч — отметьте первым на карте.";
+      box.appendChild(em);
+      return;
+    }
+    list.forEach(function (e) {
+      var st = statusBy(e.status) || { icon: "•", short: e.status };
+      var m = meta[e.id] || {};
+      var it = document.createElement("div");
+      it.className = "azs-live-item";
+      it.style.borderLeftColor = LIVE_COLORS[e.status] || "#7a7e85";
+      it.innerHTML = '<div class="azs-live-top"><span>' + escHtml((m.label || "АЗС") + (m.city ? ", " + m.city : "")) + '</span>'
+        + '<span class="azs-live-when">' + escHtml(ago(e.t, now)) + '</span></div>'
+        + '<div class="azs-live-st">' + st.icon + " " + escHtml(st.short) + (e.mine ? ' <span class="azs-live-mine">· вы</span>' : "") + '</div>';
+      if (m.lat && m.lon) it.addEventListener("click", function () { if (window.__azsMap) window.__azsMap.setView([m.lat, m.lon], 14); });
+      box.appendChild(it);
+    });
+    var foot = document.createElement("div");
+    foot.className = "azs-live-foot";
+    foot.textContent = "сообщения водителей, не гарантия";
+    box.appendChild(foot);
+  }
+  function pollFeed() {
+    if (!feedVisible()) return;
+    fetch(API + "?feed=1")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.events) return;           // рубильник — молча оставляем как есть
+        lastFeed = j.events;
+        loadStationMeta().then(function () { renderFeed(lastFeed); });
+      })
+      .catch(function () {});
+  }
+  // свой голос — мгновенно в ленте, не дожидаясь сервера (потом сверимся)
+  function feedOptimistic(id, status) {
+    lastFeed = [{ id: id, status: status, t: Date.now(), mine: true }].concat(lastFeed);
+    loadStationMeta().then(function () { renderFeed(lastFeed); });
+    setTimeout(pollFeed, 2500);
+  }
+  function startFeed() {
+    if (feedTimer) return;
+    pollFeed();
+    feedTimer = setInterval(pollFeed, FEED_POLL_MS);
+    document.addEventListener("visibilitychange", function () { if (!document.hidden) pollFeed(); });
+  }
+
   // ─── css ───────────────────────────────────────────────────────────────────
   function injectCss() {
     if (document.getElementById("azs-lab-css")) return;
@@ -112,7 +230,20 @@
       ".azs-lab-vsub{display:block;font-size:10px;font-weight:500;opacity:.85;margin-top:2px}",
       ".azs-lab-v-yes{background:#e7f5ec;color:#1a7f37}",
       ".azs-lab-v-no{background:#fce9e7;color:#c0271a}",
-      ".azs-lab-v-warn{background:#fff6d5;color:#8a6d00}"
+      ".azs-lab-v-warn{background:#fff6d5;color:#8a6d00}",
+      // живая лента отметок в правой карточке КОММЕНТАРИИ
+      ".azs-live-feed{margin:0 0 8px}",
+      ".azs-live-h{font-size:11px;font-weight:800;color:#1a7f37;margin-bottom:6px;display:flex;align-items:center;gap:5px}",
+      ".azs-live-dot{width:7px;height:7px;border-radius:50%;background:#2f9e57;animation:azsLivePulse 1.8s infinite}",
+      "@keyframes azsLivePulse{0%{box-shadow:0 0 0 0 rgba(47,158,87,.5)}70%{box-shadow:0 0 0 6px rgba(47,158,87,0)}100%{box-shadow:0 0 0 0 rgba(47,158,87,0)}}",
+      ".azs-live-item{padding:5px 7px;border:1px solid rgba(0,0,0,.1);border-left:3px solid #2f9e57;border-radius:6px;margin-bottom:5px;cursor:pointer;background:#fafafa}",
+      ".azs-live-item:hover{filter:brightness(.97)}",
+      ".azs-live-top{font-size:11px;font-weight:700;display:flex;justify-content:space-between;gap:6px}",
+      ".azs-live-when{font-weight:400;opacity:.55;white-space:nowrap}",
+      ".azs-live-st{font-size:11px;margin-top:2px;opacity:.9}",
+      ".azs-live-mine{color:#1b6ef3;font-weight:700;font-size:10px}",
+      ".azs-live-empty{font-size:11px;opacity:.6;padding:2px 0 8px}",
+      ".azs-live-foot{font-size:9.5px;opacity:.5;margin:1px 0 9px}"
     ].join("");
     document.head.appendChild(s);
   }
@@ -261,6 +392,7 @@
         postVote(station.id, s.k);       // в общий бэкенд — фоном (ошибка не критична)
         cacheDrop(station.id);           // свой голос — сброс кэша агрегата
         invalidateActive();              // и активного сета: станция могла стать активной
+        feedOptimistic(station.id, s.k); // и сразу в правую ленту (не дожидаясь сервера)
         renderSelf(self, comm, station, popup);
         loadCommunity(comm, station, popup); // подтянуть свежий агрегат с учётом своей отметки
         if (scheduleRecolor) scheduleRecolor(); // маркер может сменить цвет от своей отметки
@@ -420,7 +552,8 @@
     window.__azsMap.on("moveend", scheduleRecolor);
     window.__azsMap.on("zoomend", scheduleRecolor);
     setTimeout(recolorVisible, 1500); // первичный проход после отрисовки станций
-    console.info("[azs-lab] «Я тут» подключён к карте АЗС (TTL " + Math.round(TTL_MS / 1000) + "s), перекраска маркеров вкл");
+    startFeed();                      // живая лента отметок в правой карточке
+    console.info("[azs-lab] «Я тут» подключён к карте АЗС (TTL " + Math.round(TTL_MS / 1000) + "s), перекраска + живая лента вкл");
     return true;
   }
 

@@ -1,6 +1,7 @@
 // api/azs-votes.js — общий краудсорс наличия топлива для слоя АЗС.
 // GET  /api/azs-votes?ids=osm-1,osm-2  → агрегат отметок по станциям.
 // GET  /api/azs-votes?active=1         → id станций со свежими отметками (для перекраски).
+// GET  /api/azs-votes?feed=1           → лента последних отметок {id,status,t} (правая карточка).
 // GET  /api/azs-votes?stats=1          → health+бюджет: активные станции + оценка команд/сутки.
 // POST /api/azs-votes  { station_id, status, cid }  → записать отметку.
 // Хранилище: Upstash Redis через REST (env KV_REST_API_URL / KV_REST_API_TOKEN,
@@ -15,6 +16,7 @@ var WINDOW_MS = 6 * 60 * 60 * 1000;   // свежее окно для агрег
 var TTL_SEC = 24 * 60 * 60;           // авто-очистка ключа станции
 var RL_SEC = 30;                      // 1 отметка с cid на станцию в 30 сек
 var MAX_IDS = 60;                     // потолок станций на один GET
+var FEED_MAX = 50;                    // сколько последних отметок держим в ленте активности
 
 // #2 анти-абьюз: помимо 1/cid/станцию/30с — лимит по IP. IP НЕ храним: только соль-хэш
 // с TTL (ephemeral rate-limit-токен, не привязан к личности — приватность ТЗ §4 цела).
@@ -131,6 +133,20 @@ module.exports = async function handler(req, res) {
         });
         return;
       }
+      // ?feed=1 → лента последних отметок {id,status,t} newest-first (для правой карточки
+      // «живые отметки водителей»). Только id/статус/время — ни cid, ни IP (приватность §4).
+      if (req.query && req.query.feed) {
+        var fl = await upstash([["LRANGE", "azs:feed", "0", String(FEED_MAX - 1)]]);
+        var rawList = (fl[0] && fl[0].result) || [], events = [];
+        for (var k = 0; k < rawList.length; k++) {
+          try { var ev = JSON.parse(rawList[k]);
+            if (ev && ev.i && STATUSES.indexOf(ev.s) >= 0 && typeof ev.t === "number")
+              events.push({ id: ev.i, status: ev.s, t: ev.t });
+          } catch (_) {}
+        }
+        res.status(200).json({ events: events, as_of: Date.now() });
+        return;
+      }
       // ?active=1 → id станций со свежими (≤ окна агрегата) отметками. Клиент опрашивает
       // агрегаты только для них ∩ видимых, а не для всех видимых (на старте почти все пустые).
       if (req.query && req.query.active) {
@@ -188,7 +204,11 @@ module.exports = async function handler(req, res) {
         // «у кого вообще есть свежие отметки», не делая HGETALL по каждой видимой станции.
         ["ZADD", "azs:active", String(t), id],
         ["ZREMRANGEBYSCORE", "azs:active", "0", String(t - TTL_SEC * 1000)], // старьё за окном TTL
-        ["EXPIRE", "azs:active", String(TTL_SEC)]                            // сет тухнет, если голоса иссякли
+        ["EXPIRE", "azs:active", String(TTL_SEC)],                           // сет тухнет, если голоса иссякли
+        // лента активности: последние отметки {i:id, s:статус, t:время} для правой карточки.
+        ["LPUSH", "azs:feed", JSON.stringify({ i: id, s: status, t: t })],
+        ["LTRIM", "azs:feed", "0", String(FEED_MAX - 1)],
+        ["EXPIRE", "azs:feed", String(TTL_SEC)]
       ]);
       res.status(200).json({ ok: true });
       return;
