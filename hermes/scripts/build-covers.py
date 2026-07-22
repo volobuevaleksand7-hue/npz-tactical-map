@@ -377,6 +377,14 @@ def main():
         meta["no_ref"] = a.no_ref or meta.get("no_ref", False)   # sea всегда без референса
         if build_one(d, meta):
             ok += 1
+    # Сжать свежие обложки (2МБ PNG → ~300КБ) — иначе жрут Fast Data Transfer на Vercel.
+    # Идемпотентно (уже сжатые = mode P, пропускаются). Ловит и путь через OpenRouter.
+    try:
+        sys.path.insert(0, str(REPO / "agents"))
+        import optimize_covers
+        optimize_covers.main()
+    except Exception as _e:
+        print("build-covers: optimize_covers skip:", _e)
     tail = f", пропущено {skipped}" if skipped else ""
     print(f"build-covers: готово {ok}/{len(dates)}{tail}. Дальше — python3 agents/gen-news.py + publish.")
 

@@ -79,6 +79,13 @@ def caption_cover(in_path, out_path, city, event, date_rus):
     d.text((pad, y_date), "● " + date_rus, font=f_date, fill=AMBER)
 
     img.save(out_path, "PNG")
+    # сжать сразу при генерации (иначе 2 МБ PNG жрут Fast Data Transfer на Vercel)
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from optimize_covers import optimize_cover
+        optimize_cover(out_path)
+    except Exception as _e:
+        print("optimize_covers hook skip:", _e)
     return out_path
 
 
