@@ -55,13 +55,34 @@ esac
 # if `timeout` is unavailable (e.g. stock macOS without coreutils).
 TIMEOUT_WRAP="timeout ${NPZ_AGENT_TIMEOUT:-1800}"
 command -v timeout >/dev/null 2>&1 || TIMEOUT_WRAP=""
-$TIMEOUT_WRAP claude -p "$PROMPT" \
-  --model "$MODEL" \
-  --allowedTools "Read,Write,WebSearch,WebFetch" \
-  --permission-mode acceptEdits \
-  > "agents/logs/${LABEL}.log" 2>&1
-RC=$?
-echo "agent exit: $RC"
+
+# --- Ротация движков (2026-07-22, экономия Claude-лимитов): MiMo-подписка →
+# OpenRouter-free (оба через mimo CLI, см. /usr/local/bin/mimo-rotate) → Claude Haiku.
+# NPZ_ENGINE=claude — принудительно только Claude (старое поведение).
+# Не-Claude движкам добавляется преамбула с заменой WebSearch/WebFetch
+# (agents/websearch.sh = Tavily, curl) — сами спеки не трогаем.
+RC=1
+if [ "${NPZ_ENGINE:-rotate}" = "rotate" ] && command -v mimo-rotate >/dev/null 2>&1; then
+  GENERIC_PROMPT="$(cat agents/engine-preamble-generic.md 2>/dev/null)
+$PROMPT"
+  MIMO_TIMEOUT="${NPZ_MIMO_TIMEOUT:-900}" mimo-rotate "$GENERIC_PROMPT" \
+    > "agents/logs/${LABEL}.log" 2>&1
+  RC=$?
+  echo "engine mimo-rotate exit: $RC"
+  if [ "$RC" != "0" ]; then
+    # упавший движок мог оставить полузаписанные файлы — чистим перед fallback
+    git checkout -- data/ 2>/dev/null || true
+  fi
+fi
+if [ "$RC" != "0" ]; then
+  $TIMEOUT_WRAP claude -p "$PROMPT" \
+    --model "$MODEL" \
+    --allowedTools "Read,Write,WebSearch,WebFetch" \
+    --permission-mode acceptEdits \
+    >> "agents/logs/${LABEL}.log" 2>&1
+  RC=$?
+  echo "engine claude($MODEL) exit: $RC"
+fi
 
 # A failed agent (incl. timeout=124) may have left half-written data. Revert any
 # partial changes and DO NOT commit — better no update than a corrupt/partial one.
