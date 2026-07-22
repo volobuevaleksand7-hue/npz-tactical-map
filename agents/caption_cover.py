@@ -81,7 +81,9 @@ def caption_cover(in_path, out_path, city, event, date_rus):
     img.save(out_path, "PNG")
     # сжать сразу при генерации (иначе 2 МБ PNG жрут Fast Data Transfer на Vercel)
     try:
-        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        # _os, а не os: голого `import os` в модуле нет (ниже — `import os as _os`),
+        # поэтому хук молча падал в NameError на КАЖДОЙ обложке и сжатие не работало.
+        sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
         from optimize_covers import optimize_cover
         optimize_cover(out_path)
     except Exception as _e:
