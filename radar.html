@@ -1324,6 +1324,9 @@
     // ─── Refresh cycle ───
     function refresh() {
       if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
+      // скрытая вкладка не стучит в /api/radar-state (Edge Requests): цикл ставим на паузу,
+      // возврат на вкладку сразу дёргает refresh через visibilitychange ниже
+      if (document.hidden) { scheduleNext(); return; }
       renderState("loading", "Получаем данные через /api/radar-state...");
       // удары — независимо от радар-прокси: сбой /api/radar-state не должен прятать слой ударов
       fetchStrikes().then(renderStrikes);
@@ -1332,6 +1335,10 @@
         scheduleNext();
       });
     }
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden && nextAt && Date.now() >= nextAt) refresh();
+    });
 
     function scheduleNext() {
       nextAt = Date.now() + REFRESH_MS;

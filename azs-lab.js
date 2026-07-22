@@ -91,7 +91,7 @@
   // Оверлей: своя секция наверху #azsCommentsCard, app.js её НЕ перерисовывает (его
   // renderAzsComments трогает только #azsComments ниже). Опрос ?feed=1 только когда вкладка
   // АЗС видима — щадим бюджет Upstash. Свой голос → оптимистичный prepend + рефетч.
-  var FEED_POLL_MS = 45 * 1000;
+  var FEED_POLL_MS = 90 * 1000;   // 45→90 c: вдвое меньше Edge Requests на открытой карте АЗС
   var FEED_WINDOW_MS = 6 * 60 * 60 * 1000;   // показываем отметки не старше 6ч (окно агрегата)
   var FEED_SHOW = 12;                        // максимум станций в ленте
   var stationMeta = null;                    // id → {label, city, lat, lon}, лениво из azs-stations.json

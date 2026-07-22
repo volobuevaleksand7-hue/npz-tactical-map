@@ -263,10 +263,12 @@
       }
     }
     function tick() {
+      if (document.hidden) return;   // скрытая вкладка не тратит Edge Requests
       fetch(STATE_URL, { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(render).catch(function () {});
     }
     tick();
     setInterval(tick, REFRESH_MS);
+    document.addEventListener("visibilitychange", function () { if (!document.hidden) tick(); });
   })();
   </script>
 
