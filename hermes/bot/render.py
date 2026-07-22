@@ -39,6 +39,7 @@ CAPTION_TARGET = 900
 TEXT_HARD_MAX = 4096
 TEXT_TARGET = 3800
 MOLNIYA_MAX = 500
+BLOCKQUOTE_MAX = 1800  # потолок содержимого раскрываемого blockquote в сводке
 UAV_ALERT_MAX = 200
 
 # Allowlist Telegram HTML tags (parse_mode=HTML).
@@ -279,8 +280,20 @@ def render_briefing(data, kind="morning"):
             for s in rest:
                 conf = {"confirmed": "✓", "reported": "~"}.get(s.get("confidence"), "~")
                 detail_lines.append("%s: %s %s" % (esc(s.get("city", "")), esc(_short_target(s)), conf))
-            L.append("<blockquote expandable>ещё %d ударов: %s</blockquote>" % (
-                len(rest), "; ".join(detail_lines)))
+            # ponytail: blockquote — ЕДИНСТВЕННАЯ неограниченная строка сводки (остальные
+            # обрезаны по месту). На волне в 30+ ударов она одна перевешивала 4096, а
+            # _truncate_to режет только целыми строками — вместе с ней с конца сносило
+            # биржу, АЗС, голоса и ссылки на карту. Кап держит хвост поста живым.
+            shown_rest, used = [], 0
+            for dl in detail_lines:
+                if used + len(dl) + 2 > BLOCKQUOTE_MAX:
+                    break
+                shown_rest.append(dl)
+                used += len(dl) + 2
+            body = "; ".join(shown_rest)
+            if len(shown_rest) < len(detail_lines):
+                body += " … и ещё %d" % (len(detail_lines) - len(shown_rest))
+            L.append("<blockquote expandable>ещё %d ударов: %s</blockquote>" % (len(rest), body))
         L.append("")
 
     # ── Переработка / АЗС / Биржа ──
@@ -448,6 +461,10 @@ def render_update_line(update, kind="update"):
 
 def _selftest():
     ok_all = True
+    # Фикстуры датируем СЕГОДНЯШНИМ днём: render_briefing отбирает удары окном
+    # «за 24 часа» от текущего момента, и на захардкоженной дате блок ударов
+    # выпадал целиком — кейсы split/усечения зеленели вхолостую.
+    today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
 
     def check(name, cond, extra=""):
         nonlocal ok_all
@@ -458,16 +475,16 @@ def _selftest():
 
     # 1. 912 знаков → caption
     strikes_small = [
-        {"city": "Ярославль", "target": "ЯНОС", "date": "2026-07-06", "confidence": "confirmed",
+        {"city": "Ярославль", "target": "ЯНОС", "date": today, "confidence": "confirmed",
          "detail": "Горит установка АВТ."},
-        {"city": "Белгород", "target": "ТЭЦ", "date": "2026-07-06", "confidence": "reported"},
+        {"city": "Белгород", "target": "ТЭЦ", "date": today, "confidence": "reported"},
     ]
     small_data = {
         "strikes": strikes_small, "voices": [{"city": "Новороссийск", "quote": "Очередь 6 часов на заправке"}],
         "azs": [{"region": "Крым", "level": "critical"}],
         "exchange": {"ai95_spb_rub_t": 74250, "trend": "stable"},
         "fuel": {"national_balance": {"capacity_offline_pct": 12}, "refineries": [{"status": "partial"}]},
-        "grid": {}, "date_iso": "2026-07-06",
+        "grid": {}, "date_iso": today,
     }
     r1 = render_briefing(small_data, kind="evening")
     ok1, reason1 = preflight(r1["caption_or_text"], CAPTION_HARD_MAX)
@@ -477,7 +494,7 @@ def _selftest():
     # 2. ~2200 знаков → split-mode
     many_strikes = [
         {"city": "Город%d" % i, "target": "Объект инфраструктуры номер %d с длинным названием" % i,
-         "date": "2026-07-06", "confidence": "reported",
+         "date": today, "confidence": "reported",
          "detail": "Подробное описание удара номер %d с деталями и техническими параметрами установки." % i}
         for i in range(12)
     ]
@@ -499,6 +516,10 @@ def _selftest():
     ok3, reason3 = preflight(text3, TEXT_HARD_MAX)
     check(">4096-char briefing -> truncated within limit", entity_len(text3) <= TEXT_HARD_MAX and ok3,
           "len=%d ok=%s reason=%s" % (entity_len(text3), ok3, reason3))
+    # Хвост поста не должен срезаться вместе с раздутым blockquote.
+    check(">4096-char briefing keeps map links + strike blockquote",
+          "Карта ударов" in text3 and "<blockquote" in text3,
+          "links=%s bq=%s" % ("Карта ударов" in text3, "<blockquote" in text3))
 
     # 4. molniya
     molniya = render_molniya({
