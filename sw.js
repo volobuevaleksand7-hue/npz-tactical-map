@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v21';   // bump: пауза поллинга на скрытой вкладке (/radar в OPTIONAL — иначе PWA держит старый радар)
+var CACHE = 'npz-shell-v22';   // bump: слой «Склады ВБ/Озон» (app.js + index.html лежат в CRITICAL прекэше)
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

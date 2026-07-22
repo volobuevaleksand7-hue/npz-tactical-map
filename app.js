@@ -17,7 +17,8 @@
     azsRoutes: "data/azs-routes.json",
     capacityTimeline: "data/capacity-timeline.json",
     health: "data/health.json",
-    candidates: "data/strike-candidates.json"
+    candidates: "data/strike-candidates.json",
+    warehouses: "data/warehouses.json"
   };
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function safeUrl(u){u=String(u||'');return /^https?:\/\//i.test(u)?u:'#';}
@@ -403,6 +404,7 @@
     L_ru.grid = L.layerGroup();                     // Electricity grid (substations + blackouts) — OFF by default
     L_ru.prices = L.layerGroup();                   // Price heatmap (АИ-95 по регионам) — OFF by default
     L_ru.candidates = L.layerGroup();               // Кандидаты в удары с ленты radar-map.ru (rumor) — OFF by default
+    L_ru.warehouses = L.layerGroup();               // Крупные РЦ Wildberries/Ozon + поражённые — OFF by default
   }
   function loadGeo() {
     Promise.all([
@@ -1808,6 +1810,57 @@
     if (b.source_url) h += srcHtml(b.source_url, 'источник');
     return h;
   }
+  /* ---------- WAREHOUSES (крупные РЦ маркетплейсов) ---------- */
+  // Слой выключен по умолчанию, поэтому data/warehouses.json грузится лениво — по первому
+  // включению кнопки, а не у каждого посетителя карты.
+  var whPromise = null;
+  function loadWarehouses() {
+    if (S.warehouses) return Promise.resolve();
+    if (whPromise) return whPromise;
+    whPromise = fetchData("warehouses")
+      .then(function (d) { S.warehouses = d; })
+      .catch(function () { whPromise = null; });
+    return whPromise;
+  }
+  var WH_BRAND = { wb: { c: "#8b2fa8", label: "Wildberries" }, ozon: { c: "#0b63d6", label: "Ozon" } };
+  function whIcon(w) {
+    var b = WH_BRAND[w.operator] || { c: "#7a7e85" };
+    var burned = w.status === "hit" && w.damage === "burned";
+    // сгоревшие — красный с пульсом, чтобы читались среди полусотни обычных точек
+    var c = burned ? "#d23a2e" : (w.status === "hit" ? "#df8f17" : b.c);
+    var pulse = burned ? '<circle cx="13" cy="13" r="10" fill="none" stroke="' + c + '" stroke-width="1.6" opacity=".6"><animate attributeName="r" values="7;12;7" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="1.8s" repeatCount="indefinite"/></circle>' : '';
+    var html = '<div><svg width="26" height="26" viewBox="0 0 26 26">' + pulse +
+      '<rect x="4" y="6" width="18" height="14" rx="2" fill="' + c + '" stroke="#fff" stroke-width="2"/>' +
+      '<path d="M4 10 H22" stroke="#fff" stroke-width="1.6"/>' +
+      (burned ? '<path d="M13 12 q2 2 0 4 q-2-2 0-4" fill="#fff"/>' : '') +
+      '</svg></div>';
+    return L.divIcon({ className: "", html: html, iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -11] });
+  }
+  function whPopup(w) {
+    var b = WH_BRAND[w.operator] || { c: "#7a7e85", label: w.operator };
+    var burned = w.status === "hit" && w.damage === "burned";
+    var st = w.status !== "hit" ? { t: "РАБОТАЕТ", c: "#2f8f4e" }
+      : burned ? { t: "ПОРАЖЁН, ПОЖАР", c: "#d23a2e" } : { t: "ПОРАЖЁН", c: "#df8f17" };
+    var h = '<div class="pp-h">📦 ' + esc(b.label) + ' — ' + esc(w.name) + '</div>';
+    h += '<span class="pp-st" style="background:' + st.c + '">' + st.t + '</span>';
+    h += '<div class="pp-kv"><span>Тип</span><span>' + (w.type === "ffc" ? "фулфилмент-центр" : "распределительный центр") + '</span></div>';
+    if (w.region) h += '<div class="pp-kv"><span>Регион</span><span>' + esc(w.region) + '</span></div>';
+    if (w.date) h += '<div class="pp-kv"><span>Дата удара</span><span>' + esc(rusDate(w.date)) + '</span></div>';
+    if (w.note) h += '<div class="pp-note">' + esc(w.note) + '</div>';
+    if (w.source_url) h += srcHtml(w.source_url, 'источник');
+    return h;
+  }
+  function renderWarehouses() {
+    if (!L_ru.warehouses) return;
+    L_ru.warehouses.clearLayers();
+    var d = S.warehouses; if (!d) return;
+    (d.warehouses || []).forEach(function (w) {
+      if (typeof w.lat !== "number" || typeof w.lon !== "number") return;
+      L.marker([w.lat, w.lon], { icon: whIcon(w), zIndexOffset: w.status === "hit" ? 400 : 300 })
+        .bindPopup(whPopup(w), POPUP_OPTS).addTo(L_ru.warehouses);
+    });
+  }
+
   function renderGrid() {
     if (!L_ru.grid) return;
     L_ru.grid.clearLayers();
@@ -1930,6 +1983,14 @@
       var _dv = (new URLSearchParams(location.search).get("view") || (location.hash || "").replace("#","")).toLowerCase();
       if (_dv) { var _tb = document.querySelector('#tabs button[data-view="' + _dv + '"]'); if (_tb) _tb.click(); }
     } catch (e) {}
+    // deep-link: ?layer=warehouses включает слой при загрузке — со статьи про склады маркетплейсов
+    try {
+      var _dl = (new URLSearchParams(location.search).get("layer") || "").toLowerCase();
+      if (_dl) {
+        var _lb = document.querySelector('#layerToggles button[data-layer="' + _dl + '"]');
+        if (_lb && !_lb.classList.contains("active")) _lb.click();
+      }
+    } catch (e) {}
     // back/forward: восстанавливаем вкладку из адреса (click-guard выше не даст дубль истории)
     window.addEventListener("popstate", function () {
       var v = ((location.hash || "").replace("#", "").toLowerCase()) || "russia";
@@ -1952,6 +2013,12 @@
           var bar = document.getElementById("strikeBar");
           if (on) { maps.ru.addLayer(lg); renderStrikes(); bar.classList.remove("hidden"); }
           else { maps.ru.removeLayer(lg); stopPlay(); bar.classList.add("hidden"); }
+          return;
+        }
+        if (name === "warehouses") {
+          if (!on) { maps.ru.removeLayer(lg); return; }
+          maps.ru.addLayer(lg);
+          loadWarehouses().then(renderWarehouses);   // датасет тянем только при включении слоя
           return;
         }
         if (name === "roads") {
