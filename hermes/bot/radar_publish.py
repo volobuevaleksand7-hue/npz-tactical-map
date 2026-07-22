@@ -57,6 +57,12 @@ STRATEGIC_KEYWORDS = [
     "генерац", "электростанц", "атомн", "АЭС", "морской порт",
     "морского базир", "авиабаз", "военный аэродром",
     "Су-57", "Су-35", "Т-14", "БМП", "Т-90",
+    # 22.07: крупная гражданская логистика. Удары по складам Wildberries в
+    # Краснодаре и Невинномысске (10 и 5 пострадавших) не подходили ни под один
+    # критерий выше — «не топливо, не оборонка» — и не стали бы молнией даже
+    # после того, как их руками добавили на карту.
+    "логистическ", "распределительн", "склад", "маркетплейс",
+    "wildberries", "ozon", "элеватор", "железнодорожн", "аэропорт",
 ]
 
 # Ключевые слова, исключающие «мажорность»
@@ -158,9 +164,20 @@ def classify_news(strike_data):
     if city_major and (npz_hit or strategic):
         reasons.append(f"Крупный город ({strike_data.get('city', '')})")
 
-    # ── Проверка 6: Исключения — сбитые дроны, малые объекты ──
+    # ── Проверка 6: Пострадавшие ──
+    # Объективный признак крупного удара, не зависящий от типа объекта: если есть
+    # раненые или погибшие, это молния независимо от того, что именно поражено.
+    casualties = strike_data.get("casualties") or 0
+    try:
+        casualties = int(casualties)
+    except (TypeError, ValueError):
+        casualties = 0
+    if casualties > 0:
+        reasons.append("Пострадавшие: %d" % casualties)
+
+    # ── Проверка 7: Исключения — сбитые дроны, малые объекты ──
     is_minor = any(kw in searchable for kw in MINOR_KEYWORDS)
-    if is_minor and not npz_hit:
+    if is_minor and not npz_hit and not casualties:
         return ("regular", {
             "headline": strike_data.get("title", strike_data.get("target", "")),
             "reason": "minor/marginal event",

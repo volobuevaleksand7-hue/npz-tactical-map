@@ -2,80 +2,30 @@
 """
 sanitize-strikes.py — детерминированный фильтр качества для data/strikes.json.
 
-Вырезает записи, которые НЕ должны попадать на нейтральную OSINT-карту:
-  • украиноязычный текст (вербатим-репосты укр. Telegram-каналов) — буквы іїєґ;
-  • пропаганда/партийная лексика ("Слава Україні", "Повітряні Сили", "терориста" и т.п.);
-  • невалидный confidence (только confirmed|reported|rumored);
-  • офф-топик про сбитые самолёты/лётчиков без связи с НПЗ/топливом
-    (сайт — про топливную инфраструктуру, не про воздушные бои);
-  • свалки воздушных тревог без объекта (city пустой/"Неизвестно" И target «неуточнённый»).
+Словарь и правила живут в agents/neutrality.py (единственная копия — до 22.07
+их было две, и они разъехались). Здесь остаётся только работа с файлом:
+пройти по массиву записей, эпитеты вычистить, непубликуемое удалить.
 
-Вызывается pre-commit хуком (см. .githooks/pre-commit) — так что ни один коллектор
-(newswatch, ручной, внешняя модель) не может опубликовать такое. Идемпотентен, exit 0.
+  • scrub  (чиним)   — оценочные эпитеты режутся, запись остаётся;
+  • drop   (удаляем) — укр. язык, лозунг, призыв, битый confidence,
+                       офф-топик про сбитые самолёты, пустая воздушная тревога.
+
+Вызывается pre-commit хуком (см. .githooks/pre-commit) — так что ни один
+коллектор (newswatch, ручной, внешняя модель) не может опубликовать такое.
+Идемпотентен, exit 0 всегда: санитайзер не имеет права заблокировать коммит.
 
 Запуск:  python3 agents/sanitize-strikes.py [путь]   (по умолчанию data/strikes.json)
 """
 import json
-import re
+import os
 import sys
 
-UA_CHARS = set("іїєґ")
-UA_MARK = ["Повітр", "Слава Україн", "Гарні новини", "терориста", "Далі буде",
-           "відмінусували", "Дякуємо", "ворожий", "збитий в бою", "Твір на тему",
-           "ЗСУ переможе", "русн", "орки", "кацап", "москаль"]
-VALID_CONF = {"confirmed", "reported", "rumored"}
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import neutrality  # noqa: E402
 
-# Русскоязычные оценочные эпитеты. UA_MARK их не ловил (это не украинский и не брань),
-# поэтому «в оккупированном Севастополе» вербатимом из заголовка УП доезжало до прода —
-# к 15.07 накопилось 9 таких записей начиная с 09.06.
-# Режем ЭПИТЕТ, а не запись: событие реальное и по теме. Через reason_bad такая запись
-# удалилась бы целиком — это ровно тот усыхающий архив (11.07: 172→67).
-SCRUB = [
-    (r"(?i)\bвременно\s+оккупированн\w*\s+", ""),
-    (r"(?i)\bв\s+оккупированном\s+", "в "),
-    (r"(?i)\bв\s+аннексированном\s+", "в "),
-    (r"(?i)\bоккупированн\w*\s+", ""),
-    (r"(?i)\bаннексированн\w*\s+", ""),
-    (r"(?i)\bоккупант\w*\s+", ""),
-]
-SCRUB_FIELDS = ("detail", "target", "title", "city", "region")
-
-
-def scrub(x):
-    """Вычищает оценочные эпитеты из текстовых полей. True, если что-то изменилось."""
-    changed = False
-    for f in SCRUB_FIELDS:
-        v = x.get(f)
-        if not isinstance(v, str):
-            continue
-        orig = v
-        for pat, rep in SCRUB:
-            v = re.sub(pat, rep, v)
-        v = re.sub(r"\s{2,}", " ", v).strip()
-        if v != orig:
-            x[f] = v
-            changed = True
-    return changed
-JET_WORDS = ["су-3", "су-5", "миг-", "истребител", "льотчик", "лётчик", "самолёт", "самолет"]
-FUEL_WORDS = ["нпз", "нефт", "топлив", "нефтебаз", "терминал", "азс", "гпз", "энергет",
-              "подстанц", "тэц", "тэс", "грэс", "нпс", "нефтехим"]
-
-
-def reason_bad(x):
-    blob = json.dumps(x, ensure_ascii=False)
-    if any(c in blob for c in UA_CHARS):
-        return "UA-lang"
-    if any(m in blob for m in UA_MARK):
-        return "propaganda"
-    if x.get("confidence") not in VALID_CONF:
-        return "bad-confidence:%s" % x.get("confidence")
-    tgt = (str(x.get("target", "")) + " " + str(x.get("title", ""))).lower()
-    if any(k in tgt for k in JET_WORDS) and not any(k in tgt for k in FUEL_WORDS):
-        return "offtopic-aircraft"
-    city = str(x.get("city", "")).strip().lower()
-    if city in ("", "неизвестно") and "неуточ" in tgt:
-        return "empty-alert"
-    return None
+# Имена оставлены для обратной совместимости: на них ссылались внешние скрипты.
+scrub = neutrality.scrub_record
+reason_bad = neutrality.reason_bad
 
 
 def sanitize(path):
@@ -111,7 +61,29 @@ def sanitize(path):
     return total
 
 
+def demo():
+    """assert-самопроверка. Словарные кейсы — в neutrality.demo(); здесь работа с файлом."""
+    import tempfile
+    neutrality.demo()
+    p = os.path.join(tempfile.mkdtemp(), "s.json")
+    json.dump({"strikes": [
+        {"date": "2026-07-08", "city": "Рязань", "target": "Рязанский НПЗ", "confidence": "reported"},
+        {"date": "2026-07-08", "city": "Севастополь", "target": "порт",
+         "detail": "Удар по оккупированному порту", "confidence": "reported"},
+        {"date": "2026-07-08", "city": "X", "target": "Слава Україні", "confidence": "reported"},
+    ]}, open(p, "w", encoding="utf-8"), ensure_ascii=False)
+    assert sanitize(p) == 1
+    out = json.load(open(p, encoding="utf-8"))["strikes"]
+    assert len(out) == 2
+    assert out[1]["detail"] == "Удар по порту", out[1]
+    assert sanitize(p) == 0, "санитайзер не идемпотентен"
+    print("sanitize-strikes demo OK")
+
+
 if __name__ == "__main__":
+    if "--selftest" in sys.argv or "--demo" in sys.argv:
+        demo()
+        sys.exit(0)
     p = sys.argv[1] if len(sys.argv) > 1 else "data/strikes.json"
     try:
         n = sanitize(p)
@@ -122,22 +94,3 @@ if __name__ == "__main__":
     except Exception as e:  # никогда не блокируем коммит из-за самого санитайзера
         sys.stderr.write("sanitize-strikes: warn %s\n" % e)
     sys.exit(0)
-
-
-def demo():
-    """assert-самопроверка: пропаганда/офф-топик/битый conf режутся, нормальное остаётся."""
-    good = {"date": "2026-07-08", "city": "Рязань", "target": "Рязанский НПЗ",
-            "confidence": "reported", "title": "Удар по НПЗ"}
-    cases = [
-        ({"city": "X", "target": "Слава Україні", "confidence": "reported"}, "UA-lang"),
-        ({"city": "X", "target": "прилёт по кацапам", "confidence": "reported"}, "propaganda"),
-        ({"city": "X", "target": "сбит Су-35", "confidence": "reported"}, "offtopic-aircraft"),
-        ({"city": "X", "target": "сбит Су-35 у НПЗ", "confidence": "reported"}, None),  # есть fuel-контекст
-        ({"city": "X", "target": "НПЗ горит", "confidence": "сообщено"}, "bad-confidence:сообщено"),
-        ({"city": "Неизвестно", "target": "неуточнённый объект", "confidence": "reported"}, "empty-alert"),
-        (good, None),
-    ]
-    for x, exp in cases:
-        got = reason_bad(x)
-        assert got == exp, "reason_bad(%s) = %r, ожидалось %r" % (x, got, exp)
-    print("demo OK")

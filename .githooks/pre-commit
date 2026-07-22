@@ -17,6 +17,34 @@ if [ -n "$protected_ui" ] && [ "${ALLOW_FRONTEND_RELEASE:-}" != "1" ]; then
   exit 1
 fi
 
+# ---- ЦЕНЗОР СТАТЕЙ: нейтральность любой публикуемой страницы --------------
+# До 22.07 фильтр стоял только на data/strikes.json: статью, написанную агентом,
+# не проверял никто — она уезжала на сайт как есть. Стоит ВЫШЕ выхода по пустому
+# $staged: коммит со статьями обычно не трогает data/, и блок бы не отработал.
+# Эпитеты censor вычищает сам и перезакладывает файл (как sanitize-strikes);
+# лозунг/призыв/укр-язык автоправкой не лечится — такой коммит блокируется.
+# Осознанная публикация цитаты в разборе -> ALLOW_CENSOR_OVERRIDE=1.
+if [ -f agents/censor.py ] && command -v python3 >/dev/null 2>&1 && [ "${ALLOW_CENSOR_OVERRIDE:-}" != "1" ]; then
+  staged_html="$(git diff --cached --name-only --diff-filter=ACMR 2>/dev/null | grep -E '\.html$' || true)"
+  if [ -n "$staged_html" ]; then
+    censor_rc=0
+    # shellcheck disable=SC2086
+    python3 agents/censor.py $staged_html >&2 || censor_rc=1
+    for _f in $staged_html; do
+      if [ -f "$_f" ] && ! git diff --quiet -- "$_f" 2>/dev/null; then
+        git add "$_f"
+        echo "pre-commit: censor нейтрализовал $_f и перезаложил его в коммит." >&2
+      fi
+    done
+    if [ "$censor_rc" != "0" ]; then
+      echo "pre-commit: BLOCKED — в статье лозунг/призыв/украинский язык (см. выше)." >&2
+      echo "pre-commit: это не эпитет вокруг факта, автоматом не чинится — правь текст." >&2
+      echo "pre-commit: осознанная цитата в разборе -> ALLOW_CENSOR_OVERRIDE=1." >&2
+      exit 1
+    fi
+  fi
+fi
+
 # Files staged for commit under data/ (added/copied/modified/renamed).
 staged="$(git diff --cached --name-only --diff-filter=ACMR -- data/ 2>/dev/null)"
 [ -z "$staged" ] && exit 0

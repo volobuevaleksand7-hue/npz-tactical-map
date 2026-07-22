@@ -80,6 +80,10 @@ LABELS = {
     "/tankery-azovskoe-more": ("🚢", "Танкеры в Азовском море"),
     "/vozmozhen-li-golod":   ("🌾", "Будет ли голод в России"),
     "/udary-po-tankeram":    ("🚢", "Удары по танкерам теневого флота"),
+    "/udar-po-skladam-wildberries":       ("📦", "Удар по складам Wildberries"),
+    "/ataki-na-sklady-wildberries-hronika": ("🗓", "Атаки на склады Wildberries: хроника"),
+    "/kompensacii-wildberries-posle-udara": ("💸", "Компенсации Wildberries после ударов"),
+    "/raketnaya-opasnost-tambovskaya-oblast": ("🚀", "Ракетная опасность: Тамбовская обл."),
 }
 
 # Карточки хаба /analytics: url -> (заголовок, описание).

@@ -16,8 +16,13 @@
 # Самотест: python3 -m hermes.bot.render --selftest
 import datetime
 import html
+import os
 import re
 import sys
+
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "agents"))
+import neutrality  # noqa: E402
 
 SITE = "https://npz-tactical-map.vercel.app"
 MSK = datetime.timezone(datetime.timedelta(hours=3))
@@ -44,8 +49,19 @@ _BARE_URL_RE = re.compile(r"(?<!href=\")(?<!\">)(https?://[^\s<]+)")
 
 
 def esc(s):
-    """HTML-экранирование данных из источников: &, <, > (Telegram parse_mode=HTML)."""
+    """HTML-экранирование данных из источников: &, <, > (Telegram parse_mode=HTML).
+
+    Здесь же — ЦЕНЗОР ПОСТА. Через esc() проходит КАЖДОЕ значение, пришедшее из
+    источника (город, цель, detail, заголовок) — это единственная точка, мимо
+    которой чужой текст в пост не попадает, поэтому нейтрализация висит тут, а
+    не в четырёх рендерах по отдельности. Эпитет вырезается молча; лозунг или
+    призыв автоматом не лечится — он уходит в stderr (cron.log), чтобы человек
+    увидел, что источник протащил такое.
+    """
     s = "" if s is None else str(s)
+    s, _n = neutrality.scrub_text(s)
+    for reason, frag in neutrality.text_reasons(s):
+        sys.stderr.write("render: НЕЙТРАЛЬНОСТЬ %s | %s\n" % (reason, frag))
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 

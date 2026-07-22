@@ -19,6 +19,26 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # но запас гасит короткие сетевые заминки. См. publish_status().
 PUBLISH_LAG_THRESHOLD_H = 1.5
 
+# ---- КРИТИЧЕСКАЯ ПРОТУХШЕСТЬ ----------------------------------------------
+# 22.07: удары по складам Wildberries сутки не появлялись на карте. Watchdog всё
+# это время печатал `⚠ strikes.json stale_alive, data_age=31 h` и тут же
+# `overall: healthy` — потому что stale_alive означало «агент отчитался, просто
+# новостей нет» и в overall не поднималось. Для strikes.json это допущение
+# ложное: агент ходит каждый час днём, и сутки без единого удара — не тишина в
+# новостях, а сломанный сбор. Владелец узнал глазами, а не пингом.
+#
+# Порог — не «2× интервала» (это уже thr_h), а «столько тишины не бывает».
+# Файла нет в словаре -> критического порога у него нет, поведение прежнее.
+CRITICAL_STALE_H = {
+    "strikes.json": 12,
+}
+# Алерт владельцу не чаще, чем раз в N часов: watchdog крутится ежечасно, без
+# кулдауна авария превратится в 24 сообщения в сутки и её перестанут читать.
+ALERT_COOLDOWN_H = 6
+ALERT_STATE = os.environ.get("NPZ_HEALTH_ALERT_STATE", "/root/.npz-health-alert.json")
+ALERT_TOKEN_FILE = os.environ.get("NPZ_REPORT_TOKEN", "/root/.npz-bot/token")
+ALERT_CHAT = os.environ.get("NPZ_REPORT_CHAT", "609952529")
+
 # файл -> (агент, порог свежести данных в часах, heartbeat-key, порог свежести heartbeat в часах).
 # heartbeat-key совпадает с label в run-agent.sh.
 #
@@ -61,8 +81,19 @@ def gen_at(path):
         d = json.load(open(path, encoding="utf-8"))
     except Exception:
         return None
-    m = d.get("meta", {})
-    ts = m.get("generated_at") or d.get("generated_at") or d.get("fetched_at") or d.get("last_event_at")
+    # САМЫЙ СВЕЖИЙ из штампов, а не первый попавшийся. 22.07: в strikes.json их
+    # два — meta.generated_at пишет LLM-агент при полной перезаписи файла, а
+    # верхнеуровневый generated_at обновляет merge-strikes-inbox.py при доливке.
+    # meta стоял в этой цепочке первым и побеждал, поэтому свежий долив (12:23)
+    # читался как «данные от вчера, 31.9 ч» — watchdog мерил не то.
+    m = d.get("meta", {}) if isinstance(d.get("meta"), dict) else {}
+    cands = [m.get("generated_at"), d.get("generated_at"),
+             d.get("fetched_at"), d.get("last_event_at")]
+    dated = [(parse(t), t) for t in cands if t]
+    dated = [(dt, t) for dt, t in dated if dt is not None]
+    if dated:
+        return max(dated)[1]
+    ts = next((t for t in cands if t), None)
     if ts:
         return ts
     raw_ts = d.get("timestamp")
@@ -96,7 +127,7 @@ def load_heartbeats():
         return {}
 
 
-def classify(data_age_h, thr_h, hb_age_h, hb_fresh_h):
+def classify(data_age_h, thr_h, hb_age_h, hb_fresh_h, crit_h=None):
     """Две ОРТОГОНАЛЬНЫЕ оси: свежесть ДАННЫХ и связь с АГЕНТОМ.
 
     Возвращает (status, data_stale, agent_dead).
@@ -113,6 +144,10 @@ def classify(data_age_h, thr_h, hb_age_h, hb_fresh_h):
     if data_age_h is None:
         return "unknown", False, False
     data_stale = data_age_h > thr_h
+    if crit_h is not None and data_age_h > crit_h:
+        # столько тишины не бывает: агент может быть жив и отчитываться, но
+        # данные такого возраста означают сломанный сбор, а не отсутствие новостей
+        return "stale_critical", True, hb_dead
     if data_stale:
         # данные старые, но агент отчитался -> просто нет новостей, не алертим
         return ("stale_dead" if hb_dead else "stale_alive"), True, hb_dead
@@ -127,6 +162,13 @@ def selfcheck():
     assert classify(1, 18, None, 15)[0] == "dead"
     # данные протухли, агент на связи -> новостей нет, это не авария
     assert classify(20, 18, 1, 15)[0] == "stale_alive"
+    # ...но если у файла есть критический порог, 20ч тишины — авария (22.07)
+    assert classify(20, 18, 1, 15, crit_h=12)[0] == "stale_critical"
+    assert classify(10, 18, 1, 15, crit_h=12)[0] == "ok"
+    assert classify(20, 18, 40, 15, crit_h=12)[0] == "stale_critical"
+    assert CRITICAL_STALE_H["strikes.json"] < dict(
+        (w[0], w[2]) for w in WATCH)["strikes.json"], \
+        "критический порог обязан быть строже обычного, иначе он недостижим"
     # данные протухли И агент молчит
     assert classify(20, 18, 40, 15)[0] == "stale_dead"
     # нет generated_at
@@ -174,6 +216,34 @@ def publish_status(now):
         return None, None, None
 
 
+def alert_owner(text):
+    """Один пинг владельцу в Telegram, не чаще ALERT_COOLDOWN_H. Молча ничего не
+    делает, если токена нет (локальный прогон на Маке) — watchdog не имеет права
+    падать из-за недоступного бота."""
+    import urllib.parse
+    import urllib.request
+    now = datetime.datetime.now(datetime.timezone.utc).timestamp()
+    try:
+        last = json.load(open(ALERT_STATE, encoding="utf-8")).get("last_ts", 0)
+    except Exception:
+        last = 0
+    if now - last < ALERT_COOLDOWN_H * 3600:
+        return
+    try:
+        token = open(ALERT_TOKEN_FILE, encoding="utf-8").read().strip()
+    except Exception:
+        return
+    try:
+        data = urllib.parse.urlencode({
+            "chat_id": ALERT_CHAT, "text": text, "parse_mode": "HTML",
+            "disable_web_page_preview": "true"}).encode()
+        urllib.request.urlopen(
+            "https://api.telegram.org/bot%s/sendMessage" % token, data=data, timeout=20).read()
+        json.dump({"last_ts": now}, open(ALERT_STATE, "w", encoding="utf-8"))
+    except Exception as e:
+        print("  alert_owner: не отправлено (%s)" % e)
+
+
 def main():
     now = datetime.datetime.now(datetime.timezone.utc)
     unpushed, publish_lag_h, publish_stuck = publish_status(now)
@@ -181,6 +251,7 @@ def main():
     files = []
     stale_count = 0
     dead_count = 0
+    critical = []
     for fn, agent, thr_h, hb_key, hb_fresh_h in WATCH:
         ts = gen_at(os.path.join(ROOT, "data", fn))
         dt = parse(ts)
@@ -192,7 +263,10 @@ def main():
         hb_dt = parse(hb_ts)
         hb_age_h = None if hb_dt is None else max(0.0, round((now - hb_dt).total_seconds() / 3600, 1))
 
-        status, data_stale, hb_stale = classify(data_age_h, thr_h, hb_age_h, hb_fresh_h)
+        status, data_stale, hb_stale = classify(data_age_h, thr_h, hb_age_h, hb_fresh_h,
+                                                CRITICAL_STALE_H.get(fn))
+        if status == "stale_critical":
+            critical.append((fn, agent, data_age_h))
         if data_stale:
             stale_count += 1
         if hb_stale:
@@ -217,8 +291,11 @@ def main():
             # показывал «1 агент не на связи» вместо десяти. Баннер в app.js:589
             # печатает именно dead_count и подписан «не на связи» — теперь совпадает.
             "checked_at": now.strftime("%Y-%m-%dT%H:%MZ"),
-            "overall": "degraded" if (dead_count or publish_stuck) else "healthy",
+            "overall": "degraded" if (dead_count or publish_stuck or critical) else "healthy",
             "stale_count": stale_count,
+            # Файлы, чья протухшесть означает сломанный сбор, а не тишину в
+            # новостях. Пустой список = всё, что должно обновляться, обновляется.
+            "critical_stale": [{"file": f, "agent": a, "age_hours": h} for f, a, h in critical],
             "dead_count": dead_count,
             "heartbeat_dead_count": dead_count,  # back-compat: то же, что dead_count
             # Публикация: свежесть данных ЛОКАЛЬНО ≠ данные доехали до сайта.
@@ -234,6 +311,13 @@ def main():
     json.dump(health, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("health: %s | stale %d/%d | dead %d | hb_dead %d" % (
         health["meta"]["overall"], stale_count, len(WATCH), dead_count, dead_count))
+    for fn, agent, age in critical:
+        print("  🔴 КРИТИЧНО: %s (%s) не обновлялся %s ч (порог %s ч) — сбор сломан, "
+              "это не «нет новостей»" % (fn, agent, age, CRITICAL_STALE_H[fn]))
+    if critical:
+        alert_owner("🔴 <b>Карта: сбор сломан</b>\n" + "\n".join(
+            "• %s — %s ч без обновления (порог %s ч)" % (f, h, CRITICAL_STALE_H[f])
+            for f, _a, h in critical))
     if publish_stuck:
         print("  🚫 ПУБЛИКАЦИЯ ВСТАЛА: %d коммит(ов) не запушено, старейший %s ч — origin (сайт) отстаёт" % (
             unpushed, publish_lag_h))
