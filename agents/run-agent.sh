@@ -62,16 +62,22 @@ command -v timeout >/dev/null 2>&1 || TIMEOUT_WRAP=""
 # Не-Claude движкам добавляется преамбула с заменой WebSearch/WebFetch
 # (agents/websearch.sh = Tavily, curl) — сами спеки не трогаем.
 RC=1
-if [ "${NPZ_ENGINE:-rotate}" = "rotate" ] && command -v mimo-rotate >/dev/null 2>&1; then
-  GENERIC_PROMPT="$(cat agents/engine-preamble-generic.md 2>/dev/null)
+# Преамбула ОБЯЗАТЕЛЬНА для не-Claude движков (замена инструментов) — без неё
+# mimo-путь пропускаем, уходим сразу в claude (молча потерять её нельзя, Codex-ревью 22.07).
+if [ "${NPZ_ENGINE:-rotate}" = "rotate" ] && command -v mimo-rotate >/dev/null 2>&1 \
+   && [ -s agents/engine-preamble-generic.md ]; then
+  GENERIC_PROMPT="$(cat agents/engine-preamble-generic.md)
 $PROMPT"
-  MIMO_TIMEOUT="${NPZ_MIMO_TIMEOUT:-900}" mimo-rotate "$GENERIC_PROMPT" \
+  # env -u: не отдавать секреты из .npz-agent.env внешне-модельному агенту (env-утечка;
+  # websearch.sh сам пересорсит ключ в рантайме). Файл на диске root-агенту всё равно
+  # доступен — остаточный риск принят (ключ Tavily одноразовый/заменяемый).
+  env -u TAVILY_API_KEY MIMO_TIMEOUT="${NPZ_MIMO_TIMEOUT:-900}" mimo-rotate "$GENERIC_PROMPT" \
     > "agents/logs/${LABEL}.log" 2>&1
   RC=$?
   echo "engine mimo-rotate exit: $RC"
   if [ "$RC" != "0" ]; then
-    # упавший движок мог оставить полузаписанные файлы — чистим перед fallback
-    git checkout -- data/ 2>/dev/null || true
+    # упавший движок мог оставить полузаписанные файлы — чистим (дерево И индекс) перед fallback
+    git checkout HEAD -- data/ 2>/dev/null || true
   fi
 fi
 if [ "$RC" != "0" ]; then
