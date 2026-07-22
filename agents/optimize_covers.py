@@ -18,6 +18,39 @@ MAX_DIM = 1200          # og:image с запасом; карточка 290px и 
 COLORS = 256            # палитра PNG
 SKIP_BYTES = 420 * 1024  # уже оптимизирован → не трогаем (идемпотентность)
 
+THUMB_DIM = 560          # карточка архива ~290px CSS → 560 хватает и на 2x
+THUMB_Q = 72
+
+
+def make_thumb(path):
+    """Мини-обложка для карточек архива: assets/thumb/<name>.webp (~25 КБ вместо ~340 КБ).
+
+    На /news 69 карточек тянули полноразмерные cover-*.png в блок шириной 290px —
+    ~23 МБ за один просмотр архива, главный источник Fast Data Transfer.
+    Возвращает rel-путь тумбы или None.
+    """
+    try:
+        from PIL import Image
+    except Exception:
+        return None
+    if not os.path.isfile(path):
+        return None
+    root = os.path.dirname(os.path.dirname(os.path.abspath(path)))
+    tdir = os.path.join(root, "assets", "thumb")
+    out = os.path.join(tdir, os.path.splitext(os.path.basename(path))[0] + ".webp")
+    rel = os.path.relpath(out, root)
+    if os.path.isfile(out) and os.path.getmtime(out) >= os.path.getmtime(path):
+        return rel
+    try:
+        os.makedirs(tdir, exist_ok=True)
+        im = Image.open(path).convert("RGB")
+        im.thumbnail((THUMB_DIM, THUMB_DIM), Image.LANCZOS)
+        im.save(out, "WEBP", quality=THUMB_Q, method=6)
+        return rel
+    except Exception as e:
+        print("make_thumb: %s -> %s" % (path, e))
+        return None
+
 
 def optimize_cover(path, max_dim=MAX_DIM, colors=COLORS):
     """Ужать один PNG на месте. True — если переписали, False — если пропустили."""
@@ -70,6 +103,8 @@ def main():
         total_after += after
         if before != after:
             print("  %-40s %6.0f -> %5.0f KB" % (os.path.basename(p), before / 1024, after / 1024))
+        if "/cover-" in p.replace(os.sep, "/"):
+            make_thumb(p)
     print("optimize_covers: %d/%d сжато, всего %.1f -> %.1f МБ" %
           (changed, len(targets), total_before / 1048576, total_after / 1048576))
 

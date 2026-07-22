@@ -165,6 +165,16 @@ def cover_for(date: str):
     return rel, (ROOT / rel).exists()
 
 
+def thumb_for(rel: str):
+    """Мини-версия обложки для карточки архива (assets/thumb/*.webp, ~25 КБ).
+
+    Полноразмерный cover-*.png (~340 КБ) в карточке 290px — 69 карточек = ~23 МБ
+    за просмотр /news. Тумбы делает agents/optimize_covers.py; нет тумбы → берём оригинал.
+    """
+    t = f"assets/thumb/{Path(rel).stem}.webp"
+    return t if (ROOT / t).exists() else rel
+
+
 def is_refinery(s: dict) -> bool:
     t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
     return any(k in t for k in REFINERY_KW)
@@ -644,7 +654,7 @@ def brief_card_html(d: str, b: dict, is_latest: bool = False) -> str:
     st = b.get("strikes", [])
     vo = b.get("voices", [])
     c_rel, c_ex = cover_for(d)
-    c_path = asset_ver(c_rel) if c_ex else "/og-image.png"
+    c_path = asset_ver(thumb_for(c_rel)) if c_ex else "/og-image.png"
     n_ref = sum(1 for s in st if is_refinery(s))
     meta_bits = [f"{len(st)} {plural(len(st), 'удар', 'удара', 'ударов')}"]
     if n_ref:
