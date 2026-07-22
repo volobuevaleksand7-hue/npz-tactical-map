@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#d23a2e">
+  <title>Как быстро восстанавливают выбитые НПЗ: анализ скорости ремонта на 22 июля 2026</title>
+  <meta name="description" content="Сколько времени занимает восстановление НПЗ после удара БПЛА: данные по 32 заводам. Ни один полностью остановленный завод не вернулся в строй, медианный простой — 20 дней и растёт, рекорд 97 дней. Почему цикл повторных ударов короче цикла ремонта.">
+  <meta name="keywords" content="сколько восстанавливают нпз, когда восстановят нпз, ремонт нпз после удара, восстановление нпз россия, сколько чинят нпз, когда заработают остановленные нпз, скорость ремонта нпз">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Russian">
+  <link rel="canonical" href="https://npz-tactical-map.vercel.app/skorost-remonta-npz">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Топливный фронт РФ">
+  <meta property="og:url" content="https://npz-tactical-map.vercel.app/skorost-remonta-npz">
+  <meta property="og:title" content="Как быстро восстанавливают выбитые НПЗ: анализ скорости ремонта на 22 июля 2026">
+  <meta property="og:description" content="Сколько времени занимает восстановление НПЗ после удара БПЛА: данные по 32 заводам. Ни один полностью остановленный завод не вернулся в строй, медианный простой — 20 дней и растёт, рекорд 97 дней. Почему цикл повторных ударов короче цикла ремонта.">
+  <meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как быстро восстанавливают выбитые НПЗ: анализ скорости ремонта на 22 июля 2026">
+  <meta name="twitter:description" content="Сколько времени занимает восстановление НПЗ после удара БПЛА: данные по 32 заводам. Ни один полностью остановленный завод не вернулся в строй, медианный простой — 20 дней и растёт, рекорд 97 дней. Почему цикл повторных ударов короче цикла ремонта.">
+  <meta name="twitter:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/styles.css?v=6c4ccd2f">
+  <link rel="stylesheet" href="/news.css?v=e2bbf493">
+  <style>
+    .landing-wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+    .landing-hero{background:linear-gradient(135deg,rgba(210,58,46,.14),rgba(138,59,59,.08));border:1px solid rgba(210,58,46,.3);border-radius:16px;padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden}
+    .landing-hero::before{content:"";position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(210,58,46,.18),transparent 70%);border-radius:50%}
+    .hero-label{display:inline-block;background:var(--red,#d23a2e);color:#fff;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:6px;margin-bottom:12px}
+    .hero-h{font-size:28px;font-weight:800;line-height:1.2;margin-bottom:10px}
+    .hero-sub{font-size:15px;color:var(--ink-dim);line-height:1.6;max-width:680px}
+    .map-cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:18px 0 4px;padding:16px 22px;background:var(--teal,#12a594);color:#fff;font-weight:800;font-size:16px;border-radius:12px;text-decoration:none;box-shadow:0 6px 20px rgba(18,165,148,.3);transition:.15s}
+    .map-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(18,165,148,.45)}
+    .map-cta .mc-ico{font-size:22px}
+    .map-cta.inline{margin:20px 0;background:var(--surface);color:var(--ink);border:1.5px solid var(--teal,#12a594);box-shadow:none}
+    .map-cta.inline:hover{background:rgba(18,165,148,.08);transform:translateY(-1px)}
+    .status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:20px}
+    .status-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+    .status-card .val{font-family:var(--mono);font-size:20px;font-weight:800;color:var(--red,#d23a2e)}
+    .status-card .lbl{font-size:11px;color:var(--ink-dim);margin-top:4px}
+    .section-h{font-size:20px;font-weight:800;margin:32px 0 14px;display:flex;align-items:center;gap:8px}
+    .section-h .ico{font-size:22px}
+    .lead-p{font-size:14px;line-height:1.7;color:var(--ink);margin-bottom:8px}
+    .faq-wrap{margin:20px 0}
+    .faq-item{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+    .faq-q{font-weight:700;font-size:14px;padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q::after{content:"▼";font-size:10px;color:var(--ink-dim);transition:transform .2s}
+    .faq-item.open .faq-q::after{transform:rotate(180deg)}
+    .faq-a{padding:0 16px 14px;font-size:13px;line-height:1.6;color:var(--ink-dim);display:none}
+    .faq-item.open .faq-a{display:block}
+    .link-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:16px 0}
+    .link-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;text-decoration:none;color:var(--ink);transition:.15s}
+    .link-card:hover{border-color:var(--teal);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+    .link-card .lc-h{font-weight:700;font-size:13px;margin-bottom:4px}
+    .link-card .lc-d{font-size:11px;color:var(--ink-dim)}
+    .osint-note{margin-top:32px;font-size:11px;color:var(--ink-dim);background:var(--surface2);padding:12px;border-radius:10px;border-left:3px solid var(--amber);line-height:1.6}
+    .updated-line{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:6px}
+    .balance-box{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--red,#d23a2e);border-radius:10px;padding:16px 18px;margin:18px 0;font-size:13.5px;line-height:1.7}
+</style>
+  <link rel="stylesheet" href="/search.css?v=5a32b7c1">
+  <script defer src="/search.js?v=8b14567c"></script>
+  <script src="/metrika.js" async></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Как быстро восстанавливают выбитые НПЗ: анализ скорости ремонта на 22 июля 2026",
+    "datePublished": "2026-07-22",
+    "dateModified": "2026-07-22",
+    "image": ["https://npz-tactical-map.vercel.app/og-image.png"],
+    "author": {"@type": "Organization", "name": "Топливный фронт РФ"},
+    "publisher": {"@type": "Organization", "name": "Топливный фронт РФ", "url": "https://npz-tactical-map.vercel.app/"},
+    "description": "Сколько времени занимает восстановление НПЗ после удара БПЛА: данные по 32 заводам. Ни один полностью остановленный завод не вернулся в строй, медианный простой — 20 дней и растёт, рекорд 97 дней. Почему цикл повторных ударов короче цикла ремонта.",
+    "mainEntityOfPage": "https://npz-tactical-map.vercel.app/skorost-remonta-npz",
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Сколько времени восстанавливают НПЗ после удара?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "По наблюдаемым данным — дольше, чем длится пауза между ударами. За 15 дней наблюдений ни один из 11 полностью остановленных заводов не вернулся в строй. Медианный простой остановленных — 20 дней и растёт, рекорд — 97 дней (Туапсинский НПЗ, стоит с 16 апреля). Официальные ориентиры для тяжёлых случаев: Туапсе — ноябрь 2026, Московский НПЗ (Капотня) — не ранее 2027 года по оценке Reuters."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Хоть один завод вернулся в работу?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "В полноценную работу — ни один. Зафиксировано два частичных улучшения: ТАНЕКО вышел из полной остановки на 20% мощности (8 июля) и ЯНОС поднялся с 10% до 20% (16 июля). Оба завода в течение недели получили новые удары. Возвратов к 100% загрузки за период наблюдений не было."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Почему заводы не успевают отремонтировать?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Интервал между повторными ударами по одному заводу короче срока ремонта. Внутри волны заводы добивают с медианным интервалом 4 дня, между волнами — 33–71 день (Кинеф: 5 мая и 15 июля). Восстановление узловой установки первичной переработки занимает от 2–4 месяцев. Завод не доходит до конца цикла — его возвращают в начало."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Почему нельзя починить быстрее?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Удары приходятся по установкам первичной переработки (ЭЛОУ-АВТ, CDU) и каталитического крекинга — это горловина завода, без неё остальные мощности не работают. Ключевые узлы такого оборудования импортные и под санкциями, замена идёт через длинное плечо параллельного импорта. Плюс одновременно повреждён 21 завод, и ремонтные бригады с дефицитными узлами — общий ресурс на всю отрасль."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Насколько надёжны эти цифры?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Это ОЦЕНКА по открытым источникам. Статусы и мощности заводов взяты из данных карты, длительность простоя посчитана от даты входа в статус, факты улучшений — из истории изменений данных за 7–22 июля. Глубина истории ограничена 15 днями: этого хватает, чтобы поймать все улучшения за период, но недостаточно для измерения полного цикла ремонта. Оценки сроков восстановления (Туапсе, Капотня) — из публикаций СМИ, а не официальные графики."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-theme="light">
+  <header class="news-header">
+    <div class="news-header-inner">
+      <a href="/" class="news-logo" title="На карту">
+        <span class="news-logo-icon">⛽</span>
+        <span class="news-logo-text">ТОПЛИВНЫЙ ФРОНТ РФ</span>
+      </a>
+      <nav class="news-nav">
+        <a href="/">🗺️ Карта НПЗ</a>
+        <a href="/news">📰 Сводки</a>
+        <a href="/radar">📡 Радар БПЛА</a>
+        <div class="nav-dropdown" style="position:relative;display:inline-block">
+          <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
+          <div class="nav-dropdown-menu">
+            <div class="nav-drop-group">Регионы</div>
+            <a href="/crimea">🗺 Крым</a>
+            <a href="/krasnodar">🌴 Краснодар</a>
+            <a href="/moskva">🏙 Москва</a>
+            <details class="nav-drop-sub">
+              <summary>🚀 Ракетная опасность</summary>
+              <a href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
+              <a href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
+              <a href="/raketnaya-opasnost-omsk">📍 Омск</a>
+              <a href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
+              <a href="/raketnaya-opasnost-kazan">📍 Казань</a>
+              <a href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
+              <a href="/raketnaya-opasnost-penza">📍 Пенза</a>
+              <a href="/raketnaya-opasnost-samara">📍 Самара</a>
+              <a href="/raketnaya-opasnost-belgorod">📍 Ракетная опасность белгород</a>
+            </details>
+            <div class="nav-drop-group">Топливо</div>
+            <a href="/deficit">⛽ Почему нет бензина</a>
+            <a href="/talony">🎫 Бензин по талонам</a>
+            <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
+            <a href="/gde-dizel">🛢️ Где найти дизель</a>
+            <a href="/zakrytye-azs">📄 Какие азс закрылись</a>
+            <a href="/ocheredi-na-azs">📄 Очереди на азс</a>
+            <a href="/draki-na-azs">📄 Драки на азс</a>
+            <a href="/azhiotazh-na-azs">📄 Ажиотаж на азс</a>
+            <a href="/gde-ai95">📄 Где найти аи-95</a>
+            <a href="/zapas-benzina-kanistry">📄 Запас бензина в канистрах</a>
+            <a href="/gde-gaz-azs">📄 Где заправить газ</a>
+            <a href="/tankery-ekonomika-rf">📄 Как удары по танкерам ударят по экономике россии</a>
+            <a href="/tenevoj-flot">📄 Теневой флот россии простыми словами</a>
+            <a href="/tankery-azovskoe-more">🚢 Танкеры в Азовском море</a>
+            <a href="/vozmozhen-li-golod">🌾 Будет ли голод в России</a>
+            <div class="nav-drop-group">Прогноз</div>
+            <a href="/crisis">🔥 Прогноз кризиса</a>
+            <div class="nav-drop-group">Справочники</div>
+            <a href="/attacks">💥 Хроника ударов</a>
+            <a href="/refineries">🏭 Список НПЗ · все заводы</a>
+            <a href="/help">❓ Как пользоваться</a>
+            <a href="/metodologiya">🔬 Методология</a>
+            <a href="/udary-po-tankeram">🚢 Удары по танкерам теневого флота</a>
+            <a href="/udary-azovskoe-more">💥 Удары по Азовскому морю</a>
+            <a href="/volna-dronov">🛩 Волна дронов сейчас</a>
+            <a href="/krupnejshie-npz-rossii">📄 Крупнейшие нпз россии</a>
+            <a href="/npz-lukojla">🛢️ НПЗ Лукойла</a>
+            <a href="/npz-rosnefti">🛢️ НПЗ Роснефти</a>
+            <a href="/npz-gazprom-nefti">🛢️ НПЗ Газпром нефти</a>
+            <a href="/udar-po-skladam-wildberries">📄 Удар по складам wildberries</a>
+            <a href="/situaciya-s-benzinom">📄 Ситуация с бензином</a>
+            <a href="/skorost-remonta-npz" aria-current="page">📄 Сколько восстанавливают нпз</a>
+            <div class="nav-drop-group">Карты</div>
+            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
+            <a href="/karta-bpla">📡 Карта БПЛА</a>
+            <a href="/gde-est-benzin">📄 Где есть бензин сейчас</a>
+            <a href="/karta-azs">⛽ Карта АЗС</a>
+            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
+            <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>
+          </div>
+        </div>
+        <a href="/sources">📚 Источники</a>
+      </nav>
+      <button type="button" class="nav-search-btn" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
+    </div>
+  </header>
+  <main class="news-main">
+    <div class="landing-wrap">
+
+      <div class="landing-hero">
+        <span class="hero-label">АНАЛИЗ · СКОРОСТЬ РЕМОНТА</span>
+        <h1 class="hero-h">Как быстро возвращаются выбитые НПЗ: наблюдаемая скорость ремонта близка к нулю</h1>
+        <p class="hero-sub">Короткий ответ: за всё время наблюдений <strong>ни один полностью остановленный НПЗ не вернулся в строй</strong>. Заводы возвращаются не в «работает», а в «работает на 20–40%», и делают это единицы. Причина не в том, что ремонтировать не умеют, а в том, что интервал между повторными ударами по одному заводу короче срока восстановления узловой установки.</p>
+        <a class="map-cta" href="/refineries"><span class="mc-ico">🏭</span> Статусы всех 32 НПЗ →</a>
+        <div class="status-grid">
+          <div class="status-card"><div class="val">0</div><div class="lbl">заводов вернулись в строй</div></div>
+          <div class="status-card"><div class="val">20 дн</div><div class="lbl">медианный простой остановленных</div></div>
+          <div class="status-card"><div class="val">97 дн</div><div class="lbl">рекорд простоя (Туапсинский)</div></div>
+          <div class="status-card"><div class="val">11 из 21</div><div class="lbl">заводов получили повторный удар</div></div>
+        </div>
+        <div class="updated-line">Обновлено 22 июля 2026, МСК · расчёт по данным карты</div>
+      </div>
+
+      <h2 class="section-h"><span class="ico">🔍</span> Как это измерено</h2>
+      <p class="lead-p">Мы взяли два независимых среза. Первый — текущие статусы всех 32 НПЗ с датой входа в статус: это даёт длительность простоя. Второй — история изменений данных карты за 15 дней (7–22 июля): она показывает <strong>фактические переходы</strong> статусов, а не заявления о планах ремонта.</p>
+      <p class="lead-p">Сразу оговорим ограничение: глубина истории — 15 дней. Этого достаточно, чтобы поймать все улучшения за две недели, но недостаточно, чтобы измерить полный цикл ремонта завода, который заведомо длиннее. Поэтому ниже речь о <strong>наблюдаемой скорости возврата</strong>, а не о теоретическом сроке ремонта.</p>
+
+      <h2 class="section-h"><span class="ico">📉</span> Главный результат: за две недели — два улучшения на 21 повреждённый завод</h2>
+      <p class="lead-p">За 15 дней наблюдений среди 21 повреждённого НПЗ зафиксировано ровно <strong>два события улучшения</strong>:</p>
+      <p class="lead-p"><strong>ТАНЕКО (Нижнекамск)</strong> — 7 июля полная остановка, 8 июля переход в пониженную загрузку 20%. Через 12 дней, 20 июля, завод получил новый удар и снова опустился до 20%.</p>
+      <p class="lead-p"><strong>Славнефть-ЯНОС (Ярославль)</strong> — 15 июля выработка 10%, 16 июля поднялась до 20%. В тот же день и 18 июля завод получил новые удары.</p>
+      <p class="lead-p">Всё. Больше улучшений нет. Ни одного перехода из «полностью остановлен» в «работает». Ни одного возврата к 100% загрузки. При этом за тот же период несколько заводов ухудшили статус.</p>
+      <div class="balance-box">
+        <strong>Что это значит.</strong> Оба зафиксированных улучшения — это не «завод отремонтировали», а «завод запустил часть установок на пятую часть мощности». И оба раза этот минимальный отыгрыш был обнулён новым ударом в течение недели. Наблюдаемая скорость возврата мощностей в июле 2026 статистически неотличима от нуля.
+      </div>
+
+      <h2 class="section-h"><span class="ico">⏱️</span> Сколько заводы уже стоят</h2>
+      <p class="lead-p">Среди 11 полностью остановленных НПЗ медианный простой — <strong>20 дней</strong>, и он растёт, потому что никто из очереди не выходит. Разброс огромен:</p>
+      <p class="lead-p"><strong>Туапсинский НПЗ</strong> (12 млн т/год) — стоит с 16 апреля, <strong>97 дней</strong>. Официальный ориентир возврата — ноябрь 2026, то есть более полугода простоя.<br>
+      <strong>Лукойл-Пермнефтеоргсинтез</strong> (13,1) — 76 дней.<br>
+      <strong>Рязанский НПЗ</strong> (17,1) — 68 дней.<br>
+      <strong>Московский НПЗ, Капотня</strong> (12,5) — 66 дней; по оценке Reuters, восстановление <strong>не ранее 2027 года</strong>.<br>
+      <strong>Кинеф</strong> (20,1 — второй по величине завод страны) — 7 дней, остановлен 15 июля.</p>
+      <p class="lead-p">Частично работающие держатся не лучше. <strong>Новокуйбышевский НПЗ</strong> находится в режиме пониженной загрузки <strong>95 дней</strong> и за это время не поднялся выше 40%. Это и есть реальный профиль «восстановления»: не возврат к норме, а закрепление на треть-половине мощности на месяцы.</p>
+
+      <h2 class="section-h"><span class="ico">🔁</span> Почему ремонт не догоняет: цикл удара короче цикла ремонта</h2>
+      <p class="lead-p">Это ключевой механизм, и он измеряется. Из 21 повреждённого завода <strong>11 получили два и более удара</strong>. Интервалы между ударами по одному и тому же заводу распадаются на два режима:</p>
+      <p class="lead-p"><strong>Добивание внутри волны</strong> — медиана <strong>4 дня</strong> (26 наблюдений, от 1 до 22 дней). Завод получает серию ударов подряд, не успевая даже оценить ущерб: Москва (Капотня) — девять ударов, Ярославль — четыре, Кстово — четыре.</p>
+      <p class="lead-p"><strong>Возврат через месяцы</strong> — когда завод частично восстановился, по нему бьют снова. Кинеф: удар 5 мая, повторный <strong>15 июля — через 71 день</strong>, ровно по критичной установке ЭЛОУ-АВТ-6. Сызранский: 21 мая → 12 июля, <strong>52 дня</strong>. Афипский: 11 июня → 14 июля, <strong>33 дня</strong>.</p>
+      <p class="lead-p">Сопоставьте с сроками ремонта: восстановление узловой установки — от 2–4 месяцев в лучшем случае, для тяжёлых повреждений — год и больше. <strong>Даже самый длинный наблюдаемый интервал между ударами (71 день) короче минимального срока ремонта.</strong> Завод физически не успевает дойти до конца восстановительного цикла — его возвращают в начало.</p>
+
+      <h2 class="section-h"><span class="ico">🔧</span> Почему сам ремонт медленный</h2>
+      <p class="lead-p">Три причины, и ни одна не решается деньгами быстро.</p>
+      <p class="lead-p"><strong>1. Бьют по узлам, а не по площадям.</strong> Цели повторных ударов — установки первичной переработки (ЭЛОУ-АВТ, CDU) и каталитического крекинга. Это горловина завода: без неё остальные мощности бесполезны, сколько бы их ни уцелело. Удар по одной установке останавливает завод целиком.</p>
+      <p class="lead-p"><strong>2. Оборудование импортное и под санкциями.</strong> Ключевые узлы установок первичной переработки и крекинга исторически поставлялись западными производителями. Замена требует либо параллельного импорта с длинным плечом, либо реверс-инжиниринга — в обоих случаях это месяцы, а не недели.</p>
+      <p class="lead-p"><strong>3. Ремонтный ресурс конкурирует сам с собой.</strong> Одновременно повреждён 21 завод. Специализированные монтажные бригады, краны, дефицитные узлы — общий пул на всю отрасль. Очередь на ремонт растягивает сроки каждого отдельного объекта.</p>
+
+      <h2 class="section-h"><span class="ico">🔭</span> Что из этого следует</h2>
+      <p class="lead-p">Практический вывод для оценки топливного баланса: <strong>ждать улучшения от ремонта заводов при текущем темпе ударов не следует</strong>. Сценарий деэскалации проекта (вероятность 7%) прямо закладывает, что заметный отыгрыш загрузки — плюс 10–15 процентных пунктов за 4–8 недель — возможен только при резком ослаблении ударов. Полные остановки вроде Капотни и Туапсе не отыгрываются в этом горизонте ни при каком сценарии.</p>
+      <p class="lead-p">Именно поэтому текущая стабилизация на заправках держится на импорте и запрете экспорта, а не на восстановлении переработки — подробнее в разборе <a href="/situaciya-s-benzinom">ситуации с бензином</a>. Сценарии и сроки по кризису в целом — в материале <a href="/crisis">«Когда закончится топливный кризис»</a>.</p>
+
+      <h2 class="section-h"><span class="ico">❓</span> Частые вопросы</h2>
+      <div class="faq-wrap">
+        <div class="faq-item open">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Сколько времени восстанавливают НПЗ после удара?</div>
+          <div class="faq-a">По наблюдаемым данным — дольше, чем длится пауза между ударами. За 15 дней наблюдений ни один из 11 полностью остановленных заводов не вернулся в строй. Медианный простой остановленных — 20 дней и растёт, рекорд — 97 дней (Туапсинский НПЗ, стоит с 16 апреля). Официальные ориентиры для тяжёлых случаев: Туапсе — ноябрь 2026, Московский НПЗ (Капотня) — не ранее 2027 года по оценке Reuters.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Хоть один завод вернулся в работу?</div>
+          <div class="faq-a">В полноценную работу — ни один. Зафиксировано два частичных улучшения: ТАНЕКО вышел из полной остановки на 20% мощности (8 июля) и ЯНОС поднялся с 10% до 20% (16 июля). Оба завода в течение недели получили новые удары. Возвратов к 100% загрузки за период наблюдений не было.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Почему заводы не успевают отремонтировать?</div>
+          <div class="faq-a">Интервал между повторными ударами по одному заводу короче срока ремонта. Внутри волны заводы добивают с медианным интервалом 4 дня, между волнами — 33–71 день (Кинеф: 5 мая и 15 июля). Восстановление узловой установки первичной переработки занимает от 2–4 месяцев. Завод не доходит до конца цикла — его возвращают в начало.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Почему нельзя починить быстрее?</div>
+          <div class="faq-a">Удары приходятся по установкам первичной переработки (ЭЛОУ-АВТ, CDU) и каталитического крекинга — это горловина завода, без неё остальные мощности не работают. Ключевые узлы такого оборудования импортные и под санкциями, замена идёт через длинное плечо параллельного импорта. Плюс одновременно повреждён 21 завод, и ремонтные бригады с дефицитными узлами — общий ресурс на всю отрасль.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Насколько надёжны эти цифры?</div>
+          <div class="faq-a">Это ОЦЕНКА по открытым источникам. Статусы и мощности заводов взяты из данных карты, длительность простоя посчитана от даты входа в статус, факты улучшений — из истории изменений данных за 7–22 июля. Глубина истории ограничена 15 днями: этого хватает, чтобы поймать все улучшения за период, но недостаточно для измерения полного цикла ремонта. Оценки сроков восстановления (Туапсе, Капотня) — из публикаций СМИ, а не официальные графики.</div>
+        </div>
+      </div>
+
+      <h2 class="section-h"><span class="ico">🔗</span> Смотрите также</h2>
+      <div class="link-grid">
+        <a class="link-card" href="/refineries"><div class="lc-h">🏭 Статусы НПЗ</div><div class="lc-d">Все 32 завода и их состояние</div></a>
+        <a class="link-card" href="/situaciya-s-benzinom"><div class="lc-h">⛽ Ситуация с бензином</div><div class="lc-d">Текущий срез топливного баланса</div></a>
+        <a class="link-card" href="/crisis"><div class="lc-h">📅 Когда закончится кризис</div><div class="lc-d">Сценарии и сроки</div></a>
+        <a class="link-card" href="/deficit"><div class="lc-h">📉 Почему нет бензина</div><div class="lc-d">Причины и механика дефицита</div></a>
+        <a class="link-card" href="/attacks"><div class="lc-h">💥 Хроника ударов</div><div class="lc-d">История ударов по объектам</div></a>
+        <a class="link-card" href="/metodologiya"><div class="lc-h">🔬 Методология</div><div class="lc-d">Откуда данные и как проверяются</div></a>
+      </div>
+
+      <div class="osint-note">
+        <strong>⚠️ Дисклеймер:</strong> Материал носит <strong>справочно-аналитический характер</strong>. Расчёты выполнены по данным карты (<span class="mono">fuel-state.json</span>, <span class="mono">strikes.json</span>) и истории их изменений; оценки сроков восстановления — по публикациям СМИ (Reuters и др.). Это <strong>ОЦЕНКА / ESTIMATE</strong>, а не официальная информация: публичных ремонтных графиков НПЗ не существует. Глубина истории изменений ограничена 15 днями, что прямо ограничивает выводы о полном цикле ремонта. Причины медленного ремонта — аналитическая реконструкция, а не подтверждённые данные предприятий.
+      </div>
+    </div>
+  </main>
+
+  <footer class="news-footer">
+    <div class="news-footer-inner">
+      <p>Топливный фронт РФ · <a href="/">🗺️ Карта НПЗ</a> · OSINT-дашборд · <span class="mono">npz-tactical-map.vercel.app</span></p>
+      <p class="footer-disc">Не является официальной информацией. Данные из открытых источников.</p>
+    </div>
+  </footer>
+
+  <script>
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.dataset.theme = saved;
+  </script>
+  <script defer src="/nav-dropdown.js?v=06476ddc"></script>
+  <script defer src="/vpn-nudge.js?v=7009410b"></script>
+</body>
+</html>
