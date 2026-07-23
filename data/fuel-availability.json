@@ -1,10 +1,10 @@
 {
   "meta": {
-    "generated_at": "2026-07-23T16:20Z",
+    "generated_at": "2026-07-23T16:36:24Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
-    "updated_by": "agent:fuel-availability",
+    "updated_by": "agent:fuel-availability-update",
     "rotation_pass": "23.07 (16:20Z): РОТАЦИОННОЕ ОБНОВЛЕНИЕ 12 старейших регионов (цикл-11). Проверены WebSearch: Еврейская АО, Магаданская обл., Сахалинская обл., Калмыкия, Камчатский край, Приморский край, Пермский край, Ингушетия, Северная Осетия, Башкортостан, Мордовия, Пензенская обл. Позитивная динамика: Магаданская calm, Калмыкия +10л (до 30л на 16.07), Мордовия +20л (до 40л на 22.07), Пермский край улучшение лимитов. Северная Осетия запустила приложение мониторинга. Прогноз: стабилизация августа сохраняется."
   },
   "exchange": {
@@ -14,7 +14,7 @@
     "trend": "rising",
     "updated": "2026-07-23",
     "source_url": "https://rosstat.gov.ru/storage/mediabank/107_15-07-2026.html",
-    "notes": "23.07: АИ-95 стабильны. СПбМТСБ (7-13.07) АИ-95: 69.23-72.65 ₽/л розница, биржа требует верификацию конечных потребителей с 21.07. Бренд crude: $96.31/barrel (23.07, выше с 11 июня). Рост цен сокращается."
+    "notes": "23.07: цены на топливо обсуждаются в новостях. 23.07: АИ-95 стабильны. СПбМТСБ (7-13.07) АИ-95: 69.23-72.65 ₽/л розница, биржа требует верификацию конечных потребителей с 21.07. Бренд crude: $96.31/barrel (23.07, выше с 11 июня). Рост цен сокращается."
   },
   "regions": [
     {
@@ -138,40 +138,9 @@
         "https://t.me/chp_krd",
         "https://t.me/Crimeanwind",
         "https://www.kuban.kp.ru/daily/277794/5270568/",
-        "https://www.kuban.kp.ru/daily/277794/5271153/",
-        "https://t.me/oil_capital/25993",
-        "https://kuban.aif.ru/society/iz-bolee-tysyachi-azs-vremenno-ne-vydayut-toplivo-15-zapravok-na-kubani",
-        "https://novayagazeta.ru/articles/2026/06/10/vlasti-krasnodarskogo-kraia-nazvali-ocheredi-za-benzinom-iskusstvennym-azhiotazhem-nakanune-zhiteli-skupali-benzin-v-kanistry-news",
-        "https://56.ru/text/transport/2026/06/14/76472482/",
-        "https://www.vkpress.ru/life/ocheredi-do-sotni-mashin-i-zakrytye-kolonki-situatsiya-na-zapravkakh-kubani/?id=203960",
-        "https://newdaynews.ru/krasnodar/876131.html",
-        "https://utyug.info/new/idyem-k-talonam-chto-proiskhodit-s-benzinom-v-krasnodarskom-krae-i-chego-zhdat-dalshe-74683/",
-        "https://www.livekuban.ru/news/zhizn/ogranicheniya-na-benzin-vveli-na-azs-tatnefti-v-tom-chisle-v-krasnodarskom-krae",
-        "https://www.kuban.kp.ru/daily/277788/5257997/",
-        "https://www.kavkaz-uzel.eu/articles/424167",
-        "https://kuban.aif.ru/society/bez-paniki-situaciya-s-benzinom-na-yuge-2026-gde-stabilnye-ceny-i-postavki",
-        "https://rg.ru/2026/06/24/reg-ufo/opershtab-v-krasnodarskom-krae-ne-ogranichivali-prodazhu-benzina.html",
-        "https://93.ru/text/transport/2026/06/28/76504005/",
-        "https://www.kommersant.ru/doc/8778706",
-        "https://t.me/nefte_baza/7944",
-        "https://www.reuters.com/business/energy/cossacks-volunteers-help-keep-order-petrol-stations-russian-black-sea-resort-2026-07-03/",
-        "https://t.me/chp_krd/46587",
-        "https://t.me/chp_krd/46590",
-        "https://www.theguardian.com/world/2026/jul/07/russia-cities-feel-pinch-amid-worsening-fuel-shortages",
-        "https://edition.cnn.com/2026/07/06/europe/russia-fuel-crisis-ukraine-drone-attacks-intl-vis",
-        "https://www.kommersant.ru/doc/8781192",
-        "https://93.ru/text/auto/2026/07/01/76510386/",
-        "https://t.me/chp_krd/46606",
-        "https://t.me/chp_krd/46634",
-        "https://rg.ru/2026/07/20/reg-ufo/v-krasnodare-20-iiulia-sokratilos-chislo-rabotaiushchih-azs.html"
-      ],
-      "note": "22.07: Позитивная динамика завершена. На 20.07: 60 АЗС открыто, 42 закрыто, 11 на ремонте. Лимит 20-50л по QR-кодам, дизель 30-60л.",
-      "source_urls": [
-        "https://t.me/chp_krd",
-        "https://t.me/Crimeanwind",
-        "https://www.kuban.kp.ru/daily/277794/5270568/",
         "https://kuban.aif.ru/society/v-krasnodare-20-iyulya-benzin-prodayut-na-60-azs-v-sochi-na-50"
-      ]
+      ],
+      "note": "22.07: Позитивная динамика завершена. На 20.07: 60 АЗС открыто, 42 закрыто, 11 на ремонте. Лимит 20-50л по QR-кодам, дизель 30-60л."
     },
     {
       "region": "Москва",
@@ -218,7 +187,7 @@
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 72.14,
-      "diesel_price_rub": 81.90,
+      "diesel_price_rub": 81.9,
       "source_urls": [
         "https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-moskve-1-ijulja-2026-goda-novye-pravila-na-azs-limity-aktualnye-ceny_1760801",
         "https://ru.themoscowtimes.com/2026/06/29/gazprom-neft-i-lukoil-nachali-ogranichivat-prodazhu-benzina-v-moskve-i-podmoskove-a199450",
@@ -589,7 +558,7 @@
       ],
       "queues_hours": 0.17,
       "ai95_price_rub": 71.95,
-      "diesel_price_rub": 77.20,
+      "diesel_price_rub": 77.2,
       "source_urls": [
         "https://www.yuga.ru/news/482701-zhiteli-rostovskoj-oblasti-pozhalovalis-na-pereboi-s-benzinom-i-ego-podorozhanie/",
         "https://www.svoboda.org/a/rossiyane-chuvstvuyut-na-sebe-voynu-ocheredi-na-avtozapravkah-na-yuge/33778320.html",
@@ -1562,7 +1531,7 @@
         }
       ],
       "queues_hours": 1.0,
-      "ai95_price_rub": 81.30,
+      "ai95_price_rub": 81.3,
       "diesel_price_rub": 92.72,
       "source_urls": [
         "https://chr.aif.ru/tambov/incidents/s-20-iyulya-v-tambovskoy-oblasti-vvedut-zapravku-po-chyotnym-i-nechyotnym-dnyam",
