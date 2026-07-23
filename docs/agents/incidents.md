@@ -31,8 +31,8 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
-## [OPEN] card-missing-2026-07-23
-status: OPEN
+## [RESOLVED] card-missing-2026-07-23
+status: RESOLVED
 opened: 2026-07-23 08:16 МСК — summary-watchdog
 На живом /news НЕТ карточки-сводки за 2026-07-23.
 Что сделать:
@@ -40,6 +40,7 @@ opened: 2026-07-23 08:16 МСК — summary-watchdog
 - если ударов за 2026-07-23 нет → прогони сборщик strikes (agents/update-prompt-strikes.md) за эту дату, затем gen-news;
 - проверь https://npz-tactical-map.vercel.app/news
 
+resolved: 2026-07-23 20:15 МСК — проблема исчезла (авто, сторож)
 ## [RESOLVED] cover-fallback-2026-07-19
 status: RESOLVED
 opened: 2026-07-19 08:15 МСК — summary-watchdog
