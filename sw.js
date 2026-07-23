@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v23';   // bump: фикс deep-link ?layer= (клик по кнопке слоя до навешивания обработчиков)
+var CACHE = 'npz-shell-v24';   // bump: поражения складов выводятся из strikes.json (было 4, стало 6)
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

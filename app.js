@@ -1815,11 +1815,11 @@
   // включению кнопки, а не у каждого посетителя карты.
   var whPromise = null;
   function loadWarehouses() {
-    if (S.warehouses) return Promise.resolve();
+    if (S.warehouses) return Promise.resolve(true);
     if (whPromise) return whPromise;
     whPromise = fetchData("warehouses")
-      .then(function (d) { S.warehouses = d; })
-      .catch(function () { whPromise = null; });
+      .then(function (d) { S.warehouses = d; return true; })
+      .catch(function () { whPromise = null; return false; });   // false → вызывающий снимет слой
     return whPromise;
   }
   var WH_BRAND = { wb: { c: "#8b2fa8", label: "Wildberries" }, ozon: { c: "#0b63d6", label: "Ozon" } };
@@ -2011,7 +2011,12 @@
         if (name === "warehouses") {
           if (!on) { maps.ru.removeLayer(lg); return; }
           maps.ru.addLayer(lg);
-          loadWarehouses().then(renderWarehouses);   // датасет тянем только при включении слоя
+          // датасет тянем только при включении слоя; при сбое не оставляем «включённый» пустой
+          // слой — иначе отсутствие складов читается как «складов нет», а не «данные не пришли»
+          loadWarehouses().then(function (ok) {
+            if (!ok) { maps.ru.removeLayer(lg); b.classList.remove("active"); showToast("Слой складов не загрузился — попробуйте ещё раз"); return; }
+            renderWarehouses();
+          });
           return;
         }
         if (name === "roads") {

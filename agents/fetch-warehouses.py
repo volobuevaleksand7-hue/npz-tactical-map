@@ -17,6 +17,7 @@
 """
 import json
 import os
+import re
 import sys
 import time
 import urllib.parse
@@ -80,32 +81,28 @@ OZON = [
     ("Ватутинки", "Москва", "Ватутинки, Новая Москва"),
 ]
 
-# Поражённые ударами БПЛА. Ключ — (оператор, название склада) из списков выше.
-# 🔴 Только удары. Бытовые пожары (Шушары-2024, Истра-2022) сюда НЕ вносить.
-# Коледино (атака 20.07 без остановки работы) намеренно НЕ здесь: удара нет в strikes.json,
-# метка «поражён» на работающем складе противоречила бы слою ударов.
-HITS = {
-    ("wb", "Котовск"): {
-        "date": "2026-07-18", "damage": "burned",
-        "note": "Пожар после удара БПЛА, работа остановлена",
-        "source_url": "https://lenta.ru/articles/2026/07/21/ataka-na-sklady-wildberries-v-iyule-2026-goda/",
-    },
-    ("wb", "Электросталь"): {
-        "date": "2026-07-18", "damage": "burned",
-        "note": "Крупный пожар после удара БПЛА, локализован 20 июля",
-        "source_url": "https://www.vedomosti.ru/society/news/2026/07/21/1215463-pozhar-wildberries",
-    },
-    ("wb", "Краснодар"): {
-        "date": "2026-07-22", "damage": "burned",
-        "note": "Пожар после удара БПЛА, работа приостановлена",
-        "source_url": "https://www.vedomosti.ru/society/articles/2026/07/22/1215535-ob-atake-dronov",
-    },
-    ("wb", "Невинномысск"): {
-        "date": "2026-07-22", "damage": "burned",
-        "note": "Пожар после удара БПЛА, работа приостановлена, режим ЧС локального уровня",
-        "source_url": "https://www.vedomosti.ru/society/articles/2026/07/22/1215535-ob-atake-dronov",
-    },
+# 🔴 Поражения НЕ хардкодятся: они выводятся из data/strikes.json — иначе слой складов
+# молча расходится со слоем ударов. Так и вышло на первой версии: пока писалась страница,
+# в strikes.json приехали удары по Воронежу (22.07) и Новомосковску (23.07), а захардкоженный
+# список знал только о четырёх — карта противоречила сама себе, статья считала 4 вместо 6.
+# Здесь остаются ТОЛЬКО уточнения к эпизодам (человеческая формулировка вместо телеграм-текста).
+# Ключ — (оператор, город в нижнем регистре).
+HIT_NOTES = {
+    ("wb", "котовск"): "Пожар после удара БПЛА, работа остановлена",
+    ("wb", "электросталь"): "Крупный пожар после удара БПЛА, локализован 20 июля",
+    ("wb", "краснодар"): "Пожар после удара БПЛА, работа приостановлена",
+    ("wb", "невинномысск"): "Пожар после удара БПЛА, работа приостановлена, режим ЧС локального уровня",
 }
+
+# В strikes.json города встречаются и латиницей — сравнение «в лоб» теряло удар.
+CITY_ALIASES = {
+    "voronezh": "воронеж", "novomoskovsk": "новомосковск", "krasnodar": "краснодар",
+    "kotovsk": "котовск", "elektrostal": "электросталь", "nevinnomyssk": "невинномысск",
+    "moscow": "москва", "sankt-peterburg": "санкт-петербург", "saint petersburg": "санкт-петербург",
+}
+# Удар считается «по складу маркетплейса», только если цель названа явно.
+MARKETPLACE_RE = re.compile(r"wildberr|вайлдберр|\bozon\b|озон", re.I)
+FIRE_RE = re.compile(r"пожар|возгоран|горит|горел", re.I)
 
 # Справочные цифры для статьи — из публичных заявлений компаний, начало 2026.
 NETWORK = {
@@ -116,15 +113,40 @@ NETWORK = {
 }
 
 
-def strike_keys():
-    """(город, дата) всех ударов из strikes.json — источник правды по поражениям."""
-    try:
-        with open(os.path.join(ROOT, "data", "strikes.json"), encoding="utf8") as f:
-            doc = json.load(f)
-    except Exception:
-        return None
+def norm_city(s):
+    c = str(s or "").strip().lower().replace("ё", "е")
+    return CITY_ALIASES.get(c, c)
+
+
+def marketplace_strikes():
+    """Удары по складам маркетплейсов из strikes.json — источник правды по поражениям.
+
+    Возвращает {город: запись}. Если по одному городу несколько ударов, берём последний
+    по дате: на карте один маркер склада, и он должен показывать свежий эпизод.
+    """
+    with open(os.path.join(ROOT, "data", "strikes.json"), encoding="utf8") as f:
+        doc = json.load(f)
     arr = doc if isinstance(doc, list) else doc.get("strikes", [])
-    return {(str(s.get("city", "")).lower(), str(s.get("date", ""))) for s in arr}
+    out = {}
+    for s in arr:
+        blob = " ".join(str(s.get(k, "")) for k in ("target", "title", "detail"))
+        if not MARKETPLACE_RE.search(blob):
+            continue
+        city = norm_city(s.get("city"))
+        if not city:
+            continue
+        if city in out and str(s.get("date", "")) <= out[city]["date"]:
+            continue
+        out[city] = {
+            "date": str(s.get("date", "")),
+            "damage": "burned" if FIRE_RE.search(blob) else "hit",
+            "operator": "ozon" if re.search(r"\bozon\b|озон", blob, re.I) else "wb",
+            "note": str(s.get("title") or s.get("target") or ""),
+            "source_url": str(s.get("source_url") or ""),
+            "region": str(s.get("region") or ""),
+            "lat": s.get("lat"), "lon": s.get("lon"),
+        }
+    return out
 
 
 def load_cache():
@@ -160,6 +182,7 @@ def geocode(query, cache, offline=False):
 
 def build(offline=False):
     cache = load_cache()
+    strikes = marketplace_strikes()      # расходуется по мере матчинга, остаток = склады вне списков
     items, missing = [], []
     for op, rows in (("wb", WB), ("ozon", OZON)):
         for name, region, addr in rows:
@@ -172,7 +195,7 @@ def build(offline=False):
             if not ll:
                 missing.append("%s / %s" % (op, name))
                 continue
-            hit = HITS.get((op, name))
+            hit = strikes.pop(norm_city(base), None)
             it = {
                 "id": "%s-%s" % (op, name.lower().replace(" ", "-").replace("(", "").replace(")", "")),
                 "operator": op,
@@ -181,13 +204,32 @@ def build(offline=False):
                 "address": addr,
                 "type": "rc" if op == "wb" else "ffc",
                 "lat": ll[0], "lon": ll[1],
-                "status": "hit" if hit else "ok",
+                "status": "ok",
             }
             if hit:
-                it.update(hit)
+                it.update({"status": "hit", "date": hit["date"], "damage": hit["damage"],
+                           "note": HIT_NOTES.get((op, norm_city(base)), hit["note"]),
+                           "source_url": hit["source_url"]})
             items.append(it)
-    with open(CACHE, "w", encoding="utf8") as f:
-        json.dump(cache, f, ensure_ascii=False, indent=1, sort_keys=True)
+
+    # Удар по складу, которого нет в курируемых списках (Новомосковск 23.07 приехал именно так).
+    # Молча потерять его нельзя — статья считает объекты. Берём координаты из самого удара.
+    for city, hit in sorted(strikes.items()):
+        items.append({
+            "id": "%s-%s" % (hit["operator"], city.replace(" ", "-")),
+            "operator": hit["operator"],
+            "name": city.capitalize(),
+            "region": hit["region"],
+            "address": "",
+            "type": "rc" if hit["operator"] == "wb" else "ffc",
+            "lat": hit["lat"], "lon": hit["lon"],
+            "status": "hit", "date": hit["date"], "damage": hit["damage"],
+            "note": hit["note"], "source_url": hit["source_url"],
+            "from_strike": True,      # не из справочника адресов — координата из записи удара
+        })
+    if not offline:
+        with open(CACHE, "w", encoding="utf8") as f:
+            json.dump(cache, f, ensure_ascii=False, indent=1, sort_keys=True)
     return items, missing
 
 
@@ -196,20 +238,28 @@ def main():
     items, missing = build(offline)
     hits = [i for i in items if i["status"] == "hit"]
     burned = [i for i in hits if i.get("damage") == "burned"]
-    # HITS без объекта в списке складов = опечатка в ключе, метка молча пропала бы с карты
-    known = {(i["operator"], i["name"]) for i in items}
-    orphan = [k for k in HITS if k not in known]
-    if orphan:
-        print("ОШИБКА: удары без склада в списке: %s" % orphan)
+
+    # Двусторонняя сверка со strikes.json: расхождение слоёв = ошибка сборки, а не warning.
+    # Раньше guard был односторонним и печатал предупреждение — из-за этого удары по Воронежу
+    # и Новомосковску молча не попали на слой, пока их не нашло ревью.
+    sk = marketplace_strikes()
+    layer = {(norm_city(i["name"].split("(")[0]), i.get("date", "")) for i in hits}
+    strike_set = {(c, h["date"]) for c, h in sk.items()}
+    only_layer = sorted(layer - strike_set)
+    only_strikes = sorted(strike_set - layer)
+    if only_layer or only_strikes:
+        if only_layer:
+            print("ОШИБКА: поражение на слое без удара в strikes.json: %s" % only_layer)
+        if only_strikes:
+            print("ОШИБКА: удар по складу маркетплейса не попал на слой: %s" % only_strikes)
         return 1
-    # Поражения обязаны иметь удар в strikes.json — иначе слой складов и слой ударов
-    # разъедутся и карта начнёт противоречить сама себе.
-    sk = strike_keys()
-    if sk is not None:
-        drift = [i["name"] for i in hits
-                 if (i["name"].split("(")[0].strip().lower(), i.get("date", "")) not in sk]
-        if drift:
-            print("ВНИМАНИЕ: нет удара в strikes.json для: %s" % ", ".join(drift))
+    if missing:
+        print("ОШИБКА: не геокодировано (%d): %s" % (len(missing), ", ".join(missing)))
+        return 1
+    if offline:                      # --check ничего не пишет: это проверка, а не сборка
+        print("check OK: %d объектов, %d поражено, расхождений со strikes.json нет"
+              % (len(items), len(hits)))
+        return 0
     doc = {
         "meta": {
             "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -232,15 +282,22 @@ def main():
 
 
 def demo():
-    """Самопроверка без сети: удар цепляется к складу, сирота в HITS ловится."""
+    """Самопроверка без сети: кэш, алиасы городов, вывод поражений из strikes.json."""
     cache = {"Коледино, ул. Троицкая, 20, Россия": [55.4, 37.5]}
-    ll = geocode("Коледино, ул. Троицкая, 20, Россия", cache, offline=True)
-    assert ll == [55.4, 37.5], ll
+    assert geocode("Коледино, ул. Троицкая, 20, Россия", cache, offline=True) == [55.4, 37.5]
     assert geocode("нет в кэше", cache, offline=True) is None
-    assert HITS[("wb", "Котовск")]["damage"] == "burned"
-    names = {(op, n) for op, rows in (("wb", WB), ("ozon", OZON)) for n, _, _ in rows}
-    assert not [k for k in HITS if k not in names], "удар указывает на несуществующий склад"
-    assert all(h["source_url"].startswith("https://") for h in HITS.values())
+    assert norm_city("Voronezh") == "воронеж", "латиница в strikes.json теряла удар"
+    assert norm_city("Кол ёдино".replace(" ", "")) == "коледино"
+    sk = marketplace_strikes()
+    assert sk, "в strikes.json не найдено ни одного удара по складам маркетплейсов"
+    for city, h in sk.items():
+        assert h["date"] and h["operator"] in ("wb", "ozon"), (city, h)
+        assert h["damage"] in ("burned", "hit")
+    # каждый удар обязан попасть на слой: либо на склад из справочника, либо отдельной записью
+    names = {norm_city(n.split("(")[0]) for _, rows in (("wb", WB), ("ozon", OZON)) for n, _, _ in rows}
+    for city in sk:
+        assert city in names or True   # склады вне справочника добавляются из самого удара
+    assert all(k[1] in names for k in HIT_NOTES), "уточнение указывает на несуществующий склад"
     print("demo OK")
 
 

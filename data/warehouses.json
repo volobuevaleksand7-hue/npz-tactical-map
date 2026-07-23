@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-07-22T20:36:40Z",
+  "generated_at": "2026-07-23T03:36:07Z",
   "scope": "Крупные распределительные центры Wildberries и фулфилмент-центры Ozon. Отметка поражения — только удары БПЛА и ракет.",
   "geocoder": "Nominatim / OpenStreetMap (ODbL)",
   "network": {
@@ -17,8 +17,8 @@
    }
   },
   "counts": {
-   "total": 45,
-   "hit": 4,
+   "total": 46,
+   "hit": 6,
    "burned": 4
   }
  },
@@ -263,7 +263,11 @@
    "type": "rc",
    "lat": 51.6606,
    "lon": 39.20059,
-   "status": "ok"
+   "status": "hit",
+   "date": "2026-07-22",
+   "damage": "hit",
+   "note": "Удар БПЛА по логистическому центру Wildberries в Воронеже",
+   "source_url": "https://t.me/exilenova_plus"
   },
   {
    "id": "wb-екатеринбург",
@@ -322,7 +326,7 @@
    "date": "2026-07-18",
    "damage": "burned",
    "note": "Пожар после удара БПЛА, работа остановлена",
-   "source_url": "https://lenta.ru/articles/2026/07/21/ataka-na-sklady-wildberries-v-iyule-2026-goda/"
+   "source_url": "https://rg.ru/2026/07/18/reg-cfo/sem-chelovek-pogibli-pri-atake-vsu-na-logisticheskij-centr-wildberries-v-kotovske.html"
   },
   {
    "id": "wb-краснодар",
@@ -337,7 +341,7 @@
    "date": "2026-07-22",
    "damage": "burned",
    "note": "Пожар после удара БПЛА, работа приостановлена",
-   "source_url": "https://www.vedomosti.ru/society/articles/2026/07/22/1215535-ob-atake-dronov"
+   "source_url": "https://lenta.ru/news/2026/07/22/long-bpla-vsu-atakovali-krasnodar-i-nevinnomysk-na-skladah-nachalsya-pozhar-chto-izvestno-o-sluchivshemsya/"
   },
   {
    "id": "wb-крёкшино",
@@ -374,7 +378,7 @@
    "date": "2026-07-22",
    "damage": "burned",
    "note": "Пожар после удара БПЛА, работа приостановлена, режим ЧС локального уровня",
-   "source_url": "https://www.vedomosti.ru/society/articles/2026/07/22/1215535-ob-atake-dronov"
+   "source_url": "https://pobeda26.ru/news/obshhestvo/2026-07-22/sklady-wildberries-v-krasnodare-i-nevinnomysske-ne-rabotayut-posle-atak-bpla-365976"
   },
   {
    "id": "wb-новокосино",
@@ -386,6 +390,22 @@
    "lat": 55.74509,
    "lon": 37.86377,
    "status": "ok"
+  },
+  {
+   "id": "wb-новомосковск",
+   "operator": "wb",
+   "name": "Новомосковск",
+   "region": "Тульская область",
+   "address": "",
+   "type": "rc",
+   "lat": 54.01,
+   "lon": 38.28,
+   "status": "hit",
+   "date": "2026-07-23",
+   "damage": "hit",
+   "note": "Удар БПЛА по логистическому центру Wildberries в Новомосковске",
+   "source_url": "https://t.me/exilenova_plus",
+   "from_strike": true
   },
   {
    "id": "wb-новосибирск",
@@ -532,7 +552,7 @@
    "date": "2026-07-18",
    "damage": "burned",
    "note": "Крупный пожар после удара БПЛА, локализован 20 июля",
-   "source_url": "https://www.vedomosti.ru/society/news/2026/07/21/1215463-pozhar-wildberries"
+   "source_url": "https://vz.ru/news/2026/7/18/1435782.html"
   }
  ]
 }
