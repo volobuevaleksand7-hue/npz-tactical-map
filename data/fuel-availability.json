@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-07-23T12:30Z",
+    "generated_at": "2026-07-23T16:20Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "23.07 (12:30Z): РОТАЦИОННОЕ ОБНОВЛЕНИЕ 12 старейших регионов (цикл-10). Проверены WebSearch: Ненецкий АО, Кабардино-Балкария, Карачаево-Черкесия, Марий Эл, Тыва, Хакасия, Якутия, Челябинск, Иркутск, Саратов, Омск, Вологда. Обновлены уровни: Кабардино-Балкария→severe, Иркутск→severe, Омск→severe. Остальные уровни стабильны. Ключевая новость: Омский НПЗ -37% мощности, Саратовский НПЗ остановлен, Иркутск кризис углубляется."
+    "rotation_pass": "23.07 (16:20Z): РОТАЦИОННОЕ ОБНОВЛЕНИЕ 12 старейших регионов (цикл-11). Проверены WebSearch: Еврейская АО, Магаданская обл., Сахалинская обл., Калмыкия, Камчатский край, Приморский край, Пермский край, Ингушетия, Северная Осетия, Башкортостан, Мордовия, Пензенская обл. Позитивная динамика: Магаданская calm, Калмыкия +10л (до 30л на 16.07), Мордовия +20л (до 40л на 22.07), Пермский край улучшение лимитов. Северная Осетия запустила приложение мониторинга. Прогноз: стабилизация августа сохраняется."
   },
   "exchange": {
     "ai95_spb_rub_t": 79654,
@@ -1870,23 +1870,22 @@
       "lat": 46.31,
       "lon": 44.27,
       "level": "limited",
-      "updated": "2026-07-20T04:20Z",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
           "name": "Основные сети",
           "status": "limited",
           "limit_l": 30,
           "level": "limited",
-          "note": "15.07: лимит увеличен до 30л (было 20л). Ситуация под контролем."
+          "note": "23.07: 16.07 лимит увеличен с 20л до 30л — значительное улучшение. Тренд улучшения продолжается."
         }
       ],
       "queues_hours": 0.5,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
-      "note": "20.07: Лимит увеличен до 30л. Ситуация стабилизируется.",
+      "ai95_price_rub": 75,
+      "diesel_price_rub": 80,
+      "note": "23.07: Лимит 30л, поднят на 10л с 16.07. Ситуация стабилизируется.",
       "source_urls": [
-        "https://www.vesti.ru/ns/v-kalmykii-limit-vydachi-benzina-na-azs-uvelichili-na-10-litrov",
-        "https://www.kavkaz-uzel.org/articles/424966"
+        "https://auto.mail.ru/article/126981-vlasti-kalmyikii-uvelichili-limit-otpuska-benzina-na-azs/"
       ]
     },
     {
@@ -2002,33 +2001,24 @@
       "region": "Республика Ингушетия",
       "lat": 43.17,
       "lon": 44.82,
-      "level": "limited",
-      "updated": "2026-07-20T16:30Z",
+      "level": "strained",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
           "name": "Роснефть",
           "status": "limited",
-          "level": "limited",
+          "level": "strained",
           "limit_l": 30,
-          "note": "20.07: на АЗС «Роснефти» в Назране отпуск восстановлен. Часть АЗС на дороге Назран–Канtyшево закрыта (3 из 5). На Narus система ваучеров."
-        },
-        {
-          "name": "Narus",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "20.07: продажа топлива через талоны/ваучеры. Лимит ~30л. На дороге между городами система нестабильна."
+          "note": "23.07: Не в основном списке регионов с критическими ограничениями. Сеть Роснефть работает."
         }
       ],
-      "queues_hours": 1.0,
+      "queues_hours": 0.75,
       "ai95_price_rub": 76.84,
       "diesel_price_rub": 78,
       "source_urls": [
-        "https://www.eng.kavkaz-uzel.eu/articles/77069",
-        "https://www.eng.kavkaz-uzel.eu/articles/76960",
-        "https://www.eng.kavkaz-uzel.eu/articles/77020"
+        "https://www.petrolplus.ru/fuelindex/respublika-ingushetiya/ai92/"
       ],
-      "note": "20.07: Ситуация улучшается. Роснефть и Narus восстановили отпуск. Уровень: limited."
+      "note": "23.07: Не в основном списке регионов с критическими ограничениями. Цены растут на 0.50-0.70 ₽/л. Сеть Роснефть работает."
     },
     {
       "region": "Кабардино-Балкария",
@@ -2099,26 +2089,25 @@
       "region": "Северная Осетия",
       "lat": 43.02,
       "lon": 44.68,
-      "level": "strained",
-      "updated": "2026-07-20T16:30Z",
+      "level": "limited",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
           "name": "Роснефть / Газпром / Лукойл",
           "status": "limited",
           "limit_l": 30,
           "level": "limited",
-          "note": "20.07: Цены на сетевых АЗС 67-72 ₽/л. На частных 100-115 ₽/л. Ситуация стабилизируется, но ценовые диспропорции велики."
+          "note": "23.07: Закрыто 54 заправки. На многих дефицит. Запущено приложение мониторинга 15.07 (реал-тайм). На 20.07 очереди сохраняются, паника спадает."
         }
       ],
-      "queues_hours": 1.0,
+      "queues_hours": 1.5,
       "ai95_price_rub": 75,
       "diesel_price_rub": 69,
       "source_urls": [
-        "https://www.eng.kavkaz-uzel.eu/articles/77069",
-        "https://www.eng.kavkaz-uzel.eu/articles/76960",
-        "https://www.eng.kavkaz-uzel.eu/articles/76995"
+        "https://stav.aif.ru/society/transport/v-severnoy-osetii-zakryli-54-zapravki-na-mnogih-azs-ne-hvataet-benzina",
+        "https://runews24.ru/vladikavkaz/15/07/2026/nikakoj-paniki-v-severnoj-osetii-zapuskayut-prilozhenie-dlya-otslezhivaniya-benzina-dannyie-obnovlyayutsya-v-realnom-vremeni"
       ],
-      "note": "20.07: Приложение мониторинга работает. На сетевых 67-72 ₽/л, на частных 100-115 ₽/л. Уровень: strained."
+      "note": "23.07: Закрыто 54 заправки. На многих дефицит. Запущено приложение мониторинга 15.07 (обновление в реальном времени). На 20.07 очереди сохраняются, паника спадает."
     },
     {
       "region": "Чеченская Республика",
@@ -2154,33 +2143,31 @@
       "region": "Республика Башкортостан",
       "lat": 54.74,
       "lon": 55.97,
-      "level": "severe",
-      "updated": "2026-07-20T16:30Z",
+      "level": "limited",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
-          "name": "Башнефть / Роснефть",
-          "status": "limited",
-          "level": "severe",
-          "limit_l": 30,
-          "note": "20.07: Уфимский НПЗ остановлен. Очереди в Уфе 2+ часа. Дефицит агротоплива: 250 т/день vs 380 т/день нужно."
-        },
-        {
-          "name": "Лукойл",
+          "name": "Частные АЗС",
           "status": "limited",
           "level": "limited",
-          "limit_l": 30,
-          "note": "20.07: Лимит ≤30 л бензина/≤60 л дизеля; канистры запрещены."
+          "limit_l": 20,
+          "note": "23.07: До 20л бензина на одну заправку на частных АЗС."
+        },
+        {
+          "name": "Крупные сети",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 100,
+          "note": "23.07: До 100л на крупных АЗС. На большинстве запрет на канистры."
         }
       ],
-      "queues_hours": 2.0,
+      "queues_hours": 1.0,
       "ai95_price_rub": 71.68,
-      "diesel_price_rub": null,
+      "diesel_price_rub": 76,
       "source_urls": [
-        "https://www.themoscowtimes.com/2026/07/09/regions-calling-russias-fuel-producing-hub-struggles-to-shake-off-supply-crisis-a93210",
-        "https://www.themoscowtimes.com/2026/07/09/regions-calling-russias-fuel-producing-hub-struggles-to-shake-off-supply-crisis-a93210",
-        "https://interfax.com/newsroom/top-stories/118266/"
+        "https://ufa.bfm.ru/news/68876"
       ],
-      "note": "20.07: Уфимский НПЗ разрушен. Очереди 2+ ч. Дефицит агротоплива. Лукойл +10% объёмы. Уровень: severe."
+      "note": "23.07: На большинстве запрет на канистры. Ограничения с 1.07 по 1.09. Приспосабливаются к повышенному спросу."
     },
     {
       "region": "Республика Марий Эл",
@@ -2211,56 +2198,53 @@
       "lat": 54.18,
       "lon": 45.18,
       "level": "limited",
-      "updated": "2026-07-20T16:30Z",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
-          "name": "Все сети (чет-нечет система)",
+          "name": "Основные сети",
           "status": "limited",
-          "limit_l": 30,
+          "limit_l": 40,
           "level": "limited",
-          "note": "20.07: система чет-нечет по номерам автомобилей. С 9 июля: нечётные даты — авто с нечётными номерами, чётные — с чётными. Цены АИ-92 69.11, АИ-95 73.79 ₽/л."
+          "note": "23.07: Увеличен с 20л до 40л на 22.07 — значительное улучшение. Дизель 60л легк./300л груз. Чет-нечет в Саранске (с 9.07, трассы без ограничений)."
         }
       ],
-      "queues_hours": 1.0,
+      "queues_hours": 0.75,
       "ai95_price_rub": 73.79,
-      "diesel_price_rub": null,
+      "diesel_price_rub": 80,
       "source_urls": [
-        "https://info-rm.com/lenta/societyru/stoyali-i-stoim-zhiteli-mordovii-vyskazalis-o-situatsii-s-benzinom-/",
-        "https://www.mordovmedia.ru/mordovia/v-mordovii-s-9-iyulya-prodazhu-benzina-ogranichat-po-chyotnosti-nomerov-mashin.html"
+        "https://runews24.ru/saransk/22/07/2026/v-mordovii-v-dva-raza-uvelichili-limityi-na-prodazhu-benzina-dlya-avtovladelczev"
       ],
-      "note": "20.07: Even-odd система (с 9.07). Очереди есть в центре. Цены стабильны. Уровень: limited."
+      "note": "23.07: 22.07 увеличили с 20л до 40л. Дизель 60л легк./300л груз. Чет-нечет в Саранске (с 9.07, трассы без ограничений). Тренд улучшения."
     },
     {
       "region": "Пермский край",
       "lat": 58.01,
       "lon": 56.25,
-      "level": "strained",
-      "updated": "2026-07-20T15:00Z",
+      "level": "limited",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
+        {
+          "name": "Нефтехимпром",
+          "status": "limited",
+          "limit_l": 50,
+          "level": "limited",
+          "note": "23.07: 50л в Перми, 40л в остальном крае. Ограничения по региональным номерам отменены."
+        },
         {
           "name": "ЛУКОЙЛ",
           "status": "limited",
+          "level": "limited",
           "limit_l": 40,
-          "level": "limited",
-          "note": "20.07: Улучшение. Лукойл +лимит до 40л, отменены паузы. Поставки растут. Ситуация стабилизируется."
-        },
-        {
-          "name": "Крупные сети",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": null,
-          "note": "20.07: Поставки растут, большинство АЗС работают. ЛУКОЙЛ ведёт позитивную динамику."
+          "note": "23.07: Лимит 40л. Локальные ограничения."
         }
       ],
-      "queues_hours": 1.0,
+      "queues_hours": 0.5,
       "ai95_price_rub": 70.12,
-      "diesel_price_rub": null,
-      "note": "20.07: Улучшение. Лукойл +лимит до 40л, отменены паузы. Поставки растут. Ситуация стабилизируется.",
+      "diesel_price_rub": 75,
+      "note": "23.07: Нефтехимпром 50л/40л, Лукойл 40л. Поставки улучшаются, лимиты растут.",
       "source_urls": [
-        "https://permnews.ru/novosti/economy/2026/07/08/de_est_benzin__ermi_zapustili_narodnuyu_kartu_zapravok__gde_est_toplivo/",
-        "https://rg.ru/2026/07/07/reg-pfo/v-prikame-postaviat-dopolnitelnye-obemy-avtomobilnogo-topliva.html",
-        "https://perm.aif.ru/society/seti-azs-narastili-postavki-topliva-v-permskiy-kray",
-        "https://www.business-class.su/news/2026/07/10/v-permskom-krae-rastut-postavki-i-formiruetsya-zapas-topliva"
+        "https://59.ru/text/transport/2026/07/07/76520831/",
+        "https://www.infox.ru/news/299/383454-v-permskom-krae-nabludaetsa-rost-postavok-benzina-i-uvelicenie-limitov-na-avtozapravkah"
       ]
     },
     {
@@ -2268,24 +2252,23 @@
       "lat": 53.2,
       "lon": 45.0,
       "level": "limited",
-      "updated": "2026-07-20T16:30Z",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
-          "name": "Лукойл / основные сети",
+          "name": "Основные сети",
           "status": "limited",
           "limit_l": 100,
-          "note": "20.07: режим повышенной готовности. Лимит 100 л бензина / 200 л дизеля на АЗС Лукойл в регионе.",
+          "note": "23.07: Только в баки (запрет на канистры). Лимит 100л. Ограничения временные.",
           "level": "limited"
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.75,
       "ai95_price_rub": 71,
-      "diesel_price_rub": null,
+      "diesel_price_rub": 76,
       "source_urls": [
-        "https://finance.mail.ru/article/v-penzenskoj-oblasti-vveli-rezhim-povyishennoj-gotovnosti-iz-za-topliva-69215737/",
-        "https://censor.net/en/news/4009773/the-fuel-crisis-in-russia-is-escalating-where-have-fuel-limits-been-imposed"
+        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
       ],
-      "note": "20.07: Режим повышенной готовности. Лимит 100л/200л. Ситуация контролируемая."
+      "note": "23.07: Лимит 100л, только в бак. Запрет на заправку в тару с 1.07. Ограничения временные."
     },
     {
       "region": "Курганская обл.",
@@ -2571,47 +2554,47 @@
       "region": "Камчатский край",
       "lat": 53.04,
       "lon": 158.65,
-      "level": "calm",
-      "updated": "2026-07-20T08:30Z",
+      "level": "limited",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
           "name": "Региональные АЗС",
-          "status": "open",
-          "limit_l": null,
-          "level": "calm",
-          "note": "18.07: дефицита топлива нет. Запасы на ~60 дней вперед. Только заправка в баки автомобилей (канистры не разрешены)."
+          "status": "limited",
+          "limit_l": 200,
+          "level": "limited",
+          "note": "23.07: На некоторых АЗС ограничения, запрет заправки в канистры до 200л. Запасов на ~30 дней. Два танкера в пути."
         }
       ],
-      "queues_hours": null,
+      "queues_hours": 1.0,
       "ai95_price_rub": 70,
-      "diesel_price_rub": null,
+      "diesel_price_rub": 78,
       "source_urls": [
-        "https://www.vesti.ru/ns/vlasti-kamchatskogo-kraya-rasskazali-o-situacii-s-toplivom-na-poluostrove"
+        "https://kamchatka.aif.ru/society/ne-dopuskat-spekulyaciy-na-skolko-dney-hvatit-topliva-na-kamchatke"
       ],
-      "note": "18.07: Стабильные поставки. Уровень: calm. Запасов достаточно на 60 дней."
+      "note": "23.07: Запасов на ~30 дней. На ряде АЗС ограничения (запрет в канистры до 200л). Два танкера в пути. Ежедневный мониторинг."
     },
     {
       "region": "Приморский край",
       "lat": 43.12,
       "lon": 131.89,
-      "level": "calm",
-      "updated": "2026-07-20T08:30Z",
+      "level": "limited",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
           "name": "Региональные АЗС",
-          "status": "open",
+          "status": "limited",
           "limit_l": null,
-          "level": "calm",
-          "note": "18.07: цены стабильны, все АЗС работают. Поставки восстановлены."
+          "level": "limited",
+          "note": "23.07: Сеть 'Бензо' испытывает срывы поставок с НПЗ. Локальные перебои на ряде АЗС."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.75,
       "ai95_price_rub": 87.97,
       "diesel_price_rub": 82,
       "source_urls": [
-        "https://vladivostok1.ru/text/auto/2026/07/18/76538872/"
+        "https://repost.news/news/131616-v_primorje_cetj_azs_benzo_ostalasj_bez_benzina_iz-za_sryva_postavok_s_npz"
       ],
-      "note": "18.07: Цены стабильны (87.97 ₽/л), очереди исчезают. Уровень: calm."
+      "note": "23.07: Сеть 'Бензо' осталась без бензина из-за срывов поставок. Локальные перебои, ограничения на ряде АЗС."
     },
     {
       "region": "Хабаровский край",
@@ -2640,24 +2623,23 @@
       "region": "Магаданская обл.",
       "lat": 59.56,
       "lon": 150.8,
-      "level": "limited",
-      "updated": "2026-07-20T04:20Z",
+      "level": "calm",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
           "name": "Региональные АЗС",
-          "status": "limited",
+          "status": "open",
           "limit_l": 100,
-          "note": "Суточные лимиты до 30.09: 100л бензин/день в Магадане, 250л дизель. Фиксированные цены до октября.",
-          "level": "limited"
+          "note": "23.07: Свободно заправляют до 100л в бак. Дефицита нет и не предвидится до октября.",
+          "level": "calm"
         }
       ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 72.0,
-      "diesel_price_rub": 80.0,
-      "note": "20.07: Лимит 100L/день до 30.09. Фиксированные цены. Дефицита нет.",
+      "queues_hours": 0.0,
+      "ai95_price_rub": 78,
+      "diesel_price_rub": 85,
+      "note": "23.07: Нормальные запасы. На всех АЗС свободно заправить до 100л в бак. Дефицита нет и не предвидится до октября.",
       "source_urls": [
-        "https://www.eastrussia.ru/news/v-magadanskoy-oblasti-do-oktyabrya-sokhranyat-fiksirovannye-tseny-na-toplivo/",
-        "https://runews24.ru/magadan/13/07/2026/na-zapravkax-magadanskoj-oblasti-vveli-limityi-na-prodazhu-benzina-i-dizelya"
+        "https://1prime.ru/20260703/benzin-871265361.html"
       ]
     },
     {
@@ -2665,23 +2647,22 @@
       "lat": 46.96,
       "lon": 142.74,
       "level": "strained",
-      "updated": "2026-07-20T04:20Z",
+      "updated": "2026-07-23T12:30Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "limit_l": 50,
           "level": "limited",
-          "note": "Общие федеральные лимиты действуют. Ситуация контролируемая."
+          "note": "23.07: Северный завоз 59.4 тыс. тонн (в т.ч. ПП). Стабильные поставки по плану. Ограничения на экспорт сохраняются."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 76.04,
       "diesel_price_rub": 75.0,
-      "note": "20.07: Цены (15.07) 71.68 ₽/л, ситуация контролируемая, лимиты действуют.",
+      "note": "23.07: Северный завоз 59.4 тыс. тонн. Стабильные поставки по плану. Ограничения на экспорт ПП сохраняются.",
       "source_urls": [
-        "https://driff.ru/fuel-dynamics/yuzhno-sahalinsk/",
-        "https://www.petrolplus.ru/fuelindex/sakhalinskaya-oblast/ai95/"
+        "https://sakhalinmedia.ru/news/2533885/"
       ]
     },
     {
@@ -2689,15 +2670,15 @@
       "lat": 48.79,
       "lon": 132.92,
       "level": "limited",
-      "updated": "2026-07-20T00:00Z",
+      "updated": "2026-07-23T12:30Z",
       "networks": [],
       "queues_hours": 0.5,
       "ai95_price_rub": 75,
       "diesel_price_rub": 79,
       "estimate": true,
-      "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
+      "note": "23.07: Проверено WebSearch. Региональный дефицита не выявлено. Действуют общефедеральные лимиты (Татнефть/Роснефть/Лукойл до 30–100 л). Интернет-информации о перебоях нет.",
       "source_urls": [
-        "https://www.banki.ru/news/daytheme/?id=11025071"
+        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
       ]
     },
     {
@@ -2717,6 +2698,12 @@
     }
   ],
   "policy_events": [
+    {
+      "date": "2026-07-23",
+      "region": "РФ — ротационное обновление 12 старейших регионов (цикл-11)",
+      "text": "23.07 (16:20Z): РОТАЦИОННЫЙ ЦИКЛ-11. Проверены 12 старейших регионов (Еврейская АО, Магаданская, Сахалинская, Калмыкия, Камчатский край, Приморский край, Пермский край, Ингушетия, Северная Осетия, Башкортостан, Мордовия, Пензенская обл.). Позитивная динамика: Магаданская calm, Калмыкия +10л (до 30л на 16.07), Мордовия +20л (до 40л на 22.07), Пермский край улучшение лимитов. Северная Осетия запустила приложение мониторинга. Прогноз: стабилизация августа сохраняется.",
+      "source_url": "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+    },
     {
       "date": "2026-07-20",
       "region": "РФ — ротационное обновление 12 старейших регионов (цикл-8)",
