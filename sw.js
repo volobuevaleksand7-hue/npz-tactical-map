@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v22';   // bump: слой «Склады ВБ/Озон» (app.js + index.html лежат в CRITICAL прекэше)
+var CACHE = 'npz-shell-v23';   // bump: фикс deep-link ?layer= (клик по кнопке слоя до навешивания обработчиков)
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

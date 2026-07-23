@@ -1839,7 +1839,8 @@
   function whPopup(w) {
     var b = WH_BRAND[w.operator] || { c: "#7a7e85", label: w.operator };
     var burned = w.status === "hit" && w.damage === "burned";
-    var st = w.status !== "hit" ? { t: "РАБОТАЕТ", c: "#2f8f4e" }
+    // не «работает»: проект не проверяет работу каждого склада, он фиксирует только удары
+    var st = w.status !== "hit" ? { t: "УДАРОВ НЕ ЗАФИКСИРОВАНО", c: "#2f8f4e" }
       : burned ? { t: "ПОРАЖЁН, ПОЖАР", c: "#d23a2e" } : { t: "ПОРАЖЁН", c: "#df8f17" };
     var h = '<div class="pp-h">📦 ' + esc(b.label) + ' — ' + esc(w.name) + '</div>';
     h += '<span class="pp-st" style="background:' + st.c + '">' + st.t + '</span>';
@@ -1983,14 +1984,6 @@
       var _dv = (new URLSearchParams(location.search).get("view") || (location.hash || "").replace("#","")).toLowerCase();
       if (_dv) { var _tb = document.querySelector('#tabs button[data-view="' + _dv + '"]'); if (_tb) _tb.click(); }
     } catch (e) {}
-    // deep-link: ?layer=warehouses включает слой при загрузке — со статьи про склады маркетплейсов
-    try {
-      var _dl = (new URLSearchParams(location.search).get("layer") || "").toLowerCase();
-      if (_dl) {
-        var _lb = document.querySelector('#layerToggles button[data-layer="' + _dl + '"]');
-        if (_lb && !_lb.classList.contains("active")) _lb.click();
-      }
-    } catch (e) {}
     // back/forward: восстанавливаем вкладку из адреса (click-guard выше не даст дубль истории)
     window.addEventListener("popstate", function () {
       var v = ((location.hash || "").replace("#", "").toLowerCase()) || "russia";
@@ -2048,6 +2041,15 @@
       }
       loadCandidates();
     })();
+    // deep-link: ?layer=warehouses включает слой при загрузке — со статьи про склады маркетплейсов.
+    // 🔴 Только ПОСЛЕ навешивания обработчиков выше: в initTabs() этот же click() уходил в пустоту.
+    try {
+      var _dl = (new URLSearchParams(location.search).get("layer") || "").toLowerCase();
+      if (_dl) {
+        var _lb = document.querySelector('#layerToggles button[data-layer="' + _dl + '"]');
+        if (_lb && !_lb.classList.contains("active")) _lb.click();
+      }
+    } catch (e) {}
     // strike day-timeline controls
     var sl = document.getElementById("dayslider");
     if (sl) sl.addEventListener("input", function () { stopPlay(); SK.mode = "day"; SK.idx = +this.value; renderStrikes(); });
