@@ -80,6 +80,16 @@ while IFS= read -r f; do
     git show ":$f" 2>/dev/null | grep -nE '^(<<<<<<<|=======|>>>>>>>)' | sed 's/^/    /' >&2
     bad=1
   fi
+  # JSON parse guard: агенты клеят JSON руками → висячая запятая роняла Smoke test
+  # (validate-json) на КАЖДОМ последующем коммите. Ловим битый JSON до пуша, а не в CI.
+  case "$f" in
+    *.json)
+      if command -v python3 >/dev/null 2>&1 && ! git show ":$f" 2>/dev/null | python3 -c 'import json,sys; json.load(sys.stdin)' 2>/dev/null; then
+        echo "pre-commit: BLOCKED — $f не парсится как JSON:" >&2
+        git show ":$f" 2>/dev/null | python3 -c 'import json,sys; json.load(sys.stdin)' 2>&1 | tail -1 | sed 's/^/    /' >&2
+        bad=1
+      fi ;;
+  esac
 done <<< "$staged"
 
 if [ "$bad" = "1" ]; then
