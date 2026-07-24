@@ -27,13 +27,13 @@
   function srcBlocked(u){try{return RF_BLOCKED.test(new URL(u).hostname);}catch(e){return false;}}
   function srcHost(u){try{return new URL(u).hostname.replace(/^www\./,'');}catch(e){return'';}}
   // Source line for a popup. RF-blocked sources render struck-through + a native VPN promo
-  // (monetized hidemy.name affiliate via Admitad); normal sources render the plain link.
+  // (monetized RKNoff Telegram-bot affiliate, ref-609952529); normal sources render the plain link.
   function srcHtml(u,label){
     if(!u) return '';
     if(!srcBlocked(u)) return '<div class="pp-src"><a href="'+safeUrl(u)+'" target="_blank" rel="noopener">'+esc(label||'источник')+' ↗</a></div>';
     return '<div class="pp-src pp-src--off">🔒 <a href="'+safeUrl(u)+'" target="_blank" rel="noopener">'+esc(srcHost(u))+' — недоступно из РФ</a></div>'+
-      '<div class="pp-vpn"><div class="pp-vpn-h"><span class="pp-vpn-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20 5.6 V11 c0 5-3.4 8-8 10.4 C8.4 19 4 16 4 11 V5.6 Z"/><circle cx="12" cy="10.4" r="1.7"/><path d="M12 12.1 V14.8"/></svg></span><div class="pp-vpn-t"><span class="pp-vpn-tag">доступ через VPN</span><b>Источник заблокирован в РФ</b><div class="pp-vpn-b">Открыть можно через VPN — работает в РФ</div></div></div>'+
-      '<a class="pp-vpn-btn" href="https://hidemn.club/#6a514a15942d6" target="_blank" rel="noopener nofollow sponsored" onclick="try{ym(110490245,&#39;reachGoal&#39;,&#39;vpn_click&#39;)}catch(e){}">→ Получить доступ через hidemy</a></div>';
+      '<div class="pp-vpn"><div class="pp-vpn-h"><span class="pp-vpn-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20 5.6 V11 c0 5-3.4 8-8 10.4 C8.4 19 4 16 4 11 V5.6 Z"/><circle cx="12" cy="10.4" r="1.7"/><path d="M12 12.1 V14.8"/></svg></span><div class="pp-vpn-t"><span class="pp-vpn-tag">доступ через VPN</span><b>Источник заблокирован в РФ</b><div class="pp-vpn-b">VPN выдаёт Telegram-бот — минута, работает в РФ</div></div></div>'+
+      '<a class="pp-vpn-btn" href="https://t.me/rknoff_bot?start=ref-609952529" target="_blank" rel="noopener nofollow sponsored" onclick="try{ym(110490245,&#39;reachGoal&#39;,&#39;vpn_click&#39;)}catch(e){}">Получить VPN в Telegram →</a></div>';
   }
   // ponytail: single padding tuned for the Russia view's topbar+strikebar overlay; reused on
   // Crimea/AZS maps too since their overlay is shorter — extra clearance there is harmless.
