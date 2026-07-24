@@ -65,46 +65,46 @@ module.exports = async function handler(req, res) {
     };
   };
 
-  try {
-    // Fetch from radar-map.ru API (original data source).
-    // Hard timeout ниже Vercel-лимита функции (~10s): upstream периодически отвечает 12-14s,
-    // и без abort функция умирает по таймауту → 502. Лучше упасть в фолбэк на 8-й секунде.
+  // fetch с ГАРАНТИРОВАННЫМ прерыванием по таймауту. Раньше upstream-fetch имел abort,
+  // а фолбэк-fetch снапшота — НЕТ: когда из Vercel-iad подвисал ЛЮБОЙ из них, функция
+  // висела >30s → карта вечно «Загрузка данных». Теперь оба fetch жёстко ограничены.
+  const fetchJson = async (url, ms) => {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 8000);
-    let upstream;
+    const timer = setTimeout(() => ctrl.abort(), ms);
     try {
-      upstream = await fetch("https://radar-map.ru/api/state", {
-        headers: {
-          Accept: "application/json",
-          "User-Agent": "NPZ-Tactical-Map/1.0"
-        },
+      const r = await fetch(url, {
+        headers: { Accept: "application/json", "User-Agent": "NPZ-Tactical-Map/1.0" },
         signal: ctrl.signal,
       });
+      if (!r.ok) throw new Error(url + " -> " + r.status);
+      return await r.json();
     } finally {
       clearTimeout(timer);
     }
+  };
 
-    if (!upstream.ok) throw new Error("upstream " + upstream.status);
-    const data = await upstream.json();
+  const host = req.headers["x-forwarded-host"] || req.headers.host;
+  const snapshotUrl = `https://${host}/data/radar-state.json`;
 
+  try {
+    // Живой источник — но 5s хватает, а остаток бюджета Vercel-функции (10s) оставляем фолбэку.
+    const data = await fetchJson("https://radar-map.ru/api/state", 5000);
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=120");
+    res.setHeader("X-Radar-Src", "upstream");
     res.status(200).json(transform(data, false));
   } catch (error) {
-    // Upstream флапает (reset/таймаут) — отдаём последний закоммиченный слепок,
-    // чтобы карта показывала свежие данные, а не вечную «Загрузку». Слепок льёт agents/update-radar-state.py.
+    // Upstream флапает — отдаём последний закоммиченный слепок (agents льют каждые 10 мин),
+    // чтобы карта показывала свежие данные, а не вечную «Загрузку».
     try {
-      const host = req.headers["x-forwarded-host"] || req.headers.host;
-      const snapRes = await fetch(`https://${host}/data/radar-state.json`, {
-        headers: { Accept: "application/json" },
-      });
-      if (!snapRes.ok) throw new Error("snapshot " + snapRes.status);
-      const snap = await snapRes.json();
+      const snap = await fetchJson(snapshotUrl, 3000);
       res.setHeader("Content-Type", "application/json; charset=utf-8");
       res.setHeader("Cache-Control", "s-maxage=30, stale-while-revalidate=120");
+      res.setHeader("X-Radar-Src", "snapshot");
       res.status(200).json(transform(snap, true));
     } catch (fallbackError) {
       res.setHeader("Cache-Control", "s-maxage=5, stale-while-revalidate=30");
+      res.setHeader("X-Radar-Src", "error");
       res.status(502).json({
         error: "radar_upstream_unavailable",
         message: error && error.message ? error.message : "Failed to fetch radar state",
