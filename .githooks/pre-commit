@@ -45,6 +45,28 @@ if [ -f agents/censor.py ] && command -v python3 >/dev/null 2>&1 && [ "${ALLOW_C
   fi
 fi
 
+# ---- cover-weight guard: сжать несжатые обложки перед деплоем (режет Fast Data Transfer) ----
+# 24.07: cover-2026-07-23.png уехал 2.1 МБ и грузился на /news + в og:image при каждом просмотре —
+# генератор обошёл optimize_cover-хук в caption_cover. Ловим ЛЮБОЙ путь здесь: сжимаем staged
+# cover/analytics/og PNG на месте (×5-8) + обновляем webp-тумбу, перезакладываем. Идемпотентно
+# (уже сжатые пропускаются). Стоит ВЫШЕ выхода по пустому data/ — обложки лежат в assets/.
+if command -v python3 >/dev/null 2>&1; then
+  staged_cov="$(git diff --cached --name-only --diff-filter=ACMR 2>/dev/null | grep -E '^(assets/cover-.*\.png|assets/analytics-.*\.png|og-image\.png)$' || true)"
+  for _c in $staged_cov; do
+    [ -f "$_c" ] || continue
+    python3 -c "import sys;sys.path.insert(0,'agents');from optimize_covers import optimize_cover,make_thumb;p=sys.argv[1];optimize_cover(p);('/cover-' in p.replace('\\\\','/')) and make_thumb(p)" "$_c" 2>/dev/null || true
+    if ! git diff --quiet -- "$_c" 2>/dev/null; then
+      git add "$_c"
+      echo "pre-commit: обложка $_c сжата и перезаложена." >&2
+    fi
+    case "$_c" in
+      assets/cover-*.png)
+        _t="assets/thumb/$(basename "${_c%.png}").webp"
+        [ -f "$_t" ] && git add "$_t" ;;
+    esac
+  done
+fi
+
 # Files staged for commit under data/ (added/copied/modified/renamed).
 staged="$(git diff --cached --name-only --diff-filter=ACMR -- data/ 2>/dev/null)"
 [ -z "$staged" ] && exit 0
