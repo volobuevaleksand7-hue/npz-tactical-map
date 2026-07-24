@@ -13,19 +13,8 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  try {
-    // Fetch from radar-map.ru API (original data source)
-    const upstream = await fetch("https://radar-map.ru/api/state", {
-      headers: { 
-        Accept: "application/json",
-        "User-Agent": "NPZ-Tactical-Map/1.0"
-      },
-    });
-
-    if (!upstream.ok) throw new Error("upstream " + upstream.status);
-    const data = await upstream.json();
-
-    // Convert cities from array to dict format
+  // Normalize upstream (or snapshot — same shape) into our response format.
+  const transform = (data, stale) => {
     const citiesDict = {};
     for (const city of (data.cities || [])) {
       const key = city.key || `${city.name}|${city.region}`;
@@ -58,8 +47,7 @@ module.exports = async function handler(req, res) {
     const seaMarkers = Array.isArray(data.sea_markers) ? data.sea_markers.map(stripPvo) : [];
     const directionFlights = Array.isArray(data.direction_flights) ? data.direction_flights.map(stripPvo) : [];
 
-    // Build response in our format
-    const result = {
+    return {
       cities: citiesDict,
       regions: regionsSafe,
       districts: districtsSafe,
@@ -72,18 +60,57 @@ module.exports = async function handler(req, res) {
       direction_arrows: data.direction_arrows || [],
       bpla_icon_fade_sec: data.bpla_icon_fade_sec || 10800,
       timestamp: Date.now() / 1000,
-      fetched_at: new Date().toISOString()
+      fetched_at: new Date().toISOString(),
+      stale: !!stale
     };
+  };
+
+  try {
+    // Fetch from radar-map.ru API (original data source).
+    // Hard timeout ниже Vercel-лимита функции (~10s): upstream периодически отвечает 12-14s,
+    // и без abort функция умирает по таймауту → 502. Лучше упасть в фолбэк на 8-й секунде.
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    let upstream;
+    try {
+      upstream = await fetch("https://radar-map.ru/api/state", {
+        headers: {
+          Accept: "application/json",
+          "User-Agent": "NPZ-Tactical-Map/1.0"
+        },
+        signal: ctrl.signal,
+      });
+    } finally {
+      clearTimeout(timer);
+    }
+
+    if (!upstream.ok) throw new Error("upstream " + upstream.status);
+    const data = await upstream.json();
 
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=120");
-    res.status(200).json(result);
+    res.status(200).json(transform(data, false));
   } catch (error) {
-    res.setHeader("Cache-Control", "s-maxage=5, stale-while-revalidate=30");
-    res.status(502).json({
-      error: "radar_upstream_unavailable",
-      message: error && error.message ? error.message : "Failed to fetch radar state",
-      fetched_at: new Date().toISOString(),
-    });
+    // Upstream флапает (reset/таймаут) — отдаём последний закоммиченный слепок,
+    // чтобы карта показывала свежие данные, а не вечную «Загрузку». Слепок льёт agents/update-radar-state.py.
+    try {
+      const host = req.headers["x-forwarded-host"] || req.headers.host;
+      const snapRes = await fetch(`https://${host}/data/radar-state.json`, {
+        headers: { Accept: "application/json" },
+      });
+      if (!snapRes.ok) throw new Error("snapshot " + snapRes.status);
+      const snap = await snapRes.json();
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      res.setHeader("Cache-Control", "s-maxage=30, stale-while-revalidate=120");
+      res.status(200).json(transform(snap, true));
+    } catch (fallbackError) {
+      res.setHeader("Cache-Control", "s-maxage=5, stale-while-revalidate=30");
+      res.status(502).json({
+        error: "radar_upstream_unavailable",
+        message: error && error.message ? error.message : "Failed to fetch radar state",
+        fallback_error: fallbackError && fallbackError.message ? fallbackError.message : undefined,
+        fetched_at: new Date().toISOString(),
+      });
+    }
   }
 };
