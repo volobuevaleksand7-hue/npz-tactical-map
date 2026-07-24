@@ -67,7 +67,7 @@ def max_event_ts(payload):
     if isinstance(districts, dict):
         for item in districts.values():
             scan(item)
-    feed = payload.get("feed") or []
+    feed = payload.get("recent_messages") or payload.get("feed") or []
     if isinstance(feed, list):
         for item in feed[:FEED_LIMIT * 3]:
             scan(item)
@@ -97,6 +97,9 @@ def normalize(payload):
     ts = max_event_ts(payload)
     if not ts:
         raise RuntimeError("upstream state has no event timestamps")
+    # upstream отдаёт сообщения в recent_messages (поля feed у него нет) —
+    # пишем под тем же ключом, что читает фронт/фолбэк api/radar-state.js, иначе «Лента недоступна»
+    messages = compact_feed(payload.get("recent_messages") or payload.get("feed") or [])
     return {
         "type": "npz-radar-state",
         "schema_version": 2,
@@ -108,7 +111,7 @@ def normalize(payload):
         "cities": payload.get("cities") or [],
         "districts": payload.get("districts") or {},
         "airport_markers": payload.get("airport_markers") or [],
-        "feed": compact_feed(payload.get("feed") or []),
+        "recent_messages": messages,
         "sources": [
             {"id": "radar-map", "label": "RadarMap", "url": "https://radar-map.ru/"},
         ],
@@ -121,7 +124,7 @@ def normalize(payload):
             "source_age_seconds": max(0, int(now.timestamp()) - ts),
             "city_count": len(payload.get("cities") or []),
             "region_count": len(payload.get("regions") or {}),
-            "feed_count": len(payload.get("feed") or []),
+            "feed_count": len(messages),
         },
     }
 
