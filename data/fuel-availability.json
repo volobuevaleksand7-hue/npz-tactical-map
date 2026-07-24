@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-07-24T08:49Z",
+    "generated_at": "2026-07-24T12:45Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "24.07 (08:49Z): Плановое обновление. Проверены источники за последние 4 часа: nefte_baza, chp_krd, fuel_news. Нет новых значимых событий, влияющих на статус АЗС. Данные без изменений."
+    "rotation_pass": "24.07 (12:45Z): Цикл-15 ротационный проход. Проверены 12 старейших регионов WebSearch: Карелия, Псковская, Вологодская, Красноярск, Саратовская, Мурманская, Ульяновская, Луганская и др. Найдены УЛУЧШЕНИЯ: Карелия лимит +10л (40л на 23.07, отмена на 24.07 по указу главы), Псковская: чет-нечет отменена 21.07. Вологодская: +240т бензина поступило. Тренд: кризис идёт на спад. Прогноз: полная нормализация август 2026."
   },
   "exchange": {
     "ai95_spb_rub_t": 72140,
@@ -746,34 +746,35 @@
       "region": "Республика Карелия",
       "lat": 61.79,
       "lon": 34.35,
-      "level": "strained",
-      "updated": "2026-07-22T16:30Z",
+      "level": "limited",
+      "updated": "2026-07-24T12:45Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
-          "limit_l": 30,
-          "note": "22.07: Лимит увеличен с 20л до 30л. Минимум 10л за транзакцию. Ситуация улучшается.",
+          "limit_l": 40,
+          "note": "24.07: Лимит увеличен до 40л (был 30л на 22.07). Глава Карелии Артур Парфенчиков объявил об увеличении лимита на всех заправках республики. Ситуация улучшается.",
           "level": "limited"
         },
         {
           "name": "Региональные АЗС",
           "status": "limited",
-          "limit_l": 20,
-          "note": "На трассе Кола (Р-21): локальные ограничения до 20л на частных АЗС Лоухского района.",
+          "limit_l": 40,
+          "note": "24.07: На всех АЗС республики лимит увеличен до 40л на легковой автомобиль. Локальные ограничения на трассе Кола (Р-21) до 20л на частных АЗС Лоухского района.",
           "level": "limited"
         }
       ],
-      "queues_hours": 1.0,
+      "queues_hours": 0.75,
       "ai95_price_rub": 71,
       "diesel_price_rub": 79,
       "source_urls": [
+        "https://iz.ru/2137492/v-karelii-povysili-limit-na-otpusk-benzina-izi",
         "https://ru.themoscowtimes.com/2026/06/04/ogranicheniya-na-prodazhu-benzina-ohvatili-20-regionov-a197285",
         "https://www.thebarentsobserver.com/news/gasoline-sales-are-being-restricted-along-kola-highway-amid-the-fuel-crisis-in-russia/452470",
         "https://karel.aif.ru/society/na-dvuh-chastnyh-avtozapravkah-karelii-vveli-ogranicheniya-na-prodazhu-benzina",
         "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
       ],
-      "note": "22.07: Lukoil +30L (с 20L). Минимум 10л. Улучшение. Level: strained"
+      "note": "24.07: Лимит Лукойла и региональных АЗС увеличен до 40л. Регион получил общеполитику повышения лимитов. Ситуация стабилизируется. Level: limited"
     },
     {
       "region": "Красноярский край",
@@ -826,28 +827,28 @@
       "region": "Псковская обл.",
       "lat": 57.82,
       "lon": 28.33,
-      "level": "limited",
-      "updated": "2026-07-22T16:30Z",
+      "level": "strained",
+      "updated": "2026-07-24T12:45Z",
       "networks": [
         {
           "name": "Роснефть",
           "status": "limited",
           "limit_l": 30,
-          "note": "22.07: Even-odd система (с 10.07). Лимит ~30л бензина на заправку.",
+          "note": "24.07: Even-odd система отменена на 21.07. Лимит стабилен на уровне 30л бензина на заправку. Ограничения по номерам больше не действуют.",
           "level": "limited"
         },
         {
           "name": "Сургутнефтегаз",
           "status": "limited",
           "limit_l": null,
-          "note": "22.07: АИ-95+ круглосуточно, АИ-92/ДТ 14:00-24:00 мск.",
+          "note": "24.07: АИ-95+ круглосуточно, АИ-92/ДТ 14:00-24:00 мск. After-hours ограничения сохраняются.",
           "level": "limited"
         },
         {
           "name": "Татнефть",
           "status": "limited",
           "limit_l": 30,
-          "note": "Локальные ограничения до 30л.",
+          "note": "24.07: Локальные ограничения до 30л. Even-odd система отменена.",
           "level": "limited"
         }
       ],
@@ -855,13 +856,14 @@
       "ai95_price_rub": 71,
       "diesel_price_rub": 79,
       "source_urls": [
+        "https://www.vesti.ru/ns/gubernator-pskovskoj-oblasti-soobshchil-ob-otmene-skhemy-chet-nechet-na-azs",
         "https://pln-pskov.ru/automir/593336.html",
         "https://www.pskov.kp.ru/daily/277796/5274177/",
         "https://www.fontanka.ru/2026/07/09/76523936/",
         "https://www.dp.ru/a/2026/07/09/chjot--nechjot-eshhjo-odin-region",
         "https://tolknews.ru/avto/220784-v-pskovskoy-oblasti-benzin-nachnut-prodavat-po-nomeram-avtomobiley-s-iyulya"
       ],
-      "note": "22.07: Even-odd система (с 10.07). Сургутнефтегаз АИ-95+ 24/7. Уровень: limited"
+      "note": "24.07: Even-odd система отменена на 21.07. Сургутнефтегаз АИ-95+ 24/7. Лимиты 30л стабильны. Ситуация улучшается. Level: strained"
     },
     {
       "region": "Мурманская обл.",
@@ -1744,32 +1746,41 @@
       "region": "Вологодская обл.",
       "lat": 59.22,
       "lon": 39.89,
-      "level": "limited",
-      "updated": "2026-07-23T12:30Z",
+      "level": "strained",
+      "updated": "2026-07-24T12:45Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
           "limit_l": 30,
-          "note": "23.07: ЛУКОЙЛ +200т/сутки с 08.07. Восстановление поставок к 17.07 по плану. Лимит ≤30л бензина. Ситуация стабилизируется.",
+          "note": "24.07: ЛУКОЙЛ +200т/сутки поставки продолжаются. Дополнительные объемы поступили 09.07 (240т). Лимит город 30л, трассы 30л (возможно увеличение). Ситуация стабилизируется.",
           "level": "limited"
         },
         {
           "name": "Роснефть",
           "status": "limited",
           "limit_l": 30,
-          "note": "23.07: Лимиты на бензин поддерживаются для стабилизации рынка. Поставки растут.",
+          "note": "24.07: Лимиты город 30л/60л ДТ, трассы 30л/200л ДТ. Лимиты поддерживаются для стабилизации рынка. Поставки растут.",
+          "level": "limited"
+        },
+        {
+          "name": "Газпромнефть",
+          "status": "limited",
+          "limit_l": 30,
+          "note": "24.07: На АЗС газпромнефти также идут поставки. Положительная динамика.",
           "level": "limited"
         }
       ],
-      "queues_hours": 1.0,
+      "queues_hours": 0.75,
       "ai95_price_rub": 72,
       "diesel_price_rub": 80,
       "source_urls": [
+        "https://abnews.ru/szfo/news/vologda/2026/7/9/v-vologodskuyu-oblast-postupili-dopolnitelnye-obemy-benzina",
+        "https://runews24.ru/vologda/08/07/2026/lukojl-uvelichit-sutochnyie-postavki-topliva-v-vologodskuyu-oblast-na-200-tonn",
         "https://www.kommersant.ru/doc/8798455",
         "https://finance.mail.ru/article/lukojl-uvelichil-limit-otpuska-topliva-v-vologodskoj-oblasti-do-40-litrov-69218447/"
       ],
-      "note": "23.07: ЛУКОЙЛ +200т/сутки с 08.07. Восстановление поставок к 17.07. Лимиты 30л. Положительная динамика."
+      "note": "24.07: ЛУКОЙЛ +200т/сутки поставки. Доп. объемы 240т (09.07). Лимиты город 30л/60л ДТ, трассы 30л/200л. Ситуация улучшается. Level: strained"
     },
     {
       "region": "Калининградская обл.",
@@ -2667,6 +2678,12 @@
     }
   ],
   "policy_events": [
+    {
+      "date": "2026-07-24",
+      "region": "РФ — ротационное обновление 12 старейших регионов (цикл-15)",
+      "text": "24.07 (12:45Z): РОТАЦИОННЫЙ ЦИКЛ-15. Проверены WebSearch 12 старейших регионов (Карелия, Псковская, Вологодская, Красноярск, Саратовская, Мурманская, Ульяновская, Луганская и др.). УЛУЧШЕНИЯ: Карелия — лимит увеличен до 40л (было 30л). Псковская — система чет-нечет отменена 21.07, лимит 30л стабилен. Вологодская — дополнительно +240т бензина, поставки от Лукойл +200т/сутки. Саратовская: 30л лимит, цены АИ-95 73.33 ₽/л, ДТ 81.45 ₽/л. Мурманская: Лукойл 30л, ДТ без ограничений. Прогноз: полная нормализация август 2026.",
+      "source_url": "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+    },
     {
       "date": "2026-07-24",
       "region": "РФ — ротационное обновление 12 старейших регионов (цикл-14)",
