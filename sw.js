@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v25';   // bump: VPN-партнёр hidemy → RKNoff (app.js прекэшится → нужен bump)
+var CACHE = 'npz-shell-v25';   // bump: RKNoff VPN-свап (app.js) + новая страница /sgorel-sklad-wildberries-chto-delat
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.
