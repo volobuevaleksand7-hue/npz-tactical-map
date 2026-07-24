@@ -460,7 +460,7 @@
   function loadRegionsGeo() {
     if (S.regionsGeo) { renderRegions(); return Promise.resolve(S.regionsGeo); }
     if (regionsGeoPromise) return regionsGeoPromise;
-    regionsGeoPromise = fetchJsonPath("data/russia-regions.geojson").then(function (geo) {
+    regionsGeoPromise = fetchJsonPath("data/russia-regions-v2.geojson").then(function (geo) {
       S.regionsGeo = geo;
       // Включаем Крым и новые территории в слой заливки регионов
       if (S.regionsGeo) {

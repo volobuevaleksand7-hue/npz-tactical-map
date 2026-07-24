@@ -769,7 +769,7 @@
         : { color: "#2a3038", weight: .4, opacity: .35, fillColor: "#3a4048", fillOpacity: .04 };
     }
     var regionLayer = L.geoJSON(null, { interactive: false, style: regionStyle }).addTo(map);
-    ["/data/russia-regions.geojson", "/data/new-territories.geojson", "/data/crimea-regions.geojson"].forEach(function (url) {
+    ["/data/russia-regions-v2.geojson", "/data/new-territories.geojson", "/data/crimea-regions.geojson"].forEach(function (url) {
       fetch(url).then(function (r) { return r.json(); }).then(function (g) { regionLayer.addData(g); regionLayer.setStyle(regionStyle); }).catch(function () {});
     });
 
