@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.20.9 - 2026-07-24
+
+**Две новые страницы WB-кластера (статьи 2/3).**
+
+- `/karta-skladov-wildberries` — живая карта складов Wildberries и Ozon (клон шелла, форсит слой `?layer=warehouses`); head-терм «карта складов wildberries». Пара к `/skolko-skladov-wildberries-ozon`.
+- `/udar-sklad-wildberries-peterburg` — разбор ударов 24 июля по складам WB в Петербурге и Ленобласти (Новосаратовка/Шушары/Уткина Заводь + Симферополь). Гео/событийный угол.
+- Обе в `data/seo-topics.jsonl` + `sitemap.xml` + меню (build-nav). SW-кэш v25→v26.
+
 ## v1.20.8 - 2026-07-24
 
 **Новая страница «Сгорел склад Wildberries: что делать».**
