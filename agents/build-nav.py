@@ -123,10 +123,16 @@ HUB = {
 
 
 def cover_for(url):
-    """Обложка карточки по конвенции имени, только если файл реально есть на диске."""
+    """Обложка карточки хаба (только <img>, не og:image) — по конвенции имени.
+    Предпочитаем .webp (конвейер optimize_cover кладёт его рядом с .png), иначе
+    .png; ничего нет на диске — карточка без картинки (без битых <img>)."""
     slug = url.strip("/").replace("/", "-")
-    p = ROOT / "assets" / f"analytics-{slug}-generated.png"
-    return f"/assets/{p.name}" if p.exists() else None
+    base = ROOT / "assets" / f"analytics-{slug}-generated"
+    webp = base.with_suffix(".webp")
+    if webp.exists():
+        return f"/assets/{webp.name}"
+    png = base.with_suffix(".png")
+    return f"/assets/{png.name}" if png.exists() else None
 
 TOP_URLS   = {u for u, _, _ in TOP + TOP_TAIL}
 HIDE_TYPES = {"object"}  # /npz/* — только через /refineries, десятки заводов в меню/хабе не льём

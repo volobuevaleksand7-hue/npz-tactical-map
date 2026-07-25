@@ -160,9 +160,22 @@ def asset_ver(rel: str) -> str:
 
 
 def cover_for(date: str):
-    """Возвращает (rel_path, exists) для обложки конкретной даты."""
+    """Возвращает (rel_path, exists) для обложки конкретной даты — ВСЕГДА .png.
+    Только для og:image/twitter:image/JSON-LD: соцсети и Telegram надёжнее
+    отдают превью с PNG, чем с WEBP — сюда webp не подставлять."""
     rel = f"assets/cover-{date}.png"
     return rel, (ROOT / rel).exists()
+
+
+def cover_img_for(date: str):
+    """Возвращает rel_path для <img> (hero/обложка) — .webp, если конвейер его уже
+    сделал (optimize_cover пишет его рядом с .png при каждой генерации обложки),
+    иначе откатываемся на .png, чтобы не показать битую картинку."""
+    webp_rel = f"assets/cover-{date}.webp"
+    if (ROOT / webp_rel).exists():
+        return webp_rel
+    rel, exists = cover_for(date)
+    return rel if exists else None
 
 
 def thumb_for(rel: str):
@@ -702,8 +715,10 @@ def gen_index(archive: dict) -> str:
     latest_strikes = latest_brief.get("strikes", [])
     latest_rus = rus_date(latest)
     cover_rel, cover_exists = cover_for(latest)
-    cover_path = asset_ver(cover_rel) if cover_exists else "/og-image.png"
+    cover_path = asset_ver(cover_rel) if cover_exists else "/og-image.png"  # og:image/twitter — только .png
     cover_url = SITE + cover_path
+    img_rel = cover_img_for(latest)
+    hero_img_path = asset_ver(img_rel) if img_rel else "/og-image.png"  # <img> hero — .webp, если есть
 
     title = f"Топливный фронт РФ — сводки по дням | удары по НПЗ и дефицит бензина"
     description = (f"Ежедневные OSINT-сводки: удары БПЛА по нефтезаводам России, дефицит бензина, "
@@ -726,7 +741,7 @@ def gen_index(archive: dict) -> str:
     # герой — свежая сводка
     hero = f"""      <section class="news-hero-lead">
         <a class="hero-cover-link" href="/news/{latest}">
-          <img class="news-hero-image" src="{cover_path}" alt="Сводка за {latest_rus}" width="1200" height="630" loading="eager">
+          <img class="news-hero-image" src="{hero_img_path}" alt="Сводка за {latest_rus}" width="1200" height="630" loading="eager">
         </a>
         <div class="hero-lead-body">
           <span class="hero-kicker">🔴 Свежая сводка · {weekday_ru(latest)}, {rus_date_short(latest)}</span>
@@ -787,8 +802,10 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
     is_latest = (next_date is None)
 
     cover_rel, cover_exists = cover_for(date)
-    cover_path = asset_ver(cover_rel) if cover_exists else "/og-image.png"
+    cover_path = asset_ver(cover_rel) if cover_exists else "/og-image.png"  # og:image/twitter — только .png
     cover_url = SITE + cover_path
+    img_rel = cover_img_for(date)
+    hero_img_path = asset_ver(img_rel) if img_rel else "/og-image.png"  # <img> hero — .webp, если есть
 
     headline = brief_headline(date, strikes)
     title = f"Сводка за {date_rus}: {headline} | Топливный фронт РФ"
@@ -839,7 +856,7 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
         '  <main class="news-main">\n    <div class="news-container">\n',
         f"""      <nav class="brief-crumb"><a href="/news">📰 Все сводки</a> <span>/</span> <a href="/news/{month_ym}">{cap(month_label(month_ym))}</a> <span>/</span> {date_rus}</nav>
       <section class="news-hero">
-        <img class="news-hero-image" src="{cover_path}" alt="Сводка за {date_rus}" width="1200" height="630" loading="eager">
+        <img class="news-hero-image" src="{hero_img_path}" alt="Сводка за {date_rus}" width="1200" height="630" loading="eager">
         <span class="hero-kicker">{weekday_ru(date)}, {rus_date_short(date)}</span>
         <h1>Топливный фронт РФ — сводка за {date_rus}</h1>
         <p class="section-sub">{escape(' · '.join(sub_bits))}. OSINT-агрегация по открытым источникам.</p>
@@ -908,8 +925,10 @@ def gen_month_page(ym: str, dates: list, archive: dict, prev_ym, next_ym) -> str
     canonical = f"{SITE}/news/{ym}"
 
     cover_rel, cover_exists = cover_for(dates[0]) if dates else ("", False)
-    cover_path = asset_ver(cover_rel) if cover_exists else "/og-image.png"
+    cover_path = asset_ver(cover_rel) if cover_exists else "/og-image.png"  # og:image/twitter — только .png
     cover_url = SITE + cover_path
+    img_rel = cover_img_for(dates[0]) if dates else None
+    hero_img_path = asset_ver(img_rel) if img_rel else "/og-image.png"  # <img> hero — .webp, если есть
 
     title = f"Удары по НПЗ и топливная обстановка — {label} | Топливный фронт РФ"
     description = (f"Архив сводок за {label}: {stats['n_strikes']} {n_strikes_word} по РФ, "
@@ -963,7 +982,7 @@ def gen_month_page(ym: str, dates: list, archive: dict, prev_ym, next_ym) -> str
         '  <main class="news-main">\n    <div class="news-container">\n',
         f"""      <nav class="brief-crumb"><a href="/news">📰 Все сводки</a> <span>/</span> {label_cap}</nav>
       <section class="news-hero">
-        <img class="news-hero-image" src="{cover_path}" alt="Архив сводок за {label}" width="1200" height="630" loading="eager">
+        <img class="news-hero-image" src="{hero_img_path}" alt="Архив сводок за {label}" width="1200" height="630" loading="eager">
         <span class="hero-kicker">Архив по месяцам</span>
         <h1>Удары по НПЗ и топливная обстановка — {label}</h1>
         <p class="section-sub">Хроника ударов и дефицита топлива за {label}: {stats['n_strikes']} {n_strikes_word} за {stats['n_days']} {n_days_word}{lead_extra}.</p>

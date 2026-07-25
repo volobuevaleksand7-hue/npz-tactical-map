@@ -121,6 +121,13 @@ def _codex_cover(event, out_dir):
         try:
             import shutil
             shutil.copy(str(raw), str(out))
+            # caption_cover упал раньше своего optimize_cover-хука — .webp тут
+            # никто не сделал. Догоняем сами, best-effort (не падаем, если не вышло).
+            try:
+                oc = _load(ROOT / "agents" / "optimize_covers.py", "optimize_covers")
+                oc.make_webp_full(str(out))
+            except Exception:
+                pass
             return str(out)
         except Exception:
             return str(raw)

@@ -169,10 +169,14 @@ def cover_html(card):
     png = card.get("png_path")
     if png:
         p = pathlib.Path(png)
+        # <img> — .webp, если конвейер его уже сделал (optimize_cover рядом с .png),
+        # иначе .png. Не og:image — тут никакого «оставить png» правила нет.
+        webp = p.with_suffix(".webp")
+        img_p = webp if webp.exists() else p
         try:
-            url = "/" + str(p.relative_to(ROOT))
+            url = "/" + str(img_p.relative_to(ROOT))
         except ValueError:
-            url = "/" + p.name
+            url = "/" + img_p.name
         return f'<img class="wave-cover-img" src="{esc(url)}" alt="Волна дронов" loading="lazy">'
     return f'<div class="wave-cover-svg">{card.get("inline_svg", "")}</div>'
 
