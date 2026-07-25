@@ -16,7 +16,9 @@ fetch() {
   local destination=$2
 
   if test -n "${VERCEL_DEPLOYMENT:-}"; then
-    vercel curl "$path" --deployment "$VERCEL_DEPLOYMENT" -- --silent --show-error > "$destination"
+    # ponytail: --scope обязателен — токен CI выдан на одну команду,
+    # без него vercel curl лезет в дефолтный скоуп аккаунта и падает с "Not authorized"
+    vercel curl "$path" --deployment "$VERCEL_DEPLOYMENT" ${VERCEL_SCOPE:+--scope "$VERCEL_SCOPE"} -- --silent --show-error > "$destination"
   else
     curl --fail --silent --show-error --location "$base_url$path" > "$destination"
   fi
