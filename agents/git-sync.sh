@@ -82,33 +82,55 @@ now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
 p = "data/heartbeats.json"
 
 
+def _head_heartbeats():
+    """Закоммиченное состояние — пол, ниже которого файл опускаться не должен."""
+    try:
+        out = subprocess.run(["git", "show", "HEAD:data/heartbeats.json"],
+                             capture_output=True, text=True, timeout=10)
+        d = json.loads(out.stdout)
+        return d if isinstance(d, dict) else {}
+    except Exception:
+        return {}
+
+
 def _load_heartbeats():
     """Последнее хорошее состояние. Пустой словарь — только если файла нет вовсе.
 
     16.07: битый/полузаписанный файл ронял json.load, `except: {}` и агент стирал
     чужие 11 ключей своим одним — watchdog объявил живых агентов мёртвыми. Читаем
     fallback из git HEAD: потерять чужой heartbeat хуже, чем не обновить свой.
+
+    25.07: тот же исход через другую дверь — fuel-availability (Haiku, без Bash)
+    «записал» heartbeat через Write и оставил 1 ключ из 12. JSON при этом ВАЛИДЕН,
+    поэтому проверка «не парсится» его пропустила, и 5 живых агентов на 4 часа
+    уехали в плашку «не на связи». Теперь HEAD — не аварийный фолбэк, а пол:
+    ключи мерджим (union, берём более свежую метку). Удалить агента насовсем
+    по-прежнему можно — коммит с удалённым ключом меняет сам HEAD.
     """
+    local = None
     try:
         with open(p, encoding="utf-8") as f:
             d = json.load(f)
         if isinstance(d, dict):
-            return d
+            local = d
     except FileNotFoundError:
         return {}
     except Exception:
         pass
-    try:
-        out = subprocess.run(["git", "show", "HEAD:data/heartbeats.json"],
-                             capture_output=True, text=True, timeout=10)
-        d = json.loads(out.stdout)
-        if isinstance(d, dict):
-            print("git-sync: heartbeats.json битый — подняли версию из HEAD (%d ключей)" % len(d))
-            return d
-    except Exception:
-        pass
-    print("git-sync: heartbeats.json битый и HEAD не помог — стартуем с пустого")
-    return {}
+    head = _head_heartbeats()
+    if local is None:
+        if head:
+            print("git-sync: heartbeats.json битый — подняли версию из HEAD (%d ключей)" % len(head))
+            return head
+        print("git-sync: heartbeats.json битый и HEAD не помог — стартуем с пустого")
+        return {}
+    merged = dict(head)
+    for k, v in local.items():                 # ISO-строки: лексикографика = хронология
+        merged[k] = max(v, head[k]) if k in head and isinstance(v, str) else v
+    if len(merged) > len(local):
+        print("git-sync: heartbeats.json потерял %d ключ(ей) — восстановлены из HEAD"
+              % (len(merged) - len(local)))
+    return merged
 
 
 hb = _load_heartbeats()

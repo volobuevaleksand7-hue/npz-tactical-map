@@ -19,19 +19,12 @@
 ПРАВИЛА: это аналитическая ОЦЕНКА, опирайся на факты из fuel-state.json (выбыто мощностей, потери бензина/дизеля, запрет экспорта, дефицитные регионы). Будь строг и конкретен (проценты, направления). Сохрани валидный UTF-8 JSON, запиши целиком через Write. Ответ — только запись файла.
 
 
-## HEARTBEAT (обязательно при каждом запуске)
+## HEARTBEAT
 
-После успешного запуска (даже если новых данных нет) агент **обязан** записать свой ключ в `data/heartbeats.json` с текущим временем UTC. При коммите использовать `git add data/` (не только свой файл данных), чтобы `heartbeats.json` попал в коммит.
+Ничего делать не нужно: метку живости штампует `run-agent.sh` → `agents/git-sync.sh`
+после успешного прогона, по метке агента из crontab.
 
-```bash
-python3 - <<'PY'
-import json, datetime
-now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
-p = "data/heartbeats.json"
-try: hb = json.load(open(p, encoding="utf-8"))
-except Exception: hb = {}
-hb["forecast"] = now
-json.dump(hb, open(p,"w",encoding="utf-8"), ensure_ascii=False, indent=1)
-print("heartbeat ->", now)
-PY
-```
+🔴 **Не записывай `data/heartbeats.json` сам и не читай его.** Файл общий на всех
+агентов. 25.07.2026 агент без Bash «выполнил» такую инструкцию через Write и оставил
+в файле 1 ключ из 12 — пять живых агентов на четыре часа уехали в плашку
+«не на связи» на главной.
