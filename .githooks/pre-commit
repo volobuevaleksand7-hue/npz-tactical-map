@@ -75,12 +75,21 @@ fi
 # Пересчитываем детерминированно из refineries[] и перезакладываем (авто-фикс, как
 # цензор/обложки: агент коммитит headless на VPS — блокировкой мы бы просто застопорили
 # данные). Идемпотентно: если цифры сходятся, файл не трогается.
+# Тем же вызовом (без --check) скрипт дописывает точку в data/capacity-timeline.json,
+# если capacity_offline_pct изменился с последней сохранённой точки — иначе файл не
+# трогает (этот файл до 25.07 никто не дописывал, панель «динамика выбытия» на главной
+# застряла на 12.07). git add — на оба файла, второй может не измениться (idempotent).
 if git diff --cached --name-only --diff-filter=ACMR 2>/dev/null | grep -q '^data/fuel-state\.json$' \
    && [ -f agents/recalc-national-balance.py ] && command -v python3 >/dev/null 2>&1; then
-  if ! python3 agents/recalc-national-balance.py --check >/dev/null 2>&1; then
-    echo "pre-commit: national_balance разошёлся с refineries[] — пересчитываю:" >&2
-    python3 agents/recalc-national-balance.py >&2 && git add data/fuel-state.json
-  fi
+  # Один вызов чинит national_balance (если разошёлся) И дописывает точку таймлайна
+  # (если процент изменился) — оба идемпотентны, лишний git add на неизменный файл
+  # ничего не сделает.
+  python3 agents/recalc-national-balance.py >&2 || true
+  git diff --quiet -- data/fuel-state.json 2>/dev/null || git add data/fuel-state.json
+  [ -f data/capacity-timeline.json ] && { git diff --quiet -- data/capacity-timeline.json 2>/dev/null || {
+    git add data/capacity-timeline.json
+    echo "pre-commit: capacity-timeline.json дописан и перезаложен." >&2
+  }; }
 fi
 
 # Files staged for commit under data/ (added/copied/modified/renamed).

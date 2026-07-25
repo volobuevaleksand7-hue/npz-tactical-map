@@ -21,6 +21,14 @@
      · `throughput_shortfall_pct` = Σ `capacity_mt_year`·(1−`est_output_pct`/100) / total ×100 — недобор с учётом частично работающих (вторичная метрика, не headline).
      · `gasoline_output_loss_pct`, `diesel_output_loss_pct` — оценка по свежим данным (не выводятся из таблицы напрямую; обновляй при наличии источника).
      · `export_ban_gasoline`/`export_ban_kerosene` (true/false), `import_from_belarus`, `notes`.
+     · 🔴 **`notes` — ЗАПРЕЩЕНО дублировать цифры, которые выводит код из таблицы**: число
+       полностью остановленных/частично работающих/рабочих НПЗ, объём выбывших мощностей
+       (млн т/год), любые проценты выбытия/недобора. Эти цифры уже есть в соседних полях
+       (`capacity_offline_pct/mt_year`, `throughput_shortfall_pct`, счётчики по `status`
+       в `refineries[]`) — их синка со временем расходится с текстом (25.07: проза
+       говорила «11–12 заводов, 42–43%», таблица — «10 заводов, 38.5%»). `notes` — только
+       КАЧЕСТВЕННАЯ картина: какие регионы, какие меры, источники, тенденция; на цифры
+       ссылаться словами («см. поля выше»), не значением.
    - `fuel_balance.gasoline` / `fuel_balance.diesel`: `domestic_pct`, `export_pct` (в сумме 100), `export_status`.
    - `events[]`: добавь 1–3 НОВЫХ рыночных события сверху; не более 10 последних.
 4. Обнови `meta.generated_at` (текущий UTC ISO 8601) и `meta.updated_by` = "agent:fuel-market".
