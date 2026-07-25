@@ -4,6 +4,7 @@ name: Deploy to Vercel (production)
 # Чисто-data пуши (data/**) пропускаем — карта читает их напрямую с GitHub raw,
 # редеплой не нужен. Правки HTML/CSS/JS и регенерация news.html — деплоятся.
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths-ignore:
