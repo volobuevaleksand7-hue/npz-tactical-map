@@ -472,11 +472,31 @@
     }).catch(function () { regionsGeoPromise = null; return null; });
     return regionsGeoPromise;
   }
+  // data/azs-stations.json хранит station в компактном ТАБЛИЧНОМ виде (экономия веса —
+  // без этого повторяющиеся имена ключей у 9609 записей раздувают файл): stations —
+  // [[osm_numeric_id, brand, lat, lon, region_idx, city?, addr?, brand_label?], ...],
+  // regions_map — [regionName,...] индекс из station[4], meta.brands — brand → label для
+  // известных сетей (для brand:"other" лейбл — station[7], реальное имя АЗС из OSM).
+  // Разворачиваем один раз тут в те же {id, brand, lat, lon, region, city, addr, brand_label},
+  // что и раньше — остальной app.js схему не знает и не меняется.
+  function decodeAzsStations(j) {
+    if (!j) return null;
+    // ponytail: edge/SW отдают старый файл (массив объектов) ещё сутки после деплоя — пропускаем как есть
+    if (j.stations && j.stations.length && !Array.isArray(j.stations[0])) return j;
+    var rmap = j.regions_map || [], brands = (j.meta && j.meta.brands) || {}, rows = j.stations || [];
+    var stations = new Array(rows.length);
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i], brand = r[1];
+      stations[i] = { id: "osm-" + r[0], brand: brand, lat: r[2], lon: r[3], region: rmap[r[4]],
+        city: r[5] || null, addr: r[6] || null, brand_label: r[7] || brands[brand] || null };
+    }
+    return { meta: j.meta, stations: stations };
+  }
   function loadAzsData() {
     if (S.azsStations && S.azsRoutes) return Promise.resolve();
     if (azsDataPromise) return azsDataPromise;
     azsDataPromise = Promise.all([fetchData("azsStations").catch(function () { return null; }), fetchData("azsRoutes").catch(function () { return null; })])
-      .then(function (res) { S.azsStations = res[0]; S.azsRoutes = res[1]; if (!S.azsStations || !S.azsRoutes) azsDataPromise = null; });
+      .then(function (res) { S.azsStations = decodeAzsStations(res[0]); S.azsRoutes = res[1]; if (!S.azsStations || !S.azsRoutes) azsDataPromise = null; });
     return azsDataPromise;
   }
   function load() {

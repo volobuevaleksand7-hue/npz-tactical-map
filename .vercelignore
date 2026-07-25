@@ -7,3 +7,30 @@ docs/
 hermes/
 dashboard/
 seo/
+
+# PNG-источники обложек: <img> и og:image везде используют .webp/сгенерированный .png
+# из этого же семейства — .webp уже лежит рядом, сам .png не отдаётся ни одной
+# страницей (проверено grep по html/py/json). cover-*.png (без даты wave-) и
+# analytics-skolko-skladov-*.png НЕ трогать — они og:image, отдаются как .png.
+assets/post/
+assets/wave-cover-*.png
+# analytics-*-generated.png перечислены поимённо (без wildcard+negation — не
+# рискуем: analytics-skolko-skladov-*-generated.png остаётся, это og:image
+# страницы /skolko-skladov-wildberries-ozon, единственное исключение).
+assets/analytics-attacks-generated.png
+assets/analytics-crimea-generated.png
+assets/analytics-crisis-generated.png
+assets/analytics-deficit-generated.png
+assets/analytics-karta-benzina-krym-generated.png
+assets/analytics-karta-bpla-generated.png
+assets/analytics-krasnodar-generated.png
+assets/analytics-moskva-generated.png
+assets/analytics-refineries-generated.png
+assets/analytics-talony-generated.png
+assets/install-*.png
+assets/cover-krasnodar.png
+assets/cover-krasnodar.webp
+assets/thumb/cover-krasnodar.webp
+
+# Осиротевший CSS без ссылок нигде в разметке/генераторах.
+assets/radar-icons/sprites.css

@@ -97,6 +97,28 @@ def optimize_cover(path, max_dim=MAX_DIM, colors=COLORS):
     return result
 
 
+def _pngquant_pass(tmp, quality="65-85"):
+    """Досжимает tmp через pngquant (libimagequant — лучше PIL adaptive palette).
+    Перезаписывает tmp только если pngquant отработал; недоступен/упал → тихо пропускаем,
+    PIL-результат из tmp остаётся как есть (тот же контракт, что у make_webp_full)."""
+    out = tmp + ".pq.tmp"
+    try:
+        r = subprocess.run(
+            ["pngquant", "--force", "--quality", quality, "--speed", "1", "--strip",
+             "-o", out, tmp],
+            capture_output=True, timeout=30)
+        if r.returncode == 0 and os.path.isfile(out) and os.path.getsize(out) < os.path.getsize(tmp):
+            os.replace(out, tmp)
+        elif os.path.isfile(out):
+            os.remove(out)
+    except FileNotFoundError:
+        pass  # pngquant не установлен — PIL-палитры достаточно, не падаем
+    except Exception as e:
+        print("_pngquant_pass: %s -> %s" % (tmp, e))
+        if os.path.isfile(out):
+            os.remove(out)
+
+
 def _optimize_cover_impl(path, max_dim, colors):
     try:
         from PIL import Image
@@ -120,6 +142,7 @@ def _optimize_cover_impl(path, max_dim, colors):
         pal = im.convert("P", palette=Image.ADAPTIVE, colors=colors, dither=Image.FLOYDSTEINBERG)
         tmp = path + ".opt.tmp"
         pal.save(tmp, "PNG", optimize=True)
+        _pngquant_pass(tmp)  # доп. ~30-50% сверху PIL-палитры, если pngquant есть (best-effort)
         # берём результат ТОЛЬКО если он реально меньше (иначе оставляем оригинал)
         if os.path.getsize(tmp) < os.path.getsize(path):
             os.replace(tmp, path)

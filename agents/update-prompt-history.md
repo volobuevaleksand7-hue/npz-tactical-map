@@ -17,3 +17,4 @@
 5. Обнови/добавь поле `generated_at` на верхнем уровне файла (текущая дата YYYY-MM-DD) — нужно для watchdog-мониторинга свежести.
 
 ПРАВИЛА: refinery_id из списка: kinef,ryazan,moscow,perm,syzran,tuapse,kuibyshev,nnos,yanos,volgograd,omsk,taneco,ufa,achinsk,angarsk,komsomolsk,antipinsky,saratov,orsk,afipsky. Каждое событие — со ссылкой-источником. Не выдумывай. Сохрани валидный UTF-8 JSON, запиши целиком через Write. Ответ — только запись файла.
+- 🔴 Временные/одноразовые скрипты (python, bash) писать ТОЛЬКО в `/tmp` (например `/tmp/upd.py`). НИКОГДА не создавать их в корне репозитория: они остаются в git как мусорные untracked-файлы.

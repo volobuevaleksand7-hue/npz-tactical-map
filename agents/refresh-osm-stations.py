@@ -6,6 +6,7 @@
 Запуск:  ./.venv/bin/python agents/refresh-osm-stations.py
 """
 import json, os, sys, time, requests
+from collections import Counter
 from shapely.geometry import shape, Point
 from shapely.prepared import prep
 
@@ -136,16 +137,24 @@ def main():
                 continue  # вне целевых регионов РФ (отсекаем Украину/Казахстан/Беларусь из bbox)
             tags = el.get("tags", {})
             key, blabel = norm_brand(tags)
-            stations.append({
+            st = {
                 "id": "osm-%s" % oid,
                 "brand": key,
-                "brand_label": blabel,
-                "lat": round(lat, 5),
-                "lon": round(lon, 5),
-                "city": tags.get("addr:city"),
+                "brand_label": blabel,  # держим на каждой станции — решаем ниже, у кого он "лишний"
+                # lat/lon: 5 знаков ~1.1м — избыточно для карты АЗС, 4 знака (~11м) достаточно.
+                "lat": round(lat, 4),
+                "lon": round(lon, 4),
                 "region": reg,
-                "addr": tags.get("addr:street"),
-            })
+            }
+            # null-поля не пишем вообще (ключ+null занимает место без пользы) — фронт трактует
+            # отсутствие city/addr как falsy, как и раньше трактовал null.
+            city = tags.get("addr:city")
+            if city:
+                st["city"] = city
+            addr = tags.get("addr:street")
+            if addr:
+                st["addr"] = addr
+            stations.append(st)
         time.sleep(3)
 
     # контроль размера: все branded + ограниченное число other
@@ -157,6 +166,32 @@ def main():
         others = [others[int(i * step)] for i in range(CAP_OTHER)]
     stations = branded + others
 
+    # meta.brands = самый частый label на brand-key (напр. lukoil→"Лукойл"). Это НЕ
+    # безусловно верно для всех станций ключа — Teboil тоже brand:"lukoil" (сеть Лукойла),
+    # но label "Teboil" — поэтому per-station brand_label в строку кладём всегда, когда он
+    # отличается от majority-label, а не только для brand:"other". Общее правило, не заплатка.
+    label_counts = {}
+    for s in stations:
+        label_counts.setdefault(s["brand"], Counter())[s["brand_label"]] += 1
+    brand_labels = {k: c.most_common(1)[0][0] for k, c in label_counts.items()}
+
+    # Табличная упаковка: объект-на-станцию с одними и теми же 5-8 именами ключей на
+    # 9609 записей раздувает JSON сильнее самих данных (repeated key names). Пишем
+    # позиционные массивы + regions_map-индекс — decodeAzsStations() во фронте (app.js,
+    # azs-live.js, azs-lab.js) разворачивает обратно в те же объекты на лету.
+    regions_list = sorted(set(s["region"] for s in stations))
+    region_idx = {r: i for i, r in enumerate(regions_list)}
+    rows = []
+    for s in stations:
+        oid = int(s["id"].split("-", 1)[1])
+        row = [oid, s["brand"], s["lat"], s["lon"], region_idx[s["region"]]]
+        own_label = s["brand_label"] if s["brand_label"] != brand_labels.get(s["brand"]) else 0
+        opt = [s.get("city") or 0, s.get("addr") or 0, own_label]
+        while opt and opt[-1] == 0:  # обрезаем хвостовые пустые поля — самый частый случай
+            opt.pop()
+        row += opt
+        rows.append(row)
+
     out = {
         "meta": {
             "generated_at": time.strftime("%Y-%m-%d"),
@@ -165,8 +200,11 @@ def main():
             "count": len(stations),
             "branded": len(branded),
             "note": "Координаты и бренды — реальные (OSM). Наличие топлива — оценка по статусу сети в регионе, не по конкретной колонке.",
+            "brands": brand_labels,  # brand-key → самый частый label; исключения (Teboil, "other" и т.п.) — per-station в row[7]
+            "schema": "stations row = [osm_numeric_id, brand, lat, lon, region_idx, city?, addr?, brand_label?]",
         },
-        "stations": stations,
+        "regions_map": regions_list,
+        "stations": rows,
     }
     p = os.path.join(ROOT, "data", "azs-stations.json")
     json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))

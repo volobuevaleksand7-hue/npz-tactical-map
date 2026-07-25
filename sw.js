@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v26';   // bump: 2 новые страницы WB — /karta-skladov-wildberries + /udar-sklad-wildberries-peterburg
+var CACHE = 'npz-shell-v27';   // bump: app.js получил декодер табличной схемы azs-stations — старый app.js из кэша не прочитает новый файл
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.

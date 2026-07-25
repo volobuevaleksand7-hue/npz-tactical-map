@@ -103,12 +103,30 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   }
+  // data/azs-stations.json хранит station в компактном ТАБЛИЧНОМ виде (экономия веса —
+  // без этого файл раздувают повторяющиеся имена ключей у 9609 записей):
+  // stations: [[osm_numeric_id, brand, lat, lon, region_idx, city?, addr?, brand_label?], ...]
+  // regions_map: [regionName, ...] — индекс из station[4]. meta.brands: brand → label для
+  // известных сетей; для brand:"other" лейбл — станция[7] (реальное имя АЗС из OSM).
+  function decodeAzsStations(j) {
+    if (!j) return [];
+    // ponytail: edge/SW отдают старый файл (массив объектов) ещё сутки после деплоя — пропускаем как есть
+    if (j.stations && j.stations.length && !Array.isArray(j.stations[0])) return j.stations;
+    var rmap = j.regions_map || [], brands = (j.meta && j.meta.brands) || {}, rows = j.stations || [];
+    var out = new Array(rows.length);
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i], brand = r[1];
+      out[i] = { id: "osm-" + r[0], brand: brand, lat: r[2], lon: r[3], region: rmap[r[4]],
+        city: r[5] || null, addr: r[6] || null, brand_label: r[7] || brands[brand] || null };
+    }
+    return out;
+  }
   function loadStationMeta() {
     if (stationMeta) return Promise.resolve(stationMeta);
     return fetch("data/azs-stations.json")
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) {
-        var m = {}, arr = (j && j.stations) || [];
+        var m = {}, arr = decodeAzsStations(j);
         for (var i = 0; i < arr.length; i++) {
           var s = arr[i]; if (!s || !s.id) continue;
           m[s.id] = { label: s.brand_label || s.brand || "АЗС", city: s.city || s.region || "", lat: s.lat, lon: s.lon };
