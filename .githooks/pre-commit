@@ -67,6 +67,22 @@ if command -v python3 >/dev/null 2>&1; then
   done
 fi
 
+# ---- national-balance guard: headline-цифра выводится из таблицы, а не из модели ----
+# 25.07: на главной висело «мощностей выбито полностью 64%» при 38.5% по собственным
+# данным (агент записал в capacity_offline_* значение недобора 215.0/64% — другую
+# метрику). Завышение в 1.7× на нейтральном OSINT-проекте. Тот же класс, что дрейф
+# /refineries: две суммы считал LLM-агент на каждом синке и однажды перепутал поля.
+# Пересчитываем детерминированно из refineries[] и перезакладываем (авто-фикс, как
+# цензор/обложки: агент коммитит headless на VPS — блокировкой мы бы просто застопорили
+# данные). Идемпотентно: если цифры сходятся, файл не трогается.
+if git diff --cached --name-only --diff-filter=ACMR 2>/dev/null | grep -q '^data/fuel-state\.json$' \
+   && [ -f agents/recalc-national-balance.py ] && command -v python3 >/dev/null 2>&1; then
+  if ! python3 agents/recalc-national-balance.py --check >/dev/null 2>&1; then
+    echo "pre-commit: national_balance разошёлся с refineries[] — пересчитываю:" >&2
+    python3 agents/recalc-national-balance.py >&2 && git add data/fuel-state.json
+  fi
+fi
+
 # Files staged for commit under data/ (added/copied/modified/renamed).
 staged="$(git diff --cached --name-only --diff-filter=ACMR -- data/ 2>/dev/null)"
 [ -z "$staged" ] && exit 0
