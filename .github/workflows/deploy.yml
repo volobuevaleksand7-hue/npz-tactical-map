@@ -45,4 +45,4 @@ jobs:
           VERCEL_DEPLOYMENT: ${{ steps.candidate.outputs.url }}
         run: bash scripts/verify-release-url.sh "${{ steps.candidate.outputs.url }}"
       - name: Promote verified candidate
-        run: vercel promote "${{ steps.candidate.outputs.url }}" --yes --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel promote "${{ steps.candidate.outputs.url }}" --yes --scope npz-avod --token=${{ secrets.VERCEL_TOKEN }}
