@@ -16,9 +16,10 @@ fetch() {
   local destination=$2
 
   if test -n "${VERCEL_DEPLOYMENT:-}"; then
-    # ponytail: --scope обязателен — токен CI выдан на одну команду,
-    # без него vercel curl лезет в дефолтный скоуп аккаунта и падает с "Not authorized"
-    vercel ${VERCEL_SCOPE:+--scope "$VERCEL_SCOPE"} curl "$path" --deployment "$VERCEL_DEPLOYMENT" -- --silent --show-error > "$destination"
+    # ponytail: скоуп задаётся переменной VERCEL_SCOPE (см. deploy.yml) — токен CI
+    # выдан на одну команду. Флаг --scope сюда не годится: vercel curl пробрасывает
+    # нераспознанные флаги в сам curl, и тот падает на "option --scope: is unknown".
+    vercel curl "$path" --deployment "$VERCEL_DEPLOYMENT" -- --silent --show-error > "$destination"
   else
     curl --fail --silent --show-error --location "$base_url$path" > "$destination"
   fi
