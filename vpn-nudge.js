@@ -33,11 +33,18 @@
     });
   }
 
+  // Оффер: давим на бесплатный доступ + скорость, мотив остаётся «открыть источник».
+  // 🔴 «5 дней» и «3 минуты» — слова владельца, в боте НЕ подтверждены. Проверить до деплоя.
+  // Про «без установки приложений» намеренно молчим: бот, скорее всего, отдаёт конфиг под
+  // клиент (WireGuard/Outline) — утверждать обратное = врать в UI.
+  var OFFER = 'бесплатный доступ на 5 дней, подключение за 3 минуты в Telegram-боте';
+  var CTA_TXT = 'Подключить бесплатно на 5 дней →';
+
   function promo(contextual) {
     var head = contextual ? 'Источник заблокирован в РФ' : 'Часть источников недоступна в РФ';
     var body = contextual
-      ? 'VPN выдаёт Telegram-бот — минута, работает в РФ'
-      : 'Первоисточники по теме (западные СМИ) заблокированы в РФ. VPN выдаёт Telegram-бот — минута, работает в РФ';
+      ? 'Открыть можно через VPN — ' + OFFER
+      : 'Первоисточники по теме (западные СМИ) заблокированы в РФ. Открыть их можно через VPN — ' + OFFER;
     var d = document.createElement('div');
     d.className = 'pp-vpn';
     d.style.cssText = 'max-width:560px;margin:16px auto';
@@ -45,7 +52,7 @@
       '<div class="pp-vpn-h"><span class="pp-vpn-ic">' + SHIELD + '</span>' +
         '<div class="pp-vpn-t"><span class="pp-vpn-tag">доступ через VPN</span>' +
         '<b>' + head + '</b><div class="pp-vpn-b">' + body + '</div></div></div>' +
-      '<a class="pp-vpn-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">Получить VPN в Telegram →</a>';
+      '<a class="pp-vpn-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">' + CTA_TXT + '</a>';
     d.querySelector('.pp-vpn-btn').addEventListener('click', track);
     return d;
   }
@@ -131,15 +138,36 @@
       '<button type="button" class="pp-vpn-float-x" aria-label="Свернуть">×</button>' +
       '<span class="pp-vpn-ic">' + SHIELD + '</span>' +
       '<div class="pp-vpn-float-t"><b>Источники недоступны в РФ?</b>' +
-        '<span>VPN — в Telegram-боте, минута</span></div>' +
-      '<a class="pp-vpn-float-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">Получить VPN в Telegram →</a>';
+        '<span>Открыть через VPN — 5 дней бесплатно, 3 минуты в Telegram-боте</span></div>' +
+      '<a class="pp-vpn-float-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">' + CTA_TXT + '</a>';
     d.querySelector('.pp-vpn-float-btn').addEventListener('click', track);
     return d;
   }
 
+  // Топ-3 текстовых донора трафика (замер 24.07) — плавающая карточка вместо inline,
+  // глубоко в статье её реже замечают. '/' не в списке: там уже #map (карта на главной).
+  var FLOAT_PAGES = ['/skolko-skladov-wildberries-ozon', '/karta-bpla', '/news'];
+
+  // Бейджи «🔒 недоступно в РФ» у заблокированных ссылок информативны сами по себе, отдельно
+  // от промо — поэтому вешаются и там, где карточка плавающая. Возвращает первую такую ссылку
+  // (к ней привязывается контекстная inline-карточка). На картах НЕ зовём: там ссылки живут в
+  // попапах, их рисует app.js своей копией.
+  function markBlockedLinks() {
+    var firstBlocked = null;
+    [].slice.call(document.querySelectorAll('a[href^="http"]')).forEach(function (a) {
+      if (a.dataset._vpn || !RF_BLOCKED.test(host(a.href))) return;
+      a.dataset._vpn = '1';
+      a.insertAdjacentHTML('afterend', ' <span class="vpn-off">🔒 недоступно в РФ</span>');
+      if (!firstBlocked) firstBlocked = a;
+    });
+    return firstBlocked;
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     trackBotInterest(); // до раннего return для карт — CTA бота есть и на radar/karta-azs
-    if (document.getElementById('map')) {
+    var isMap = !!document.getElementById('map');
+    var firstBlocked = isMap ? null : markBlockedLinks();
+    if (isMap || FLOAT_PAGES.indexOf(location.pathname.replace(/\/$/, '')) !== -1) {
       // На картах живут ОБЕ плашки (решение Серёги 15.07): VPN — язычок слева внизу,
       // карточка свежей сводки (article-nudge.js) — справа. Не конфликтуют: разные стороны
       // дока (side:'right' у сводки) + реестр __nudgeDocks сдвигает фазы подмигивания.
@@ -153,14 +181,6 @@
       f.querySelector('.pp-vpn-float-x').addEventListener('click', d.collapse);
       return;
     }
-    var links = [].slice.call(document.querySelectorAll('a[href^="http"]'));
-    var firstBlocked = null;
-    links.forEach(function (a) {
-      if (a.dataset._vpn || !RF_BLOCKED.test(host(a.href))) return;
-      a.dataset._vpn = '1';
-      a.insertAdjacentHTML('afterend', ' <span class="vpn-off">🔒 недоступно в РФ</span>');
-      if (!firstBlocked) firstBlocked = a;
-    });
     if (firstBlocked) {
       var box = firstBlocked.closest('li,p,article,section,div') || firstBlocked.parentNode;
       box.insertAdjacentElement('afterend', promo(true));
