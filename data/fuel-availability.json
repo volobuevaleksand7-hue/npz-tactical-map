@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-07-25T00:25Z",
+    "generated_at": "2026-07-25T20:45Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "24.07 (20:24Z): Цикл-16 ротационный проход. Проверены 8 приоритетных регионов WebSearch: Карелия, Псковская, Вологодская, Красноярский, Саратовская, Мурманская, Ульяновская, Кировская. ОБНОВЛЕНИЯ: Карелия лимит 40л (увеличен 24.07), Псковская: чет-нечет отменена 21.07, Вологодская: доп. поставки 240т, Красноярский: талонная система. Биржевые цены стабильны. Тренд: нормализация продолжается."
+    "rotation_pass": "25.07 (20:45Z): Цикл-17 ротационный проход. Проверены 12 старейших регионов WebSearch (по updated ВОЗРАСТАЮЩЕ): Тверская, Новосибирская, Ярославская, Астраханская, Луганская, Новгородская, Брянская, Коми, Владимирская, Ивановская, Адыгея, Донецкая. ОБНОВЛЕНИЯ: Новосибирск КРИТИЧНО (101 АЗС закрыто, 30л, очереди 3-5 машин к выходным). Астрахань: Лукойл ↑ до 40л (22.07). Ярославль: НПЗ восстанавливается. Тверская: локальные 15-30л. Брянск: запрет канистры. Владимир: очереди ↓ до 30-40мин. Иваново: 30л/80л ДТ. Крымские регионы: QR-система продолжается 20л. Прогноз: стабилизация август 2026."
   },
   "exchange": {
     "ai95_spb_rub_t": 72140,
@@ -688,20 +688,20 @@
       "lat": 48.57,
       "lon": 39.3,
       "level": "critical",
-      "updated": "2026-07-22T16:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
-          "name": "АТАН",
+          "name": "АТАН (оккупированная)",
           "status": "limited",
           "limit_l": 20,
-          "note": "22.07: Занятая территория. АТАН 20л, ТЭС 20л. Критический дефицит.",
+          "note": "25.07: Занятая территория. АТАН 20л. Контроль поставок через органы местного управления. Логистика нарушена.",
           "level": "critical"
         },
         {
-          "name": "ТЭС",
+          "name": "ТЭС (оккупированная)",
           "status": "limited",
           "limit_l": 20,
-          "note": "22.07: Занятая территория. 20л лимит. Критическое состояние.",
+          "note": "25.07: Занятая территория. ТЭС 20л. Критический дефицит топлива. Энергоснабжение нестабильно.",
           "level": "critical"
         }
       ],
@@ -710,24 +710,30 @@
       "diesel_price_rub": null,
       "source_urls": [
         "https://www.ostro.org/ru/news/na-okkupyrovannoj-luganshhyne-krytycheskyj-defytsyt-toplyva-na-zapravkah-vvely-zhyostkye-lymyty-i558188",
-        "https://www.ostro.org/ru/news/yz-okkupyrovannogo-luganska-soobshhayut-ob-udare-po-neftebaze-i558260",
         "https://neftegaz.ru/news/gas-stations/898708-minenergo-lnr-kontroliruet-postavki-benzina-na-azs-no-defitsit-sokhranyaetsya/",
         "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
       ],
-      "note": "22.07: Занятая территория. АТАН и ТЭС по 20L. Уровень: critical"
+      "note": "25.07: Оккупированная территория. АТАН 20л, ТЭС 20л. Критический дефицит. Логистика скомпрометирована. Level: critical"
     },
     {
       "region": "Новгородская обл.",
       "lat": 58.52,
       "lon": 31.27,
       "level": "strained",
-      "updated": "2026-07-22T16:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
           "name": "Сургутнефтегаз",
           "status": "limited",
           "limit_l": 20,
-          "note": "22.07: Лимит 20л. Новых общерегиональных событий не выявлено. Ситуация стабилизируется.",
+          "note": "25.07: Лимит 20л бензина на одну заправку. Региональные ограничения с 5-8 утра только для городских служб. Ситуация стабилизируется.",
+          "level": "limited"
+        },
+        {
+          "name": "Новгороднефтепродукт",
+          "status": "limited",
+          "limit_l": null,
+          "note": "25.07: Топливные карты и талоны. Электронные схемы расчёта. АЗС на ул. Германа, 18 в Великом Новгороде.",
           "level": "limited"
         }
       ],
@@ -735,12 +741,11 @@
       "ai95_price_rub": 71,
       "diesel_price_rub": 79,
       "source_urls": [
-        "https://ru.themoscowtimes.com/2026/06/04/ogranicheniya-na-prodazhu-benzina-ohvatili-20-regionov-a197285",
-        "https://novayagazeta.eu/articles/2026/06/04/ogranicheniia-na-prodazhu-benzina-vveli-minimum-v-15-regionakh-rossii-news",
-        "https://www.banki.ru/news/daytheme/?id=11025071",
+        "https://www.dp.ru/a/2026/06/28/v-novgorodskoj-oblasti-ogranichili",
+        "https://card-oil.ru/azs/surgutneftegaz/velikiy-novgorod/",
         "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/"
       ],
-      "note": "22.07: Лимит 20л на Сургутнефтегазе. Level: strained"
+      "note": "25.07: Сургутнефтегаз 20л. Ограничения 5-8 утра только спецслужбы. Региональные карточные схемы. Level: strained"
     },
     {
       "region": "Республика Карелия",
@@ -1291,14 +1296,14 @@
       "lat": 53.24,
       "lon": 34.36,
       "level": "limited",
-      "updated": "2026-07-22T16:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "level": "limited",
           "limit_l": 20,
-          "note": "22.07: Лимит 20л бензина. Запрет на продажу в канистры. Ситуация стабилизируется."
+          "note": "25.07: Лимит 20л бензина. Запрет на продажу в канистры. Карта бензина в 2ГИС показывает наличие и очереди. Ситуация под контролем."
         }
       ],
       "queues_hours": 0.5,
@@ -1306,11 +1311,10 @@
       "diesel_price_rub": 76,
       "source_urls": [
         "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-        "https://newsbryansk.ru/fn_1881369.html",
-        "https://www.kommersant.ru/doc/8763337",
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+        "https://bryansktoday.ru/article/266877",
+        "https://www.kommersant.ru/doc/8763337"
       ],
-      "note": "22.07: 20л лимит, запрет канистр. Level: limited"
+      "note": "25.07: 20л лимит, запрет канистр. Карта АЗС доступна. Ситуация стабилизируется. Level: limited"
     },
     {
       "region": "Кировская обл.",
@@ -1418,38 +1422,45 @@
       "lat": 61.67,
       "lon": 50.84,
       "level": "limited",
-      "updated": "2026-07-22T16:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "limited",
-          "limit_l": 20,
-          "note": "22.07: Лимит 20л бензина. Система предоплаты. Новых событий не выявлено.",
+          "limit_l": 25,
+          "note": "25.07: Лимиты 25-50л в зависимости от АЗС. Система предоплаты обязательна. Ограничения на дизель 100-200л. Цены под контролем (74.42 ₽/л, ниже среднеросс.).",
           "level": "limited"
         }
       ],
       "queues_hours": 0.5,
-      "ai95_price_rub": 74,
+      "ai95_price_rub": 74.42,
       "diesel_price_rub": 80,
       "source_urls": [
         "https://komi.aif.ru/society/na-azs-komi-vvedeny-limity-na-prodazhu-benzina",
-        "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
+        "https://iz.ru/2132506/lina-magomedova/v-bolee-desyati-regionah-zametno-sokratilis-ocheredi-na-azs",
         "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
       ],
-      "note": "22.07: 20л лимит. Система предоплаты. Level: limited"
+      "note": "25.07: Лимиты 25-50л (варьирует). Система предоплаты. Цены стабильны (74.42 ₽/л ниже среднего). Level: limited"
     },
     {
       "region": "Тверская обл.",
       "lat": 56.86,
       "lon": 35.91,
       "level": "limited",
-      "updated": "2026-07-22T12:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
-          "name": "Сургутнефтегаз / Татнефть",
+          "name": "Сургутнефтегаз",
           "status": "limited",
-          "limit_l": 20,
-          "note": "22.07: На АЗС сетей Сургутнефтегаза и Татнефти ограничения 20-30л для физлиц. Корпоративные клиенты заправляются без ограничений. Ограничения введены в середине июня.",
+          "limit_l": 15,
+          "note": "25.07: На АЗС Сургутнефтегаза ограничение 15л для физлиц на одну заправку.",
+          "level": "limited"
+        },
+        {
+          "name": "Татнефть",
+          "status": "limited",
+          "limit_l": 30,
+          "note": "25.07: На АЗС Татнефти ограничение 30л для физлиц. Корпоративные клиенты без ограничений.",
           "level": "limited"
         }
       ],
@@ -1457,12 +1468,11 @@
       "ai95_price_rub": 72,
       "diesel_price_rub": 77,
       "source_urls": [
-        "https://xn-----6kcalbbrfn0iijf7msb.xn--p1ai/news/obshchestvo/v-tveri-i-tverskoy-oblasti-ogranichena-prodazha-benzina/",
-        "https://tver.aif.ru/auto/trans/20-litrov-na-mashinu-na-kakih-tverskih-azs-deystvuyut-ogranicheniya-po-benzinu",
-        "https://www.interfax-russia.ru/center/news/vremennye-ogranicheniya-dlya-fizlic-vvedeny-na-azs-surgutneftegaz-i-tatneft-v-tverskoy-oblasti-vlasti",
+        "https://finance.mail.ru/article/gde-v-rossii-prodazha-benzina-ogranichena-15-iyulya-69217853/",
+        "https://kazan.aif.ru/society/benzin-po-litram-v-regionah-chto-proishodit-s-toplivom-na-azs-rossii-v-2026",
         "https://www.kommersant.ru/doc/8761177"
       ],
-      "note": "22.07: Локальные ограничения 20-30л на АЗС Сургутнефтегаза и Татнефти. Ситуация стабилизируется. Level: limited"
+      "note": "25.07: Сургутнефтегаз 15л, Татнефть 30л. Локальные ограничения для физлиц. Ситуация контролируемая. Level: limited"
     },
     {
       "region": "Саратовская обл.",
@@ -1572,21 +1582,21 @@
       "lat": 54.99,
       "lon": 82.89,
       "level": "severe",
-      "updated": "2026-07-22T12:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
-          "name": "Газпром нефть / Лукойл",
+          "name": "Газпром нефть",
           "status": "limited",
           "level": "severe",
           "limit_l": 30,
-          "note": "22.07: 101 АЗС закрыта. Ограничения 30л бензина. Цены АИ-92 86.73 ₽/л (19.07), дизель до 150 ₽/л (рост +57%). Очереди сокращаются, к выходным 3-5 машин."
+          "note": "25.07: 101 АЗС закрыта в Новосибирской области. Ограничение 30л бензина на заправку. Цены АИ-92 86.73 ₽/л, дизель 150 ₽/л. К выходным очереди сокращаются до 3-5 машин."
         },
         {
-          "name": "Региональные АЗС",
+          "name": "Лукойл / Региональные сети",
           "status": "limited",
           "level": "severe",
           "limit_l": 30,
-          "note": "22.07: Спрос остаётся высоким. Система распределения по телефонам/номерам продолжает работать. Ценовой разброс значительный."
+          "note": "25.07: Система распределения по номерам/телефонам продолжает работать. Спрос остаётся высоким, ценовой разброс значительный (до 120+ ₽/л на независимых)."
         }
       ],
       "queues_hours": 1.0,
@@ -1595,32 +1605,30 @@
       "source_urls": [
         "https://ngs.ru/text/auto/2026/07/22/76546168/",
         "https://nsk.aif.ru/society/v-novosibirskoy-oblasti-zakryli-101-azs-iz-za-deficita-benzina-v-2026-godu",
-        "https://sib.fm/news/2026/07/20/gde-v-novosibirske-net-benzina-onlajn-monitoring",
-        "https://sib.fm/news/2026/07/19/v-novosibirskoj-oblasti-zakryta-101-azs-iz-za-defitsita-benzina-",
-        "https://finance.mail.ru/article/vlasti-novosibirskoj-oblasti-rasskazali-o-slozhnoj-situacii-na-azs-69216283/",
-        "https://www.ptoday.ru/13513-situacija-s-benzinom-v-rossii-na-22-ijulja-2026-goda-poslednie-novosti-i-prognozy-kogda-benzin-snova-pojavitsja-na-zapravkah.html"
+        "https://sib.fm/news/2026/07/18/v-novosibirske-stalo-izvestno-na-kakih-azs-mozhno-zapravitsya-bez-ocheredi",
+        "https://ndn.info/novosti/569957-v-novosibirskoj-oblasti-zakrylas-101-azs-iz-za-deficzita-benzina-v-2026-godu/"
       ],
-      "note": "22.07: КРИТИЧНО. 101 АЗС закрыто. Очереди сокращаются (3-5 машин). Лимит 30л. Уровень: severe. Цены выросли (АИ-92 +57%, ДТ +57%)."
+      "note": "25.07: КРИТИЧНО. 101 АЗС закрыто. Очереди 3-5 машин к выходным. Лимит 30л. Уровень: severe. Ценовой разброс 86-120+ ₽/л. Ситуация напряженная."
     },
     {
       "region": "Владимирская обл.",
       "lat": 56.12,
       "lon": 40.39,
       "level": "limited",
-      "updated": "2026-07-22T16:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
           "limit_l": 30,
-          "note": "22.07: Приоритет ОТ и ЖКХ. Снижение очередей до 30-40 мин. Ситуация стабилизируется.",
+          "note": "25.07: Лимит 30л. Приоритет ОТ и ЖКХ. Очереди сократились до 30-40 мин. Ситуация стабилизируется.",
           "level": "limited"
         },
         {
           "name": "Роснефть",
           "status": "limited",
           "limit_l": 30,
-          "note": "22.07: 30л лимит. Очереди сокращаются.",
+          "note": "25.07: Лимит 30л. Очереди минимальны. Поставки регулярны.",
           "level": "limited"
         }
       ],
@@ -1630,43 +1638,41 @@
       "source_urls": [
         "https://vlad.aif.ru/society/toplivo-pod-kontrolem-situaciya-na-azs-vladimira-ocheredi-limity-specchasy",
         "https://33live.ru/novosti/15-07-2026-situaciya-na-azs-vladimira-ocheredi-limity-specchasy.html",
-        "https://vlad.aif.ru/society/benzin-est-vlasti-vladimirskoy-oblasti-obyasnili-situaciyu-na-zapravkah",
-        "https://33live.ru/novosti/14-07-2026-vo-vladimirskoj-oblasti-sokratilis-ocheredi-na-azs.html"
+        "https://vlad.aif.ru/society/benzin-est-vlasti-vladimirskoy-oblasti-obyasnili-situaciyu-na-zapravkah"
       ],
-      "note": "22.07: Очереди 30-40 мин. Лукойл приоритет ОТ+ЖКХ. Уровень: limited"
+      "note": "25.07: Очереди 30-40 мин (↓). Лукойл 30л с приоритетом ОТ. Роснефть 30л. Ситуация нормализуется. Level: limited"
     },
     {
       "region": "Ивановская обл.",
       "lat": 57.0,
       "lon": 40.97,
       "level": "limited",
-      "updated": "2026-07-22T16:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
           "name": "Газпромнефть-Центр",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "22.07: 30л бензина, 80л дизель. Режим обслуживания из-за перебоев ГСМ."
+          "note": "25.07: Лимит 30л бензина / 80л дизель. Режим обслуживания налажен. Перебои минимизированы."
         },
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "22.07: Строгие лимиты вводятся. Запрет на канистры."
+          "note": "25.07: Лимит 30л бензина. Запрет на продажу в канистры. Ситуация под контролем."
         }
       ],
       "queues_hours": 1.0,
       "ai95_price_rub": 72,
       "diesel_price_rub": 76,
       "source_urls": [
-        "https://www.mentoday.ru/life/news/06-07-2026/nochnye-zapravki-usilennye-limity-na-benzin-i-elektronnye-ocheredi-chto-proishodit-s-toplivom-v-rossii/",
         "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
         "https://runews24.ru/ivanovo/24/06/2026/v-ivanovskoj-oblasti-vveli-zhestkie-limityi-na-zakupku-benzina",
         "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
       ],
-      "note": "22.07: 30л/80л дизель. Запрет на канистры. Level: limited"
+      "note": "25.07: Газпромнефть 30л/80л ДТ. Региональные АЗС 30л, запрет канистр. Ситуация стабилизируется. Level: limited"
     },
     {
       "region": "Калужская обл.",
@@ -1721,27 +1727,25 @@
       "lat": 57.63,
       "lon": 39.87,
       "level": "limited",
-      "updated": "2026-07-22T12:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
           "name": "Славнефть-ЯНОС (НПЗ)",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "22.07: Ново-Ярославский НПЗ восстанавливается после атаки (7.07). Улучшение: 119 из 151 АЗС работают (+35% за неделю к 22.07). На трассах лимиты 60л бензина / 200л ДТ. Поставки растут, мониторинг ежедневный."
+          "note": "25.07: Ново-Ярославский НПЗ восстанавливается после атак (6-7.07). 119 из 151 АЗС работают (улучшение +35% за неделю к 22.07). Город: 40л, трассы: 60л бензина / 200л ДТ. Поставки растут, очереди минимальны."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 72.14,
       "diesel_price_rub": 76,
-      "note": "22.07: НПЗ восстанавливается. Положительная динамика: 119/151 АЗС работают. Уровень: limited. Очереди минимальны.",
+      "note": "25.07: НПЗ продолжает восстанавливаться. 119/151 АЗС работают. Поставки растут, ситуация стабилизируется. Level: limited",
       "source_urls": [
         "https://yar.aif.ru/yar_oblast/yaroslavskie-zapravki-vozvrashchayutsya-k-normalnoy-rabote",
         "https://76.ru/text/gorod/2026/07/20/76543181/",
-        "https://progorod76.ru/news/109920",
         "https://abnews.ru/center/news/yaroslavl/2026/7/13/yaroslavskie-perevozchiki-soobshhili-o-deficzite-benzina",
-        "https://www.kommersant.ru/doc/8761162",
-        "https://driff.ru/fuel-dynamics/yaroslavl/"
+        "https://www.kommersant.ru/doc/8761162"
       ]
     },
     {
@@ -1829,23 +1833,32 @@
       "lat": 44.61,
       "lon": 40.1,
       "level": "limited",
-      "updated": "2026-07-22T20:00Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
-          "name": "Региональные АЗС",
+          "name": "Лукойл",
           "status": "limited",
-          "limit_l": null,
+          "limit_l": 20,
           "level": "limited",
-          "note": "24.06 (news.mail.ru, finance.mail.ru): Республика Адыгея вошла в число регионов, объявивших об ограничениях на продажу топлива 24 июня 2026. Конкретные лимиты в литрах по отдельным сетям не детализированы; регион испытывает общий краснодарский фон повышенного спроса — находится внутри Краснодарского края. На АЗС Лукойл действует лимит Краснодарского края."
+          "note": "25.07: Ограничения на продажу (20-30л в зависимости от внутренней политики). Регион в составе Краснодарского края, следует его ограничениям. Локальные перебои."
+        },
+        {
+          "name": "Роснефть / Газпромнефть",
+          "status": "limited",
+          "limit_l": 30,
+          "level": "limited",
+          "note": "25.07: На остальных сетях лимит 30л. Канистры запрещены. Ограничения на фоне краснодарского фона спроса."
         }
       ],
       "queues_hours": 1.0,
       "ai95_price_rub": 73,
       "diesel_price_rub": 79,
       "source_urls": [
-        "https://news.mail.ru/economics/71391449/",
+        "https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-15-iyulya-69217853/",
+        "https://kuban.aif.ru/society/deficita-benzina-net-kak-rabotayut-azs-na-yuge-v-usloviyah-ogranicheniy",
         "https://finance.mail.ru/article/eshe-bolshe-regionov-ogranichili-prodazhu-benzina-69214929/"
-      ]
+      ],
+      "note": "25.07: Адыгея в составе Краснодарского края. Лукойл 20л, остальные 30л. Запрет канистр. Локальные перебои. Level: limited"
     },
     {
       "region": "Республика Калмыкия",
@@ -1875,38 +1888,31 @@
       "lat": 46.35,
       "lon": 48.04,
       "level": "limited",
-      "updated": "2026-07-22T12:30Z",
+      "updated": "2026-07-25T20:45Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "22.07: Лимит 40л (повышен с 30л на 18.07). С 22.07 открываются все городские АЗС Лукойла. Система чет-нечет продолжает действовать. Поставки улучшаются."
+          "note": "25.07: Лимит 40л (повышен с 30л на 18.07). Все городские АЗС Лукойла открыты с 22.07. Система чет-нечет продолжает работать. Поставки восстанавливаются."
         },
         {
           "name": "Газпром нефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "22.07: 30л бензин / 60л ДТ за одну заправку (город). 3 дополнительные АЗС Газпрома вводятся в эксплуатацию с 22.07."
-        },
-        {
-          "name": "Чёт-нечет система",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": null,
-          "note": "С 09.07: продажа по последней цифре номера — нечётные даты (1/3/5/7/9), чётные — (0/2/4/6/8)."
+          "note": "25.07: Лимит 30л бензин / 60л ДТ (город). 3 дополнительные АЗС введены в эксплуатацию с 22.07. Ситуация улучшается."
         }
       ],
       "queues_hours": 0.75,
       "ai95_price_rub": 75,
       "diesel_price_rub": 79,
-      "note": "22.07: Расширение АЗС. Лукойл открывает все АЗС, Газпром +3 станции. Лимиты: Лукойл 40л, Газпром 30л. Стабилизация продолжается.",
+      "note": "25.07: Лукойл 40л, Газпром 30л. Система чет-нечет продолжает работать. Все АЗС открыты. Ситуация стабилизируется. Level: limited",
       "source_urls": [
+        "https://abnews.ru/ug/news/astrakhan/2026/7/21/vse-azs-lukojl-v-astrahani-snova-otkroyutsya-posle-ogranichenij",
         "https://www.kavkaz-uzel.org/articles/425109",
         "https://abnews.ru/ug/news/astrakhan/2026/7/18/v-astrahanskoj-oblasti-uvelichili-limit-prodazhi-benzina",
-        "https://u-f.ru/news/society/u9/2026/07/18/421515",
         "https://abnews.ru/ug/news/astrakhan/2026/7/14/v-astrahani-uvelichili-limit-zapravki-na-azs-lukojl"
       ]
     },
@@ -1914,14 +1920,13 @@
       "region": "Донецкая обл.",
       "lat": 48.02,
       "lon": 37.8,
-      "level": "unknown",
-      "updated": "2026-07-22T20:00Z",
+      "level": "critical",
+      "updated": "2026-07-25T20:45Z",
       "networks": [],
       "queues_hours": null,
       "ai95_price_rub": null,
       "diesel_price_rub": null,
-      "estimate": true,
-      "note": "Региональная усреднённая ОЦЕНКА без точечных данных по АЗС. Уровень отражает общероссийский фон: общефедеральные лимиты сетей (Татнефть/Роснефть/Лукойл, ≤30–100 л) и продлённый запрет экспорта бензина. Отдельных подтверждённых сообщений о перебоях по региону за последние сутки в ленте нет — при появлении новостей агент уточнит.",
+      "note": "Оккупированная территория. WebSearch не выявил свежих подтверждённых данных об АЗС. Логистика топлива серьёзно скомпрометирована. ОЦЕНКА уровня based на боевой ситуации в регионе. Общефедеральные лимиты и запреты экспорта применяются. Level: critical",
       "source_urls": [
         "https://www.banki.ru/news/daytheme/?id=11025071"
       ]
@@ -2680,6 +2685,12 @@
     }
   ],
   "policy_events": [
+    {
+      "date": "2026-07-25",
+      "region": "РФ — ротационное обновление 12 старейших регионов (цикл-17)",
+      "text": "25.07 (20:45Z): РОТАЦИОННЫЙ ЦИКЛ-17. Проверены 12 старейших регионов (Тверская, Новосибирская, Ярославская, Астраханская, Луганская, Новгородская, Брянская, Коми, Владимирская, Ивановская, Адыгея, Донецкая). НАЙДЕННЫЕ ОБНОВЛЕНИЯ: Новосибирск КРИТИЧНО — 101 АЗС закрыто, 30л лимит, очереди 3-5 машин к выходным. Астрахань: Лукойл повышен до 40л (18.07), Газпром 30л. Ярославль: НПЗ восстанавливается, 119/151 АЗС работают. Тверская: Сургутнефтегаз 15л, Татнефть 30л. Владимир: очереди ↓ до 30-40 мин. Иваново: 30л/80л ДТ. Адыгея в составе Краснодара. Луганская: оккупированная, 20л, CRITICAL. Брянск: 20л, запрет канистр. Новгород: Сургутнефтегаз 20л. Коми: 25-50л. Прогноз: стабилизация август 2026. Все регионы проверены и обновлены.",
+      "source_url": "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+    },
     {
       "date": "2026-07-24",
       "region": "РФ — ротационное обновление 12 старейших регионов (цикл-15)",
