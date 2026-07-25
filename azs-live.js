@@ -75,7 +75,13 @@
       .then(function (j) { return j ? j[id] : null; })
       .catch(function () { return null; });
   }
+  // ponytail: событие в Метрику и Vercel Analytics — воронка «Я тут» по факту отправки
+  function trackVote(status) {
+    try { if (window.ym) ym(110490245, "reachGoal", "azs_vote"); } catch (e) {}
+    try { if (window.va) va("event", { name: "azs_vote", status: String(status) }); } catch (e) {}
+  }
   function postVote(id, status) {
+    trackVote(status);
     return fetch(API, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ station_id: id, status: status, cid: cid() })
