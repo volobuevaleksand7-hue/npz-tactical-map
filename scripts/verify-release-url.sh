@@ -15,11 +15,14 @@ fetch() {
   local path=$1
   local destination=$2
 
-  if test -n "${VERCEL_DEPLOYMENT:-}"; then
-    # ponytail: скоуп задаётся переменной VERCEL_SCOPE (см. deploy.yml) — токен CI
-    # выдан на одну команду. Флаг --scope сюда не годится: vercel curl пробрасывает
-    # нераспознанные флаги в сам curl, и тот падает на "option --scope: is unknown".
-    vercel curl "$path" --deployment "$VERCEL_DEPLOYMENT" -- --silent --show-error > "$destination"
+  # ponytail: на Pro превью-деплои закрыты Vercel Authentication, поэтому ходим
+  # обычным curl с bypass-заголовком. vercel curl не годится: он пробрасывает
+  # нераспознанные флаги (в т.ч. --scope) в сам curl, а без --scope падает на
+  # том, что CI-токен выдан на одну команду.
+  if test -n "${VERCEL_BYPASS_SECRET:-}"; then
+    curl --fail --silent --show-error --location \
+      -H "x-vercel-protection-bypass: $VERCEL_BYPASS_SECRET" \
+      "$base_url$path" > "$destination"
   else
     curl --fail --silent --show-error --location "$base_url$path" > "$destination"
   fi
