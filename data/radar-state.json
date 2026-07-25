@@ -131,16 +131,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1784984797,
-      "source_text": "25.07.2026 14:59 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла\n\n25.07.2026 16:06 МСК\nОстрогожский район Лискинский район Воронежская область Опасность по БПЛА"
+      "source_text": "25.07.2026 16:06 МСК\nОстрогожский район Лискинский район Воронежская область Опасность по БПЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -309,8 +309,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1785001836,
-      "source_text": "25.07.2026 20:50 МСК\nОт Ачуево до Славянск на Кубани тревога по БПЛА"
+      "last_event_ts": 1785002451,
+      "source_text": "25.07.2026 21:00 МСК\nГеленджик и близлежащие Краснодарский край Работа ПВО по БПЛА Меры безопасности"
     },
     "Севастополь": {
       "bpla": false,
@@ -988,18 +988,18 @@
       "lon": 38.06646,
       "region": "Краснодарский край",
       "bpla": true,
-      "bplaDim": true,
+      "bplaDim": false,
       "uab": false,
       "uabDim": false,
       "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1785001174,
-      "source_text": "25.07.2026 20:39 МСК\nГеленджик и близлежащие Краснодарский край Опасность по БПЛА"
+      "last_event_ts": 1785002451,
+      "source_text": "25.07.2026 21:00 МСК\nГеленджик и близлежащие Краснодарский край Работа ПВО по БПЛА Меры безопасности"
     },
     {
       "key": "кировское|донецкая народная республика",
@@ -1400,26 +1400,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1784992740,
       "source_text": "25.07.2026 18:19 МСК\nСоветский район и далее через Азовское море на Керченский полуостров тревога по БПЛА. Очень много"
-    },
-    {
-      "key": "белгород|белгородская область",
-      "name": "Белгород",
-      "lat": 50.5955595,
-      "lon": 36.5873394,
-      "region": "Белгородская область",
-      "bpla": true,
-      "bplaDim": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1784980776,
-      "source_text": "25.07.2026 14:59 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла"
     },
     {
       "key": "мещовский район|калужская область",
@@ -2003,26 +1983,6 @@
     }
   ],
   "districts": {
-    "RUS.7.4_1": {
-      "gid_2": "RUS.7.4_1",
-      "name_ru": "Белгородский район",
-      "region_ru": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1784980776,
-      "source_text": "25.07.2026 14:59 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла"
-    },
     "RUS.8.23_1": {
       "gid_2": "RUS.8.23_1",
       "name_ru": "Стародубский район",
@@ -2380,6 +2340,14 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 75885,
+      "text": "Геленджик и близлежащие\nКраснодарский край\nРабота ПВО по БПЛА\nМеры безопасности",
+      "ts": 1785002451,
+      "time_label": "25.07.2026 21:00 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 249444,
       "text": "Новороссийск ещё БПЛА на подлёте",
@@ -3011,14 +2979,6 @@
       "time_label": "25.07.2026 17:52 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 74809,
-      "text": "Брянская область, Курская область - опасность по БПЛА. Ещё летят от гг.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1784991141,
-      "time_label": "25.07.2026 17:52 МСК",
-      "source_id": "locatorru",
-      "source_label": "locatorru"
     }
   ],
   "sources": [
@@ -3028,14 +2988,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1785002185,
-  "last_event_at": "2026-07-25T17:56:25Z",
-  "fetched_at": "2026-07-25T18:00:03.128890Z",
+  "timestamp": 1785002451,
+  "last_event_at": "2026-07-25T18:00:51Z",
+  "fetched_at": "2026-07-25T18:10:02.492985Z",
   "poll_interval_sec": 7,
   "meta": {
-    "generated_at": "2026-07-25T18:00:03.128890Z",
-    "source_age_seconds": 218,
-    "city_count": 75,
+    "generated_at": "2026-07-25T18:10:02.492985Z",
+    "source_age_seconds": 551,
+    "city_count": 74,
     "region_count": 29,
     "feed_count": 80
   }
