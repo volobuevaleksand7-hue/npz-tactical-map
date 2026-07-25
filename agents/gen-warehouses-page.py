@@ -271,9 +271,10 @@ def build():
       <p class="lead-p">Ударами беспилотников поражено <strong>{len(hits)}</strong> из них — {ops_txt}; пожар подтверждён на {len(burned)}. {"Подтверждённых ударов по складам Ozon в открытых источниках на " + rus(UPDATED) + " нет." if "ozon" not in ops else ""} Потери площадей оцениваются примерно в <strong>{LOST_M2 // 1000} тыс. м²</strong> — около <strong>{share:.0f}%</strong> складских мощностей Wildberries.</p>
 
       <div class="link-grid">
+        <a class="link-card" href="/sgorel-sklad-wildberries-chto-delat"><div class="lc-h">🧾 Товар или заказ был на складе — что делать</div><div class="lc-d">Пошагово покупателю и продавцу</div></a>
         <a class="link-card" href="/ataki-na-sklady-wildberries-hronika"><div class="lc-h">🗓 Хроника ударов по датам</div><div class="lc-d">Все эпизоды по складам Wildberries (ВБ)</div></a>
         <a class="link-card" href="/kompensacii-wildberries-posle-udara"><div class="lc-h">💸 Компенсации после удара</div><div class="lc-d">Выплаты продавцам и покупателям</div></a>
-        <a class="link-card" href="/karta-bpla"><div class="lc-h">📡 Живая карта БПЛА</div><div class="lc-d">Удары и активность в реальном времени</div></a>
+        <a class="link-card" href="/karta-skladov-wildberries"><div class="lc-h">🗺 Карта складов ВБ и Озон</div><div class="lc-d">Все объекты и поражённые на карте</div></a>
       </div>
 
       <h2 class="section-h"><span class="ico">🔥</span> Какие склады поражены</h2>
@@ -313,6 +314,8 @@ def build():
         <a class="link-card" href="/ataki-na-sklady-wildberries-hronika"><div class="lc-h">🗓 Хроника ударов по складам</div><div class="lc-d">Все эпизоды по датам и регионам</div></a>
         <a class="link-card" href="/udar-po-skladam-wildberries"><div class="lc-h">📦 Разбор эпизода 18 июля</div><div class="lc-d">Что известно об ударе и версии сторон</div></a>
         <a class="link-card" href="/kompensacii-wildberries-posle-udara"><div class="lc-h">💸 Компенсации Wildberries</div><div class="lc-d">Выплаты семьям, продавцам, покупателям</div></a>
+        <a class="link-card" href="/udar-sklad-wildberries-peterburg"><div class="lc-h">🏭 Удары 24 июля: Петербург и Ленобласть</div><div class="lc-d">Новосаратовка, Шушары, Уткина Заводь</div></a>
+        <a class="link-card" href="/karta-skladov-wildberries"><div class="lc-h">🗺 Карта складов Wildberries и Ozon</div><div class="lc-d">Сеть и поражённые объекты на карте</div></a>
         <a class="link-card" href="/karta-bpla"><div class="lc-h">📡 Карта БПЛА</div><div class="lc-d">Удары и активность беспилотников</div></a>
         <a class="link-card" href="/attacks"><div class="lc-h">💥 Хроника ударов</div><div class="lc-d">История ударов по объектам</div></a>
         <a class="link-card" href="/news"><div class="lc-h">📰 Сводки</div><div class="lc-d">Ежедневный архив обстановки</div></a>
