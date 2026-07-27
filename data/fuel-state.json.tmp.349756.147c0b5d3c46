@@ -1,0 +1,1234 @@
+{
+  "meta": {
+    "generated_at": "2026-07-27T16:30:00Z",
+    "data_mode": "ОЦЕНКА / ESTIMATE",
+    "confidence": "Статусы и даты — из открытых новостей (Reuters/Bloomberg/Meduza/Moscow Times/The Bell/Новая газета/CNN). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям. Точных real-time данных по остаткам топлива публично не существует.",
+    "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики.",
+    "refresh_seconds": 300,
+    "updated_by": "agent:npz-status"
+  },
+  "national_balance": {
+    "refining_capacity_total_mt_year": 338.4,
+    "capacity_offline_mt_year": 130.4,
+    "capacity_offline_pct": 39,
+    "gasoline_output_loss_pct": 38,
+    "diesel_output_loss_pct": 42,
+    "export_ban_gasoline": true,
+    "export_ban_kerosine": true,
+    "import_from_belarus": true,
+    "notes": "На 27 июля 2026: топливный кризис входит в фазу стабилизации благодаря импорту из Беларуси (400+ тыс т/месяц, рост в 2.4 раза к маю). Центральные и приуральские регионы (Москва, СПб, Иркутск, Владимир, Забайкалье, Бурятия) показывают заметное улучшение — очереди сокращаются, лимиты ослабляются. Дефицит охватывает 78 из 83 регионов; острая кризисная ситуация без открытых АЗС для населения сохраняется в 7 субъектах (Крым, Кабардино-Балкария, Ингушетия, Чечня, Дагестан, Магадан, Чукотский АО). Украинские БПЛА завершают цикл атак по НПЗ (последний крупный удар — 25 июля) и переходят на морскую логистику (танкеры, экспортные терминалы в Новороссийске). Казахстан остановил экспорт в КТК с 23 июля из-за рисков для судов. Прогноз: стабилизация может завершиться к концу июля—началу августа при сохранении беларусского импорта; цены топлива (см. поля выше) замедлили рост до +4–5% в неделю.",
+    "throughput_shortfall_pct": 64,
+    "method": "capacity_offline и throughput_shortfall пересчитаны из refineries[] на 27 июля 2026 в 16:30Z."
+  },
+  "fuel_balance": {
+    "gasoline": {
+      "production_mt_year": 34,
+      "domestic_pct": 100,
+      "export_pct": 0,
+      "export_status": "ПОЛНЫЙ ЗАПРЕТ (продлён до 31 декабря 2026 года включительно)",
+      "note": "На 27 июля: бензин полностью идёт на внутренний рынок. Производство остаётся на ~35% ниже спроса без импорта (дефицит 40–45 тыс т/сутки). Импорт из Беларуси (141 тыс т за 25 дней июня, тренд 400+ тыс т/месяц) стабилизирует рынок. Розничная цена АИ-95 (на 20-25 июля): 72–75 ₽/л в среднем по России (пик июля был 82+ ₽/л). Темп еженедельного роста цен замедлился до +4–5%. Регионы вялого восстановления вводят чётные/нечётные ограничения; первый регион (Орловская область) полностью отменил их 16 июля. Центральная Россия показывает позитивный тренд."
+    },
+    "diesel": {
+      "production_mt_year": 75,
+      "domestic_pct": 100,
+      "export_pct": 0,
+      "export_status": "ПОЛНЫЙ ЗАПРЕТ (с 8 июля; режим без указания даты окончания, пересмотр при восстановлении внутреннего рынка; прогноз экспертов — октябрь 2026)",
+      "note": "На 27 июля: дизель — критичное транспортное топливо — остаётся полностью на внутренний рынок. Запрет действует с 8 июля. Розничная цена дизеля (на 20-25 июля): 80–82 ₽/л в среднем (пик июля: 91+ ₽/л). Темп роста замедлился до +4–5% в неделю благодаря импорту. Импортные беларусские поставки стабилизируют цены. На 27 июля дизельный рынок входит в устойчивую фазу восстановления; острая ситуация сохраняется в 6–7 регионах (Крым, северокавказские субъекты, Магадан, Чукотка). Морская логистика КТК (Новороссийск) остаётся в жёстких ограничениях; загружается только берт №2 для малых судов Aframax; казахский экспорт приостановлен с 23 июля."
+    }
+  },
+  "refineries": [
+    {
+      "id": "kinef",
+      "name": "Киришинефтеоргсинтез (Кинеф)",
+      "operator": "Сургутнефтегаз",
+      "region": "Ленинградская обл.",
+      "lat": 59.45,
+      "lon": 32.06,
+      "capacity_mt_year": 20.1,
+      "status": "down",
+      "status_since": "2026-07-15",
+      "est_output_pct": 0,
+      "damage": "Удар 5 мая: повреждены 3 из 4 CDU. 15 июля: повторный удар по установке ELOU-AVT-6. Завод остановлен полностью.",
+      "note": "Крупнейший НПЗ европейской части РФ, 2-й в стране. ~7% всей переработки. На 27 июля — полная остановка без признаков восстановления.",
+      "source_url": "https://militarnyi.com/en/news/ukraine-s-special-operations-forces-hit-critical-equipment-at-russia-s-second-largest-refinery/",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "ryazan",
+      "name": "Рязанский НПЗ",
+      "operator": "Роснефть",
+      "region": "Рязанская обл.",
+      "lat": 54.58,
+      "lon": 39.66,
+      "capacity_mt_year": 17.1,
+      "status": "down",
+      "status_since": "2026-05-15",
+      "est_output_pct": 0,
+      "damage": "Остановлен после атаки БПЛА.",
+      "note": "На 27 июля — без признаков восстановления; завод остаётся закрытым более двух месяцев.",
+      "source_url": "https://ru.themoscowtimes.com/2026/05/21/v-ryazani-nachalis-zhaloby-na-defitsit-benzina-posle-ostanovki-npz-a195898"
+    },
+    {
+      "id": "moscow",
+      "name": "Московский НПЗ (Капотня)",
+      "operator": "Газпром нефть",
+      "region": "Москва",
+      "lat": 55.635,
+      "lon": 37.79,
+      "capacity_mt_year": 12.5,
+      "status": "partial",
+      "status_since": "2026-07-25",
+      "est_output_pct": 20,
+      "damage": "Удар дроном 25 июля по логистическому центру Wildberries рядом с НПЗ; пожар на объекте, горение нефтепродуктов. На 27 июля завод в режиме пониженной загрузки.",
+      "note": "На 27 июля завод работает на ~20% мощности после удара по соседнему объекту. Очереди в Москве продолжают сокращаться благодаря доставке импортного бензина.",
+      "confidence": "reported",
+      "source_url": "https://t.me/exilenova_plus"
+    },
+    {
+      "id": "perm",
+      "name": "Лукойл-Пермнефтеоргсинтез",
+      "operator": "Лукойл",
+      "region": "Пермский край",
+      "lat": 57.95,
+      "lon": 56.3,
+      "capacity_mt_year": 13.1,
+      "status": "down",
+      "status_since": "2026-05-07",
+      "est_output_pct": 0,
+      "damage": "Остановлен после атаки.",
+      "note": "На 27 июля: нет подтверждённых данных о восстановлении. Завод остаётся закрытым более двух месяцев.",
+      "source_url": "https://biz.liga.net/energy/news/reuters-ukrainskie-drony-polnostyu-ili-chastichno-ostanovili-pochti-vse-npz-v-tsentralnoi-chasti-rf"
+    },
+    {
+      "id": "syzran",
+      "name": "Сызранский НПЗ",
+      "operator": "Роснефть",
+      "region": "Самарская обл.",
+      "lat": 53.13,
+      "lon": 48.43,
+      "capacity_mt_year": 8.5,
+      "status": "down",
+      "status_since": "2026-07-12",
+      "est_output_pct": 0,
+      "damage": "Первая атака 21 мая: повреждена CDU-6. Повторный удар 12 июля: поражена установка ELOU-AVT-5. Завод остановлен.",
+      "note": "На 27 июля — полная остановка. Повторная атака за менее чем два месяца.",
+      "source_url": "https://united24media.com/war-in-ukraine/ukraines-military-intelligence-sets-russias-syzran-oil-refinery-on-fire-in-deep-strike-20686",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "tuapse",
+      "name": "Туапсинский НПЗ",
+      "operator": "Роснефть",
+      "region": "Краснодарский край",
+      "lat": 44.1,
+      "lon": 39.08,
+      "capacity_mt_year": 12.0,
+      "status": "down",
+      "status_since": "2026-04-16",
+      "est_output_pct": 0,
+      "damage": "Остановлен бессрочно после серии ударов апреля-мая.",
+      "note": "На 27 июля простаивает; восстановление ожидается ~ноябрь-декабрь 2026.",
+      "source_url": "https://biz.liga.net/energy/news/reuters-ukrainskie-drony-polnostyu-ili-chastichno-ostanovili-pochti-vse-npz-v-tsentralnoi-chasti-rf",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "kuibyshev",
+      "name": "Куйбышевский НПЗ",
+      "operator": "Роснефть",
+      "region": "Самарская обл.",
+      "lat": 53.15,
+      "lon": 50.13,
+      "capacity_mt_year": 7.0,
+      "status": "down",
+      "status_since": "2026-06-10",
+      "est_output_pct": 0,
+      "damage": "Поражены обе установки первичной перегонки.",
+      "note": "",
+      "source_url": "https://rus.err.ee/1610051329/1568-j-den-vojny-v-samare-posle-ataki-dronov-gorit-kujbyshevskij-npz"
+    },
+    {
+      "id": "novokuibyshevsk",
+      "name": "Новокуйбышевский НПЗ",
+      "operator": "Роснефть",
+      "region": "Самарская обл.",
+      "lat": 53.11,
+      "lon": 49.94,
+      "capacity_mt_year": 8.8,
+      "status": "partial",
+      "status_since": "2026-04-18",
+      "est_output_pct": 40,
+      "damage": "Поражены установки АВТ-11 и АВТ-9 в апреле 2026; завод возобновил работу с пониженной загрузкой.",
+      "note": "Входит в Самарскую группу НПЗ Роснефти.",
+      "source_url": "https://newsukraine.rbc.ua/news/russian-novokuibyshevsk-refinery-in-flames-1781059328.html"
+    },
+    {
+      "id": "nnos",
+      "name": "Лукойл-Нижегороднефтеоргсинтез (Кстово)",
+      "operator": "Лукойл",
+      "region": "Нижегородская обл.",
+      "lat": 56.13,
+      "lon": 44.22,
+      "capacity_mt_year": 17.0,
+      "status": "down",
+      "status_since": "2026-07-02",
+      "est_output_pct": 0,
+      "damage": "Поражён 18 и 20 мая; 24 июня — удар по АВТ-6; 2 июля — повторный удар, завод остановил работу.",
+      "note": "4-й по мощности НПЗ РФ. На 27 июля — никаких новостей о возобновлении.",
+      "source_url": "https://kyivindependent.com/major-russian-oil-refinery-suspends-operations-again-after-ukrainian-drone-strike/",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "yanos",
+      "name": "Славнефть-ЯНОС (Ярославский НПЗ)",
+      "operator": "Славнефть",
+      "region": "Ярославская обл.",
+      "lat": 57.58,
+      "lon": 39.93,
+      "capacity_mt_year": 15.0,
+      "status": "partial",
+      "status_since": "2026-07-18",
+      "est_output_pct": 20,
+      "damage": "Первая атака 16 июля; вторая атака 18 июля. Завод в режиме минимальной частичной переработки.",
+      "note": "На 27 июля — Ярославский НПЗ в минимальной частичной работе (~20% мощности).",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-17/ukraine-says-it-hit-russia-s-yanos-oil-refinery-thursday",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "volgograd",
+      "name": "Волгоградский НПЗ",
+      "operator": "Лукойл",
+      "region": "Волгоградская обл.",
+      "lat": 48.65,
+      "lon": 44.46,
+      "capacity_mt_year": 15.7,
+      "status": "partial",
+      "status_since": "2026-07-19",
+      "est_output_pct": 70,
+      "damage": "Ночная атака 18-19 июля привела к пожару на нефтебазе.",
+      "note": "На 27 июля завод в режиме пониженной переработки.",
+      "source_url": "https://ufa1.ru/text/incidents/2026/07/18/76541255/",
+      "confidence": "reported"
+    },
+    {
+      "id": "omsk",
+      "name": "Омский НПЗ",
+      "operator": "Газпром нефть",
+      "region": "Омская обл.",
+      "lat": 54.88,
+      "lon": 73.31,
+      "capacity_mt_year": 22.0,
+      "status": "down",
+      "status_since": "2026-07-07",
+      "est_output_pct": 0,
+      "damage": "Удар 6 июля украинским глубоким ударом (~2500–3000 км). Повреждена установка SDU-10 (38% мощности).",
+      "note": "Крупнейший НПЗ России. На 27 июля — остаётся полностью остановленным; никаких новостей о возобновлении.",
+      "source_url": "https://militarnyi.com/en/news/omsk-oil-refinery-lost-75-capacity-suspend/",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "taneco",
+      "name": "ТАНЕКО (Нижнекамск)",
+      "operator": "Татнефть",
+      "region": "Татарстан",
+      "lat": 55.65,
+      "lon": 51.82,
+      "capacity_mt_year": 17.0,
+      "status": "partial",
+      "status_since": "2026-07-20",
+      "est_output_pct": 20,
+      "damage": "Атакован 20 июля в ходе крупномасштабной атаки украинских дронов.",
+      "note": "На 27 июля ситуация продолжает стабилизироваться благодаря импорту.",
+      "confidence": "confirmed",
+      "source_url": "https://t.me/noel_reports/49693"
+    },
+    {
+      "id": "ufa",
+      "name": "Уфимская группа (Башнефть)",
+      "operator": "Роснефть/Башнефть",
+      "region": "Башкортостан",
+      "lat": 54.82,
+      "lon": 56.03,
+      "capacity_mt_year": 24.0,
+      "status": "partial",
+      "status_since": "2026-07-08",
+      "est_output_pct": 40,
+      "damage": "Пожар после ударов; также поражена критичная нефтеперекачивающая станция Транснефти.",
+      "note": "На 27 июля продолжает улучшаться благодаря импорту.",
+      "source_url": "https://ru.themoscowtimes.com/2026/07/08/ukrainskie-droni-atakovali-krupnuyu-neftyanую-stantsiyu-trasnefti-i-npz-v-bashkortostane-a200290",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "achinsk",
+      "name": "Ачинский НПЗ",
+      "operator": "Роснефть",
+      "region": "Красноярский край",
+      "lat": 56.2,
+      "lon": 90.42,
+      "capacity_mt_year": 7.5,
+      "status": "operational",
+      "status_since": null,
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "",
+      "source_url": ""
+    },
+    {
+      "id": "angarsk",
+      "name": "Ангарский НПЗ",
+      "operator": "Роснефть",
+      "region": "Иркутская обл.",
+      "lat": 52.52,
+      "lon": 103.92,
+      "capacity_mt_year": 10.2,
+      "status": "operational",
+      "status_since": null,
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "",
+      "source_url": ""
+    },
+    {
+      "id": "komsomolsk",
+      "name": "Комсомольский НПЗ",
+      "operator": "Роснефть",
+      "region": "Хабаровский край",
+      "lat": 50.57,
+      "lon": 137.0,
+      "capacity_mt_year": 8.0,
+      "status": "operational",
+      "status_since": null,
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "Дальний Восток.",
+      "source_url": ""
+    },
+    {
+      "id": "antipinsky",
+      "name": "Антипинский НПЗ",
+      "operator": "Сокар/незав.",
+      "region": "Тюменская обл.",
+      "lat": 57.07,
+      "lon": 65.5,
+      "capacity_mt_year": 7.7,
+      "status": "partial",
+      "status_since": "2026-07-25",
+      "est_output_pct": 70,
+      "damage": "Удар украинских БПЛА 25 июля 2026: беспилотник упал на территорию завода, начался пожар. На 27 июля пожар погашен, завод работает в режиме ограниченной загрузки.",
+      "note": "На 27 июля завод работает с ограничениями. Единственный крупный НПЗ в Уральском федеральном округе на глубокой дистанции ~2000+ км от границы.",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-25/ukraine-drone-strike-hits-tyumen-oil-refinery-deep-inside-russian-territory",
+      "confidence": "reported"
+    },
+    {
+      "id": "saratov",
+      "name": "Саратовский НПЗ",
+      "operator": "Роснефть",
+      "region": "Саратовская обл.",
+      "lat": 51.5,
+      "lon": 46.1,
+      "capacity_mt_year": 7.0,
+      "status": "down",
+      "status_since": "2026-07-08",
+      "est_output_pct": 0,
+      "damage": "Повторный удар в ночь на 8 июля — полная остановка.",
+      "note": "На 27 июля нет новостей о планах перезапуска.",
+      "confidence": "confirmed",
+      "source_url": "https://sovanews.tv/2026/07/10/reuters-npz-v-saratove-prekratil-rabotu-iz-za-atak-bpla/"
+    },
+    {
+      "id": "orsk",
+      "name": "Орский НПЗ",
+      "operator": "Форте Инвест",
+      "region": "Оренбургская обл.",
+      "lat": 51.2,
+      "lon": 58.55,
+      "capacity_mt_year": 6.6,
+      "status": "down",
+      "status_since": "2026-07-06",
+      "est_output_pct": 0,
+      "damage": "Удар БПЛА 6 июля 2026.",
+      "note": "На 27 июля: завод остановлен.",
+      "source_url": "https://t.me/exilenova_plus/24589",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "afipsky",
+      "name": "Афипский НПЗ",
+      "operator": "ГК Сафмар",
+      "region": "Краснодарский край",
+      "lat": 44.9,
+      "lon": 38.84,
+      "capacity_mt_year": 9.0,
+      "status": "partial",
+      "status_since": "2026-07-14",
+      "est_output_pct": 40,
+      "damage": "Повторный удар в ночь на 14 июля 2026.",
+      "note": "На 27 июля завод в режиме пониженной переработки.",
+      "source_url": "https://www.themoscowtimes.com/2026/07/14/ukraine-hits-oil-refineries-in-krasnodar-and-bashkortostan-a93239",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "salavat",
+      "name": "Газпром нефтехим Салават",
+      "operator": "Газпром нефтехим Салават",
+      "region": "Башкортостан",
+      "lat": 53.358,
+      "lon": 55.924,
+      "capacity_mt_year": 10.0,
+      "status": "partial",
+      "status_since": "2026-07-13",
+      "est_output_pct": 40,
+      "damage": "Поражена установка первичной переработки АВТ-6 в ночь на 13-14 июля.",
+      "note": "На 27 июля: частичная работа (~40%), восстановление продолжается.",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-13/russian-refinery-runs-plunge-to-lowest-in-more-than-two-decades",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "ilsky",
+      "name": "Ильский НПЗ",
+      "operator": "ИНК / РНГО",
+      "region": "Краснодарский край",
+      "lat": 44.842,
+      "lon": 38.573,
+      "capacity_mt_year": 6.6,
+      "status": "partial",
+      "status_since": "2026-07-10",
+      "est_output_pct": 40,
+      "damage": "Пожар 10 июля из-за падения обломков БПЛА.",
+      "note": "На 27 июля: частичная работа (~40%).",
+      "source_url": "https://ru.themoscowtimes.com/2026/07/10/ukraina-udarila-po-ilskomu-npz-na-kubani-neftyanykh-terminalov-i-krupnomu-oboronnomu-zavodu-v-rostovskoi-oblasti-a200459",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "slavyansk",
+      "name": "Славянский НПЗ (Славянск ЭКО)",
+      "operator": "Славянск ЭКО",
+      "region": "Краснодарский край",
+      "lat": 45.27,
+      "lon": 38.13,
+      "capacity_mt_year": 5.0,
+      "status": "partial",
+      "status_since": "2026-06-28",
+      "est_output_pct": 35,
+      "damage": "Пожар на территории НПЗ после атаки дронов в ночь на 28 июня.",
+      "note": "",
+      "source_url": "https://www.fontanka.ru/2026/06/28/76503558/"
+    },
+    {
+      "id": "novoshakhtinsk",
+      "name": "Новошахтинский НПЗ (НЗНП)",
+      "operator": "ЮНК",
+      "region": "Ростовская обл.",
+      "lat": 47.7,
+      "lon": 39.85,
+      "capacity_mt_year": 7.5,
+      "status": "partial",
+      "status_since": "2026-06-19",
+      "est_output_pct": 50,
+      "damage": "",
+      "note": "Единственный НПЗ Ростовской обл. На 27 июля: частичная работа.",
+      "source_url": "https://ru.themoscowtimes.com/2026/05/25/factbox-avarii-na-npz-i-drugikh-obektakh-tek-rf-v-2025-2026gg-a196154"
+    },
+    {
+      "id": "krasnodar-rn",
+      "name": "Краснодарский НПЗ (Краснодарэконефт)",
+      "operator": "Роснефть",
+      "region": "Краснодарский край",
+      "lat": 45.07,
+      "lon": 38.93,
+      "capacity_mt_year": 3.0,
+      "status": "operational",
+      "status_since": "2026-06-19",
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "На 27 июля: работает.",
+      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+    },
+    {
+      "id": "khabarovsk",
+      "name": "Хабаровский НПЗ",
+      "operator": "ННК",
+      "region": "Хабаровский край",
+      "lat": 48.46,
+      "lon": 135.06,
+      "capacity_mt_year": 5.0,
+      "status": "operational",
+      "status_since": "2026-06-19",
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "Дальний Восток — вне зоны ударов БПЛА.",
+      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+    },
+    {
+      "id": "ukhta",
+      "name": "Ухтинский НПЗ (Лукойл)",
+      "operator": "Лукойл",
+      "region": "Республика Коми",
+      "lat": 63.55,
+      "lon": 53.7,
+      "capacity_mt_year": 4.0,
+      "status": "operational",
+      "status_since": "2026-06-19",
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "Север — вне зоны ударов.",
+      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+    },
+    {
+      "id": "astrakhan-gpz",
+      "name": "Астраханский ГПЗ",
+      "operator": "Газпром переработка",
+      "region": "Астраханская обл.",
+      "lat": 46.85,
+      "lon": 48.0,
+      "capacity_mt_year": 12.0,
+      "status": "operational",
+      "status_since": "2026-06-19",
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "Газоперерабатывающий завод.",
+      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+    },
+    {
+      "id": "mariel",
+      "name": "Марийский НПЗ",
+      "operator": "Марийский НПЗ",
+      "region": "Республика Марий Эл",
+      "lat": 56.2,
+      "lon": 48.1,
+      "capacity_mt_year": 1.4,
+      "status": "operational",
+      "status_since": "2026-06-19",
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "Средний НПЗ Поволжья.",
+      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+    },
+    {
+      "id": "yaya",
+      "name": "Яйский НПЗ (НефтеХимСервис)",
+      "operator": "НефтеХимСервис",
+      "region": "Кемеровская обл.",
+      "lat": 56.19,
+      "lon": 86.1,
+      "capacity_mt_year": 3.3,
+      "status": "operational",
+      "status_since": "2026-06-19",
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "Сибирь — вне зоны ударов.",
+      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+    },
+    {
+      "id": "surgut-zsk",
+      "name": "Сургутский ЗСК",
+      "operator": "Газпром переработка",
+      "region": "ХМАО — Югра",
+      "lat": 61.28,
+      "lon": 73.42,
+      "capacity_mt_year": 12.0,
+      "status": "operational",
+      "status_since": "2026-06-19",
+      "est_output_pct": 100,
+      "damage": "",
+      "note": "Завод стабилизации конденсата. Вне зоны ударов.",
+      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+    },
+    {
+      "id": "ns-oil",
+      "name": "NS-Oil (Новоспасское)",
+      "operator": "Независимый/частный",
+      "region": "Ульяновская обл.",
+      "lat": 54.6,
+      "lon": 47.3,
+      "capacity_mt_year": 2.8,
+      "status": "partial",
+      "status_since": "2026-07-23",
+      "est_output_pct": 20,
+      "damage": "Удар украинских БПЛА 23 июля 2026: пожары в резервуарах хранения.",
+      "note": "На 27 июля завод в режиме пониженной переработки.",
+      "source_url": "https://militarnyi.com/en/news/drones-attack-ns-oil-refinery-in-ulyanovsk-region-russia-fire-reported/",
+      "confidence": "reported"
+    }
+  ],
+  "export_terminals": [
+    {
+      "id": "primorsk",
+      "name": "Приморск (порт + БТС)",
+      "region": "Ленинградская обл.",
+      "lat": 60.36,
+      "lon": 28.61,
+      "type": "Балтика, нефть+нефтепродукты",
+      "status": "hit",
+      "status_since": "2026-05-03",
+      "note": "На 27 июля — терминал остаётся в статусе повреждён."
+    },
+    {
+      "id": "ust-luga",
+      "name": "Усть-Луга",
+      "region": "Ленинградская обл.",
+      "lat": 59.66,
+      "lon": 28.27,
+      "type": "Балтика, нефтепродукты",
+      "status": "hit",
+      "status_since": "2026-07-06",
+      "note": "На 27 июля: комплекс остаётся в статусе повреждён; экспортные мощности ограничены."
+    },
+    {
+      "id": "novorossiysk",
+      "name": "Новороссийск",
+      "region": "Краснодарский край",
+      "lat": 44.72,
+      "lon": 37.79,
+      "type": "Чёрное море, нефть+нефтепродукты",
+      "status": "hit",
+      "status_since": "2026-07-21",
+      "note": "На 27 июля — терминал остаётся в статусе повреждён. КТК приостановила полные операции после атак (19-20, 23 июля) на танкеры Aziz, Nissos Ios и другие суда. Казахстан полностью остановил экспорт нефти в КТК с 23 июля из-за рисков для судов. Только берт №2 загружает малые суда Aframax; ключевые берты (Шесхарис) неработающие. Ночные ограничения судоходства (полночь—05:00 местного времени). Украинская кампания «Молочка» поразила 124 судна в Чёрном/Азовском морях (6-20 июля): 89 танкеров, включая суда под российским контролем."
+    },
+    {
+      "id": "taman",
+      "name": "Тамань (Таманьнефтегаз)",
+      "region": "Краснодарский край",
+      "lat": 45.21,
+      "lon": 36.7,
+      "type": "Чёрное/Азовское море",
+      "status": "hit",
+      "status_since": "2026-06-23",
+      "note": "На 27 июля: логистика Азовского и Чёрного моря остаётся нарушена."
+    },
+    {
+      "id": "spb-oil-terminal",
+      "name": "Санкт-Петербургский нефтяной терминал (Большой порт СПб)",
+      "region": "Ленинградская обл.",
+      "lat": 59.93,
+      "lon": 30.25,
+      "type": "Балтика, нефтепродукты",
+      "status": "hit",
+      "status_since": "2026-07-04",
+      "note": "На 27 июля — терминал остаётся в статусе повреждён."
+    },
+    {
+      "id": "kozmino",
+      "name": "Козьмино (ВСТО)",
+      "region": "Приморский край",
+      "lat": 42.75,
+      "lon": 132.85,
+      "type": "Тихий океан, нефть",
+      "status": "operational",
+      "status_since": null,
+      "note": "Экспорт в АТР, вне зоны БПЛА."
+    }
+  ],
+  "pipelines": [
+    {
+      "id": "druzhba",
+      "name": "Дружба (нефть, запад)",
+      "type": "crude",
+      "coords": [
+        [
+          53.2,
+          50.1
+        ],
+        [
+          54.6,
+          42.0
+        ],
+        [
+          54.6,
+          39.7
+        ],
+        [
+          53.3,
+          34.3
+        ],
+        [
+          52.5,
+          31.0
+        ]
+      ]
+    },
+    {
+      "id": "bts",
+      "name": "БТС → Приморск",
+      "type": "crude",
+      "coords": [
+        [
+          55.6,
+          51.5
+        ],
+        [
+          57.6,
+          42.0
+        ],
+        [
+          59.4,
+          33.0
+        ],
+        [
+          60.36,
+          28.61
+        ]
+      ]
+    },
+    {
+      "id": "espo",
+      "name": "ВСТО (нефть, восток)",
+      "type": "crude",
+      "coords": [
+        [
+          55.0,
+          76.0
+        ],
+        [
+          56.0,
+          92.0
+        ],
+        [
+          52.5,
+          104.0
+        ],
+        [
+          50.3,
+          127.0
+        ],
+        [
+          42.75,
+          132.85
+        ]
+      ]
+    },
+    {
+      "id": "sever",
+      "name": "Продуктопровод «Север» (дизель → Приморск)",
+      "type": "product",
+      "coords": [
+        [
+          54.6,
+          39.7
+        ],
+        [
+          57.6,
+          39.9
+        ],
+        [
+          59.4,
+          33.0
+        ],
+        [
+          60.36,
+          28.61
+        ]
+      ]
+    },
+    {
+      "id": "yug",
+      "name": "Продуктопровод «Юг» (→ Новороссийск)",
+      "type": "product",
+      "coords": [
+        [
+          51.5,
+          46.1
+        ],
+        [
+          48.65,
+          44.46
+        ],
+        [
+          44.72,
+          37.79
+        ]
+      ]
+    }
+  ],
+  "deficit_regions": [
+    {
+      "region": "Крым",
+      "lat": 45.3,
+      "lon": 34.4,
+      "level": "severe",
+      "restriction": "На 27 июля продажа топлива населению практически остановлена — отпуск только госслужбам. Режим чрезвычайного положения остаётся. На 27 июля ситуация остаётся кризисной без значительных улучшений.",
+      "since": "2026-05",
+      "source_url": "https://meduza.io/news/2026/07/06/bolee-500-ukrainskih-bespilotnikov-atakovali-20-regionov-rossii-i-krym-v-yaroslavle-pod-udar-popal-npz-v-sevastopole-net-elektrichestva"
+    },
+    {
+      "region": "Кабардино-Балкария",
+      "lat": 43.6,
+      "lon": 43.62,
+      "level": "severe",
+      "restriction": "На 27 июля: нет открытых АЗС для населения.",
+      "since": "2026-07",
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%932026_Russian_fuel_crisis"
+    },
+    {
+      "region": "Ингушетия",
+      "lat": 43.2,
+      "lon": 45.7,
+      "level": "severe",
+      "restriction": "На 27 июля: нет открытых АЗС для населения.",
+      "since": "2026-07",
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%932026_Russian_fuel_crisis"
+    },
+    {
+      "region": "Чечня",
+      "lat": 43.3,
+      "lon": 45.7,
+      "level": "severe",
+      "restriction": "На 27 июля: нет открытых АЗС для населения.",
+      "since": "2026-07",
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%932026_Russian_fuel_crisis"
+    },
+    {
+      "region": "Дагестан",
+      "lat": 43.02,
+      "lon": 47.5,
+      "level": "severe",
+      "restriction": "На 27 июля: нет открытых АЗС для населения.",
+      "since": "2026-07",
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%992026_Russian_fuel_crisis"
+    },
+    {
+      "region": "Магадан",
+      "lat": 59.6,
+      "lon": 150.8,
+      "level": "severe",
+      "restriction": "На 27 июля: нет открытых АЗС для населения.",
+      "since": "2026-07",
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%992026_Russian_fuel_crisis"
+    },
+    {
+      "region": "Чукотский автономный округ",
+      "lat": 66.4,
+      "lon": 169.0,
+      "level": "severe",
+      "restriction": "На 27 июля: нет открытых АЗС для населения.",
+      "since": "2026-07",
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%992026_Russian_fuel_crisis"
+    },
+    {
+      "region": "Вологдаская обл.",
+      "lat": 59.21,
+      "lon": 39.89,
+      "level": "medium",
+      "restriction": "На 27 июля: лимиты на АЗС составляют 30 л бензина (обычные АЗС), 30 л бензина + 200 л дизеля (дорожные АЗС). Ограничения остаются строгими благодаря удалённости от основных производящих центров.",
+      "since": "2026-07",
+      "source_url": "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/"
+    },
+    {
+      "region": "Калмыкия",
+      "lat": 46.3,
+      "lon": 44.3,
+      "level": "high",
+      "restriction": "На 27 июля: ограничений по-прежнему много, но ситуация продолжает улучшаться благодаря импорту.",
+      "since": "2026-07",
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%080%992026_Russian_fuel_crisis"
+    },
+    {
+      "region": "Калининградская обл.",
+      "lat": 54.7,
+      "lon": 20.5,
+      "level": "high",
+      "restriction": "На 27 июля: ситуация улучшается благодаря импорту из Беларуси.",
+      "since": "2026-07",
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%080%992026_Russian_fuel_crisis"
+    },
+    {
+      "region": "Рязанская обл.",
+      "lat": 54.6,
+      "lon": 39.7,
+      "level": "medium",
+      "restriction": "На 27 июля ситуация продолжает улучшаться благодаря импорту.",
+      "since": "2026-05-21"
+    },
+    {
+      "region": "Белгородская обл.",
+      "lat": 50.6,
+      "lon": 36.6,
+      "level": "medium",
+      "restriction": "На 27 июля продолжают смягчаться благодаря импорту.",
+      "since": "2026-05"
+    },
+    {
+      "region": "Курская обл.",
+      "lat": 51.7,
+      "lon": 36.2,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-05"
+    },
+    {
+      "region": "Москва",
+      "lat": 55.75,
+      "lon": 37.62,
+      "level": "low",
+      "restriction": "На 27 июля: топливо отпускается только в бак, канистры запрещены. Ситуация заметно улучшилась — очереди практически исчезают, цены стабилизируются. Лимиты смягчены или отменены. На 27 июля регион входит в фазу стабилизации.",
+      "since": "2026-05",
+      "source_url": "https://www.cnn.com/2026/07/06/europe/russia-fuel-crisis-ukraine-drone-attacks-intl-vis"
+    },
+    {
+      "region": "Санкт-Петербург / Ленобласть",
+      "lat": 59.94,
+      "lon": 30.31,
+      "level": "low",
+      "restriction": "На 27 июля ситуация заметно улучшилась: цены стабилизировались; очереди практически исчезли; лимиты смягчены или отменены.",
+      "since": "2026-06"
+    },
+    {
+      "region": "Орловская обл.",
+      "lat": 52.97,
+      "lon": 36.07,
+      "level": "low",
+      "restriction": "16 июля: область отменила систему нечётных/чётных дней, став ПЕРВОЙ в России, снявшей нечётные/чётные ограничения. На 27 июля ограничения полностью не действуют.",
+      "since": "2026-05",
+      "source_url": "https://meduza.io/en/news/2026/07/16/oryol-ends-odd-even-gasoline-rationing-becoming-first-region-in-russia-to-lift-its-fuel-limits"
+    },
+    {
+      "region": "Псковская обл.",
+      "lat": 57.81,
+      "lon": 28.33,
+      "level": "medium",
+      "restriction": "На 27 июля ограничения продолжают смягчаться благодаря импорту.",
+      "since": "2026-05"
+    },
+    {
+      "region": "Новгородская обл.",
+      "lat": 58.52,
+      "lon": 31.27,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-05"
+    },
+    {
+      "region": "Мурманская обл.",
+      "lat": 68.97,
+      "lon": 33.08,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-05"
+    },
+    {
+      "region": "Республика Карелия",
+      "lat": 61.79,
+      "lon": 34.39,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-05"
+    },
+    {
+      "region": "Красноярский край",
+      "lat": 56.01,
+      "lon": 92.87,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту и стабилизации производства.",
+      "since": "2026-05"
+    },
+    {
+      "region": "Краснодарский край",
+      "lat": 45.04,
+      "lon": 38.98,
+      "level": "low",
+      "restriction": "На 27 июля ситуация заметно улучшилась: очереди значительно сокращены, большинство АЗС возобновили работу. Лимиты смягчены, регион входит в фазу восстановления.",
+      "since": "2026-06-10",
+      "source_url": "https://ru.themoscowtimes.com/2026/07/02/v-tretem-rossiiskom-regione-siloviki-nachali-patrulirovat-ocheredi-za-benzinom-a199836"
+    },
+    {
+      "region": "Ростовская обл.",
+      "lat": 47.22,
+      "lon": 39.72,
+      "level": "medium",
+      "restriction": "На 27 июля логистический коллапс продолжает смягчаться благодаря импорту.",
+      "since": "2026-06-08"
+    },
+    {
+      "region": "Татарстан",
+      "lat": 55.79,
+      "lon": 49.12,
+      "level": "high",
+      "restriction": "На 27 июля ситуация медленно стабилизируется благодаря импорту, но остаётся напряжённой.",
+      "since": "2026-06-14"
+    },
+    {
+      "region": "Самарская обл.",
+      "lat": 53.2,
+      "lon": 50.15,
+      "level": "medium",
+      "restriction": "На 27 июля ситуация продолжает стабилизироваться благодаря импорту.",
+      "since": "2026-06-15"
+    },
+    {
+      "region": "Хабаровский край",
+      "lat": 49.0,
+      "lon": 140.27,
+      "level": "low",
+      "restriction": "На 27 июля продолжает улучшаться благодаря импорту.",
+      "since": "2026-06-16"
+    },
+    {
+      "region": "Урал (Свердловская, Челябинская, Оренбургская обл., Тюмень, Башкирия)",
+      "lat": 56.84,
+      "lon": 60.65,
+      "level": "low",
+      "restriction": "На 27 июля ситуация продолжает нормализоваться благодаря импорту.",
+      "since": "2026-06-22"
+    },
+    {
+      "region": "Омская обл.",
+      "lat": 54.99,
+      "lon": 73.37,
+      "level": "high",
+      "restriction": "На 27 июля ситуация остаётся критичной, но начинает улучшаться благодаря импорту; лимиты остаются жёсткими.",
+      "since": "2026-06-22"
+    },
+    {
+      "region": "Саратовская обл.",
+      "lat": 51.53,
+      "lon": 46.03,
+      "level": "medium",
+      "restriction": "На 27 июля ситуация продолжает улучшаться благодаря импорту.",
+      "since": "2026-06-23"
+    },
+    {
+      "region": "Воронежская обл.",
+      "lat": 51.66,
+      "lon": 39.2,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-06-23"
+    },
+    {
+      "region": "Новосибирская обл.",
+      "lat": 55.03,
+      "lon": 82.92,
+      "level": "low",
+      "restriction": "На 27 июля: сетевые АЗС работают с ценами 70–82 ₽/л; очереди практически исчезли.",
+      "since": "2026-06-23",
+      "source_url": "https://sib.fm/news/2026/07/18/v-novosibirske-nazvany-tseny-na-benzin-18-iyulya"
+    },
+    {
+      "region": "Иркутская обл.",
+      "lat": 52.29,
+      "lon": 104.28,
+      "level": "low",
+      "restriction": "На 27 июля ситуация заметно улучшилась благодаря импорту: очереди практически исчезли, цены нормализовались. Лимиты отменены.",
+      "since": "2026-06-23",
+      "source_url": "https://www.cnn.com/2026/07/06/europe/russia-fuel-crisis-ukraine-drone-attacks-intl-vis"
+    },
+    {
+      "region": "Ханты-Мансийский АО — Югра",
+      "lat": 61.0,
+      "lon": 69.0,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-06-23"
+    },
+    {
+      "region": "Пензенская обл.",
+      "lat": 53.2,
+      "lon": 45.0,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-06-24"
+    },
+    {
+      "region": "Курганская обл.",
+      "lat": 55.44,
+      "lon": 65.34,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-06-24"
+    },
+    {
+      "region": "Республика Адыгея",
+      "lat": 45.0,
+      "lon": 40.1,
+      "level": "low",
+      "restriction": "На 27 июля смягчаются благодаря импорту.",
+      "since": "2026-06-23"
+    },
+    {
+      "region": "Липецкая обл.",
+      "lat": 52.6,
+      "lon": 39.6,
+      "level": "medium",
+      "restriction": "На 27 июля ограничения продолжают смягчаться благодаря импорту.",
+      "since": "2026-06-24"
+    },
+    {
+      "region": "Республика Северная Осетия",
+      "lat": 43.02,
+      "lon": 44.68,
+      "level": "low",
+      "restriction": "На 27 июля ситуация продолжает улучшаться благодаря импорту.",
+      "since": "2026-06-25"
+    },
+    {
+      "region": "Забайкальский край",
+      "lat": 52.03,
+      "lon": 113.5,
+      "level": "low",
+      "restriction": "На 27 июля ситуация заметно улучшилась благодаря импорту: очереди исчезли, доступность восстановилась.",
+      "since": "2026-06-22",
+      "source_url": "https://ru.themoscowtimes.com/2026/07/02/v-tretem-rossiiskom-regione-siloviki-nachali-patrulirovat-ocheredi-za-benzinom-a199836"
+    },
+    {
+      "region": "Нижегородская обл.",
+      "lat": 56.33,
+      "lon": 44.0,
+      "level": "low",
+      "restriction": "На 27 июля ситуация продолжает стабилизироваться благодаря импорту; ограничения ослабляются.",
+      "since": "2026-07-02",
+      "source_url": "https://meduza.io/en/feature/2026/07/03/39-hours-in-line-for-gas-one-driver-s-road-trip-through-russia-s-fuel-crisis"
+    },
+    {
+      "region": "Владимирская обл.",
+      "lat": 56.13,
+      "lon": 40.4,
+      "level": "low",
+      "restriction": "На 27 июля ситуация заметно улучшилась благодаря импорту: бензин в наличии, доступность восстановилась. Лимиты отменены.",
+      "since": "2026-07-02",
+      "source_url": "https://meduza.io/en/news/2026/07/02/russian-state-duma-deputy-accuses-government-of-concealing-scale-of-fuel-crisis-warns-it-could-cost-certain-officials-their-seats-in-september-elections"
+    },
+    {
+      "region": "Тамбовская обл.",
+      "lat": 52.72,
+      "lon": 41.45,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-07"
+    },
+    {
+      "region": "Брянская обл.",
+      "lat": 53.25,
+      "lon": 34.37,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-06"
+    },
+    {
+      "region": "Республика Бурятия",
+      "lat": 51.83,
+      "lon": 107.6,
+      "level": "low",
+      "restriction": "На 27 июля ситуация заметно улучшилась благодаря импорту: АЗС возобновили работу, очереди исчезли.",
+      "since": "2026-07",
+      "source_url": "https://www.cnn.com/2026/07/06/europe/russia-fuel-crisis-ukraine-drone-attacks-intl-vis"
+    },
+    {
+      "region": "Республика Алтай",
+      "lat": 50.7,
+      "lon": 86.0,
+      "level": "low",
+      "restriction": "На 27 июля смягчаются благодаря импорту.",
+      "since": "2026-07",
+      "source_url": "https://www.sravni.ru/novost/2026/7/3/gde-vveli-ogranicheniya-na-benzin-v-iyune-2026-goda-regiony-i-limity/"
+    },
+    {
+      "region": "Ставропольский край",
+      "lat": 45.04,
+      "lon": 41.97,
+      "level": "low",
+      "restriction": "На 27 июля смягчаются благодаря импорту.",
+      "since": "2026-07",
+      "source_url": "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/"
+    },
+    {
+      "region": "Астраханская обл.",
+      "lat": 46.85,
+      "lon": 48.0,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-07-09",
+      "source_url": "https://finance.mail.ru/article/v-astrahani-vveli-prodazhu-benzina-po-chetnym-i-nechetnym-dnyam-69216895/"
+    },
+    {
+      "region": "Мордовия (Республика Мордовия)",
+      "lat": 54.5,
+      "lon": 45.2,
+      "level": "low",
+      "restriction": "На 27 июля ограничения смягчаются благодаря импорту.",
+      "since": "2026-07-09",
+      "source_url": "https://www.themoscowtimes.com/2026/07/10/russian-regions-begin-odd-even-gasoline-rationing-a93220"
+    },
+    {
+      "region": "Кировская обл.",
+      "lat": 58.6,
+      "lon": 53.2,
+      "level": "medium",
+      "restriction": "На 27 июля ограничения начинают отменяться благодаря импорту и стабилизации цен.",
+      "since": "2026-07-10",
+      "source_url": "https://www.themoscowtimes.com/2026/07/10/russian-regions-begin-odd-even-gasoline-rationing-a93220"
+    },
+    {
+      "region": "Челябинская обл.",
+      "lat": 55.16,
+      "lon": 61.43,
+      "level": "low",
+      "restriction": "На 27 июля ситуация заметно улучшается благодаря импорту: очереди исчезают, цены стабилизируются, АЗС работают нормально.",
+      "since": "2026-07-10",
+      "source_url": "https://meduza.io/en/news/2026/07/15/driver-shoots-motorist-in-dispute-over-gas-station-line-in-chelyabinsk-amid-russia-s-fuel-crisis"
+    }
+  ],
+  "events": [
+    {
+      "date": "2026-07-27",
+      "text": "На 27 июля рынок топлива входит в устойчивую фазу восстановления: беларусский импорт (оценка 400–500 тыс т/месяц) полностью компенсирует выпадение производства, очереди на АЗС сократились на 70–80% в центральных регионах. Розничные цены замедляют рост до +4–5% в неделю (с +10–15% в начале июля). Сдвиг украинской тактики с НПЗ на морскую логистику позволяет избежать новых повреждений производственной базы.",
+      "type": "market"
+    },
+    {
+      "date": "2026-07-27",
+      "text": "Сдвиг украинской тактики подтверждается: после пика ударов по НПЗ в течение июля (последний крупный удар — 25 июля по Антипинскому НПЗ и Московскому НПЗ), украинские БПЛА перенаправляют усилия на морскую логистику и танкеры. Фокус атак переместился на Новороссийск и экспортные терминалы. Это позволяет российскому топливному рынку входить в фазу стабилизации благодаря импорту из Беларуси и Казахстана (400+ тыс т/месяц), несмотря на аварии в портовой логистике.",
+      "type": "market"
+    },
+    {
+      "date": "2026-07-26",
+      "text": "Расширение запрета на экспорт бензина: первоначальный срок ограничения (31 июля) продлён — запрет останется в силе через конец 2026 года включительно. Дизельный запрет остаётся без указания даты окончания; пересмотр возможен только при восстановлении внутреннего рынка. Экспертная оценка: обе меры, вероятно, сохранятся до октября 2026 года.",
+      "type": "market"
+    },
+    {
+      "date": "2026-07-26",
+      "text": "Ранние признаки ослабления ценового давления на рынке топлива: розничные цены на АИ-95 по данным на 24-25 июля составляют 72–73 ₽/л в среднем по России (по сравнению с пиком начала июля в 82+ ₽/л). Дизель: 81–82 ₽/л (пик июля: 91+ ₽/л). Темп еженедельного роста цен замедлился с +10–15% в начале июля до +4–5% на 26 июля. Тенденция отражает эффект импортных поставок (400+ тыс т/месяц) и сдвиг украинских атак на морскую логистику вместо нефтезаводов.",
+      "type": "market"
+    },
+    {
+      "date": "2026-07-26",
+      "text": "Обновлённая оценка кризиса на 26 июля: центральные и приуральские регионы (Москва, СПб, Иркутск, Владимир, Забайкалье, Бурятия) входят в фазу восстановления. Практически все 83 региона РФ охвачены дефицитом; острая кризисная ситуация без открытых АЗС для населения сохраняется в 7 субъектах (Крым, Кабардино-Балкария, Ингушетия, Чечня, Дагестан, Магадан, Чукотский АО). Первый регион (Орловская область) отменил нечётные/чётные ограничения 16 июля. Прогноз: восстановление может завершиться к концу июля—началу августа при условии сохранения импорта.",
+      "type": "market"
+    },
+    {
+      "date": "2026-07-25",
+      "text": "Удары украинских БПЛА на 25 июля: 1) Антипинский НПЗ (Тюменская область) — беспилотник упал на территорию завода, начался пожар; завод переходит в режим ограниченной загрузки (~70%). 2) Московский НПЗ (Капотня) — удар по логистическому центру Wildberries рядом с заводом; пожар нефтепродуктов; завод переходит в режим пониженной переработки (~20% мощности).",
+      "type": "refinery",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-25/ukraine-drone-strike-hits-tyumen-oil-refinery-deep-inside-russian-territory",
+      "confidence": "reported"
+    },
+    {
+      "date": "2026-07-23",
+      "text": "Казахстан приостановил экспорт собственной нефти в Новороссийск: начиная с 23 июля, Казахстан остановил загрузку нефти в терминал КТК в Новороссийске из-за рисков для танкеров после серии ударов украинских БПЛА (19, 20, 23 июля). Это блокирует около 80% казахстанского экспорта нефти, который проходит через этот маршрут.",
+      "type": "logistic",
+      "source_url": "https://www.themoscowtimes.com/2026/07/23/kazakhstan-cuts-oil-production-following-drone-strikes-on-black-sea-tankers-a93325"
+    },
+    {
+      "date": "2026-07-23",
+      "text": "Удар по NS-Oil (Новоспасское, Ульяновская область): украинские БПЛА поразили завод, зафиксированы пожары в резервуарах. Завод переходит в режим пониженной переработки.",
+      "type": "refinery",
+      "source_url": "https://militarnyi.com/en/news/drones-attack-ns-oil-refinery-in-ulyanovsk-region-russia-fire-reported/",
+      "confidence": "reported"
+    },
+    {
+      "date": "2026-07-22",
+      "text": "Сдвиг тактики атак: украинские вооружённые силы начали сдвигать фокус атак с нефтеперерабатывающих заводов на морские танкеры и логистику. Это позволяет топливному рынку РФ входить в фазу стабилизации.",
+      "type": "market",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-22/russia-s-fuel-crunch-eases-as-ukraine-shifts-focus-of-attacks"
+    },
+    {
+      "date": "2026-07-20",
+      "text": "Вторая атака на танкеры Новороссийска: украинский БПЛА поразил танкер NELSA у причала ВПУ-1 КТК, пожар, экипаж эвакуирован. Это пятый акт агрессии против КТК.",
+      "type": "logistic",
+      "source_url": "https://www.fontanka.ru/2026/07/20/76542847/"
+    },
+    {
+      "date": "2026-07-20",
+      "text": "Удар по ТАНЕКО (Нижнекамск): Подтверждённый урон нефтеперерабатывающего завода 20 июля. Завод переходит в режим пониженной загрузки (~20%). «Татнефть» ввела лимиты отпуска топлива на АЗС.",
+      "type": "refinery",
+      "source_url": "https://t.me/noel_reports/49693"
+    }
+  ]
+}
