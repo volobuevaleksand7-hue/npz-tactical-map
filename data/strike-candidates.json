@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-26T23:20Z",
+ "generated_at": "2026-07-27T00:05Z",
  "data_mode": "СЛУХ / НЕПРОВЕРЕНО (вариант B)",
  "disclaimer": "Авто-детектор кандидатов в удары из ленты radar-map.ru. НЕ боевые данные, НЕ публикуется автоматически. Только для ручного/Hermes-подтверждения перед переносом в strikes.json.",
  "candidates": [
@@ -524,11 +524,12 @@
    "detail": "[Newsader] Виталий Портников: Впервые в истории россияне узнали, что такое война и угроза государственности",
    "source_url": "https://www.youtube.com/watch?v=CCOZnUq3vcQ",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "CCOZnUq3vcQ",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   }
  ]
 }
