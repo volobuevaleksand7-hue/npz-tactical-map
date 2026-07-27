@@ -64,6 +64,7 @@ CARDS = {
     "astrakhan-gpz": "astrahanskij-gpz",
     "salavat": "salavat-npz",
     "antipinsky": "antipinskij-npz",
+    "novoshakhtinsk": "novoshahtinskij-npz",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
