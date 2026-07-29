@@ -88,6 +88,14 @@ for reg in av.get("regions", []):
             elif cap and cap < 30:  # 30 л ≈ бак, 20 л — уже паёк
                 err("availability %s: level=calm при лимите %s л у сети %s" % (name, cap, nw.get("name")))
 
+# Запись региона, на которую не садится ни одна станция, — мёртвая: её статус не красит
+# ничего. Так «Севастополь» месяцами был limited впустую, пока севастопольские АЗС сидели
+# под «Республикой Крым» (в regions_map не было отдельного субъекта).
+st_regions = {norm_region(r) for r in regions_map}
+for reg in av.get("regions", []):
+    if norm_region(reg.get("region")) not in st_regions:
+        err("availability %s: нет ни одной станции с таким регионом в azs-stations.regions_map" % reg.get("region"))
+
 # Два датасета описывают одно и то же; расхождение на 2+ ступени — значит один из агентов врёт.
 fs_lvl = {norm_region(d.get("region")): (d.get("region"), d.get("level"))
           for d in load("fuel-state.json").get("deficit_regions", [])}
