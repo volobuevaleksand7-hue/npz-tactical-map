@@ -70,6 +70,7 @@ CARDS = {
     "khabarovsk": "habarovskij-npz",
     "ukhta": "uhtinskij-npz",
     "mariel": "marijskij-npz",
+    "yaya": "yajskij-npz",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
