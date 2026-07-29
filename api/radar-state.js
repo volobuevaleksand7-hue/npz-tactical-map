@@ -87,10 +87,14 @@ module.exports = async function handler(req, res) {
   const snapshotUrl = `https://${host}/data/radar-state.json`;
 
   try {
-    // Живой источник — но 5s хватает, а остаток бюджета Vercel-функции (10s) оставляем фолбэку.
-    const data = await fetchJson("https://radar-map.ru/api/state", 5000);
+    // 🔴 Заголовки Cache-Control задаются ЗДЕСЬ, по ветке. Раньше их глушил статический
+    // заголовок в vercel.json (s-maxage=10) — он перекрывает всё, что ставит функция, и
+    // ветвление было мёртвым кодом: edge ревалидировал раз в 10 с и на каждом промахе платил
+    // полный таймаут упавшего upstream (замер 29.07: MISS 6,2 с при лимите функции 10 с).
+    // 2,5 с хватает живому upstream с запасом; когда он флапает — быстрее уходим на снапшот.
+    const data = await fetchJson("https://radar-map.ru/api/state", 2500);
     res.setHeader("Content-Type", "application/json; charset=utf-8");
-    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=120");
+    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=600");
     res.setHeader("X-Radar-Src", "upstream");
     res.status(200).json(transform(data, false));
   } catch (error) {
@@ -99,7 +103,10 @@ module.exports = async function handler(req, res) {
     try {
       const snap = await fetchJson(snapshotUrl, 3000);
       res.setHeader("Content-Type", "application/json; charset=utf-8");
-      res.setHeader("Cache-Control", "s-maxage=30, stale-while-revalidate=120");
+      // Снапшот всё равно обновляется агентами раз в ~10 мин — держать его в edge 10 с не было
+      // смысла, только лишние промахи с полным таймаутом. 60 с + длинный SWR: пока upstream
+      // лежит, пользователь получает мгновенный ответ, а обновление идёт в фоне.
+      res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=600");
       res.setHeader("X-Radar-Src", "snapshot");
       res.status(200).json(transform(snap, true));
     } catch (fallbackError) {
