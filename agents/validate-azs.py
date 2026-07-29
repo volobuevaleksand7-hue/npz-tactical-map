@@ -96,6 +96,41 @@ for reg in av.get("regions", []):
     if norm_region(reg.get("region")) not in st_regions:
         err("availability %s: нет ни одной станции с таким регионом в azs-stations.regions_map" % reg.get("region"))
 
+# Сеть, закрытая и одновременно отпускающая топливо, — след склейки двух разных фактов.
+for reg in av.get("regions", []):
+    for nw in reg.get("networks", []):
+        if str(nw.get("status", "")).lower() == "closed" and nw.get("limit_l"):
+            err("availability %s: сеть %s — status=closed, но limit_l=%s" % (reg.get("region"), nw.get("name"), nw.get("limit_l")))
+
+# 🔴 У deficit_regions в fuel-state.json ШКАЛА СВОЯ — {low, medium, high, severe, critical}, она
+# красит регионы на вкладке «Россия» через loadColor(). Значение вне шкалы (напр. "limited" из
+# шкалы АЗС) не падает в ошибку — оно молча уходит в ветку по умолчанию, то есть в ЗЕЛЁНЫЙ
+# «норма». Ровно так Крым, честно переведённый в limited на вкладке АЗС, стал зелёным на карте.
+LOAD_SCALE = {"low", "medium", "high", "severe", "critical"}
+LOAD_ORD = {"low": 1, "medium": 2, "high": 3, "severe": 4, "critical": 5}
+fs = load("fuel-state.json")
+for d in fs.get("deficit_regions", []):
+    if d.get("level") not in LOAD_SCALE:
+        err("fuel-state %s: level=%r вне шкалы deficit_regions %s — loadColor() покрасит ЗЕЛЁНЫМ"
+            % (d.get("region"), d.get("level"), sorted(LOAD_SCALE)))
+
+# Запись, чьё имя не садится ни на один полигон карты, не красит ничего (тот же класс, что
+# мёртвые записи в fuel-availability). Джойн идёт через regKeys(): имя может содержать "/".
+poly = set()
+for fn in ("russia-regions-v2.geojson", "new-territories.geojson", "crimea-regions.geojson"):
+    fp = os.path.join(ROOT, "data", fn)
+    if not os.path.exists(fp):
+        continue
+    for feat in json.load(open(fp, encoding="utf-8")).get("features", []):
+        nm = (feat.get("properties") or {}).get("name")
+        if nm:
+            poly.add(norm_region(nm))
+REGION_ALIAS = {"ленобласть": "ленинградская", "питер": "санктпетербург"}  # как в app.js regKeys()
+for d in fs.get("deficit_regions", []):
+    keys = [REGION_ALIAS.get(norm_region(part), norm_region(part)) for part in str(d.get("region", "")).split("/")]
+    if not any(k in poly for k in keys):
+        err("fuel-state %s: имя не садится ни на один полигон карты — запись не красит ничего" % d.get("region"))
+
 # Два датасета описывают одно и то же; расхождение на 2+ ступени — значит один из агентов врёт.
 fs_lvl = {norm_region(d.get("region")): (d.get("region"), d.get("level"))
           for d in load("fuel-state.json").get("deficit_regions", [])}
