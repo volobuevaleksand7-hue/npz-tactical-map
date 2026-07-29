@@ -73,6 +73,7 @@ CARDS = {
     "yaya": "yajskij-npz",
     "surgut-zsk": "surgutskij-zsk",
     "krasnodar-rn": "krasnodarskij-npz",
+    "perm": "lukojl-permnefteorgsintez",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
