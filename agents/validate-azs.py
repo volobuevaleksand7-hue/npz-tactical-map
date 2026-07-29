@@ -96,6 +96,20 @@ for reg in av.get("regions", []):
     if norm_region(reg.get("region")) not in st_regions:
         err("availability %s: нет ни одной станции с таким регионом в azs-stations.regions_map" % reg.get("region"))
 
+# 🔴 Страж усыхания. Агент пишет fuel-availability.json ЦЕЛИКОМ через Write, и 27.07.2026
+# один проход молча срезал файл с 88 регионов до 13 — 6 тысяч станций на карте АЗС ушли в
+# серое «нет данных», и никто этого не заметил четверо суток. Меряем не число регионов
+# (оно скачет от переименований), а долю станций, которым запись региона вообще нашлась.
+covered = 0
+avail_keys = {norm_region(r.get("region")) for r in av.get("regions", [])}
+for row in st.get("stations", []):
+    if 0 <= row[4] < len(regions_map) and norm_region(regions_map[row[4]]) in avail_keys:
+        covered += 1
+total = len(st.get("stations", []))
+if total and covered / total < 0.90:
+    err("fuel-availability покрывает %d из %d станций (%.0f%%) — было 100%%; похоже, проход агента срезал регионы"
+        % (covered, total, 100.0 * covered / total))
+
 # Сеть, закрытая и одновременно отпускающая топливо, — след склейки двух разных фактов.
 for reg in av.get("regions", []):
     for nw in reg.get("networks", []):

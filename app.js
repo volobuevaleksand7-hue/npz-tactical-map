@@ -1433,6 +1433,15 @@
   // «Есть топливо» — честная OSINT-оценка: калм/перебои/лимиты считаем «есть», severe/critical/unknown — нет.
   function azsLevelHasFuel(lvl) { return lvl === "calm" || lvl === "strained" || lvl === "limited"; }
 
+  // Возвращает русскую дату записи региона, если она старше суток, иначе "" (свежее не подписываем).
+  function staleRegionDate(reg) {
+    var raw = reg && reg.updated;
+    if (!raw) return "";
+    var t = Date.parse(raw);
+    if (!t || (Date.now() - t) < 24 * 3600 * 1000) return "";
+    return rusDate(raw.slice(0, 10));
+  }
+
   function azsStationPopup(st, distKm) {
     var lvl = stationLevel(st), c = AZS_LVL[lvl] || AZS_UNKNOWN, lbl = (AZS_LBL[lvl] || "нет данных").toUpperCase();
     var reg = azsRegionEntry(st.region);
@@ -1447,6 +1456,10 @@
     if (reg) {
       if (reg.ai95_price_rub) html += '<div class="ap-row">АИ-95 ~' + esc(reg.ai95_price_rub) + ' ₽/л</div>';
       if (typeof reg.queues_hours === "number" && reg.queues_hours > 0) html += '<div class="ap-row">Очередь ~' + esc(reg.queues_hours) + ' ч</div>';
+      // Часть регионов обновляется ротацией раз в несколько дней. Молча показывать
+      // трёхдневную оценку как текущую — то же враньё, что и неверный цвет.
+      var upd = staleRegionDate(reg);
+      if (upd) html += '<div class="ap-row" style="opacity:.7">Данные по региону от ' + esc(upd) + '</div>';
     }
     var cm = nearestComments(st, 2);
     cm.forEach(function (q) { html += '<div class="ap-quote">«' + esc(q.quote || "") + '»</div>'; });
