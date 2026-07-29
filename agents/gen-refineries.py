@@ -69,6 +69,7 @@ CARDS = {
     "komsomolsk": "komsomolskij-npz",
     "khabarovsk": "habarovskij-npz",
     "ukhta": "uhtinskij-npz",
+    "mariel": "marijskij-npz",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
