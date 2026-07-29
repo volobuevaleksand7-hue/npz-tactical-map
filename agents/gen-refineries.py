@@ -65,6 +65,10 @@ CARDS = {
     "salavat": "salavat-npz",
     "antipinsky": "antipinskij-npz",
     "novoshakhtinsk": "novoshahtinskij-npz",
+    "achinsk": "achinskij-npz",
+    "komsomolsk": "komsomolskij-npz",
+    "khabarovsk": "habarovskij-npz",
+    "ukhta": "uhtinskij-npz",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
