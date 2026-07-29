@@ -76,6 +76,7 @@ CARDS = {
     "perm": "lukojl-permnefteorgsintez",
     "orsk": "orskij-npz",
     "slavyansk": "slavyanskij-npz",
+    "ns-oil": "ns-oil",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
