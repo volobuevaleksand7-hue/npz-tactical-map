@@ -71,6 +71,7 @@ CARDS = {
     "ukhta": "uhtinskij-npz",
     "mariel": "marijskij-npz",
     "yaya": "yajskij-npz",
+    "surgut-zsk": "surgutskij-zsk",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
