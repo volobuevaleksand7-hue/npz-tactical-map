@@ -72,6 +72,7 @@ CARDS = {
     "mariel": "marijskij-npz",
     "yaya": "yajskij-npz",
     "surgut-zsk": "surgutskij-zsk",
+    "krasnodar-rn": "krasnodarskij-npz",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
