@@ -75,6 +75,7 @@ CARDS = {
     "krasnodar-rn": "krasnodarskij-npz",
     "perm": "lukojl-permnefteorgsintez",
     "orsk": "orskij-npz",
+    "slavyansk": "slavyanskij-npz",
 }
 
 TAG = {"down": ("tag-down", "СТОП"), "partial": ("tag-partial", "ОГРАНИЧЕНО"),
