@@ -33,7 +33,15 @@ set -uo pipefail
 MSG="${1:?commit message required}"
 HB_KEYS="${2:-}"                          # optional space-separated heartbeat keys to stamp
 MARKER_RE='^(<<<<<<<|=======|>>>>>>>)'   # git conflict / stash markers
-EPHEMERAL=(data/last-sync.txt data/heartbeats.json)  # regenerated every run; safe to auto-resolve
+# Файлы, которые перезаписываются своей же рутиной каждые ~10 минут: конфликт по ним не несёт
+# информации, брать --theirs безопасно — следующий прогон всё равно перепишет файл целиком.
+# 🔴 30.07.2026: в списке были только last-sync и heartbeats, а конфликт пришёл по health.json,
+# radar-state.json и wave-state.json → git-sync делал ABORT → run-agent.sh честно откатывал
+# data/ целиком (защита от утечки забракованного файла) → вместе с браком улетала СВЕЖАЯ работа
+# соседних сборщиков. Итог: fuel-state, roads, grid-state и history-crimea простояли 16-35 часов,
+# а 3 удара за 30.07 (Пенза, Сарапул, Тамань) потерялись между сборщиком и архивом.
+# Держать список узким: сюда попадает только то, что регенерируется целиком и часто.
+EPHEMERAL=(data/last-sync.txt data/heartbeats.json data/health.json data/radar-state.json data/wave-state.json)
 
 # ---- 0. must be at repo root with a data/ dir -------------------------------
 [ -d data ] || { echo "git-sync: run from repo root (no data/ dir here)" >&2; exit 2; }
