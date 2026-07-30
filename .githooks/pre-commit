@@ -155,6 +155,24 @@ if echo "$staged" | grep -q '^data/fuel-voices\.json$' && [ "${ALLOW_VOICES_SHRI
   fi
 fi
 
+# ---- coverage guard: fuel-availability.json — регионы не должны пропадать ----
+# 27.07: агент отдал 13 регионов вместо 88 → 6131 АЗС посерели на 4 суток. 30.07 повторилось
+# (24 вместо 86): плохая версия упёрлась в конфликт и заклинила git-sync на 13 часов — rebase
+# встал на шаге 18/72, флот коммитил в пустоту. Промпт агента ОБЕЩАЕТ «покрытие не
+# уменьшается», но валидатор в цепочке не вызывается: обещание в тексте ≠ страж в конвейере.
+# НЕ блокируем (как fuel-voices, и ровно по той причине, что стоила 13 часов простоя): файл
+# едет в общем коммите git-sync вместе с радаром, exit 1 остановил бы публикацию целиком.
+# Логика доклейки — agents/guard-availability-coverage.py (есть --selfcheck).
+if echo "$staged" | grep -q '^data/fuel-availability\.json$' && [ "${ALLOW_COVERAGE_DROP:-}" != "1" ] \
+   && [ -f agents/guard-availability-coverage.py ] && command -v python3 >/dev/null 2>&1; then
+  _fa_msg="$(python3 agents/guard-availability-coverage.py 2>/dev/null || true)"
+  if [ -n "$_fa_msg" ]; then
+    git add data/fuel-availability.json
+    echo "pre-commit: $_fa_msg" >&2
+    echo "pre-commit: осознанное сокращение → ALLOW_COVERAGE_DROP=1." >&2
+  fi
+fi
+
 # ---- neutral-OSINT guard: вычистить пропаганду / укр-вербатим / офф-топик из strikes ----
 # Ловит ЛЮБОЙ коммит (newswatch, ручной, внешняя модель), т.к. core.hooksPath=.githooks.
 # Санитайзер идемпотентен и авто-перезакладывает очищенный файл — коммит не блокируется,
