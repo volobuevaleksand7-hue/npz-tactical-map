@@ -16,6 +16,7 @@
 Проверка (без сети):  ./.venv/bin/python agents/fetch-warehouses.py --check
 """
 import json
+import math
 import os
 import re
 import sys
@@ -104,6 +105,13 @@ CITY_ALIASES = {
 MARKETPLACE_RE = re.compile(r"wildberr|вайлдберр|\bozon\b|озон", re.I)
 FIRE_RE = re.compile(r"пожар|возгоран|горит|горел", re.I)
 
+# 🔴 Удар привязывается к складу по расстоянию, а не по названию города. По названию
+# удар 25.07 «Санкт-Петербург» (объекты на Московском шоссе, Пулково) пришился к складу
+# «Санкт-Петербург (Парголово)» — 13 км мимо, склад ложно числился поражённым.
+# Реальные пары удар↔склад укладываются в 1.6 км (геокодер бьёт по адресу склада,
+# координата удара — по описанию места), запас до 6 км — на грубый геокод промзон.
+MATCH_KM = 6.0
+
 # Справочные цифры для статьи — из публичных заявлений компаний, начало 2026.
 NETWORK = {
     "wb": {"complexes": 200, "area_m2": 5200000,
@@ -138,6 +146,7 @@ def marketplace_strikes():
         if city in out and str(s.get("date", "")) <= out[city]["date"]:
             continue
         out[city] = {
+            "city": str(s.get("city") or "").strip(),   # для подписи метки: capitalize() ломает «Санкт-Петербург»
             "date": str(s.get("date", "")),
             "damage": "burned" if FIRE_RE.search(blob) else "hit",
             "operator": "ozon" if re.search(r"\bozon\b|озон", blob, re.I) else "wb",
@@ -147,6 +156,29 @@ def marketplace_strikes():
             "lat": s.get("lat"), "lon": s.get("lon"),
         }
     return out
+
+
+def haversine_km(a, b):
+    lat1, lon1, lat2, lon2 = (math.radians(x) for x in (a[0], a[1], b[0], b[1]))
+    h = (math.sin((lat2 - lat1) / 2) ** 2
+         + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2)
+    return 2 * 6371.0 * math.asin(math.sqrt(h))
+
+
+def nearest_strike(op, ll, strikes):
+    """Ближайший удар того же оператора в пределах MATCH_KM -> ключ в strikes или None.
+
+    Оператор сверяется не для порядка: в Шушарах РФЦ Ozon стоит в 2 км от удара по складу
+    Wildberries — по одной геометрии поражение уехало бы не тому оператору.
+    """
+    best, best_km = None, MATCH_KM
+    for city, h in strikes.items():
+        if h["operator"] != op or h.get("lat") is None or h.get("lon") is None:
+            continue
+        km = haversine_km(ll, (h["lat"], h["lon"]))
+        if km <= best_km:
+            best, best_km = city, km
+    return best
 
 
 def load_cache():
@@ -183,7 +215,7 @@ def geocode(query, cache, offline=False):
 def build(offline=False):
     cache = load_cache()
     strikes = marketplace_strikes()      # расходуется по мере матчинга, остаток = склады вне списков
-    items, missing = [], []
+    items, missing, placed = [], [], set()
     for op, rows in (("wb", WB), ("ozon", OZON)):
         for name, region, addr in rows:
             # Nominatim часто не знает промзоны и логопарки по полному адресу — откатываемся
@@ -195,7 +227,14 @@ def build(offline=False):
             if not ll:
                 missing.append("%s / %s" % (op, name))
                 continue
-            hit = strikes.pop(norm_city(base), None)
+            city = nearest_strike(op, ll, strikes)
+            if city is None:
+                # у удара может не быть координат — геометрией такой не проверишь,
+                # для него остаётся прежняя сверка по названию города
+                c = norm_city(base)
+                if strikes.get(c, {}).get("lat") is None and c in strikes:
+                    city = c
+            hit = strikes.pop(city) if city else None
             it = {
                 "id": "%s-%s" % (op, name.lower().replace(" ", "-").replace("(", "").replace(")", "")),
                 "operator": op,
@@ -210,6 +249,7 @@ def build(offline=False):
                 it.update({"status": "hit", "date": hit["date"], "damage": hit["damage"],
                            "note": HIT_NOTES.get((op, norm_city(base)), hit["note"]),
                            "source_url": hit["source_url"]})
+                placed.add((city, hit["date"]))
             items.append(it)
 
     # Удар по складу, которого нет в курируемых списках (Новомосковск 23.07 приехал именно так).
@@ -218,7 +258,7 @@ def build(offline=False):
         items.append({
             "id": "%s-%s" % (hit["operator"], city.replace(" ", "-")),
             "operator": hit["operator"],
-            "name": city.capitalize(),
+            "name": hit["city"] or city.capitalize(),
             "region": hit["region"],
             "address": "",
             "type": "rc" if hit["operator"] == "wb" else "ffc",
@@ -227,26 +267,27 @@ def build(offline=False):
             "note": hit["note"], "source_url": hit["source_url"],
             "from_strike": True,      # не из справочника адресов — координата из записи удара
         })
+        placed.add((city, hit["date"]))
     if not offline:
         with open(CACHE, "w", encoding="utf8") as f:
             json.dump(cache, f, ensure_ascii=False, indent=1, sort_keys=True)
-    return items, missing
+    return items, missing, placed
 
 
 def main():
     offline = "--check" in sys.argv
-    items, missing = build(offline)
+    items, missing, placed = build(offline)
     hits = [i for i in items if i["status"] == "hit"]
     burned = [i for i in hits if i.get("damage") == "burned"]
 
     # Двусторонняя сверка со strikes.json: расхождение слоёв = ошибка сборки, а не warning.
     # Раньше guard был односторонним и печатал предупреждение — из-за этого удары по Воронежу
     # и Новомосковску молча не попали на слой, пока их не нашло ревью.
-    sk = marketplace_strikes()
-    layer = {(norm_city(i["name"].split("(")[0]), i.get("date", "")) for i in hits}
-    strike_set = {(c, h["date"]) for c, h in sk.items()}
-    only_layer = sorted(layer - strike_set)
-    only_strikes = sorted(strike_set - layer)
+    # Сверяем по удару, который реально сел на объект (placed), а не по названию склада:
+    # после матчинга по расстоянию город удара и имя склада могут не совпадать.
+    strike_set = {(c, h["date"]) for c, h in marketplace_strikes().items()}
+    only_layer = sorted(placed - strike_set)
+    only_strikes = sorted(strike_set - placed)
     if only_layer or only_strikes:
         if only_layer:
             print("ОШИБКА: поражение на слое без удара в strikes.json: %s" % only_layer)
@@ -298,6 +339,20 @@ def demo():
     for city in sk:
         assert city in names or True   # склады вне справочника добавляются из самого удара
     assert all(k[1] in names for k in HIT_NOTES), "уточнение указывает на несуществующий склад"
+
+    # 🔴 Регрессия 25.07: удар «Санкт-Петербург» (объекты на Московском шоссе, Пулково)
+    # садился на склад «Санкт-Петербург (Парголово)» просто по совпадению города — 13 км мимо.
+    spb = {"санкт-петербург": {"operator": "wb", "date": "2026-07-25", "lat": 59.83, "lon": 30.4}}
+    pargolovo, moskovskoe_sh = (59.93873, 30.31623), (59.79, 30.42)
+    assert haversine_km(pargolovo, (59.83, 30.4)) > MATCH_KM
+    assert nearest_strike("wb", pargolovo, dict(spb)) is None, "удар пришит к чужому складу по городу"
+    assert nearest_strike("wb", moskovskoe_sh, dict(spb)) == "санкт-петербург", "близкий склад не найден"
+    # тот же удар, но склад чужого оператора в 2 км (РФЦ Ozon в Шушарах) — не наш
+    assert nearest_strike("ozon", (59.81166, 30.38085), dict(spb)) is None
+
+    # реальные пары из strikes.json обязаны находиться геометрией
+    assert nearest_strike("wb", (51.6606, 39.20059), dict(sk)) == "воронеж"
+    assert nearest_strike("wb", (55.37859, 37.58046), dict(sk)) == "коледино"
     print("demo OK")
 
 
