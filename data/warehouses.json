@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-07-30T07:40:17Z",
+  "generated_at": "2026-07-30T07:51:52Z",
   "scope": "Крупные распределительные центры Wildberries и фулфилмент-центры Ozon. Отметка поражения — только удары БПЛА и ракет.",
   "geocoder": "Nominatim / OpenStreetMap (ODbL)",
   "network": {
@@ -17,9 +17,9 @@
    }
   },
   "counts": {
-   "total": 53,
-   "hit": 16,
-   "burned": 12
+   "total": 52,
+   "hit": 15,
+   "burned": 11
   }
  },
  "warehouses": [
@@ -445,7 +445,14 @@
    "damage": "burned",
    "note": "логистический центр Wildberries",
    "source_url": "https://t.me/exilenova_plus",
-   "from_strike": true
+   "from_strike": true,
+   "merged_strikes": [
+    {
+     "city": "Санкт-Петербург",
+     "date": "2026-07-25",
+     "source_url": "https://eadaily.com/ru/news/2026/07/25/v-sankt-peterburge-potushen-voznikshiy-posle-udara-dronov-pozhar"
+    }
+   ]
   },
   {
    "id": "wb-новосибирск",
@@ -516,22 +523,6 @@
    "lat": 53.36994,
    "lon": 50.35365,
    "status": "ok"
-  },
-  {
-   "id": "wb-санкт-петербург",
-   "operator": "wb",
-   "name": "Санкт-Петербург",
-   "region": "Санкт-Петербург",
-   "address": "",
-   "type": "rc",
-   "lat": 59.83,
-   "lon": 30.4,
-   "status": "hit",
-   "date": "2026-07-25",
-   "damage": "burned",
-   "note": "Удар дронов по складской инфраструктуре и объектам агропромышленности",
-   "source_url": "https://eadaily.com/ru/news/2026/07/25/v-sankt-peterburge-potushen-voznikshiy-posle-udara-dronov-pozhar",
-   "from_strike": true
   },
   {
    "id": "wb-санкт-петербург-парголово",
