@@ -96,6 +96,17 @@ for reg in av.get("regions", []):
     if norm_region(reg.get("region")) not in st_regions:
         err("availability %s: нет ни одной станции с таким регионом в azs-stations.regions_map" % reg.get("region"))
 
+# Две записи об одном субъекте (напр. «Свердловская обл.» и «Свердловская область»):
+# app.js берёт ПЕРВУЮ по нормализованному имени, вторая живёт мёртвым грузом и никогда не
+# обновляется. Так доклейка покрытия плодила дубли, пока сверяла имена по строке.
+seen_reg = {}
+for reg in av.get("regions", []):
+    k = norm_region(reg.get("region"))
+    if k in seen_reg:
+        err("availability: две записи об одном регионе — %r и %r" % (seen_reg[k], reg.get("region")))
+    else:
+        seen_reg[k] = reg.get("region")
+
 # 🔴 Страж усыхания. Агент пишет fuel-availability.json ЦЕЛИКОМ через Write, и 27.07.2026
 # один проход молча срезал файл с 88 регионов до 13 — 6 тысяч станций на карте АЗС ушли в
 # серое «нет данных», и никто этого не заметил четверо суток. Меряем не число регионов
