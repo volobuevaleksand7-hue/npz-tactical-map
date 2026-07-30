@@ -36,6 +36,30 @@ def _read(cmd):
     return json.loads(r.stdout) if r.returncode == 0 and r.stdout.strip() else None
 
 
+def fix_worktree():
+    """Вызывается в crontab СРАЗУ после агента, до git add. Сравнивает рабочий файл
+    с последней закоммиченной версией и доклеивает то, что агент не перенёс.
+    Так урезанный файл не доживает даже до индекса."""
+    head = _read(["git", "show", f"HEAD:{PATH}"])
+    try:
+        cur = json.load(open(PATH, encoding="utf-8"))
+    except Exception:
+        return 0                      # агент не дописал файл — не наше дело, поймает JSON-guard
+    if not head:
+        return 0
+    old, new = head.get("regions", []), cur.get("regions", [])
+    if len(old) <= 5 or len(new) >= int(len(old) * KEEP_RATIO):
+        return 0
+    merged, restored = merge_regions(old, new)
+    cur["regions"] = merged
+    with open(PATH, "w", encoding="utf-8") as f:
+        json.dump(cur, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    print(f"coverage-fix: агент отдал {len(new)} регионов из {len(old)} — "
+          f"доклеено {len(restored)}, итого {len(merged)}.")
+    return 0
+
+
 def main():
     head = _read(["git", "show", f"HEAD:{PATH}"])
     staged = _read(["git", "show", f":{PATH}"])
@@ -80,5 +104,7 @@ def _selfcheck():
 if __name__ == "__main__":
     if "--selfcheck" in sys.argv:
         _selfcheck()
+    elif "--fix-worktree" in sys.argv:
+        sys.exit(fix_worktree())
     else:
         sys.exit(main())
