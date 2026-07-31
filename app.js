@@ -1896,6 +1896,18 @@
       smoke + flame + cross +
       '</svg>';
   }
+  // Бабл поражённых складов: перечёркнутая коробка + счётчик, чтобы свёрнутая группа
+  // читалась как «столько-то складов выбито», а не как обычный кластер объектов.
+  function whHitClusterIcon(cluster) {
+    var n = cluster.getChildCount(), size = n < 5 ? 34 : 40;
+    var html = '<div style="position:relative;width:' + size + 'px;height:' + size + 'px;border-radius:50%;'
+      + 'background:radial-gradient(circle at 50% 32%,#e8583f,#b4241a);border:2px solid #fff;'
+      + 'box-shadow:0 0 0 2px rgba(180,36,26,.30),0 2px 6px rgba(0,0,0,.40);'
+      + 'display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px">'
+      + '<span style="position:absolute;top:-8px;right:-6px;font-size:15px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.55))">📦</span>'
+      + n + '</div>';
+    return L.divIcon({ className: "strike-cluster", html: html, iconSize: L.point(size, size) });
+  }
   function whIcon(w) {
     var b = WH_BRAND[w.operator] || { c: "#7a7e85" };
     var hit = w.status === "hit", burned = hit && w.damage === "burned";
@@ -1925,20 +1937,30 @@
     if (!L_ru.warehouses) return;
     L_ru.warehouses.clearLayers();
     var d = S.warehouses; if (!d) return;
-    // Непоражённые кластеризуем: в Подмосковье их два десятка, изометрические фишки
-    // наваливаются друг на друга. Поражённые — НИКОГДА не в кластере: спрятать удар
-    // внутрь бабла значит потерять единственное, ради чего слой и смотрят.
-    var cluster = (typeof L.markerClusterGroup === "function")
-      ? L.markerClusterGroup({ maxClusterRadius: 46, spiderfyOnMaxZoom: true, disableClusteringAtZoom: 8 })
-      : L.layerGroup();
+    // Два раздельных кластера. Поражённые кластеризуются СВОИМ красным баблом и
+    // расходятся раньше (zoom 6 против 8): на обзоре Питера их четыре в одной точке —
+    // без кластера фишки наваливались друг на друга, а прятать их в общий серый бабл
+    // нельзя, удар должен читаться и в свёрнутом виде.
+    function group(hitGroup) {
+      return (typeof L.markerClusterGroup === "function")
+        ? L.markerClusterGroup({
+            maxClusterRadius: hitGroup ? 38 : 46,
+            spiderfyOnMaxZoom: true,
+            disableClusteringAtZoom: hitGroup ? 6 : 8,
+            iconCreateFunction: hitGroup ? whHitClusterIcon : undefined
+          })
+        : L.layerGroup();
+    }
+    var hits = group(true), rest = group(false);
     (d.warehouses || []).forEach(function (w) {
       if (typeof w.lat !== "number" || typeof w.lon !== "number") return;
       var hit = w.status === "hit";
       var m = L.marker([w.lat, w.lon], { icon: whIcon(w), riseOnHover: true, zIndexOffset: hit ? 400 : 300 })
         .bindPopup(whPopup(w), POPUP_OPTS);
-      if (hit) m.addTo(L_ru.warehouses); else cluster.addLayer(m);
+      (hit ? hits : rest).addLayer(m);
     });
-    L_ru.warehouses.addLayer(cluster);
+    L_ru.warehouses.addLayer(rest);
+    L_ru.warehouses.addLayer(hits);
   }
 
   function renderGrid() {
