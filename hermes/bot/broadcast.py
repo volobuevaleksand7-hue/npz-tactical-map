@@ -300,9 +300,19 @@ def render_briefing_card(mode="morning"):
         return render_digest_card()
 
 
-def do_briefing(mode, dry=False, test_chat=None):
+def do_briefing(mode, dry=False, test_chat=None, force=False):
     date_iso = DS.today_iso()
     state = DS.ensure_today(DS.load_state(), date_iso)
+
+    # 🔴 Сводка за день и вид выходит ОДИН раз. Сюда приходят два публикатора с разницей
+    # в 2 часа (в @NPZmap 29-31.07 каждая сводка выходила дважды), и второй заход не был
+    # виден ни в crontab, ни в логах. Кто бы ни позвал вторым — дальше он не пройдёт.
+    # Повторить осознанно: --force. ponytail: журнал published_keys уже есть, свой не заводим.
+    guard_key = DS.make_key(date_iso, "briefing-%s" % mode, "", "")
+    if not (dry or test_chat or force) and DS.is_published(state, guard_key):
+        print("briefing %s: сводка за %s уже публиковалась — пропуск (--force чтобы повторить)"
+              % (mode, date_iso))
+        return
 
     # Утренняя/вечерняя — НОВАЯ сводка (не апдейт), сбрасываем update_lines для нового поста,
     # но сохраняем molniya_refs дня для лида, если молния уже была.
@@ -385,6 +395,7 @@ def do_briefing(mode, dry=False, test_chat=None):
                            text_message_id=text_message_id, site_page=data["site_page"])
     state["update_lines"] = []  # новая сводка = новый день пополнений
     state["mirrors"] = mirrors_state
+    DS.mark_published(state, guard_key)
     DS.save_state(state)
 
     is_final = (mode == "evening")
@@ -662,7 +673,7 @@ def main():
 
     # === НОВЫЙ единый путь: сводка ===
     if briefing_mode:
-        do_briefing(briefing_mode, dry=dry, test_chat=test_chat)
+        do_briefing(briefing_mode, dry=dry, test_chat=test_chat, force=force)
         return
 
     # === НОВЫЙ путь: пополнение сводки ===
