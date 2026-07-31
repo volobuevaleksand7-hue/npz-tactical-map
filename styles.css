@@ -788,7 +788,7 @@ body.has-alert .strikebar{top:66px}
 }
 .tab-dropdown:hover .tab-link-inner{color:var(--ink);transform:translateY(-1px)}
 .tab-dropdown-menu{
-  display:block;position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);z-index:300;
+  display:block;position:absolute;top:100%;left:50%;transform:translateX(-50%);z-index:300;
   min-width:220px;max-height:min(72vh,540px);overflow-y:auto;overscroll-behavior:contain;padding:6px 0;
   background:var(--surface,#1a1a2e);border:1px solid var(--line,#333);border-radius:10px;
   box-shadow:0 8px 24px rgba(0,0,0,.35);
@@ -798,8 +798,15 @@ body.has-alert .strikebar{top:66px}
   display:block;padding:8px 16px;color:var(--ink,#e0e0e0);text-decoration:none;font-size:13px;white-space:nowrap;transition:background .15s
 }
 .tab-dropdown-menu a:hover{background:var(--teal-15,rgba(0,200,200,.12))}
-/* клик закрепляет меню (.open) — без залипания hover и без «мёртвой зоны» между кнопкой и пунктами */
+/* клик закрепляет меню (.open) на всех вьюпортах — базовый механизм (nav-dropdown.js/inline-JS
+   ниже решают preventDefault по устройству). top:100% без зазора — без «мёртвой зоны» между
+   кнопкой и пунктами. Hover — ТОЛЬКО на реальной мыши (@media hover:hover): на тач без него
+   клик по «Аналитика ▾» просто идёт на /analytics, а раскрытие меню полностью на .open —
+   так не возвращаем старое «залипание» hover на тач-планшетах. */
 .tab-dropdown.open .tab-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto}
+@media (hover:hover) and (pointer:fine){
+  .tab-dropdown:hover .tab-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto}
+}
 .tab-dropdown.open .tab-link-inner{color:var(--teal)}
 /* заголовки групп + свёрнутая «Ракетная опасность» + ссылка на полный каталог */
 .tab-dropdown-menu .tdm-group{padding:9px 16px 3px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--ink-dim,#8aa2ad);opacity:.7}

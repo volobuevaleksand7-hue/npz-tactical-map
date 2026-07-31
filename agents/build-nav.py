@@ -56,6 +56,48 @@ COLLAPSE_EMOJI = {
 # (реестр = хронология публикации, для 34+ заводов это нечитаемо).
 GROUP_SORT_ALPHA = {"НПЗ по заводам"}
 
+# Вложенные подгруппы ВНУТРИ группы (напр. «Топливо», «Справочники») — тот же паттерн
+# <details class="nav-drop-sub">, что уже отрисован для верхнеуровневых collapse-групп
+# («Ракетная опасность», «НПЗ по заводам»), просто без своего пункта в GROUPS. Пункт
+# группы, не попавший ни в одну подгруппу, остаётся видимым пином прямо под заголовком
+# группы (напр. /deficit — «Почему нет бензина»).
+SUBGROUPS = {
+    "Топливо": [
+        ("⛽", "Где заправиться", {
+            "/gde-dizel", "/gde-ai95", "/gde-gaz-azs", "/benzin-na-trasse", "/zakrytye-azs",
+        }),
+        ("🚦", "Обстановка на АЗС", {
+            "/ocheredi-na-azs", "/draki-na-azs", "/azhiotazh-na-azs", "/talony", "/zapas-benzina-kanistry",
+        }),
+        ("🚢", "Нефть и экспорт", {
+            "/tankery-ekonomika-rf", "/tenevoj-flot", "/tankery-azovskoe-more", "/vozmozhen-li-golod",
+        }),
+    ],
+    "Справочники": [
+        ("📦", "Склады маркетплейсов", {
+            "/udar-po-skladam-wildberries", "/ataki-na-sklady-wildberries-hronika",
+            "/kompensacii-wildberries-posle-udara", "/skolko-skladov-wildberries-ozon",
+            "/udar-po-skladu-ozon", "/sgorel-sklad-wildberries-chto-delat",
+            "/udar-sklad-wildberries-peterburg", "/ceny-marketpleysy-posle-udarov",
+        }),
+    ],
+}
+
+
+def split_subgroups(title, picked):
+    """picked -> (pinned, [(emoji, subtitle, items), ...]). Подгруппа появляется, только
+    если в неё реально попала хоть одна live-страница — новый URL без записи в SUBGROUPS
+    просто остаётся пином (сироты невозможны, как и везде в этом файле)."""
+    used, subs = set(), []
+    for emoji, subtitle, urls in SUBGROUPS.get(title, []):
+        items = [r for r in picked if r["url"] in urls]
+        if items:
+            subs.append((emoji, subtitle, items))
+            used.update(r["url"] for r in items)
+    pinned = [r for r in picked if r["url"] not in used]
+    return pinned, subs
+
+
 # Подписи пунктов меню: url -> (emoji, label). Нет в списке → берётся primary_kw.
 LABELS = {
     "/crimea":            ("🗺", "Крым"),
@@ -264,10 +306,20 @@ def build_menu(rows, current):
             out.append('            </details>')
         else:
             out.append(f'            <div class="nav-drop-group">{title}</div>')
-            for r in picked:
+            pinned, subs = split_subgroups(title, picked)
+            for r in pinned:
                 emoji, lab = label_for(r["url"], r.get("primary_kw"))
                 cur = ' aria-current="page"' if r["url"] == current else ""
                 out.append(f'            <a href="{r["url"]}"{cur}>{emoji} {lab}</a>')
+            for emoji, subtitle, items in subs:
+                op = " open" if any(r["url"] == current for r in items) else ""
+                out.append(f'            <details class="nav-drop-sub"{op}>')
+                out.append(f'              <summary>{emoji} {subtitle}</summary>')
+                for r in items:
+                    e2, lab = label_for(r["url"], r.get("primary_kw"))
+                    cur = ' aria-current="page"' if r["url"] == current else ""
+                    out.append(f'              <a href="{r["url"]}"{cur}>{e2} {lab}</a>')
+                out.append('            </details>')
     # каталог-хаб последним — /analytics достижим, т.к. клик по самому «Аналитика ▾» теперь
     # открывает меню (preventDefault в nav-dropdown.js), а не переходит на хаб.
     out.append('            <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>')
@@ -361,9 +413,17 @@ def build_index_menu(rows):
             lines.append('            </details>\n')
         else:
             lines.append(f'            <div class="tdm-group">{title}</div>\n')
-            for r in picked:
+            pinned, subs = split_subgroups(title, picked)
+            for r in pinned:
                 emoji, lab = label_for(r["url"], r.get("primary_kw"))
                 lines.append(f'            <a href="{r["url"]}">{emoji} {lab}</a>\n')
+            for emoji, subtitle, items in subs:
+                lines.append('            <details class="tdm-sub">\n')
+                lines.append(f'              <summary>{emoji} {subtitle}</summary>\n')
+                for r in items:
+                    e2, lab = label_for(r["url"], r.get("primary_kw"))
+                    lines.append(f'              <a href="{r["url"]}">{e2} {lab}</a>\n')
+                lines.append('            </details>\n')
     lines.append('            <a class="tdm-all" href="/analytics">📊 Все статьи · каталог →</a>\n')
     return "".join(lines) + "          "
 
@@ -390,9 +450,17 @@ def build_drawer_analytics(rows):
                 lines.append(f'        <a class="ndp-item ndp-subitem" href="{r["url"]}">{item_emoji} {lab}</a>\n')
             lines.append('      </details>\n')
         else:
-            for r in picked:
+            pinned, subs = split_subgroups(title, picked)
+            for r in pinned:
                 emoji, lab = label_for(r["url"], r.get("primary_kw"))
                 lines.append(f'      <a class="ndp-item" href="{r["url"]}">{emoji} {lab}</a>\n')
+            for emoji, subtitle, items in subs:
+                lines.append('      <details class="ndp-sub">\n')
+                lines.append(f'        <summary class="ndp-item">{emoji} {subtitle}</summary>\n')
+                for r in items:
+                    e2, lab = label_for(r["url"], r.get("primary_kw"))
+                    lines.append(f'        <a class="ndp-item ndp-subitem" href="{r["url"]}">{e2} {lab}</a>\n')
+                lines.append('      </details>\n')
     return "".join(lines) + "      "
 
 
@@ -529,6 +597,38 @@ def wire_dropdown(html):
     return html
 
 
+# ---- 5a) кнопка «АНАЛИТИКА ▾» на ГЛАВНОЙ (index.html, .tab-dropdown) ----
+# index.html — свой topbar (не news-header), инлайн-скрипт клика тут не заменён на shared
+# /nav-dropdown.js исторически; но по факту это тот же паттерн клик-фиксации .open. Он
+# генерируется здесь (не руками в index.html), чтобы не разъезжаться со shared-версией:
+# десктоп (реальная мышь, hover работает) — клик уходит на /analytics; тач — preventDefault
+# + .open, ровно как в nav-dropdown.js. Зеркало правится синхронно с nav-dropdown.js выше.
+TAB_DROPDOWN_JS_RE = re.compile(
+    r'<script>\n\s*// АНАЛИТИКА:.*?</script>', re.DOTALL)
+TAB_DROPDOWN_JS = '''<script>
+    // АНАЛИТИКА: десктоп (реальная мышь, hover работает) — клик по «АНАЛИТИКА ▾» ведёт
+    // на /analytics, меню раскрывается по наведению (CSS :hover, см. styles.css). На тач
+    // hover ненадёжен — там клик закрепляет меню (класс .open), закрытие — клик вне / Esc.
+    // /analytics всё равно достижим пунктом «Все статьи · каталог →» внутри меню.
+    // Зеркалит nav-dropdown.js (там та же логика для лендингов) — правь синхронно.
+    document.querySelectorAll('.tab-dropdown > .tab-link-inner').forEach(a => {
+      a.addEventListener('click', function(e) {
+        if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        e.preventDefault();
+        this.closest('.tab-dropdown').classList.toggle('open');
+      });
+    });
+    const closeDrops = () => document.querySelectorAll('.tab-dropdown.open')
+      .forEach(d => d.classList.remove('open'));
+    document.addEventListener('click', e => { if (!e.target.closest('.tab-dropdown')) closeDrops(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrops(); });
+  </script>'''
+
+
+def wire_tab_dropdown(html):
+    return TAB_DROPDOWN_JS_RE.sub(TAB_DROPDOWN_JS, html, count=1)
+
+
 def main():
     rows = load_reg()
     changed = 0
@@ -600,6 +700,7 @@ def main():
             print("!! no .ss-nav in index.html (chip skipped)")
         # мобильный drawer «Аналитика» — из того же реестра (был hand-maintained → дрейфовал)
         new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
+        new = wire_tab_dropdown(new)  # клик по «АНАЛИТИКА ▾»: десктоп → /analytics, тач → .open
         new = ensure_search_assets(new)  # search.css/search.js в <head>
         new = stamp_assets(new)  # ?v=<хэш> на styles.css/app.js — иначе кэш прячет правки шапки
         if new != html:
