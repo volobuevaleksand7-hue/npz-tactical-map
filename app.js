@@ -1856,18 +1856,55 @@
     return whPromise;
   }
   var WH_BRAND = { wb: { c: "#8b2fa8", label: "Wildberries" }, ozon: { c: "#0b63d6", label: "Ozon" } };
+  // Изометрический склад в том же языке, что фишка НПЗ (refinerySVG): ромб-основание в цвете
+  // статуса, объёмный корпус, флажок в цвете сети. Поражённые ПЕРЕЧЁРКНУТЫ красным крестом —
+  // на обзорном зуме это читается мгновенно, в отличие от заливки другим цветом.
+  function warehouseSVG(hit, burned, brand) {
+    var c = hit ? (burned ? "#d23a2e" : "#df8f17") : "#2f9e57";
+    var smoke = "", flame = "", cross = "", ring = "";
+    if (hit) {
+      ring = '<circle class="alert-ring" cx="32" cy="50" r="14" fill="none" stroke="' + c + '" stroke-width="2"/>';
+      // белая подложка под крестом — иначе линии теряются на светлой крыше
+      cross = '<g stroke-linecap="round">' +
+        '<path d="M15 33 L47 50 M47 33 L15 50" stroke="#fff" stroke-width="5" opacity=".9"/>' +
+        '<path d="M15 33 L47 50 M47 33 L15 50" stroke="#d23a2e" stroke-width="2.8"/>' +
+        '</g>';
+    }
+    if (burned) {
+      smoke = '<circle class="smoke" cx="40" cy="24" r="3" fill="#5a5148"/>' +
+              '<circle class="smoke s2" cx="40" cy="24" r="3.4" fill="#6b6258"/>' +
+              '<circle class="smoke s3" cx="40" cy="24" r="2.6" fill="#4d453d"/>';
+      flame = '<path class="flame" d="M38 34 q-3 -6 0 -10 q2 4 4 1 q3 5 -1 9 z" fill="#ff7a1a"/>' +
+              '<path class="flame" d="M39 34 q-1.5 -4 0 -6 q1.5 3 2.4 0 q1.4 3 -0.6 6 z" fill="#ffd23a"/>';
+    }
+    return '' +
+      '<svg width="100%" height="100%" viewBox="0 0 64 64">' +
+      ring +
+      // основание-ромб (изометрия, как у НПЗ)
+      '<path d="M32 60 L54 50 L32 40 L10 50 Z" fill="' + c + '" fill-opacity=".18" stroke="' + c + '" stroke-width="1.5"/>' +
+      // корпус: длинный низкий ангар — фронт, торец, крыша
+      '<path d="M13 36 L43 36 L43 51 L13 51 Z" fill="#d8cbac" stroke="#6b5d3f" stroke-width="1"/>' +
+      '<path d="M43 36 L49 31 L49 46 L43 51 Z" fill="#bfae87" stroke="#6b5d3f" stroke-width="1"/>' +
+      '<path d="M13 36 L19 31 L49 31 L43 36 Z" fill="#ebe1c8" stroke="#6b5d3f" stroke-width="1"/>' +
+      // рёбра крыши — «складская» фактура
+      '<path d="M15.6 34.3 H45.6 M17.6 32.6 H47.6" stroke="#c9bd9c" stroke-width=".9"/>' +
+      // ворота погрузки
+      '<path d="M16 44 h5 v7 h-5 z M24 44 h5 v7 h-5 z M32 44 h5 v7 h-5 z" fill="#9a8a68" stroke="#6b5d3f" stroke-width=".7"/>' +
+      // флажок в цвете сети — WB и Ozon различимы даже под крестом
+      '<line x1="26" y1="31" x2="26" y2="15" stroke="#6b5d3f" stroke-width="1.4"/>' +
+      '<path d="M26 15 L37 18 L26 21 Z" fill="' + brand + '" stroke="#5a4d33" stroke-width=".6"/>' +
+      smoke + flame + cross +
+      '</svg>';
+  }
   function whIcon(w) {
     var b = WH_BRAND[w.operator] || { c: "#7a7e85" };
-    var burned = w.status === "hit" && w.damage === "burned";
-    // сгоревшие — красный с пульсом, чтобы читались среди полусотни обычных точек
-    var c = burned ? "#d23a2e" : (w.status === "hit" ? "#df8f17" : b.c);
-    var pulse = burned ? '<circle cx="13" cy="13" r="10" fill="none" stroke="' + c + '" stroke-width="1.6" opacity=".6"><animate attributeName="r" values="7;12;7" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="1.8s" repeatCount="indefinite"/></circle>' : '';
-    var html = '<div><svg width="26" height="26" viewBox="0 0 26 26">' + pulse +
-      '<rect x="4" y="6" width="18" height="14" rx="2" fill="' + c + '" stroke="#fff" stroke-width="2"/>' +
-      '<path d="M4 10 H22" stroke="#fff" stroke-width="1.6"/>' +
-      (burned ? '<path d="M13 12 q2 2 0 4 q-2-2 0-4" fill="#fff"/>' : '') +
-      '</svg></div>';
-    return L.divIcon({ className: "", html: html, iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -11] });
+    var hit = w.status === "hit", burned = hit && w.damage === "burned";
+    var sc = hit ? 1 : 0.82;                       // поражённые крупнее — их и надо замечать
+    var wd = Math.round(48 * sc), ht = Math.round(50 * sc);
+    var html = '<div class="npz-piece" style="width:' + wd + 'px;height:' + ht + 'px">' +
+      warehouseSVG(hit, burned, b.c) + '</div>';
+    return L.divIcon({ className: "", html: html, iconSize: [wd, ht],
+                       iconAnchor: [wd / 2, ht * 0.74], popupAnchor: [0, -ht * 0.6] });
   }
   function whPopup(w) {
     var b = WH_BRAND[w.operator] || { c: "#7a7e85", label: w.operator };
@@ -1888,11 +1925,20 @@
     if (!L_ru.warehouses) return;
     L_ru.warehouses.clearLayers();
     var d = S.warehouses; if (!d) return;
+    // Непоражённые кластеризуем: в Подмосковье их два десятка, изометрические фишки
+    // наваливаются друг на друга. Поражённые — НИКОГДА не в кластере: спрятать удар
+    // внутрь бабла значит потерять единственное, ради чего слой и смотрят.
+    var cluster = (typeof L.markerClusterGroup === "function")
+      ? L.markerClusterGroup({ maxClusterRadius: 46, spiderfyOnMaxZoom: true, disableClusteringAtZoom: 8 })
+      : L.layerGroup();
     (d.warehouses || []).forEach(function (w) {
       if (typeof w.lat !== "number" || typeof w.lon !== "number") return;
-      L.marker([w.lat, w.lon], { icon: whIcon(w), zIndexOffset: w.status === "hit" ? 400 : 300 })
-        .bindPopup(whPopup(w), POPUP_OPTS).addTo(L_ru.warehouses);
+      var hit = w.status === "hit";
+      var m = L.marker([w.lat, w.lon], { icon: whIcon(w), riseOnHover: true, zIndexOffset: hit ? 400 : 300 })
+        .bindPopup(whPopup(w), POPUP_OPTS);
+      if (hit) m.addTo(L_ru.warehouses); else cluster.addLayer(m);
     });
+    L_ru.warehouses.addLayer(cluster);
   }
 
   function renderGrid() {
