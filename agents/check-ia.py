@@ -73,6 +73,47 @@ def check_head_meta():
     return warnings
 
 
+def check_nav_hygiene(rows):
+    """Гигиена меню для НОВЫХ страниц — ловит ровно две регрессии, которые уже случались:
+
+    1. нет подписи в build-nav.LABELS → пункт печатается сырым SEO-ключом и заглушкой 📄
+       («сгорел склад wildberries что делать»);
+    2. страница не попала ни в одну подгруппу → висит пином в корне группы, и меню
+       постепенно снова превращается в портянку.
+    Не блокирует сборку: страница-одиночка в новой теме — это нормально, пока их мало.
+    """
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("build_nav", ROOT / "agents" / "build-nav.py")
+    bn = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bn)
+
+    live = [r for r in rows if r.get("status") == "live"]
+    out = []
+    for r in sorted(live, key=lambda x: x["url"]):
+        if r.get("type") == "hub":            # /analytics — сам каталог, пунктом меню не бывает
+            continue
+        if r["url"] not in bn.LABELS and r["url"] not in {u for u, _, _ in bn.TOP + bn.TOP_TAIL}:
+            out.append(f"{r['url']}: нет подписи в build-nav.LABELS — в меню будет сырой ключ "
+                       f"«{r.get('primary_kw', '')}»")
+    # указана подгруппа, которой нет в SUBGROUPS — страница молча уедет в пины
+    known = {s.lower() for subs in bn.SUBGROUPS.values() for _, s, _ in subs}
+    for r in live:
+        g = (r.get("group") or "").strip()
+        if g and g.lower() not in known:
+            out.append(f"{r['url']}: group=«{g}» не найдена в build-nav.SUBGROUPS")
+    # раздувшийся корень группы = пора заводить подгруппу. collapse-группы пропускаем:
+    # они и так свёрнуты целиком, длина внутри них на меню не влияет.
+    for title, _pred, _collapse in bn.GROUPS:
+        if _collapse:
+            continue
+        picked = [r for r in live if _pred(r)]
+        pinned, _subs = bn.split_subgroups(title, picked)
+        if len(pinned) > 8:
+            out.append(f"группа «{title}»: {len(pinned)} пунктов подряд без подгруппы — "
+                       f"меню снова растёт портянкой, заведи подгруппу в build-nav.SUBGROUPS")
+    return out
+
+
 def main():
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     rows = bn.load_reg()
@@ -106,6 +147,12 @@ def main():
     if head_warnings:
         print("HEAD-META WARNINGS (не блокирует):")
         for w in head_warnings:
+            print("  -", w)
+
+    nav_warnings = check_nav_hygiene(rows)
+    if nav_warnings:
+        print("NAV WARNINGS (не блокирует):")
+        for w in nav_warnings:
             print("  -", w)
 
     print(f"IA check OK — {live} live-страниц: файлы, sitemap и меню на месте.")

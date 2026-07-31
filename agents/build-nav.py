@@ -61,36 +61,56 @@ GROUP_SORT_ALPHA = {"НПЗ по заводам"}
 # («Ракетная опасность», «НПЗ по заводам»), просто без своего пункта в GROUPS. Пункт
 # группы, не попавший ни в одну подгруппу, остаётся видимым пином прямо под заголовком
 # группы (напр. /deficit — «Почему нет бензина»).
+#
+# 🔴 ПРАВИЛО ДЛЯ НОВЫХ СТАТЕЙ. Ручной список URL здесь держать НЕ надо — иначе каждая
+# новая страница молча падает пином в корень группы и меню снова становится портянкой
+# (так и выросли 15 пунктов подряд в «Топливе»). Страница попадает в подгруппу так:
+#   1) поле "group" в data/seo-topics.jsonl — приоритет; ставь его при заведении страницы;
+#   2) если поля нет — тематический паттерн ниже по url + primary_kw + keywords;
+#   3) не совпало ничего — остаётся видимым пином (это осознанный запасной вариант,
+#      сироты по-прежнему невозможны).
+# Заводя новую подгруппу, добавляй сюда строку с паттерном, а не перечень адресов.
 SUBGROUPS = {
     "Топливо": [
-        ("⛽", "Где заправиться", {
-            "/gde-dizel", "/gde-ai95", "/gde-gaz-azs", "/benzin-na-trasse", "/zakrytye-azs",
-        }),
-        ("🚦", "Обстановка на АЗС", {
-            "/ocheredi-na-azs", "/draki-na-azs", "/azhiotazh-na-azs", "/talony", "/zapas-benzina-kanistry",
-        }),
-        ("🚢", "Нефть и экспорт", {
-            "/tankery-ekonomika-rf", "/tenevoj-flot", "/tankery-azovskoe-more", "/vozmozhen-li-golod",
-        }),
+        ("⛽", "Где заправиться",
+         r"где (найти|есть|заправить)|на трассе|закрыл|ai-?95|аи-?95|дизел|газ на азс"),
+        ("🚦", "Обстановка на АЗС",
+         r"очеред|драк|конфликт|ажиотаж|талон|канистр|лимит|паник"),
+        ("🚢", "Нефть и экспорт",
+         r"танкер|теневой флот|экспорт|азовск|голод|эмбарго|нефтян(ой|ые) доход"),
     ],
     "Справочники": [
-        ("📦", "Склады маркетплейсов", {
-            "/udar-po-skladam-wildberries", "/ataki-na-sklady-wildberries-hronika",
-            "/kompensacii-wildberries-posle-udara", "/skolko-skladov-wildberries-ozon",
-            "/udar-po-skladu-ozon", "/sgorel-sklad-wildberries-chto-delat",
-            "/udar-sklad-wildberries-peterburg", "/ceny-marketpleysy-posle-udarov",
-        }),
+        ("📦", "Склады маркетплейсов",
+         r"wildberries|вайлдберр|ozon|озон|склад|маркетплейс|фулфилмент"),
+        ("🏭", "Справочники по НПЗ",
+         r"нпз|нефтеперераб|завод|переработк"),
     ],
 }
 
 
+def subgroup_for(row, title):
+    """Подгруппа страницы внутри группы title: явное поле реестра → тематический паттерн."""
+    subs = SUBGROUPS.get(title, [])
+    want = (row.get("group") or "").strip().lower()
+    if want:
+        for emoji, subtitle, _ in subs:
+            if subtitle.lower() == want:
+                return subtitle
+        return None            # указана несуществующая подгруппа — ловит check_subgroup_field()
+    blob = " ".join([row.get("url", ""), row.get("primary_kw", "")] + list(row.get("keywords") or [])).lower()
+    for emoji, subtitle, pattern in subs:
+        if re.search(pattern, blob):
+            return subtitle
+    return None
+
+
 def split_subgroups(title, picked):
     """picked -> (pinned, [(emoji, subtitle, items), ...]). Подгруппа появляется, только
-    если в неё реально попала хоть одна live-страница — новый URL без записи в SUBGROUPS
-    просто остаётся пином (сироты невозможны, как и везде в этом файле)."""
+    если в неё реально попала хоть одна live-страница; страница, не подошедшая ни под
+    одно правило, остаётся видимым пином (сироты невозможны, как и везде в этом файле)."""
     used, subs = set(), []
-    for emoji, subtitle, urls in SUBGROUPS.get(title, []):
-        items = [r for r in picked if r["url"] in urls]
+    for emoji, subtitle, _ in SUBGROUPS.get(title, []):
+        items = [r for r in picked if subgroup_for(r, title) == subtitle]
         if items:
             subs.append((emoji, subtitle, items))
             used.update(r["url"] for r in items)
@@ -144,6 +164,31 @@ LABELS = {
     "/raketnaya-opasnost-tyumenskaya-oblast": ("🚀", "Ракетная опасность: Тюменская обл."),
     "/raketnaya-opasnost-ryazanskaya-oblast": ("🚀", "Ракетная опасность: Рязанская обл."),
     "/skolko-skladov-wildberries-ozon": ("📦", "Сколько складов у ВБ и Озон"),
+    # Без записи здесь пункт показывается сырым SEO-ключом («сгорел склад wildberries что
+    # делать») и заглушкой 📄 — вычитка подписей обязательна, см. check-ia.py: он ругается
+    # на каждую live-страницу без ручной подписи.
+    "/gde-est-benzin":        ("🔎", "Где есть бензин сейчас"),
+    "/zakrytye-azs":          ("🚫", "Какие АЗС закрылись"),
+    "/ocheredi-na-azs":       ("🚗", "Очереди на АЗС"),
+    "/draki-na-azs":          ("💢", "Конфликты на АЗС"),
+    "/azhiotazh-na-azs":      ("📈", "Ажиотаж на АЗС"),
+    "/gde-ai95":              ("⛽", "Где найти АИ-95"),
+    "/zapas-benzina-kanistry": ("🛢️", "Запас бензина в канистрах"),
+    "/gde-gaz-azs":           ("🔥", "Где заправить газ"),
+    "/tankery-ekonomika-rf":  ("💰", "Танкеры и экономика РФ"),
+    "/tenevoj-flot":          ("🚢", "Теневой флот — простыми словами"),
+    "/krupnejshie-npz-rossii": ("🏭", "Крупнейшие НПЗ России"),
+    "/udary-po-energetike-kryma": ("⚡", "Удары по энергетике Крыма"),
+    "/zerkalnaya-eskalaciya-energetika": ("⚡", "Зеркальная эскалация по энергетике"),
+    "/situaciya-s-benzinom":  ("📊", "Ситуация с бензином"),
+    "/skorost-remonta-npz":   ("🔧", "Сколько восстанавливают НПЗ"),
+    "/raketnaya-opasnost-belgorod": ("🚀", "Ракетная опасность: Белгород"),
+    # кластер складов маркетплейсов — подписи в одном стиле, без сырых «wildberries спб»
+    "/udar-po-skladu-ozon":   ("📦", "Удар по складу Ozon"),
+    "/sgorel-sklad-wildberries-chto-delat": ("❓", "Сгорел склад Wildberries: что делать"),
+    "/udar-sklad-wildberries-peterburg": ("📦", "Удар по складу Wildberries в Петербурге"),
+    "/ceny-marketpleysy-posle-udarov": ("💸", "Вырастут ли цены после ударов по складам"),
+    "/karta-skladov-wildberries": ("🗺️", "Карта складов Wildberries"),
     # object(/npz/*) — свёрнутый блок «НПЗ по заводам»; подписи = чистое название завода
     # (без служебных слов реестра вида «омский нпз удар»), взято из <title> страниц.
     "/npz/omskij-npz":                  ("🛢️", "Омский НПЗ"),
