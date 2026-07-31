@@ -26,10 +26,6 @@ STATE_PATH = os.path.join(BOT_DIR, "state.json")               # legacy diff sna
 EDITORIAL_STATE_PATH = os.path.join(BOT_DIR, "editorial-state.json")  # legacy
 SITE = "https://npz-tactical-map.vercel.app"
 CHANNEL = os.environ.get("NPZ_CHANNEL", "@NPZmap")  # публичный канал-лента; "" чтобы отключить
-# Зеркала: та же картинка/текст, что в CHANNEL, шлём ещё и сюда. Через запятую;
-# пустая строка ("") — зеркал нет. Падение зеркала НЕ должно ронять публикацию в CHANNEL.
-CHANNEL_MIRRORS = [c.strip() for c in
-                    os.environ.get("NPZ_CHANNEL_MIRRORS", "@npz_karta_online").split(",") if c.strip()]
 TOKEN = None
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -352,25 +348,6 @@ def do_briefing(mode, dry=False, test_chat=None):
         if text_res and text_res[0]:
             text_message_id = (text_res[0].get("result") or {}).get("message_id")
 
-    # Зеркала — тот же пост в доп. каналы (id сохраняем отдельно от основного,
-    # чтобы --update правил каждый канал по своим message_id). Ошибка зеркала
-    # только логируется и не мешает основной публикации.
-    mirrors_state = {}
-    for mirror in CHANNEL_MIRRORS:
-        try:
-            m_res, t_res = send_card_or_text(mirror, img, caption_or_text)
-            ok = bool((m_res and m_res[0]) or (t_res and t_res[0]))
-            print("briefing %s: зеркало %s -> %s" % (mode, mirror, "ok" if ok else "ERR"))
-            entry = {}
-            if m_res and m_res[0]:
-                entry["media_message_id"] = (m_res[0].get("result") or {}).get("message_id")
-            if t_res and t_res[0]:
-                entry["text_message_id"] = (t_res[0].get("result") or {}).get("message_id")
-            if entry:
-                mirrors_state[mirror] = entry
-        except Exception as e:
-            print("briefing %s: зеркало %s — исключение %s" % (mode, mirror, e))
-
     # Личка
     subs = jload(SUBS_PATH, {}).get("subscribers", {})
     chats = [c for c, info in subs.items() if info.get("status", "active") == "active"]
@@ -384,7 +361,6 @@ def do_briefing(mode, dry=False, test_chat=None):
     DS.set_publish_result(state, text_mode, media_message_id=media_message_id,
                            text_message_id=text_message_id, site_page=data["site_page"])
     state["update_lines"] = []  # новая сводка = новый день пополнений
-    state["mirrors"] = mirrors_state
     DS.save_state(state)
 
     is_final = (mode == "evening")
@@ -458,30 +434,6 @@ def do_update(update_text, molniya_url=None, dry=False):
             print("update: ERR при переключении в split -", err)
     else:
         print("update: нет message_id для режима %s — пропускаю отправку, но строка сохранена в state." % mode)
-
-    # То же самое пополнение — в зеркала, по их собственным message_id. Падение
-    # зеркала не должно мешать основной правке (уже применена выше).
-    mirrors = state.get("mirrors", {})
-    for mirror, ids in mirrors.items():
-        try:
-            if mode == "caption" and not switch_to_split and ids.get("media_message_id"):
-                ok, err = edit_caption(mirror, ids["media_message_id"], final_text)
-                print("update: зеркало %s editMessageCaption -> %s" % (
-                    mirror, "ok" if (ok and ok.get("ok")) else ("ERR " + str(err))))
-            elif mode == "split" and not switch_to_split and ids.get("text_message_id"):
-                ok, err = edit_text(mirror, ids["text_message_id"], final_text)
-                print("update: зеркало %s editMessageText -> %s" % (
-                    mirror, "ok" if (ok and ok.get("ok")) else ("ERR " + str(err))))
-            elif switch_to_split and ids.get("media_message_id"):
-                ok, err = send(mirror, final_text)
-                if ok and ok.get("ok"):
-                    ids["text_message_id"] = (ok.get("result") or {}).get("message_id")
-                    print("update: зеркало %s — переключение в split-mode." % mirror)
-                else:
-                    print("update: зеркало %s ERR при переключении в split - %s" % (mirror, err))
-        except Exception as e:
-            print("update: зеркало %s — исключение %s" % (mirror, e))
-    state["mirrors"] = mirrors
 
     DS.save_state(state)
     regenerate_site_page()
