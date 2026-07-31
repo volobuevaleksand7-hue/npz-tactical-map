@@ -1,23 +1,23 @@
 {
   "meta": {
-    "generated_at": "2026-07-31T08:30Z",
+    "generated_at": "2026-07-31T04:47Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Reuters/Bloomberg/Meduza/Moscow Times/The Bell/Новая газета/CNN). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
-    "capacity_offline_mt_year": 138.1,
-    "capacity_offline_pct": 41,
+    "capacity_offline_mt_year": 126.1,
+    "capacity_offline_pct": 37,
     "gasoline_output_loss_pct": 37,
     "diesel_output_loss_pct": 41,
     "export_ban_gasoline": true,
     "export_ban_kerosine": true,
     "import_from_belarus": true,
     "notes": "На 31 июля 2026: кризис находится в финальной стадии восстановления. Беларусский импорт установился на уровне 274+ тыс т/месяц (181 тыс т/месяц бензина, 77 тыс т/месяц дизеля, 16 тыс т/месяц авиатоплива в июне), что полностью покрывает недостачу производства и обеспечивает восстановление дефицитных регионов. Волна отмен нечётно-чётных ограничений продолжается: после Орловской области (16 июля) добавились Смоленск, Тамбов, Кировская область и др. Центральная Россия (Москва, Санкт-Петербург, Иркутск, Владимир, Забайкалье, Бурятия), Урал и Сибирь полностью вышли из кризиса. Острая фаза локализована в северокавказских республиках (Кабардино-Балкария, Ингушетия, Чечня, Дагестан) и Крыме. 31 июля: удар по Волгоградскому НПЗ (переводится в частичную работу, ~40%). Экспортные терминалы остаются под обстрелом: атака на танкеры КТК (30 июля) временно приостановила казахский экспорт. При сохранении беларусского потока большинство регионов выйдут из кризиса к концу августа—началу сентября.",
-    "throughput_shortfall_pct": 67,
+    "throughput_shortfall_pct": 66,
     "method": "capacity_offline и throughput_shortfall пересчитаны из refineries[] на 31 июля 2026."
   },
   "fuel_balance": {
@@ -125,13 +125,13 @@
       "lat": 44.1,
       "lon": 39.08,
       "capacity_mt_year": 12.0,
-      "status": "down",
-      "status_since": "2026-04-16",
-      "est_output_pct": 0,
-      "damage": "Остановлен бессрочно после серии ударов апреля-мая.",
+      "status": "partial",
+      "status_since": "2026-07-31",
+      "est_output_pct": 20,
+      "damage": "Удар по крупному нефтеперерабатывающему заводу Роснефти на Чёрном море. Завод является ключевым объектом экспортной инфраструктуры РФ, мощность переработки около 12 млн тонн нефти в год.",
       "note": "На 31 июля простаивает; восстановление ожидается ~ноябрь-декабрь 2026.",
-      "source_url": "https://biz.liga.net/energy/news/reuters-ukrainskie-drony-polnostyu-ili-chastichno-ostanovili-pochti-vse-npz-v-tsentralnoi-chasti-rf",
-      "confidence": "confirmed"
+      "source_url": "https://kyivindependent.com/wildberries-warehouse-oil-refineries-reportedly-attacked-volgograd-krasnodar/",
+      "confidence": "reported"
     },
     {
       "id": "kuibyshev",
@@ -1172,6 +1172,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-07-31",
+      "text": "Удар по Туапсинский НПЗ (Туапсе): Удар по крупному нефтеперерабатывающему заводу Роснефти на Чёрном море. Завод является ключевым объе",
+      "source_url": "https://kyivindependent.com/wildberries-warehouse-oil-refineries-reportedly-attacked-volgograd-krasnodar/"
+    },
     {
       "date": "2026-07-31",
       "text": "Ночной удар украинских БПЛА по Волгоградской области: поражены объекты топливно-энергетического комплекса в южной части Волгограда с возникновением пожаров, складские помещения в Дзержинском районе, повреждены жилые дома. Волгоградский НПЗ переведён в режим пониженной переработки (~40% мощности).",
