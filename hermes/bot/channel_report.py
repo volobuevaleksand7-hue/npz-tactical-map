@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
-"""Ежедневный отчёт по каналу владельцу: сколько пришло, сколько ушло, сколько всего.
+"""Ежедневный отчёт по каналу владельцу: сколько пришло НОВЫХ и сколько новых ушло.
 
-Bot API даёт только итоговое число участников — при 5 пришедших и 5 ушедших дельта равна
-нулю и отчёт врёт. Поэтому приход/уход берём из журнала действий канала (админ-лог) через
-юзербота-создателя; Telegram хранит журнал ~48 часов, суточного прогона хватает.
+Зачем не «за сутки»: 31.07.2026 в канал разово залили 1239 накрученных аккаунтов, и на их
+фоне живой приход не виден. Поэтому ведём поимённый список пришедших ПОСЛЕ базовой отметки,
+а уход считаем раздельно:
+  • ушло новых      — ушёл тот, кто пришёл уже при нас (реальная потеря)
+  • отвал накрутки  — ушёл кто-то из базы (её Telegram и должен вычищать)
 
-ponytail: без БД — итог прошлого прогона лежит в одном текстовом файле рядом с состоянием.
+Bot API отдаёт только итоговое число участников; поимённо приход/уход есть лишь в журнале
+действий канала, поэтому читаем его юзерботом-создателем. Журнал живёт ~48 ч, а прогон идёт
+по id последнего разобранного события — пропуск одного дня переживём, двух уже нет.
 
 env: NPZ_REPORT_CHAT (кому), NPZ_REPORT_TOKEN (файл токена бота-отправителя),
      NPZ_CHANNEL (канал), NPZ_BOT_SUBS (subscribers.json бота, необязательно)
-Запуск: python3 channel_report.py [--dry]
+Запуск: python3 channel_report.py [--dry] [--selftest] [--reset-baseline]
 """
 import os, sys, json, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
@@ -27,38 +31,47 @@ CHANNEL = os.environ.get("NPZ_CHANNEL", "@npz_karta_online")
 CHAT = os.environ.get("NPZ_REPORT_CHAT", "609952529")
 TOKEN_FILE = os.environ.get("NPZ_REPORT_TOKEN", "/root/.npz-bot/token")
 BOT_SUBS = os.environ.get("NPZ_BOT_SUBS", "/root/.npz-bot-bpl/subscribers.json")
-STATE = os.environ.get("NPZ_CHANNEL_STATE", "/root/.npz-bot/channel-report-last.json")
-DRY = "--dry" in sys.argv
+STATE = os.environ.get("NPZ_CHANNEL_STATE", "/root/.npz-bot/channel-report-state.json")
 
 JOIN = (ChannelAdminLogEventActionParticipantJoin,
         ChannelAdminLogEventActionParticipantJoinByInvite)
 LEAVE = (ChannelAdminLogEventActionParticipantLeave,)
 
 
-def tally(pages, since):
-    """Считает приход/уход по страницам журнала (свежие сначала), пока не упрётся в границу.
-    🔴 Telegram отдаёт максимум 100 событий за запрос — в шумные сутки одной страницы мало,
-    поэтому счёт вынесен сюда и покрыт --selftest."""
-    joined = left = seen = 0
-    for page in pages:
-        if not page:
-            break
-        stop = False
-        for ev in page:
-            seen += 1
-            if ev.date < since:
-                stop = True
-                continue
-            if isinstance(ev.action, JOIN):
-                joined += 1
-            elif isinstance(ev.action, LEAVE):
-                left += 1
-        if stop:
-            break
-    return joined, left, seen
+def classify(events, last_id, newcomers):
+    """events — журнал (порядок любой). Считаем только события новее last_id.
+    Возвращает (пришло, ушло_новых, отвал_базы, max_id, набор новичков)."""
+    fresh = [e for e in events if e.id > last_id]
+    joined = left_new = left_base = 0
+    for e in sorted(fresh, key=lambda e: e.id):      # по возрастанию: вход раньше выхода
+        uid = str(e.user_id)
+        if isinstance(e.action, JOIN):
+            joined += 1
+            newcomers[uid] = e.date.strftime("%Y-%m-%d")
+        elif isinstance(e.action, LEAVE):
+            if uid in newcomers:
+                del newcomers[uid]
+                left_new += 1
+            else:
+                left_base += 1
+    return joined, left_new, left_base, max([e.id for e in fresh], default=last_id), newcomers
 
 
-def collect():
+def load_state():
+    try:
+        with open(STATE) as f:
+            s = json.load(f)
+    except Exception:
+        s = {}
+    s.setdefault("last_event_id", 0)
+    s.setdefault("newcomers", {})
+    s.setdefault("total_joined", 0)
+    s.setdefault("baseline_at", None)
+    s.setdefault("baseline_total", None)
+    return s
+
+
+def read_log(state):
     c = TelegramClient(StringSession(open(SESSION).read()), 2040,
                        "b18441a1ff607e10a989891a5462e627")
     c.connect()
@@ -66,19 +79,18 @@ def collect():
     total = c(GetFullChannelRequest(ch)).full_chat.participants_count
     flt = ChannelAdminLogEventsFilter(join=True, leave=True)
 
-    def pages():
-        max_id = 0
-        for _ in range(20):  # ponytail: 20 страниц = 2000 событий, потолок от бесконечного цикла
-            res = c(GetAdminLogRequest(channel=ch, q="", max_id=max_id, min_id=0,
-                                       limit=100, events_filter=flt, admins=[]))
-            if not res.events:
-                return
-            yield res.events
-            max_id = res.events[-1].id
-
-    joined, left, seen = tally(pages(), datetime.now(timezone.utc) - timedelta(hours=24))
+    events, max_id = [], 0
+    for _ in range(20):        # ponytail: 20 страниц по 100 — потолок от бесконечного цикла
+        res = c(GetAdminLogRequest(channel=ch, q="", max_id=max_id, min_id=0,
+                                   limit=100, events_filter=flt, admins=[]))
+        if not res.events:
+            break
+        events.extend(res.events)
+        max_id = res.events[-1].id
+        if max_id <= state["last_event_id"]:
+            break              # дошли до уже разобранного — глубже не нужно
     c.disconnect()
-    return total, joined, left, seen
+    return total, events
 
 
 def bot_subs():
@@ -86,14 +98,6 @@ def bot_subs():
         with open(BOT_SUBS) as f:
             subs = json.load(f)["subscribers"]
         return sum(1 for v in subs.values() if v.get("status") == "active")
-    except Exception:
-        return None
-
-
-def prev_total():
-    try:
-        with open(STATE) as f:
-            return json.load(f).get("total")
     except Exception:
         return None
 
@@ -109,27 +113,27 @@ def send(text):
 
 
 def selftest():
-    """Проверяет ровно то, что легко сломать: счёт через границу страниц и отсечку по времени."""
-    now = datetime.now(timezone.utc)
-
     class Ev:
-        def __init__(self, action, hours_ago):
-            self.action = action
-            self.date = now - timedelta(hours=hours_ago)
+        def __init__(self, i, action, uid):
+            self.id, self.action, self.user_id = i, action, uid
+            self.date = datetime.now(timezone.utc)
 
     j = ChannelAdminLogEventActionParticipantJoin()
     lv = ChannelAdminLogEventActionParticipantLeave()
-    since = now - timedelta(hours=24)
 
-    # две полные страницы: приход считается на обеих, значит пагинация не теряет вторую
-    assert tally([[Ev(j, 1)] * 100, [Ev(j, 2)] * 100], since)[0] == 200
+    # новичок пришёл и ушёл — это потеря живого, а не отвал накрутки
+    assert classify([Ev(2, lv, 77), Ev(1, j, 77)], 0, {})[:3] == (1, 1, 0)
 
-    # событие старше суток обрывает счёт и само не считается
-    joined, left, _ = tally([[Ev(j, 1), Ev(lv, 2), Ev(j, 30)], [Ev(j, 40)] * 100], since)
-    assert (joined, left) == (1, 1), (joined, left)
+    # ушёл тот, кого мы не видели приходящим → это база (накрутка)
+    assert classify([Ev(3, lv, 55)], 0, {})[:3] == (0, 0, 1)
 
-    # пустая страница не роняет и не зацикливает
-    assert tally([[]], since) == (0, 0, 0)
+    # уже разобранные события не считаются повторно
+    assert classify([Ev(5, j, 9), Ev(4, j, 8)], 5, {})[:3] == (0, 0, 0)
+
+    # новичок прошлого прогона, ушедший сегодня, всё ещё считается новым
+    r = classify([Ev(9, lv, 42)], 8, {"42": "2026-08-01"})
+    assert r[:3] == (0, 1, 0) and "42" not in r[4]
+
     print("selftest ok")
 
 
@@ -137,32 +141,52 @@ def main():
     if "--selftest" in sys.argv:
         selftest()
         return 0
-    total, joined, left, log_seen = collect()
-    prev = prev_total()
-    net = "" if prev is None else " (%+d за сутки)" % (total - prev)
 
-    lines = ["📊 %s — за сутки" % CHANNEL,
-             "➕ пришло: %d" % joined,
-             "➖ ушло: %d" % left,
-             "👥 всего: %d%s" % (total, net)]
-    if log_seen == 0:
-        lines.append("⚠️ журнал канала пуст — приход/уход мог не записаться")
+    dry = "--dry" in sys.argv
+    reset = "--reset-baseline" in sys.argv
+    state = load_state()
+    first = state["baseline_at"] is None or reset
+    total, events = read_log(state)
+
+    if first:
+        # Базовая отметка: всё, что в канале сейчас, считаем накруткой. Новым будет только
+        # то, что придёт после этого прогона.
+        state.update(baseline_at=datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                     baseline_total=total, newcomers={}, total_joined=0,
+                     last_event_id=max([e.id for e in events], default=0))
+        lines = ["📊 %s — отсчёт пошёл" % CHANNEL,
+                 "👥 в канале сейчас: %d — это базовая отметка" % total,
+                 "Дальше считаю только тех, кто придёт после неё."]
+    else:
+        j, ln, lb, last, newcomers = classify(events, state["last_event_id"],
+                                              dict(state["newcomers"]))
+        state.update(last_event_id=last, newcomers=newcomers,
+                     total_joined=state["total_joined"] + j)
+        lines = ["📊 %s — за сутки" % CHANNEL,
+                 "➕ новых: %d" % j,
+                 "➖ ушло новых: %d" % ln,
+                 "♻️ отвал накрутки: %d" % lb,
+                 "",
+                 "📈 новых с %s: %d, осталось %d" % (
+                     state["baseline_at"], state["total_joined"], len(newcomers)),
+                 "👥 в канале: %d" % total]
+
     n = bot_subs()
     if n is not None:
         lines.append("🤖 подписчиков бота: %d" % n)
     lines.append(datetime.now(timezone(timedelta(hours=3))).strftime("%d.%m %H:%M МСК"))
     text = "\n".join(lines)
 
-    if DRY:
+    if dry:
         print(text)
-        print("\n[dry] событий в журнале: %d, прошлый итог: %s" % (log_seen, prev))
+        print("\n[dry] состояние не сохранено; last_event_id=%s" % state["last_event_id"])
         return 0
     if not send(text):
-        print("отправка не удалась — водяной знак не двигаю")
+        print("отправка не удалась — состояние не двигаю")
         return 1
     os.makedirs(os.path.dirname(STATE), exist_ok=True)
     with open(STATE, "w") as f:
-        json.dump({"total": total, "at": datetime.now(timezone.utc).isoformat()}, f)
+        json.dump(state, f, ensure_ascii=False)
     print("отправлено:", text.replace("\n", " · "))
     return 0
 
