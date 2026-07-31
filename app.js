@@ -613,8 +613,12 @@
     if (S.capacityTimeline && S.capacityTimeline.timeline && S.capacityTimeline.timeline.length > 1) h += sparkBlock(S.capacityTimeline.timeline);
     h += '<div style="display:flex;gap:6px;text-align:center;margin-bottom:6px">' +
       chip(c.down, "стоит", "red") + chip(c.partial, "частично", "amber") + chip(c.operational, "работает", "green") + '</div>';
-    h += bar("Потери выпуска бензина", nb.gasoline_output_loss_pct, "red");
-    h += bar("Потери выпуска дизеля", nb.diesel_output_loss_pct, "amber");
+    // ponytail: подписаны как оценка — в отличие от цифр выше, они НЕ выводятся из refineries[]
+    // (у заводов есть только общая загрузка est_output_pct, разбивки по продуктам в данных нет).
+    h += bar("Потери выпуска бензина · оценка", nb.gasoline_output_loss_pct, "red");
+    h += bar("Потери выпуска дизеля · оценка", nb.diesel_output_loss_pct, "amber");
+    if (nb.gasoline_output_loss_pct != null || nb.diesel_output_loss_pct != null)
+      h += '<div class="note">Потери по видам топлива — экспертная оценка, а не расчёт по таблице заводов: разбивки выпуска по бензину и дизелю в открытых данных нет. Проверяемые цифры — доля выбитых мощностей и недобор выше.</div>';
     h += '<div class="sect">БАЛАНС: ВНУТР. РЫНОК ⟷ ЭКСПОРТ</div>';
     if (fb.gasoline) h += splitBlock("Бензин · ~" + fb.gasoline.production_mt_year + " млн т/год", fb.gasoline);
     if (fb.diesel) h += splitBlock("Дизель · ~" + fb.diesel.production_mt_year + " млн т/год", fb.diesel);
