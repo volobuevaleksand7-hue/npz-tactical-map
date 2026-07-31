@@ -356,8 +356,8 @@ TEMPLATE = """<!DOCTYPE html>
 
       <h2 class="section-h"><span class="ico">📡</span> Где следить за обстановкой {gde}</h2>
       <p class="lead-p">Официальный статус тревоги объявляют региональные власти и МЧС. Обзорную картину по регионам, включая {region}, показывает <a href="/radar">карта-радар</a>: где по открытым данным отмечена угроза БПЛА или ракет и насколько свежие данные. Радар связан с общей <a href="/">картой НПЗ</a> и <a href="/attacks">хроникой ударов</a> — про обстановку «сейчас» и архив подтверждённых событий соответственно.</p>
-      <p class="lead-p">Чтобы не проверять радар вручную, подпишитесь на оповещения в нашем Telegram-боте: он присылает сигналы об угрозе БПЛА и ракетной опасности по вашему региону, а интервал уведомлений вы выбираете сами — от 10 минут до 24 часов. Это оценка по открытым данным, а не официальное экстренное оповещение — при реальной угрозе ориентируйтесь на сигналы МЧС.</p>
-      <a class="map-cta inline" href="https://t.me/BPLAlert_bot" target="_blank" rel="noopener"><span class="mc-ico">🚨</span> Подписаться на оповещения в Telegram-боте →</a>
+      <p class="lead-p">Чтобы не открывать радар вручную, подпишитесь на наш Telegram-канал: дважды в день там выходит сводка по обстановке, а между сводками приходят короткие сообщения о подтверждённых ударах. Это обзор по открытым данным, а не официальное экстренное оповещение — при реальной угрозе ориентируйтесь на сигналы МЧС.</p>
+      <a class="map-cta inline" href="https://t.me/npz_karta_online" target="_blank" rel="noopener"><span class="mc-ico">📡</span> Сводки об ударах в Telegram →</a>
 
       <h2 class="section-h"><span class="ico">❓</span> Частые вопросы</h2>
       <div class="faq-wrap">
@@ -407,7 +407,7 @@ TEMPLATE = """<!DOCTYPE html>
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
   <script defer src="/nav-dropdown.js"></script>
-  <script defer src="/vpn-nudge.js?v=c0646280"></script>
+  <script defer src="/vpn-nudge.js?v=5c0544cd"></script>
 </body>
 </html>
 """

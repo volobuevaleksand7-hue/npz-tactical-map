@@ -8,9 +8,11 @@
   // ponytail: shown-once + dismiss tracked in localStorage; edit the 3 copy
   // constants below to tune. BOT is a single line to swap if the handle changes.
 
-  var BOT   = "https://t.me/BPLAlert_bot"; // рабочий бот (в коде везде он); поменять на @fuelalert = одна строка
+  // Канал, не бот: @BPLAlert_bot заморожен Telegram 15.07.2026. Про «оповещения о тревогах»
+  // в тексте молчим — канал их не шлёт, обещать нечем.
+  var BOT   = "https://t.me/npz_karta_online";
   var TITLE = "Не теряйте карту 💚";
-  var BODY  = "Сайт могут заблокировать. В Telegram всегда рабочая ссылка на карту, оповещения о тревогах и сводки об ударах и дефиците топлива.";
+  var BODY  = "Сайт могут заблокировать. В Telegram всегда рабочая ссылка на карту и сводки об ударах и дефиците топлива.";
 
   var K = "sub_nudge_x";
   // Telegram-сторож: синий диск, серьёзные глаза/брови, самолётик снизу (сибling к guard-щиту VPN)

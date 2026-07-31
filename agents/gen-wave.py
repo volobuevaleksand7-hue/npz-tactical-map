@@ -41,7 +41,9 @@ STATE_PATH = ROOT / "data" / "wave-state.json"
 EVENTS_PATH = ROOT / "data" / "wave-events.json"
 OUT_LIVE = ROOT / "volna-dronov.html"
 OUT_DIR = ROOT / "volna-dronov"
-BOT = "https://t.me/BPLAlert_bot"  # ⚠️ именно этот бот, НЕ @fuelalert
+# Канал, а не бот: @BPLAlert_bot заморожен Telegram 15.07.2026, и обещать «оповещения»
+# нечем. Канал отдаёт сводки дважды в день — формулировка ниже обещает ровно это.
+CHANNEL = "https://t.me/npz_karta_online"
 
 RU_MONTHS = ["января", "февраля", "марта", "апреля", "мая", "июня",
              "июля", "августа", "сентября", "октября", "ноября", "декабря"]
@@ -234,9 +236,8 @@ HEADER_HTML = """  <header class="news-header">
     </div>
   </header>"""
 
-SUBSCRIBE_CTA = (f'<a class="map-cta inline" href="{BOT}" target="_blank" rel="noopener">'
-                  f'<span class="mc-ico">🚨</span> Подписаться на оповещения о волнах в '
-                  f'Telegram-боте →</a>')
+SUBSCRIBE_CTA = (f'<a class="map-cta inline" href="{CHANNEL}" target="_blank" rel="noopener">'
+                  f'<span class="mc-ico">📡</span> Сводки об ударах в Telegram →</a>')
 
 LINK_GRID = """      <div class="link-grid">
         <a class="link-card" href="/radar"><div class="lc-h">📡 Радар угроз</div><div class="lc-d">Карта БПЛА и ракет по регионам в реальном времени</div></a>
@@ -445,7 +446,7 @@ def build_live_page(state, events):
       <p class="lead-p">{DISCLAIMER_TEXT}</p>
 
       <h2 class="section-h"><span class="ico">🔔</span> Узнавать о волнах первым</h2>
-      <p class="lead-p">Чтобы не проверять страницу вручную, подпишитесь на Telegram-бота: он присылает оповещения об угрозе БПЛА и ракетной опасности по вашему региону.</p>
+      <p class="lead-p">Чтобы не проверять страницу вручную, подпишитесь на наш Telegram-канал: дважды в день там выходит сводка по обстановке, а между сводками приходят короткие сообщения о подтверждённых ударах.</p>
       {SUBSCRIBE_CTA}
 
       <h2 class="section-h"><span class="ico">🗂</span> Лента волн — архив</h2>

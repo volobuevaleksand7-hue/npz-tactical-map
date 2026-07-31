@@ -14,21 +14,27 @@
     try { if (window.va) va('event', { name: 'vpn_click' }); } catch (e) {}
   }
 
-  // Аккаунт @BPLAlert_bot заморожен (15.07.2026), но CTA на него оставлены до разморозки.
-  // Считаем клики — это замер реального интереса к подписке (цель bot_click_frozen, параметр
-  // page = какая страница даёт спрос). ponytail: живёт здесь, а не отдельным файлом, потому что
-  // vpn-nudge.js уже инжектится на ВСЕ страницы (build-nav + gen-rocket-danger + gen-wave) —
-  // значит переживает регенерацию. Снять вместе с разморозкой бота.
+  // CTA переведены с замороженного @BPLAlert_bot на канал @npz_karta_online (31.07.2026).
+  // Считаем клики по каналу — цель tg_channel_click, параметр page = какая страница даёт спрос.
+  // Старая цель bot_click_frozen остаётся для страниц, где ссылка на бота ещё не заменена:
+  // пока такие есть, две цели считаются раздельно и история не смешивается.
+  // ponytail: живёт здесь, а не отдельным файлом, потому что vpn-nudge.js уже инжектится на
+  // ВСЕ страницы (build-nav + gen-rocket-danger + gen-wave) — значит переживает регенерацию.
+  var TG_GOALS = [
+    { sel: 'a[href*="t.me/npz_karta_online"]', goal: 'tg_channel_click', flag: '_tgch' },
+    { sel: 'a[href*="t.me/BPLAlert_bot"]',     goal: 'bot_click_frozen', flag: '_bot' }
+  ];
+
   function trackBotInterest() {
-    var links = [].slice.call(document.querySelectorAll('a[href*="t.me/BPLAlert_bot"]'));
-    if (!links.length) return;
     var page = location.pathname;
-    links.forEach(function (a) {
-      if (a.dataset._bot) return;
-      a.dataset._bot = '1';
-      a.addEventListener('click', function () {
-        try { if (window.ym) ym(110490245, 'reachGoal', 'bot_click_frozen', { page: page }); } catch (e) {}
-        try { if (window.va) va('event', { name: 'bot_click_frozen', data: { page: page } }); } catch (e) {}
+    TG_GOALS.forEach(function (g) {
+      [].slice.call(document.querySelectorAll(g.sel)).forEach(function (a) {
+        if (a.dataset[g.flag]) return;
+        a.dataset[g.flag] = '1';
+        a.addEventListener('click', function () {
+          try { if (window.ym) ym(110490245, 'reachGoal', g.goal, { page: page }); } catch (e) {}
+          try { if (window.va) va('event', { name: g.goal, data: { page: page } }); } catch (e) {}
+        });
       });
     });
   }

@@ -430,7 +430,7 @@ def build():
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
   <script defer src="/nav-dropdown.js?v=06476ddc"></script>
-  <script defer src="/vpn-nudge.js?v=7009410b"></script>
+  <script defer src="/vpn-nudge.js?v=5c0544cd"></script>
 </body>
 </html>
 """
