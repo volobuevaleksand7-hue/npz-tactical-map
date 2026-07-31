@@ -5,7 +5,7 @@
      self.addEventListener('push', e => { ... self.registration.showNotification(...) });
      self.addEventListener('notificationclick', e => { ... });
 */
-var CACHE = 'npz-shell-v28';   // bump: app.js получил декодер табличной схемы azs-stations — старый app.js из кэша не прочитает новый файл
+var CACHE = 'npz-shell-v29';   // bump: app.js получил декодер табличной схемы azs-stations — старый app.js из кэша не прочитает новый файл
 // CRITICAL должен закешироваться — иначе install падает и старый рабочий SW остаётся (не активируем битую оболочку).
 var CRITICAL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest'];
 // OPTIONAL — best-effort: 404/сбой одной страницы не рушит установку и не сносит старый кэш.
