@@ -55,6 +55,65 @@ def mln(n):
     return ("%.1f" % (n / 1000000.0)).replace(".", ",")
 
 
+def area_ru(m2):
+    """Площадь по-русски: тыс. м² для крупных значений, м² — для мелких."""
+    if m2 >= 1000:
+        v = m2 / 1000.0
+        s = "%d" % v if v == int(v) else ("%.1f" % v).replace(".", ",")
+        return "%s тыс. м²" % s
+    return "%d м²" % m2
+
+
+def warehouse_rank_section(wh, updated_iso):
+    """Топ-25 складов по площади — самообновляемый: как только у объекта
+    status меняется на "hit" (новый удар в data/warehouses.json), карточка
+    на следующем прогоне генератора красится в поражённую, без ручной правки.
+
+    area_m2/area_source_url добавляет параллельный агент; пока их нет ни у
+    одного объекта — рейтинг не рисуется, честно объясняется почему
+    (ponytail: без плейсхолдерных нулей и фейковых карточек).
+    """
+    TOP_N = 25
+    ranked = sorted((w for w in wh if w.get("area_m2")), key=lambda w: -w["area_m2"])
+    if not ranked:
+        return ('      <p class="lead-p">Рейтинг складов по площади пока не опубликован: '
+                'метраж объектов проверяется по открытым источникам и появится здесь, как только '
+                'будет подтверждён.</p>\n')
+
+    shown = ranked[:TOP_N]
+    hit_shown = sum(1 for w in shown if w["status"] == "hit")
+
+    def card(i, w):
+        hit = w["status"] == "hit"
+        cls = "hit" if hit else "ok"
+        state_txt = "ПОРАЖЁН" if hit else "без сообщений об ударах"
+        src = w.get("area_source_url", "")
+        src_html = ('\n          <a class="wh-rank-src" href="%s" rel="nofollow noopener" '
+                    'target="_blank">источник площади ↗</a>' % escape(src)) if src.startswith("https://") else ""
+        return ('        <div class="wh-rank-card %s">\n'
+                '          <div class="wh-rank-top"><span class="wh-rank-num">#%d</span>'
+                '<span class="wh-rank-op">%s</span></div>\n'
+                '          <div class="wh-rank-city">%s</div>\n'
+                '          <div class="wh-rank-region">%s</div>\n'
+                '          <div class="wh-rank-area">%s</div>\n'
+                '          <div class="wh-rank-state %s">%s</div>%s\n'
+                '        </div>'
+                % (cls, i, "WB" if w["operator"] == "wb" else "OZON",
+                   escape(w["name"]), escape(w["region"]), area_ru(w["area_m2"]),
+                   cls, state_txt, src_html))
+
+    cards = "\n".join(card(i, w) for i, w in enumerate(shown, 1))
+    return (
+        '      <div class="wh-rank-grid">\n%s\n      </div>\n'
+        '      <p class="lead-p wh-rank-caption">Показано %d из %d объектов с известной площадью '
+        '(WB %d, Ozon %d), поражено %d. Площади — по открытым источникам, обновлено %s.</p>\n'
+        % (cards, len(shown), len(ranked),
+           sum(1 for w in ranked if w["operator"] == "wb"),
+           sum(1 for w in ranked if w["operator"] == "ozon"),
+           hit_shown, rus(updated_iso))
+    )
+
+
 def build():
     with open(SRC, encoding="utf8") as f:
         doc = json.load(f)
@@ -125,6 +184,7 @@ def build():
         json.dumps({"@type": "Question", "name": q,
                     "acceptedAnswer": {"@type": "Answer", "text": a}}, ensure_ascii=False)
         for q, a in faq)
+    RANK_BLOCK = warehouse_rank_section(wh, UPDATED)
     faq_html = "\n".join(
         '        <div class="faq-item">\n'
         '          <div class="faq-q" onclick="this.parentElement.classList.toggle(\'open\')">%s</div>\n'
@@ -238,6 +298,21 @@ def build():
     .osint-note{{margin-top:32px;font-size:11px;color:var(--ink-dim);background:var(--surface2);padding:12px;border-radius:10px;border-left:3px solid var(--amber);line-height:1.6}}
     .updated-line{{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:6px}}
     .balance-box{{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--red,#d23a2e);border-radius:10px;padding:16px 18px;margin:18px 0;font-size:13.5px;line-height:1.7}}
+    .wh-rank-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}}
+    .wh-rank-card{{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}}
+    .wh-rank-card.hit{{border-color:var(--crit,#a01d14)}}
+    .wh-rank-top{{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}}
+    .wh-rank-num{{font-family:var(--mono);font-size:11px;color:var(--ink-dim);font-weight:800}}
+    .wh-rank-op{{font-family:var(--mono);font-size:10px;color:var(--teal);font-weight:800}}
+    .wh-rank-city{{font-weight:700;font-size:14px;margin-bottom:2px}}
+    .wh-rank-region{{font-size:11px;color:var(--ink-dim);margin-bottom:6px}}
+    .wh-rank-area{{font-family:var(--mono);font-size:16px;font-weight:800;margin-bottom:6px}}
+    .wh-rank-state{{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:800;text-transform:uppercase;padding:2px 8px;border-radius:4px}}
+    .wh-rank-state.hit{{background:rgba(160,29,20,.14);color:var(--crit,#a01d14)}}
+    .wh-rank-state.ok{{background:rgba(23,133,133,.12);color:var(--teal)}}
+    .wh-rank-src{{display:block;margin-top:6px;font-size:11px;color:var(--teal);text-decoration:none}}
+    .wh-rank-src:hover{{text-decoration:underline}}
+    .wh-rank-caption{{font-size:12px;color:var(--ink-dim)}}
 </style>
   <link rel="stylesheet" href="/search.css?v=5a32b7c1">
   <script defer src="/search.js?v=8b14567c"></script>
@@ -306,6 +381,8 @@ def build():
       </div>
       <p class="lead-p">Важно и то, где именно выбыли мощности. Электросталь — один из ключевых узлов доставки для Московского региона, Краснодар и Невинномысск закрывают юг. Потеря узла бьёт не пропорционально его площади, а пропорционально плечу доставки, которое он обслуживал: заказы переносятся на соседние центры, сроки растут именно в тех регионах, где выбыл узел.</p>
 
+      <h2 class="section-h"><span class="ico">🏆</span> Крупнейшие склады по площади</h2>
+{RANK_BLOCK}
       <h2 class="section-h"><span class="ico">📦</span> Сколько складов осталось у Wildberries</h2>
       <p class="lead-p">Ударами напрямую поражено <strong>{len(hits)}</strong> объектов из более чем <strong>{net['wb']['complexes']} складских комплексов</strong> Wildberries (Вайлдберриз, ВБ) — это около <strong>{wb_hit_share:.0f}%</strong> сети. Остальные в открытых данных как поражённые не значатся — это не подтверждение того, что они работают в штатном режиме, а лишь отсутствие сообщений об ударах по ним.</p>
       <p class="lead-p">В вопросах читателей одно и то же событие называют по-разному: сколько складов ВБ <strong>пострадало</strong>, сколько <strong>сгорело</strong>, сколько <strong>взорвали</strong> или <strong>уничтожено</strong>. Проверяемая величина при этом одна — <strong>{len(hits)}</strong> объектов с сообщениями об ударе, пожар подтверждён на {len(burned)}. Данных о полном уничтожении (сносе или списании) объектов в открытых источниках нет, поэтому на этой странице используется формулировка «поражены ударами»: степень повреждений по большинству объектов официально не раскрыта.</p>
@@ -386,6 +463,27 @@ def demo():
     assert mln(doc["meta"]["network"]["wb"]["area_m2"]) in html
     assert LOST_SRC in html, "оценка потерь без ссылки на источник"
     assert "работающие" not in html, "непроверяемое утверждение о работе складов"
+
+    # Рейтинг по площади: пока в датасете area_m2 нет ни у одного объекта —
+    # честная заглушка, а не пустая/фейковая сетка.
+    if not any(w.get("area_m2") for w in doc["warehouses"]):
+        assert "Рейтинг складов по площади пока не опубликован" in html
+
+    # Синтетика — проверяем обе ветки area_ru/warehouse_rank_section без ожидания,
+    # пока area_m2 реально появится в data/warehouses.json.
+    synth = [
+        {"operator": "wb", "name": "Тестово", "region": "Тестовая область",
+         "status": "hit", "area_m2": 250000, "area_source_url": "https://example.com/a"},
+        {"operator": "ozon", "name": "Проверково", "region": "Проверковская область",
+         "status": "ok", "area_m2": 500, "area_source_url": ""},
+    ]
+    block = warehouse_rank_section(synth, "2026-07-31")
+    assert "Тестово" in block and "250 тыс. м²" in block and "ПОРАЖЁН" in block
+    assert "Проверково" in block and "500 м²" in block
+    assert "https://example.com/a" in block
+    assert warehouse_rank_section([{"operator": "wb", "name": "Пусто", "region": "-",
+                                     "status": "ok"}], "2026-07-31").startswith(
+        '      <p class="lead-p">Рейтинг')
     print("demo OK")
 
 
