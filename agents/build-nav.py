@@ -15,7 +15,8 @@ LABELS/HUB ниже, если хочешь красиво) → запусти `p
 Тип страницы (`type` в реестре) → группа меню:
   region → Регионы · region + /raketnaya-opasnost-* → свёрнутый блок «Ракетная опасность» ·
   explainer → Топливо · forecast → Прогноз · reference → Справочники · tool → Карты ·
-  object(/npz/*) → скрыт, только через /refineries.
+  object(/npz/*) → свёрнутый блок «НПЗ по заводам» (в меню; в хабе /analytics НЕ дублируется —
+  там уже есть /refineries со списком всех заводов, см. HUB_EXCLUDE_GROUPS).
 """
 import json, re, pathlib, hashlib
 
@@ -42,7 +43,18 @@ GROUPS = [
     ("Прогноз",            lambda r: r.get("type") == "forecast",                    False),
     ("Справочники",        lambda r: r.get("type") == "reference",                   False),
     ("Карты",              lambda r: r.get("type") == "tool",                        False),
+    ("НПЗ по заводам",     lambda r: r.get("type") == "object",                       True),
 ]
+
+# Свёрнутые (collapse=True) группы: свои эмодзи заголовка <summary> и эмодзи пункта —
+# было захардкожено под единственную группу «Ракетная опасность» (🚀 / 📍), теперь общий словарь.
+COLLAPSE_EMOJI = {
+    "Ракетная опасность": ("🚀", "📍"),
+    "НПЗ по заводам":     ("🏭", "🛢️"),
+}
+# Эти группы сортируются по алфавиту подписи, а не по порядку строк в реестре
+# (реестр = хронология публикации, для 34+ заводов это нечитаемо).
+GROUP_SORT_ALPHA = {"НПЗ по заводам"}
 
 # Подписи пунктов меню: url -> (emoji, label). Нет в списке → берётся primary_kw.
 LABELS = {
@@ -90,6 +102,42 @@ LABELS = {
     "/raketnaya-opasnost-tyumenskaya-oblast": ("🚀", "Ракетная опасность: Тюменская обл."),
     "/raketnaya-opasnost-ryazanskaya-oblast": ("🚀", "Ракетная опасность: Рязанская обл."),
     "/skolko-skladov-wildberries-ozon": ("📦", "Сколько складов у ВБ и Озон"),
+    # object(/npz/*) — свёрнутый блок «НПЗ по заводам»; подписи = чистое название завода
+    # (без служебных слов реестра вида «омский нпз удар»), взято из <title> страниц.
+    "/npz/omskij-npz":                  ("🛢️", "Омский НПЗ"),
+    "/npz/moskovskij-npz":              ("🛢️", "Московский НПЗ (Капотня)"),
+    "/npz/slavneft-yanos":              ("🛢️", "НПЗ ЯНОС (Ярославль)"),
+    "/npz/kujbyshevskij-npz":           ("🛢️", "Куйбышевский НПЗ (Самара)"),
+    "/npz/ryazanskij-npz":              ("🛢️", "Рязанский НПЗ"),
+    "/npz/saratovskij-npz":             ("🛢️", "Саратовский НПЗ"),
+    "/npz/taneko-npz":                  ("🛢️", "ТАНЕКО (Нижнекамск)"),
+    "/npz/bashneft-ufa":                ("🛢️", "Уфимский НПЗ (Башнефть)"),
+    "/npz/taif-nk":                     ("🛢️", "ТАИФ-НК (Нижнекамск)"),
+    "/npz/lukojl-norsi":                ("🛢️", "Лукойл-НОРСИ (Кстово)"),
+    "/npz/ilskij-npz":                  ("🛢️", "Ильский НПЗ"),
+    "/npz/kinef":                       ("🛢️", "Кинеф (Кириши)"),
+    "/npz/tuapsinskij-npz":             ("🛢️", "Туапсинский НПЗ"),
+    "/npz/syzranskij-npz":              ("🛢️", "Сызранский НПЗ"),
+    "/npz/afipskij-npz":                ("🛢️", "Афипский НПЗ"),
+    "/npz/angarskij-npz":               ("🛢️", "Ангарский НПЗ"),
+    "/npz/astrahanskij-gpz":            ("🛢️", "Астраханский ГПЗ"),
+    "/npz/novokujbyshevskij-npz":       ("🛢️", "Новокуйбышевский НПЗ"),
+    "/npz/volgogradskij-npz":           ("🛢️", "Волгоградский НПЗ"),
+    "/npz/salavat-npz":                 ("🛢️", "Газпром нефтехим Салават"),
+    "/npz/antipinskij-npz":             ("🛢️", "Антипинский НПЗ"),
+    "/npz/novoshahtinskij-npz":         ("🛢️", "Новошахтинский НПЗ"),
+    "/npz/achinskij-npz":               ("🛢️", "Ачинский НПЗ"),
+    "/npz/komsomolskij-npz":            ("🛢️", "Комсомольский НПЗ"),
+    "/npz/habarovskij-npz":             ("🛢️", "Хабаровский НПЗ"),
+    "/npz/uhtinskij-npz":               ("🛢️", "Ухтинский НПЗ"),
+    "/npz/marijskij-npz":               ("🛢️", "Марийский НПЗ"),
+    "/npz/yajskij-npz":                 ("🛢️", "Яйский НПЗ"),
+    "/npz/surgutskij-zsk":              ("🛢️", "Сургутский ЗСК"),
+    "/npz/krasnodarskij-npz":           ("🛢️", "Краснодарский НПЗ"),
+    "/npz/lukojl-permnefteorgsintez":   ("🛢️", "Лукойл-Пермнефтеоргсинтез"),
+    "/npz/orskij-npz":                  ("🛢️", "Орский НПЗ"),
+    "/npz/slavyanskij-npz":             ("🛢️", "Славянский НПЗ"),
+    "/npz/ns-oil":                      ("🛢️", "NS-Oil (Новоспасское)"),
 }
 
 # Карточки хаба /analytics: url -> (заголовок, описание).
@@ -145,7 +193,8 @@ def cover_for(url):
     return f"/assets/{png.name}" if png.exists() else None
 
 TOP_URLS   = {u for u, _, _ in TOP + TOP_TAIL}
-HIDE_TYPES = {"object"}  # /npz/* — только через /refineries, десятки заводов в меню/хабе не льём
+HIDE_TYPES = set()  # object(/npz/*) больше не скрыт целиком — свой свёрнутый блок меню, см. GROUPS;
+                     # из хаба /analytics по-прежнему не льём, см. HUB_EXCLUDE_GROUPS ниже
 
 
 def load_reg():
@@ -170,16 +219,22 @@ def pick(rows, pred):
             and r.get("type") not in HIDE_TYPES]
 
 
-def short_label(url, primary_kw):
-    """Подпись внутри блока «Ракетная опасность» — только город (префикс не дублируем)."""
-    emoji, lab = label_for(url, primary_kw)
-    return emoji, lab.replace("Ракетная опасность: ", "")
+def short_label(url, primary_kw, title):
+    """Подпись внутри свёрнутого блока меню — заголовок группы в тексте не дублируем
+    («Ракетная опасность: Волгоград» → «Волгоград»; для заводов префикса и так нет)."""
+    return label_for(url, primary_kw)[1].replace(f"{title}: ", "")
+
+
+HUB_EXCLUDE_GROUPS = {"НПЗ по заводам"}  # объектные страницы заводов не дублируем карточками
+                                          # хаба — там уже есть /refineries со списком всех
 
 
 def ordered_pages(rows):
-    """Все видимые live-страницы в порядке групп (плоско, для хаба/drawer)."""
+    """Все видимые live-страницы в порядке групп (плоско, для хаба)."""
     out = []
-    for _title, pred, _collapse in GROUPS:
+    for title, pred, _collapse in GROUPS:
+        if title in HUB_EXCLUDE_GROUPS:
+            continue
         out.extend(pick(rows, pred))
     return out
 
@@ -194,15 +249,18 @@ def build_menu(rows, current):
         picked = pick(rows, pred)
         if not picked:
             continue
+        if title in GROUP_SORT_ALPHA:
+            picked = sorted(picked, key=lambda r: label_for(r["url"], r.get("primary_kw"))[1])
         if collapse:
             # свёрнутый блок; авто-раскрыт, если открыта одна из его страниц
+            summary_emoji, item_emoji = COLLAPSE_EMOJI.get(title, ("🚀", "📍"))
             op = " open" if any(r["url"] == current for r in picked) else ""
             out.append(f'            <details class="nav-drop-sub"{op}>')
-            out.append(f'              <summary>🚀 {title}</summary>')
+            out.append(f'              <summary>{summary_emoji} {title}</summary>')
             for r in picked:
-                _e, lab = short_label(r["url"], r.get("primary_kw"))
+                lab = short_label(r["url"], r.get("primary_kw"), title)
                 cur = ' aria-current="page"' if r["url"] == current else ""
-                out.append(f'              <a href="{r["url"]}"{cur}>📍 {lab}</a>')
+                out.append(f'              <a href="{r["url"]}"{cur}>{item_emoji} {lab}</a>')
             out.append('            </details>')
         else:
             out.append(f'            <div class="nav-drop-group">{title}</div>')
@@ -291,12 +349,15 @@ def build_index_menu(rows):
         picked = pick(rows, pred)
         if not picked:
             continue
+        if title in GROUP_SORT_ALPHA:
+            picked = sorted(picked, key=lambda r: label_for(r["url"], r.get("primary_kw"))[1])
         if collapse:
+            summary_emoji, item_emoji = COLLAPSE_EMOJI.get(title, ("🚀", "📍"))
             lines.append('            <details class="tdm-sub">\n')
-            lines.append(f'              <summary>🚀 {title}</summary>\n')
+            lines.append(f'              <summary>{summary_emoji} {title}</summary>\n')
             for r in picked:
-                _e, lab = short_label(r["url"], r.get("primary_kw"))
-                lines.append(f'              <a href="{r["url"]}">📍 {lab}</a>\n')
+                lab = short_label(r["url"], r.get("primary_kw"), title)
+                lines.append(f'              <a href="{r["url"]}">{item_emoji} {lab}</a>\n')
             lines.append('            </details>\n')
         else:
             lines.append(f'            <div class="tdm-group">{title}</div>\n')
@@ -314,16 +375,19 @@ DRAWER_SKIP = {"/help"}  # /help закреплён в группе «Разде
 
 def build_drawer_analytics(rows):
     lines = ["\n"]
-    for _title, pred, collapse in GROUPS:
+    for title, pred, collapse in GROUPS:
         picked = [r for r in pick(rows, pred) if r["url"] not in DRAWER_SKIP]
         if not picked:
             continue
+        if title in GROUP_SORT_ALPHA:
+            picked = sorted(picked, key=lambda r: label_for(r["url"], r.get("primary_kw"))[1])
         if collapse:
+            summary_emoji, item_emoji = COLLAPSE_EMOJI.get(title, ("🚀", "📍"))
             lines.append('      <details class="ndp-sub">\n')
-            lines.append('        <summary class="ndp-item">🚀 Ракетная опасность</summary>\n')
+            lines.append(f'        <summary class="ndp-item">{summary_emoji} {title}</summary>\n')
             for r in picked:
-                _e, lab = short_label(r["url"], r.get("primary_kw"))
-                lines.append(f'        <a class="ndp-item ndp-subitem" href="{r["url"]}">📍 {lab}</a>\n')
+                lab = short_label(r["url"], r.get("primary_kw"), title)
+                lines.append(f'        <a class="ndp-item ndp-subitem" href="{r["url"]}">{item_emoji} {lab}</a>\n')
             lines.append('      </details>\n')
         else:
             for r in picked:
