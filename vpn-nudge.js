@@ -20,6 +20,7 @@
   // пока такие есть, две цели считаются раздельно и история не смешивается.
   // ponytail: живёт здесь, а не отдельным файлом, потому что vpn-nudge.js уже инжектится на
   // ВСЕ страницы (build-nav + gen-rocket-danger + gen-wave) — значит переживает регенерацию.
+  var CHANNEL_URL = 'https://t.me/npz_karta_online';
   var TG_GOALS = [
     { match: 't.me/npz_karta_online', goal: 'tg_channel_click' },
     { match: 't.me/BPLAlert_bot',     goal: 'bot_click_frozen' }
@@ -174,8 +175,50 @@
     return firstBlocked;
   }
 
+  // Читатель уходит в чужие каналы: 143 ссылки-источника на exilenova_plus / radarrussiia /
+  // noel_reports на 41 странице, и НИ НА ОДНОЙ из них не было нашей кнопки (замер 01.08.2026,
+  // ~1900 переходов в чужие каналы за 17 дней). Ставим свою рядом; источники не трогаем —
+  // они нужны для нейтральной атрибуции.
+  // ponytail: инжектим отсюда, а не правим шаблоны news/*.html и npz/*.html — этот файл уже
+  // на всех страницах и переживает их регенерацию.
+  var FOREIGN_TG = 'a[href*="t.me/exilenova_plus"],a[href*="t.me/radarrussiia"],a[href*="t.me/noel_reports"]';
+
+  function addChannelCta() {
+    if (document.querySelector('a[href*="t.me/npz_karta_online"]')) return; // кнопка уже есть
+    if (!document.querySelector(FOREIGN_TG)) return;                        // уводить некому
+
+    var row = document.querySelector('.cta-buttons');
+    if (row) {
+      var b = document.createElement('a');
+      b.className = 'cta-btn secondary';
+      b.href = CHANNEL_URL; b.target = '_blank'; b.rel = 'noopener';
+      b.textContent = '📡 Сводки в Telegram →';
+      row.appendChild(b);
+      return;
+    }
+    var main = document.querySelector('main');
+    if (!main) return;
+    var box = document.createElement('div');
+    box.style.cssText = 'margin:28px auto;max-width:900px;padding:14px 18px;border:1px solid ' +
+      'rgba(18,165,148,.35);border-radius:12px;background:rgba(18,165,148,.07);font-size:15px';
+    box.innerHTML = 'Следите за обстановкой в нашем Telegram-канале — сводки об ударах дважды ' +
+      'в день. <a href="' + CHANNEL_URL + '" target="_blank" rel="noopener" ' +
+      'style="font-weight:700;white-space:nowrap">📡 Подписаться →</a>';
+    main.appendChild(box);
+  }
+
+  // 🔴 На страницах заводов и в новостях ссылки-источники дорисовываются из данных уже ПОСЛЕ
+  // DOMContentLoaded — разовая проверка не находила ни одной и молча выходила. Пробуем трижды;
+  // повтор безопасен, addChannelCta выходит сразу, если кнопка уже стоит.
+  function scheduleChannelCta() {
+    addChannelCta();
+    window.addEventListener('load', addChannelCta);
+    setTimeout(addChannelCta, 2500);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     trackBotInterest(); // до раннего return для карт — CTA бота есть и на radar/karta-azs
+    scheduleChannelCta();
     var isMap = !!document.getElementById('map');
     var firstBlocked = isMap ? null : markBlockedLinks();
     if (isMap || FLOAT_PAGES.indexOf(location.pathname.replace(/\/$/, '')) !== -1) {

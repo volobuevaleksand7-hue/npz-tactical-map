@@ -407,7 +407,7 @@ TEMPLATE = """<!DOCTYPE html>
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
   <script defer src="/nav-dropdown.js"></script>
-  <script defer src="/vpn-nudge.js?v=b73274e9"></script>
+  <script defer src="/vpn-nudge.js?v=75a0afd9"></script>
 </body>
 </html>
 """

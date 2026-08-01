@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-07-31T12:56:48Z",
+  "generated_at": "2026-08-01T07:33:57Z",
   "scope": "Крупные распределительные центры Wildberries и фулфилмент-центры Ozon. Отметка поражения — только удары БПЛА и ракет.",
   "geocoder": "Nominatim / OpenStreetMap (ODbL)",
   "network": {
@@ -18,7 +18,7 @@
   },
   "counts": {
    "total": 56,
-   "hit": 19,
+   "hit": 20,
    "burned": 13
   }
  },
@@ -63,8 +63,8 @@
    "region": "Московская область",
    "address": "деревня Кучино, Домодедово",
    "type": "ffc",
-   "lat": 55.40871,
-   "lon": 37.90947,
+   "lat": 55.75212,
+   "lon": 37.95475,
    "status": "ok"
   },
   {
@@ -74,8 +74,8 @@
    "region": "Свердловская область",
    "address": "Логопарк Кольцовский, Екатеринбург",
    "type": "ffc",
-   "lat": 56.83821,
-   "lon": 60.60079,
+   "lat": 56.77085,
+   "lon": 60.73197,
    "status": "ok"
   },
   {
@@ -96,8 +96,8 @@
    "region": "Татарстан",
    "address": "Зеленодольск, промышленный парк Зеленодольск",
    "type": "ffc",
-   "lat": 55.79465,
-   "lon": 49.1115,
+   "lat": 55.85866,
+   "lon": 48.56742,
    "status": "ok"
   },
   {
@@ -107,8 +107,8 @@
    "region": "Краснодарский край",
    "address": "посёлок Дружный, Индустриальный парк, Краснодар",
    "type": "ffc",
-   "lat": 45.05388,
-   "lon": 38.98627,
+   "lat": 44.72468,
+   "lon": 39.77718,
    "status": "ok"
   },
   {
@@ -129,8 +129,8 @@
    "region": "Московская область",
    "address": "Обухово, Обухово-Парк, 2",
    "type": "ffc",
-   "lat": 55.85535,
-   "lon": 38.44119,
+   "lat": 55.83147,
+   "lon": 38.2727,
    "status": "ok"
   },
   {
@@ -195,8 +195,8 @@
    "region": "Самарская область",
    "address": "Чапаевск, ул. Индустриальная",
    "type": "ffc",
-   "lat": 53.19563,
-   "lon": 50.10149,
+   "lat": 52.98128,
+   "lon": 49.71119,
    "status": "ok"
   },
   {
@@ -241,10 +241,7 @@
    "type": "rc",
    "lat": 54.50281,
    "lon": 37.06672,
-   "status": "ok",
-   "area_source_url": "https://retail-loyalty.org/news/wildberries-stroit-dva-krupnykh-regionalnykh-sklada/",
-   "area_note": "заявленная (проектная) площадь распредцентра на ТОСЭР «Алексин»; данных о фактически введённой площади не найдено",
-   "area_planned_m2": 300000
+   "status": "ok"
   },
   {
    "id": "wb-белые-столбы",
@@ -256,6 +253,22 @@
    "lat": 55.33347,
    "lon": 37.85093,
    "status": "ok"
+  },
+  {
+   "id": "wb-волгоград",
+   "operator": "wb",
+   "name": "Волгоград",
+   "region": "Волгоградская область",
+   "address": "",
+   "type": "rc",
+   "lat": 48.73,
+   "lon": 44.5,
+   "status": "hit",
+   "date": "2026-07-31",
+   "damage": "hit",
+   "note": "Удар дронами по логистическому центру Wildberries",
+   "source_url": "https://t.me/exilenova_plus",
+   "from_strike": true
   },
   {
    "id": "wb-воронеж",
@@ -270,9 +283,7 @@
    "date": "2026-07-23",
    "damage": "hit",
    "note": "Новая волна удара по складу Wildberries в Воронеже",
-   "source_url": "https://t.me/exilenova_plus",
-   "area_m2": 156000,
-   "area_source_url": "https://www.retail.ru/news/wildberries-zapustil-logisticheskiy-tsentr-v-voronezhe-14-noyabrya-2025-271402/"
+   "source_url": "https://t.me/exilenova_plus"
   },
   {
    "id": "wb-всеволожск",
@@ -306,22 +317,6 @@
    "source_url": "https://www.rbc.ua/ukr/news/droni-atakuvali-sklad-wildberries-ekaterinburzi-1784960496.html"
   },
   {
-   "id": "wb-зеленодольск",
-   "operator": "wb",
-   "name": "Зеленодольск",
-   "region": "Республика Татарстан",
-   "address": "",
-   "type": "rc",
-   "lat": 55.4,
-   "lon": 48.7,
-   "status": "hit",
-   "date": "2026-07-31",
-   "damage": "hit",
-   "note": "логистический центр Wildberries",
-   "source_url": "https://t.me/exilenova_plus",
-   "from_strike": true
-  },
-  {
    "id": "wb-иваново",
    "operator": "wb",
    "name": "Иваново",
@@ -339,12 +334,13 @@
    "region": "Татарстан",
    "address": "Зеленодольск, промышленный парк",
    "type": "rc",
-   "lat": 55.79465,
-   "lon": 49.1115,
-   "status": "ok",
-   "area_m2": 100000,
-   "area_source_url": "https://www.retail.ru/news/wildberries-zapustil-krupneyshiy-regionalnyy-raspredtsentr-v-tatarstane-24-avgusta-2020-196991/",
-   "area_note": "по данным Retail.ru (2020): первая очередь 50 тыс. м², всего свыше 100 тыс. м²; более поздние агрегаторы без первоисточника упоминают до 150 тыс. м² — не подтверждено"
+   "lat": 55.85866,
+   "lon": 48.56742,
+   "status": "hit",
+   "date": "2026-07-31",
+   "damage": "hit",
+   "note": "логистический центр Wildberries",
+   "source_url": "https://t.me/exilenova_plus"
   },
   {
    "id": "wb-коледино",
@@ -359,9 +355,7 @@
    "date": "2026-07-28",
    "damage": "burned",
    "note": "логистический центр Wildberries",
-   "source_url": "https://t.me/s/exilenova_plus",
-   "area_m2": 250000,
-   "area_source_url": "https://www.kommersant.ru/doc/8832545"
+   "source_url": "https://t.me/s/exilenova_plus"
   },
   {
    "id": "wb-котовск",
@@ -376,9 +370,7 @@
    "date": "2026-07-18",
    "damage": "burned",
    "note": "Пожар после удара БПЛА, работа остановлена",
-   "source_url": "https://rg.ru/2026/07/18/reg-cfo/sem-chelovek-pogibli-pri-atake-vsu-na-logisticheskij-centr-wildberries-v-kotovske.html",
-   "area_m2": 108000,
-   "area_source_url": "https://abireg.ru/newsitem/107370/"
+   "source_url": "https://rg.ru/2026/07/18/reg-cfo/sem-chelovek-pogibli-pri-atake-vsu-na-logisticheskij-centr-wildberries-v-kotovske.html"
   },
   {
    "id": "wb-краснодар",
@@ -393,10 +385,7 @@
    "date": "2026-07-22",
    "damage": "burned",
    "note": "Пожар после удара БПЛА, работа приостановлена",
-   "source_url": "https://lenta.ru/news/2026/07/22/long-bpla-vsu-atakovali-krasnodar-i-nevinnomysk-na-skladah-nachalsya-pozhar-chto-izvestno-o-sluchivshemsya/",
-   "area_m2": 100000,
-   "area_source_url": "https://www.retail.ru/news/wildberries-zapustil-50-tys-kv-m-novoy-ocheredi-logisticheskogo-kompleksa-v-kras-23-marta-2023-227015/",
-   "area_note": "общая площадь после ввода второй очереди (март 2023); в отдельных публикациях фигурирует проектная площадь всего комплекса до 250 тыс. м², без указания текущей введённой"
+   "source_url": "https://lenta.ru/news/2026/07/22/long-bpla-vsu-atakovali-krasnodar-i-nevinnomysk-na-skladah-nachalsya-pozhar-chto-izvestno-o-sluchivshemsya/"
   },
   {
    "id": "wb-крёкшино",
@@ -433,9 +422,7 @@
    "date": "2026-07-22",
    "damage": "burned",
    "note": "Пожар после удара БПЛА, работа приостановлена, режим ЧС локального уровня",
-   "source_url": "https://pobeda26.ru/news/obshhestvo/2026-07-22/sklady-wildberries-v-krasnodare-i-nevinnomysske-ne-rabotayut-posle-atak-bpla-365976",
-   "area_m2": 94000,
-   "area_source_url": "https://kavkaz.rbc.ru/kavkaz/freenews/66fa49cf9a7947dc7c52206e"
+   "source_url": "https://pobeda26.ru/news/obshhestvo/2026-07-22/sklady-wildberries-v-krasnodare-i-nevinnomysske-ne-rabotayut-posle-atak-bpla-365976"
   },
   {
    "id": "wb-новокосино",
@@ -587,9 +574,7 @@
    "type": "rc",
    "lat": 53.36994,
    "lon": 50.35365,
-   "status": "ok",
-   "area_m2": 130000,
-   "area_source_url": "https://news.ati.su/news/2025/05/24/v-samarskoj-oblasti-otkryli-sklad-wildberries-kotoryj-vmestit-120-mln-edinits-tovarov-770310/"
+   "status": "ok"
   },
   {
    "id": "wb-санкт-петербург-парголово",
@@ -598,8 +583,8 @@
    "region": "Санкт-Петербург",
    "address": "Парголово, ул. Подгорная, 61",
    "type": "rc",
-   "lat": 59.93873,
-   "lon": 30.31623,
+   "lat": 60.08125,
+   "lon": 30.25892,
    "status": "ok"
   },
   {
@@ -616,9 +601,7 @@
    "damage": "burned",
    "note": "Удар по складу Wildberries в Сарапуле",
    "source_url": "https://t.me/radarrussiia",
-   "from_strike": true,
-   "area_m2": 53000,
-   "area_source_url": "https://oborot.ru/news/wildberries-delaet-stavku-na-udmurtiyu-v-sarapule-otkroetsya-novyj-sklad-na-53-tysyachi-kvadratov-i245311.html"
+   "from_strike": true
   },
   {
    "id": "wb-саратов",
@@ -629,10 +612,7 @@
    "type": "rc",
    "lat": 51.53002,
    "lon": 46.03468,
-   "status": "ok",
-   "area_m2": 84000,
-   "area_source_url": "https://www.retail.ru/news/wildberries-gotovitsya-k-otkrytiyu-logisticheskogo-kompleksa-v-saratove-5-fevralya-2026-274208/",
-   "area_note": "площадь первой очереди; проектная общая площадь после завершения строительства — 204 тыс. м²"
+   "status": "ok"
   },
   {
    "id": "wb-симферополь",
@@ -648,10 +628,7 @@
    "damage": "burned",
    "note": "логистический центр Wildberries",
    "source_url": "https://t.me/exilenova_plus",
-   "from_strike": true,
-   "area_m2": 6000,
-   "area_source_url": "https://expertsouth.ru/news/sklad-dlya-postavshchikov-wildberries-poyavilsya-v-simferopole/",
-   "area_note": "источник даёт нижнюю границу «более 6 тыс. кв. м», точная цифра не названа"
+   "from_strike": true
   },
   {
    "id": "wb-софьино",
@@ -662,10 +639,7 @@
    "type": "rc",
    "lat": 55.50291,
    "lon": 38.18864,
-   "status": "ok",
-   "area_m2": 41500,
-   "area_source_url": "https://cre.ru/news/98099",
-   "area_note": "площадь конкретного корпуса, арендованного WB в 2024 г. (класс A+); суммарно в технопарке «Софьино» WB занимает более 80 тыс. м² по разным договорам"
+   "status": "ok"
   },
   {
    "id": "wb-тверь",
@@ -681,10 +655,7 @@
    "damage": "burned",
    "note": "Атака БПЛА на логистический центр Wildberries в Твери",
    "source_url": "https://tverigrad.ru/publication/vitalij-korolev-v-tveri-proizoshlo-vozgoranie-logisticheskogo-centra-posle-ataki-bpla/",
-   "from_strike": true,
-   "area_m2": 77000,
-   "area_source_url": "https://postavleno.ru/blog/sklad-wildberries-tver/",
-   "area_note": "площадь первой очереди; проектная общая площадь после завершения строительства (2-я очередь) — 150 тыс. м²"
+   "from_strike": true
   },
   {
    "id": "wb-улан-удэ",
@@ -749,10 +720,7 @@
    "damage": "hit",
    "note": "Удар по логистическому центру Wildberries в Шушарах",
    "source_url": "https://t.me/s/exilenova_plus",
-   "from_strike": true,
-   "area_m2": 106000,
-   "area_source_url": "https://oborot.ru/news/58-millionov-tovarov-i-trehurovnejer-dlya-sortirovki-tovarov-vo-chto-wildberries-prevrashhaet-sgorevshij-sklad-v-shusharah-i248697.html",
-   "area_note": "площадь после восстановления и расширения после пожара 2024 года"
+   "from_strike": true
   },
   {
    "id": "wb-электросталь",
@@ -767,9 +735,7 @@
    "date": "2026-07-18",
    "damage": "burned",
    "note": "Крупный пожар после удара БПЛА, локализован 20 июля",
-   "source_url": "https://vz.ru/news/2026/7/18/1435782.html",
-   "area_m2": 250000,
-   "area_source_url": "https://www.kommersant.ru/doc/8832545"
+   "source_url": "https://vz.ru/news/2026/7/18/1435782.html"
   }
  ]
 }

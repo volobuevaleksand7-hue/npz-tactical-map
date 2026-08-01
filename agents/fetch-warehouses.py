@@ -226,19 +226,38 @@ def build(offline=False):
             # Nominatim часто не знает промзоны и логопарки по полному адресу — откатываемся
             # на «населённый пункт + регион». На обзорной карте страны такой точки достаточно,
             # а пустая координата выкинула бы склад с карты совсем.
+            #
+            # 🔴 Скобки в имени — это УТОЧНЕНИЕ места, а не пояснение: «Казань (Зеленодольск)»
+            # стоит в Зеленодольске, в 40 км от Казани. Раньше фолбэк брал текст ДО скобки и
+            # ставил склад в центр Казани; когда 31.07 прилетело по Зеленодольску, удар не
+            # смэтчился с этим складом по расстоянию и породил дубль-призрак без площади,
+            # а реальный поражённый склад остался помечен целым. Поэтому сначала пробуем
+            # место ИЗ скобок и только потом — город до скобки.
             base = name.split("(")[0].strip()
+            inner = name[name.find("(") + 1:name.rfind(")")].strip() if "(" in name else ""
             ll = (geocode(addr + ", Россия", cache, offline)
+                  or (geocode(inner + ", " + region + ", Россия", cache, offline) if inner else None)
                   or geocode(base + ", " + region + ", Россия", cache, offline))
             if not ll:
                 missing.append("%s / %s" % (op, name))
                 continue
-            city = nearest_strike(op, ll, strikes)
+            # 🔴 Уточнение из скобок сверяем по имени ПЕРВЫМ, до геометрии: координаты в
+            # strikes.json часто округлены до десятых градуса, и у удара по Зеленодольску это
+            # дало промах ~50 км — геометрия не признала его своим и породила дубль-призрак.
+            # Берём ТОЛЬКО inner: он называет конкретное место («Зеленодольск», «Парголово»).
+            # Город до скобки для этого не годится — «Санкт-Петербург» носят четыре склада, и
+            # общегородская сводка приписала бы удар одному из них как факт.
+            city = None
+            ci = norm_city(inner)
+            if ci and ci in strikes and strikes[ci]["operator"] == op:
+                city = ci
             if city is None:
-                # у удара может не быть координат — геометрией такой не проверишь,
-                # для него остаётся прежняя сверка по названию города
-                c = norm_city(base)
-                if strikes.get(c, {}).get("lat") is None and c in strikes:
-                    city = c
+                city = nearest_strike(op, ll, strikes)
+            if city is None:
+                # у удара нет координат — геометрией не проверишь, остаётся сверка по городу
+                cb = norm_city(base)
+                if cb in strikes and strikes[cb].get("lat") is None:
+                    city = cb
             hit = strikes.pop(city) if city else None
             it = {
                 "id": "%s-%s" % (op, name.lower().replace(" ", "-").replace("(", "").replace(")", "")),
@@ -360,10 +379,15 @@ def demo():
     for city, h in sk.items():
         assert h["date"] and h["operator"] in ("wb", "ozon"), (city, h)
         assert h["damage"] in ("burned", "hit")
-    # каждый удар обязан попасть на слой: либо на склад из справочника, либо отдельной записью
-    names = {norm_city(n.split("(")[0]) for _, rows in (("wb", WB), ("ozon", OZON)) for n, _, _ in rows}
-    for city in sk:
-        assert city in names or True   # склады вне справочника добавляются из самого удара
+    # имя склада может уточнять место в скобках — в набор идут обе формы, иначе удар по
+    # Зеленодольску не признавался «своим» для склада «Казань (Зеленодольск)»
+    names = set()
+    for _, rows in (("wb", WB), ("ozon", OZON)):
+        for n, _, _ in rows:
+            names.add(norm_city(n.split("(")[0]))
+            if "(" in n:
+                names.add(norm_city(n[n.find("(") + 1:n.rfind(")")]))
+    assert "зеленодольск" in names, "уточнение из скобок не попадает в набор имён"
     assert all(k[1] in names for k in HIT_NOTES), "уточнение указывает на несуществующий склад"
 
     # 🔴 Регрессия 25.07: удар «Санкт-Петербург» (объекты на Московском шоссе, Пулково)
