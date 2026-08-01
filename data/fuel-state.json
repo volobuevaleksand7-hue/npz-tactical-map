@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-01T08:07Z",
+    "generated_at": "2026-08-01T16:30Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Reuters/Bloomberg/Meduza/Moscow Times/The Bell/Новая газета/CNN). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики.",
     "refresh_seconds": 300,
-    "updated_by": "agent:strike-pipeline"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
@@ -254,10 +254,10 @@
       "status": "partial",
       "status_since": "2026-08-01",
       "est_output_pct": 15,
-      "damage": "Несколько дронов атаковали НПЗ в Уфе. Зафиксированы взрывы, видны столбы дыма. Пожар на нефтебазе. Атака подтверждена видеоматериалами с места события.",
-      "note": "На 1 августа продолжает улучшаться благодаря импорту.",
-      "source_url": "https://t.me/s/exilenova_plus",
-      "confidence": "reported"
+      "damage": "Удар украинских дронов 1 августа: поражены три объекта комплекса (Bashneft-UNPZ, Bashneft-Novoil, Bashneft-Ufaneftekhim). Зафиксированы взрывы и множественные пожары. Поражение подтверждено видео и спутниковыми данными.",
+      "note": "На 1 августа — Уфимская группа (крупнейший кластер переработки РФ с мощностью 24 млн т/год) переведена в режим пониженной загрузки. Атака на дальность ~1600 км.",
+      "source_url": "https://en.apa.az/cis-countries/ukrainian-drone-strikes-hit-oil-refinery-infrastructure-in-russias-bashkortostan-military-sites-in-crimea-518602",
+      "confidence": "confirmed"
     },
     {
       "id": "achinsk",
@@ -1174,8 +1174,10 @@
   "events": [
     {
       "date": "2026-08-01",
-      "text": "Удар по Уфимская группа (Башнефть) (Уфа): Несколько дронов атаковали НПЗ в Уфе. Зафиксированы взрывы, видны столбы дыма. Пожар на нефтебазе. А",
-      "source_url": "https://t.me/s/exilenova_plus"
+      "text": "Удар украинских дронов на Уфимскую группу (Башнефть) в Башкортостане: поражены три крупных объекта (Bashneft-UNPZ, Bashneft-Novoil, Bashneft-Ufaneftekhim) с общей мощностью свыше 23 млн т/год. Зафиксированы взрывы, множественные пожары, дым над городом. Рассеяние в аэропорту Уфы. Атака — на дальность свыше 1600 км от линии фронта.",
+      "type": "refinery",
+      "source_url": "https://kyivindependent.com/fire-reported-at-major-russian-oil-refinery-in-ufa-following-drone-attack/",
+      "confidence": "confirmed"
     },
     {
       "date": "2026-07-31",
