@@ -113,6 +113,11 @@ def merge(archive, incoming):
         archive["summary"]["total"] = len(strikes)
     if added:
         archive["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    # 🔴 checked_at штампуется ВСЕГДА, даже когда влить нечего. generated_at отвечает на
+    # «когда данные последний раз МЕНЯЛИСЬ», checked_at — на «когда мы последний раз успешно
+    # СХОДИЛИ за ними». Без второго watchdog не отличает сломанный сбор от тихой ночи: 01.08
+    # ударов не было вовсе, сбор отработал штатно, а сторож 18 часов кричал stale_critical.
+    archive["checked_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     return archive, added, dupes
 
 

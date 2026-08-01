@@ -127,7 +127,21 @@ def load_heartbeats():
         return {}
 
 
-def classify(data_age_h, thr_h, hb_age_h, hb_fresh_h, crit_h=None):
+def checked_at(path):
+    """Когда сбор последний раз УСПЕШНО отработал (в отличие от «когда данные менялись»).
+
+    Пишется мерджером на каждом прогоне, даже при нуле новых записей. Отдельный штамп, а НЕ
+    кандидат в gen_at: если подмешать его к свежести данных, протухший слой начнёт выглядеть
+    свежим и мы потеряем сигнал, ради которого сторож и заведён.
+    """
+    try:
+        d = json.load(open(path, encoding="utf-8"))
+    except Exception:
+        return None
+    return d.get("checked_at") if isinstance(d, dict) else None
+
+
+def classify(data_age_h, thr_h, hb_age_h, hb_fresh_h, crit_h=None, check_age_h=None):
     """Две ОРТОГОНАЛЬНЫЕ оси: свежесть ДАННЫХ и связь с АГЕНТОМ.
 
     Возвращает (status, data_stale, agent_dead).
@@ -146,7 +160,14 @@ def classify(data_age_h, thr_h, hb_age_h, hb_fresh_h, crit_h=None):
     data_stale = data_age_h > thr_h
     if crit_h is not None and data_age_h > crit_h:
         # столько тишины не бывает: агент может быть жив и отчитываться, но
-        # данные такого возраста означают сломанный сбор, а не отсутствие новостей
+        # данные такого возраста означают сломанный сбор, а не отсутствие новостей.
+        # 🔴 Исключение (01.08): если сбор ОТЧИТАЛСЯ о свежем успешном проходе (checked_at
+        # моложе окна hb_fresh_h), то тишина настоящая — источники проверены, новых событий
+        # нет. Иначе сторож кричит «сломано» в спокойные сутки и его перестают читать.
+        # Heartbeat тут не годится: его штампует git-sync на любом прогоне, даже когда сбор
+        # упал, — а checked_at пишет мерджер и только после успешного прохода.
+        if check_age_h is not None and check_age_h <= hb_fresh_h:
+            return ("stale_dead" if hb_dead else "stale_alive"), True, hb_dead
         return "stale_critical", True, hb_dead
     if data_stale:
         # данные старые, но агент отчитался -> просто нет новостей, не алертим
@@ -166,6 +187,14 @@ def selfcheck():
     assert classify(20, 18, 1, 15, crit_h=12)[0] == "stale_critical"
     assert classify(10, 18, 1, 15, crit_h=12)[0] == "ok"
     assert classify(20, 18, 40, 15, crit_h=12)[0] == "stale_critical"
+    # 🔴 тихая ночь: данные старше крит-порога, но сбор успешно отработал час назад
+    assert classify(20, 18, 1, 15, crit_h=12, check_age_h=1)[0] == "stale_alive"
+    # сбор отработал давно -> это уже поломка, крит остаётся
+    assert classify(20, 18, 1, 15, crit_h=12, check_age_h=40)[0] == "stale_critical"
+    # свежий checked_at НЕ воскрешает мёртвого агента: связь отдельная ось
+    assert classify(20, 18, 40, 15, crit_h=12, check_age_h=1)[0] == "stale_dead"
+    # без checked_at поведение прежнее (слои, где мерджер его не пишет)
+    assert classify(20, 18, 1, 15, crit_h=12, check_age_h=None)[0] == "stale_critical"
     assert CRITICAL_STALE_H["strikes.json"] < dict(
         (w[0], w[2]) for w in WATCH)["strikes.json"], \
         "критический порог обязан быть строже обычного, иначе он недостижим"
@@ -263,8 +292,11 @@ def main():
         hb_dt = parse(hb_ts)
         hb_age_h = None if hb_dt is None else max(0.0, round((now - hb_dt).total_seconds() / 3600, 1))
 
+        chk_dt = parse(checked_at(os.path.join(ROOT, "data", fn)))
+        check_age_h = None if chk_dt is None else max(0.0, round((now - chk_dt).total_seconds() / 3600, 1))
+
         status, data_stale, hb_stale = classify(data_age_h, thr_h, hb_age_h, hb_fresh_h,
-                                                CRITICAL_STALE_H.get(fn))
+                                                CRITICAL_STALE_H.get(fn), check_age_h)
         if status == "stale_critical":
             critical.append((fn, agent, data_age_h))
         if data_stale:
