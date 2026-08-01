@@ -30,6 +30,7 @@ import json, os, sys, time, urllib.request, urllib.parse, datetime, hashlib
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import render as R
 import day_state as DS
+from channel_mirror import CHANNEL_MIRRORS, send_to_mirrors, mirror_enabled  # noqa: E402
 
 # ─── Конфиг ───────────────────────────────────────────────────────────────────
 HOME = os.path.expanduser("~")
@@ -41,13 +42,10 @@ SITE = "https://npz-tactical-map.vercel.app"
 
 CHANNEL_CHAT_ID = "-1004491068477"   # @NPZmap
 ADMIN_CHAT_ID = "609952529"         # текущий чат для tier-2
-# Зеркала молний: тот же текст, что в CHANNEL_CHAT_ID. Список через запятую, пустая
-# строка отключает. Имя переменной то же, что у сводок в broadcast.py — иначе каналы
-# разъедутся: сводки в одном месте, молнии в другом.
-# 🔴 Падение зеркала НЕ должно ронять публикацию в основной канал.
-CHANNEL_MIRRORS = [c.strip() for c in
-                   os.environ.get("NPZ_CHANNEL_MIRRORS", "@npz_karta_online").split(",")
-                   if c.strip()]
+# Зеркала молний: тот же текст, что в CHANNEL_CHAT_ID, но АНОНИМНЫМ ботом
+# (см. channel_mirror.py) — 🔴 не через api_call()/TOKEN этого файла, тот бот
+# личный. CHANNEL_MIRRORS/mirror_enabled реэкспортированы отсюда, т.к. CLI и
+# test_molniya_mirror.py читают их как RP.CHANNEL_MIRRORS.
 
 # ─── Константы классификации ─────────────────────────────────────────────────
 # Слова в target/title, обозначающие удар по НПЗ/нефтепереработке
@@ -338,6 +336,9 @@ def publish_major(text, dry_run=False):
     except Exception as e:
         errors.append(f"channel exception: {e}")
 
+    if result["channel_ok"] and mirror_enabled("NPZ_MIRROR_MOLNIYA"):
+        send_to_mirrors(formatted, label="молния (legacy --major)")
+
     # 2) Всем активным подписчикам
     subscribers = _get_active_subscribers()
     sent = 0
@@ -411,16 +412,8 @@ def publish_strike_molniya(strike, reason="", dry_run=False):
     except Exception as e:
         errors.append(f"channel exception: {e}")
 
-    for mirror in CHANNEL_MIRRORS:
-        try:
-            resp = api_call("sendMessage", chat_id=mirror, text=text,
-                             parse_mode="HTML", disable_web_page_preview="true")
-            ok = resp.get("ok", False)
-            print(f"молния: зеркало {mirror} -> {'ok' if ok else resp.get('description')}")
-            if not ok:
-                errors.append(f"mirror {mirror}: {resp.get('description', 'unknown error')}")
-        except Exception as e:
-            errors.append(f"mirror {mirror} exception: {e}")
+    if mirror_enabled("NPZ_MIRROR_MOLNIYA"):
+        send_to_mirrors(text, label="молния")
 
     subscribers = _get_active_subscribers()
     sent = 0
@@ -682,7 +675,10 @@ def _do_publish_to_channel(text):
         parse_mode="HTML",
         disable_web_page_preview="true",
     )
-    return resp.get("ok", False)
+    ok = resp.get("ok", False)
+    if ok and mirror_enabled("NPZ_MIRROR_MOLNIYA"):
+        send_to_mirrors(text, label="молния (tier2-подтверждена)")
+    return ok
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
