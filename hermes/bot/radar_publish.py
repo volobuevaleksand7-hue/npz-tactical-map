@@ -41,6 +41,13 @@ SITE = "https://npz-tactical-map.vercel.app"
 
 CHANNEL_CHAT_ID = "-1004491068477"   # @NPZmap
 ADMIN_CHAT_ID = "609952529"         # текущий чат для tier-2
+# Зеркала молний: тот же текст, что в CHANNEL_CHAT_ID. Список через запятую, пустая
+# строка отключает. Имя переменной то же, что у сводок в broadcast.py — иначе каналы
+# разъедутся: сводки в одном месте, молнии в другом.
+# 🔴 Падение зеркала НЕ должно ронять публикацию в основной канал.
+CHANNEL_MIRRORS = [c.strip() for c in
+                   os.environ.get("NPZ_CHANNEL_MIRRORS", "@npz_karta_online").split(",")
+                   if c.strip()]
 
 # ─── Константы классификации ─────────────────────────────────────────────────
 # Слова в target/title, обозначающие удар по НПЗ/нефтепереработке
@@ -385,7 +392,8 @@ def publish_strike_molniya(strike, reason="", dry_run=False):
         print(f"\n{'='*60}\n[DRY-RUN] TIER 1 — МОЛНИЯ (единый рендер)\n{'='*60}")
         print(text)
         subscribers = _get_active_subscribers()
-        print(f"\nКанал: {CHANNEL_CHAT_ID} (@NPZmap)\nПодписчики ({len(subscribers)}): {subscribers}")
+        print(f"\nКанал: {CHANNEL_CHAT_ID} (@NPZmap)\nЗеркала: {CHANNEL_MIRRORS or '—'}"
+              f"\nПодписчики ({len(subscribers)}): {subscribers}")
         print(f"{'='*60}\n")
         return {"channel_ok": True, "subscribers_sent": len(subscribers), "errors": [],
                 "skipped_duplicate": False, "key": key}
@@ -402,6 +410,17 @@ def publish_strike_molniya(strike, reason="", dry_run=False):
             errors.append(f"channel: {resp.get('description', 'unknown error')}")
     except Exception as e:
         errors.append(f"channel exception: {e}")
+
+    for mirror in CHANNEL_MIRRORS:
+        try:
+            resp = api_call("sendMessage", chat_id=mirror, text=text,
+                             parse_mode="HTML", disable_web_page_preview="true")
+            ok = resp.get("ok", False)
+            print(f"молния: зеркало {mirror} -> {'ok' if ok else resp.get('description')}")
+            if not ok:
+                errors.append(f"mirror {mirror}: {resp.get('description', 'unknown error')}")
+        except Exception as e:
+            errors.append(f"mirror {mirror} exception: {e}")
 
     subscribers = _get_active_subscribers()
     sent = 0
