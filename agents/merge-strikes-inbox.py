@@ -156,13 +156,11 @@ def main():
     before = len(archive["strikes"])
 
     added = dupes = 0
+    dirty = False
     if "--refresh" not in sys.argv:
         incoming = as_list(load(INBOX, []))
         if incoming:
             archive, added, dupes = merge(archive, incoming)
-            if added:
-                with open(ARCHIVE, "w", encoding="utf-8") as f:
-                    json.dump(archive, f, ensure_ascii=False, indent=1)
             # inbox чистим всегда: он разовый, иначе дубли поедут в следующий прогон
             with open(INBOX, "w", encoding="utf-8") as f:
                 json.dump([], f)
@@ -170,15 +168,25 @@ def main():
                   % (added, dupes, before, len(archive["strikes"])), file=sys.stderr)
         else:
             print("merge-inbox: inbox пуст — нечего вливать", file=sys.stderr)
+        # 🔴 checked_at обязан пережить ЛЮБОЙ успешный прогон, включая тихую ночь.
+        # merge() штампует его только при непустом inbox, а архив писался только при
+        # added>0 — то есть ровно в тихую ночь, под которую healthcheck.py и вводил
+        # исключение, штамп до файла не доезжал: 01.08 сторож 18 ч кричал «сбор сломан»
+        # при живом сборе, писавшем inbox=[] каждый час. Строка в час дешевле ложной
+        # тревоги, на которую перестают смотреть.
+        archive["checked_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        dirty = True
 
     # total дрейфует и без нас (санитайзер его не пересчитывает, ручные правки тоже):
-    # застали 196 при 197 записях. Чиним всегда, а не только при вливании — но пишем
-    # файл лишь при реальном расхождении, чтобы не плодить пустые коммиты.
+    # застали 196 при 197 записях. Чиним всегда, а не только при вливании.
     summ = archive.get("summary")
-    if isinstance(summ, dict) and summ.get("total") != len(archive["strikes"]) and not added:
+    if isinstance(summ, dict) and summ.get("total") != len(archive["strikes"]):
         print("merge-inbox: summary.total рассинхронен (%s → %d) — пересчитан"
               % (summ.get("total"), len(archive["strikes"])), file=sys.stderr)
         summ["total"] = len(archive["strikes"])
+        dirty = True
+
+    if dirty:
         with open(ARCHIVE, "w", encoding="utf-8") as f:
             json.dump(archive, f, ensure_ascii=False, indent=1)
 
@@ -202,20 +210,28 @@ def selfcheck():
     INBOX = os.path.join(tmp, "strikes-inbox.json")
     RECENT = os.path.join(tmp, "strikes-recent.json")
 
+    # Даты фикстуры — ОТНОСИТЕЛЬНЫЕ. С хардкодом ("2026-07-01") тест протухал: build_recent
+    # режет хвост по now−RECENT_DAYS, поэтому через 10 дней после написания фикстуры
+    # проверка `count >= 1` начинала падать сама по себе, на неизменном коде.
+    _today = datetime.now(timezone.utc).date()
+    D_OLD = (_today - timedelta(days=2)).isoformat()
+    D_MID = (_today - timedelta(days=1)).isoformat()
+    D_NEW = _today.isoformat()
+
     arch = {
         "strikes": [
-            {"id": "old-1", "date": "2026-07-01", "city": "Рязань", "target": "НПЗ"},
-            {"date": "2026-07-14", "time": "ночь", "city": "Афипский", "target": "НПЗ"},
+            {"id": "old-1", "date": D_OLD, "city": "Рязань", "target": "НПЗ"},
+            {"date": D_MID, "time": "ночь", "city": "Афипский", "target": "НПЗ"},
         ],
         "summary": {"total": 999},           # рассинхрон — должен пересчитаться
         "generated_at": "2026-07-14T00:00:00+00:00",
     }
     json.dump(arch, open(ARCHIVE, "w", encoding="utf-8"), ensure_ascii=False)
     json.dump([
-        {"id": "new-1", "date": "2026-07-15", "city": "Чёрное море", "target": "танкеры"},
-        {"id": "old-1", "date": "2026-07-01", "city": "Рязань", "target": "НПЗ"},        # дубль по id
-        {"date": "2026-07-14", "time": "ночь", "city": "Афипский", "target": "НПЗ"},     # дубль по составному
-        {"city": "без даты"},                                                             # мусор
+        {"id": "new-1", "date": D_NEW, "city": "Чёрное море", "target": "танкеры"},
+        {"id": "old-1", "date": D_OLD, "city": "Рязань", "target": "НПЗ"},        # дубль по id
+        {"date": D_MID, "time": "ночь", "city": "Афипский", "target": "НПЗ"},     # дубль по составному
+        {"city": "без даты"},                                                      # мусор
     ], open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
 
     rc = main()
@@ -227,7 +243,7 @@ def selfcheck():
     assert json.load(open(RECENT, encoding="utf-8"))["count"] >= 1
 
     # повторный прогон того же inbox не плодит дубли
-    json.dump([{"id": "new-1", "date": "2026-07-15", "city": "Чёрное море", "target": "танкеры"}],
+    json.dump([{"id": "new-1", "date": D_NEW, "city": "Чёрное море", "target": "танкеры"}],
               open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
     main()
     assert len(json.load(open(ARCHIVE, encoding="utf-8"))["strikes"]) == 3, "дубль просочился"
@@ -240,11 +256,25 @@ def selfcheck():
     main()
     assert json.load(open(ARCHIVE, encoding="utf-8"))["summary"]["total"] == 3, "total не починен"
 
+    # 🔴 тихая ночь: inbox пуст, вливать нечего — но штамп «сходили за данными» ОБЯЗАН
+    # доехать до файла, иначе healthcheck не отличит тихую ночь от сломанного сбора
+    # и будет 18 ч кричать «сбор сломан» (01.08). generated_at при этом не трогаем —
+    # данные не менялись.
+    a = json.load(open(ARCHIVE, encoding="utf-8"))
+    a.pop("checked_at", None)
+    gen_before = a.get("generated_at")
+    json.dump(a, open(ARCHIVE, "w", encoding="utf-8"), ensure_ascii=False)
+    json.dump([], open(INBOX, "w", encoding="utf-8"))
+    main()
+    a = json.load(open(ARCHIVE, encoding="utf-8"))
+    assert a.get("checked_at"), "пустой inbox не оставил checked_at — сторож снова соврёт"
+    assert a.get("generated_at") == gen_before, "generated_at сдвинут без новых данных"
+
     # подозрительная коллизия id: тот же id old-1, но ДРУГОЕ событие (другое время).
     # Дефолт — отбросить (как настоящий дубль двух источников), но НЕ создать фантом:
     # архив не растёт, второго old-1 не появляется. (В stderr при этом идёт ⚠.)
     n0 = len(json.load(open(ARCHIVE, encoding="utf-8"))["strikes"])
-    json.dump([{"id": "old-1", "date": "2026-07-01", "time": "ночь",
+    json.dump([{"id": "old-1", "date": D_OLD, "time": "ночь",
                 "city": "Рязань", "target": "нефтебаза"}],
               open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
     main()
