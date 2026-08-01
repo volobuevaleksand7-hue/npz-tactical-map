@@ -14,6 +14,28 @@ module.exports = async function handler(req, res) {
   }
 
   // Normalize upstream (or snapshot — same shape) into our response format.
+  // ponytail: сантиметры на карте городов не нужны — 4 знака после запятой (~11м)
+  // с запасом покрывает точность маркера на радаре; режет ~2-3 байта/координата.
+  const round4 = (n) => Math.round((n || 0) * 10000) / 10000;
+
+  // Общие для region/district поля угроз, которые реально читает radar.html
+  // (грепнуто по rData./dd. в processRadar): остальное (attention, bplaLaunchAnim,
+  // fill, ПВО) фронт не трогает — не отдаём.
+  const threatFields = (o) => ({
+    bpla: o.bpla || false,
+    bplaDim: o.bplaDim || false,
+    uab: o.uab || false,
+    uabDim: o.uabDim || false,
+    fpv: o.fpv || false,
+    rocket: o.rocket || false,
+    rocket_level: o.rocket_level || false,
+    rocketOnRegion: o.rocketOnRegion || false,
+    aviation: o.aviation || false,
+    explosionOnRegion: o.explosionOnRegion || false,
+    last_event_ts: o.last_event_ts || 0,
+    source_text: o.source_text || ""
+  });
+
   const transform = (data, stale) => {
     const citiesDict = {};
     for (const city of (data.cities || [])) {
@@ -29,23 +51,39 @@ module.exports = async function handler(req, res) {
         rocket: city.rocket || false,
         rocket_level: city.rocket_level || false,
         aviation: city.aviation || false,
-        lat: city.lat || 0,
-        lon: city.lon || 0,
+        lat: round4(city.lat),
+        lon: round4(city.lon),
         last_event_ts: city.last_event_ts || 0,
         source_text: city.source_text || ""
       };
     }
 
+    const regionsSafe = {};
+    for (const [name, r] of Object.entries(data.regions || {})) {
+      regionsSafe[name] = threatFields(r || {});
+    }
+    const districtsSafe = {};
+    for (const [key, d0] of Object.entries(data.districts || {})) {
+      const d = d0 || {};
+      districtsSafe[key] = Object.assign({ region_ru: d.region_ru }, threatFields(d));
+    }
+
     // ПВО (air defense) НЕ отдаём — отмечать позиции ПВО на карте нельзя; вырезаем на уровне прокси
     const stripPvo = (o) => { if (o && typeof o === "object") delete o.pvo; return o; };
-    const regionsSafe = data.regions || {};
-    for (const r of Object.values(regionsSafe)) stripPvo(r);
-    const districtsSafe = data.districts || {};
-    for (const d of Object.values(districtsSafe)) stripPvo(d);
     const routeMarkers = Array.isArray(data.route_markers) ? data.route_markers.map(stripPvo) : [];
     // sea_markers / direction_flights могут нести маркеры БПЛА (над морем / в полёте) во время налётов — прокидываем
     const seaMarkers = Array.isArray(data.sea_markers) ? data.sea_markers.map(stripPvo) : [];
     const directionFlights = Array.isArray(data.direction_flights) ? data.direction_flights.map(stripPvo) : [];
+
+    // recent_messages: фронт (renderFeed) рендерит только первые 60 — msg_id никогда не читает
+    const messages = Array.isArray(data.recent_messages) ? data.recent_messages.slice(0, 60) : [];
+    const recentMessages = messages.map((m) => ({
+      ts: m.ts || 0,
+      time_label: m.time_label || "",
+      source_id: m.source_id || null,
+      source_label: m.source_label || null,
+      text: m.text || ""
+    }));
 
     return {
       cities: citiesDict,
@@ -55,12 +93,8 @@ module.exports = async function handler(req, res) {
       sea_markers: seaMarkers,
       direction_flights: directionFlights,
       poll_interval_sec: data.poll_interval_sec || 60,
-      recent_messages: Array.isArray(data.recent_messages) ? data.recent_messages.slice(0, 100) : [],
+      recent_messages: recentMessages,
       sources: data.sources || [],
-      direction_arrows: data.direction_arrows || [],
-      bpla_icon_fade_sec: data.bpla_icon_fade_sec || 10800,
-      timestamp: Date.now() / 1000,
-      fetched_at: new Date().toISOString(),
       stale: !!stale
     };
   };
