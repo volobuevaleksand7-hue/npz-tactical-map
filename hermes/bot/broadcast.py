@@ -31,6 +31,9 @@ CHANNEL = os.environ.get("NPZ_CHANNEL", "@NPZmap")  # публичный кан�
 CHANNEL_MIRRORS = [c.strip() for c in
                     os.environ.get("NPZ_CHANNEL_MIRRORS", "@npz_karta_online").split(",") if c.strip()]
 TOKEN = None
+# Зеркала постит ОТДЕЛЬНЫЙ анонимный бот @npz_karta_bot. Личный @NpzFuel_Bot заведён
+# с аккаунта владельца — его админка в анонимном канале означала бы деанон проекта.
+MIRROR_TOKEN_PATH = os.environ.get("NPZ_MIRROR_TOKEN", "/root/.npz-site-bot/token")
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import render as R
@@ -49,6 +52,16 @@ def jload(p, d):
 def esc(s):
     s = "" if s is None else str(s)
     return s.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
+
+def mirror_token():
+    """Токен анонимного бота для зеркал. None — файла нет, тогда зеркала пропускаем:
+    лучше не запостить в зеркало, чем запостить личным ботом."""
+    try:
+        return open(MIRROR_TOKEN_PATH).read().strip()
+    except Exception as e:
+        print("зеркала: нет токена %s (%s) — пропускаю" % (MIRROR_TOKEN_PATH, e))
+        return None
+
 
 def api_url(method):
     global TOKEN
@@ -366,7 +379,12 @@ def do_briefing(mode, dry=False, test_chat=None, force=False):
     # чтобы --update правил каждый канал по своим message_id). Ошибка зеркала
     # только логируется и не мешает основной публикации.
     mirrors_state = {}
-    for mirror in CHANNEL_MIRRORS:
+    # ponytail: подменяем глобальный TOKEN вокруг цикла, а не тащим параметр через
+    # все хелперы — скрипт однопоточный и синхронный, гонки быть не может.
+    mtok = mirror_token()
+    _saved_token = TOKEN
+    globals()["TOKEN"] = mtok
+    for mirror in (CHANNEL_MIRRORS if mtok else []):
         try:
             m_res, t_res = send_card_or_text(mirror, img, caption_or_text)
             ok = bool((m_res and m_res[0]) or (t_res and t_res[0]))
@@ -380,6 +398,7 @@ def do_briefing(mode, dry=False, test_chat=None, force=False):
                 mirrors_state[mirror] = entry
         except Exception as e:
             print("briefing %s: зеркало %s — исключение %s" % (mode, mirror, e))
+    globals()["TOKEN"] = _saved_token      # дальше личка — снова основным ботом
 
     # Личка
     subs = jload(SUBS_PATH, {}).get("subscribers", {})
@@ -473,7 +492,10 @@ def do_update(update_text, molniya_url=None, dry=False):
     # То же самое пополнение — в зеркала, по их собственным message_id. Падение
     # зеркала не должно мешать основной правке (уже применена выше).
     mirrors = state.get("mirrors", {})
-    for mirror, ids in mirrors.items():
+    mtok = mirror_token()
+    _saved_token = TOKEN
+    globals()["TOKEN"] = mtok
+    for mirror, ids in (mirrors.items() if mtok else []):
         try:
             if mode == "caption" and not switch_to_split and ids.get("media_message_id"):
                 ok, err = edit_caption(mirror, ids["media_message_id"], final_text)
@@ -492,6 +514,7 @@ def do_update(update_text, molniya_url=None, dry=False):
                     print("update: зеркало %s ERR при переключении в split - %s" % (mirror, err))
         except Exception as e:
             print("update: зеркало %s — исключение %s" % (mirror, e))
+    globals()["TOKEN"] = _saved_token
     state["mirrors"] = mirrors
 
     DS.save_state(state)
