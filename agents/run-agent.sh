@@ -102,11 +102,16 @@ fi
 # Validate ALL data json — revert everything on any corruption.
 # Runs BEFORE the heartbeat write so a corrupt run does not get its heartbeat
 # reverted along with the bad data (the heartbeat must survive to prove liveness).
-BAD=0
-for f in data/*.json; do
-  python3 -c "import json, sys; json.load(open(sys.argv[1]))" "$f" 2>/dev/null || { echo "!! INVALID: $f"; BAD=1; }
-done
-if [ "$BAD" = "1" ]; then
+# Factored into a function: the strikes/newswatch retry below (01.08) needs to
+# re-validate after a second attempt too.
+validate_data_json() {
+  local bad=0
+  for f in data/*.json; do
+    python3 -c "import json, sys; json.load(open(sys.argv[1]))" "$f" 2>/dev/null || { echo "!! INVALID: $f"; bad=1; }
+  done
+  return "$bad"
+}
+if ! validate_data_json; then
   echo "reverting data/ due to invalid JSON"
   git checkout -- data/
   exit 1
@@ -129,11 +134,41 @@ fi
 # Сборщик ударов: признак работы — записанный inbox, а НЕ diff по data/.
 # «Новых ударов нет» → агент пишет [] поверх [] → содержимое не изменилось, но прогон
 # честный. А вот нетронутый файл = агент не работал (15.07: просил разрешение, RC=0).
+#
+# 01.08: поймано вживую — headless `claude -p` изредка (модель, не окружение)
+# отвечает текстом-подтверждением задачи вместо записи файла (см. agents/logs/
+# strikes.log хвост за 2026-08-01). Раньше это стоило всего 12-часового
+# cron-слота сборки ударов до следующего запуска — healthcheck успевал
+# закричать «сбор сломан». Один быстрый повтор того же промпта в этом же
+# запуске закрывает разрыв дешевле простоя.
+# ponytail: один retry, не цикл — стабильный отказ модели пусть остаётся
+# честным пустым прогоном (heartbeat не пишем, как и раньше).
 if [ -n "$AGENT_OUT" ]; then
   _out_ts="$( [ -f "$AGENT_OUT" ] && stat -c %Y "$AGENT_OUT" 2>/dev/null || echo 0 )"
   if [ "$_out_ts" -lt "$RUN_START_TS" ]; then
-    echo "!! [$LABEL] ПУСТОЙ ПРОГОН: RC=0, но агент не записал $AGENT_OUT — heartbeat НЕ пишем."
-    echo "   Ответ агента (для разбора): $(head -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
+    echo "!! [$LABEL] пустой прогон (попытка 1) — $AGENT_OUT не записан, повтор той же задачи"
+    $TIMEOUT_WRAP claude -p "$PROMPT" \
+      --model "$MODEL" \
+      --allowedTools "Read,Write,WebSearch,WebFetch" \
+      --permission-mode acceptEdits \
+      >> "agents/logs/${LABEL}.log" 2>&1
+    RC=$?
+    echo "engine claude($MODEL) retry exit: $RC"
+    if [ "$RC" != "0" ]; then
+      echo "!! agent retry failed (RC=$RC) — reverting data/, no commit"
+      git checkout -- data/ 2>/dev/null || true
+      exit "$RC"
+    fi
+    if ! validate_data_json; then
+      echo "reverting data/ due to invalid JSON (retry)"
+      git checkout -- data/
+      exit 1
+    fi
+    _out_ts="$( [ -f "$AGENT_OUT" ] && stat -c %Y "$AGENT_OUT" 2>/dev/null || echo 0 )"
+  fi
+  if [ "$_out_ts" -lt "$RUN_START_TS" ]; then
+    echo "!! [$LABEL] ПУСТОЙ ПРОГОН: RC=0, но агент не записал $AGENT_OUT (после повтора) — heartbeat НЕ пишем."
+    echo "   Ответ агента (для разбора, хвост лога): $(tail -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
     exit 0
   fi
   # Влить найденное в полный архив: дедуп + пересчёт summary, без LLM.
@@ -167,7 +202,7 @@ if [ "$DATA_BEFORE" = "$DATA_AFTER" ]; then
     bash agents/git-sync.sh "data(${LABEL}): heartbeat $(date -u +%Y-%m-%dT%H:%MZ)" "$LABEL" || true
   else
     echo "!! [$LABEL] МГНОВЕННЫЙ ПУСТОЙ ПРОГОН (${_dur}с): подозрение на тихий крах — heartbeat НЕ пишем."
-    echo "   Ответ агента (для разбора): $(head -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
+    echo "   Ответ агента (для разбора, хвост лога): $(tail -c 300 "agents/logs/${LABEL}.log" 2>/dev/null | tr "\n" " ")"
   fi
   exit 0
 fi
