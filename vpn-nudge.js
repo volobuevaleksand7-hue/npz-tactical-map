@@ -21,22 +21,27 @@
   // ponytail: живёт здесь, а не отдельным файлом, потому что vpn-nudge.js уже инжектится на
   // ВСЕ страницы (build-nav + gen-rocket-danger + gen-wave) — значит переживает регенерацию.
   var TG_GOALS = [
-    { sel: 'a[href*="t.me/npz_karta_online"]', goal: 'tg_channel_click', flag: '_tgch' },
-    { sel: 'a[href*="t.me/BPLAlert_bot"]',     goal: 'bot_click_frozen', flag: '_bot' }
+    { match: 't.me/npz_karta_online', goal: 'tg_channel_click' },
+    { match: 't.me/BPLAlert_bot',     goal: 'bot_click_frozen' }
   ];
 
+  // 🔴 Слушаем документ, а не навешиваем на найденные ссылки: две самые заметные кнопки —
+  // баннер .subscription-alert и попап sub-nudge.js — появляются в DOM ПОЗЖЕ загрузки, и
+  // разовый querySelectorAll их не видел. Клики по ним не считались вообще.
+  // Делегирование ловит ссылку независимо от того, когда её вставили, и стоит одного слушателя.
   function trackBotInterest() {
-    var page = location.pathname;
-    TG_GOALS.forEach(function (g) {
-      [].slice.call(document.querySelectorAll(g.sel)).forEach(function (a) {
-        if (a.dataset[g.flag]) return;
-        a.dataset[g.flag] = '1';
-        a.addEventListener('click', function () {
-          try { if (window.ym) ym(110490245, 'reachGoal', g.goal, { page: page }); } catch (e) {}
-          try { if (window.va) va('event', { name: g.goal, data: { page: page } }); } catch (e) {}
-        });
-      });
-    });
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href*="t.me/"]');
+      if (!a) return;
+      var page = location.pathname;
+      for (var i = 0; i < TG_GOALS.length; i++) {
+        if (a.href.indexOf(TG_GOALS[i].match) === -1) continue;
+        var goal = TG_GOALS[i].goal;
+        try { if (window.ym) ym(110490245, 'reachGoal', goal, { page: page }); } catch (err) {}
+        try { if (window.va) va('event', { name: goal, data: { page: page } }); } catch (err) {}
+        return;
+      }
+    }, true);
   }
 
   // Оффер: давим на бесплатный доступ + скорость, мотив остаётся «открыть источник».
