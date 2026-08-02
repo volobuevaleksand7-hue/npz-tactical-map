@@ -305,6 +305,7 @@ def build():
     .wh-rank-num{{font-family:var(--mono);font-size:11px;color:var(--ink-dim);font-weight:800}}
     .wh-rank-op{{font-family:var(--mono);font-size:10px;color:var(--teal);font-weight:800}}
     .wh-rank-city{{font-weight:700;font-size:14px;margin-bottom:2px}}
+    .wh-rank-card.hit .wh-rank-city{{text-decoration:line-through;text-decoration-color:var(--crit,#a01d14)}}
     .wh-rank-region{{font-size:11px;color:var(--ink-dim);margin-bottom:6px}}
     .wh-rank-area{{font-family:var(--mono);font-size:16px;font-weight:800;margin-bottom:6px}}
     .wh-rank-state{{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:800;text-transform:uppercase;padding:2px 8px;border-radius:4px}}
@@ -481,6 +482,9 @@ def demo():
     assert "Тестово" in block and "250 тыс. м²" in block and "ПОРАЖЁН" in block
     assert "Проверково" in block and "500 м²" in block
     assert "https://example.com/a" in block
+    assert '"wh-rank-card hit"' in block, "поражённая карточка без класса hit — зачёркивание не сработает"
+    assert ".wh-rank-card.hit .wh-rank-city{text-decoration:line-through" in html, (
+        "нет CSS-правила зачёркивания названия поражённого склада")
     assert warehouse_rank_section([{"operator": "wb", "name": "Пусто", "region": "-",
                                      "status": "ok"}], "2026-07-31").startswith(
         '      <p class="lead-p">Рейтинг')

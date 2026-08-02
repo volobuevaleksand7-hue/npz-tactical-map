@@ -117,6 +117,12 @@ MATCH_KM = 6.0
 # Новосаратовской). 15 км накрывает агломерацию и не склеивает соседние города.
 AGG_KM = 15.0
 
+# Площадь объекта — ручные поля параллельного агента (проверяются по открытым источникам),
+# этот скрипт их не собирает и не проверяет. build() пересобирает items с нуля из справочников
+# WB/OZON + strikes.json, поэтому без явного переноса по id любой прогон стирал бы их
+# (так и вышло: коммит 04618a5f обнулил все area_m2, вернувшись отсюда с чистыми dict'ами).
+AREA_FIELDS = ("area_m2", "area_source_url", "area_note", "area_planned_m2")
+
 # Справочные цифры для статьи — из публичных заявлений компаний, начало 2026.
 NETWORK = {
     "wb": {"complexes": 200, "area_m2": 5200000,
@@ -319,9 +325,24 @@ def build(offline=False):
     return items, missing, placed
 
 
+def load_area_fields():
+    """id -> ручные поля площади из уже опубликованного data/warehouses.json."""
+    try:
+        with open(OUT, encoding="utf8") as f:
+            doc = json.load(f)
+    except Exception:
+        return {}
+    return {w["id"]: {k: w[k] for k in AREA_FIELDS if k in w}
+            for w in doc.get("warehouses", []) if any(k in w for k in AREA_FIELDS)}
+
+
 def main():
     offline = "--check" in sys.argv
     items, missing, placed = build(offline)
+    areas = load_area_fields()           # мержим по id ДО записи — иначе пересборка их стирает
+    for it in items:
+        if it["id"] in areas:
+            it.update(areas[it["id"]])
     hits = [i for i in items if i["status"] == "hit"]
     burned = [i for i in hits if i.get("damage") == "burned"]
 
@@ -414,6 +435,19 @@ def demo():
                   for oc, o in sk.items() if oc != c and o.get("lat") is not None]
         assert any(d <= AGG_KM for d in others), (
             "сводка %s осталась без соседа — она станет отдельным объектом, счётчик завысится" % c)
+
+    # 🔴 Регресс 04618a5f: пересборка build() создаёт items с нуля и стирала area_m2/area_note/
+    # area_source_url/area_planned_m2 у объектов, которым площадь добавили руками. Проверяем, что
+    # такой прогон их сохраняет (мерж по id), а не только сам load_area_fields().
+    areas = load_area_fields()
+    assert areas, "load_area_fields() не нашёл ни одной площади в текущем data/warehouses.json"
+    sample_id, sample_fields = next(iter(areas.items()))
+    items, _, _ = build(offline=True)
+    by_id = {it["id"]: it for it in items}
+    assert sample_id in by_id, "id из area_fields пропал после build() — площадь осиротеет"
+    for k, v in sample_fields.items():
+        by_id[sample_id][k] = v            # main() делает то же самое через areas[it['id']]
+    assert by_id[sample_id].get("area_m2") == sample_fields.get("area_m2")
     print("demo OK")
 
 
