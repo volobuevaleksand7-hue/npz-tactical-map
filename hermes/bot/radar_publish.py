@@ -30,6 +30,10 @@ import json, os, sys, time, urllib.request, urllib.parse, datetime, hashlib
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import render as R
 import day_state as DS
+try:
+    from content_guard import scrub_record
+except ImportError:
+    scrub_record = None  # без чистки лучше опубликовать, чем упасть
 from channel_mirror import CHANNEL_MIRRORS, send_to_mirrors, mirror_enabled  # noqa: E402
 
 # ─── Конфиг ───────────────────────────────────────────────────────────────────
@@ -255,6 +259,12 @@ def strike_to_molniya_event(strike, reason=""):
     """Конвертирует запись из strikes.json в event-payload для render.render_molniya().
     `reason` (внутренняя причина TIER1-классификации) НЕ идёт в текст поста —
     используется только для логов пайплайна."""
+    # 🔴 Чистим ПЕРЕД рендером, а не полагаемся на pre-commit: санитайзер правит
+    # data/strikes.json на git-commit, а молния уходит в канал раньше — именно так
+    # 01.08 в ленту попали «Bashneft-UNPZ» и «по информации SBU».
+    strike = dict(strike)
+    if scrub_record:
+        scrub_record(strike)
     city = strike.get("city", "")
     region = strike.get("region", "")
     target = str(strike.get("target") or strike.get("title") or "").split("(")[0].strip()

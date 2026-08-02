@@ -32,6 +32,9 @@ is_clean = neutrality.is_clean
 scrub_text = neutrality.scrub_text
 # Непочиняемое в тексте: [(причина, фрагмент)]. Пусто — публиковать можно.
 text_reasons = neutrality.text_reasons
+# Чистка полей записи на месте — зовётся ПЕРЕД рендером поста, т.к. санитайзер
+# в pre-commit срабатывает уже после отправки молнии в канал.
+scrub_record = neutrality.scrub_record
 
 
 def demo():
