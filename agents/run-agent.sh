@@ -83,7 +83,7 @@ fi
 if [ "$RC" != "0" ]; then
   $TIMEOUT_WRAP claude -p "$PROMPT" \
     --model "$MODEL" \
-    --allowedTools "Read,Write,WebSearch,WebFetch" \
+    --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
     --permission-mode acceptEdits \
     >> "agents/logs/${LABEL}.log" 2>&1
   RC=$?
@@ -111,10 +111,29 @@ validate_data_json() {
   done
   return "$bad"
 }
+# 🔴 02.08: fuel-market дважды подряд отдал битый JSON (модель пишет файл сырым текстом
+# и оставляет висячую запятую). Guard честно откатывал и выходил — но БЕЗ heartbeat, и
+# агент числился мёртвым 21+ ч при расписании раз в 12 ч: один плохой прогон стоил всего
+# слота. Ретрай на пустой прогон ниже сюда не доставал — он ловит «файл не записан», а не
+# «записан мусор». Даём тот же один быстрый повтор, что и там.
+# Откат ДО повтора обязателен: иначе модель перечитает собственный сломанный файл.
+# ponytail: один повтор, не цикл — стабильный отказ модели остаётся честным падением.
 if ! validate_data_json; then
-  echo "reverting data/ due to invalid JSON"
+  echo "!! [$LABEL] битый JSON (попытка 1) — откатываю data/ и повторяю ту же задачу"
   git checkout -- data/
-  exit 1
+  $TIMEOUT_WRAP claude -p "$PROMPT" \
+    --model "$MODEL" \
+    --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
+    --permission-mode acceptEdits \
+    >> "agents/logs/${LABEL}.log" 2>&1
+  RC=$?
+  echo "engine claude($MODEL) json-retry exit: $RC"
+  if [ "$RC" != "0" ] || ! validate_data_json; then
+    echo "reverting data/ due to invalid JSON (после повтора)"
+    git checkout -- data/
+    exit 1
+  fi
+  echo "[$LABEL] повтор дал валидный JSON — продолжаем"
 fi
 
 # We only reach here on a successful, JSON-valid run (RC=0 — failures exited above).
@@ -149,7 +168,7 @@ if [ -n "$AGENT_OUT" ]; then
     echo "!! [$LABEL] пустой прогон (попытка 1) — $AGENT_OUT не записан, повтор той же задачи"
     $TIMEOUT_WRAP claude -p "$PROMPT" \
       --model "$MODEL" \
-      --allowedTools "Read,Write,WebSearch,WebFetch" \
+      --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
       --permission-mode acceptEdits \
       >> "agents/logs/${LABEL}.log" 2>&1
     RC=$?
