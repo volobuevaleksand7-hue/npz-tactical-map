@@ -187,9 +187,22 @@ if [ "${ALLOW_FRONTEND_RELEASE:-}" != "1" ]; then
   PROTECTED_UI_RE='^(index\.html|styles\.css|app\.js|radar\.html|version\.json|CHANGELOG\.md|\.vercelignore)$'
   prot="$(git diff --name-only 2>/dev/null | grep -E "$PROTECTED_UI_RE" || true)"
   if [ -n "$prot" ]; then
-    echo "git-sync: сбрасываю protected-UI правки (VPS их не коммитит — иначе заклинит pull):" >&2
-    printf '%s\n' "$prot" | sed 's/^/    /' >&2
-    printf '%s\n' "$prot" | while IFS= read -r _f; do git checkout -- "$_f" 2>/dev/null || true; done
+    # 🔴 02.08.2026: этот сброс дважды за день уничтожил НЕЗАКОММИЧЕННУЮ работу живой сессии
+    # на Маке (переписанные иконки складов в app.js). На VPS фронт никто не редактирует, и
+    # сброс безопасен; на машине разработчика ровно здесь идёт правка. Различать машины по
+    # hostname ненадёжно (сессии бывают и в worktree, и по ssh), поэтому проще и честнее:
+    # НИКОГДА не выбрасывать правку молча — сначала сохранить копию, потом сбрасывать.
+    # Восстановление: cp .claude/discarded/<стамп>/<файл> <файл>
+    bak=".claude/discarded/$(date +%Y%m%d-%H%M%S)"
+    mkdir -p "$bak" 2>/dev/null || true
+    echo "git-sync: сбрасываю protected-UI правки (VPS их не коммитит — иначе заклинит pull)." >&2
+    echo "git-sync: КОПИИ СОХРАНЕНЫ в $bak — работа не потеряна:" >&2
+    printf '%s\n' "$prot" | while IFS= read -r _f; do
+      mkdir -p "$bak/$(dirname "$_f")" 2>/dev/null || true
+      cp -p "$_f" "$bak/$_f" 2>/dev/null || true
+      echo "    $_f  →  $bak/$_f" >&2
+      git checkout -- "$_f" 2>/dev/null || true
+    done
   fi
 fi
 

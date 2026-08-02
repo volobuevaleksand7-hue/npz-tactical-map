@@ -624,7 +624,11 @@
     if (fb.diesel) h += splitBlock("Дизель · ~" + fb.diesel.production_mt_year + " млн т/год", fb.diesel);
     h += '<div class="sect">МЕРЫ</div>';
     h += kv("Экспорт бензина", nb.export_ban_gasoline ? '<span class="tag ban">ЗАПРЕТ</span>' : '<span class="tag on">ОТКР.</span>');
-    h += kv("Экспорт керосина", nb.export_ban_kerosene ? '<span class="tag ban">ЗАПРЕТ</span>' : '<span class="tag on">ОТКР.</span>');
+    // 🔴 В данных поле называется export_ban_kerosine (опечатка), код читал kerosene — строка
+    // всегда показывала «ОТКР.», хотя запрет действовал. Файл переписывает LLM-агент дважды в
+    // сутки и может вернуть любое написание, поэтому принимаем оба, а не чиним одно место.
+    var kerosBan = nb.export_ban_kerosene != null ? nb.export_ban_kerosene : nb.export_ban_kerosine;
+    h += kv("Экспорт керосина", kerosBan ? '<span class="tag ban">ЗАПРЕТ</span>' : '<span class="tag on">ОТКР.</span>');
     h += kv("Импорт из Беларуси", nb.import_from_belarus ? '<span class="tag on">ДА</span>' : "—");
     if (nb.notes) h += '<div class="note">' + esc(nb.notes) + '</div>';
     if (S.state.meta && S.state.meta.confidence) h += '<div class="note">⚠ ' + esc(S.state.meta.confidence) + '</div>';

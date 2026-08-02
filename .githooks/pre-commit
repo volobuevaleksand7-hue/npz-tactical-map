@@ -17,6 +17,50 @@ if [ -n "$protected_ui" ] && [ "${ALLOW_FRONTEND_RELEASE:-}" != "1" ]; then
   exit 1
 fi
 
+# ---- ЗОНЫ СЕССИЙ: не утаскивать чужую работу в свой коммит ----------------
+# 🔴 01.08.2026: параллельная сессия сделала `git add -A` и утянула в свой коммит
+# (04618a5f) незакоммиченную правку соседней сессии — фикс геокодера складов уехал
+# под чужим сообщением, смысл в истории потерялся. В тот же день git-sync дважды
+# снёс незакоммиченную работу. Оба раза корень один: сессии не знают друг о друге.
+#
+# Механика: сессия объявляет зону, создавая .claude/zones/<имя>.zone со списком
+# glob-путей (по строке на путь). Хук блокирует коммит, если в индекс попал файл из
+# ЧУЖОЙ свежей зоны (моложе ZONE_TTL_H часов). Свои зоны определяются переменной
+# NPZ_ZONE (можно несколько через пробел).
+#
+# Осознанный компромисс: это ПРЕДУПРЕЖДЕНИЕ о пересечении, а не блокировка работы.
+# Обход на один коммит: ALLOW_CROSS_ZONE=1 (например, когда правка реально общая).
+ZONE_TTL_H="${NPZ_ZONE_TTL_H:-8}"
+zone_dir=".claude/zones"
+if [ -d "$zone_dir" ] && [ "${ALLOW_CROSS_ZONE:-}" != "1" ]; then
+  staged_all="$(git diff --cached --name-only --diff-filter=ACMR 2>/dev/null || true)"
+  if [ -n "$staged_all" ]; then
+    now=$(date +%s)
+    clash=""
+    for zf in "$zone_dir"/*.zone; do
+      [ -f "$zf" ] || continue
+      zname="$(basename "$zf" .zone)"
+      case " ${NPZ_ZONE:-} " in *" $zname "*) continue ;; esac   # своя зона
+      # протухшую зону игнорируем: сессия давно закончилась, файл забыли убрать
+      zmod=$(stat -f %m "$zf" 2>/dev/null || stat -c %Y "$zf" 2>/dev/null || echo 0)
+      [ $(( (now - zmod) / 3600 )) -ge "$ZONE_TTL_H" ] && continue
+      while IFS= read -r pat; do
+        [ -z "$pat" ] && continue
+        case "$pat" in \#*) continue ;; esac
+        hit="$(printf '%s\n' "$staged_all" | grep -E "$pat" || true)"
+        [ -n "$hit" ] && clash="$clash\n  зона «$zname» ($pat):\n$(printf '%s\n' "$hit" | sed 's/^/      /')"
+      done < "$zf"
+    done
+    if [ -n "$clash" ]; then
+      echo "pre-commit: BLOCKED — в коммит попали файлы из ЧУЖОЙ активной зоны:" >&2
+      printf "%b\n" "$clash" >&2
+      echo "pre-commit: это защита от 'git add -A', который утаскивает работу соседней сессии." >&2
+      echo "pre-commit: закоммить только своё (git add <файлы>), либо ALLOW_CROSS_ZONE=1, если правка общая." >&2
+      exit 1
+    fi
+  fi
+fi
+
 # ---- ЦЕНЗОР СТАТЕЙ: нейтральность любой публикуемой страницы --------------
 # До 22.07 фильтр стоял только на data/strikes.json: статью, написанную агентом,
 # не проверял никто — она уезжала на сайт как есть. Стоит ВЫШЕ выхода по пустому

@@ -5,3 +5,6 @@ agents/logs/*.log
 *.log
 .venv/
 __pycache__/
+
+# бэкапы правок, которые git-sync сбросил (см. agents/git-sync.sh) — локальные, не в репо
+.claude/discarded/
