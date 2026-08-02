@@ -162,18 +162,56 @@ def edit_text(chat_id, message_id, text):
         return None, body
 
 
+def cover_path_for(date_iso):
+    return os.path.join(REPO, "assets", "cover-%s.png" % date_iso)
+
+
+def build_cover_for(date_iso):
+    """Собрать обложку конкретной даты штатным пайплайном. Возвращает True, если файл появился.
+    Зовём прямо из сводки: генератор обложек по расписанию ходит ПОЗЖЕ брифинга
+    (07:00/19:00 UTC против 05:00/17:00), поэтому к утреннему посту своей картинки
+    ещё не существует и раньше молча бралась вчерашняя."""
+    try:
+        result = subprocess.run(
+            ["python3", os.path.join(REPO, "hermes", "scripts", "build-covers.py"),
+             "--dates", date_iso],
+            capture_output=True, text=True, timeout=600, cwd=REPO)
+        if result.returncode != 0:
+            print("обложка %s: build-covers код %d, stderr: %s"
+                  % (date_iso, result.returncode, (result.stderr or "")[:300]))
+    except Exception as e:
+        print("обложка %s: build-covers исключение %s" % (date_iso, e))
+    return os.path.exists(cover_path_for(date_iso))
+
+
 def latest_cover_path():
-    """Обложка дня из репозитория (та же, что на сайте /news): assets/cover-<дата>.png.
-    Берём по максимальной дате ударов; None, если файла нет."""
+    """Обложка СЕГОДНЯШНЕГО дня: assets/cover-<сегодня>.png.
+
+    🔴 Раньше бралась обложка максимальной даты ударов, и если её не было — молча
+    следующая по свежести. 02.08 так уехала картинка с подписью «31.07.2026»:
+    cover-2026-08-02.png на момент сводки ещё не собрался, а cover-2026-08-01.png
+    оказался порчен (сгенерирован в обход build-covers.py и содержал Туапсе за 31.07).
+    Теперь берём только сегодняшнюю, а если её нет — собираем; чужую дату отдаём лишь
+    как последнее средство и ГРОМКО об этом пишем, а не молча.
+    """
+    today = DS.today_iso()
+    p = cover_path_for(today)
+    if os.path.exists(p):
+        return p
+    print("обложка: за %s ещё нет — собираю" % today)
+    if build_cover_for(today):
+        return cover_path_for(today)
     try:
         strikes = (load("strikes.json") or {}).get("strikes", [])
         dates = sorted({str(s.get("date", ""))[:10] for s in strikes if s.get("date")}, reverse=True)
-        for d in dates[:3]:  # свежая дата или пара ближайших — что реально есть
-            p = os.path.join(REPO, "assets", "cover-%s.png" % d)
-            if os.path.exists(p):
-                return p
-    except Exception:
-        pass
+        for d in dates[:3]:
+            if d != today and os.path.exists(cover_path_for(d)):
+                print("🔴 обложка: своей за %s нет, беру чужую за %s — пост уйдёт "
+                      "с несовпадающей датой" % (today, d))
+                return cover_path_for(d)
+    except Exception as e:
+        print("обложка: не смог подобрать запасную (%s)" % e)
+    print("🔴 обложка: ни одной подходящей не нашёл")
     return None
 
 
@@ -299,6 +337,10 @@ def render_briefing_card(mode="morning"):
     cover = latest_cover_path()
     if cover:
         return cover
+    # 🔴 Дальше идут запасные пути, и последний из них — статичный briefing-<mode>.png
+    # в BOT_DIR, который не обновлялся с 7 июля. Молчать об этом нельзя: в канал уйдёт
+    # картинка месячной давности и никто не узнает.
+    print("🔴 обложка дня недоступна — включились запасные рендеры (%s)" % mode)
     img = os.path.join(BOT_DIR, "briefing-%s.png" % mode)
     try:
         import importlib.util
