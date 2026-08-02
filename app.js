@@ -1863,44 +1863,39 @@
       .catch(function () { whPromise = null; return false; });   // false → вызывающий снимет слой
     return whPromise;
   }
-  var WH_BRAND = { wb: { c: "#8b2fa8", label: "Wildberries" }, ozon: { c: "#0b63d6", label: "Ozon" } };
-  // Изометрический склад в том же языке, что фишка НПЗ (refinerySVG): ромб-основание в цвете
-  // статуса, объёмный корпус, флажок в цвете сети. Поражённые ПЕРЕЧЁРКНУТЫ красным крестом —
-  // на обзорном зуме это читается мгновенно, в отличие от заливки другим цветом.
-  function warehouseSVG(hit, burned, brand) {
-    var c = hit ? (burned ? "#d23a2e" : "#df8f17") : "#2f9e57";
+  var WH_BRAND = {
+    wb:   { c: "#A20E89", label: "Wildberries", mark: "WB" },
+    ozon: { c: "#005BFF", label: "Ozon",        mark: "OZ" }   // OZON не влезает читаемо в 30-40px метку
+  };
+  // Метка-капля (pin-drop) в фирменном цвете сети, форма как у референса владельца:
+  // круглая «голова» с буквами бренда + острый носик, указывающий точно в координату
+  // склада (см. iconAnchor в whIcon). Поражённые ПЕРЕЧЁРКНУТЫ красным крестом поверх
+  // капли — на обзорном зуме это читается мгновенно, в отличие от заливки другим цветом.
+  var WH_PIN_D = "M9.9 36.1 A20 20 0 1 1 38.1 36.1 C36 46 30 58 24 62 C18 58 12 46 9.9 36.1 Z";
+  function warehouseSVG(hit, burned, brand, mark) {
     var smoke = "", flame = "", cross = "", ring = "";
     if (hit) {
-      ring = '<circle class="alert-ring" cx="32" cy="50" r="14" fill="none" stroke="' + c + '" stroke-width="2"/>';
-      // белая подложка под крестом — иначе линии теряются на светлой крыше
+      var statusC = burned ? "#d23a2e" : "#df8f17";
+      ring = '<circle class="alert-ring" cx="24" cy="22" r="17" fill="none" stroke="' + statusC + '" stroke-width="2"/>';
+      // белая подложка под крестом — иначе линии теряются на цветном фоне капли
       cross = '<g stroke-linecap="round">' +
-        '<path d="M15 33 L47 50 M47 33 L15 50" stroke="#fff" stroke-width="5" opacity=".9"/>' +
-        '<path d="M15 33 L47 50 M47 33 L15 50" stroke="#d23a2e" stroke-width="2.8"/>' +
+        '<path d="M13 11 L35 33 M35 11 L13 33" stroke="#fff" stroke-width="5" opacity=".9"/>' +
+        '<path d="M13 11 L35 33 M35 11 L13 33" stroke="#d23a2e" stroke-width="2.8"/>' +
         '</g>';
     }
     if (burned) {
-      smoke = '<circle class="smoke" cx="40" cy="24" r="3" fill="#5a5148"/>' +
-              '<circle class="smoke s2" cx="40" cy="24" r="3.4" fill="#6b6258"/>' +
-              '<circle class="smoke s3" cx="40" cy="24" r="2.6" fill="#4d453d"/>';
-      flame = '<path class="flame" d="M38 34 q-3 -6 0 -10 q2 4 4 1 q3 5 -1 9 z" fill="#ff7a1a"/>' +
-              '<path class="flame" d="M39 34 q-1.5 -4 0 -6 q1.5 3 2.4 0 q1.4 3 -0.6 6 z" fill="#ffd23a"/>';
+      smoke = '<circle class="smoke" cx="34" cy="-2" r="2.6" fill="#5a5148"/>' +
+              '<circle class="smoke s2" cx="34" cy="-2" r="3" fill="#6b6258"/>' +
+              '<circle class="smoke s3" cx="34" cy="-2" r="2.2" fill="#4d453d"/>';
+      flame = '<path class="flame" d="M31 8 q-3 -6 0 -10 q2 4 4 1 q3 5 -1 9 z" fill="#ff7a1a"/>' +
+              '<path class="flame" d="M32 8 q-1.5 -4 0 -6 q1.5 3 2.4 0 q1.4 3 -0.6 6 z" fill="#ffd23a"/>';
     }
     return '' +
-      '<svg width="100%" height="100%" viewBox="0 0 64 64">' +
+      '<svg width="100%" height="100%" viewBox="0 0 48 64">' +
       ring +
-      // основание-ромб (изометрия, как у НПЗ)
-      '<path d="M32 60 L54 50 L32 40 L10 50 Z" fill="' + c + '" fill-opacity=".18" stroke="' + c + '" stroke-width="1.5"/>' +
-      // корпус: длинный низкий ангар — фронт, торец, крыша
-      '<path d="M13 36 L43 36 L43 51 L13 51 Z" fill="#d8cbac" stroke="#6b5d3f" stroke-width="1"/>' +
-      '<path d="M43 36 L49 31 L49 46 L43 51 Z" fill="#bfae87" stroke="#6b5d3f" stroke-width="1"/>' +
-      '<path d="M13 36 L19 31 L49 31 L43 36 Z" fill="#ebe1c8" stroke="#6b5d3f" stroke-width="1"/>' +
-      // рёбра крыши — «складская» фактура
-      '<path d="M15.6 34.3 H45.6 M17.6 32.6 H47.6" stroke="#c9bd9c" stroke-width=".9"/>' +
-      // ворота погрузки
-      '<path d="M16 44 h5 v7 h-5 z M24 44 h5 v7 h-5 z M32 44 h5 v7 h-5 z" fill="#9a8a68" stroke="#6b5d3f" stroke-width=".7"/>' +
-      // флажок в цвете сети — WB и Ozon различимы даже под крестом
-      '<line x1="26" y1="31" x2="26" y2="15" stroke="#6b5d3f" stroke-width="1.4"/>' +
-      '<path d="M26 15 L37 18 L26 21 Z" fill="' + brand + '" stroke="#5a4d33" stroke-width=".6"/>' +
+      // капля: белая обводка (paint-order рисует stroke под fill) + мягкая тень через .npz-piece svg
+      '<path d="' + WH_PIN_D + '" fill="' + brand + '" stroke="#fff" stroke-width="3" stroke-linejoin="round" paint-order="stroke fill"/>' +
+      '<text x="24" y="28" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="system-ui,Arial,sans-serif">' + mark + '</text>' +
       smoke + flame + cross +
       '</svg>';
   }
@@ -1917,14 +1912,16 @@
     return L.divIcon({ className: "strike-cluster", html: html, iconSize: L.point(size, size) });
   }
   function whIcon(w) {
-    var b = WH_BRAND[w.operator] || { c: "#7a7e85" };
+    var b = WH_BRAND[w.operator] || { c: "#7a7e85", mark: "?" };
     var hit = w.status === "hit", burned = hit && w.damage === "burned";
     var sc = hit ? 1 : 0.82;                       // поражённые крупнее — их и надо замечать
-    var wd = Math.round(48 * sc), ht = Math.round(50 * sc);
+    var ht = Math.round(50 * sc), wd = Math.round(ht * 0.75);   // капля 48:64 = 0.75 по референсу
     var html = '<div class="npz-piece" style="width:' + wd + 'px;height:' + ht + 'px">' +
-      warehouseSVG(hit, burned, b.c) + '</div>';
+      warehouseSVG(hit, burned, b.c, b.mark) + '</div>';
+    // остриё капли в SVG стоит ровно в нижней точке viewBox (48x64) — якорь туда же,
+    // без магических коэффициентов, как было у старого изометрического ангара
     return L.divIcon({ className: "", html: html, iconSize: [wd, ht],
-                       iconAnchor: [wd / 2, ht * 0.74], popupAnchor: [0, -ht * 0.6] });
+                       iconAnchor: [wd / 2, Math.round(ht * 0.969)], popupAnchor: [0, -Math.round(ht * 0.72)] });
   }
   function whPopup(w) {
     var b = WH_BRAND[w.operator] || { c: "#7a7e85", label: w.operator };
