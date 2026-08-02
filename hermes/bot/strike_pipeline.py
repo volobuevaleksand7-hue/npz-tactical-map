@@ -36,11 +36,13 @@ PIPELINE_STATE_PATH = os.path.join(DATA_DIR, "pipeline-state.json")
 # ─── Import radar_publish ────────────────────────────────────────────────────
 sys.path.insert(0, os.path.join(BASE_DIR, "hermes", "bot"))
 try:
-    from radar_publish import classify_news, publish_strike_molniya, publish_strike_tier2
+    from radar_publish import (classify_news, publish_strike_molniya,
+                               publish_strike_tier2, publish_strikes_batch)
 except ImportError:
     print("WARNING: Could not import radar_publish. Classification will be skipped.")
     classify_news = None
     publish_strike_molniya = None
+    publish_strikes_batch = None
     publish_strike_tier2 = None
 try:
     from content_guard import reason_bad
@@ -142,6 +144,7 @@ def classify_and_publish(new_strikes, dry_run=False, force_major=False):
         return []
 
     results = []
+    majors = []          # TIER-1 этого прогона — уйдут одним сообщением
     for strike in new_strikes:
         # ГВАРД НЕЙТРАЛЬНОСТИ: не публиковать укр-вербатим/пропаганду/офф-топик в канал
         # и подписчикам (это происходит ДО git-commit, т.е. до санитайзера в pre-commit).
@@ -165,16 +168,11 @@ def classify_and_publish(new_strikes, dry_run=False, force_major=False):
         result = {"strike": strike, "tier": tier, "info": info, "publish_result": None}
 
         if tier == "major":
-            print(f"  → Publishing as МОЛНИЯ (TIER 1)")
-            if publish_strike_molniya:
-                pub_result = publish_strike_molniya(strike, reason=info.get("reason", ""), dry_run=dry_run)
-                result["publish_result"] = pub_result
-                if pub_result.get("skipped_duplicate"):
-                    print(f"  → SKIP: уже опубликовано сегодня (dedup key={pub_result.get('key')})")
-                else:
-                    print(f"  → Result: channel_ok={pub_result.get('channel_ok')}, subs_sent={pub_result.get('subscribers_sent')}")
-            else:
-                print("  → [SKIP] radar_publish not available")
+            # Не публикуем поштучно: копим TIER-1 этого прогона и отправим одним
+            # сообщением ниже. Иначе в ленте встаёт пачка молний с одинаковым временем.
+            print(f"  → В пачку МОЛНИИ (TIER 1)")
+            majors.append((strike, info.get("reason", "")))
+            result["publish_result"] = {"batched": True}
 
         elif tier == "regular":
             print(f"  → Sending to admin chat (TIER 2)")
@@ -189,6 +187,21 @@ def classify_and_publish(new_strikes, dry_run=False, force_major=False):
                 print("  → [SKIP] radar_publish not available")
 
         results.append(result)
+
+    if majors:
+        if publish_strikes_batch:
+            print(f"\n[МОЛНИЯ] отправляю пачкой: {len(majors)}")
+            batch = publish_strikes_batch(majors, dry_run=dry_run)
+            print(f"  → опубликовано {batch.get('published')}, "
+                  f"пропущено дублей {batch.get('skipped_duplicate')}, "
+                  f"канал={batch.get('channel_ok')}, подписчикам={batch.get('subscribers_sent')}")
+            for err in batch.get("errors", [])[:5]:
+                print(f"  → ошибка: {err}")
+            for r in results:
+                if r.get("publish_result", {}).get("batched"):
+                    r["publish_result"] = batch
+        else:
+            print("  → [SKIP] radar_publish not available")
 
     return results
 

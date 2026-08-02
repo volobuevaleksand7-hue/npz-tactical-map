@@ -367,6 +367,104 @@ def publish_major(text, dry_run=False):
     return result
 
 
+def _deliver_molniya(text):
+    """Отправка готового текста молнии: канал → зеркала → подписчики.
+    Возвращает (channel_ok, channel_message_id, отправлено_подписчикам, ошибки).
+    🔴 Падение зеркала или подписчика не должно ронять публикацию в основной канал."""
+    errors = []
+    channel_ok = False
+    channel_message_id = None
+    try:
+        resp = api_call("sendMessage", chat_id=CHANNEL_CHAT_ID, text=text,
+                         parse_mode="HTML", disable_web_page_preview="true")
+        channel_ok = resp.get("ok", False)
+        channel_message_id = (resp.get("result") or {}).get("message_id")
+        if not channel_ok:
+            errors.append(f"channel: {resp.get('description', 'unknown error')}")
+    except Exception as e:
+        errors.append(f"channel exception: {e}")
+
+    # 🔴 Зеркала постит АНОНИМНЫЙ бот через channel_mirror, а не api_call() этого файла:
+    # тот работает личным @NpzFuel_Bot, и его админка в анонимном канале = деанон проекта.
+    if mirror_enabled("NPZ_MIRROR_MOLNIYA"):
+        send_to_mirrors(text, label="молния")
+
+    sent = 0
+    for cid in _get_active_subscribers():
+        time.sleep(0.1)
+        try:
+            resp = api_call("sendMessage", chat_id=cid, text=text,
+                             parse_mode="HTML", disable_web_page_preview="true")
+            if resp.get("ok"):
+                sent += 1
+            else:
+                if resp.get("error_code", 0) in (403, 400):
+                    _mark_blocked(cid)
+                errors.append(f"subscriber {cid}: {resp.get('description', '')}")
+        except Exception as e:
+            errors.append(f"subscriber {cid} exception: {e}")
+
+    return channel_ok, channel_message_id, sent, errors
+
+
+def publish_strikes_batch(items, dry_run=False):
+    """Все удары ОДНОГО прогона сборщика — одним сообщением.
+
+    Сборщик ходит раз в 20 минут и находит сразу несколько событий; поштучная
+    публикация давала пачку молний с одинаковым временем, будто удар случился
+    в четырёх местах в одну минуту. Один удар — прежний одиночный формат.
+
+    items: [(strike, reason), ...]. Возвращает
+    {"published", "skipped_duplicate", "channel_ok", "subscribers_sent", "errors", "keys"}.
+    """
+    state = DS.ensure_today(DS.load_state())
+    fresh, skipped = [], 0
+    for strike, reason in items:
+        key = molniya_dedup_key(strike)
+        if DS.is_published(state, key) and not dry_run:
+            skipped += 1
+            continue
+        fresh.append((strike, reason, key))
+
+    if not fresh:
+        return {"published": 0, "skipped_duplicate": skipped, "channel_ok": False,
+                "subscribers_sent": 0, "errors": [], "keys": []}
+
+    if len(fresh) == 1:
+        strike, reason, _ = fresh[0]
+        r = publish_strike_molniya(strike, reason=reason, dry_run=dry_run)
+        return {"published": 0 if r.get("skipped_duplicate") else 1,
+                "skipped_duplicate": skipped + int(bool(r.get("skipped_duplicate"))),
+                "channel_ok": r.get("channel_ok"), "subscribers_sent": r.get("subscribers_sent"),
+                "errors": r.get("errors", []), "keys": [r.get("key")]}
+
+    events = [strike_to_molniya_event(s, reason=rs) for s, rs, _ in fresh]
+    text = R.render_molniya_batch(events)
+    ok_pf, reason_pf = R.preflight(text, R.MOLNIYA_BATCH_MAX)
+    if not ok_pf:
+        return {"published": 0, "skipped_duplicate": skipped, "channel_ok": False,
+                "subscribers_sent": 0, "errors": ["preflight: %s" % reason_pf], "keys": []}
+
+    if dry_run:
+        print(f"\n{'='*60}\n[DRY-RUN] МОЛНИЯ ПАЧКОЙ ({len(fresh)})\n{'='*60}\n{text}\n{'='*60}\n")
+        return {"published": len(fresh), "skipped_duplicate": skipped, "channel_ok": True,
+                "subscribers_sent": len(_get_active_subscribers()), "errors": [],
+                "keys": [k for _, _, k in fresh]}
+
+    channel_ok, channel_message_id, sent, errors = _deliver_molniya(text)
+
+    if channel_ok:
+        url = "https://t.me/NPZmap/%s" % channel_message_id if channel_message_id else SITE
+        for (strike, _, key), ev in zip(fresh, events):
+            DS.mark_published(state, key)
+            DS.add_molniya_ref(state, ev["headline"], url, key)
+        DS.save_state(state)
+
+    return {"published": len(fresh) if channel_ok else 0, "skipped_duplicate": skipped,
+            "channel_ok": channel_ok, "subscribers_sent": sent, "errors": errors,
+            "keys": [k for _, _, k in fresh]}
+
+
 def publish_strike_molniya(strike, reason="", dry_run=False):
     """TIER 1 (единый прод-путь, редполитика v2): рендерит МОЛНИЮ через render.py,
     проверяет единый дедуп (day_state.published_keys), публикует в канал +
@@ -399,38 +497,7 @@ def publish_strike_molniya(strike, reason="", dry_run=False):
         return {"channel_ok": True, "subscribers_sent": len(subscribers), "errors": [],
                 "skipped_duplicate": False, "key": key}
 
-    errors = []
-    channel_ok = False
-    channel_message_id = None
-    try:
-        resp = api_call("sendMessage", chat_id=CHANNEL_CHAT_ID, text=text,
-                         parse_mode="HTML", disable_web_page_preview="true")
-        channel_ok = resp.get("ok", False)
-        channel_message_id = (resp.get("result") or {}).get("message_id")
-        if not channel_ok:
-            errors.append(f"channel: {resp.get('description', 'unknown error')}")
-    except Exception as e:
-        errors.append(f"channel exception: {e}")
-
-    if mirror_enabled("NPZ_MIRROR_MOLNIYA"):
-        send_to_mirrors(text, label="молния")
-
-    subscribers = _get_active_subscribers()
-    sent = 0
-    for cid in subscribers:
-        time.sleep(0.1)
-        try:
-            resp = api_call("sendMessage", chat_id=cid, text=text,
-                             parse_mode="HTML", disable_web_page_preview="true")
-            if resp.get("ok"):
-                sent += 1
-            else:
-                code = resp.get("error_code", 0)
-                if code in (403, 400):
-                    _mark_blocked(cid)
-                errors.append(f"subscriber {cid}: {resp.get('description', '')}")
-        except Exception as e:
-            errors.append(f"subscriber {cid} exception: {e}")
+    channel_ok, channel_message_id, sent, errors = _deliver_molniya(text)
 
     if channel_ok:
         url = SITE

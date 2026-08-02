@@ -410,13 +410,59 @@ def render_molniya(event):
         conf_line = "~ Ожидает подтверждения"
     L.append(conf_line)
     L.append("")
-    if context:
+    # context часто совпадает с why (оба падают на первое предложение detail) — тогда
+    # пост печатал одно и то же дважды. Печатаем только если это правда другой текст.
+    if context and not (why and context.strip().startswith(why.strip().rstrip("…"))):
         L.append(esc(context))
     L.append('👉 <a href="%s">Карта</a>' % esc_attr(url))
 
     text = "\n".join(L).strip()
     if entity_len(text) > MOLNIYA_MAX:
         text = _truncate_to(text, MOLNIYA_MAX)
+    return text
+
+
+MOLNIYA_BATCH_MAX = 900          # длиннее одиночной: строк много, но всё ещё одно сообщение
+MOLNIYA_BATCH_LINES = 6          # больше — «и ещё N на карте»
+
+
+def _udarov(n):
+    a, b = n % 10, n % 100
+    if a == 1 and b != 11:
+        return "удар"
+    if 2 <= a <= 4 and not (12 <= b <= 14):
+        return "удара"
+    return "ударов"
+
+
+def render_molniya_batch(events, url=None):
+    """Несколько ударов, найденных ОДНИМ прогоном сборщика, — одним сообщением.
+
+    Молния публикуется по факту обнаружения, а сборщик ходит раз в 20 минут, поэтому
+    за один заход находится сразу несколько событий. Раньше каждое уходило отдельным
+    постом, и в ленте вставала пачка молний с одинаковым временем — читается как
+    «удар в четырёх местах в одну минуту», чего не было.
+    """
+    if len(events) == 1:
+        return render_molniya(events[0])
+
+    url = url or SITE
+    n = len(events)
+    L = ["🚨 <b>МОЛНИЯ · %d %s</b>" % (n, _udarov(n)), ""]
+    for e in events[:MOLNIYA_BATCH_LINES]:
+        city, region = e.get("city", ""), e.get("region", "")
+        loc = "%s, %s" % (city, region) if region and region != city else (city or region)
+        mark = "✓" if e.get("confidence") == "confirmed" else "~"
+        L.append("%s 📍 <b>%s</b> — %s" % (mark, esc(loc), esc(e.get("target", "инфраструктура"))))
+    if n > MOLNIYA_BATCH_LINES:
+        L.append("… и ещё %d на карте" % (n - MOLNIYA_BATCH_LINES))
+    L.append("")
+    L.append("✓ подтверждено · ~ ожидает подтверждения")
+    L.append('👉 <a href="%s">Карта</a>' % esc_attr(url))
+
+    text = "\n".join(L).strip()
+    if entity_len(text) > MOLNIYA_BATCH_MAX:
+        text = _truncate_to(text, MOLNIYA_BATCH_MAX)
     return text
 
 
