@@ -41,8 +41,14 @@ if [ -d "$zone_dir" ] && [ "${ALLOW_CROSS_ZONE:-}" != "1" ]; then
       [ -f "$zf" ] || continue
       zname="$(basename "$zf" .zone)"
       case " ${NPZ_ZONE:-} " in *" $zname "*) continue ;; esac   # своя зона
-      # протухшую зону игнорируем: сессия давно закончилась, файл забыли убрать
-      zmod=$(stat -f %m "$zf" 2>/dev/null || stat -c %Y "$zf" 2>/dev/null || echo 0)
+      # протухшую зону игнорируем: сессия давно закончилась, файл забыли убрать.
+      # 🔴 GNU stat (Linux/VPS) первым: BSD-форма `stat -f %m` там НЕ ошибка, а другая
+      # команда — печатает «  File: ...», и арифметика ниже падала под `set -u`
+      # («File: unbound variable»), обваливая КАЖДЫЙ коммит на VPS. Плюс явная
+      # проверка на число: любой неожиданный вывод трактуем как «зона протухла».
+      zmod=$(stat -c %Y "$zf" 2>/dev/null || stat -f %m "$zf" 2>/dev/null || echo 0)
+      case "$zmod" in ''|*[!0-9]*) zmod=0 ;; esac
+      [ "$zmod" -eq 0 ] && continue
       [ $(( (now - zmod) / 3600 )) -ge "$ZONE_TTL_H" ] && continue
       while IFS= read -r pat; do
         [ -z "$pat" ] && continue
