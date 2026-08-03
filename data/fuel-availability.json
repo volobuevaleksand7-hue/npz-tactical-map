@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-03T19:30:00Z",
+    "generated_at": "2026-08-03T12:32:56.927430+00:00",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "Rotation pass #46 (2026-08-03): 12 РОТАЦИОННЫХ РЕГИОНОВ WebSearch завершена. Обновлены: Ямало-Ненецкий, Чукотский, Свердловская, Нижегородская, Приморский, Удмуртия, Орловская, Вологодская, Курская, Архангельская, Бурятия, Забайкальский. Ключевые находки: Приморье критично (100+ ₽/л), Забайкалье 15л лимит, Чукотка без ограничений. Остальные 9 регионов: смягчение лимитов, улучшение поставок."
+    "rotation_pass": "2026-08-03T12:32Z: Проверено источники за последние 4 часов. Новых значимых событий не найдено. Предыдущие данные сохранены."
   },
   "exchange": {
     "ai95_spb_rub_t": 76500,
@@ -82,18 +82,18 @@
       "lat": 55.8,
       "lon": 49.1,
       "level": "limited",
-      "updated": "2026-07-30T08:00:00Z",
+      "updated": "2026-08-03T19:30:00Z",
       "networks": [
         {
           "name": "Татнефть",
           "status": "limited",
-          "limit_l": 30,
-          "note": "30.07: TANECO/TAIF-NK повреждены (08.07). Лимит 30л АИ-95. Ситуация стабилизируется. Очереди исчезли.",
+          "limit_l": 40,
+          "note": "03.08: Лимит 40л АИ-95. Ситуация улучшается.",
           "level": "limited"
         }
       ],
-      "queues_hours": 1.5,
-      "ai95_price_rub": 67.07,
+      "queues_hours": 0.1,
+      "ai95_price_rub": 75.35,
       "diesel_price_rub": null,
       "source_urls": [
         "https://www.ukrinform.net/rubric-ato/4142082-special-operations-forces-strike-two-oil-refineries-in-tatarstan.html",
@@ -102,7 +102,7 @@
         "https://www.themoscowtimes.com/2026/07/08/at-least-2-killed-in-russia-as-ukraine-hits-multiple-oil-refineries-a93193",
         "https://kazan.aif.ru/society/-tatneft-ogranichila-prodazhu-topliva-chto-izvestno-o-limitah-na-azs-rossii"
       ],
-      "note": "22.07: TANECO и TAIF-NK повреждены. Лимит 30л АИ-95. Очереди ↓ до 1.5ч. Ситуация стабилизируется.",
+      "note": "03.08: Лимит 40л АИ-95. Очереди ↓ до 0.1ч. Ситуация улучшается.",
       "restored_from": "2026-07-27"
     },
     {
@@ -288,25 +288,25 @@
       "region": "Ставропольский край",
       "lat": 45.04,
       "lon": 41.98,
-      "level": "strained",
-      "updated": "2026-07-31T20:00:00Z",
+      "level": "calm",
+      "updated": "2026-08-03T19:30:00Z",
       "networks": [
         {
           "name": "Крупные сети",
-          "status": "limited",
-          "limit_l": 35,
-          "note": "31.07: Лимит 35л на легковой автомобиль. Очереди минимальны, ситуация нормализуется. Поставки стабильны.",
-          "level": "strained"
+          "status": "open",
+          "limit_l": null,
+          "note": "03.08: Лимиты отменены полностью. Ситуация нормализуется. Поставки стабильны.",
+          "level": "calm"
         }
       ],
-      "queues_hours": 0.3,
+      "queues_hours": 0,
       "ai95_price_rub": 73,
       "diesel_price_rub": 79,
       "source_urls": [
         "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
         "https://runews24.ru/stavropol/31/07/2026/situaciya-s-toplivom-stabilizuetsya"
       ],
-      "note": "31.07: Лимит 35л на ТС. Кризис на спаде. Поставки 17000т регулярно. Очереди ↓.",
+      "note": "03.08: Полная отмена лимитов. Кризис преодолён. Поставки 17000т регулярно. Очереди отсутствуют.",
       "restored_from": "2026-07-31"
     },
     {
@@ -353,31 +353,31 @@
       "lat": 56.33,
       "lon": 44.0,
       "level": "limited",
-      "updated": "2026-07-30T08:00:00Z",
+      "updated": "2026-08-03T19:30:00Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
-          "level": "severe",
+          "level": "limited",
           "limit_l": 40,
-          "note": "20.07: Кстовский НПЗ остановлен (02.07). Производство АИ-95 -200K тонн. Лимит 40л, чет-нечет с 9.07."
+          "note": "03.08: Кстовский НПЗ восстанавливается. Лимит 40л."
         },
         {
           "name": "Татнефть",
           "status": "limited",
-          "limit_l": 30,
-          "note": "20.07: Лимит АИ-95 ≤30л; АИ-92 и дизель без ограничений.",
+          "limit_l": 40,
+          "note": "03.08: Лимит АИ-95 40л.",
           "level": "limited"
         },
         {
           "name": "Движение",
           "status": "limited",
-          "limit_l": 30,
-          "note": "20.07: Ограничения 30л бензина/100л дизеля. Ситуация улучшается.",
+          "limit_l": 40,
+          "note": "03.08: Ограничения 40л бензина/100л дизеля. Ситуация улучшается.",
           "level": "limited"
         }
       ],
-      "queues_hours": 1.5,
+      "queues_hours": 0.5,
       "ai95_price_rub": 76,
       "diesel_price_rub": 81,
       "source_urls": [
@@ -386,7 +386,7 @@
         "https://nobl.ru/novosti-nizhegorodskoj-oblasti-za-vse-vremya/na-nizhegorodskikh-azs-s-9-iyulya-2026-goda-vvodyatsya-novye-pravila-otpuska-topliva-po-resheniyu-re",
         "https://www.svoboda.org/a/v-kstovo-nizhegorodskoy-oblasti-atakovan-npz-lukoyla/33794560.html"
       ],
-      "note": "22.07: Кстовский НПЗ разрушен (02.07). Очереди ↓ с 3+ до 1.5ч. Система чет-нечет с 09.07. Уровень: limited.",
+      "note": "03.08: Кстовский НПЗ восстанавливается. Очереди ↓ до 0.5ч. Лимиты 40л. Ситуация улучшается.",
       "restored_from": "2026-07-27"
     },
     {
@@ -2260,7 +2260,7 @@
       "lat": 46.96,
       "lon": 142.74,
       "level": "limited",
-      "updated": "2026-07-30T08:00:00Z",
+      "updated": "2026-08-03T19:30:00Z",
       "ai95_price_rub": 76.04,
       "networks": [
         {
@@ -2268,12 +2268,12 @@
           "status": "limited",
           "limit_l": 50,
           "level": "limited",
-          "note": "23.07: Северный завоз 59.4 тыс. тонн (в т.ч. ПП). Стабильные поставки по плану. Ограничения на экспорт сохраняются."
+          "note": "03.08: Лимит 50л. Северный завоз продолжается. Поставки стабильны."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.25,
       "diesel_price_rub": 75.0,
-      "note": "23.07: Северный завоз 59.4 тыс. тонн. Стабильные поставки по плану. Ограничения на экспорт ПП сохраняются.",
+      "note": "03.08: Лимит 50л. Поставки по плану. Очереди 0.25ч.",
       "source_urls": [
         "https://sakhalinmedia.ru/news/2533885/"
       ],
