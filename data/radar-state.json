@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1785834014,
-      "source_text": "04.08.2026 12:00 МСК\nПротивник готовит следующие массовые запуски БПЛА из Черниговской области в направлении Брянской области"
+      "last_event_ts": 1785834972,
+      "source_text": "04.08.2026 12:16 МСК\nСтародуб и близлежащие опасность по БПЛА и ФПВ повторно"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1785834084,
-      "source_text": "04.08.2026 12:01 МСК\nТульская область Опасность по БПЛА"
+      "last_event_ts": 1785835146,
+      "source_text": "04.08.2026 12:19 МСК\nАлексин Тульская область Опасность по БПЛА"
     },
     "Смоленская область": {
       "bpla": false,
@@ -312,6 +312,28 @@
     }
   },
   "cities": [
+    {
+      "key": "алексин|тульская область",
+      "name": "Алексин",
+      "lat": 54.50484,
+      "lon": 37.06697,
+      "region": "Тульская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1785835146,
+      "source_text": "04.08.2026 12:19 МСК\nАлексин Тульская область Опасность по БПЛА"
+    },
     {
       "key": "кировское|донецкая народная республика",
       "name": "Кировское",
@@ -1324,6 +1346,28 @@
       "source_text": "04.08.2026 08:56 МСК\nКлимово и далее на Клинцы, Унеча Брянская область тревога по БПЛА"
     },
     {
+      "key": "стародуб|брянская область",
+      "name": "Стародуб",
+      "lat": 52.58501,
+      "lon": 32.76314,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1785834972,
+      "source_text": "04.08.2026 12:16 МСК\nСтародуб и близлежащие опасность по БПЛА и ФПВ повторно"
+    },
+    {
       "key": "климово|брянская область",
       "name": "Климово",
       "lat": 52.37877,
@@ -1802,6 +1846,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 78449,
+      "text": "Алексин\nТульская область\nОпасность по БПЛА",
+      "ts": 1785835146,
+      "time_label": "04.08.2026 12:19 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "Радар ВРВ"
+    },
+    {
+      "msg_id": 254472,
+      "text": "Стародуб и близлежащие опасность по БПЛА и ФПВ повторно",
+      "ts": 1785834972,
+      "time_label": "04.08.2026 12:16 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 254471,
+      "text": "Противник готовит запуски БПЛА от Черниговской области",
+      "ts": 1785834649,
+      "time_label": "04.08.2026 12:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 254470,
       "text": "Горловка ДНР и близлежащие\nОпасность по БПЛА и возможным ФПВ с запада",
@@ -2417,30 +2485,6 @@
       "time_label": "04.08.2026 10:01 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 254402,
-      "text": "Курская область\nТревога по БПЛА",
-      "ts": 1785826873,
-      "time_label": "04.08.2026 10:01 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 254401,
-      "text": "Волоконовка, Валуйки районы фиксации БПЛА\nБелгородская область",
-      "ts": 1785826837,
-      "time_label": "04.08.2026 10:00 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 254400,
-      "text": "Мглин, Клетня, Сеща, Брянск и близлежащие тревога по БПЛА с юга. Очень большое количество",
-      "ts": 1785825822,
-      "time_label": "04.08.2026 09:43 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2450,14 +2494,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1785834510,
-  "last_event_at": "2026-08-04T09:08:30Z",
-  "fetched_at": "2026-08-04T09:10:02.712878Z",
+  "timestamp": 1785835146,
+  "last_event_at": "2026-08-04T09:19:06Z",
+  "fetched_at": "2026-08-04T09:20:03.104851Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-04T09:10:02.712878Z",
-    "source_age_seconds": 92,
-    "city_count": 47,
+    "generated_at": "2026-08-04T09:20:03.104851Z",
+    "source_age_seconds": 57,
+    "city_count": 49,
     "region_count": 16,
     "feed_count": 80
   }
