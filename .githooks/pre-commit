@@ -185,8 +185,20 @@ fi
 # Дважды (июнь: 168→110, 08.07: 147→5) облачный коллектор перезаписывал архив свежим
 # снапшотом. Блокируем коммит, если число strikes падает >10%. Обход: ALLOW_STRIKES_SHRINK=1.
 if echo "$staged" | grep -q '^data/strikes\.json$' && [ "${ALLOW_STRIKES_SHRINK:-}" != "1" ] && command -v python3 >/dev/null 2>&1; then
-  old_n="$(git show HEAD:data/strikes.json 2>/dev/null | python3 -c 'import json,sys;print(len(json.load(sys.stdin).get("strikes",[])))' 2>/dev/null || echo 0)"
-  new_n="$(git show :data/strikes.json 2>/dev/null | python3 -c 'import json,sys;print(len(json.load(sys.stdin).get("strikes",[])))' 2>/dev/null || echo 0)"
+  old_n="$(git show HEAD:data/strikes.json 2>/dev/null | python3 -c 'import json,sys;print(len(json.load(sys.stdin).get("strikes",[])))' 2>/dev/null || echo NA)"
+  new_n="$(git show :data/strikes.json 2>/dev/null | python3 -c 'import json,sys;print(len(json.load(sys.stdin).get("strikes",[])))' 2>/dev/null || echo NA)"
+  # 🔴 Страж обязан падать ЗАКРЫТО. Раньше любая осечка чтения (битый JSON в HEAD,
+  # сбой python, пустой вывод git show) давала old_n=0, условие `old_n -gt 20`
+  # не выполнялось — и страж молча пропускал коммит, ровно в тот момент, когда
+  # данные и так были в плохом состоянии. 04.08 архив уехал в прод 320 -> 0 при
+  # исправном во всём остальном страже; повторять эту дыру нельзя.
+  case "$old_n$new_n" in
+    *NA*)
+      echo "pre-commit: BLOCKED — не смог прочитать data/strikes.json (HEAD=$old_n, индекс=$new_n)." >&2
+      echo "pre-commit: страж усыхания архива не может проверить файл — это причина остановиться," >&2
+      echo "pre-commit: а не повод пропустить. Осознанно → ALLOW_STRIKES_SHRINK=1." >&2
+      exit 1 ;;
+  esac
   if [ "$old_n" -gt 20 ] && [ "$new_n" -lt "$((old_n * 9 / 10))" ]; then
     echo "pre-commit: BLOCKED — data/strikes.json усыхает: $old_n → $new_n записей." >&2
     echo "pre-commit: strikes.json — ПОЛНЫЙ архив, коллекторы только дописывают." >&2

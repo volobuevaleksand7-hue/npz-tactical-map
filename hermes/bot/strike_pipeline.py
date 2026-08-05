@@ -398,9 +398,16 @@ def git_commit_push(message, dry_run=False):
         return True
 
     try:
-        # Stage all data changes
+        # 🔴 data/strikes.json тут НЕ стейджим: пайплайн его только ЧИТАЕТ (jsave идёт
+        # лишь в fuel-state и pipeline-state). Стейджа хватало, чтобы утащить в свой
+        # коммит чужое состояние файла: 04.08 коллектор обрезал архив, его собственный
+        # коммит завернул pre-commit, файл остался грязным — и пайплайн через минуту
+        # заметил его своим `git add` и увёз в прод под сообщением «320 strikes».
+        # Архив 320 -> 0, сутки на карте не было истории с 6 июня. Тот же механизм уже
+        # съедал архив 11.07 (172->67) и 12.07 (75->2). Кто пишет файл, тот его и коммитит:
+        # strikes.json публикуют merge-strikes-inbox.py + agents/git-sync.sh.
         subprocess.run(
-            ["git", "add", "data/fuel-state.json", "data/pipeline-state.json", "data/strikes.json"],
+            ["git", "add", "data/fuel-state.json", "data/pipeline-state.json"],
             cwd=BASE_DIR, capture_output=True, timeout=30
         )
 
