@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-04T17:30:00Z",
+    "generated_at": "2026-08-05T04:10:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Reuters/Bloomberg/Meduza/Moscow Times/The Bell/Новая газета/CNN). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
@@ -65,8 +65,8 @@
       "status_since": "2026-07-29",
       "est_output_pct": 0,
       "damage": "Удар украинских дронов в ночь на 29 июля: повреждены критичные установки, начался пожар. Завод полностью остановил операции. Повторная атака завода, который был ударен в мае и остаётся в shutdown.",
-      "note": "На 4 августа завод полностью остановлен. Ожидаемое восстановление — около двух недель (по оценкам от 29 июля).",
-      "source_url": "https://kyivindependent.com/wildberries-warehouse-major-oil-refinery-burn-as-ukraine-strikes-russias-ryazan-oblast-media-reports/",
+      "note": "На 5 августа завод полностью остановлен. Ожидаемое восстановление — около двух недель от 29 июля (примерно середина августа). Восстановление требует запуска первичных и вторичных установок и настройки технологических процессов.",
+      "source_url": "https://www.pravda.com.ua/eng/news/2026/07/31/8046635/",
       "confidence": "confirmed"
     },
     {
@@ -112,9 +112,9 @@
       "status": "down",
       "status_since": "2026-07-12",
       "est_output_pct": 0,
-      "damage": "Первая атака 21 мая: повреждена CDU-6. Повторный удар 12 июля: поражена установка ELOU-AVT-5. Завод остановлен.",
-      "note": "На 4 августа — полная остановка. Повторная атака за менее чем два месяца.",
-      "source_url": "https://united24media.com/war-in-ukraine/ukraines-military-intelligence-sets-russias-syzran-oil-refinery-on-fire-in-deep-strike-20686",
+      "damage": "Первая атака 21 мая: повреждена CDU-6. Повторный удар 12 июля: поражена установка ELOU-AVT-5. Третья атака 4 августа: подтверждены взрывы и пожары на объекте. Завод полностью остановлен.",
+      "note": "На 5 августа — полная остановка. Установка ELOU-AVT-5 (~30% мощности завода) повреждена. Завод производит ~800 тыс. т/год бензина и ~1.5 млн т/год дизеля.",
+      "source_url": "https://ru.themoscowtimes.com/2026/08/04/droni-atakovali-sizranskii-npz-i-ocherednoi-sklad-wildberries-pod-tveryu-a202573",
       "confidence": "confirmed"
     },
     {
@@ -1197,9 +1197,9 @@
     },
     {
       "date": "2026-08-04",
-      "text": "Украина нанесла массированный удар дронами по логистической и инфраструктурной инфраструктуре России ночью на 4 августа. Поражен логистический центр Wildberries в городе Чехове (Московская область, ~65 км от Кремля). Видеоматериалы показывают чёрный дым над объектом. Переработка нефти упала до 24-летнего минимума (3.6 млн барр/день в июле).",
+      "text": "Ночная операция украинских БПЛА охватила четыре региона РФ: атакованы Сызранский НПЗ (Самара, пожары и взрывы подтверждены видеоматериалами), логистический центр Wildberries в Чехове (Москва, ~65 км от Кремля) и ещё два склада компании. На Сызранском НПЗ продолжаются последствия предыдущих ударов (установка ELOU-AVT-5 ~30% мощности поражена). Переработка нефти упала до 24-летнего минимума (3.6 млн барр/день в июле); экспорт упал ниже 4 млн барр/день впервые за 6 недель.",
       "type": "logistic",
-      "source_url": "https://www.themoscowtimes.com/2026/08/03/russian-oil-refining-falls-to-24-year-low-after-ukrainian-drone-strikes-bloomberg-a93404",
+      "source_url": "https://ru.themoscowtimes.com/2026/08/04/droni-atakovali-sizranskii-npz-i-ocherednoi-sklad-wildberries-pod-tveryu-a202573",
       "confidence": "confirmed"
     },
     {
