@@ -114,6 +114,26 @@ def check_nav_hygiene(rows):
     return out
 
 
+def check_cyrillic_hrefs():
+    """Внутренние ссылки со славянскими буквами в слаге = гарантированный 404.
+
+    Как это случилось (05.08): цензор нейтральности гоняется по СЫРОМУ HTML, без
+    strip_markup, и правило LATIN_FIX «TAIF-NK → ТАИФ-НК» переписывало не только текст,
+    но и href="/npz/taif-nk" → href="/npz/ТАИФ-НК". Битая ссылка разъехалась по 91
+    странице, включая /refineries и все архивы /news, и жила на проде незамеченной.
+    Лукбихайнд в самом правиле закрывает ровно этот случай — а проверка закрывает КЛАСС:
+    любое будущее правило словаря, которое залезет в атрибут, упрётся здесь.
+    """
+    bad = []
+    for p in sorted(ROOT.rglob("*.html")):
+        if ".claude" in p.parts or "node_modules" in p.parts:
+            continue
+        for m in re.finditer(r'href="(/[^"]*)"', p.read_text(encoding="utf-8")):
+            if re.search(r"[А-Яа-яЁё]", m.group(1)):
+                bad.append(f"{p.relative_to(ROOT)}: href=\"{m.group(1)}\" — кириллица в слаге, это 404")
+    return bad
+
+
 def main():
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     rows = bn.load_reg()
@@ -131,6 +151,7 @@ def main():
         if url not in bn.TOP_URLS and typ not in bn.HIDE_TYPES:
             if f'href="{url}"' not in menu:
                 problems.append(f"{url}: нет пункта в меню (type={typ})")
+    problems += check_cyrillic_hrefs()
     if problems:
         print("IA CHECK FAILED:")
         for p in problems:
