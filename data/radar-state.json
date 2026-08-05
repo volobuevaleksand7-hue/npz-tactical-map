@@ -52,16 +52,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1785946644,
-      "source_text": "05.08.2026 13:30 МСК\nАвиационная ракетная бомбовая опасность Херсонская область РФ, Запорожская область РФ, ЛДНР\n\n05.08.2026 19:17 МСК\nКаховка и близлежащие Опасность по БПЛА Херсонская область РФ"
+      "source_text": "05.08.2026 19:17 МСК\nКаховка и близлежащие Опасность по БПЛА Херсонская область РФ"
     },
     "Липецкая область": {
       "bpla": false,
@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1785945417,
-      "source_text": "05.08.2026 17:48 МСК\nАвиационная ракетная бомбовая опасность ЛДНР, Запорожская область РФ\n\n05.08.2026 18:56 МСК\nСветлодарск, Дебальцево ДНР и близлежащие Опасность по БПЛА"
+      "last_event_ts": 1785947498,
+      "source_text": "05.08.2026 17:48 МСК\nАвиационная ракетная бомбовая опасность ЛДНР, Запорожская область РФ\n\n05.08.2026 19:31 МСК\nДонецк ДНР и близлежащие Тревога по БПЛА"
     },
     "Мордовия": {
       "bpla": false,
@@ -413,19 +413,41 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1785942704,
-      "source_text": "05.08.2026 18:11 МСК\nКурская область Орловская область Белгородская область Тревога по БПЛА Меры безопасности внимание по бпла"
+      "fill": "#dc2626",
+      "last_event_ts": 1785947889,
+      "source_text": "05.08.2026 19:38 МСК\nКурская область и близлежащие авиационная ракетная бомбовая опасность\n\n05.08.2026 18:11 МСК\nКурская область Орловская область Белгородская область Тревога по БПЛА Меры безопасности внимание по бпла"
     }
   },
   "cities": [
+    {
+      "key": "донецк|донецкая народная республика",
+      "name": "Донецк",
+      "lat": 48.023,
+      "lon": 37.80224,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1785947498,
+      "source_text": "05.08.2026 19:31 МСК\nДонецк ДНР и близлежащие Тревога по БПЛА"
+    },
     {
       "key": "ейск|краснодарский край",
       "name": "Ейск",
@@ -1835,28 +1857,6 @@
       "source_text": "05.08.2026 18:49 МСК\nГО Егорьевск Московская область Фиксация БПЛА"
     },
     {
-      "key": "разумное|белгородская область",
-      "name": "Разумное",
-      "lat": 50.5347515,
-      "lon": 36.6859568,
-      "region": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1785925995,
-      "source_text": "05.08.2026 13:33 МСК\nНижний Ольшанец Разумное Бгд Тревога по БПЛА"
-    },
-    {
       "key": "щекино|тульская область",
       "name": "Щекино",
       "lat": 54.00734,
@@ -2407,28 +2407,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1785931968,
       "source_text": "05.08.2026 15:12 МСК\nПокровский район Орловская область Фиксация группы БПЛА"
-    },
-    "RUS.7.17_1": {
-      "gid_2": "RUS.7.17_1",
-      "name_ru": "Ракитянский район",
-      "region_ru": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1785926113,
-      "source_text": "05.08.2026 13:35 МСК\nРакитянский район Опасность по БПЛА"
     },
     "RUS.34.27_1": {
       "gid_2": "RUS.34.27_1",
@@ -3326,6 +3304,46 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 255194,
+      "text": "Белгородская область\nАвиационно ракетная бомбовая опасность",
+      "ts": 1785947889,
+      "time_label": "05.08.2026 19:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 255193,
+      "text": "Курская область и близлежащие авиационная ракетная бомбовая опасность",
+      "ts": 1785947889,
+      "time_label": "05.08.2026 19:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 255192,
+      "text": "ЛДНР Запорожская область РФ\nАвиационно ракетно бомбовая опасность",
+      "ts": 1785947653,
+      "time_label": "05.08.2026 19:34 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 255191,
+      "text": "Донецк ДНР и близлежащие\nТревога по БПЛА",
+      "ts": 1785947498,
+      "time_label": "05.08.2026 19:31 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 255190,
+      "text": "Вадьковка Брянская область Погарский район сбросы с БПЛА марки ФПВ",
+      "ts": 1785947454,
+      "time_label": "05.08.2026 19:30 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 255189,
       "text": "Белая Березка тревога по БПЛА и далее в тыл Брянская область",
       "ts": 1785947312,
@@ -3924,46 +3942,6 @@
       "time_label": "05.08.2026 16:22 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 255139,
-      "text": "Белгородский район\nОпасность по БПЛА",
-      "ts": 1785936107,
-      "time_label": "05.08.2026 16:21 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 255138,
-      "text": "БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Краснодар,  Славянский, Калининский,  Выселковский, Динской, Красноармейский, Кореновский, Тимашевский районы.",
-      "ts": 1785935952,
-      "time_label": "05.08.2026 16:19 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 78882,
-      "text": "Новодеревеньковский район\nОрловская область\nФиксация от 2 БПЛА",
-      "ts": 1785935680,
-      "time_label": "05.08.2026 16:14 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "Радар ВРВ"
-    },
-    {
-      "msg_id": 78881,
-      "text": "Верховский район\nОрловская область\nФиксация от 3 БПЛА",
-      "ts": 1785935678,
-      "time_label": "05.08.2026 16:14 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "Радар ВРВ"
-    },
-    {
-      "msg_id": 78880,
-      "text": "Должанский район\nОрловская область\nФиксация БПЛА",
-      "ts": 1785935672,
-      "time_label": "05.08.2026 16:14 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "Радар ВРВ"
     }
   ],
   "sources": [
@@ -3973,13 +3951,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1785947312,
-  "last_event_at": "2026-08-05T16:28:32Z",
-  "fetched_at": "2026-08-05T16:30:04.004279Z",
+  "timestamp": 1785947889,
+  "last_event_at": "2026-08-05T16:38:09Z",
+  "fetched_at": "2026-08-05T16:40:03.461331Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-05T16:30:04.004279Z",
-    "source_age_seconds": 92,
+    "generated_at": "2026-08-05T16:40:03.461331Z",
+    "source_age_seconds": 114,
     "city_count": 69,
     "region_count": 22,
     "feed_count": 80
