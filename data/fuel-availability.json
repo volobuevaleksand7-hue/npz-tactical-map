@@ -1,20 +1,20 @@
 {
   "meta": {
-    "generated_at": "2026-08-05T04:35:00Z",
+    "generated_at": "2026-08-05T08:50:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "2026-08-05T04:35:00Z: Ротационный проход — 12 самых старых регионов по updated проверены через WebSearch. Новых значимых новостей не найдено по большинству регионов. Timestamps обновлены."
+    "rotation_pass": "2026-08-05T08:50:00Z: Ротационный проход #51 — 12 самых старых регионов (Хакасия, Чеченская, Дагестан, Татарстан, Ставропольский, Самарская, Нижегородская, Кемеровская, Чувашия, Курская, Новгородская, Тверская) проверены WebSearch. Ключевые: Нижегородская лимиты отменены, Новгородская отменила ограничения, Чувашия Газпром отменила с 04.08. СПбМТСБ АИ-95 обновлена до 72.35 ₽/л. ФАС контроль усилен."
   },
   "exchange": {
-    "ai95_spb_rub_t": 76377,
-    "ai92_spb_rub_t": 71000,
-    "diesel_spb_rub_t": 82500,
+    "ai95_spb_rub_t": 72350,
+    "ai92_spb_rub_t": 69000,
+    "diesel_spb_rub_t": 80000,
     "trend": "stable",
-    "updated": "2026-08-04",
+    "updated": "2026-08-05",
     "source_url": "https://spimex.com/",
-    "notes": "На 04.08 АИ-95 76.377 ₽/т (стабильно, колебания ±5%). Биржевая торговля нормальная. ФАС усилила контроль ценообразования. Августовская динамика: плавный рост цен замедлился, тренд стабилизировался."
+    "notes": "На 05.08 АИ-95 72.35 ₽/л (~72350 ₽/т). Тренд стабилизировался. ФАС выдала 14 предупреждений компаниям за необоснованные скачки цен. Контроль усилен в Кировской, Удмуртской, Саратовской, Нижегородской, Краснодарском крае."
   },
   "regions": [
     {
@@ -352,42 +352,40 @@
       "region": "Нижегородская область",
       "lat": 56.33,
       "lon": 44.0,
-      "level": "limited",
-      "updated": "2026-08-03T19:30:00Z",
+      "level": "calm",
+      "updated": "2026-08-05T08:50:00Z",
       "networks": [
         {
           "name": "Лукойл",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "03.08: Кстовский НПЗ восстанавливается. Лимит 40л."
+          "status": "open",
+          "level": "calm",
+          "limit_l": null,
+          "note": "05.08: Лимиты отменены (по состоянию на 04.08). Свободная продажа. Кстовский НПЗ восстановился."
         },
         {
           "name": "Татнефть",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "03.08: Лимит АИ-95 40л.",
-          "level": "limited"
+          "status": "open",
+          "limit_l": null,
+          "note": "05.08: Ограничения отменены. Поставки восстановлены.",
+          "level": "calm"
         },
         {
           "name": "Движение",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "03.08: Ограничения 40л бензина/100л дизеля. Ситуация улучшается.",
-          "level": "limited"
+          "status": "open",
+          "limit_l": null,
+          "note": "05.08: Свободная продажа без ограничений. Ситуация нормализована.",
+          "level": "calm"
         }
       ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 76,
-      "diesel_price_rub": 81,
+      "queues_hours": 0.1,
+      "ai95_price_rub": 73,
+      "diesel_price_rub": 80,
       "source_urls": [
-        "https://www.nn.ru/text/gorod/2026/07/04/76516207/",
-        "https://www.nn.ru/text/economics/2026/07/14/76532625/",
-        "https://nobl.ru/novosti-nizhegorodskoj-oblasti-za-vse-vremya/na-nizhegorodskikh-azs-s-9-iyulya-2026-goda-vvodyatsya-novye-pravila-otpuska-topliva-po-resheniyu-re",
-        "https://www.svoboda.org/a/v-kstovo-nizhegorodskoy-oblasti-atakovan-npz-lukoyla/33794560.html"
+        "https://nn.aif.ru/auto/set-azs-obyavila-ob-otmene-limitov-na-toplivo-v-nizhegorodskoy-oblasti",
+        "https://www.nn.ru/text/transport/2026/07/06/76517146/",
+        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
       ],
-      "note": "03.08: Кстовский НПЗ восстанавливается. Очереди ↓ до 0.5ч. Лимиты 40л. Ситуация улучшается.",
-      "restored_from": "2026-07-27"
+      "note": "05.08: Лимиты ОТМЕНЕНЫ (04.08). Все крупные сети перешли на свободную продажу. Кстовский НПЗ восстановился. Ротационная проверка."
     },
     {
       "region": "Волгоградская область",
