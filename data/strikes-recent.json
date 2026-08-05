@@ -1,7 +1,7 @@
 {
  "_comment": "ХВОСТ-ИНДЕКС архива за 10 дней — только для чтения агентом, только ключевые поля (полные записи — в data/strikes.json, его правит agents/merge-strikes-inbox.py). Новые удары писать в data/strikes-inbox.json.",
- "since": "2026-07-25",
- "count": 5,
+ "since": "2026-07-26",
+ "count": 10,
  "strikes": [
   {
    "date": "2026-08-02",
@@ -41,6 +41,46 @@
    "city": "Красный Бор",
    "region": "Ленинградская область",
    "target": "логистический центр Wildberries",
+   "confidence": "confirmed"
+  },
+  {
+   "date": "2026-08-04",
+   "time": "08:40 мск",
+   "city": "Керчь",
+   "region": "Республика Крым",
+   "target": "Керченский полуостров",
+   "confidence": "confirmed"
+  },
+  {
+   "date": "2026-08-04",
+   "time": "23:00 мск",
+   "city": "Севастополь",
+   "region": "Севастополь",
+   "target": "город Севастополь",
+   "confidence": "confirmed"
+  },
+  {
+   "date": "2026-08-01",
+   "time": "утро",
+   "city": "Уфа",
+   "region": "Республика Башкортостан",
+   "target": "Bashneft-Ufaneftekhim нефтеперерабатывающий завод",
+   "confidence": "reported"
+  },
+  {
+   "date": "2026-08-02",
+   "time": "ночь",
+   "city": "Новосемейкино",
+   "region": "Самарская область",
+   "target": "Wildberries логистический комплекс",
+   "confidence": "confirmed"
+  },
+  {
+   "date": "2026-08-05",
+   "time": "ночь",
+   "city": "Олексин",
+   "region": "Тульская область",
+   "target": "Wildberries сортировочный центр",
    "confidence": "confirmed"
   }
  ]
