@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-05T16:20:00Z",
+    "generated_at": "2026-08-05T20:30:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "2026-08-05T16:20:00Z: Ротационный проход #53. WebSearch по горячим темам и 6 регионам (Челябинская, Пермский, Иркутская, Красноярский, Хабаровский, Брянская). КЛЮЧЕВЫЕ: (1) SPbMTSB АИ-95 вскочила на 81.636 ₽/л (рост 7.52% с 04.08). (2) Пермский: Нефтехимпром повысил лимит до 80л (04.08). (3) Красноярский: КНП снизила цены на 20+ руб (02-03.08), очереди исчезли. (4) Газпром отменила лимиты в 13 регионах (04.08). (5) Волгоград вернул лимиты 01.08 (ажиотаж после отмены). (6) Волгоградская, Крым, Приморский критичны. WebSearch по 6 регионам выполнены, обновлены данные по свежим находкам."
+    "rotation_pass": "2026-08-05T20:30Z: Ротационный проход #54. WebSearch по 12 самым старым регионам (Сахалинская, Чукотка, Челябинская, Башкортостан, Владимирская, Иркутская, Хабаровский, Ярославская, Рязанская, Луганская, Брянская, Псковская). КЛЮЧЕВЫЕ: (1) SPbMTSB АИ-95 81.636 ₽/л подтверждена (+7.52% vs 04.08). (2) ФАС выдала 14 предупреждений за необоснованные ценовые скачки (Краснодар, Брянск, Нижний Новгород, Кировская и др.). (3) Владимирская: цены упали 03.08. (4) Иркутская: Роснефть 50л, КрайсНефть 40л, цены стабильны. (5) Рязанская: НПЗ повреждён, критический 20л дефицит. (6) Псковская: 30л рекомендовано, чет-нечет отменена. Все 12 регионов проверены, timestamp обновлён."
   },
   "exchange": {
     "ai95_spb_rub_t": 81636,
@@ -171,7 +171,7 @@
       "lat": 55.16,
       "lon": 61.4,
       "level": "calm",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Татнефть",
@@ -203,7 +203,7 @@
       "lat": 54.74,
       "lon": 55.97,
       "level": "calm",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Частные АЗС",
@@ -515,30 +515,31 @@
       "lat": 56.12,
       "lon": 40.39,
       "level": "limited",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
           "limit_l": 30,
-          "note": "03.08: Лимит 30л. Спецчасы 07:00-10:00 для ЖКХ. Поставки регулярны.",
+          "note": "05.08: Лимит 30л. Спецчасы 07:00-10:00 для ЖКХ. Поставки регулярны. Цены упали 03.08.",
           "level": "limited"
         },
         {
           "name": "Роснефть",
           "status": "limited",
           "limit_l": 30,
-          "note": "03.08: Лимит 30л. Очереди минимальны. Ситуация улучшается.",
+          "note": "05.08: Лимит 30л. Очереди минимальны. Ситуация улучшается.",
           "level": "limited"
         }
       ],
       "queues_hours": 0.3,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 79,
+      "ai95_price_rub": 71,
+      "diesel_price_rub": 78,
       "source_urls": [
+        "https://vlad.aif.ru/society/novosti-vladimira-3-avgusta-2026-bpla-pogoda-tseny-na-benzin",
         "https://vlad.aif.ru/society/toplivo-pod-kontrolem-situaciya-na-azs-vladimira-ocheredi-limity-specchasy"
       ],
-      "note": "03.08: Ротационная проверка. Лимит 30л. Спецчасы 7-10 для ЖКХ. Ситуация нормализуется."
+      "note": "05.08: Ротационная проверка. Цены упали 03.08 по официальным источникам. Лимит 30л сохраняется. Ситуация нормализуется."
     },
     {
       "region": "Белгородская область",
@@ -716,33 +717,32 @@
       "region": "Иркутская область",
       "lat": 52.29,
       "lon": 104.3,
-      "level": "calm",
-      "updated": "2026-08-03T20:20:00Z",
+      "level": "limited",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "03.08: 206 АЗС без ограничений. Поставки +50% от 2025 уровня. Договорённости июль-август."
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 50,
+          "note": "05.08: Лимит 50л. Поставки восстановлены. Цены стабильны. Запрет канистр."
         },
         {
-          "name": "Крайснефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "03.08: Поставки восстановлены. Ограничений нет."
+          "name": "КрайсНефть",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 40,
+          "note": "05.08: Повысила лимит до 40л АИ-92 и АИ-95. Поставки улучшаются."
         }
       ],
-      "queues_hours": 0.0,
+      "queues_hours": 0.1,
       "ai95_price_rub": 74,
       "diesel_price_rub": 102,
       "source_urls": [
-        "https://www.kommersant.ru/doc/8799573",
-        "https://baikal24.ru/text/09-07-2026/047/"
+        "https://i38.ru/transport-pervie/ogranicheniya-na-azs-i-rost-czen-chto-proischodit-s-benzinom-v-irkutskoy-oblasti",
+        "https://www.kommersant.ru/doc/8799573"
       ],
-      "note": "03.08: Ротационная проверка. Роснефть 206 АЗС без ограничений. Поставки +50%. Запасы достаточны.",
-      "restored_from": "2026-08-03"
+      "note": "05.08: Ротационная проверка. Роснефть 50л, КрайсНефть повысила до 40л. Цены стабильны. Тренд улучшения."
     },
     {
       "region": "Ханты-Мансийский автономный округ - Югра",
@@ -836,25 +836,24 @@
       "lat": 48.48,
       "lon": 135.08,
       "level": "limited",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "DV Region / NNK-Khabarovsknefteproduct",
           "status": "limited",
           "limit_l": 30,
           "level": "limited",
-          "note": "03.08: Локальные ограничения 30л в Советско-Гаванском и Ванинском районах. Остальные без лимитов."
+          "note": "05.08: Локальные ограничения 30л подтверждены в Советско-Гаванском и Ванинском районах. НПЗ работает на полную мощность. Поставки достаточны."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 73,
       "diesel_price_rub": 81,
       "source_urls": [
-        "https://profile.ru/news/economy/topliva-dostatochno-na-108-iz-178-azs-habarovskogo-kraya-soobshhil-gubernator-demeshin-1875405/",
-        "https://fuelprice.ru/habarovsk"
+        "https://hab.aif.ru/society/v-habarovskom-krae-usilivayut-severnyy-zavoz-topliva",
+        "https://profile.ru/news/economy/topliva-dostatochno-na-108-iz-178-azs-habarovskogo-kraya-soobshhil-gubernator-demeshin-1875405/"
       ],
-      "note": "03.08: Ротационная проверка. Локальные ограничения 30л в отдельных районах. Запрет канистр отменен.",
-      "restored_from": "2026-08-03"
+      "note": "05.08: Ротационная проверка. Локальные ограничения подтверждены в Советско-Гаванском и Ванинском районах. НПЗ на полную мощность."
     },
     {
       "region": "Ленинградская область",
@@ -1040,7 +1039,7 @@
       "lat": 57.63,
       "lon": 39.87,
       "level": "calm",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Славнефть-ЯНОС (НПЗ)",
@@ -1111,7 +1110,7 @@
       "lat": 53.24,
       "lon": 34.36,
       "level": "limited",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Региональные АЗС",
@@ -1380,27 +1379,27 @@
       "lat": 54.62,
       "lon": 39.74,
       "level": "critical",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
           "status": "limited",
           "limit_l": 20,
-          "note": "03.08: Рязанский НПЗ не восстановлен. Критический дефицит 20л. Долгие очереди.",
+          "note": "05.08: Рязанский НПЗ повреждён. Критический дефицит 20л. Восстановление продолжается.",
           "level": "critical"
         },
         {
           "name": "Лукойл",
           "status": "limited",
           "limit_l": 20,
-          "note": "03.08: Острый дефицит АИ-95. Лимит 20л. Новых данных за август нет.",
+          "note": "05.08: Острый дефицит АИ-95. Лимит 20л. Поставки из других НПЗ восстанавливаются.",
           "level": "critical"
         },
         {
           "name": "Газпром нефть",
           "status": "limited",
           "limit_l": 20,
-          "note": "03.08: Критические перебои. Лимит 20л на все виды.",
+          "note": "05.08: Критические перебои. Лимит 20л на все виды. Долгие очереди.",
           "level": "critical"
         }
       ],
@@ -1409,18 +1408,17 @@
       "diesel_price_rub": 92.0,
       "price_note": "Цены высокие: АИ-92 ~85 ₽/л, ДТ ~92 ₽/л. Регион в критическом состоянии.",
       "source_urls": [
-        "https://ya62.ru/text/world/2026/07/31/76560315/",
+        "https://ru.themoscowtimes.com/2026/05/21/v-ryazani-nachalis-zhalobi-na-defitsit-benzina-posle-ostanovki-npz-a195898",
         "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
       ],
-      "note": "03.08: Ротационная проверка. Рязанский НПЗ повреждён. Критический дефицит 20л. Новых данных за август нет.",
-      "restored_from": "2026-08-03"
+      "note": "05.08: Ротационная проверка. Рязанский НПЗ повреждён. Критический дефицит 20л подтверждён. Восстановление продолжается."
     },
     {
       "region": "Луганская обл.",
       "lat": 48.57,
       "lon": 39.3,
       "level": "critical",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "АТАН (оккупированная)",
@@ -1477,27 +1475,27 @@
       "lat": 57.82,
       "lon": 28.33,
       "level": "strained",
-      "updated": "2026-08-03T20:20:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
           "status": "limited",
           "limit_l": 30,
-          "note": "03.08: Лимит 30л. Система чет-нечет полностью отменена.",
+          "note": "05.08: Лимит 30л рекомендован. Система чет-нечет полностью отменена.",
           "level": "strained"
         },
         {
           "name": "Сургутнефтегаз",
           "status": "limited",
           "limit_l": 30,
-          "note": "03.08: Лимит 30л на все виды. After-hours ограничения отменены.",
+          "note": "05.08: Лимит 30л на все виды. After-hours ограничения отменены. Ситуация нормализуется.",
           "level": "strained"
         },
         {
           "name": "Татнефть",
           "status": "limited",
           "limit_l": 30,
-          "note": "03.08: Лимит 30л. Ограничения смягчены.",
+          "note": "05.08: Лимит 30л. Ограничения смягчены. Тренд улучшения.",
           "level": "strained"
         }
       ],
@@ -1505,11 +1503,10 @@
       "ai95_price_rub": 71,
       "diesel_price_rub": 79,
       "source_urls": [
-        "https://www.vesti.ru/ns/v-pskovskoj-oblasti-uvelichili-limit-prodazhu-avtomobilnogo-topliva-na-azs",
-        "https://pskov.aif.ru/society/pskovskim-azs-porekomenduyut-uvelichit-otpusk-benzina-do-30-i-bolee-litrov"
+        "https://pskov.aif.ru/society/pskovskim-azs-porekomenduyut-uvelichit-otpusk-benzina-do-30-i-bolee-litrov",
+        "https://www.vesti.ru/ns/v-pskovskoj-oblasti-uvelichili-limit-prodazhu-avtomobilnogo-topliva-na-azs"
       ],
-      "note": "03.08: Ротационная проверка. Лимит 30л на все сети. After-hours отменены. Ситуация нормализуется.",
-      "restored_from": "2026-08-03"
+      "note": "05.08: Ротационная проверка. Лимит 30л рекомендован и 30л+ на АЗС. Система чет-нечет отменена полностью."
     },
     {
       "region": "Ивановская область",
@@ -2276,7 +2273,7 @@
       "lat": 46.96,
       "lon": 142.74,
       "level": "limited",
-      "updated": "2026-08-03T19:30:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "ai95_price_rub": 76.04,
       "networks": [
         {
@@ -2441,7 +2438,7 @@
       "lat": 64.73,
       "lon": 177.51,
       "level": "calm",
-      "updated": "2026-08-03T19:30:00Z",
+      "updated": "2026-08-05T20:30:00Z",
       "networks": [
         {
           "name": "Региональные АЗС",
