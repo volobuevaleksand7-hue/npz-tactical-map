@@ -127,6 +127,14 @@ FUEL_WORDS = ["нпз", "нефт", "топлив", "нефтебаз", "тер�
 _HTML_DROP = re.compile(r"(?is)<(script|style)\b.*?</\1>")
 _HTML_TAG = re.compile(r"(?s)<[^>]+>")
 
+# 🔴 05.08: scrub_text() чинил "TAIF-NK" внутри href="/npz/taif-nk" (URL, не проза) —
+# ссылка сломалась (кириллица в слаге), а последующий пробельный клинап той же функции
+# (\s+ перед пунктуацией, включая ".") прошёлся по <style> и съел пробел в CSS-селекторах
+# вида ".status-card .val" -> ".status-card.val" (другой селектор, вёрстка отваливается).
+# И то и другое — не текст статьи: <style>/<script> и href/src защищаем от всего пайплайна
+# (SCRUB/LATIN_FIX и клинап), как text_reasons уже защищает их через strip_markup.
+_PROTECT = re.compile(r'(?is)<(script|style)\b.*?</\1>|\bhref="[^"]*"|\bsrc="[^"]*"')
+
 
 def strip_markup(s):
     """HTML -> видимый текст. Диагноз ставим по тексту, а не по атрибутам тегов."""
@@ -135,10 +143,8 @@ def strip_markup(s):
     return re.sub(r"\s+", " ", s)
 
 
-def scrub_text(s):
-    """Вырезает оценочные эпитеты и чинит латиницу. Возвращает (текст, сколько правок)."""
-    if not isinstance(s, str) or not s:
-        return s, 0
+def _scrub_plain(s):
+    """SCRUB+LATIN_FIX и пробельный клинап, БЕЗ учёта защищённых секций."""
     n = 0
     for pat, rep in SCRUB + LATIN_FIX:
         s, k = re.subn(pat, rep, s)
@@ -149,6 +155,28 @@ def scrub_text(s):
         s = re.sub(r"[ \t]{2,}", " ", s)
         s = re.sub(r"[ \t]+([,.;:!?»)])", r"\1", s)
     return s, n
+
+
+def scrub_text(s):
+    """Вырезает оценочные эпитеты и чинит латиницу. Возвращает (текст, сколько правок).
+
+    <style>/<script>-содержимое и значения href=/src= пропускаются без изменений —
+    это разметка/URL, а не текст статьи (см. _PROTECT)."""
+    if not isinstance(s, str) or not s:
+        return s, 0
+    out = []
+    total = 0
+    pos = 0
+    for m in _PROTECT.finditer(s):
+        fixed, k = _scrub_plain(s[pos:m.start()])
+        out.append(fixed)
+        total += k
+        out.append(m.group(0))  # <style>/<script>/href=".."/src=".." — без изменений
+        pos = m.end()
+    fixed, k = _scrub_plain(s[pos:])
+    out.append(fixed)
+    total += k
+    return "".join(out), total
 
 
 def text_reasons(s, markup=False):
@@ -234,6 +262,18 @@ def demo():
     s, n = scrub_text("варварский удар по НПЗ")
     assert s == "удар по НПЗ", s
     assert scrub_text("Удар по НПЗ в Рязани")[1] == 0
+
+    # 🔴 05.08 регресс: правка эпитета В ОДНОМ месте файла не должна портить <style>/
+    # href в ДРУГИХ местах — раньше пробельный клинап съедал пробел в CSS-селекторах
+    # (".a .b" -> ".a.b") и LATIN_FIX переписывал URL-слаг на кириллицу, ломая ссылку.
+    html = ('<a href="/npz/taif-nk">ТАИФ-НК</a>'
+            '<style>.status-card .val{color:red}</style>'
+            '<p>варварский удар по НПЗ</p>')
+    fixed, n = scrub_text(html)
+    assert n == 1, (fixed, n)
+    assert 'href="/npz/taif-nk"' in fixed, "URL в href испорчен: " + fixed
+    assert '.status-card .val{color:red}' in fixed, "пробел в CSS-селекторе съеден: " + fixed
+    assert "варварский" not in fixed and "удар по НПЗ" in fixed
 
     assert text_reasons("Поражён Рязанский НПЗ") == []
     assert text_reasons("Слава Україні")            # лозунг + укр-язык
