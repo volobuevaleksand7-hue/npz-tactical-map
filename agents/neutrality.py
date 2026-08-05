@@ -103,7 +103,9 @@ SCRUB = [
 LATIN_FIX = [
     (r"(?i)\bBashneft-UNPZ\b", "Башнефть-УНПЗ"),
     (r"(?i)\bBashneft-Novoil\b", "Башнефть-Новойл"),
-    (r"(?i)\bTAIF-NK\b", "ТАИФ-НК"),
+    # (?<!/) — не трогать URL-слаг /npz/taif-nk (censor работает на сыром HTML,
+    # без strip_markup; без лукбихайнда правило калечило href в ссылку 404).
+    (r"(?i)(?<!/)\bTAIF-NK\b", "ТАИФ-НК"),
     (r"(?i)\bELOU-AVT\b", "ЭЛОУ-АВТ"),
     (r"(?i)\bAzovnefteprodukt\b", "Азовнефтепродукт"),
     (r"(?i)\bForte\s+Invest\b", "Форте Инвест"),
