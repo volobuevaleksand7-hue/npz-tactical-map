@@ -46,7 +46,13 @@ if [ -d "$zone_dir" ] && [ "${ALLOW_CROSS_ZONE:-}" != "1" ]; then
       # команда — печатает «  File: ...», и арифметика ниже падала под `set -u`
       # («File: unbound variable»), обваливая КАЖДЫЙ коммит на VPS. Плюс явная
       # проверка на число: любой неожиданный вывод трактуем как «зона протухла».
-      zmod=$(stat -c %Y "$zf" 2>/dev/null || stat -f %m "$zf" 2>/dev/null || echo 0)
+      # 🔴 Возраст зоны берём из git, а не из mtime файла: свежий `git worktree add`
+      # штампует ВСЕ файлы временем чекаута, и зона трёхдневной давности выглядела
+      # рождённой минуту назад. А работать субагентам предписано именно из worktree —
+      # то есть guard блокировал любой их коммит навсегда (05.08: зоны от 02.08,
+      # возрастом ~70 ч, считались живыми). mtime остаётся фолбэком для не-git случаев.
+      zmod=$(git log -1 --format=%ct -- "$zf" 2>/dev/null)
+      case "$zmod" in ''|*[!0-9]*) zmod=$(stat -c %Y "$zf" 2>/dev/null || stat -f %m "$zf" 2>/dev/null || echo 0) ;; esac
       case "$zmod" in ''|*[!0-9]*) zmod=0 ;; esac
       [ "$zmod" -eq 0 ] && continue
       [ $(( (now - zmod) / 3600 )) -ge "$ZONE_TTL_H" ] && continue
@@ -54,7 +60,10 @@ if [ -d "$zone_dir" ] && [ "${ALLOW_CROSS_ZONE:-}" != "1" ]; then
         [ -z "$pat" ] && continue
         case "$pat" in \#*) continue ;; esac
         hit="$(printf '%s\n' "$staged_all" | grep -E "$pat" || true)"
-        [ -n "$hit" ] && clash="$clash\n  зона «$zname» ($pat):\n$(printf '%s\n' "$hit" | sed 's/^/      /')"
+        # ${zname} в фигурных скобках обязателен: следом идёт многобайтовая «»», и bash
+        # затягивал её в имя переменной — под `set -u` это «zname»: unbound variable»,
+        # то есть сторож падал ровно в тот момент, когда должен был напечатать претензию.
+        [ -n "$hit" ] && clash="$clash\n  зона «${zname}» ($pat):\n$(printf '%s\n' "$hit" | sed 's/^/      /')"
       done < "$zf"
     done
     if [ -n "$clash" ]; then
