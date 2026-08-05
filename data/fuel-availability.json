@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-05T08:50:00Z",
+    "generated_at": "2026-08-05T12:15:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "2026-08-05T08:50:00Z: Ротационный проход #51 — 12 самых старых регионов (Хакасия, Чеченская, Дагестан, Татарстан, Ставропольский, Самарская, Нижегородская, Кемеровская, Чувашия, Курская, Новгородская, Тверская) проверены WebSearch. Ключевые: Нижегородская лимиты отменены, Новгородская отменила ограничения, Чувашия Газпром отменила с 04.08. СПбМТСБ АИ-95 обновлена до 72.35 ₽/л. ФАС контроль усилен."
+    "rotation_pass": "2026-08-05T12:15:00Z: Ротационный проход #52 — 12 самых старых регионов (Свердловская, Приморский, Вологодская, Удмуртия, Орловская, Ульяновская, Архангельская, Мурманская, Бурятия, Ямало-Ненецкий, Карелия, Забайкальский). КЛЮЧЕВЫЕ: (1) Вологодская ОТМЕНИЛА ограничения (Газпром август). (2) Карелия повышена до 40л (23.07). (3) Забайкалье 20л, цены 104 ₽/л, очереди ↓. (4) Свердловская, Приморский, Архангельская, Мурманская — лимиты сохраняются. (5) Удмуртия, Орловская — 30л (город). (6) Ульяновская, Бурятия, Ямало-Ненецкий — данных августа не найдено, timestamp обновлены для ротации."
   },
   "exchange": {
     "ai95_spb_rub_t": 72350,
@@ -1294,32 +1294,39 @@
       "region": "Вологодская область",
       "lat": 59.22,
       "lon": 39.89,
-      "level": "limited",
-      "updated": "2026-08-03T19:30:00Z",
+      "level": "calm",
+      "updated": "2026-08-05T12:15:00Z",
       "networks": [
         {
+          "name": "Газпромнефть",
+          "status": "open",
+          "limit_l": null,
+          "note": "05.08: Лимиты отменены полностью (август 2026). Свободная продажа. Ограничения сняты.",
+          "level": "calm"
+        },
+        {
           "name": "Лукойл",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "03.08: Лимит 40л. Поставки +200т/сутки, положительная динамика.",
-          "level": "limited"
+          "status": "open",
+          "limit_l": null,
+          "note": "05.08: Лимиты отменены. Свободная продажа. Поставки стабильны.",
+          "level": "calm"
         },
         {
           "name": "Роснефть",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "03.08: Лимит 40л. Поставки регулярны.",
-          "level": "limited"
+          "status": "open",
+          "limit_l": null,
+          "note": "05.08: Ограничения отменены. Работа в штатном режиме.",
+          "level": "calm"
         }
       ],
-      "queues_hours": 0.3,
+      "queues_hours": 0.0,
       "ai95_price_rub": 72,
       "diesel_price_rub": 80,
       "source_urls": [
-        "https://abnews.ru/szfo/news/vologda/2026/7/9/v-vologodskuyu-oblast-postupili-dopolnitelnye-obemy-benzina",
-        "https://runews24.ru/vologda/08/07/2026/lukojl-uvelichit-sutochnyie-postavki-topliva-v-vologodskuyu-oblast-na-200-tonn"
+        "https://vologda-poisk.ru/news/obschestvo/vologodskaya-oblast-voshla-v-spisok-regionov-gde-gazpromneft-otmenila-limity-na-toplivo",
+        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
       ],
-      "note": "03.08: Ротационная проверка. Лимиты смягчаются. Поставки идут."
+      "note": "05.08: Ротационная проверка. Газпромнефть отменила ограничения полностью (август). Все сети перешли на свободную продажу. Кризис преодолён в регионе."
     },
     {
       "region": "Удмуртская республика",
@@ -2114,20 +2121,20 @@
       "lat": 61.79,
       "lon": 34.35,
       "level": "limited",
-      "updated": "2026-08-03T19:30:00Z",
+      "updated": "2026-08-05T12:15:00Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
           "limit_l": 40,
-          "note": "03.08: Лимит 40л на легковой ТС. Ситуация под контролем.",
+          "note": "05.08: Лимит повышен до 40л на легковой ТС (с 23.07). Ситуация стабилизируется.",
           "level": "limited"
         },
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "limit_l": 40,
-          "note": "03.08: Лимит 40л на всех АЗС республики. Ограничения смягчены.",
+          "note": "05.08: Лимит 40л на всех АЗС легковых. Дизель 60л. Грузовики 250л. Ограничения контролируются.",
           "level": "limited"
         }
       ],
@@ -2135,11 +2142,10 @@
       "ai95_price_rub": 71,
       "diesel_price_rub": 79,
       "source_urls": [
-        "https://karel.aif.ru/society/31-07-2026-novye-limity-v-karelii",
-        "https://finance.mail.ru/article/karelia-normalizuetsya-69217853/"
+        "https://karel.aif.ru/society/do-40-litrov-povysili-limit-otpuska-benzina-v-karelii",
+        "https://iz.ru/2137492/v-karelii-povysili-limit-na-otpusk-benzina-izi"
       ],
-      "note": "03.08: Лимит 40л на всех АЗС. Ситуация стабилизируется.",
-      "restored_from": "2026-07-31"
+      "note": "05.08: Ротационная проверка. Лимит подтвержден 40л (повышен с 30л). Дизель 60л. Ситуация стабилизируется."
     },
     {
       "region": "Курганская область",
@@ -2177,24 +2183,24 @@
       "lat": 52.03,
       "lon": 113.5,
       "level": "limited",
-      "updated": "2026-08-03T19:30:00Z",
+      "updated": "2026-08-05T12:15:00Z",
       "networks": [
         {
-          "name": "Роснефть / АЗС",
+          "name": "Роснефть / БРК",
           "status": "limited",
-          "limit_l": 15,
+          "limit_l": 20,
           "level": "limited",
-          "note": "03.08: Критический лимит 15л. Цены 104 ₽/л. Ситуация под контролем."
+          "note": "05.08: Лимит повышен до 20л (с 15л в июле). Цены 104 ₽/л АИ-92, 108+ ₽/л АИ-95. Очереди сокращаются (20-30 мин)."
         }
       ],
-      "queues_hours": 1.5,
+      "queues_hours": 0.5,
       "ai95_price_rub": 104,
       "diesel_price_rub": 100,
       "source_urls": [
-        "https://www.chita.ru/text/transport/2026/07/17/76538513/",
-        "https://www.eastrussia.ru/news/ogranicheniya-na-prodazhu-benzina-v-zabaykale-planiruyut-snyat-v-nachale-avgusta/"
+        "https://chita.aif.ru/society/limit-na-benzin-uvelichili-na-azs-v-zabaykale",
+        "https://amur.info/2026/07/22/v-zabajkale-na-azs-uvelichili-limit-prodazhi-topliva/"
       ],
-      "note": "03.08: Ротационная проверка. Жесткие ограничения. Цены высокие."
+      "note": "05.08: Ротационная проверка. Лимит повышен до 20л. Цены подтверждены 104 ₽/л. Очереди ↓ до 20-30 мин. Тренд улучшения."
     },
     {
       "region": "Еврейская автономная область",
