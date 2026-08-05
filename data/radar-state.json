@@ -288,8 +288,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1785937606,
-      "source_text": "05.08.2026 16:46 МСК\nПричерноморье Краснодарский край от Анапы и далее на Новороссийск - Туапсе - Сочи опасность по БПЛА"
+      "last_event_ts": 1785937812,
+      "source_text": "05.08.2026 16:50 МСК\nАнапа Краснодарский край Работа ПВО по БПЛА"
     },
     "Белгородская область": {
       "bpla": false,
@@ -960,9 +960,9 @@
       "lat": 44.89497,
       "lon": 37.31623,
       "region": "Краснодарский край",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -970,11 +970,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1785937213,
-      "source_text": "05.08.2026 16:40 МСК\nАнапа, Витязево и близлежащие повторно тревога по БПЛА"
+      "last_event_ts": 1785937812,
+      "source_text": "05.08.2026 16:50 МСК\nАнапа Краснодарский край Работа ПВО по БПЛА"
     },
     {
       "key": "кабардинка|краснодарский край",
@@ -1107,28 +1107,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1785937402,
       "source_text": "05.08.2026 16:43 МСК\nГорловка ДНР опасность по БПЛА повторно, внимание по возможным ФПВ Крыло с горловского моря в сторону горыныча ❗ дмг"
-    },
-    {
-      "key": "херсонес|севастополь",
-      "name": "Херсонес",
-      "lat": 44.583371,
-      "lon": 33.380345,
-      "region": "Севастополь",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1785916732,
-      "source_text": "05.08.2026 10:58 МСК\nКазачка от м. Херсонес тревога по БПЛА"
     },
     {
       "key": "алчевск|луганская народная республика",
@@ -1300,7 +1278,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#d8c06a",
       "last_event_ts": 1785934741,
@@ -2383,28 +2361,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1785935669,
       "source_text": "05.08.2026 16:14 МСК\nКаменский район Тульская область Фиксация от 4 БПЛА"
-    },
-    {
-      "key": "казачья|севастополь",
-      "name": "Казачья",
-      "lat": 44.572058,
-      "lon": 33.411822,
-      "region": "Севастополь",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1785916649,
-      "source_text": "05.08.2026 10:57 МСК\nБухта Казачья, Камышовая тревога по БПЛА с моря"
     },
     {
       "key": "крымск|краснодарский край",
@@ -4272,6 +4228,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 78886,
+      "text": "Анапа\nКраснодарский край\nРабота ПВО по БПЛА",
+      "ts": 1785937812,
+      "time_label": "05.08.2026 16:50 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "Радар ВРВ"
+    },
+    {
       "msg_id": 255146,
       "text": "Причерноморье Краснодарский край от Анапы и далее на Новороссийск - Туапсе - Сочи опасность по БПЛА",
       "ts": 1785937606,
@@ -4902,14 +4866,6 @@
       "time_label": "05.08.2026 14:35 МСК",
       "source_id": "vrv_radar",
       "source_label": "Радар ВРВ"
-    },
-    {
-      "msg_id": 77843,
-      "text": "Рошаль, Шатура, Дмитровский Погост, Московская область - внимание по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1785929602,
-      "time_label": "05.08.2026 14:33 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -4919,14 +4875,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1785937606,
-  "last_event_at": "2026-08-05T13:46:46Z",
-  "fetched_at": "2026-08-05T13:50:03.385292Z",
+  "timestamp": 1785937812,
+  "last_event_at": "2026-08-05T13:50:12Z",
+  "fetched_at": "2026-08-05T14:00:05.015413Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-05T13:50:03.385292Z",
-    "source_age_seconds": 197,
-    "city_count": 100,
+    "generated_at": "2026-08-05T14:00:05.015413Z",
+    "source_age_seconds": 593,
+    "city_count": 98,
     "region_count": 22,
     "feed_count": 80
   }
