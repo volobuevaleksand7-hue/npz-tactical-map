@@ -53,7 +53,8 @@
       {"@type": "Question", "name": "Какая доля складских мощностей выбыла?", "acceptedAnswer": {"@type": "Answer", "text": "По оценкам в СМИ, Wildberries потерял около 350 тыс. м² складских площадей — это порядка 7% от заявленных 5,2 млн м². Оценка приблизительная: компания не публиковала официальных данных о выбывших площадях."}},
       {"@type": "Question", "name": "В каких городах есть склады Вайлдберриз?", "acceptedAnswer": {"@type": "Answer", "text": "Крупных объектов Wildberries на карте — 37, в 24 регионах: в том числе Алексин, Белые Столбы, Волгоград, Воронеж, Всеволожск, Екатеринбург, Иваново, Казань (Зеленодольск), Коледино, Котовск, Краснодар, Крёкшино. Это выборка крупных распределительных центров: сортировочные центры и пункты выдачи в неё не входят, поэтому список городов сети шире. Полный перечень объектов с регионами — на слое «Склады ВБ/Озон» карты."}},
       {"@type": "Question", "name": "Какие склады Вайлдберриз самые большие по площади?", "acceptedAnswer": {"@type": "Answer", "text": "Рейтинг складов по площади по открытым данным построить нельзя: компания публикует только суммарную величину — более 200 складских комплексов общей площадью свыше 5,2 млн м², — но не метраж каждого объекта. К крупнейшим узлам обычно относят подмосковные комплексы, однако официальных данных по площади отдельных складов Wildberries не раскрывала."}},
-      {"@type": "Question", "name": "Сколько складов показано на карте?", "acceptedAnswer": {"@type": "Answer", "text": "На слое «Склады ВБ/Озон» нанесены 56 крупных объекта: 37 распределительных центров Wildberries и 19 фулфилмент-центров Ozon. Это выборка крупных объектов, а не вся сеть из 200+ комплексов — сортировочные центры и пункты выдачи на карту не наносятся."}}
+      {"@type": "Question", "name": "Сколько складов показано на карте?", "acceptedAnswer": {"@type": "Answer", "text": "На слое «Склады ВБ/Озон» нанесены 56 крупных объекта: 37 распределительных центров Wildberries и 19 фулфилмент-центров Ozon. Это выборка крупных объектов, а не вся сеть из 200+ комплексов — сортировочные центры и пункты выдачи на карту не наносятся."}},
+      {"@type": "Question", "name": "Какие склады Wildberries и Ozon остались?", "acceptedAnswer": {"@type": "Answer", "text": "В выборке проекта из 56 крупных объектов у 35 нет сообщений об ударе на 2 августа 2026 (16 Wildberries, 19 Ozon) — полный список с городом и оператором на этой странице. Отсутствие объекта в списке поражённых не значит, что он работает в штатном режиме: это лишь отсутствие сообщений об ударах по нему, независимая проверка исправности объектов проектом не проводилась."}}
     ]
   }
   </script>
@@ -130,6 +131,11 @@
     .wh-rank-src{display:block;margin-top:6px;font-size:11px;color:var(--teal);text-decoration:none}
     .wh-rank-src:hover{text-decoration:underline}
     .wh-rank-caption{font-size:12px;color:var(--ink-dim)}
+    .wh-ok-op-h{font-family:var(--mono);font-size:12px;font-weight:800;color:var(--teal);margin:16px 0 8px;letter-spacing:.5px}
+    .wh-ok-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:8px}
+    .wh-ok-card{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+    .wh-ok-city{font-weight:700;font-size:13px}
+    .wh-ok-region{font-size:11px;color:var(--ink-dim);margin-top:2px}
 </style>
   <link rel="stylesheet" href="/search.css?v=5a32b7c1">
   <script defer src="/search.js?v=8b14567c"></script>
@@ -340,6 +346,50 @@
       <p class="lead-p">В вопросах читателей одно и то же событие называют по-разному: сколько складов ВБ <strong>пострадало</strong>, сколько <strong>сгорело</strong>, сколько <strong>взорвали</strong> или <strong>уничтожено</strong>. Проверяемая величина при этом одна — <strong>21</strong> объектов с сообщениями об ударе, пожар подтверждён на 14. Данных о полном уничтожении (сносе или списании) объектов в открытых источниках нет, поэтому на этой странице используется формулировка «поражены ударами»: степень повреждений по большинству объектов официально не раскрыта.</p>
       <p class="lead-p">Итог: поражено 21 из 200+, статус оставшихся объектов проектом не проверялся и не утверждается.</p>
 
+      <h2 class="section-h"><span class="ico">📋</span> Какие склады Wildberries и Ozon остались</h2>
+      <p class="lead-p">Ниже — <strong>35 объектов</strong>, по которым на 2 августа 2026 в открытых данных проекта нет сообщений об ударе (16 Wildberries, 19 Ozon). Это не значит, что они работают в штатном режиме: это лишь отсутствие сообщений об ударах по ним, а не подтверждение исправности объекта.</p>
+      <div class="wh-ok-op-h">Wildberries (16)</div>
+      <div class="wh-ok-grid">
+        <div class="wh-ok-card"><div class="wh-ok-city">Улан-Удэ</div><div class="wh-ok-region">Бурятия</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Иваново</div><div class="wh-ok-region">Ивановская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Крёкшино</div><div class="wh-ok-region">Москва</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Новокосино</div><div class="wh-ok-region">Москва</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Белые Столбы</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Нахабино</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Обухово</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Подольск</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Пушкино</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Софьино</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Чехов</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Новосибирск</div><div class="wh-ok-region">Новосибирская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Санкт-Петербург (Парголово)</div><div class="wh-ok-region">Санкт-Петербург</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Саратов</div><div class="wh-ok-region">Саратовская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Алексин</div><div class="wh-ok-region">Тульская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Хабаровск</div><div class="wh-ok-region">Хабаровский край</div></div>
+      </div>
+      <div class="wh-ok-op-h">Ozon (19)</div>
+      <div class="wh-ok-grid">
+        <div class="wh-ok-card"><div class="wh-ok-city">Воронеж</div><div class="wh-ok-region">Воронежская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Краснодар-2 (Дружный)</div><div class="wh-ok-region">Краснодарский край</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">СПб Бугры</div><div class="wh-ok-region">Ленинградская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Ватутинки</div><div class="wh-ok-region">Москва</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Гривно</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Домодедово (Кучино)</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Жуковский</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Ногинск (Обухово)</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Пушкино-1</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Пушкино-2</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Софьино</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Хоругвино</div><div class="wh-ok-region">Московская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Новосибирск (Толмачёво)</div><div class="wh-ok-region">Новосибирская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Самара (Чапаевск)</div><div class="wh-ok-region">Самарская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">СПб Колпино</div><div class="wh-ok-region">Санкт-Петербург</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">СПб Шушары</div><div class="wh-ok-region">Санкт-Петербург</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Санкт-Петербург (Петро-Славянка)</div><div class="wh-ok-region">Санкт-Петербург</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Екатеринбург (Кольцовский)</div><div class="wh-ok-region">Свердловская область</div></div>
+        <div class="wh-ok-card"><div class="wh-ok-city">Казань (Зеленодольск)</div><div class="wh-ok-region">Татарстан</div></div>
+      </div>
+
       <h2 class="section-h"><span class="ico">🗺</span> Что показано на карте</h2>
       <p class="lead-p">На слое «Склады ВБ/Озон» нанесены <strong>56 крупных объекта</strong>: 37 распределительных центров Wildberries и 19 фулфилмент-центров Ozon. Поражённые ударами отмечены <strong>красным</strong> с пульсацией, остальные — фирменным цветом сети: по ним в этом наборе удары не зафиксированы, что не является утверждением о том, что склад работает. В карточке каждого поражённого объекта — дата удара и ссылка на источник.</p>
       <p class="lead-p">Это <strong>выборка крупных объектов</strong>, а не полная сеть: сортировочные центры и пункты выдачи на карту не наносятся — достоверного открытого датасета по ним нет, а на карте страны они превратились бы в сплошное пятно. Координаты складов получены геокодированием открытых адресов через OpenStreetMap и для части объектов указывают на населённый пункт, а не на конкретное здание.</p>
@@ -385,6 +435,10 @@
         <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Сколько складов показано на карте?</div>
           <div class="faq-a">На слое «Склады ВБ/Озон» нанесены 56 крупных объекта: 37 распределительных центров Wildberries и 19 фулфилмент-центров Ozon. Это выборка крупных объектов, а не вся сеть из 200+ комплексов — сортировочные центры и пункты выдачи на карту не наносятся.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Какие склады Wildberries и Ozon остались?</div>
+          <div class="faq-a">В выборке проекта из 56 крупных объектов у 35 нет сообщений об ударе на 2 августа 2026 (16 Wildberries, 19 Ozon) — полный список с городом и оператором на этой странице. Отсутствие объекта в списке поражённых не значит, что он работает в штатном режиме: это лишь отсутствие сообщений об ударах по нему, независимая проверка исправности объектов проектом не проводилась.</div>
         </div>
       </div>
 

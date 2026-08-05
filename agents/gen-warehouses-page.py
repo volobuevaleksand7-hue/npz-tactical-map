@@ -114,6 +114,41 @@ def warehouse_rank_section(wh, updated_iso):
     )
 
 
+def warehouse_ok_section(wh, updated_iso):
+    """Перечень объектов status=ok — отвечает буквально на «какие склады остались».
+
+    🔴 Формулировка осторожная (то же правило, что в FAQ «Сколько складов Wildberries
+    осталось?»): отсутствие объекта в списке поражённых — это отсутствие сообщений об
+    ударе по нему, а не подтверждение штатной работы. Список НЕ дублирует рейтинг по
+    площади выше — там топ по метражу среди объектов с известной площадью (другой
+    знаменатель), здесь — все status=ok объекта датасета.
+    """
+    ok = [w for w in wh if w["status"] == "ok"]
+    wb_ok = sorted((w for w in ok if w["operator"] == "wb"), key=lambda w: (w["region"], w["name"]))
+    oz_ok = sorted((w for w in ok if w["operator"] == "ozon"), key=lambda w: (w["region"], w["name"]))
+
+    def card(w):
+        return ('        <div class="wh-ok-card"><div class="wh-ok-city">%s</div>'
+                '<div class="wh-ok-region">%s</div></div>'
+                % (escape(w["name"]), escape(w["region"])))
+
+    def group(title, items):
+        if not items:
+            return ""
+        return ('      <div class="wh-ok-op-h">%s (%d)</div>\n'
+                '      <div class="wh-ok-grid">\n%s\n      </div>\n'
+                % (escape(title), len(items), "\n".join(card(w) for w in items)))
+
+    return (
+        '      <p class="lead-p">Ниже — <strong>%d объектов</strong>, по которым на %s в открытых '
+        'данных проекта нет сообщений об ударе (%d Wildberries, %d Ozon). Это не значит, что они '
+        'работают в штатном режиме: это лишь отсутствие сообщений об ударах по ним, а не '
+        'подтверждение исправности объекта.</p>\n'
+        '%s%s'
+        % (len(ok), rus(updated_iso), len(wb_ok), len(oz_ok), group("Wildberries", wb_ok), group("Ozon", oz_ok))
+    )
+
+
 def build():
     with open(SRC, encoding="utf8") as f:
         doc = json.load(f)
@@ -179,12 +214,16 @@ def build():
         ("Сколько складов показано на карте?",
          "На слое «Склады ВБ/Озон» нанесены %d крупных объекта: %d распределительных центров Wildberries и %d фулфилмент-центров Ozon. Это выборка крупных объектов, а не вся сеть из %d+ комплексов — сортировочные центры и пункты выдачи на карту не наносятся."
          % (len(wh), wb_n, oz_n, net["wb"]["complexes"])),
+        ("Какие склады Wildberries и Ozon остались?",
+         "В выборке проекта из %d крупных объектов у %d нет сообщений об ударе на %s (%d Wildberries, %d Ozon) — полный список с городом и оператором на этой странице. Отсутствие объекта в списке поражённых не значит, что он работает в штатном режиме: это лишь отсутствие сообщений об ударах по нему, независимая проверка исправности объектов проектом не проводилась."
+         % (len(wh), len(wh) - len(hits), rus(UPDATED), wb_n - len(hits), oz_n)),
     ]
     faq_ld = ",\n      ".join(
         json.dumps({"@type": "Question", "name": q,
                     "acceptedAnswer": {"@type": "Answer", "text": a}}, ensure_ascii=False)
         for q, a in faq)
     RANK_BLOCK = warehouse_rank_section(wh, UPDATED)
+    OK_BLOCK = warehouse_ok_section(wh, UPDATED)
     faq_html = "\n".join(
         '        <div class="faq-item">\n'
         '          <div class="faq-q" onclick="this.parentElement.classList.toggle(\'open\')">%s</div>\n'
@@ -314,6 +353,11 @@ def build():
     .wh-rank-src{{display:block;margin-top:6px;font-size:11px;color:var(--teal);text-decoration:none}}
     .wh-rank-src:hover{{text-decoration:underline}}
     .wh-rank-caption{{font-size:12px;color:var(--ink-dim)}}
+    .wh-ok-op-h{{font-family:var(--mono);font-size:12px;font-weight:800;color:var(--teal);margin:16px 0 8px;letter-spacing:.5px}}
+    .wh-ok-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:8px}}
+    .wh-ok-card{{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:8px 12px}}
+    .wh-ok-city{{font-weight:700;font-size:13px}}
+    .wh-ok-region{{font-size:11px;color:var(--ink-dim);margin-top:2px}}
 </style>
   <link rel="stylesheet" href="/search.css?v=5a32b7c1">
   <script defer src="/search.js?v=8b14567c"></script>
@@ -389,6 +433,8 @@ def build():
       <p class="lead-p">В вопросах читателей одно и то же событие называют по-разному: сколько складов ВБ <strong>пострадало</strong>, сколько <strong>сгорело</strong>, сколько <strong>взорвали</strong> или <strong>уничтожено</strong>. Проверяемая величина при этом одна — <strong>{len(hits)}</strong> объектов с сообщениями об ударе, пожар подтверждён на {len(burned)}. Данных о полном уничтожении (сносе или списании) объектов в открытых источниках нет, поэтому на этой странице используется формулировка «поражены ударами»: степень повреждений по большинству объектов официально не раскрыта.</p>
       <p class="lead-p">Итог: поражено {len(hits)} из {net['wb']['complexes']}+, статус оставшихся объектов проектом не проверялся и не утверждается.</p>
 
+      <h2 class="section-h"><span class="ico">📋</span> Какие склады Wildberries и Ozon остались</h2>
+{OK_BLOCK}
       <h2 class="section-h"><span class="ico">🗺</span> Что показано на карте</h2>
       <p class="lead-p">На слое «Склады ВБ/Озон» нанесены <strong>{len(wh)} крупных объекта</strong>: {wb_n} распределительных центров Wildberries и {oz_n} фулфилмент-центров Ozon. Поражённые ударами отмечены <strong>красным</strong> с пульсацией, остальные — фирменным цветом сети: по ним в этом наборе удары не зафиксированы, что не является утверждением о том, что склад работает. В карточке каждого поражённого объекта — дата удара и ссылка на источник.</p>
       <p class="lead-p">Это <strong>выборка крупных объектов</strong>, а не полная сеть: сортировочные центры и пункты выдачи на карту не наносятся — достоверного открытого датасета по ним нет, а на карте страны они превратились бы в сплошное пятно. Координаты складов получены геокодированием открытых адресов через OpenStreetMap и для части объектов указывают на населённый пункт, а не на конкретное здание.</p>
@@ -455,6 +501,7 @@ def demo():
     with open(SRC, encoding="utf8") as f:
         doc = json.load(f)
     hits = [w for w in doc["warehouses"] if w["status"] == "hit"]
+    ok = [w for w in doc["warehouses"] if w["status"] == "ok"]
     html = build()
     assert html.count("<h1") == 1
     for w in hits:                       # каждый поражённый объект виден в тексте и со ссылкой
@@ -464,6 +511,16 @@ def demo():
     assert mln(doc["meta"]["network"]["wb"]["area_m2"]) in html
     assert LOST_SRC in html, "оценка потерь без ссылки на источник"
     assert "работающие" not in html, "непроверяемое утверждение о работе складов"
+
+    # блок «какие склады остались»: каждый status=ok объект виден в тексте,
+    # осторожная формулировка присутствует и не подменена более смелой
+    for w in ok:
+        assert w["name"] in html, "нет в списке уцелевших: %s" % w["name"]
+    assert "Какие склады Wildberries и Ozon остались" in html
+    assert str(len(ok)) in html
+    assert "не подтверждение того, что они работают в штатном режиме" in html or \
+           "не значит, что они работают в штатном режиме" in html, \
+           "пропала осторожная формулировка про статус уцелевших складов"
 
     # Рейтинг по площади: пока в датасете area_m2 нет ни у одного объекта —
     # честная заглушка, а не пустая/фейковая сетка.
