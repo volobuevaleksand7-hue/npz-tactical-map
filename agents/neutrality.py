@@ -101,6 +101,10 @@ SCRUB = [
 # 🔴 названия судов (Nordic Zenith, NELSA, Banda) и бренды (Wildberries, Ozon, DNS)
 # латиницей пишут и в русской прессе — их трогать нельзя, транслит их изуродует.
 LATIN_FIX = [
+    # У «Башнефти» ровно три уфимских завода — список полный, гадать не нужно.
+    (r"(?i)\bBashneft[- ]?Ufaneftekhim\b", "Башнефть-Уфанефтехим"),
+    (r"(?i)\bBashneft[- ]?Ufaneftehim\b", "Башнефть-Уфанефтехим"),
+    (r"(?i)\bUfaneftekhim\b", "Уфанефтехим"),
     (r"(?i)\bBashneft-UNPZ\b", "Башнефть-УНПЗ"),
     (r"(?i)\bBashneft-Novoil\b", "Башнефть-Новойл"),
     # (?<!/) — не трогать URL-слаг /npz/taif-nk (censor работает на сыром HTML,
@@ -194,6 +198,27 @@ def scrub_text(s):
     out.append(fixed)
     total += k
     return "".join(out), total
+
+
+# Латиница, которую МОЖНО оставлять: бренды и суда так пишет и русская пресса,
+# служебные аббревиатуры — тоже. Всё остальное латиницей в русской ленте — сигнал,
+# что словарь LATIN_FIX отстал от данных.
+LATIN_OK = re.compile(
+    r"(?i)^(wildberries|ozon|dns|nasa|firms|utc|osint|isw|reuters|bbc|the|moscow|times|"
+    r"exilenova|plus|noelreports|noel|reports|radarrussiia|media|fpv|fp|cdu|avt|elou|"
+    r"nordic|zenith|nelsa|banda|louise|asia|nissos|ios|blue|matilda|suezmax|zao)$")
+
+
+def latin_leftovers(s):
+    """Латинские слова, которых нет ни в словаре перевода, ни в списке допустимых.
+
+    Словарь всегда отстаёт от данных: 05.08 в канал ушло «Bashneft-Ufaneftekhim» —
+    вариант, которого в LATIN_FIX не было. Пусть следующий такой случай виден в
+    логе публикации, а не только глазами в ленте.
+    """
+    fixed, _ = scrub_text(str(s or ""))
+    return sorted({w for w in re.findall(r"[A-Za-z][A-Za-z0-9\-]{2,}", fixed)
+                   if not LATIN_OK.match(w)})
 
 
 def text_reasons(s, markup=False):
@@ -347,6 +372,13 @@ def demo():
     s, _ = scrub_text("нефтеперерабатывающий завод Bashneft-UNPZ")
     assert s == "нефтеперерабатывающий завод Башнефть-УНПЗ", s
     assert scrub_text("По информации SBU, атакован завод")[0] == "По информации СБУ, атакован завод"
+    # 05.08 этот вариант проскочил в канал — теперь переводится, как и два других завода
+    s, _ = scrub_text("Bashneft-Ufaneftekhim нефтеперерабатывающий завод")
+    assert s == "Башнефть-Уфанефтехим нефтеперерабатывающий завод", s
+    # сторож отставания словаря: незнакомая латиница видна, знакомая — нет
+    assert latin_leftovers("удар по Kirishinefteorgsintez") == ["Kirishinefteorgsintez"]
+    assert latin_leftovers("склад Wildberries, танкер Nordic Zenith") == []
+    assert latin_leftovers("завод Bashneft-Ufaneftekhim") == [], "переведённое не должно всплывать"
     assert scrub_text("TAIF-NK нефтеперерабатывающий завод")[0] == "ТАИФ-НК нефтеперерабатывающий завод"
     # 🔴 суда и бренды латиницей — норма русской прессы, транслит их изуродует
     for keep in ("Танкер Nordic Zenith", "склад Wildberries", "морской терминал NELSA",

@@ -43,4 +43,16 @@ keep = {"date": "2026-08-01", "city": "Пенза", "region": "Пензенск�
 text = rendered(keep)
 assert "Wildberries" in text and "Nordic Zenith" in text, text
 
+# 05.08 этот вариант ушёл в канал латиницей — теперь переводится
+ufa = {"date": "2026-08-05", "city": "Уфа", "region": "Республика Башкортостан",
+       "target": "Bashneft-Ufaneftekhim нефтеперерабатывающий завод",
+       "detail": "", "confidence": "reported"}
+text = rendered(ufa)
+assert "Bashneft" not in text and "Башнефть-Уфанефтехим" in text, text
+
+# сторож отставания словаря: незнакомое имя видно, знакомое молчит
+import content_guard as CG
+assert CG.latin_leftovers("удар по Kirishinefteorgsintez") == ["Kirishinefteorgsintez"]
+assert CG.latin_leftovers("Bashneft-Ufaneftekhim и склад Wildberries") == []
+
 print("test_molniya_neutrality: ok")

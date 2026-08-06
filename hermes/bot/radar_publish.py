@@ -31,10 +31,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import render as R
 import day_state as DS
 try:
-    from content_guard import scrub_record, reason_bad as _reason_bad
+    from content_guard import scrub_record, reason_bad as _reason_bad, latin_leftovers
 except ImportError:
     scrub_record = None  # без чистки лучше опубликовать, чем упасть
     _reason_bad = None
+    latin_leftovers = None
 from channel_mirror import CHANNEL_MIRRORS, send_to_mirrors, mirror_enabled  # noqa: E402
 
 
@@ -280,6 +281,12 @@ def strike_to_molniya_event(strike, reason=""):
     strike = dict(strike)
     if scrub_record:
         scrub_record(strike)
+    if latin_leftovers:
+        rest = latin_leftovers(" ".join(str(strike.get(f) or "")
+                                        for f in ("target", "title", "detail")))
+        if rest:
+            print("🔴 молния: латиница без перевода %s — допиши LATIN_FIX "
+                  "(%s)" % (rest, strike.get("city", "?")))
     city = strike.get("city", "")
     region = strike.get("region", "")
     target = str(strike.get("target") or strike.get("title") or "").split("(")[0].strip()

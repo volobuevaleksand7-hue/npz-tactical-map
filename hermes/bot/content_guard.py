@@ -35,6 +35,8 @@ text_reasons = neutrality.text_reasons
 # Чистка полей записи на месте — зовётся ПЕРЕД рендером поста, т.к. санитайзер
 # в pre-commit срабатывает уже после отправки молнии в канал.
 scrub_record = neutrality.scrub_record
+# Незнакомая латиница в готовом посте — словарь перевода отстал от данных.
+latin_leftovers = neutrality.latin_leftovers
 
 
 def demo():
