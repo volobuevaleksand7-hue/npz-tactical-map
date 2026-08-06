@@ -1,23 +1,23 @@
 {
   "meta": {
-    "generated_at": "2026-08-05T16:47Z",
+    "generated_at": "2026-08-06T04:05Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Reuters/Bloomberg/Meduza/Moscow Times/The Bell/Новая газета/CNN). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики.",
     "refresh_seconds": 300,
-    "updated_by": "agent:strike-pipeline"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
-    "capacity_offline_mt_year": 104.1,
-    "capacity_offline_pct": 31,
+    "capacity_offline_mt_year": 119.8,
+    "capacity_offline_pct": 35,
     "gasoline_output_loss_pct": 37,
     "diesel_output_loss_pct": 41,
     "export_ban_gasoline": true,
     "export_ban_kerosene": true,
     "import_from_belarus": true,
     "notes": "На 5 августа 2026: переработка сырой нефти остаётся в критическом состоянии. 3.6 млн барр/день (июль) — минимум за 24 года. Волна ударов на Уфимскую группу (1–2 августа), Саратовский НПЗ (2 августа, 15-я атака) и Сызранский НПЗ (4 августа) привела нефтеперерабатывающий сектор в максимальное стрессовое состояние. Уфимская группа (24 млн т/год) переведена на 15% мощности; Саратовский НПЗ (7 млн т/год) полностью остановлен повторной атакой. Беларусский импорт остаётся критической компенсирующей линией. Розничные цены относительно стабилизированы: АИ-92 при 70–74 ₽/л. Северокавказские республики остаются в критическом состоянии (нет открытых АЗС для населения); Крым — в режиме лимитов через QR.",
-    "throughput_shortfall_pct": 62,
+    "throughput_shortfall_pct": 64,
     "method": "capacity_offline и throughput_shortfall пересчитаны из refineries[] на 5 августа 2026."
   },
   "fuel_balance": {
@@ -203,12 +203,12 @@
       "lat": 48.65,
       "lon": 44.46,
       "capacity_mt_year": 15.7,
-      "status": "partial",
-      "status_since": "2026-07-31",
-      "est_output_pct": 40,
-      "damage": "Ночной удар украинских БПЛА на 31 июля: поражены объекты топливно-энергетического комплекса в южной части города. Завод переведён в режим пониженной переработки.",
-      "note": "На 5 августа функционирует на ~40% мощности. Попадания подтверждены видеоматериалами.",
-      "source_url": "https://kyivindependent.com/wildberries-warehouse-oil-refineries-reportedly-attacked-volgograd-krasnodar/",
+      "status": "down",
+      "status_since": "2026-08-03",
+      "est_output_pct": 0,
+      "damage": "Ночной удар украинских БПЛА на 31 июля: поражены объекты топливно-энергетического комплекса в южной части города. На 3 августа завод полностью остановил переработку нефти.",
+      "note": "На 6 августа завод полностью остановлен. Восстановление не началось.",
+      "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Ukraine-Strikes-Lukoils-Volgograd-Refinery-as-Drone-Attacks-Resume.html",
       "confidence": "confirmed"
     },
     {
@@ -995,8 +995,8 @@
       "lat": 48.79,
       "lon": 44.27,
       "level": "medium",
-      "restriction": "На 5 августа: Волгоградский НПЗ поражен 31 июля и функционирует на 40% мощности. Ситуация напряжённая.",
-      "since": "2026-07-31"
+      "restriction": "На 6 августа: Волгоградский НПЗ полностью остановлен после повреждений 31 июля. Регион получает топливо через импорт из Беларуси и резервные источники; ситуация остаётся напряжённой.",
+      "since": "2026-08-03"
     },
     {
       "region": "Саратовская обл.",
@@ -1188,6 +1188,13 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-08-06",
+      "text": "На 6 августа: Волгоградский НПЗ (Лукойл) полностью остановил переработку нефти после повреждений 31 июля. Завод, производивший ~4% российского топлива, теперь выведен из строя. Восстановление осложнено отсутствием новых информаций о сроках запуска.",
+      "type": "refinery",
+      "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Ukraine-Strikes-Lukoils-Volgograd-Refinery-as-Drone-Attacks-Resume.html",
+      "confidence": "confirmed"
+    },
     {
       "date": "2026-08-05",
       "text": "Удар по Уфимская группа (Башнефть) (Уфа): Атака БПЛА на НПЗ Башнефти в Уфе",
