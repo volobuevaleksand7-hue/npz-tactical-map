@@ -117,6 +117,23 @@ LATIN_FIX = [
     (r"\bFSB\b", "ФСБ"),
 ]
 
+# --- «событие» о том, что события не было --------------------------------------
+# 04.08 в канал ушли молнии «Новых ударов по нефтегазовой инфраструктуре не
+# зафиксировано за последний час» с пустыми полями: «📍 — , — 🎯 — ~ —». Сборщик
+# оформил отчёт «за час ничего» как удар, классификатор увидел слово «нефтегазовой»
+# и выдал TIER-1. Молния — это событие; отсутствие события молнией быть не может.
+NO_EVENT = re.compile(
+    r"(?i)(не\s+зафиксирован|не\s+отмечен|не\s+зарегистрирован|ударов\s+нет|"
+    r"новых\s+ударов\s+не|отч[её]т\s+за\s+последний\s+час|без\s+изменений|"
+    r"ничего\s+не\s+произошло|обстановка\s+спокойн)")
+
+_EMPTY = {"", "-", "—", "–", "none", "null", "n/a", "нет данных", "неизвестно"}
+
+
+def _blank(v):
+    return str(v or "").strip().lower() in _EMPTY
+
+
 VALID_CONF = {"confirmed", "reported", "rumored"}
 
 JET_WORDS = ["су-3", "су-5", "миг-", "истребител", "льотчик", "лётчик", "самолёт", "самолет"]
@@ -245,6 +262,12 @@ def reason_bad(x):
     tgt = (str(x.get("target", "")) + " " + str(x.get("title", ""))).lower()
     if any(k in tgt for k in JET_WORDS) and not any(k in tgt for k in FUEL_WORDS):
         return "offtopic-aircraft"
+    # Отчёт «за час ничего не произошло» — не событие и молнией быть не может.
+    if NO_EVENT.search(str(x.get("title", "")) + " " + str(x.get("target", ""))):
+        return "no-event"
+    # Пустая карточка: рендер даёт «📍 — , — 🎯 —» и заглушку описания.
+    if _blank(x.get("city")) and _blank(x.get("target")) and _blank(x.get("title")):
+        return "empty-alert"
     city = str(x.get("city", "")).strip().lower()
     if city in ("", "неизвестно") and "неуточ" in tgt:
         return "empty-alert"
@@ -301,6 +324,16 @@ def demo():
         ({"city": "X", "target": "склад Wildberries", "confidence": "reported"}, None),
         ({"city": "X", "target": "НПЗ горит", "confidence": "сообщено"}, "bad-confidence:сообщено"),
         ({"city": "Неизвестно", "target": "неуточнённый объект", "confidence": "reported"}, "empty-alert"),
+        # 🔴 отчёт «за час ничего» — не событие; 04.08 такие уходили молнией в канал
+        ({"city": "", "target": "", "confidence": "reported",
+          "title": "Новых ударов по нефтегазовой инфраструктуре не зафиксировано за последний час"}, "no-event"),
+        ({"city": "Москва", "target": "нефтебаза", "confidence": "reported",
+          "title": "Отчет за последний час"}, "no-event"),
+        ({"city": "", "target": "", "title": "", "confidence": "reported"}, "empty-alert"),
+        ({"city": "—", "target": "—", "title": "—", "confidence": "reported"}, "empty-alert"),
+        # обычная запись со словом «зафиксирован» в утвердительном смысле — пропускаем
+        ({"city": "Рязань", "target": "НПЗ", "confidence": "reported",
+          "title": "Зафиксирован пожар на установке"}, None),
         (good, None),
     ]
     for x, exp in cases:

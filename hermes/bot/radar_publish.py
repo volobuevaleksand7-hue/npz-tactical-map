@@ -31,10 +31,25 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import render as R
 import day_state as DS
 try:
-    from content_guard import scrub_record
+    from content_guard import scrub_record, reason_bad as _reason_bad
 except ImportError:
     scrub_record = None  # без чистки лучше опубликовать, чем упасть
+    _reason_bad = None
 from channel_mirror import CHANNEL_MIRRORS, send_to_mirrors, mirror_enabled  # noqa: E402
+
+
+def refuse_reason(strike):
+    """Почему эту запись нельзя публиковать молнией, иначе None.
+
+    🔴 Проверка стоит ЗДЕСЬ, а не только в strike_pipeline: publish_strike_molniya
+    зовут ещё из CLI и из подтверждения TIER-2, и 04.08 в канал так ушли молнии
+    «Новых ударов не зафиксировано за последний час» с пустыми полями. Один заслон
+    на общем пути дешевле, чем по заслону у каждого вызывающего.
+    """
+    if not _reason_bad:
+        return None
+    r = _reason_bad(strike)
+    return r if r in ("no-event", "empty-alert") else None
 
 # ─── Конфиг ───────────────────────────────────────────────────────────────────
 HOME = os.path.expanduser("~")
@@ -430,6 +445,10 @@ def publish_strikes_batch(items, dry_run=False):
     state = DS.ensure_today(DS.load_state())
     fresh, skipped = [], 0
     for strike, reason in items:
+        refuse = refuse_reason(strike)
+        if refuse:
+            print("молния: отказ — %s (%s)" % (refuse, strike.get("city", "?")))
+            continue
         key = molniya_dedup_key(strike)
         if DS.is_published(state, key) and not dry_run:
             skipped += 1
@@ -483,6 +502,12 @@ def publish_strike_molniya(strike, reason="", dry_run=False):
     редактирование существующей молнии апдейт-строкой, не новая публикация.
     Возвращает {"channel_ok", "subscribers_sent", "errors", "skipped_duplicate", "key"}.
     """
+    refuse = refuse_reason(strike)
+    if refuse:
+        print("молния: отказ — %s (%s | %s)" % (refuse, strike.get("city", "?"),
+                                                str(strike.get("title") or strike.get("target"))[:60]))
+        return {"channel_ok": False, "subscribers_sent": 0, "errors": ["refused: %s" % refuse],
+                "skipped_duplicate": False, "key": None}
     key = molniya_dedup_key(strike)
     state = DS.ensure_today(DS.load_state())
 
