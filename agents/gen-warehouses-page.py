@@ -46,6 +46,13 @@ def og_image():
     return "%s/%s?v=%s" % (BASE, COVER_REL, v)
 
 
+def load_data():
+    """Единственная точка чтения data/warehouses.json — переиспользуется
+    agents/gen-survivors-page.py, чтобы не заводить второй парсер того же файла."""
+    with open(SRC, encoding="utf8") as f:
+        return json.load(f)
+
+
 def rus(iso):
     y, m, d = iso.split("-")
     return "%d %s %s" % (int(d), MONTHS[int(m) - 1], y)
@@ -149,9 +156,33 @@ def warehouse_ok_section(wh, updated_iso):
     )
 
 
+def warehouse_ok_summary(wh, updated_iso, survivors_url):
+    """Компактная версия warehouse_ok_section для чемпиона: цифра + ссылка на
+    разведённую страницу-список, БЕЗ перечня объектов.
+
+    05.08 сюда же на чемпион временно жил полный перечень (warehouse_ok_section) —
+    держать обе версии в полном виде значило бы, что чемпион конкурирует за интент
+    «какие склады остались» с собственной новой страницей. Развёрнутый список теперь
+    живёт только там (см. agents/gen-survivors-page.py), здесь — 2-3 предложения.
+    """
+    ok = [w for w in wh if w["status"] == "ok"]
+    wb_ok = sum(1 for w in ok if w["operator"] == "wb")
+    oz_ok = sum(1 for w in ok if w["operator"] == "ozon")
+    return (
+        '      <p class="lead-p">У <strong>%d объектов</strong> из %d в выборке проекта на %s нет '
+        'сообщений об ударе (%d Wildberries, %d Ozon). Это не подтверждение того, что они работают '
+        'в штатном режиме — лишь отсутствие сообщений об ударах по ним.</p>\n'
+        '      <a class="map-cta inline" href="%s"><span class="mc-ico">📋</span> Полный список '
+        'уцелевших объектов: город, регион, оператор и федеральный округ →</a>\n'
+        % (len(ok), len(wh), rus(updated_iso), wb_ok, oz_ok, survivors_url)
+    )
+
+
+SURVIVORS_URL = "/kakie-sklady-wildberries-ostalis"
+
+
 def build():
-    with open(SRC, encoding="utf8") as f:
-        doc = json.load(f)
+    doc = load_data()
     wh = doc["warehouses"]
     net = doc["meta"]["network"]
     hits = [w for w in wh if w["status"] == "hit"]
@@ -215,15 +246,15 @@ def build():
          "На слое «Склады ВБ/Озон» нанесены %d крупных объекта: %d распределительных центров Wildberries и %d фулфилмент-центров Ozon. Это выборка крупных объектов, а не вся сеть из %d+ комплексов — сортировочные центры и пункты выдачи на карту не наносятся."
          % (len(wh), wb_n, oz_n, net["wb"]["complexes"])),
         ("Какие склады Wildberries и Ozon остались?",
-         "В выборке проекта из %d крупных объектов у %d нет сообщений об ударе на %s (%d Wildberries, %d Ozon) — полный список с городом и оператором на этой странице. Отсутствие объекта в списке поражённых не значит, что он работает в штатном режиме: это лишь отсутствие сообщений об ударах по нему, независимая проверка исправности объектов проектом не проводилась."
-         % (len(wh), len(wh) - len(hits), rus(UPDATED), wb_n - len(hits), oz_n)),
+         "В выборке проекта из %d крупных объектов у %d нет сообщений об ударе на %s (%d Wildberries, %d Ozon). Отсутствие объекта в списке поражённых не значит, что он работает в штатном режиме: это лишь отсутствие сообщений об ударах по нему, независимая проверка исправности объектов проектом не проводилась. Полный список с городом, регионом, оператором и разбивкой по федеральным округам — на странице «Какие склады Wildberries и Ozon остались» (%s)."
+         % (len(wh), len(wh) - len(hits), rus(UPDATED), wb_n - len(hits), oz_n, SURVIVORS_URL)),
     ]
     faq_ld = ",\n      ".join(
         json.dumps({"@type": "Question", "name": q,
                     "acceptedAnswer": {"@type": "Answer", "text": a}}, ensure_ascii=False)
         for q, a in faq)
     RANK_BLOCK = warehouse_rank_section(wh, UPDATED)
-    OK_BLOCK = warehouse_ok_section(wh, UPDATED)
+    OK_BLOCK = warehouse_ok_summary(wh, UPDATED, SURVIVORS_URL)
     faq_html = "\n".join(
         '        <div class="faq-item">\n'
         '          <div class="faq-q" onclick="this.parentElement.classList.toggle(\'open\')">%s</div>\n'
@@ -446,6 +477,7 @@ def build():
 
       <h2 class="section-h"><span class="ico">🔗</span> Смотрите также</h2>
       <div class="link-grid">
+        <a class="link-card" href="{SURVIVORS_URL}"><div class="lc-h">📋 Какие склады остались</div><div class="lc-d">Полный список уцелевших объектов по регионам</div></a>
         <a class="link-card" href="/ataki-na-sklady-wildberries-hronika"><div class="lc-h">🗓 Хроника ударов по складам</div><div class="lc-d">Все эпизоды по датам и регионам</div></a>
         <a class="link-card" href="/udar-po-skladam-wildberries"><div class="lc-h">📦 Разбор эпизода 18 июля</div><div class="lc-d">Что известно об ударе и версии сторон</div></a>
         <a class="link-card" href="/kompensacii-wildberries-posle-udara"><div class="lc-h">💸 Компенсации Wildberries</div><div class="lc-d">Выплаты семьям, продавцам, покупателям</div></a>
@@ -498,8 +530,7 @@ def demo():
     такого удара в падение генератора вместо корректного текста. Теперь проверяется
     согласованность, а не конкретный оператор.
     """
-    with open(SRC, encoding="utf8") as f:
-        doc = json.load(f)
+    doc = load_data()
     hits = [w for w in doc["warehouses"] if w["status"] == "hit"]
     ok = [w for w in doc["warehouses"] if w["status"] == "ok"]
     html = build()
@@ -512,12 +543,14 @@ def demo():
     assert LOST_SRC in html, "оценка потерь без ссылки на источник"
     assert "работающие" not in html, "непроверяемое утверждение о работе складов"
 
-    # блок «какие склады остались»: каждый status=ok объект виден в тексте,
-    # осторожная формулировка присутствует и не подменена более смелой
-    for w in ok:
-        assert w["name"] in html, "нет в списке уцелевших: %s" % w["name"]
+    # блок «какие склады остались» на чемпионе — теперь КОМПАКТНЫЙ (цифра + ссылка),
+    # полный перечень объектов переехал на SURVIVORS_URL (см. gen-survivors-page.py),
+    # чтобы обе страницы не конкурировали за один интент. Здесь проверяем цифру,
+    # осторожную формулировку и что ссылка на страницу-список никуда не делась —
+    # НЕ то, что каждое имя объекта попало в текст (это больше не так, и это осознанно).
     assert "Какие склады Wildberries и Ozon остались" in html
     assert str(len(ok)) in html
+    assert SURVIVORS_URL in html, "чемпион потерял ссылку на страницу-список уцелевших складов"
     assert "не подтверждение того, что они работают в штатном режиме" in html or \
            "не значит, что они работают в штатном режиме" in html, \
            "пропала осторожная формулировка про статус уцелевших складов"
