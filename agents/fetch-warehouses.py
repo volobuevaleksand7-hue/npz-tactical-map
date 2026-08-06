@@ -306,8 +306,26 @@ def build(offline=False):
                 print("  сводка по городу, пришита к «%s»: %-18s %s (%.1f км)"
                       % (nearest["name"], city, hit["date"][:10], d))
                 continue
+        # 🔴 Тот же id = тот же объект: город+оператор. Матчинг по расстоянию промахивается,
+        # когда координата из записи удара стоит далеко от адреса из справочника (Чехов 05.08:
+        # 24 км между промзоной Новосёлки и точкой удара) — и склад дублировался: один и тот же
+        # wb-чехов лежал в файле дважды, ok и hit. Итог на живой странице: поражённый склад
+        # оставался в списке «какие остались», а счётчик поражённых считал фантом.
+        # Совпал id — помечаем УЖЕ ЛЕЖАЩИЙ объект, сохраняя его адрес и выверенные координаты.
+        new_id = "%s-%s" % (hit["operator"], city.replace(" ", "-"))
+        twin = next((i for i in items if i["id"] == new_id), None)
+        if twin is not None:
+            if twin["status"] == "hit":
+                twin.setdefault("merged_strikes", []).append(
+                    {"city": hit["city"] or city, "date": hit["date"], "source_url": hit["source_url"]})
+            else:
+                twin.update({"status": "hit", "date": hit["date"], "damage": hit["damage"],
+                             "note": hit["note"], "source_url": hit["source_url"]})
+            placed.add((city, hit["date"]))
+            print("  удар пришит к уже известному складу по id: %s (%s)" % (new_id, hit["date"][:10]))
+            continue
         items.append({
-            "id": "%s-%s" % (hit["operator"], city.replace(" ", "-")),
+            "id": new_id,
             "operator": hit["operator"],
             "name": hit["city"] or city.capitalize(),
             "region": hit["region"],
