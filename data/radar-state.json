@@ -554,8 +554,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1786017994,
-      "source_text": "06.08.2026 14:49 МСК\nРакетная опасность Грайворон\n\n06.08.2026 15:06 МСК\nБелгородский район Тревога по БПЛА"
+      "last_event_ts": 1786021918,
+      "source_text": "06.08.2026 14:49 МСК\nРакетная опасность Грайворон\n\n06.08.2026 16:11 МСК\nШебекино и близлежащие Тревога по БПЛА"
     },
     "Адыгея": {
       "bpla": false,
@@ -2206,28 +2206,6 @@
       "source_text": "06.08.2026 11:36 МСК\nБелая Березка Брянская область Опасность по Бпла-разведчику Возможен обстрел"
     },
     {
-      "key": "инкерман|севастополь",
-      "name": "Инкерман",
-      "lat": 44.61391,
-      "lon": 33.6098,
-      "region": "Севастополь",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1785978821,
-      "source_text": "06.08.2026 04:13 МСК\nГолландия Инкерман ГРЭС Тревога по БПЛА Севастополь"
-    },
-    {
       "key": "тамань|краснодарский край",
       "name": "Тамань",
       "lat": 45.2158646,
@@ -2446,6 +2424,28 @@
       "fill": "#d8c06a",
       "last_event_ts": 1785982639,
       "source_text": "06.08.2026 05:17 МСК\nКременки Калужская область Работа ПВО по БПЛА От окон!"
+    },
+    {
+      "key": "шебекино|белгородская область",
+      "name": "Шебекино",
+      "lat": 50.41342,
+      "lon": 36.92537,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1786021918,
+      "source_text": "06.08.2026 16:11 МСК\nШебекино и близлежащие Тревога по БПЛА"
     },
     {
       "key": "мариуполь|донецкая народная республика",
@@ -5193,6 +5193,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 255784,
+      "text": "Шебекино и близлежащие\nТревога по БПЛА",
+      "ts": 1786021918,
+      "time_label": "06.08.2026 16:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 255783,
+      "text": "От Качи на Бельбек, Любимовку\nФиксации БПЛА",
+      "ts": 1786021819,
+      "time_label": "06.08.2026 16:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 255782,
       "text": "Бахчисарайский район\nОпасность по БПЛА\nРеспублика Крым",
       "ts": 1786021707,
@@ -5815,22 +5831,6 @@
       "time_label": "06.08.2026 14:22 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 255719,
-      "text": "Зугрэс, Шахтёрск, Иловайск ДНР и близлежащие\nОпасность по БПЛА",
-      "ts": 1786015172,
-      "time_label": "06.08.2026 14:19 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 255718,
-      "text": "ЛДНР\nЗапорожская область РФ\nАвиационная ракетно бомбовая опасность",
-      "ts": 1786015122,
-      "time_label": "06.08.2026 14:18 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -5840,13 +5840,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786021707,
-  "last_event_at": "2026-08-06T13:08:27Z",
-  "fetched_at": "2026-08-06T13:10:03.291637Z",
-  "poll_interval_sec": 60,
+  "timestamp": 1786021918,
+  "last_event_at": "2026-08-06T13:11:58Z",
+  "fetched_at": "2026-08-06T13:20:03.888405Z",
+  "poll_interval_sec": 50,
   "meta": {
-    "generated_at": "2026-08-06T13:10:03.291637Z",
-    "source_age_seconds": 96,
+    "generated_at": "2026-08-06T13:20:03.888405Z",
+    "source_age_seconds": 485,
     "city_count": 148,
     "region_count": 30,
     "feed_count": 80
