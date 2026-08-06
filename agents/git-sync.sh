@@ -209,6 +209,28 @@ fi
 # Nothing staged-worthy? still commit (heartbeat + stamp change every run).
 git add data/
 
+# ---- накопительные архивы: не заметать чужую поломку ------------------------
+# 🔴 `git add data/` выше — ровно тот слепой захват, о котором предупреждает шапка
+# этого файла. Дважды за сутки (05.08 320->0 через strike-pipeline, 06.08 336->0
+# через radar-refresh) обнулённый коллектором архив уезжал в прод под сообщением
+# соседней рутины: коллектор ломает файл, его собственный коммит заворачивает
+# pre-commit, файл остаётся грязным — и следующая рутина через минуту забирает его
+# себе. Хук тут не спасает: он гарантированно отрабатывает на `git commit`, но не на
+# коммитах, которые git создаёт сам при `rebase --continue` в push_with_retry ниже.
+# Поэтому проверяем ЗДЕСЬ, до коммита, и снимаем усохший архив со стейджа: рутина
+# публикует своё, а сломанный файл остаётся грязным и ждёт разбора — как и задумано.
+for _arch in data/strikes.json data/fuel-voices.json; do
+  git diff --cached --name-only --diff-filter=ACMR -- "$_arch" | grep -q . || continue
+  _old="$(git show "HEAD:$_arch" 2>/dev/null | python3 -c 'import json,sys;d=json.load(sys.stdin);print(len(d.get("strikes") or d.get("voices") or []))' 2>/dev/null || echo NA)"
+  _new="$(git show ":$_arch" 2>/dev/null | python3 -c 'import json,sys;d=json.load(sys.stdin);print(len(d.get("strikes") or d.get("voices") or []))' 2>/dev/null || echo NA)"
+  case "$_old$_new" in *NA*) _shrink=1 ;; *) [ "$_old" -gt 20 ] && [ "$_new" -lt "$((_old * 9 / 10))" ] && _shrink=1 || _shrink=0 ;; esac
+  if [ "$_shrink" = "1" ]; then
+    echo "git-sync: 🔴 $_arch усох ($_old -> $_new) — НЕ забираю его в свой коммит." >&2
+    echo "git-sync: файл остаётся грязным, чинить тому, кто его сломал." >&2
+    git restore --staged -- "$_arch" 2>/dev/null || git reset -q HEAD -- "$_arch" 2>/dev/null || true
+  fi
+done
+
 # Defense in depth: inspect what is actually STAGED for added marker lines.
 if git diff --cached -U0 -- data/ | grep -qE '^\+(<<<<<<<|=======|>>>>>>>)'; then
   echo "git-sync: ABORT — staged diff introduces conflict markers" >&2
