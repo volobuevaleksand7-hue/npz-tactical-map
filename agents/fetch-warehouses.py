@@ -154,12 +154,18 @@ def marketplace_strikes():
         city = norm_city(s.get("city"))
         if not city:
             continue
+        # 🔴 damage — ХУДШЕЕ из эпизодов, а не последнее. Метка показывает свежий эпизод
+        # (date/note/source берём у него), но «сгорел» стирать нельзя: 08.08 повторный
+        # прилёт обломков по уже сгоревшему складу в Твери откатил его damage
+        # burned -> hit, то есть факт пожара 24.07 пропал с карты из-за более мелкого
+        # позднего эпизода. Ущерб не «заживает» от того, что позже прилетело слабее.
+        burned_before = out.get(city, {}).get("damage") == "burned"
         if city in out and str(s.get("date", "")) <= out[city]["date"]:
             continue
         out[city] = {
             "city": str(s.get("city") or "").strip(),   # для подписи метки: capitalize() ломает «Санкт-Петербург»
             "date": str(s.get("date", "")),
-            "damage": "burned" if FIRE_RE.search(blob) else "hit",
+            "damage": "burned" if (burned_before or FIRE_RE.search(blob)) else "hit",
             "operator": "ozon" if re.search(r"\bozon\b|озон", blob, re.I) else "wb",
             "note": str(s.get("title") or s.get("target") or ""),
             "source_url": str(s.get("source_url") or ""),
