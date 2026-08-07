@@ -43,6 +43,23 @@ def key(x):
     )
 
 
+def reason_invalid(x):
+    """Причина, по которой запись НЕ доедет до архива, или None если она годная.
+
+    Повод завести это здесь: 07.08 агент 7 раз подряд писал в inbox lat/lon=0.0
+    (падает в Атлантику у Африки — на карте России не видно) с city="Неизвестно",
+    и никто этого не заметил, пока Серёга не спросил, почему на радаре нет ударов.
+    Единственная воронка в архив — этот файл, значит здесь и ставим последний
+    рубеж перед координатами-нулём и городом-заглушкой.
+    """
+    lat, lon = x.get("lat"), x.get("lon")
+    if lat in (None, 0, 0.0) or lon in (None, 0, 0.0):
+        return "lat/lon пустые или нулевые (lat=%r, lon=%r)" % (lat, lon)
+    if str(x.get("city", "")).strip() == "Неизвестно":
+        return "city == 'Неизвестно'"
+    return None
+
+
 def _same_event(a, b):
     """Одно ли это событие: совпали КОГДА и ГДЕ (date+city+time). Формулировку target
     не сверяем — у re-report того же удара она переписана. Нужно только чтобы отличить
@@ -73,15 +90,22 @@ def as_list(d):
 
 
 def merge(archive, incoming):
-    """Возвращает (архив, добавлено, пропущено_дублей). Архив только РАСТЁТ."""
+    """Возвращает (архив, добавлено, пропущено_дублей, отброшено_битых). Архив только РАСТЁТ."""
     strikes = archive.setdefault("strikes", [])
     seen = {}                       # key -> уже лежащая запись (для сверки события при коллизии)
     for x in strikes:
         if isinstance(x, dict):
             seen.setdefault(key(x), x)
-    added = dupes = 0
+    added = dupes = rejected = 0
     for x in incoming:
         if not isinstance(x, dict) or not str(x.get("date", "")).strip():
+            continue
+        bad = reason_invalid(x)
+        if bad:
+            rejected += 1
+            print("merge-inbox: ✗ отброшена битая запись [%s / %s] — %s"
+                  % (x.get("date"), str(x.get("title") or x.get("target") or "")[:80], bad),
+                  file=sys.stderr)
             continue
         k = key(x)
         prev = seen.get(k)
@@ -118,7 +142,7 @@ def merge(archive, incoming):
     # СХОДИЛИ за ними». Без второго watchdog не отличает сломанный сбор от тихой ночи: 01.08
     # ударов не было вовсе, сбор отработал штатно, а сторож 18 часов кричал stale_critical.
     archive["checked_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    return archive, added, dupes
+    return archive, added, dupes, rejected
 
 
 # Хвост — ИНДЕКС для дедупа, а не копия данных. Полные записи с detail на 10 дней
@@ -155,17 +179,17 @@ def main():
         return 1
     before = len(archive["strikes"])
 
-    added = dupes = 0
+    added = dupes = rejected = 0
     dirty = False
     if "--refresh" not in sys.argv:
         incoming = as_list(load(INBOX, []))
         if incoming:
-            archive, added, dupes = merge(archive, incoming)
+            archive, added, dupes, rejected = merge(archive, incoming)
             # inbox чистим всегда: он разовый, иначе дубли поедут в следующий прогон
             with open(INBOX, "w", encoding="utf-8") as f:
                 json.dump([], f)
-            print("merge-inbox: влито %d, дублей пропущено %d, архив %d → %d"
-                  % (added, dupes, before, len(archive["strikes"])), file=sys.stderr)
+            print("merge-inbox: влито %d, дублей пропущено %d, битых отброшено %d, архив %d → %d"
+                  % (added, dupes, rejected, before, len(archive["strikes"])), file=sys.stderr)
         else:
             print("merge-inbox: inbox пуст — нечего вливать", file=sys.stderr)
         # 🔴 checked_at обязан пережить ЛЮБОЙ успешный прогон, включая тихую ночь.
@@ -228,10 +252,14 @@ def selfcheck():
     }
     json.dump(arch, open(ARCHIVE, "w", encoding="utf-8"), ensure_ascii=False)
     json.dump([
-        {"id": "new-1", "date": D_NEW, "city": "Чёрное море", "target": "танкеры"},
-        {"id": "old-1", "date": D_OLD, "city": "Рязань", "target": "НПЗ"},        # дубль по id
-        {"date": D_MID, "time": "ночь", "city": "Афипский", "target": "НПЗ"},     # дубль по составному
+        {"id": "new-1", "date": D_NEW, "city": "Чёрное море", "target": "танкеры",
+         "lat": 43.5, "lon": 33.5},
+        {"id": "old-1", "date": D_OLD, "city": "Рязань", "target": "НПЗ",
+         "lat": 54.6, "lon": 39.7},                                                # дубль по id
+        {"date": D_MID, "time": "ночь", "city": "Афипский", "target": "НПЗ",
+         "lat": 45.0, "lon": 38.8},                                                # дубль по составному
         {"city": "без даты"},                                                      # мусор
+        {"date": D_NEW, "city": "Неизвестно", "target": "х", "lat": 0.0, "lon": 0.0},  # битая: город+нули
     ], open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
 
     rc = main()
@@ -243,7 +271,8 @@ def selfcheck():
     assert json.load(open(RECENT, encoding="utf-8"))["count"] >= 1
 
     # повторный прогон того же inbox не плодит дубли
-    json.dump([{"id": "new-1", "date": D_NEW, "city": "Чёрное море", "target": "танкеры"}],
+    json.dump([{"id": "new-1", "date": D_NEW, "city": "Чёрное море", "target": "танкеры",
+                "lat": 43.5, "lon": 33.5}],
               open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
     main()
     assert len(json.load(open(ARCHIVE, encoding="utf-8"))["strikes"]) == 3, "дубль просочился"
@@ -275,14 +304,42 @@ def selfcheck():
     # архив не растёт, второго old-1 не появляется. (В stderr при этом идёт ⚠.)
     n0 = len(json.load(open(ARCHIVE, encoding="utf-8"))["strikes"])
     json.dump([{"id": "old-1", "date": D_OLD, "time": "ночь",
-                "city": "Рязань", "target": "нефтебаза"}],
+                "city": "Рязань", "target": "нефтебаза", "lat": 54.6, "lon": 39.7}],
               open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
     main()
     a = json.load(open(ARCHIVE, encoding="utf-8"))
     assert len(a["strikes"]) == n0, "коллизия id не отброшена: %d" % len(a["strikes"])
     assert sum(1 for s in a["strikes"] if s.get("id") == "old-1") == 1, "фантом-дубль id"
 
-    print("selfcheck OK: влито новое, 2 дубля и мусор отсечены, total пересчитан, "
+    # 🔴 главный регресс-тест: битые записи (lat/lon=0/None, city='Неизвестно') НИКОГДА
+    # не доезжают до архива — это чинили 07.08 (7 ударов по Крыму с lat/lon=0.0 упали
+    # в Атлантику и не появились на карте). merge() должен их отбросить, а не влить.
+    n1 = len(json.load(open(ARCHIVE, encoding="utf-8"))["strikes"])
+    json.dump([
+        {"date": D_NEW, "time": "01:00", "city": "Гвардейское", "target": "аэродром",
+         "lat": 0.0, "lon": 0.0},
+        {"date": D_NEW, "time": "02:00", "city": "Гвардейское", "target": "аэродром",
+         "lat": None, "lon": None},
+        {"date": D_NEW, "time": "03:00", "city": "Неизвестно", "target": "аэродром",
+         "lat": 45.1157, "lon": 34.0239},
+        {"date": D_NEW, "time": "04:00", "city": "Гвардейское", "target": "аэродром",
+         "lat": 45.1157, "lon": 34.0239},                                  # годная — должна влиться
+    ], open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
+    arch_before, added3, dupes3, rejected3 = merge(
+        json.load(open(ARCHIVE, encoding="utf-8")),
+        as_list(load(INBOX, [])))
+    assert rejected3 == 3, "битые записи не отброшены: rejected=%d" % rejected3
+    assert added3 == 1, "годная запись не влилась: added=%d" % added3
+    assert len(arch_before["strikes"]) == n1 + 1
+    assert not any(s.get("lat") in (None, 0, 0.0) for s in arch_before["strikes"]
+                   if s.get("date") == D_NEW), \
+        "запись с нулевыми/пустыми координатами просочилась в архив"
+    assert not any(s.get("city") == "Неизвестно" for s in arch_before["strikes"]
+                   if s.get("date") == D_NEW), \
+        "запись с city='Неизвестно' просочилась в архив"
+
+    print("selfcheck OK: влито новое, 2 дубля и мусор отсечены, битые координаты/город "
+          "отброшены, total пересчитан, "
           "inbox очищен, повтор не дублирует, дрейф total чинится без вливания, "
           "подозрительная коллизия id отброшена без фантома (с ⚠ в stderr)")
     return 0
