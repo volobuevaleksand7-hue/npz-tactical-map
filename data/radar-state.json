@@ -432,16 +432,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1786049372,
-      "source_text": "06.08.2026 16:05 МСК\nСтаробельск Ракетная опасность ЛНР\n\n06.08.2026 23:49 МСК\nМиллеровский район, Чертковский район, Тарасовский район, Верхнедонской район, Кашарский район, Шолоховский район, Боковский район, Милютинский район, Ростовская область - опасность по БПЛА от ЛНР, повторно и в направлении Волгоградской области. 📡 Локатор России - @locatorru"
+      "source_text": "06.08.2026 23:49 МСК\nМиллеровский район, Чертковский район, Тарасовский район, Верхнедонской район, Кашарский район, Шолоховский район, Боковский район, Милютинский район, Ростовская область - опасность по БПЛА от ЛНР, повторно и в направлении Волгоградской области. 📡 Локатор России - @locatorru"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -554,8 +554,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786064311,
-      "source_text": "07.08.2026 03:58 МСК\nГеленджик, село Кабардинка Краснодарский край Фиксация БПЛА"
+      "last_event_ts": 1786064509,
+      "source_text": "07.08.2026 04:01 МСК\nГеленджик и близлежащие, тревога по БпЛА сохраняется!"
     },
     "Оренбургская область": {
       "bpla": false,
@@ -2940,14 +2940,14 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "bplaLaunchAnim": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1786049282,
-      "source_text": "06.08.2026 16:05 МСК\nСтаробельск Ракетная опасность ЛНР\n\n06.08.2026 23:48 МСК\nСтаробельск и близлежащие Тревога по БПЛА сохраняется В том числе на электротяге ЛНР"
+      "source_text": "06.08.2026 23:48 МСК\nСтаробельск и близлежащие Тревога по БПЛА сохраняется В том числе на электротяге ЛНР"
     },
     {
       "key": "луганск|луганская народная республика",
@@ -3681,9 +3681,9 @@
       "lat": 44.58014,
       "lon": 38.06646,
       "region": "Краснодарский край",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -3694,8 +3694,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786064311,
-      "source_text": "07.08.2026 03:58 МСК\nГеленджик, село Кабардинка Краснодарский край Фиксация БПЛА"
+      "last_event_ts": 1786064509,
+      "source_text": "07.08.2026 04:01 МСК\nГеленджик и близлежащие, тревога по БпЛА сохраняется!"
     },
     {
       "key": "самара|самарская область",
@@ -5173,28 +5173,6 @@
       "last_event_ts": 1786042056,
       "source_text": "06.08.2026 21:47 МСК\nСуздальский район Владимирская область Фиксация БПЛА"
     },
-    "UKR.4.2_1": {
-      "gid_2": "UKR.4.2_1",
-      "name_ru": "Бахчисарайский район",
-      "region_ru": "Автономная Республика Крым",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1786021707,
-      "source_text": "06.08.2026 16:08 МСК\nБахчисарайский район Опасность по БПЛА Республика Крым"
-    },
     "RUS.34.9_1": {
       "gid_2": "RUS.34.9_1",
       "name_ru": "Брюховецкий район",
@@ -6014,6 +5992,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 256048,
+      "text": "Геленджик и близлежащие, тревога по БпЛА сохраняется!",
+      "ts": 1786064509,
+      "time_label": "07.08.2026 04:01 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 256047,
+      "text": "Геленджик и близлежащие, тревога по БпЛА сохраняется!",
+      "ts": 1786064405,
+      "time_label": "07.08.2026 04:00 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 79579,
       "text": "Геленджик, село Кабардинка\nКраснодарский край\nФиксация БПЛА",
       "ts": 1786064311,
@@ -6636,22 +6630,6 @@
       "time_label": "07.08.2026 02:00 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 256012,
-      "text": "Белогорский район\nТревога по БПЛА\nРеспублика Крым",
-      "ts": 1786057047,
-      "time_label": "07.08.2026 01:57 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 256011,
-      "text": "Евпатория\nПрибрежное\nОпасность по БПЛА с моря\nРеспублика Крым",
-      "ts": 1786057040,
-      "time_label": "07.08.2026 01:57 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -6661,13 +6639,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786064311,
-  "last_event_at": "2026-08-07T00:58:31Z",
-  "fetched_at": "2026-08-07T01:00:03.679839Z",
-  "poll_interval_sec": 50,
+  "timestamp": 1786064509,
+  "last_event_at": "2026-08-07T01:01:49Z",
+  "fetched_at": "2026-08-07T01:10:03.646537Z",
+  "poll_interval_sec": 60,
   "meta": {
-    "generated_at": "2026-08-07T01:00:03.679839Z",
-    "source_age_seconds": 92,
+    "generated_at": "2026-08-07T01:10:03.646537Z",
+    "source_age_seconds": 494,
     "city_count": 146,
     "region_count": 39,
     "feed_count": 80
