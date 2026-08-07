@@ -273,6 +273,44 @@ def alert_owner(text):
         print("  alert_owner: не отправлено (%s)" % e)
 
 
+# Накопительные архивы: они только растут. Ключ — как называется массив внутри файла.
+ARCHIVES = {"strikes.json": "strikes", "fuel-voices.json": "voices"}
+
+
+def archive_sizes():
+    """Сколько записей сейчас в каждом накопительном архиве. None — файл не читается."""
+    out = {}
+    for fn, key in ARCHIVES.items():
+        try:
+            with open(os.path.join(ROOT, "data", fn), encoding="utf-8") as f:
+                d = json.load(f)
+            out[fn] = len(d.get(key) or [])
+        except Exception:
+            out[fn] = None
+    return out
+
+
+def archive_shrink(now_sizes, prev_sizes):
+    """Сравнение с ПРОШЛЫМ прогоном сторожа. Возвращает список аварий.
+
+    Зачем отдельно от стражей в pre-commit и git-sync: те не дают усыханию попасть
+    в коммит, но если оно всё-таки прошло (05.08 и 06.08 архив ударов уехал в прод
+    320 -> 0 и 336 -> 0 под сообщениями соседних рутин), заметить это было НЕЧЕМ —
+    оба раза поломку нашли случайно, спустя часы. Здесь ловим постфактум.
+
+    Порог 10%, как у стража в pre-commit. Нечитаемый файл — тоже авария: архив,
+    который перестал парситься, ничем не лучше усохшего.
+    """
+    bad = []
+    for fn, cur in sorted(now_sizes.items()):
+        prev = prev_sizes.get(fn)
+        if cur is None:
+            bad.append((fn, prev, cur, "не читается"))
+        elif isinstance(prev, int) and prev > 20 and cur < prev * 0.9:
+            bad.append((fn, prev, cur, "усох"))
+    return bad
+
+
 def main():
     now = datetime.datetime.now(datetime.timezone.utc)
     unpushed, publish_lag_h, publish_stuck = publish_status(now)
@@ -314,6 +352,15 @@ def main():
             "status": status,
         })
 
+    # прошлый прогон — единственная база сравнения для архивов
+    try:
+        with open(os.path.join(ROOT, "data", "health.json"), encoding="utf-8") as f:
+            prev_meta = json.load(f).get("meta", {})
+    except Exception:
+        prev_meta = {}
+    arch_now = archive_sizes()
+    arch_bad = archive_shrink(arch_now, prev_meta.get("archives") or {})
+
     health = {
         "meta": {
             # Контракт (обновлён 15.07): dead_count = агенты, которые НЕ ВЫШЛИ НА СВЯЗЬ
@@ -323,7 +370,7 @@ def main():
             # показывал «1 агент не на связи» вместо десяти. Баннер в app.js:589
             # печатает именно dead_count и подписан «не на связи» — теперь совпадает.
             "checked_at": now.strftime("%Y-%m-%dT%H:%MZ"),
-            "overall": "degraded" if (dead_count or publish_stuck or critical) else "healthy",
+            "overall": "degraded" if (dead_count or publish_stuck or critical or arch_bad) else "healthy",
             "stale_count": stale_count,
             # Файлы, чья протухшесть означает сломанный сбор, а не тишину в
             # новостях. Пустой список = всё, что должно обновляться, обновляется.
@@ -336,6 +383,11 @@ def main():
             "publish_lag_hours": publish_lag_h,
             "publish_stuck": bool(publish_stuck),
             "total": len(WATCH),
+            # Размеры накопительных архивов — не диагностика сама по себе, а база
+            # сравнения для СЛЕДУЮЩЕГО прогона: усыхание видно только по паре точек.
+            "archives": arch_now,
+            "archive_alerts": [{"file": f, "was": p, "now": c, "reason": r}
+                               for f, p, c, r in arch_bad],
         },
         "files": files,
     }
