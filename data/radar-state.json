@@ -63,25 +63,6 @@
       "last_event_ts": 1786079597,
       "source_text": "07.08.2026 08:13 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла"
     },
-    "Астраханская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1786048573,
-      "source_text": "06.08.2026 23:36 МСК\nАстраханская область Опасность по БПЛА"
-    },
     "Белгородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -98,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1786083542,
-      "source_text": "07.08.2026 08:13 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла\n\n07.08.2026 09:19 МСК\nКорочанский район Опасность по БПЛА"
+      "last_event_ts": 1786084049,
+      "source_text": "07.08.2026 08:13 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла\n\n07.08.2026 09:27 МСК\nЯковлевский район Белгородская область опасность по БПЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -176,25 +157,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1786081016,
       "source_text": "07.08.2026 08:36 МСК\nПантелеймоновка, Енакиево, Шахтёрск ДНР и близлежащие Опасность по БПЛА, единичные фиксации пока"
-    },
-    "Калмыкия": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1786048581,
-      "source_text": "06.08.2026 23:36 МСК\nРеспублика Калмыкия Опасность по БПЛА"
     },
     "Краснодарский край": {
       "bpla": false,
@@ -895,6 +857,28 @@
     }
   ],
   "districts": {
+    "RUS.7.27_1": {
+      "gid_2": "RUS.7.27_1",
+      "name_ru": "Яковлевский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786084049,
+      "source_text": "07.08.2026 09:27 МСК\nЯковлевский район Белгородская область опасность по БПЛА"
+    },
     "UKR.9.15_1": {
       "gid_2": "UKR.9.15_1",
       "name_ru": "Скадовский район",
@@ -1031,6 +1015,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 256090,
+      "text": "Яковлевский район Белгородская область опасность по БПЛА",
+      "ts": 1786084049,
+      "time_label": "07.08.2026 09:27 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 79627,
+      "text": "Астраханская область\nРеспублика Калмыкия\nОтбой опасности по БПЛА",
+      "ts": 1786083898,
+      "time_label": "07.08.2026 09:24 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 79626,
+      "text": "Смоленская область\nТверская область\nОтбой опасности по БПЛА",
+      "ts": 1786083826,
+      "time_label": "07.08.2026 09:23 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 256089,
       "text": "Корочанский район\nОпасность по БПЛА",
@@ -1646,30 +1654,6 @@
       "time_label": "07.08.2026 05:56 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 79604,
-      "text": "Свердловская область\nОпасность по БПЛА",
-      "ts": 1786071367,
-      "time_label": "07.08.2026 05:56 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 79603,
-      "text": "Челябинская область\nОпасность по БПЛА",
-      "ts": 1786071355,
-      "time_label": "07.08.2026 05:55 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 79602,
-      "text": "Республика Татарстан\nОтбой опасности по БПЛА",
-      "ts": 1786070768,
-      "time_label": "07.08.2026 05:46 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1679,15 +1663,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786083542,
-  "last_event_at": "2026-08-07T06:19:02Z",
-  "fetched_at": "2026-08-07T06:20:02.927396Z",
+  "timestamp": 1786084049,
+  "last_event_at": "2026-08-07T06:27:29Z",
+  "fetched_at": "2026-08-07T06:30:03.463918Z",
   "poll_interval_sec": 50,
   "meta": {
-    "generated_at": "2026-08-07T06:20:02.927396Z",
-    "source_age_seconds": 60,
+    "generated_at": "2026-08-07T06:30:03.463918Z",
+    "source_age_seconds": 154,
     "city_count": 29,
-    "region_count": 13,
+    "region_count": 11,
     "feed_count": 80
   }
 }
