@@ -22,9 +22,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "data", "warehouses.json")
 OUT = os.path.join(ROOT, "skolko-skladov-wildberries-ozon.html")
 URL = "https://npz-tactical-map.vercel.app/skolko-skladov-wildberries-ozon"
-TITLE = "Сколько складов у Wildberries и Ozon в России и сколько сгорело"
-DESC = ("Сколько всего складов Wildberries (Вайлдберриз, ВБ) и Ozon в России, сколько складов вб "
-        "сгорело и сколько осталось после ударов БПЛА в июле 2026 года — с картой складов.")
+TITLE = "Сколько складов Wildberries пострадало и сколько сгорело"
+# DESC собирается динамически в build() из data/warehouses.json — прямой численный
+# ответ в сниппете ("пострадало 25 складов") нельзя зашивать строкой, цифра меняется
+# с каждым ударом (см. кластер "сколько складов пострадало": поз 7-8.4 при CTR втрое
+# ниже соседних "сгорело"/"взорвали" — снипет не отвечал числом на слово "пострадало").
 MONTHS = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля",
           "августа", "сентября", "октября", "ноября", "декабря"]
 
@@ -200,6 +202,12 @@ def build():
     share = LOST_M2 * 100.0 / net["wb"]["area_m2"]
     wb_hit_share = len(hits) * 100.0 / net["wb"]["complexes"]
     OG = og_image()
+    ozon_clause = ("Ozon — 0 подтверждённых" if "ozon" not in ops
+                   else "включая %d Ozon" % len(hit_oz))
+    DESC = ("На %s пострадало %d складов Wildberries из %d+ в России (%s), сгорело %d, "
+            "осталось %d без сообщений об ударе — карта и полный список."
+            % (rus(UPDATED), len(hits), net["wb"]["complexes"], ozon_clause, len(burned),
+               len(wh) - len(hits)))
 
     def src_cell(w):
         u = w.get("source_url", "")
@@ -269,7 +277,7 @@ def build():
   <meta name="theme-color" content="#d23a2e">
   <title>{TITLE}</title>
   <meta name="description" content="{DESC}">
-  <meta name="keywords" content="сколько складов у wildberries, сколько складов вб, сколько складов у ozon, склады wildberries в россии количество, сколько складов сгорело, сколько складов вб сгорело, сколько осталось складов вб, сколько складов вб пострадало, сколько складов вайлдберриз пострадало, сколько складов вб взорвали, сколько складов вб уничтожено, какие склады вб остались, вайлдберриз, валберис, площадь складов wildberries, логистика маркетплейсов россия, карта складов маркетплейсов">
+  <meta name="keywords" content="сколько складов у wildberries, сколько складов вб, сколько складов у ozon, склады wildberries в россии количество, сколько складов сгорело, сколько складов вб сгорело, сколько осталось складов вб, сколько складов вб пострадало, сколько складов вайлдберриз пострадало, сколько складов вайлдберриз пострадало в россии, сколько складов у вайлдберриз пострадало, сколько складов вб взорвали, сколько складов вб уничтожено, сколько складов вайлдберриз уничтожено, какие склады вб остались, вайлдберриз, валберис, площадь складов wildberries, логистика маркетплейсов россия, карта складов маркетплейсов">
   <meta name="robots" content="index, follow">
   <meta name="language" content="Russian">
   <link rel="canonical" href="{URL}">
@@ -542,6 +550,17 @@ def demo():
     assert mln(doc["meta"]["network"]["wb"]["area_m2"]) in html
     assert LOST_SRC in html, "оценка потерь без ссылки на источник"
     assert "работающие" not in html, "непроверяемое утверждение о работе складов"
+
+    # Сниппет (title/description) обязан отвечать словом «пострадало» и числом —
+    # кластер «сколько складов пострадало» ранжировался хуже соседних «сгорело»/
+    # «взорвали» именно потому, что снипет не подтверждал совпадение со словом
+    # запроса и не давал прямого числа. См. data/seo-topics.jsonl → skolko-skladov.
+    import re
+    title_m = re.search(r"<title>(.*?)</title>", html)
+    desc_m = re.search(r'name="description" content="(.*?)"', html)
+    assert title_m and "пострадало" in title_m.group(1), "в <title> нет слова «пострадало»"
+    assert desc_m and "пострадало" in desc_m.group(1) and str(len(hits)) in desc_m.group(1), (
+        "в meta description нет прямого числа пострадавших складов")
 
     # блок «какие склады остались» на чемпионе — теперь КОМПАКТНЫЙ (цифра + ссылка),
     # полный перечень объектов переехал на SURVIVORS_URL (см. gen-survivors-page.py),
