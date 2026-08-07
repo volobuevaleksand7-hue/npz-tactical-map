@@ -202,7 +202,14 @@ def classify_news(strike_data):
 
     # ── Проверка 7: Исключения — сбитые дроны, малые объекты ──
     is_minor = any(kw in searchable for kw in MINOR_KEYWORDS)
-    if is_minor and not npz_hit and not casualties:
+    # 🔴 `strategic` тоже отменяет минорность, наравне с НПЗ и пострадавшими.
+    # 07.08 удар по логистическому центру Wildberries в Екатеринбурге (три БПЛА на
+    # крышу, пожар, эвакуация ~800 человек) ушёл в TIER 2 и не попал в канал: в
+    # описании было «сбито восемь БПЛА» — слово «сбит» из MINOR_KEYWORDS сработало
+    # раньше, чем проверка на стратегический объект. Минорные слова описывают ИСХОД
+    # «всё перехвачено, объект не задет», а не удар с подтверждённым попаданием;
+    # когда объект поражён, контекст про работу ПВО не должен понижать тир.
+    if is_minor and not npz_hit and not casualties and not strategic:
         return ("regular", {
             "headline": strike_data.get("title", strike_data.get("target", "")),
             "reason": "minor/marginal event",
