@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-08T07:27Z",
+    "generated_at": "2026-08-08T16:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Reuters/Bloomberg/Meduza/Moscow Times/The Bell/Новая газета/CNN/UA.NEWS). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики.",
     "refresh_seconds": 300,
-    "updated_by": "agent:strike-pipeline"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
@@ -176,7 +176,7 @@
       "status_since": "2026-08-08",
       "est_output_pct": 15,
       "damage": "Удар БПЛА по НПЗ Лукойл-Нижегороднефтеоргсинтез в Кстово, Нижегородская область, утром 8 августа 2026. Взрывы и пожары на территории завода; объект остановлен. Подтверждено каналом NPZmap (молния 08.08 07:47 МСК). Источник: Militarnyi, канал NPZmap.",
-      "note": "На 7 августа — полная остановка после подтвержденной атаки 3 августа 2026. Никаких новостей о возобновлении.",
+      "note": "На 8 августа — частичная остановка после подтвержденной атаки. 4-й по величине нефтезавод России (мощность 16-17 млн т/год). Восстановление требует времени и отсутствия новых ударов.",
       "source_url": "https://militarnyi.com/en/news/drone-attacks-oil-refinery-in-the-nizhny-novgorod-region/",
       "confidence": "confirmed"
     },
@@ -396,9 +396,9 @@
       "status": "partial",
       "status_since": "2026-07-10",
       "est_output_pct": 40,
-      "damage": "Пожар 10 июля из-за падения обломков БПЛА.",
-      "note": "На 7 августа: частичная работа (~40%).",
-      "source_url": "https://ru.themoscowtimes.com/2026/07/10/ukraina-udarila-po-ilskomu-npz-na-kubani-neftyanykh-terminalov-i-krupnomu-oboronnomu-zavodu-v-rostovskoi-oblasti-a200459",
+      "damage": "Пожар 10 июля из-за падения обломков БПЛА. Новый пожар 8 августа в результате попадания обломков украинского беспилотника; пожар потушен, 5 человек получили ранения.",
+      "note": "На 8 августа: завод в режиме пониженной переработки (~40%). Вторая атака за месяц с аналогичным механизмом повреждения (обломки БПЛА).",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-08-08/ukraine-drone-strike-sparks-fire-at-russia-s-ilsky-oil-refinery",
       "confidence": "confirmed"
     },
     {
@@ -788,7 +788,7 @@
       "level": "severe",
       "restriction": "На 5 августа: нет открытых АЗС для населения.",
       "since": "2026-07",
-      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%92026_Russian_fuel_crisis"
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%922026_Russian_fuel_crisis"
     },
     {
       "region": "Дагестан",
@@ -797,7 +797,7 @@
       "level": "severe",
       "restriction": "На 5 августа: нет открытых АЗС для населения.",
       "since": "2026-07",
-      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%992026_Russian_fuel_crisis"
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%922026_Russian_fuel_crisis"
     },
     {
       "region": "Магаданская область",
@@ -833,7 +833,7 @@
       "level": "medium",
       "restriction": "На 5 августа: ситуация улучшается благодаря импорту из Беларуси.",
       "since": "2026-07",
-      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%992026_Russian_fuel_crisis"
+      "source_url": "https://en.wikipedia.org/wiki/2025%E2%80%932026_Russian_fuel_crisis"
     },
     {
       "region": "Рязанская обл.",
@@ -1191,7 +1191,12 @@
   "events": [
     {
       "date": "2026-08-08",
-      "text": "Удар по Лукойл-Нижегороднефтеоргсинтез (Кстово) (Кстово): Удар БПЛА по НПЗ Лукойл-Нижегороднефтеоргсинтез в Кстово, Нижегородская область, утром 8 августа 202",
+      "text": "Удар по Ильский НПЗ (Краснодарский край): пожар в результате попадания обломков украинского беспилотника. Пожар потушен. 5 человек получили ранения. Завод продолжает работать в режиме пониженной переработки.",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-08-08/ukraine-drone-strike-sparks-fire-at-russia-s-ilsky-oil-refinery"
+    },
+    {
+      "date": "2026-08-08",
+      "text": "Удар по Лукойл-Нижегороднефтеоргсинтез (Кстово) (Кстово): Удар БПЛА по НПЗ Лукойл-Нижегороднефтеоргсинтез в Кстово, Нижегородская область, утром 8 августа 2026. Взрывы и пожары на территории завода; объект остановлен. Подтверждено каналом NPZmap (молния 08.08 07:47 МСК). Источник: Militarnyi, канал NPZmap.",
       "source_url": "https://militarnyi.com/en/news/drone-attacks-oil-refinery-in-the-nizhny-novgorod-region/"
     },
     {
@@ -1249,48 +1254,6 @@
       "text": "Украинские дроны поразили Славнефть-ЯНОС (Ярославский НПЗ) — 7-я атака на завод за 2026 год. Загорелись резервуары с нефтепродуктами, зафиксированы два столба дыма. Движение по федеральной трассе М-8 приостановлено. НПЗ переведён в режим минимальной переработки (~15% мощности). Один из пяти крупнейших НПЗ России.",
       "type": "refinery",
       "source_url": "https://euromaidanpress.com/2026/08/06/seventh-time-this-year-ukrainian-drones-torch-a-top-five-russian-refinery-in-yaroslavl/",
-      "confidence": "confirmed"
-    },
-    {
-      "date": "2026-08-04",
-      "text": "Ночная операция украинских БПЛА: атакованы Сызранский НПЗ (пожары и взрывы подтверждены видеоматериалами), логистический центр Wildberries в Чехове (~65 км от Кремля) и ещё два склада. На Сызранском НПЗ поражена установка ELOU-AVT-5 (~30% мощности). Переработка нефти упала до 24-летнего минимума (3.6 млн барр/день в июле).",
-      "type": "logistic",
-      "source_url": "https://ru.themoscowtimes.com/2026/08/04/droni-atakovali-sizranskii-npz-i-ocherednoi-sklad-wildberries-pod-tveryu-a202573",
-      "confidence": "confirmed"
-    },
-    {
-      "date": "2026-08-03",
-      "text": "На 3 августа: Волгоградский НПЗ (Лукойл) полностью остановил переработку нефти после повреждений 31 июля. Завод, производивший ~4% российского топлива (15.7 млн т/год), выведен из строя. Восстановление осложнено отсутствием информации о сроках запуска.",
-      "type": "refinery",
-      "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Ukraine-Strikes-Lukoils-Volgograd-Refinery-as-Drone-Attacks-Resume.html",
-      "confidence": "confirmed"
-    },
-    {
-      "date": "2026-08-02",
-      "text": "Украинские дроны атаковали Саратовский НПЗ (Саратовская область). На объекте зафиксированы крупные пожары. Это 15-я атака на завод с начала войны. НПЗ (7.0 млн т/год) остаётся полностью остановленным. Подтверждено поражение ELOU-AVT-6 (~20% мощности).",
-      "type": "refinery",
-      "source_url": "https://www.pravda.com.ua/eng/news/2026/08/02/8046879/",
-      "confidence": "confirmed"
-    },
-    {
-      "date": "2026-08-02",
-      "text": "Орский НПЗ поражен атакой украинских дронов 2 августа. На 7 августа завод остаётся одним из 10 полностью остановленных НПЗ России. Мощность завода — 6.6 млн т/год.",
-      "type": "refinery",
-      "source_url": "https://militarnyi.com/en/news/drone-attack-hits-orsknefteorgsintez-oil-refinery-in-orsk/",
-      "confidence": "confirmed"
-    },
-    {
-      "date": "2026-08-02",
-      "text": "Украинские дроны атаковали ТАНЕКО (Нижнекамск, Татарстан) вторую ночь подряд (1 августа было повреждение, 2 августа — повторный удар). Завод переведён на 20% мощности, восстановление продолжается благодаря компенсирующим мерам.",
-      "type": "refinery",
-      "source_url": "https://t.me/noel_reports/49693",
-      "confidence": "confirmed"
-    },
-    {
-      "date": "2026-08-01",
-      "text": "Украинские дроны атаковали Уфимскую группу (Башнефть): поражены три объекта (Bashneft-UNPZ, Bashneft-Novoil, Bashneft-Ufaneftekhim) с мощностью 23+ млн т/год. Зафиксированы взрывы, пожары. Атака на дальность ~1600 км. Тройная координированная атака (1, 2 августа, затем 5 августа) — крупнейший кластер переработки РФ переведён в режим минимальной работы (~15%).",
-      "type": "refinery",
-      "source_url": "https://en.apa.az/cis-countries/ukrainian-drone-strikes-hit-oil-refinery-infrastructure-in-russias-bashkortostan-military-sites-in-crimea-518602",
       "confidence": "confirmed"
     }
   ]
