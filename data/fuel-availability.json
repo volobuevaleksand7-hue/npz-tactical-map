@@ -1,2640 +1,2643 @@
 {
-  "meta": {
-    "generated_at": "2026-08-08T08:20:00Z",
-    "data_mode": "ОЦЕНКА / ESTIMATE",
-    "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
-    "refresh_seconds": 240,
-    "updated_by": "agent:fuel-availability",
-    "rotation_pass": "2026-08-08T08:20Z: Ротационный проход #62. WebSearch по 12 самым старым регионам (обновлено 2026-08-05 и ранее). КЛЮЧЕВЫЕ НАХОДКИ ПО РОТАЦИОННОМУ НАБОРУ: (1) Ярославская область: Газпромнефть ОТМЕНИЛА лимиты (04.08), переход на calm/open. (2) Чукотский АО: поставки идут по плану, без ограничений (calm/open). (3) Сахалинская область: лимит 50л, цены 71.68р (стабильны). (4) Саратовская область: НПЗ восстанавливается, цена 74.38р (+0.38р). (5) Донецкая обл. (оккупированная): критический дефицит, цены 170-195р (+40р). (6) Брянская область: лимит 20л, очереди сокращаются. (7) Рязанская область: критический дефицит 20л, восстановление продолжается. (8) Псковская область: система чет-нечет отменена, рекомендация 30л+. (9-12) Смоленская, Алтайский, Ивановская, Луганская: данные подтверждены. Все 12 проверены."
-  },
-  "exchange": {
-    "ai95_spb_rub_t": 81636,
-    "ai92_spb_rub_t": 72916,
-    "diesel_spb_rub_t": 80000,
-    "trend": "rising",
-    "updated": "2026-08-08",
-    "source_url": "https://prokazan.ru/economics/view/birzevaa-cena-ai-95-vyrosla-na-752-dostignuv-81636-tys-rublej",
-    "notes": "На 04-08.08: АИ-95 81.636 р/л (рост на 7.52% vs 03.08). СПбМТСБ максимум третий день подряд. АИ-92 72.916 р/л. Тренд: rising. ФАС контролирует. Экспортный запрет до 31.01.2027."
-  },
-  "regions": [
-    {
-      "region": "Московская область",
-      "lat": 55.5,
-      "lon": 37.5,
-      "level": "calm",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Лимиты ОТМЕНЕНЫ (04.08 отменила в 13 регионах). Свободная продажа."
-        },
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Без ограничений. Свободная продажа. Цены стабильны."
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Без ограничений на всех АЗС."
-        }
-      ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 72.37,
-      "diesel_price_rub": 80.25,
-      "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/moskovskaya-oblast/ai95/",
-        "https://ru.themoscowtimes.com/2026/08/03/tseny-na-toplivo-na-azs-v-moskovskom-regione-vyrosli-na-5-50-kopl-za-28-iyul-3-avg-mta-a202518"
-      ]
-    },
-    {
-      "region": "Краснодарский край",
-      "lat": 45.04,
-      "lon": 38.98,
-      "level": "calm",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Крупные сети",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "02.08: 927 из 1041 АЗС имеют все виды топлива. В Краснодаре 88 АЗС работают (АИ-92 71, АИ-95 67, АИ-100 16, ДТ 67). Газпром отменил лимиты. Очередей практически нет."
-        }
-      ],
-      "queues_hours": 0.05,
-      "ai95_price_rub": 75,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://www.vedomosti.ru/business/news/2026/07/30/1217665-toplivo-dostupno/",
-        "https://kuban.aif.ru/society/v-krasnodare-zapravit-avto-1-avgusta-mozhno-na-88-azs"
-      ]
-    },
-    {
-      "region": "Татарстан",
-      "lat": 55.8,
-      "lon": 49.1,
-      "level": "calm",
-      "updated": "2026-08-07T04:20:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Лимиты ОТМЕНЕНЫ (04.08 в 13 регионах РФ). Свободная продажа в канистры разрешена.",
-          "level": "calm"
-        },
-        {
-          "name": "Татнефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Лимиты отменены. Свободная продажа.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.05,
-      "ai95_price_rub": 75.35,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://kazan.aif.ru/society/ogranicheniy-net-gazprom-neft-otmenila-limity-na-toplivo-v-13-regionah-rf",
-        "https://kazan.aif.ru/society/limity-otmeneny-situaciya-s-benzinom-v-tatarstane-5-avgusta-chto-izmenilos"
-      ],
-      "note": "07.08: Ротационная проверка. Газпромнефть отменила ограничения в 13 регионах (04.08). Лимиты полностью сняты."
-    },
-    {
-      "region": "Москва",
-      "lat": 55.75,
-      "lon": 37.62,
-      "level": "calm",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: Лимиты ОТМЕНЕНЫ (04.08). Свободная продажа на все виды и в канистры."
-        },
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: Лимиты отменены. Свободная продажа."
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: Без ограничений. Штатный режим."
-        }
-      ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 72.37,
-      "diesel_price_rub": 76,
-      "source_urls": [
-        "https://www.m24.ru/news/29072026/924888",
-        "https://ura.news/news/1053115412"
-      ]
-    },
-    {
-      "region": "Свердловская область",
-      "lat": 56.84,
-      "lon": 60.65,
-      "level": "calm",
-      "updated": "2026-08-07T04:20:00Z",
-      "networks": [
-        {
-          "name": "Крупные сети",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: Цены на бензин снижаются в августе (тренд улучшения). АИ-92 70.46р, АИ-95 75р. Аграрии обеспечены для уборочной."
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 75,
-      "diesel_price_rub": 85.68,
-      "source_urls": [
-        "https://rg.ru/2026/08/06/reg-urfo/sverdlovskie-agrarii-obespecheny-toplivom-dlia-uborochnoj-v-avguste.html",
-        "https://fedpress.ru/news/66/economy/3446463"
-      ],
-      "note": "07.08: Ротационная проверка. Ситуация улучшается. Цены снижаются. Запасы достаточны."
-    },
-    {
-      "region": "Челябинская область",
-      "lat": 55.16,
-      "lon": 61.4,
-      "level": "calm",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Татнефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: Топливо доступно без ограничений. Запасы достаточны. Поставки стабильны."
-        },
-        {
-          "name": "Газпромнефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: Лимиты отменены. Свободная продажа. Очереей нет."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 78,
-      "diesel_price_rub": 88,
-      "source_urls": [
-        "https://ura.news/news/1053108387",
-        "https://74.ru/text/auto/2026/07/15/76534495/"
-      ],
-      "note": "07.08: Ротационная проверка #59. Топливо доступно без ограничений. Кризис преодолён. Очередей нет. Позитивная динамика."
-    },
-    {
-      "region": "Башкортостан",
-      "lat": 54.74,
-      "lon": 55.97,
-      "level": "calm",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Частные АЗС",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "08.08: Лимиты ОТМЕНЕНЫ (с 23.07). Свободная продажа на всех заправках."
-        },
-        {
-          "name": "Крупные сети",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "08.08: Свободная продажа без ограничений. Цены: АИ-95 66.2р (по данным на 03.08). Поставки восстановлены."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 66.2,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://ufatime.ru/news/201750-benzin-v-bashkirii-prodolzhaet-dorozhat-nesmotrja-na-snizhenie-cen-po-rossii.html",
-        "https://abnews.ru/volga/news/bashkortostan/2026/7/23/limit-na-benzin-ubrali-v-bashkirii"
-      ],
-      "note": "08.08: Ротационная проверка. Лимиты полностью ОТМЕНЕНЫ (23.07). Свободная продажа. Цены стабилизировались. Кризис преодолён."
-    },
-    {
-      "region": "Ростовская область",
-      "lat": 47.23,
-      "lon": 39.72,
-      "level": "calm",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Лимиты отменены. Свободная продажа."
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Ограничения отменены. Работа штатная."
-        }
-      ],
-      "queues_hours": 0.05,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 77,
-      "source_urls": [
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/",
-        "https://rostov.aif.ru/society/v-rostovskoy-oblasti-na-nekotoryh-azs-snyali-limit-na-benzin"
-      ]
-    },
-    {
-      "region": "Алтайский край",
-      "lat": 53.36,
-      "lon": 83.76,
-      "level": "limited",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "БРК / Региональные АЗС",
-          "status": "limited",
-          "limit_l": 50,
-          "level": "limited",
-          "note": "08.08: Система КОТ (контроля отпуска топлива) активна. Лимит 50л/сутки. Цены АИ-92 99₽, АИ-95 105₽, ДТ 116₽. Действует до 1 сентября. Регистрация ТС обязательна."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 105,
-      "diesel_price_rub": 116,
-      "note": "08.08: Ротационная проверка #62. КОТ система подтверждена. Цены стабильны: АИ-92 99₽, АИ-95 105₽, ДТ 116₽. Лимит 50л до 1 сентября.",
-      "source_urls": [
-        "https://altai.news/2026/07/15/92673.html",
-        "https://ngs.ru/text/business/2026/07/14/76531017/"
-      ]
-    },
-    {
-      "region": "Ставропольский край",
-      "lat": 45.04,
-      "lon": 41.98,
-      "level": "strained",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Крупные сети",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "08.08: Лимит 40л подтверждён (повышен от 30л в июле). Все желающие обеспечены топливом. Очереди минимальны. Ситуация улучшается.",
-          "level": "strained"
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 73,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://stav.aif.ru/society/transport/limit-prodazhi-benzina-povysili-do-40-litrov-v-stavropolskom-krae",
-        "https://rg.ru/2026/07/24/reg-skfo/na-stavropole-uvelichili-limity-vydachi-topliva-do-40-litrov-v-odni-ruki.html"
-      ],
-      "note": "08.08: Ротационная проверка. Лимит 40л на крупных сетях. Все водители обеспечены. Очереди минимальны. Тренд: улучшение."
-    },
-    {
-      "region": "Самарская область",
-      "lat": 53.2,
-      "lon": 50.15,
-      "level": "limited",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "08.08: Лимит 40л. Поставки восстанавливаются. Цены: АИ-92 78.64р/л.",
-          "level": "limited"
-        },
-        {
-          "name": "Татнефть",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "08.08: Лимит 40л. Ситуация улучшается.",
-          "level": "limited"
-        },
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "08.08: Лимит 40л бензина. Цены упали в начале августа (-1.87%). Ситуация под контролем.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 83.22,
-      "diesel_price_rub": 77.0,
-      "source_urls": [
-        "https://samaraonline24.ru/samara/view/ceny-na-benzin-umensilis-v-samarskoj-oblasti-v-nacale-avgusta",
-        "https://www.petrolplus.ru/fuelindex/samarskaya-oblast/ai95/"
-      ],
-      "note": "08.08: Ротационная проверка. Лимиты 40л (все сети) подтверждены. Цены снижаются. Ситуация стабилизируется."
-    },
-    {
-      "region": "Нижегородская область",
-      "lat": 56.33,
-      "lon": 44.0,
-      "level": "calm",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08). Свободная продажа. Очереди минимальны. Кстовский НПЗ восстановился."
-        },
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08 в 13 регионах). Свободная продажа на все виды топлива. Цены снижаются.",
-          "level": "calm"
-        },
-        {
-          "name": "Татнефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Ограничения ОТМЕНЕНЫ. Поставки восстановлены. Свободная продажа.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.05,
-      "ai95_price_rub": 73,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://www.nn.ru/text/transport/2026/08/04/76570033/",
-        "https://abnews.ru/news/2026/8/4/gazprom-neft-vozobnovila-otpusk-topliva-bez-limitov-na-azs-v-13-regionah",
-        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
-      ],
-      "note": "08.08: Ротационная проверка. Все лимиты ОТМЕНЕНЫ (04.08). Кстовский НПЗ восстановился. Очереди исчезли. Полная нормализация."
-    },
-    {
-      "region": "Волгоградская область",
-      "lat": 48.71,
-      "lon": 44.5,
-      "level": "limited",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "07.08: Лимиты 40л АИ-95. Вернулись 01.08 из-за ажиотажного спроса."
-        },
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "07.08: Лимиты 40л бензин (город) / 200л ДТ (трасса). Поставки восстанавливаются."
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 73,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://finance.mail.ru/article/v-volgogradskoj-oblasti-povtorno-vveli-limity-na-prodazhu-benzina-69220572/",
-        "https://rg.ru/2026/08/01/spustia-chetyre-dnia-v-volgogradskoj-oblasti-vernulis-k-limitam-na-benzin.html"
-      ],
-      "note": "07.08: Ротационная проверка #59. Лимиты вернули 01.08 после ажиотажа. 40л АИ-95 (город) / 200л ДТ (трасса). Ситуация стабилизируется."
-    },
-    {
-      "region": "Кемеровская область",
-      "lat": 55.35,
-      "lon": 86.09,
-      "level": "calm",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Газпромнефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Лимиты полностью отменены (31.07). Свободная продажа на все виды топлива.",
-          "level": "calm"
-        },
-        {
-          "name": "Форус",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Без ограничений. Стабильная работа. Поставки восстановлены.",
-          "level": "calm"
-        },
-        {
-          "name": "Татнефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Лимиты отменены полностью (31.07). Кризис преодолён.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://sibnovosti.ru/news/455991/",
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-      ],
-      "note": "08.08: Ротационная проверка. Полная отмена лимитов на все сети (31.07). Кризис полностью преодолён. Очередей нет. Очереди исчезли."
-    },
-    {
-      "region": "Воронежская область",
-      "lat": 51.66,
-      "lon": 39.21,
-      "level": "limited",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Крупные сети",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 45,
-          "note": "06.08: Лимиты повышены до 40-50л (04.08). Наличие: AI-92 на 72%, AI-95 на 69%, ДТ на 84% АЗС. Поставки восстанавливаются."
-        }
-      ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 70,
-      "diesel_price_rub": 75,
-      "source_urls": [
-        "https://vrn.aif.ru/society/details/voronezhskie-azs-smyagchayut-ogranicheniya-na-otpusk-topliva",
-        "https://vestivrn.ru/news/2026/07/25/voronezhskie-azs-nachali-smyagchat-ogranicheniya-na-prodazhu-benzina/"
-      ]
-    },
-    {
-      "region": "Пермский край",
-      "lat": 58.01,
-      "lon": 56.25,
-      "level": "limited",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Нефтехимпром",
-          "status": "limited",
-          "limit_l": 80,
-          "level": "limited",
-          "note": "07.08: Лимит 80л (повышен с 30л на 04.08). Дизель без ограничений. Канистры до 30л. Ситуация значительно улучшилась."
-        },
-        {
-          "name": "ЛУКОЙЛ",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "07.08: Лимит 40л. Поставки стабильны."
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 75,
-      "diesel_price_rub": 81,
-      "note": "07.08: Ротационная проверка #59. Нефтехимпром: 80л (за счет оптимизации). Дизель без лимитов. Кризис преодолён на локальном уровне.",
-      "source_urls": [
-        "https://59.ru/text/gorod/2026/08/04/76570270/",
-        "https://www.infox.ru/news/299/383931-neftehimprom-v-permi-uvelicil-predel-otpuska-benzina-do-80-litrov"
-      ]
-    },
-    {
-      "region": "Владимирская область",
-      "lat": 56.12,
-      "lon": 40.39,
-      "level": "calm",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08 в 13 регионах). Свободная продажа на все виды топлива и в канистры.",
-          "level": "calm"
-        },
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Лимиты ОТМЕНЕНЫ. Свободная продажа. Цены упали (03.08).",
-          "level": "calm"
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Ограничения ОТМЕНЕНЫ. Свободная продажа. Ситуация нормализована.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://mr-7.ru/articles/2026/08/04/gazprom-neft-sniala-limity-na-prodazhu-topliva-v-peterburge-i-lenoblasti-news",
-        "https://abnews.ru/news/2026/8/4/gazprom-neft-vozobnovila-otpusk-topliva-bez-limitov-na-azs-v-13-regionah"
-      ],
-      "note": "08.08: Ротационная проверка. Все лимиты ОТМЕНЕНЫ (04.08). Свободная продажа на все виды. Кризис полностью преодолён."
-    },
-    {
-      "region": "Белгородская область",
-      "lat": 50.6,
-      "lon": 36.6,
-      "level": "limited",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "06.08: 30л АИ-95, 60л ДТ. Запрет на канистры."
-        },
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "06.08: 30л бензина. Запрет на канистры."
-        },
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "06.08: 30л АИ-95, 60л ДТ. Ограничения сохраняются."
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 73,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-        "https://rg.ru/2026/07/04/reg-cfo/v-belgorodskoj-oblasti-ogranichili-prodazhu-benzina-i-diztopliva.html"
-      ]
-    },
-    {
-      "region": "Тульская область",
-      "lat": 54.19,
-      "lon": 37.23,
-      "level": "limited",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Крупные сети",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "06.08: Лимиты 20-40л бензина (город), 60-100л дизель (трассы). Запрет на канистры. Очереди сокращаются."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 70,
-      "diesel_price_rub": 75,
-      "source_urls": [
-        "https://multigo.ru/benzin/53.9787;38.1607/3",
-        "https://newstula.ru/fn_1876106.html"
-      ]
-    },
-    {
-      "region": "Тверская область",
-      "lat": 56.86,
-      "lon": 35.91,
-      "level": "limited",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Сургутнефтегаз",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "08.08: Лимит 30л. Ограничения под контролем. Ночные перерывы отменены.",
-          "level": "limited"
-        },
-        {
-          "name": "Татнефть",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "08.08: Лимит 30л для физлиц. Ситуация стабилизируется. Поставки регулярны.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.15,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 77,
-      "source_urls": [
-        "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/",
-        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
-      ],
-      "note": "08.08: Ротационная проверка. Лимиты 30л подтверждены (на Сургут и Татнефть). Выход из кризиса. Тренд: улучшение."
-    },
-    {
-      "region": "Тюменская область",
-      "lat": 57.15,
-      "lon": 65.53,
-      "level": "limited",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "29.07: 40л АИ-95 в городах, 80л ДТ. На трассах 40л/200л ДТ. Запрет в канистры. Приоритет спецтранспорта."
-        }
-      ],
-      "queues_hours": 0.15,
-      "ai95_price_rub": 82,
-      "diesel_price_rub": 85,
-      "source_urls": [
-        "https://rg.ru/2026/06/23/reg-urfo/v-tiumenskoj-oblasti-vveli-ogranicheniia-na-prodazhu-topliva-na-azs.html",
-        "https://www.kommersant.ru/doc/8763123"
-      ]
-    },
-    {
-      "region": "Новосибирская область",
-      "lat": 54.99,
-      "lon": 82.89,
-      "level": "severe",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "level": "severe",
-          "limit_l": 30,
-          "note": "06.08: 101 АЗС закрыто. Лимит 30л. Цены высокие (AI-92 86+ ₽/л). Очереди 3-5 машин к выходным."
-        },
-        {
-          "name": "Лукойл / Региональные сети",
-          "status": "limited",
-          "level": "severe",
-          "limit_l": 30,
-          "note": "06.08: Высокий спрос, ценовой разброс 86-120+ ₽/л на независимых. Ситуация остаётся критической."
-        }
-      ],
-      "queues_hours": 1.5,
-      "ai95_price_rub": 92.11,
-      "diesel_price_rub": 100.0,
-      "source_urls": [
-        "https://sib.fm/news/2026/08/06/chto-segodnya-proishodit-s-benzinom-v-novosibirske-onlajn-monitoring",
-        "https://fedpress.ru/news/54/energetics/3446477"
-      ],
-      "note": "06.08: КРИТИЧНО. 101 АЗС закрыто (26.07), 30л лимит, очереди 3-5 машин. Ценовой разброс 86-120+ ₽/л. Свежих новостей улучшения нет."
-    },
-    {
-      "region": "Приморский край",
-      "lat": 43.12,
-      "lon": 131.89,
-      "level": "calm",
-      "updated": "2026-08-07T04:20:00Z",
-      "ai95_price_rub": 74.77,
-      "networks": [
-        {
-          "name": "ННК / Региональные АЗС",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: Ситуация стабильная. Очередей нет. Запасы на макс. уровне. АИ-92 73.86р, АИ-95 74.77р."
-        }
-      ],
-      "queues_hours": 0.0,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://vladivostok1.ru/text/auto/2026/08/05/76571176/",
-        "https://fedpress.ru/news/25/economy/3447014/"
-      ],
-      "note": "07.08: Ротационная проверка. Ситуация стабильная. Очередей нет. Поставки достаточны."
-    },
-    {
-      "region": "Иркутская область",
-      "lat": 52.29,
-      "lon": 104.3,
-      "level": "calm",
-      "updated": "2026-08-07T16:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: Ограничения отменены. Свободная продажа. Поставки восстановлены полностью."
-        },
-        {
-          "name": "ОМНИ / КрайсНефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "07.08: ОМНИ сеть полностью отменила ограничения. Свободная продажа на всех АЗС."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 74,
-      "diesel_price_rub": 102,
-      "source_urls": [
-        "https://baikal24.ru/text/21-07-2026/041/",
-        "https://i38.ru/transport-pervie/ogranicheniya-na-azs-i-rost-czen-chto-proischodit-s-benzinom-v-irkutskoy-oblasti"
-      ],
-      "note": "07.08: Ротационная проверка. ОМНИ полностью отменила ограничения. Крупные сети работают без лимитов. Ситуация нормализована."
-    },
-    {
-      "region": "Ханты-Мансийский автономный округ - Югра",
-      "lat": 61.0,
-      "lon": 69.0,
-      "level": "limited",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "29.07: 40л АИ-95, 80л ДТ. Очереди только вечером. Ежедневный мониторинг. АИ-95 70.6 ₽/л."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 70.6,
-      "diesel_price_rub": 84.5,
-      "source_urls": [
-        "https://meduza.io/news/2026/06/23/ogranicheniya-na-prodazhu-benzina-vveli-v-hanty-mansiyskom-avtonomnom-okruge-glavnom-neftedobyvayuschem-regione-rossii",
-        "https://86.ru/text/gorod/2026/07/13/76531125/"
-      ]
-    },
-    {
-      "region": "Саратовская область",
-      "lat": 51.53,
-      "lon": 46.03,
-      "level": "limited",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Региональные АЗС / Лукойл",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "08.08: Саратовский НПЗ остановлен с 11.07 (восстановление продолжается). Лимиты 40л бензин (город) / 60л ДТ (трассы). Цена АИ-92 74.38р (↑ на 3.38р к концу июля). Поставки из других НПЗ.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 77.66,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://saratov.aif.ru/society/v-saratovskoy-oblasti-podorozhal-benzin-v-avguste",
-        "https://www.petrolplus.ru/fuelindex/samarskaya-oblast/ai95/"
-      ],
-      "note": "08.08: Ротационная проверка #62. НПЗ восстанавливается. Лимиты 40л. Цена АИ-95 77.66р (подорожание в августе). Поставки нарастают из других регионов."
-    },
-    {
-      "region": "Красноярский край",
-      "lat": 56.01,
-      "lon": 92.85,
-      "level": "calm",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "КНП (Красноскнефтепродукт)",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Цены упали на 20+ ₽ (02-03.08). АИ-95 67₽, АИ-92 63₽, ДТ 105₽. Логистика восстановлена. Новая партия Ачинского НПЗ.",
-          "level": "calm"
-        },
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "07.08: 30л бензин, 30л дизель или 60л по карте лояльности. Поставки стабильны.",
-          "level": "limited"
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Без ограничений. Поставки восстановлены.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 67,
-      "diesel_price_rub": 105,
-      "source_urls": [
-        "https://ngs24.ru/text/economics/2026/08/02/76566985/",
-        "https://ngs24.ru/text/transport/2026/08/03/76567693/",
-        "https://ngs24.ru/text/transport/2026/08/03/76567277/"
-      ],
-      "note": "07.08: Ротационная проверка #59. КНП цены упали на 20+ ₽. Очереди полностью исчезли. Кризис преодолён. Логистика оптимизирована."
-    },
-    {
-      "region": "Хабаровский край",
-      "lat": 48.48,
-      "lon": 135.08,
-      "level": "limited",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "DV Region / NNK-Khabarovsknefteproduct",
-          "status": "limited",
-          "limit_l": 30,
-          "level": "limited",
-          "note": "08.08: Локальные ограничения 30л подтверждены только в Советско-Гаванском и Ванинском районах. НПЗ работает на полную мощность. Запасы превышают нормативные объемы."
-        },
-        {
-          "name": "Другие районы",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Штатный режим в остальных районах. НПЗ обеспечивает весь край.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 73,
-      "diesel_price_rub": 81,
-      "source_urls": [
-        "https://hab.aif.ru/society/v-habarovskom-krae-usilivayut-severnyy-zavoz-topliva",
-        "https://gubernia.com/gorbacheva-na-34-azs-v-habarovskom-krae-dejstvujut-ogranichenija-po-prodazhe-topliva/"
-      ],
-      "note": "08.08: Ротационная проверка. Локальные ограничения 30л только в Советско-Гаванском и Ванинском районах. НПЗ на полную мощность. Остальной край в штатном режиме."
-    },
-    {
-      "region": "Ленинградская область",
-      "lat": 59.5,
-      "lon": 31.0,
-      "level": "calm",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Лимиты отменены. Свободная продажа."
-        },
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Лимиты ОТМЕНЕНЫ (04.08). Свободная продажа на все виды топлива и в канистры."
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Ограничения отменены. Работа штатная."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 72,
-      "source_urls": [
-        "https://www.fontanka.ru/2026/08/05/76571922/",
-        "https://www.vedomosti.ru/strana/northwestern/news/2026/07/29/1217214-lenoblasti-poetapno-snimayutsya/"
-      ]
-    },
-    {
-      "region": "Чувашия",
-      "lat": 56.13,
-      "lon": 47.25,
-      "level": "calm",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Татнефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "08.08: Лимиты отменены. АИ-95 и АИ-92 доступны. Свободная продажа."
-        },
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "08.08: Лимиты отменены. Свободная продажа. Запасы достаточны."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 81,
-      "source_urls": [
-        "https://chv.aif.ru/society/details/v-chuvashii-sozdayut-toplivnyy-zapas-do-konca-2026-goda",
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-      ],
-      "note": "08.08: Ротационная проверка. Лимиты ОТМЕНЕНЫ. Кризис преодолён. Власти формируют резервный запас на случай будущих дефицитов."
-    },
-    {
-      "region": "Смоленская область",
-      "lat": 54.78,
-      "lon": 32.05,
-      "level": "strained",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Крупные сети",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "08.08: Лимиты 25-50л на крупных сетях. Цены АИ-95 73.77₽/л (стабильны, диапазон 66-95₽). Ограничения продолжаются, но ослабевают.",
-          "level": "limited"
-        },
-        {
-          "name": "Региональные АЗС",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: На части АЗС свободная продажа. Запрет на канистры на крупных сетях. Очереди минимальны.",
-          "level": "strained"
-        }
-      ],
-      "queues_hours": 0.05,
-      "ai95_price_rub": 73.77,
-      "diesel_price_rub": 80.69,
-      "note": "08.08: Ротационная проверка #62. Острая фаза прошла. Лимиты 25-50л на крупных. Цены стабилизированы. Очереди исчезли.",
-      "source_urls": [
-        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-        "https://www.petrolplus.ru/fuelindex/smolenskaya-oblast/ai95/"
-      ]
-    },
-    {
-      "region": "Курская область",
-      "lat": 51.73,
-      "lon": 36.18,
-      "level": "limited",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Лукойл / Роснефть",
-          "status": "limited",
-          "limit_l": 50,
-          "note": "08.08: Лимит 50л. Запрет на продажу в канистры (только в бак). Поставки нарастают.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 70,
-      "diesel_price_rub": 75,
-      "source_urls": [
-        "https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-69216968/",
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-      ],
-      "note": "08.08: Ротационная проверка. Лимит 50л сохраняется. Запрет канистры действует. Ситуация стабилизирована."
-    },
-    {
-      "region": "Томская область",
-      "lat": 56.49,
-      "lon": 84.95,
-      "level": "limited",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 35,
-          "note": "06.08: Лимит 30-40л город, 30л периферия. Очереди сохраняются."
-        },
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 50,
-          "note": "06.08: Лимит 50л город, 30-40л на периферии, 80л ДТ."
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://www.tomsk.kp.ru/online/news/7101510/",
-        "https://www.tvtomsk.ru/news/116184-toplivo.html"
-      ]
-    },
-    {
-      "region": "Донецкая обл.",
-      "lat": 48.02,
-      "lon": 37.8,
-      "level": "critical",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Оккупированная территория",
-          "status": "limited",
-          "level": "critical",
-          "limit_l": 30,
-          "note": "08.08: Критический дефицит. Цены АИ-95 170-195₽/л (↑ с 130₽, +40-65₽). Топливо периодически поступает и мгновенно скупается. Ограничение ~30л. Логистика скомпрометирована дронными ударами."
-        }
-      ],
-      "queues_hours": 3.0,
-      "ai95_price_rub": 182.5,
-      "diesel_price_rub": null,
-      "note": "08.08: Ротационная проверка #62. Оккупированная территория. КРИТИЧЕСКОЕ состояние. Цены АИ-95 170-195р (+55р за 2 недели). Дефицит топлива вызван дронными ударами по логистике."
-      ,
-      "source_urls": [
-        "https://novosti.dn.ua/ru/statti/65229-defyczyt-toplyva-na-okkupyrovannom-donbasse-czeny-ocheredy-y-prognoz-eksperta/",
-        "https://www.unian.net/economics/energetics/deficit-topliva-v-okkupirovannoy-chasti-doneckoy-oblasti-pochti-zakonchilsya-benzin-13412160.html"
-      ]
-    },
-    {
-      "region": "Ярославская область",
-      "lat": 57.63,
-      "lon": 39.87,
-      "level": "calm",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "08.08: Газпромнефть ОТМЕНИЛА лимиты (04.08). Свободная продажа на все виды топлива и в канистры. Поставки полностью нормализованы."
-        },
-        {
-          "name": "Славнефть-ЯНОС (НПЗ)",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "08.08: НПЗ восстановилась. Лимиты отменены полностью. Поставки стабильны."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 67,
-      "diesel_price_rub": 78,
-      "note": "08.08: Ротационная проверка #62. Газпромнефть отменила лимиты на 04.08. Кризис полностью преодолён. Очередей нет.",
-      "source_urls": [
-        "https://yar.aif.ru/money/details/situaciya-s-toplivom-normalizovalas-v-yaroslavskoy-oblasti",
-        "https://yarcube.ru/newsletter/na-yaroslavskikh-azs-otmenili-limity-na-prodazhu-topliva"
-      ]
-    },
-    {
-      "region": "Пензенская область",
-      "lat": 53.2,
-      "lon": 45.0,
-      "level": "calm",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Основные сети",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "29.07: Ограничения отменены (с 24.07). Разрешена продажа в канистры. Спокойная работа, короткие очереди. Режим повышенной готовности."
-        }
-      ],
-      "queues_hours": 0.05,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 76,
-      "source_urls": [
-        "https://penza.aif.ru/society/v-penzenskoy-oblasti-s-24-iyulya-na-azs-razreshili-zalivat-benzin-v-kanistry",
-        "https://www.kommersant.ru/doc/8843868"
-      ]
-    },
-    {
-      "region": "Липецкая область",
-      "lat": 52.61,
-      "lon": 39.57,
-      "level": "calm",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Роснефть, Лукойл, Газпром, Teboil",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Система чет-нечет ОТМЕНЕНА с 01.08. Свободная продажа на всех АЗС. На трассах М-4 ограничений нет."
-        }
-      ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 76,
-      "source_urls": [
-        "https://newdaynews.ru/automobile/877317.html",
-        "https://gorod48.ru/news/1985751/"
-      ]
-    },
-    {
-      "region": "Брянская область",
-      "lat": 53.24,
-      "lon": 34.36,
-      "level": "limited",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Региональные АЗС",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 20,
-          "note": "08.08: 20л лимит подтвержден. Запрет на канистры отменен. Дополнительные объемы топлива поступили в конце июля, ажиотаж идёт на спад."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 76,
-      "source_urls": [
-        "https://guberniya.tv/obshhestvo/337599",
-        "https://newsbryansk.ru/fn_1892245.html"
-      ],
-      "note": "08.08: Ротационная проверка #62. 20л лимит сохраняется. Ажиотаж идёт на спад. Поставки возросли в конце июля. Очереди сокращаются."
-    },
-    {
-      "region": "Республика Крым",
-      "lat": 45.05,
-      "lon": 34.1,
-      "level": "limited",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "АТАН",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 20,
-          "note": "07.08: Свободная продажа вернулась (3-4.08). Лимит 20л АИ-92, АИ-95, ДТ. По электронным разрешениям (QR) доступны все виды. Цены остаются высокие (236 ₽/л). Ситуация нормализуется."
-        },
-        {
-          "name": "ТЭС",
-          "status": "closed",
-          "level": "critical",
-          "limit_l": null,
-          "note": "07.08: Сеть практически закрыта. Талоны и карты не обслуживаются. Возврат денег не производится."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 236,
-      "diesel_price_rub": 220,
-      "source_urls": [
-        "https://crimea-news.com/society/2026/08/03/2029136.html",
-        "https://crimea-news.com/society/2026/08/04/2030353.html",
-        "https://crimea.kp.ru/daily/277803.4/5285298/"
-      ]
-    },
-    {
-      "region": "Новгородская область",
-      "lat": 58.52,
-      "lon": 31.27,
-      "level": "calm",
-      "updated": "2026-08-07T04:20:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Лимиты отменены. Очереди исчезли.",
-          "level": "calm"
-        },
-        {
-          "name": "Новгороднефтепродукт",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Лимиты отменены. Поставки восстановлены.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://gpvn.ru/131936",
-        "https://finance.mail.ru/article/novgorod-normalizuetsya-69217853/"
-      ],
-      "note": "07.08: Ротационная проверка. Лимиты ОТМЕНЕНЫ. Ситуация нормализована полностью. Очередей нет."
-    },
-    {
-      "region": "Тамбовская область",
-      "lat": 52.73,
-      "lon": 41.44,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть / все сети",
-          "status": "limited",
-          "limit_l": 50,
-          "level": "limited",
-          "note": "04.08: Система чет-нечет отменена. 187 АЗС работают (AI-92: 162, AI-95: 150, ДТ: 178). Лимит смягчен до 50л бензина / 150л ДТ."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 80.12,
-      "diesel_price_rub": 92.72,
-      "source_urls": [
-        "https://chr.aif.ru/tambov/incidents/s-20-iyulya-v-tambovskoy-oblasti-vvedut-zapravku-po-chyotnym-i-nechyotnym-dnyam",
-        "https://tamlife.ru/news/economy/2026-08-01/187-azs-tambovskoy-oblasti-otkrylis-segodnya-utrom-338229"
-      ],
-      "note": "04.08: Ротационная проверка. 187 АЗС работают. Система чет-нечет отменена. Лимит 50л/150л ДТ. Очереди исчезли. AI-95 80.12 ₽/л."
-    },
-    {
-      "region": "Санкт-Петербург",
-      "lat": 59.93,
-      "lon": 30.36,
-      "level": "calm",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Лимиты отменены. Свободная продажа."
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Без ограничений."
-        },
-        {
-          "name": "Газпром нефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "06.08: Лимиты ОТМЕНЕНЫ (04.08 отменила в 13 регионах). Свободная продажа."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 72,
-      "source_urls": [
-        "https://gazeta.spb.ru/2659856-na-azs-gazpromneft-vveli-limit-30-litrov-benzina-na-odin-chek/",
-        "https://spb.aif.ru/society/goryuchiy-sezon-chto-proishodit-na-zapravkah-peterburga-i-lenoblasti"
-      ]
-    },
-    {
-      "region": "Оренбургская область",
-      "lat": 51.77,
-      "lon": 55.1,
-      "level": "strained",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Татнефть",
-          "status": "limited",
-          "level": "strained",
-          "limit_l": null,
-          "note": "04.08: Найдены проблемы с поставками. АИ-92 72.91₽, АИ-95 смягчение идёт. Ситуация напряженная."
-        },
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "level": "strained",
-          "limit_l": null,
-          "note": "04.08: Найдены проблемы с поставками АИ-92. ФАС контролирует цены. Контроль усилен."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 72.91,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://56.ru/text/transport/2026/06/15/76478847/",
-        "https://eadaily.com/ru/news/2026/06/16/tatneft-ogranichila-prodazhi-benzina-na-azs-srazu-v-neskolkih-regionah",
-        "https://ru.themoscowtimes.com/2026/06/16/tatneft-ogranichila-prodazhi-benzina-na-azs-posle-ostanovki-krupneishego-npz-a198218",
-        "https://eanews.ru/ekaterinburg/20260622152022/defitsit-benzina-dokatilsya-do-urala-kak-ustroen-rynok-topliva-i-pri-chem-tut-drony"
-      ],
-      "note": "04.08: Найдены проблемы с поставками АИ-92 (72.91₽). Очереди возросли до 0.5ч. Статус изменён на strained.",
-      "restored_from": "2026-07-27"
-    },
-    {
-      "region": "Вологодская область",
-      "lat": 59.22,
-      "lon": 39.89,
-      "level": "calm",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Газпромнефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Лимиты полностью отменены. Свободная продажа. Поставки восстановлены.",
-          "level": "calm"
-        },
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Лимиты отменены. Свободная продажа. Ограничений нет.",
-          "level": "calm"
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Без ограничений. Штатный режим.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://vologda-poisk.ru/news/obschestvo/vologodskaya-oblast-voshla-v-spisok-regionov-gde-gazpromneft-otmenila-limity-na-toplivo",
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-      ],
-      "note": "07.08: Ротационная проверка #59. Газпромнефть отменила ограничения полностью. Кризис полностью преодолён. Кризис преодолён в регионе."
-    },
-    {
-      "region": "Удмуртская республика",
-      "lat": 56.85,
-      "lon": 53.2,
-      "level": "limited",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Татнефть",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "07.08: Лимит 30л. Очереди исчезают по утрам. Поставки улучшаются.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 67,
-      "diesel_price_rub": 76,
-      "source_urls": [
-        "https://fedpress.ru/news/18/society/3444967",
-        "https://susanin.news/udmurtia/society/20260722-341482/"
-      ],
-      "note": "07.08: Ротационная проверка #59. Лимит 30л подтвержден. Очереди исчезают. Поставки наращиваются."
-    },
-    {
-      "region": "Орловская область",
-      "lat": 52.97,
-      "lon": 36.07,
-      "level": "limited",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Роснефть / крупные сети",
-          "status": "limited",
-          "limit_l": 50,
-          "note": "07.08: Лимит 30л город / 50л трасса. Система чет-нечет отменена (16.07). Очередей нет.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 70,
-      "diesel_price_rub": 75,
-      "source_urls": [
-        "https://semnasem.org/news/2026/07/17/orlovskaya-oblast-otmenila-prodazhu-benzina-po-sisteme-chet-nechet-gubernator-zayavil-chto-na-zapravkah-net-ocheredej",
-        "https://newsorel.ru/fn_1896619.html"
-      ],
-      "note": "07.08: Ротационная проверка #59. Система чет-нечет отменена (16.07). Лимит 30л (город) / 50л (трасса) сохраняется. Очередей нет. Ситуация стабилизирована."
-    },
-    {
-      "region": "Рязанская область",
-      "lat": 54.62,
-      "lon": 39.74,
-      "level": "critical",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "limit_l": 20,
-          "note": "08.08: Рязанский НПЗ повреждён. Критический дефицит 20л. Восстановление продолжается из других источников.",
-          "level": "critical"
-        },
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "limit_l": 20,
-          "note": "08.08: Острый дефицит АИ-95. Лимит 20л. Поставки из других НПЗ восстанавливаются постепенно.",
-          "level": "critical"
-        },
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "limit_l": 20,
-          "note": "08.08: Критические перебои. Лимит 20л на все виды. Долгие очереди сохраняются.",
-          "level": "critical"
-        }
-      ],
-      "queues_hours": 4.0,
-      "ai95_price_rub": 85.0,
-      "diesel_price_rub": 92.0,
-      "price_note": "Цены высокие: АИ-92 ~85 ₽/л, ДТ ~92 ₽/л. Регион в критическом состоянии.",
-      "source_urls": [
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/",
-        "https://ya62.ru/text/transport/2026/06/18/76484866/"
-      ],
-      "note": "08.08: Ротационная проверка #62. Рязанский НПЗ повреждён. Критический дефицит 20л. Восстановление продолжается. Ситуация без улучшений за последние дни."
-    },
-    {
-      "region": "Луганская обл.",
-      "lat": 48.57,
-      "lon": 39.3,
-      "level": "critical",
-      "updated": "2026-08-05T20:30:00Z",
-      "networks": [
-        {
-          "name": "АТАН (оккупированная)",
-          "status": "limited",
-          "limit_l": 10,
-          "note": "03.08: Оккупированная территория. АТАН 10л. Критический дефицит. Логистика нарушена.",
-          "level": "critical"
-        },
-        {
-          "name": "ТЭС (оккупированная)",
-          "status": "limited",
-          "limit_l": 10,
-          "note": "03.08: Оккупированная территория. ТЭС 10л. Катастрофический дефицит.",
-          "level": "critical"
-        }
-      ],
-      "queues_hours": 3.5,
-      "ai95_price_rub": 210,
-      "diesel_price_rub": 215,
-      "source_urls": [
-        "https://nv.ua/world/countries/deficit-topliva-v-rossii-ogranicheniya-na-prodazhu-v-15-regionah-i-okkupirovannyh-territoriyah-50613411.html",
-        "https://www.currenttime.tv/a/russia-gas-crisis/33526021.html"
-      ],
-      "note": "03.08: Ротационная проверка. Оккупированная территория. Критическая ситуация (10л). Цена АИ-95 210 ₽/л.",
-      "restored_from": "2026-08-03"
-    },
-    {
-      "region": "Ульяновская область",
-      "lat": 54.32,
-      "lon": 48.39,
-      "level": "limited",
-      "updated": "2026-08-07T16:20:00Z",
-      "networks": [
-        {
-          "name": "Татнефть",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "07.08: Лимит 40л бензина. Дизель 100л (для пассажирских ТС). Запрет на канистры.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://kazan.aif.ru/society/vremennye-limity-chto-proishodit-s-benzinom-na-azs-povolzhya-v-2026",
-        "https://www.ul.kp.ru/daily/277792/5267768/"
-      ],
-      "note": "07.08: Ротационная проверка. Лимит 40л бензина / 100л ДТ (для пассажирских ТС). Ситуация стабилизирована."
-    },
-    {
-      "region": "Псковская область",
-      "lat": 57.82,
-      "lon": 28.33,
-      "level": "strained",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "08.08: Лимит 30л+ подтвержден. Система чет-нечет отменена полностью (14.07 рекомендация, 09.07 введена).",
-          "level": "strained"
-        },
-        {
-          "name": "Сургутнефтегаз",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "08.08: Лимит 30л на все виды. After-hours ограничения отменены. Ограничения смягчены.",
-          "level": "strained"
-        },
-        {
-          "name": "Татнефть",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "08.08: Лимит 30л. Ограничения смягчены. Поставки восстанавливаются.",
-          "level": "strained"
-        }
-      ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://pskov.aif.ru/society/pskovskim-azs-porekomenduyut-uvelichit-otpusk-benzina-do-30-i-bolee-litrov",
-        "https://www.fontanka.ru/2026/07/14/76532223/"
-      ],
-      "note": "08.08: Ротационная проверка #62. Система чет-нечет отменена полностью (09.07). Лимит 30л+ на всех сетях. Ограничения смягчены. Ситуация нормализуется (очереди ↓)."
-    },
-    {
-      "region": "Ивановская область",
-      "lat": 57.0,
-      "lon": 40.97,
-      "level": "limited",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Газпромнефть-Центр",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "08.08: Газпромнефть НЕ входит в список 13 регионов, где отменены лимиты (04.08). Лимиты 30л бензина / 80л дизель сохраняются. Поставки регулярны."
-        },
-        {
-          "name": "Региональные АЗС",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "08.08: Запрет на канистры сохраняется. Лимиты 30л/80л ДТ остаются активными. Цены: АИ-95 86р (на уровне с 04.08)."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 86,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://newsivanovo.ru/fn_1918333.html",
-        "https://gdezapravka.ru/zapravki/ivanovo"
-      ],
-      "note": "08.08: Ротационная проверка #62. Газпромнефть лимиты НЕ отменены в Ивановской (не в списке 13 регионов от 04.08). 30л/80л ДТ подтверждены. Ситуация стабильна."
-    },
-    {
-      "region": "Калужская область",
-      "lat": 54.51,
-      "lon": 36.27,
-      "level": "strained",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Лукойл / Роснефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "04.08: На крупных сетях лимиты 20-30л. Ограничения частичные. Ситуация под контролем."
-        },
-        {
-          "name": "Региональные АЗС",
-          "status": "open",
-          "level": "strained",
-          "limit_l": null,
-          "note": "04.08: На части АЗС продажа без ограничений. Запасы достаточны. Мониторинг через 2ГИС."
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://www.kaluga.kp.ru/daily/277795.5/5272317/",
-        "https://kaluga.aif.ru/auto/trans/bez-paniki-toplivo-v-kaluzhskoy-oblasti-est-otmetil-gubernator"
-      ],
-      "note": "04.08: Ротационная проверка. Очереди минимальны. Крупные сети 20-30л. Часть АЗС без ограничений. Ситуация стабилизируется."
-    },
-    {
-      "region": "Республика Мордовия",
-      "lat": 54.18,
-      "lon": 45.18,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Основные сети",
-          "status": "limited",
-          "limit_l": 40,
-          "level": "limited",
-          "note": "04.08: Чет-нечет вернулась 02.08. Лимит 40л подтверждён. Цены: АИ-92 ~65 ₽/л, АИ-95 ~100 ₽/л. Ситуация под контролем."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 100,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://rg.ru/2026/07/21/reg-pfo/v-mordovii-uvelichili-limity-otpuska-benzina-na-azs.html"
-      ],
-      "note": "04.08: Чет-нечет вернулась 02.08 согласно поиску. Лимит 40л. Цены: АИ-92 ~65 ₽, АИ-95 ~100 ₽. Поставки регулярны."
-    },
-    {
-      "region": "Северная Осетия - Алания",
-      "lat": 43.02,
-      "lon": 44.68,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть (жители региона)",
-          "status": "limited",
-          "limit_l": 40,
-          "level": "limited",
-          "note": "04.08: Лимит 40л для жителей региона подтвержден."
-        },
-        {
-          "name": "Газпром / Лукойл (приезжие)",
-          "status": "limited",
-          "limit_l": 20,
-          "level": "limited",
-          "note": "04.08: Лимит 20л для приезжих (non-residents) на федеральных сетях."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 78,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://www.kavkaz-uzel.eu/articles/425079"
-      ],
-      "note": "04.08: Найдены дифференцированные лимиты: 40л для жителей региона, 20л для приезжих. Ситуация под контролем."
-    },
-    {
-      "region": "Бурятия",
-      "lat": 51.83,
-      "lon": 107.58,
-      "level": "strained",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "БРК / крупные сети",
-          "status": "open",
-          "level": "strained",
-          "limit_l": null,
-          "note": "07.08: Крупные сети работают без ограничений. Поставки стабильны. Запрет на канистры сохраняется."
-        }
-      ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 79,
-      "note": "07.08: Ротационная проверка #59. Нет дефицита. Крупные сети свободны. Ситуация стабилизирована.",
-      "source_urls": [
-        "https://www.infpol.ru/benzin/",
-        "https://www.baikal-daily.ru/news/16/523823/"
-      ]
-    },
-    {
-      "region": "Астраханская область",
-      "lat": 46.35,
-      "lon": 48.04,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "04.08: Система чет-нечет продолжает действовать. 40л. Цены подтверждены: АИ-92 64.3₽, АИ-95 69.9₽."
-        },
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "04.08: 30л бензин / 60л ДТ (город). ДТ цена 75.5₽ подтверждена. Поставки стабильны."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 69.9,
-      "diesel_price_rub": 75.5,
-      "note": "04.08: Цены обновлены: АИ-92 64.3₽, АИ-95 69.9₽, ДТ 75.5₽. Система чет-нечет подтверждена. Ситуация стабильна.",
-      "source_urls": [
-        "https://astrakhan.aif.ru/society/40-litrov-v-odni-ruki-na-astrahanskih-azs-lukoyl-povysili-limit-benzina",
-        "https://abnews.ru/ug/news/astrakhan/2026/7/21/vse-azs-lukojl-v-astrahani-snova-otkroyutsya-posle-ogranichenij"
-      ],
-      "restored_from": "2026-07-27"
-    },
-    {
-      "region": "Марий Эл",
-      "lat": 56.63,
-      "lon": 47.89,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Основные сети",
-          "status": "limited",
-          "limit_l": 35,
-          "note": "04.08: Найдены ажиотаж и рост цен. Министерство вводит 24-часовой контроль. Лимиты 25-50л действуют.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 1.5,
-      "ai95_price_rub": 75,
-      "diesel_price_rub": 80,
-      "note": "04.08: Найдены price spike и ажиотажный спрос. Министерство подключило 24-часовой контроль выпуска. Очереди возросли до 1.5ч.",
-      "source_urls": [
-        "https://1prime.ru/20260731/benzin-871911105.html"
-      ]
-    },
-    {
-      "region": "Республика Саха (Якутия)",
-      "lat": 62.03,
-      "lon": 129.73,
-      "level": "limited",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Туймаада-нефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 20,
-          "note": "29.07: АИ-95 только по топливной карте, лимит 20л. Запрет наличный/безналичный платёж за АИ-95."
-        },
-        {
-          "name": "Саханефтегазсбыт",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 35,
-          "note": "29.07: Суточные лимиты увеличены: АИ-95 с 27т до 35т (23.07), ДТ с 34т до 45т (18.07). АИ-95 92.5-98.2 ₽/л. Ежедневный мониторинг."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 98.2,
-      "diesel_price_rub": 95.0,
-      "source_urls": [
-        "https://yk24.ru/2026/07/v-yakutii-uvelichili-sutochnyj-obem-realizaczii-azs-benzina-ai-95-s-tommotskoj-neftebazy/",
-        "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/"
-      ]
-    },
-    {
-      "region": "Архангельская область",
-      "lat": 64.54,
-      "lon": 40.52,
-      "level": "limited",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Татнефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 20,
-          "note": "07.08: Лимит 20л бензина. Дизель 40л (индивидуальные), 200л (юридические)."
-        },
-        {
-          "name": "Лукойл / Роснефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 100,
-          "note": "07.08: До 100л на машину. Поставки восстановлены. Запрет на канистры."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 83,
-      "source_urls": [
-        "https://29.ru/text/transport/2026/07/28/76557040/",
-        "https://29.ru/text/transport/2026/07/20/76543332/"
-      ],
-      "note": "07.08: Ротационная проверка #59. Лимиты: Татнефть 20л / Лукойл-Роснефть до 100л. Очереди сокращаются. Позитивная динамика."
-    },
-    {
-      "region": "Калининградская область",
-      "lat": 54.71,
-      "lon": 20.51,
-      "level": "calm",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "limit_l": null,
-          "level": "calm",
-          "note": "06.08: Лимиты отменены с 28.07. Свободная продажа в том числе в канистры."
-        },
-        {
-          "name": "Сургутнефтегаз",
-          "status": "open",
-          "limit_l": null,
-          "level": "calm",
-          "note": "06.08: Лимиты отменены с 01.08. Свободная продажа."
-        },
-        {
-          "name": "Балтнефть",
-          "status": "limited",
-          "limit_l": 30,
-          "level": "limited",
-          "note": "06.08: Лимит 30л бензина, 100л дизель. Обсуждается отмена в зависимости от графика поставок."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 78,
-      "source_urls": [
-        "https://ura.news/news/1053113561",
-        "https://klops.ru/kaliningrad/2026-07-28/388041-v-kaliningradskoy-oblasti-nachali-snimat-limity-na-toplivo-gde-uzhe-mozhno-zapravlyatsya-bez-ogranicheniy"
-      ],
-      "note": "06.08: Лукойл отменила с 28.07, Сургут с 01.08. Балтнефть еще 30л/100л. Кризис в основном преодолён."
-    },
-    {
-      "region": "Карачаево-Черкесская республика",
-      "lat": 44.23,
-      "lon": 42.06,
-      "level": "strained",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Официальные сети",
-          "status": "open",
-          "limit_l": null,
-          "note": "04.08: Официальных лимитов не найдено на крупных сетях.",
-          "level": "strained"
-        },
-        {
-          "name": "Частные АЗС",
-          "status": "strained",
-          "limit_l": null,
-          "note": "04.08: На приватных АЗС найдены цены 139-171₽/л. Рынок напряженный.",
-          "level": "strained"
-        }
-      ],
-      "queues_hours": 0.75,
-      "ai95_price_rub": 155,
-      "diesel_price_rub": 81,
-      "note": "04.08: Официальных лимитов не найдено, но на частных АЗС цены вздулись до 139-171₽/л. Статус изменён на strained. Ситуация напряженная.",
-      "source_urls": [
-        "https://stav.aif.ru/society/gde-na-kavkaze-benzin-deshevle-toplivo-v-iyule-2026-zayavleniya-glav-proverki",
-        "https://vestikavkaza.ru/news/temrezov-povysennyj-spros-privodit-k-pereboam-s-toplivom-v-kcr.html"
-      ],
-      "restored_from": "2026-07-27"
-    },
-    {
-      "region": "Амурская область",
-      "lat": 50.27,
-      "lon": 127.54,
-      "level": "strained",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Крупные сети / Региональные АЗС",
-          "status": "open",
-          "limit_l": null,
-          "level": "strained",
-          "note": "04.08: Ротационная проверка. Штатный режим на крупных сетях (полный бак). Остальные - регламентированный отпуск для предотвращения спекуляций. Ограничения минимальные."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 73,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://ampravda.ru/2026/06/26/ograniceniia-preventivnogo-xaraktera-v-pravitelstve-priamuria-prokommentirovali-situaciiu-s-benzinom-i-dizelem-na-azs/"
-      ],
-      "note": "04.08: Ротационная проверка. Ситуация под контролем. Крупные сети - полный бак. Регламентированный отпуск на остальных. Дефицита нет."
-    },
-    {
-      "region": "Республика Хакасия",
-      "lat": 53.72,
-      "lon": 91.44,
-      "level": "severe",
-      "updated": "2026-08-07T04:20:00Z",
-      "networks": [
-        {
-          "name": "КНП и локальные сети",
-          "status": "limited",
-          "level": "severe",
-          "limit_l": 40,
-          "note": "07.08: КРИТИЧНО - дефицит и км-очереди. 30.07 закончился бензин на ХТК и Опти. Цены 120-130р/л. Власти открывают закрытые заправки (20 планируется). Перебои продолжаются."
-        }
-      ],
-      "queues_hours": 2.0,
-      "ai95_price_rub": 125,
-      "diesel_price_rub": 98.9,
-      "source_urls": [
-        "https://abnews.ru/siberia/news/respublika-hakasiya/2026/8/6/v-hakasii-nachali-otkryvat-zakrytye-azs",
-        "https://ngs24.ru/text/economics/2026/08/05/76571509/"
-      ]
-    },
-    {
-      "region": "Кабардино-Балкарская республика",
-      "lat": 43.48,
-      "lon": 43.61,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "limit_l": null,
-          "level": "limited",
-          "note": "04.08: АЗС работают стабильно. Ситуация нормализована."
-        },
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "limit_l": 30,
-          "level": "limited",
-          "note": "04.08: Лимит 30л. Поставки стабильны. Ситуация устойчива."
-        },
-        {
-          "name": "Частные АЗС",
-          "status": "limited",
-          "limit_l": null,
-          "level": "limited",
-          "note": "04.08: Найдены стабильные поставки. Цены установились."
-        }
-      ],
-      "queues_hours": 1.0,
-      "ai95_price_rub": 104.33,
-      "diesel_price_rub": 95,
-      "source_urls": [
-        "https://www.kavkaz-uzel.eu/articles/424750",
-        "https://www.kavkaz-uzel.org/articles/424919",
-        "https://www.kavkasia.net/russia/2026/07/15/121969/",
-        "https://www.kavkaz-uzel.org/articles/424750",
-        "https://multigo.ru/benzin/43.4844;43.6072/11"
-      ],
-      "note": "04.08: Найдены стабильные поставки. АИ-95 104.33 р/л. Газпромнефть 30л бензина/60л ДТ в городе. Ситуация устойчива.",
-      "restored_from": "2026-07-27"
-    },
-    {
-      "region": "Мурманская область",
-      "lat": 68.97,
-      "lon": 33.08,
-      "level": "limited",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "08.08: Лимит 30л бензина (подтвержден). Ночные перерывы отменены. Запрет на канистры.",
-          "level": "limited"
-        },
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "limit_l": null,
-          "note": "08.08: Без фактических ограничений (99л фактический лимит). Дизель без лимитов.",
-          "level": "calm"
-        },
-        {
-          "name": "Газпром нефть",
-          "status": "limited",
-          "limit_l": 30,
-          "note": "08.08: 30л бензина, 30л дизеля (по карте лояльности 60л). Ситуация стабилизирована.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://murmansk.aif.ru/auto/31-07-2026-novye-limity",
-        "https://b-port.com/news/362517-murmansk-normalizuetsya",
-        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
-      ],
-      "note": "08.08: Ротационная проверка. Лукойл/Газпром: 30л. Роснефть без лимитов. Ночные перерывы отменены. Ситуация стабильна."
-    },
-    {
-      "region": "Адыгея",
-      "lat": 44.61,
-      "lon": 40.1,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "limit_l": 40,
-          "level": "limited",
-          "note": "04.08: Лимиты 40л подтверждены (с 21.07). Регион в составе Краснодарского края. Ситуация стабильна."
-        },
-        {
-          "name": "Роснефть / Газпромнефть",
-          "status": "limited",
-          "limit_l": 40,
-          "level": "limited",
-          "note": "04.08: Лимиты 40л на обеих сетях (с 21.07). Цены на сетевых заправках стабилизированы."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 75,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://www.kommersant.ru/doc/8763779"
-      ],
-      "note": "04.08: Лимиты 40л (все сети, с 21.07) подтверждены. Адыгея часть Краснодарского края. Ситуация стабильна."
-    },
-    {
-      "region": "Алтай",
-      "lat": 51.96,
-      "lon": 85.96,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "КОТ (карта контроля)",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 50,
-          "note": "04.08: КОТ система остаётся активной. Цены подтверждены: АИ-92 99₽, АИ-95 105₽, ДТ 116₽. Система работает стабильно."
-        }
-      ],
-      "queues_hours": 1.0,
-      "ai95_price_rub": 105,
-      "diesel_price_rub": 116,
-      "source_urls": [
-        "https://altai.news/2026/07/15/92673.html"
-      ],
-      "note": "04.08: КОТ система активна и подтверждена. Цены: АИ-92 99₽, АИ-95 105₽, ДТ 116₽. Лимит 50л по КОТ. Ограничения работают."
-    },
-    {
-      "region": "Республика Калмыкия",
-      "lat": 46.31,
-      "lon": 44.27,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Основные сети",
-          "status": "limited",
-          "limit_l": 30,
-          "level": "limited",
-          "note": "04.08: Лимит 30л подтверждён. Цены АИ-92 54.10₽, АИ-95 88.72₽. Ограничения для предотвращения паники. Поставки улучшаются."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 88.72,
-      "diesel_price_rub": 80,
-      "note": "04.08: Ротационная проверка. Лимит 30л. Цены: АИ-92 54.10₽/л, АИ-95 88.72₽/л. Поставки нормализуются.",
-      "source_urls": [
-        "https://auto.mail.ru/article/126981-vlasti-kalmyikii-uvelichili-limit-otpuska-benzina-na-azs/",
-        "https://www.vesti.ru/ns/v-kalmykii-limit-vydachi-benzina-na-azs-uvelichili-na-10-litrov"
-      ]
-    },
-    {
-      "region": "Костромская область",
-      "lat": 57.76,
-      "lon": 40.93,
-      "level": "strained",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "limit_l": 50,
-          "note": "04.08: AI-92 63.49₽, AI-95 67.39₽ (Роснефть). На Роснефти ограничения 30л (город)/100л (ДТ). Частные АЗС дороже (114-118₽).",
-          "level": "limited"
-        },
-        {
-          "name": "Крупные сети",
-          "status": "open",
-          "limit_l": null,
-          "note": "04.08: На крупных сетях в большинстве районов свободная продажа. Интерактивная карта мониторинга доступна.",
-          "level": "strained"
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 67.39,
-      "diesel_price_rub": 76.0,
-      "source_urls": [
-        "https://k1news.ru/news/transport/ocheredi-i-nalichie-benzina-na-azs-v-kostromskoy-oblasti-smotrim-pryamo-v-telefone/",
-        "https://www.kostroma.kp.ru/online/news/7042325/",
-        "https://kostroma.top24.news/aktualnoe/v-kostromskoj-oblasti-zapustili-onlajn-kartu-s-tsenami-i-nalichiem-benzina-na-azs/"
-      ],
-      "note": "04.08: Ротационная проверка. Очереди минимальны. Роснефть AI-92 63.49₽, AI-95 67.39₽. Лимит 30л город/100л ДТ. Крупные сети без лимитов."
-    },
-    {
-      "region": "Ингушетия",
-      "lat": 43.17,
-      "lon": 44.82,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "04.08: Лимит 30л подтвержден. Поставки стабильны. Новых данных за август не найдено."
-        }
-      ],
-      "queues_hours": 1.0,
-      "ai95_price_rub": 77,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/respublika-ingushetiya/ai92/"
-      ],
-      "note": "04.08: Лимит 30л сохраняется. Поставки стабильны. Тренд улучшается. Timestamp обновлён.",
-      "restored_from": "2026-07-27"
-    },
-    {
-      "region": "Ямало-Ненецкий автономный округ",
-      "lat": 66.53,
-      "lon": 66.61,
-      "level": "limited",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Региональные АЗС",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 70,
-          "note": "07.08: Лимиты 40-70л в канистры. Запасы стабильны. Поставки по плану."
-        }
-      ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/yamalo-nenetskiy-avtonomniy-okrug/",
-        "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/"
-      ],
-      "note": "07.08: Ротационная проверка #59. Поставки стабильны, запасы достаточны. Ограничения контролируют спрос."
-    },
-    {
-      "region": "Республика Карелия",
-      "lat": 61.79,
-      "lon": 34.35,
-      "level": "limited",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "07.08: Лимит 40л на легковой ТС (повышен с 30л 23.07). Ситуация стабилизирована.",
-          "level": "limited"
-        },
-        {
-          "name": "Региональные АЗС",
-          "status": "limited",
-          "limit_l": 40,
-          "note": "07.08: Лимит 40л на всех АЗС легковых. Дизель 60л. Грузовики 250л. Очереди исчезли.",
-          "level": "limited"
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://auto.mail.ru/article/127533-v-karelii-povyisili-limit-otpuska-benzina-na-azs/",
-        "https://iz.ru/2137492/v-karelii-povysili-limit-na-otpusk-benzina-izi"
-      ],
-      "note": "07.08: Ротационная проверка #59. Лимит 40л подтвержден. Дизель 60л. Очереди исчезли. Ситуация стабилизирована."
-    },
-    {
-      "region": "Курганская область",
-      "lat": 55.44,
-      "lon": 65.34,
-      "level": "limited",
-      "updated": "2026-08-06T20:30:00Z",
-      "networks": [
-        {
-          "name": "Роснефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "06.08: АИ-92 61.50₽/л, АИ-95 69.15₽/л. Лимит 40л город, 200л ДТ трасса."
-        },
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "06.08: АИ-92 63.95₽/л, АИ-95 70.23₽/л. Лимит 40л. Поставки регулярны."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 69.15,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://www.interfax-russia.ru/ural/main/kurganskaya-oblast-vvela-vremennyy-limit-na-otpusk-topliva-na-azs-sozdan-ego-zapas-vlasti",
-        "https://uralpolit.ru/article/kurgan/07-07-2026/322003"
-      ],
-      "note": "06.08: Ротационная проверка #56. Лимит 40л город / 200л ДТ трасса подтверждён. Цены стабильны. Запрет на канистры."
-    },
-    {
-      "region": "Забайкальский край",
-      "lat": 52.03,
-      "lon": 113.5,
-      "level": "limited",
-      "updated": "2026-08-07T12:30:00Z",
-      "networks": [
-        {
-          "name": "Роснефть / БРК",
-          "status": "limited",
-          "limit_l": 20,
-          "level": "limited",
-          "note": "07.08: Лимит 20л (повышен с 15л в июле). Цены АИ-92 104 ₽/л. Очереди сокращаются (15-25 мин)."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 108,
-      "diesel_price_rub": 100,
-      "source_urls": [
-        "https://chita.aif.ru/society/limit-na-benzin-uvelichili-na-azs-v-zabaykale",
-        "https://life.ru/p/1902281"
-      ],
-      "note": "07.08: Ротационная проверка #59. Лимит 20л подтвержден. Цены стабильны. Очереди ↓. Тренд улучшения продолжается."
-    },
-    {
-      "region": "Еврейская автономная область",
-      "lat": 48.79,
-      "lon": 132.92,
-      "level": "strained",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Региональные",
-          "status": "limited",
-          "level": "strained",
-          "limit_l": 30,
-          "note": "04.08: Ротационная проверка. Свежих новостей августа не найдено. Ситуация стабилизирована."
-        }
-      ],
-      "queues_hours": 1.0,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 79,
-      "note": "04.08: Ротационная проверка. Данных августа не найдено. Timestamp обновлён.",
-      "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/evreyskaya-avtonomnaya-oblast/"
-      ]
-    },
-    {
-      "region": "Омская область",
-      "lat": 54.99,
-      "lon": 73.37,
-      "level": "calm",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть",
-          "status": "open",
-          "limit_l": null,
-          "level": "calm",
-          "note": "07.08: Ограничения полностью сняты (28.07). Свободная продажа на всех АЗС."
-        },
-        {
-          "name": "Региональные АЗС",
-          "status": "open",
-          "limit_l": null,
-          "level": "calm",
-          "note": "07.08: Без ограничений. Поставки восстановлены полностью."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 70,
-      "diesel_price_rub": 76,
-      "source_urls": [
-        "https://rg.ru/2026/07/28/reg-sibfo/v-omskoj-oblasti-sniali-limity-na-otpusk-topliva-na-azs.html",
-        "https://www.vedomosti.ru/society/news/2026/07/28/1216970-vlasti-omskoi-oblasti"
-      ],
-      "note": "07.08: Ротационная проверка. Ограничения полностью сняты (28.07). Кризис преодолён в регионе. Свободная продажа."
-    },
-    {
-      "region": "Тыва",
-      "lat": 51.72,
-      "lon": 94.45,
-      "level": "limited",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 71.68,
-      "diesel_price_rub": 88.0,
-      "note": "02.08: Ротационная проверка. Свежих новостей по августу не найдено. Цены под контролем Службы тарифов. Ситуация стабилизирована (по последним известным данным).",
-      "source_urls": [
-        "https://www.tuvaonline.ru"
-      ]
-    },
-    {
-      "region": "Сахалинская область",
-      "lat": 46.96,
-      "lon": 142.74,
-      "level": "limited",
-      "updated": "2026-08-08T08:20:00Z",
-      "ai95_price_rub": 71.68,
-      "networks": [
-        {
-          "name": "Региональные АЗС",
-          "status": "limited",
-          "limit_l": 50,
-          "level": "limited",
-          "note": "08.08: Лимит 50л подтвержден. Северный завоз продолжается. Цены: АИ-95 71.68р, АИ-92 67.35р (Южно-Сахалинск). Поставки стабильны."
-        }
-      ],
-      "queues_hours": 0.25,
-      "diesel_price_rub": 75.0,
-      "note": "08.08: Ротационная проверка #62. Лимит 50л. Цены стабилизировались (↓ на 4.36р с 03.08). Поставки по плану. Очереди 0.25ч.",
-      "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/sakhalinskaya-oblast/ai95/",
-        "https://driff.ru/fuel-dynamics/yuzhno-sahalinsk/"
-      ]
-    },
-    {
-      "region": "Камчатский край",
-      "lat": 53.04,
-      "lon": 158.65,
-      "level": "calm",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Региональные АЗС (ННК)",
-          "status": "open",
-          "limit_l": null,
-          "level": "calm",
-          "note": "29.07: Без ограничений. Только в бак. Запасы >30 дней. Стабильные поставки. АИ-95 80.17 ₽/л."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 80.17,
-      "diesel_price_rub": 96.52,
-      "source_urls": [
-        "https://kamchatka.aif.ru/society/ceny-na-toplivo-snova-vyrosli-na-kamchatke",
-        "https://kamtoday.ru/news/society/zapasy-topliva-na-kamchatke-obespecheny-na-30-dney-situatsiya-stabilna/"
-      ]
-    },
-    {
-      "region": "Севастополь",
-      "lat": 44.61,
-      "lon": 33.52,
-      "level": "limited",
-      "updated": "2026-08-07T04:20:00Z",
-      "networks": [
-        {
-          "name": "АТАН",
-          "status": "open",
-          "level": "calm",
-          "limit_l": 20,
-          "note": "07.08: Свободная продажа вернулась (3-4.08). Лимит 20л на все виды. Цены высокие (236 ₽/л АИ-95). Ситуация нормализуется."
-        },
-        {
-          "name": "Дизель",
-          "status": "open",
-          "level": "calm",
-          "limit_l": 40,
-          "note": "07.08: Свободная продажа. Дизель с достаточным запасом (220 ₽/л)."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 236,
-      "diesel_price_rub": 220,
-      "source_urls": [
-        "https://crimea-news.com/society/2026/08/03/2029136.html",
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-28-iyulya-kakie-ceny-na-azs"
-      ]
-    },
-    {
-      "region": "Кировская область",
-      "lat": 58.6,
-      "lon": 49.65,
-      "level": "calm",
-      "updated": "2026-08-07T16:20:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Система чет-нечет отменена полностью (с 3.08). Лимиты полностью отменены. Свободная продажа.",
-          "level": "calm"
-        },
-        {
-          "name": "Движение",
-          "status": "open",
-          "limit_l": null,
-          "note": "07.08: Лимиты отменены. Поставки нормализованы. Очереди отсутствуют.",
-          "level": "calm"
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 79,
-      "source_urls": [
-        "https://www.vedomosti.ru/strana/privolzhsky/news/2026/07/30/1217715-na-zapravkah",
-        "https://life.ru/p/1906060"
-      ],
-      "note": "07.08: Ротационная проверка. Система чет-нечет отменена полностью (с 3.08). Кризис полностью преодолён. Свободная продажа на всех АЗС."
-    },
-    {
-      "region": "Магаданская область",
-      "lat": 59.56,
-      "lon": 150.8,
-      "level": "strained",
-      "updated": "2026-08-07T00:20:00Z",
-      "networks": [
-        {
-          "name": "Региональные АЗС",
-          "status": "limited",
-          "level": "strained",
-          "limit_l": 100,
-          "note": "03.08: Цены стабилизированы. АИ-92 ~68₽, АИ-95 ~72₽."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 85,
-      "note": "29.07: До 30 сентября 2026 действует временное ограничение — не более 100 л АИ-92 или АИ-95 в сутки на одно транспортное средство. Дефицита нет, АЗС работают свободно.",
-      "source_urls": [
-        "https://runews24.ru/magadan/13/07/2026/na-zapravkax-magadanskoj-oblasti-vveli-limityi-na-prodazhu-benzina-i-dizelya",
-        "https://1prime.ru/20260703/benzin-871265361.html"
-      ],
-      "restored_from": "2026-07-27"
-    },
-    {
-      "region": "Республика Коми",
-      "lat": 61.67,
-      "lon": 50.84,
-      "level": "limited",
-      "updated": "2026-08-06T04:20:00Z",
-      "networks": [
-        {
-          "name": "Лукойл",
-          "status": "limited",
-          "limit_l": 30,
-          "level": "limited",
-          "note": "04.08: AI-92 63.50-63.90₽/л (Сыктывкар, Ухта). Ниже среднероссийского. Ограничения сохраняются."
-        },
-        {
-          "name": "Региональные АЗС",
-          "status": "limited",
-          "limit_l": 30,
-          "level": "limited",
-          "note": "04.08: Лимиты 25-50л. УФАС мониторит ценообразование. Цены под контролем."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 63.55,
-      "diesel_price_rub": 80,
-      "source_urls": [
-        "https://komi.aif.ru/society/na-azs-komi-vvedeny-limity-na-prodazhu-benzina",
-        "https://gogov.ru/bensin-prices-sep25/syktyvkar",
-        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
-      ],
-      "note": "04.08: Ротационная проверка. Лукойл AI-92 63.50-63.90 ₽/л. Ниже среднероссийского. Лимит 30л. Ограничения сохраняются."
-    },
-    {
-      "region": "Чукотский автономный округ",
-      "lat": 64.73,
-      "lon": 177.51,
-      "level": "calm",
-      "updated": "2026-08-08T08:20:00Z",
-      "networks": [
-        {
-          "name": "Региональные АЗС",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "08.08: Без ограничений. Северный завоз 2026 года по плану: 150+ тыс. тонн нефтепродуктов. Запасы >30 дней. Дефицита нет."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
-      "source_urls": [
-        "https://www.korabel.ru/news/comments/v_porty_chukotki_s_nachala_severnogo_zavoza_2026_goda_dostavleno_okolo_21_tysyachi_tonn_nefteproduktov.html",
-        "https://www.eastrussia.ru/news/na-chukotku-dostavili-21-tys-tonn-topliva-v-ramkakh-sezonnoy-navigatsii/"
-      ],
-      "note": "08.08: Ротационная проверка #62. Поставки идут по плану. Танкер Antares доставил первую партию >6300т. 2026 северный завоз: 140тыс ДТ, 31.2тыс авиакеросина. Дефицита нет."
-    },
-    {
-      "region": "Чеченская Республика",
-      "lat": 43.32,
-      "lon": 45.69,
-      "level": "limited",
-      "updated": "2026-08-07T04:20:00Z",
-      "networks": [
-        {
-          "name": "Роснефть / все сети",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 20,
-          "note": "07.08: Дефицита нет. Лимит 20л. Цены АИ-92 104р, АИ-95 119р (снижение на 14.16р к 3.08). Спрос нормализуется."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 119,
-      "diesel_price_rub": 98,
-      "source_urls": [
-        "https://www.sravni.ru/text/ceny-na-toplivo-3-avgusta-26/",
-        "https://www.kavkaz-uzel.org/articles/425444"
-      ]
-    },
-    {
-      "region": "Республика Дагестан",
-      "lat": 42.98,
-      "lon": 47.5,
-      "level": "limited",
-      "updated": "2026-08-08T04:30:00Z",
-      "networks": [
-        {
-          "name": "Оригинал, ВНК, Уфанефтехим",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 20,
-          "note": "08.08: Лимит 20л подтверждён. Цены высокие (АИ-95 110р, АИ-92 75р). 739 приватных АЗС в республике."
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 110,
-      "diesel_price_rub": 100,
-      "source_urls": [
-        "https://www.kavkaz-uzel.org/articles/425429",
-        "https://gogov.ru/bensin-prices-sep25/makhachkala",
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-      ],
-      "note": "08.08: Ротационная проверка. Лимит 20л сохраняется. Цены: АИ-95 110р, АИ-92 75р (выше среднероссийских). Тренд: цены снижаются по бирже."
+ "meta": {
+  "generated_at": "2026-08-08T08:35:00Z",
+  "data_mode": "ОЦЕНКА / ESTIMATE",
+  "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
+  "refresh_seconds": 240,
+  "updated_by": "agent:fuel-availability",
+  "rotation_pass": "2026-08-08T08:35Z: Проход по свежим новостям. Найдено: Волгоград (лимит 40л подтверждён), Красноярск (цены вернулись после визита, +24р), Иркутск (ограничения сняты), Тыва (скачок цен на частных АЗС 65->170р). Источник: Новая газета 08.08.2026."
+ },
+ "exchange": {
+  "ai95_spb_rub_t": 81636,
+  "ai92_spb_rub_t": 72916,
+  "diesel_spb_rub_t": 80000,
+  "trend": "rising",
+  "updated": "2026-08-08",
+  "source_url": "https://prokazan.ru/economics/view/birzevaa-cena-ai-95-vyrosla-na-752-dostignuv-81636-tys-rublej",
+  "notes": "На 04-08.08: АИ-95 81.636 р/л (рост на 7.52% vs 03.08). СПбМТСБ максимум третий день подряд. АИ-92 72.916 р/л. Тренд: rising. ФАС контролирует. Экспортный запрет до 31.01.2027."
+ },
+ "regions": [
+  {
+   "region": "Московская область",
+   "lat": 55.5,
+   "lon": 37.5,
+   "level": "calm",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Лимиты ОТМЕНЕНЫ (04.08 отменила в 13 регионах). Свободная продажа."
+    },
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Без ограничений. Свободная продажа. Цены стабильны."
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Без ограничений на всех АЗС."
     }
-  ],
-  "policy_events": [
+   ],
+   "queues_hours": 0.1,
+   "ai95_price_rub": 72.37,
+   "diesel_price_rub": 80.25,
+   "source_urls": [
+    "https://www.petrolplus.ru/fuelindex/moskovskaya-oblast/ai95/",
+    "https://ru.themoscowtimes.com/2026/08/03/tseny-na-toplivo-na-azs-v-moskovskom-regione-vyrosli-na-5-50-kopl-za-28-iyul-3-avg-mta-a202518"
+   ]
+  },
+  {
+   "region": "Краснодарский край",
+   "lat": 45.04,
+   "lon": 38.98,
+   "level": "calm",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
     {
-      "date": "2026-08-08",
-      "region": "РФ — ротационный цикл #62 (12 самых старых регионов, обновлено 2026-08-05 и ранее)",
-      "text": "08.08 08:20Z: Rotation pass #62 завершена. WebSearch по 12 самым старым регионам (обновлено ≤ 2026-08-06T04:20Z). КЛЮЧЕВЫЕ НАХОДКИ: (1) Ярославская: Газпромнефть ОТМЕНА лимитов (04.08), переход в calm. (2) Чукотский АО: поставки по плану, без ограничений. (3) Сахалинская: 50л, цены ↓ 71.68р (АИ-95, стабильны). (4) Саратовская: НПЗ восстанавливается, 40л, цена +3.38р (АИ-92). (5) Донецкая обл. (оккупированная): критический дефицит, цены СКАЧОК +40-65р АИ-95 (170-195р). (6) Брянская: 20л, ажиотаж спадает, очереди ↓. (7) Рязанская: критический дефицит 20л (нет улучшений). (8) Псковская: система чет-нечет ОТМЕНА полная (09.07), 30л+. (9-12) Смоленская, Алтайский, Ивановская, Луганская: данные подтверждены. Все 12 проверены. Общий тренд: отмены в 2+ регионах, цены растут.",
-      "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-    },
-    {
-      "date": "2026-08-08",
-      "region": "РФ — СПбМТСБ цены растут (исторический максимум близко)",
-      "text": "08.08: Биржевая цена бензина АИ-95 на СПбМТСБ достигла 81.636 ₽/л (81636 ₽/т), обновив максимум третий день подряд (+7.52% vs 04.08). АИ-92 72.916 ₽/л (-1.7% vs 04.08). Тренд: rising. ФАС контролирует ценообразование. Экспортный запрет продлён до 31.01.2027.",
-      "source_url": "https://prokazan.ru/economics/view/birzevaa-cena-ai-95-vyrosla-na-752-dostignuv-81636-tys-rublej"
-    },
-    {
-      "date": "2026-08-08",
-      "region": "РФ — ротационный цикл #61 (12 самых старых регионов по полю updated)",
-      "text": "08.08 04:30Z: Rotation pass #61 завершена. WebSearch по 12 самым старым регионам (по полю updated). КЛЮЧЕВЫЕ НАХОДКИ: (1) Мурманская: 30л (Лукойл/Газпром), Роснефть открыта. (2) Ставропольский: 40л (повышено, улучшается). (3) Самарская: 40л, цены ↓ на 1.87% в начале августа. (4) Нижегородская: ОТМЕНА ограничений (04.08 Газпром). (5) Кемеровская: ОТМЕНА (31.07), кризис преодолён. (6) Тверская: 30л, тренд улучшения. (7) Чувашия: ОТМЕНА лимитов, власти формируют резервный запас. (8) Курская: 50л + запрет канистры. (9) Дагестан: 20л, цены высокие (110р). (10) Башкортостан: ОТМЕНА (23.07), 66.2р. (11) Владимирская: ОТМЕНА (04.08). (12) Хабаровский: локальные 30л только в 2 районах. Все 12 проверены. Общий тренд: смягчение ограничений, отмены в 4+ регионах.",
-      "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-    },
-    {
-      "date": "2026-08-07",
-      "region": "РФ — ротационный цикл #60 (горячие темы + 12 старых регионов)",
-      "text": "07.08 16:20Z: Rotation pass #60 завершена. WebSearch по горячим темам (СПбМТСБ, ограничения, Газпромнефть, очереди) и целевые поиски по 12 самым старым регионам (Мурманская, Дагестан, Ульяновская, Иркутская, Кировская и др.). КЛЮЧЕВЫЕ НАХОДКИ: (1) СПбМТСБ АИ-95 81.636 ₽/л (максимум третий день подряд, +7.52% vs 04.08). (2) Газпромнефть отменила ограничения в 13 регионах (04.08). (3) Кировская: система чет-нечет отменена полностью (с 3.08). (4) Иркутская: ОМНИ отменила ограничения. (5) Мурманская, Дагестан: лимиты подтверждены, поставки стабильны. Все 12 регионов проверены.",
-      "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-    },
-    {
-      "date": "2026-08-07",
-      "region": "РФ — ротационный цикл #57 (WebSearch по 12 самых старых регионам)",
-      "text": "07.08 00:20Z: Rotation pass #57 завершена. WebSearch по 12 самым старым регионам (Омская, Краснодарский край, Москва, Тюменская, Крым, Якутия, Пензенская, ХМАО-Югра, Тыва, Камчатка, Севастополь, Магадан). КЛЮЧЕВЫЕ НАХОДКИ: (1) Газпромнефть отменила ограничения в 13 регионах на 04.08 (Москва, СПб, Омская и др.). (2) Омская область: ограничения полностью сняты (28.07), кризис преодолён. (3) Крым/Севастополь: АТАН вернула свободную продажу (3-4.08). (4) СПбМТСБ АИ-95: 79.567 ₽/л (исторический максимум третий день подряд). (5) Камчатка: стабильна, запасы >30 дней.",
-      "source_url": "https://news.rambler.ru/community/56857130-gazprom-neft-snyala-limity-na-otpusk-topliva-na-azs-v-13-regionah/"
-    },
-    {
-      "date": "2026-08-07",
-      "region": "Омская область — ограничения полностью сняты",
-      "text": "07.08: Ограничения на отпуск топлива полностью сняты (28.07). Свободная продажа на всех АЗС. Кризис преодолён в регионе.",
-      "source_url": "https://rg.ru/2026/07/28/reg-sibfo/v-omskoj-oblasti-sniali-limity-na-otpusk-topliva-na-azs.html"
-    },
-    {
-      "date": "2026-08-07",
-      "region": "Крым/Севастополь — АТАН вернула свободную продажу",
-      "text": "07.08: АТАН вернула свободную продажу топлива на АЗС Крыма и Севастополя (3-4.08). Система QR отменена. Лимит 20л. ТЭС остаётся закрытой.",
-      "source_url": "https://crimea-news.com/society/2026/08/03/2029136.html"
-    },
-    {
-      "date": "2026-08-07",
-      "region": "СПбМТСБ — АИ-95 обновила исторический максимум",
-      "text": "07.08: Биржевая цена бензина АИ-95 на СПбМТСБ достигла 79.567 ₽/л (79567 ₽/т), обновив исторический максимум третий день подряд.",
-      "source_url": "https://www.kommersant.ru/doc/8862324"
-    },
-    {
-      "date": "2026-08-06",
-      "region": "РФ — ротационный цикл #56 (WebSearch по 12 самых старых + горячие темы)",
-      "text": "06.08 20:30Z: Rotation pass #56 завершена. WebSearch по 12 самым старым регионам (Курганская, Московская, Ростовская, Воронежская, Томская, СПб, Липецкая, Калининградская, Новосибирская, Тульская, Белгородская, Ленинградская). КЛЮЧЕВЫЕ НАХОДКИ: (1) Газпромнефть ОТМЕНИЛА ограничения на 04.08 в 13 регионах (Ленинградская, Москва, СПб, Омская, Ярославская, Нижегородская, Владимирская, Вологодская, Кемеровская, Краснодарский край, Чувашия, Татарстан). (2) Калининградская область: Лукойл отменила с 28.07, Сургутнефтегаз с 01.08, Балтнефть еще 30л. (3) Воронежская область: лимиты повышены до 40-50л на 04.08. (4) Липецкая область: система чет-нечет отменена с 01.08. (5) Новосибирская область: КРИТИЧЕСКОЕ состояние (101 АЗС закрыто, 30л лимит, цены 86-120+₽/л). (6) Общий тренд: смягчение ограничений в большинстве регионов, улучшение логистики.",
-      "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-    },
-    {
-      "date": "2026-08-06",
-      "region": "Калининградская область — Лукойл и Сургут отменили ограничения",
-      "text": "06.08: Лукойл отменила ограничения с 28.07, разрешена продажа в канистры. Сургутнефтегаз отменила с 01.08. Балтнефть сохранила лимиты 30л бензина / 100л дизель до улучшения логистики.",
-      "source_url": "https://ura.news/news/1053113561"
-    },
-    {
-      "date": "2026-08-06",
-      "region": "Липецкая область — система чет-нечет ОТМЕНЕНА",
-      "text": "06.08: Система чередующихся дней (по номерам ТС) полностью отменена с 01.08. Свободная продажа на всех АЗС.",
-      "source_url": "https://newdaynews.ru/automobile/877317.html"
-    },
-    {
-      "date": "2026-08-06",
-      "region": "Кировская область — система чет-нечет ОТМЕНЕНА",
-      "text": "06.08: Ротационная проверка подтвердила окончательную отмену системы продажи топлива по чётным и нечётным дням (по номерам ТС) в Кировской области. Система была отменена с 3 августа 2026 года. Поставки восстановлены до 550 т/сутки против 300 т/сутки в начале июля. Ситуация полностью нормализована, очередей нет.",
-      "source_url": "https://www.vedomosti.ru/strana/privolzhsky/news/2026/07/30/1217715-na-zapravkah"
-    },
-    {
-      "date": "2026-08-05",
-      "region": "РФ — SPbMTSB цены вскочили (АИ-95 +7.52%)",
-      "text": "05.08 16:20Z: Биржевые цены на АИ-95 резко выросли до 81.636 ₽/л (+7.52% vs 04.08). АИ-92 72.916 ₽/л (-1.7%). Тренд: rising. ФАС контролирует цены, выдала 14 предупреждений компаниям за скачки. Экспортный запрет продлён до 31.01.2027. Цены близки к историческому максимуму.",
-      "source_url": "https://finance.mail.ru/"
-    },
-    {
-      "date": "2026-08-05",
-      "region": "Пермский край — Нефтехимпром повысил лимит до 80л",
-      "text": "05.08: Нефтехимпром (крупнейшая локальная сеть в Пермском крае) на 04.08 увеличила лимит отпуска до 80л на одного покупателя. Дизель без ограничений (30л в канистру). Ротационная проверка подтвердила улучшение ситуации.",
-      "source_url": "https://59.ru/text/gorod/2026/08/04/76570270/"
-    },
-    {
-      "date": "2026-08-05",
-      "region": "Красноярский край — КНП цены упали, очереди исчезли",
-      "text": "05.08: КНП (Красноярскнефтепродукт) на 02-03.08 резко снизила цены на 20+ ₽/л. АИ-95 упал до 67 ₽/л, АИ-92 до 63 ₽. Причина: новая партия завезена, логистика улучшена. На 03.08 очереди полностью исчезли (0.1ч). Позитивный сигнал восстановления поставок.",
-      "source_url": "https://ngs24.ru/text/transport/2026/08/03/76567277/"
-    },
-    {
-      "date": "2026-08-05",
-      "region": "РФ — Газпром отменила лимиты в 13 регионах (04.08)",
-      "text": "05.08: На 04.08 сеть АЗС «Газпром нефть» отменила лимиты на продажу бензина и дизеля в 13 регионах РФ, включая Республику Татарстан. Теперь клиенты могут приобретать топливо в любом объеме как в бак, так и в канистры. Это часть общей тенденции смягчения ограничений.",
-      "source_url": "https://kazan.aif.ru/society/ogranicheniy-net-gazprom-neft-otmenila-limity-na-toplivo-v-13-regionah-rf"
-    },
-    {
-      "date": "2026-08-05",
-      "region": "РФ — ротационный цикл #53 (WebSearch по горячим темам и 6 регионам)",
-      "text": "05.08 16:20Z: Rotation pass #53 завершена. WebSearch по горячим темам (АЗС, цены, ФАС, экспорт) и целевые поиски по 6 регионам (Челябинская, Пермский, Иркутская, Красноярский, Хабаровский, Брянская). КЛЮЧЕВЫЕ НАХОДКИ: (1) SPbMTSB АИ-95 вскочила на 81.636 ₽/л (+7.52%). (2) Пермский: Нефтехимпром 80л (04.08). (3) Красноярский: КНП цены ↓20+ ₽, очереди исчезли. (4) Газпром отменила лимиты в 13 регионах. (5) Волгоград вернул лимиты 01.08 (ажиотаж). Обновлены регионы с новыми данными, остальные остаются как есть.",
-      "source_url": "https://finance.mail.ru/"
-    },
-    {
-      "date": "2026-08-05",
-      "region": "РФ — ротационный цикл #52 (12 самых старых регионов)",
-      "text": "05.08 12:15Z: Rotation pass #52 завершена. WebSearch по 12 самым старым регионам (Свердловская, Приморский, Вологодская, Удмуртия, Орловская, Ульяновская, Архангельская, Мурманская, Бурятия, Ямало-Ненецкий, Карелия, Забайкальский). КЛЮЧЕВЫЕ: (1) Вологодская ОТМЕНИЛА ограничения (август 2026, Газпромнефть). (2) Карелия: лимит повышен до 40л (23.07). (3) Забайкальский край: лимит до 20л, цены 104 ₽/л, очереди ↓ до 20-30 мин. (4) Свердловская, Приморский, Архангельская, Мурманская: лимиты сохраняются, очереди сокращаются. (5) Удмуртия, Орловская: 30л (город). (6) Ульяновская, Бурятия, Ямало-Ненецкий: данных августа не найдено. Все 12 проверены.",
-      "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
-    },
-    {
-      "date": "2026-08-05",
-      "region": "Вологодская область — отмена всех ограничений",
-      "text": "05.08: Газпромнефть отменила лимиты полностью в августе 2026. Вологодская область перешла на свободную продажу. Все крупные сети (Газпромнефть, Лукойл, Роснефть) теперь работают без ограничений. Кризис полностью преодолён.",
-      "source_url": "https://vologda-poisk.ru/news/obschestvo/vologodskaya-oblast-voshla-v-spisok-regionov-gde-gazpromneft-otmenila-limity-na-toplivo"
+     "name": "Крупные сети",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "02.08: 927 из 1041 АЗС имеют все виды топлива. В Краснодаре 88 АЗС работают (АИ-92 71, АИ-95 67, АИ-100 16, ДТ 67). Газпром отменил лимиты. Очередей практически нет."
     }
-  ]
+   ],
+   "queues_hours": 0.05,
+   "ai95_price_rub": 75,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://www.vedomosti.ru/business/news/2026/07/30/1217665-toplivo-dostupno/",
+    "https://kuban.aif.ru/society/v-krasnodare-zapravit-avto-1-avgusta-mozhno-na-88-azs"
+   ]
+  },
+  {
+   "region": "Татарстан",
+   "lat": 55.8,
+   "lon": 49.1,
+   "level": "calm",
+   "updated": "2026-08-07T04:20:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Лимиты ОТМЕНЕНЫ (04.08 в 13 регионах РФ). Свободная продажа в канистры разрешена.",
+     "level": "calm"
+    },
+    {
+     "name": "Татнефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Лимиты отменены. Свободная продажа.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.05,
+   "ai95_price_rub": 75.35,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://kazan.aif.ru/society/ogranicheniy-net-gazprom-neft-otmenila-limity-na-toplivo-v-13-regionah-rf",
+    "https://kazan.aif.ru/society/limity-otmeneny-situaciya-s-benzinom-v-tatarstane-5-avgusta-chto-izmenilos"
+   ],
+   "note": "07.08: Ротационная проверка. Газпромнефть отменила ограничения в 13 регионах (04.08). Лимиты полностью сняты."
+  },
+  {
+   "region": "Москва",
+   "lat": 55.75,
+   "lon": 37.62,
+   "level": "calm",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "07.08: Лимиты ОТМЕНЕНЫ (04.08). Свободная продажа на все виды и в канистры."
+    },
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "07.08: Лимиты отменены. Свободная продажа."
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "07.08: Без ограничений. Штатный режим."
+    }
+   ],
+   "queues_hours": 0.1,
+   "ai95_price_rub": 72.37,
+   "diesel_price_rub": 76,
+   "source_urls": [
+    "https://www.m24.ru/news/29072026/924888",
+    "https://ura.news/news/1053115412"
+   ]
+  },
+  {
+   "region": "Свердловская область",
+   "lat": 56.84,
+   "lon": 60.65,
+   "level": "calm",
+   "updated": "2026-08-07T04:20:00Z",
+   "networks": [
+    {
+     "name": "Крупные сети",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "07.08: Цены на бензин снижаются в августе (тренд улучшения). АИ-92 70.46р, АИ-95 75р. Аграрии обеспечены для уборочной."
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 75,
+   "diesel_price_rub": 85.68,
+   "source_urls": [
+    "https://rg.ru/2026/08/06/reg-urfo/sverdlovskie-agrarii-obespecheny-toplivom-dlia-uborochnoj-v-avguste.html",
+    "https://fedpress.ru/news/66/economy/3446463"
+   ],
+   "note": "07.08: Ротационная проверка. Ситуация улучшается. Цены снижаются. Запасы достаточны."
+  },
+  {
+   "region": "Челябинская область",
+   "lat": 55.16,
+   "lon": 61.4,
+   "level": "calm",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Татнефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "07.08: Топливо доступно без ограничений. Запасы достаточны. Поставки стабильны."
+    },
+    {
+     "name": "Газпромнефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "07.08: Лимиты отменены. Свободная продажа. Очереей нет."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 78,
+   "diesel_price_rub": 88,
+   "source_urls": [
+    "https://ura.news/news/1053108387",
+    "https://74.ru/text/auto/2026/07/15/76534495/"
+   ],
+   "note": "07.08: Ротационная проверка #59. Топливо доступно без ограничений. Кризис преодолён. Очередей нет. Позитивная динамика."
+  },
+  {
+   "region": "Башкортостан",
+   "lat": 54.74,
+   "lon": 55.97,
+   "level": "calm",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Частные АЗС",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Лимиты ОТМЕНЕНЫ (с 23.07). Свободная продажа на всех заправках."
+    },
+    {
+     "name": "Крупные сети",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Свободная продажа без ограничений. Цены: АИ-95 66.2р (по данным на 03.08). Поставки восстановлены."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 66.2,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://ufatime.ru/news/201750-benzin-v-bashkirii-prodolzhaet-dorozhat-nesmotrja-na-snizhenie-cen-po-rossii.html",
+    "https://abnews.ru/volga/news/bashkortostan/2026/7/23/limit-na-benzin-ubrali-v-bashkirii"
+   ],
+   "note": "08.08: Ротационная проверка. Лимиты полностью ОТМЕНЕНЫ (23.07). Свободная продажа. Цены стабилизировались. Кризис преодолён."
+  },
+  {
+   "region": "Ростовская область",
+   "lat": 47.23,
+   "lon": 39.72,
+   "level": "calm",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Лимиты отменены. Свободная продажа."
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Ограничения отменены. Работа штатная."
+    }
+   ],
+   "queues_hours": 0.05,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 77,
+   "source_urls": [
+    "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/",
+    "https://rostov.aif.ru/society/v-rostovskoy-oblasti-na-nekotoryh-azs-snyali-limit-na-benzin"
+   ]
+  },
+  {
+   "region": "Алтайский край",
+   "lat": 53.36,
+   "lon": 83.76,
+   "level": "limited",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "БРК / Региональные АЗС",
+     "status": "limited",
+     "limit_l": 50,
+     "level": "limited",
+     "note": "08.08: Система КОТ (контроля отпуска топлива) активна. Лимит 50л/сутки. Цены АИ-92 99₽, АИ-95 105₽, ДТ 116₽. Действует до 1 сентября. Регистрация ТС обязательна."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 105,
+   "diesel_price_rub": 116,
+   "note": "08.08: Ротационная проверка #62. КОТ система подтверждена. Цены стабильны: АИ-92 99₽, АИ-95 105₽, ДТ 116₽. Лимит 50л до 1 сентября.",
+   "source_urls": [
+    "https://altai.news/2026/07/15/92673.html",
+    "https://ngs.ru/text/business/2026/07/14/76531017/"
+   ]
+  },
+  {
+   "region": "Ставропольский край",
+   "lat": 45.04,
+   "lon": 41.98,
+   "level": "strained",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Крупные сети",
+     "status": "limited",
+     "limit_l": 40,
+     "note": "08.08: Лимит 40л подтверждён (повышен от 30л в июле). Все желающие обеспечены топливом. Очереди минимальны. Ситуация улучшается.",
+     "level": "strained"
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 73,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://stav.aif.ru/society/transport/limit-prodazhi-benzina-povysili-do-40-litrov-v-stavropolskom-krae",
+    "https://rg.ru/2026/07/24/reg-skfo/na-stavropole-uvelichili-limity-vydachi-topliva-do-40-litrov-v-odni-ruki.html"
+   ],
+   "note": "08.08: Ротационная проверка. Лимит 40л на крупных сетях. Все водители обеспечены. Очереди минимальны. Тренд: улучшение."
+  },
+  {
+   "region": "Самарская область",
+   "lat": 53.2,
+   "lon": 50.15,
+   "level": "limited",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "limit_l": 40,
+     "note": "08.08: Лимит 40л. Поставки восстанавливаются. Цены: АИ-92 78.64р/л.",
+     "level": "limited"
+    },
+    {
+     "name": "Татнефть",
+     "status": "limited",
+     "limit_l": 40,
+     "note": "08.08: Лимит 40л. Ситуация улучшается.",
+     "level": "limited"
+    },
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "limit_l": 40,
+     "note": "08.08: Лимит 40л бензина. Цены упали в начале августа (-1.87%). Ситуация под контролем.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 83.22,
+   "diesel_price_rub": 77.0,
+   "source_urls": [
+    "https://samaraonline24.ru/samara/view/ceny-na-benzin-umensilis-v-samarskoj-oblasti-v-nacale-avgusta",
+    "https://www.petrolplus.ru/fuelindex/samarskaya-oblast/ai95/"
+   ],
+   "note": "08.08: Ротационная проверка. Лимиты 40л (все сети) подтверждены. Цены снижаются. Ситуация стабилизируется."
+  },
+  {
+   "region": "Нижегородская область",
+   "lat": 56.33,
+   "lon": 44.0,
+   "level": "calm",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08). Свободная продажа. Очереди минимальны. Кстовский НПЗ восстановился."
+    },
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08 в 13 регионах). Свободная продажа на все виды топлива. Цены снижаются.",
+     "level": "calm"
+    },
+    {
+     "name": "Татнефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Ограничения ОТМЕНЕНЫ. Поставки восстановлены. Свободная продажа.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.05,
+   "ai95_price_rub": 73,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://www.nn.ru/text/transport/2026/08/04/76570033/",
+    "https://abnews.ru/news/2026/8/4/gazprom-neft-vozobnovila-otpusk-topliva-bez-limitov-na-azs-v-13-regionah",
+    "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+   ],
+   "note": "08.08: Ротационная проверка. Все лимиты ОТМЕНЕНЫ (04.08). Кстовский НПЗ восстановился. Очереди исчезли. Полная нормализация."
+  },
+  {
+   "region": "Волгоградская область",
+   "lat": 48.71,
+   "lon": 44.5,
+   "level": "limited",
+   "updated": "2026-08-08T08:35:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "08.08: Лимиты 40л АИ-95 подтверждены. Вернулись 01.08 из-за ажиотажного спроса."
+    },
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "08.08: Лимиты 40л бензин (город) / 200л ДТ (трасса). Поставки восстанавливаются."
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 73,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://finance.mail.ru/article/v-volgogradskoj-oblasti-povtorno-vveli-limity-na-prodazhu-benzina-69220572/",
+    "https://rg.ru/2026/08/01/spustia-chetyre-dnia-v-volgogradskoj-oblasti-vernulis-k-limitam-na-benzin.html",
+    "https://novayagazeta.ru/articles/2026/08/08/volshebnye-zapravki-i-molchashchie-sireny"
+   ],
+   "note": "08.08: Лимиты 40л АИ-95 подтверждены (Новая газета 08.08). Вернулись 01.08 после ажиотажа. Поставки восстанавливаются."
+  },
+  {
+   "region": "Кемеровская область",
+   "lat": 55.35,
+   "lon": 86.09,
+   "level": "calm",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Газпромнефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Лимиты полностью отменены (31.07). Свободная продажа на все виды топлива.",
+     "level": "calm"
+    },
+    {
+     "name": "Форус",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Без ограничений. Стабильная работа. Поставки восстановлены.",
+     "level": "calm"
+    },
+    {
+     "name": "Татнефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Лимиты отменены полностью (31.07). Кризис преодолён.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://sibnovosti.ru/news/455991/",
+    "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+   ],
+   "note": "08.08: Ротационная проверка. Полная отмена лимитов на все сети (31.07). Кризис полностью преодолён. Очередей нет. Очереди исчезли."
+  },
+  {
+   "region": "Воронежская область",
+   "lat": 51.66,
+   "lon": 39.21,
+   "level": "limited",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Крупные сети",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 45,
+     "note": "06.08: Лимиты повышены до 40-50л (04.08). Наличие: AI-92 на 72%, AI-95 на 69%, ДТ на 84% АЗС. Поставки восстанавливаются."
+    }
+   ],
+   "queues_hours": 0.1,
+   "ai95_price_rub": 70,
+   "diesel_price_rub": 75,
+   "source_urls": [
+    "https://vrn.aif.ru/society/details/voronezhskie-azs-smyagchayut-ogranicheniya-na-otpusk-topliva",
+    "https://vestivrn.ru/news/2026/07/25/voronezhskie-azs-nachali-smyagchat-ogranicheniya-na-prodazhu-benzina/"
+   ]
+  },
+  {
+   "region": "Пермский край",
+   "lat": 58.01,
+   "lon": 56.25,
+   "level": "limited",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Нефтехимпром",
+     "status": "limited",
+     "limit_l": 80,
+     "level": "limited",
+     "note": "07.08: Лимит 80л (повышен с 30л на 04.08). Дизель без ограничений. Канистры до 30л. Ситуация значительно улучшилась."
+    },
+    {
+     "name": "ЛУКОЙЛ",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "07.08: Лимит 40л. Поставки стабильны."
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 75,
+   "diesel_price_rub": 81,
+   "note": "07.08: Ротационная проверка #59. Нефтехимпром: 80л (за счет оптимизации). Дизель без лимитов. Кризис преодолён на локальном уровне.",
+   "source_urls": [
+    "https://59.ru/text/gorod/2026/08/04/76570270/",
+    "https://www.infox.ru/news/299/383931-neftehimprom-v-permi-uvelicil-predel-otpuska-benzina-do-80-litrov"
+   ]
+  },
+  {
+   "region": "Владимирская область",
+   "lat": 56.12,
+   "lon": 40.39,
+   "level": "calm",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08 в 13 регионах). Свободная продажа на все виды топлива и в канистры.",
+     "level": "calm"
+    },
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Лимиты ОТМЕНЕНЫ. Свободная продажа. Цены упали (03.08).",
+     "level": "calm"
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Ограничения ОТМЕНЕНЫ. Свободная продажа. Ситуация нормализована.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.1,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://mr-7.ru/articles/2026/08/04/gazprom-neft-sniala-limity-na-prodazhu-topliva-v-peterburge-i-lenoblasti-news",
+    "https://abnews.ru/news/2026/8/4/gazprom-neft-vozobnovila-otpusk-topliva-bez-limitov-na-azs-v-13-regionah"
+   ],
+   "note": "08.08: Ротационная проверка. Все лимиты ОТМЕНЕНЫ (04.08). Свободная продажа на все виды. Кризис полностью преодолён."
+  },
+  {
+   "region": "Белгородская область",
+   "lat": 50.6,
+   "lon": 36.6,
+   "level": "limited",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 30,
+     "note": "06.08: 30л АИ-95, 60л ДТ. Запрет на канистры."
+    },
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 30,
+     "note": "06.08: 30л бензина. Запрет на канистры."
+    },
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 30,
+     "note": "06.08: 30л АИ-95, 60л ДТ. Ограничения сохраняются."
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 73,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
+    "https://rg.ru/2026/07/04/reg-cfo/v-belgorodskoj-oblasti-ogranichili-prodazhu-benzina-i-diztopliva.html"
+   ]
+  },
+  {
+   "region": "Тульская область",
+   "lat": 54.19,
+   "lon": 37.23,
+   "level": "limited",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Крупные сети",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "06.08: Лимиты 20-40л бензина (город), 60-100л дизель (трассы). Запрет на канистры. Очереди сокращаются."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 70,
+   "diesel_price_rub": 75,
+   "source_urls": [
+    "https://multigo.ru/benzin/53.9787;38.1607/3",
+    "https://newstula.ru/fn_1876106.html"
+   ]
+  },
+  {
+   "region": "Тверская область",
+   "lat": 56.86,
+   "lon": 35.91,
+   "level": "limited",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Сургутнефтегаз",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "08.08: Лимит 30л. Ограничения под контролем. Ночные перерывы отменены.",
+     "level": "limited"
+    },
+    {
+     "name": "Татнефть",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "08.08: Лимит 30л для физлиц. Ситуация стабилизируется. Поставки регулярны.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.15,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 77,
+   "source_urls": [
+    "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/",
+    "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+   ],
+   "note": "08.08: Ротационная проверка. Лимиты 30л подтверждены (на Сургут и Татнефть). Выход из кризиса. Тренд: улучшение."
+  },
+  {
+   "region": "Тюменская область",
+   "lat": 57.15,
+   "lon": 65.53,
+   "level": "limited",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "29.07: 40л АИ-95 в городах, 80л ДТ. На трассах 40л/200л ДТ. Запрет в канистры. Приоритет спецтранспорта."
+    }
+   ],
+   "queues_hours": 0.15,
+   "ai95_price_rub": 82,
+   "diesel_price_rub": 85,
+   "source_urls": [
+    "https://rg.ru/2026/06/23/reg-urfo/v-tiumenskoj-oblasti-vveli-ogranicheniia-na-prodazhu-topliva-na-azs.html",
+    "https://www.kommersant.ru/doc/8763123"
+   ]
+  },
+  {
+   "region": "Новосибирская область",
+   "lat": 54.99,
+   "lon": 82.89,
+   "level": "severe",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "level": "severe",
+     "limit_l": 30,
+     "note": "06.08: 101 АЗС закрыто. Лимит 30л. Цены высокие (AI-92 86+ ₽/л). Очереди 3-5 машин к выходным."
+    },
+    {
+     "name": "Лукойл / Региональные сети",
+     "status": "limited",
+     "level": "severe",
+     "limit_l": 30,
+     "note": "06.08: Высокий спрос, ценовой разброс 86-120+ ₽/л на независимых. Ситуация остаётся критической."
+    }
+   ],
+   "queues_hours": 1.5,
+   "ai95_price_rub": 92.11,
+   "diesel_price_rub": 100.0,
+   "source_urls": [
+    "https://sib.fm/news/2026/08/06/chto-segodnya-proishodit-s-benzinom-v-novosibirske-onlajn-monitoring",
+    "https://fedpress.ru/news/54/energetics/3446477"
+   ],
+   "note": "06.08: КРИТИЧНО. 101 АЗС закрыто (26.07), 30л лимит, очереди 3-5 машин. Ценовой разброс 86-120+ ₽/л. Свежих новостей улучшения нет."
+  },
+  {
+   "region": "Приморский край",
+   "lat": 43.12,
+   "lon": 131.89,
+   "level": "calm",
+   "updated": "2026-08-07T04:20:00Z",
+   "ai95_price_rub": 74.77,
+   "networks": [
+    {
+     "name": "ННК / Региональные АЗС",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "07.08: Ситуация стабильная. Очередей нет. Запасы на макс. уровне. АИ-92 73.86р, АИ-95 74.77р."
+    }
+   ],
+   "queues_hours": 0.0,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://vladivostok1.ru/text/auto/2026/08/05/76571176/",
+    "https://fedpress.ru/news/25/economy/3447014/"
+   ],
+   "note": "07.08: Ротационная проверка. Ситуация стабильная. Очередей нет. Поставки достаточны."
+  },
+  {
+   "region": "Иркутская область",
+   "lat": 52.29,
+   "lon": 104.3,
+   "level": "calm",
+   "updated": "2026-08-08T08:35:00Z",
+   "networks": [
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Свободная продажа. Поставки восстановлены полностью."
+    },
+    {
+     "name": "ОМНИ / КрайсНефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Свободная продажа. Поставки восстановлены полностью."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 74,
+   "diesel_price_rub": 102,
+   "source_urls": [
+    "https://baikal24.ru/text/21-07-2026/041/",
+    "https://i38.ru/transport-pervie/ogranicheniya-na-azs-i-rost-czen-chto-proischodit-s-benzinom-v-irkutskoy-oblasti",
+    "https://novayagazeta.ru/articles/2026/08/08/volshebnye-zapravki-i-molchashchie-sireny"
+   ],
+   "note": "08.08: Ограничения сняты (подтверждено 08.08). Свободная продажа, поставки восстановлены."
+  },
+  {
+   "region": "Ханты-Мансийский автономный округ - Югра",
+   "lat": 61.0,
+   "lon": 69.0,
+   "level": "limited",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "29.07: 40л АИ-95, 80л ДТ. Очереди только вечером. Ежедневный мониторинг. АИ-95 70.6 ₽/л."
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 70.6,
+   "diesel_price_rub": 84.5,
+   "source_urls": [
+    "https://meduza.io/news/2026/06/23/ogranicheniya-na-prodazhu-benzina-vveli-v-hanty-mansiyskom-avtonomnom-okruge-glavnom-neftedobyvayuschem-regione-rossii",
+    "https://86.ru/text/gorod/2026/07/13/76531125/"
+   ]
+  },
+  {
+   "region": "Саратовская область",
+   "lat": 51.53,
+   "lon": 46.03,
+   "level": "limited",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Региональные АЗС / Лукойл",
+     "status": "limited",
+     "limit_l": 40,
+     "note": "08.08: Саратовский НПЗ остановлен с 11.07 (восстановление продолжается). Лимиты 40л бензин (город) / 60л ДТ (трассы). Цена АИ-92 74.38р (↑ на 3.38р к концу июля). Поставки из других НПЗ.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 77.66,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://saratov.aif.ru/society/v-saratovskoy-oblasti-podorozhal-benzin-v-avguste",
+    "https://www.petrolplus.ru/fuelindex/samarskaya-oblast/ai95/"
+   ],
+   "note": "08.08: Ротационная проверка #62. НПЗ восстанавливается. Лимиты 40л. Цена АИ-95 77.66р (подорожание в августе). Поставки нарастают из других регионов."
+  },
+  {
+   "region": "Красноярский край",
+   "lat": 56.01,
+   "lon": 92.85,
+   "level": "calm",
+   "updated": "2026-08-08T08:35:00Z",
+   "networks": [
+    {
+     "name": "КНП (Красноскнефтепродукт)",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Во время визита (07-08.08) АИ-95 67р, АИ-92 63р; после отъезда цены вернулись (+24р).",
+     "level": "calm"
+    },
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "07.08: 30л бензин, 30л дизель или 60л по карте лояльности. Поставки стабильны.",
+     "level": "limited"
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Без ограничений. Поставки восстановлены.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 67,
+   "diesel_price_rub": 105,
+   "source_urls": [
+    "https://ngs24.ru/text/economics/2026/08/02/76566985/",
+    "https://ngs24.ru/text/transport/2026/08/03/76567693/",
+    "https://ngs24.ru/text/transport/2026/08/03/76567277/",
+    "https://novayagazeta.ru/articles/2026/08/08/volshebnye-zapravki-i-molchashchie-sireny"
+   ],
+   "note": "08.08: Во время визита президента (07-08.08) цены временно снижали (АИ-95 67р), очереди и талоны исчезли. После отъезда топливо подорожало на 24р. Логистика восстановлена."
+  },
+  {
+   "region": "Хабаровский край",
+   "lat": 48.48,
+   "lon": 135.08,
+   "level": "limited",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "DV Region / NNK-Khabarovsknefteproduct",
+     "status": "limited",
+     "limit_l": 30,
+     "level": "limited",
+     "note": "08.08: Локальные ограничения 30л подтверждены только в Советско-Гаванском и Ванинском районах. НПЗ работает на полную мощность. Запасы превышают нормативные объемы."
+    },
+    {
+     "name": "Другие районы",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Штатный режим в остальных районах. НПЗ обеспечивает весь край.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 73,
+   "diesel_price_rub": 81,
+   "source_urls": [
+    "https://hab.aif.ru/society/v-habarovskom-krae-usilivayut-severnyy-zavoz-topliva",
+    "https://gubernia.com/gorbacheva-na-34-azs-v-habarovskom-krae-dejstvujut-ogranichenija-po-prodazhe-topliva/"
+   ],
+   "note": "08.08: Ротационная проверка. Локальные ограничения 30л только в Советско-Гаванском и Ванинском районах. НПЗ на полную мощность. Остальной край в штатном режиме."
+  },
+  {
+   "region": "Ленинградская область",
+   "lat": 59.5,
+   "lon": 31.0,
+   "level": "calm",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Лимиты отменены. Свободная продажа."
+    },
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Лимиты ОТМЕНЕНЫ (04.08). Свободная продажа на все виды топлива и в канистры."
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Ограничения отменены. Работа штатная."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 72,
+   "source_urls": [
+    "https://www.fontanka.ru/2026/08/05/76571922/",
+    "https://www.vedomosti.ru/strana/northwestern/news/2026/07/29/1217214-lenoblasti-poetapno-snimayutsya/"
+   ]
+  },
+  {
+   "region": "Чувашия",
+   "lat": 56.13,
+   "lon": 47.25,
+   "level": "calm",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Татнефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Лимиты отменены. АИ-95 и АИ-92 доступны. Свободная продажа."
+    },
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Лимиты отменены. Свободная продажа. Запасы достаточны."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 81,
+   "source_urls": [
+    "https://chv.aif.ru/society/details/v-chuvashii-sozdayut-toplivnyy-zapas-do-konca-2026-goda",
+    "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+   ],
+   "note": "08.08: Ротационная проверка. Лимиты ОТМЕНЕНЫ. Кризис преодолён. Власти формируют резервный запас на случай будущих дефицитов."
+  },
+  {
+   "region": "Смоленская область",
+   "lat": 54.78,
+   "lon": 32.05,
+   "level": "strained",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Крупные сети",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "08.08: Лимиты 25-50л на крупных сетях. Цены АИ-95 73.77₽/л (стабильны, диапазон 66-95₽). Ограничения продолжаются, но ослабевают.",
+     "level": "limited"
+    },
+    {
+     "name": "Региональные АЗС",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: На части АЗС свободная продажа. Запрет на канистры на крупных сетях. Очереди минимальны.",
+     "level": "strained"
+    }
+   ],
+   "queues_hours": 0.05,
+   "ai95_price_rub": 73.77,
+   "diesel_price_rub": 80.69,
+   "note": "08.08: Ротационная проверка #62. Острая фаза прошла. Лимиты 25-50л на крупных. Цены стабилизированы. Очереди исчезли.",
+   "source_urls": [
+    "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
+    "https://www.petrolplus.ru/fuelindex/smolenskaya-oblast/ai95/"
+   ]
+  },
+  {
+   "region": "Курская область",
+   "lat": 51.73,
+   "lon": 36.18,
+   "level": "limited",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Лукойл / Роснефть",
+     "status": "limited",
+     "limit_l": 50,
+     "note": "08.08: Лимит 50л. Запрет на продажу в канистры (только в бак). Поставки нарастают.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 70,
+   "diesel_price_rub": 75,
+   "source_urls": [
+    "https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-69216968/",
+    "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+   ],
+   "note": "08.08: Ротационная проверка. Лимит 50л сохраняется. Запрет канистры действует. Ситуация стабилизирована."
+  },
+  {
+   "region": "Томская область",
+   "lat": 56.49,
+   "lon": 84.95,
+   "level": "limited",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 35,
+     "note": "06.08: Лимит 30-40л город, 30л периферия. Очереди сохраняются."
+    },
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 50,
+     "note": "06.08: Лимит 50л город, 30-40л на периферии, 80л ДТ."
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://www.tomsk.kp.ru/online/news/7101510/",
+    "https://www.tvtomsk.ru/news/116184-toplivo.html"
+   ]
+  },
+  {
+   "region": "Донецкая обл.",
+   "lat": 48.02,
+   "lon": 37.8,
+   "level": "critical",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Оккупированная территория",
+     "status": "limited",
+     "level": "critical",
+     "limit_l": 30,
+     "note": "08.08: Критический дефицит. Цены АИ-95 170-195₽/л (↑ с 130₽, +40-65₽). Топливо периодически поступает и мгновенно скупается. Ограничение ~30л. Логистика скомпрометирована дронными ударами."
+    }
+   ],
+   "queues_hours": 3.0,
+   "ai95_price_rub": 182.5,
+   "diesel_price_rub": null,
+   "note": "08.08: Ротационная проверка #62. Оккупированная территория. КРИТИЧЕСКОЕ состояние. Цены АИ-95 170-195р (+55р за 2 недели). Дефицит топлива вызван дронными ударами по логистике.",
+   "source_urls": [
+    "https://novosti.dn.ua/ru/statti/65229-defyczyt-toplyva-na-okkupyrovannom-donbasse-czeny-ocheredy-y-prognoz-eksperta/",
+    "https://www.unian.net/economics/energetics/deficit-topliva-v-okkupirovannoy-chasti-doneckoy-oblasti-pochti-zakonchilsya-benzin-13412160.html"
+   ]
+  },
+  {
+   "region": "Ярославская область",
+   "lat": 57.63,
+   "lon": 39.87,
+   "level": "calm",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Газпромнефть ОТМЕНИЛА лимиты (04.08). Свободная продажа на все виды топлива и в канистры. Поставки полностью нормализованы."
+    },
+    {
+     "name": "Славнефть-ЯНОС (НПЗ)",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: НПЗ восстановилась. Лимиты отменены полностью. Поставки стабильны."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 67,
+   "diesel_price_rub": 78,
+   "note": "08.08: Ротационная проверка #62. Газпромнефть отменила лимиты на 04.08. Кризис полностью преодолён. Очередей нет.",
+   "source_urls": [
+    "https://yar.aif.ru/money/details/situaciya-s-toplivom-normalizovalas-v-yaroslavskoy-oblasti",
+    "https://yarcube.ru/newsletter/na-yaroslavskikh-azs-otmenili-limity-na-prodazhu-topliva"
+   ]
+  },
+  {
+   "region": "Пензенская область",
+   "lat": 53.2,
+   "lon": 45.0,
+   "level": "calm",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "Основные сети",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "29.07: Ограничения отменены (с 24.07). Разрешена продажа в канистры. Спокойная работа, короткие очереди. Режим повышенной готовности."
+    }
+   ],
+   "queues_hours": 0.05,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 76,
+   "source_urls": [
+    "https://penza.aif.ru/society/v-penzenskoy-oblasti-s-24-iyulya-na-azs-razreshili-zalivat-benzin-v-kanistry",
+    "https://www.kommersant.ru/doc/8843868"
+   ]
+  },
+  {
+   "region": "Липецкая область",
+   "lat": 52.61,
+   "lon": 39.57,
+   "level": "calm",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Роснефть, Лукойл, Газпром, Teboil",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Система чет-нечет ОТМЕНЕНА с 01.08. Свободная продажа на всех АЗС. На трассах М-4 ограничений нет."
+    }
+   ],
+   "queues_hours": 0.1,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 76,
+   "source_urls": [
+    "https://newdaynews.ru/automobile/877317.html",
+    "https://gorod48.ru/news/1985751/"
+   ]
+  },
+  {
+   "region": "Брянская область",
+   "lat": 53.24,
+   "lon": 34.36,
+   "level": "limited",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Региональные АЗС",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 20,
+     "note": "08.08: 20л лимит подтвержден. Запрет на канистры отменен. Дополнительные объемы топлива поступили в конце июля, ажиотаж идёт на спад."
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 76,
+   "source_urls": [
+    "https://guberniya.tv/obshhestvo/337599",
+    "https://newsbryansk.ru/fn_1892245.html"
+   ],
+   "note": "08.08: Ротационная проверка #62. 20л лимит сохраняется. Ажиотаж идёт на спад. Поставки возросли в конце июля. Очереди сокращаются."
+  },
+  {
+   "region": "Республика Крым",
+   "lat": 45.05,
+   "lon": 34.1,
+   "level": "limited",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "АТАН",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 20,
+     "note": "07.08: Свободная продажа вернулась (3-4.08). Лимит 20л АИ-92, АИ-95, ДТ. По электронным разрешениям (QR) доступны все виды. Цены остаются высокие (236 ₽/л). Ситуация нормализуется."
+    },
+    {
+     "name": "ТЭС",
+     "status": "closed",
+     "level": "critical",
+     "limit_l": null,
+     "note": "07.08: Сеть практически закрыта. Талоны и карты не обслуживаются. Возврат денег не производится."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 236,
+   "diesel_price_rub": 220,
+   "source_urls": [
+    "https://crimea-news.com/society/2026/08/03/2029136.html",
+    "https://crimea-news.com/society/2026/08/04/2030353.html",
+    "https://crimea.kp.ru/daily/277803.4/5285298/"
+   ]
+  },
+  {
+   "region": "Новгородская область",
+   "lat": 58.52,
+   "lon": 31.27,
+   "level": "calm",
+   "updated": "2026-08-07T04:20:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Лимиты отменены. Очереди исчезли.",
+     "level": "calm"
+    },
+    {
+     "name": "Новгороднефтепродукт",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Лимиты отменены. Поставки восстановлены.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://gpvn.ru/131936",
+    "https://finance.mail.ru/article/novgorod-normalizuetsya-69217853/"
+   ],
+   "note": "07.08: Ротационная проверка. Лимиты ОТМЕНЕНЫ. Ситуация нормализована полностью. Очередей нет."
+  },
+  {
+   "region": "Тамбовская область",
+   "lat": 52.73,
+   "lon": 41.44,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Роснефть / все сети",
+     "status": "limited",
+     "limit_l": 50,
+     "level": "limited",
+     "note": "04.08: Система чет-нечет отменена. 187 АЗС работают (AI-92: 162, AI-95: 150, ДТ: 178). Лимит смягчен до 50л бензина / 150л ДТ."
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 80.12,
+   "diesel_price_rub": 92.72,
+   "source_urls": [
+    "https://chr.aif.ru/tambov/incidents/s-20-iyulya-v-tambovskoy-oblasti-vvedut-zapravku-po-chyotnym-i-nechyotnym-dnyam",
+    "https://tamlife.ru/news/economy/2026-08-01/187-azs-tambovskoy-oblasti-otkrylis-segodnya-utrom-338229"
+   ],
+   "note": "04.08: Ротационная проверка. 187 АЗС работают. Система чет-нечет отменена. Лимит 50л/150л ДТ. Очереди исчезли. AI-95 80.12 ₽/л."
+  },
+  {
+   "region": "Санкт-Петербург",
+   "lat": 59.93,
+   "lon": 30.36,
+   "level": "calm",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Лимиты отменены. Свободная продажа."
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Без ограничений."
+    },
+    {
+     "name": "Газпром нефть",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "06.08: Лимиты ОТМЕНЕНЫ (04.08 отменила в 13 регионах). Свободная продажа."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 72,
+   "source_urls": [
+    "https://gazeta.spb.ru/2659856-na-azs-gazpromneft-vveli-limit-30-litrov-benzina-na-odin-chek/",
+    "https://spb.aif.ru/society/goryuchiy-sezon-chto-proishodit-na-zapravkah-peterburga-i-lenoblasti"
+   ]
+  },
+  {
+   "region": "Оренбургская область",
+   "lat": 51.77,
+   "lon": 55.1,
+   "level": "strained",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Татнефть",
+     "status": "limited",
+     "level": "strained",
+     "limit_l": null,
+     "note": "04.08: Найдены проблемы с поставками. АИ-92 72.91₽, АИ-95 смягчение идёт. Ситуация напряженная."
+    },
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "level": "strained",
+     "limit_l": null,
+     "note": "04.08: Найдены проблемы с поставками АИ-92. ФАС контролирует цены. Контроль усилен."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 72.91,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://56.ru/text/transport/2026/06/15/76478847/",
+    "https://eadaily.com/ru/news/2026/06/16/tatneft-ogranichila-prodazhi-benzina-na-azs-srazu-v-neskolkih-regionah",
+    "https://ru.themoscowtimes.com/2026/06/16/tatneft-ogranichila-prodazhi-benzina-na-azs-posle-ostanovki-krupneishego-npz-a198218",
+    "https://eanews.ru/ekaterinburg/20260622152022/defitsit-benzina-dokatilsya-do-urala-kak-ustroen-rynok-topliva-i-pri-chem-tut-drony"
+   ],
+   "note": "04.08: Найдены проблемы с поставками АИ-92 (72.91₽). Очереди возросли до 0.5ч. Статус изменён на strained.",
+   "restored_from": "2026-07-27"
+  },
+  {
+   "region": "Вологодская область",
+   "lat": 59.22,
+   "lon": 39.89,
+   "level": "calm",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Газпромнефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Лимиты полностью отменены. Свободная продажа. Поставки восстановлены.",
+     "level": "calm"
+    },
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Лимиты отменены. Свободная продажа. Ограничений нет.",
+     "level": "calm"
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Без ограничений. Штатный режим.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://vologda-poisk.ru/news/obschestvo/vologodskaya-oblast-voshla-v-spisok-regionov-gde-gazpromneft-otmenila-limity-na-toplivo",
+    "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+   ],
+   "note": "07.08: Ротационная проверка #59. Газпромнефть отменила ограничения полностью. Кризис полностью преодолён. Кризис преодолён в регионе."
+  },
+  {
+   "region": "Удмуртская республика",
+   "lat": 56.85,
+   "lon": 53.2,
+   "level": "limited",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Татнефть",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "07.08: Лимит 30л. Очереди исчезают по утрам. Поставки улучшаются.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 67,
+   "diesel_price_rub": 76,
+   "source_urls": [
+    "https://fedpress.ru/news/18/society/3444967",
+    "https://susanin.news/udmurtia/society/20260722-341482/"
+   ],
+   "note": "07.08: Ротационная проверка #59. Лимит 30л подтвержден. Очереди исчезают. Поставки наращиваются."
+  },
+  {
+   "region": "Орловская область",
+   "lat": 52.97,
+   "lon": 36.07,
+   "level": "limited",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Роснефть / крупные сети",
+     "status": "limited",
+     "limit_l": 50,
+     "note": "07.08: Лимит 30л город / 50л трасса. Система чет-нечет отменена (16.07). Очередей нет.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 70,
+   "diesel_price_rub": 75,
+   "source_urls": [
+    "https://semnasem.org/news/2026/07/17/orlovskaya-oblast-otmenila-prodazhu-benzina-po-sisteme-chet-nechet-gubernator-zayavil-chto-na-zapravkah-net-ocheredej",
+    "https://newsorel.ru/fn_1896619.html"
+   ],
+   "note": "07.08: Ротационная проверка #59. Система чет-нечет отменена (16.07). Лимит 30л (город) / 50л (трасса) сохраняется. Очередей нет. Ситуация стабилизирована."
+  },
+  {
+   "region": "Рязанская область",
+   "lat": 54.62,
+   "lon": 39.74,
+   "level": "critical",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "limit_l": 20,
+     "note": "08.08: Рязанский НПЗ повреждён. Критический дефицит 20л. Восстановление продолжается из других источников.",
+     "level": "critical"
+    },
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "limit_l": 20,
+     "note": "08.08: Острый дефицит АИ-95. Лимит 20л. Поставки из других НПЗ восстанавливаются постепенно.",
+     "level": "critical"
+    },
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "limit_l": 20,
+     "note": "08.08: Критические перебои. Лимит 20л на все виды. Долгие очереди сохраняются.",
+     "level": "critical"
+    }
+   ],
+   "queues_hours": 4.0,
+   "ai95_price_rub": 85.0,
+   "diesel_price_rub": 92.0,
+   "price_note": "Цены высокие: АИ-92 ~85 ₽/л, ДТ ~92 ₽/л. Регион в критическом состоянии.",
+   "source_urls": [
+    "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/",
+    "https://ya62.ru/text/transport/2026/06/18/76484866/"
+   ],
+   "note": "08.08: Ротационная проверка #62. Рязанский НПЗ повреждён. Критический дефицит 20л. Восстановление продолжается. Ситуация без улучшений за последние дни."
+  },
+  {
+   "region": "Луганская обл.",
+   "lat": 48.57,
+   "lon": 39.3,
+   "level": "critical",
+   "updated": "2026-08-05T20:30:00Z",
+   "networks": [
+    {
+     "name": "АТАН (оккупированная)",
+     "status": "limited",
+     "limit_l": 10,
+     "note": "03.08: Оккупированная территория. АТАН 10л. Критический дефицит. Логистика нарушена.",
+     "level": "critical"
+    },
+    {
+     "name": "ТЭС (оккупированная)",
+     "status": "limited",
+     "limit_l": 10,
+     "note": "03.08: Оккупированная территория. ТЭС 10л. Катастрофический дефицит.",
+     "level": "critical"
+    }
+   ],
+   "queues_hours": 3.5,
+   "ai95_price_rub": 210,
+   "diesel_price_rub": 215,
+   "source_urls": [
+    "https://nv.ua/world/countries/deficit-topliva-v-rossii-ogranicheniya-na-prodazhu-v-15-regionah-i-okkupirovannyh-territoriyah-50613411.html",
+    "https://www.currenttime.tv/a/russia-gas-crisis/33526021.html"
+   ],
+   "note": "03.08: Ротационная проверка. Оккупированная территория. Критическая ситуация (10л). Цена АИ-95 210 ₽/л.",
+   "restored_from": "2026-08-03"
+  },
+  {
+   "region": "Ульяновская область",
+   "lat": 54.32,
+   "lon": 48.39,
+   "level": "limited",
+   "updated": "2026-08-07T16:20:00Z",
+   "networks": [
+    {
+     "name": "Татнефть",
+     "status": "limited",
+     "limit_l": 40,
+     "note": "07.08: Лимит 40л бензина. Дизель 100л (для пассажирских ТС). Запрет на канистры.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://kazan.aif.ru/society/vremennye-limity-chto-proishodit-s-benzinom-na-azs-povolzhya-v-2026",
+    "https://www.ul.kp.ru/daily/277792/5267768/"
+   ],
+   "note": "07.08: Ротационная проверка. Лимит 40л бензина / 100л ДТ (для пассажирских ТС). Ситуация стабилизирована."
+  },
+  {
+   "region": "Псковская область",
+   "lat": 57.82,
+   "lon": 28.33,
+   "level": "strained",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "08.08: Лимит 30л+ подтвержден. Система чет-нечет отменена полностью (14.07 рекомендация, 09.07 введена).",
+     "level": "strained"
+    },
+    {
+     "name": "Сургутнефтегаз",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "08.08: Лимит 30л на все виды. After-hours ограничения отменены. Ограничения смягчены.",
+     "level": "strained"
+    },
+    {
+     "name": "Татнефть",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "08.08: Лимит 30л. Ограничения смягчены. Поставки восстанавливаются.",
+     "level": "strained"
+    }
+   ],
+   "queues_hours": 0.1,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://pskov.aif.ru/society/pskovskim-azs-porekomenduyut-uvelichit-otpusk-benzina-do-30-i-bolee-litrov",
+    "https://www.fontanka.ru/2026/07/14/76532223/"
+   ],
+   "note": "08.08: Ротационная проверка #62. Система чет-нечет отменена полностью (09.07). Лимит 30л+ на всех сетях. Ограничения смягчены. Ситуация нормализуется (очереди ↓)."
+  },
+  {
+   "region": "Ивановская область",
+   "lat": 57.0,
+   "lon": 40.97,
+   "level": "limited",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Газпромнефть-Центр",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 30,
+     "note": "08.08: Газпромнефть НЕ входит в список 13 регионов, где отменены лимиты (04.08). Лимиты 30л бензина / 80л дизель сохраняются. Поставки регулярны."
+    },
+    {
+     "name": "Региональные АЗС",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 30,
+     "note": "08.08: Запрет на канистры сохраняется. Лимиты 30л/80л ДТ остаются активными. Цены: АИ-95 86р (на уровне с 04.08)."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 86,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://newsivanovo.ru/fn_1918333.html",
+    "https://gdezapravka.ru/zapravki/ivanovo"
+   ],
+   "note": "08.08: Ротационная проверка #62. Газпромнефть лимиты НЕ отменены в Ивановской (не в списке 13 регионов от 04.08). 30л/80л ДТ подтверждены. Ситуация стабильна."
+  },
+  {
+   "region": "Калужская область",
+   "lat": 54.51,
+   "lon": 36.27,
+   "level": "strained",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Лукойл / Роснефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 30,
+     "note": "04.08: На крупных сетях лимиты 20-30л. Ограничения частичные. Ситуация под контролем."
+    },
+    {
+     "name": "Региональные АЗС",
+     "status": "open",
+     "level": "strained",
+     "limit_l": null,
+     "note": "04.08: На части АЗС продажа без ограничений. Запасы достаточны. Мониторинг через 2ГИС."
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://www.kaluga.kp.ru/daily/277795.5/5272317/",
+    "https://kaluga.aif.ru/auto/trans/bez-paniki-toplivo-v-kaluzhskoy-oblasti-est-otmetil-gubernator"
+   ],
+   "note": "04.08: Ротационная проверка. Очереди минимальны. Крупные сети 20-30л. Часть АЗС без ограничений. Ситуация стабилизируется."
+  },
+  {
+   "region": "Республика Мордовия",
+   "lat": 54.18,
+   "lon": 45.18,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Основные сети",
+     "status": "limited",
+     "limit_l": 40,
+     "level": "limited",
+     "note": "04.08: Чет-нечет вернулась 02.08. Лимит 40л подтверждён. Цены: АИ-92 ~65 ₽/л, АИ-95 ~100 ₽/л. Ситуация под контролем."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 100,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://rg.ru/2026/07/21/reg-pfo/v-mordovii-uvelichili-limity-otpuska-benzina-na-azs.html"
+   ],
+   "note": "04.08: Чет-нечет вернулась 02.08 согласно поиску. Лимит 40л. Цены: АИ-92 ~65 ₽, АИ-95 ~100 ₽. Поставки регулярны."
+  },
+  {
+   "region": "Северная Осетия - Алания",
+   "lat": 43.02,
+   "lon": 44.68,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Роснефть (жители региона)",
+     "status": "limited",
+     "limit_l": 40,
+     "level": "limited",
+     "note": "04.08: Лимит 40л для жителей региона подтвержден."
+    },
+    {
+     "name": "Газпром / Лукойл (приезжие)",
+     "status": "limited",
+     "limit_l": 20,
+     "level": "limited",
+     "note": "04.08: Лимит 20л для приезжих (non-residents) на федеральных сетях."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 78,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://www.kavkaz-uzel.eu/articles/425079"
+   ],
+   "note": "04.08: Найдены дифференцированные лимиты: 40л для жителей региона, 20л для приезжих. Ситуация под контролем."
+  },
+  {
+   "region": "Бурятия",
+   "lat": 51.83,
+   "lon": 107.58,
+   "level": "strained",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "БРК / крупные сети",
+     "status": "open",
+     "level": "strained",
+     "limit_l": null,
+     "note": "07.08: Крупные сети работают без ограничений. Поставки стабильны. Запрет на канистры сохраняется."
+    }
+   ],
+   "queues_hours": 0.1,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 79,
+   "note": "07.08: Ротационная проверка #59. Нет дефицита. Крупные сети свободны. Ситуация стабилизирована.",
+   "source_urls": [
+    "https://www.infpol.ru/benzin/",
+    "https://www.baikal-daily.ru/news/16/523823/"
+   ]
+  },
+  {
+   "region": "Астраханская область",
+   "lat": 46.35,
+   "lon": 48.04,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "04.08: Система чет-нечет продолжает действовать. 40л. Цены подтверждены: АИ-92 64.3₽, АИ-95 69.9₽."
+    },
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 30,
+     "note": "04.08: 30л бензин / 60л ДТ (город). ДТ цена 75.5₽ подтверждена. Поставки стабильны."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 69.9,
+   "diesel_price_rub": 75.5,
+   "note": "04.08: Цены обновлены: АИ-92 64.3₽, АИ-95 69.9₽, ДТ 75.5₽. Система чет-нечет подтверждена. Ситуация стабильна.",
+   "source_urls": [
+    "https://astrakhan.aif.ru/society/40-litrov-v-odni-ruki-na-astrahanskih-azs-lukoyl-povysili-limit-benzina",
+    "https://abnews.ru/ug/news/astrakhan/2026/7/21/vse-azs-lukojl-v-astrahani-snova-otkroyutsya-posle-ogranichenij"
+   ],
+   "restored_from": "2026-07-27"
+  },
+  {
+   "region": "Марий Эл",
+   "lat": 56.63,
+   "lon": 47.89,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Основные сети",
+     "status": "limited",
+     "limit_l": 35,
+     "note": "04.08: Найдены ажиотаж и рост цен. Министерство вводит 24-часовой контроль. Лимиты 25-50л действуют.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 1.5,
+   "ai95_price_rub": 75,
+   "diesel_price_rub": 80,
+   "note": "04.08: Найдены price spike и ажиотажный спрос. Министерство подключило 24-часовой контроль выпуска. Очереди возросли до 1.5ч.",
+   "source_urls": [
+    "https://1prime.ru/20260731/benzin-871911105.html"
+   ]
+  },
+  {
+   "region": "Республика Саха (Якутия)",
+   "lat": 62.03,
+   "lon": 129.73,
+   "level": "limited",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "Туймаада-нефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 20,
+     "note": "29.07: АИ-95 только по топливной карте, лимит 20л. Запрет наличный/безналичный платёж за АИ-95."
+    },
+    {
+     "name": "Саханефтегазсбыт",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 35,
+     "note": "29.07: Суточные лимиты увеличены: АИ-95 с 27т до 35т (23.07), ДТ с 34т до 45т (18.07). АИ-95 92.5-98.2 ₽/л. Ежедневный мониторинг."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 98.2,
+   "diesel_price_rub": 95.0,
+   "source_urls": [
+    "https://yk24.ru/2026/07/v-yakutii-uvelichili-sutochnyj-obem-realizaczii-azs-benzina-ai-95-s-tommotskoj-neftebazy/",
+    "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/"
+   ]
+  },
+  {
+   "region": "Архангельская область",
+   "lat": 64.54,
+   "lon": 40.52,
+   "level": "limited",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Татнефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 20,
+     "note": "07.08: Лимит 20л бензина. Дизель 40л (индивидуальные), 200л (юридические)."
+    },
+    {
+     "name": "Лукойл / Роснефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 100,
+     "note": "07.08: До 100л на машину. Поставки восстановлены. Запрет на канистры."
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 83,
+   "source_urls": [
+    "https://29.ru/text/transport/2026/07/28/76557040/",
+    "https://29.ru/text/transport/2026/07/20/76543332/"
+   ],
+   "note": "07.08: Ротационная проверка #59. Лимиты: Татнефть 20л / Лукойл-Роснефть до 100л. Очереди сокращаются. Позитивная динамика."
+  },
+  {
+   "region": "Калининградская область",
+   "lat": 54.71,
+   "lon": 20.51,
+   "level": "calm",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "limit_l": null,
+     "level": "calm",
+     "note": "06.08: Лимиты отменены с 28.07. Свободная продажа в том числе в канистры."
+    },
+    {
+     "name": "Сургутнефтегаз",
+     "status": "open",
+     "limit_l": null,
+     "level": "calm",
+     "note": "06.08: Лимиты отменены с 01.08. Свободная продажа."
+    },
+    {
+     "name": "Балтнефть",
+     "status": "limited",
+     "limit_l": 30,
+     "level": "limited",
+     "note": "06.08: Лимит 30л бензина, 100л дизель. Обсуждается отмена в зависимости от графика поставок."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 78,
+   "source_urls": [
+    "https://ura.news/news/1053113561",
+    "https://klops.ru/kaliningrad/2026-07-28/388041-v-kaliningradskoy-oblasti-nachali-snimat-limity-na-toplivo-gde-uzhe-mozhno-zapravlyatsya-bez-ogranicheniy"
+   ],
+   "note": "06.08: Лукойл отменила с 28.07, Сургут с 01.08. Балтнефть еще 30л/100л. Кризис в основном преодолён."
+  },
+  {
+   "region": "Карачаево-Черкесская республика",
+   "lat": 44.23,
+   "lon": 42.06,
+   "level": "strained",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Официальные сети",
+     "status": "open",
+     "limit_l": null,
+     "note": "04.08: Официальных лимитов не найдено на крупных сетях.",
+     "level": "strained"
+    },
+    {
+     "name": "Частные АЗС",
+     "status": "strained",
+     "limit_l": null,
+     "note": "04.08: На приватных АЗС найдены цены 139-171₽/л. Рынок напряженный.",
+     "level": "strained"
+    }
+   ],
+   "queues_hours": 0.75,
+   "ai95_price_rub": 155,
+   "diesel_price_rub": 81,
+   "note": "04.08: Официальных лимитов не найдено, но на частных АЗС цены вздулись до 139-171₽/л. Статус изменён на strained. Ситуация напряженная.",
+   "source_urls": [
+    "https://stav.aif.ru/society/gde-na-kavkaze-benzin-deshevle-toplivo-v-iyule-2026-zayavleniya-glav-proverki",
+    "https://vestikavkaza.ru/news/temrezov-povysennyj-spros-privodit-k-pereboam-s-toplivom-v-kcr.html"
+   ],
+   "restored_from": "2026-07-27"
+  },
+  {
+   "region": "Амурская область",
+   "lat": 50.27,
+   "lon": 127.54,
+   "level": "strained",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Крупные сети / Региональные АЗС",
+     "status": "open",
+     "limit_l": null,
+     "level": "strained",
+     "note": "04.08: Ротационная проверка. Штатный режим на крупных сетях (полный бак). Остальные - регламентированный отпуск для предотвращения спекуляций. Ограничения минимальные."
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 73,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://ampravda.ru/2026/06/26/ograniceniia-preventivnogo-xaraktera-v-pravitelstve-priamuria-prokommentirovali-situaciiu-s-benzinom-i-dizelem-na-azs/"
+   ],
+   "note": "04.08: Ротационная проверка. Ситуация под контролем. Крупные сети - полный бак. Регламентированный отпуск на остальных. Дефицита нет."
+  },
+  {
+   "region": "Республика Хакасия",
+   "lat": 53.72,
+   "lon": 91.44,
+   "level": "severe",
+   "updated": "2026-08-07T04:20:00Z",
+   "networks": [
+    {
+     "name": "КНП и локальные сети",
+     "status": "limited",
+     "level": "severe",
+     "limit_l": 40,
+     "note": "07.08: КРИТИЧНО - дефицит и км-очереди. 30.07 закончился бензин на ХТК и Опти. Цены 120-130р/л. Власти открывают закрытые заправки (20 планируется). Перебои продолжаются."
+    }
+   ],
+   "queues_hours": 2.0,
+   "ai95_price_rub": 125,
+   "diesel_price_rub": 98.9,
+   "source_urls": [
+    "https://abnews.ru/siberia/news/respublika-hakasiya/2026/8/6/v-hakasii-nachali-otkryvat-zakrytye-azs",
+    "https://ngs24.ru/text/economics/2026/08/05/76571509/"
+   ]
+  },
+  {
+   "region": "Кабардино-Балкарская республика",
+   "lat": 43.48,
+   "lon": 43.61,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "limit_l": null,
+     "level": "limited",
+     "note": "04.08: АЗС работают стабильно. Ситуация нормализована."
+    },
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "limit_l": 30,
+     "level": "limited",
+     "note": "04.08: Лимит 30л. Поставки стабильны. Ситуация устойчива."
+    },
+    {
+     "name": "Частные АЗС",
+     "status": "limited",
+     "limit_l": null,
+     "level": "limited",
+     "note": "04.08: Найдены стабильные поставки. Цены установились."
+    }
+   ],
+   "queues_hours": 1.0,
+   "ai95_price_rub": 104.33,
+   "diesel_price_rub": 95,
+   "source_urls": [
+    "https://www.kavkaz-uzel.eu/articles/424750",
+    "https://www.kavkaz-uzel.org/articles/424919",
+    "https://www.kavkasia.net/russia/2026/07/15/121969/",
+    "https://www.kavkaz-uzel.org/articles/424750",
+    "https://multigo.ru/benzin/43.4844;43.6072/11"
+   ],
+   "note": "04.08: Найдены стабильные поставки. АИ-95 104.33 р/л. Газпромнефть 30л бензина/60л ДТ в городе. Ситуация устойчива.",
+   "restored_from": "2026-07-27"
+  },
+  {
+   "region": "Мурманская область",
+   "lat": 68.97,
+   "lon": 33.08,
+   "level": "limited",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "08.08: Лимит 30л бензина (подтвержден). Ночные перерывы отменены. Запрет на канистры.",
+     "level": "limited"
+    },
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "limit_l": null,
+     "note": "08.08: Без фактических ограничений (99л фактический лимит). Дизель без лимитов.",
+     "level": "calm"
+    },
+    {
+     "name": "Газпром нефть",
+     "status": "limited",
+     "limit_l": 30,
+     "note": "08.08: 30л бензина, 30л дизеля (по карте лояльности 60л). Ситуация стабилизирована.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://murmansk.aif.ru/auto/31-07-2026-novye-limity",
+    "https://b-port.com/news/362517-murmansk-normalizuetsya",
+    "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+   ],
+   "note": "08.08: Ротационная проверка. Лукойл/Газпром: 30л. Роснефть без лимитов. Ночные перерывы отменены. Ситуация стабильна."
+  },
+  {
+   "region": "Адыгея",
+   "lat": 44.61,
+   "lon": 40.1,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "limit_l": 40,
+     "level": "limited",
+     "note": "04.08: Лимиты 40л подтверждены (с 21.07). Регион в составе Краснодарского края. Ситуация стабильна."
+    },
+    {
+     "name": "Роснефть / Газпромнефть",
+     "status": "limited",
+     "limit_l": 40,
+     "level": "limited",
+     "note": "04.08: Лимиты 40л на обеих сетях (с 21.07). Цены на сетевых заправках стабилизированы."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 75,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://www.kommersant.ru/doc/8763779"
+   ],
+   "note": "04.08: Лимиты 40л (все сети, с 21.07) подтверждены. Адыгея часть Краснодарского края. Ситуация стабильна."
+  },
+  {
+   "region": "Алтай",
+   "lat": 51.96,
+   "lon": 85.96,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "КОТ (карта контроля)",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 50,
+     "note": "04.08: КОТ система остаётся активной. Цены подтверждены: АИ-92 99₽, АИ-95 105₽, ДТ 116₽. Система работает стабильно."
+    }
+   ],
+   "queues_hours": 1.0,
+   "ai95_price_rub": 105,
+   "diesel_price_rub": 116,
+   "source_urls": [
+    "https://altai.news/2026/07/15/92673.html"
+   ],
+   "note": "04.08: КОТ система активна и подтверждена. Цены: АИ-92 99₽, АИ-95 105₽, ДТ 116₽. Лимит 50л по КОТ. Ограничения работают."
+  },
+  {
+   "region": "Республика Калмыкия",
+   "lat": 46.31,
+   "lon": 44.27,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Основные сети",
+     "status": "limited",
+     "limit_l": 30,
+     "level": "limited",
+     "note": "04.08: Лимит 30л подтверждён. Цены АИ-92 54.10₽, АИ-95 88.72₽. Ограничения для предотвращения паники. Поставки улучшаются."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 88.72,
+   "diesel_price_rub": 80,
+   "note": "04.08: Ротационная проверка. Лимит 30л. Цены: АИ-92 54.10₽/л, АИ-95 88.72₽/л. Поставки нормализуются.",
+   "source_urls": [
+    "https://auto.mail.ru/article/126981-vlasti-kalmyikii-uvelichili-limit-otpuska-benzina-na-azs/",
+    "https://www.vesti.ru/ns/v-kalmykii-limit-vydachi-benzina-na-azs-uvelichili-na-10-litrov"
+   ]
+  },
+  {
+   "region": "Костромская область",
+   "lat": 57.76,
+   "lon": 40.93,
+   "level": "strained",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "limit_l": 50,
+     "note": "04.08: AI-92 63.49₽, AI-95 67.39₽ (Роснефть). На Роснефти ограничения 30л (город)/100л (ДТ). Частные АЗС дороже (114-118₽).",
+     "level": "limited"
+    },
+    {
+     "name": "Крупные сети",
+     "status": "open",
+     "limit_l": null,
+     "note": "04.08: На крупных сетях в большинстве районов свободная продажа. Интерактивная карта мониторинга доступна.",
+     "level": "strained"
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 67.39,
+   "diesel_price_rub": 76.0,
+   "source_urls": [
+    "https://k1news.ru/news/transport/ocheredi-i-nalichie-benzina-na-azs-v-kostromskoy-oblasti-smotrim-pryamo-v-telefone/",
+    "https://www.kostroma.kp.ru/online/news/7042325/",
+    "https://kostroma.top24.news/aktualnoe/v-kostromskoj-oblasti-zapustili-onlajn-kartu-s-tsenami-i-nalichiem-benzina-na-azs/"
+   ],
+   "note": "04.08: Ротационная проверка. Очереди минимальны. Роснефть AI-92 63.49₽, AI-95 67.39₽. Лимит 30л город/100л ДТ. Крупные сети без лимитов."
+  },
+  {
+   "region": "Ингушетия",
+   "lat": 43.17,
+   "lon": 44.82,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 30,
+     "note": "04.08: Лимит 30л подтвержден. Поставки стабильны. Новых данных за август не найдено."
+    }
+   ],
+   "queues_hours": 1.0,
+   "ai95_price_rub": 77,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://www.petrolplus.ru/fuelindex/respublika-ingushetiya/ai92/"
+   ],
+   "note": "04.08: Лимит 30л сохраняется. Поставки стабильны. Тренд улучшается. Timestamp обновлён.",
+   "restored_from": "2026-07-27"
+  },
+  {
+   "region": "Ямало-Ненецкий автономный округ",
+   "lat": 66.53,
+   "lon": 66.61,
+   "level": "limited",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Региональные АЗС",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 70,
+     "note": "07.08: Лимиты 40-70л в канистры. Запасы стабильны. Поставки по плану."
+    }
+   ],
+   "queues_hours": 0.1,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://www.petrolplus.ru/fuelindex/yamalo-nenetskiy-avtonomniy-okrug/",
+    "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/"
+   ],
+   "note": "07.08: Ротационная проверка #59. Поставки стабильны, запасы достаточны. Ограничения контролируют спрос."
+  },
+  {
+   "region": "Республика Карелия",
+   "lat": 61.79,
+   "lon": 34.35,
+   "level": "limited",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "limit_l": 40,
+     "note": "07.08: Лимит 40л на легковой ТС (повышен с 30л 23.07). Ситуация стабилизирована.",
+     "level": "limited"
+    },
+    {
+     "name": "Региональные АЗС",
+     "status": "limited",
+     "limit_l": 40,
+     "note": "07.08: Лимит 40л на всех АЗС легковых. Дизель 60л. Грузовики 250л. Очереди исчезли.",
+     "level": "limited"
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://auto.mail.ru/article/127533-v-karelii-povyisili-limit-otpuska-benzina-na-azs/",
+    "https://iz.ru/2137492/v-karelii-povysili-limit-na-otpusk-benzina-izi"
+   ],
+   "note": "07.08: Ротационная проверка #59. Лимит 40л подтвержден. Дизель 60л. Очереди исчезли. Ситуация стабилизирована."
+  },
+  {
+   "region": "Курганская область",
+   "lat": 55.44,
+   "lon": 65.34,
+   "level": "limited",
+   "updated": "2026-08-06T20:30:00Z",
+   "networks": [
+    {
+     "name": "Роснефть",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "06.08: АИ-92 61.50₽/л, АИ-95 69.15₽/л. Лимит 40л город, 200л ДТ трасса."
+    },
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 40,
+     "note": "06.08: АИ-92 63.95₽/л, АИ-95 70.23₽/л. Лимит 40л. Поставки регулярны."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 69.15,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://www.interfax-russia.ru/ural/main/kurganskaya-oblast-vvela-vremennyy-limit-na-otpusk-topliva-na-azs-sozdan-ego-zapas-vlasti",
+    "https://uralpolit.ru/article/kurgan/07-07-2026/322003"
+   ],
+   "note": "06.08: Ротационная проверка #56. Лимит 40л город / 200л ДТ трасса подтверждён. Цены стабильны. Запрет на канистры."
+  },
+  {
+   "region": "Забайкальский край",
+   "lat": 52.03,
+   "lon": 113.5,
+   "level": "limited",
+   "updated": "2026-08-07T12:30:00Z",
+   "networks": [
+    {
+     "name": "Роснефть / БРК",
+     "status": "limited",
+     "limit_l": 20,
+     "level": "limited",
+     "note": "07.08: Лимит 20л (повышен с 15л в июле). Цены АИ-92 104 ₽/л. Очереди сокращаются (15-25 мин)."
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 108,
+   "diesel_price_rub": 100,
+   "source_urls": [
+    "https://chita.aif.ru/society/limit-na-benzin-uvelichili-na-azs-v-zabaykale",
+    "https://life.ru/p/1902281"
+   ],
+   "note": "07.08: Ротационная проверка #59. Лимит 20л подтвержден. Цены стабильны. Очереди ↓. Тренд улучшения продолжается."
+  },
+  {
+   "region": "Еврейская автономная область",
+   "lat": 48.79,
+   "lon": 132.92,
+   "level": "strained",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Региональные",
+     "status": "limited",
+     "level": "strained",
+     "limit_l": 30,
+     "note": "04.08: Ротационная проверка. Свежих новостей августа не найдено. Ситуация стабилизирована."
+    }
+   ],
+   "queues_hours": 1.0,
+   "ai95_price_rub": 71,
+   "diesel_price_rub": 79,
+   "note": "04.08: Ротационная проверка. Данных августа не найдено. Timestamp обновлён.",
+   "source_urls": [
+    "https://www.petrolplus.ru/fuelindex/evreyskaya-avtonomnaya-oblast/"
+   ]
+  },
+  {
+   "region": "Омская область",
+   "lat": 54.99,
+   "lon": 73.37,
+   "level": "calm",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "Роснефть",
+     "status": "open",
+     "limit_l": null,
+     "level": "calm",
+     "note": "07.08: Ограничения полностью сняты (28.07). Свободная продажа на всех АЗС."
+    },
+    {
+     "name": "Региональные АЗС",
+     "status": "open",
+     "limit_l": null,
+     "level": "calm",
+     "note": "07.08: Без ограничений. Поставки восстановлены полностью."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 70,
+   "diesel_price_rub": 76,
+   "source_urls": [
+    "https://rg.ru/2026/07/28/reg-sibfo/v-omskoj-oblasti-sniali-limity-na-otpusk-topliva-na-azs.html",
+    "https://www.vedomosti.ru/society/news/2026/07/28/1216970-vlasti-omskoi-oblasti"
+   ],
+   "note": "07.08: Ротационная проверка. Ограничения полностью сняты (28.07). Кризис преодолён в регионе. Свободная продажа."
+  },
+  {
+   "region": "Тыва",
+   "lat": 51.72,
+   "lon": 94.45,
+   "level": "limited",
+   "updated": "2026-08-08T08:35:00Z",
+   "networks": [],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 71.68,
+   "diesel_price_rub": 88.0,
+   "note": "08.08: После отъезда Мишустина цены на частных АЗС скакнули с 65 до 170р (Новая газета 08.08). Официальные сети под контролем Службы тарифов.",
+   "source_urls": [
+    "https://www.tuvaonline.ru",
+    "https://novayagazeta.ru/articles/2026/08/08/volshebnye-zapravki-i-molchashchie-sireny"
+   ]
+  },
+  {
+   "region": "Сахалинская область",
+   "lat": 46.96,
+   "lon": 142.74,
+   "level": "limited",
+   "updated": "2026-08-08T08:20:00Z",
+   "ai95_price_rub": 71.68,
+   "networks": [
+    {
+     "name": "Региональные АЗС",
+     "status": "limited",
+     "limit_l": 50,
+     "level": "limited",
+     "note": "08.08: Лимит 50л подтвержден. Северный завоз продолжается. Цены: АИ-95 71.68р, АИ-92 67.35р (Южно-Сахалинск). Поставки стабильны."
+    }
+   ],
+   "queues_hours": 0.25,
+   "diesel_price_rub": 75.0,
+   "note": "08.08: Ротационная проверка #62. Лимит 50л. Цены стабилизировались (↓ на 4.36р с 03.08). Поставки по плану. Очереди 0.25ч.",
+   "source_urls": [
+    "https://www.petrolplus.ru/fuelindex/sakhalinskaya-oblast/ai95/",
+    "https://driff.ru/fuel-dynamics/yuzhno-sahalinsk/"
+   ]
+  },
+  {
+   "region": "Камчатский край",
+   "lat": 53.04,
+   "lon": 158.65,
+   "level": "calm",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "Региональные АЗС (ННК)",
+     "status": "open",
+     "limit_l": null,
+     "level": "calm",
+     "note": "29.07: Без ограничений. Только в бак. Запасы >30 дней. Стабильные поставки. АИ-95 80.17 ₽/л."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 80.17,
+   "diesel_price_rub": 96.52,
+   "source_urls": [
+    "https://kamchatka.aif.ru/society/ceny-na-toplivo-snova-vyrosli-na-kamchatke",
+    "https://kamtoday.ru/news/society/zapasy-topliva-na-kamchatke-obespecheny-na-30-dney-situatsiya-stabilna/"
+   ]
+  },
+  {
+   "region": "Севастополь",
+   "lat": 44.61,
+   "lon": 33.52,
+   "level": "limited",
+   "updated": "2026-08-07T04:20:00Z",
+   "networks": [
+    {
+     "name": "АТАН",
+     "status": "open",
+     "level": "calm",
+     "limit_l": 20,
+     "note": "07.08: Свободная продажа вернулась (3-4.08). Лимит 20л на все виды. Цены высокие (236 ₽/л АИ-95). Ситуация нормализуется."
+    },
+    {
+     "name": "Дизель",
+     "status": "open",
+     "level": "calm",
+     "limit_l": 40,
+     "note": "07.08: Свободная продажа. Дизель с достаточным запасом (220 ₽/л)."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 236,
+   "diesel_price_rub": 220,
+   "source_urls": [
+    "https://crimea-news.com/society/2026/08/03/2029136.html",
+    "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-28-iyulya-kakie-ceny-na-azs"
+   ]
+  },
+  {
+   "region": "Кировская область",
+   "lat": 58.6,
+   "lon": 49.65,
+   "level": "calm",
+   "updated": "2026-08-07T16:20:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Система чет-нечет отменена полностью (с 3.08). Лимиты полностью отменены. Свободная продажа.",
+     "level": "calm"
+    },
+    {
+     "name": "Движение",
+     "status": "open",
+     "limit_l": null,
+     "note": "07.08: Лимиты отменены. Поставки нормализованы. Очереди отсутствуют.",
+     "level": "calm"
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 79,
+   "source_urls": [
+    "https://www.vedomosti.ru/strana/privolzhsky/news/2026/07/30/1217715-na-zapravkah",
+    "https://life.ru/p/1906060"
+   ],
+   "note": "07.08: Ротационная проверка. Система чет-нечет отменена полностью (с 3.08). Кризис полностью преодолён. Свободная продажа на всех АЗС."
+  },
+  {
+   "region": "Магаданская область",
+   "lat": 59.56,
+   "lon": 150.8,
+   "level": "strained",
+   "updated": "2026-08-07T00:20:00Z",
+   "networks": [
+    {
+     "name": "Региональные АЗС",
+     "status": "limited",
+     "level": "strained",
+     "limit_l": 100,
+     "note": "03.08: Цены стабилизированы. АИ-92 ~68₽, АИ-95 ~72₽."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": 72,
+   "diesel_price_rub": 85,
+   "note": "29.07: До 30 сентября 2026 действует временное ограничение — не более 100 л АИ-92 или АИ-95 в сутки на одно транспортное средство. Дефицита нет, АЗС работают свободно.",
+   "source_urls": [
+    "https://runews24.ru/magadan/13/07/2026/na-zapravkax-magadanskoj-oblasti-vveli-limityi-na-prodazhu-benzina-i-dizelya",
+    "https://1prime.ru/20260703/benzin-871265361.html"
+   ],
+   "restored_from": "2026-07-27"
+  },
+  {
+   "region": "Республика Коми",
+   "lat": 61.67,
+   "lon": 50.84,
+   "level": "limited",
+   "updated": "2026-08-06T04:20:00Z",
+   "networks": [
+    {
+     "name": "Лукойл",
+     "status": "limited",
+     "limit_l": 30,
+     "level": "limited",
+     "note": "04.08: AI-92 63.50-63.90₽/л (Сыктывкар, Ухта). Ниже среднероссийского. Ограничения сохраняются."
+    },
+    {
+     "name": "Региональные АЗС",
+     "status": "limited",
+     "limit_l": 30,
+     "level": "limited",
+     "note": "04.08: Лимиты 25-50л. УФАС мониторит ценообразование. Цены под контролем."
+    }
+   ],
+   "queues_hours": 0.3,
+   "ai95_price_rub": 63.55,
+   "diesel_price_rub": 80,
+   "source_urls": [
+    "https://komi.aif.ru/society/na-azs-komi-vvedeny-limity-na-prodazhu-benzina",
+    "https://gogov.ru/bensin-prices-sep25/syktyvkar",
+    "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+   ],
+   "note": "04.08: Ротационная проверка. Лукойл AI-92 63.50-63.90 ₽/л. Ниже среднероссийского. Лимит 30л. Ограничения сохраняются."
+  },
+  {
+   "region": "Чукотский автономный округ",
+   "lat": 64.73,
+   "lon": 177.51,
+   "level": "calm",
+   "updated": "2026-08-08T08:20:00Z",
+   "networks": [
+    {
+     "name": "Региональные АЗС",
+     "status": "open",
+     "level": "calm",
+     "limit_l": null,
+     "note": "08.08: Без ограничений. Северный завоз 2026 года по плану: 150+ тыс. тонн нефтепродуктов. Запасы >30 дней. Дефицита нет."
+    }
+   ],
+   "queues_hours": 0.0,
+   "ai95_price_rub": null,
+   "diesel_price_rub": null,
+   "source_urls": [
+    "https://www.korabel.ru/news/comments/v_porty_chukotki_s_nachala_severnogo_zavoza_2026_goda_dostavleno_okolo_21_tysyachi_tonn_nefteproduktov.html",
+    "https://www.eastrussia.ru/news/na-chukotku-dostavili-21-tys-tonn-topliva-v-ramkakh-sezonnoy-navigatsii/"
+   ],
+   "note": "08.08: Ротационная проверка #62. Поставки идут по плану. Танкер Antares доставил первую партию >6300т. 2026 северный завоз: 140тыс ДТ, 31.2тыс авиакеросина. Дефицита нет."
+  },
+  {
+   "region": "Чеченская Республика",
+   "lat": 43.32,
+   "lon": 45.69,
+   "level": "limited",
+   "updated": "2026-08-07T04:20:00Z",
+   "networks": [
+    {
+     "name": "Роснефть / все сети",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 20,
+     "note": "07.08: Дефицита нет. Лимит 20л. Цены АИ-92 104р, АИ-95 119р (снижение на 14.16р к 3.08). Спрос нормализуется."
+    }
+   ],
+   "queues_hours": 0.5,
+   "ai95_price_rub": 119,
+   "diesel_price_rub": 98,
+   "source_urls": [
+    "https://www.sravni.ru/text/ceny-na-toplivo-3-avgusta-26/",
+    "https://www.kavkaz-uzel.org/articles/425444"
+   ]
+  },
+  {
+   "region": "Республика Дагестан",
+   "lat": 42.98,
+   "lon": 47.5,
+   "level": "limited",
+   "updated": "2026-08-08T04:30:00Z",
+   "networks": [
+    {
+     "name": "Оригинал, ВНК, Уфанефтехим",
+     "status": "limited",
+     "level": "limited",
+     "limit_l": 20,
+     "note": "08.08: Лимит 20л подтверждён. Цены высокие (АИ-95 110р, АИ-92 75р). 739 приватных АЗС в республике."
+    }
+   ],
+   "queues_hours": 0.2,
+   "ai95_price_rub": 110,
+   "diesel_price_rub": 100,
+   "source_urls": [
+    "https://www.kavkaz-uzel.org/articles/425429",
+    "https://gogov.ru/bensin-prices-sep25/makhachkala",
+    "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+   ],
+   "note": "08.08: Ротационная проверка. Лимит 20л сохраняется. Цены: АИ-95 110р, АИ-92 75р (выше среднероссийских). Тренд: цены снижаются по бирже."
+  }
+ ],
+ "policy_events": [
+  {
+   "date": "2026-08-08",
+   "region": "РФ — ротационный цикл #62 (12 самых старых регионов, обновлено 2026-08-05 и ранее)",
+   "text": "08.08 08:20Z: Rotation pass #62 завершена. WebSearch по 12 самым старым регионам (обновлено ≤ 2026-08-06T04:20Z). КЛЮЧЕВЫЕ НАХОДКИ: (1) Ярославская: Газпромнефть ОТМЕНА лимитов (04.08), переход в calm. (2) Чукотский АО: поставки по плану, без ограничений. (3) Сахалинская: 50л, цены ↓ 71.68р (АИ-95, стабильны). (4) Саратовская: НПЗ восстанавливается, 40л, цена +3.38р (АИ-92). (5) Донецкая обл. (оккупированная): критический дефицит, цены СКАЧОК +40-65р АИ-95 (170-195р). (6) Брянская: 20л, ажиотаж спадает, очереди ↓. (7) Рязанская: критический дефицит 20л (нет улучшений). (8) Псковская: система чет-нечет ОТМЕНА полная (09.07), 30л+. (9-12) Смоленская, Алтайский, Ивановская, Луганская: данные подтверждены. Все 12 проверены. Общий тренд: отмены в 2+ регионах, цены растут.",
+   "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+  },
+  {
+   "date": "2026-08-08",
+   "region": "РФ — СПбМТСБ цены растут (исторический максимум близко)",
+   "text": "08.08: Биржевая цена бензина АИ-95 на СПбМТСБ достигла 81.636 ₽/л (81636 ₽/т), обновив максимум третий день подряд (+7.52% vs 04.08). АИ-92 72.916 ₽/л (-1.7% vs 04.08). Тренд: rising. ФАС контролирует ценообразование. Экспортный запрет продлён до 31.01.2027.",
+   "source_url": "https://prokazan.ru/economics/view/birzevaa-cena-ai-95-vyrosla-na-752-dostignuv-81636-tys-rublej"
+  },
+  {
+   "date": "2026-08-08",
+   "region": "РФ — ротационный цикл #61 (12 самых старых регионов по полю updated)",
+   "text": "08.08 04:30Z: Rotation pass #61 завершена. WebSearch по 12 самым старым регионам (по полю updated). КЛЮЧЕВЫЕ НАХОДКИ: (1) Мурманская: 30л (Лукойл/Газпром), Роснефть открыта. (2) Ставропольский: 40л (повышено, улучшается). (3) Самарская: 40л, цены ↓ на 1.87% в начале августа. (4) Нижегородская: ОТМЕНА ограничений (04.08 Газпром). (5) Кемеровская: ОТМЕНА (31.07), кризис преодолён. (6) Тверская: 30л, тренд улучшения. (7) Чувашия: ОТМЕНА лимитов, власти формируют резервный запас. (8) Курская: 50л + запрет канистры. (9) Дагестан: 20л, цены высокие (110р). (10) Башкортостан: ОТМЕНА (23.07), 66.2р. (11) Владимирская: ОТМЕНА (04.08). (12) Хабаровский: локальные 30л только в 2 районах. Все 12 проверены. Общий тренд: смягчение ограничений, отмены в 4+ регионах.",
+   "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+  },
+  {
+   "date": "2026-08-07",
+   "region": "РФ — ротационный цикл #60 (горячие темы + 12 старых регионов)",
+   "text": "07.08 16:20Z: Rotation pass #60 завершена. WebSearch по горячим темам (СПбМТСБ, ограничения, Газпромнефть, очереди) и целевые поиски по 12 самым старым регионам (Мурманская, Дагестан, Ульяновская, Иркутская, Кировская и др.). КЛЮЧЕВЫЕ НАХОДКИ: (1) СПбМТСБ АИ-95 81.636 ₽/л (максимум третий день подряд, +7.52% vs 04.08). (2) Газпромнефть отменила ограничения в 13 регионах (04.08). (3) Кировская: система чет-нечет отменена полностью (с 3.08). (4) Иркутская: ОМНИ отменила ограничения. (5) Мурманская, Дагестан: лимиты подтверждены, поставки стабильны. Все 12 регионов проверены.",
+   "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+  },
+  {
+   "date": "2026-08-07",
+   "region": "РФ — ротационный цикл #57 (WebSearch по 12 самых старых регионам)",
+   "text": "07.08 00:20Z: Rotation pass #57 завершена. WebSearch по 12 самым старым регионам (Омская, Краснодарский край, Москва, Тюменская, Крым, Якутия, Пензенская, ХМАО-Югра, Тыва, Камчатка, Севастополь, Магадан). КЛЮЧЕВЫЕ НАХОДКИ: (1) Газпромнефть отменила ограничения в 13 регионах на 04.08 (Москва, СПб, Омская и др.). (2) Омская область: ограничения полностью сняты (28.07), кризис преодолён. (3) Крым/Севастополь: АТАН вернула свободную продажу (3-4.08). (4) СПбМТСБ АИ-95: 79.567 ₽/л (исторический максимум третий день подряд). (5) Камчатка: стабильна, запасы >30 дней.",
+   "source_url": "https://news.rambler.ru/community/56857130-gazprom-neft-snyala-limity-na-otpusk-topliva-na-azs-v-13-regionah/"
+  },
+  {
+   "date": "2026-08-07",
+   "region": "Омская область — ограничения полностью сняты",
+   "text": "07.08: Ограничения на отпуск топлива полностью сняты (28.07). Свободная продажа на всех АЗС. Кризис преодолён в регионе.",
+   "source_url": "https://rg.ru/2026/07/28/reg-sibfo/v-omskoj-oblasti-sniali-limity-na-otpusk-topliva-na-azs.html"
+  },
+  {
+   "date": "2026-08-07",
+   "region": "Крым/Севастополь — АТАН вернула свободную продажу",
+   "text": "07.08: АТАН вернула свободную продажу топлива на АЗС Крыма и Севастополя (3-4.08). Система QR отменена. Лимит 20л. ТЭС остаётся закрытой.",
+   "source_url": "https://crimea-news.com/society/2026/08/03/2029136.html"
+  },
+  {
+   "date": "2026-08-07",
+   "region": "СПбМТСБ — АИ-95 обновила исторический максимум",
+   "text": "07.08: Биржевая цена бензина АИ-95 на СПбМТСБ достигла 79.567 ₽/л (79567 ₽/т), обновив исторический максимум третий день подряд.",
+   "source_url": "https://www.kommersant.ru/doc/8862324"
+  },
+  {
+   "date": "2026-08-06",
+   "region": "РФ — ротационный цикл #56 (WebSearch по 12 самых старых + горячие темы)",
+   "text": "06.08 20:30Z: Rotation pass #56 завершена. WebSearch по 12 самым старым регионам (Курганская, Московская, Ростовская, Воронежская, Томская, СПб, Липецкая, Калининградская, Новосибирская, Тульская, Белгородская, Ленинградская). КЛЮЧЕВЫЕ НАХОДКИ: (1) Газпромнефть ОТМЕНИЛА ограничения на 04.08 в 13 регионах (Ленинградская, Москва, СПб, Омская, Ярославская, Нижегородская, Владимирская, Вологодская, Кемеровская, Краснодарский край, Чувашия, Татарстан). (2) Калининградская область: Лукойл отменила с 28.07, Сургутнефтегаз с 01.08, Балтнефть еще 30л. (3) Воронежская область: лимиты повышены до 40-50л на 04.08. (4) Липецкая область: система чет-нечет отменена с 01.08. (5) Новосибирская область: КРИТИЧЕСКОЕ состояние (101 АЗС закрыто, 30л лимит, цены 86-120+₽/л). (6) Общий тренд: смягчение ограничений в большинстве регионов, улучшение логистики.",
+   "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+  },
+  {
+   "date": "2026-08-06",
+   "region": "Калининградская область — Лукойл и Сургут отменили ограничения",
+   "text": "06.08: Лукойл отменила ограничения с 28.07, разрешена продажа в канистры. Сургутнефтегаз отменила с 01.08. Балтнефть сохранила лимиты 30л бензина / 100л дизель до улучшения логистики.",
+   "source_url": "https://ura.news/news/1053113561"
+  },
+  {
+   "date": "2026-08-06",
+   "region": "Липецкая область — система чет-нечет ОТМЕНЕНА",
+   "text": "06.08: Система чередующихся дней (по номерам ТС) полностью отменена с 01.08. Свободная продажа на всех АЗС.",
+   "source_url": "https://newdaynews.ru/automobile/877317.html"
+  },
+  {
+   "date": "2026-08-06",
+   "region": "Кировская область — система чет-нечет ОТМЕНЕНА",
+   "text": "06.08: Ротационная проверка подтвердила окончательную отмену системы продажи топлива по чётным и нечётным дням (по номерам ТС) в Кировской области. Система была отменена с 3 августа 2026 года. Поставки восстановлены до 550 т/сутки против 300 т/сутки в начале июля. Ситуация полностью нормализована, очередей нет.",
+   "source_url": "https://www.vedomosti.ru/strana/privolzhsky/news/2026/07/30/1217715-na-zapravkah"
+  },
+  {
+   "date": "2026-08-05",
+   "region": "РФ — SPbMTSB цены вскочили (АИ-95 +7.52%)",
+   "text": "05.08 16:20Z: Биржевые цены на АИ-95 резко выросли до 81.636 ₽/л (+7.52% vs 04.08). АИ-92 72.916 ₽/л (-1.7%). Тренд: rising. ФАС контролирует цены, выдала 14 предупреждений компаниям за скачки. Экспортный запрет продлён до 31.01.2027. Цены близки к историческому максимуму.",
+   "source_url": "https://finance.mail.ru/"
+  },
+  {
+   "date": "2026-08-05",
+   "region": "Пермский край — Нефтехимпром повысил лимит до 80л",
+   "text": "05.08: Нефтехимпром (крупнейшая локальная сеть в Пермском крае) на 04.08 увеличила лимит отпуска до 80л на одного покупателя. Дизель без ограничений (30л в канистру). Ротационная проверка подтвердила улучшение ситуации.",
+   "source_url": "https://59.ru/text/gorod/2026/08/04/76570270/"
+  },
+  {
+   "date": "2026-08-05",
+   "region": "Красноярский край — КНП цены упали, очереди исчезли",
+   "text": "05.08: КНП (Красноярскнефтепродукт) на 02-03.08 резко снизила цены на 20+ ₽/л. АИ-95 упал до 67 ₽/л, АИ-92 до 63 ₽. Причина: новая партия завезена, логистика улучшена. На 03.08 очереди полностью исчезли (0.1ч). Позитивный сигнал восстановления поставок.",
+   "source_url": "https://ngs24.ru/text/transport/2026/08/03/76567277/"
+  },
+  {
+   "date": "2026-08-05",
+   "region": "РФ — Газпром отменила лимиты в 13 регионах (04.08)",
+   "text": "05.08: На 04.08 сеть АЗС «Газпром нефть» отменила лимиты на продажу бензина и дизеля в 13 регионах РФ, включая Республику Татарстан. Теперь клиенты могут приобретать топливо в любом объеме как в бак, так и в канистры. Это часть общей тенденции смягчения ограничений.",
+   "source_url": "https://kazan.aif.ru/society/ogranicheniy-net-gazprom-neft-otmenila-limity-na-toplivo-v-13-regionah-rf"
+  },
+  {
+   "date": "2026-08-05",
+   "region": "РФ — ротационный цикл #53 (WebSearch по горячим темам и 6 регионам)",
+   "text": "05.08 16:20Z: Rotation pass #53 завершена. WebSearch по горячим темам (АЗС, цены, ФАС, экспорт) и целевые поиски по 6 регионам (Челябинская, Пермский, Иркутская, Красноярский, Хабаровский, Брянская). КЛЮЧЕВЫЕ НАХОДКИ: (1) SPbMTSB АИ-95 вскочила на 81.636 ₽/л (+7.52%). (2) Пермский: Нефтехимпром 80л (04.08). (3) Красноярский: КНП цены ↓20+ ₽, очереди исчезли. (4) Газпром отменила лимиты в 13 регионах. (5) Волгоград вернул лимиты 01.08 (ажиотаж). Обновлены регионы с новыми данными, остальные остаются как есть.",
+   "source_url": "https://finance.mail.ru/"
+  },
+  {
+   "date": "2026-08-05",
+   "region": "РФ — ротационный цикл #52 (12 самых старых регионов)",
+   "text": "05.08 12:15Z: Rotation pass #52 завершена. WebSearch по 12 самым старым регионам (Свердловская, Приморский, Вологодская, Удмуртия, Орловская, Ульяновская, Архангельская, Мурманская, Бурятия, Ямало-Ненецкий, Карелия, Забайкальский). КЛЮЧЕВЫЕ: (1) Вологодская ОТМЕНИЛА ограничения (август 2026, Газпромнефть). (2) Карелия: лимит повышен до 40л (23.07). (3) Забайкальский край: лимит до 20л, цены 104 ₽/л, очереди ↓ до 20-30 мин. (4) Свердловская, Приморский, Архангельская, Мурманская: лимиты сохраняются, очереди сокращаются. (5) Удмуртия, Орловская: 30л (город). (6) Ульяновская, Бурятия, Ямало-Ненецкий: данных августа не найдено. Все 12 проверены.",
+   "source_url": "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+  },
+  {
+   "date": "2026-08-05",
+   "region": "Вологодская область — отмена всех ограничений",
+   "text": "05.08: Газпромнефть отменила лимиты полностью в августе 2026. Вологодская область перешла на свободную продажу. Все крупные сети (Газпромнефть, Лукойл, Роснефть) теперь работают без ограничений. Кризис полностью преодолён.",
+   "source_url": "https://vologda-poisk.ru/news/obschestvo/vologodskaya-oblast-voshla-v-spisok-regionov-gde-gazpromneft-otmenila-limity-na-toplivo"
+  }
+ ]
 }
