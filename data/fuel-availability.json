@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-08T20:24:00Z",
+    "generated_at": "2026-08-08T21:15:01Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "2026-08-08T16:33:56Z: Проход по свежим новостям (Bing News, 7ч + Новая газета 08.08 уже учтена). Крым/Севастополь — подтверждены лимиты (Атан 20л, канистры запрещены, АИ-92 нет), план снижения ДТ до 109 ₽/л. Новых регионов с изменениями нет."
+    "rotation_pass": "2026-08-08T21:15:01Z: NewsNN 08.08 — Нижегородская область: очереди и ограничения на АЗС (заголовок мониторинга), АИ-95 72,97 ₽/л. Прочие источники прохода 20:24Z уже учтены."
   },
   "exchange": {
     "ai95_spb_rub_t": 81636,
@@ -351,8 +351,8 @@
       "region": "Нижегородская область",
       "lat": 56.33,
       "lon": 44.0,
-      "level": "calm",
-      "updated": "2026-08-08T04:30:00Z",
+      "level": "strained",
+      "updated": "2026-08-08T21:15:01Z",
       "networks": [
         {
           "name": "Лукойл",
@@ -382,9 +382,10 @@
       "source_urls": [
         "https://www.nn.ru/text/transport/2026/08/04/76570033/",
         "https://abnews.ru/news/2026/8/4/gazprom-neft-vozobnovila-otpusk-topliva-bez-limitov-na-azs-v-13-regionah",
-        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+        "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
+        "https://newsnn.ru/news/2026-08-08/obstanovka-na-nizhegorodskih-azs-8-avgusta-ocheredi-ogranicheniya-tseny-na-benzin-5655266"
       ],
-      "note": "08.08: Ротационная проверка. Все лимиты ОТМЕНЕНЫ (04.08). Кстовский НПЗ восстановился. Очереди исчезли. Полная нормализация."
+      "note": "08.08 (вечер): NewsNN 08.08 — на нижегородских АЗС вновь фиксируются очереди и ограничения (заголовок мониторинга «очереди, ограничения, цены»), АИ-95 подорожал до 72,97 ₽/л. Ранее (04.08) «Газпром нефть» сняла лимиты; правило «чёт-нечёт» сохраняется на сетевых АЗС."
     },
     {
       "region": "Волгоградская область",
