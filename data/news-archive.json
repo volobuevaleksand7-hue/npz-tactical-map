@@ -2,15 +2,15 @@
  "snapshot": {
   "balance": {
    "refining_capacity_total_mt_year": 338.4,
-   "capacity_offline_mt_year": 119.8,
-   "capacity_offline_pct": 35,
+   "capacity_offline_mt_year": 102.8,
+   "capacity_offline_pct": 30,
    "gasoline_output_loss_pct": 37,
    "diesel_output_loss_pct": 41,
    "export_ban_gasoline": true,
    "export_ban_kerosene": true,
    "import_from_belarus": true,
-   "notes": "На 7 августа 2026: переработка сырой нефти остаётся в критическом состоянии. 3.6 млн барр/день (июль) — минимум за 24 года. Дефицит подтверждается в 78+ регионах из 83. Кинеф (20.1 млн т/год) остаётся полностью выведен; Саратовский НПЗ (7.0 млн т/год) не восстанавливается после 15-й атаки. Три крупнейших кластера (Уфимская группа на 15%, Ярославский на 15%, Волгоградский полностью остановлен) компенсируются беларусским импортом (453 тыс. т в первой половине года). В конце июля-начале августа: Gazprom Neft поднял лимиты в 13 регионах (Москва, СПб, Татарстан, Омск, Кемерово, Нижний Новгород и др.). Розничные цены относительно стабилизированы: АИ-92 при 65–74 ₽/л. Северокавказские республики остаются в острой фазе (нет открытых АЗС); Крым — в режиме QR.",
-   "throughput_shortfall_pct": 64,
+   "notes": "На 8 августа 2026: переработка сырой нефти остаётся в критическом состоянии с тенденцией к стабилизации. 3.6 млн барр/день (июль) — минимум за 24 года. Дефицит подтверждается в 78+ регионах из 83. Кинеф (20.1 млн т/год) остаётся полностью выведен; Саратовский НПЗ (7.0 млн т/год) не восстанавливается после 15-й атаки. Три крупнейших кластера (Уфимская группа на 15%, Ярославский на 15%, Волгоградский полностью остановлен) компенсируются беларусским импортом (453 тыс. т в первой половине года). Gazprom Neft отменил ограничения в 13 регионах (Москва, СПб, Татарстан, Омск, Кемерово, Нижний Новгород и др.). Розничные цены относительно стабилизированы: АИ-92 при 65–74 ₽/л. Северокавказские республики остаются в острой фазе; Крым работает по системе QR. Ожидаемое восстановление основных НПЗ — не раньше Q4 2026.",
+   "throughput_shortfall_pct": 63,
    "method": "capacity_offline и throughput_shortfall пересчитаны из refineries[] на 7 августа 2026."
   },
   "regions": [
@@ -202,31 +202,31 @@
     "lat": 54.74,
     "lon": 55.97,
     "level": "calm",
-    "updated": "2026-08-05T20:30:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Частные АЗС",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "03.08: Лимиты полностью отменены (с 23.07). Свободная продажа."
+      "note": "08.08: Лимиты ОТМЕНЕНЫ (с 23.07). Свободная продажа на всех заправках."
      },
      {
       "name": "Крупные сети",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "03.08: Свободная продажа на всех АЗС. Поставки восстановлены."
+      "note": "08.08: Свободная продажа без ограничений. Цены: АИ-95 66.2р (по данным на 03.08). Поставки восстановлены."
      }
     ],
     "queues_hours": 0.0,
-    "ai95_price_rub": 72,
+    "ai95_price_rub": 66.2,
     "diesel_price_rub": 78,
     "source_urls": [
-     "https://abnews.ru/volga/news/bashkortostan/2026/7/23/limit-na-benzin-ubrali-v-bashkirii",
-     "https://ufatime.ru/news/201484-benzin-v-bashkirii-prodolzhaet-dorozhat-svezhie-dannye-rosstata.html"
+     "https://ufatime.ru/news/201750-benzin-v-bashkirii-prodolzhaet-dorozhat-nesmotrja-na-snizhenie-cen-po-rossii.html",
+     "https://abnews.ru/volga/news/bashkortostan/2026/7/23/limit-na-benzin-ubrali-v-bashkirii"
     ],
-    "note": "03.08: Ротационная проверка. Лимиты полностью отменены (с 23.07). Свободная продажа на всех АЗС."
+    "note": "08.08: Ротационная проверка. Лимиты полностью ОТМЕНЕНЫ (23.07). Свободная продажа. Цены стабилизировались. Кризис преодолён."
    },
    {
     "region": "Ростовская область",
@@ -287,104 +287,102 @@
     "region": "Ставропольский край",
     "lat": 45.04,
     "lon": 41.98,
-    "level": "calm",
-    "updated": "2026-08-05T08:50:00Z",
+    "level": "strained",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Крупные сети",
-      "status": "open",
-      "limit_l": null,
-      "note": "03.08: Лимиты отменены полностью. Ситуация нормализуется. Поставки стабильны.",
-      "level": "calm"
+      "status": "limited",
+      "limit_l": 40,
+      "note": "08.08: Лимит 40л подтверждён (повышен от 30л в июле). Все желающие обеспечены топливом. Очереди минимальны. Ситуация улучшается.",
+      "level": "strained"
      }
     ],
-    "queues_hours": 0,
+    "queues_hours": 0.2,
     "ai95_price_rub": 73,
     "diesel_price_rub": 79,
     "source_urls": [
-     "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
-     "https://runews24.ru/stavropol/31/07/2026/situaciya-s-toplivom-stabilizuetsya"
+     "https://stav.aif.ru/society/transport/limit-prodazhi-benzina-povysili-do-40-litrov-v-stavropolskom-krae",
+     "https://rg.ru/2026/07/24/reg-skfo/na-stavropole-uvelichili-limity-vydachi-topliva-do-40-litrov-v-odni-ruki.html"
     ],
-    "note": "03.08: Полная отмена лимитов. Кризис преодолён. Поставки 17000т регулярно. Очереди отсутствуют.",
-    "restored_from": "2026-07-31"
+    "note": "08.08: Ротационная проверка. Лимит 40л на крупных сетях. Все водители обеспечены. Очереди минимальны. Тренд: улучшение."
    },
    {
     "region": "Самарская область",
     "lat": 53.2,
     "lon": 50.15,
     "level": "limited",
-    "updated": "2026-08-05T08:50:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Роснефть",
       "status": "limited",
       "limit_l": 40,
-      "note": "03.08: Лимит 40л. Поставки восстанавливаются.",
+      "note": "08.08: Лимит 40л. Поставки восстанавливаются. Цены: АИ-92 78.64р/л.",
       "level": "limited"
      },
      {
       "name": "Татнефть",
       "status": "limited",
       "limit_l": 40,
-      "note": "03.08: Лимит 40л на АИ-95. Ситуация улучшается.",
+      "note": "08.08: Лимит 40л. Ситуация улучшается.",
       "level": "limited"
      },
      {
       "name": "Лукойл",
       "status": "limited",
       "limit_l": 40,
-      "note": "03.08: Лимит 40л бензина. Ситуация под контролем.",
+      "note": "08.08: Лимит 40л бензина. Цены упали в начале августа (-1.87%). Ситуация под контролем.",
       "level": "limited"
      }
     ],
     "queues_hours": 0.2,
-    "ai95_price_rub": 75.5,
+    "ai95_price_rub": 83.22,
     "diesel_price_rub": 77.0,
     "source_urls": [
-     "https://63.ru/text/auto/2026/07/31/76560201/",
-     "https://tvsamara.ru/news/na-azs-lukoyl-uvelichili-limity-31-iyulya/"
+     "https://samaraonline24.ru/samara/view/ceny-na-benzin-umensilis-v-samarskoj-oblasti-v-nacale-avgusta",
+     "https://www.petrolplus.ru/fuelindex/samarskaya-oblast/ai95/"
     ],
-    "note": "03.08: Лимиты 40л (все сети). Ситуация под контролем. Очереди минимальны.",
-    "restored_from": "2026-07-31"
+    "note": "08.08: Ротационная проверка. Лимиты 40л (все сети) подтверждены. Цены снижаются. Ситуация стабилизируется."
    },
    {
     "region": "Нижегородская область",
     "lat": 56.33,
     "lon": 44.0,
     "level": "calm",
-    "updated": "2026-08-05T08:50:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Лукойл",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "05.08: Лимиты отменены (по состоянию на 04.08). Свободная продажа. Кстовский НПЗ восстановился."
+      "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08). Свободная продажа. Очереди минимальны. Кстовский НПЗ восстановился."
+     },
+     {
+      "name": "Газпром нефть",
+      "status": "open",
+      "limit_l": null,
+      "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08 в 13 регионах). Свободная продажа на все виды топлива. Цены снижаются.",
+      "level": "calm"
      },
      {
       "name": "Татнефть",
       "status": "open",
       "limit_l": null,
-      "note": "05.08: Ограничения отменены. Поставки восстановлены.",
-      "level": "calm"
-     },
-     {
-      "name": "Движение",
-      "status": "open",
-      "limit_l": null,
-      "note": "05.08: Свободная продажа без ограничений. Ситуация нормализована.",
+      "note": "08.08: Ограничения ОТМЕНЕНЫ. Поставки восстановлены. Свободная продажа.",
       "level": "calm"
      }
     ],
-    "queues_hours": 0.1,
+    "queues_hours": 0.05,
     "ai95_price_rub": 73,
     "diesel_price_rub": 80,
     "source_urls": [
-     "https://nn.aif.ru/auto/set-azs-obyavila-ob-otmene-limitov-na-toplivo-v-nizhegorodskoy-oblasti",
-     "https://www.nn.ru/text/transport/2026/07/06/76517146/",
+     "https://www.nn.ru/text/transport/2026/08/04/76570033/",
+     "https://abnews.ru/news/2026/8/4/gazprom-neft-vozobnovila-otpusk-topliva-bez-limitov-na-azs-v-13-regionah",
      "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
     ],
-    "note": "05.08: Лимиты ОТМЕНЕНЫ (04.08). Все крупные сети перешли на свободную продажу. Кстовский НПЗ восстановился. Ротационная проверка."
+    "note": "08.08: Ротационная проверка. Все лимиты ОТМЕНЕНЫ (04.08). Кстовский НПЗ восстановился. Очереди исчезли. Полная нормализация."
    },
    {
     "region": "Волгоградская область",
@@ -422,39 +420,38 @@
     "lat": 55.35,
     "lon": 86.09,
     "level": "calm",
-    "updated": "2026-08-05T08:50:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Газпромнефть",
       "status": "open",
       "limit_l": null,
-      "note": "03.08: Лимиты отменены. Свободная продажа.",
+      "note": "08.08: Лимиты полностью отменены (31.07). Свободная продажа на все виды топлива.",
       "level": "calm"
      },
      {
       "name": "Форус",
       "status": "open",
       "limit_l": null,
-      "note": "03.08: Ограничения отсутствуют. Стабильная работа.",
+      "note": "08.08: Без ограничений. Стабильная работа. Поставки восстановлены.",
       "level": "calm"
      },
      {
       "name": "Татнефть",
       "status": "open",
       "limit_l": null,
-      "note": "03.08: Лимиты отменены полностью.",
+      "note": "08.08: Лимиты отменены полностью (31.07). Кризис преодолён.",
       "level": "calm"
      }
     ],
-    "queues_hours": 0,
+    "queues_hours": 0.0,
     "ai95_price_rub": 71,
     "diesel_price_rub": 79,
     "source_urls": [
-     "https://kuzbass.aif.ru/auto/31-07-2026-otmena-limitov-na-azs-kuzbassa",
-     "https://ircity.ru/text/economics/2026/07/31/76560189/"
+     "https://sibnovosti.ru/news/455991/",
+     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
     ],
-    "note": "03.08: Полная отмена лимитов на все сети. Кризис преодолён. Очередей нет.",
-    "restored_from": "2026-07-31"
+    "note": "08.08: Ротационная проверка. Полная отмена лимитов на все сети (31.07). Кризис полностью преодолён. Очередей нет. Очереди исчезли."
    },
    {
     "region": "Воронежская область",
@@ -514,32 +511,39 @@
     "region": "Владимирская область",
     "lat": 56.12,
     "lon": 40.39,
-    "level": "limited",
-    "updated": "2026-08-05T20:30:00Z",
+    "level": "calm",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
+      "name": "Газпром нефть",
+      "status": "open",
+      "limit_l": null,
+      "note": "08.08: Лимиты ОТМЕНЕНЫ (04.08 в 13 регионах). Свободная продажа на все виды топлива и в канистры.",
+      "level": "calm"
+     },
+     {
       "name": "Лукойл",
-      "status": "limited",
-      "limit_l": 30,
-      "note": "05.08: Лимит 30л. Спецчасы 07:00-10:00 для ЖКХ. Поставки регулярны. Цены упали 03.08.",
-      "level": "limited"
+      "status": "open",
+      "limit_l": null,
+      "note": "08.08: Лимиты ОТМЕНЕНЫ. Свободная продажа. Цены упали (03.08).",
+      "level": "calm"
      },
      {
       "name": "Роснефть",
-      "status": "limited",
-      "limit_l": 30,
-      "note": "05.08: Лимит 30л. Очереди минимальны. Ситуация улучшается.",
-      "level": "limited"
+      "status": "open",
+      "limit_l": null,
+      "note": "08.08: Ограничения ОТМЕНЕНЫ. Свободная продажа. Ситуация нормализована.",
+      "level": "calm"
      }
     ],
-    "queues_hours": 0.3,
+    "queues_hours": 0.1,
     "ai95_price_rub": 71,
     "diesel_price_rub": 78,
     "source_urls": [
-     "https://vlad.aif.ru/society/novosti-vladimira-3-avgusta-2026-bpla-pogoda-tseny-na-benzin",
-     "https://vlad.aif.ru/society/toplivo-pod-kontrolem-situaciya-na-azs-vladimira-ocheredi-limity-specchasy"
+     "https://mr-7.ru/articles/2026/08/04/gazprom-neft-sniala-limity-na-prodazhu-topliva-v-peterburge-i-lenoblasti-news",
+     "https://abnews.ru/news/2026/8/4/gazprom-neft-vozobnovila-otpusk-topliva-bez-limitov-na-azs-v-13-regionah"
     ],
-    "note": "05.08: Ротационная проверка. Цены упали 03.08 по официальным источникам. Лимит 30л сохраняется. Ситуация нормализуется."
+    "note": "08.08: Ротационная проверка. Все лимиты ОТМЕНЕНЫ (04.08). Свободная продажа на все виды. Кризис полностью преодолён."
    },
    {
     "region": "Белгородская область",
@@ -606,20 +610,20 @@
     "lat": 56.86,
     "lon": 35.91,
     "level": "limited",
-    "updated": "2026-08-05T08:50:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Сургутнефтегаз",
       "status": "limited",
       "limit_l": 30,
-      "note": "03.08: Лимит 30л. Ограничения под контролем.",
+      "note": "08.08: Лимит 30л. Ограничения под контролем. Ночные перерывы отменены.",
       "level": "limited"
      },
      {
       "name": "Татнефть",
       "status": "limited",
       "limit_l": 30,
-      "note": "03.08: Лимит 30л для физлиц. Ситуация стабилизируется.",
+      "note": "08.08: Лимит 30л для физлиц. Ситуация стабилизируется. Поставки регулярны.",
       "level": "limited"
      }
     ],
@@ -627,11 +631,10 @@
     "ai95_price_rub": 72,
     "diesel_price_rub": 77,
     "source_urls": [
-     "https://finance.mail.ru/article/situaciya-v-tverskoj-oblasti-31-07-69217853/",
-     "https://tverskaya-oblast.media/news/benzinovoe-uregulirovanie-2026/"
+     "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/",
+     "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
     ],
-    "note": "03.08: Лимиты 30л на все сети. Очереди ↓ до 0.15ч. Выход из кризиса.",
-    "restored_from": "2026-07-31"
+    "note": "08.08: Ротационная проверка. Лимиты 30л подтверждены (на Сургут и Татнефть). Выход из кризиса. Тренд: улучшение."
    },
    {
     "region": "Тюменская область",
@@ -834,24 +837,31 @@
     "lat": 48.48,
     "lon": 135.08,
     "level": "limited",
-    "updated": "2026-08-05T20:30:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "DV Region / NNK-Khabarovsknefteproduct",
       "status": "limited",
       "limit_l": 30,
       "level": "limited",
-      "note": "05.08: Локальные ограничения 30л подтверждены в Советско-Гаванском и Ванинском районах. НПЗ работает на полную мощность. Поставки достаточны."
+      "note": "08.08: Локальные ограничения 30л подтверждены только в Советско-Гаванском и Ванинском районах. НПЗ работает на полную мощность. Запасы превышают нормативные объемы."
+     },
+     {
+      "name": "Другие районы",
+      "status": "open",
+      "limit_l": null,
+      "note": "08.08: Штатный режим в остальных районах. НПЗ обеспечивает весь край.",
+      "level": "calm"
      }
     ],
-    "queues_hours": 0.5,
+    "queues_hours": 0.3,
     "ai95_price_rub": 73,
     "diesel_price_rub": 81,
     "source_urls": [
      "https://hab.aif.ru/society/v-habarovskom-krae-usilivayut-severnyy-zavoz-topliva",
-     "https://profile.ru/news/economy/topliva-dostatochno-na-108-iz-178-azs-habarovskogo-kraya-soobshhil-gubernator-demeshin-1875405/"
+     "https://gubernia.com/gorbacheva-na-34-azs-v-habarovskom-krae-dejstvujut-ogranichenija-po-prodazhe-topliva/"
     ],
-    "note": "05.08: Ротационная проверка. Локальные ограничения подтверждены в Советско-Гаванском и Ванинском районах. НПЗ на полную мощность."
+    "note": "08.08: Ротационная проверка. Локальные ограничения 30л только в Советско-Гаванском и Ванинском районах. НПЗ на полную мощность. Остальной край в штатном режиме."
    },
    {
     "region": "Ленинградская область",
@@ -895,32 +905,31 @@
     "lat": 56.13,
     "lon": 47.25,
     "level": "calm",
-    "updated": "2026-08-05T08:50:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Татнефть",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "03.08: Лимиты отменены. АИ-95 и АИ-92 доступны."
+      "note": "08.08: Лимиты отменены. АИ-95 и АИ-92 доступны. Свободная продажа."
      },
      {
       "name": "Лукойл",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "03.08: Лимиты отменены. Свободная продажа. Очереди отсутствуют."
+      "note": "08.08: Лимиты отменены. Свободная продажа. Запасы достаточны."
      }
     ],
-    "queues_hours": 0,
+    "queues_hours": 0.0,
     "ai95_price_rub": 71,
     "diesel_price_rub": 81,
     "source_urls": [
-     "https://chv.aif.ru/auto/31-07-2026-uvelichenie-limitov-na-azs",
-     "https://finance.mail.ru/article/situaciya-v-chuvashii-normalizuetsya-69215852/"
+     "https://chv.aif.ru/society/details/v-chuvashii-sozdayut-toplivnyy-zapas-do-konca-2026-goda",
+     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
     ],
-    "note": "03.08: Лимиты отменены (все сети). Кризис преодолён. Очередей нет.",
-    "restored_from": "2026-07-31"
+    "note": "08.08: Ротационная проверка. Лимиты ОТМЕНЕНЫ. Кризис преодолён. Власти формируют резервный запас на случай будущих дефицитов."
    },
    {
     "region": "Смоленская область",
@@ -958,13 +967,13 @@
     "lat": 51.73,
     "lon": 36.18,
     "level": "limited",
-    "updated": "2026-08-05T08:50:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Лукойл / Роснефть",
       "status": "limited",
       "limit_l": 50,
-      "note": "03.08: Лимит 50л. Поставки нарастают. Очереди исчезли.",
+      "note": "08.08: Лимит 50л. Запрет на продажу в канистры (только в бак). Поставки нарастают.",
       "level": "limited"
      }
     ],
@@ -972,10 +981,10 @@
     "ai95_price_rub": 70,
     "diesel_price_rub": 75,
     "source_urls": [
-     "https://kursk-izvestia.ru/news/1934755",
-     "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+     "https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-69216968/",
+     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
     ],
-    "note": "03.08: Ротационная проверка. Ситуация стабилизирована."
+    "note": "08.08: Ротационная проверка. Лимит 50л сохраняется. Запрет канистры действует. Ситуация стабилизирована."
    },
    {
     "region": "Томская область",
@@ -1923,27 +1932,27 @@
     "lat": 68.97,
     "lon": 33.08,
     "level": "limited",
-    "updated": "2026-08-05T12:15:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Лукойл",
       "status": "limited",
       "limit_l": 30,
-      "note": "03.08: Лимит 30л бензина. Ночные перерывы отменены.",
+      "note": "08.08: Лимит 30л бензина (подтвержден). Ночные перерывы отменены. Запрет на канистры.",
       "level": "limited"
      },
      {
       "name": "Роснефть",
-      "status": "limited",
-      "limit_l": 30,
-      "note": "03.08: Лимит 30л бензина. Поставки регулярны.",
-      "level": "limited"
+      "status": "open",
+      "limit_l": null,
+      "note": "08.08: Без фактических ограничений (99л фактический лимит). Дизель без лимитов.",
+      "level": "calm"
      },
      {
       "name": "Газпром нефть",
       "status": "limited",
       "limit_l": 30,
-      "note": "03.08: 30л бензина. Ситуация стабилизируется.",
+      "note": "08.08: 30л бензина, 30л дизеля (по карте лояльности 60л). Ситуация стабилизирована.",
       "level": "limited"
      }
     ],
@@ -1952,10 +1961,10 @@
     "diesel_price_rub": 79,
     "source_urls": [
      "https://murmansk.aif.ru/auto/31-07-2026-novye-limity",
-     "https://b-port.com/news/362517-murmansk-normalizuetsya"
+     "https://b-port.com/news/362517-murmansk-normalizuetsya",
+     "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
     ],
-    "note": "03.08: Лимит 30л на всех сетях. Ночные перерывы отменены. Поставки идут.",
-    "restored_from": "2026-07-31"
+    "note": "08.08: Ротационная проверка. Лукойл/Газпром: 30л. Роснефть без лимитов. Ночные перерывы отменены. Ситуация стабильна."
    },
    {
     "region": "Адыгея",
@@ -2486,23 +2495,25 @@
     "lat": 42.98,
     "lon": 47.5,
     "level": "limited",
-    "updated": "2026-08-05T08:50:00Z",
+    "updated": "2026-08-08T04:30:00Z",
     "networks": [
      {
       "name": "Оригинал, ВНК, Уфанефтехим",
       "status": "limited",
       "level": "limited",
       "limit_l": 20,
-      "note": "03.08: Лимит 20л. Цены высокие. 739 приватных АЗС."
+      "note": "08.08: Лимит 20л подтверждён. Цены высокие (АИ-95 110р, АИ-92 75р). 739 приватных АЗС в республике."
      }
     ],
     "queues_hours": 0.2,
     "ai95_price_rub": 110,
     "diesel_price_rub": 100,
     "source_urls": [
-     "https://www.kavkaz-uzel.eu/articles/424821",
-     "https://gogov.ru/bensin-prices-sep25/makhachkala"
-    ]
+     "https://www.kavkaz-uzel.org/articles/425429",
+     "https://gogov.ru/bensin-prices-sep25/makhachkala",
+     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+    ],
+    "note": "08.08: Ротационная проверка. Лимит 20л сохраняется. Цены: АИ-95 110р, АИ-92 75р (выше среднероссийских). Тренд: цены снижаются по бирже."
    }
   ],
   "exchange": {
@@ -2510,13 +2521,13 @@
    "ai92_spb_rub_t": 72916,
    "diesel_spb_rub_t": 80000,
    "trend": "rising",
-   "updated": "2026-08-07",
-   "source_url": "https://reis.zr.ru/news/tsena-benzina-ai-95-vzletela-na-fone-snizheniya-stoimosti-drugikh-vidov-topliva",
-   "notes": "На 07.08: АИ-95 81.636 р/л (рост на 7.52% vs 04.08). СПбМТСБ близка к историческому максимуму. АИ-92 и ДТ стабильны. ФАС контролирует. Экспортный запрет до 31.01.2027."
+   "updated": "2026-08-08",
+   "source_url": "https://prokazan.ru/economics/view/birzevaa-cena-ai-95-vyrosla-na-752-dostignuv-81636-tys-rublej",
+   "notes": "На 04-08.08: АИ-95 81.636 р/л (рост на 7.52% vs 03.08). СПбМТСБ максимум третий день подряд. АИ-92 72.916 р/л. Тренд: rising. ФАС контролирует. Экспортный запрет до 31.01.2027."
   },
   "refinery_counts": {
-   "down": 10,
-   "partial": 12,
+   "down": 9,
+   "partial": 13,
    "operational": 11
   },
   "timeline": [
@@ -2608,6 +2619,13 @@
     "date": "2026-08-06",
     "capacity_offline_pct": 35,
     "capacity_offline_mt_year": 119.8,
+    "gasoline_loss_pct": 37,
+    "diesel_loss_pct": 41
+   },
+   {
+    "date": "2026-08-08",
+    "capacity_offline_pct": 30,
+    "capacity_offline_mt_year": 102.8,
     "gasoline_loss_pct": 37,
     "diesel_loss_pct": 41
    }
@@ -4268,24 +4286,6 @@
     },
     {
      "date": "2026-07-06",
-     "time": "ночь",
-     "city": "Симферополь",
-     "region": "Крым",
-     "lat": 44.9521,
-     "lon": 34.1024,
-     "type": "drone",
-     "count": null,
-     "target": "Подстанция ПС «Симферополь» 330 кВ — энергетическая инфраструктура",
-     "casualties": "Данных о пострадавших нет",
-     "title": "Ночь на 6 июля: пожар на подстанции в Симферополе",
-     "detail": "Сервис NASA FIRMS фиксирует пожар на электроподстанции ПС «Симферополь» 330 кВ. Также пожар зафиксирован в районе мобильной газотурбинной электростанции. Это часть систематического воздействия на энергосистему Крыма.",
-     "source_url": "",
-     "confidence": "confirmed",
-     "source_dead": "https://t.me/exilenova_plus/24512",
-     "source_dead_reason": "пост Telegram удалён"
-    },
-    {
-     "date": "2026-07-06",
      "time": "01:46 МСК / 22:46 UTC",
      "city": "Белгород",
      "region": "Белгородская область",
@@ -4316,6 +4316,24 @@
      "detail": "Удар ракетами по энергетической инфраструктуре Белгорода. Под атакой ТЭЦ, сообщения о крупном пожаре. Крупные районы города остались без электричества. Подтверждено exilenova_plus и noel_reports.",
      "source_url": "https://t.me/exilenova_plus/24600",
      "confidence": "reported"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "ночь",
+     "city": "Симферополь",
+     "region": "Крым",
+     "lat": 44.9521,
+     "lon": 34.1024,
+     "type": "drone",
+     "count": null,
+     "target": "Подстанция ПС «Симферополь» 330 кВ — энергетическая инфраструктура",
+     "casualties": "Данных о пострадавших нет",
+     "title": "Ночь на 6 июля: пожар на подстанции в Симферополе",
+     "detail": "Сервис NASA FIRMS фиксирует пожар на электроподстанции ПС «Симферополь» 330 кВ. Также пожар зафиксирован в районе мобильной газотурбинной электростанции. Это часть систематического воздействия на энергосистему Крыма.",
+     "source_url": "",
+     "confidence": "rumored",
+     "source_dead": "https://t.me/exilenova_plus/24512",
+     "source_dead_reason": "пост Telegram удалён"
     },
     {
      "date": "2026-07-06",
@@ -4380,7 +4398,7 @@
      "title": "Ночь на 6 июля: пожар на авиабазе в Гвардейском (Крым)",
      "detail": "Зафиксирован пожар на территории авиабазы Гвардейское во Крыму. Авиабаза является важным военным объектом для российской авиации.",
      "source_url": "",
-     "confidence": "reported",
+     "confidence": "rumored",
      "source_dead": "https://t.me/exilenova_plus/24513",
      "source_dead_reason": "пост Telegram удалён"
     },
@@ -4398,7 +4416,7 @@
      "title": "Ночь на 6 июля: удар БПЛА по порту в Керчи",
      "detail": "Сегодня ночью был атакован порт в Керчи. Местные жители фиксируют пожар на территории порта. Атака является частью массированной ночной операции по объектам инфраструктуры в Крыму.",
      "source_url": "",
-     "confidence": "reported",
+     "confidence": "rumored",
      "source_dead": "https://t.me/exilenova_plus/24511",
      "source_dead_reason": "пост Telegram удалён"
     },
@@ -7578,7 +7596,7 @@
      "category": "type/npz",
      "impact": "unknown",
      "source_url": "",
-     "confidence": "reported",
+     "confidence": "rumored",
      "lat": 47.34,
      "lon": 36.88,
      "detail": "Генштаб ВСУ (18:33 UTC 10 июля) подтвердил удар по топливному хранилищу в районе Розовки (Запорожская область). Объект используется для обеспечения ГСМ. Детали поражения и масштаб повреждений уточняются. (NOELREPORTS, 10 июля 16:21 UTC)",
@@ -7672,7 +7690,7 @@
      "category": "type/npz",
      "impact": "active_fire",
      "source_url": "",
-     "confidence": "reported",
+     "confidence": "rumored",
      "lat": 45.195,
      "lon": 33.37,
      "detail": "Утром 10 июля в результате атаки БПЛА возник пожар на электроподстанции в Евпатории (западный Крым). Пожар на подстанции мог усугубить и без того критический дефицит электроснабжения в регионе. (Апостроф, 10 июля, 07:44 UTC)",
@@ -7712,7 +7730,7 @@
      "category": "type/gas",
      "impact": "unknown",
      "source_url": "",
-     "confidence": "confirmed",
+     "confidence": "rumored",
      "lat": 59.66,
      "lon": 28.29,
      "detail": "Генштаб ВСУ (18:33 UTC 10 июля) подтвердил удар по комплексу НОВАТЭК в Усть-Луге (Ленинградская область). Объект является крупнейшим на Балтике газоперерабатывающим комплексом. Детали поражения и масштаб повреждений уточняются. (NOELREPORTS, 10 июля 16:21 UTC)",
@@ -8252,24 +8270,10 @@
      "confidence": "reported",
      "lat": 53.19,
      "lon": 47.97,
-     "detail": "Утром 12 июля Сызранский НПЗ в Самарской области атакован модифицированными FP-1 дронами. По данным Exilenova+, на территории завода зафиксированы возгорания и повреждения инфраструктуры первичной переработки. Первая волна утренней атаки. (Exilenova+, 12 июля 05:16 UTC)"
-    },
-    {
-     "id": "syzran-20260712-3",
-     "date": "2026-07-12",
-     "time": "06:19 UTC",
-     "city": "Сызрань",
-     "region": "Самарская область",
-     "type": "drone",
-     "count": null,
-     "target": "Сызранский НПЗ (установки первичной переработки)",
-     "category": "type/npz",
-     "impact": "active_fire",
-     "source_url": "https://t.me/exilenova_plus/25144",
-     "confidence": "reported",
-     "lat": 53.19,
-     "lon": 47.97,
-     "detail": "Продолжение утренней атаки на Сызранский НПЗ. Вторая волна БПЛА атаковала объект в 06:19 UTC. Поражены установки первичной переработки. (Exilenova+, 12 июля 06:19 UTC)"
+     "detail": "Утром 12 июля Сызранский НПЗ в Самарской области атакован модифицированными FP-1 дронами. По данным Exilenova+, на территории завода зафиксированы возгорания и повреждения инфраструктуры первичной переработки. Первая волна утренней атаки. (Exilenova+, 12 июля 05:16 UTC)",
+     "merged_sources": [
+      "https://t.me/exilenova_plus/25144"
+     ]
     },
     {
      "id": "syzran-20260712-4",
@@ -8563,7 +8567,7 @@
      "title": "Удар по порту Кавказ — пожар на железнодорожной станции и резервуарном парке",
      "detail": "13 июля NASA FIRMS зафиксировал пожары на инфраструктуре железнодорожной станции Кавказ и резервуарном парке порта Кавказ в Краснодарском крае. Порт Кавказ — один из ключевых логистических узлов, обеспечивающих сообщение с Крымом через Керченский пролив. Атака продолжает системную кампанию по изоляции полуострова.",
      "source_url": "",
-     "confidence": "reported",
+     "confidence": "rumored",
      "source_dead": "https://t.me/exilenova_plus/25137",
      "source_dead_reason": "пост Telegram удалён"
     }
@@ -8900,8 +8904,10 @@
      "target": "Центр управления и склады",
      "detail": "Удар по центру управления и складам ВС РФ в Севастополе",
      "source_url": "",
-     "confidence": "reported",
-     "title": "Удар по центру управления и складам в Севастополе"
+     "confidence": "rumored",
+     "title": "Удар по центру управления и складам в Севастополе",
+     "lat": 44.6167,
+     "lon": 33.525
     }
    ]
   },
@@ -9132,7 +9138,9 @@
      "title": "Атака БПЛА на Ярославский НПЗ",
      "detail": "По данным губернатора М. Евраева, в результате атаки дронов на НПЗ произошла гибель одного человека и ранения четырёх. Над территорией завода зафиксирован дым. Перекрыт выезд из города в сторону Москвы.",
      "source_url": "https://istories.media/news/2026/07/16/rossiya-nanesla-udar-po-skladam-v-kieve-a-ukraina-po-aerodromu-engelsa/",
-     "confidence": "reported"
+     "confidence": "reported",
+     "lat": 57.58,
+     "lon": 39.93
     },
     {
      "date": "2026-07-16",
@@ -9160,7 +9168,9 @@
      "title": "Поражение танкеров теневого флота в Чёрном море",
      "detail": "По данным СБУ, морские дроны атаковали танкеры Louise 1 и Banda, занятые в обходе санкций и экспорте нефти из портов Балтики и Чёрного моря. Louise 1 экспортировал ежегодно примерно 3 млн тонн уральской сырой нефти. Banda транспортировала нефть из портов Усть-Луга, Керчь, Новороссийск и Находка.",
      "source_url": "https://unn.ua/ru/news/sbu-podtverdila-porazhenie-dronami-yeshche-dvukh-tankerov-tenevogo-flota-rf-v-chernom-more",
-     "confidence": "confirmed"
+     "confidence": "confirmed",
+     "lat": 43.3,
+     "lon": 34.0
     }
    ],
    "voices": [
@@ -9298,7 +9308,9 @@
      "target": "6 нефтяных танкеров теневого флота — нефтетранспортная инфраструктура (доставка топлива в интересах РФ, обход санкций)",
      "detail": "В ночь на 17 июля украинские БПЛА поразили 6 судов теневого флота РФ в акватории Чёрного моря. По данным независимых источников, с начала июля в Азовском и Чёрном морях поражено более 130 танкеров и сухогрузов теневого флота.",
      "source_url": "https://istories.media/news/2026/07/16/vsu-porazili-bolee-130-tankerov-i-sukhogruzov-rossii-v-azovskom-i-chernom-moryakh-menshe-chem-za-dve-nedeli/",
-     "confidence": "reported"
+     "confidence": "reported",
+     "lat": 43.5,
+     "lon": 33.5
     },
     {
      "date": "2026-07-17",
@@ -9425,8 +9437,8 @@
      "time": "09:18",
      "city": "Ногинск",
      "region": "Московская область",
-     "lat": 55.7639,
-     "lon": 37.1831,
+     "lat": 55.87,
+     "lon": 38.22,
      "type": "drone",
      "count": 1,
      "target": "Ногинская нефтебаза",
@@ -9434,37 +9446,11 @@
      "title": "БПЛА поразил нефтебазу в Ногинске",
      "detail": "Пожар на территории нефтебазы Ногинск после атаки БПЛА. Эвакуирован родильный дом. По данным официального источника, 2 человека пострадали в Ногинске в ходе массированного налета БПЛА на регион.",
      "source_url": "https://t.me/s/radarrussiia",
-     "confidence": "confirmed"
-    },
-    {
-     "date": "2026-07-18",
-     "time": "02:54 UTC",
-     "city": "Ногинск",
-     "region": "Московская область",
-     "lat": 55.87,
-     "lon": 38.22,
-     "type": "drone",
-     "count": 1,
-     "target": "Ногинская нефтебаза",
-     "detail": "Пожар на нефтебазе",
-     "source_url": "https://t.me/s/exilenova_plus",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-07-18",
-     "time": "06:18",
-     "city": "Ногинск",
-     "region": "Московская область",
-     "lat": 55.75,
-     "lon": 37.98,
-     "type": "drone",
-     "count": null,
-     "target": "Ногинская нефтебаза",
-     "casualties": null,
-     "title": "Повторный удар по нефтебазе Ногинска",
-     "detail": "Пожар в объекте нефтебазы после атаки БПЛА. Повторный удар после 02:54 UTC того же дня.",
-     "source_url": "https://t.me/exilenova_plus",
-     "confidence": "reported"
+     "confidence": "confirmed",
+     "merged_sources": [
+      "https://t.me/s/exilenova_plus",
+      "https://t.me/exilenova_plus"
+     ]
     },
     {
      "date": "2026-07-18",
@@ -10149,7 +10135,9 @@
      "region": "Ростовская область",
      "target": "три нефтебазы",
      "confidence": "reported",
-     "source_url": "https://t.me/s/exilenova_plus"
+     "source_url": "https://t.me/s/exilenova_plus",
+     "lat": 47.11,
+     "lon": 39.42
     },
     {
      "date": "2026-07-20",
@@ -10199,7 +10187,9 @@
      "region": "Московская область",
      "target": "Логистический комплекс 'Южные Врата' (индустриальный парк, складской центр площадью 650 тыс. кв. м)",
      "confidence": "reported",
-     "source_url": "https://meduza.io/news/2026/07/20/ukrainskie-drony-atakovali-podmoskovie-est-postradavshie-v-podolske-zagorelas-neftebaza-v-domodedovo-sklad"
+     "source_url": "https://meduza.io/news/2026/07/20/ukrainskie-drony-atakovali-podmoskovie-est-postradavshie-v-podolske-zagorelas-neftebaza-v-domodedovo-sklad",
+     "lat": 55.4383,
+     "lon": 37.7886
     },
     {
      "date": "2026-07-20",
@@ -10208,7 +10198,9 @@
      "region": "Азовское море / Ростовская область",
      "target": "нефтяные танкеры в портовой акватории Азова",
      "confidence": "reported",
-     "source_url": "https://t.me/s/exilenova_plus"
+     "source_url": "https://t.me/s/exilenova_plus",
+     "lat": 47.11,
+     "lon": 39.42
     }
    ]
   },
@@ -10591,21 +10583,9 @@
      "title": "Третий удар по нефтестанции Субханкулово",
      "detail": "Повторный удар дронов по линейной производственно-диспетчерской станции системы Транснефти-Урал. Вспыхнул пожар.",
      "source_url": "https://t.me/exilenova_plus",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-07-23",
-     "time": "11:56",
-     "city": "Воронеж",
-     "region": "Воронежская область",
-     "type": "drone",
-     "count": null,
-     "target": "логистический центр Wildberries",
-     "casualties": 1,
-     "title": "Третий удар по логцентру Wildberries в Воронеже",
-     "detail": "Удар дронов по логистическому центру в Новоусманском районе. Повреждена кровля здания. Зафиксирован один летальный исход.",
-     "source_url": "https://t.me/exilenova_plus",
-     "confidence": "reported"
+     "confidence": "reported",
+     "lat": 54.55766,
+     "lon": 53.81247
     }
    ],
    "voices": [
@@ -10897,8 +10877,8 @@
      "time": "08:09",
      "city": "Тюмень",
      "region": "Тюменская область",
-     "lat": null,
-     "lon": null,
+     "lat": 57.1553,
+     "lon": 65.5348,
      "type": "drone",
      "count": null,
      "target": "Тюменский НПЗ",
@@ -10999,8 +10979,8 @@
      "time": "night",
      "city": "Каспийское море",
      "region": "Каспийское море",
-     "lat": null,
-     "lon": null,
+     "lat": 45.0019,
+     "lon": 48.4809,
      "type": "drone",
      "count": null,
      "target": "Месторождение им. В. Филановского — нефтегазоконденсатная платформа",
@@ -11264,8 +11244,8 @@
      "time": "01:52",
      "city": "Чехов",
      "region": "Московская область",
-     "lat": null,
-     "lon": null,
+     "lat": 55.3589,
+     "lon": 37.4639,
      "type": "drone",
      "count": 1,
      "target": "завод ZAO «Гидросталькonstruktsiya»",
@@ -11279,8 +11259,8 @@
      "time": "03:17",
      "city": "Чехов",
      "region": "Московская область",
-     "lat": null,
-     "lon": null,
+     "lat": 55.3589,
+     "lon": 37.4639,
      "type": "drone",
      "count": 1,
      "target": "жилой дом",
@@ -11292,10 +11272,10 @@
     {
      "date": "2026-07-28",
      "time": "04:18",
-     "city": "Вавулово",
+     "city": "Ваулово",
      "region": "Московская область",
-     "lat": null,
-     "lon": null,
+     "lat": 55.1313,
+     "lon": 37.2925,
      "type": "drone",
      "count": null,
      "target": "жилой дом",
@@ -11325,7 +11305,9 @@
      "target": "логистический склад 3PL",
      "detail": "пожар в результате атаки беспилотников",
      "source_url": "https://ru.slovoidilo.ua/2026/07/28/novost/bezopasnost/drony-atakovali-krupnyj-logisticheskij-sklad-rf-moskovskoj-oblasti",
-     "confidence": "reported"
+     "confidence": "reported",
+     "lat": 55.43088,
+     "lon": 37.54531
     }
    ],
    "voices": [
@@ -12732,6 +12714,20 @@
    "strikes": [
     {
      "date": "2026-08-03",
+     "time": "ночь",
+     "city": "Кстово",
+     "region": "Нижегородская область",
+     "lat": 56.13,
+     "lon": 44.22,
+     "type": "drone",
+     "count": "",
+     "target": "нефтеперерабатывающий завод Лукойл-Нижегороднефтеоргсинтез",
+     "detail": "Взрывы и пожары на территории завода. Четвёртый по величине нефтезавод России (мощность 16-17 млн т/год). Объект остановлен.",
+     "source_url": "https://militarnyi.com/en/news/drone-attacks-oil-refinery-in-the-nizhny-novgorod-region/",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-03",
      "time": "01:35",
      "city": "Керчь",
      "region": "Республика Крым",
@@ -12845,6 +12841,20 @@
     },
     {
      "date": "2026-08-04",
+     "time": "05:00",
+     "city": "Сызрань",
+     "region": "Самарская область",
+     "lat": 53.13,
+     "lon": 48.43,
+     "type": "drone",
+     "count": "",
+     "target": "нефтеперерабатывающий завод Роснефть, установка ЭЛОУ-АВТ-5",
+     "detail": "Установка первичной переработки ЭЛОУ-АВТ-5 поражена, пожар. Завод повредил ~30% мощности первичной переработки. Объект остановлен.",
+     "source_url": "https://militarnyi.com/en/news/drones-struck-the-syzran-oil-refinery-causing-fire/",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-04",
      "time": "день",
      "city": "Красный Бор",
      "region": "Ленинградская область",
@@ -12889,22 +12899,6 @@
      "title": "Взрывы в Севастополе, отключение света",
      "detail": "В Севастополе слышны взрывы, в некоторых районах пропал свет. По данным источника, это связано с ночной атакой беспилотников на город.",
      "source_url": "https://ru.krymr.com/amp/news--sevastopole-vzryvy-v-nekotorykh-rayonakh-propal-svet/33821912.html",
-     "confidence": "confirmed"
-    },
-    {
-     "date": "2026-08-04",
-     "time": "08:40 мск",
-     "city": "Керчь",
-     "region": "Республика Крым",
-     "lat": 45.3606,
-     "lon": 36.4683,
-     "type": "drone",
-     "count": null,
-     "target": "Керченский полуостров",
-     "casualties": 4,
-     "title": "Атака дронов на Керченский полуостров",
-     "detail": "Прошедшей ночью беспилотники атаковали Керченский полуостров. В результате погибли четыре человека, пострадали 28, из них 14 госпитализированы, среди них двое детей в реанимации. На полуострове приостановлена продажа топлива на АЗС, часть населения осталась без электроэнергии из-за повреждения сетей.",
-     "source_url": "https://www.kommersant.ru/doc/8761371",
      "confidence": "confirmed"
     }
    ],
@@ -13059,22 +13053,6 @@
     },
     {
      "date": "2026-08-06",
-     "time": "13:10",
-     "city": "",
-     "region": "Крым",
-     "lat": 0.0,
-     "lon": 0.0,
-     "type": "strike",
-     "count": 1,
-     "target": "",
-     "casualties": "",
-     "title": "Сообщается об ударах по объектам в Крыму",
-     "detail": "В Крыму поступают сообщения об ударах по нефтяным и военным объектам. Источник: иностранные СМИ.",
-     "source_url": "https://ru.slovoidilo.ua/2026/07/24/novost/bezopasnost/sbu-nanesla-novye-udary-neftyanym-obektam-rf-i-okkupirovannom-krymu",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-06",
      "time": "ночь",
      "city": "Сузёмка",
      "region": "Брянская область",
@@ -13140,6 +13118,22 @@
    "strikes": [
     {
      "date": "2026-08-07",
+     "time": "11:25",
+     "city": "Ялта",
+     "region": "Республика Крым",
+     "lat": 44.4988,
+     "lon": 34.1689,
+     "type": "drone",
+     "count": 0,
+     "target": "Гвардейское (военный аэродром), нефтебаза у Феодосии, Крымский мост",
+     "casualties": "Неизвестно",
+     "title": "Ялта: дроны атакуют Крым уже полдня, что известно на данный момент",
+     "detail": "Дроны атаковали несколько городов Крыма: взрывы в Севастополе, Феодосии, Керчи, у аэродрома «Гвардейское» и вблизи Алушты. У Феодосии сообщалось о пожаре в районе нефтебазы, движение по Крымскому мосту временно перекрывали. Генштаб ВСУ подтвердил удары по объекту хранения, подготовки и запуска БПЛА у Гвардейского и по РЛС в Крыму.",
+     "source_url": "https://www.unian.net/war/yalta-drony-atakuyut-krym-uzhe-poldnya-chto-izvestno-na-dannyy-moment-13463571.html",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-08-07",
      "time": "10:00",
      "city": "Ялта",
      "region": "Республика Крым",
@@ -13156,114 +13150,67 @@
     },
     {
      "date": "2026-08-07",
-     "time": "06:00",
-     "city": "Неизвестно",
-     "region": "Гвардейское",
-     "lat": 0.0,
-     "lon": 0.0,
+     "time": "07:45",
+     "time_local": "07:45 (местное)",
+     "city": "Екатеринбург",
+     "region": "Свердловская область",
+     "lat": 56.83821,
+     "lon": 60.60079,
      "type": "drone",
-     "count": 0,
-     "target": "Неизвестно",
-     "casualties": "Неизвестно",
-     "title": "Атака на Крым 7 августа 2026 года – что известно, какие последствия",
-     "detail": "Предположительно, произошел удар в районе Центрального рынка. Там дрон мог попасть в электроподстанцию на улице Мирошника. Пожар в Керчи заметили рядом с Керченским мостом во временном поселке его строителей.\n\nПоздно вечером 27 июля и ночью 28-го беспилотники провели очередную атаку на Крым.Громко было в Севастополе и Симферополе.\n\nКроме того, пытались сбить дроны в Бахчисарайском районе. Также слышалась стрельба по БПЛА в Феодосии и в районе мыса Фиолент. Впоследствии возле последнего",
-     "source_url": "https://24tv.ua/ru/ataka-krym-7-avgusta-2026-goda-chto-izvestno-kakie-posledstvija_n3119189",
-     "confidence": "reported"
+     "count": 3,
+     "target": "логистический центр Wildberries",
+     "casualties": "пострадавших нет",
+     "confidence": "confirmed",
+     "title": "Удар БПЛА по логистическому центру Wildberries в Екатеринбурге",
+     "detail": "По данным региональных изданий и сообщению властей, утром 7 августа над Свердловской областью сбито восемь беспилотных летательных аппаратов. Три аппарата упали на крышу логистического центра Wildberries в Екатеринбурге, начался пожар. Эвакуировано около 800 человек, о пострадавших не сообщается. Режим беспилотной опасности в регионе действовал с 07:45 до 09:51 по местному времени.",
+     "source_url": "https://www.e1.ru/text/incidents/2026/08/07/76575128/"
     },
     {
      "date": "2026-08-07",
      "time": "05:59",
      "city": "Алушта",
-     "region": "Алушта",
-     "lat": 0.0,
-     "lon": 0.0,
+     "region": "Республика Крым",
+     "lat": 44.6771,
+     "lon": 34.4095,
      "type": "drone",
      "count": 0,
-     "target": "Неизвестно",
+     "target": "Гвардейское (военный аэродром), объекты в Севастополе и Феодосии",
      "casualties": "Неизвестно",
      "title": "В Крыму и Севастополе были слышны взрывы, на аэродроме «Гвардейское» возник пожар с детонацией – паблики",
-     "detail": "logo\n\n# В Крыму и Севастополе были слышны взрывы, на аэродроме «Гвардейское» возник пожар с детонацией – паблики\n\nАэродром «Гвардейское» в Крыму, архивное фото\n\nВ ночь на 7 августа в Крыму и Севастополе были слышны взрывы, наблюдался пролет дронов, работали мобильные огневые группы (МОГ). Об этом сообщают местные мониторинговые каналы и российские власти.\n\nСерия взрывов и стрельба МОГ по дронам прозвучали в Феодосии, Севастополе (в том числе в районе мыса Фиолент)",
+     "detail": "В ночь на 7 августа в Крыму и Севастополе слышны взрывы, зафиксирован пролёт БПЛА, работали средства РЭБ/ПВО. Сообщается о взрывах в Феодосии и Севастополе (район мыса Фиолент), на аэродроме «Гвардейское» — пожар с детонацией.",
      "source_url": "https://ru.krymr.com/amp/news-krym-sevastopol-vzryvy-aerodrom-gvardeyskoye-pozhar/33823994.html",
      "confidence": "reported"
     },
     {
      "date": "2026-08-07",
-     "time": "11:25",
-     "city": "Ялта",
-     "region": "Ялта",
-     "lat": 0.0,
-     "lon": 0.0,
-     "type": "drone",
-     "count": 0,
-     "target": "Неизвестно",
-     "casualties": "Неизвестно",
-     "title": "Ялта: дроны атакуют Крым уже полдня, что известно на данный момент",
-     "detail": "Кроме того, в ночь на 7 августа дроны массированно атаковали и другие города Крыма. Сообщалось о взрывах в Севастополе, Феодосии, Керчи, на военном аэродроме Гвардейское и вблизи Алушты. Возле Феодосии сообщали о пожаре в районе нефтебазы. Также временно перекрывали движение по Крымскому мосту.\n\nПозже в Генштабе подтвердили удары Сил обороны по полуострову. В частности, возле Гвардейского сообщается о поражении места хранения, подготовки и запуска ударных БпЛА. Также Силы обороны поразили радиол",
-     "source_url": "https://www.unian.net/war/yalta-drony-atakuyut-krym-uzhe-poldnya-chto-izvestno-na-dannyy-moment-13463571.html",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-07",
      "time": "09:49",
-     "city": "Неизвестно",
-     "region": "Гвардейское",
-     "lat": 0.0,
-     "lon": 0.0,
+     "city": "Гвардейское",
+     "region": "Республика Крым",
+     "lat": 45.1157,
+     "lon": 34.0239,
      "type": "drone",
      "count": 0,
-     "target": "Неизвестно",
+     "target": "Военный аэродром «Гвардейское»",
      "casualties": "Неизвестно",
      "title": "Взрывы в Крыму в ночь на 7 августа 2026 года — на аэродроме \"Гвардейское\" пожар, слышны взрывы — фото и видео | OBOZ.UA",
-     "detail": "Последствия попаданий\nПоследствия попаданий\n\nОчевидцы утверждают, что пожар был очень масштабным и освещал окружающую территорию на несколько километров. В то же время сообщается, что на аэродроме были видны два отдельных очага возгорания. С этого аэродрома российские военные запускают беспилотники типа \"Шахед\".\n\nНа момент публикации оккупационные власти не прокомментировали ситуацию.\n\n## В Генштабе рассказали подробности\n\nПо информации Генштаба, в Крыму были поражены радиолокационная станция ра",
+     "detail": "На аэродроме «Гвардейское» — крупный пожар с двумя очагами возгорания; с аэродрома, по имеющимся данным, ранее запускались ударные БПЛА. Генштаб ВСУ сообщил о поражении радиолокационной станции в Крыму.",
      "source_url": "https://war.obozrevatel.com/v-okkupirovannom-kryimu-progremela-seriya-vzryivov-na-aerodrome-gvardejskoe-pozhar-slyishnyi-vzryivyi-foto-i-video.htm",
      "confidence": "reported"
     },
     {
      "date": "2026-08-07",
      "time": "08:31",
-     "city": "Неизвестно",
-     "region": "Гвардейское",
-     "lat": 0.0,
-     "lon": 0.0,
+     "city": "Гвардейское",
+     "region": "Республика Крым",
+     "lat": 45.1157,
+     "lon": 34.0239,
      "type": "drone",
      "count": 0,
-     "target": "Неизвестно",
+     "target": "Военный аэродром «Гвардейское», объекты в Крыму",
      "casualties": "Неизвестно",
      "title": "Ночью в Крыму атаковано несколько городов и военный аэродром",
-     "detail": "Николаевские новости\n\n# Ночью в Крыму атаковано несколько городов и военный аэродром\n\nВ ночь на 7 августа Крым подвергся массированной атаке беспилотных летательных аппаратов. Громкие взрывы прогремели сразу в нескольких районах полуострова, повлекшие пожары на военных объектах.\n\n### Ночные взрывы в Севастополе, Феодосии, Керчи [...] ### Пожар и детонация на аэродроме Гвардейское\n\nСерьезные последствия атаки были зафиксированы в районе военного аэродрома Гвардейское. Посл",
+     "detail": "Ночью 7 августа зафиксированы взрывы в нескольких районах Крыма (Севастополь, Феодосия, Керчь), возникли пожары на военных объектах. Наиболее серьёзные последствия — в районе военного аэродрома «Гвардейское».",
      "source_url": "https://www.niknews.mk.ua/2026/08/07/nochju-v-krymu-atakovano-neskolko-gorodov-i-voennyj-aerodrom",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-07",
-     "time": "06:00",
-     "city": "Неизвестно",
-     "region": "Гвардейское",
-     "lat": 0.0,
-     "lon": 0.0,
-     "type": "drone",
-     "count": 0,
-     "target": "Неизвестно",
-     "casualties": "Неизвестно",
-     "title": "В Крыму после ночной атаки горит военный аэродром \"Гвардейское\"",
-     "detail": "Предположительно, произошел удар в районе Центрального рынка. Там дрон мог попасть в электроподстанцию на улице Мирошника. Пожар в Керчи заметили рядом с Керченским мостом во временном поселке его строителей.\n\nПоздно вечером 27 июля и ночью 28-го беспилотники провели очередную атаку на Крым.Громко было в Севастополе и Симферополе.\n\nКроме того, пытались сбить дроны в Бахчисарайском районе. Также слышалась стрельба по БПЛА в Феодосии и в районе мыса Фиолент. Впоследствии возле последнего",
-     "source_url": "https://24tv.ua/ru/ataka-krym-7-avgusta-2026-goda-chto-izvestno-kakie-posledstvija_n3119189",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-07",
-     "time": "07:00",
-     "city": "Неизвестно",
-     "region": "Гвардейское",
-     "lat": 0.0,
-     "lon": 0.0,
-     "type": "drone",
-     "count": 0,
-     "target": "Неизвестно",
-     "casualties": "Неизвестно",
-     "title": "В Крыму бушуют масштабные пожары после прилетов | DonPress.com",
-     "detail": "Теги\n\nвойна Украина россия Крым взрывы и пожары атака БПЛА\n\n## Новости по теме\n\n21.07.2026\n\n403\n\nВзрывы в Крыму: что известно\n\n Взрывы в Крыму: что известно\n\n22.07.2026\n\n280\n\nКрым под ударом дронов: фиксируют пожары\n\n Крым под ударом дронов: фиксируют пожары\n\n24.07.2026\n\n208\n\nВ Крыму сообщают о пожарах на в результате атаки дронов\n\n В Крыму сообщают о пожарах на в результате атаки дронов\n\n29.07.2026\n\n243\n\nВзрывы в Крыму: зафиксированы п",
-     "source_url": "https://donpress.com/news/07-08-2026-v-krymu-bushuyut-masshtabnye-pozhary-posle-priletov",
      "confidence": "reported"
     },
     {
@@ -13284,7 +13231,54 @@
     }
    ],
    "voices": []
+  },
+  "2026-08-08": {
+   "strikes": [
+    {
+     "date": "2026-08-08",
+     "time": "03:00",
+     "city": "Сызрань",
+     "region": "Самарская область",
+     "lat": 53.13,
+     "lon": 48.43,
+     "type": "drone",
+     "count": "",
+     "target": "нефтеперерабатывающий завод Роснефть",
+     "detail": "Вторая волна ударов за 4 дня. Прямые попадания, крупный пожар. Завод полностью остановил операции.",
+     "source_url": "https://www.svoboda.org/a/npz-v-syzrani-polnostjyu-ostanovil-rabotu-posle-voskresnoy-ataki-bespilotnikov-reuters-so-ssylkoy-na-istochniki/33803274.html",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-08",
+     "time": "ночь",
+     "city": "Керчь",
+     "region": "Республика Крым",
+     "lat": 45.35,
+     "lon": 36.47,
+     "type": "drone",
+     "count": "2",
+     "target": "жилой многоэтажный дом",
+     "detail": "Жилой многоэтажный дом поражён ударом. 2 погибших, 1 раненый.",
+     "source_url": "https://74.ru/text/incidents/2026/08/08/76577737/",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-08",
+     "time": "",
+     "city": "Чёрное море",
+     "region": "Чёрное море",
+     "lat": 45.5,
+     "lon": 31.0,
+     "type": "drone",
+     "count": "",
+     "target": "сухогруз EMIL (shadow fleet), логистика",
+     "detail": "Сухогруз EMIL (либерийский флаг, часть российского теневого флота) поражен дронами Geran-4. Пожар, потеря управления. Расположен ~21 морских миль от Одесы.",
+     "source_url": "https://germany.news-pravda.com/en/world/2026/08/08/149141.html",
+     "confidence": "reported"
+    }
+   ],
+   "voices": []
   }
  },
- "updated": "2026-08-07"
+ "updated": "2026-08-08"
 }
