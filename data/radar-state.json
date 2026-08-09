@@ -433,7 +433,7 @@
       "uabDim": false,
       "fpv": false,
       "rocket": true,
-      "rocket_level": true,
+      "rocket_level": false,
       "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
@@ -441,7 +441,7 @@
       "rocketOnRegion": false,
       "fill": "#dc2626",
       "last_event_ts": 1786224281,
-      "source_text": "08.08.2026 18:04 МСК\nХерсонская область ракетная опасность\n\n08.08.2026 23:26 МСК\nАвиационная опасность Запорожская область РФ Херсонская область РФ ДНР\n\n09.08.2026 00:24 МСК\nКаланчак и близлежащие Тревога по БПЛА Херсонская область РФ Соблюдайте меры безопасности"
+      "source_text": "08.08.2026 23:26 МСК\nАвиационная опасность Запорожская область РФ Херсонская область РФ ДНР\n\n09.08.2026 00:24 МСК\nКаланчак и близлежащие Тревога по БПЛА Херсонская область РФ Соблюдайте меры безопасности"
     },
     "Вологодская область": {
       "bpla": false,
@@ -480,6 +480,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1786238384,
       "source_text": "09.08.2026 04:19 МСК\nШаховская, Волоколамск, Ярополец, Руза, Московская область - опасность по БПЛА от Карманово, Тверская область. 📡 Локатор России - @locatorru"
+    },
+    "Удмуртия": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1786244660,
+      "source_text": "09.08.2026 06:04 МСК\nРеспублика Удмуртия Опасность по БПЛА"
     },
     "Смоленская область": {
       "bpla": false,
@@ -6049,28 +6068,6 @@
       "last_event_ts": 1786230616,
       "source_text": "09.08.2026 02:10 МСК\nОрловский район Орловская область Фиксация БПЛА"
     },
-    "RUS.70.27_1": {
-      "gid_2": "RUS.70.27_1",
-      "name_ru": "Узловский район",
-      "region_ru": "Тульская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1786201437,
-      "source_text": "08.08.2026 18:03 МСК\nУзловский район Тульская область Фиксация БПЛА"
-    },
     "RUS.7.18_1": {
       "gid_2": "RUS.7.18_1",
       "name_ru": "Ровеньский район",
@@ -6758,6 +6755,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 80231,
+      "text": "Республика Удмуртия\nОпасность по БПЛА",
+      "ts": 1786244660,
+      "time_label": "09.08.2026 06:04 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 78982,
+      "text": "Удмуртская Республика - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1786244393,
+      "time_label": "09.08.2026 05:59 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
       "msg_id": 80230,
       "text": "Липецкая область\nОтбой опасности по БПЛА",
       "ts": 1786244122,
@@ -7380,22 +7393,6 @@
       "time_label": "09.08.2026 02:17 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 80200,
-      "text": "Куйбышевский район\nРостовская область\nФиксация БПЛА",
-      "ts": 1786231028,
-      "time_label": "09.08.2026 02:17 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 80199,
-      "text": "Лев-Толстовский район\nЛипецкая область\nФиксация БПЛА",
-      "ts": 1786230967,
-      "time_label": "09.08.2026 02:16 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7405,15 +7402,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786244122,
-  "last_event_at": "2026-08-09T02:55:22Z",
-  "fetched_at": "2026-08-09T03:00:16.757232Z",
-  "poll_interval_sec": 50,
+  "timestamp": 1786244660,
+  "last_event_at": "2026-08-09T03:04:20Z",
+  "fetched_at": "2026-08-09T03:10:12.760109Z",
+  "poll_interval_sec": 60,
   "meta": {
-    "generated_at": "2026-08-09T03:00:16.757232Z",
-    "source_age_seconds": 294,
+    "generated_at": "2026-08-09T03:10:12.760109Z",
+    "source_age_seconds": 352,
     "city_count": 159,
-    "region_count": 33,
+    "region_count": 34,
     "feed_count": 80
   }
 }
