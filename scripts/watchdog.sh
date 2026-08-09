@@ -5,15 +5,20 @@ set -euo pipefail
 REPO_ROOT="/root/npz-tactical-map"
 cd "$REPO_ROOT"
 
-# Update repository with stash handling for local changes
-if ! git diff-index --quiet HEAD --; then
-    echo "Local changes detected, stashing before pull"
-    git stash push -m "watchdog stash before pull $(date -u +%Y-%m-%dT%H:%MZ)"
-fi
-git pull --rebase
-# Restore stashed changes if any
-if git stash list | grep -q "watchdog stash"; then
-    git stash pop
+# Обновляем репозиторий. 🔴 Здесь НЕТ и не должно быть git stash: прежняя версия делала
+# stash push -> pull -> stash pop, и когда pop падал на конфликте, стэш оставался
+# осиротевшим. Осиротевшие стэши на hermes рецидивно роняли git-sync всему флоту —
+# 30.07.2026 автопубликация встала на 13-34 часа именно так, а health.json при этом
+# показывал healthy. Сторож, который сам ломает синк, хуже отсутствующего сторожа.
+#
+# Грязное дерево — это симптом, а не помеха: чинить его должен владелец файлов, а не
+# сторож втихую. Поэтому пропускаем pull, громко сообщаем и идём проверять здоровье на
+# том чекауте, который есть.
+if git diff-index --quiet HEAD -- && [ -z "$(git status --porcelain)" ]; then
+    git pull --rebase
+else
+    echo "watchdog: дерево грязное — pull ПРОПУЩЕН (стэшить нельзя, осиротевший стэш роняет git-sync):"
+    git status --porcelain | head -20
 fi
 
 # Run health check and capture output
