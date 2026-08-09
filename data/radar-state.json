@@ -161,7 +161,7 @@
     "Рязанская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -173,9 +173,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1786263636,
-      "source_text": "09.08.2026 11:20 МСК\nЛипецкая область Тульская область Рязанская область внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1786264678,
+      "source_text": "09.08.2026 11:37 МСК\nРязанская область Опасность по БПЛА"
     },
     "Краснодарский край": {
       "bpla": false,
@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786258347,
-      "source_text": "09.08.2026 09:52 МСК\nБрянская область Опасность по БПЛА"
+      "last_event_ts": 1786264434,
+      "source_text": "09.08.2026 11:33 МСК\nСлавное - Котовское - Межводное трасса и близлежащие населенные пункты тревога по БПЛА с направления Славное на Черноморский район"
     },
     "Херсонская область": {
       "bpla": false,
@@ -1120,8 +1120,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786256537,
-      "source_text": "09.08.2026 09:22 МСК\nВыезд Мелитополь трасса на Новоалексеевку тревога по БПЛА Хорнет"
+      "last_event_ts": 1786264434,
+      "source_text": "09.08.2026 11:33 МСК\nСлавное - Котовское - Межводное трасса и близлежащие населенные пункты тревога по БПЛА с направления Славное на Черноморский район"
     },
     {
       "key": "губкин|белгородская область",
@@ -2054,6 +2054,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 80280,
+      "text": "Рязанская область\nОпасность по БПЛА",
+      "ts": 1786264678,
+      "time_label": "09.08.2026 11:37 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 257225,
+      "text": "Славное - Котовское - Межводное трасса и близлежащие населенные пункты тревога по БПЛА с направления Славное на Черноморский район",
+      "ts": 1786264434,
+      "time_label": "09.08.2026 11:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 257224,
       "text": "Курск\nТревога по БПЛА",
       "ts": 1786263922,
@@ -2676,22 +2692,6 @@
       "time_label": "09.08.2026 08:59 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 257159,
-      "text": "Противник готовит пуски БПЛА от Николаевской области",
-      "ts": 1786255119,
-      "time_label": "09.08.2026 08:58 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 257158,
-      "text": "От Чернышево на юго-восток\nРеспублика Крым\nФиксации  БПЛА",
-      "ts": 1786255096,
-      "time_label": "09.08.2026 08:58 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2701,13 +2701,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786263922,
-  "last_event_at": "2026-08-09T08:25:22Z",
-  "fetched_at": "2026-08-09T08:30:07.435948Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1786264678,
+  "last_event_at": "2026-08-09T08:37:58Z",
+  "fetched_at": "2026-08-09T08:40:03.971664Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-09T08:30:07.435948Z",
-    "source_age_seconds": 285,
+    "generated_at": "2026-08-09T08:40:03.971664Z",
+    "source_age_seconds": 125,
     "city_count": 50,
     "region_count": 17,
     "feed_count": 80
