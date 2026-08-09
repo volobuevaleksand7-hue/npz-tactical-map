@@ -7,6 +7,16 @@ strike_alerts.py — рассылка ПОДТВЕРЖДЁННЫХ УДАРОВ 
 Init-guard: при первом запуске (нет state) — засеять все текущие id и НЕ рассылать
 архив задним числом.
 
+Удары ОДНОГО прогона группируются по времени СОБЫТИЯ (date+time), не по времени
+прогона: разрыв между соседними ударами ≤ GROUP_GAP_HOURS — одно сообщение
+списком, > GROUP_GAP_HOURS — отдельное сообщение на группу.
+
+Удары старше MAX_AGE_HOURS от текущего момента не рассылаются вообще (молния —
+про «сейчас»), но помечаются seen — иначе просроченный бэклог блокирует дедуп
+навсегда. Порог + группировка добавлены 09.08.2026 после инцидента: сбойный
+прогон копил бэклог несколько часов (см. executions.db на hermes-vps), а когда
+наконец прошёл — разослал 11 старых ударов (28.07–01.08) отдельными сообщениями.
+
 Использование (как у radar_alerts.py):
   NPZ_BOT_DIR=/root/.npz-bot-bpl python3 strike_alerts.py --dry-run
   NPZ_BOT_DIR=/root/.npz-bot-bpl python3 strike_alerts.py --send
@@ -15,6 +25,7 @@ import argparse
 import datetime
 import json
 import os
+import re
 import sys
 
 # Переиспользуем нормализацию регионов и отправку из radar_alerts (тот же каталог)
@@ -29,6 +40,11 @@ SUBS_PATH = os.path.join(BOT_DIR, "subscribers.json")
 STATE_PATH = os.path.join(BOT_DIR, "strike-alert-state.json")
 STRIKES_PATH = os.path.join(DATA, "strikes.json")
 SITE = "https://npz-tactical-map.vercel.app"
+
+# Молния — про «сейчас»: событие старше этого возраста тихо уходит в seen, без рассылки.
+MAX_AGE_HOURS = 36
+# Удары одного прогона с разрывом между событиями ≤ этого порога — одно сообщение списком.
+GROUP_GAP_HOURS = 2
 
 MONTHS = ["", "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
           "августа", "сентября", "октября", "ноября", "декабря"]
@@ -69,6 +85,22 @@ def msk_time(t):
 def strike_key(strike):
     """Стабильный ключ дедупа: id, а если его нет (старый архив/сбой) — date|time|city|target."""
     return strike.get("id") or "|".join(str(strike.get(k, "")) for k in ("date", "time", "city", "target"))
+
+
+def strike_event_dt(strike):
+    """Время СОБЫТИЯ удара в UTC (date+time из strikes.json), для свежести и группировки.
+    time бывает текстовым ('ночь'/'утро'/пусто) — тогда берём полдень даты. Дату
+    распарсить не удалось — берём текущий момент (не роняем удар в 'старьё' по ошибке)."""
+    date_s = str(strike.get("date") or "")[:10]
+    try:
+        base = datetime.date.fromisoformat(date_s)
+    except Exception:
+        return datetime.datetime.now(datetime.timezone.utc)
+    hh, mm = 12, 0
+    m = re.match(r"^(\d{1,2}):(\d{2})", str(strike.get("time") or "").strip())
+    if m:
+        hh, mm = int(m.group(1)), int(m.group(2))
+    return datetime.datetime(base.year, base.month, base.day, hh, mm, tzinfo=datetime.timezone.utc)
 
 
 def strike_region(strike):
@@ -116,26 +148,62 @@ def _wants(alerts, canonical):
     return False
 
 
-def build_strike_notifications(strikes, subscribers, seen):
-    """(notices, new_seen). notices = [{chat_id, strike_id, text}].
+def build_strike_notifications(strikes, subscribers, seen, max_age_hours=None, now=None):
+    """(notices, new_seen). notices = [{chat_id, strike_id, text, event_dt}].
     seen — множество уже разосланных id. Новые id всегда добавляются в new_seen
-    (даже если адресатов нет), чтобы не копить и не перебирать архив повторно."""
+    (даже если адресатов нет ИЛИ удар отсеян по свежести), чтобы не копить и не
+    перебирать архив повторно.
+    max_age_hours — если задан, удары СТАРШЕ этого возраста (по факту события,
+    strike_event_dt) в notices не попадают — молния про 'сейчас', не задним числом."""
     seen = set(seen or [])
     new_seen = set(seen)
+    now = now or datetime.datetime.now(datetime.timezone.utc)
     notices = []
     for s in strikes:
         sid = strike_key(s)
         if sid in seen:
             continue
         new_seen.add(sid)
+        event_dt = strike_event_dt(s)
+        if max_age_hours is not None and (now - event_dt) > datetime.timedelta(hours=max_age_hours):
+            continue
         canonical = strike_region(s)
         text = format_strike(s)
         for chat_id, info in subscribers.items():
             if info.get("status") != "active":
                 continue
             if _wants(info.get("alerts") or {}, canonical):
-                notices.append({"chat_id": str(chat_id), "strike_id": sid, "text": text})
+                notices.append({"chat_id": str(chat_id), "strike_id": sid, "text": text, "event_dt": event_dt})
     return notices, new_seen
+
+
+def group_notices_for_send(notices, gap_hours=GROUP_GAP_HOURS):
+    """Схлопывает адресные уведомления ОДНОГО подписчика в сообщения по времени
+    СОБЫТИЯ: разрыв между соседними ударами (в порядке события) ≤ gap_hours —
+    один текст списком, > gap_hours — отдельное сообщение на группу.
+    Возвращает [{"chat_id", "text", "strike_ids": [...]}, ...]."""
+    by_chat = {}
+    for n in notices:
+        by_chat.setdefault(n["chat_id"], []).append(n)
+    out = []
+    for chat_id, items in by_chat.items():
+        items = sorted(items, key=lambda n: n["event_dt"])
+        groups, cur, prev_dt = [], [], None
+        for n in items:
+            if cur and (n["event_dt"] - prev_dt) > datetime.timedelta(hours=gap_hours):
+                groups.append(cur)
+                cur = []
+            cur.append(n)
+            prev_dt = n["event_dt"]
+        if cur:
+            groups.append(cur)
+        for g in groups:
+            if len(g) == 1:
+                text = g[0]["text"]
+            else:
+                text = "<b>💥 Удары (%d)</b>\n\n%s" % (len(g), "\n\n".join(n["text"] for n in g))
+            out.append({"chat_id": chat_id, "text": text, "strike_ids": [n["strike_id"] for n in g]})
+    return out
 
 
 def main():
@@ -156,26 +224,28 @@ def main():
         return
 
     seen = state.get("seen", [])
-    notices, new_seen = build_strike_notifications(strikes, subs, seen)
-    print("strike-alerts: %d новых-адресных сообщений" % len(notices))
+    notices, new_seen = build_strike_notifications(strikes, subs, seen, max_age_hours=MAX_AGE_HOURS)
+    grouped = group_notices_for_send(notices)
+    print("strike-alerts: %d новых-адресных сообщений -> %d к отправке (сгруппировано)"
+          % (len(notices), len(grouped)))
 
     if args.send:
         token = open(os.path.join(BOT_DIR, "token")).read().strip()
         sent = 0
-        for n in notices:
+        for g in grouped:
             try:
-                resp = send_message(token, n["chat_id"], n["text"])
+                resp = send_message(token, g["chat_id"], g["text"])
                 if resp.get("ok"):
                     sent += 1
             except Exception as e:  # HTTPError(403 заблокировал)/сеть — не роняем прогон
-                print("FAIL chat=%s strike=%s: %s" % (n["chat_id"], n["strike_id"], e))
+                print("FAIL chat=%s strikes=%s: %s" % (g["chat_id"], ",".join(g["strike_ids"]), e))
         # Коммитим seen ВСЕГДА после попытки (иначе на след. прогоне — дубли всем)
         jsave(STATE_PATH, {"seen": sorted(new_seen)})
-        print("strike-alerts: отправлено %d/%d" % (sent, len(notices)))
+        print("strike-alerts: отправлено %d/%d" % (sent, len(grouped)))
     else:
-        for n in notices:
-            print("-> %s (strike %s)" % (n["chat_id"], n["strike_id"]))
-            print(n["text"])
+        for g in grouped:
+            print("-> %s (%d удар(ов): %s)" % (g["chat_id"], len(g["strike_ids"]), ",".join(g["strike_ids"])))
+            print(g["text"])
             print("---")
         print("strike-alerts: dry-run, state НЕ сохранён")
 
