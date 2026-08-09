@@ -37,9 +37,19 @@ grouped = group_notices_for_send(notices)
 assert len(notices) == 4, notices
 assert len(grouped) == 1, grouped
 assert set(grouped[0]["strike_ids"]) == {"a", "b", "c", "d"}
-assert "Удары (4)" in grouped[0]["text"], grouped[0]["text"]
+assert "Удары БПЛА (4)" in grouped[0]["text"], grouped[0]["text"]
 assert new_seen == {"a", "b", "c", "d"}
 print("ok: 4 удара в пределах 2ч -> 1 сообщение")
+
+# 1a) сгруппированное сообщение КОМПАКТНОЕ: одна шапка, одна ссылка, строка на удар.
+# Склейка четырёх готовых карточек подряд формально «одно сообщение», но читается
+# как та же пачка — ради этого фикс и делался.
+text = grouped[0]["text"]
+assert text.count("/radar.html") == 1, text
+assert text.count("💥") == 1, text
+for city in ("Город-a", "Город-b", "Город-c", "Город-d"):
+    assert city in text, text
+print("ok: сгруппированное сообщение компактное (1 шапка, 1 ссылка, 4 строки)")
 
 # 2) удары с разрывом 3 часа -> 2 сообщения
 strikes_gap = [

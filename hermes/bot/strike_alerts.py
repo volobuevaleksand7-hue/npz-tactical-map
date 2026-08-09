@@ -134,6 +134,37 @@ def format_strike(strike):
     return "\n".join(lines)
 
 
+def _head(strike):
+    """«Город — объект» одной строкой (объект обрезан до первого « — », как в format_strike)."""
+    city = strike.get("city") or ""
+    target = (strike.get("target") or "").split(" — ")[0].strip()
+    if city and target:
+        return "%s — %s" % (city, target)
+    return city or target
+
+
+def format_group(strikes):
+    """Несколько ударов одного окна — ОДНИМ сообщением: общий заголовок, строка на удар,
+    одна ссылка на карту. Повторять шапку и ссылку на каждый удар — это и есть спам."""
+    kinds = {s.get("type") == "rocket" for s in strikes}
+    weapon, kind = ("🚀", "Ракетные удары") if kinds == {True} else \
+                   (("🛩", "Удары БПЛА") if kinds == {False} else ("", "Удары"))
+    dates = {str(s.get("date"))[:10] for s in strikes}
+    lines = ["<b>💥%s %s (%d)</b>" % (weapon, kind, len(strikes))]
+    if len(dates) == 1:
+        lines.append("🕐 %s" % rudate(strikes[0].get("date")))
+        lines.append("")
+        for s in strikes:
+            lines.append("• %s · %s" % (msk_time(s.get("time")), _head(s)))
+    else:
+        lines.append("")
+        for s in strikes:
+            lines.append("• %s, %s · %s" % (rudate(s.get("date")), msk_time(s.get("time")), _head(s)))
+    lines.append("")
+    lines.append('📍 <a href="%s/radar.html">карта</a>' % SITE)
+    return "\n".join(lines)
+
+
 def _wants(alerts, canonical):
     """Подходит ли удар в регионе canonical подписчику с настройками alerts."""
     if not alerts.get("enabled", True):
@@ -173,7 +204,8 @@ def build_strike_notifications(strikes, subscribers, seen, max_age_hours=None, n
             if info.get("status") != "active":
                 continue
             if _wants(info.get("alerts") or {}, canonical):
-                notices.append({"chat_id": str(chat_id), "strike_id": sid, "text": text, "event_dt": event_dt})
+                notices.append({"chat_id": str(chat_id), "strike_id": sid, "text": text,
+                                "event_dt": event_dt, "strike": s})
     return notices, new_seen
 
 
@@ -201,7 +233,7 @@ def group_notices_for_send(notices, gap_hours=GROUP_GAP_HOURS):
             if len(g) == 1:
                 text = g[0]["text"]
             else:
-                text = "<b>💥 Удары (%d)</b>\n\n%s" % (len(g), "\n\n".join(n["text"] for n in g))
+                text = format_group([n["strike"] for n in g])
             out.append({"chat_id": chat_id, "text": text, "strike_ids": [n["strike_id"] for n in g]})
     return out
 
