@@ -326,8 +326,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786289059,
-      "source_text": "09.08.2026 18:24 МСК\nГО Наро-Фоминск Московская область Фиксация БПЛА"
+      "last_event_ts": 1786292133,
+      "source_text": "09.08.2026 19:15 МСК\nГО Домодедово Московская область Работа ПВО по БПЛА Меры безопасности"
     },
     "Смоленская область": {
       "bpla": false,
@@ -383,8 +383,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786290995,
-      "source_text": "09.08.2026 18:56 МСК\nЖелезногорск, Курская область Дмитровск-Орловский, Орловская область Опасность по БПЛА"
+      "last_event_ts": 1786292001,
+      "source_text": "09.08.2026 19:13 МСК\nРыльск Льгов и близлежащие Тревога по БПЛА Курская область"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -1803,11 +1803,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786279385,
-      "source_text": "09.08.2026 15:43 МСК\nГО Домодедово Московская область Работа ПВО по БПЛА Меры безопасности"
+      "last_event_ts": 1786292133,
+      "source_text": "09.08.2026 19:15 МСК\nГО Домодедово Московская область Работа ПВО по БПЛА Меры безопасности"
     },
     {
       "key": "новофёдоровка|автономная республика крым",
@@ -2057,9 +2057,9 @@
       "lat": 51.6906587,
       "lon": 35.2839999,
       "region": "Курская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -2070,8 +2070,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786290406,
-      "source_text": "09.08.2026 18:46 МСК\nОт ГГ ещё группа БПЛА в направлении Рыльск, Льгов и далее в тыл Курская область"
+      "last_event_ts": 1786292001,
+      "source_text": "09.08.2026 19:13 МСК\nРыльск Льгов и близлежащие Тревога по БПЛА Курская область"
     },
     {
       "key": "красноперекопск|автономная республика крым",
@@ -2578,6 +2578,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1786256369,
       "source_text": "09.08.2026 09:19 МСК\nБелое, Роскошное ЛНР тревога по БПЛА Хорнет"
+    },
+    {
+      "key": "рыльск|курская область",
+      "name": "Рыльск",
+      "lat": 51.570538,
+      "lon": 34.683506,
+      "region": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786292001,
+      "source_text": "09.08.2026 19:13 МСК\nРыльск Льгов и близлежащие Тревога по БПЛА Курская область"
     },
     {
       "key": "юнокоммунаровск|донецкая народная республика",
@@ -3950,6 +3972,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 80339,
+      "text": "ГО Домодедово\nМосковская область\nРабота ПВО по БПЛА\nМеры безопасности",
+      "ts": 1786292133,
+      "time_label": "09.08.2026 19:15 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 257399,
+      "text": "Рыльск\nЛьгов и близлежащие\nТревога по БПЛА\nКурская область",
+      "ts": 1786292001,
+      "time_label": "09.08.2026 19:13 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 257397,
       "text": "Разумное Бгд\nРазвязка бабочка\nТревога по БПЛА",
       "ts": 1786291553,
@@ -4572,22 +4610,6 @@
       "time_label": "09.08.2026 16:25 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 257349,
-      "text": "Валуйский район приграничье\nОпасность по БПЛА Хорнет",
-      "ts": 1786281865,
-      "time_label": "09.08.2026 16:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 257348,
-      "text": "От Брянска в сторону Калужской области\nТревога по БПЛА",
-      "ts": 1786281781,
-      "time_label": "09.08.2026 16:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4597,14 +4619,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786291553,
-  "last_event_at": "2026-08-09T16:05:53Z",
-  "fetched_at": "2026-08-09T16:10:02.626574Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1786292133,
+  "last_event_at": "2026-08-09T16:15:33Z",
+  "fetched_at": "2026-08-09T16:20:03.254835Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-09T16:10:02.626574Z",
-    "source_age_seconds": 249,
-    "city_count": 113,
+    "generated_at": "2026-08-09T16:20:03.254835Z",
+    "source_age_seconds": 270,
+    "city_count": 114,
     "region_count": 23,
     "feed_count": 80
   }
