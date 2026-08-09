@@ -45,6 +45,10 @@ SITE = "https://npz-tactical-map.vercel.app"
 MAX_AGE_HOURS = 36
 # Удары одного прогона с разрывом между событиями ≤ этого порога — одно сообщение списком.
 GROUP_GAP_HOURS = 2
+# Больше этого числа непрочитанных ударов за прогон — состояние рассинхронизировано с
+# архивом, а не «много новостей»: досеиваем без рассылки. Реальный максимум за сутки —
+# единицы, так что 20 не заденет живой поток даже в очень активный день.
+RESEED_THRESHOLD = 20
 
 MONTHS = ["", "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
           "августа", "сентября", "октября", "ноября", "декабря"]
@@ -256,6 +260,25 @@ def main():
         return
 
     seen = state.get("seen", [])
+
+    # Re-seed guard. Init-guard выше срабатывает, только если файла состояния НЕТ.
+    # 09.08.2026: у нового контура бота файл БЫЛ, но отставший (seen=9 при 365 ударах
+    # в архиве) и с унаследованными 26 живыми подписчиками — прогон поставил в очередь
+    # 4 224 сообщения, упёрся в таймаут 3600с и был убит ДО сохранения seen, поэтому
+    # следующий прогон начинал ту же рассылку заново. Отставание такого масштаба — это
+    # не «много новостей», это несинхронное состояние: досеиваем молча и говорим об
+    # этом в логе, чтобы расхождение было видно.
+    unseen = sum(1 for s in strikes if strike_key(s) not in set(seen))
+    if unseen > RESEED_THRESHOLD:
+        if args.dry_run:
+            print("strike-alerts: re-seed СРАБОТАЛ БЫ — непрочитанных %d (> %d); "
+                  "dry-run, состояние НЕ сохранено" % (unseen, RESEED_THRESHOLD))
+        else:
+            jsave(STATE_PATH, {"seen": sorted({strike_key(s) for s in strikes})})
+            print("strike-alerts: re-seed — непрочитанных %d (> %d), состояние отстало от "
+                  "архива; засеяно %d id, рассылка пропущена" % (unseen, RESEED_THRESHOLD, len(strikes)))
+        return
+
     notices, new_seen = build_strike_notifications(strikes, subs, seen, max_age_hours=MAX_AGE_HOURS)
     grouped = group_notices_for_send(notices)
     print("strike-alerts: %d новых-адресных сообщений -> %d к отправке (сгруппировано)"

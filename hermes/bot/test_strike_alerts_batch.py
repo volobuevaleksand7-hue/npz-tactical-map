@@ -71,4 +71,32 @@ assert notices == [], notices
 assert new_seen == {"old"}, new_seen
 print("ok: удар 5 суток -> 0 сообщений, но seen")
 
+
+# 4) re-seed guard: состояние отстало от архива -> 0 отправок, всё помечено seen.
+# Ровно сценарий 09.08.2026: seen=9 при 365 ударах и 26 живых подписчиках.
+import json
+import tempfile
+
+import strike_alerts as SA
+
+sent_texts = []
+tmp = tempfile.mkdtemp()
+archive = [strike(str(i), "2026-08-09", "08:00") for i in range(50)]
+orig = (SA.STRIKES_PATH, SA.SUBS_PATH, SA.STATE_PATH, SA.send_message)
+try:
+    SA.STRIKES_PATH = os.path.join(tmp, "strikes.json")
+    SA.SUBS_PATH = os.path.join(tmp, "subscribers.json")
+    SA.STATE_PATH = os.path.join(tmp, "state.json")
+    SA.send_message = lambda *a, **k: sent_texts.append(a) or {"ok": True}
+    json.dump({"strikes": archive}, open(SA.STRIKES_PATH, "w"))
+    json.dump({"subscribers": SUB_ALL}, open(SA.SUBS_PATH, "w"))
+    json.dump({"seen": ["0"]}, open(SA.STATE_PATH, "w"))  # отстал на 49 ударов
+    sys.argv = ["strike_alerts.py", "--send"]
+    SA.main()
+    assert sent_texts == [], sent_texts
+    assert len(json.load(open(SA.STATE_PATH))["seen"]) == 50
+finally:
+    (SA.STRIKES_PATH, SA.SUBS_PATH, SA.STATE_PATH, SA.send_message) = orig
+print("ok: состояние отстало от архива -> re-seed без рассылки")
+
 print("\nAll strike_alerts_batch tests passed.")
