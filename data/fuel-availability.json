@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-09T16:25:00Z",
+    "generated_at": "2026-08-09T16:31:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "2026-08-09T16:25Z: Rotation pass #64. WebSearch по 12 самым старым регионам (обновлено ≤ 2026-08-08). Обновлены: Чеченская (20л, 119р), Коми (30л), Псковская (30л+), Алтайский (КОТ 50л), Смоленская (73.77р), Рязанская (критический 20л), СПб (Роснефть 10л картам), Оренбургская (50л, 400л ДТ). Остальные 4 (Чукотский, Сахалинская, Тамбовская, Луганская): проверены, новостей не найдено."
+    "rotation_pass": "2026-08-09T16:31Z: Новости. Краснодарский край — Новороссийск: все 27 АЗС с лимитами 30/50 л, АИ-100 нет, 6 АЗС временно не работают (Ъ-Кубань). Нижегородская — strained→calm (NewsNN 09.08, заголовок без очередей/ограничений). Белгородская — заявление врио губернатора о стабильности (Вести.ru), лимиты 30 л сохраняются. Татарстан — снижение цен (Росстат по РТ)."
   },
   "exchange": {
     "ai95_spb_rub_t": 81636,
@@ -59,14 +59,14 @@
       "lat": 45.04,
       "lon": 38.98,
       "level": "strained",
-      "updated": "2026-08-09T08:33:05Z",
+      "updated": "2026-08-09T16:31:00Z",
       "networks": [
         {
           "name": "Крупные сети",
           "status": "open",
           "level": "strained",
           "limit_l": null,
-          "note": "09.08: по сообщениям жителей Краснодара (ТГ «Краснодар Телетайп», Кавказский узел) на части АЗС отсутствовал бензин, часть заправок закрыта либо только ДТ; очереди до 1,5 ч. По «Новой Кубани» (09.08): массовые очереди сократились, топливо есть на большинстве крупных сетевых АЗС, но лимиты 30-50 л и отпуск по картам/спецтранспорту сохраняются; в Краснодаре скопления у отдельных АЗС, в Геленджике бензин лишь на нескольких АЗС, АИ-100 в Анапе периодически отсутствует. Полной стабилизации нет."
+          "note": "09.08: по сообщениям жителей Краснодара (ТГ «Краснодар Телетайп», Кавказский узел) на части АЗС отсутствовал бензин, часть заправок закрыта либо только ДТ; очереди до 1,5 ч. По «Новой Кубани» (09.08): массовые очереди сократились, топливо есть на большинстве крупных сетевых АЗС, но лимиты 30-50 л и отпуск по картам/спецтранспорту сохраняются; в Краснодаре скопления у отдельных АЗС, в Геленджике бензин лишь на нескольких АЗС, АИ-100 в Анапе периодически отсутствует. Полной стабилизации нет. По данным администрации Новороссийска (09.08, «Ъ-Кубань»): все 27 работающих АЗС города отпускают топливо с ограничениями 30/50 л в бак, АИ-100 отсутствует, 6 АЗС временно не работают; АИ-95/АИ-92 есть на 21 АЗС, ДТ — на 27."
         }
       ],
       "queues_hours": 1.5,
@@ -76,7 +76,8 @@
         "https://www.vedomosti.ru/business/news/2026/07/30/1217665-toplivo-dostupno/",
         "https://kuban.aif.ru/society/v-krasnodare-zapravit-avto-1-avgusta-mozhno-na-88-azs",
         "https://www.kavkaz-uzel.eu/articles/425608",
-        "https://auto.rambler.ru/navigator/56880600-avtomobilisty-rasskazali-kak-izmenilas-situatsiya-s-benzinom-na-m-4-don-i-kurortah-kubani/"
+        "https://auto.rambler.ru/navigator/56880600-avtomobilisty-rasskazali-kak-izmenilas-situatsiya-s-benzinom-na-m-4-don-i-kurortah-kubani/",
+        "https://www.kommersant.ru/doc/8875707"
       ]
     },
     {
@@ -84,7 +85,7 @@
       "lat": 55.8,
       "lon": 49.1,
       "level": "calm",
-      "updated": "2026-08-09T04:20:00Z",
+      "updated": "2026-08-09T16:31:00Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -106,9 +107,10 @@
       "diesel_price_rub": 80,
       "source_urls": [
         "https://kazan.aif.ru/society/ogranicheniy-net-gazprom-neft-otmenila-limity-na-toplivo-v-13-regionah-rf",
-        "https://kazan.aif.ru/society/limity-otmeneny-situaciya-s-benzinom-v-tatarstane-5-avgusta-chto-izmenilos"
+        "https://kazan.aif.ru/society/limity-otmeneny-situaciya-s-benzinom-v-tatarstane-5-avgusta-chto-izmenilos",
+        "https://chelny-izvest.ru/news/facts/ceny-na-xodovye-marki-benzina-upali-v-tatarstane"
       ],
-      "note": "09.08: Лимиты отменены (04.08). Свободная продажа."
+      "note": "09.08: Лимиты отменены (04.08). Свободная продажа. Цены на ходовые марки бензина снизились (Росстат по РТ, 27.07–04.08)."
     },
     {
       "region": "Москва",
@@ -353,8 +355,8 @@
       "region": "Нижегородская область",
       "lat": 56.33,
       "lon": 44.0,
-      "level": "strained",
-      "updated": "2026-08-08T21:15:01Z",
+      "level": "calm",
+      "updated": "2026-08-09T16:31:00Z",
       "networks": [
         {
           "name": "Лукойл",
@@ -385,9 +387,10 @@
         "https://www.nn.ru/text/transport/2026/08/04/76570033/",
         "https://abnews.ru/news/2026/8/4/gazprom-neft-vozobnovila-otpusk-topliva-bez-limitov-na-azs-v-13-regionah",
         "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-        "https://newsnn.ru/news/2026-08-08/obstanovka-na-nizhegorodskih-azs-8-avgusta-ocheredi-ogranicheniya-tseny-na-benzin-5655266"
+        "https://newsnn.ru/news/2026-08-08/obstanovka-na-nizhegorodskih-azs-8-avgusta-ocheredi-ogranicheniya-tseny-na-benzin-5655266",
+        "https://newsnn.ru/news/2026-08-09/chto-proishodit-s-benzinom-v-nizhnem-novgorode-i-tseny-na-9-avgusta-5655492"
       ],
-      "note": "08.08 (вечер): NewsNN 08.08 — на нижегородских АЗС вновь фиксируются очереди и ограничения (заголовок мониторинга «очереди, ограничения, цены»), АИ-95 подорожал до 72,97 ₽/л. Ранее (04.08) «Газпром нефть» сняла лимиты; правило «чёт-нечёт» сохраняется на сетевых АЗС."
+      "note": "09.08: по мониторингу NewsNN (09.08) в заголовке нет упоминаний очередей и ограничений (08.08 — были); АИ-92 от 64,29 ₽, средняя по городу 69,39 ₽/л. Сети работают без лимитов с 04.08, Кстовский НПЗ восстановился. Признаки нормализации."
     },
     {
       "region": "Волгоградская область",
@@ -558,7 +561,7 @@
       "lat": 50.6,
       "lon": 36.6,
       "level": "limited",
-      "updated": "2026-08-09T00:30:00Z",
+      "updated": "2026-08-09T16:31:00Z",
       "networks": [
         {
           "name": "Лукойл",
@@ -587,8 +590,10 @@
       "diesel_price_rub": 78,
       "source_urls": [
         "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/",
-        "https://rg.ru/2026/07/04/reg-cfo/v-belgorodskoj-oblasti-ogranichili-prodazhu-benzina-i-diztopliva.html"
-      ]
+        "https://rg.ru/2026/07/04/reg-cfo/v-belgorodskoj-oblasti-ogranichili-prodazhu-benzina-i-diztopliva.html",
+        "https://www.vesti.ru/ns/shuvaev-zayavil-o-stabilnoj-situacii-s-benzinom-i-prodovolstviem-v-belgorodchine"
+      ],
+      "note": "09.08: врио губернатора А. Шуваев заявил о стабильной ситуации с бензином, ажиотажа на АЗС нет (Вести.ru). Сетевые лимиты 30 л (данные 06.08) сохраняются."
     },
     {
       "region": "Тульская область",
