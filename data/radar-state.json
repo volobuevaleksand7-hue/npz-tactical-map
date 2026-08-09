@@ -123,7 +123,7 @@
     "Нижегородская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -135,9 +135,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1786283341,
-      "source_text": "09.08.2026 16:49 МСК\nНижегородская область внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1786285949,
+      "source_text": "09.08.2026 17:32 МСК\nНижегородская область Опасность по БПЛА"
     },
     "Калужская область": {
       "bpla": false,
@@ -233,6 +233,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1786280612,
       "source_text": "09.08.2026 16:03 МСК\nРязань Рязанская область Работа ПВО по БПЛА"
+    },
+    "Мордовия": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1786286194,
+      "source_text": "09.08.2026 17:36 МСК\nРеспублика Мордовия Опасность по БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -3601,6 +3620,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 257372,
+      "text": "Республика Мордовия\nвнимание по бпла",
+      "ts": 1786286270,
+      "time_label": "09.08.2026 17:37 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 80315,
+      "text": "Республика Мордовия\nОпасность по БПЛА",
+      "ts": 1786286194,
+      "time_label": "09.08.2026 17:36 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 80314,
+      "text": "Нижегородская область\nОпасность по БПЛА",
+      "ts": 1786285949,
+      "time_label": "09.08.2026 17:32 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 257371,
       "text": "Керченский полуостров\nКерчь\nКрымский мост\nИ близлежащие\nТревога по БПЛА",
       "ts": 1786285572,
@@ -4215,30 +4258,6 @@
       "time_label": "09.08.2026 15:08 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 257316,
-      "text": "Зугрэс Шахтёрск опасность по БПЛА\nДНР",
-      "ts": 1786277219,
-      "time_label": "09.08.2026 15:06 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 257315,
-      "text": "г. Брянск опасность по БПЛА с юга, юго-запада",
-      "ts": 1786277014,
-      "time_label": "09.08.2026 15:03 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 257314,
-      "text": "Раздольненский район тревога по БПЛА с моря. Готовность к 15:10",
-      "ts": 1786276930,
-      "time_label": "09.08.2026 15:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4248,15 +4267,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786285572,
-  "last_event_at": "2026-08-09T14:26:12Z",
-  "fetched_at": "2026-08-09T14:30:03.108270Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1786286270,
+  "last_event_at": "2026-08-09T14:37:50Z",
+  "fetched_at": "2026-08-09T14:40:03.561963Z",
+  "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-09T14:30:03.108270Z",
-    "source_age_seconds": 231,
+    "generated_at": "2026-08-09T14:40:03.561963Z",
+    "source_age_seconds": 133,
     "city_count": 104,
-    "region_count": 22,
+    "region_count": 23,
     "feed_count": 80
   }
 }
