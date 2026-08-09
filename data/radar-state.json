@@ -250,8 +250,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1786279321,
-      "source_text": "09.08.2026 11:53 МСК\nРакетная опасность Троебортное и ближайшие, Брянская область\n\n09.08.2026 15:42 МСК\nВыгоничский район фиксации БПЛА в тыл"
+      "last_event_ts": 1786281544,
+      "source_text": "09.08.2026 11:53 МСК\nРакетная опасность Троебортное и ближайшие, Брянская область\n\n09.08.2026 16:19 МСК\nТрасса Пятницкое Волоконовка Тревога по БПЛА Дартс"
     },
     "Владимирская область": {
       "bpla": false,
@@ -402,8 +402,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786279581,
-      "source_text": "09.08.2026 15:46 МСК\nБелгородский район Опасность по БПЛА"
+      "last_event_ts": 1786281544,
+      "source_text": "09.08.2026 16:19 МСК\nТрасса Пятницкое Волоконовка Тревога по БПЛА Дартс"
     }
   },
   "cities": [
@@ -650,6 +650,28 @@
       "source_text": "09.08.2026 15:32 МСК\nЗаозёрное - на Уютное Катушка фиксация БПЛА"
     },
     {
+      "key": "волоконовка|белгородская область",
+      "name": "Волоконовка",
+      "lat": 50.48504,
+      "lon": 37.86093,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786281544,
+      "source_text": "09.08.2026 16:19 МСК\nТрасса Пятницкое Волоконовка Тревога по БПЛА Дартс"
+    },
+    {
       "key": "акимовка|запорожская область",
       "name": "Акимовка",
       "lat": 46.7011,
@@ -782,6 +804,28 @@
       "source_text": "09.08.2026 13:55 МСК\nПриморский, Бердянский район повторно опасность по БПЛА и далее в направлении Мариуполь, Ялта ДНР"
     },
     {
+      "key": "трасса|брянская область",
+      "name": "трасса",
+      "lat": 53.395264,
+      "lon": 34.3207189,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786281544,
+      "source_text": "09.08.2026 16:19 МСК\nТрасса Пятницкое Волоконовка Тревога по БПЛА Дартс"
+    },
+    {
       "key": "приморск|запорожская область",
       "name": "Приморск",
       "lat": 46.73415,
@@ -868,27 +912,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1786252515,
       "source_text": "09.08.2026 08:15 МСК\nГубкин и близлежащие Белгородская область Опасность по БПЛА"
-    },
-    {
-      "key": "сумская область",
-      "name": "Сумская область",
-      "lat": 50.91198,
-      "lon": 34.802764,
-      "region": null,
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": true,
-      "fill": "#ea580c",
-      "last_event_ts": null
     },
     {
       "key": "троебортное|брянская область",
@@ -3405,6 +3428,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 257346,
+      "text": "Трасса Пятницкое Волоконовка\nТревога по БПЛА Дартс",
+      "ts": 1786281544,
+      "time_label": "09.08.2026 16:19 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 257345,
       "text": "Межводное и близлежащие с севера тревога по БПЛА",
       "ts": 1786280743,
@@ -4035,14 +4066,6 @@
       "time_label": "09.08.2026 14:14 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 257299,
-      "text": "Стародубский район фиксации бпла противника в тыл\nБрянская область",
-      "ts": 1786273993,
-      "time_label": "09.08.2026 14:13 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4052,14 +4075,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786280743,
-  "last_event_at": "2026-08-09T13:05:43Z",
-  "fetched_at": "2026-08-09T13:10:02.735186Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1786281544,
+  "last_event_at": "2026-08-09T13:19:04Z",
+  "fetched_at": "2026-08-09T13:20:04.809154Z",
+  "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-09T13:10:02.735186Z",
-    "source_age_seconds": 259,
-    "city_count": 96,
+    "generated_at": "2026-08-09T13:20:04.809154Z",
+    "source_age_seconds": 60,
+    "city_count": 97,
     "region_count": 21,
     "feed_count": 80
   }
