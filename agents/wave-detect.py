@@ -303,9 +303,11 @@ def commit_artifacts(event, runner=None):
     paths = ["volna-dronov.html", "volna-dronov"]
     date = event.get("date") or (event.get("started_at") or "")[:10]
     if date:
-        cover = os.path.join("assets", "wave-cover-%s.png" % date)
-        if os.path.exists(os.path.join(ROOT, cover)):
-            paths.append(cover)
+        # .png и лёгкий .webp-сосед (optimize_covers): страница ссылается на webp,
+        # без него обложка волны отдаёт 404, а файл копится untracked (09.08.2026).
+        for cover in ("assets/wave-cover-%s.png" % date, "assets/wave-cover-%s.webp" % date):
+            if os.path.exists(os.path.join(ROOT, cover)):
+                paths.append(cover)
     if run(["git", "add"] + paths) != 0:
         print("wave-detect: WARNING git add артефактов волны не удался",
               file=sys.stderr)

@@ -51,7 +51,12 @@ if [ -f agents/gen-news.py ]; then
     # Список синхронен с эталоном в agents/summary-watchdog.py:heal().
     # krupnejshie-npz-rossii.html — вторая RANK_PAGE gen-refineries.py; без неё
     # в git add файл вечно modified → блокирует pull всех агентов (инцидент 17.07).
-    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png refineries.html krupnejshie-npz-rossii.html 2>/dev/null; then
+    # 🔴 09.08.2026, третий рецидив той же грабли: optimize_covers кладёт рядом с
+    # cover-*.png лёгкий cover-*.webp (54 КБ против 202 КБ), news.html ссылается
+    # именно на него — а в git add был только *.png. Итог: 6 обложек за 03–09.08
+    # отдавали 404 на проде, /news неделю показывал битые картинки, а сами файлы
+    # копились untracked и роняли `git pull --rebase` всем агентам.
+    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png assets/cover-*.webp assets/thumb/cover-*.webp refineries.html krupnejshie-npz-rossii.html 2>/dev/null; then
       echo "publish-vps: ОШИБКА — git add не удался" >&2
       exit 4
     fi

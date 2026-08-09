@@ -248,6 +248,11 @@ def heal(day: str):
              "data/news-archive.json"]
     if cover_ok:
         files.append(f"assets/cover-{day}.png")
+        # Лёгкий webp-сосед (optimize_covers) — именно на него ссылается news.html.
+        # Без него обложка отдаёт 404, а файл копится untracked и клинит pull (09.08.2026).
+        for sib in (f"assets/cover-{day}.webp", f"assets/thumb/cover-{day}.webp"):
+            if (ROOT / sib).exists():
+                files.append(sib)
     _run(["git", "-C", str(ROOT), "add", "--", *files])
     gs = ROOT / "agents" / "git-sync.sh"
     if not gs.exists():

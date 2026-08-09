@@ -34,6 +34,29 @@ jobs:
             python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f" || { echo "Invalid JSON: $f"; exit 1; }
           done
 
+      # 🔴 Трижды подряд (17.07 wave-cover, 09.08 cover-*.webp) генератор клал файл
+      # рядом со страницей, а git add его не забирал: страница ссылается, файла в репо
+      # нет, прод отдаёт 404, а сам файл копится untracked и клинит pull всем агентам.
+      # Ловим этот класс здесь: всё, на что ссылается страница внутри /assets, должно
+      # лежать в чекауте.
+      - name: Every referenced /assets file is committed
+        run: |
+          python3 - <<'PY'
+          import glob, os, re, sys
+          missing = []
+          for page in glob.glob("*.html") + glob.glob("news/*.html"):
+              html = open(page, encoding="utf-8", errors="ignore").read()
+              for ref in set(re.findall(r'["\'(](/assets/[^"\')?#]+)', html)):
+                  if not os.path.exists(ref.lstrip("/")):
+                      missing.append((page, ref))
+          for page, ref in sorted(missing):
+              print(f"MISSING {ref} — ссылается {page}")
+          if missing:
+              print(f"\n{len(missing)} ссылок на несуществующие файлы в /assets")
+              sys.exit(1)
+          print("все ссылки на /assets разрешаются")
+          PY
+
   check-urls:
     needs: validate-json
     runs-on: ubuntu-latest
