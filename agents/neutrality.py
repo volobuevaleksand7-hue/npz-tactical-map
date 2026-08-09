@@ -115,6 +115,16 @@ LATIN_FIX = [
     (r"(?i)\bForte\s+Invest\b", "Форте Инвест"),
     (r"(?i)\bYug\s+Rusi\s+oil\s+terminal\b", "нефтяной терминал «Юг Руси»"),
     (r"(?i)\bGidrostal\w*konstruktsiya\b", "Гидростальконструкция"),
+    # 28.07 коллектор выдал «завод ZAO «Гидросталькonstruktsiya»»: половину слова
+    # он транслитерировал, половину нет — \bGidrostal… по такому уже не попадает.
+    (r"(?i)Гидростал[ьи]?к?onstruktsiya", "Гидростальконструкция"),
+    (r"(?i)(?<![/\w-])ZAO(?![\w-])", "ЗАО"),
+    (r"(?i)\bНИИФI\b", "НИИФИ"),
+    (r"(?i)(?<![/\w-])(АВ|Avi)ETEK(?![\w-])", "«Авитек»"),
+    (r"(?i)(?<![/\w-])Rosneft(?![\w-])", "Роснефть"),
+    (r"(?i)(?<![/\w-])Novospasskoye(?![\w-])", "Новоспасское"),
+    (r"(?i)(?<![/\w-])Yalta(?![\w-])", "Ялта"),
+    (r"(?i)(?<![/\w-])shadow\s+fleet(?![\w-])", "теневой флот"),
     (r"(?i)\bShahed\b", "Шахед"),
     (r"\bSBU\b", "СБУ"),
     (r"\bHUR\b", "ГУР"),
@@ -207,6 +217,26 @@ LATIN_OK = re.compile(
     r"(?i)^(wildberries|ozon|dns|nasa|firms|utc|osint|isw|reuters|bbc|the|moscow|times|"
     r"exilenova|plus|noelreports|noel|reports|radarrussiia|media|fpv|fp|cdu|avt|elou|"
     r"nordic|zenith|nelsa|banda|louise|asia|nissos|ios|blue|matilda|suezmax|zao)$")
+
+
+# Слово, внутри которого кириллица и латиница вперемешку: «Гидросталькonstruktsiya»,
+# «НИИФI», «АВETEK». Это всегда брак полутранслитерации коллектора — ни бренд, ни имя
+# судна так не пишут, поэтому порога длины и белого списка тут нет. Дефис в слово не
+# входит: «Bashneft-УНПЗ» — два токена и норма, ловить надо слипшееся.
+_WORD = re.compile(r"[A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё0-9]*")
+
+
+def mixed_script_words(s):
+    """Слова со смешанной кириллицей и латиницей, ОСТАВШИЕСЯ после scrub_text.
+
+    28.07 в архив попал «завод ZAO «Гидросталькonstruktsiya»» и провисел до 09.08:
+    LATIN_FIX знал пару таких имён, но искал их целиком латиницей, а полусловo не
+    ловил никто. Автоматом чинится только знакомое имя (LATIN_FIX) — незнакомое
+    пусть будет видно в логе, угадывать русское написание нельзя.
+    """
+    fixed, _ = scrub_text(str(s or ""))
+    return sorted({w for w in _WORD.findall(fixed)
+                   if re.search(r"[А-Яа-яЁё]", w) and re.search(r"[A-Za-z]", w)})
 
 
 def latin_leftovers(s):
@@ -380,6 +410,22 @@ def demo():
     assert latin_leftovers("склад Wildberries, танкер Nordic Zenith") == []
     assert latin_leftovers("завод Bashneft-Ufaneftekhim") == [], "переведённое не должно всплывать"
     assert scrub_text("TAIF-NK нефтеперерабатывающий завод")[0] == "ТАИФ-НК нефтеперерабатывающий завод"
+
+    # 🔴 28.07: полутранслит («Гидростальк» + «onstruktsiya» одним словом) — чинится
+    # словарём, а незнакомое такое же слово обязано всплыть в логе, а не в архиве.
+    s, _ = scrub_text("завод ZAO «Гидросталькonstruktsiya»")
+    assert s == "завод ЗАО «Гидростальконструкция»", s
+    assert scrub_text("НИИФI, «Роскосмос»")[0] == "НИИФИ, «Роскосмос»"
+    assert scrub_text("предприятие АВETEK")[0] == "предприятие «Авитек»"
+    assert scrub_text("завод Саратов (Rosneft)")[0] == "завод Саратов (Роснефть)"
+    assert scrub_text("газовая база в Novospasskoye")[0] == "газовая база в Новоспасское"
+    assert mixed_script_words("завод ZAO «Гидросталькonstruktsiya»") == [], "знакомое чинится"
+    assert mixed_script_words("завод «Уралхимmash»") == ["Уралхимmash"]
+    # дефис — граница слова: смешение по разные стороны от него легально
+    assert mixed_script_words("Bashneft-УНПЗ и ЭЛОУ-АВТ-6 и Су-34") == []
+    assert mixed_script_words("склад Wildberries в Ялте") == []
+    # слаг ссылки не трогаем — тот же класс регресса, что был с TAIF-NK
+    assert scrub_text('<a href="/npz/rosneft-saratov">Саратовский НПЗ</a>')[1] == 0
     # 🔴 суда и бренды латиницей — норма русской прессы, транслит их изуродует
     for keep in ("Танкер Nordic Zenith", "склад Wildberries", "морской терминал NELSA",
                  "склад Ozon", "магазин DNS", "данные NASA FIRMS"):

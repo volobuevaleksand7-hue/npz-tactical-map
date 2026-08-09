@@ -27,6 +27,29 @@ import neutrality  # noqa: E402
 scrub = neutrality.scrub_record
 reason_bad = neutrality.reason_bad
 
+TEXT_FIELDS = ("target", "title", "detail", "city", "region")
+
+
+def translit_warnings(x):
+    """Битая транслитерация, которую словарь LATIN_FIX не смог починить сам.
+
+    Две разные приметы, обе — брак коллектора, а не стиль источника:
+      • слово с кириллицей и латиницей вперемешку («Гидросталькonstruktsiya»);
+      • латиница в city/region — русский населённый пункт латиницей («Yalta»,
+        «Novospasskoye») не пишет ни один русскоязычный источник. В target такое
+        не проверяем: там латиницей законно стоят суда и бренды.
+
+    Не удаляем и не блокируем: правильное русское написание известно источнику, а
+    не нам, угадать = подделать; а падение хука заморозило бы публикацию у крона
+    (инцидент 29.07). Задача — чтобы такая запись была видна в логе коммита.
+    """
+    out = []
+    blob = " ".join(str(x.get(f) or "") for f in TEXT_FIELDS)
+    out += neutrality.mixed_script_words(blob)
+    for f in ("city", "region"):
+        out += neutrality.latin_leftovers(x.get(f))
+    return sorted(set(out))
+
 
 def sanitize(path):
     """Чистит массив записей под ключом strikes/history (или сам список). Возвращает N удалённых."""
@@ -45,6 +68,13 @@ def sanitize(path):
                 scrubbed += 1
                 sys.stderr.write("  sanitize: scrub эпитетов | %s | %s\n"
                                  % (x.get("date"), str(x.get("city"))[:24]))
+            if isinstance(x, dict):
+                bad_translit = translit_warnings(x)
+                if bad_translit:
+                    sys.stderr.write("  sanitize: битая транслитерация %s | %s | %s "
+                                     "— впиши имя в LATIN_FIX (agents/neutrality.py)\n"
+                                     % (", ".join(bad_translit), x.get("date"),
+                                        str(x.get("city"))[:24]))
             r = reason_bad(x) if isinstance(x, dict) else None
             (removed if r else keep).append(x)
             if r:
@@ -77,6 +107,15 @@ def demo():
     assert len(out) == 2
     assert out[1]["detail"] == "Удар по порту", out[1]
     assert sanitize(p) == 0, "санитайзер не идемпотентен"
+
+    # 🔴 28.07 -> 09.08: полутранслит «завод ZAO «Гидросталькonstruktsiya»» лежал в
+    # архиве 12 дней. Знакомое имя чинит словарь, незнакомое обязано попасть в лог.
+    assert translit_warnings({"target": "завод ZAO «Гидросталькonstruktsiya»"}) == []
+    assert translit_warnings({"target": "завод «Уралхимmash»"}) == ["Уралхимmash"]
+    assert translit_warnings({"city": "Novospasskoye"}) == [], "знакомое чинится словарём"
+    assert translit_warnings({"city": "Kotelnikovo"}) == ["Kotelnikovo"]
+    # латиница в target — норма (суда, бренды), в отличие от city/region
+    assert translit_warnings({"city": "Чёрное море", "target": "танкер Nordic Zenith"}) == []
     print("sanitize-strikes demo OK")
 
 
