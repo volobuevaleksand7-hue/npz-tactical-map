@@ -4,7 +4,15 @@
   // but visible to readers. ponytail: RF_BLOCKED mirrors the list in app.js -- two copies until
   // the test proves this worth a shared module; keep them in sync if you edit either.
   var RF_BLOCKED = /(^|\.)(meduza\.io|themoscowtimes\.com|svoboda\.org|currenttime\.tv|theins\.ru|mediazona\.care|zona\.media|novayagazeta\.eu|verstka\.media|holod\.media|istories\.media|agents\.media|proekt\.media|republic\.ru|tvrain\.tv|bbc\.com|bbc\.co\.uk|dw\.com|reuters\.com|theguardian\.com|cnn\.com|euronews\.com|kyivindependent\.com|kyivpost\.com|pravda\.com\.ua|nv\.ua|focus\.ua|hromadske\.ua|liga\.net|err\.ee|sovanews\.tv)$/i;
+  // 🔴 VPN-промо ВЫКЛЮЧЕНО 09.08.2026. Две недели данных: 0-6 кликов/сут, конверсия
+  // 0.06-0.14% (до свапа партнёрки было 0.36-1.67%), а кабинет RKNoff по рефералке
+  // ref-609952529 не найден с 24.07 — то есть продаж мы не видим в принципе и гоним
+  // трафик бесплатно. Канал на том же месте даёт втрое больше кликов (14-26/сут).
+  // Освободившийся слот дока на картах отдан каналу — это самый заметный элемент сайта.
+  // Вернуть: поставить true (весь код промо цел и на месте).
+  var VPN_ENABLED = false;
   var REF = 'https://t.me/rknoff_bot?start=ref-609952529';
+  var ANTENNA = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 A9 9 0 0 1 19 15"/><path d="M8.2 12.6 A5 5 0 0 1 15.8 12.6"/><circle cx="12" cy="16.4" r="1.6"/><path d="M12 18 V21.4"/></svg>';
   var SHIELD = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20 5.6 V11 c0 5-3.4 8-8 10.4 C8.4 19 4 16 4 11 V5.6 Z"/><circle cx="12" cy="10.4" r="1.7"/><path d="M12 12.1 V14.8"/></svg>';
 
   function host(u) { try { return new URL(u, location.href).hostname.replace(/^www\./, ''); } catch (e) { return ''; } }
@@ -66,6 +74,23 @@
         '<b>' + head + '</b><div class="pp-vpn-b">' + body + '</div></div></div>' +
       '<a class="pp-vpn-btn" href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">' + CTA_TXT + '</a>';
     d.querySelector('.pp-vpn-btn').addEventListener('click', track);
+    return d;
+  }
+
+  // Inline-карточка канала — в том же месте статьи, где стояло VPN-промо, и в тех же
+  // классах (.pp-vpn*), чтобы не заводить второй набор стилей. Возвращает null, если
+  // кнопка канала на странице уже есть — не дублируем (addChannelCta мог отработать раньше).
+  function promoChannel() {
+    if (document.querySelector('a[href*="t.me/npz_karta_online"]')) return null;
+    var d = document.createElement('div');
+    d.className = 'pp-vpn';
+    d.style.cssText = 'max-width:560px;margin:16px auto';
+    d.innerHTML =
+      '<div class="pp-vpn-h"><span class="pp-vpn-ic">' + ANTENNA + '</span>' +
+        '<div class="pp-vpn-t"><span class="pp-vpn-tag">телеграм-канал</span>' +
+        '<b>Сводки об ударах дважды в день</b><div class="pp-vpn-b">Что произошло за ночь и за день: ' +
+        'объекты, регионы, карта и цифры — коротко, без пересказа новостей.</div></div></div>' +
+      '<a class="pp-vpn-btn" href="' + CHANNEL_URL + '" target="_blank" rel="noopener">Подписаться на канал →</a>';
     return d;
   }
 
@@ -156,6 +181,21 @@
     return d;
   }
 
+  // Карточка канала в том же доке, что раньше занимало VPN-промо. Клик считает уже
+  // существующее делегирование trackBotInterest (цель tg_channel_click) — своего
+  // обработчика не заводим.
+  function floatChannel() {
+    var d = document.createElement('div');
+    d.className = 'pp-vpn-float';
+    d.innerHTML =
+      '<button type="button" class="pp-vpn-float-x" aria-label="Свернуть">×</button>' +
+      '<span class="pp-vpn-ic">' + ANTENNA + '</span>' +
+      '<div class="pp-vpn-float-t"><b>Сводки об ударах в Telegram</b>' +
+        '<span>Два раза в день: что за ночь произошло, карта и цифры</span></div>' +
+      '<a class="pp-vpn-float-btn" href="' + CHANNEL_URL + '" target="_blank" rel="noopener">Подписаться на канал →</a>';
+    return d;
+  }
+
   // Топ-3 текстовых донора трафика (замер 24.07) — плавающая карточка вместо inline,
   // глубоко в статье её реже замечают. '/' не в списке: там уже #map (карта на главной).
   var FLOAT_PAGES = ['/skolko-skladov-wildberries-ozon', '/karta-bpla', '/news'];
@@ -222,26 +262,36 @@
     var isMap = !!document.getElementById('map');
     var firstBlocked = isMap ? null : markBlockedLinks();
     if (isMap || FLOAT_PAGES.indexOf(location.pathname.replace(/\/$/, '')) !== -1) {
-      // На картах живут ОБЕ плашки (решение Серёги 15.07): VPN — язычок слева внизу,
-      // карточка свежей сводки (article-nudge.js) — справа. Не конфликтуют: разные стороны
-      // дока (side:'right' у сводки) + реестр __nudgeDocks сдвигает фазы подмигивания.
-      var K = 'vpn_float_x';
+      // На картах живут ОБЕ плашки (решение Серёги 15.07): слева внизу — язычок, справа —
+      // карточка свежей сводки (article-nudge.js). Не конфликтуют: разные стороны дока
+      // (side:'right' у сводки) + реестр __nudgeDocks сдвигает фазы подмигивания.
+      // 09.08.2026: в левом язычке вместо VPN — подписка на канал (см. VPN_ENABLED).
+      var K = 'vpn_float_x'; // ключ localStorage прежний: у кого язычок был свёрнут, таким и останется
       // Всегда стартуем свёрнутым язычком слева: плавающая карточка перекрывала мобильный KPI-бар (v1.19.1).
       var startDocked = true;
-      var f = floatPromo();
+      var f = VPN_ENABLED ? floatPromo() : floatChannel();
       if (startDocked) f.classList.add('nudge-out'); // до вставки в DOM — без анимации-мигания
       document.body.appendChild(f);
-      var d = dock(f, { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'bottom:96px', startDocked: startDocked });
+      var d = dock(f, VPN_ENABLED
+        ? { key: K, label: 'Доступ через VPN', icon: GUARD_SHIELD, pos: 'bottom:96px', startDocked: startDocked }
+        : { key: K, label: 'Сводки в Telegram', icon: ANTENNA, pos: 'bottom:96px', startDocked: startDocked });
       f.querySelector('.pp-vpn-float-x').addEventListener('click', d.collapse);
       return;
     }
+    // Бейджи «🔒 недоступно в РФ» остаются и без VPN-промо: читателю честнее знать, что
+    // ссылка не откроется, даже если мы больше ничего ему не предлагаем.
+    // 🔴 Место, где стояло VPN-промо, не оставляем пустым: addChannelCta показывает кнопку
+    // канала только там, где есть ссылка на ЧУЖОЙ телеграм («уводить некому»), а таких
+    // страниц меньшинство — без этой ветки статьи остались бы вообще без CTA.
+    var card = VPN_ENABLED ? promo(!!firstBlocked) : promoChannel();
+    if (!card) return;
     if (firstBlocked) {
       var box = firstBlocked.closest('li,p,article,section,div') || firstBlocked.parentNode;
-      box.insertAdjacentElement('afterend', promo(true));
+      box.insertAdjacentElement('afterend', card);
     } else {
       var anchor = document.querySelector('.status-grid, .landing-hero, main section, main h2');
-      if (anchor) anchor.insertAdjacentElement('afterend', promo(false));
-      else (document.querySelector('main, article, .content, .container, .wrap') || document.body).appendChild(promo(false));
+      if (anchor) anchor.insertAdjacentElement('afterend', card);
+      else (document.querySelector('main, article, .content, .container, .wrap') || document.body).appendChild(card);
     }
   });
 })();
