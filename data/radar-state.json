@@ -234,6 +234,25 @@
       "last_event_ts": 1786336692,
       "source_text": "10.08.2026 07:38 МСК\nДаниловский район Волгоградская область Фиксации БПЛА"
     },
+    "Краснодарский край": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1786372871,
+      "source_text": "10.08.2026 17:41 МСК\nПриморско-Ахтарск и близлежащие Опасность по БПЛА от РСЧС"
+    },
     "Запорожская область": {
       "bpla": false,
       "bplaDim": false,
@@ -407,6 +426,27 @@
     }
   },
   "cities": [
+    {
+      "key": "черниговской области",
+      "name": "Черниговской области",
+      "lat": 51.491148,
+      "lon": 31.293199,
+      "region": null,
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": true,
+      "fill": "#ea580c",
+      "last_event_ts": null
+    },
     {
       "key": "республика крым|автономная республика крым",
       "name": "Республика Крым",
@@ -1154,6 +1194,28 @@
       "fill": "#e3421a",
       "last_event_ts": 1786349538,
       "source_text": "10.08.2026 11:12 МСК\nДружковка и далее на юго-восток тревога по УАБ"
+    },
+    {
+      "key": "приморско-ахтарск|краснодарский край",
+      "name": "Приморско-Ахтарск",
+      "lat": 46.04847,
+      "lon": 38.17899,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786372871,
+      "source_text": "10.08.2026 17:41 МСК\nПриморско-Ахтарск и близлежащие Опасность по БПЛА от РСЧС"
     },
     {
       "key": "алексин|тульская область",
@@ -2393,6 +2455,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 258013,
+      "text": "Противник готовит массовый запуск БПЛА от Черниговской области",
+      "ts": 1786372912,
+      "time_label": "10.08.2026 17:41 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 258012,
+      "text": "Приморско-Ахтарск и близлежащие\nОпасность по БПЛА от РСЧС",
+      "ts": 1786372871,
+      "time_label": "10.08.2026 17:41 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 80713,
       "text": "Липецкая область\nОтбой опасности по БПЛА",
       "ts": 1786372762,
@@ -3015,22 +3093,6 @@
       "time_label": "10.08.2026 14:54 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 80688,
-      "text": "Анапский район\nКраснодарский край\nОпасность по БПЛА\nПовторно",
-      "ts": 1786362834,
-      "time_label": "10.08.2026 14:53 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 257962,
-      "text": "Анапский район, Таманский полуостров, Темрюкский район, Крымский район и близлежащие тревога по БПЛА и далее в направлении Ильский, Афипский или Новороссийск",
-      "ts": 1786362700,
-      "time_label": "10.08.2026 14:51 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3040,15 +3102,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786372762,
-  "last_event_at": "2026-08-10T14:39:22Z",
-  "fetched_at": "2026-08-10T14:40:03.312929Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1786372912,
+  "last_event_at": "2026-08-10T14:41:52Z",
+  "fetched_at": "2026-08-10T14:50:02.781936Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-10T14:40:03.312929Z",
-    "source_age_seconds": 41,
-    "city_count": 79,
-    "region_count": 21,
+    "generated_at": "2026-08-10T14:50:02.781936Z",
+    "source_age_seconds": 490,
+    "city_count": 81,
+    "region_count": 22,
     "feed_count": 80
   }
 }
