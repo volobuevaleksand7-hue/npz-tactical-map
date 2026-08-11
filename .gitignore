@@ -22,3 +22,10 @@ __pycache__/
 /run_*.py
 /extract_*.py
 /crimea_*.py
+# 09 и 11.08.2026 — тот же класс дважды: в корне и в agents/ появлялись update_*.py,
+# update_rotation_*.jq от чужих сессий и держали дерево hermes грязным (git pull --rebase
+# падает → синк встаёт у ВСЕХ агентов). Ловим и в корне, и в agents/.
+/update_*.py
+/update_*.jq
+agents/update_*.py
+agents/update_*.jq
