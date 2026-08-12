@@ -693,7 +693,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1786502659,
@@ -962,28 +962,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1786475261,
       "source_text": "11.08.2026 22:07 МСК\nНовоазовск ДНР тревога по БПЛА и далее на Таганрог и близлежащие"
-    },
-    {
-      "key": "акимовка|запорожская область",
-      "name": "Акимовка",
-      "lat": 46.7011,
-      "lon": 35.16334,
-      "region": "Запорожская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1786462841,
-      "source_text": "11.08.2026 18:40 МСК\nДорожное направлении Акимовка - Мелитополь Опасность по БПЛА Хорнет"
     },
     {
       "key": "абинск|краснодарский край",
@@ -4618,20 +4596,24 @@
       "source_text": "11.08.2026 21:21 МСК\nИвнянский район Белгородская область опасность по БПЛА"
     }
   },
-  "airport_markers": [
-    {
-      "key": "калуга (грабцево)",
-      "name": "КАЛУГА",
-      "match_text": "КАЛУГА (Грабцево)",
-      "lat": 54.549999,
-      "lon": 36.366669,
-      "closed": true,
-      "last_event_ts": 1786503616,
-      "city": "Калуга",
-      "source_text": "🔻\nАэропорт\nКАЛУГА\n(Грабцево)\n🚫\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n🧑‍🧑‍🧒‍🧒\nОграничения необходимы для обеспечения безопасности полетов.\n✈️\nГоворит Росавиация | MAX"
-    }
-  ],
+  "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 258978,
+      "text": "Селидово\nпролет БПЛА Хорнет на юг\nДНР",
+      "ts": 1786506447,
+      "time_label": "12.08.2026 06:47 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 258977,
+      "text": "Белгород\nБелгородский район\nУгроза атаки БПЛА",
+      "ts": 1786506323,
+      "time_label": "12.08.2026 06:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 258976,
       "text": "Ростовская область\nОтбой ракетной опасности",
@@ -5255,22 +5237,6 @@
       "time_label": "12.08.2026 04:21 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 79602,
-      "text": "Анапа, Супсех, Анапский, Сукко, Большой Утриш, Витязево, Цибанобалка, Анапская, Геленджик, Кабардинка, Новороссийск, Джанхот, Краснодарский край - опасность по БПЛА ещё действует.Продолжаются фиксации БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1786497604,
-      "time_label": "12.08.2026 04:20 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 81104,
-      "text": "Геленджик\nКраснодарский край\nПродолжается работа ПВО по БПЛА\nМеры безопасности!",
-      "ts": 1786497213,
-      "time_label": "12.08.2026 04:13 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5280,14 +5246,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786505628,
-  "last_event_at": "2026-08-12T03:33:48Z",
-  "fetched_at": "2026-08-12T03:40:04.026671Z",
+  "timestamp": 1786506447,
+  "last_event_at": "2026-08-12T03:47:27Z",
+  "fetched_at": "2026-08-12T03:50:03.338748Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-12T03:40:04.026671Z",
-    "source_age_seconds": 376,
-    "city_count": 137,
+    "generated_at": "2026-08-12T03:50:03.338748Z",
+    "source_age_seconds": 156,
+    "city_count": 136,
     "region_count": 19,
     "feed_count": 80
   }
