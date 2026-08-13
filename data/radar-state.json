@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786627678,
-      "source_text": "13.08.2026 16:27 МСК\nМосковская область Опасность по БПЛА"
+      "last_event_ts": 1786630867,
+      "source_text": "13.08.2026 17:21 МСК\nГО Подольск Московская область Фиксация БПЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -174,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786628725,
-      "source_text": "13.08.2026 16:45 МСК\nРязанская область Опасность по БПЛА"
+      "last_event_ts": 1786631229,
+      "source_text": "13.08.2026 17:27 МСК\nСкопинский район Рязанская область Фиксация БПЛА"
     },
     "Липецкая область": {
       "bpla": false,
@@ -1063,6 +1063,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1786613173,
       "source_text": "13.08.2026 12:26 МСК\nДонецк, Еленовка, Докучаевск ДНР и близлежащие Опасность по БПЛА"
+    },
+    {
+      "key": "о подольск|московская область",
+      "name": "О Подольск",
+      "lat": 55.3524887,
+      "lon": 37.4439535,
+      "region": "Московская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786630867,
+      "source_text": "13.08.2026 17:21 МСК\nГО Подольск Московская область Фиксация БПЛА"
     },
     {
       "key": "рубежное|луганская народная республика",
@@ -4410,6 +4432,28 @@
       "last_event_ts": 1786619217,
       "source_text": "13.08.2026 14:06 МСК\nНетьинка, Брянский район фиксация БПЛА в направлении Дятьково Брянская область"
     },
+    "RUS.59.26_1": {
+      "gid_2": "RUS.59.26_1",
+      "name_ru": "Скопинский район",
+      "region_ru": "Рязанская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786631229,
+      "source_text": "13.08.2026 17:27 МСК\nСкопинский район Рязанская область Фиксация БПЛА"
+    },
     "RUS.34.10_1": {
       "gid_2": "RUS.34.10_1",
       "name_ru": "Динский район",
@@ -4513,6 +4557,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 81542,
+      "text": "Скопинский район\nРязанская область\nФиксация БПЛА",
+      "ts": 1786631229,
+      "time_label": "13.08.2026 17:27 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 81541,
+      "text": "ГО Подольск\nМосковская область\nФиксация БПЛА",
+      "ts": 1786630867,
+      "time_label": "13.08.2026 17:21 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 259870,
       "text": "От Мелитополь в направлении Бердянск фиксации БПЛА\nЗапорожская область РФ",
@@ -5136,22 +5196,6 @@
       "time_label": "13.08.2026 15:00 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 259818,
-      "text": "Балаклавская ТЭС\nФиксации БПЛА от Дергачей",
-      "ts": 1786622402,
-      "time_label": "13.08.2026 15:00 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 81518,
-      "text": "Сочи и близлежащие\nКраснодарский край\nОпасность по БПЛА",
-      "ts": 1786622382,
-      "time_label": "13.08.2026 14:59 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5161,14 +5205,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786630651,
-  "last_event_at": "2026-08-13T14:17:31Z",
-  "fetched_at": "2026-08-13T14:20:12.772713Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1786631229,
+  "last_event_at": "2026-08-13T14:27:09Z",
+  "fetched_at": "2026-08-13T14:30:15.714641Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-13T14:20:12.772713Z",
-    "source_age_seconds": 161,
-    "city_count": 130,
+    "generated_at": "2026-08-13T14:30:15.714641Z",
+    "source_age_seconds": 186,
+    "city_count": 131,
     "region_count": 22,
     "feed_count": 80
   }
