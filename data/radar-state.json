@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786747713,
-      "source_text": "15.08.2026 01:48 МСК\nНовороссийск Краснодарский край С моря тревога по БПЛА"
+      "last_event_ts": 1786748580,
+      "source_text": "15.08.2026 02:03 МСК\nТуапсе Сочи опасность по БПЛА Краснодарский край"
     },
     "Калужская область": {
       "bpla": false,
@@ -554,8 +554,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786748292,
-      "source_text": "15.08.2026 01:58 МСК\nСевастополь Республика Крым Тревога по БПЛА"
+      "last_event_ts": 1786748688,
+      "source_text": "15.08.2026 02:04 МСК\nОт Маловидное/Бахчисарай по тавриде в сторону Севастополя наблюдаются фиксации БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -2182,8 +2182,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786729895,
-      "source_text": "14.08.2026 20:51 МСК\nТуапсе и близлежащие Краснодарский край Опасность по БПЛА сохраняется"
+      "last_event_ts": 1786748580,
+      "source_text": "15.08.2026 02:03 МСК\nТуапсе Сочи опасность по БПЛА Краснодарский край"
     },
     {
       "key": "кашира|московская область",
@@ -3071,9 +3071,9 @@
       "lat": 44.754571,
       "lon": 33.854009,
       "region": "Автономная Республика Крым",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -3084,8 +3084,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786712891,
-      "source_text": "14.08.2026 16:08 МСК\nОт Песчаное в направлении Симферополь, Бахчисарай ещё БПЛА. Очень высоко"
+      "last_event_ts": 1786748688,
+      "source_text": "15.08.2026 02:04 МСК\nОт Маловидное/Бахчисарай по тавриде в сторону Севастополя наблюдаются фиксации БПЛА"
     },
     {
       "key": "дебальцево|донецкая народная республика",
@@ -3335,9 +3335,9 @@
       "lat": 43.59699,
       "lon": 39.72477,
       "region": "Краснодарский край",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -3348,8 +3348,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786735801,
-      "source_text": "14.08.2026 22:30 МСК\nСочи Краснодарский край Работа ПВО по БПЛА"
+      "last_event_ts": 1786748580,
+      "source_text": "15.08.2026 02:03 МСК\nТуапсе Сочи опасность по БПЛА Краснодарский край"
     },
     {
       "key": "севастополь|севастополь",
@@ -6271,8 +6271,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -6448,6 +6448,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 260636,
+      "text": "От Маловидное/Бахчисарай по тавриде в сторону Севастополя наблюдаются фиксации БПЛА",
+      "ts": 1786748688,
+      "time_label": "15.08.2026 02:04 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 260635,
+      "text": "От Сак до Севастополя\nпо побережью\nмногочисленные фиксации БПЛА",
+      "ts": 1786748633,
+      "time_label": "15.08.2026 02:03 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 260634,
+      "text": "Туапсе\nСочи\nопасность по БПЛА\nКраснодарский край",
+      "ts": 1786748580,
+      "time_label": "15.08.2026 02:03 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 260633,
       "text": "Севастополь\nРеспублика Крым\nТревога по БПЛА",
@@ -7063,30 +7087,6 @@
       "time_label": "15.08.2026 00:26 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 260606,
-      "text": "Керченский полуостров\nТревога по БПЛА\nРеспублика Крым",
-      "ts": 1786742800,
-      "time_label": "15.08.2026 00:26 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 82026,
-      "text": "Скопинский район\nРязанская область\nФиксация группы БПЛА в вашем направление",
-      "ts": 1786742784,
-      "time_label": "15.08.2026 00:26 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 260605,
-      "text": "Московская область\nСаратовская область\nПензенская область\nОпасность по БПЛА",
-      "ts": 1786742774,
-      "time_label": "15.08.2026 00:26 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -7096,13 +7096,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786748292,
-  "last_event_at": "2026-08-14T22:58:12Z",
-  "fetched_at": "2026-08-14T23:00:05.645818Z",
+  "timestamp": 1786748688,
+  "last_event_at": "2026-08-14T23:04:48Z",
+  "fetched_at": "2026-08-14T23:10:04.094114Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-08-14T23:00:05.645818Z",
-    "source_age_seconds": 113,
+    "generated_at": "2026-08-14T23:10:04.094114Z",
+    "source_age_seconds": 316,
     "city_count": 149,
     "region_count": 37,
     "feed_count": 80
