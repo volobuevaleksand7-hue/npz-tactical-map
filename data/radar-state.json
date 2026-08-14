@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786674783,
-      "source_text": "14.08.2026 05:33 МСК\nСлавянск-на-Кубани Краснодарский край Сбитие БПЛА Меры безопасности"
+      "last_event_ts": 1786676197,
+      "source_text": "14.08.2026 05:56 МСК\nДагомыс(Сочи) И близлежащие Тревога по БПЛА Краснодарский край"
     },
     "Калужская область": {
       "bpla": false,
@@ -294,7 +294,7 @@
     "Мордовия": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -306,9 +306,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1786675331,
-      "source_text": "14.08.2026 05:42 МСК\nРеспублика Мордовия Внимание по БПЛА"
+      "fill": "#d8c06a",
+      "last_event_ts": 1786675784,
+      "source_text": "14.08.2026 05:49 МСК\nРеспублика Мордовия Опасность по БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -516,8 +516,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786669830,
-      "source_text": "14.08.2026 04:10 МСК\nНижегородская область Опасность по БПЛА"
+      "last_event_ts": 1786676320,
+      "source_text": "14.08.2026 05:58 МСК\nВознесенский район Нижегородская область Фиксация БПЛА"
     },
     "Костромская область": {
       "bpla": false,
@@ -1871,7 +1871,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1786672366,
@@ -4164,6 +4164,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1786664486,
       "source_text": "14.08.2026 02:41 МСК\nЛокоть Брасово Карачев Брянск И ближайшее Опасность по БПЛА сохраняется Брянская область"
+    },
+    {
+      "key": "дагомыс(сочи)|краснодарский край",
+      "name": "Дагомыс(Сочи)",
+      "lat": 43.6537043,
+      "lon": 39.6532575,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786676197,
+      "source_text": "14.08.2026 05:56 МСК\nДагомыс(Сочи) И близлежащие Тревога по БПЛА Краснодарский край"
     }
   ],
   "districts": {
@@ -4276,6 +4298,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1786675088,
       "source_text": "14.08.2026 05:38 МСК\nСараевский район Рязанская область Фиксация БПЛА"
+    },
+    "RUS.47.55_1": {
+      "gid_2": "RUS.47.55_1",
+      "name_ru": "Вознесенский район",
+      "region_ru": "Нижегородская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1786676320,
+      "source_text": "14.08.2026 05:58 МСК\nВознесенский район Нижегородская область Фиксация БПЛА"
     },
     "RUS.8.19_1": {
       "gid_2": "RUS.8.19_1",
@@ -6889,6 +6933,46 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 81770,
+      "text": "Вознесенский район\nНижегородская область\nФиксация БПЛА",
+      "ts": 1786676320,
+      "time_label": "14.08.2026 05:58 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 260097,
+      "text": "Дагомыс(Сочи)\nИ близлежащие\nТревога по БПЛА\nКраснодарский край",
+      "ts": 1786676197,
+      "time_label": "14.08.2026 05:56 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 260096,
+      "text": "Тамбовская область\nНовгородская область\nвнимание по бпла",
+      "ts": 1786676054,
+      "time_label": "14.08.2026 05:54 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 260095,
+      "text": "Тульская область\nРязанская область\nТверская область\nМосковская область\nПсковская область\nвнимание по бпла",
+      "ts": 1786675829,
+      "time_label": "14.08.2026 05:50 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 81769,
+      "text": "Республика Мордовия\nОпасность по БПЛА",
+      "ts": 1786675784,
+      "time_label": "14.08.2026 05:49 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 81768,
       "text": "Сасовский район\nРязанская область\nФиксация БПЛА",
       "ts": 1786675685,
@@ -7487,46 +7571,6 @@
       "time_label": "14.08.2026 04:13 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 81699,
-      "text": "Владимирская область\nОпасность по БПЛА",
-      "ts": 1786669919,
-      "time_label": "14.08.2026 04:11 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 260087,
-      "text": "Экстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: Апшеронский, Белореченский, Горячий ключ, Динский, Кореновский, Краснодар, Туапсинский, Усть-Лабинский  районы.\nКраснодарский край",
-      "ts": 1786669915,
-      "time_label": "14.08.2026 04:11 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 81698,
-      "text": "Ивановская область\nОпасность по БПЛА",
-      "ts": 1786669909,
-      "time_label": "14.08.2026 04:11 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 81697,
-      "text": "Нижегородская область\nОпасность по БПЛА",
-      "ts": 1786669830,
-      "time_label": "14.08.2026 04:10 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 81696,
-      "text": "Малоярославецкий район\nКалужская область\nФиксация группы БПЛА",
-      "ts": 1786669805,
-      "time_label": "14.08.2026 04:10 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7536,14 +7580,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786675685,
-  "last_event_at": "2026-08-14T02:48:05Z",
-  "fetched_at": "2026-08-14T02:50:08.720943Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1786676320,
+  "last_event_at": "2026-08-14T02:58:40Z",
+  "fetched_at": "2026-08-14T03:00:19.781643Z",
+  "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-08-14T02:50:08.720943Z",
-    "source_age_seconds": 123,
-    "city_count": 157,
+    "generated_at": "2026-08-14T03:00:19.781643Z",
+    "source_age_seconds": 99,
+    "city_count": 158,
     "region_count": 37,
     "feed_count": 80
   }
