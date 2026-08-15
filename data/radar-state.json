@@ -6,25 +6,6 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
-    "Астраханская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1786793684,
-      "source_text": "15.08.2026 14:34 МСК\nАстраханская область Ракетная опасность"
-    },
     "Орловская область": {
       "bpla": false,
       "bplaDim": false,
@@ -269,8 +250,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1786792220,
-      "source_text": "15.08.2026 11:31 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла\n\n15.08.2026 14:10 МСК\nКурская область Орловская область Тревога по БПЛА Повторно внимание по бпла"
+      "last_event_ts": 1786795024,
+      "source_text": "15.08.2026 11:31 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла\n\n15.08.2026 14:57 МСК\nФиксация БПЛА в сторону Курчатова от Лобазовски Октябрьский район Курская область"
     },
     "Брянская область": {
       "bpla": false,
@@ -2508,8 +2489,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786789307,
-      "source_text": "15.08.2026 13:21 МСК\nОктябрьский район, д. Лобазовка, фиксации БПЛА в направлении Прямицыно Курская область"
+      "last_event_ts": 1786795024,
+      "source_text": "15.08.2026 14:57 МСК\nФиксация БПЛА в сторону Курчатова от Лобазовски Октябрьский район Курская область"
     },
     "RUS.64.18_1": {
       "gid_2": "RUS.64.18_1",
@@ -2713,6 +2694,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 260912,
+      "text": "Балаклавская ТЭС и близлежащие\nОпасность по БПЛА\nПовторно",
+      "ts": 1786795048,
+      "time_label": "15.08.2026 14:57 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 260911,
+      "text": "Фиксация БПЛА в сторону Курчатова от Лобазовски Октябрьский район\nКурская область",
+      "ts": 1786795024,
+      "time_label": "15.08.2026 14:57 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 82182,
+      "text": "Астраханская область\nОтбой ракетной опасности\nЛожная тревога",
+      "ts": 1786794675,
+      "time_label": "15.08.2026 14:51 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 260910,
       "text": "Торское ЛНР РСЗО!",
@@ -3328,30 +3333,6 @@
       "time_label": "15.08.2026 13:11 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 260841,
-      "text": "Ивнянский район\nОпасность по БПЛА",
-      "ts": 1786788597,
-      "time_label": "15.08.2026 13:09 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 260840,
-      "text": "Север Крыма опасность по БПЛА",
-      "ts": 1786788557,
-      "time_label": "15.08.2026 13:09 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 260839,
-      "text": "Пантелеймоновка, Енакиево ДНР и близлежащие\nОпасность по БПЛА",
-      "ts": 1786788549,
-      "time_label": "15.08.2026 13:09 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3361,15 +3342,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786794565,
-  "last_event_at": "2026-08-15T11:49:25Z",
-  "fetched_at": "2026-08-15T11:50:03.714494Z",
-  "poll_interval_sec": 40,
+  "timestamp": 1786795048,
+  "last_event_at": "2026-08-15T11:57:28Z",
+  "fetched_at": "2026-08-15T12:00:16.726413Z",
+  "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-08-15T11:50:03.714494Z",
-    "source_age_seconds": 38,
+    "generated_at": "2026-08-15T12:00:16.726413Z",
+    "source_age_seconds": 168,
     "city_count": 88,
-    "region_count": 17,
+    "region_count": 16,
     "feed_count": 80
   }
 }
