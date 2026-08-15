@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-14T23:20Z",
+ "generated_at": "2026-08-15T00:05Z",
  "data_mode": "СЛУХ / НЕПРОВЕРЕНО (вариант B)",
  "disclaimer": "Авто-детектор кандидатов в удары из ленты radar-map.ru. НЕ боевые данные, НЕ публикуется автоматически. Только для ручного/Hermes-подтверждения перед переносом в strikes.json.",
  "candidates": [
@@ -1138,11 +1138,12 @@
    "detail": "[Newsader] ВЗОРВАН КЛЮЧЕВОЙ НПЗ ГАЗПРОМА: ВЕРНУЛИСЬ БЕНЗИНОВЫЕ ОЧЕРЕДИ!",
    "source_url": "https://www.youtube.com/watch?v=cliU8_7Phco",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "cliU8_7Phco",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   },
   {
    "date": "2026-08-14",
