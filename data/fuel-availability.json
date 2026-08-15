@@ -1,20 +1,20 @@
 {
   "meta": {
-    "generated_at": "2026-08-15T16:58:36.839102Z",
+    "generated_at": "2026-08-15T17:00:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "2026-08-15T16:58:36.839178Z: Нет новостей за последние 72 часа, статусы не изменены"
+    "rotation_pass": "2026-08-15T17:00:00Z: Ротационный проход. Обновлены: Липецкая область (возврат чёт-нечета 13.08). Биржевые цены АИ-95 СПбМТСБ актуализированы."
   },
   "exchange": {
-    "ai95_spb_rub_t": 67383,
+    "ai95_spb_rub_t": 63401,
     "ai92_spb_rub_t": 61767,
     "diesel_spb_rub_t": 60344,
     "trend": "falling",
-    "updated": "2026-08-14",
-    "source_url": "https://ru.themoscowtimes.com/2026/08/14/birzhevye-prodazhi-benzina-ai-92-v-rf-upali-s-nachala-avgusta-na-19-a203538",
-    "notes": "14.08: СПбМТСБ цены. АИ-92: 61.767 тыс. ₽/т (-0.94%), АИ-95: 67.383 тыс. ₽/т (-1.26%), ДТ: 60.344 тыс. ₽/т (+0.69%). Объём продаж ↓19-20% с начала августа (атаки БПЛА на НПЗ). Тренд: falling."
+    "updated": "2026-08-15",
+    "source_url": "https://ru.themoscowtimes.com/2026/08/10/birzhevye-prodazhi-benzina-v-rf-upali-s-nachala-avgusta-diztopliva-vyrosli-a203090",
+    "notes": "15.08: СПбМТСБ. АИ-95: 63.401 тыс. ₽/т (+1.16% vs 14.08). АИ-92: 61.767 тыс. ₽/т. ДТ: 60.344 тыс. ₽/т. Продажи бензина упали на 23.5% с конца июля. Объём ↓19-20% с начала августа (атаки БПЛА на НПЗ). Тренд: falling."
   },
   "regions": [
     {
@@ -1145,32 +1145,27 @@
       "lat": 52.61,
       "lon": 39.57,
       "level": "critical",
-      "updated": "2026-08-15T00:00:00Z",
+      "updated": "2026-08-15T17:00:00Z",
       "networks": [
         {
           "name": "Роснефть, Лукойл, Газпром, Teboil",
           "status": "limited",
           "level": "critical",
           "limit_l": null,
-          "note": "09-11.08: «Лукойл» и Teboil резко сократили поставки (подтвердил губернатор 11.08), «Роснефть» ввозит малыми партиями — распродажа за считаные часы; ВИНК-АЗС продают по паре часов в день с ограничением объёма отпуска. Утром огромные очереди, к обеду бензин исчезает."
+          "note": "13-15.08: Система «чёт-нечет» возобновлена с 13.08 (Газпромнефть, Лукойл, Teboil, Роснефть). Дефицит может сохраниться до конца августа. Утром огромные очереди, к обеду бензин исчезает."
         }
       ],
-      "queues_hours": 0.1,
-      "ai95_price_rub": 71,
-      "diesel_price_rub": 76,
+      "queues_hours": 1.5,
+      "ai95_price_rub": 105,
+      "diesel_price_rub": 95,
       "source_urls": [
+        "https://semnasem.org/news/2026/08/12/lipeckaya-oblast-pervoj-v-rossii-vernula-prodazhu-benzina-po-sisteme-chet-nechet-posle-ego-otmeny",
+        "https://abireg.ru/newsitem/116364/",
         "https://newdaynews.ru/automobile/877317.html",
         "https://gorod48.ru/news/1985751/",
-        "https://finance.rambler.ru/economics/56881756-benzin-snova-ischez-s-lipetskih-zapravok/",
-        "https://www.kommersant.ru/doc/8876218",
-        "https://auto.rambler.ru/navigator/56885089-volonterov-vernuli-na-lipetskie-zapravki-regulirovat-dvizhenie/",
-        "https://www.lipetsk.kp.ru/daily/277805/5287888/",
-        "https://www.kommersant.ru/doc/8877325",
-        "https://www.pravda.ru/news/districts/2387672-fuel-deficit-lipetsk/",
-        "https://abireg.ru/newsitem/116316/",
-        "https://www.bfm.ru/news/614853"
+        "https://www.kommersant.ru/doc/8876218"
       ],
-      "note": " 11.08 (Ъ 13:39): губернатор Артамонов — ситуация напряжённая, улучшений не ожидается в ближайшие 1-2 недели; региону выделяется суточный лимит топлива, после выработки АЗС ждут следующей поставки; режим «чет-нечет» ситуацию не изменит; призыв не «доливать» 10 л до полного бака. 11.08 (Pravda 13:05): на части АЗС цены выше 100 ₽/л (АИ-92 — 105 ₽/л на ул. Вермишева, очередь ~300 м), Teboil на Циолковского — только дизель, заезд к «Роснефти» на Московской перекрыт; мэр вернул волонтёров к колонкам. Ранее 10.08: волонтёры на заправках; 09.08: утром огромные очереди, к обеду бензин исчез."
+      "note": "15.08: Возврат к системе «чёт-нечет» с 13 августа на Газпромнефть, Лукойл, Teboil, Роснефть. Липецкая область — первая, вернувшаяся к чёт-нечету после его отмены. Дефицит может сохраниться до конца августа."
     },
     {
       "region": "Брянская область",
