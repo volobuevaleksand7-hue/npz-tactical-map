@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-15T23:20Z",
+ "generated_at": "2026-08-16T00:05Z",
  "data_mode": "СЛУХ / НЕПРОВЕРЕНО (вариант B)",
  "disclaimer": "Авто-детектор кандидатов в удары из ленты radar-map.ru. НЕ боевые данные, НЕ публикуется автоматически. Только для ручного/Hermes-подтверждения перед переносом в strikes.json.",
  "candidates": [
@@ -1183,11 +1183,12 @@
    "detail": "[Newsader] МИНУС 90% МОРСКОГО ЗЕРНО-ЭКСПОРТА: ВЫБИТ ТЕРМИНАЛ В УСТЬ-ЛУГЕ!",
    "source_url": "https://www.youtube.com/watch?v=eKujFNgQgEM",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "eKujFNgQgEM",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   }
  ]
 }
