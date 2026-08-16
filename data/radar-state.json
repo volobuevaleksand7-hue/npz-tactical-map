@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786921695,
-      "source_text": "17.08.2026 02:08 МСК\nЗолотая Коса, Неклиновский район, Ростовская область - фиксации БПЛА, возможно в сторону Таганрог, залива. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1786921891,
+      "source_text": "17.08.2026 02:11 МСК\nНеклиновский район Таганрог Таганрогский залив Тревога по БПЛА Ростовская область"
     },
     "Волгоградская область": {
       "bpla": false,
@@ -895,7 +895,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1786918256,
@@ -1787,9 +1787,9 @@
       "lat": 47.23627,
       "lon": 38.9053,
       "region": "Ростовская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1800,8 +1800,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786921695,
-      "source_text": "17.08.2026 02:08 МСК\nЗолотая Коса, Неклиновский район, Ростовская область - фиксации БПЛА, возможно в сторону Таганрог, залива. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1786921891,
+      "source_text": "17.08.2026 02:11 МСК\nНеклиновский район Таганрог Таганрогский залив Тревога по БПЛА Ростовская область"
     },
     {
       "key": "республика крым|автономная республика крым",
@@ -4383,9 +4383,9 @@
       "gid_2": "RUS.58.29_1",
       "name_ru": "Неклиновский район",
       "region_ru": "Ростовская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -4398,8 +4398,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786921695,
-      "source_text": "17.08.2026 02:08 МСК\nЗолотая Коса, Неклиновский район, Ростовская область - фиксации БПЛА, возможно в сторону Таганрог, залива. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1786921891,
+      "source_text": "17.08.2026 02:11 МСК\nНеклиновский район Таганрог Таганрогский залив Тревога по БПЛА Ростовская область"
     },
     "RU.CITY.VGG.SOVETSKY": {
       "gid_2": "RU.CITY.VGG.SOVETSKY",
@@ -5187,6 +5187,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 261928,
+      "text": "Неклиновский район\nТаганрог\nТаганрогский залив\nТревога по БПЛА\nРостовская область",
+      "ts": 1786921891,
+      "time_label": "17.08.2026 02:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 80718,
       "text": "Золотая Коса, Неклиновский район, Ростовская область - фиксации БПЛА, возможно в сторону Таганрог, залива.\n📡\nЛокатор России -\n@locatorru",
       "ts": 1786921695,
@@ -5817,14 +5825,6 @@
       "time_label": "17.08.2026 00:38 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 261903,
-      "text": "Вилино\nОтрадное\nУгловое\nИ далее на  Бахчисарай\nСевастополь\nТревога по БПЛА",
-      "ts": 1786916307,
-      "time_label": "17.08.2026 00:38 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -5834,13 +5834,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786921695,
-  "last_event_at": "2026-08-16T23:08:15Z",
-  "fetched_at": "2026-08-16T23:10:02.709188Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1786921891,
+  "last_event_at": "2026-08-16T23:11:31Z",
+  "fetched_at": "2026-08-16T23:20:03.245229Z",
+  "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-16T23:10:02.709188Z",
-    "source_age_seconds": 107,
+    "generated_at": "2026-08-16T23:20:03.245229Z",
+    "source_age_seconds": 512,
     "city_count": 142,
     "region_count": 25,
     "feed_count": 80
