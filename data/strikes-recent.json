@@ -1,7 +1,7 @@
 {
  "_comment": "ХВОСТ-ИНДЕКС архива за 10 дней — только для чтения агентом, только ключевые поля (полные записи — в data/strikes.json, его правит agents/merge-strikes-inbox.py). Новые удары писать в data/strikes-inbox.json.",
  "since": "2026-08-06",
- "count": 21,
+ "count": 24,
  "strikes": [
   {
    "date": "2026-08-14",
@@ -169,6 +169,30 @@
    "city": "Тверь",
    "region": "Тверская область",
    "target": "логистический центр Wildberries (Калининский район)",
+   "confidence": "reported"
+  },
+  {
+   "date": "2026-08-15",
+   "time": "ночь",
+   "city": "Самара",
+   "region": "Самарская область",
+   "target": "ракетно-космический центр Progress (Roscosmos) и завод Aviakor",
+   "confidence": "reported"
+  },
+  {
+   "date": "2026-08-16",
+   "time": "02:45",
+   "city": "Домодедово",
+   "region": "Московская область",
+   "target": "жилые дома и складской комплекс",
+   "confidence": "reported"
+  },
+  {
+   "date": "2026-08-16",
+   "time": "ночь",
+   "city": "Подольск",
+   "region": "Московская область",
+   "target": "логистический центр 3PL (рядом с комплексом Wildberries Коледино)",
    "confidence": "reported"
   }
  ]
