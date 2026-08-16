@@ -592,8 +592,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786849601,
-      "source_text": "16.08.2026 06:06 МСК\nГО Домодедово Московская область Фиксация БПЛА"
+      "last_event_ts": 1786850072,
+      "source_text": "16.08.2026 06:14 МСК\nГО Домодедово Московская область Сбитие БПЛА"
     }
   },
   "cities": [
@@ -3583,11 +3583,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786849601,
-      "source_text": "16.08.2026 06:06 МСК\nГО Домодедово Московская область Фиксация БПЛА"
+      "last_event_ts": 1786850072,
+      "source_text": "16.08.2026 06:14 МСК\nГО Домодедово Московская область Сбитие БПЛА"
     },
     {
       "key": "узловая|тульская область",
@@ -3896,28 +3896,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1786824855,
       "source_text": "15.08.2026 23:14 МСК\nМарковка и близлежащие ЛНР Тревога по БПЛА"
-    },
-    {
-      "key": "юнокоммунаровск|донецкая народная республика",
-      "name": "Юнокоммунаровск",
-      "lat": 48.2214,
-      "lon": 38.28365,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1786806983,
-      "source_text": "15.08.2026 18:16 МСК\nКарло, Енакиево, Юнокоммунаровск ДНР и близлежащие Опасность по БПЛА и ФПВ"
     },
     {
       "key": "острогожск|воронежская область",
@@ -4661,7 +4639,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1786846378,
@@ -7193,6 +7171,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 82512,
+      "text": "ГО Домодедово\nМосковская область\nСбитие БПЛА",
+      "ts": 1786850072,
+      "time_label": "16.08.2026 06:14 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 261366,
+      "text": "Воронеж и близлежащие\nТревога по БПЛА, повторно",
+      "ts": 1786849852,
+      "time_label": "16.08.2026 06:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 80615,
       "text": "Воронеж, опасность по БПЛА сохраняется.\n📡\nЛокатор России -\n@locatorru",
       "ts": 1786849691,
@@ -7815,22 +7809,6 @@
       "time_label": "16.08.2026 04:26 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 82457,
-      "text": "Алексин\nТульская область\nРабота ПВО по БПЛА\nМеры безопасности",
-      "ts": 1786843544,
-      "time_label": "16.08.2026 04:25 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 82456,
-      "text": "Алексин\nТульская область\nСбитие БПЛА",
-      "ts": 1786843486,
-      "time_label": "16.08.2026 04:24 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7840,14 +7818,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786849691,
-  "last_event_at": "2026-08-16T03:08:11Z",
-  "fetched_at": "2026-08-16T03:10:04.458715Z",
+  "timestamp": 1786850072,
+  "last_event_at": "2026-08-16T03:14:32Z",
+  "fetched_at": "2026-08-16T03:20:13.496063Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-16T03:10:04.458715Z",
-    "source_age_seconds": 113,
-    "city_count": 187,
+    "generated_at": "2026-08-16T03:20:13.496063Z",
+    "source_age_seconds": 341,
+    "city_count": 186,
     "region_count": 31,
     "feed_count": 80
   }
