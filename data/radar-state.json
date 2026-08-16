@@ -63,25 +63,6 @@
       "last_event_ts": 1786849017,
       "source_text": "16.08.2026 05:56 МСК\nМосковская область Тверская область Тревога по БПЛА сохраняется внимание по бпла"
     },
-    "Чувашия": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1786835560,
-      "source_text": "16.08.2026 02:12 МСК\nРеспублика Чувашия Опасность по БПЛА"
-    },
     "Адыгея": {
       "bpla": false,
       "bplaDim": false,
@@ -119,25 +100,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1786849132,
       "source_text": "16.08.2026 05:58 МСК\nКаменский район, Миллеровский район, Ростовская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
-    },
-    "Самарская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1786835935,
-      "source_text": "16.08.2026 02:18 МСК\nСамарская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     "Волгоградская область": {
       "bpla": false,
@@ -3637,28 +3599,6 @@
       "source_text": "16.08.2026 03:59 МСК\nПолушкино, Ступинский район, Московская область - пролёты БПЛА в сторону Домодедово. Много. 📡 Локатор России - @locatorru"
     },
     {
-      "key": "белогорск|автономная республика крым",
-      "name": "Белогорск",
-      "lat": 45.05679,
-      "lon": 34.60386,
-      "region": "Автономная Республика Крым",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1786810579,
-      "source_text": "15.08.2026 19:16 МСК\nОт Белогорск в направлении Симферополь (Таврическая ТЭС) фиксация БПЛА"
-    },
-    {
       "key": "сухиничи|калужская область",
       "name": "Сухиничи",
       "lat": 54.1012793,
@@ -6822,6 +6762,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 82520,
+      "text": "Самарская область\nОтбой опасности по БПЛА",
+      "ts": 1786853495,
+      "time_label": "16.08.2026 07:11 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 82519,
+      "text": "Республика Чувашия\nОтбой опасности по БПЛА",
+      "ts": 1786853398,
+      "time_label": "16.08.2026 07:09 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 82518,
       "text": "Рязанская область\nОтбой опасности по БПЛА",
       "ts": 1786853173,
@@ -7444,22 +7400,6 @@
       "time_label": "16.08.2026 04:37 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 82465,
-      "text": "ГО Подольск\nМосковская область\nСбития БПЛА\nМеры безопасности!",
-      "ts": 1786844214,
-      "time_label": "16.08.2026 04:36 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 82464,
-      "text": "ГО Домодедово\nМосковская область\nСбития БПЛА\nМеры безопасности!",
-      "ts": 1786844188,
-      "time_label": "16.08.2026 04:36 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7469,15 +7409,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786853173,
-  "last_event_at": "2026-08-16T04:06:13Z",
-  "fetched_at": "2026-08-16T04:10:11.064787Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1786853495,
+  "last_event_at": "2026-08-16T04:11:35Z",
+  "fetched_at": "2026-08-16T04:20:13.792632Z",
+  "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-08-16T04:10:11.064787Z",
-    "source_age_seconds": 238,
-    "city_count": 182,
-    "region_count": 30,
+    "generated_at": "2026-08-16T04:20:13.792632Z",
+    "source_age_seconds": 518,
+    "city_count": 181,
+    "region_count": 28,
     "feed_count": 80
   }
 }
