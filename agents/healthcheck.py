@@ -215,6 +215,18 @@ def selfcheck():
     assert all(len(row) == 5 for row in WATCH)
     hb_keys = [row[3] for row in WATCH]
     assert len(hb_keys) == len(set(hb_keys)), "дублирующийся heartbeat-key в WATCH"
+    # 🔴 регрессия 14.08: тревога об обвале архива гасла на следующем прогоне,
+    # потому что базой сравнения был прошлый прогон. База — максимум, и он за
+    # обвалом не идёт; тревога снимается только реальным восстановлением.
+    hwm = bump_hwm({}, {"strikes.json": 403})
+    assert archive_shrink({"strikes.json": 403}, hwm) == []
+    assert archive_shrink({"strikes.json": 0}, hwm)[0][3] == "усох"
+    hwm = bump_hwm(hwm, {"strikes.json": 0})
+    assert hwm["strikes.json"] == 403, "база пошла за обвалом — тревога погаснет"
+    assert archive_shrink({"strikes.json": 0}, hwm)[0][3] == "усох"
+    assert archive_shrink({"strikes.json": 423}, hwm) == [], "восстановленный архив — не авария"
+    assert bump_hwm(hwm, {"strikes.json": 423})["strikes.json"] == 423
+    assert archive_shrink({"strikes.json": None}, hwm)[0][3] == "не читается"
     print("healthcheck selfcheck: ok (%d агентов)" % len(WATCH))
 
 
@@ -290,25 +302,40 @@ def archive_sizes():
     return out
 
 
-def archive_shrink(now_sizes, prev_sizes):
-    """Сравнение с ПРОШЛЫМ прогоном сторожа. Возвращает список аварий.
+def archive_shrink(now_sizes, base_sizes):
+    """Сравнение с ИСТОРИЧЕСКИМ МАКСИМУМОМ архива. Возвращает список аварий.
 
     Зачем отдельно от стражей в pre-commit и git-sync: те не дают усыханию попасть
     в коммит, но если оно всё-таки прошло (05.08 и 06.08 архив ударов уехал в прод
     320 -> 0 и 336 -> 0 под сообщениями соседних рутин), заметить это было НЕЧЕМ —
     оба раза поломку нашли случайно, спустя часы. Здесь ловим постфактум.
 
+    🔴 14.08: strikes.json 403 -> 0, и сторож это ЗАМЕТИЛ — записал was=402/now=0
+    и ушёл в degraded. Но базой сравнения был ПРОШЛЫЙ ПРОГОН: следующий сравнил
+    0 с 0, счёл нормой и стёр тревогу. Обвал был виден 10 минут, а пустой архив
+    пролежал в проде трое суток. Поэтому база — максимум, который архив когда-либо
+    имел: тревога держится, пока архив реально не восстановят, а не гаснет сама.
+
     Порог 10%, как у стража в pre-commit. Нечитаемый файл — тоже авария: архив,
     который перестал парситься, ничем не лучше усохшего.
     """
     bad = []
     for fn, cur in sorted(now_sizes.items()):
-        prev = prev_sizes.get(fn)
+        prev = base_sizes.get(fn)
         if cur is None:
             bad.append((fn, prev, cur, "не читается"))
         elif isinstance(prev, int) and prev > 20 and cur < prev * 0.9:
             bad.append((fn, prev, cur, "усох"))
     return bad
+
+
+def bump_hwm(hwm, now_sizes):
+    """Новый исторический максимум. Растёт — да, за обвалом не идёт — нет."""
+    out = dict(hwm)
+    for fn, cur in now_sizes.items():
+        if isinstance(cur, int) and cur > (out.get(fn) or 0):
+            out[fn] = cur
+    return out
 
 
 def main():
@@ -359,7 +386,12 @@ def main():
     except Exception:
         prev_meta = {}
     arch_now = archive_sizes()
-    arch_bad = archive_shrink(arch_now, prev_meta.get("archives") or {})
+    # База — исторический максимум. Первый прогон после этого фикса берёт размеры
+    # прошлого прогона (archives_hwm ещё нет), дальше максимум ведём сами.
+    arch_bad = archive_shrink(
+        arch_now, prev_meta.get("archives_hwm") or prev_meta.get("archives") or {})
+    arch_hwm = bump_hwm(prev_meta.get("archives_hwm") or prev_meta.get("archives") or {},
+                        arch_now)
 
     health = {
         "meta": {
@@ -386,6 +418,9 @@ def main():
             # Размеры накопительных архивов — не диагностика сама по себе, а база
             # сравнения для СЛЕДУЮЩЕГО прогона: усыхание видно только по паре точек.
             "archives": arch_now,
+            # Максимум, который архив когда-либо имел — база сравнения, которая не
+            # следует за обвалом (иначе тревога гаснет на следующем прогоне, 14.08).
+            "archives_hwm": arch_hwm,
             "archive_alerts": [{"file": f, "was": p, "now": c, "reason": r}
                                for f, p, c, r in arch_bad],
         },
@@ -398,10 +433,19 @@ def main():
     for fn, agent, age in critical:
         print("  🔴 КРИТИЧНО: %s (%s) не обновлялся %s ч (порог %s ч) — сбор сломан, "
               "это не «нет новостей»" % (fn, agent, age, CRITICAL_STALE_H[fn]))
-    if critical:
-        alert_owner("🔴 <b>Карта: сбор сломан</b>\n" + "\n".join(
-            "• %s — %s ч без обновления (порог %s ч)" % (f, h, CRITICAL_STALE_H[f])
-            for f, _a, h in critical))
+    for f, p, c, r in arch_bad:
+        print("  🔴 АРХИВ %s: %s (было %s, стало %s) — накопительный архив только растёт" % (
+            f, r, p, c))
+    # 🔴 14.08 обвал архива не дошёл до владельца ВООБЩЕ: пинг слался только по
+    # critical, а усыхание оставалось строчкой в health.json, которую никто не
+    # читает. Тревоги шлём одним сообщением — у alert_owner общий кулдаун, двумя
+    # вызовами вторая новость просто утонула бы.
+    alert_lines = ["• %s — %s ч без обновления (порог %s ч)" % (f, h, CRITICAL_STALE_H[f])
+                   for f, _a, h in critical]
+    alert_lines += ["• архив %s: %s (было %s, стало %s)" % (f, r, p, c)
+                    for f, p, c, r in arch_bad]
+    if alert_lines:
+        alert_owner("🔴 <b>Карта: сбор сломан</b>\n" + "\n".join(alert_lines))
     if publish_stuck:
         print("  🚫 ПУБЛИКАЦИЯ ВСТАЛА: %d коммит(ов) не запушено, старейший %s ч — origin (сайт) отстаёт" % (
             unpushed, publish_lag_h))
