@@ -2,8 +2,8 @@
  "snapshot": {
   "balance": {
    "refining_capacity_total_mt_year": 338.4,
-   "capacity_offline_mt_year": 128.3,
-   "capacity_offline_pct": 38,
+   "capacity_offline_mt_year": 136.8,
+   "capacity_offline_pct": 40,
    "gasoline_output_loss_pct": 37,
    "diesel_output_loss_pct": 41,
    "export_ban_gasoline": true,
@@ -2618,8 +2618,8 @@
    "notes": "17.08: СПбМТСБ. АИ-95: 67.383 тыс. ₽/т, АИ-92: 61.767 тыс. ₽/т, ДТ: 60.344 тыс. ₽/т. Тренд: стабилизация. Восстановление поставок продолжается."
   },
   "refinery_counts": {
-   "down": 10,
-   "partial": 13,
+   "down": 11,
+   "partial": 12,
    "operational": 10
   },
   "timeline": [
@@ -2746,6 +2746,13 @@
     "date": "2026-08-15",
     "capacity_offline_pct": 38,
     "capacity_offline_mt_year": 128.3,
+    "gasoline_loss_pct": 37,
+    "diesel_loss_pct": 41
+   },
+   {
+    "date": "2026-08-17",
+    "capacity_offline_pct": 40,
+    "capacity_offline_mt_year": 136.8,
     "gasoline_loss_pct": 37,
     "diesel_loss_pct": 41
    }
@@ -15726,7 +15733,40 @@
    "voices": []
   },
   "2026-08-17": {
-   "strikes": [],
+   "strikes": [
+    {
+     "date": "2026-08-17",
+     "time": "ночь",
+     "city": "Валуйки",
+     "region": "Белгородская область",
+     "lat": 50.084,
+     "lon": 40.038,
+     "type": "both",
+     "count": null,
+     "target": "жилой сектор (село Колосково, Валуйский округ)",
+     "casualties": "6 погибших, 4 раненых (включая ребёнка)",
+     "title": "Обстрел села Колосково БПЛА и ракетами",
+     "detail": "Атака на жилой сектор в ночь 16-17 августа. По сообщениям местных властей, в результате удара по селу Колосково погибло 6 человек и 4 ранены.",
+     "source_url": "https://bel.aif.ru/incidents/chp/vsu-obstrelyali-belgorodskoe-selo-17-avgusta-shestero-pogibli-chto-izvestno",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-17",
+     "time": "ночь",
+     "city": "Енотаевск",
+     "region": "Астраханская область",
+     "lat": 46.492,
+     "lon": 48.037,
+     "type": "drone",
+     "count": null,
+     "target": "частный жилой дом",
+     "casualties": "1 погибла",
+     "title": "Удар дронов по частному дому в Енотаевском округе",
+     "detail": "В результате атаки БПЛА в ночь 16-17 августа по частному дому погибла женщина из Енотаевского округа. Её сын-подросток не пострадал.",
+     "source_url": "https://www.fontanka.ru/2026/08/17/76591834/",
+     "confidence": "reported"
+    }
+   ],
    "voices": []
   }
  },
