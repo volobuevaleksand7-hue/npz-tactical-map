@@ -174,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786986496,
-      "source_text": "17.08.2026 20:08 МСК\nАлексин Тульская область Тревога по БПЛА"
+      "last_event_ts": 1786987684,
+      "source_text": "17.08.2026 20:28 МСК\nАлексин Тульская область Продолжается работа ПВО по БПЛА Меры безопасности"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -193,8 +193,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1786985075,
-      "source_text": "17.08.2026 19:44 МСК\nГорловка опасность по БПЛА с запада, в том числе и на электротяге"
+      "last_event_ts": 1786987399,
+      "source_text": "17.08.2026 20:23 МСК\nГорловка св фиксации БПЛА на восток, ю-в"
     },
     "Херсонская область": {
       "bpla": false,
@@ -922,9 +922,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -935,8 +935,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786985075,
-      "source_text": "17.08.2026 19:44 МСК\nГорловка опасность по БПЛА с запада, в том числе и на электротяге"
+      "last_event_ts": 1786987399,
+      "source_text": "17.08.2026 20:23 МСК\nГорловка св фиксации БПЛА на восток, ю-в"
     },
     {
       "key": "новоалексеевка|херсонская область",
@@ -1208,9 +1208,9 @@
       "lat": 54.50484,
       "lon": 37.06697,
       "region": "Тульская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1218,11 +1218,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1786986496,
-      "source_text": "17.08.2026 20:08 МСК\nАлексин Тульская область Тревога по БПЛА"
+      "last_event_ts": 1786987684,
+      "source_text": "17.08.2026 20:28 МСК\nАлексин Тульская область Продолжается работа ПВО по БПЛА Меры безопасности"
     },
     {
       "key": "армянск|автономная республика крым",
@@ -3794,6 +3794,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 262274,
+      "text": "Днепропетровск\nАвиаторское\nМассовые запуски БПЛА",
+      "ts": 1786987723,
+      "time_label": "17.08.2026 20:28 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 82713,
+      "text": "Алексин\nТульская область\nПродолжается работа ПВО по БПЛА\nМеры безопасности",
+      "ts": 1786987684,
+      "time_label": "17.08.2026 20:28 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 262273,
+      "text": "Горловка св фиксации БПЛА на восток, ю-в",
+      "ts": 1786987399,
+      "time_label": "17.08.2026 20:23 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 262272,
       "text": "Феодосия и близлежащие\nОпасность по БПЛА",
       "ts": 1786987063,
@@ -4408,30 +4432,6 @@
       "time_label": "17.08.2026 18:37 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262232,
-      "text": "Анапа\nНовороссийск и близлежащие\nОпасность по БПЛА\nКраснодарский край",
-      "ts": 1786980893,
-      "time_label": "17.08.2026 18:34 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262231,
-      "text": "Валуйский район приграничье\nТревога по БПЛА Хорнет",
-      "ts": 1786980855,
-      "time_label": "17.08.2026 18:34 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262230,
-      "text": "Суземка опасность по БПЛА Шарк\nБрянская область",
-      "ts": 1786980514,
-      "time_label": "17.08.2026 18:28 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4441,13 +4441,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1786987063,
-  "last_event_at": "2026-08-17T17:17:43Z",
-  "fetched_at": "2026-08-17T17:20:03.475510Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1786987723,
+  "last_event_at": "2026-08-17T17:28:43Z",
+  "fetched_at": "2026-08-17T17:30:02.955287Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-17T17:20:03.475510Z",
-    "source_age_seconds": 140,
+    "generated_at": "2026-08-17T17:30:02.955287Z",
+    "source_age_seconds": 79,
     "city_count": 99,
     "region_count": 20,
     "feed_count": 80
