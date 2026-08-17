@@ -248,14 +248,48 @@ fi
 # Ловит ЛЮБОЙ коммит (newswatch, ручной, внешняя модель), т.к. core.hooksPath=.githooks.
 # Санитайзер идемпотентен и авто-перезакладывает очищенный файл — коммит не блокируется,
 # но мусор физически не попадает в data/strikes.json (и на сайт/в Telegram).
+# 🔴 14.08.2026 САНИТАЙЗЕР САМ СТАЛ ОБНУЛЯТЕЛЕМ: коллектор оставил в дереве архив,
+# где у всех записей пропали date/city/confidence, санитайзер честно признал их
+# браком и удалил ВСЕ 402 — «sanitize-strikes: удалено 402 мусорных записей» →
+# `git add` → архив 403 → 0 уехал в прод под чужим сообщением `data(radar)`.
+# Оба стража усыхания (здесь выше и в git-sync.sh) сравнивают индекс с HEAD ДО
+# санитайзера и потому видели ещё целый файл: мутатор, который правит уже
+# проверенный индекс, обязан проверять СЕБЯ. Откатываем массовое выкашивание к
+# доsanitize-версии (она выше уже прошла страж усыхания) и НЕ блокируем коммит:
+# радар тикает каждые 10 минут, exit 1 здесь заклинил бы публикацию всего флота.
+_arch_count() {
+  python3 - "$1" <<'PY' 2>/dev/null || echo NA
+import json, sys
+d = json.load(open(sys.argv[1], encoding="utf-8"))
+a = d if isinstance(d, list) else (d.get("strikes") or d.get("history") or [])
+print(len(a))
+PY
+}
 if [ -f agents/sanitize-strikes.py ] && command -v python3 >/dev/null 2>&1; then
   for _f in data/strikes.json data/history-crimea.json; do
     if echo "$staged" | grep -q "^$_f$"; then
+      _pre="$(mktemp)"
+      git show ":$_f" > "$_pre" 2>/dev/null || true
+      _n0="$(_arch_count "$_pre")"
       python3 agents/sanitize-strikes.py "$_f" >&2 || true
-      if ! git diff --quiet -- "$_f" 2>/dev/null; then
+      _n1="$(_arch_count "$_f")"
+      _wiped=0
+      case "$_n0$_n1" in
+        *NA*) [ -s "$_pre" ] && _wiped=1 ;;
+        *) [ "$_n0" -gt 20 ] && [ "$_n1" -lt "$((_n0 * 9 / 10))" ] && _wiped=1 ;;
+      esac
+      if [ "$_wiped" = "1" ] && [ "${ALLOW_STRIKES_SHRINK:-}" != "1" ]; then
+        cp "$_pre" "$_f"
+        git add "$_f"
+        echo "pre-commit: 🔴 sanitize-strikes выкосил $_f ($_n0 → $_n1 записей) — ОТКАЧЕНО." >&2
+        echo "pre-commit: архив сохранён как был, коммит идёт дальше. Причина брака — в" >&2
+        echo "pre-commit: коллекторе, который положил записи без date/city/confidence." >&2
+        echo "pre-commit: осознанная массовая чистка → ALLOW_STRIKES_SHRINK=1." >&2
+      elif ! git diff --quiet -- "$_f" 2>/dev/null; then
         git add "$_f"
         echo "pre-commit: sanitize-strikes очистил $_f и перезаложил его в коммит." >&2
       fi
+      rm -f "$_pre"
     fi
   done
 fi
