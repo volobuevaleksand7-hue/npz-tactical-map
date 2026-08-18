@@ -25,6 +25,25 @@
       "last_event_ts": 1787026546,
       "source_text": "18.08.2026 07:15 МСК\nГорское, Попасная, Первомайское и близлежащие ЛНР Опасность по БПЛА Хорнет"
     },
+    "Орловская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": true,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#e8e4c4",
+      "last_event_ts": 1787029126,
+      "source_text": "18.08.2026 07:58 МСК\nОрловская область внимание по БПЛА от Курской области"
+    },
     "Московская область": {
       "bpla": false,
       "bplaDim": false,
@@ -2413,6 +2432,28 @@
       "source_text": "18.08.2026 01:27 МСК\nАлексин, Тула, Узловая, Щёкино, Киреевск, Новомосковск, Кимовск, Донской,Венев, Ясногорск и близлежащие, Тульская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     {
+      "key": "курской области|орловская область",
+      "name": "Курской области",
+      "lat": 52.9671146,
+      "lon": 36.0840222,
+      "region": "Орловская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": true,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#f0c4a0",
+      "last_event_ts": 1787029126,
+      "source_text": "18.08.2026 07:58 МСК\nОрловская область внимание по БПЛА от Курской области"
+    },
+    {
       "key": "щекинский|тульская область",
       "name": "Щекинский",
       "lat": 53.8906918,
@@ -2428,7 +2469,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1787025659,
@@ -4388,6 +4429,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 262551,
+      "text": "ЛДНР, Запорожская область РФ авиационная ракетная бомбовая опасность",
+      "ts": 1787029257,
+      "time_label": "18.08.2026 08:00 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 262550,
+      "text": "Орловская область внимание по БПЛА от Курской области",
+      "ts": 1787029126,
+      "time_label": "18.08.2026 07:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 262549,
       "text": "Приморск - Бердянск опасность по БПЛА дорожное Р-280\nЗапорожская область РФ",
       "ts": 1787029021,
@@ -5010,22 +5067,6 @@
       "time_label": "18.08.2026 05:22 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 83045,
-      "text": "Движение автотранспорта по Крымскому мосту возобновлено.\nЧтобы получать информацию без задержек, подписывайтесь на официальный канал в\nMAX «КРЫМСКИЙ МОСТ: оперативная информация».",
-      "ts": 1787019762,
-      "time_label": "18.08.2026 05:22 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 81063,
-      "text": "Самарская область, Ульяновская область, Саратовская область, Пензенская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1787019191,
-      "time_label": "18.08.2026 05:13 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -5035,15 +5076,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787029021,
-  "last_event_at": "2026-08-18T04:57:01Z",
-  "fetched_at": "2026-08-18T05:00:04.984552Z",
+  "timestamp": 1787029257,
+  "last_event_at": "2026-08-18T05:00:57Z",
+  "fetched_at": "2026-08-18T05:10:03.549916Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-08-18T05:00:04.984552Z",
-    "source_age_seconds": 183,
-    "city_count": 131,
-    "region_count": 20,
+    "generated_at": "2026-08-18T05:10:03.549916Z",
+    "source_age_seconds": 546,
+    "city_count": 132,
+    "region_count": 21,
     "feed_count": 80
   }
 }
