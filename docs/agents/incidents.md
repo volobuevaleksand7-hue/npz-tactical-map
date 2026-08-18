@@ -31,29 +31,32 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
-## [OPEN] cover-fallback-2026-08-17
-status: OPEN
+## [RESOLVED] cover-fallback-2026-08-17
+status: RESOLVED
 opened: 2026-08-17 08:15 МСК — summary-watchdog
 Карточка за 2026-08-17 на месте, но обложка = заглушка og-image. Обычно самолечение чинит само (Codex работает и на VPS, и на Маке); если висит — вероятно кончились image-кредиты Codex-воркспейса.
 Что сделать:
 - `python3 hermes/scripts/build-covers.py --dates 2026-08-17` (Codex-first) → `python3 agents/gen-news.py` → git-sync + деплой;
 - если Codex «out of credits» — пополнить воркспейс, либо разово `NPZ_COVERS_ALLOW_OPENROUTER=1` при живом OpenRouter-ключе.
 
-## [OPEN] cover-fallback-2026-08-15
-status: OPEN
+resolved: 2026-08-17 20:15 МСК — проблема исчезла (авто, сторож)
+## [RESOLVED] cover-fallback-2026-08-15
+status: RESOLVED
 opened: 2026-08-15 08:16 МСК — summary-watchdog
 Карточка за 2026-08-15 на месте, но обложка = заглушка og-image. Обычно самолечение чинит само (Codex работает и на VPS, и на Маке); если висит — вероятно кончились image-кредиты Codex-воркспейса.
 Что сделать:
 - `python3 hermes/scripts/build-covers.py --dates 2026-08-15` (Codex-first) → `python3 agents/gen-news.py` → git-sync + деплой;
 - если Codex «out of credits» — пополнить воркспейс, либо разово `NPZ_COVERS_ALLOW_OPENROUTER=1` при живом OpenRouter-ключе.
+resolved: 2026-08-18 05:55 МСК — ревизия: обложка на месте и не совпадает с og-image (заглушкой), самолечение отработало, тикет висел незакрытым
 
-## [OPEN] cover-fallback-2026-08-07
-status: OPEN
+## [RESOLVED] cover-fallback-2026-08-07
+status: RESOLVED
 opened: 2026-08-07 08:15 МСК — summary-watchdog
 Карточка за 2026-08-07 на месте, но обложка = заглушка og-image. Обычно самолечение чинит само (Codex работает и на VPS, и на Маке); если висит — вероятно кончились image-кредиты Codex-воркспейса.
 Что сделать:
 - `python3 hermes/scripts/build-covers.py --dates 2026-08-07` (Codex-first) → `python3 agents/gen-news.py` → git-sync + деплой;
 - если Codex «out of credits» — пополнить воркспейс, либо разово `NPZ_COVERS_ALLOW_OPENROUTER=1` при живом OpenRouter-ключе.
+resolved: 2026-08-18 05:55 МСК — ревизия: обложка на месте и не совпадает с og-image (заглушкой), самолечение отработало, тикет висел незакрытым
 
 ## [RESOLVED] cover-fallback-2026-08-04
 status: RESOLVED
@@ -73,21 +76,23 @@ opened: 2026-08-01 08:15 МСК — summary-watchdog
 - если Codex «out of credits» — пополнить воркспейс, либо разово `NPZ_COVERS_ALLOW_OPENROUTER=1` при живом OpenRouter-ключе.
 
 resolved: 2026-08-01 20:15 МСК — проблема исчезла (авто, сторож)
-## [OPEN] cover-fallback-2026-07-26
-status: OPEN
+## [RESOLVED] cover-fallback-2026-07-26
+status: RESOLVED
 opened: 2026-07-26 08:15 МСК — summary-watchdog
 Карточка за 2026-07-26 на месте, но обложка = заглушка og-image. Обычно самолечение чинит само (Codex работает и на VPS, и на Маке); если висит — вероятно кончились image-кредиты Codex-воркспейса.
 Что сделать:
 - `python3 hermes/scripts/build-covers.py --dates 2026-07-26` (Codex-first) → `python3 agents/gen-news.py` → git-sync + деплой;
 - если Codex «out of credits» — пополнить воркспейс, либо разово `NPZ_COVERS_ALLOW_OPENROUTER=1` при живом OpenRouter-ключе.
+resolved: 2026-08-18 05:55 МСК — ревизия: обложка на месте и не совпадает с og-image (заглушкой), самолечение отработало, тикет висел незакрытым
 
-## [OPEN] cover-fallback-2026-07-25
-status: OPEN
+## [RESOLVED] cover-fallback-2026-07-25
+status: RESOLVED
 opened: 2026-07-25 08:15 МСК — summary-watchdog
 Карточка за 2026-07-25 на месте, но обложка = заглушка og-image. Обычно самолечение чинит само (Codex работает и на VPS, и на Маке); если висит — вероятно кончились image-кредиты Codex-воркспейса.
 Что сделать:
 - `python3 hermes/scripts/build-covers.py --dates 2026-07-25` (Codex-first) → `python3 agents/gen-news.py` → git-sync + деплой;
 - если Codex «out of credits» — пополнить воркспейс, либо разово `NPZ_COVERS_ALLOW_OPENROUTER=1` при живом OpenRouter-ключе.
+resolved: 2026-08-18 05:55 МСК — ревизия: обложка на месте и не совпадает с og-image (заглушкой), самолечение отработало, тикет висел незакрытым
 
 ## [RESOLVED] card-missing-2026-07-23
 status: RESOLVED
