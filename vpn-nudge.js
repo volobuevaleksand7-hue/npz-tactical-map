@@ -10,7 +10,7 @@
   // трафик бесплатно. Канал на том же месте даёт втрое больше кликов (14-26/сут).
   // Освободившийся слот дока на картах отдан каналу — это самый заметный элемент сайта.
   // Вернуть: поставить true (весь код промо цел и на месте).
-  var VPN_ENABLED = false;
+  var VPN_ENABLED = true;
   var REF = 'https://t.me/rknoff_bot?start=ref-609952529';
   var ANTENNA = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 A9 9 0 0 1 19 15"/><path d="M8.2 12.6 A5 5 0 0 1 15.8 12.6"/><circle cx="12" cy="16.4" r="1.6"/><path d="M12 18 V21.4"/></svg>';
   var SHIELD = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20 5.6 V11 c0 5-3.4 8-8 10.4 C8.4 19 4 16 4 11 V5.6 Z"/><circle cx="12" cy="10.4" r="1.7"/><path d="M12 12.1 V14.8"/></svg>';
