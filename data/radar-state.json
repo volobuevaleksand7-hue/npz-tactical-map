@@ -288,8 +288,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787067359,
-      "source_text": "18.08.2026 18:35 МСК\nБрянская область, Курская область, Черноморское побережье Краснодарского края - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1787068068,
+      "source_text": "18.08.2026 18:47 МСК\nСочи и близлежащие Краснодарский край Опасность по БПЛА повторно"
     },
     "Марий Эл": {
       "bpla": false,
@@ -1299,9 +1299,9 @@
       "lat": 43.59699,
       "lon": 39.72477,
       "region": "Краснодарский край",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1309,11 +1309,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787065373,
-      "source_text": "18.08.2026 18:02 МСК\nСочи Краснодарский край Работа ПВО по БПЛА"
+      "last_event_ts": 1787068068,
+      "source_text": "18.08.2026 18:47 МСК\nСочи и близлежащие Краснодарский край Опасность по БПЛА повторно"
     },
     {
       "key": "порт|краснодарский край",
@@ -2301,6 +2301,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 83124,
+      "text": "Сочи и близлежащие\nКраснодарский край\nОпасность по БПЛА повторно",
+      "ts": 1787068068,
+      "time_label": "18.08.2026 18:47 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 83123,
+      "text": "Рязанская область\nОтбой опасности по БПЛА",
+      "ts": 1787067604,
+      "time_label": "18.08.2026 18:40 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 83122,
       "text": "Орловская область\nОтбой опасности по БПЛА",
       "ts": 1787067375,
@@ -2923,22 +2939,6 @@
       "time_label": "18.08.2026 15:40 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262735,
-      "text": "Запорожская область РФ\nЛДНР\nОтбой авиационной ракетной бомбовой опасности",
-      "ts": 1787054959,
-      "time_label": "18.08.2026 15:09 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262734,
-      "text": "От Хар горы в сторону центра Белгород тревога по БПЛА\nВозможно Хорнет\nБелгородская область",
-      "ts": 1787054485,
-      "time_label": "18.08.2026 15:01 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2948,13 +2948,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787067375,
-  "last_event_at": "2026-08-18T15:36:15Z",
-  "fetched_at": "2026-08-18T15:40:03.219679Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1787068068,
+  "last_event_at": "2026-08-18T15:47:48Z",
+  "fetched_at": "2026-08-18T15:50:03.283237Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-18T15:40:03.219679Z",
-    "source_age_seconds": 228,
+    "generated_at": "2026-08-18T15:50:03.283237Z",
+    "source_age_seconds": 135,
     "city_count": 72,
     "region_count": 19,
     "feed_count": 80
