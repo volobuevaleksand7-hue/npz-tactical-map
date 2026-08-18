@@ -38,6 +38,11 @@ jobs:
       # синке — и 25.07 он записал в «выбито полностью» ДРУГУЮ метрику (недобор),
       # завысив headline на главной в 1.7× (64% вместо 38.5%). Пересчётчик под это и
       # написан, но до 18.08 его не звал НИКТО: ни скрипт, ни крон. Теперь дрейф ловит CI.
+      # 🔴 15.07 агент записал удар «на 9 часов вперёд» — модель текущего времени не знает
+      # и берёт дату из головы. Страж под это написан, но его тоже никто не звал.
+      - name: no strikes dated in the future
+        run: python3 agents/check-future-dates.py data/strikes.json
+
       - name: national_balance derived from refineries[]
         run: python3 agents/recalc-national-balance.py --check
 
