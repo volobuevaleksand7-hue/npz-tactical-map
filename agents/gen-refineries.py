@@ -149,6 +149,26 @@ def counts(R):
     return c["down"], c["partial"], c["operational"], len(R)
 
 
+def was_hit(r):
+    """Был ли по заводу удар. 🔴 В таблице статус — это ТЕКУЩИЙ режим, и восстановленный
+    завод выглядит там ровно как никогда не тронутый. На 18.08.2026 такой ровно один —
+    Омский (22 млн т/год, крупнейший в РФ, удары 6 и 17 июля, со 28.07 снова 100%), и он
+    читался как «целый». Отсюда пометка «восстановлен»: она из данных, а не из текста."""
+    return bool((r.get("damage") or "").strip())
+
+
+def state_phrase(r):
+    """«остановлен с 6 июля» / «работает на ~20%» / «работает в штатном режиме»."""
+    pct = r.get("est_output_pct")
+    ss = r.get("status_since")
+    when = f" с {rus_date(ss)}" if ss else ""
+    if r["status"] == "down":
+        return f"остановлен{when}"
+    if r["status"] == "partial":
+        return f"работает на ~{pct}%{when}" if pct is not None else f"работает с ограничениями{when}"
+    return "восстановлен и работает в штатном режиме" + when if was_hit(r) else "работает в штатном режиме"
+
+
 def render_table(R):
     out = []
     for r in sorted(R, key=lambda r: -r["capacity_mt_year"]):
@@ -159,9 +179,13 @@ def render_table(R):
         load_s = "—" if pct is None else ("0%" if pct == 0 else f"~{pct}%" if r["status"] != "operational" else "100%")
         ss = r.get("status_since")
         since = f"{ss[8:10]}.{ss[5:7]}" if ss else "—"
+        # восстановленный после удара завод не должен читаться как нетронутый
+        note = (' <span style="font-size:10px;color:var(--ink-dim);white-space:nowrap"'
+                ' title="Завод был поражён и восстановлен">· восстановлен</span>')\
+               if r["status"] == "operational" and was_hit(r) else ""
         out.append(f'          <tr><td>{nm}</td><td>{r["operator"]}</td><td>{r["region"]}</td>'
                    f'<td>{r["capacity_mt_year"]} млн т/г</td>'
-                   f'<td><span class="{cls}">{label}</span></td><td>{load_s}</td><td>{since}</td></tr>')
+                   f'<td><span class="{cls}">{label}</span>{note}</td><td>{load_s}</td><td>{since}</td></tr>')
     return "\n".join(out)
 
 
@@ -388,6 +412,12 @@ def faq_texts(R, meta):
     p_list = ", ".join(
         f'{short(r["name"])} (~{r["est_output_pct"]}%)' if r.get("est_output_pct") is not None
         else short(r["name"]) for r in part)
+    # 🔴 «Уфимская группа» в данных — ОДНА запись на ТРИ завода (площадка, не завод).
+    # Для вопроса «самый большой ЗАВОД» её надо исключить, иначе выходит, что
+    # крупнейший отдельный НПЗ — это группа, а Омский вдруг «второй».
+    ufa = next((r for r in R if "Уфимск" in r["name"]), None)
+    singles = sorted((r for r in R if r is not ufa), key=lambda r: -r["capacity_mt_year"])
+    big, second = singles[0], singles[1]
     o_list = ", ".join(f'{short(r["name"])} ({r["capacity_mt_year"]})' for r in oper)
     return {
         "Сколько нефтеперерабатывающих заводов в России?":
@@ -415,6 +445,13 @@ def faq_texts(R, meta):
              f"{date}, составляет {tot}: {len(down)} полностью остановлены, {len(part)} работают "
              f"с ограничениями и {len(oper)} — в штатном режиме. Суммарная мощность этого "
              f"количества — около {cap_all:.0f} млн т/год."),
+        "Какой самый большой НПЗ в России?":
+            (f"Крупнейший отдельный НПЗ России — {short(big['name'])} ({big['operator']}), "
+             f"мощность {big['capacity_mt_year']:.0f} млн тонн в год; на {date} {state_phrase(big)}. "
+             f"Крупнейшая площадка в целом — Уфимская группа (Башнефть, 24 млн т/год суммарно "
+             f"по трём заводам), {state_phrase(ufa) if ufa else 'статус см. в таблице'}. "
+             f"Второй по мощности отдельный завод — {short(second['name'])} "
+             f"({second['capacity_mt_year']:.0f} млн т/год), {state_phrase(second)}."),
         "Сколько НПЗ осталось в России в рабочем состоянии?":
             (f"По состоянию на {date} из {tot} НПЗ России в рабочем состоянии (не остановлены "
              f"полностью) осталось {len(oper) + len(part)}: {len(oper)} работают в штатном "
@@ -431,6 +468,7 @@ FAQ_MARK = {
     "Какие НПЗ работают в России сейчас?": "faq-working",
     "Какое количество НПЗ в России на 2026 год?": "faq-count",
     "Сколько НПЗ осталось в России в рабочем состоянии?": "faq-remaining",
+    "Какой самый большой НПЗ в России?": "faq-biggest",
 }
 
 
