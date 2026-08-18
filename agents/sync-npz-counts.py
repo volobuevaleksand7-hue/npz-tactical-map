@@ -97,6 +97,51 @@ def down_capacity_pct():
     return round(down_capacity_mt() / total_cap * 100)
 
 
+def throughput_shortfall_pct():
+    """Недобор с учётом частично работающих — взвешенная по мощности недопоставка
+    (совпадает с national_balance.throughput_shortfall_pct в fuel-state.json,
+    пересчитывается заново из refineries[], чтобы не тащить отдельный источник)."""
+    refs = _refineries()
+    total_cap = sum(r["capacity_mt_year"] for r in refs)
+    avail = sum(r["capacity_mt_year"] * r.get("est_output_pct", 0) / 100 for r in refs)
+    return round(100 - avail / total_cap * 100)
+
+
+def total_capacity_mt():
+    return round(sum(r["capacity_mt_year"] for r in _refineries()), 1)
+
+
+def mt_str(x):
+    """Российский формат мощности с запятой: 338.4 -> "338,4"."""
+    return ("%.1f" % x).replace(".", ",")
+
+
+def _ref(rid):
+    return next(r for r in _refineries() if r["id"] == rid)
+
+
+def refinery_share_pct(rid):
+    """Доля мощности ОДНОГО завода в общероссийской, округлённая."""
+    total_cap = sum(r["capacity_mt_year"] for r in _refineries())
+    return round(_ref(rid)["capacity_mt_year"] / total_cap * 100)
+
+
+def refinery_output_pct(rid):
+    return round(_ref(rid)["est_output_pct"])
+
+
+KRASNODAR_KRAI = ("tuapse", "afipsky", "ilsky", "slavyansk", "krasnodar-rn")
+
+
+def krai_available_pct():
+    """Взвешенная реальная доступность мощностей 5 НПЗ Краснодарского края
+    (widget на krasnodar.html: "реально доступно около N% мощностей края")."""
+    refs = [r for r in _refineries() if r["id"] in KRASNODAR_KRAI]
+    total_cap = sum(r["capacity_mt_year"] for r in refs)
+    avail = sum(r["capacity_mt_year"] * r.get("est_output_pct", 0) / 100 for r in refs)
+    return round(avail / total_cap * 100)
+
+
 METRICS = {
     "total": total_count,
     "down": down_count,
@@ -105,6 +150,15 @@ METRICS = {
     "damaged": damaged_count,
     "down_cap_mt": down_capacity_mt,
     "down_cap_pct": down_capacity_pct,
+    "shortfall_pct": throughput_shortfall_pct,
+    "total_cap_mt": total_capacity_mt,
+    "kinef_share_pct": lambda: refinery_share_pct("kinef"),
+    "tuapse_pct": lambda: refinery_output_pct("tuapse"),
+    "afipsky_pct": lambda: refinery_output_pct("afipsky"),
+    "ilsky_pct": lambda: refinery_output_pct("ilsky"),
+    "slavyansk_pct": lambda: refinery_output_pct("slavyansk"),
+    "krasnodar_rn_pct": lambda: refinery_output_pct("krasnodar-rn"),
+    "krai_available_pct": krai_available_pct,
 }
 
 NPZ = ("завод", "завода", "заводов")
@@ -114,6 +168,8 @@ NPZ = ("завод", "завода", "заводов")
 PLAIN = {
     "situaciya-s-benzinom.html": [
         ("total", r'(Статусы всех )\d+( НПЗ на карте)'),
+        ("down_cap_pct", r'(<div class="status-card"><div class="val">)\d+(%</div><div class="lbl">мощностей выбито полностью</div></div>)'),
+        ("shortfall_pct", r'(<div class="status-card"><div class="val">)\d+(%</div><div class="lbl">недобор с учётом частичных</div></div>)'),
     ],
     "npz-lukojla.html": [
         ("total", r'(Все )\d+( НПЗ России: мощности и статусы →)'),
@@ -126,6 +182,36 @@ PLAIN = {
     ],
     "talony.html": [
         ("total", r'(Из )\d+( крупных НПЗ страны часть полностью остановлена)'),
+        ("down_cap_pct", r'(из строя выведено около )\d+(% перерабатывающих мощностей)'),
+        ("down_cap_pct", r'(<div class="val">)\d+(%</div>\s*<div class="lbl">потеря мощностей НПЗ РФ</div>)'),
+        ("down_cap_pct", r'(совокупно выбыло около <strong>)\d+(% перерабатывающих мощностей</strong>)'),
+        ("down_cap_pct", r'(выбыло около )\d+(% мощностей\.)'),
+    ],
+    "moskva.html": [
+        ("down_cap_pct", r'(и общим выбытием около )\d+(% перерабатывающих мощностей РФ)'),
+        ("down_cap_pct", r'(и общее выбытие около )\d+(% перерабатывающих мощностей РФ)'),
+        ("down_cap_pct", r'(выбытием ~)\d+(% мощностей РФ)'),
+    ],
+    "npz/kinef.html": [
+        ("kinef_share_pct", r'(второй по мощности в стране — около )\d+(% всей нефтепереработки РФ)'),
+        ("kinef_share_pct", r'(на него приходится около )\d+(% всей российской нефтепереработки)'),
+        ("kinef_share_pct", r'(на завод приходится около )\d+(% переработки страны)'),
+        ("kinef_share_pct", r'(около )\d+(% всей переработки страны и первое место по мощности)'),
+    ],
+    "npz/slavneft-yanos.html": [
+        ("down_cap_pct", r'(на фоне общего кризиса переработки: около )\d+(% мощностей НПЗ страны остановлено полностью)'),
+        ("shortfall_pct", r'(совокупный недобор с учётом частично работающих заводов — около )\d+(%\)\.)'),
+    ],
+    "krasnodar.html": [
+        ("tuapse_pct", r'(<span class="station-name">Туапсинский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
+        ("afipsky_pct", r'(<span class="station-name">Афипский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
+        ("ilsky_pct", r'(<span class="station-name">Ильский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
+        ("slavyansk_pct", r'(<span class="station-name">Славянский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
+        ("krasnodar_rn_pct", r'(<span class="station-name">Краснодарский НПЗ</span><span class="station-status ok">)\d+(%</span>)'),
+        ("krai_available_pct", r'(реально доступно около )\d+(% мощностей края)'),
+        ("tuapse_pct", r'(Туапсинский НПЗ \(крупнейший в крае, 12 млн т/год\) с 31 июля частично перезапущен \(около )\d+(% загрузки\))'),
+        ("tuapse_pct", r'(Туапсинский НПЗ \(Роснефть, 12 млн т/год — частично, )\d+(%\))'),
+        ("tuapse_pct", r'(Туапсинский \(Роснефть, 12 млн т/год — )\d+(%\), Афипский)'),
     ],
 }
 
@@ -170,6 +256,10 @@ MULTI = {
          lambda g: g[0] + str(total_count()) + g[1] + str(down_count()) + g[2] + str(partial_count()) + g[3]),
         (r'(Из )\d+( крупных НПЗ — )\d+( полностью остановлены, )\d+( работают с ограничениями\.)',
          lambda g: g[0] + str(total_count()) + g[1] + str(down_count()) + g[2] + str(partial_count()) + g[3]),
+        (r'(Совокупная потеря мощностей — около )\d+(% \()\d+,\d+( из )\d+,\d+( млн тонн/год\)\.)',
+         lambda g: g[0] + str(down_capacity_pct()) + g[1] + mt_str(down_capacity_mt()) + g[2] + mt_str(total_capacity_mt()) + g[3]),
+        (r'(<div class="st">Падение переработки на )\d+(%</div><div class="se">)\d+,\d+( из )\d+,\d+( млн тонн/год мощностей простаивают\. Bloomberg: минимум переработки с 2005 года\.</div>)',
+         lambda g: g[0] + str(down_capacity_pct()) + g[1] + mt_str(down_capacity_mt()) + g[2] + mt_str(total_capacity_mt()) + g[3]),
     ],
     "attacks.html": [
         # "20" (сколько заводов затрагивалось ударами хоть раз, кумулятивно с апреля) —
@@ -182,6 +272,11 @@ MULTI = {
         (r'(Из )\d+ (?:завод|завода|заводов)( в базе <strong>)\d+( стоят полностью, )\d+( работают на пониженной загрузке 20–70%, и лишь )\d+( в штатном режиме</strong>\.)',
          lambda g: (g[0] + str(total_count()) + " " + ru_count_gen(total_count(), "завода", "заводов") + g[1]
                     + str(down_count()) + g[2] + str(partial_count()) + g[3] + str(normal_count()) + g[4])),
+    ],
+    "krasnodar.html": [
+        (r'(Туапсинский работает на )\d+(% \(с 31 июля вышел из полной остановки\), Афипский работает на )\d+(%, Ильский — на )\d+(%, Славянский — на )\d+(%\.)',
+         lambda g: (g[0] + str(refinery_output_pct("tuapse")) + g[1] + str(refinery_output_pct("afipsky"))
+                    + g[2] + str(refinery_output_pct("ilsky")) + g[3] + str(refinery_output_pct("slavyansk")) + g[4])),
     ],
 }
 
