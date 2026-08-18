@@ -29,3 +29,9 @@ __pycache__/
 /update_*.jq
 agents/update_*.py
 agents/update_*.jq
+
+# Рабочие каталоги worktree-агентов Claude Code — локальные, в репо им не место.
+.claude/worktrees/
+# 18.08.2026: префиксного /update_*.py не хватило — тем же мусором прилетел
+# npz-history-crimea-update.py (суффикс, не префикс). Ловим и такую форму в корне.
+/*-update.py
