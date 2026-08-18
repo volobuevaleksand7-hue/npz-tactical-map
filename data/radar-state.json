@@ -364,8 +364,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787064981,
-      "source_text": "18.08.2026 17:56 МСК\nСочи и близлежащие Краснодарский край Опасность по БПЛА"
+      "last_event_ts": 1787065373,
+      "source_text": "18.08.2026 18:02 МСК\nСочи Краснодарский край Работа ПВО по БПЛА"
     },
     "Калужская область": {
       "bpla": false,
@@ -1372,9 +1372,9 @@
       "lat": 43.59699,
       "lon": 39.72477,
       "region": "Краснодарский край",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1382,11 +1382,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787064981,
-      "source_text": "18.08.2026 17:56 МСК\nСочи и близлежащие Краснодарский край Опасность по БПЛА"
+      "last_event_ts": 1787065373,
+      "source_text": "18.08.2026 18:02 МСК\nСочи Краснодарский край Работа ПВО по БПЛА"
     },
     {
       "key": "орёл|орловская область",
@@ -2418,6 +2418,38 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 262776,
+      "text": "Херсонская область РФ\nЗапорожская область РФ\nЛДНР\nАвиационная ракетная бомбовая опасность",
+      "ts": 1787065554,
+      "time_label": "18.08.2026 18:05 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 83119,
+      "text": "Сочи\nКраснодарский край\nРабота ПВО по БПЛА",
+      "ts": 1787065373,
+      "time_label": "18.08.2026 18:02 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 81117,
+      "text": "Черноморское побережье Краснодарского края - опасность по БПЛА ещё действует, начиная от Анапы и до Сочи.\nВсем быть предельно внимательными.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1787065364,
+      "time_label": "18.08.2026 18:02 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 262775,
+      "text": "Республика Крым\n❤️\n❤️\n❤️\nвнимание по бпла",
+      "ts": 1787065360,
+      "time_label": "18.08.2026 18:02 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 83118,
       "text": "Сочи и близлежащие\nКраснодарский край\nОпасность по БПЛА",
       "ts": 1787064981,
@@ -3024,38 +3056,6 @@
       "time_label": "18.08.2026 14:28 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262721,
-      "text": "ЛДНР, Запорожская область РФ, Херсонская область РФ\nПовторно авиационная ракетная бомбовая опасность",
-      "ts": 1787052500,
-      "time_label": "18.08.2026 14:28 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262720,
-      "text": "Филия, Богатырь и близлежащие ДНР уабын",
-      "ts": 1787052254,
-      "time_label": "18.08.2026 14:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262719,
-      "text": "Филия\nБогатырь\nДНР\nУаб",
-      "ts": 1787052253,
-      "time_label": "18.08.2026 14:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 262718,
-      "text": "Комар ДНР УАБ",
-      "ts": 1787052250,
-      "time_label": "18.08.2026 14:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3065,13 +3065,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787064981,
-  "last_event_at": "2026-08-18T14:56:21Z",
-  "fetched_at": "2026-08-18T15:00:04.185277Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1787065554,
+  "last_event_at": "2026-08-18T15:05:54Z",
+  "fetched_at": "2026-08-18T15:10:02.960534Z",
+  "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-18T15:00:04.185277Z",
-    "source_age_seconds": 223,
+    "generated_at": "2026-08-18T15:10:02.960534Z",
+    "source_age_seconds": 248,
     "city_count": 73,
     "region_count": 24,
     "feed_count": 80
