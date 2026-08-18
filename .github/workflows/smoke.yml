@@ -34,6 +34,13 @@ jobs:
             python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f" || { echo "Invalid JSON: $f"; exit 1; }
           done
 
+      # 🔴 national_balance выводится из refineries[], но пишет его LLM-агент на каждом
+      # синке — и 25.07 он записал в «выбито полностью» ДРУГУЮ метрику (недобор),
+      # завысив headline на главной в 1.7× (64% вместо 38.5%). Пересчётчик под это и
+      # написан, но до 18.08 его не звал НИКТО: ни скрипт, ни крон. Теперь дрейф ловит CI.
+      - name: national_balance derived from refineries[]
+        run: python3 agents/recalc-national-balance.py --check
+
       # 🔴 Трижды подряд (17.07 wave-cover, 09.08 cover-*.webp) генератор клал файл
       # рядом со страницей, а git add его не забирал: страница ссылается, файла в репо
       # нет, прод отдаёт 404, а сам файл копится untracked и клинит pull всем агентам.
