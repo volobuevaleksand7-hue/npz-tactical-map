@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-08-07T21:18:50Z",
+  "generated_at": "2026-08-18T02:46:01Z",
   "scope": "Крупные распределительные центры Wildberries и фулфилмент-центры Ozon. Отметка поражения — только удары БПЛА и ракет.",
   "geocoder": "Nominatim / OpenStreetMap (ODbL)",
   "network": {
@@ -17,9 +17,9 @@
    }
   },
   "counts": {
-   "total": 59,
-   "hit": 25,
-   "burned": 18
+   "total": 61,
+   "hit": 28,
+   "burned": 20
   }
  },
  "warehouses": [
@@ -283,10 +283,10 @@
    "lat": 51.6606,
    "lon": 39.20059,
    "status": "hit",
-   "date": "2026-07-23",
-   "damage": "hit",
-   "note": "Новая волна удара по складу Wildberries в Воронеже",
-   "source_url": "https://t.me/exilenova_plus",
+   "date": "2026-08-11",
+   "damage": "burned",
+   "note": "Удар БПЛА по складам Wildberries",
+   "source_url": "https://lenta.ru/news/2026/08/11/long-v-voronezhskoy-oblasti-pri-padenii-bpla-zagorelis-sklady-krupnoy-kompanii-chto-izvestno/",
    "area_m2": 156000,
    "area_source_url": "https://www.retail.ru/news/wildberries-zapustil-logisticheskiy-tsentr-v-voronezhe-14-noyabrya-2025-271402/"
   },
@@ -360,10 +360,10 @@
    "lat": 55.37859,
    "lon": 37.58046,
    "status": "hit",
-   "date": "2026-07-28",
-   "damage": "burned",
-   "note": "логистический центр Wildberries",
-   "source_url": "https://t.me/s/exilenova_plus",
+   "date": "2026-08-16",
+   "damage": "hit",
+   "note": "Удар по логистическому центру в Коледино",
+   "source_url": "https://focus.ua/voennye-novosti/762462-ataka-bpla-na-rf-v-podmoskovnom-koledino-gorit-sklad-vozle-wildberries",
    "area_m2": 250000,
    "area_source_url": "https://www.kommersant.ru/doc/8832545"
   },
@@ -586,7 +586,11 @@
    "type": "rc",
    "lat": 55.43088,
    "lon": 37.54531,
-   "status": "ok"
+   "status": "hit",
+   "date": "2026-07-28",
+   "damage": "burned",
+   "note": "логистический центр Wildberries",
+   "source_url": "https://t.me/s/exilenova_plus"
   },
   {
    "id": "wb-пушкино",
@@ -613,6 +617,22 @@
    "damage": "burned",
    "note": "логистический центр Wildberries",
    "source_url": "https://t.me/s/exilenova_plus"
+  },
+  {
+   "id": "wb-салават",
+   "operator": "wb",
+   "name": "Салават",
+   "region": "Республика Башкортостан",
+   "address": "",
+   "type": "rc",
+   "lat": 52.1515,
+   "lon": 55.9328,
+   "status": "hit",
+   "date": "2026-08-15",
+   "damage": "hit",
+   "note": "Салават — склад Wildberries",
+   "source_url": "https://www.svoboda.org/amp/ataka-na-bashkortostan-goryat-npz-v-salavate-i-sklad-wildberries/33829529.html",
+   "from_strike": true
   },
   {
    "id": "wb-самара-новосемейкино",
@@ -714,13 +734,13 @@
    "region": "Тверская область",
    "address": "",
    "type": "rc",
-   "lat": 56.858,
-   "lon": 35.901,
+   "lat": 56.8558,
+   "lon": 35.9013,
    "status": "hit",
-   "date": "2026-08-06",
+   "date": "2026-08-15",
    "damage": "burned",
-   "note": "логистический центр Wildberries (обломки сбитого дрона)",
-   "source_url": "https://www.fontanka.ru/2026/08/06/76573084/",
+   "note": "Тверь — склад Wildberries",
+   "source_url": "https://ura.news/articles/1053118245",
    "from_strike": true,
    "area_m2": 77000,
    "area_source_url": "https://postavleno.ru/blog/sklad-wildberries-tver/",
@@ -794,6 +814,22 @@
    "damage": "burned",
    "note": "Удар по промзоне Новоселки в Чехове",
    "source_url": "https://www.bloomberg.com/news/articles/2026-08-04/five-die-in-ukraine-drone-strike-in-moscow-region-governor-says"
+  },
+  {
+   "id": "wb-чишминский-район",
+   "operator": "wb",
+   "name": "Чишминский район",
+   "region": "Республика Башкортостан",
+   "address": "",
+   "type": "rc",
+   "lat": 54.55409625,
+   "lon": 55.38276325,
+   "status": "hit",
+   "date": "2026-08-13",
+   "damage": "burned",
+   "note": "Атака БПЛА на склад Wildberries в Чишминском районе",
+   "source_url": "https://kazan.aif.ru/incidents/details/pvo-strelyaet-ataka-bpla-v-bashkirii-13-avgusta-pozhar-v-salavate-i-na-sklade",
+   "from_strike": true
   },
   {
    "id": "wb-шушары",
