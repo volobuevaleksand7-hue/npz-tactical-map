@@ -227,6 +227,11 @@ def selfcheck():
     assert archive_shrink({"strikes.json": 423}, hwm) == [], "восстановленный архив — не авария"
     assert bump_hwm(hwm, {"strikes.json": 423})["strikes.json"] == 423
     assert archive_shrink({"strikes.json": None}, hwm)[0][3] == "не читается"
+    # 🔴 19.08: скользящее окно штатно усыхает по TTL — максимум ему не база.
+    assert archive_shrink({"fuel-voices.json": 200}, {"fuel-voices.json": 327}) == []
+    assert archive_shrink({"fuel-voices.json": 0}, {})[0][3] == "окно ниже пола"
+    assert "fuel-voices.json" not in bump_hwm({"fuel-voices.json": 327}, {}), \
+        "окно попало в максимумы — усыхание по TTL снова поднимет ложную тревогу"
     print("healthcheck selfcheck: ok (%d агентов)" % len(WATCH))
 
 
@@ -286,13 +291,19 @@ def alert_owner(text):
 
 
 # Накопительные архивы: они только растут. Ключ — как называется массив внутри файла.
-ARCHIVES = {"strikes.json": "strikes", "fuel-voices.json": "voices"}
+ARCHIVES = {"strikes.json": "strikes"}
+
+# Скользящие окна: живут по TTL и ШТАТНО усыхают, максимум им базой не годится.
+# 🔴 19.08: fuel-voices стоял в ARCHIVES и 327 -> 200 (TTL 21 день, 167 цитат старше
+# 29.07) поднял ложную degraded. Стережём полом: окно может дышать, но не обнуляться
+# (11.07 его обнулила соседняя рутина — 96 -> 0). Значение — минимальный размер.
+WINDOWS = {"fuel-voices.json": ("voices", 50)}
 
 
 def archive_sizes():
-    """Сколько записей сейчас в каждом накопительном архиве. None — файл не читается."""
+    """Сколько записей сейчас в каждом архиве/окне. None — файл не читается."""
     out = {}
-    for fn, key in ARCHIVES.items():
+    for fn, key in list(ARCHIVES.items()) + [(f, k) for f, (k, _) in WINDOWS.items()]:
         try:
             with open(os.path.join(ROOT, "data", fn), encoding="utf-8") as f:
                 d = json.load(f)
@@ -324,6 +335,10 @@ def archive_shrink(now_sizes, base_sizes):
         prev = base_sizes.get(fn)
         if cur is None:
             bad.append((fn, prev, cur, "не читается"))
+        elif fn in WINDOWS:
+            floor = WINDOWS[fn][1]
+            if cur < floor:
+                bad.append((fn, floor, cur, "окно ниже пола"))
         elif isinstance(prev, int) and prev > 20 and cur < prev * 0.9:
             bad.append((fn, prev, cur, "усох"))
     return bad
@@ -331,9 +346,9 @@ def archive_shrink(now_sizes, base_sizes):
 
 def bump_hwm(hwm, now_sizes):
     """Новый исторический максимум. Растёт — да, за обвалом не идёт — нет."""
-    out = dict(hwm)
+    out = {fn: v for fn, v in hwm.items() if fn in ARCHIVES}
     for fn, cur in now_sizes.items():
-        if isinstance(cur, int) and cur > (out.get(fn) or 0):
+        if fn in ARCHIVES and isinstance(cur, int) and cur > (out.get(fn) or 0):
             out[fn] = cur
     return out
 

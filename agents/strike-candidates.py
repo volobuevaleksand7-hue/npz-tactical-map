@@ -48,6 +48,27 @@ def is_strike_candidate(text):
     return bool(text) and bool(STRIKE_RE.search(text)) and bool(TARGET_RE.search(text))
 
 
+def is_digest(text):
+    """True, если это сводка-дайджест за сутки, а не сообщение об одном ударе.
+
+    Повод: 19.08.2026 в data/strike-candidates.json нашлись 4 кандидата, где в
+    detail лежал ЦЕЛЫЙ телеграм-пост «#Сводка на утро ... ▪️ В Ростовской области
+    ... В Рязани ... В Ярославле ...». Геокодер выбирал из такого поста ОДИН город
+    (в двух случаях — «Маслова Пристань», которой в тексте вообще нет по смыслу
+    события), и на карте в слое «Кандидаты» появлялась метка-фантом: один удар
+    вместо десятка событий, да ещё и не в том месте.
+
+    Дайджест опознаём по подписи, а не по словам: пост-рубрика (#Сводка,
+    #Обзорная) и/или список из нескольких пунктов-буллетов.
+    """
+    t = (text or "").strip()
+    if re.match(r"^#\s*(Сводка|Обзорная|Итоги|Дайджест)", t, re.I):
+        return True
+    if t.count("▪️") >= 2 or t.count("▫️") >= 2:
+        return True
+    return False
+
+
 def matched_target_keyword(text):
     m = TARGET_RE.search(text or "")
     return m.group(0) if m else ""
@@ -122,6 +143,9 @@ def collect_candidates(payload):
     for msg in messages:
         text = msg.get("text") or ""
         if not is_strike_candidate(text):
+            continue
+        if is_digest(text):
+            # сводка за сутки — это НЕ один удар в одном городе
             continue
         city = geocode_city(text, cities)
         out.append(to_candidate(msg, city))
