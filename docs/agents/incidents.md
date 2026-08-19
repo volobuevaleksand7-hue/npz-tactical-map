@@ -130,3 +130,15 @@ resolved: 2026-07-12 11:55 МСК — Opus/Mac: причина — пайпла�
 - если в data/strikes.json уже есть удары за 2026-07-12 → `python3 agents/gen-news.py` + git-sync + деплой;
 - если ударов за 2026-07-12 нет → прогони сборщик strikes (agents/update-prompt-strikes.md) за эту дату, затем gen-news;
 - проверь https://npz-tactical-map.vercel.app/news
+
+## [RESOLVED] fuel-voices-false-shrink-2026-08-19
+status: RESOLVED
+opened: 2026-08-19 07:10 МСК — npz-status: health.json overall=degraded, `fuel-voices.json` 327 -> 200 «усох»
+resolved: 2026-08-19 08:30 МСК — ложная тревога, данные не терялись.
+Разбор: все 167 выпавших записей имели `seen` в диапазоне 07.07–29.07, т.е. старше 21 дня —
+это штатный TTL из `agents/update-prompt-voices.md` (плюс 40 новых цитат тем же прогоном).
+`fuel-voices` — скользящее окно, а не накопительный архив, но 18.08 его завели в `ARCHIVES`
+healthcheck'а вместе со `strikes.json`, где базой служит исторический максимум. Максимум
+для окна с TTL недостижим по определению — тревога держалась бы вечно и глушила настоящие.
+Фикс: `agents/healthcheck.py` — окна вынесены в `WINDOWS` и стерегутся ПОЛОМ (50 записей,
+ловит обнуление вроде 11.07 96 -> 0), в максимумы не попадают; тест в `--selfcheck`.
