@@ -440,8 +440,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787102306,
-      "source_text": "19.08.2026 04:18 МСК\nБабынинский район Калужская область Фиксации групп БПЛА"
+      "last_event_ts": 1787102375,
+      "source_text": "19.08.2026 04:19 МСК\nМещовский район Калужская область Фиксация от 3 БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -5029,8 +5029,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787091733,
-      "source_text": "19.08.2026 01:22 МСК\nКозельский район Сухиничский район Мещовский район Бабынинский район Перемышльский район Ферзиковский район Калужская область Фиксации групп БПЛА"
+      "last_event_ts": 1787102375,
+      "source_text": "19.08.2026 04:19 МСК\nМещовский район Калужская область Фиксация от 3 БПЛА"
     },
     "RUS.52.21_1": {
       "gid_2": "RUS.52.21_1",
@@ -5178,8 +5178,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -6906,6 +6906,30 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 83380,
+      "text": "",
+      "ts": 1787102792,
+      "time_label": "19.08.2026 04:26 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 263030,
+      "text": "Оренбургская область\nвнимание по бпла",
+      "ts": 1787102688,
+      "time_label": "19.08.2026 04:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 83379,
+      "text": "Мещовский район\nКалужская область\nФиксация от 3 БПЛА",
+      "ts": 1787102375,
+      "time_label": "19.08.2026 04:19 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 83378,
       "text": "Козельский район\nКалжуская область\nФиксация БПЛА",
       "ts": 1787102339,
@@ -7520,30 +7544,6 @@
       "time_label": "19.08.2026 03:07 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 263009,
-      "text": "Балаклавская ТЭС\nБалаклава\nИ близлежащие\nТревога по БПЛА",
-      "ts": 1787097957,
-      "time_label": "19.08.2026 03:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 83331,
-      "text": "ГО Воскресенск\nМосковская область\nФиксации БПЛА",
-      "ts": 1787097953,
-      "time_label": "19.08.2026 03:05 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 83330,
-      "text": "Радищевский район\nУльяновская область\nФиксация БПЛА",
-      "ts": 1787097932,
-      "time_label": "19.08.2026 03:05 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7553,13 +7553,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787102339,
-  "last_event_at": "2026-08-19T01:18:59Z",
-  "fetched_at": "2026-08-19T01:20:04.002709Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1787102792,
+  "last_event_at": "2026-08-19T01:26:32Z",
+  "fetched_at": "2026-08-19T01:30:05.745666Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-19T01:20:04.002709Z",
-    "source_age_seconds": 65,
+    "generated_at": "2026-08-19T01:30:05.745666Z",
+    "source_age_seconds": 213,
     "city_count": 160,
     "region_count": 42,
     "feed_count": 80
