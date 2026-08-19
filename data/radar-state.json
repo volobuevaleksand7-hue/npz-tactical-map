@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787152031,
-      "source_text": "19.08.2026 18:07 МСК\nКраснодар Краснодарский край Фиксация БПЛА"
+      "last_event_ts": 1787152214,
+      "source_text": "19.08.2026 18:10 МСК\nГеленджик и близлежащие Краснодарский край Фиксации БПЛА"
     },
     "Москва": {
       "bpla": false,
@@ -1527,9 +1527,9 @@
       "lat": 44.58014,
       "lon": 38.06646,
       "region": "Краснодарский край",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1540,8 +1540,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787145933,
-      "source_text": "19.08.2026 16:25 МСК\nАнапа, Супсех, Сукко, Большой Утриш, Витязево, Цибанобалка, Анапская, Геленджик, Кабардинка, Новороссийск, Джанхот, Краснодарский край - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1787152214,
+      "source_text": "19.08.2026 18:10 МСК\nГеленджик и близлежащие Краснодарский край Фиксации БПЛА"
     },
     {
       "key": "приморск|запорожская область",
@@ -3837,9 +3837,9 @@
       "gid_2": "RUS.34.38_1",
       "name_ru": "Северский район",
       "region_ru": "Краснодарский край",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -3852,8 +3852,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787142739,
-      "source_text": "19.08.2026 15:32 МСК\nЭкстренная информация РСЧС (Краснодарский край): БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: Приморско-Ахтарский МО, Славянский, Калининский, Красноармейский, Северский, Тимашевский районы."
+      "last_event_ts": 1787152165,
+      "source_text": "19.08.2026 18:09 МСК\nСеверский район Краснодарский край Фиксация БПЛА"
     },
     "RUS.39.1_1": {
       "gid_2": "RUS.39.1_1",
@@ -5069,6 +5069,30 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 263301,
+      "text": "Каменка-Днепровская арт обстрел\n⏺\nВ укрытия !\nНикванта подписаться\n🇷🇺\nНикванта в МАХ",
+      "ts": 1787152672,
+      "time_label": "19.08.2026 18:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 83627,
+      "text": "Геленджик и близлежащие\nКраснодарский край\nФиксации БПЛА",
+      "ts": 1787152214,
+      "time_label": "19.08.2026 18:10 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 83626,
+      "text": "Северский район\nКраснодарский край\nФиксация БПЛА",
+      "ts": 1787152165,
+      "time_label": "19.08.2026 18:09 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 83625,
       "text": "Кошехабльский район Республика Адыгея\nФиксация БПЛА",
       "ts": 1787152084,
@@ -5683,30 +5707,6 @@
       "time_label": "19.08.2026 15:49 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 83600,
-      "text": "Гусь-хрустальный район\nВладимирская область\nФиксация группы БПЛА",
-      "ts": 1787143688,
-      "time_label": "19.08.2026 15:48 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 83599,
-      "text": "Спасский район\nРязанская область\nФиксация БПЛА",
-      "ts": 1787143649,
-      "time_label": "19.08.2026 15:47 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 83598,
-      "text": "ГО Коломна\nМосковская область\nФиксация БПЛА",
-      "ts": 1787143634,
-      "time_label": "19.08.2026 15:47 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5716,13 +5716,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787152084,
-  "last_event_at": "2026-08-19T15:08:04Z",
-  "fetched_at": "2026-08-19T15:10:02.919018Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1787152672,
+  "last_event_at": "2026-08-19T15:17:52Z",
+  "fetched_at": "2026-08-19T15:20:04.087551Z",
+  "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-08-19T15:10:02.919018Z",
-    "source_age_seconds": 118,
+    "generated_at": "2026-08-19T15:20:04.087551Z",
+    "source_age_seconds": 132,
     "city_count": 111,
     "region_count": 31,
     "feed_count": 80
