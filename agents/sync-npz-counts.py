@@ -269,7 +269,7 @@ MULTI = {
          lambda g: g[0] + str(total_count()) + g[1]),
     ],
     "situaciya-s-benzinom.html": [
-        (r'(Из )\d+ (?:завод|завода|заводов)( в базе <strong>)\d+( стоят полностью, )\d+( работают на пониженной загрузке 20–70%, и лишь )\d+( в штатном режиме</strong>\.)',
+        (r'(из )\d+ (?:завод|завода|заводов)( <strong>)\d+( стоят полностью, )\d+( работают на пониженной загрузке и )\d+( — в штатном режиме</strong>)',
          lambda g: (g[0] + str(total_count()) + " " + ru_count_gen(total_count(), "завода", "заводов") + g[1]
                     + str(down_count()) + g[2] + str(partial_count()) + g[3] + str(normal_count()) + g[4])),
     ],
