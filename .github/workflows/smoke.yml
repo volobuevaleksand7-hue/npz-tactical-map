@@ -40,6 +40,28 @@ jobs:
       # написан, но до 18.08 его не звал НИКТО: ни скрипт, ни крон. Теперь дрейф ловит CI.
       # 🔴 15.07 агент записал удар «на 9 часов вперёд» — модель текущего времени не знает
       # и берёт дату из головы. Страж под это написан, но его тоже никто не звал.
+      # 🔴 17-18.08 в архив попали 28 «ударов», где target — кусок веб-страницы
+      # (заголовок новости, навигационное меню, статья про рестораны). Валидатор в
+      # merge-strikes-inbox.py их бы отсёк, но writer прошёл МИМО инбокса. Поэтому
+      # проверяем итоговый файл — он один для всех путей записи.
+      - name: no scraped page fragments in strikes archive
+        run: |
+          python3 - <<'PYEOF'
+          import json, sys, importlib.util
+          spec = importlib.util.spec_from_file_location("m", "agents/merge-strikes-inbox.py")
+          m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          bad = []
+          for x in json.load(open("data/strikes.json"))["strikes"]:
+              why = m.reason_scraped(x)
+              if why:
+                  bad.append((str(x.get("date"))[:10], (x.get("target") or "")[:60], why))
+          for d, t, why in bad:
+              print("SCRAPED %s | %s | %s" % (d, t, why))
+          if bad:
+              print("\n%d записей-скрейпов в архиве ударов" % len(bad)); sys.exit(1)
+          print("скрейпов в архиве нет")
+          PYEOF
+
       - name: no strikes dated in the future
         run: python3 agents/check-future-dates.py data/strikes.json
 
