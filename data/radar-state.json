@@ -16,14 +16,14 @@
       "fpv": false,
       "rocket": true,
       "rocket_level": true,
-      "aviation": false,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1787186530,
-      "source_text": "20.08.2026 03:42 МСК\nКраснодарский край авиационная ракетная опасность (РСЧС) Уточняем причину объявления"
+      "last_event_ts": 1787209106,
+      "source_text": "20.08.2026 03:42 МСК\nКраснодарский край авиационная ракетная опасность (РСЧС) Уточняем причину объявления\n\n20.08.2026 09:58 МСК\nРостовская область Краснодарский край Авиационная опасность"
     },
     "Ярославская область": {
       "bpla": false,
@@ -62,6 +62,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1787182247,
       "source_text": "20.08.2026 02:30 МСК\nСтавропольский край повторно опасность по БПЛА"
+    },
+    "Ростовская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": false,
+      "aviation": true,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1787209106,
+      "source_text": "20.08.2026 09:58 МСК\nРостовская область Краснодарский край Авиационная опасность"
     },
     "Ивановская область": {
       "bpla": false,
@@ -1349,6 +1368,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 263811,
+      "text": "Ростовская область\nКраснодарский край\nАвиационная опасность",
+      "ts": 1787209106,
+      "time_label": "20.08.2026 09:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 263810,
       "text": "Бердянск -Мелитополь\nВся трасса р-280\nОпасность по БПЛА Хорнет\nЗапорожская область РФ",
       "ts": 1787208907,
@@ -1979,14 +2006,6 @@
       "time_label": "20.08.2026 06:20 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 84006,
-      "text": "Туапсе и близлежащие\nКраснодарский край\nОтбой опасности по БПЛА\nОпасность на территории региона сохраняется",
-      "ts": 1787195789,
-      "time_label": "20.08.2026 06:16 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1996,15 +2015,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787208907,
-  "last_event_at": "2026-08-20T06:55:07Z",
-  "fetched_at": "2026-08-20T07:00:05.109214Z",
+  "timestamp": 1787209106,
+  "last_event_at": "2026-08-20T06:58:26Z",
+  "fetched_at": "2026-08-20T07:10:24.626089Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-20T07:00:05.109214Z",
-    "source_age_seconds": 298,
+    "generated_at": "2026-08-20T07:10:24.626089Z",
+    "source_age_seconds": 718,
     "city_count": 40,
-    "region_count": 17,
+    "region_count": 18,
     "feed_count": 80
   }
 }
