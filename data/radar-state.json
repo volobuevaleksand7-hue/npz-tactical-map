@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787226773,
-      "source_text": "20.08.2026 14:52 МСК\nДКАД ДНР, Донецк - Макеевка и близлежащие Опасность по БПЛА сохраняется"
+      "last_event_ts": 1787231863,
+      "source_text": "20.08.2026 16:17 МСК\nДонецк п.Октябрьский Опасность по Фпв ДНР"
     },
     "Херсонская область": {
       "bpla": false,
@@ -323,15 +323,15 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": false,
+      "fpv": true,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787226773,
-      "source_text": "20.08.2026 14:52 МСК\nДКАД ДНР, Донецк - Макеевка и близлежащие Опасность по БПЛА сохраняется"
+      "last_event_ts": 1787231863,
+      "source_text": "20.08.2026 16:17 МСК\nДонецк п.Октябрьский Опасность по Фпв ДНР"
     },
     {
       "key": "пролетарский|белгородская область",
@@ -994,6 +994,28 @@
       "source_text": "20.08.2026 10:16 МСК\nКрасноперекопский район и близлежащие Опасность по БПЛА Республика Крым"
     },
     {
+      "key": "кировское|донецкая народная республика",
+      "name": "Кировское",
+      "lat": 48.14969,
+      "lon": 38.35941,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787231529,
+      "source_text": "20.08.2026 16:12 МСК\nКировское ДНР и близлежащие Опасность по БПЛА на электротяге"
+    },
+    {
       "key": "макеевка|донецкая народная республика",
       "name": "Макеевка",
       "lat": 48.04782,
@@ -1306,6 +1328,30 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 263889,
+      "text": "Донецк п.Октябрьский\nОпасность по Фпв\nДНР",
+      "ts": 1787231863,
+      "time_label": "20.08.2026 16:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 263888,
+      "text": "Кировское ДНР и близлежащие\nОпасность по БПЛА на электротяге",
+      "ts": 1787231529,
+      "time_label": "20.08.2026 16:12 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 263887,
+      "text": "ВЕДЕТСЯ ОБСТРЕЛ Валуйский МО, с. Борки Спуститесь в подвал (укрытие).",
+      "ts": 1787231485,
+      "time_label": "20.08.2026 16:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 263886,
       "text": "Борисовский район\nОпасность по БПЛА",
@@ -1921,30 +1967,6 @@
       "time_label": "20.08.2026 11:06 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 263829,
-      "text": "Краснодарский край, Ростовская область отбой авиационной опасности",
-      "ts": 1787213136,
-      "time_label": "20.08.2026 11:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 263828,
-      "text": "Трасса Приморск - Бердянск тревога по БПЛА, ФПВ.\nВысокая активность",
-      "ts": 1787213084,
-      "time_label": "20.08.2026 11:04 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 263827,
-      "text": "Миллерово\nРостовская область\nМеры безопасности",
-      "ts": 1787212680,
-      "time_label": "20.08.2026 10:58 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1954,14 +1976,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787231349,
-  "last_event_at": "2026-08-20T13:09:09Z",
-  "fetched_at": "2026-08-20T13:10:08.863912Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1787231863,
+  "last_event_at": "2026-08-20T13:17:43Z",
+  "fetched_at": "2026-08-20T13:20:08.863202Z",
+  "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-20T13:10:08.863912Z",
-    "source_age_seconds": 59,
-    "city_count": 42,
+    "generated_at": "2026-08-20T13:20:08.863202Z",
+    "source_age_seconds": 145,
+    "city_count": 43,
     "region_count": 9,
     "feed_count": 80
   }
