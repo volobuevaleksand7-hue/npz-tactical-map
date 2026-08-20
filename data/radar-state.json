@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787218512,
-      "source_text": "20.08.2026 12:35 МСК\nВалуйский район Опасность по БПЛА"
+      "last_event_ts": 1787222334,
+      "source_text": "20.08.2026 13:38 МСК\nКрасная яруга Тревога по БПЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -400,28 +400,6 @@
       "source_text": "20.08.2026 09:05 МСК\nРакитное, Пролетарский Тревога по БПЛА Хорнет"
     },
     {
-      "key": "скадовск|херсонская область",
-      "name": "Скадовск",
-      "lat": 46.11313,
-      "lon": 32.90978,
-      "region": "Херсонская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787179088,
-      "source_text": "20.08.2026 01:38 МСК\nСкадовск и близлежащие тревога по БПЛА действует. Соблюдаем меры безопасности"
-    },
-    {
       "key": "мариуполь|донецкая народная республика",
       "name": "Мариуполь",
       "lat": 47.09514,
@@ -442,6 +420,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1787212518,
       "source_text": "20.08.2026 10:55 МСК\nЯлта ДНР, Урзуф, Мангуш, Мариуполь, Володарское И близлежащие опасность по БПЛА"
+    },
+    {
+      "key": "красная яруга|белгородская область",
+      "name": "Красная Яруга",
+      "lat": 50.80198,
+      "lon": 35.65774,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787222334,
+      "source_text": "20.08.2026 13:38 МСК\nКрасная яруга Тревога по БПЛА"
     },
     {
       "key": "армянск|автономная республика крым",
@@ -1483,6 +1483,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 263863,
+      "text": "Красная яруга\nТревога по БПЛА",
+      "ts": 1787222334,
+      "time_label": "20.08.2026 13:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 263862,
       "text": "Горловка Комсомолец БПЛА на восток",
       "ts": 1787221441,
@@ -2113,14 +2121,6 @@
       "time_label": "20.08.2026 09:06 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 263795,
-      "text": "Ракитное, Пролетарский\nТревога по БПЛА Хорнет",
-      "ts": 1787205954,
-      "time_label": "20.08.2026 09:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2130,13 +2130,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787221441,
-  "last_event_at": "2026-08-20T10:24:01Z",
-  "fetched_at": "2026-08-20T10:30:06.043636Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1787222334,
+  "last_event_at": "2026-08-20T10:38:54Z",
+  "fetched_at": "2026-08-20T10:40:04.250209Z",
+  "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-20T10:30:06.043636Z",
-    "source_age_seconds": 365,
+    "generated_at": "2026-08-20T10:40:04.250209Z",
+    "source_age_seconds": 70,
     "city_count": 45,
     "region_count": 9,
     "feed_count": 80
