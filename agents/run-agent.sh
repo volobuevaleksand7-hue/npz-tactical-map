@@ -6,6 +6,23 @@
 # обновление видно БЕЗ редеплоя Vercel (на след. 5-мин опросе).
 set -uo pipefail
 
+# --- Распознавание обрыва сети (чистая функция, проверяется `--selftest`) ---
+# Ровно та подпись, которую печатает сам claude CLI, когда не может открыть сокет
+# к API. Узко намеренно: «Could not resolve host» из результата WebFetch — это
+# нерабочий ИСТОЧНИК, а не обрыв у нас, и повтором он не чинится.
+_is_net_failure() {
+  grep -qE 'API Error: Unable to connect to API|API Error: Connection error'
+}
+
+if [ "${1:-}" = "--selftest" ]; then
+  printf 'API Error: Unable to connect to API (ConnectionRefused)\n'  | _is_net_failure || { echo "FAIL: ConnectionRefused не распознан";  exit 1; }
+  printf 'API Error: Unable to connect to API (FailedToOpenSocket)\n' | _is_net_failure || { echo "FAIL: FailedToOpenSocket не распознан"; exit 1; }
+  printf 'WebFetch: Could not resolve host: example.com\n'            | _is_net_failure && { echo "FAIL: дохлый источник принят за обрыв сети"; exit 1; }
+  printf 'Готов запустить обновление? Жду одобрения.\n'               | _is_net_failure && { echo "FAIL: пустой прогон принят за обрыв сети";  exit 1; }
+  echo "run-agent.sh --selftest OK: обрыв сети отличим от дохлого источника и пустого прогона"
+  exit 0
+fi
+
 # load local secrets (ANTHROPIC_API_KEY и пр.) — файл ВНЕ репозитория
 [ -f /root/.npz-agent.env ] && . /root/.npz-agent.env
 [ -f "$HOME/.npz-agent.env" ] && . "$HOME/.npz-agent.env"
@@ -88,6 +105,47 @@ if [ "$RC" != "0" ]; then
     >> "agents/logs/${LABEL}.log" 2>&1
   RC=$?
   echo "engine claude($MODEL) exit: $RC"
+fi
+
+# --- Обрыв сети: дождаться возврата и повторить один раз (21.08.2026) ---
+# 21.08 пять агентов подряд легли на `API Error: Unable to connect to API
+# (ConnectionRefused / FailedToOpenSocket)` — на VPS отвалилась сеть. Работу они
+# успели сделать (готовый ответ остался в agents/logs/<label>.log), потерялся
+# только коммит; heartbeat не записан → «5 агентов не на связи» до следующего
+# слота через 12 ч.
+# Ждём именно ВОЗВРАТА сети, а не «просто ещё раз»: слепой повтор при мёртвом DNS
+# сожжёт второй 30-минутный слот впустую, а под глобальным flock ещё и придержит
+# очередь. Проба дешёвая и возвращается мгновенно, когда сеть уже жива, — поэтому
+# второму агенту в пачке ждать уже не придётся.
+# ponytail: один повтор после ожидания, не цикл — устойчивый обрыв остаётся
+# честным падением, его ловит watchdog. Потолок ожидания — NPZ_NET_WAIT (600с),
+# заведомо меньше NPZ_LOCK_WAIT (1900с), чтобы очередь не голодала.
+_net_up() { curl -sS -o /dev/null -m 8 https://api.anthropic.com/v1/messages >/dev/null 2>&1; }
+
+if [ "$RC" != "0" ] && tail -c 2000 "agents/logs/${LABEL}.log" 2>/dev/null | _is_net_failure; then
+  _net_budget="${NPZ_NET_WAIT:-600}"
+  _net_start=$(date +%s)
+  _net_deadline=$(( _net_start + _net_budget ))
+  echo "!! [$LABEL] обрыв сети (RC=$RC) — жду возврата, потолок ${_net_budget}с"
+  while ! _net_up; do
+    [ "$(date +%s)" -ge "$_net_deadline" ] && break
+    sleep 20
+  done
+  if _net_up; then
+    echo "[$LABEL] сеть вернулась через $(( $(date +%s) - _net_start ))с — повтор той же задачи"
+    # Откат ДО повтора: упавший прогон мог оставить полузаписанный файл, иначе
+    # модель перечитает собственный обрывок (та же причина, что у json-повтора ниже).
+    git checkout -- data/ 2>/dev/null || true
+    $TIMEOUT_WRAP claude -p "$PROMPT" \
+      --model "$MODEL" \
+      --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
+      --permission-mode acceptEdits \
+      >> "agents/logs/${LABEL}.log" 2>&1
+    RC=$?
+    echo "engine claude($MODEL) net-retry exit: $RC"
+  else
+    echo "!! [$LABEL] сеть не вернулась за ${_net_budget}с — честное падение, разбирать по heartbeat"
+  fi
 fi
 
 # A failed agent (incl. timeout=124) may have left half-written data. Revert any
