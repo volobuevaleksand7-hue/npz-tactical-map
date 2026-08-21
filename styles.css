@@ -90,6 +90,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .topctl{display:flex;align-items:center;gap:6px;min-width:220px;justify-content:flex-end}
 .hdr-quick{display:none}/* быстрые чипы РАДАР/АЗС — только на мобиле (десктоп имеет полный ряд вкладок) */
 .sync{font-family:var(--mono);font-size:10px;color:var(--ink-dim);text-align:right;line-height:1.4}
+/* Штамп синка, когда сбор встал: не тихая ночь, а прерванный сбор. Порог — STALE_SYNC_H в app.js. */
+.sync-stale{color:#c9760a;font-weight:700}
+
 .sync-next{display:block;color:var(--teal);font-weight:600}
 .mode-pill{background:var(--amber);color:#241500;font-family:var(--mono);font-weight:800;font-size:9px;letter-spacing:1px;padding:4px 8px;border-radius:6px}
 .topctl .tg-subscribe{padding:5px 10px!important;border-radius:7px!important;font-size:11px!important}

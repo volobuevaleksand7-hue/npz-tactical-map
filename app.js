@@ -2033,12 +2033,29 @@
     var el = document.getElementById("nextSync");
     if (el) el.textContent = "T-" + pad(Math.floor(rem / 60)) + ":" + pad(rem % 60);
   }
+  // Порог, после которого штамп синка честно кричит о прерванном сборе.
+  var STALE_SYNC_H = 3;
+
   function renderSyncMeta() {
     if (!S.state) return;
     var m = S.state.meta || {};
     if (m.generated_at) {
       var d = new Date(new Date(m.generated_at).getTime() + 3 * 3600 * 1000); // МСК = UTC+3
-      document.getElementById("lastSync").textContent = "sync " + pad(d.getUTCDate()) + "." + pad(d.getUTCMonth() + 1) + " " + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + " МСК";
+      var el = document.getElementById("lastSync");
+      el.textContent = "sync " + pad(d.getUTCDate()) + "." + pad(d.getUTCMonth() + 1) + " " + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + " МСК";
+      // 🔴 Пустая лента не значит «тихая ночь» — она значит и «сбор встал». Пассивная дата
+      // этого не сообщает: 21.08.2026 сборщик молчал 14 часов (упал VPS), а посетитель видел
+      // обычный штамп «sync 20.08 17:50» и ленту без новых записей. Читаем возраст вслух.
+      var ageH = (Date.now() - new Date(m.generated_at).getTime()) / 3600000;
+      var stale = ageH >= STALE_SYNC_H;
+      el.classList.toggle("sync-stale", stale);
+      if (stale) {
+        var hh = Math.floor(ageH);
+        el.textContent += " · сбор прерван " + (hh < 48 ? hh + " ч" : Math.floor(hh / 24) + " сут") + " назад";
+        el.title = "Сбор данных не обновлялся " + hh + " ч. Отсутствие новых записей в ленте не означает, что событий не было.";
+      } else {
+        el.removeAttribute("title");
+      }
     }
     if (m.data_mode) document.getElementById("modePill").textContent = m.data_mode.split("/")[0].trim();
     var fb = document.getElementById("ssFallback"); if (fb) fb.classList.toggle("hidden", !usedFallback);
