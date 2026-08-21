@@ -258,41 +258,21 @@ def _match_refinery_id(strike):
 
 
 def _recalculate_national_balance(fuel):
+    """national_balance из refineries[] — формулы берём из agents/recalc-national-balance.py.
+
+    Своя копия формул тут разошлась с канонической: capacity_offline считался
+    вместе с недобором частично работающих, то есть headline «выбито полностью»
+    равнялся throughput_shortfall (тот же класс бага, что и 25.07, см. шапку
+    recalc-national-balance.py). Спасал только pre-commit-хук, который
+    пересчитывал файл заново. Держим ОДНУ формулу.
     """
-    Recalculate national_balance from refineries[].
-    capacity_offline = sum of capacities where status=down
-    throughput_shortfall = weighted by est_output_pct
-    """
-    refineries = fuel.get("refineries", [])
-    total_capacity = 0
-    offline_capacity = 0
-    total_weighted = 0
-
-    for ref in refineries:
-        cap = ref.get("capacity_mt_year", 0)
-        total_capacity += cap
-        status = ref.get("status", "operational")
-        output_pct = ref.get("est_output_pct", 100)
-
-        if status == "down":
-            offline_capacity += cap
-        elif status == "partial":
-            offline_capacity += cap * (1 - output_pct / 100.0)
-
-        total_weighted += cap * (1 - output_pct / 100.0)
-
-    if total_capacity > 0:
-        offline_pct = int(round(offline_capacity / total_capacity * 100))
-        shortfall_pct = int(round(total_weighted / total_capacity * 100))
-    else:
-        offline_pct = 0
-        shortfall_pct = 0
-
-    fuel["national_balance"]["refining_capacity_total_mt_year"] = round(total_capacity, 1)
-    fuel["national_balance"]["capacity_offline_mt_year"] = round(offline_capacity, 1)
-    fuel["national_balance"]["capacity_offline_pct"] = offline_pct
-    fuel["national_balance"]["throughput_shortfall_pct"] = shortfall_pct
-
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "recalc_national_balance",
+        os.path.join(BASE_DIR, "agents", "recalc-national-balance.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    fuel["national_balance"].update(mod.derive(fuel["refineries"]))
     return fuel
 
 
@@ -343,6 +323,16 @@ def update_map(strike_data, dry_run=False):
         new_status = "partial"
         new_output = max(target_ref.get("est_output_pct", 100) - 20, 20)
 
+    # Удар не может улучшить завод. 21.08.2026 повторный прилёт по уже стоящим
+    # ТАНЕКО и Лукойл-Пермнефтеоргсинтез поднял их down/0% → partial/15-20%
+    # (пол `max(..., 15)` выше поднимает нуль, а status перетирался вслепую) —
+    # headline на главной просел с 40% до 32%. Берём худшее из старого и нового.
+    RANK = {"operational": 0, "partial": 1, "down": 2}
+    if RANK.get(old_status, 0) > RANK.get(new_status, 0):
+        new_status = old_status
+    new_output = min(new_output, target_ref.get("est_output_pct", 100))
+    status_changed = new_status != old_status
+
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     print(f"\n[update_map] Refinery: {target_ref.get('name', ref_id)}")
@@ -355,7 +345,8 @@ def update_map(strike_data, dry_run=False):
 
     # a. Update refinery status
     target_ref["status"] = new_status
-    target_ref["status_since"] = today
+    if status_changed:
+        target_ref["status_since"] = today
     target_ref["est_output_pct"] = new_output
     target_ref["damage"] = detail[:500] if detail else target_ref.get("damage", "")
     target_ref["source_url"] = strike_data.get("source_url", target_ref.get("source_url", ""))
