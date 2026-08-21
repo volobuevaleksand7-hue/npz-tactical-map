@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787316120,
-      "source_text": "21.08.2026 15:42 МСК\nСкопинский район Рязанская область Фиксация от 2 БПЛА"
+      "last_event_ts": 1787318029,
+      "source_text": "21.08.2026 16:13 МСК\nРязань Рязанская область Работа ПВО по БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -156,7 +156,7 @@
       "rocketOnRegion": false,
       "fill": "#d8c06a",
       "last_event_ts": 1787317475,
-      "source_text": "21.08.2026 16:04 МСК\nТаврово, Белгородский район Опасность по БПЛА Хорнет\n\n21.08.2026 13:13 МСК\nТрасса Валуйки-Пятницкое-Новый Оскол Опасность по ФПВ"
+      "source_text": "21.08.2026 16:04 МСК\nТаврово, Белгородский район Опасность по БПЛА Хорнет"
     },
     "Воронежская область": {
       "bpla": false,
@@ -1683,7 +1683,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -1868,6 +1868,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1787298391,
       "source_text": "21.08.2026 10:46 МСК\nНовогродовка ДНР опасность по БПЛА Хорнет"
+    },
+    {
+      "key": "рязань|рязанская область",
+      "name": "Рязань",
+      "lat": 54.62696,
+      "lon": 39.70415,
+      "region": "Рязанская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": true,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787318029,
+      "source_text": "21.08.2026 16:13 МСК\nРязань Рязанская область Работа ПВО по БПЛА"
     },
     {
       "key": "темрюк|краснодарский край",
@@ -2255,7 +2277,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -3107,6 +3129,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 264549,
+      "text": "Рязань\nвнимание по бпла",
+      "ts": 1787318197,
+      "time_label": "21.08.2026 16:16 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 84378,
+      "text": "Рязань\nРязанская область\nРабота ПВО по БПЛА",
+      "ts": 1787318029,
+      "time_label": "21.08.2026 16:13 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 264548,
       "text": "Горловка, Енакиево ДНР и близлежащие\nОпасность по БПЛА и ФПВ сохраняется",
       "ts": 1787317608,
@@ -3729,22 +3767,6 @@
       "time_label": "21.08.2026 13:36 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 264507,
-      "text": "Кировский район\nЛенинский район\nФеодосия\nКерченский полуостров\nКерчь\nКрымский мост\nПролив\nТаманский полуостров\nОпасность по БПЛА",
-      "ts": 1787308521,
-      "time_label": "21.08.2026 13:35 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 264506,
-      "text": "Калужская область\nМосковская область\nПриготовиться к волне БПЛА от Брянской области",
-      "ts": 1787308326,
-      "time_label": "21.08.2026 13:32 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3754,14 +3776,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787317608,
-  "last_event_at": "2026-08-21T13:06:48Z",
-  "fetched_at": "2026-08-21T13:10:03.473081Z",
+  "timestamp": 1787318197,
+  "last_event_at": "2026-08-21T13:16:37Z",
+  "fetched_at": "2026-08-21T13:20:02.728151Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-21T13:10:03.473081Z",
-    "source_age_seconds": 195,
-    "city_count": 87,
+    "generated_at": "2026-08-21T13:20:02.728151Z",
+    "source_age_seconds": 205,
+    "city_count": 88,
     "region_count": 25,
     "feed_count": 80
   }
