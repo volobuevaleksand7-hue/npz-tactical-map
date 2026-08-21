@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-20T10:34:26.807562Z",
+    "generated_at": "2026-08-21T07:30:00.000000Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "updated_by": "agent:fuel-availability",
-    "rotation_pass": "Rotation pass #79 (20.08, 10:34Z). No new news found in last 4 hours."
+    "rotation_pass": "Rotation pass #80 (21.08, 07:30Z). Second wave continues."
   },
   "exchange": {
     "ai95_spb_rub_t": 63400,
@@ -59,14 +59,14 @@
       "lat": 45.04,
       "lon": 38.98,
       "level": "critical",
-      "updated": "2026-08-20T20:00:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Крупные сети",
           "status": "limited",
           "level": "critical",
           "limit_l": 25,
-          "note": "16.08: вторая волна кризиса продолжается. Краснодар 78+ АЗС, Сочи 52+ АЗС. Ограничения 20-30л. Сочи: очереди до 47 часов (зафиксированы туристами). Новороссийск: многочасовые ожидания. Ситуация остаётся критической в конце туристического сезона."
+          "note": "21.08 WebSearch: очереди до 47 часов в Сочи"
         }
       ],
       "queues_hours": 2.5,
@@ -77,7 +77,7 @@
         "https://www.ptoday.ru/14129-sochi-bez-benzina-turisty-zastrjali-na-kurorte-i-ne-mogut-vyehat-domoj.html",
         "https://www.bfm.ru/news/614853"
       ],
-      "note": "20.08 WebSearch: Вторая волна продолжается. Сочи очереди до 47 часов. Краснодар, Новороссийск многочасовые очереди. Лимиты 20-30л. Критическая ситуация."
+      "note": "21.08 WebSearch: Сочи очереди до 47 часов"
     },
     {
       "region": "Татарстан",
@@ -231,21 +231,21 @@
       "lat": 47.23,
       "lon": 39.72,
       "level": "critical",
-      "updated": "2026-08-20T20:00:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Газпром нефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "11.08 горячая проверка: частичные лимиты восстановлены. Поставки ограничены."
+          "note": "21.08 WebSearch: 1-1.5ч очереди"
         },
         {
           "name": "Роснефть",
           "status": "limited",
           "level": "critical",
           "limit_l": 30,
-          "note": "11.08 горячая проверка: вторая неделя дефицита. Очереди до 50-100 машин, ожидание 1-1.5ч. Лимиты 20-30л. Дефицит АИ-95."
+          "note": "21.08 WebSearch: 1-1.5ч очереди"
         }
       ],
       "queues_hours": 1.5,
@@ -258,14 +258,14 @@
         "https://www.bfm.ru/news/614796",
         "https://www.bfm.ru/news/614853"
       ],
-      "note": "20.08 WebSearch: Вторая волна дефицита продолжается. Очереди 1-1.5 часа, лимиты 20-30л. Дефицит АИ-95. По М-4 трассе: критическая ситуация."
+      "note": "21.08 WebSearch: 1-1.5ч очереди"
     },
     {
       "region": "Алтайский край",
       "lat": 53.36,
       "lon": 83.76,
       "level": "limited",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "БРК / Региональные АЗС",
@@ -339,7 +339,7 @@
       "lat": 56.33,
       "lon": 44.0,
       "level": "strained",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Лукойл",
@@ -382,7 +382,7 @@
       "lat": 48.71,
       "lon": 44.5,
       "level": "limited",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -492,7 +492,7 @@
       "lat": 56.12,
       "lon": 40.39,
       "level": "limited",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -568,7 +568,7 @@
       "lat": 54.19,
       "lon": 37.23,
       "level": "strained",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Крупные сети",
@@ -596,7 +596,7 @@
       "lat": 56.86,
       "lon": 35.91,
       "level": "limited",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Сургутнефтегаз",
@@ -627,7 +627,7 @@
       "lat": 57.15,
       "lon": 65.53,
       "level": "limited",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -685,7 +685,7 @@
       "lat": 43.12,
       "lon": 131.89,
       "level": "calm",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "ai95_price_rub": 74,
       "networks": [
         {
@@ -710,7 +710,7 @@
       "lat": 52.29,
       "lon": 104.3,
       "level": "limited",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -744,7 +744,7 @@
       "lat": 61.0,
       "lon": 69.0,
       "level": "limited",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Газпром нефть",
@@ -825,7 +825,7 @@
       "lat": 48.48,
       "lon": 135.08,
       "level": "calm",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "DV Region / NNK-Khabarovsknefteproduct",
@@ -895,7 +895,7 @@
       "lat": 56.13,
       "lon": 47.25,
       "level": "limited",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Татнефть",
@@ -1073,14 +1073,14 @@
       "lat": 52.61,
       "lon": 39.57,
       "level": "critical",
-      "updated": "2026-08-20T20:00:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "Газпромнефть / Лукойл / Роснефть / Teboil",
           "status": "limited",
           "level": "critical",
           "limit_l": 30,
-          "note": "19.08 WebSearch: Система «чёт-нечет» действует с 13.08. Четные номера ГРЗ (0,2,4,6,8) на четные дни, нечетные на нечетные дни. Лимит 30л. На трассах М-4, Р-119, А-133 система не действует. Дефицит может сохраниться до конца августа."
+          "note": "21.08 WebSearch: система чет-нечет активна с 13.08"
         }
       ],
       "queues_hours": 1.5,
@@ -1090,7 +1090,7 @@
         "https://lipetsktime.ru/news/society/16-avgusta-benzin-na-azs-lipeckoj-oblasti-otpuskayut-avtomobilyam-s-chyotnoj-pervoj-cifroj-gosnomera/",
         "https://finance.mail.ru/article/v-lipeckoj-oblasti-vozvrashayut-prodazhu-benzina-po-nomeram-avto-69222367/"
       ],
-      "note": "20.08 WebSearch: Система чет-нечет действует с 13.08. Лимит 30л. Критическое состояние сохраняется."
+      "note": "21.08 WebSearch: система чет-нечет активна с 13.08"
     },
     {
       "region": "Брянская область",
@@ -2483,14 +2483,14 @@
       "lat": 51.76,
       "lon": 55.09,
       "level": "strained",
-      "updated": "2026-08-18T12:25:00Z",
+      "updated": "2026-08-21T07:30:00Z",
       "networks": [
         {
           "name": "АЗС (четные-нечетные)",
           "status": "limited",
           "level": "critical",
           "limit_l": 30,
-          "note": "17.08 WebSearch: Система чет-нечет с 12.08 по последней цифре ГРЗ. Лимит 15-30л бензина, 60л ДТ. Запрет канистры. Причина: атаки БПЛА на Орск НПЗ (11.08)."
+          "note": "21.08 WebSearch: система чет-нечет активна с 12.08"
         }
       ],
       "queues_hours": 0.3,
@@ -2501,10 +2501,16 @@
         "https://eadaily.com/ru/news/2026/08/12/budu-chesten-na-azs-orenburgskoy-oblasti-budut-zapravlyat-po-dnyam-chet-nechet",
         "https://www.vedomosti.ru/strana/privolzhsky/news/2026/08/12/1220506-chet-nechet"
       ],
-      "note": "18.08 ротация: вторая волна кризиса."
+      "note": "21.08 WebSearch: система чет-нечет активна с 12.08"
     }
   ],
   "policy_events": [
+    {
+      "date": "2026-08-21",
+      "region": "РФ — вторая волна (21.08)",
+      "text": "21.08: вторая волна топливного кризиса продолжается. Система чет-нечет в Оренбургской, Липецкой, Калужской, Смоленской областях. Критические: Краснодар (Сочи 47ч очереди), Ростов (1-1.5ч), Рязань, Саратов.",
+      "source_url": "https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda/"
+    },
     {
       "date": "2026-08-20",
       "region": "РФ — вторая волна мониторинг",
