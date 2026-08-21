@@ -443,6 +443,25 @@
       "last_event_ts": 1787318698,
       "source_text": "21.08.2026 16:24 МСК\nАО Новомосковский Москва Фиксация БПЛА"
     },
+    "Ярославская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1787321932,
+      "source_text": "21.08.2026 17:18 МСК\nЯрославская область Опасность по БПЛА"
+    },
     "Тульская область": {
       "bpla": false,
       "bplaDim": false,
@@ -1926,7 +1945,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1787318029,
@@ -3412,6 +3431,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 84394,
+      "text": "Ярославская область\nОпасность по БПЛА",
+      "ts": 1787321932,
+      "time_label": "21.08.2026 17:18 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 264555,
       "text": "Запорожская область РФ\nЛДНР\nАвиационная ракетно бомбовая опасность",
       "ts": 1787321119,
@@ -4042,14 +4069,6 @@
       "time_label": "21.08.2026 13:53 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 264520,
-      "text": "Калужская область\nЛипецкая область\nТульская область\nРязанская область\nОпасность по БПЛА в том числе реактивные БПЛА",
-      "ts": 1787309508,
-      "time_label": "21.08.2026 13:51 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4059,15 +4078,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787321119,
-  "last_event_at": "2026-08-21T14:05:19Z",
-  "fetched_at": "2026-08-21T14:10:02.736238Z",
+  "timestamp": 1787321932,
+  "last_event_at": "2026-08-21T14:18:52Z",
+  "fetched_at": "2026-08-21T14:20:03.117591Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-21T14:10:02.736238Z",
-    "source_age_seconds": 283,
+    "generated_at": "2026-08-21T14:20:03.117591Z",
+    "source_age_seconds": 71,
     "city_count": 90,
-    "region_count": 26,
+    "region_count": 27,
     "feed_count": 80
   }
 }
