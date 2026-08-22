@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-22T05:15:00Z",
+    "generated_at": "2026-08-22T04:47Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
@@ -144,10 +144,10 @@
       "status": "down",
       "status_since": "2026-06-10",
       "est_output_pct": 0,
-      "damage": "Поражены обе установки первичной перегонки (CDU-4 и CDU-5). Завод остановлен полностью, восстановление не началось.",
+      "damage": "Удар БПЛА по НПЗ. Пожар зафиксирован на территории объекта. Российские власти официально не подтвердили.",
       "note": "На 22 августа завод остаётся в полной остановке. Нет новостей о возобновлении работы.",
-      "source_url": "https://euromaidanpress.com/2026/06/10/fire-reported-at-kuibyshev-oil-refinery-in-russias-samara-after-drone-strike/",
-      "confidence": "confirmed"
+      "source_url": "https://slovoidilo.ua/2026/08/22/novyna/ukrayinski-drony-atakuvaly-npz",
+      "confidence": "reported"
     },
     {
       "id": "novokuibyshevsk",
@@ -1247,6 +1247,16 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-08-22",
+      "text": "Удар по Куйбышевский НПЗ (Новокуйбышевск): Удар БПЛА по НПЗ. Пожар зафиксирован на территории объекта. Российские власти официально не подтверд",
+      "source_url": "https://slovoidilo.ua/2026/08/22/novyna/ukrayinski-drony-atakuvaly-npz"
+    },
+    {
+      "date": "2026-08-22",
+      "text": "Удар по Куйбышевский НПЗ (Новокуйбышевск): Удар по НПЗ в Новокуйбышевске",
+      "source_url": "https://glavnoe.in.ua/en/news-en/drones-hit-saratov-oil-refinery-and-wildberries-warehouse-near-samara"
+    },
     {
       "date": "2026-08-21",
       "text": "Удар по Лукойл-Пермнефтеоргсинтез (Пермь): Утором 21 августа в Индустриальном районе Перми прозвучала серия взрывов и сирены беспилотной опасности, работала ПВО, аэропорт временно не принимал рейсы. Генштаб ВСУ подтвердил удар на НПЗ «ЛУКОЙЛ-Пермнефтеоргсинтез» с последующим пожаром на территории. Завод остановлен полностью.",
