@@ -22,7 +22,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "data", "warehouses.json")
 OUT = os.path.join(ROOT, "skolko-skladov-wildberries-ozon.html")
 URL = "https://npz-tactical-map.vercel.app/skolko-skladov-wildberries-ozon"
-TITLE = "Сколько складов Wildberries пострадало и сколько сгорело"
+TITLE = "Сколько складов Wildberries осталось: сколько пострадало и сгорело"
 # DESC собирается динамически в build() из data/warehouses.json — прямой численный
 # ответ в сниппете ("пострадало 25 складов") нельзя зашивать строкой, цифра меняется
 # с каждым ударом (см. кластер "сколько складов пострадало": поз 7-8.4 при CTR втрое
@@ -204,10 +204,13 @@ def build():
     OG = og_image()
     ozon_clause = ("Ozon — 0 подтверждённых" if "ozon" not in ops
                    else "включая %d Ozon" % len(hit_oz))
-    DESC = ("На %s пострадало %d складов Wildberries из %d+ в России (%s), сгорело %d, "
-            "осталось %d без сообщений об ударе — карта и полный список."
-            % (rus(UPDATED), len(hits), net["wb"]["complexes"], ozon_clause, len(burned),
-               len(wh) - len(hits)))
+    # ponytail: словоформы ("склада"/"объекта") не согласуются программно по числу —
+    # тот же уровень упрощения, что уже был в исходном DESC (см. git blame), не вводим новую грамматику.
+    DESC = ("На %s у Wildberries и Ozon осталось %d складов без сообщений об ударе, "
+            "пострадало %d, сгорело %d — из %d отслеживаемых объектов (%d+ складов у Wildberries, "
+            "%d ФЦ у Ozon). Карта и полный список."
+            % (rus(UPDATED), len(wh) - len(hits), len(hits), len(burned), len(wh),
+               net["wb"]["complexes"], net["ozon"]["fulfillment"]))
 
     def src_cell(w):
         u = w.get("source_url", "")
@@ -234,6 +237,12 @@ def build():
         ("Сколько складов поражено ударами?",
          "По открытым данным на %s поражены %d складских объектов, %s: %s. Из них пожар подтверждён на %d объектах."
          % (rus(UPDATED), len(hits), ops_txt, ", ".join(w["name"] for w in hits), len(burned))),
+        ("Сколько складов Wildberries пострадало?",
+         "На %s пострадало %d складских объектов Wildberries и Ozon (%d Wildberries и %d Ozon) из %d отслеживаемых проектом — пожар подтверждён на %d из них. Полный список объектов и источников — в таблице на этой странице."
+         % (rus(UPDATED), len(hits), len(hits) - len(hit_oz), len(hit_oz), len(wh), len(burned))),
+        ("Сколько складов Wildberries сгорело?",
+         "На %s пожар подтверждён на %d складском объекте Wildberries и Ozon — это около %.0f%% от %d поражённых ударами. По остальным %d поражённым объектам источники сообщают об ударе, но не подтверждают возгорание."
+         % (rus(UPDATED), len(burned), len(burned) * 100.0 / len(hits), len(hits), len(hits) - len(burned))),
         ("Пострадали ли склады Ozon?",
          "На %s среди поражённых объектов %s. Крупный пожар на складе Ozon в Истре произошёл в августе 2022 года и с ударами БПЛА не связан — на этой странице он не учитывается."
          % (rus(UPDATED), "объектов Ozon нет" if "ozon" not in ops else "есть объекты Ozon")),
@@ -423,13 +432,14 @@ def build():
 
       <div class="landing-hero">
         <span class="hero-label">СПРАВОЧНИК · ЛОГИСТИКА</span>
-        <h1 class="hero-h">Сколько складов у Wildberries и Ozon в России и сколько из них сгорело</h1>
-        <p class="hero-sub">Два маркетплейса — Wildberries (в обиходе «Вайлдберриз», «ВБ», встречается написание «Валберис») и Ozon — держат в России около {mln(net['wb']['area_m2'] + net['ozon']['area_m2'])} млн м² складов. В июле 2026 года часть этой сети выбыла после ударов беспилотников. Ниже — сколько объектов у каждой компании, сколько поражено, сколько складов вб осталось и что из этого проверяемо по открытым источникам.</p>
+        <h1 class="hero-h">Сколько складов Wildberries и Ozon осталось — и сколько из них пострадало</h1>
+        <p class="hero-sub">На {rus(UPDATED)} у Wildberries и Ozon в России осталось <strong>{len(wh) - len(hits)} складов</strong> без сообщений об ударе — из {len(wh)} объектов, которые отслеживает проект ({net['wb']['complexes']}+ складских комплексов Wildberries и {net['ozon']['fulfillment']} фулфилмент-центр Ozon по данным компаний). Поражено {len(hits)}, сгорело {len(burned)}. Два маркетплейса — Wildberries (в обиходе «Вайлдберриз», «ВБ», встречается написание «Валберис») и Ozon — держат в России около {mln(net['wb']['area_m2'] + net['ozon']['area_m2'])} млн м² складов; в июле 2026 года часть этой сети выбыла после ударов беспилотников. Ниже — карта, полный список и что из этого проверяемо по открытым источникам.</p>
         <a class="map-cta" href="/?layer=warehouses"><span class="mc-ico">📦</span> Открыть слой складов на карте →</a>
         <div class="status-grid">
+          <div class="status-card"><div class="val">{len(wh) - len(hits)}</div><div class="lbl">складов осталось без сообщений об ударе</div></div>
+          <div class="status-card"><div class="val">{len(hits)}</div><div class="lbl">складов поражено ударами</div></div>
           <div class="status-card"><div class="val">{net['wb']['complexes']}+</div><div class="lbl">складских комплексов Wildberries</div></div>
           <div class="status-card"><div class="val">{net['ozon']['fulfillment']}</div><div class="lbl">фулфилмент-центров Ozon</div></div>
-          <div class="status-card"><div class="val">{len(hits)}</div><div class="lbl">складов поражено ударами</div></div>
           <div class="status-card"><div class="val">≈{share:.0f}%</div><div class="lbl">площадей Wildberries выбыло</div></div>
         </div>
         <div class="updated-line">Обновлено {rus(UPDATED)}, МСК · данные последних суток уточняются</div>

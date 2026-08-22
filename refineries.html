@@ -24,7 +24,7 @@
  <meta name="twitter:description" content="Все НПЗ России: мощности, статусы, история ударов БПЛА.">
  <meta name="twitter:image" content="https://npz-tactical-map.vercel.app/og-image.png">
 
- <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Сколько НПЗ в России: список заводов на карте 2026","datePublished":"2026-07-07","dateModified":"2026-07-27","image":["https://npz-tactical-map.vercel.app/og-image.png"],"author":{"@type":"Organization","name":"Топливный фронт РФ"},"publisher":{"@type":"Organization","name":"Топливный фронт РФ","url":"https://npz-tactical-map.vercel.app/"},"description":"Сколько нефтеперерабатывающих заводов в России и сколько выведено из строя — актуальные цифры, полный список НПЗ с мощностями и статусами, на карте.","mainEntityOfPage":"https://npz-tactical-map.vercel.app/refineries","isAccessibleForFree":true}</script>
+ <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Сколько НПЗ в России: список заводов на карте 2026","datePublished":"2026-07-07","dateModified":"2026-08-22","image":["https://npz-tactical-map.vercel.app/og-image.png"],"author":{"@type":"Organization","name":"Топливный фронт РФ"},"publisher":{"@type":"Organization","name":"Топливный фронт РФ","url":"https://npz-tactical-map.vercel.app/"},"description":"Сколько нефтеперерабатывающих заводов в России и сколько выведено из строя — актуальные цифры, полный список НПЗ с мощностями и статусами, на карте.","mainEntityOfPage":"https://npz-tactical-map.vercel.app/refineries","isAccessibleForFree":true}</script>
 
  <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -212,8 +212,6 @@
             <a href="/deficit">⛽ Почему нет бензина</a>
             <details class="nav-drop-sub">
               <summary>⛽ Где заправиться</summary>
-              <a href="/benzin-na-trasse">🛣️ Бензин на трассе</a>
-              <a href="/gde-dizel">🛢️ Где найти дизель</a>
               <a href="/zakrytye-azs">🚫 Какие АЗС закрылись</a>
               <a href="/gde-ai95">⛽ Где найти АИ-95</a>
               <a href="/gde-gaz-azs">🔥 Где заправить газ</a>
@@ -223,13 +221,10 @@
               <a href="/talony">🎫 Бензин по талонам</a>
               <a href="/ocheredi-na-azs">🚗 Очереди на АЗС</a>
               <a href="/draki-na-azs">💢 Конфликты на АЗС</a>
-              <a href="/azhiotazh-na-azs">📈 Ажиотаж на АЗС</a>
               <a href="/zapas-benzina-kanistry">🛢️ Запас бензина в канистрах</a>
             </details>
             <details class="nav-drop-sub">
               <summary>🚢 Нефть и экспорт</summary>
-              <a href="/tankery-ekonomika-rf">💰 Танкеры и экономика РФ</a>
-              <a href="/tenevoj-flot">🚢 Теневой флот — простыми словами</a>
               <a href="/tankery-azovskoe-more">🚢 Танкеры в Азовском море</a>
               <a href="/vozmozhen-li-golod">🌾 Будет ли голод в России</a>
             </details>
@@ -354,13 +349,19 @@
  <p style="margin-top:8px">Сколько именно НПЗ пострадало от ударов БПЛА в целом — вопрос более сложный: часть ограничений связана с подтверждёнными атаками, часть — с иными причинами (плановый ремонт, логистика). Полную и постоянно обновляемую хронику ударов смотрите на странице <a href="/attacks" style="color:var(--teal);font-weight:700">«Хроника ударов по НПЗ»</a> или на <a href="/" style="color:var(--teal);font-weight:700">интерактивной карте</a>.</p>
  </div>
 
+ <!-- СКОЛЬКО НПЗ ВЫВЕДЕНО ИЗ СТРОЯ -->
+ <h2 class="section-h" id="vyvedeno-iz-stroya"><span class="ico">🛑</span> Сколько НПЗ в России выведено из строя</h2>
+ <div class="explainer">
+ <p>На 22 августа 2026 полностью остановлены (выведены из строя) <strong style="color:var(--red)">11 НПЗ</strong> из 33 в России. По числу заводов это треть, но по мощности больше: на остановленные приходится 136,8 из 338,4 млн тонн в год — <strong>40% нефтеперерабатывающих мощностей страны</strong>. Ещё 12 заводов работают с ограничениями по загрузке, 10 — в штатном режиме. Список остановленных заводов по именам — в разделе <a href="#kartochki" style="color:var(--teal);font-weight:700">«Подробные карточки заводов»</a> и в ответе на вопрос «Какие НПЗ остановлены в 2026 году?» ниже.</p>
+ </div>
+
  <!-- ЛЕГЕНДА -->
  <div class="legend">
  <span><span class="dot red"></span> <strong>СТОП</strong> — полностью остановлен</span>
  <span><span class="dot amber"></span> <strong>ОГРАНИЧЕНО</strong> — работает частично</span>
  <span><span class="dot green"></span> <strong>РАБОТАЕТ</strong> — нормальный режим</span>
  </div>
- <p style="font-size:12px;color:var(--ink-dim);margin-bottom:20px">Интерактивная карта: <a href="/" style="color:var(--teal);font-weight:700">npz-tactical-map.vercel.app</a> · Статусы из data/fuel-state.json · Обновлено 27 июля 2026 (МСК) · Ниже — все действующие НПЗ РФ по состоянию на 2026 год</p>
+ <p style="font-size:12px;color:var(--ink-dim);margin-bottom:20px">Интерактивная карта: <a href="/" style="color:var(--teal);font-weight:700">npz-tactical-map.vercel.app</a> · Статусы из data/fuel-state.json · Обновлено 22 августа 2026 (МСК) · Ниже — все действующие НПЗ РФ по состоянию на 2026 год</p>
 
  <!-- ПОЛНЫЙ СПИСОК НПЗ -->
  <h2 class="section-h"><span class="ico">🏭</span> Все НПЗ России на 2026 год: полный список</h2>

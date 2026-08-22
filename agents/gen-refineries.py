@@ -506,7 +506,7 @@ def update_jsonld_faq(html, texts):
     return re.sub(r'<script type="application/ld\+json">(.*?)</script>', repl, html, flags=re.S)
 
 
-def check(R, meta, html):
+def check(R, meta, html, nb=None):
     """Ловит дрейф прозы/JSON-LD, которые генератор не владеет. Молчаливое
     расхождение в проде опаснее падения — поэтому шумим."""
     problems = []
@@ -537,6 +537,41 @@ def check(R, meta, html):
         for d_ in names_down:
             if not any(same_plant(x, d_) for x in listed):
                 problems.append(f"завод «{d_}» остановлен в данных, но его нет в списке остановленных")
+
+    # 2b. Доля мощностей ≠ доля заводов по счёту. 22.08 в прозу попало «11 НПЗ из 33 —
+    # это около трети мощностей»: 11/33 действительно треть ПО ЧИСЛУ ЗАВОДОВ, но эти 11
+    # держат 136.8 из 338.4 млн т/год, то есть 40% МОЩНОСТЕЙ. Страница разошлась с
+    # хедлайном главной. Третий рецидив путаницы метрик (25.07 агент, 21.08 pipeline),
+    # поэтому ловим здесь — там же, где уже сверяется вся остальная проза.
+    # Ловим УЗКО: только долю, стоящую рядом со словом «мощност» и совпавшую со счётной
+    # долей при расхождении с мощностной. «Более половины мощностей» про затронутые
+    # (down+partial) — другая метрика, под это правило не попадает.
+    cap_pct = (nb or {}).get("capacity_offline_pct")
+    if cap_pct is not None and tot:
+        count_pct = round(down / tot * 100)
+        WORDS = {"четверт": 25, "трет": 33, "половин": 50, "двух третей": 67, "две трети": 67}
+        for m in re.finditer(r"([^.<>]{0,70}?)мощност", html):
+            frag = m.group(1)
+            claimed = None
+            pm = re.search(r"(\d{1,3})\s*%", frag)
+            if pm:
+                claimed = int(pm.group(1))
+            else:
+                for w, v in WORDS.items():
+                    if w in frag.lower():
+                        claimed = v; break
+            if claimed is None:
+                continue
+            # Предложение, которое САМО разводит две метрики («по числу заводов это треть,
+            # но по мощности 40%»), — не ошибка, а лучшее из возможных объяснений. Не ругаемся,
+            # если рядом стоит верная мощностная доля или явная привязка доли к счёту.
+            around = html[max(0, m.start() - 70):m.end() + 160]
+            if f"{cap_pct}%" in around or "по числу" in around or "по счёту" in around:
+                continue
+            if abs(claimed - cap_pct) > 5 and abs(claimed - count_pct) <= 3:
+                problems.append(
+                    f"доля мощностей в тексте ({claimed}%) — это доля ЗАВОДОВ ПО СЧЁТУ "
+                    f"({down}/{tot}), а выбывшая мощность = {cap_pct}%: «…{frag.strip()}мощност…»")
 
     # 3. JSON-LD валиден + FAQ-разметка совпадает с видимым текстом (прецедент: разъезжались)
     blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
@@ -633,6 +668,20 @@ def selftest():
     assert not any("устаревшая дата" in p for p in check(R, meta, ok_html)), check(R, meta, ok_html)
     drift = ('3 завода по состоянию на 14 июля 2026 '
              'полностью остановлены 1 НПЗ: Второй НПЗ.')
+    # доля мощностей ≠ доля заводов по счёту (22.08): 11/33 — треть ПО СЧЁТУ, но 40% мощностей
+    NB = {"capacity_offline_pct": 40}
+    R40 = [{"name": f"З{i}", "status": "down" if i < 11 else "operational",
+            "capacity_mt_year": 10, "region": "Р", "est_output_pct": 0} for i in range(33)]
+    bad_share = "<p>остановлены 11 НПЗ из 33 — это около трети нефтеперерабатывающих мощностей.</p>"
+    assert any("доля мощностей" in x for x in check(R40, meta, bad_share, NB)), "не поймал подмену доли"
+    ok_share = "<p>остановлены 11 НПЗ из 33 — это 40% нефтеперерабатывающих мощностей.</p>"
+    assert not any("доля мощностей" in x for x in check(R40, meta, ok_share, NB)), "ложное срабатывание"
+    contrast = "<p>11 НПЗ из 33. По числу заводов это треть, но по мощности — 40% мощностей.</p>"
+    assert not any("доля мощностей" in x for x in check(R40, meta, contrast, NB)), "ругается на верное объяснение"
+    other = "<p>затронуто 23 из 33 — более половины нефтеперерабатывающих мощностей.</p>"
+    assert not any("доля мощностей" in x for x in check(R40, meta, other, NB)), "сработал на другой метрике"
+    assert not any("доля мощностей" in x for x in check(R40, meta, bad_share)), "без nb должен молчать"
+
     ps = check(R, meta, drift)
     assert any("Второй НПЗ" in p for p in ps), ps      # он partial, а не down
     assert any("Омский" in p for p in ps), ps          # он down, но не перечислен
@@ -666,6 +715,7 @@ def main():
         return selftest()
 
     R, meta = load()
+    nb = json.load(open(DATA, encoding="utf-8")).get("national_balance", {})
     html = open(PAGE, encoding="utf-8").read()
     down, part, oper, tot = counts(R)
     print(f"данные на {meta['generated_at']}: {tot} НПЗ = {down} стоп + {part} огранич + {oper} работают")
@@ -690,7 +740,7 @@ def main():
             open(RANK_PAGE, "w", encoding="utf-8").write(rh)
             print("krupnejshie-npz-rossii: ranking + ranksummary перегенерены")
 
-    problems = check(R, meta, html)
+    problems = check(R, meta, html, nb)
     if problems:
         print("\n🔴 ДРЕЙФ (проза/JSON-LD расходятся с данными):")
         for p in problems:

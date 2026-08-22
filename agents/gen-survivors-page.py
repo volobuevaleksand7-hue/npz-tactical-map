@@ -34,8 +34,6 @@ OUT = os.path.join(ROOT, "kakie-sklady-wildberries-ostalis.html")
 BASE = gwp.BASE
 URL = BASE + "/kakie-sklady-wildberries-ostalis"
 TITLE = "Какие склады Wildberries и Ozon остались в 2026 году: полный список"
-DESC = ("Список складов Wildberries (ВБ) и Ozon, по которым на текущий момент нет сообщений об "
-        "ударе БПЛА: город, регион, оператор и федеральный округ — с разбивкой по округам.")
 
 # Регион -> федеральный округ. Покрывает регионы, встречающиеся в data/warehouses.json на
 # 06.08.2026 (полный список сверяется в demo()). Новый регион без записи не роняет генератор —
@@ -51,6 +49,7 @@ OKRUG = {
     "Республика Крым": "Южный",
     "Ставропольский край": "Северо-Кавказский",
     "Татарстан": "Приволжский", "Самарская область": "Приволжский",
+    "Республика Башкортостан": "Приволжский",
     "Саратовская область": "Приволжский", "Пензенская область": "Приволжский",
     "Пермский край": "Приволжский", "Республика Удмуртия": "Приволжский",
     "Свердловская область": "Уральский",
@@ -125,6 +124,16 @@ def build():
     n_okrugs = len({okrug_for(w["region"]) for w in ok})
     LIST_HTML = survivors_list_html(ok)
 
+    # 🔴 раньше здесь считалось, что поражённых Ozon не бывает (та же грабля, что была
+    # у чемпиона /skolko-skladov до фикса в его demo()) — теперь считается по данным.
+    wb_hits = [w for w in hits if w["operator"] == "wb"]
+    oz_hits = [w for w in hits if w["operator"] == "ozon"]
+    hits_txt = ("все — Wildberries" if not oz_hits
+                else "%d Wildberries и %d Ozon" % (len(wb_hits), len(oz_hits)))
+    DESC = ("На %s без сообщений об ударе остаются %d складов Wildberries и Ozon (%d ВБ, %d Ozon): "
+            "полный список с городом, регионом, оператором и федеральным округом, разбивка по округам."
+            % (UPD_RU, len(ok), len(wb_ok), len(oz_ok)))
+
     only_wb_txt = ("Только у Wildberries среди уцелевших объектов есть округ %s. " % ", ".join(cmp_["only_wb"])
                    if cmp_["only_wb"] else "")
     only_oz_txt = ("Только у Ozon — %s. " % ", ".join(cmp_["only_oz"]) if cmp_["only_oz"] else "")
@@ -142,15 +151,21 @@ def build():
          "сообщений об ударах по ним."
          % (UPD_RU, len(wb_ok), sum(1 for w in wh if w["operator"] == "wb"))),
         ("Какие склады вайлдберриз остались, а какие пострадали?",
-         "Пострадавшие объекты (все — Wildberries) перечислены с датами и источниками на странице "
+         "Пострадавшие объекты (%s) перечислены с датами и источниками на странице "
          "«Сколько складов у Wildberries и Ozon» и в хронике эпизодов. Здесь — обратный список: %d "
-         "объектов Wildberries, по которым на %s сообщений об ударе нет."
-         % (len(wb_ok), UPD_RU)),
+         "объектов Wildberries и %d объектов Ozon, по которым на %s сообщений об ударе нет."
+         % (hits_txt, len(wb_ok), len(oz_ok), UPD_RU)),
         ("Какие склады остались у Ozon?",
-         "На %s среди объектов Ozon в выборке проекта подтверждённых ударов БПЛА нет ни по одному: "
-         "все %d фулфилмент-центра Ozon значатся без сообщений об ударе. Это объекты, о которых удалось "
-         "собрать координаты и адрес по открытым источникам, а не вся сеть Ozon."
-         % (UPD_RU, len(oz_ok))),
+         ("На %s среди объектов Ozon в выборке проекта подтверждённых ударов БПЛА нет ни по одному: "
+          "все %d фулфилмент-центра Ozon значатся без сообщений об ударе. Это объекты, о которых удалось "
+          "собрать координаты и адрес по открытым источникам, а не вся сеть Ozon."
+          % (UPD_RU, len(oz_ok))) if not oz_hits else
+         ("На %s без сообщений об ударе остаётся %d из %d фулфилмент-центров Ozon в выборке проекта. "
+          "%s поражён(ы) ударом БПЛА, подробности на странице «Сколько складов у Wildberries и Ozon». "
+          "Это объекты, о которых удалось собрать координаты и адрес по открытым источникам, а не вся "
+          "сеть Ozon."
+          % (UPD_RU, len(oz_ok), len(oz_ok) + len(oz_hits),
+             ", ".join(w["name"] for w in oz_hits)))),
         ("Значит ли отсутствие склада в списке поражённых, что он работает исправно?",
          "Нет. Отсутствие объекта среди поражённых — это отсутствие сообщений об ударе по нему в "
          "открытых источниках на %s, а не подтверждение того, что склад работает в штатном режиме. "
@@ -342,7 +357,7 @@ def build():
       </div>
 
       <h2 class="section-h"><span class="ico">📍</span> Короткий ответ</h2>
-      <p class="lead-p">Из {len(wh)} крупных объектов Wildberries и Ozon, которые проект отслеживает по открытым источникам, на {UPD_RU} поражено {len(hits)} (все — Wildberries), а по <strong>{len(ok)}</strong> сообщений об ударе нет: <strong>{len(wb_ok)}</strong> объектов Wildberries и <strong>{len(oz_ok)}</strong> объектов Ozon. Список ниже — не рейтинг и не хроника: это перечень конкретных объектов с адресом, регионом и федеральным округом.</p>
+      <p class="lead-p">Из {len(wh)} крупных объектов Wildberries и Ozon, которые проект отслеживает по открытым источникам, на {UPD_RU} поражено {len(hits)} ({hits_txt}), а по <strong>{len(ok)}</strong> сообщений об ударе нет: <strong>{len(wb_ok)}</strong> объектов Wildberries и <strong>{len(oz_ok)}</strong> объектов Ozon. Список ниже — не рейтинг и не хроника: это перечень конкретных объектов с адресом, регионом и федеральным округом.</p>
 
       <div class="link-grid">
         <a class="link-card" href="/skolko-skladov-wildberries-ozon"><div class="lc-h">📦 Сколько складов у WB и Ozon</div><div class="lc-d">Масштаб сети целиком, счётчики и доля выбывшего</div></a>
@@ -369,7 +384,7 @@ def build():
       <div class="link-grid">
         <a class="link-card" href="/skolko-skladov-wildberries-ozon"><div class="lc-h">📦 Сколько складов у WB и Ozon</div><div class="lc-d">Масштаб сети, счётчики, доля выбывшего</div></a>
         <a class="link-card" href="/ataki-na-sklady-wildberries-hronika"><div class="lc-h">🗓 Хроника ударов по складам</div><div class="lc-d">Все эпизоды по датам и регионам</div></a>
-        <a class="link-card" href="/udar-po-skladu-ozon"><div class="lc-h">📦 Удар по складу Ozon</div><div class="lc-d">Почему у Ozon пока нет поражённых объектов</div></a>
+        <a class="link-card" href="/udar-po-skladu-ozon"><div class="lc-h">📦 Удар по складу Ozon</div><div class="lc-d">{"Разбор ударов по складам Ozon" if oz_hits else "Почему у Ozon пока нет поражённых объектов"}</div></a>
         <a class="link-card" href="/kompensacii-wildberries-posle-udara"><div class="lc-h">💸 Компенсации Wildberries</div><div class="lc-d">Выплаты продавцам и покупателям</div></a>
         <a class="link-card" href="/karta-skladov-wildberries"><div class="lc-h">🗺 Карта складов Wildberries и Ozon</div><div class="lc-d">Сеть и поражённые объекты на карте</div></a>
         <a class="link-card" href="/news"><div class="lc-h">📰 Сводки</div><div class="lc-d">Ежедневный архив обстановки</div></a>
