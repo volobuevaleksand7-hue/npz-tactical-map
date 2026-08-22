@@ -174,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787364967,
-      "source_text": "22.08.2026 05:16 МСК\nПо восточной части Нижегородской области пролёты БПЛА в сторону Чувашской Республики. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1787366252,
+      "source_text": "22.08.2026 05:37 МСК\nЧиганары, Чувашская Республика - пролёт 2 БПЛА в сторону примерно Чебоксары. 📡 Локатор России - @locatorru"
     },
     "Курская область": {
       "bpla": false,
@@ -2097,28 +2097,6 @@
       "source_text": "21.08.2026 22:21 МСК\nЖелезногорск и близлежащие Опасность по БПЛА Курская область"
     },
     {
-      "key": "курская|белгородская область",
-      "name": "Курская",
-      "lat": 50.6599157,
-      "lon": 36.4644847,
-      "region": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787322561,
-      "source_text": "21.08.2026 17:29 МСК\nБрянская область, Курская область, Белгородская область, Смоленская область, Тверская область, Псковская область, Тульская область, Орловская область, Воронежская область, Липецкая область, Московская область, Рязанская область, Владимирская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
-    },
-    {
       "key": "геленджик|краснодарский край",
       "name": "Геленджик",
       "lat": 44.58014,
@@ -2337,6 +2315,28 @@
       "fill": "#f0c4a0",
       "last_event_ts": 1787365263,
       "source_text": "22.08.2026 05:21 МСК\nСевастополь, отбой тревоги БПЛА Переход в режим повышенного внимания"
+    },
+    {
+      "key": "чебоксары|чувашия",
+      "name": "Чебоксары",
+      "lat": 56.13218,
+      "lon": 47.246,
+      "region": "Чувашия",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787366252,
+      "source_text": "22.08.2026 05:37 МСК\nЧиганары, Чувашская Республика - пролёт 2 БПЛА в сторону примерно Чебоксары. 📡 Локатор России - @locatorru"
     },
     {
       "key": "фролово|волгоградская область",
@@ -4358,6 +4358,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 81825,
+      "text": "Чиганары, Чувашская Республика - пролёт 2 БПЛА в сторону примерно Чебоксары.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1787366252,
+      "time_label": "22.08.2026 05:37 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 264830,
+      "text": "Калужская область\nвнимание по бпла",
+      "ts": 1787365961,
+      "time_label": "22.08.2026 05:32 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 84637,
       "text": "Анапа и близлежащие\nКраснодарский край\nОпасность по БПЛА",
       "ts": 1787365676,
@@ -4980,22 +4996,6 @@
       "time_label": "22.08.2026 03:41 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 84605,
-      "text": "Республика Чувашия\nОпасность по БПЛА",
-      "ts": 1787359313,
-      "time_label": "22.08.2026 03:41 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 81786,
-      "text": "Отбой. Режим внимание.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1787359195,
-      "time_label": "22.08.2026 03:39 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -5005,13 +5005,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787365676,
-  "last_event_at": "2026-08-22T02:27:56Z",
-  "fetched_at": "2026-08-22T02:30:03.847627Z",
+  "timestamp": 1787366252,
+  "last_event_at": "2026-08-22T02:37:32Z",
+  "fetched_at": "2026-08-22T02:43:05.826655Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-22T02:30:03.847627Z",
-    "source_age_seconds": 127,
+    "generated_at": "2026-08-22T02:43:05.826655Z",
+    "source_age_seconds": 333,
     "city_count": 83,
     "region_count": 30,
     "feed_count": 80
