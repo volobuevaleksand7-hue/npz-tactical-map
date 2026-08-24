@@ -1,23 +1,23 @@
 {
   "meta": {
-    "generated_at": "2026-08-24T08:15Z",
+    "generated_at": "2026-08-24T16:30Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
-    "capacity_offline_mt_year": 145.6,
-    "capacity_offline_pct": 43,
+    "capacity_offline_mt_year": 138.6,
+    "capacity_offline_pct": 41,
     "gasoline_output_loss_pct": 36,
     "diesel_output_loss_pct": 42,
     "export_ban_gasoline": true,
     "export_ban_kerosene": true,
     "import_from_belarus": true,
     "notes": "На 24 августа 2026: вторая волна кризиса охватывает 59+ регионов РФ. Массовые очереди на АЗС (15 минут до 2.5+ часов). Острая фаза в Оренбургской, Смоленской, Калужской, Тульской, Пензенской, Тамбовской, Липецкой, Воронежской областях, Краснодарском и Приморском краях, Москве и Санкт-Петербурге. Ограничения (20-30 л за заправку, нечётные/чётные дни, лицензионное ограничение по номеру машины в Калуге); Москва и СПб — 60 л за заправку. Производство на критическом уровне (3.6 млн bbl/day, минимум с май 2002). Дневной дефицит 40-45 тыс т (35% рынка). Экспортные запреты: бензин до 31 января 2027, дизель до 31 августа (затем исключения). Беларусский импорт (453+ тыс т в 2026) — главный стабилизатор, но недостаточен. Розничные цены 72-82 ₽/л. Северокавказские республики в критическом состоянии. Восстановление поражённых НПЗ медленное (санкции на импортное оборудование).",
-    "throughput_shortfall_pct": 68,
+    "throughput_shortfall_pct": 66,
     "method": "capacity_offline и throughput_shortfall выводятся из refineries[] кодом (agents/recalc-national-balance.py), не оценкой агента."
   },
   "fuel_balance": {
@@ -141,12 +141,12 @@
       "lat": 53.15,
       "lon": 50.13,
       "capacity_mt_year": 7.0,
-      "status": "down",
-      "status_since": "2026-06-10",
-      "est_output_pct": 0,
-      "damage": "Удар БПЛА по НПЗ. Пожар зафиксирован на территории объекта. Российские власти официально не подтвердили.",
-      "note": "На 24 августа завод остаётся в полной остановке. Нет новостей о возобновлении работы.",
-      "source_url": "https://slovoidilo.ua/2026/08/22/novyna/ukrayinski-drony-atakuvaly-npz",
+      "status": "operational",
+      "status_since": "2026-08-21",
+      "est_output_pct": 100,
+      "damage": "После удара 10 июня завод был восстановлен. Вернулся в строй 21 августа 2026 года после завершения ремонтных работ, начатых 1 июля.",
+      "note": "На 24 августа завод работает в полном режиме после успешного восстановления. Возобновил обработку нефти 21 августа после двухмесячного ремонта.",
+      "source_url": "https://unn.ua/en/news/russia-says-several-oil-refineries-have-resumed-operations-after-repairs-amid-attacks",
       "confidence": "reported"
     },
     {
