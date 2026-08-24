@@ -101,25 +101,6 @@
       "last_event_ts": 1787529257,
       "source_text": "24.08.2026 02:54 МСК\nБелгородская область, единичные фиксации БПЛА от Гг"
     },
-    "Тульская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1787527854,
-      "source_text": "24.08.2026 02:30 МСК\nСмоленская область, Калужская область, Орловская область, Тульская область, Московская область - опасность по БПЛА от Брянской области. 📡 Локатор России - @locatorru"
-    },
     "Брянская область": {
       "bpla": false,
       "bplaDim": false,
@@ -288,8 +269,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787540190,
-      "source_text": "24.08.2026 05:56 МСК\nСириус, опасность по БПЛА Краснодарский край"
+      "last_event_ts": 1787540702,
+      "source_text": "24.08.2026 06:05 МСК\nСочи и близлежащие Краснодарский край Сбитие БПЛА Меры безопасности"
     },
     "Москва": {
       "bpla": false,
@@ -804,9 +785,9 @@
       "lat": 43.66403666666667,
       "lon": 39.66197066666667,
       "region": "Краснодарский край",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -814,11 +795,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787540054,
-      "source_text": "24.08.2026 05:54 МСК\nСочи Адлер И близлежащие Опасность по БПЛА"
+      "last_event_ts": 1787540702,
+      "source_text": "24.08.2026 06:05 МСК\nСочи и близлежащие Краснодарский край Сбитие БПЛА Меры безопасности"
     },
     {
       "key": "темрюк|краснодарский край",
@@ -1589,28 +1570,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1787525061,
       "source_text": "24.08.2026 01:44 МСК\nМариновка Волгоградская область Фиксации БПЛА в вашем направлении от Ростовской области"
-    },
-    {
-      "key": "приморск|запорожская область",
-      "name": "Приморск",
-      "lat": 46.73415,
-      "lon": 36.34599,
-      "region": "Запорожская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787497442,
-      "source_text": "23.08.2026 18:04 МСК\nПриморск и близлежащие Опасность по БПЛА Запорожская область РФ"
     },
     {
       "key": "новороссийск, геленджик|краснодарский край",
@@ -3351,28 +3310,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1787521975,
       "source_text": "24.08.2026 00:52 МСК\nСтародубский район, Трубчевский район, Брянская область - массовый пролёт БПЛА в тыл. 📡 Локатор России - @locatorru"
-    },
-    "RUS.70.6_1": {
-      "gid_2": "RUS.70.6_1",
-      "name_ru": "Чернский район",
-      "region_ru": "Тульская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787497757,
-      "source_text": "23.08.2026 18:09 МСК\nЧернский район Тульская область Фиксация 2 БПЛА"
     }
   },
   "airport_markers": [
@@ -3411,6 +3348,38 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 85289,
+      "text": "Тульская область\nОтбой опасности по БПЛА",
+      "ts": 1787540873,
+      "time_label": "24.08.2026 06:07 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 85288,
+      "text": "Сочи и близлежащие\nКраснодарский край\nСбитие БПЛА\nМеры безопасности",
+      "ts": 1787540702,
+      "time_label": "24.08.2026 06:05 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 265913,
+      "text": "Калужская область",
+      "ts": 1787540631,
+      "time_label": "24.08.2026 06:03 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 85287,
+      "text": "Сочи\nКраснодарский край\nМеры безопасности",
+      "ts": 1787540362,
+      "time_label": "24.08.2026 05:59 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 85286,
       "text": "Калужская область\nОтбой опасности по БПЛА",
@@ -4018,38 +3987,6 @@
       "time_label": "24.08.2026 02:51 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 265867,
-      "text": "От ЛНР очередная группа ракет на Ростовскую область!",
-      "ts": 1787529044,
-      "time_label": "24.08.2026 02:50 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265866,
-      "text": "Севастополь, Бахчисарайский район, тревога по БПЛА сохраняется, продолжаются фиксации",
-      "ts": 1787528953,
-      "time_label": "24.08.2026 02:49 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 85269,
-      "text": "Невинномысск\nСтавропольский край\nРабота ПВО по БПЛА",
-      "ts": 1787528916,
-      "time_label": "24.08.2026 02:48 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 265865,
-      "text": "Саратовская область\nПензенская область",
-      "ts": 1787528907,
-      "time_label": "24.08.2026 02:48 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4059,15 +3996,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787540303,
-  "last_event_at": "2026-08-24T02:58:23Z",
-  "fetched_at": "2026-08-24T03:00:03.187255Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1787540873,
+  "last_event_at": "2026-08-24T03:07:53Z",
+  "fetched_at": "2026-08-24T03:10:03.181919Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-24T03:00:03.187255Z",
-    "source_age_seconds": 100,
-    "city_count": 106,
-    "region_count": 30,
+    "generated_at": "2026-08-24T03:10:03.181919Z",
+    "source_age_seconds": 130,
+    "city_count": 105,
+    "region_count": 29,
     "feed_count": 80
   }
 }
