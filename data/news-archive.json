@@ -2,15 +2,15 @@
  "snapshot": {
   "balance": {
    "refining_capacity_total_mt_year": 338.4,
-   "capacity_offline_mt_year": 145.6,
-   "capacity_offline_pct": 43,
+   "capacity_offline_mt_year": 138.6,
+   "capacity_offline_pct": 41,
    "gasoline_output_loss_pct": 36,
    "diesel_output_loss_pct": 42,
    "export_ban_gasoline": true,
    "export_ban_kerosene": true,
    "import_from_belarus": true,
-   "notes": "На 24 августа 2026: вторая волна кризиса охватывает 59+ регионов РФ. Массовые очереди на АЗС (15 минут до 2.5+ часов). Острая фаза в Оренбургской, Смоленской, Калужской, Тульской, Пензенской, Тамбовской, Липецкой, Воронежской областях, Краснодарском и Приморском краях, Москве и Санкт-Петербурге. Ограничения (20-30 л за заправку, нечётные/чётные дни, лицензионное ограничение по номеру машины в Калуге); Москва и СПб — 60 л за заправку. Производство на критическом уровне (3.6 млн bbl/day, минимум с май 2002). Дневной дефицит 40-45 тыс т (35% рынка). Экспортные запреты: бензин до 31 января 2027, дизель до 31 августа (затем исключения). Беларусский импорт (453+ тыс т в 2026) — главный стабилизатор, но недостаточен. Розничные цены 72-82 ₽/л. Северокавказские республики в критическом состоянии. Восстановление поражённых НПЗ медленное (санкции на импортное оборудование).",
-   "throughput_shortfall_pct": 68,
+   "notes": "Вторая волна кризиса (после 8 августа) охватывает 59+ регионов РФ с массовыми очередями на АЗС (от 15 минут до 2.5+ часов) и восстановленными ограничениями продажи (20-30 л за заправку, системы нечётных/чётных дней). Острая фаза в Оренбургской, Смоленской, Калужской (с 24 августа — лицензионное ограничение по номеру машины), Тульской, Пензенской, Тамбовской, Липецкой, Воронежской, Саратовской, Волгоградской областях, Краснодарском и Приморском краях, Москве и Санкт-Петербурге (60 л за заправку). Производство упало до минимума за два десятилетия. Дневной дефицит около 40-45 тыс т (треть рынка). Семь НПЗ полностью остановлены (мощность 8.8—20.1 млн т/год каждый); восстановление затруднено санкциями на оборудование. Экспортные запреты продлены (бензин до 31 января 2027, дизель до 31 августа с последующими исключениями). Беларусский импорт (454 тыс т в 2026, в 20+ раз выше 2025) стабилизирует, но недостаточен. Розничные цены 72-82 ₽/л; биржевая АИ-95 на СПбМТСБ выше 81 тыс. ₽/т. Пять северокавказских субъектов (Крым, Кабардино-Балкария, Ингушетия, Чечня, Дагестан) без открытых АЗС для населения.",
+   "throughput_shortfall_pct": 66,
    "method": "capacity_offline и throughput_shortfall выводятся из refineries[] кодом (agents/recalc-national-balance.py), не оценкой агента."
   },
   "regions": [
@@ -55,27 +55,27 @@
     "region": "Краснодарский край",
     "lat": 45.04,
     "lon": 38.98,
-    "level": "limited",
-    "updated": "2026-08-23T08:53:04.263589+00:00",
+    "level": "critical",
+    "updated": "2026-08-24T12:23:51Z",
     "networks": [
      {
-      "name": "Лукойл/Роснефть (Сочи, Геленджик)",
+      "name": "Лукойл/Роснефть (Сочи)",
       "status": "limited",
       "level": "critical",
       "limit_l": 30,
-      "note": "22.08: Сочи КРИТИЧЕН. Очереди 5-6 часов. Из ~50 АЗС работают 38. Геленджик килом. очереди. Туристы застревают."
+      "note": "24.08: Сочи критичен. Очереди 5-6 часов. На 52 АЗС Сочи работают. Геленджик 8 АЗС."
      },
      {
       "name": "Остальной край (Краснодар, Анапа, Новороссийск)",
       "status": "limited",
       "level": "limited",
       "limit_l": 40,
-      "note": "22.08: Краснодар 70/106 АЗС работают. Анапа 25 АЗС (11 только карты). Новороссийск 30-60л (с 12:00). Лимит 30-50л повсеместно."
+      "note": "24.08: Краснодар, Анапа, Новороссийск. Лимит 30-50л."
      }
     ],
     "queues_hours": 5.0,
-    "ai95_price_rub": 69.55,
-    "diesel_price_rub": 72.9,
+    "ai95_price_rub": 75.0,
+    "diesel_price_rub": 75.0,
     "source_urls": [
      "https://93.ru/text/transport/2026/08/18/76593457/",
      "https://kavkaz-uzel.org/articles/425652"
@@ -111,33 +111,33 @@
     "lat": 55.75,
     "lon": 37.62,
     "level": "strained",
-    "updated": "2026-08-23T17:30:00+00:00",
+    "updated": "2026-08-24T12:23:51Z",
     "networks": [
      {
       "name": "Газпром нефть",
       "status": "limited",
       "level": "strained",
-      "limit_l": 60,
-      "note": "23.08: Лимиты 40-60л. Очереди 1+ час, дефицит АИ-95."
+      "limit_l": 50,
+      "note": "24.08: Лимиты 40-60л на автоматических и обычных АЗС. Очереди ~1 час."
      },
      {
       "name": "Татнефть",
       "status": "limited",
       "level": "strained",
       "limit_l": 50,
-      "note": "23.08: Лимит 50л. Очереди."
+      "note": "24.08: Лимит 50л бензина, 60л дизеля."
      },
      {
       "name": "Роснефть",
       "status": "limited",
       "level": "strained",
       "limit_l": 50,
-      "note": "23.08: Лимит 50л."
+      "note": "24.08: Лимит 50л."
      }
     ],
-    "queues_hours": 1.5,
-    "ai95_price_rub": 75.5,
-    "diesel_price_rub": 82.15,
+    "queues_hours": 1.0,
+    "ai95_price_rub": 76.0,
+    "diesel_price_rub": 82.0,
     "source_urls": [
      "https://auto.rambler.ru/novosti/56929724-na-moskovskih-zapravkah-snova-ogranichili-prodazhu-benzina/",
      "https://www.mentoday.ru/life/news/21-08-2026/benzina-opyat-net-v-ocheredyah-desyatki-mashin-chto-proishodit-na-azs-v-moskve-i-regionah-20-avgusta/",
@@ -151,19 +151,19 @@
     "lat": 56.84,
     "lon": 60.65,
     "level": "calm",
-    "updated": "2026-08-23T06:00:00Z",
+    "updated": "2026-08-24T12:23:51Z",
     "networks": [
      {
       "name": "Крупные сети",
-      "status": "open",
+      "status": "limited",
       "level": "calm",
-      "limit_l": null,
-      "note": "22.08: Цены снизились. Без жёстких ограничений. Стабильна."
+      "limit_l": 40,
+      "note": "24.08: Газпром нефть ограничивает до 40л. Цены снизились: АИ-92 68.3₽/л, АИ-95 72.7₽/л."
      }
     ],
     "queues_hours": 0.0,
     "ai95_price_rub": 72.7,
-    "diesel_price_rub": 76,
+    "diesel_price_rub": 76.0,
     "source_urls": [
      "https://fedpress.ru/"
     ],
@@ -234,26 +234,26 @@
     "lat": 47.23,
     "lon": 39.72,
     "level": "critical",
-    "updated": "2026-08-23T17:30:00+00:00",
+    "updated": "2026-08-24T12:23:51Z",
     "networks": [
      {
       "name": "Газпром нефть",
       "status": "limited",
       "level": "critical",
       "limit_l": 40,
-      "note": "23.08: Очереди 1-1.5ч. Вторая волна активна. На М-4 критично."
+      "note": "24.08: На М-4 критично. Очереди 1-2 часа. Цены АИ-95 от 69-110 ₽/л."
      },
      {
       "name": "Роснефть",
       "status": "limited",
       "level": "critical",
       "limit_l": 30,
-      "note": "23.08: Очереди 1-1.5ч. Критическая ситуация."
+      "note": "24.08: Критическая ситуация на трассе."
      }
     ],
     "queues_hours": 1.5,
-    "ai95_price_rub": 110,
-    "diesel_price_rub": 95,
+    "ai95_price_rub": 95.0,
+    "diesel_price_rub": 90.0,
     "source_urls": [
      "https://mo.tsargrad.tv/news/chto-s-benzinom-na-trasse-m-4-don-na-1-avgusta-2026-goda-stoimost-topliva-ocheredi-i-ogranichenija-na-azs_1805981",
      "https://ufocar.ru/v-tsentre-sobytij/benzin-na-m-4-don-18-avgusta-2026-goda-gde-zakanchivaetsya-toplivo-voditeli-stoyat-chasami/"
@@ -527,19 +527,19 @@
     "lat": 57.63,
     "lon": 39.87,
     "level": "calm",
-    "updated": "2026-08-23T20:20:00Z",
+    "updated": "2026-08-24T12:23:51Z",
     "networks": [
      {
-      "name": "Крупные сети",
+      "name": "АЗС (лимиты отменены)",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "23.08: Лимиты отменены 4 августа. Свободная продажа."
+      "note": "24.08: Лимиты отменены с 4.08. Свободная продажа."
      }
     ],
-    "queues_hours": 0,
-    "ai95_price_rub": 77.5,
-    "diesel_price_rub": 76,
+    "queues_hours": 0.0,
+    "ai95_price_rub": 70.0,
+    "diesel_price_rub": 76.0,
     "source_urls": [
      "https://runews24.ru/"
     ],
@@ -618,20 +618,20 @@
     "region": "Республика Крым",
     "lat": 45.05,
     "lon": 34.1,
-    "level": "severe",
-    "updated": "2026-08-23T17:30:00+00:00",
+    "level": "critical",
+    "updated": "2026-08-24T12:23:51Z",
     "networks": [
      {
       "name": "АТАН / ТЭС",
       "status": "limited",
-      "level": "severe",
-      "limit_l": null,
-      "note": "23.08: АИ-95 только по талонам. Цены до 100₽/л (АИ-92). Жесткие ограничения. АИ-92 и АИ-95 по системе QR/талонов."
+      "level": "critical",
+      "limit_l": 20,
+      "note": "24.08: Лимит 20л АИ-92, 30л дизеля. Цена АИ-92 100₽/л, дизель 119₽/л. 44 АЗС АТАН."
      }
     ],
     "queues_hours": 1.0,
-    "ai95_price_rub": 100.0,
-    "diesel_price_rub": 95.0,
+    "ai95_price_rub": 105.0,
+    "diesel_price_rub": 119.0,
     "source_urls": [
      "https://crimea.ria.ru/20260803/v-krymu-i-sevastopole-na-zapravkakh-tes-i-atan-snizyat-tseny-na-benzin-ai-92-1158216574.html",
      "https://gogov.ru/news/929016"
@@ -642,19 +642,19 @@
     "region": "Севастополь",
     "lat": 44.61,
     "lon": 33.52,
-    "level": "severe",
-    "updated": "2026-08-23T17:30:00+00:00",
+    "level": "critical",
+    "updated": "2026-08-24T12:23:51Z",
     "networks": [
      {
       "name": "АТАН / ТЭС",
       "status": "limited",
-      "level": "severe",
-      "limit_l": null,
-      "note": "23.08: АИ-92 и АИ-95 только по талонам. Цены максимальные. Жесткие ограничения."
+      "level": "critical",
+      "limit_l": 20,
+      "note": "24.08: Лимит 20л АИ-92, 30л дизеля по системе АТАН/ТЭС."
      }
     ],
-    "queues_hours": 1.5,
-    "ai95_price_rub": 100.0,
+    "queues_hours": 1.0,
+    "ai95_price_rub": 105.0,
     "diesel_price_rub": 95.0,
     "source_urls": [
      "https://crimea.ria.ru/20260803/v-krymu-i-sevastopole-na-zapravkakh-tes-i-atan-snizyat-tseny-na-benzin-ai-92-1158216574.html"
@@ -712,20 +712,20 @@
     "region": "Смоленская область",
     "lat": 54.78,
     "lon": 32.05,
-    "level": "calm",
-    "updated": "2026-08-23T20:20:00Z",
+    "level": "limited",
+    "updated": "2026-08-24T12:23:51Z",
     "networks": [
      {
-      "name": "Крупные сети",
-      "status": "open",
-      "limit_l": null,
-      "note": "23.08: Нет свежих новостей об ограничениях. Стабильна.",
-      "level": "calm"
+      "name": "АЗС сети",
+      "status": "limited",
+      "limit_l": 30,
+      "note": "24.08: Лимит 30л бензина, 60л дизеля. Ограничения введены.",
+      "level": "limited"
      }
     ],
-    "queues_hours": 0,
-    "ai95_price_rub": 72,
-    "diesel_price_rub": 76,
+    "queues_hours": 0.5,
+    "ai95_price_rub": 70.0,
+    "diesel_price_rub": 78.0,
     "source_urls": [
      "https://runews24.ru/"
     ],
@@ -834,8 +834,8 @@
     "region": "Приморский край",
     "lat": 43.12,
     "lon": 131.89,
-    "level": "limited",
-    "updated": "2026-08-23T05:49:48.604322Z",
+    "level": "calm",
+    "updated": "2026-08-24T12:00:00Z",
     "ai95_price_rub": 75.7,
     "networks": [
      {
@@ -858,7 +858,7 @@
     "lat": 52.29,
     "lon": 104.3,
     "level": "strained",
-    "updated": "2026-08-23T05:49:48.604399Z",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Роснефть",
@@ -918,7 +918,7 @@
     "lat": 58.01,
     "lon": 56.25,
     "level": "limited",
-    "updated": "2026-08-23T05:49:48.604585Z",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Нефтехимпром/ЛУКОЙЛ",
@@ -940,8 +940,8 @@
     "region": "Республика Коми",
     "lat": 61.67,
     "lon": 50.84,
-    "level": "calm",
-    "updated": "2026-08-23T05:49:48.604637Z",
+    "level": "strained",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Лукойл",
@@ -964,7 +964,7 @@
     "lat": 64.73,
     "lon": 177.51,
     "level": "calm",
-    "updated": "2026-08-23T05:49:48.604695Z",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -1009,8 +1009,8 @@
     "region": "Волгоградская область",
     "lat": 48.71,
     "lon": 44.5,
-    "level": "strained",
-    "updated": "2026-08-23T05:49:48.604872Z",
+    "level": "limited",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Газпром нефть",
@@ -1086,7 +1086,7 @@
     "lat": 51.96,
     "lon": 85.96,
     "level": "limited",
-    "updated": "2026-08-23T05:49:48.606053Z",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "КОТ система",
@@ -1108,8 +1108,8 @@
     "region": "Ставропольский край",
     "lat": 45.04,
     "lon": 41.98,
-    "level": "strained",
-    "updated": "2026-08-23T05:49:48.606132Z",
+    "level": "limited",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Крупные сети",
@@ -1154,8 +1154,8 @@
     "region": "Нижегородская область",
     "lat": 56.33,
     "lon": 44.0,
-    "level": "limited",
-    "updated": "2026-08-23T05:49:48.606900Z",
+    "level": "improving",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Лукойл/Газпром нефть/Татнефть",
@@ -1177,8 +1177,8 @@
     "region": "Кемеровская область",
     "lat": 55.35,
     "lon": 86.09,
-    "level": "strained",
-    "updated": "2026-08-23T05:49:48.606947Z",
+    "level": "severe",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Газпромнефть",
@@ -1207,8 +1207,8 @@
     "region": "Томская область",
     "lat": 56.49,
     "lon": 84.95,
-    "level": "limited",
-    "updated": "2026-08-23T05:49:48.606963Z",
+    "level": "stable",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Газпром нефть/Роснефть",
@@ -1254,7 +1254,7 @@
     "lat": 53.24,
     "lon": 34.36,
     "level": "limited",
-    "updated": "2026-08-23T05:49:48.607009Z",
+    "updated": "2026-08-24T12:00:00Z",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -2190,19 +2190,19 @@
    }
   ],
   "exchange": {
-   "ai95_spb_rub_t": 63400,
-   "ai92_spb_rub_t": 61800,
-   "diesel_spb_rub_t": 60300,
+   "ai95_spb_rub_t": 63500,
+   "ai92_spb_rub_t": 61900,
+   "diesel_spb_rub_t": 60400,
    "trend": "stable",
-   "updated": "2026-08-23T17:30:00+00:00",
+   "updated": "2026-08-24T16:30:00Z",
    "source_url": "https://www.kommersant.ru/doc/7941302",
    "notes": "23.08: СПбМТСБ. АИ-95: ~63.4 тыс. ₽/т. Домашний бензин ~53.94 ₽/л, импортный ~80 ₽/л. Объёмы 61-68% ниже августа-2025. Импортный бензин торгуется с 20.08. Запрет экспорта до 31.01.2027. Тренд: стабилизация.",
    "note": "Updated based on recent WebSearch (see sources)"
   },
   "refinery_counts": {
-   "down": 12,
+   "down": 11,
    "partial": 11,
-   "operational": 10
+   "operational": 11
   },
   "timeline": [
    {
@@ -2349,6 +2349,13 @@
     "date": "2026-08-23",
     "capacity_offline_pct": 43,
     "capacity_offline_mt_year": 145.6,
+    "gasoline_loss_pct": 36,
+    "diesel_loss_pct": 42
+   },
+   {
+    "date": "2026-08-24",
+    "capacity_offline_pct": 41,
+    "capacity_offline_mt_year": 138.6,
     "gasoline_loss_pct": 36,
     "diesel_loss_pct": 42
    }
@@ -17045,6 +17052,22 @@
      "detail": "Обломки сбитого беспилотника вызвали пожар на территории логистического комплекса Ozon. Пожар был быстро потушен. Из комплекса эвакуировано примерно 300 рабочих.",
      "source_url": "https://meduza.io/news/2026/08/23/ukrainskie-drony-atakovali-vtoroy-sklad-ozon-v-orenburge",
      "confidence": "reported"
+    },
+    {
+     "date": "2026-08-23",
+     "time": "ночь",
+     "city": "Санкт-Петербург",
+     "region": "Санкт-Петербург",
+     "lat": 59.74177,
+     "lon": 30.51747,
+     "type": "drone",
+     "count": null,
+     "target": "логистический центр Ozon (Колпинское шоссе, 135, Пушкинский район)",
+     "casualties": null,
+     "title": "Пожар на складе в Колпино",
+     "detail": "В ночь на 23 августа разразился крупный пожар на логистической площадке в Колпино (площадь ~82,000 кв.м), расположенной рядом с логистическим центром Ozon. Пожар тушили более 200 спасателей, жертв и пострадавших не было.",
+     "source_url": "https://www.fontanka.ru/2026/08/24/76603577/",
+     "confidence": "reported"
     }
    ],
    "voices": [
@@ -17109,6 +17132,54 @@
      "detail": "Обломки БПЛА рухнули на частный детский центр в районе Прикубанский. Повреждены жилые многоквартирные дома. Пожар в логистическом центре Ozon и складских помещениях.",
      "source_url": "https://93.ru/text/incidents/2026/08/24/76603554/",
      "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-24",
+     "time": "ночь",
+     "city": "Адыгейск",
+     "region": "Республика Адыгея",
+     "lat": 44.88338,
+     "lon": 39.19096,
+     "type": "drone",
+     "count": null,
+     "target": "логистический центр Ozon (Тахтамукайский район)",
+     "casualties": null,
+     "title": "Удар БПЛА по складу Ozon в Адыгейске",
+     "detail": "Атака украинских беспилотников на логистический центр Ozon в Адыгее привела к пожару на складе. По данным главы республики, работники эвакуированы без потерь.",
+     "source_url": "https://iz.ru/2153851/2026-08-24/logisticheskii-tcentr-ozon-zagorelsia-v-adygee-v-rezultate-ataki-vsu",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-24",
+     "time": "ночь",
+     "city": "Махачкала",
+     "region": "Республика Дагестан",
+     "lat": 43.0222,
+     "lon": 47.2958,
+     "type": "drone",
+     "count": null,
+     "target": "логистический центр Ozon",
+     "casualties": "несколько человек получили ранения, госпитализация не потребовалась",
+     "title": "Удар по складу Ozon в Махачкале",
+     "detail": "Около 05:00 24 августа обломки сбитых БПЛА вызвали пожар на территории логистического центра Ozon в Махачкале. Несколько сотрудников получили ранения, по заявлению компании их жизни и здоровью ничего не угрожает. Работа склада приостановлена. В ту же ночь были эвакуированы (без подтверждённых повреждений) склады Ozon в Невинномысске и Адыгейске.",
+     "source_url": "https://aif.ru/incidents/pri-atake-bpla-na-sklad-ozon-v-mahachkale-postradali-neskolko-chelovek",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-08-24",
+     "time": "ночь",
+     "city": "Невинномысск",
+     "region": "Ставропольский край",
+     "lat": 44.62458,
+     "lon": 41.94759,
+     "type": "drone",
+     "count": null,
+     "target": "логистический центр Ozon",
+     "casualties": null,
+     "title": "Атака БПЛА на склад Ozon в Невинномысске",
+     "detail": "В ночь на 24 августа логистический центр Ozon в Невинномысске подвергся атаке беспилотников. Персонал эвакуирован, в 00:33 объявлена угроза атаки.",
+     "source_url": "https://bloknot-stavropol.ru/news/ozon-pod-pritselom-24-avgusta-stavropole-provelo-n-2003357",
+     "confidence": "reported"
     }
    ],
    "voices": []
