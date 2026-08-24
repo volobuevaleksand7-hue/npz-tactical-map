@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-23T23:20Z",
+ "generated_at": "2026-08-24T00:05Z",
  "data_mode": "СЛУХ / НЕПРОВЕРЕНО (вариант B)",
  "disclaimer": "Авто-детектор кандидатов в удары из ленты radar-map.ru. НЕ боевые данные, НЕ публикуется автоматически. Только для ручного/Hermes-подтверждения перед переносом в strikes.json.",
  "candidates": [
@@ -1366,11 +1366,12 @@
    "detail": "[Newsader] БЕЗ ПРОДЫХУ: ВСУ РАЗНЕСЛИ НОВОКУЙБЫШЕВСКИЙ НПЗ! Его только что починили",
    "source_url": "https://www.youtube.com/watch?v=4TGHNnaWuvI",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "4TGHNnaWuvI",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   },
   {
    "date": "2026-08-22",
@@ -1388,11 +1389,12 @@
    "detail": "[Newsader] ЕЙСК В ОГНЕ: ВСУ РАЗГРОМИЛИ МОРСКОЙ НЕФТЯНОЙ ТЕРМИНАЛ!",
    "source_url": "https://www.youtube.com/watch?v=XpxPPGoDLJg",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "XpxPPGoDLJg",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   }
  ]
 }
