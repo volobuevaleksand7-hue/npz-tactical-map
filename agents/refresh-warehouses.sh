@@ -18,10 +18,13 @@ cd "$REPO" || exit 1
 
 python3 agents/fetch-warehouses.py   || { echo "refresh-warehouses: fetch упал" >&2; exit 1; }
 python3 agents/gen-warehouses-page.py || { echo "refresh-warehouses: gen упал" >&2; exit 1; }
+python3 agents/gen-survivors-page.py || { echo "refresh-warehouses: gen-survivors упал" >&2; exit 1; }
 python3 agents/sync-warehouse-counts.py || { echo "refresh-warehouses: sync упал" >&2; exit 1; }
 
 # Коммитим ТОЛЬКО свои файлы поимённо: `git add data/` соседа уже дважды уносил чужую работу.
-FILES="data/warehouses.json skolko-skladov-wildberries-ozon.html udar-po-skladu-ozon.html ceny-marketpleysy-posle-udarov.html"
+# 🔴 24.08: kakie-sklady-wildberries-ostalis.html не было в этом списке — gen-survivors-page.py
+# не входил ни в один плановый прогон, счётчик отставал (та же грабля, что уже была у чемпиона).
+FILES="data/warehouses.json skolko-skladov-wildberries-ozon.html udar-po-skladu-ozon.html ceny-marketpleysy-posle-udarov.html kakie-sklady-wildberries-ostalis.html"
 CHANGED=""
 for f in $FILES; do
   [ -f "$f" ] && ! git diff --quiet -- "$f" && CHANGED="$CHANGED $f"

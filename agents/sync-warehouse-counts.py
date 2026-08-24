@@ -89,21 +89,33 @@ def total_ok_count():
     return sum(1 for w in _warehouses() if w["status"] == "ok")
 
 
+def ozon_hit_count():
+    return sum(1 for w in _warehouses() if w["status"] == "hit" and w["operator"] == "ozon")
+
+
+def total_hit_count():
+    return wb_hit_count() + ozon_hit_count()
+
+
 METRICS = {
     "wb_hit": wb_hit_count,
     "wb_ok": wb_ok_count,
     "ozon_ok": ozon_ok_count,
     "total_ok": total_ok_count,
+    "ozon_hit": ozon_hit_count,
+    "total_hit": total_hit_count,
 }
 
 # --- якоря без склонения: после числа сразу нелитеральный текст без сущ. (эллипсис/лейбл) ---
 # (файл, [(метрика из METRICS, regex с ОДНОЙ группой \d+ в стабильном литеральном контексте)])
+# 🔴 24.08: страница переписана под серию из 3 ударов по Ozon (Чапаевск/Оренбург/Краснодар) —
+# старые якоря на единичный эпизод («первое поражение» и т.п.) сняты, добавлен ozon_hit —
+# та же грабля, что уже сломала счётчик WB, теперь заранее закрыта и для Ozon.
 PLAIN = {
     "udar-po-skladu-ozon.html": [
-        ("wb_hit", r'(объектов против )\d+( — три проверяемые причины)'),
-        ("wb_hit", r'(объектов против )\d+(</strong> у Wildberries)'),
-        ("wb_hit", r'(<div class="val">)\d+(</div><div class="lbl">поражённых складов Wildberries</div>)'),
-        ("wb_hit", r'(таких объектов уже )\d+(\.)'),
+        ("ozon_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых объект\w* Ozon \(из 21\))'),
+        ("wb_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых складов Wildberries \(из 42\))'),
+        ("total_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых складов в базе \(из 63\))'),
     ],
     "ceny-marketpleysy-posle-udarov.html": [
         ("wb_hit", r'(<div class="val">)\d+(</div><div class="lbl">поражённых складов Wildberries</div>)'),
@@ -121,16 +133,6 @@ PLAIN = {
 # --- якоря со склонением: (метрика, regex с prefix/suffix группами + альтернативой из трёх
 #     форм, функция согласования, формы one/few/many) ---
 DECLINED = {
-    "udar-po-skladu-ozon.html": [
-        ("wb_hit", r'(поражено уже )\d+ (объект|объекта|объектов)(\.)',
-         ru_count, ("объект", "объекта", "объектов")),
-        ("wb_hit", r'(закономерность\.</strong> )\d+ (поражённый объект|поражённых объекта|поражённых объектов)( — выборка)',
-         ru_count, ("поражённый объект", "поражённых объекта", "поражённых объектов")),
-        ("wb_hit", r'(Помимо )\d+ (объекта|объектов)( Wildberries)',
-         ru_count_gen, ("объекта", "объектов")),
-        ("wb_hit", r'(выборки — )\d+ (поражённого объекта|поражённых объектов)( недостаточно)',
-         ru_count_gen, ("поражённого объекта", "поражённых объектов")),
-    ],
     "ceny-marketpleysy-posle-udarov.html": [
         ("wb_hit", r'(поражено <strong>)\d+ (складской объект|складских объекта|складских объектов)( Wildberries</strong>)',
          ru_count, ("складской объект", "складских объекта", "складских объектов")),
