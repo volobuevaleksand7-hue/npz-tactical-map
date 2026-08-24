@@ -611,28 +611,6 @@
       "source_text": "24.08.2026 03:16 МСК\nСевастополь, Бахчисарайский район, отбой тревоги БПЛА Переход в режим повышенного внимания"
     },
     {
-      "key": "скадовск|херсонская область",
-      "name": "Скадовск",
-      "lat": 46.11313,
-      "lon": 32.90978,
-      "region": "Херсонская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787524142,
-      "source_text": "24.08.2026 01:29 МСК\nЖелезный порт Лазурное Скадовск И близлежащие Херсонская область РФ Опасность по БПЛА сохраняется"
-    },
-    {
       "key": "дятьково|брянская область",
       "name": "Дятьково",
       "lat": 53.59782,
@@ -1668,6 +1646,28 @@
       "last_event_ts": 1787527794,
       "source_text": "24.08.2026 02:29 МСК\nСтарь, Ивот, Дятьково, Дятьковский район, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
+    "RUS.34.3_1": {
+      "gid_2": "RUS.34.3_1",
+      "name_ru": "Анапский район",
+      "region_ru": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": true,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#f0c4a0",
+      "last_event_ts": 1787567079,
+      "source_text": "24.08.2026 13:24 МСК\nАнапский район и близлежащие районы внимание по БПЛА с Чёрного моря"
+    },
     "RUS.34.39_1": {
       "gid_2": "RUS.34.39_1",
       "name_ru": "Щербиновский район",
@@ -1793,6 +1793,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 82338,
+      "text": "1",
+      "ts": 1787567244,
+      "time_label": "24.08.2026 13:27 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 266016,
+      "text": "Анапский район и близлежащие районы внимание по БПЛА с Чёрного моря",
+      "ts": 1787567079,
+      "time_label": "24.08.2026 13:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 266015,
       "text": "Пологи и близлежащие УАБы\nЗапорожская область РФ",
@@ -2416,22 +2432,6 @@
       "time_label": "24.08.2026 09:56 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265952,
-      "text": "Мариуполь и близлежащие опасность по БПЛА\nДНР",
-      "ts": 1787554487,
-      "time_label": "24.08.2026 09:54 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265951,
-      "text": "Камышеваха\nКарбонид\nИ близлежащие\nОпасность по БПЛА Хорнет\nЛНР",
-      "ts": 1787554281,
-      "time_label": "24.08.2026 09:51 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2441,14 +2441,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787566674,
-  "last_event_at": "2026-08-24T10:17:54Z",
-  "fetched_at": "2026-08-24T10:20:03.032879Z",
+  "timestamp": 1787567244,
+  "last_event_at": "2026-08-24T10:27:24Z",
+  "fetched_at": "2026-08-24T10:30:03.321534Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-24T10:20:03.032879Z",
-    "source_age_seconds": 129,
-    "city_count": 58,
+    "generated_at": "2026-08-24T10:30:03.321534Z",
+    "source_age_seconds": 159,
+    "city_count": 57,
     "region_count": 12,
     "feed_count": 80
   }
