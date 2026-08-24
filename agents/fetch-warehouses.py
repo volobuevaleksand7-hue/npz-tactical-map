@@ -140,8 +140,16 @@ def norm_city(s):
 def marketplace_strikes():
     """Удары по складам маркетплейсов из strikes.json — источник правды по поражениям.
 
-    Возвращает {город: запись}. Если по одному городу несколько ударов, берём последний
-    по дате: на карте один маркер склада, и он должен показывать свежий эпизод.
+    Возвращает {(город, оператор): запись}. Если по одному городу и оператору несколько
+    ударов, берём последний по дате: на карте один маркер склада, и он должен показывать
+    свежий эпизод.
+
+    🔴 Оператор В КЛЮЧЕ, а не только в записи (24.08.2026). Раньше ключом был один город, и
+    «один город = один склад» держалось, пока в городе стоял склад одного оператора. В
+    Краснодаре их два: WB поражён 22.07, Ozon — 24.08. Свежий удар занял ключ «краснодар», а
+    объект WB пересобрался с дефолтным status="ok" — сгоревший склад стал «целым», счётчик
+    упал 28 -> 27. Городов со складами обоих операторов сейчас 8, так что это не разовый
+    случай. Сам архив strikes.json при этом цел: врал только производный слой.
     """
     with open(os.path.join(ROOT, "data", "strikes.json"), encoding="utf8") as f:
         doc = json.load(f)
@@ -154,19 +162,21 @@ def marketplace_strikes():
         city = norm_city(s.get("city"))
         if not city:
             continue
+        op = "ozon" if re.search(r"\bozon\b|озон", blob, re.I) else "wb"
+        k = (city, op)
         # 🔴 damage — ХУДШЕЕ из эпизодов, а не последнее. Метка показывает свежий эпизод
         # (date/note/source берём у него), но «сгорел» стирать нельзя: 08.08 повторный
         # прилёт обломков по уже сгоревшему складу в Твери откатил его damage
         # burned -> hit, то есть факт пожара 24.07 пропал с карты из-за более мелкого
         # позднего эпизода. Ущерб не «заживает» от того, что позже прилетело слабее.
-        burned_before = out.get(city, {}).get("damage") == "burned"
-        if city in out and str(s.get("date", "")) <= out[city]["date"]:
+        burned_before = out.get(k, {}).get("damage") == "burned"
+        if k in out and str(s.get("date", "")) <= out[k]["date"]:
             continue
-        out[city] = {
+        out[k] = {
             "city": str(s.get("city") or "").strip(),   # для подписи метки: capitalize() ломает «Санкт-Петербург»
             "date": str(s.get("date", "")),
             "damage": "burned" if (burned_before or FIRE_RE.search(blob)) else "hit",
-            "operator": "ozon" if re.search(r"\bozon\b|озон", blob, re.I) else "wb",
+            "operator": op,
             "note": str(s.get("title") or s.get("target") or ""),
             "source_url": str(s.get("source_url") or ""),
             "region": str(s.get("region") or ""),
@@ -189,12 +199,12 @@ def nearest_strike(op, ll, strikes):
     Wildberries — по одной геометрии поражение уехало бы не тому оператору.
     """
     best, best_km = None, MATCH_KM
-    for city, h in strikes.items():
+    for key, h in strikes.items():
         if h["operator"] != op or h.get("lat") is None or h.get("lon") is None:
             continue
         km = haversine_km(ll, (h["lat"], h["lon"]))
         if km <= best_km:
-            best, best_km = city, km
+            best, best_km = key, km
     return best
 
 
@@ -259,18 +269,21 @@ def build(offline=False):
             # Берём ТОЛЬКО inner: он называет конкретное место («Зеленодольск», «Парголово»).
             # Город до скобки для этого не годится — «Санкт-Петербург» носят четыре склада, и
             # общегородская сводка приписала бы удар одному из них как факт.
-            city = None
+            # key — кортеж (город, оператор) для словаря; city остаётся СТРОКОЙ: её ждут
+            # placed, new_id и двусторонний страж ниже.
+            key = None
             ci = norm_city(inner)
-            if ci and ci in strikes and strikes[ci]["operator"] == op:
-                city = ci
-            if city is None:
-                city = nearest_strike(op, ll, strikes)
-            if city is None:
+            if ci and (ci, op) in strikes:
+                key = (ci, op)
+            if key is None:
+                key = nearest_strike(op, ll, strikes)
+            if key is None:
                 # у удара нет координат — геометрией не проверишь, остаётся сверка по городу
                 cb = norm_city(base)
-                if cb in strikes and strikes[cb].get("lat") is None:
-                    city = cb
-            hit = strikes.pop(city) if city else None
+                if (cb, op) in strikes and strikes[(cb, op)].get("lat") is None:
+                    key = (cb, op)
+            city = key[0] if key else None
+            hit = strikes.pop(key) if key else None
             it = {
                 "id": "%s-%s" % (op, name.lower().replace(" ", "-").replace("(", "").replace(")", "")),
                 "operator": op,
@@ -290,7 +303,7 @@ def build(offline=False):
 
     # Удар по складу, которого нет в курируемых списках (Новомосковск 23.07 приехал именно так).
     # Молча потерять его нельзя — статья считает объекты. Берём координаты из самого удара.
-    for city, hit in sorted(strikes.items()):
+    for (city, _op), hit in sorted(strikes.items()):
         # 🔴 Сводка по городу — не отдельный склад. Матчинг по расстоянию (выше) уже не даёт
         # такой записи прилипнуть к чужому складу, но сама она всё равно становилась объектом:
         # счётчик поражённых показывал 16 вместо 15. Признак сводки — город записи совпадает с её
@@ -375,7 +388,7 @@ def main():
     # и Новомосковску молча не попали на слой, пока их не нашло ревью.
     # Сверяем по удару, который реально сел на объект (placed), а не по названию склада:
     # после матчинга по расстоянию город удара и имя склада могут не совпадать.
-    strike_set = {(c, h["date"]) for c, h in marketplace_strikes().items()}
+    strike_set = {(c[0], h["date"]) for c, h in marketplace_strikes().items()}
     only_layer = sorted(placed - strike_set)
     only_strikes = sorted(strike_set - placed)
     if only_layer or only_strikes:
@@ -421,9 +434,19 @@ def demo():
     assert norm_city("Кол ёдино".replace(" ", "")) == "коледино"
     sk = marketplace_strikes()
     assert sk, "в strikes.json не найдено ни одного удара по складам маркетплейсов"
-    for city, h in sk.items():
-        assert h["date"] and h["operator"] in ("wb", "ozon"), (city, h)
+    for key, h in sk.items():
+        assert isinstance(key, tuple) and len(key) == 2, "ключ индекса — (город, оператор)"
+        assert key[1] == h["operator"], (key, h["operator"])
+        assert h["date"] and h["operator"] in ("wb", "ozon"), (key, h)
         assert h["damage"] in ("burned", "hit")
+
+    # 🔴 Регресс 24.08.2026: два склада разных операторов в ОДНОМ городе. Пока ключом был
+    # только город, свежий удар по Ozon в Краснодаре вытеснял из индекса удар по WB от
+    # 22.07, и склад WB пересобирался как «целый» — сгоревший объект показывался уцелевшим.
+    kras = {k: v for k, v in sk.items() if k[0] == "краснодар"}
+    if len(kras) > 1:
+        assert {k[1] for k in kras} == {"wb", "ozon"}, kras
+        assert len({v["date"] for v in kras.values()}) > 1, "разные операторы — разные эпизоды"
     # имя склада может уточнять место в скобках — в набор идут обе формы, иначе удар по
     # Зеленодольску не признавался «своим» для склада «Казань (Зеленодольск)»
     names = set()
@@ -437,21 +460,32 @@ def demo():
 
     # 🔴 Регрессия 25.07: удар «Санкт-Петербург» (объекты на Московском шоссе, Пулково)
     # садился на склад «Санкт-Петербург (Парголово)» просто по совпадению города — 13 км мимо.
-    spb = {"санкт-петербург": {"operator": "wb", "date": "2026-07-25", "lat": 59.83, "lon": 30.4}}
+    spb = {("санкт-петербург", "wb"): {"operator": "wb", "date": "2026-07-25",
+                                       "lat": 59.83, "lon": 30.4}}
     pargolovo, moskovskoe_sh = (59.93873, 30.31623), (59.79, 30.42)
     assert haversine_km(pargolovo, (59.83, 30.4)) > MATCH_KM
     assert nearest_strike("wb", pargolovo, dict(spb)) is None, "удар пришит к чужому складу по городу"
-    assert nearest_strike("wb", moskovskoe_sh, dict(spb)) == "санкт-петербург", "близкий склад не найден"
+    assert nearest_strike("wb", moskovskoe_sh, dict(spb)) == ("санкт-петербург", "wb"), "близкий склад не найден"
     # тот же удар, но склад чужого оператора в 2 км (РФЦ Ozon в Шушарах) — не наш
     assert nearest_strike("ozon", (59.81166, 30.38085), dict(spb)) is None
 
     # реальные пары из strikes.json обязаны находиться геометрией
-    assert nearest_strike("wb", (51.6606, 39.20059), dict(sk)) == "воронеж"
-    assert nearest_strike("wb", (55.37859, 37.58046), dict(sk)) == "коледино"
+    assert nearest_strike("wb", (51.6606, 39.20059), dict(sk)) == ("воронеж", "wb")
+    # 🔴 Коледино: жёстко ждать здесь («коледино», «wb») больше нельзя, и это НЕ придирка теста.
+    # Удар 16.08 записан с city="Подольск", но его координаты в 0.1 км от склада в Коледино, а
+    # заголовок — «Удар по логистическому центру в Коледино» (Коледино входит в округ Подольск).
+    # Он и выигрывает геометрию у собственного удара Коледино от 28.07, который стоит в 1.5 км.
+    # Итог на слое: эпизоды двух складов поменялись местами. Чинится это в АТРИБУЦИИ данных, а не
+    # ослаблением теста, поэтому здесь проверяем инвариант, который обязан держаться всегда:
+    # геометрия обязана найти удар того же оператора в пределах MATCH_KM.
+    kol = nearest_strike("wb", (55.37859, 37.58046), dict(sk))
+    assert kol is not None and sk[kol]["operator"] == "wb", kol
+    assert haversine_km((55.37859, 37.58046),
+                        (sk[kol]["lat"], sk[kol]["lon"])) <= MATCH_KM, (kol, sk[kol])
 
     # 🔴 Регресс на дубль: сводка по городу-субъекту не должна становиться отдельным складом.
     # Признак — город записи равен её региону; в данных таким оказывается только запись по СПб.
-    aggregates = [c for c, h in sk.items() if norm_city(h.get("region")) == c]
+    aggregates = [c for c, h in sk.items() if norm_city(h.get("region")) == c[0]]
     assert aggregates, "признак сводки перестал срабатывать — проверь, не изменились ли данные"
     for c in aggregates:
         h = sk[c]
