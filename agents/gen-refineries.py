@@ -377,6 +377,44 @@ def render_ranksummary(R, meta):
             f'с оператором, регионом и текущим статусом — в таблице ниже.</p>')
 
 
+def _plural(n, one, few, many):
+    """Согласование числительного: 1 завод / 2 завода / 11 заводов."""
+    n = abs(int(n)) % 100
+    if 11 <= n <= 14:
+        return many
+    n %= 10
+    if n == 1:
+        return one
+    if 2 <= n <= 4:
+        return few
+    return many
+
+
+_NB = {}
+
+
+def render_vyvedeno(R, meta, nb):
+    """Блок «Сколько НПЗ выведено из строя» — числа из данных, а не из прозы.
+
+    22.08 этот абзац написали руками и зашили в него «11 НПЗ из 33 … 136,8 … 40%».
+    За двое суток данные ушли на 12/43%, и текст поехал — страж поймал уже второй
+    заход той же путаницы «доля заводов vs доля мощностей». Лечится не аккуратностью,
+    а тем же лекарством, что и остальные блоки страницы: цифру выводит код.
+    """
+    down, part, oper, tot = counts(R)
+    cap_pct = nb.get("capacity_offline_pct")
+    off, total = nb.get("capacity_offline_mt_year"), nb.get("refining_capacity_total_mt_year")
+    ru = lambda x: str(x).replace(".", ",")
+    return (f'        <p>На {rus_date(meta["generated_at"][:10])} полностью остановлены '
+            f'(выведены из строя) <strong style="color:var(--red)">{down} НПЗ</strong> из {tot} '
+            f'в России. По числу заводов это {down}/{tot}, но по мощности доля выше: на '
+            f'остановленные приходится {ru(off)} из {ru(total)} млн тонн в год — '
+            f'<strong>{cap_pct}% нефтеперерабатывающих мощностей страны</strong>. Ещё {part} '
+            f'{_plural(part, "завод", "завода", "заводов")} '
+            f'{_plural(part, "работает", "работают", "работают")} с ограничениями по загрузке, '
+            f'{oper} — в штатном режиме.</p>')
+
+
 BLOCKS = {
     "table": render_table,
     "regions": render_regions,
@@ -387,6 +425,7 @@ BLOCKS = {
     "herostats": lambda R, m: render_herostats(R, m),
     "top5": render_top5,
     "cards": render_cards,
+    "vyvedeno": lambda R, m: render_vyvedeno(R, m, _NB),
 }
 
 
@@ -716,6 +755,7 @@ def main():
 
     R, meta = load()
     nb = json.load(open(DATA, encoding="utf-8")).get("national_balance", {})
+    globals()["_NB"] = nb            # рендерер блока «выведено из строя» берёт баланс отсюда
     html = open(PAGE, encoding="utf-8").read()
     down, part, oper, tot = counts(R)
     print(f"данные на {meta['generated_at']}: {tot} НПЗ = {down} стоп + {part} огранич + {oper} работают")
