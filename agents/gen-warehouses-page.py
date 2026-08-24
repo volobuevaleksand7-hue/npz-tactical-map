@@ -199,6 +199,7 @@ def build():
     wb_n = sum(1 for w in wh if w["operator"] == "wb")
     oz_n = sum(1 for w in wh if w["operator"] == "ozon")
     hit_oz = [w for w in hits if w["operator"] == "ozon"]
+    hit_wb = [w for w in hits if w["operator"] == "wb"]
     share = LOST_M2 * 100.0 / net["wb"]["area_m2"]
     wb_hit_share = len(hits) * 100.0 / net["wb"]["complexes"]
     OG = og_image()
@@ -264,8 +265,14 @@ def build():
          % (len(wh), wb_n, oz_n, net["wb"]["complexes"])),
         ("Какие склады Wildberries и Ozon остались?",
          "В выборке проекта из %d крупных объектов у %d нет сообщений об ударе на %s (%d Wildberries, %d Ozon). Отсутствие объекта в списке поражённых не значит, что он работает в штатном режиме: это лишь отсутствие сообщений об ударах по нему, независимая проверка исправности объектов проектом не проводилась. Полный список с городом, регионом, оператором и разбивкой по федеральным округам — на странице «Какие склады Wildberries и Ozon остались» (%s)."
-         % (len(wh), len(wh) - len(hits), rus(UPDATED), wb_n - len(hits), oz_n, SURVIVORS_URL)),
+         # 🔴 было wb_n - len(hits): вычитало ВСЕ поражения (включая Ozon) из числа складов WB,
+         # а oz_n брало голым без вычитания поражённых Ozon вообще — FAQ на одной странице
+         # называл два разных числа «сколько складов осталось». Каждый оператор вычитает
+         # только СВОИ поражения (hit_wb/hit_oz), и сумма сходится с len(wh) - len(hits).
+         % (len(wh), len(wh) - len(hits), rus(UPDATED), wb_n - len(hit_wb), oz_n - len(hit_oz), SURVIVORS_URL)),
     ]
+    assert (wb_n - len(hit_wb)) + (oz_n - len(hit_oz)) == len(wh) - len(hits), (
+        "FAQ 'остались': разбивка по операторам разошлась с общим числом уцелевших")
     faq_ld = ",\n      ".join(
         json.dumps({"@type": "Question", "name": q,
                     "acceptedAnswer": {"@type": "Answer", "text": a}}, ensure_ascii=False)

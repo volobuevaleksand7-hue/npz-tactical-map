@@ -97,6 +97,23 @@ def total_hit_count():
     return wb_hit_count() + ozon_hit_count()
 
 
+# 🔴 24.08.2026: датасет догнали 12 новыми РФЦ Ozon (21 -> 33 объекта) — денаминаторы
+# "(из N)" на status-card карточках были захардкожены литералом в самом regex ("из 21",
+# "из 63") и молча разошлись бы с реальным total, как только регекс перестал бы их
+# трогать. wb_total сейчас не меняется (WB объекты не добавлялись), но заведён туда же,
+# чтобы третий якорь того же класса не забыли при следующем расширении справочника WB.
+def wb_total_count():
+    return sum(1 for w in _warehouses() if w["operator"] == "wb")
+
+
+def ozon_total_count():
+    return sum(1 for w in _warehouses() if w["operator"] == "ozon")
+
+
+def total_all_count():
+    return len(_warehouses())
+
+
 METRICS = {
     "wb_hit": wb_hit_count,
     "wb_ok": wb_ok_count,
@@ -104,6 +121,9 @@ METRICS = {
     "total_ok": total_ok_count,
     "ozon_hit": ozon_hit_count,
     "total_hit": total_hit_count,
+    "wb_total": wb_total_count,
+    "ozon_total": ozon_total_count,
+    "total_all": total_all_count,
 }
 
 # --- якоря без склонения: после числа сразу нелитеральный текст без сущ. (эллипсис/лейбл) ---
@@ -113,9 +133,16 @@ METRICS = {
 # та же грабля, что уже сломала счётчик WB, теперь заранее закрыта и для Ozon.
 PLAIN = {
     "udar-po-skladu-ozon.html": [
-        ("ozon_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых объект\w* Ozon \(из 21\))'),
-        ("wb_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых складов Wildberries \(из 42\))'),
-        ("total_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых складов в базе \(из 63\))'),
+        # 🔴 второе число в каждом якоре — денаминатор "(из N)" — записано как [0-9]+, не
+        # \d+: demo() ниже проверяет PLAIN-якоря наивной строковой заменой
+        # pat.replace(r'\d+', str(count)) — при двух \d+ в одном паттерне она подставила
+        # бы одно и то же число в оба места. Денаминатор синкует отдельный якорь ниже.
+        ("ozon_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых объект\w* Ozon \(из [0-9]+\))'),
+        ("ozon_total", r'(поражённых объект\w* Ozon \(из )\d+(\))'),
+        ("wb_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых складов Wildberries \(из [0-9]+\))'),
+        ("wb_total", r'(поражённых складов Wildberries \(из )\d+(\))'),
+        ("total_hit", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">поражённых складов в базе \(из [0-9]+\))'),
+        ("total_all", r'(поражённых складов в базе \(из )\d+(\))'),
     ],
     "ceny-marketpleysy-posle-udarov.html": [
         ("wb_hit", r'(<div class="val">)\d+(</div><div class="lbl">поражённых складов Wildberries</div>)'),
