@@ -77,7 +77,7 @@
   <script defer src="/_vercel/insights/script.js"></script>
 
   <link rel="stylesheet" href="/fonts.css">
-  <link rel="stylesheet" href="/styles.css?v=be2b915a">
+  <link rel="stylesheet" href="/styles.css?v=6c4ccd2f">
   <link rel="stylesheet" href="/news.css?v=e2bbf493">
   <style>
     .landing-wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
@@ -116,6 +116,14 @@
     .link-card .lc-d{font-size:11px;color:var(--ink-dim)}
     .osint-note{margin-top:32px;font-size:11px;color:var(--ink-dim);background:var(--surface2);padding:12px;border-radius:10px;border-left:3px solid var(--amber);line-height:1.6}
     .updated-line{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:6px}
+    .ozon-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
+    .ozon-card-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+    .ozon-card-kicker{font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.4px;color:var(--teal);margin:0 0 4px}
+    .ozon-card-head h2{font-size:19px;font-weight:800;margin:0}
+    .ozon-card-head p{font-size:12px;color:var(--ink-dim);margin:0}
+    .ozon-card-scroll{overflow-x:auto}
+    .ozon-card-svg{display:block;min-width:1060px}
+    .ozon-card-caption{font-size:11px;color:var(--ink-dim);margin:12px 0 0;line-height:1.6}
     .balance-box{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--red,#d23a2e);border-radius:10px;padding:16px 18px;margin:18px 0;font-size:13.5px;line-height:1.7}
     .wh-rank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}
     .wh-rank-card{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
@@ -154,137 +162,8 @@
         <a href="/">🗺️ Карта НПЗ</a>
         <a href="/news">📰 Сводки</a>
         <a href="/radar">📡 Радар БПЛА</a>
-        <div class="nav-dropdown" style="position:relative;display:inline-block">
-          <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика ▾</a>
-          <div class="nav-dropdown-menu">
-            <div class="nav-drop-group">Регионы</div>
-            <a href="/crimea">🗺 Крым</a>
-            <a href="/krasnodar">🌴 Краснодар</a>
-            <a href="/moskva">🏙 Москва</a>
-            <details class="nav-drop-sub">
-              <summary>🚀 Ракетная опасность</summary>
-              <a href="/raketnaya-opasnost-volgograd">📍 Волгоград</a>
-              <a href="/raketnaya-opasnost-cheboksary">📍 Чебоксары</a>
-              <a href="/raketnaya-opasnost-omsk">📍 Омск</a>
-              <a href="/raketnaya-opasnost-ulyanovsk">📍 Ульяновск</a>
-              <a href="/raketnaya-opasnost-kazan">📍 Казань</a>
-              <a href="/raketnaya-opasnost-moskovskaya-oblast">📍 Московская обл.</a>
-              <a href="/raketnaya-opasnost-penza">📍 Пенза</a>
-              <a href="/raketnaya-opasnost-samara">📍 Самара</a>
-              <a href="/raketnaya-opasnost-belgorod">📍 Белгород</a>
-              <a href="/raketnaya-opasnost-tambovskaya-oblast">📍 Тамбовская обл.</a>
-              <a href="/raketnaya-opasnost-sverdlovskaya-oblast">📍 Свердловская обл.</a>
-              <a href="/raketnaya-opasnost-rostovskaya-oblast">📍 Ростовская обл.</a>
-              <a href="/raketnaya-opasnost-kirovskaya-oblast">📍 Кировская обл.</a>
-              <a href="/raketnaya-opasnost-tyumenskaya-oblast">📍 Тюменская обл.</a>
-              <a href="/raketnaya-opasnost-ryazanskaya-oblast">📍 Рязанская обл.</a>
-            </details>
-            <div class="nav-drop-group">Топливо</div>
-            <a href="/deficit">⛽ Почему нет бензина</a>
-            <details class="nav-drop-sub">
-              <summary>⛽ Где заправиться</summary>
-              <a href="/zakrytye-azs">🚫 Какие АЗС закрылись</a>
-              <a href="/gde-ai95">⛽ Где найти АИ-95</a>
-              <a href="/gde-gaz-azs">🔥 Где заправить газ</a>
-            </details>
-            <details class="nav-drop-sub">
-              <summary>🚦 Обстановка на АЗС</summary>
-              <a href="/talony">🎫 Бензин по талонам</a>
-              <a href="/ocheredi-na-azs">🚗 Очереди на АЗС</a>
-              <a href="/draki-na-azs">💢 Конфликты на АЗС</a>
-              <a href="/zapas-benzina-kanistry">🛢️ Запас бензина в канистрах</a>
-            </details>
-            <details class="nav-drop-sub">
-              <summary>🚢 Нефть и экспорт</summary>
-              <a href="/tankery-azovskoe-more">🚢 Танкеры в Азовском море</a>
-              <a href="/vozmozhen-li-golod">🌾 Будет ли голод в России</a>
-            </details>
-            <div class="nav-drop-group">Прогноз</div>
-            <a href="/crisis">🔥 Прогноз кризиса</a>
-            <div class="nav-drop-group">Справочники</div>
-            <a href="/udary-po-tankeram">🚢 Удары по танкерам теневого флота</a>
-            <a href="/udary-azovskoe-more">💥 Удары по Азовскому морю</a>
-            <a href="/volna-dronov">🛩 Волна дронов сейчас</a>
-            <a href="/udary-po-energetike-kryma">⚡ Удары по энергетике Крыма</a>
-            <a href="/zerkalnaya-eskalaciya-energetika">⚡ Зеркальная эскалация по энергетике</a>
-            <a href="/situaciya-s-benzinom">📊 Ситуация с бензином</a>
-            <details class="nav-drop-sub" open>
-              <summary>📦 Склады маркетплейсов</summary>
-              <a href="/udar-po-skladam-wildberries">📦 Удар по складам Wildberries</a>
-              <a href="/ataki-na-sklady-wildberries-hronika">🗓 Атаки на склады Wildberries: хроника</a>
-              <a href="/kompensacii-wildberries-posle-udara">💸 Компенсации Wildberries после ударов</a>
-              <a href="/udar-po-skladu-ozon">📦 Удар по складу Ozon</a>
-              <a href="/skolko-skladov-wildberries-ozon" aria-current="page">📦 Сколько складов у ВБ и Озон</a>
-              <a href="/sgorel-sklad-wildberries-chto-delat">❓ Сгорел склад Wildberries: что делать</a>
-              <a href="/udar-sklad-wildberries-peterburg">📦 Удар по складу Wildberries в Петербурге</a>
-              <a href="/ceny-marketpleysy-posle-udarov">💸 Вырастут ли цены после ударов по складам</a>
-              <a href="/kakie-sklady-wildberries-ostalis">📋 Какие склады ВБ и Ozon остались</a>
-              <a href="/dolgi-wildberries-i-banki">🏦 Долги Wildberries и банки</a>
-              <a href="/chto-budet-s-zakazom-ozon-posle-udara">🛒 Что будет с заказом Ozon</a>
-              <a href="/mery-podderzhki-ozon-prodavcam-posle-udarov">🧾 Меры поддержки Ozon продавцам</a>
-            </details>
-            <details class="nav-drop-sub">
-              <summary>🏭 Справочники по НПЗ</summary>
-              <a href="/attacks">💥 Хроника ударов</a>
-              <a href="/refineries">🏭 Список НПЗ · все заводы</a>
-              <a href="/help">❓ Как пользоваться</a>
-              <a href="/metodologiya">🔬 Методология</a>
-              <a href="/krupnejshie-npz-rossii">🏭 Крупнейшие НПЗ России</a>
-              <a href="/npz-lukojla">🛢️ НПЗ Лукойла</a>
-              <a href="/npz-rosnefti">🛢️ НПЗ Роснефти</a>
-              <a href="/npz-gazprom-nefti">🛢️ НПЗ Газпром нефти</a>
-              <a href="/skorost-remonta-npz">🔧 Сколько восстанавливают НПЗ</a>
-            </details>
-            <div class="nav-drop-group">Карты</div>
-            <a href="/karta-benzina-krym">🗺️ Карта бензина Крым</a>
-            <a href="/karta-bpla">📡 Карта БПЛА</a>
-            <a href="/gde-est-benzin">🔎 Где есть бензин сейчас</a>
-            <a href="/karta-azs">⛽ Карта АЗС</a>
-            <a href="/azs-ryadom">📍 АЗС рядом со мной</a>
-            <a href="/karta-skladov-wildberries">🗺️ Карта складов Wildberries</a>
-            <details class="nav-drop-sub">
-              <summary>🏭 НПЗ по заводам</summary>
-              <a href="/npz/ns-oil">🛢️ NS-Oil (Новоспасское)</a>
-              <a href="/npz/angarskij-npz">🛢️ Ангарский НПЗ</a>
-              <a href="/npz/antipinskij-npz">🛢️ Антипинский НПЗ</a>
-              <a href="/npz/astrahanskij-gpz">🛢️ Астраханский ГПЗ</a>
-              <a href="/npz/afipskij-npz">🛢️ Афипский НПЗ</a>
-              <a href="/npz/achinskij-npz">🛢️ Ачинский НПЗ</a>
-              <a href="/npz/volgogradskij-npz">🛢️ Волгоградский НПЗ</a>
-              <a href="/npz/salavat-npz">🛢️ Газпром нефтехим Салават</a>
-              <a href="/npz/ilskij-npz">🛢️ Ильский НПЗ</a>
-              <a href="/npz/kinef">🛢️ Кинеф (Кириши)</a>
-              <a href="/npz/komsomolskij-npz">🛢️ Комсомольский НПЗ</a>
-              <a href="/npz/krasnodarskij-npz">🛢️ Краснодарский НПЗ</a>
-              <a href="/npz/kujbyshevskij-npz">🛢️ Куйбышевский НПЗ (Самара)</a>
-              <a href="/npz/lukojl-norsi">🛢️ Лукойл-НОРСИ (Кстово)</a>
-              <a href="/npz/lukojl-permnefteorgsintez">🛢️ Лукойл-Пермнефтеоргсинтез</a>
-              <a href="/npz/marijskij-npz">🛢️ Марийский НПЗ</a>
-              <a href="/npz/moskovskij-npz">🛢️ Московский НПЗ (Капотня)</a>
-              <a href="/npz/slavneft-yanos">🛢️ НПЗ ЯНОС (Ярославль)</a>
-              <a href="/npz/novokujbyshevskij-npz">🛢️ Новокуйбышевский НПЗ</a>
-              <a href="/npz/novoshahtinskij-npz">🛢️ Новошахтинский НПЗ</a>
-              <a href="/npz/omskij-npz">🛢️ Омский НПЗ</a>
-              <a href="/npz/orskij-npz">🛢️ Орский НПЗ</a>
-              <a href="/npz/ryazanskij-npz">🛢️ Рязанский НПЗ</a>
-              <a href="/npz/saratovskij-npz">🛢️ Саратовский НПЗ</a>
-              <a href="/npz/slavyanskij-npz">🛢️ Славянский НПЗ</a>
-              <a href="/npz/surgutskij-zsk">🛢️ Сургутский ЗСК</a>
-              <a href="/npz/syzranskij-npz">🛢️ Сызранский НПЗ</a>
-              <a href="/npz/taif-nk">🛢️ ТАИФ-НК (Нижнекамск)</a>
-              <a href="/npz/taneko-npz">🛢️ ТАНЕКО (Нижнекамск)</a>
-              <a href="/npz/tuapsinskij-npz">🛢️ Туапсинский НПЗ</a>
-              <a href="/npz/bashneft-ufa">🛢️ Уфимский НПЗ (Башнефть)</a>
-              <a href="/npz/uhtinskij-npz">🛢️ Ухтинский НПЗ</a>
-              <a href="/npz/habarovskij-npz">🛢️ Хабаровский НПЗ</a>
-              <a href="/npz/yajskij-npz">🛢️ Яйский НПЗ</a>
-            </details>
-            <a class="nav-drop-all" href="/analytics">📊 Все статьи · каталог →</a>
-          </div>
-        </div>
-        <a href="/sources">📚 Источники</a>
+        <a href="/analytics" style="color:var(--teal);font-weight:700">📊 Аналитика</a>
       </nav>
-      <button type="button" class="nav-search-btn" id="searchOpenBtn" title="Поиск по сайту" aria-label="Поиск по сайту">🔍</button>
     </div>
   </header>
 
@@ -493,6 +372,136 @@
       <p class="lead-p">У <strong>43 объектов</strong> из 75 в выборке проекта на 24 августа 2026 нет сообщений об ударе (14 Wildberries, 29 Ozon). Это не подтверждение того, что они работают в штатном режиме — лишь отсутствие сообщений об ударах по ним.</p>
       <a class="map-cta inline" href="/kakie-sklady-wildberries-ostalis"><span class="mc-ico">📋</span> Полный список уцелевших объектов: город, регион, оператор и федеральный округ →</a>
 
+      <section class="ozon-card" data-ozon-card="warehouses" aria-labelledby="ozon-card-title">
+        <div class="ozon-card-head"><div><p class="ozon-card-kicker">OZON · КРУПНЫЕ ФУЛФИЛМЕНТ-ЦЕНТРЫ</p><h2 id="ozon-card-title">Какие хабы Ozon отмечены в выборке проекта</h2></div><p>Актуально: <strong>2026-08-24</strong> · <strong>33</strong> объектов</p></div>
+        <div class="ozon-card-scroll"><svg class="ozon-card-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 1948" width="1060" height="1948" role="img" aria-label="33 объектов Ozon: 4 поражены, 29 без сообщений об ударе">
+          <style>.ozon-bg{fill:var(--surface)}.ozon-panel{stroke:var(--line);stroke-width:1}.ozon-panel.ozon-hit{fill:color-mix(in srgb,var(--red) 7%,var(--surface))}.ozon-panel.ozon-ok{fill:color-mix(in srgb,var(--teal) 7%,var(--surface))}.ozon-panel-title,.ozon-district,.ozon-date{font-family:var(--mono)}.ozon-panel-title{font-size:14px;font-weight:800;fill:var(--ink)}.ozon-district{font-size:11px;font-weight:800;fill:var(--ink-dim)}.ozon-item{stroke:var(--line);stroke-width:1;fill:var(--surface)}.ozon-item.ozon-hit{stroke:var(--red)}.ozon-item.ozon-ok{stroke:var(--teal)}.ozon-name{font-family:var(--disp);font-size:14px;font-weight:800;fill:var(--ink)}.ozon-region,.ozon-note{font-family:var(--disp);font-size:11px;fill:var(--ink-dim)}.ozon-date{font-size:11px;font-weight:800;fill:var(--red)}</style>
+          <rect class="ozon-bg" width="1060" height="1948" rx="12" /><text x="24" y="32" class="ozon-panel-title">33 КРУПНЫХ ОБЪЕКТОВ OZON</text><text x="24" y="56" class="ozon-region">Красным — подтверждённые поражения; нейтральным — объекты без сообщений об ударе.</text><text x="24" y="79" class="ozon-region">Для поражённых указаны дата и сведения из открытых данных проекта.</text>
+<rect x="24" y="112" width="490" height="501" rx="12" class="ozon-panel ozon-hit" />
+<text x="46" y="142" class="ozon-panel-title">ПОРАЖЕНЫ · 4</text>
+<text x="46" y="185" class="ozon-district">Южный ФО · 1</text>
+<rect x="46" y="201" width="446" height="70" rx="8" class="ozon-item ozon-hit" />
+<text x="58" y="219" class="ozon-name">Краснодар</text>
+<text x="58" y="236" class="ozon-date">2026-08-24</text>
+<text x="132" y="250" class="ozon-note">Пожар на складе Ozon после удара БПЛА,</text>
+<text x="132" y="264" class="ozon-note">работа приостановлена</text>
+<text x="46" y="302" class="ozon-district">Северо-Кавказский ФО · 1</text>
+<rect x="46" y="318" width="446" height="84" rx="8" class="ozon-item ozon-hit" />
+<text x="58" y="336" class="ozon-name">Махачкала</text>
+<text x="58" y="353" class="ozon-date">2026-08-24</text>
+<text x="132" y="367" class="ozon-note">Пожар после удара БПЛА, несколько</text>
+<text x="132" y="381" class="ozon-note">сотрудников получили лёгкие травмы, работа</text>
+<text x="132" y="395" class="ozon-note">склада остановлена</text>
+<text x="46" y="433" class="ozon-district">Приволжский ФО · 2</text>
+<rect x="46" y="449" width="446" height="70" rx="8" class="ozon-item ozon-hit" />
+<text x="58" y="467" class="ozon-name">Оренбург</text>
+<text x="58" y="484" class="ozon-date">2026-08-23</text>
+<text x="132" y="498" class="ozon-note">Пожар на логистическом комплексе Ozon в</text>
+<text x="132" y="512" class="ozon-note">Оренбурге от падения обломков БПЛА</text>
+<rect x="46" y="527" width="446" height="70" rx="8" class="ozon-item ozon-hit" />
+<text x="58" y="545" class="ozon-name">Самара (Чапаевск)</text>
+<text x="58" y="562" class="ozon-date">2026-08-22</text>
+<text x="132" y="576" class="ozon-note">Удар по логистическому центру Ozon в</text>
+<text x="132" y="590" class="ozon-note">Чапаевске</text>
+<rect x="546" y="112" width="490" height="1820" rx="12" class="ozon-panel ozon-ok" />
+<text x="568" y="142" class="ozon-panel-title">БЕЗ СООБЩЕНИЙ ОБ УДАРЕ · 29</text>
+<text x="568" y="185" class="ozon-district">Центральный ФО · 11</text>
+<rect x="568" y="201" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="219" class="ozon-name">Воронеж</text>
+<text x="580" y="235" class="ozon-region">Воронежская область</text>
+<rect x="568" y="251" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="269" class="ozon-name">Ватутинки</text>
+<text x="580" y="285" class="ozon-region">Москва</text>
+<rect x="568" y="301" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="319" class="ozon-name">Гривно</text>
+<text x="580" y="335" class="ozon-region">Московская область</text>
+<rect x="568" y="351" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="369" class="ozon-name">Домодедово (Кучино)</text>
+<text x="580" y="385" class="ozon-region">Московская область</text>
+<rect x="568" y="401" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="419" class="ozon-name">Жуковский</text>
+<text x="580" y="435" class="ozon-region">Московская область</text>
+<rect x="568" y="451" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="469" class="ozon-name">Ногинск (Обухово)</text>
+<text x="580" y="485" class="ozon-region">Московская область</text>
+<rect x="568" y="501" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="519" class="ozon-name">Пушкино-1</text>
+<text x="580" y="535" class="ozon-region">Московская область</text>
+<rect x="568" y="551" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="569" class="ozon-name">Пушкино-2</text>
+<text x="580" y="585" class="ozon-region">Московская область</text>
+<rect x="568" y="601" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="619" class="ozon-name">Софьино</text>
+<text x="580" y="635" class="ozon-region">Московская область</text>
+<rect x="568" y="651" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="669" class="ozon-name">Хоругвино</text>
+<text x="580" y="685" class="ozon-region">Московская область</text>
+<rect x="568" y="701" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="719" class="ozon-name">Тверь (Боровлёво)</text>
+<text x="580" y="735" class="ozon-region">Тверская область</text>
+<text x="568" y="774" class="ozon-district">Северо-Западный ФО · 4</text>
+<rect x="568" y="790" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="808" class="ozon-name">СПб Бугры</text>
+<text x="580" y="824" class="ozon-region">Ленинградская область</text>
+<rect x="568" y="840" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="858" class="ozon-name">СПб Колпино</text>
+<text x="580" y="874" class="ozon-region">Санкт-Петербург</text>
+<rect x="568" y="890" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="908" class="ozon-name">СПб Шушары</text>
+<text x="580" y="924" class="ozon-region">Санкт-Петербург</text>
+<rect x="568" y="940" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="958" class="ozon-name">Санкт-Петербург (Петро-Славянка)</text>
+<text x="580" y="974" class="ozon-region">Санкт-Петербург</text>
+<text x="568" y="1013" class="ozon-district">Южный ФО · 4</text>
+<rect x="568" y="1029" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1047" class="ozon-name">Волгоград (Гумрак)</text>
+<text x="580" y="1063" class="ozon-region">Волгоградская область</text>
+<rect x="568" y="1079" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1097" class="ozon-name">Краснодар-2 (Дружный)</text>
+<text x="580" y="1113" class="ozon-region">Краснодарский край</text>
+<rect x="568" y="1129" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1147" class="ozon-name">Адыгейск</text>
+<text x="580" y="1163" class="ozon-region">Республика Адыгея</text>
+<rect x="568" y="1179" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1197" class="ozon-name">Ростов-на-Дону</text>
+<text x="580" y="1213" class="ozon-region">Ростовская область</text>
+<text x="568" y="1252" class="ozon-district">Северо-Кавказский ФО · 1</text>
+<rect x="568" y="1268" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1286" class="ozon-name">Невинномысск</text>
+<text x="580" y="1302" class="ozon-region">Ставропольский край</text>
+<text x="568" y="1341" class="ozon-district">Приволжский ФО · 5</text>
+<rect x="568" y="1357" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1375" class="ozon-name">Нижний Новгород (Дзержинск)</text>
+<text x="580" y="1391" class="ozon-region">Нижегородская область</text>
+<rect x="568" y="1407" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1425" class="ozon-name">Оренбург (Тихая)</text>
+<text x="580" y="1441" class="ozon-region">Оренбургская область</text>
+<rect x="568" y="1457" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1475" class="ozon-name">Пермь (Култаево)</text>
+<text x="580" y="1491" class="ozon-region">Пермский край</text>
+<rect x="568" y="1507" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1525" class="ozon-name">Уфа (Благовещенск)</text>
+<text x="580" y="1541" class="ozon-region">Республика Башкортостан</text>
+<rect x="568" y="1557" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1575" class="ozon-name">Казань (Зеленодольск)</text>
+<text x="580" y="1591" class="ozon-region">Татарстан</text>
+<text x="568" y="1630" class="ozon-district">Уральский ФО · 1</text>
+<rect x="568" y="1646" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1664" class="ozon-name">Екатеринбург (Кольцовский)</text>
+<text x="580" y="1680" class="ozon-region">Свердловская область</text>
+<text x="568" y="1719" class="ozon-district">Сибирский ФО · 2</text>
+<rect x="568" y="1735" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1753" class="ozon-name">Красноярск</text>
+<text x="580" y="1769" class="ozon-region">Красноярский край</text>
+<rect x="568" y="1785" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1803" class="ozon-name">Новосибирск (Толмачёво)</text>
+<text x="580" y="1819" class="ozon-region">Новосибирская область</text>
+<text x="568" y="1858" class="ozon-district">Дальневосточный ФО · 1</text>
+<rect x="568" y="1874" width="446" height="42" rx="8" class="ozon-item ozon-ok" />
+<text x="580" y="1892" class="ozon-name">Хабаровск</text>
+<text x="580" y="1908" class="ozon-region">Хабаровский край</text>
+        </svg></div><p class="ozon-card-caption">Выборка проекта: крупные фулфилмент-центры Ozon, сгруппированные по федеральным округам. «Без сообщений об ударе» не означает подтверждённую штатную работу.</p>
+      </section>
       <h2 class="section-h"><span class="ico">🗺</span> Что показано на карте</h2>
       <p class="lead-p">На слое «Склады ВБ/Озон» нанесены <strong>75 крупных объекта</strong>: 42 распределительных центров Wildberries и 33 фулфилмент-центров Ozon. Поражённые ударами отмечены <strong>красным</strong> с пульсацией, остальные — фирменным цветом сети: по ним в этом наборе удары не зафиксированы, что не является утверждением о том, что склад работает. В карточке каждого поражённого объекта — дата удара и ссылка на источник.</p>
       <p class="lead-p">Это <strong>выборка крупных объектов</strong>, а не полная сеть: сортировочные центры и пункты выдачи на карту не наносятся — достоверного открытого датасета по ним нет, а на карте страны они превратились бы в сплошное пятно. Координаты складов получены геокодированием открытых адресов через OpenStreetMap и для части объектов указывают на населённый пункт, а не на конкретное здание.</p>
@@ -586,7 +595,7 @@
     const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.dataset.theme = saved;
   </script>
-  <script defer src="/nav-dropdown.js?v=88bd76bb"></script>
-  <script defer src="/vpn-nudge.js?v=06b2ba89"></script>
+  <script defer src="/nav-dropdown.js?v=06476ddc"></script>
+  <script defer src="/vpn-nudge.js?v=75a0afd9"></script>
 </body>
 </html>

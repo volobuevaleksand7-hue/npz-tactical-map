@@ -277,6 +277,12 @@ def build():
         json.dumps({"@type": "Question", "name": q,
                     "acceptedAnswer": {"@type": "Answer", "text": a}}, ensure_ascii=False)
         for q, a in faq)
+    # Карточка Ozon — отдельный генератор, читает тот же датасет.
+    import importlib.util as _ilu, os as _os
+    _spec = _ilu.spec_from_file_location("gen_ozon_card",
+        _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "gen-ozon-card.py"))
+    _card = _ilu.module_from_spec(_spec); _spec.loader.exec_module(_card)
+    OZON_CARD = _card.build()
     RANK_BLOCK = warehouse_rank_section(wh, UPDATED)
     OK_BLOCK = warehouse_ok_summary(wh, UPDATED, SURVIVORS_URL)
     faq_html = "\n".join(
@@ -391,6 +397,14 @@ def build():
     .link-card .lc-d{{font-size:11px;color:var(--ink-dim)}}
     .osint-note{{margin-top:32px;font-size:11px;color:var(--ink-dim);background:var(--surface2);padding:12px;border-radius:10px;border-left:3px solid var(--amber);line-height:1.6}}
     .updated-line{{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:6px}}
+    .ozon-card{{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}}
+    .ozon-card-head{{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px}}
+    .ozon-card-kicker{{font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.4px;color:var(--teal);margin:0 0 4px}}
+    .ozon-card-head h2{{font-size:19px;font-weight:800;margin:0}}
+    .ozon-card-head p{{font-size:12px;color:var(--ink-dim);margin:0}}
+    .ozon-card-scroll{{overflow-x:auto}}
+    .ozon-card-svg{{display:block;min-width:1060px}}
+    .ozon-card-caption{{font-size:11px;color:var(--ink-dim);margin:12px 0 0;line-height:1.6}}
     .balance-box{{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--red,#d23a2e);border-radius:10px;padding:16px 18px;margin:18px 0;font-size:13.5px;line-height:1.7}}
     .wh-rank-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}}
     .wh-rank-card{{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}}
@@ -491,6 +505,7 @@ def build():
 
       <h2 class="section-h"><span class="ico">📋</span> Какие склады Wildberries и Ozon остались</h2>
 {OK_BLOCK}
+{OZON_CARD}
       <h2 class="section-h"><span class="ico">🗺</span> Что показано на карте</h2>
       <p class="lead-p">На слое «Склады ВБ/Озон» нанесены <strong>{len(wh)} крупных объекта</strong>: {wb_n} распределительных центров Wildberries и {oz_n} фулфилмент-центров Ozon. Поражённые ударами отмечены <strong>красным</strong> с пульсацией, остальные — фирменным цветом сети: по ним в этом наборе удары не зафиксированы, что не является утверждением о том, что склад работает. В карточке каждого поражённого объекта — дата удара и ссылка на источник.</p>
       <p class="lead-p">Это <strong>выборка крупных объектов</strong>, а не полная сеть: сортировочные центры и пункты выдачи на карту не наносятся — достоверного открытого датасета по ним нет, а на карте страны они превратились бы в сплошное пятно. Координаты складов получены геокодированием открытых адресов через OpenStreetMap и для части объектов указывают на населённый пункт, а не на конкретное здание.</p>
