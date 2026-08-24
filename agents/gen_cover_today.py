@@ -1,11 +1,40 @@
 #!/usr/bin/env python3
 """Generate today's cover using smart city selection from strikes.json.
 Uses PIL fallback when image_gen (Codex) is unavailable (429)."""
-import sys, os
+import sys, os, re
 sys.path.insert(0, os.path.dirname(__file__))
 from caption_cover import pick_top_strike, caption_cover
 from PIL import Image, ImageDraw, ImageFont
 import platform as _plat
+
+DOMAIN_RE = re.compile(r"нпз|завод|склад|логист|терминал|нефт|топлив|нефтебаз|резервуар|азс", re.I)
+
+
+def _cover_caption(target, limit=60):
+    """Короткая подпись для обложки из описания цели.
+
+    Из перечисления через запятую берём первую часть по профилю проекта (топливо и
+    логистика); если такой нет — первую вообще. Режем по границе слова, а не по букве.
+    """
+    parts = [x.strip() for x in str(target).split(",") if x.strip()]
+    if not parts:
+        return ""
+    pick = next((x for x in parts if DOMAIN_RE.search(x)), parts[0])
+    if len(pick) <= limit:
+        return pick
+    return pick[:limit].rsplit(" ", 1)[0].rstrip(" ,;:-—") + "\u2026"
+
+
+def demo():
+    assert _cover_caption("частный детский центр, жилые многоквартирные дома, "
+                          "логистический центр Ozon") == "логистический центр Ozon"
+    assert _cover_caption("НПЗ Лукойл") == "НПЗ Лукойл"
+    assert _cover_caption("") == ""
+    long_ = _cover_caption("склад " + "очень " * 40)
+    assert len(long_) <= 61 and long_.endswith("\u2026") and " " in long_, long_
+    assert not long_.rstrip("\u2026").endswith(" "), long_
+    print("gen_cover_today demo OK")
+
 
 W, H = 1200, 630
 BG = (15, 20, 35)
@@ -80,17 +109,22 @@ def generate_cover_auto():
         sys.exit(1)
 
     city = strike["city"]
-    # Truncate long target descriptions for cover
-    target = strike["target"]
-    if len(target) > 60:
-        target = target[:57] + "..."
-    event = target
+    # Подпись на обложке — не сырой target. 24.08 удар по Краснодару описан как
+    # «частный детский центр, жилые многоквартирные дома, логистический центр Ozon»,
+    # и слепая обрезка по 57 символам дала на промо-картинке «частный детский центр,
+    # жилые многоквартирные дома, логист...» — оборвано на полуслове и мрачно.
+    # Берём часть перечисления по профилю проекта (топливо и логистика), режем по слову.
+    event = _cover_caption(strike["target"])
     date_str = strike["date"]  # "2026-07-06"
 
     # Format date for display
     from datetime import datetime
     dt = datetime.strptime(date_str, "%Y-%m-%d")
-    months = {6: "июня", 7: "июля"}
+    # 🔴 Было {6: "июня", 7: "июля"} — остальные месяцы падали в str(dt.month), и с
+    # 1 августа обложки уходили с датой «24 8 2026» вместо «24 августа 2026».
+    months = {1: "января", 2: "февраля", 3: "марта", 4: "апреля", 5: "мая", 6: "июня",
+              7: "июля", 8: "августа", 9: "сентября", 10: "октября", 11: "ноября",
+              12: "декабря"}
     date_rus = f"{dt.day} {months.get(dt.month, str(dt.month))} {dt.year}"
 
     print(f"Selected: {city} | {event} | {date_rus}")
@@ -114,4 +148,9 @@ def generate_cover_auto():
 
 
 if __name__ == "__main__":
+    if "--demo" in sys.argv:
+        demo()
+        sys.exit(0)
+
     generate_cover_auto()
+
