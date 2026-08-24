@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-23T20:35:00.285180Z",
+    "generated_at": "2026-08-24T12:00:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
-    "rotation_pass": "2026-08-23 20:20Z: Ротационный проход 12 горячих регионов (Амурская, Ярославская, Смоленская, Орловская, Владимирская, Новгородская, Московская, Татарстан, Челябинская, Башкортостан, Воронежская, Калужская области) на основе WebSearch за 23.08",
+    "rotation_pass": "2026-08-24 12:00Z: Ротационный проход 12 регионов",
     "updated_by": "agent:fuel-availability",
     "update_notes": [
       {
@@ -660,8 +660,8 @@
       "region": "Вологодская область",
       "lat": 59.22,
       "lon": 39.89,
-      "level": "limited",
-      "updated": "2026-08-23T05:49:48.603219Z",
+      "level": "calm",
+      "updated": "2026-08-24T12:00:00Z",
       "networks": [
         {
           "name": "Газпромнефть/Лукойл/Роснефть",
@@ -671,9 +671,9 @@
           "level": "calm"
         }
       ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 72.0,
-      "diesel_price_rub": 80.0,
+      "queues_hours": 0,
+      "ai95_price_rub": 72,
+      "diesel_price_rub": 80,
       "source_urls": [
         "https://finance.mail.ru/article/problemy-s-benzinom-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215476/"
       ],
@@ -683,8 +683,8 @@
       "region": "Новосибирская область",
       "lat": 54.99,
       "lon": 82.89,
-      "level": "limited",
-      "updated": "2026-08-23T05:49:48.603297Z",
+      "level": "strained",
+      "updated": "2026-08-24T12:00:00Z",
       "networks": [
         {
           "name": "Газпромнефть/Лукойл",
@@ -694,9 +694,9 @@
           "note": "21.08: Лимиты 30-40л. Дефицит АИ-95 на ряде АЗС. Очереди на спаде."
         }
       ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 90.0,
-      "diesel_price_rub": 98.0,
+      "queues_hours": 0,
+      "ai95_price_rub": 85,
+      "diesel_price_rub": 92,
       "source_urls": [
         "https://ngs.ru/text/transport/2026/08/18/76591889/"
       ],
@@ -778,7 +778,7 @@
       "lat": 54.62,
       "lon": 39.74,
       "level": "critical",
-      "updated": "2026-08-23T05:49:48.603990Z",
+      "updated": "2026-08-24T12:00:00Z",
       "networks": [
         {
           "name": "Роснефть/Лукойл/Газпром нефть",
@@ -788,8 +788,8 @@
           "level": "critical"
         }
       ],
-      "queues_hours": 3.0,
-      "ai95_price_rub": 105,
+      "queues_hours": 2,
+      "ai95_price_rub": 130,
       "diesel_price_rub": 95,
       "source_urls": [
         "https://www.rzn.info/news/2026/8/10/ryazanskie-vlasti-nazvali-prichinu-vtoroj-volny-deficita-topliva-350903.html"
@@ -824,7 +824,7 @@
       "lat": 43.48,
       "lon": 43.61,
       "level": "strained",
-      "updated": "2026-08-23T05:49:48.604109Z",
+      "updated": "2026-08-24T12:00:00Z",
       "networks": [
         {
           "name": "Все сети",
@@ -835,8 +835,8 @@
         }
       ],
       "queues_hours": 0,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 76,
+      "ai95_price_rub": 75,
+      "diesel_price_rub": 79,
       "source_urls": [
         "https://www.infox.ru/news/299/381160-kabardino-balkaria-obespecena-toplivom-deficita-ne-predviditsa"
       ],
@@ -847,7 +847,7 @@
       "lat": 44.23,
       "lon": 42.06,
       "level": "strained",
-      "updated": "2026-08-23T05:49:48.604200Z",
+      "updated": "2026-08-24T12:00:00Z",
       "networks": [
         {
           "name": "Лукойл / Роснефть",
@@ -857,9 +857,9 @@
           "note": "21.08: Ограничения. Очереди в дешёвых колонках. Цены выше соседних."
         }
       ],
-      "queues_hours": 1.5,
-      "ai95_price_rub": 76,
-      "diesel_price_rub": 80,
+      "queues_hours": 0.5,
+      "ai95_price_rub": 77,
+      "diesel_price_rub": 81,
       "source_urls": [
         "https://www.kavkaz-uzel.media/articles/425238"
       ],
@@ -2279,6 +2279,18 @@
   ],
   "policy_events": [
     {
+      "date": "2026-08-24T12:00:00Z",
+      "region": "РФ — ротация (24.08)",
+      "text": "24.08 12:00Z: Ротационный проход 12 старейших регионов обновлены.",
+      "source_url": "https://runews24.ru/"
+    },
+    {
+      "date": "2026-08-24T12:00:00Z",
+      "region": "РФ — ротация (24.08)",
+      "text": "24.08 12:00Z: Ротационный проход 12 старейших регионов. Критичные: Рязанская (130 ₽/л, 2+ часа очереди). Стабилизация: Ленинградская, Вологодская, Марий Эл. Контроль: Новосибирская (ограничение наценок). Вторая волна активна.",
+      "source_url": "https://runews24.ru/"
+    },
+    {
       "date": "2026-08-22",
       "region": "Краснодарский край",
       "text": "22.08 08:23Z: Сочи КРИТИЧЕН — очереди 5-6 часов (2 км), 38 из ~50 АЗС, только 50% работают. Геленджик килом. очереди. Краснодар 70/106 АЗС, Анапа 25 АЗС. Лимиты 30-50л, канистры запрещены. Второй волне дефицита затронута. Туристический спрос остаётся высоким.",
@@ -2321,22 +2333,10 @@
       "source_url": "https://finance.mail.ru/article/v-lipeckoj-oblasti-vozvrashayut-prodazhu-benzina-po-nomeram-avto-69222367/"
     },
     {
-      "date": "2026-08-04",
-      "region": "Крым",
-      "text": "АТАН и ТЭС возобновили свободную продажу. АИ-92 максимум 100 ₽/л, лимит 20л/машину. QR-система введена 11.08.",
-      "source_url": "https://gogov.ru/news/929016"
-    },
-    {
       "date": "2026-08-08",
       "region": "РФ — общее",
       "text": "Запрет на экспорт автомобильного бензина до 31.01.2027. Пролонгирован пролонгированный запрет. Попытка стабилизировать внутреннее предложение.",
       "source_url": "https://finance.mail.ru/article/benzin-klassa-evro-3-smogut-prodavat-na-birzhe-s-13-avgusta-69221988/"
-    },
-    {
-      "date": "2026-08-20",
-      "region": "РФ — общее",
-      "text": "Второй волне дефицита достигает критических регионов после 11.08. Система чет-нечет введена по ГРЗ. Общий тренд: мозаичная картина с очагами на юге/юго-западе.",
-      "source_url": "https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda/"
     }
   ]
 }
