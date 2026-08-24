@@ -63,6 +63,25 @@
       "last_event_ts": 1787581541,
       "source_text": "24.08.2026 17:25 МСК\nКача, Бельбек, Северная Севастополь и близлежащие опасность по БПЛА с моря и с МРШ"
     },
+    "Рязанская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1787585940,
+      "source_text": "24.08.2026 18:39 МСК\nРязанская область Опасность по БПЛА"
+    },
     "Запорожская область": {
       "bpla": false,
       "bplaDim": false,
@@ -81,6 +100,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1787572631,
       "source_text": "24.08.2026 14:57 МСК\nСевер Бердянск и трассы тревога по БПЛА Хорнет"
+    },
+    "Тамбовская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1787585832,
+      "source_text": "24.08.2026 18:37 МСК\nТамбовская область Опасность по БПЛА"
     },
     "Белгородская область": {
       "bpla": false,
@@ -255,28 +293,6 @@
     }
   },
   "cities": [
-    {
-      "key": "алчевск|луганская народная республика",
-      "name": "Алчевск",
-      "lat": 48.46893,
-      "lon": 38.81669,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787583229,
-      "source_text": "24.08.2026 17:53 МСК\nАлчевск Луганск и близлежащие Тревога по БПЛА ЛНР"
-    },
     {
       "key": "симферополь|автономная республика крым",
       "name": "Симферополь",
@@ -1114,28 +1130,6 @@
       "source_text": "24.08.2026 10:18 МСК\nДжанкой - Воинка /Красноперекопск трасса тревога по БПЛА Хорнет"
     },
     {
-      "key": "луганск|луганская народная республика",
-      "name": "Луганск",
-      "lat": 48.56814,
-      "lon": 39.30553,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787583229,
-      "source_text": "24.08.2026 17:53 МСК\nАлчевск Луганск и близлежащие Тревога по БПЛА ЛНР"
-    },
-    {
       "key": "маслова пристань|белгородская область",
       "name": "Маслова Пристань",
       "lat": 50.45758,
@@ -1548,6 +1542,38 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 85323,
+      "text": "Рязанская область\nОпасность по БПЛА",
+      "ts": 1787585940,
+      "time_label": "24.08.2026 18:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 85322,
+      "text": "Тамбовская область\nОпасность по БПЛА",
+      "ts": 1787585832,
+      "time_label": "24.08.2026 18:37 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 266064,
+      "text": "Запорожская область РФ, ЛДНР\nАвиационная ракетная бомбовая опасность",
+      "ts": 1787585543,
+      "time_label": "24.08.2026 18:32 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266063,
+      "text": "Алчевск\nЛуганск и близлежащие\nЛНР\nОтбой тревоги по БПЛА",
+      "ts": 1787585425,
+      "time_label": "24.08.2026 18:30 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 266062,
       "text": "Горловка запад БПЛА\nВнимание всем по сбросам и ФПВ",
@@ -2155,38 +2181,6 @@
       "time_label": "24.08.2026 12:41 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265997,
-      "text": "Рыльск и близлежащие опасность по БПЛА\nКурская область",
-      "ts": 1787564481,
-      "time_label": "24.08.2026 12:41 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265996,
-      "text": "Раздольное и близлежащие\nТревога по БПЛА\nРеспублика Крым",
-      "ts": 1787564451,
-      "time_label": "24.08.2026 12:40 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 85313,
-      "text": "Благодарим тех кто участвует в сборе\n❤️\nСобрано:  80.973 из 190.000₽\n+25.000 на материалы для строительства блиндажей МОГ республики Адыгея\nСсылки для перевода:\nhttps://pay.cloudtips.ru/p/0376bf3f\nhttps://yoomoney.ru/fundraise/1H7FOEKHABB.260418",
-      "ts": 1787564102,
-      "time_label": "24.08.2026 12:35 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 265995,
-      "text": "Раздольненский район\nЧерноморский район и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1787563953,
-      "time_label": "24.08.2026 12:32 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2196,15 +2190,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787584315,
-  "last_event_at": "2026-08-24T15:11:55Z",
-  "fetched_at": "2026-08-24T15:30:03.161498Z",
+  "timestamp": 1787585940,
+  "last_event_at": "2026-08-24T15:39:00Z",
+  "fetched_at": "2026-08-24T15:40:02.479931Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-24T15:30:03.161498Z",
-    "source_age_seconds": 1088,
-    "city_count": 47,
-    "region_count": 13,
+    "generated_at": "2026-08-24T15:40:02.479931Z",
+    "source_age_seconds": 62,
+    "city_count": 45,
+    "region_count": 15,
     "feed_count": 80
   }
 }
