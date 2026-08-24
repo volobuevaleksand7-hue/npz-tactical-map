@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-08-24T12:41:07Z",
+  "generated_at": "2026-08-24T18:41:18Z",
   "scope": "Крупные распределительные центры Wildberries и фулфилмент-центры Ozon. Отметка поражения — только удары БПЛА и ракет.",
   "geocoder": "Nominatim / OpenStreetMap (ODbL)",
   "network": {
@@ -18,8 +18,8 @@
   },
   "counts": {
    "total": 75,
-   "hit": 32,
-   "burned": 24
+   "hit": 35,
+   "burned": 26
   }
  },
  "warehouses": [
@@ -32,7 +32,11 @@
    "type": "ffc",
    "lat": 44.88338,
    "lon": 39.19096,
-   "status": "ok"
+   "status": "hit",
+   "date": "2026-08-24",
+   "damage": "burned",
+   "note": "Удар БПЛА по складу Ozon в Адыгейске",
+   "source_url": "https://iz.ru/2153851/2026-08-24/logisticheskii-tcentr-ozon-zagorelsia-v-adygee-v-rezultate-ataki-vsu"
   },
   {
    "id": "ozon-ватутинки",
@@ -183,7 +187,11 @@
    "type": "ffc",
    "lat": 44.62458,
    "lon": 41.94759,
-   "status": "ok"
+   "status": "hit",
+   "date": "2026-08-24",
+   "damage": "hit",
+   "note": "Атака БПЛА на склад Ozon в Невинномысске",
+   "source_url": "https://bloknot-stavropol.ru/news/ozon-pod-pritselom-24-avgusta-stavropole-provelo-n-2003357"
   },
   {
    "id": "ozon-нижний-новгород-дзержинск",
@@ -346,7 +354,18 @@
    "type": "ffc",
    "lat": 59.78963,
    "lon": 30.49532,
-   "status": "ok"
+   "status": "hit",
+   "date": "2026-08-23",
+   "damage": "burned",
+   "note": "Пожар на складе в Колпино",
+   "source_url": "https://www.fontanka.ru/2026/08/24/76603577/",
+   "merged_strikes": [
+    {
+     "city": "Санкт-Петербург",
+     "date": "2026-07-25",
+     "source_url": "https://eadaily.com/ru/news/2026/07/25/v-sankt-peterburge-potushen-voznikshiy-posle-udara-dronov-pozhar"
+    }
+   ]
   },
   {
    "id": "ozon-софьино",
@@ -669,14 +688,7 @@
    "damage": "burned",
    "note": "логистический центр Wildberries",
    "source_url": "https://t.me/exilenova_plus",
-   "from_strike": true,
-   "merged_strikes": [
-    {
-     "city": "Санкт-Петербург",
-     "date": "2026-07-25",
-     "source_url": "https://eadaily.com/ru/news/2026/07/25/v-sankt-peterburge-potushen-voznikshiy-posle-udara-dronov-pozhar"
-    }
-   ]
+   "from_strike": true
   },
   {
    "id": "wb-новосибирск",
