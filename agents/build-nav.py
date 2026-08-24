@@ -155,6 +155,7 @@ LABELS = {
     "/udar-po-skladam-wildberries":       ("📦", "Удар по складам Wildberries"),
     "/ataki-na-sklady-wildberries-hronika": ("🗓", "Атаки на склады Wildberries: хроника"),
     "/kompensacii-wildberries-posle-udara": ("💸", "Компенсации Wildberries после ударов"),
+    "/dolgi-wildberries-i-banki": ("🏦", "Долги Wildberries и банки"),
     "/raketnaya-opasnost-tambovskaya-oblast": ("🚀", "Ракетная опасность: Тамбовская обл."),
     "/raketnaya-opasnost-sverdlovskaya-oblast": ("🚀", "Ракетная опасность: Свердловская обл."),
     "/raketnaya-opasnost-rostovskaya-oblast": ("🚀", "Ракетная опасность: Ростовская обл."),
