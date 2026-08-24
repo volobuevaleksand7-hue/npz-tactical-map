@@ -82,25 +82,6 @@
       "last_event_ts": 1787589226,
       "source_text": "24.08.2026 19:33 МСК\nНижегородская область Внимание по БПЛА"
     },
-    "Рязанская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1787586146,
-      "source_text": "24.08.2026 18:42 МСК\nРязанская область Опасность по БПЛА от РСЧС Мы пока не понимаем с чем связано"
-    },
     "Запорожская область": {
       "bpla": false,
       "bplaDim": false,
@@ -269,8 +250,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787581234,
-      "source_text": "24.08.2026 17:20 МСК\nПриграничные районы Брянской области, Курской области, Белгородской области - опасность по БПЛА сохраняется. Приморско-Ахтарский район, Брюховецкий район, Ейский район, Каневской район, Щербиновский район, Краснодарский край - опасность по БПЛА сохраняется. По остальным регионам пока тихо. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1787591279,
+      "source_text": "24.08.2026 20:07 МСК\nПричерноморье Краснодарского края, ЮБК Феодосия и близлежащие опасность по БПЛА, идущих в обход Крыма"
     },
     "Воронежская область": {
       "bpla": false,
@@ -550,6 +531,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1787589840,
       "source_text": "24.08.2026 19:44 МСК\nГорловка опасность по БПЛА и ФПВ повторно, ещё фиксации"
+    },
+    {
+      "key": "причерноморье|краснодарский край",
+      "name": "Причерноморье",
+      "lat": 44.157515,
+      "lon": 37.831548,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787591279,
+      "source_text": "24.08.2026 20:07 МСК\nПричерноморье Краснодарского края, ЮБК Феодосия и близлежащие опасность по БПЛА, идущих в обход Крыма"
     },
     {
       "key": "мелитополь|запорожская область",
@@ -1625,6 +1628,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 85327,
+      "text": "Рязанская область\nОтбой опасности по БПЛА",
+      "ts": 1787591344,
+      "time_label": "24.08.2026 20:09 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 266084,
+      "text": "Причерноморье  Краснодарского края,\nЮБК\nФеодосия и близлежащие опасность по БПЛА, идущих в обход Крыма",
+      "ts": 1787591279,
+      "time_label": "24.08.2026 20:07 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 266083,
       "text": "Горловка опасность по БПЛА и ФПВ повторно, ещё фиксации",
       "ts": 1787589840,
@@ -2247,22 +2266,6 @@
       "time_label": "24.08.2026 13:27 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 266016,
-      "text": "Анапский район и близлежащие районы внимание по БПЛА с Чёрного моря",
-      "ts": 1787567079,
-      "time_label": "24.08.2026 13:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 266015,
-      "text": "Пологи и близлежащие УАБы\nЗапорожская область РФ",
-      "ts": 1787566674,
-      "time_label": "24.08.2026 13:17 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2272,15 +2275,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787589840,
-  "last_event_at": "2026-08-24T16:44:00Z",
-  "fetched_at": "2026-08-24T17:00:03.390031Z",
+  "timestamp": 1787591344,
+  "last_event_at": "2026-08-24T17:09:04Z",
+  "fetched_at": "2026-08-24T17:10:02.346085Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-24T17:00:03.390031Z",
-    "source_age_seconds": 963,
-    "city_count": 47,
-    "region_count": 17,
+    "generated_at": "2026-08-24T17:10:02.346085Z",
+    "source_age_seconds": 58,
+    "city_count": 48,
+    "region_count": 16,
     "feed_count": 80
   }
 }
