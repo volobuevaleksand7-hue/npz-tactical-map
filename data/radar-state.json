@@ -101,6 +101,25 @@
       "last_event_ts": 1787581687,
       "source_text": "24.08.2026 17:28 МСК\nМаслова Пристань и близлежащие Шебекинский район Тревога по БПЛА"
     },
+    "Луганская Народная Республика": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1787583229,
+      "source_text": "24.08.2026 17:53 МСК\nАлчевск Луганск и близлежащие Тревога по БПЛА ЛНР"
+    },
     "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
@@ -236,6 +255,28 @@
     }
   },
   "cities": [
+    {
+      "key": "алчевск|луганская народная республика",
+      "name": "Алчевск",
+      "lat": 48.46893,
+      "lon": 38.81669,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787583229,
+      "source_text": "24.08.2026 17:53 МСК\nАлчевск Луганск и близлежащие Тревога по БПЛА ЛНР"
+    },
     {
       "key": "симферополь|автономная республика крым",
       "name": "Симферополь",
@@ -1095,6 +1136,28 @@
       "source_text": "24.08.2026 10:18 МСК\nДжанкой - Воинка /Красноперекопск трасса тревога по БПЛА Хорнет"
     },
     {
+      "key": "луганск|луганская народная республика",
+      "name": "Луганск",
+      "lat": 48.56814,
+      "lon": 39.30553,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787583229,
+      "source_text": "24.08.2026 17:53 МСК\nАлчевск Луганск и близлежащие Тревога по БПЛА ЛНР"
+    },
+    {
       "key": "маслова пристань|белгородская область",
       "name": "Маслова Пристань",
       "lat": 50.45758,
@@ -1529,6 +1592,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 266061,
+      "text": "Алчевск\nЛуганск и близлежащие\nТревога по БПЛА\nЛНР",
+      "ts": 1787583229,
+      "time_label": "24.08.2026 17:53 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266060,
+      "text": "Славяносербск над трассой Хорнет\nЛНР",
+      "ts": 1787582979,
+      "time_label": "24.08.2026 17:49 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 266059,
       "text": "Горловка Гурты БПЛА Хорнет в направлении Углегорск, Дебальцево\nДНР",
@@ -2152,22 +2231,6 @@
       "time_label": "24.08.2026 12:32 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265993,
-      "text": "Дорога\nПриазовское - Приморск\nТревога  по БПЛА Хорнет\nЗапорожская область РФ",
-      "ts": 1787563807,
-      "time_label": "24.08.2026 12:30 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265992,
-      "text": "Дебальцево, Углегорск, Енакиево ДНР и близлежащие\nОпасность по БПЛА",
-      "ts": 1787563805,
-      "time_label": "24.08.2026 12:30 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2177,15 +2240,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787582948,
-  "last_event_at": "2026-08-24T14:49:08Z",
-  "fetched_at": "2026-08-24T14:50:02.611919Z",
+  "timestamp": 1787583229,
+  "last_event_at": "2026-08-24T14:53:49Z",
+  "fetched_at": "2026-08-24T15:00:03.178980Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-24T14:50:02.611919Z",
-    "source_age_seconds": 54,
-    "city_count": 46,
-    "region_count": 12,
+    "generated_at": "2026-08-24T15:00:03.178980Z",
+    "source_age_seconds": 374,
+    "city_count": 48,
+    "region_count": 13,
     "feed_count": 80
   }
 }
