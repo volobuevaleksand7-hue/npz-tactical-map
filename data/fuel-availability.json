@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-24T12:00:00Z",
+    "generated_at": "2026-08-24T12:23:51Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
-    "rotation_pass": "2026-08-24 12:00Z: Ротационный проход 12 регионов",
+    "rotation_pass": "2026-08-24 12:23Z: Ротационный проход горячих регионов + WebSearch",
     "updated_by": "agent:fuel-availability",
     "update_notes": [
       {
@@ -92,11 +92,11 @@
     ]
   },
   "exchange": {
-    "ai95_spb_rub_t": 63400,
-    "ai92_spb_rub_t": 61800,
-    "diesel_spb_rub_t": 60300,
+    "ai95_spb_rub_t": 63500,
+    "ai92_spb_rub_t": 61900,
+    "diesel_spb_rub_t": 60400,
     "trend": "stable",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-24T12:23:51Z",
     "source_url": "https://www.kommersant.ru/doc/7941302",
     "notes": "23.08: СПбМТСБ. АИ-95: ~63.4 тыс. ₽/т. Домашний бензин ~53.94 ₽/л, импортный ~80 ₽/л. Объёмы 61-68% ниже августа-2025. Импортный бензин торгуется с 20.08. Запрет экспорта до 31.01.2027. Тренд: стабилизация.",
     "note": "Updated based on recent WebSearch (see sources)"
@@ -143,27 +143,27 @@
       "region": "Краснодарский край",
       "lat": 45.04,
       "lon": 38.98,
-      "level": "limited",
-      "updated": "2026-08-23T08:53:04.263589+00:00",
+      "level": "critical",
+      "updated": "2026-08-24T12:23:51Z",
       "networks": [
         {
-          "name": "Лукойл/Роснефть (Сочи, Геленджик)",
+          "name": "Лукойл/Роснефть (Сочи)",
           "status": "limited",
           "level": "critical",
           "limit_l": 30,
-          "note": "22.08: Сочи КРИТИЧЕН. Очереди 5-6 часов. Из ~50 АЗС работают 38. Геленджик килом. очереди. Туристы застревают."
+          "note": "24.08: Сочи критичен. Очереди 5-6 часов. На 52 АЗС Сочи работают. Геленджик 8 АЗС."
         },
         {
           "name": "Остальной край (Краснодар, Анапа, Новороссийск)",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "22.08: Краснодар 70/106 АЗС работают. Анапа 25 АЗС (11 только карты). Новороссийск 30-60л (с 12:00). Лимит 30-50л повсеместно."
+          "note": "24.08: Краснодар, Анапа, Новороссийск. Лимит 30-50л."
         }
       ],
       "queues_hours": 5.0,
-      "ai95_price_rub": 69.55,
-      "diesel_price_rub": 72.9,
+      "ai95_price_rub": 75.0,
+      "diesel_price_rub": 75.0,
       "source_urls": [
         "https://93.ru/text/transport/2026/08/18/76593457/",
         "https://kavkaz-uzel.org/articles/425652"
@@ -199,33 +199,33 @@
       "lat": 55.75,
       "lon": 37.62,
       "level": "strained",
-      "updated": "2026-08-23T17:30:00+00:00",
+      "updated": "2026-08-24T12:23:51Z",
       "networks": [
         {
           "name": "Газпром нефть",
           "status": "limited",
           "level": "strained",
-          "limit_l": 60,
-          "note": "23.08: Лимиты 40-60л. Очереди 1+ час, дефицит АИ-95."
+          "limit_l": 50,
+          "note": "24.08: Лимиты 40-60л на автоматических и обычных АЗС. Очереди ~1 час."
         },
         {
           "name": "Татнефть",
           "status": "limited",
           "level": "strained",
           "limit_l": 50,
-          "note": "23.08: Лимит 50л. Очереди."
+          "note": "24.08: Лимит 50л бензина, 60л дизеля."
         },
         {
           "name": "Роснефть",
           "status": "limited",
           "level": "strained",
           "limit_l": 50,
-          "note": "23.08: Лимит 50л."
+          "note": "24.08: Лимит 50л."
         }
       ],
-      "queues_hours": 1.5,
-      "ai95_price_rub": 75.5,
-      "diesel_price_rub": 82.15,
+      "queues_hours": 1.0,
+      "ai95_price_rub": 76.0,
+      "diesel_price_rub": 82.0,
       "source_urls": [
         "https://auto.rambler.ru/novosti/56929724-na-moskovskih-zapravkah-snova-ogranichili-prodazhu-benzina/",
         "https://www.mentoday.ru/life/news/21-08-2026/benzina-opyat-net-v-ocheredyah-desyatki-mashin-chto-proishodit-na-azs-v-moskve-i-regionah-20-avgusta/",
@@ -239,19 +239,19 @@
       "lat": 56.84,
       "lon": 60.65,
       "level": "calm",
-      "updated": "2026-08-23T06:00:00Z",
+      "updated": "2026-08-24T12:23:51Z",
       "networks": [
         {
           "name": "Крупные сети",
-          "status": "open",
+          "status": "limited",
           "level": "calm",
-          "limit_l": null,
-          "note": "22.08: Цены снизились. Без жёстких ограничений. Стабильна."
+          "limit_l": 40,
+          "note": "24.08: Газпром нефть ограничивает до 40л. Цены снизились: АИ-92 68.3₽/л, АИ-95 72.7₽/л."
         }
       ],
       "queues_hours": 0.0,
       "ai95_price_rub": 72.7,
-      "diesel_price_rub": 76,
+      "diesel_price_rub": 76.0,
       "source_urls": [
         "https://fedpress.ru/"
       ],
@@ -322,26 +322,26 @@
       "lat": 47.23,
       "lon": 39.72,
       "level": "critical",
-      "updated": "2026-08-23T17:30:00+00:00",
+      "updated": "2026-08-24T12:23:51Z",
       "networks": [
         {
           "name": "Газпром нефть",
           "status": "limited",
           "level": "critical",
           "limit_l": 40,
-          "note": "23.08: Очереди 1-1.5ч. Вторая волна активна. На М-4 критично."
+          "note": "24.08: На М-4 критично. Очереди 1-2 часа. Цены АИ-95 от 69-110 ₽/л."
         },
         {
           "name": "Роснефть",
           "status": "limited",
           "level": "critical",
           "limit_l": 30,
-          "note": "23.08: Очереди 1-1.5ч. Критическая ситуация."
+          "note": "24.08: Критическая ситуация на трассе."
         }
       ],
       "queues_hours": 1.5,
-      "ai95_price_rub": 110,
-      "diesel_price_rub": 95,
+      "ai95_price_rub": 95.0,
+      "diesel_price_rub": 90.0,
       "source_urls": [
         "https://mo.tsargrad.tv/news/chto-s-benzinom-na-trasse-m-4-don-na-1-avgusta-2026-goda-stoimost-topliva-ocheredi-i-ogranichenija-na-azs_1805981",
         "https://ufocar.ru/v-tsentre-sobytij/benzin-na-m-4-don-18-avgusta-2026-goda-gde-zakanchivaetsya-toplivo-voditeli-stoyat-chasami/"
@@ -615,19 +615,19 @@
       "lat": 57.63,
       "lon": 39.87,
       "level": "calm",
-      "updated": "2026-08-23T20:20:00Z",
+      "updated": "2026-08-24T12:23:51Z",
       "networks": [
         {
-          "name": "Крупные сети",
+          "name": "АЗС (лимиты отменены)",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "23.08: Лимиты отменены 4 августа. Свободная продажа."
+          "note": "24.08: Лимиты отменены с 4.08. Свободная продажа."
         }
       ],
-      "queues_hours": 0,
-      "ai95_price_rub": 77.5,
-      "diesel_price_rub": 76,
+      "queues_hours": 0.0,
+      "ai95_price_rub": 70.0,
+      "diesel_price_rub": 76.0,
       "source_urls": [
         "https://runews24.ru/"
       ],
@@ -706,20 +706,20 @@
       "region": "Республика Крым",
       "lat": 45.05,
       "lon": 34.1,
-      "level": "severe",
-      "updated": "2026-08-23T17:30:00+00:00",
+      "level": "critical",
+      "updated": "2026-08-24T12:23:51Z",
       "networks": [
         {
           "name": "АТАН / ТЭС",
           "status": "limited",
-          "level": "severe",
-          "limit_l": null,
-          "note": "23.08: АИ-95 только по талонам. Цены до 100₽/л (АИ-92). Жесткие ограничения. АИ-92 и АИ-95 по системе QR/талонов."
+          "level": "critical",
+          "limit_l": 20,
+          "note": "24.08: Лимит 20л АИ-92, 30л дизеля. Цена АИ-92 100₽/л, дизель 119₽/л. 44 АЗС АТАН."
         }
       ],
       "queues_hours": 1.0,
-      "ai95_price_rub": 100.0,
-      "diesel_price_rub": 95.0,
+      "ai95_price_rub": 105.0,
+      "diesel_price_rub": 119.0,
       "source_urls": [
         "https://crimea.ria.ru/20260803/v-krymu-i-sevastopole-na-zapravkakh-tes-i-atan-snizyat-tseny-na-benzin-ai-92-1158216574.html",
         "https://gogov.ru/news/929016"
@@ -730,19 +730,19 @@
       "region": "Севастополь",
       "lat": 44.61,
       "lon": 33.52,
-      "level": "severe",
-      "updated": "2026-08-23T17:30:00+00:00",
+      "level": "critical",
+      "updated": "2026-08-24T12:23:51Z",
       "networks": [
         {
           "name": "АТАН / ТЭС",
           "status": "limited",
-          "level": "severe",
-          "limit_l": null,
-          "note": "23.08: АИ-92 и АИ-95 только по талонам. Цены максимальные. Жесткие ограничения."
+          "level": "critical",
+          "limit_l": 20,
+          "note": "24.08: Лимит 20л АИ-92, 30л дизеля по системе АТАН/ТЭС."
         }
       ],
-      "queues_hours": 1.5,
-      "ai95_price_rub": 100.0,
+      "queues_hours": 1.0,
+      "ai95_price_rub": 105.0,
       "diesel_price_rub": 95.0,
       "source_urls": [
         "https://crimea.ria.ru/20260803/v-krymu-i-sevastopole-na-zapravkakh-tes-i-atan-snizyat-tseny-na-benzin-ai-92-1158216574.html"
@@ -800,20 +800,20 @@
       "region": "Смоленская область",
       "lat": 54.78,
       "lon": 32.05,
-      "level": "calm",
-      "updated": "2026-08-23T20:20:00Z",
+      "level": "limited",
+      "updated": "2026-08-24T12:23:51Z",
       "networks": [
         {
-          "name": "Крупные сети",
-          "status": "open",
-          "limit_l": null,
-          "note": "23.08: Нет свежих новостей об ограничениях. Стабильна.",
-          "level": "calm"
+          "name": "АЗС сети",
+          "status": "limited",
+          "limit_l": 30,
+          "note": "24.08: Лимит 30л бензина, 60л дизеля. Ограничения введены.",
+          "level": "limited"
         }
       ],
-      "queues_hours": 0,
-      "ai95_price_rub": 72,
-      "diesel_price_rub": 76,
+      "queues_hours": 0.5,
+      "ai95_price_rub": 70.0,
+      "diesel_price_rub": 78.0,
       "source_urls": [
         "https://runews24.ru/"
       ],
