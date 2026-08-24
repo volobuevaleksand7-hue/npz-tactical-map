@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1787566022,
-      "source_text": "24.08.2026 12:50 МСК\nПолтавка, Очеретино ДНР ракетная опасность\n\n24.08.2026 13:07 МСК\nДонецк ДНР и близлежащие Опасность по БПЛА повторно\n\n24.08.2026 12:04 МСК\nГорловка запад БПЛА заходит на город, всем быть предельно осторожными Опасность по ФПВ сохраняется"
+      "last_event_ts": 1787566502,
+      "source_text": "24.08.2026 12:50 МСК\nПолтавка, Очеретино ДНР ракетная опасность\n\n24.08.2026 13:15 МСК\nДонецк, Макеевка ДНР и близлежащие Тревога по БПЛА\n\n24.08.2026 12:04 МСК\nГорловка запад БПЛА заходит на город, всем быть предельно осторожными Опасность по ФПВ сохраняется"
     },
     "Адыгея": {
       "bpla": false,
@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787554580,
-      "source_text": "24.08.2026 09:56 МСК\nБелгородский район опасность по БПЛА Повторно"
+      "last_event_ts": 1787566250,
+      "source_text": "24.08.2026 13:10 МСК\nВалуйский район приграничье Опасность по БПЛА Хорнет"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -279,6 +279,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1787564529,
       "source_text": "24.08.2026 12:42 МСК\nЧауда Кировское Феодосия и близлежащие Опасность по БПЛА Республика Крым"
+    },
+    {
+      "key": "макеевка|донецкая народная республика",
+      "name": "Макеевка",
+      "lat": 48.04782,
+      "lon": 37.92576,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787566502,
+      "source_text": "24.08.2026 13:15 МСК\nДонецк, Макеевка ДНР и близлежащие Тревога по БПЛА"
     },
     {
       "key": "республика крым|автономная республика крым",
@@ -893,8 +915,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787566022,
-      "source_text": "24.08.2026 13:07 МСК\nДонецк ДНР и близлежащие Опасность по БПЛА повторно"
+      "last_event_ts": 1787566502,
+      "source_text": "24.08.2026 13:15 МСК\nДонецк, Макеевка ДНР и близлежащие Тревога по БПЛА"
     },
     {
       "key": "кировское|автономная республика крым",
@@ -1115,28 +1137,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1787557227,
       "source_text": "24.08.2026 10:40 МСК\nНижняя Крынка Тревога по БПЛА Хорнет"
-    },
-    {
-      "key": "краснодон|луганская народная республика",
-      "name": "Краснодон",
-      "lat": 48.29235,
-      "lon": 39.73921,
-      "region": "Луганская Народная Республика",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787523359,
-      "source_text": "24.08.2026 01:15 МСК\nКраснодон и близлежащие Ещё фиксации БПЛА ЛНР"
     },
     {
       "key": "льгов|курская область",
@@ -1514,72 +1514,6 @@
     }
   ],
   "districts": {
-    "RUS.7.4_1": {
-      "gid_2": "RUS.7.4_1",
-      "name_ru": "Белгородский район",
-      "region_ru": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787554580,
-      "source_text": "24.08.2026 09:56 МСК\nБелгородский район опасность по БПЛА Повторно"
-    },
-    "RUS.34.12_1": {
-      "gid_2": "RUS.34.12_1",
-      "name_ru": "Ейский район",
-      "region_ru": "Краснодарский край",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787554117,
-      "source_text": "24.08.2026 09:48 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: Приморско-Ахтарский муниципальный округ, Брюховецкий, Ейский, Каневской, Щербиновский районы.24.08.2026."
-    },
-    "RUS.34.37_1": {
-      "gid_2": "RUS.34.37_1",
-      "name_ru": "Приморско-Ахтарский район",
-      "region_ru": "Краснодарский край",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787553645,
-      "source_text": "24.08.2026 09:40 МСК\nПриморско-Ахтарский район, Брюховецкий район, Ейский район, Каневской район, Щербиновский район, Краснодарский край - опасность по БПЛА с моря. 📡 Локатор России - @locatorru"
-    },
     "RUS.34.17_1": {
       "gid_2": "RUS.34.17_1",
       "name_ru": "Каневский район",
@@ -1646,6 +1580,50 @@
       "last_event_ts": 1787554117,
       "source_text": "24.08.2026 09:48 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: Приморско-Ахтарский муниципальный округ, Брюховецкий, Ейский, Каневской, Щербиновский районы.24.08.2026."
     },
+    "UKR.15.15_1": {
+      "gid_2": "UKR.15.15_1",
+      "name_ru": "Старобельский район",
+      "region_ru": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787526272,
+      "source_text": "24.08.2026 02:04 МСК\nЛНР, Белокуракинский район и Старобельский район Опасность по БПЛА сохраняется"
+    },
+    "RUS.34.12_1": {
+      "gid_2": "RUS.34.12_1",
+      "name_ru": "Ейский район",
+      "region_ru": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787554117,
+      "source_text": "24.08.2026 09:48 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: Приморско-Ахтарский муниципальный округ, Брюховецкий, Ейский, Каневской, Щербиновский районы.24.08.2026."
+    },
     "RUS.8.26_1": {
       "gid_2": "RUS.8.26_1",
       "name_ru": "Трубчевский район",
@@ -1690,6 +1668,50 @@
       "last_event_ts": 1787527794,
       "source_text": "24.08.2026 02:29 МСК\nСтарь, Ивот, Дятьково, Дятьковский район, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
+    "RUS.34.39_1": {
+      "gid_2": "RUS.34.39_1",
+      "name_ru": "Щербиновский район",
+      "region_ru": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787554117,
+      "source_text": "24.08.2026 09:48 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: Приморско-Ахтарский муниципальный округ, Брюховецкий, Ейский, Каневской, Щербиновский районы.24.08.2026."
+    },
+    "RUS.34.37_1": {
+      "gid_2": "RUS.34.37_1",
+      "name_ru": "Приморско-Ахтарский район",
+      "region_ru": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787553645,
+      "source_text": "24.08.2026 09:40 МСК\nПриморско-Ахтарский район, Брюховецкий район, Ейский район, Каневской район, Щербиновский район, Краснодарский край - опасность по БПЛА с моря. 📡 Локатор России - @locatorru"
+    },
     "UKR.9.15_1": {
       "gid_2": "UKR.9.15_1",
       "name_ru": "Скадовский район",
@@ -1712,10 +1734,10 @@
       "last_event_ts": 1787524539,
       "source_text": "24.08.2026 01:35 МСК\nСкадовский район и близлежащие Тревога по БПЛА Херсонская область РФ"
     },
-    "UKR.15.15_1": {
-      "gid_2": "UKR.15.15_1",
-      "name_ru": "Старобельский район",
-      "region_ru": "Луганская Народная Республика",
+    "RUS.7.4_1": {
+      "gid_2": "RUS.7.4_1",
+      "name_ru": "Белгородский район",
+      "region_ru": "Белгородская область",
       "bpla": false,
       "bplaDim": false,
       "danger": true,
@@ -1731,13 +1753,13 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787526272,
-      "source_text": "24.08.2026 02:04 МСК\nЛНР, Белокуракинский район и Старобельский район Опасность по БПЛА сохраняется"
+      "last_event_ts": 1787554580,
+      "source_text": "24.08.2026 09:56 МСК\nБелгородский район опасность по БПЛА Повторно"
     },
-    "RUS.34.39_1": {
-      "gid_2": "RUS.34.39_1",
-      "name_ru": "Щербиновский район",
-      "region_ru": "Краснодарский край",
+    "RUS.7.24_1": {
+      "gid_2": "RUS.7.24_1",
+      "name_ru": "Валуйский район",
+      "region_ru": "Белгородская область",
       "bpla": false,
       "bplaDim": false,
       "danger": true,
@@ -1753,8 +1775,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787554117,
-      "source_text": "24.08.2026 09:48 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: Приморско-Ахтарский муниципальный округ, Брюховецкий, Ейский, Каневской, Щербиновский районы.24.08.2026."
+      "last_event_ts": 1787566250,
+      "source_text": "24.08.2026 13:10 МСК\nВалуйский район приграничье Опасность по БПЛА Хорнет"
     }
   },
   "airport_markers": [
@@ -1771,6 +1793,54 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 266015,
+      "text": "Пологи и близлежащие УАБы\nЗапорожская область РФ",
+      "ts": 1787566674,
+      "time_label": "24.08.2026 13:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 85315,
+      "text": "Карачаево-Черкесская Республика\nКабардино-Балкарская Республика\nРеспублика Северная Осетия\nРеспублика Ингушетия\nРеспублика Дагестан\nЧеченская Республика\nОтбой опасности по БПЛА",
+      "ts": 1787566564,
+      "time_label": "24.08.2026 13:16 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 266014,
+      "text": "Донецк, Макеевка ДНР и близлежащие\nТревога по БПЛА",
+      "ts": 1787566502,
+      "time_label": "24.08.2026 13:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266013,
+      "text": "Филия\nКомар\nБогатырь ДНР\nАвиационно ракетно бомбовая тревога",
+      "ts": 1787566329,
+      "time_label": "24.08.2026 13:12 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266012,
+      "text": "Филия, Богатырь, Угледар, Комар, Великая Новосёлка и близлежащие ДНР\nГуляйполе, Васильевка, Степногорск, Орехов и близлежащие Запорожская область РФ\nАвиационная ракетная бомбовая тревога",
+      "ts": 1787566322,
+      "time_label": "24.08.2026 13:12 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266011,
+      "text": "Валуйский район приграничье\nОпасность по БПЛА Хорнет",
+      "ts": 1787566250,
+      "time_label": "24.08.2026 13:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 266010,
       "text": "Донецк ДНР и близлежащие\nОпасность по БПЛА повторно",
@@ -2362,54 +2432,6 @@
       "time_label": "24.08.2026 09:51 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265950,
-      "text": "Экстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: Приморско-Ахтарский муниципальный округ, Брюховецкий, Ейский, Каневской, Щербиновский районы.24.08.2026.",
-      "ts": 1787554117,
-      "time_label": "24.08.2026 09:48 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265949,
-      "text": "Экстренная информация РСЧС: Объявлена беспилотная опасность по южной части Ростовской области. Покиньте открытые участки улиц, зайдите в помещения, не подходите к окнам!",
-      "ts": 1787554080,
-      "time_label": "24.08.2026 09:48 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 265948,
-      "text": "Горловка, Пантелеймоновка, Енакиево, Ждановка, Кировское ДНР и близлежащие\nОпасность по БПЛА",
-      "ts": 1787554039,
-      "time_label": "24.08.2026 09:47 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 85309,
-      "text": "Ростовская область\nОпасность по БПЛА",
-      "ts": 1787553767,
-      "time_label": "24.08.2026 09:42 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 82327,
-      "text": "южная часть Ростовской области - опасность по БПЛА.\nсеверная часть Краснодарского края - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1787553721,
-      "time_label": "24.08.2026 09:42 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 82326,
-      "text": "Приморско-Ахтарский район, Брюховецкий район, Ейский район, Каневской район, Щербиновский район, Краснодарский край - опасность по БПЛА с моря.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1787553645,
-      "time_label": "24.08.2026 09:40 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -2419,13 +2441,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787566022,
-  "last_event_at": "2026-08-24T10:07:02Z",
-  "fetched_at": "2026-08-24T10:10:03.815622Z",
+  "timestamp": 1787566674,
+  "last_event_at": "2026-08-24T10:17:54Z",
+  "fetched_at": "2026-08-24T10:20:03.032879Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-24T10:10:03.815622Z",
-    "source_age_seconds": 181,
+    "generated_at": "2026-08-24T10:20:03.032879Z",
+    "source_age_seconds": 129,
     "city_count": 58,
     "region_count": 12,
     "feed_count": 80
