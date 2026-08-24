@@ -156,6 +156,8 @@ LABELS = {
     "/ataki-na-sklady-wildberries-hronika": ("🗓", "Атаки на склады Wildberries: хроника"),
     "/kompensacii-wildberries-posle-udara": ("💸", "Компенсации Wildberries после ударов"),
     "/dolgi-wildberries-i-banki": ("🏦", "Долги Wildberries и банки"),
+    "/chto-budet-s-zakazom-ozon-posle-udara": ("🛒", "Что будет с заказом Ozon"),
+    "/mery-podderzhki-ozon-prodavcam-posle-udarov": ("🧾", "Меры поддержки Ozon продавцам"),
     "/raketnaya-opasnost-tambovskaya-oblast": ("🚀", "Ракетная опасность: Тамбовская обл."),
     "/raketnaya-opasnost-sverdlovskaya-oblast": ("🚀", "Ракетная опасность: Свердловская обл."),
     "/raketnaya-opasnost-rostovskaya-oblast": ("🚀", "Ракетная опасность: Ростовская обл."),
