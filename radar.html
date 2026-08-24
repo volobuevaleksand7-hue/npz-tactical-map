@@ -788,6 +788,7 @@
 
     var RADAR_URL = "/api/radar-state";
     var REFRESH_MS = 5 * 60 * 1000;
+    var everRendered = false;   // был ли хоть один отрисованный цикл (см. visibilitychange)
     var TIMER = null;
     var retryTimer = null;
     var nextAt = 0;
@@ -1451,6 +1452,7 @@
       // скрытая вкладка не стучит в /api/radar-state (Edge Requests): цикл ставим на паузу,
       // возврат на вкладку сразу дёргает refresh через visibilitychange ниже
       if (document.hidden) { scheduleNext(); return; }
+      everRendered = true;
       renderState("loading", "Получаем данные через /api/radar-state...");
       // удары — независимо от радар-прокси: сбой /api/radar-state не должен прятать слой ударов
       fetchStrikes().then(renderStrikes);
@@ -1461,7 +1463,12 @@
     }
 
     document.addEventListener("visibilitychange", function () {
-      if (!document.hidden && nextAt && Date.now() >= nextAt) refresh();
+      // 🔴 Первый заход тоже считается: страница, открытая в ФОНОВОЙ вкладке (cmd-клик из
+      // выдачи, восстановление сессии), уходила на scheduleNext() ничего не нарисовав, а
+      // этот обработчик будил её только когда nextAt уже прошёл — то есть до 5 минут
+      // пустой карты и вечной «Загрузки ленты...», если переключиться на вкладку раньше.
+      if (document.hidden) return;
+      if (!everRendered || (nextAt && Date.now() >= nextAt)) refresh();
     });
 
     function scheduleNext() {
