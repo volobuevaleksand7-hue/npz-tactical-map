@@ -66,7 +66,7 @@
     "Нижегородская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -78,9 +78,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1787589226,
-      "source_text": "24.08.2026 19:33 МСК\nНижегородская область Внимание по БПЛА"
+      "fill": "#d8c06a",
+      "last_event_ts": 1787628475,
+      "source_text": "25.08.2026 06:27 МСК\nНижегородская область Опасность по БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -263,14 +263,14 @@
       "fpv": false,
       "rocket": true,
       "rocket_level": true,
-      "aviation": false,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1787627876,
-      "source_text": "25.08.2026 00:07 МСК\nКурская область Ракетная опасность\n\n25.08.2026 06:17 МСК\nКурск и близлежащие Тревога по БПЛА Курская область"
+      "last_event_ts": 1787627968,
+      "source_text": "25.08.2026 00:07 МСК\nКурская область Ракетная опасность\n\n25.08.2026 06:19 МСК\n‼️ Напоминаем, на территории Курской области сохраняется опасность атаки БПЛА и авиационная опасность!\n\n25.08.2026 06:17 МСК\nКурск и близлежащие Тревога по БПЛА Курская область"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -309,6 +309,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1787588925,
       "source_text": "24.08.2026 19:28 МСК\nЛипецкая область Опасность по БПЛА"
+    },
+    "Краснодарский край": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": true,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#e8e4c4",
+      "last_event_ts": 1787628037,
+      "source_text": "25.08.2026 06:20 МСК\nКраснодарский край Отбой опасности по БПЛА Режим повышенного внимания остаётся"
     },
     "Воронежская область": {
       "bpla": false,
@@ -2040,6 +2059,46 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 85387,
+      "text": "Нижегородская область\nОпасность по БПЛА",
+      "ts": 1787628475,
+      "time_label": "25.08.2026 06:27 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 266290,
+      "text": "Нижегородская область\nвнимание по бпла",
+      "ts": 1787628460,
+      "time_label": "25.08.2026 06:27 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266289,
+      "text": "Ростовская область отбой беспилотной опасности",
+      "ts": 1787628087,
+      "time_label": "25.08.2026 06:21 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266288,
+      "text": "Краснодарский край\nОтбой опасности по БПЛА\nРежим повышенного внимания остаётся",
+      "ts": 1787628037,
+      "time_label": "25.08.2026 06:20 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266287,
+      "text": "‼️\nНапоминаем, на территории Курской области сохраняется опасность атаки БПЛА и авиационная опасность!",
+      "ts": 1787627968,
+      "time_label": "25.08.2026 06:19 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 85386,
       "text": "Рязанская область\nОпасность по БПЛА",
       "ts": 1787627912,
@@ -2638,46 +2697,6 @@
       "time_label": "25.08.2026 02:03 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 266254,
-      "text": "Ачуево и близлежащие\nТревога по БПЛА\nКраснодарский край",
-      "ts": 1787612530,
-      "time_label": "25.08.2026 02:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 85366,
-      "text": "Родионово-Несветайский район\nРостовская область\nФиксация БПЛА",
-      "ts": 1787612520,
-      "time_label": "25.08.2026 02:02 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 266253,
-      "text": "Новошахтинск\nКрасный Сулин\nМатвеев Курган\nИ близлежащие\nТревога по БПЛА",
-      "ts": 1787612357,
-      "time_label": "25.08.2026 01:59 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 266252,
-      "text": "Преображенка\nПерекоп\nАрмянск и близлежащие\nРеспублика Крым\nТревога по БПЛА",
-      "ts": 1787612232,
-      "time_label": "25.08.2026 01:57 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 82390,
-      "text": "Внимание по пролётам БПЛА от Голубая Нива, Краснодарский край в сторону Староджерелиевская - Старонижестеблиевская - Старовеличковская - Бойкопонура - Старомышастовская, Красносельское - Пластуновская  - Динская - Краснодар - Усть-Лабинск - Тбилисская.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1787612141,
-      "time_label": "25.08.2026 01:55 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -2687,15 +2706,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787627912,
-  "last_event_at": "2026-08-25T03:18:32Z",
-  "fetched_at": "2026-08-25T03:20:03.466382Z",
+  "timestamp": 1787628475,
+  "last_event_at": "2026-08-25T03:27:55Z",
+  "fetched_at": "2026-08-25T03:30:03.753020Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-25T03:20:03.466382Z",
-    "source_age_seconds": 91,
+    "generated_at": "2026-08-25T03:30:03.753020Z",
+    "source_age_seconds": 128,
     "city_count": 61,
-    "region_count": 18,
+    "region_count": 19,
     "feed_count": 80
   }
 }
