@@ -1611,19 +1611,19 @@
       "updated": "2026-08-25T09:00Z",
       "networks": [
         {
-          "name": "Крупные сети",
-          "status": "limited",
-          "level": "strained",
-          "limit_l": 30,
-          "note": "25.08: Мониторинг активен. Общее управление запасами."
+          "name": "БРК / крупные сети",
+          "status": "open",
+          "level": "calm",
+          "limit_l": null,
+          "note": "21.08: Стабильно. Нет дефицита. Поставки восстановлены."
         }
       ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 78.0,
-      "diesel_price_rub": 82.0,
-      "note": "25.08: Регион получает дополнительное внимание из-за удалённости.",
+      "queues_hours": 0.0,
+      "ai95_price_rub": 69.95,
+      "diesel_price_rub": 79.0,
+      "note": "21.08 ротация: Стабильная ситуация. АИ-95 69.95 р/л. Нет дефицита. [Сколько стоит топливо в регионах России к 10 августа 2026 года](https://www.sravni.ru/text/ceny-na-toplivo-10-avgusta-26) [Сколько стоит топливо в регионах России к 3 августа 2026 года](https://www.sravni.ru/text/ceny-na-toplivo-3-avgusta-26)",
       "source_urls": [
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+        "https://www.petrolplus.ru/fuelindex/respublika-buryatiya/ai95/"
       ]
     },
     {
@@ -1631,114 +1631,121 @@
       "lat": 53.72,
       "lon": 91.44,
       "level": "calm",
-      "updated": "2026-08-25T09:00Z",
+      "updated": "2026-08-23T05:49:48.609956Z",
       "networks": [
         {
-          "name": "Лукойл/Газпром нефть/Роснефть",
+          "name": "КНП и локальные сети",
           "status": "limited",
-          "level": "calm",
-          "limit_l": null,
-          "note": "25.08: Запасы выросли на 20%. Лимиты отменены."
+          "level": "limited",
+          "limit_l": 40,
+          "note": "21.08: АЗС снизили цены после ФАС. Ажиотажный спрос спадает. Ситуация улучшается."
         }
       ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 72.5,
-      "diesel_price_rub": 79.0,
+      "queues_hours": 0.2,
+      "ai95_price_rub": 80,
+      "diesel_price_rub": 87,
       "source_urls": [
-        "https://abnews.ru/siberia/news/respublika-hakasiya/2026/8/18/zapasy-topliva-v-hakasii-vyrosli-na-20"
+        "https://ria.ru/20260818/hakasija-2111625412.html"
       ],
-      "note": "25.08: Ротация. Запасы +20%."
+      "note": "21.08 ротация: Цены снизились. Ажиотажный спрос спадает. Тренд: нормализация. [Сколько стоит топливо в регионах России к 3 августа ...](https://www.sravni.ru/text/ceny-na-toplivo-3-avgusta-26)"
     },
     {
       "region": "Забайкальский край",
       "lat": 52.03,
       "lon": 113.5,
       "level": "limited",
-      "updated": "2026-08-25T09:00Z",
+      "updated": "2026-08-23T05:49:48.610635Z",
       "networks": [
         {
-          "name": "Региональные АЗС",
+          "name": "\"Нефтемаркет\"",
           "status": "limited",
+          "limit_l": 30,
           "level": "limited",
-          "limit_l": 20,
-          "note": "25.08: Лимит 20л."
+          "note": "21.08: Жёсткие лимиты на 72% АЗС. QR система снята (30.07)."
         }
       ],
       "queues_hours": 0.5,
-      "ai95_price_rub": 88.0,
-      "diesel_price_rub": 85.0,
+      "ai95_price_rub": 108,
+      "diesel_price_rub": 100,
       "source_urls": [
-        "https://www.chita.ru/text/transport/2026/08/19/76595356/"
+        "https://eadaily.com/ru/news/2026/08/03/set-azs-v-zabaykale-otkazyvaetsya-prodavat-benzin"
       ],
-      "note": "25.08: Ротация. Лимит 20л."
+      "note": "21.08: Жёсткие лимиты. QR снята (30.07). Поставки нарушаются. [Что с бензином в России 2026: лимиты в регионах, ограничения на продажу бензина и дизеля в августе: Авто: Lenta.ru](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Ограничения на продажу бензина коснулись более 50 регионов России. Где ввели лимиты в 2026 году](https://www.banki.ru/news/daytheme?id=11025071) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Ограничения на продажу бензина коснулись более 50 ...](https://www.banki.ru/news/daytheme?id=11025071) [Сколько стоит топливо в регионах России к 17 августа ...](https://www.sravni.ru/text/ceny-na-toplivo-17-avgusta-26) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Ограничения на продажу бензина коснулись более 50 ...](https://www.banki.ru/news/daytheme?id=11025071) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda)"
     },
     {
       "region": "Еврейская автономная область",
       "lat": 48.79,
       "lon": 132.92,
-      "level": "calm",
-      "updated": "2026-08-25T09:00Z",
+      "level": "strained",
+      "updated": "2026-08-23T05:49:48.610760Z",
       "networks": [
         {
           "name": "Крупные сети",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "25.08: Топливо доступно свободно."
+          "note": "21.08: Стабильная работа. Без критических проблем. 5 АЗС работают."
         }
       ],
       "queues_hours": 0.0,
-      "ai95_price_rub": 82.0,
-      "diesel_price_rub": 85.0,
-      "note": "25.08: Ротация. Стабильное снабжение.",
+      "ai95_price_rub": 78,
+      "diesel_price_rub": 85,
+      "note": "21.08 ротация: Стабильно. Без критических проблем. [Сколько стоит литр топлива: Еврейская автономная область](https://www.petrolplus.ru/fuelindex/evreyskaya-avtonomnaya-oblast) [О потребительских ценах на нефтепродукты с 18 по 24 августа ...](https://rosstat.gov.ru/announcements/document/255635) [Ситуация с бензином в регионе Еврейская автономная область](https://m.vk.com/wall-145044648_8266) [Ситуация с бензином в регионе Еврейская автономная область](https://m.vk.com/wall-145044648_5882) [Сколько стоит топливо в регионах России к 17 августа ...](https://www.sravni.ru/text/ceny-na-toplivo-17-avgusta-26)",
       "source_urls": [
-        "https://www.mn.ru/short/deficzit-benzina-v-rossii-v-avguste-2026-goda-chto-izvestno"
+        "https://www.petrolplus.ru/fuelindex/evrejskaya-avtonomnaya-oblast/ai95/"
       ]
     },
     {
       "region": "Омская область",
       "lat": 54.99,
       "lon": 73.37,
-      "level": "calm",
-      "updated": "2026-08-25T09:00Z",
+      "level": "strained",
+      "updated": "2026-08-23T05:49:48.610779Z",
       "networks": [
         {
-          "name": "Все сети",
+          "name": "Татнефть",
           "status": "open",
-          "level": "calm",
           "limit_l": null,
-          "note": "25.08: Лимиты сняты. Свободная продажа."
+          "level": "calm",
+          "note": "21.08: Все лимиты отменены. Свободная продажа. АИ-92 61.5 ₽/л."
+        },
+        {
+          "name": "Транссиб / Региональные",
+          "status": "open",
+          "limit_l": null,
+          "level": "calm",
+          "note": "21.08: Без ограничений. Свободные продажи. Поставки восстановлены."
         }
       ],
       "queues_hours": 0.0,
-      "ai95_price_rub": 73.0,
-      "diesel_price_rub": 78.0,
+      "ai95_price_rub": 65.4,
+      "diesel_price_rub": 78.4,
       "source_urls": [
         "https://rg.ru/2026/07/28/reg-sibfo/v-omskoj-oblasti-sniali-limity-na-otpusk-topliva-na-azs.html"
       ],
-      "note": "25.08: Ротация. Лимиты отменены."
+      "note": "21.08 ротация: Лимиты полностью сняты. Дешевый бензин (65₽/л). Кризис преодолён. [«Газпром нефть» сняла лимиты на бензин и дизель в 13 регионах: продажа в канистры, цены на АЗС Татарстана и отмена ограничений с 4 августа 2026 | АиФ Казань](https://kazan.aif.ru/society/ogranicheniy-net-gazprom-neft-otmenila-limity-na-toplivo-v-13-regionah-rf) [Томская область нарастила поставки топлива для аграриев](https://tomsk.bezformata.com/listnews/tomskaya-oblast/162225090)"
     },
     {
       "region": "Тыва",
       "lat": 51.72,
       "lon": 94.45,
-      "level": "severe",
-      "updated": "2026-08-25T09:00Z",
+      "level": "limited",
+      "updated": "2026-08-23T05:49:48.611343Z",
       "networks": [
         {
-          "name": "АЗС (чет-нечет)",
-          "status": "limited",
-          "level": "severe",
-          "limit_l": 20,
-          "note": "25.08: Система чет-нечет. Цены >100₽/л."
+          "name": "Региональные АЗС",
+          "status": "open",
+          "limit_l": null,
+          "level": "strained",
+          "note": "21.08: Высокие цены (>100₽/л). Требует мониторинга. Логистика сложная."
         }
       ],
-      "queues_hours": 0.7,
-      "ai95_price_rub": 105.0,
-      "diesel_price_rub": 105.0,
-      "note": "25.08: Ротация. Критически высокие цены.",
+      "queues_hours": 0.3,
+      "ai95_price_rub": 105,
+      "diesel_price_rub": 88,
+      "note": "21.08 ротация: Высокие цены (>100₽/л). Требует внимания. Логистика сложная. [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в России летом 2026. Ограничения на продажу в 26 регионах. — DRIVE2](https://www.drive2.ru/b/737311058183589625) [Российские СМИ сообщают о лимитах на бензин в Москве](https://ru.krymr.com/a/krym-news-moskva-limity-benzin/33833548.html) [Что происходит с бензином в Москве 21 августа 2026 года: цены, очереди и лимиты на АЗС](https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-moskve-21-avgusta-2026-goda-ceny-ocheredi-i-limity-na-azs_1832479) [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в ...](https://www.drive2.ru/b/737311058183589625) [В Ивановскую область направят дополнительные объемы топлива](https://www.interfax.ru/business/1097493) [Бензин в Подмосковье 21 августа 2026 года](https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-podmoskove-21-avgusta-2026-goda-ceny-ocheredi-i-limity-na-azs_1832399) [Чёт, нечёт: ещё один регион России перешёл к продаже ...](https://www.dp.ru/a/2026/07/09/chjot--nechjot-eshhjo-odin-region) [Есть ли дефицит бензина в регионах России в 2026 году? Ажиотаж на АЗС, лимиты до 30 литров, очереди, запрет канистр — полная картина по Оренбуржью, Башкирии, Татарстану и другим регионам | АиФ Казань](https://kazan.aif.ru/society/pusteyut-azs-toplivnyy-azhiotazh-v-regionah-rf-deficit-benzina-limity-mery) [Дефицит бензина летом 2026: атаки на НПЗ, ажиотажный спрос и меры правительства](https://finance.mail.ru/article/ogranicheniya-dlya-zheleznyh-konej-kak-pravitelstvo-namereno-stabilizirovat-rynok-topliva-69214739) [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в ...](https://www.drive2.ru/b/737311058183589625) [Цена бензина и дизельного топлива в Республике Адыгея сегодня | Полный Бак](https://ftcard.ru/toplivo-cena/respublika-adygeya) [Карта ограничений бензина по регионам России — BenZinMap](https://benzinmap.ru) [Ситуация с бензином на трассе М-4 19 августа 2026 года: цены, очереди и лимиты на АЗС](https://mo.tsargrad.tv/news/situacija-s-benzinom-na-trasse-m-4-19-avgusta-2026-goda-ceny-ocheredi-i-limity-na-azs_1829548) [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в ...](https://www.drive2.ru/b/737311058183589625) [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в ...](https://www.drive2.ru/b/737311058183589625) [АЗС Лукойла, Роснефти и Газпром нефти в Москве ввели лимиты на продажу бензина | Новости Украины | LIGA.net](https://biz.liga.net/energy/news/azs-v-moskve-vveli-limity-na-prodazhu-benzina) [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в ...](https://www.drive2.ru/b/737311058183589625) [Сколько стоит литр аи-95: Кабардино-Балкарская Республика | Узнать цены на топливо](https://www.petrolplus.ru/fuelindex/kabardino-balkarskaya-respublika/ai95) [Бензин подешевел в 25 регионах России](https://ura.news/news/1053119756) [Бензин в Подмосковье 21 августа 2026 года](https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-podmoskove-21-avgusta-2026-goda-ceny-ocheredi-i-limity-na-azs_1832399) [Новая волна топливного кризиса в России: бензин ...](https://meduza.io/feature/2026/08/20/novaya-volna-toplivnogo-krizisa-v-rossii-benzin-dorozhaet-na-zapravkah-opyat-ocheredi-pereboi-dazhe-s-motornym-maslom) [Бензин подешевел в 25 российских регионах | 20.08.2026](https://irkutsk.bezformata.com/listnews/benzin-podeshevel/162830823) [Бензин в Подмосковье 21 августа 2026 года](https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-podmoskove-21-avgusta-2026-goda-ceny-ocheredi-i-limity-na-azs_1832399) [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в ...](https://www.drive2.ru/b/737311058183589625) [Сколько стоит литр топлива: Чеченская Республика | Узнать цены на топливо](https://www.petrolplus.ru/fuelindex/chechenskaya-respublika) [В каких регионах подешевел бензин с 10 по 17 августа 2026 года: данные Росстата](https://ura.news/news/1053119756) [Сколько стоит топливо в регионах России к 10 августа ...](https://www.sravni.ru/text/ceny-na-toplivo-10-avgusta-26) [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в ...](https://www.drive2.ru/b/737311058183589625) [Сколько стоит топливо в регионах России к 3 августа ...](https://www.sravni.ru/text/ceny-na-toplivo-3-avgusta-26) [Бензин по 140 рублей и пустые АЗС: что происходит с топливом в ...](https://www.drive2.ru/b/737311058183589625) [АЗС Лукойла, Роснефти и Газпром нефти в Москве ввели лимиты на продажу бензина | Новости Украины | LIGA.net](https://biz.liga.net/energy/news/azs-v-moskve-vveli-limity-na-prodazhu-benzina)",
       "source_urls": [
-        "https://rosstat.gov.ru/storage/mediabank/125_19-08-2026.html"
+        "https://www.tuvaonline.ru"
       ]
     },
     {
@@ -1768,70 +1775,77 @@
       "region": "Камчатский край",
       "lat": 53.04,
       "lon": 158.65,
-      "level": "calm",
-      "updated": "2026-08-25T09:00Z",
+      "level": "strained",
+      "updated": "2026-08-23T05:49:48.611404Z",
       "networks": [
         {
-          "name": "Газпромнефть/Лукойл/Роснефть",
+          "name": "Региональные АЗС (ННК)",
           "status": "open",
-          "level": "calm",
           "limit_l": null,
-          "note": "25.08: Запасы в норме. Нет перебоев."
+          "level": "calm",
+          "note": "21.08: Запасы в норме. Палана 100л/день лимит. Большинство районов спокойно."
         }
       ],
       "queues_hours": 0.0,
-      "ai95_price_rub": 83.45,
-      "diesel_price_rub": 87.0,
+      "ai95_price_rub": 105,
+      "diesel_price_rub": 96.52,
       "source_urls": [
-        "https://kamtoday.ru/news/auto/zapasy-topliva-na-kamchatke-nakhodyatsya-na-normativnom-urovne/"
+        "https://kamchatka.aif.ru/society/benzin-na-kamchatke-za-god-podorozhal-pochti-na-20"
       ],
-      "note": "25.08: Ротация. Стабильное снабжение."
+      "note": "21.08 ротация: Запасы в норме. Ситуация стабильна. Лимит Палана 100л/день. [Сколько стоит топливо в регионах России к 17 августа ...](https://www.sravni.ru/text/ceny-na-toplivo-17-avgusta-26)"
     },
     {
       "region": "Кировская область",
       "lat": 58.6,
       "lon": 49.65,
-      "level": "calm",
-      "updated": "2026-08-25T09:00Z",
+      "level": "strained",
+      "updated": "2026-08-23T05:49:48.611572Z",
       "networks": [
         {
-          "name": "Все сети",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "25.08: Ограничения снимаются."
+          "name": "Лукойл",
+          "status": "limited",
+          "limit_l": 30,
+          "note": "21.08: Ограничения отменены с 03.08. Свободная продажа.",
+          "level": "calm"
+        },
+        {
+          "name": "Движение",
+          "status": "limited",
+          "limit_l": 30,
+          "note": "21.08: Без ограничений. Поставки восстановлены.",
+          "level": "calm"
         }
       ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 75.0,
-      "diesel_price_rub": 80.0,
+      "queues_hours": 0.05,
+      "ai95_price_rub": 69.87,
+      "diesel_price_rub": 82.12,
       "source_urls": [
-        "https://www.vbr.ru/novosti/avto/2026/07/28/v-regionah-na-azs-otmenyaut-limiti-na-toplivo/"
+        "https://rg.ru/2026/07/30/reg-pfo/v-kirovskoj-oblasti-stabilizirovalas-obstanovka-s-postavkami-benzina.html"
       ],
-      "note": "25.08: Ротация. Лимиты отменяются."
+      "note": "21.08 ротация: Стабилизация подтверждена. Кризис полностью преодолён. [Дефицит бензина в России 2026: список регионов с ограничениями, причины и прогнозы](https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089) [Дефицит бензина в России 1 июля 2026](https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852) [Дефицит бензина в России 2026: список регионов с ограничениями, причины и прогнозы](https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089) [Сколько стоит топливо в регионах России к 17 августа ...](https://www.sravni.ru/text/ceny-na-toplivo-17-avgusta-26) [Дефицит бензина в России 2026: список регионов с ограничениями, причины и прогнозы](https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089) [Дефицит бензина в России 9 июля 2026: регионы с ограничениями, причины и прогнозы](https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-69216968)"
     },
     {
       "region": "Республика Карелия",
       "lat": 61.79,
       "lon": 34.35,
-      "level": "calm",
-      "updated": "2026-08-25T09:00Z",
+      "level": "limited",
+      "updated": "2026-08-23T05:49:48.611619Z",
       "networks": [
         {
-          "name": "Газпромнефть/Роснефть/Лукойл",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "25.08: 53 АЗС в регионе."
+          "name": "Лукойл",
+          "status": "limited",
+          "limit_l": 40,
+          "note": "22.08: Лимит 40л. Дизель 60л. Ситуация стабилизирована. Очереди исчезли. Регион проверен.",
+          "level": "limited"
         }
       ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 74.0,
-      "diesel_price_rub": 79.0,
+      "queues_hours": 0.1,
+      "ai95_price_rub": 72,
+      "diesel_price_rub": 80,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/respublika-kareliya/ai92/"
+        "https://auto.mail.ru/article/127533-v-karelii-povyisili-limit-otpuska-benzina-na-azs/"
       ],
-      "note": "25.08: Ротация. Стабильное предложение."
+      "note": "22.08: Лимит 40л бензина, 60л дизеля. Ситуация стабилизирована. Очередей нет. [Сколько стоит топливо в регионах России к 10 августа 2026 года](https://www.sravni.ru/text/ceny-na-toplivo-10-avgusta-26) [Сколько стоит топливо в регионах России к 3 августа 2026 года](https://www.sravni.ru/text/ceny-na-toplivo-3-avgusta-26)"
     },
     {
       "region": "Курганская область",
@@ -1976,69 +1990,69 @@
       "lat": 52.73,
       "lon": 41.44,
       "level": "limited",
-      "updated": "2026-08-25T09:00Z",
+      "updated": "2026-08-23T05:49:48.612903Z",
       "networks": [
         {
-          "name": "Все АЗС",
+          "name": "Роснефть / все сети",
           "status": "limited",
+          "limit_l": 50,
           "level": "limited",
-          "limit_l": 30,
-          "note": "25.08: Чет-нечет отменили. Лимит 30л."
+          "note": "21.08: 182-183 АЗС работают. Лимит 50л бензина / 150л ДТ. Временные ограничения на 31 станции."
         }
       ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 76.0,
-      "diesel_price_rub": 80.0,
+      "queues_hours": 0.3,
+      "ai95_price_rub": 80.12,
+      "diesel_price_rub": 92.72,
       "source_urls": [
-        "https://tambov.mk.ru/social/2026/08/23/v-tambovskoy-oblasti-37-azs-priostanovili-prodazhu-topliva.html"
+        "https://chr.aif.ru/tambov/incidents/s-20-iyulya-v-tambovskoy-oblasti-vvedut-zapravku-po-chyotnym-i-nechyotnym-dnyam"
       ],
-      "note": "25.08: Ротация. Объёмные лимиты."
+      "note": "21.08: 182-183 АЗС работают. Лимит 50л/150л ДТ. Ограничения контролируются. [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива](https://www.sravni.ru/novost/2026/8/19/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda)"
     },
     {
       "region": "Санкт-Петербург",
       "lat": 59.93,
       "lon": 30.36,
-      "level": "calm",
-      "updated": "2026-08-25T09:00Z",
+      "level": "limited",
+      "updated": "2026-08-23T05:49:48.614326Z",
       "networks": [
         {
-          "name": "Все сети",
+          "name": "Лукойл/Роснефть/Газпром нефть",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "25.08: Нет очередей. Стабильный запас."
+          "note": "21.08: Свободная продажа. Стабильность. Нет очередей. Запас АИ-92/95 в наличии."
         }
       ],
       "queues_hours": 0.0,
-      "ai95_price_rub": 69.48,
-      "diesel_price_rub": 78.59,
+      "ai95_price_rub": 71,
+      "diesel_price_rub": 72,
       "source_urls": [
         "https://www.fontanka.ru/2026/08/17/76592294/"
       ],
-      "note": "25.08: Ротация. Стабильная ситуация."
+      "note": "21.08: Санкт-Петербург стабилен. Нет очередей. Свободная продажа. [Дефицит 95-го бензина на московских АЗС и очереди](https://www.kommersant.ru/doc/8890496) [Новая волна топливного кризиса в России: бензин ...](https://meduza.io/feature/2026/08/20/novaya-volna-toplivnogo-krizisa-v-rossii-benzin-dorozhaet-na-zapravkah-opyat-ocheredi-pereboi-dazhe-s-motornym-maslom) [Цены на бензин на АЗС в РФ снизились впервые в 2026г](https://ru.themoscowtimes.com/2026/08/05/tseny-na-benzin-na-azs-v-rf-snizilis-vpervye-v-2026g-na-11-za-28-iyul-3-avg-rosstat-a202794) [Ограничения на продажу топлива в регионах: лимиты на бензин и дизель, список областей, причины](https://finance.mail.ru/article/30-litrov-na-avto-v-kakih-regionah-vveli-ogranicheniya-iz-za-toplivnogo-krizisa-69214349) [В как минимум 15 регионах России введены лимиты на продажу бензина - Astra Press](https://astra.press/russian/2026/06/04/13269) [«Газпром нефть» сняла лимиты на бензин и дизель в 13 регионах: продажа в канистры, цены на АЗС Татарстана и отмена ограничений с 4 августа 2026 | АиФ Казань](https://kazan.aif.ru/society/ogranicheniy-net-gazprom-neft-otmenila-limity-na-toplivo-v-13-regionah-rf) [«Газпромнефть» отменила лимиты на продажу топлива в 13 регионах](https://expert.ru/news/gazpromneft-otmenila-limity-na-prodazhu-topliva-v-13-regionakh) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где найти бензин на АЗС летом 2026: какие приложения и платформы реально помогают не остаться без топлива на трассе](https://peterburg2.ru/news/gde-nayti-benzin-na-azs-letom-2026-aktualnye-servisy-dlya-voditeley-244316.html) [Бензин и дизель пошли вниз. Что происходит с ценами ...](https://www.fontanka.ru/2026/08/05/76572500) [Власти Ленобласти дали прогноз стабилизации ситуации с бензином](https://www.rbc.ru/spb_sz/05/08/2026/6a734c4e9a794722e1bec56e) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [В России снова вводят ограничения на продажу топлива: регионы и ...](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [Новая волна топливного кризиса в России: бензин ...](https://meduza.io/feature/2026/08/20/novaya-volna-toplivnogo-krizisa-v-rossii-benzin-dorozhaet-na-zapravkah-opyat-ocheredi-pereboi-dazhe-s-motornym-maslom) [Перебои с бензином в России: где ввели лимиты на топливо, что с ценами и когда все закончится](https://finance.mail.ru/article/chto-proishodit-s-prodazhej-benzina-v-rossii-69216606) [Новая волна топливного кризиса в России: бензин ...](https://meduza.io/feature/2026/08/20/novaya-volna-toplivnogo-krizisa-v-rossii-benzin-dorozhaet-na-zapravkah-opyat-ocheredi-pereboi-dazhe-s-motornym-maslom) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Цена Аи-95 на бирже обновила рекорд | Эксперт](https://expert.ru/ekonomika/tsena-ai-95-na-birzhe-vpervye-prevysila-77-tys-rubley-za-tonnu) [Цены на бензин в России в августе: где топливо ...](https://polis812.ru/blog/czeny-na-benzin-v-rossii-v-avguste-gde-toplivo-podeshevelo-i-chto-budet-dalshe) [Цена бензина АИ-95 впервые превысила ₽80 тыс. за тонну на бирже](https://www.rbc.ru/economics/08/08/2025/6896012a9a79475d9cc6ccdb) [На АЗС в Москве рассказали о росте спроса и о лимитах на бензин](https://www.rbc.ru/economics/19/08/2026/6a84bb959a7947c0ad9b886f) [Ограничения на продажу бензина коснулись более 50 ...](https://www.banki.ru/news/daytheme?id=11025071) [Ограничения на продажу бензина коснулись более 50 ...](https://www.banki.ru/news/daytheme?id=11025071) [Новая волна топливного кризиса в России: бензин ...](https://meduza.io/feature/2026/08/20/novaya-volna-toplivnogo-krizisa-v-rossii-benzin-dorozhaet-na-zapravkah-opyat-ocheredi-pereboi-dazhe-s-motornym-maslom) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Ограничения на продажу бензина коснулись более 50 ...](https://www.banki.ru/news/daytheme?id=11025071) [«Газпромнефть» отменила лимиты на продажу топлива в 13 регионах](https://expert.ru/news/gazpromneft-otmenila-limity-na-prodazhu-topliva-v-13-regionakh) [В каких регионах подешевел бензин с 10 по 17 августа 2026 года: данные Росстата](https://ura.news/news/1053119756) [Цены на бензин на АЗС в РФ снизились впервые в 2026г](https://ru.themoscowtimes.com/2026/08/05/tseny-na-benzin-na-azs-v-rf-snizilis-vpervye-v-2026g-na-11-za-28-iyul-3-avg-rosstat-a202794) [Новая волна топливного кризиса в России: бензин ...](https://meduza.io/feature/2026/08/20/novaya-volna-toplivnogo-krizisa-v-rossii-benzin-dorozhaet-na-zapravkah-opyat-ocheredi-pereboi-dazhe-s-motornym-maslom) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Цены на бензин на АЗС в РФ снизились впервые в 2026г](https://ru.themoscowtimes.com/2026/08/05/tseny-na-benzin-na-azs-v-rf-snizilis-vpervye-v-2026g-na-11-za-28-iyul-3-avg-rosstat-a202794) [Перебои с бензином в России: где ввели лимиты на топливо, что с ценами и когда все закончится](https://finance.mail.ru/article/chto-proishodit-s-prodazhej-benzina-v-rossii-69216606) [Новая волна топливного кризиса в России: бензин ...](https://meduza.io/feature/2026/08/20/novaya-volna-toplivnogo-krizisa-v-rossii-benzin-dorozhaet-na-zapravkah-opyat-ocheredi-pereboi-dazhe-s-motornym-maslom) [Где в России ограничили продажу бензина в августе 2026 года](https://lenta.ru/articles/2026/08/19/ogranicheniya-na-pokupku-benzina-v-rossii-v-avguste-2026-goda) [Цена Аи-95 на бирже обновила рекорд | Эксперт](https://expert.ru/ekonomika/tsena-ai-95-na-birzhe-vpervye-prevysila-77-tys-rubley-za-tonnu) [Цены на бензин в России в августе: где топливо ...](https://polis812.ru/blog/czeny-na-benzin-v-rossii-v-avguste-gde-toplivo-podeshevelo-i-chto-budet-dalshe) [Цена бензина АИ-95 впервые превысила ₽80 тыс. за тонну на бирже](https://www.rbc.ru/economics/08/08/2025/6896012a9a79475d9cc6ccdb) [На АЗС в Москве рассказали о росте спроса и о лимитах на бензин](https://www.rbc.ru/economics/19/08/2026/6a84bb959a7947c0ad9b886f)"
     },
     {
       "region": "Пензенская область",
       "lat": 53.2,
       "lon": 45.0,
-      "level": "limited",
-      "updated": "2026-08-25T09:00Z",
+      "level": "strained",
+      "updated": "2026-08-23T05:49:48.614425Z",
       "networks": [
         {
-          "name": "Все АЗС",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 100,
-          "note": "25.08: Лимит 100л. Дизель 200л."
+          "name": "Основные сети",
+          "status": "open",
+          "level": "strained",
+          "limit_l": null,
+          "note": "21.08: Вторая волна дефицита на ряде заправок. Многочасовые очереди. Дефицит на ряде сетей."
         }
       ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 74.0,
-      "diesel_price_rub": 78.0,
+      "queues_hours": 0.5,
+      "ai95_price_rub": 71,
+      "diesel_price_rub": 76,
       "source_urls": [
-        "https://fedpress.ru/news/58/energetics/3441703"
+        "https://penza.aif.ru/society/v-penzenskoy-oblasti-s-24-iyulya-na-azs-razreshili-zalivat-benzin-v-kanistry"
       ],
-      "note": "25.08: Ротация. Долгосрочные ограничения."
+      "note": "21.08: Вторая волна достигает область. Многочасовые очереди на ряде АЗС. Дефицит АИ-95 подтвержден. [В России снова вводят ограничения на продажу топлива: регионы и лимиты в августе 2026 года](https://www.sravni.ru/novost/2026/8/14/v-rossii-snova-vvodyat-ogranicheniya-na-prodazhu-topliva-regiony-i-limity-v-avguste-2026-goda) [Дефицит бензина в России 2026: список регионов с ограничениями, причины и прогнозы](https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089)"
     },
     {
       "region": "Архангельская область",
