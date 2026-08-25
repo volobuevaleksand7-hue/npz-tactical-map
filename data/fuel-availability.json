@@ -1,12 +1,12 @@
 {
   "meta": {
-    "generated_at": "2026-08-24T20:40:00Z",
+    "generated_at": "2026-08-25T04:18Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
     "rotation_pass": "2026-08-24: 12 старых регионов ротированы",
-    "updated_by": "agent:fuel-availability",
+    "updated_by": "agent:fuel-availability-update",
     "update_notes": [
       {
         "date": "2026-08-23T08:49:26.925968+00:00",
@@ -88,6 +88,28 @@
           "https://runews24.ru/",
           "WebSearch (23.08.2026)"
         ]
+      },
+      {
+        "date": "2026-08-25T04:17Z",
+        "action": "metadata_update_only",
+        "regions_updated": 0,
+        "message": "Обновление метаданных на основе проверки источников за последние 4 часа: Bing News, RSS коммерсант, t.me (недоступны), web_search. Нет новых значимых событий, влияющих на статус АЗС.",
+        "sources": [
+          "Bing News Browser",
+          "Kommersant RSS",
+          "web_search"
+        ]
+      },
+      {
+        "date": "2026-08-25T04:18Z",
+        "action": "metadata_update_only",
+        "regions_updated": 0,
+        "message": "2026-08-25T04:18Z: Проверено источники за последние 4 часа: Bing News, kommersant.ru RSS, t.me (недоступны), web_search. Нет новых значимых событий, влияющих на статус АЗС. Предыдущие данные сохранены.",
+        "sources": [
+          "Bing News Browser",
+          "Kommersant RSS",
+          "web_search"
+        ]
       }
     ]
   },
@@ -96,7 +118,7 @@
     "ai92_spb_rub_t": 61900,
     "diesel_spb_rub_t": 60400,
     "trend": "stable",
-    "updated": "2026-08-24T20:40:00Z",
+    "updated": "2026-08-25T04:17Z",
     "source_url": "https://www.kommersant.ru/doc/7941302",
     "notes": "23.08: СПбМТСБ. АИ-95: ~63.4 тыс. ₽/т. Домашний бензин ~53.94 ₽/л, импортный ~80 ₽/л. Объёмы 61-68% ниже августа-2025. Импортный бензин торгуется с 20.08. Запрет экспорта до 31.01.2027. Тренд: стабилизация.",
     "note": "Updated based on recent WebSearch (see sources)"
