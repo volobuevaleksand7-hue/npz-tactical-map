@@ -100,18 +100,30 @@ def _make_dark_bg():
 
 
 def generate_cover_auto(day=None):
-    """Обложка по верхнему удару. day=YYYY-MM-DD — добор за прошедший день.
+    """Обложка по ведущему удару. day=YYYY-MM-DD — добор за прошедший день.
 
-    Без day берётся сегодняшняя дата и окно последних 24 часов. С day окно
-    расширяется так, чтобы захватить нужные сутки — иначе добор за вчера
-    молча нарисовал бы обложку по сегодняшним ударам.
+    🔴 Расширить окно pick_top_strike для добора НЕДОСТАТОЧНО: она возвращает
+    ведущий удар за весь период, поэтому за 25.08 рисовалась картинка по удару
+    26-го — поймано на живом доборе, обе обложки вышли байт в байт одинаковыми.
+    Отбираем удары РОВНО этих суток во временный файл и отдаём их той же функции:
+    приоритет (НПЗ > энергетика > прочее, confirmed > reported) не дублируем.
     """
     strikes_path = os.path.join(os.path.dirname(__file__), "..", "data", "strikes.json")
     if day:
-        from datetime import date as _date
-        y, m, dd = (int(x) for x in day.split("-"))
-        age_days = (_date.today() - _date(y, m, dd)).days
-        strike = pick_top_strike(strikes_path, hours=24 * (age_days + 1))
+        import json as _json, tempfile
+        with open(strikes_path, encoding="utf-8") as _fh:
+            _doc = _json.load(_fh)
+        _all = _doc if isinstance(_doc, list) else _doc.get("strikes", [])
+        _day_only = [x for x in _all if str(x.get("date", ""))[:10] == day]
+        if not _day_only:
+            print("ERROR: за %s в архиве нет ударов" % day)
+            sys.exit(1)
+        _tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False,
+                                           encoding="utf-8")
+        _json.dump({"strikes": _day_only}, _tmp, ensure_ascii=False)
+        _tmp.close()
+        strike = pick_top_strike(_tmp.name, hours=24 * 3650)
+        os.unlink(_tmp.name)
     else:
         strike = pick_top_strike(strikes_path, hours=24)
 
