@@ -4,7 +4,7 @@
 Прилёт по уже стоящим ТАНЕКО и Лукойл-Пермнефтеоргсинтез перевёл их
 down/0% → partial/15-20%, и headline «выбито полностью» просел 40% → 32%.
 """
-import json, os, sys, tempfile
+import json, os, re, sys, tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import strike_pipeline as sp
@@ -52,5 +52,41 @@ def demo():
     print("OK: удар не улучшает завод; баланс из канонической формулы")
 
 
+def demo_matcher():
+    """Сопоставление удара с заводом: покрытие всех 33 и защита от чужого города.
+
+    26.08.2026: словарь покрывал 17 заводов из 33, остальные 16 (102.9 из 338.4
+    млн т/год) не могли быть сопоставлены В ПРИНЦИПЕ — Астраханский ГПЗ остался
+    «operational» после прямого удара, и headline занижал выбытие.
+    """
+    import json as _json
+    fuel = _json.load(open(os.path.join(os.path.dirname(sp.FUEL_STATE_PATH),
+                                        "fuel-state.json"), encoding="utf-8"))
+    ids = {r["id"] for r in fuel["refineries"]}
+    src = open(sp.__file__, encoding="utf-8").read()
+    i = src.index("refinery_keywords = {")
+    mapped = set(re.findall(r'"([a-z0-9-]+)":\s*\[', src[i:src.index("\n    }", i)]))
+    assert not (ids - mapped), "заводы без ключей: %s" % sorted(ids - mapped)
+
+    CASES = [
+        ({"target": "Астраханский газоперерабатывающий завод (ГПЗ)",
+          "city": "Красноярский район", "title": ""}, "astrakhan-gpz"),
+        ({"target": "Афипский нефтеперерабатывающий завод",
+          "city": "Афипский", "title": ""}, "afipsky"),
+        # 🔴 город в ЗАГОЛОВКЕ не должен перетягивать удар на одноимённый завод
+        ({"target": "жилая многоэтажка (обломки) / Афипский НПЗ", "city": "Краснодар",
+          "title": "Обломки БПЛА в многоэтажку Краснодара, пожар на Афипском НПЗ"}, "afipsky"),
+        ({"target": "логистический центр Ozon", "city": "Краснодар",
+          "title": "Атака БПЛА на Краснодар"}, None),
+        ({"target": "логистический центр Wildberries", "city": "Саратов",
+          "title": "Атака на Саратов"}, None),
+    ]
+    for strike, want in CASES:
+        got, _ = sp._match_refinery_id(strike)
+        assert got == want, (strike["target"][:40], got, want)
+    print("OK: все 33 завода покрыты; город не перетягивает удар на чужой НПЗ")
+
+
 if __name__ == "__main__":
     demo()
+    demo_matcher()
