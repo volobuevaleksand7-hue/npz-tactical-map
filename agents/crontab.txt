@@ -1,16 +1,30 @@
-# NPZ TACTICAL MAP — VPS cron (routine)
-# Установка:   ( crontab -l 2>/dev/null; cat agents/crontab.txt ) | crontab -
+# ⚠️ ЭТО НЕ ЖИВОЕ РАСПИСАНИЕ. ЭТО ОБРАЗЕЦ УСТАНОВКИ.
+#
+# 🔴 Живая правда — docs/agents/FLEET-SNAPSHOT.md (снимается agents/fleet-snapshot.sh
+#    со всех ТРЁХ планировщиков: crontab, ~/.hermes/cron/jobs.json, systemd timers).
+#    Проверить, не разошлось ли:  bash agents/fleet-snapshot.sh --check
+#
+# Этот файл — рукописная копия, и он протухал дважды: аудит 2026-07-07 назвал его
+# «мёртвым артефактом эпохи claude-раннера», разбор 2026-08-26 поймал его на том,
+# что он врёт про forecast (тут «раз в неделю на Opus», живьём — ежедневно на Haiku,
+# и это осознанное решение от 2026-07-14, канонные Opus-строки на VPS помечены
+# DISABLED COST). Ниже строки НЕ соответствуют живому crontab: реальные сборщики
+# ходят 4,16 (а не 0,6,12,18), плюс живьём есть grid-status, fuel-availability и
+# economy, которых тут нет вовсе. Читать как пример формы вызова run-agent.sh,
+# НЕ как расписание.
+#
+# Установка (только при разворачивании флота с нуля):
+#   ( crontab -l 2>/dev/null; cat agents/crontab.txt ) | crontab -
 # Требуется: установленный `claude` CLI (Claude Code) на VPS + git push-доступ к репо.
 #
 TZ=UTC
 MAILTO=root
 #
 # Модели по силе задачи:
-#   collectors (факт-сбор новостей)  -> Haiku  (дёшево), 4 раза в сутки
-#   forecast   (макро-анализ)        -> Opus   (умно),   раз в неделю
+#   collectors (факт-сбор новостей)  -> Haiku  (дёшево)
+#   forecast   (макро-анализ)        -> см. FLEET-SNAPSHOT.md, менялось
 #
-# Сбор новостей 4×/сутки = каждые 6 часов (00,06,12,18 UTC), со сдвигом по минутам,
-# чтобы три агента не толкались при git push.
+# Сдвиг по минутам — чтобы агенты не толкались при git push.
 
 # A) NPZ-STATUS  (Haiku) — статусы заводов и терминалов  → data/fuel-state.json
 5 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-npz.md npz-status >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
@@ -27,10 +41,11 @@ MAILTO=root
 # F) ROADS (Haiku) — дороги/топливная логистика, Мариуполь → data/roads.json
 45 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-roads.md roads >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
 
-# H) NEWSWATCH (Haiku) — ЧАСОВОЙ fast-lane по ударам.
-# ЖИВЁТ КАК ОБЛАЧНЫЙ Remote-trigger Anthropic (id trig_01PhsFLRt2Q5yijyyVzRHq6D,
-# cron «0 1-5,7-11,13-17,19-23 * * *»), НЕ как VPS-крон. Промпт — agents/update-prompt-newswatch.md.
-# Строки cron здесь нет намеренно: все сборщики карты крутятся в облаке Anthropic, не на VPS.
+# H) NEWSWATCH — fast-lane по ударам. Промпт — agents/update-prompt-newswatch.md.
+# ⚠️ Устарело: тут было написано «живёт облачным Remote-trigger Anthropic
+# (trig_01PhsFLRt2Q5yijyyVzRHq6D), все сборщики крутятся в облаке». Это неверно с
+# 2026-08-26: NEWSWATCH живёт в hermes cron (~/.hermes/cron/jobs.json), расписание
+# «0 1,3,...,23», модель deepseek-v4-flash. Актуально — FLEET-SNAPSHOT.md.
 
 # D) FORECAST (Opus) — сценарный прогноз, раз в неделю (вс 03:45 UTC) → data/forecast.json
 45 3 * * 0 NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-opus-4-8 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-forecast.md forecast >> /root/npz-tactical-map/agents/logs/cron.log 2>&1

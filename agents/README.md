@@ -25,14 +25,30 @@ agents/
   update-prompt-market.md  # FUEL-MARKET (дефицит/баланс/меры)
   update-prompt-history.md # HISTORY-CRIMEA (хроника + Крым)
   update-prompt-forecast.md# FORECAST (Opus, раз в неделю)
-  crontab.txt              # строки cron (4×/сутки + еженедельный прогноз)
+  crontab.txt              # ⚠️ ОБРАЗЕЦ установки, НЕ живое расписание (см. шапку файла)
+  fleet-snapshot.sh        # снимок всех 3 планировщиков -> docs/agents/FLEET-SNAPSHOT.md
   logs/                    # логи запусков
 ```
 
-## Установка на VPS (193.28.186.23)
+## Живое расписание флота
+
+🔴 Расписание живёт в **трёх** местах, которые друг о друге не знают: `crontab -l`,
+`~/.hermes/cron/jobs.json` (эти задания не видны ни в crontab, ни в syslog) и systemd
+timers. Единственный достоверный список — снимок:
 
 ```bash
-ssh root@193.28.186.23
+ssh hermes-vps 'cd /root/npz-tactical-map && bash agents/fleet-snapshot.sh'   # обновить
+bash agents/fleet-snapshot.sh --check                                          # RC=1 если разошлось
+```
+
+Результат — `docs/agents/FLEET-SNAPSHOT.md`. Руками его не правят.
+
+## Установка на VPS (hermes-vps, 104.252.77.253)
+
+> ⚠️ Прежний адрес 193.28.186.23 выключен навсегда — не использовать.
+
+```bash
+ssh hermes-vps
 git clone git@github.com:volobuevaleksand7-hue/npz-tactical-map.git /root/npz-tactical-map   # или https
 cd /root/npz-tactical-map
 chmod +x agents/run-agent.sh
