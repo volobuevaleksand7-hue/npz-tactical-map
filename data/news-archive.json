@@ -9,7 +9,7 @@
    "export_ban_gasoline": true,
    "export_ban_kerosene": true,
    "import_from_belarus": true,
-   "notes": "Вторая волна кризиса (после 8 августа) охватывает 59+ регионов РФ с массовыми очередями на АЗС (от 15 минут до 2.5+ часов) и восстановленными ограничениями продажи (20-30 л за заправку, системы нечётных/чётных дней). На 25 августа острая фаза в Оренбургской, Смоленской, Калужской (лицензионное ограничение по номеру машины действует), Тульской, Пензенской, Тамбовской, Липецкой, Воронежской, Саратовской, Волгоградской областях, Краснодарском и Приморском краях, Москве и Санкт-Петербурге (60 л за заправку). Производство упало до минимума за два десятилетия (~75-80 тыс т/сутки при спросе 115-120 тыс т/сутки). Дневной дефицит 35-40% от спроса. Десять НПЗ полностью остановлены (Кинеф, Рязань, Пермь, Волгоград, Саратов, Орск, ННОС, ТАНЕКО, Сызран, Новокуйбышевск); восстановление затруднено санкциями на оборудование. Экспортные запреты: бензин — полный запрет до 31 января 2027; дизель — запрет до 31 августа, затем исключения для производителей и судовых фракций с 1 сентября. Беларусский импорт (454+ тыс т в 2026, 20-кратный рост к 2025) остаётся главным стабилизатором, но объёмы в августе снижаются. Розничные цены 72-82 ₽/л; биржевая АИ-95 на СПбМТСБ держится выше 80 тыс. ₽/т (максимум 80.5 тыс. ₽/т 12 августа). Пять северокавказских субъектов (Крым, Кабардино-Балкария, Ингушетия, Чечня, Дагестан) без открытых АЗС для населения.",
+   "notes": "Вторая волна кризиса охватывает 59+ регионов РФ с массовыми очередями на АЗС (15 мин — 2.5+ часов) и восстановленными ограничениями продажи (20-30 л за заправку, системы нечётных/чётных дней). Острая фаза: Оренбургская, Смоленская, Калужская (лицензионное ограничение по номеру машины действует с 24 августа), Тульская, Пензенская, Тамбовская, Липецкая, Воронежская, Саратовская, Волгоградская области, Краснодарский и Приморский края, Москва и Санкт-Петербург (60 л за заправку). Производство достигло минимума за два десятилетия; дневной дефицит 35-40% рыночного спроса. Восстановление неработающих заводов затруднено санкциями на импортное оборудование. Экспортные запреты: бензин до 31 января 2027; дизель до 31 августа, затем исключения для производителей и судовых фракций. Беларусский импорт (454+ тыс т в 2026, 20-кратный рост к 2025) — главный стабилизатор, но августовские поставки ниже июльских; РФ импортирует также ~270 тыс т дозапреобработанного топлива из АТР. Розничные цены 72-82 ₽/л. Пять северокавказских субъектов (Крым, Кабардино-Балкария, Ингушетия, Чечня, Дагестан) без открытых АЗС для населения.",
    "throughput_shortfall_pct": 67,
    "method": "capacity_offline и throughput_shortfall выводятся из refineries[] кодом (agents/recalc-national-balance.py), не оценкой агента."
   },
@@ -562,46 +562,46 @@
     "lat": 57.82,
     "lon": 28.33,
     "level": "strained",
-    "updated": "2026-08-24T12:00:00Z",
-    "networks": [
-     {
-      "name": "Все сети",
-      "status": "open",
-      "level": "calm",
-      "limit_l": null,
-      "note": "21.08: АИ-95 в наличии. Кризис преодолён. Ограничений нет."
-     }
-    ],
-    "queues_hours": 0.2,
-    "ai95_price_rub": 72,
-    "diesel_price_rub": 80,
-    "source_urls": [
-     "https://www.petrolplus.ru/fuelindex/pskovskaya-oblast/ai95/"
-    ],
-    "note": "21.08 ротация: Кризис преодолён. АИ-95 в наличии везде. Без ограничений."
-   },
-   {
-    "region": "Марий Эл",
-    "lat": 56.63,
-    "lon": 47.89,
-    "level": "calm",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
       "name": "Крупные сети",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "21.08: Без жёстких ограничений. Мониторинг активен. Цены стабильны."
+      "note": "26.08: Без ограничений. Стабильна."
+     }
+    ],
+    "queues_hours": 0.2,
+    "ai95_price_rub": 72,
+    "diesel_price_rub": 80,
+    "source_urls": [
+     "https://forum.awd.ru/viewtopic.php?t=440480"
+    ],
+    "note": "26.08: Ротация. Стабильна."
+   },
+   {
+    "region": "Марий Эл",
+    "lat": 56.63,
+    "lon": 47.89,
+    "level": "calm",
+    "updated": "2026-08-26T04:23:42Z",
+    "networks": [
+     {
+      "name": "Крупные сети",
+      "status": "open",
+      "level": "calm",
+      "limit_l": null,
+      "note": "26.08: Без жёстких ограничений. Мониторинг активен."
      }
     ],
     "queues_hours": 0,
     "ai95_price_rub": 71,
     "diesel_price_rub": 80,
     "source_urls": [
-     "https://www.marimedia.ru/news/transport-i-dorogi/item/kakaya-obstanovka-po-benzinu-seychas-v-yoshkar-ole/"
+     "https://forum.awd.ru/viewtopic.php?t=440480"
     ],
-    "note": "21.08 ротация: Ситуация стабильна. Жёстких ограничений нет. Цены в норме."
+    "note": "26.08: Ротация. Стабильна."
    },
    {
     "region": "Амурская область",
@@ -631,23 +631,23 @@
     "lat": 44.61,
     "lon": 40.1,
     "level": "limited",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
       "name": "Все АЗС",
       "status": "limited",
       "level": "limited",
       "limit_l": 40,
-      "note": "21.08: Лимит 40л/сутки. Очереди контролируются. Запасы достаточны."
+      "note": "26.08: Лимит 40л/сутки с 21.07. Ограничения сохраняются."
      }
     ],
     "queues_hours": 0.2,
     "ai95_price_rub": 74,
     "diesel_price_rub": 77,
     "source_urls": [
-     "https://kuban24.tv/item/v-adygee-vveli-vremennye-ogranicheniya-na-kolichestvo-otpuskaemogo-na-azs-topliva"
+     "https://finance.mail.ru/article/nu-vot-i-vse-v-kakih-regionah-nachali-snimat-ogranicheniya-na-prodazhu-benzina-i-dizelya-69219723/"
     ],
-    "note": "21.08 ротация: Лимит 40л. Ограничения контролируемы. Ситуация стабильна."
+    "note": "26.08: Ротация. Лимит 40л."
    },
    {
     "region": "Ярославская область",
@@ -677,14 +677,14 @@
     "lat": 59.5,
     "lon": 31.0,
     "level": "calm",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
-      "name": "Лукойл/Газпром нефть/Роснефть",
+      "name": "Газпромнефть / Лукойл / Роснефть",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "21.08: Ограничения полностью отменены. Свободная продажа."
+      "note": "26.08: Ограничения отменены (4.08). Свободная продажа."
      }
     ],
     "queues_hours": 0,
@@ -693,20 +693,20 @@
     "source_urls": [
      "https://abnews.ru/szfo/news/lenobl/2026/8/6/v-lenoblasti-uvelichili-limit-na-otpusk-benzina"
     ],
-    "note": "21.08: Ограничения полностью отменены. Кризис преодолён."
+    "note": "26.08: Ротация. Ограничения отменены."
    },
    {
     "region": "Вологодская область",
     "lat": 59.22,
     "lon": 39.89,
     "level": "calm",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
       "name": "Газпромнефть/Лукойл/Роснефть",
       "status": "open",
       "limit_l": null,
-      "note": "21.08: Ограничения отменены. Свободная продажа.",
+      "note": "26.08: Ограничения отменены (4.08). Свободная продажа.",
       "level": "calm"
      }
     ],
@@ -714,32 +714,32 @@
     "ai95_price_rub": 72,
     "diesel_price_rub": 80,
     "source_urls": [
-     "https://finance.mail.ru/article/problemy-s-benzinom-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215476/"
+     "https://abnews.ru/szfo/news/lenobl/2026/8/6/v-lenoblasti-uvelichili-limit-na-otpusk-benzina"
     ],
-    "note": "21.08: Ограничения отменены. Очередей нет. Кризис преодолён."
+    "note": "26.08: Ротация. Кризис преодолён."
    },
    {
     "region": "Новосибирская область",
     "lat": 54.99,
     "lon": 82.89,
     "level": "strained",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
       "name": "Газпромнефть/Лукойл",
       "status": "limited",
       "level": "limited",
       "limit_l": 30,
-      "note": "21.08: Лимиты 30-40л. Дефицит АИ-95 на ряде АЗС. Очереди на спаде."
+      "note": "26.08: Лимиты 30л бензина, 60л дизеля. Наценка ограничена 15% до 15.11."
      }
     ],
     "queues_hours": 0,
     "ai95_price_rub": 85,
     "diesel_price_rub": 92,
     "source_urls": [
-     "https://ngs.ru/text/transport/2026/08/18/76591889/"
+     "https://www.vedomosti.ru/strana/siberian/news/2026/08/14/1221206-natsenki-na-benzin"
     ],
-    "note": "21.08: Лимиты действуют. Ценовой разброс снижается. Очереди на спаде."
+    "note": "26.08: Ротация. Лимиты действуют."
    },
    {
     "region": "Саратовская область",
@@ -815,46 +815,46 @@
     "lat": 43.48,
     "lon": 43.61,
     "level": "strained",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
       "name": "Все сети",
-      "status": "open",
-      "level": "calm",
+      "status": "limited",
+      "level": "strained",
       "limit_l": null,
-      "note": "21.08: Без ограничений. Топливо доступно. Дефицита не ожидается."
+      "note": "26.08: На АЗС сохранялись очереди (15-24.08). Ситуация напряжённая."
      }
     ],
     "queues_hours": 0,
     "ai95_price_rub": 75,
     "diesel_price_rub": 79,
     "source_urls": [
-     "https://www.infox.ru/news/299/381160-kabardino-balkaria-obespecena-toplivom-deficita-ne-predviditsa"
+     "https://www.kavkaz-uzel.eu/articles/426060"
     ],
-    "note": "21.08 ротация: Стабильное снабжение. Без ограничений."
+    "note": "26.08: Ротация. Ситуация напряжённая."
    },
    {
     "region": "Карачаево-Черкесская республика",
     "lat": 44.23,
     "lon": 42.06,
-    "level": "strained",
-    "updated": "2026-08-24T12:00:00Z",
+    "level": "limited",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
       "name": "Лукойл / Роснефть",
       "status": "limited",
       "level": "limited",
-      "limit_l": 50,
-      "note": "21.08: Ограничения. Очереди в дешёвых колонках. Цены выше соседних."
+      "limit_l": 30,
+      "note": "26.08: Лимит 30л бензина, 60л дизеля (город), 200л (трасса)."
      }
     ],
     "queues_hours": 0.5,
     "ai95_price_rub": 77,
     "diesel_price_rub": 81,
     "source_urls": [
-     "https://www.kavkaz-uzel.media/articles/425238"
+     "https://forum.awd.ru/viewtopic.php?t=440480"
     ],
-    "note": "21.08 ротация: Лимиты и очереди сохраняются."
+    "note": "26.08: Ротация. Лимит 30л."
    },
    {
     "region": "Краснодарский край (Черноморское побережье)",
@@ -916,7 +916,7 @@
     "lat": 43.12,
     "lon": 131.89,
     "level": "calm",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "ai95_price_rub": 75.7,
     "networks": [
      {
@@ -924,38 +924,38 @@
       "status": "open",
       "level": "calm",
       "limit_l": 100,
-      "note": "22.08: Топливо доступно. Запреты на канистры действуют. Лимиты для грузовиков: 100л (город), 200л (трасса)."
+      "note": "26.08: Топливо доступно. Запреты на канистры. Лимиты для грузовиков: 100л (город), 200л (трасса)."
      }
     ],
     "queues_hours": 0.0,
     "diesel_price_rub": 125.0,
     "source_urls": [
-     "https://vladivostok1.ru/text/auto/2026/08/19/76596110/"
+     "https://www.dv.kp.ru/daily/277804/5286271/"
     ],
-    "note": "22.08: Доступность стабильна. Ограничения на канистры, лимиты для грузовиков. Цены стабилизировались."
+    "note": "26.08: Ротация. Доступность стабильна."
    },
    {
     "region": "Иркутская область",
     "lat": 52.29,
     "lon": 104.3,
     "level": "strained",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
-      "name": "Роснефть",
+      "name": "Роснефть / Крайснефть",
       "status": "limited",
       "level": "limited",
-      "limit_l": 40,
-      "note": "21.08: Лимит 40л. Ограничения действуют в городе, 80л ДТ на трассе."
+      "limit_l": 30,
+      "note": "26.08: Лимит 30л бензина (с 13.08), 80л ДТ на трассе."
      }
     ],
     "queues_hours": 0.2,
     "ai95_price_rub": 81,
     "diesel_price_rub": 88,
     "source_urls": [
-     "https://www.baikal-daily.ru/news/23/06/2026/7537629/"
+     "https://i38.ru/transport-pervie/ogranicheniya-na-azs-i-rost-tsen-chto-proischodit-s-benzinom-v-irkutskoy-oblasti"
     ],
-    "note": "21.08: Лимиты действуют. Ситуация контролируется. Цены выше среднероссийских."
+    "note": "26.08: Ротация. Ограничения действуют."
    },
    {
     "region": "Архангельская область",
@@ -1799,14 +1799,14 @@
     "lat": 51.96,
     "lon": 85.96,
     "level": "limited",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
       "name": "КОТ система",
       "status": "limited",
       "level": "limited",
       "limit_l": 50,
-      "note": "21.08: КОТ система работает. Ограничения смягчены. Очереди исчезли в центре."
+      "note": "26.08: Лимит 50л бензина, 100л дизеля ежедневно."
      }
     ],
     "queues_hours": 0.2,
@@ -1815,7 +1815,7 @@
     "source_urls": [
      "https://tolknews.ru/respaltay/obsestvo/223006-kak-v-respublike-altay-smyagchili-ogranicheniya-na-prodazhu-topliva"
     ],
-    "note": "21.08 ротация: КОТ система активна. Очереди минимальны в центре."
+    "note": "26.08: Ротация. КОТ система активна."
    },
    {
     "region": "Самарская область",
@@ -1944,23 +1944,23 @@
     "lat": 53.24,
     "lon": 34.36,
     "level": "limited",
-    "updated": "2026-08-24T12:00:00Z",
+    "updated": "2026-08-26T04:23:42Z",
     "networks": [
      {
       "name": "Региональные АЗС",
       "status": "limited",
       "level": "limited",
       "limit_l": 20,
-      "note": "21.08: 20л лимит. Запрет на канистры отменен. Ситуация под контролем."
+      "note": "26.08: Лимит 20л. Приоритет аграриям."
      }
     ],
     "queues_hours": 0.5,
     "ai95_price_rub": 71,
     "diesel_price_rub": 76,
     "source_urls": [
-     "https://finance.mail.ru/article/gde-ogranichili-prodazhu-benzina-i-kogda-situaciya-normalizuetsya-69217153/"
+     "https://newsbryansk.ru/fn_1892245.html"
     ],
-    "note": "21.08: 20л лимит сохраняется. Ситуация под контролем."
+    "note": "26.08: Ротация. Лимит 20л."
    },
    {
     "region": "Курская область",
@@ -17252,6 +17252,22 @@
      "detail": "Новошахтинский НПЗ получил повреждения при атаке и приостановил переработку. На территории завода начался пожар. Повреждены жилые дома в городе, лесной пожар в Каменском районе охватил 4,5 гектара.",
      "source_url": "https://lenta.ru/news/2026/08/25/long-npz-v-rostovskoy-oblasti-priostanovil-rabotu-posle-naleta-vsu-region-nochyu-atakovali-desyatki-bpla/",
      "confidence": "reported"
+    },
+    {
+     "date": "2026-08-25",
+     "time": "ночь",
+     "city": "Афипский",
+     "region": "Краснодарский край",
+     "lat": 44.8909,
+     "lon": 38.8338,
+     "type": "drone",
+     "count": 1,
+     "target": "железнодорожная станция Афипская",
+     "detail": "обломки БПЛА упали на станцию",
+     "title": "Удар по железнодорожной станции Афипская",
+     "casualties": 2,
+     "source_url": "https://kazan.aif.ru/incidents/details/tragediya-na-stancii-ataka-bpla-na-kuban-25-avgusta-pogibshie-i-povrezhdeniya",
+     "confidence": "confirmed"
     }
    ],
    "voices": [
@@ -17354,7 +17370,75 @@
      "author_hint": "пользователь Telegram"
     }
    ]
+  },
+  "2026-08-26": {
+   "strikes": [
+    {
+     "date": "2026-08-26",
+     "time": "ночь",
+     "city": "Кстово",
+     "region": "Нижегородская область",
+     "lat": 56.157562,
+     "lon": 44.205868,
+     "type": "drone",
+     "count": 1,
+     "target": "НПЗ LUKOIL-Nizhegorodnefteorgsintez",
+     "detail": "крупный пожар на нефтеперерабатывающем заводе, один из крупнейших НПЗ РФ мощностью ~17 млн тонн в год",
+     "title": "Удар по нефтеперерабатывающему заводу в Кстово",
+     "source_url": "https://neftegaz.ru/news/incidental/925119-v-kstovo-padenie-oblomkov-bpla-vyzvalo-pozhary-na-prompredpriyatiyakh/",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-08-26",
+     "time": "ночь",
+     "city": "Котовск",
+     "region": "Тамбовская область",
+     "lat": 52.587,
+     "lon": 41.499,
+     "type": "drone",
+     "count": 1,
+     "target": "логистический центр Wildberries",
+     "detail": "пожар площадью 40-100 тыс. кв. м, эвакуация сотрудников, один пострадавший получил сотрясение мозга от взрывной волны",
+     "title": "Пожар на логистическом центре Wildberries в Котовске",
+     "casualties": 1,
+     "source_url": "https://iz.ru/2155137/2026-08-26/na-sklade-wildberries-v-tambovskoi-oblasti-v-rezultate-ataki-bpla-voznik-pozhar",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-26",
+     "time": "ночь",
+     "city": "Липецкий округ",
+     "region": "Липецкая область",
+     "lat": 52.6122,
+     "lon": 39.59812,
+     "type": "drone",
+     "count": 1,
+     "target": "частный жилой дом",
+     "detail": "падение беспилотника на жилой дом и пожар, погибли мужчина и 14-летний подросток, двое женщин получили ранения",
+     "title": "Падение беспилотника на жилой дом в Липецкой области",
+     "casualties": 2,
+     "source_url": "https://zona.media/news/2026/04/14/artamonov",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-08-26",
+     "time": "ночь",
+     "city": "Прокоровка",
+     "region": "Белгородская область",
+     "lat": 51.036,
+     "lon": 36.731,
+     "type": "drone",
+     "count": 2,
+     "target": "промышленное предприятие",
+     "detail": "две БПЛА деtonировали на территории предприятия, повреждены два грузовика, двое мужчин получили множественные осколочные ранения",
+     "title": "Удар по промышленному предприятию в Прокоровке",
+     "casualties": 2,
+     "source_url": "https://ukraina.ru/20260826/tri-cheloveka-postradali-v-belgorodskoy-oblasti-pri-nalte-bpla-1082797401.html",
+     "confidence": "confirmed"
+    }
+   ],
+   "voices": []
   }
  },
- "updated": "2026-08-25"
+ "updated": "2026-08-26"
 }
