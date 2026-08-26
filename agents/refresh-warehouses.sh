@@ -19,6 +19,10 @@ cd "$REPO" || exit 1
 python3 agents/fetch-warehouses.py   || { echo "refresh-warehouses: fetch упал" >&2; exit 1; }
 python3 agents/gen-warehouses-page.py || { echo "refresh-warehouses: gen упал" >&2; exit 1; }
 python3 agents/gen-survivors-page.py || { echo "refresh-warehouses: gen-survivors упал" >&2; exit 1; }
+# 🔴 26.08: проза на udar-po-skladu-ozon.html дрейфовала отдельно от счётчиков — статкарты
+# синкались автоматикой, а список городов и «три эпизода» писались руками. За двое суток
+# страница начала противоречить сама себе. Теперь изменчивые куски генерируются из датасета.
+python3 agents/gen-ozon-episodes.py || { echo "refresh-warehouses: gen-ozon-episodes упал" >&2; exit 1; }
 python3 agents/sync-warehouse-counts.py || { echo "refresh-warehouses: sync упал" >&2; exit 1; }
 
 # Коммитим ТОЛЬКО свои файлы поимённо: `git add data/` соседа уже дважды уносил чужую работу.
