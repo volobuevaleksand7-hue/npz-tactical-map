@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-26T04:20:00Z",
+    "generated_at": "2026-08-26T04:47Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
@@ -176,10 +176,10 @@
       "status": "down",
       "status_since": "2026-08-08",
       "est_output_pct": 0,
-      "damage": "Удар БПЛА по НПЗ Лукойл-Нижегороднефтеоргсинтез в Кстово, Нижегородская область, утром 8 августа 2026. Взрывы и пожары на территории завода; объект остановлен. Подтверждено каналом NPZmap (молния 08.08 07:47 МСК). Источник: Militarnyi, канал NPZmap.",
+      "damage": "крупный пожар на нефтеперерабатывающем заводе, один из крупнейших НПЗ РФ мощностью ~17 млн тонн в год",
       "note": "На 24 августа — полная остановка после подтвережденной атаки. 4-й по величине нефтезавод России (мощность 16-17 млн т/год). Восстановление требует времени и отсутствия новых ударов.",
-      "source_url": "https://militarnyi.com/en/news/drone-attacks-oil-refinery-in-the-nizhny-novgorod-region/",
-      "confidence": "confirmed"
+      "source_url": "https://neftegaz.ru/news/incidental/925119-v-kstovo-padenie-oblomkov-bpla-vyzvalo-pozhary-na-prompredpriyatiyakh/",
+      "confidence": "reported"
     },
     {
       "id": "yanos",
@@ -1249,6 +1249,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-08-26",
+      "text": "Удар по Лукойл-Нижегороднефтеоргсинтез (Кстово) (Кстово): Удар по нефтеперерабатывающему заводу в Кстово",
+      "source_url": "https://neftegaz.ru/news/incidental/925119-v-kstovo-padenie-oblomkov-bpla-vyzvalo-pozhary-na-prompredpriyatiyakh/"
+    },
     {
       "date": "2026-08-25",
       "text": "Удар по Афипскому НПЗ (Краснодарский край): ночью 25 августа украинские БПЛА атаковали завод, спровоцировав пожар. Обломки дрона упали на жилой дом, погибли 2 человека, ранены 2. Завод переведён на пониженную мощность. Это вторая атака на завод в 2026 году.",
