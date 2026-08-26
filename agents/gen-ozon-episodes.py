@@ -151,6 +151,38 @@ def short_block(doc):
                len(all_hit), len(wh), len(wb_hit), len(wb), len(hit), len(oz)))
 
 
+def cards_block(doc):
+    """4 плитки в шапке из данных.
+
+    Были статикой: 26.08 в них стояло свежее число 7, но слово осталось от прошлой
+    правки — «7 поражённых ОБЪЕКТА Ozon» вместо «объектов». Числа правили руками,
+    согласование — нет. Тот же класс, что и остальные счётчики страницы, поэтому
+    плитки тоже уходят под генератор.
+    """
+    wh, oz, wb, hit = split(doc)
+    wb_hit = [w for w in wb if w.get("status") == "hit"]
+    all_hit = [w for w in wh if w.get("status") == "hit"]
+    days = "—"
+    if hit:
+        ds = sorted({w["date"][:10] for w in hit if w.get("date")})
+        if ds:
+            from datetime import date as _d
+            a = _d(*(int(x) for x in ds[0].split("-")))
+            b = _d(*(int(x) for x in ds[-1].split("-")))
+            n = (b - a).days + 1
+            days = "%d %s" % (n, plural(n, "день", "дня", "дней"))
+    card = ('          <div class="status-card"><div class="val">%s</div>'
+            '<div class="lbl">%s</div></div>')
+    return "\n".join([
+        card % (len(hit), "%s Ozon (из %d)" % (
+            plural(len(hit), "поражённый объект", "поражённых объекта",
+                   "поражённых объектов"), len(oz))),
+        card % (days, "от первого удара до последнего"),
+        card % (len(wb_hit), "поражённых складов Wildberries (из %d)" % len(wb)),
+        card % (len(all_hit), "поражённых складов в базе (из %d)" % len(wh)),
+    ])
+
+
 def between(html, tag, payload):
     """Замена строго между маркерами — операция идемпотентна."""
     pat = re.compile(r"(<!-- %s:START -->).*?(<!-- %s:END -->)" % (tag, tag), re.S)
@@ -197,6 +229,7 @@ def build(html, doc):
     html = between(html, "OZON-SHORT", "\n" + short_block(doc) + "\n      ")
     html = between(html, "OZON-EPISODES", "\n" + episodes_block(doc) + "\n      ")
     html = between(html, "OZON-COUNTS", "\n" + counts_block(doc) + "\n      ")
+    html = between(html, "OZON-CARDS", "\n" + cards_block(doc) + "\n        ")
     for q, a in faq_answers(doc).items():
         html = set_faq(html, q, a)
     html = sync_faq_ld(html)
