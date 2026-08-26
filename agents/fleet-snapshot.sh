@@ -71,11 +71,15 @@ PY
 
   echo "## 3. systemd timers (не-ОС)"
   echo
+  # Только ИМЕНА юнитов: колонки NEXT/LEFT/LAST/PASSED меняются каждую секунду и
+  # ломали бы --check ложным расхождением на каждом прогоне.
   if command -v systemctl >/dev/null 2>&1; then
     echo '```'
     systemctl list-timers --all --no-pager 2>/dev/null \
-      | grep -vE 'apt-daily|dpkg-db-backup|logrotate|motd-news|systemd-tmpfiles|e2scrub|fstrim|snapd|^NEXT|^$|timers listed' \
-      || echo '(нет)'
+      | grep -oE '[a-z0-9_.@-]+\.timer' \
+      | grep -vE '^(apt-daily|apt-daily-upgrade|dpkg-db-backup|logrotate|motd-news|systemd-tmpfiles-clean|e2scrub_all|fstrim|snapd)' \
+      | sort -u \
+      | grep . || echo '(нет)'
     echo '```'
   else
     echo "_systemctl недоступен на этой машине._"
