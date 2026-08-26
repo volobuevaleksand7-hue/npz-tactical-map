@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787747193,
-      "source_text": "26.08.2026 15:26 МСК\nШтурмовое, Сахарная Головка Севастополь С запада фиксации БПЛА"
+      "last_event_ts": 1787757358,
+      "source_text": "26.08.2026 18:15 МСК\nСевастополь Опасность по БПЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787748735,
-      "source_text": "26.08.2026 15:52 МСК\nФиолент от Херсонеса и далее в направлении Балаклавы Тревога по БПЛА с моря"
+      "last_event_ts": 1787757358,
+      "source_text": "26.08.2026 18:15 МСК\nСевастополь Опасность по БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -1317,9 +1317,9 @@
       "lat": 44.60795,
       "lon": 33.52134,
       "region": "Севастополь",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1330,8 +1330,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787747193,
-      "source_text": "26.08.2026 15:26 МСК\nШтурмовое, Сахарная Головка Севастополь С запада фиксации БПЛА"
+      "last_event_ts": 1787757358,
+      "source_text": "26.08.2026 18:15 МСК\nСевастополь Опасность по БПЛА"
     },
     {
       "key": "токмак|запорожская область",
@@ -2253,6 +2253,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 266971,
+      "text": "ЮБК внимание по БПЛА от Севастополя по морю",
+      "ts": 1787757408,
+      "time_label": "26.08.2026 18:16 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266970,
+      "text": "Севастополь\nОпасность по БПЛА",
+      "ts": 1787757358,
+      "time_label": "26.08.2026 18:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 266969,
+      "text": "Севастополь опасность по БПЛА с моря",
+      "ts": 1787757352,
+      "time_label": "26.08.2026 18:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 266968,
       "text": "Ржевка премиксы и близлежащие\nШебекинский район\nТревога по БПЛА",
       "ts": 1787756604,
@@ -2867,30 +2891,6 @@
       "time_label": "26.08.2026 15:14 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 266899,
-      "text": "Балаклава\nБалаклавская ТЭС\nСевастополь\nС юга фиксации БПЛА",
-      "ts": 1787746466,
-      "time_label": "26.08.2026 15:14 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 266898,
-      "text": "Рыльск опасность по БПЛА от Звягина - Трошино\nКурская область",
-      "ts": 1787746164,
-      "time_label": "26.08.2026 15:09 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 266897,
-      "text": "Танковое Бахчисарайского района и в направлении Байдарская долина, ЮБК\nТревога по БПЛА",
-      "ts": 1787746133,
-      "time_label": "26.08.2026 15:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2900,13 +2900,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787756604,
-  "last_event_at": "2026-08-26T15:03:24Z",
-  "fetched_at": "2026-08-26T15:10:03.074495Z",
+  "timestamp": 1787757408,
+  "last_event_at": "2026-08-26T15:16:48Z",
+  "fetched_at": "2026-08-26T15:20:04.250512Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-26T15:10:03.074495Z",
-    "source_age_seconds": 399,
+    "generated_at": "2026-08-26T15:20:04.250512Z",
+    "source_age_seconds": 196,
     "city_count": 74,
     "region_count": 13,
     "feed_count": 80
