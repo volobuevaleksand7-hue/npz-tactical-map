@@ -37,10 +37,13 @@ def make_webp_full(path, quality=FULL_WEBP_Q):
     webp_path = os.path.splitext(path)[0] + ".webp"
     if os.path.isfile(webp_path) and os.path.getmtime(webp_path) >= os.path.getmtime(path):
         return webp_path  # уже свежий — не дёргаем cwebp зря
-    # ponytail: пишем во временный и оставляем МЕНЬШИЙ из двух. 25.07: после добавления
-    # pngquant PNG стал палитровым с дизерингом, и cwebp из него давал webp НА 13% ТЯЖЕЛЕЕ
-    # прежнего — а .webp это горячий путь (<img> на страницах), png идёт только в og:image.
-    # Размен вышел в минус; правило «не ухудшать» чинит это раз и навсегда.
+    # 🔴 26.08: раньше здесь при регенерации оставляли МЕНЬШИЙ из старого/нового webp
+    # (задумано против 13%-регрессии pngquant от 25.07 на ТОЙ ЖЕ картинке) — но проверки
+    # "на то же изображение" не было, только байты. 24.08 перерисовали обложку (абстрактные
+    # кружки → нормальная карточка), новый webp вышел тяжелее — и правило молча оставило
+    # СТАРУЮ картинку с ДРУГИМ содержимым, да ещё и обновило ей mtime, спрятав протухание
+    # от следующего прогона. mtime-гейт выше уже отвечает на вопрос "источник менялся?" —
+    # если он сказал "да", то отдаём свежий encode безусловно, без байтового арбитража.
     tmp_webp = webp_path + ".tmp"
     try:
         r = subprocess.run(["cwebp", "-quiet", "-q", str(quality), path, "-o", tmp_webp],
@@ -50,10 +53,6 @@ def make_webp_full(path, quality=FULL_WEBP_Q):
                   (path, r.stderr.decode("utf-8", "replace")[:200]))
             os.path.isfile(tmp_webp) and os.remove(tmp_webp)
             return None
-        if os.path.isfile(webp_path) and os.path.getsize(webp_path) <= os.path.getsize(tmp_webp):
-            os.remove(tmp_webp)          # существующий не хуже — не трогаем
-            os.utime(webp_path, None)    # но метим свежим, иначе будем пересчитывать каждый раз
-            return webp_path
         os.replace(tmp_webp, webp_path)
         return webp_path
     except FileNotFoundError:

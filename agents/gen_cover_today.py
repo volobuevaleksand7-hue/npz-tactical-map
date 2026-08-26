@@ -4,8 +4,7 @@ Uses PIL fallback when image_gen (Codex) is unavailable (429)."""
 import sys, os, re
 sys.path.insert(0, os.path.dirname(__file__))
 from caption_cover import pick_top_strike, caption_cover
-from PIL import Image, ImageDraw, ImageFont
-import platform as _plat
+from PIL import Image, ImageDraw
 
 DOMAIN_RE = re.compile(r"нпз|завод|склад|логист|терминал|нефт|топлив|нефтебаз|резервуар|азс", re.I)
 
@@ -33,19 +32,17 @@ def demo():
     long_ = _cover_caption("склад " + "очень " * 40)
     assert len(long_) <= 61 and long_.endswith("\u2026") and " " in long_, long_
     assert not long_.rstrip("\u2026").endswith(" "), long_
+    # очень длинный город + очень длинная подпись не выходят за пределы холста
+    # (23.08.2026: «НОВОКУЙБЫШЕВСК» и вторая строка обрезало по обоим краям —
+    # реальный прогон рендера через caption_cover, не только текстовая логика)
+    from caption_cover import _selfcheck as _cc_selfcheck
+    _cc_selfcheck()
     print("gen_cover_today demo OK")
 
 
 W, H = 1200, 630
-BG = (15, 20, 35)
-AMBER = (255, 206, 107)
-
-if _plat.system() == "Darwin":
-    FONT_BOLD = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
-    FONT_REG = "/System/Library/Fonts/Supplemental/Arial.ttf"
-else:
-    FONT_BOLD = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
-    FONT_REG = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
+BG = (14, 19, 28)
+AMBER = (255, 180, 67)
 
 
 def _make_dark_bg():
@@ -161,7 +158,11 @@ def generate_cover_auto(day=None):
     # Apply caption overlay
     # Always save as today's date for the cover filename
     today = day or datetime.now().strftime("%Y-%m-%d")
-    out_path = f"/root/npz-tactical-map/assets/cover-{today}.png"
+    # 🔴 было захардкожено "/root/npz-tactical-map/..." — работало только на VPS,
+    # локальный прогон (Mac/worktree) падал бы на несуществующем /root. Путь теперь
+    # считаем от расположения самого скрипта (agents/.. = корень репо), как strikes_path выше.
+    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_path = os.path.join(repo_root, "assets", f"cover-{today}.png")
     caption_cover(bg_path, out_path, city, event, date_rus)
 
     # Cleanup
