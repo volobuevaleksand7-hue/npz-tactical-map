@@ -99,10 +99,21 @@ def _make_dark_bg():
     return img
 
 
-def generate_cover_auto():
-    """Auto-select top strike and generate cover."""
+def generate_cover_auto(day=None):
+    """Обложка по верхнему удару. day=YYYY-MM-DD — добор за прошедший день.
+
+    Без day берётся сегодняшняя дата и окно последних 24 часов. С day окно
+    расширяется так, чтобы захватить нужные сутки — иначе добор за вчера
+    молча нарисовал бы обложку по сегодняшним ударам.
+    """
     strikes_path = os.path.join(os.path.dirname(__file__), "..", "data", "strikes.json")
-    strike = pick_top_strike(strikes_path, hours=24)
+    if day:
+        from datetime import date as _date
+        y, m, dd = (int(x) for x in day.split("-"))
+        age_days = (_date.today() - _date(y, m, dd)).days
+        strike = pick_top_strike(strikes_path, hours=24 * (age_days + 1))
+    else:
+        strike = pick_top_strike(strikes_path, hours=24)
 
     if not strike:
         print("ERROR: No strikes found in last 24h")
@@ -137,7 +148,7 @@ def generate_cover_auto():
 
     # Apply caption overlay
     # Always save as today's date for the cover filename
-    today = datetime.now().strftime("%Y-%m-%d")
+    today = day or datetime.now().strftime("%Y-%m-%d")
     out_path = f"/root/npz-tactical-map/assets/cover-{today}.png"
     caption_cover(bg_path, out_path, city, event, date_rus)
 
@@ -152,5 +163,8 @@ if __name__ == "__main__":
         demo()
         sys.exit(0)
 
-    generate_cover_auto()
+    _day = None
+    if "--date" in sys.argv:
+        _day = sys.argv[sys.argv.index("--date") + 1]
+    generate_cover_auto(_day)
 

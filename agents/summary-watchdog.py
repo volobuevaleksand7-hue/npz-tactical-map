@@ -231,8 +231,17 @@ def heal(day: str):
             # best-effort: на Маке Codex сделает обложку, на VPS — молча GENFAIL
             _run([sys.executable, "hermes/scripts/build-covers.py", "--dates", day],
                  timeout=600, env=env)
+            if not coverf.exists():
+                # 🔴 26.08: Codex «out of credits», OpenRouter упёрся в кап (403) — вся
+                # цепочка build-covers молчала, сторож писал «долг», и сайт двое суток
+                # показывал в карточке сводки ОБЩУЮ og-заглушку вместо обложки дня, а в
+                # архиве /news зияли дыры (миниатюры 404). gen_cover_today.py рисует
+                # обложку локально через PIL, без сети и без кредитов — он и должен
+                # закрывать хвост, а не «долг-инцидент».
+                _run([sys.executable, "agents/gen_cover_today.py", "--date", day],
+                     timeout=180, env=env)
             if coverf.exists():
-                _run([sys.executable, "agents/gen-news.py"])          # вшить обложку
+                _run([sys.executable, "agents/gen-news.py"])          # вшить обложку + миниатюру
     except Exception as e:  # noqa: BLE001
         log(f"самолечение: сборка упала: {e}")
         return False, False
