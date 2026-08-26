@@ -43,6 +43,10 @@ if [ -f agents/gen-news.py ]; then
     # и FAQ отстают от данных (дрейф FAQ чинили 16.07); теперь /refineries едет тем же
     # коммитом. FAQ/JSON-LD генерятся из данных, разъехаться не могут.
     python3 agents/gen-refineries.py >/dev/null 2>&1 || echo "publish-vps: ⚠ gen-refineries упал — пропускаю"
+    # /rabotayut-li-npz-rossii: та же логика, что и /refineries выше — генератор из
+    # свежего fuel-state.json, неблокирующе. Без этого статус/дни простоя/FAQ на
+    # странице отстают от данных ровно тем же классом дрейфа, что чинили на /refineries.
+    python3 agents/gen-npz-status-page.py >/dev/null 2>&1 || echo "publish-vps: ⚠ gen-npz-status-page упал — пропускаю"
     # ВСЕ артефакты gen-news (он внутри зовёт seo/generate-sitemap.py + agents/gen-rss.py):
     # news.html, sitemap.xml, news-sitemap.xml, rss.xml, news/, news-archive.json.
     # Раньше здесь не было news-sitemap.xml/rss.xml — gen-rss переписывал их каждый
@@ -56,7 +60,7 @@ if [ -f agents/gen-news.py ]; then
     # именно на него — а в git add был только *.png. Итог: 6 обложек за 03–09.08
     # отдавали 404 на проде, /news неделю показывал битые картинки, а сами файлы
     # копились untracked и роняли `git pull --rebase` всем агентам.
-    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png assets/cover-*.webp assets/thumb/cover-*.webp refineries.html krupnejshie-npz-rossii.html 2>/dev/null; then
+    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png assets/cover-*.webp assets/thumb/cover-*.webp refineries.html krupnejshie-npz-rossii.html rabotayut-li-npz-rossii.html 2>/dev/null; then
       echo "publish-vps: ОШИБКА — git add не удался" >&2
       exit 4
     fi
