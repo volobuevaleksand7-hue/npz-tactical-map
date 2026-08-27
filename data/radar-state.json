@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1787815805,
-      "source_text": "27.08.2026 10:30 МСК\nРостовская область Краснодарский край Авиационная опасность"
+      "last_event_ts": 1787848905,
+      "source_text": "27.08.2026 10:30 МСК\nРостовская область Краснодарский край Авиационная опасность\n\n27.08.2026 19:41 МСК\nРостовская область от ДНР Амвросиевка опасность по БПЛА"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787847796,
-      "source_text": "27.08.2026 14:38 МСК\nДзержинск, Горловка ДНР и близлежащие Опасность по БПЛА, в том числе и на электротяге"
+      "last_event_ts": 1787849142,
+      "source_text": "27.08.2026 19:45 МСК\nГуково Новошахтинск И близлежащие Тревога по БПЛА от ДНР"
     },
     "Московская область": {
       "bpla": false,
@@ -336,6 +336,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1787837531,
       "source_text": "27.08.2026 16:32 МСК\nКерченский полуостров опасность по БПЛА от Горностаевка в направлении возможно Керчь"
+    },
+    {
+      "key": "амвросиевка|донецкая народная республика",
+      "name": "Амвросиевка",
+      "lat": 47.79062,
+      "lon": 38.47851,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787848905,
+      "source_text": "27.08.2026 19:41 МСК\nРостовская область от ДНР Амвросиевка опасность по БПЛА"
     },
     {
       "key": "ровеньки|луганская народная республика",
@@ -1147,6 +1169,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 267485,
+      "text": "Гуково\nНовошахтинск\nИ близлежащие\nТревога по БПЛА от ДНР",
+      "ts": 1787849142,
+      "time_label": "27.08.2026 19:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 267484,
+      "text": "Ростовская область от ДНР Амвросиевка опасность по БПЛА",
+      "ts": 1787848905,
+      "time_label": "27.08.2026 19:41 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 267483,
+      "text": "Амвросиевка и близлежащие и далее на восток\nДНР\nТревога по БПЛА",
+      "ts": 1787848797,
+      "time_label": "27.08.2026 19:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 267482,
       "text": "Огромное спасибо!\n❤️\n❤️\n❤️\nhttps://pay.cloudtips.ru/p/f2a9c1d8",
       "ts": 1787848371,
@@ -1761,30 +1807,6 @@
       "time_label": "27.08.2026 14:22 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 267413,
-      "text": "Филия, Богатырь, Комар ДНР УАБы повторно",
-      "ts": 1787828704,
-      "time_label": "27.08.2026 14:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 267412,
-      "text": "Новоселовка ДНР УАБ",
-      "ts": 1787828624,
-      "time_label": "27.08.2026 14:03 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 267411,
-      "text": "Филия, Богатырь, Комар ДНР УАБы",
-      "ts": 1787828572,
-      "time_label": "27.08.2026 14:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1794,14 +1816,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787848371,
-  "last_event_at": "2026-08-27T16:32:51Z",
-  "fetched_at": "2026-08-27T16:40:02.865943Z",
+  "timestamp": 1787849142,
+  "last_event_at": "2026-08-27T16:45:42Z",
+  "fetched_at": "2026-08-27T16:50:03.571373Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-27T16:40:02.865943Z",
-    "source_age_seconds": 431,
-    "city_count": 30,
+    "generated_at": "2026-08-27T16:50:03.571373Z",
+    "source_age_seconds": 261,
+    "city_count": 31,
     "region_count": 15,
     "feed_count": 80
   }
