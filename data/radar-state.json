@@ -193,8 +193,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787791681,
-      "source_text": "27.08.2026 03:48 МСК\nСалават Республика Башкортостан Опасность по БПЛА"
+      "last_event_ts": 1787797643,
+      "source_text": "27.08.2026 05:27 МСК\nСалават Республика Башкортостан Работа ПВО по БПЛА Меры безопасности"
     },
     "Волгоградская область": {
       "bpla": false,
@@ -326,8 +326,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787793009,
-      "source_text": "27.08.2026 04:10 МСК\nГеленджик Краснодарский край Работа ПВО по БПЛА"
+      "last_event_ts": 1787797518,
+      "source_text": "27.08.2026 05:25 МСК\nКамышеватская Ейский район Тревога по БпЛА"
     },
     "Чувашия": {
       "bpla": false,
@@ -2315,6 +2315,28 @@
       "source_text": "26.08.2026 21:19 МСК\nКороча, Новый Оскол, Белгородская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     {
+      "key": "камышеватская|краснодарский край",
+      "name": "Камышеватская",
+      "lat": 46.412354,
+      "lon": 37.951698,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787797518,
+      "source_text": "27.08.2026 05:25 МСК\nКамышеватская Ейский район Тревога по БпЛА"
+    },
+    {
       "key": "новоалексеевка|херсонская область",
       "name": "Новоалексеевка",
       "lat": 46.22995,
@@ -3266,9 +3288,9 @@
       "lat": 53.3828,
       "lon": 55.91094,
       "region": "Республика Башкортостан",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -3276,11 +3298,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787791681,
-      "source_text": "27.08.2026 03:48 МСК\nСалават Республика Башкортостан Опасность по БПЛА"
+      "last_event_ts": 1787797643,
+      "source_text": "27.08.2026 05:27 МСК\nСалават Республика Башкортостан Работа ПВО по БПЛА Меры безопасности"
     },
     {
       "key": "куйбышево|запорожская область",
@@ -4315,8 +4337,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787778017,
-      "source_text": "27.08.2026 00:00 МСК\nЕйский район, Приморско-Ахтарский район, Краснодарский край - опасность по БПЛА от Азовского моря сохраняется. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1787797518,
+      "source_text": "27.08.2026 05:25 МСК\nКамышеватская Ейский район Тревога по БпЛА"
     },
     "RUS.53.37_1": {
       "gid_2": "RUS.53.37_1",
@@ -5170,6 +5192,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 85806,
+      "text": "Салават\nРеспублика Башкортостан\nРабота ПВО по БПЛА\nМеры безопасности",
+      "ts": 1787797643,
+      "time_label": "27.08.2026 05:27 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 267278,
+      "text": "Камышеватская\nЕйский район\nТревога по БпЛА",
+      "ts": 1787797518,
+      "time_label": "27.08.2026 05:25 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 82715,
       "text": "Кировская область - отбой ракетной опасности!\n📡\nЛокатор России -\n@locatorru",
       "ts": 1787797048,
@@ -5792,22 +5830,6 @@
       "time_label": "27.08.2026 02:21 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 85772,
-      "text": "Республика Марий Эл\nРакетная опасность",
-      "ts": 1787786456,
-      "time_label": "27.08.2026 02:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 85771,
-      "text": "Липецкая область\nОтбой ракетной опасности",
-      "ts": 1787786446,
-      "time_label": "27.08.2026 02:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5817,14 +5839,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787797048,
-  "last_event_at": "2026-08-27T02:17:28Z",
-  "fetched_at": "2026-08-27T02:20:03.417622Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1787797643,
+  "last_event_at": "2026-08-27T02:27:23Z",
+  "fetched_at": "2026-08-27T02:30:03.510373Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-08-27T02:20:03.417622Z",
-    "source_age_seconds": 155,
-    "city_count": 128,
+    "generated_at": "2026-08-27T02:30:03.510373Z",
+    "source_age_seconds": 160,
+    "city_count": 129,
     "region_count": 38,
     "feed_count": 80
   }
