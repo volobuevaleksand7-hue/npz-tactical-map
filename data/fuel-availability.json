@@ -869,24 +869,25 @@
       "region": "Ярославская область",
       "lat": 57.63,
       "lon": 39.87,
-      "level": "calm",
-      "updated": "2026-08-26T08:20:00Z",
+      "level": "limited",
+      "updated": "2026-08-27T16:20:00Z",
       "networks": [
         {
-          "name": "АЗС (лимиты отменены)",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "26.08: Лимиты отменены с 4.08. Свободная продажа."
+          "name": "Лукойл/Газпромнефть/Роснефть",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 40,
+          "note": "27.08 ротация: Вторая волна вернулась 18-19 августа. Атака на ярославский НПЗ. Очереди возобновились. Лимиты действуют."
         }
       ],
-      "queues_hours": 0.0,
+      "queues_hours": 0.5,
       "ai95_price_rub": 74.67,
       "diesel_price_rub": 82.63,
       "source_urls": [
-        "https://76.ru/text/transport/2026/08/24/76604559/"
+        "https://76.ru/text/transport/2026/08/25/76606809/",
+        "https://76.ru/text/tags/benzin/"
       ],
-      "note": "26.08: Лимиты отменены. Свободная продажа. Стабильна."
+      "note": "27.08 ротация: Вторая волна. Атака на НПЗ. Очереди вернулись 18-19.08. Лимиты вновь действуют."
     },
     {
       "region": "Ленинградская область",
@@ -939,24 +940,25 @@
       "region": "Новосибирская область",
       "lat": 54.99,
       "lon": 82.89,
-      "level": "strained",
-      "updated": "2026-08-26T04:23:42Z",
+      "level": "critical",
+      "updated": "2026-08-27T16:20:00Z",
       "networks": [
         {
           "name": "Газпромнефть/Лукойл",
           "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "26.08: Лимиты 30л бензина, 60л дизеля. Наценка ограничена 15% до 15.11."
+          "level": "critical",
+          "limit_l": 35,
+          "note": "27.08: Вторая волна кризиса. Очереди вернулись (ночь 26-27 августа). Лимиты 30-40л. Цены частников до 135₽/л наличными."
         }
       ],
-      "queues_hours": 0,
-      "ai95_price_rub": 85,
+      "queues_hours": 1.5,
+      "ai95_price_rub": 135,
       "diesel_price_rub": 92,
       "source_urls": [
-        "https://www.vedomosti.ru/strana/siberian/news/2026/08/14/1221206-natsenki-na-benzin"
+        "https://ngs.ru/text/auto/2026/08/27/76607735/",
+        "https://ngs.ru/text/transport/2026/08/27/76610021/"
       ],
-      "note": "26.08: Ротация. Лимиты действуют."
+      "note": "27.08 ротация: Вторая волна. Очереди ночью. Лимиты 30-40л. Цены критически высокие (135₽)."
     },
     {
       "region": "Саратовская область",
@@ -988,23 +990,24 @@
       "lat": 54.78,
       "lon": 32.05,
       "level": "limited",
-      "updated": "2026-08-26T08:20:00Z",
+      "updated": "2026-08-27T16:20:00Z",
       "networks": [
         {
           "name": "АЗС сети",
           "status": "limited",
-          "limit_l": 30,
-          "note": "26.08: Лимит 30л бензина, 60л дизеля. Ограничения сохраняются.",
-          "level": "limited"
+          "level": "limited",
+          "limit_l": 35,
+          "note": "27.08 ротация: Вторая волна дефицита. Лимиты варьируются 25-50л в зависимости от АЗС. На большинстве 30л бензина, 60л дизеля."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 70.0,
       "diesel_price_rub": 78.0,
       "source_urls": [
-        "https://runews24.ru/"
+        "https://www.petrolplus.ru/fuelindex/smolenskaya-oblast/ai95/",
+        "https://www1.ru/news/2026/08/13/427882-v-rossii-snova-ne-xvataet-benzina-12-regionov-stolknulis-s-ocerediami-i-ograniceniiami-na-azs.html"
       ],
-      "note": "26.08: Ограничения действуют. Ситуация контролируется."
+      "note": "27.08 ротация: Вторая волна. Лимиты 25-50л по разным АЗС. Ограничения контролируются."
     },
     {
       "region": "Кабардино-Балкарская республика",
@@ -1319,46 +1322,47 @@
       "lat": 54.18,
       "lon": 45.18,
       "level": "limited",
-      "updated": "2026-08-26T08:20:00Z",
+      "updated": "2026-08-27T16:20:00Z",
       "networks": [
         {
           "name": "Сети",
           "status": "limited",
           "level": "limited",
-          "limit_l": 30,
-          "note": "26.08: Чет-нечет отмена. Лимит 30л. Цены растут."
+          "limit_l": 60,
+          "note": "27.08 ротация: Лимит увеличен до 60л с 22 июля. Вторая волна кризиса. Ограничения действуют."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.3,
       "ai95_price_rub": 79.48,
       "diesel_price_rub": 81,
       "source_urls": [
-        "https://multigo.ru/benzin/54.1816;45.183/11"
+        "https://izvmor.ru/novosti/obshchestvo/v-mordovii-do-40-litrov-uvelichili-limit-razovoj-zapravki-benzina/"
       ],
-      "note": "26.08: Дефицит преодолен. Ограничения контролируются."
+      "note": "27.08 ротация: Лимит увеличен до 60л. Вторая волна продолжается."
     },
     {
       "region": "Северная Осетия - Алания",
       "lat": 43.02,
       "lon": 44.68,
       "level": "calm",
-      "updated": "2026-08-26T08:20:00Z",
+      "updated": "2026-08-27T16:20:00Z",
       "networks": [
         {
-          "name": "Сети",
+          "name": "Сети (28 АЗС)",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "26.08: Приложение для поиска топлива. Цены стабильны."
+          "note": "27.08 ротация: Стабильна. 9 АЗС работают полностью (полный ассортимент). Частные АЗС без очередей, но дороже. Цена официальная АИ-92: 73.59₽."
         }
       ],
       "queues_hours": 0.0,
       "ai95_price_rub": 75.14,
       "diesel_price_rub": 78,
       "source_urls": [
-        "https://techora.ru/news/v-severnoy-osetii-zapustili-prilozhenie-dlya-2026-08-05"
+        "https://www.petrolplus.ru/fuelindex/respublika-severnaya-osetiya-alaniya/ai95/",
+        "https://www.e-osetia.ru/news/proisshestviya/benzin-v-rso-alaniya-skolko-topliva-na-bazakh-gde-est-ocheredi-i-kogda-vsye-normalizuetsya/"
       ],
-      "note": "26.08: Приложение для поиска топлива запущено. Стабильна."
+      "note": "27.08 ротация: Стабильна. 28 АЗС, 9 полностью функциональных. Частные дороже. Цены: АИ-92 73.59₽."
     },
     {
       "region": "Республика Саха (Якутия)",
