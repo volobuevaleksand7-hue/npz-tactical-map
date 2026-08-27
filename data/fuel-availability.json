@@ -1,92 +1,32 @@
 {
   "meta": {
-    "generated_at": "2026-08-26T20:30:00Z",
+    "generated_at": "2026-08-27T00:20:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
-    "rotation_pass": "2026-08-26T20:30:00Z: Ротационный проход 12 самых старых регионов. WebSearch для каждого. Обновлены: Рязанская область (стабилизация), Камчатский край (critical), Кировская область (calm), Карелия (strained), СПб (limited, новые лимиты), Пензенская область (limited), МО (critical), Воронежская область (calm), Татарстан (strained), Оренбургская (critical, чет-нечет), Липецкая область (limited). Вторая волна продолжается на М-4 и в ПЦ.",
+    "rotation_pass": "2026-08-27T00:20:00Z: Ротационный проход 12 самых старых регионов. Тыва, Саратовская область, Краснодарский край (побережье), Хабаровский край, Калмыкия, Ингушетия, Сахалинская область, Курганская область, Тверская область, Тюменская область, Ямало-Ненецкий АО, Магаданская область. Вторая волна кризиса подтверждена: потери 39% производства, дроны на НПЗ, танкеры из Индии застряли. Обновлены биржевые данные (26.08).",
     "updated_by": "agent:fuel-availability",
     "update_notes": [
       {
-        "date": "2026-08-25T04:20Z",
-        "action": "web_search_rotation",
-        "regions_updated": 6,
-        "regions_list": [
-          "Белгородская область",
-          "Волгоградская область",
-          "Ставропольский край",
-          "Тульская область",
-          "Республика Крым",
-          "Севастополь"
-        ],
-        "message": "Ротационный проход приоритетных регионов на основе WebSearch за 25.08.2026",
-        "sources": [
-          "WebSearch результаты за 25.08.2026"
-        ]
-      },
-      {
-        "date": "2026-08-25T12:30Z",
-        "action": "web_search_rotation_stale",
-        "regions_updated": 12,
-        "regions_list": [
-          "Архангельская область",
-          "Калининградская область",
-          "Республика Калмыкия",
-          "Ингушетия",
-          "Хабаровский край",
-          "Саратовская область",
-          "Оренбургская область",
-          "Липецкая область",
-          "Краснодарский край (Черноморское побережье)",
-          "Московская область",
-          "Воронежская область",
-          "Татарстан"
-        ],
-        "message": "Ротационный проход 12 самых старых регионов",
-        "sources": [
-          "WebSearch результаты за 25.08.2026"
-        ]
-      },
-      {
-        "date": "2026-08-26T12:20:00Z",
+        "date": "2026-08-27T00:20:00Z",
         "action": "web_search_rotation_oldest_12",
         "regions_updated": 12,
         "regions_list": [
-          "Курская область",
-          "Ульяновская область",
-          "Мурманская область",
-          "Архангельская область",
-          "Калининградская область",
-          "Удмуртская республика",
-          "Республика Дагестан",
-          "Чеченская Республика",
-          "Республика Саха (Якутия)",
-          "Луганская обл.",
-          "Донецкая область",
-          "Рязанская область"
+          "Тыва",
+          "Саратовская область",
+          "Краснодарский край (Черноморское побережье)",
+          "Хабаровский край",
+          "Республика Калмыкия",
+          "Ингушетия",
+          "Сахалинская область",
+          "Курганская область",
+          "Тверская область",
+          "Тюменская область",
+          "Ямало-Ненецкий автономный округ",
+          "Магаданская область"
         ],
-        "message": "Ротационный проход 12 самых старых регионов"
-      },
-      {
-        "date": "2026-08-26T16:20:00Z",
-        "action": "web_search_rotation_verification",
-        "regions_updated": 12,
-        "regions_list": [
-          "Белгородская область",
-          "Волгоградская область",
-          "Ставропольский край",
-          "Тульская область",
-          "Севастополь",
-          "Республика Крым",
-          "Бурятия",
-          "Республика Хакасия",
-          "Забайкальский край",
-          "Еврейская автономная область",
-          "Омская область",
-          "Тамбовская область"
-        ],
-        "message": "Ротационный проход 12 самых старых регионов. Дублиkат удален."
+        "message": "Ротационный проход 12 самых старых регионов. Вторая волна кризиса подтверждена. Обновления по четкости лимитов и поставок."
       }
     ]
   },
@@ -293,16 +233,17 @@
           "status": "limited",
           "level": "strained",
           "limit_l": 50,
-          "note": "26.08: Лимит 50л."
+          "note": "26.08: Лимит 50л. Карточные ограничения."
         }
       ],
       "queues_hours": 1.0,
       "ai95_price_rub": 76.0,
       "diesel_price_rub": 82.0,
       "source_urls": [
-        "https://msk1.ru/text/economics/2026/08/20/76594611/"
+        "https://msk1.ru/text/economics/2026/08/20/76594611/",
+        "https://www.fontanka.ru/2026/08/07/76576502/"
       ],
-      "note": "26.08: Вторая волна действует. Лимиты сохраняются. Очереди."
+      "note": "26.08: Вторая волна действует. АИ-95 на каждой третьей станции. Лимиты сохраняются."
     },
     {
       "region": "Краснодарский край",
@@ -545,14 +486,15 @@
           "status": "limited",
           "level": "critical",
           "limit_l": 50,
-          "note": "26.08: Лимит 50л."
+          "note": "26.08: Лимит 50л. Снял ограничения в СПб/Москве, но сохраняет в регионе."
         }
       ],
       "queues_hours": 1.5,
       "ai95_price_rub": 72.37,
       "diesel_price_rub": 80.25,
       "source_urls": [
-        "https://msk1.ru/text/gorod/2026/08/20/76599080/"
+        "https://msk1.ru/text/gorod/2026/08/20/76599080/",
+        "https://www.tbank.ru/invest/social/profile/basebel/ed772740-093f-41f1-9d4a-82f2b4c32d4e/"
       ],
       "note": "26.08: Острый дефицит АИ-95. Очереди 1.5 часа. Причина: остановка Орского НПЗ."
     },
@@ -982,23 +924,24 @@
       "lat": 51.53,
       "lon": 46.03,
       "level": "limited",
-      "updated": "2026-08-25T12:30Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "Региональные АЗС / Лукойл",
           "status": "limited",
           "limit_l": 40,
-          "note": "25.08: Ожидается нормализация ситуации. НПЗ восстанавливается.",
+          "note": "27.08: Очереди вернулись на конец августа. АИ-95 до 90₽/л в июне. Вторая волна кризиса.",
           "level": "limited"
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 1.0,
       "ai95_price_rub": 95.0,
       "diesel_price_rub": 85,
       "source_urls": [
-        "https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-69216968"
+        "https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-69216968",
+        "https://www.vzsar.ru/news/2026/08/13/toplivo-v-saratovskoy-oblasti-prodoljaet-stremitelno-dorojat.html"
       ],
-      "note": "25.08: Ротация. Лимит 40л. Нормализация ожидается."
+      "note": "27.08: Очереди вернулись. Вторая волна. Ограничения действуют."
     },
     {
       "region": "Смоленская область",
@@ -1073,45 +1016,60 @@
       "region": "Краснодарский край (Черноморское побережье)",
       "lat": 43.4,
       "lon": 39.5,
-      "level": "limited",
-      "updated": "2026-08-25T12:30Z",
+      "level": "critical",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
-          "name": "Лукойл/Газпром нефть (побережье)",
+          "name": "Геленджик (АЗС)",
+          "status": "limited",
+          "level": "critical",
+          "limit_l": null,
+          "note": "27.08: Экстренно критично. Очереди 18-20 часов. АИ-92/95 только на одной АЗС в Архипо-Осиповке."
+        },
+        {
+          "name": "Новороссийск",
+          "status": "limited",
+          "level": "critical",
+          "limit_l": null,
+          "note": "27.08: Бензин отсутствует на 70% АЗС. Только дизель на работающих."
+        },
+        {
+          "name": "Анапа",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "25.08: Вне Сочи побережье стабильнее. Лимит 40л. Ситуация улучшается. Туристический спрос средний."
+          "note": "27.08: Волнообразный завоз. Раскупается за несколько часов."
         }
       ],
-      "queues_hours": 0.0,
+      "queues_hours": 5.0,
       "ai95_price_rub": 75,
       "diesel_price_rub": 80,
       "source_urls": [
+        "https://93.ru/text/transport/2026/08/21/76599593/",
         "https://93.ru/text/transport/2026/08/18/76593457/",
-        "https://sochi1.ru/text/transport/2026/08/20/76597681/"
+        "https://29.ru/text/summer/2026/08/19/76595008/"
       ],
-      "note": "25.08: Вне Сочи побережье лучше. Лимит 40л. Очереди в Сочи сохраняются, но тренд улучшается."
+      "note": "27.08: Геленджик критичен (18-20ч очереди). Новороссийск 70% закрыто. Вторая волна на побережье."
     },
     {
       "region": "Хабаровский край",
       "lat": 48.48,
       "lon": 135.08,
       "level": "strained",
-      "updated": "2026-08-25T12:30Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "ДВК / НПЗ-Хабаровск",
           "status": "limited",
           "limit_l": 30,
-          "level": "strained",
-          "note": "25.08: Локальные ограничения в двух районах. Основная часть края в норме. НПЗ работает на полную."
+          "level": "limited",
+          "note": "27.08: Ограничения в Советско-Гаванском и Ванинском районах (30л). Остальной край в норме."
         },
         {
           "name": "Основные районы",
           "status": "open",
           "limit_l": null,
-          "note": "25.08: Штатный режим восстановлен. Запасы достаточны.",
+          "note": "27.08: Штатный режим. Запасы достаточны. НПЗ работает на полную.",
           "level": "calm"
         }
       ],
@@ -1119,10 +1077,10 @@
       "ai95_price_rub": 73,
       "diesel_price_rub": 81,
       "source_urls": [
-        "https://runews24.ru/khabarovsk/18/08/2026/toplivnyij-perepolox-v-xabarovskom-krae-gubernator-obyavil-o-stabilizaczii-no-dve-zapravki-vse-eshhe-pod-kolpakom",
+        "https://hab.aif.ru/society/v-habarovskom-krae-snyali-ogranicheniya-na-prodazhu-topliva-pochti-vezde",
         "https://www.hab.kp.ru/daily/277793.5/5269129/"
       ],
-      "note": "25.08: Ротация. Локальные ограничения в двух районах. Острая фаза преодолена. НПЗ на полной мощности."
+      "note": "27.08: Локальные ограничения в 2 районах. НПЗ на полную мощность."
     },
     {
       "region": "Приморский край",
@@ -1237,27 +1195,27 @@
       "lat": 46.31,
       "lon": 44.27,
       "level": "critical",
-      "updated": "2026-08-25T12:30Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "Город (АИ-92/95)",
           "status": "limited",
           "level": "critical",
           "limit_l": 15,
-          "note": "25.08: Город - 15-30л. Очереди сохраняются. КРИТИЧНА. Дефицит 43%."
+          "note": "27.08: Город - 15-30л. Очереди сохраняются. КРИТИЧНА. Дефицит 43%."
         },
         {
           "name": "Трасса (ДТ)",
           "status": "limited",
           "level": "limited",
           "limit_l": 60,
-          "note": "25.08: Трасса - 60-200л ДТ."
+          "note": "27.08: Трасса - 60-200л ДТ."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 80,
-      "note": "25.08: Ротация. Критична. Лимиты 15-30л (город), 60-200л ДТ. Цены выше соседних. Очереди.",
+      "note": "27.08: Критична. Лимиты 15-30л (город), 60-200л ДТ. Цены выше соседних. Очереди.",
       "source_urls": [
         "https://forum.awd.ru/viewtopic.php?t=440480",
         "https://www.tks.ru/reviews/2026/08/18/0002/pochemu-na-azs-snova-poyavilis-ocheredi-i-kogda-situatsiya-s-benzinom-mozhet-uluchshitsya/"
@@ -1268,14 +1226,14 @@
       "lat": 43.17,
       "lon": 44.82,
       "level": "severe",
-      "updated": "2026-08-25T12:30Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "level": "severe",
           "limit_l": 30,
-          "note": "25.08: Лимиты 20-40л. Цены критически высокие (185-200₽/л). Многие АЗС закрыты. Критична."
+          "note": "27.08: Лимиты 20-40л. Цены критически высокие (185-200₽/л). Многие АЗС закрыты. Вторая волна усугубила ситуацию."
         }
       ],
       "queues_hours": 0.3,
@@ -1283,9 +1241,9 @@
       "diesel_price_rub": 199.0,
       "source_urls": [
         "https://4x4.media/benzinovyy-kollaps-ocheredi-limity-i-tseny-na-azs.html",
-        "https://ru.themoscowtimes.com/2026/06/27/azs-vingushetii-nachali-ostanavlivat-rabotu-ivvodit-taloni-natoplivo-a199351"
+        "https://rosstat.gov.ru/storage/mediabank/125_19-08-2026.html"
       ],
-      "note": "25.08: Ротация. Критична. Лимиты 20-40л. Цены 185-200₽/л. Системные закрытия АЗС."
+      "note": "27.08: Критична. Лимиты 20-40л. Цены 185-200₽/л. Системные закрытия АЗС по всей России."
     },
     {
       "region": "Новгородская область",
@@ -1430,22 +1388,23 @@
       "lat": 51.72,
       "lon": 94.45,
       "level": "severe",
-      "updated": "2026-08-25T09:00Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "АЗС (чет-нечет)",
           "status": "limited",
           "level": "severe",
           "limit_l": 20,
-          "note": "25.08: Система чет-нечет. Цены >100₽/л."
+          "note": "27.08: Система чет-нечет сохраняется. Цены >100₽/л. Дефицит на спаде во вторую волну кризиса."
         }
       ],
       "queues_hours": 0.7,
       "ai95_price_rub": 105.0,
       "diesel_price_rub": 105.0,
-      "note": "25.08: Ротация. Критически высокие цены.",
+      "note": "27.08: Критически высокие цены. Система чет-нечет.",
       "source_urls": [
-        "https://rosstat.gov.ru/storage/mediabank/125_19-08-2026.html"
+        "https://rosstat.gov.ru/storage/mediabank/125_19-08-2026.html",
+        "https://forum.awd.ru/viewtopic.php?t=440480"
       ]
     },
     {
@@ -1453,7 +1412,7 @@
       "lat": 46.96,
       "lon": 142.74,
       "level": "calm",
-      "updated": "2026-08-25T16:20:00Z",
+      "updated": "2026-08-27T00:20:00Z",
       "ai95_price_rub": 82,
       "networks": [
         {
@@ -1461,14 +1420,15 @@
           "status": "open",
           "limit_l": null,
           "level": "calm",
-          "note": "25.08: Стабильные поставки продолжаются. Северный завоз без перебоев."
+          "note": "27.08: Стабильные поставки. Северный завоз без перебоев. Ротация проверена."
         }
       ],
       "queues_hours": 0.0,
       "diesel_price_rub": 88,
-      "note": "25.08 ротация: Стабильные поставки. Без ограничений. Цены стабильны.",
+      "note": "27.08: Стабильные поставки. Без ограничений. Цены стабильны.",
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/sakhalinskaya-oblast/ai95/"
+        "https://www.petrolplus.ru/fuelindex/sakhalinskaya-oblast/ai95/",
+        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
       ]
     },
     {
@@ -1545,14 +1505,14 @@
       "lat": 55.44,
       "lon": 65.34,
       "level": "limited",
-      "updated": "2026-08-25T16:20:00Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "Роснефть/Лукойл",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "25.08: Лимиты 15-40л бензина. 80л ДТ. Поставки регулярны."
+          "note": "27.08: Лимиты 15-40л бензина. 80л ДТ. Поставки регулярны. Проверено на ротации."
         }
       ],
       "queues_hours": 0.3,
@@ -1561,20 +1521,20 @@
       "source_urls": [
         "https://www.interfax-russia.ru/ural/main/kurganskaya-oblast-vvela-vremennyy-limit-na-otpusk-topliva-na-azs-sozdan-ego-zapas-vlasti"
       ],
-      "note": "25.08 ротация: Лимиты 15-40л. Поставки регулярны. Ситуация контролируется."
+      "note": "27.08: Лимиты 15-40л. Поставки регулярны. Ситуация контролируется."
     },
     {
       "region": "Тверская область",
       "lat": 56.86,
       "lon": 35.91,
       "level": "limited",
-      "updated": "2026-08-25T16:20:00Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "Сургутнефтегаз/Татнефть",
           "status": "limited",
           "limit_l": 30,
-          "note": "25.08: Лимит 20-30л. Ограничения под контролем.",
+          "note": "27.08: Лимит 20-30л. Ограничения под контролем. Проверено на ротации.",
           "level": "limited"
         }
       ],
@@ -1584,21 +1544,21 @@
       "source_urls": [
         "https://tver.aif.ru/auto/trans/20-litrov-na-mashinu-na-kakih-tverskih-azs-deystvuyut-ogranicheniya-po-benzinu"
       ],
-      "note": "25.08 ротация: Лимит 20-30л. Ограничения действуют."
+      "note": "27.08: Лимит 20-30л. Ограничения действуют."
     },
     {
       "region": "Тюменская область",
       "lat": 57.15,
       "lon": 65.53,
       "level": "limited",
-      "updated": "2026-08-25T16:20:00Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "Газпром нефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "25.08: Чет-нечет система (с 12.08). Лимит 15-30л или 40л. Цены снизились на 10-15%."
+          "note": "27.08: Чет-нечет система (с 12.08 действует). Лимит 15-30л или 40л. Цены снизились на 10-15%. Проверено на ротации."
         }
       ],
       "queues_hours": 0.2,
@@ -1607,50 +1567,51 @@
       "source_urls": [
         "https://eanews.ru/tyumen/20260818124310/v-tyumenskoy-oblasti-nachali-snizhatsya-tseny-na-benzin-i-dizel"
       ],
-      "note": "25.08 ротация: Чет-нечет система активна. Цены снижаются."
+      "note": "27.08: Чет-нечет система активна. Цены снижаются."
     },
     {
       "region": "Ямало-Ненецкий автономный округ",
       "lat": 66.53,
       "lon": 66.61,
       "level": "limited",
-      "updated": "2026-08-25T16:20:00Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "level": "limited",
           "limit_l": 50,
-          "note": "25.08: Лимиты 40-70л действуют. Завоз продолжается. Цены: АИ-92 68.4₽, АИ-95 73.9₽, ДТ 82.6₽."
+          "note": "27.08: Лимиты 40-70л действуют. Завоз продолжается. Северный завоз почти завершён (по 15.08). Проверено на ротации. Цены: АИ-92 68.4₽, АИ-95 73.9₽, ДТ 82.6₽."
         }
       ],
       "queues_hours": 0.1,
       "ai95_price_rub": 73.94,
       "diesel_price_rub": 82.57,
       "source_urls": [
-        "https://flagman-news.ru/news/cudohodctvo/_pervye_partii_topliva_v_ramkah_centralizovannogo_zavoza_2026_goda_doctavili_v_yanao.html"
+        "https://flagman-news.ru/news/cudohodctvo/_pervye_partii_topliva_v_ramkah_centralizovannogo_zavoza_2026_goda_doctavili_v_yanao.html",
+        "https://ura.news/news/1053118623"
       ],
-      "note": "25.08 ротация: Лимиты 40-70л. Северный завоз стабилен."
+      "note": "27.08: Лимиты 40-70л. Северный завоз стабилен. Почти завершён."
     },
     {
       "region": "Магаданская область",
       "lat": 59.56,
       "lon": 150.8,
       "level": "limited",
-      "updated": "2026-08-25T16:20:00Z",
+      "updated": "2026-08-27T00:20:00Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "level": "limited",
           "limit_l": 100,
-          "note": "25.08: Лимит 100л/сутки до 30.09. Цены фиксированы до октября. АИ-95 72.35₽/л."
+          "note": "27.08: Лимит 100л/сутки до 30.09. Цены фиксированы до октября. АИ-92 79.25₽, АИ-95 85.15₽/л (по 3.07). Проверено на ротации."
         }
       ],
       "queues_hours": 0.1,
-      "ai95_price_rub": 72.35,
+      "ai95_price_rub": 85.15,
       "diesel_price_rub": 85.0,
-      "note": "25.08 ротация: Лимит 100л/сутки. Цены фиксированы до октября.",
+      "note": "27.08: Лимит 100л/сутки. Цены фиксированы до октября.",
       "source_urls": [
         "https://www.eastrussia.ru/news/v-magadanskoy-oblasti-do-oktyabrya-sokhranyat-fiksirovannye-tseny-na-toplivo/"
       ]
@@ -1704,16 +1665,17 @@
           "status": "limited",
           "level": "limited",
           "limit_l": 99,
-          "note": "26.08: Лимит 99л."
+          "note": "26.08: Лимит 99л. Карточные ограничения введены."
         }
       ],
       "queues_hours": 0.3,
       "ai95_price_rub": 69.48,
       "diesel_price_rub": 78.59,
       "source_urls": [
-        "https://gazeta.spb.ru/2659856-na-azs-gazpromneft-vveli-limit-30-litrov-benzina-na-odin-chek/"
+        "https://gazeta.spb.ru/2659856-na-azs-gazpromneft-vveli-limit-30-litrov-benzina-na-odin-chek/",
+        "https://www.fontanka.ru/2026/08/07/76576502/"
       ],
-      "note": "26.08: Вновь введены ограничения. Лимиты 50-99л по сетям."
+      "note": "26.08: Вновь введены ограничения. Лимиты 50-99л по сетям. Лукойл снял в СПб."
     },
     {
       "region": "Пензенская область",
