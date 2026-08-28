@@ -273,31 +273,24 @@
     "lat": 47.23,
     "lon": 39.72,
     "level": "critical",
-    "updated": "2026-08-27T04:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
-      "name": "Газпром нефть",
+      "name": "Газпром нефть/Роснефть",
       "status": "limited",
       "level": "critical",
-      "limit_l": 40,
-      "note": "27.08: На М-4 критично. Очереди 20-45 мин (до 1.5 часов на перегруженных участках). Дефицит АИ-95. Лимит 40л."
-     },
-     {
-      "name": "Роснефть",
-      "status": "limited",
-      "level": "critical",
-      "limit_l": 30,
-      "note": "27.08: Критическая ситуация на М-4. Лимит 30л. Регулярные поступления."
+      "limit_l": 35,
+      "note": "28.08 ротация: М-4 критична с неравномерным распределением. Очереди 20-45 мин, до 1.5ч на перегруженных участках. АИ-92: 82.9₽, АИ-95: 90.91₽."
      }
     ],
-    "queues_hours": 1.5,
-    "ai95_price_rub": 95.0,
-    "diesel_price_rub": 90.0,
+    "queues_hours": 1.0,
+    "ai95_price_rub": 90.91,
+    "diesel_price_rub": 85.29,
     "source_urls": [
      "https://carexpo.ru/situatsiya-s-behnzinom-na-trasse-m-4-don-21-avgusta-2026-goda/",
-     "https://mo.tsargrad.tv/news/situacija-s-benzinom-na-trasse-m-4-don-24-avgusta-2026-goda-ceny-ocheredi-i-limity-na-azs_1835716"
+     "https://forum.awd.ru/viewtopic.php?t=440480"
     ],
-    "note": "27.08: М-4 критична. Очереди 20-45 мин (до 1.5ч). Дефицит АИ-95 продолжается."
+    "note": "28.08 ротация: М-4 критична, неравномерное распределение. На одной АЗС 10-20 мин, на соседней закрыто/очередь. Цены: АИ-92: 82.9₽, АИ-95: 90.91₽."
    },
    {
     "region": "Рязанская область",
@@ -618,61 +611,63 @@
     "region": "Челябинская область",
     "lat": 55.16,
     "lon": 61.4,
-    "level": "calm",
-    "updated": "2026-08-27T04:20:00Z",
+    "level": "critical",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
-      "name": "Татнефть/Газпромнефть",
-      "status": "open",
-      "level": "calm",
+      "name": "Крупные сети",
+      "status": "limited",
+      "level": "critical",
       "limit_l": null,
-      "note": "25.08: Локальные ограничения на отдельных АЗС. Общее управляемо."
+      "note": "28.08 ротация: Вторая волна усилилась. После 3-недельной стабильности многие АЗС закрылись. Очереди растут. Дефицит АИ-95."
      }
     ],
-    "queues_hours": 0.0,
-    "ai95_price_rub": 72.0,
-    "diesel_price_rub": 80.0,
+    "queues_hours": 1.5,
+    "ai95_price_rub": 75.0,
+    "diesel_price_rub": 82.0,
     "source_urls": [
-     "https://chel.aif.ru/tag/bjenzin"
+     "https://74.ru/text/auto/2026/08/27/76608092/",
+     "https://74.ru/text/auto/2026/08/27/76610441/"
     ],
-    "note": "25.08 ротация: Локальные ограничения. Ажиотаж спадает. Ситуация стабилизируется."
+    "note": "28.08 ротация: Вторая волна кризиса интенсифицирована (27-28 августа). Закрытия АЗС, очереди растут. Ситуация критична."
    },
    {
     "region": "Башкортостан",
     "lat": 54.74,
     "lon": 55.97,
     "level": "limited",
-    "updated": "2026-08-27T04:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
-      "name": "Газпромнефть/Лукойл (Уфа)",
+      "name": "Газпромнефть/Лукойл",
       "status": "limited",
-      "level": "strained",
+      "level": "limited",
       "limit_l": 40,
-      "note": "25.08 ротация: Цены нормализуются. Пожар в Салавате. Лимит 40л в Уфе."
+      "note": "28.08 ротация: Цены стабильны ниже средней по ПФО. АИ-92: 64.12₽, АИ-95: 69.13₽, ДТ: 78.55₽."
      },
      {
       "name": "Региональные АЗС",
-      "status": "open",
-      "level": "calm",
-      "limit_l": null,
-      "note": "25.08: Вне Уфы ситуация улучшается."
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 40,
+      "note": "28.08: Ограничения продолжаются. Запасы под контролем."
      }
     ],
-    "queues_hours": 0.3,
-    "ai95_price_rub": 70.0,
-    "diesel_price_rub": 80.0,
+    "queues_hours": 0.2,
+    "ai95_price_rub": 69.13,
+    "diesel_price_rub": 78.55,
     "source_urls": [
-     "https://runews24.ru/"
+     "https://www.sobaka.ru/ufa/city/city/219864",
+     "https://www.petrolplus.ru/fuelindex/respublika-bashkortostan/ai92/"
     ],
-    "note": "25.08 ротация: Ситуация нормализуется. Очереди на спаде."
+    "note": "28.08 ротация: Цены остаются ниже средней по ПФО. Ограничения продолжают действовать. АИ-92: 64.12₽, АИ-95: 69.13₽."
    },
    {
     "region": "Калужская область",
     "lat": 54.51,
     "lon": 36.27,
     "level": "limited",
-    "updated": "2026-08-27T04:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
       "name": "Лукойл / Роснефть",
@@ -1440,7 +1435,7 @@
     "lat": 53.04,
     "lon": 158.65,
     "level": "severe",
-    "updated": "2026-08-26T16:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
       "name": "Газпромнефть/Лукойл/Роснефть",
@@ -1463,7 +1458,7 @@
     "lat": 58.6,
     "lon": 49.65,
     "level": "calm",
-    "updated": "2026-08-26T16:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
       "name": "Все АЗС",
@@ -1510,7 +1505,7 @@
     "lat": 55.44,
     "lon": 65.34,
     "level": "limited",
-    "updated": "2026-08-27T00:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
       "name": "Роснефть/Лукойл",
@@ -1533,53 +1528,55 @@
     "lat": 56.86,
     "lon": 35.91,
     "level": "limited",
-    "updated": "2026-08-27T00:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
-      "name": "Сургутнефтегаз/Татнефть",
+      "name": "Крупные сети",
       "status": "limited",
       "limit_l": 30,
-      "note": "27.08: Лимит 20-30л. Ограничения под контролем. Проверено на ротации.",
+      "note": "28.08 ротация: Цены упали на 6.8% после вмешательства ФАС. Ограничения действуют.",
       "level": "limited"
      }
     ],
-    "queues_hours": 0.1,
-    "ai95_price_rub": 72.0,
-    "diesel_price_rub": 78.0,
+    "queues_hours": 0.2,
+    "ai95_price_rub": 66.8,
+    "diesel_price_rub": 76.0,
     "source_urls": [
-     "https://tver.aif.ru/auto/trans/20-litrov-na-mashinu-na-kakih-tverskih-azs-deystvuyut-ogranicheniya-po-benzinu"
+     "https://ria.ru/20260819/benzin-2111864347.html",
+     "https://tverlife.ru/photo/benzin-v-tverskoj-oblasti-podorozhal-na-6-8-region-stal-liderom-po-rostu-cen/"
     ],
-    "note": "27.08: Лимит 20-30л. Ограничения действуют."
+    "note": "28.08 ротация: ФАС вмешалось, цены упали. АИ-92: 62.5₽, АИ-95: 66.8₽. Ограничения контролируются."
    },
    {
     "region": "Тюменская область",
     "lat": 57.15,
     "lon": 65.53,
     "level": "limited",
-    "updated": "2026-08-27T00:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
-      "name": "Газпром нефть",
+      "name": "Газпром нефть/Лукойл",
       "status": "limited",
       "level": "limited",
       "limit_l": 30,
-      "note": "27.08: Чет-нечет система (с 12.08 действует). Лимит 15-30л или 40л. Цены снизились на 10-15%. Проверено на ротации."
+      "note": "28.08 ротация: Чет-нечет система продолжает действовать. Цены упали на 10-15% за неделю. АИ-92: 82.63₽, АИ-95: 87.30₽."
      }
     ],
-    "queues_hours": 0.2,
-    "ai95_price_rub": 80.0,
-    "diesel_price_rub": 84.0,
+    "queues_hours": 0.15,
+    "ai95_price_rub": 87.3,
+    "diesel_price_rub": 82.0,
     "source_urls": [
-     "https://eanews.ru/tyumen/20260818124310/v-tyumenskoy-oblasti-nachali-snizhatsya-tseny-na-benzin-i-dizel"
+     "https://eanews.ru/tyumen/20260818124310/v-tyumenskoy-oblasti-nachali-snizhatsya-tseny-na-benzin-i-dizel",
+     "https://tmn.aif.ru/society/v-tyumenskoy-oblasti-azs-snizhayut-stoimost-benzina-i-dizelya"
     ],
-    "note": "27.08: Чет-нечет система активна. Цены снижаются."
+    "note": "28.08 ротация: Цены продолжают падать. АИ-92: 82.63₽, АИ-95: 87.30₽. Ограничения под контролем."
    },
    {
     "region": "Ямало-Ненецкий автономный округ",
     "lat": 66.53,
     "lon": 66.61,
     "level": "limited",
-    "updated": "2026-08-27T00:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -1603,7 +1600,7 @@
     "lat": 59.56,
     "lon": 150.8,
     "level": "limited",
-    "updated": "2026-08-27T00:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
       "name": "Региональные АЗС",
@@ -2086,7 +2083,7 @@
     "lat": 54.62,
     "lon": 39.74,
     "level": "strained",
-    "updated": "2026-08-26T16:20:00Z",
+    "updated": "2026-08-28T08:20:00Z",
     "networks": [
      {
       "name": "Все АЗС",
