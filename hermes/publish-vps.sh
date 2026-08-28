@@ -47,6 +47,38 @@ if [ -f agents/gen-news.py ]; then
     # свежего fuel-state.json, неблокирующе. Без этого статус/дни простоя/FAQ на
     # странице отстают от данных ровно тем же классом дрейфа, что чинили на /refineries.
     python3 agents/gen-npz-status-page.py >/dev/null 2>&1 || echo "publish-vps: ⚠ gen-npz-status-page упал — пропускаю"
+    # 🔴 28.08.2026, ЧЕТВЁРТЫЙ рецидив класса «генератор пишет, git add не знает» —
+    # но ломалось не то, что раньше: сама страница В списке git add ниже. Беда была
+    # в порядке. Генераторы выше перевыпускают страницы из шаблона со СТАРОЙ
+    # навигацией (у rabotayut-li-npz-rossii.html падало с 3 вхождений nav-dropdown
+    # до 1), а build-nav.py — единственный владелец <header class="news-header"> —
+    # здесь не вызывался вовсе. Он дочинивал меню ПОЗЖЕ, отдельным прогоном, и та
+    # правка уже никем не коммитилась: файл оставался вечно modified и заклинивал
+    # `git pull --rebase` всему флоту. Публикация вставала так дважды за двое суток
+    # (26.08 и 28.08), оба раза с осиротевшим стэшем ровно этой страницы.
+    #
+    # Лечение — вернуть порядок: сгенерировали → сразу привели навигацию к канону →
+    # и только потом коммитим. Неблокирующе, как соседи: упавший build-nav не должен
+    # ронять публикацию данных.
+    #
+    # 🔴 И отдельно — почему git add тут по СПИСКУ ФАЙЛОВ, а не по фиксированному
+    # перечню имён: build-nav владеет навигацией на ВСЕХ страницах, а перечень ниже
+    # знает про четыре. Первый заход этой правки это и показал — build-nav тронул
+    # news/2026-08.html и две страницы складов, они остались modified, то есть
+    # рецидив просто переехал на другие файлы. Поэтому берём снимок ДО и ПОСЛЕ и
+    # добавляем ровно те html, которые сделал грязными сам build-nav. Огульный
+    # `git add *.html` тут запрещён: он утащил бы в коммит чужую незакоммиченную
+    # правку страницы (ровно тем классом сносили архивы, см. data/).
+    _html_before="$(git status --porcelain -- '*.html' 'news/' 2>/dev/null | cut -c4- | sort)"
+    python3 agents/build-nav.py >/dev/null 2>&1 || echo "publish-vps: ⚠ build-nav упал — навигация может отстать"
+    _html_after="$(git status --porcelain -- '*.html' 'news/' 2>/dev/null | cut -c4- | sort)"
+    _nav_touched="$(comm -13 <(printf '%s\n' "$_html_before") <(printf '%s\n' "$_html_after") | grep . || true)"
+    if [ -n "$_nav_touched" ]; then
+      echo "publish-vps: build-nav обновил навигацию, добавляю в коммит:"
+      printf '  %s\n' $_nav_touched
+      # shellcheck disable=SC2086 — пути без пробелов, разбиение по словам намеренное
+      git add -- $_nav_touched || echo "publish-vps: ⚠ git add навигации не удался" >&2
+    fi
     # ВСЕ артефакты gen-news (он внутри зовёт seo/generate-sitemap.py + agents/gen-rss.py):
     # news.html, sitemap.xml, news-sitemap.xml, rss.xml, news/, news-archive.json.
     # Раньше здесь не было news-sitemap.xml/rss.xml — gen-rss переписывал их каждый
