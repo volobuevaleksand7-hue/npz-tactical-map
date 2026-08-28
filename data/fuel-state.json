@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-28T22:15Z",
+    "generated_at": "2026-08-28T16:47Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/NBC News/Bloomberg/Euronews). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
@@ -192,10 +192,10 @@
       "status": "down",
       "status_since": "2026-08-28",
       "est_output_pct": 0,
-      "damage": "При атаке 40 БПЛА загорелись резервуары нефтезавода, два столба черного дыма. Гражданская инфраструктура повреждена (выбито стекло в домах). Выезд из города в сторону Москвы перекрыт, движение по федеральной трассе М-8 приостановлено. На 28 августа: 8-я атака на заводе привела к полной остановке производства.",
+      "damage": "Обломки БПЛА упали на межмуниципальный автобус. Погибнул 1 человек, 10 человек получили ранения. Всего над Ярославской областью сбито 67 беспилотников. Закрыты два детских сада. Дорога М-8 (Ярославль-Москва) была перекрыта.",
       "note": "На 28 августа завод полностью остановлен после 8-й атаки в 2026 году. Один из пяти крупнейших НПЗ России. Восстановление требует недель отсутствия новых ударов.",
-      "source_url": "https://kyivindependent.com/ukrainian-drones-target-moscow-one-of-russias-largest-oil-refineries-in-yaroslavl-sparking-fire-media-reports/",
-      "confidence": "reported"
+      "source_url": "https://kazan.aif.ru/incidents/details/dron-v-dom-ataka-bpla-na-regiony-rf-28-avgusta-sevastopol-kostroma",
+      "confidence": "confirmed"
     },
     {
       "id": "volgograd",
@@ -1259,6 +1259,16 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-08-28",
+      "text": "Удар по Славнефть-ЯНОС (Ярославский НПЗ) (Ярославль): Обломки БПЛА упали на автобус в Ярославской области",
+      "source_url": "https://kazan.aif.ru/incidents/details/dron-v-dom-ataka-bpla-na-regiony-rf-28-avgusta-sevastopol-kostroma"
+    },
+    {
+      "date": "2026-08-28",
+      "text": "Удар по Славнефть-ЯНОС (Ярославский НПЗ) (Ярославль): Атака на НПЗ Славнефть-ЯНОС в Ярославле",
+      "source_url": "https://fakty.com.ua/ru/svit/20260828-zsu-znovu-urazyly-yaroslavskyj-npz-u-rf-na-zavodi-vyruye-pozhezha/"
+    },
     {
       "date": "2026-08-28",
       "text": "Удар по Славнефть-ЯНОС (Ярославский НПЗ): ночью 28 августа украинские БПЛА атаковали один из пяти крупнейших НПЗ России. Завод полностью остановлен. Это 8-я атака на завод в 2026 году.",
