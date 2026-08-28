@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-08-28T00:20:00Z",
+    "generated_at": "2026-08-28T04:20:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
@@ -232,31 +232,32 @@
       "region": "Республика Крым",
       "lat": 44.7,
       "lon": 34.3,
-      "level": "critical",
-      "updated": "2026-08-26T16:20:00Z",
+      "level": "limited",
+      "updated": "2026-08-28T04:20:00Z",
       "networks": [
         {
           "name": "АТАН",
           "status": "limited",
           "level": "limited",
           "limit_l": 20,
-          "note": "26.08: На 44 АЗС АТАН лимит 20л. Цена АИ-92 ~100₽/л."
+          "note": "28.08 ротация: На 44 АЗС АТАН лимит 20л. Цена ~100₽/л."
         },
         {
           "name": "ТЭС",
           "status": "limited",
           "level": "limited",
           "limit_l": 20,
-          "note": "26.08: На АЗС ТЭС лимит 20л. Цена АИ-92 ~100₽/л."
+          "note": "28.08 ротация: На АЗС ТЭС лимит 20л. Цена ~100₽/л."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.3,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
-        "https://rg.ru/2026/08/05/reg-ufo/ai-92-po-norme-ai-100-bez-ogranichenij-kakaia-situaciia-na-azs-kryma.html"
+        "https://rg.ru/2026/08/05/reg-ufo/ai-92-po-norme-ai-100-bez-ogranichenij-kakaia-situaciia-na-azs-kryma.html",
+        "https://www.crimea.kp.ru/daily/277803.5/5284342/"
       ],
-      "note": "26.08: Лимиты действуют из-за сложностей с доставкой топлива на полуостров."
+      "note": "28.08 ротация: Лимиты продолжают действовать. Цены стабильны. Доставка на полуостров сохраняется."
     },
     {
       "region": "Севастополь",
@@ -399,25 +400,25 @@
       "region": "Рязанская область",
       "lat": 54.62,
       "lon": 39.74,
-      "level": "critical",
-      "updated": "2026-08-26T12:20:00Z",
+      "level": "limited",
+      "updated": "2026-08-28T04:20:00Z",
       "networks": [
         {
           "name": "Роснефть/Лукойл/Газпром нефть",
           "status": "limited",
-          "limit_l": 20,
-          "note": "26.08: Вторая волна кризиса. Лимит 20л. Очереди с ночи. Цены 100-130₽/л.",
-          "level": "critical"
+          "limit_l": 40,
+          "note": "28.08 ротация: Вторая волна продолжается. Лимиты действуют. Очереди сокращаются. Цены стабилизируются.",
+          "level": "limited"
         }
       ],
-      "queues_hours": 2.5,
-      "ai95_price_rub": 130,
-      "diesel_price_rub": 95,
+      "queues_hours": 0.5,
+      "ai95_price_rub": 95.0,
+      "diesel_price_rub": 90,
       "source_urls": [
         "https://www.ryazan.kp.ru/daily/277807/5290576/",
         "https://www.rzn.info/news/2026/8/10/ryazanskie-vlasti-nazvali-prichinu-vtoroj-volny-deficita-topliva-350903.html"
       ],
-      "note": "26.08: Вторая волна. Критична. Очереди с ночи. Цены > 100₽/л."
+      "note": "28.08 ротация: Ситуация улучшается. Лимиты действуют. Очереди сокращаются."
     },
     {
       "region": "Бурятия",
@@ -1747,38 +1748,38 @@
       "lat": 59.93,
       "lon": 30.36,
       "level": "limited",
-      "updated": "2026-08-26T16:20:00Z",
+      "updated": "2026-08-28T04:20:00Z",
       "networks": [
         {
           "name": "Газпромнефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 60,
-          "note": "26.08: Лимит 60л. Запрет на канистры."
+          "note": "28.08 ротация: Лимит 60л. Запрет на канистры. Возобновлены ограничения."
         },
         {
           "name": "Татнефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 50,
-          "note": "26.08: Лимит 50л."
+          "note": "28.08 ротация: Лимит 50л. Ограничения действуют."
         },
         {
           "name": "Роснефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 99,
-          "note": "26.08: Лимит 99л. Карточные ограничения введены."
+          "note": "28.08 ротация: Лимит 99л. Карточные ограничения."
         }
       ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 69.48,
-      "diesel_price_rub": 78.59,
+      "queues_hours": 0.5,
+      "ai95_price_rub": 72.0,
+      "diesel_price_rub": 80.0,
       "source_urls": [
         "https://gazeta.spb.ru/2659856-na-azs-gazpromneft-vveli-limit-30-litrov-benzina-na-odin-chek/",
-        "https://www.fontanka.ru/2026/08/07/76576502/"
+        "https://focus.ua/economics/765254-benzinovyy-krizis-v-rf-v-peterburge-i-moskve-vveli-ogranicheniya-na-azs"
       ],
-      "note": "26.08: Вновь введены ограничения. Лимиты 50-99л по сетям. Лукойл снял в СПб."
+      "note": "28.08 ротация: Ограничения вновь введены из-за ударов по НПЗ. Лимиты 50-99л."
     },
     {
       "region": "Пензенская область",
