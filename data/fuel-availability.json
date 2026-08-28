@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-08-27T16:20:00Z",
+    "generated_at": "2026-08-28T00:20:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
-    "rotation_pass": "2026-08-27T16:20:00Z: Вторая волна ротационного прохода 12 регионов (Владимирская, ХМАО-Югра, Пермский, Коми, Чукотский, Орловская, Псковская, Карачаево-Черкесская, Алтай, Москва, Краснодарский, Свердловская). Подтверждена критическая ситуация на юге: Геленджик 18-20+ ч очередей, Новороссийск 70% закрыто. Москва: дефицит АИ-95, очереди многочасовые. Северные регионы (Коми, Чукотка) нормализуются. М-4 критична. Вторая волна расширяется.",
+    "rotation_pass": "2026-08-28T00:20:00Z: Четвёртая волна ротационного прохода 12 старых регионов (Чеченская Республика, Луганская обл., Донецкая область, Удмуртская республика, Мурманская область, Курская область, Ульяновская область, Пензенская область, Белгородская область, Волгоградская область, Ставропольский край, Тульская область). Вторая волна дефицита продолжает расширяться на конец августа. Москва: дефицит АИ-95, очереди 2+ часа. Краснодар: Геленджик 18-20ч очередей, Новороссийск 70% закрыто. Волгоград: лимиты вернули с 1.08 (40л). Мурманск: 30-60л лимиты действуют. Ставрополь: до 35л. Тула: АИ-95 исчез. Ротация завершена.",
     "updated_by": "agent:fuel-availability",
     "update_notes": [
       {
@@ -93,83 +93,85 @@
       "lat": 50.6,
       "lon": 36.6,
       "level": "limited",
-      "updated": "2026-08-26T16:20:00Z",
+      "updated": "2026-08-28T00:20:00Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "26.08: Лимит 30л бензина и 60л дизеля."
+          "note": "28.08 ротация: Лимит 30л бензина и 60л дизеля."
         },
         {
           "name": "Роснефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "26.08: Лимит 30л, запрет на канистры."
+          "note": "28.08 ротация: Лимит 30л, запрет на канистры."
         }
       ],
       "queues_hours": 0.3,
       "ai95_price_rub": 82.0,
       "diesel_price_rub": 85.0,
       "source_urls": [
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/",
+        "https://bel.aif.ru/society/details/rosstat-publikuet-statistiku-o-cenah-na-toplivo-v-belgorodskoy-oblasti"
       ],
-      "note": "26.08: Лимиты на продажу бензина и дизеля. Ситуация стабильна."
+      "note": "28.08 ротация: Лимиты на продажу бензина и дизеля. Ситуация стабильна."
     },
     {
       "region": "Волгоградская область",
       "lat": 48.7,
       "lon": 44.5,
-      "level": "strained",
-      "updated": "2026-08-26T16:20:00Z",
+      "level": "limited",
+      "updated": "2026-08-28T00:20:00Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
-          "level": "strained",
+          "level": "limited",
           "limit_l": 40,
-          "note": "26.08: Лимит 40л бензина."
+          "note": "28.08 ротация: Лимит 40л бензина с 1.08."
         },
         {
           "name": "Газпромнефть",
           "status": "limited",
-          "level": "strained",
+          "level": "limited",
           "limit_l": 40,
-          "note": "26.08: Лимит 40л бензина."
+          "note": "28.08 ротация: Лимит 40л бензина. 60л дизеля в городе, 200л на трассе."
         }
       ],
       "queues_hours": 0.5,
-      "ai95_price_rub": 75.0,
-      "diesel_price_rub": 78.0,
+      "ai95_price_rub": 73.95,
+      "diesel_price_rub": 77.92,
       "source_urls": [
-        "https://finance.mail.ru/article/v-volgogradskoj-oblasti-povtorno-vveli-limity-na-prodazhu-benzina-69220572/"
+        "https://www.volgograd.kp.ru/daily/277809/5294202/",
+        "https://abnews.ru/ug/news/volgograd/2026/8/13/benzin-ai-92-v-volgogradskoj-oblasti-stoit-6656-rublya-za-litr"
       ],
-      "note": "26.08: Лимиты вновь введены. Вторая волна. Ситуация контролируется."
+      "note": "28.08 ротация: Лимиты 40л вновь введены с 1.08. Очереди на отдельных АЗС. Вторая волна дефицита."
     },
     {
       "region": "Ставропольский край",
       "lat": 45.1,
       "lon": 43.7,
-      "level": "calm",
-      "updated": "2026-08-26T16:20:00Z",
+      "level": "limited",
+      "updated": "2026-08-28T00:20:00Z",
       "networks": [
         {
           "name": "Крупные сети",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "26.08: Ограничения сняты. Свободная продажа."
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 35,
+          "note": "28.08 ротация: До 35л на легковой автомобиль. Цены 65-140₽ на разных АЗС (сетевые 65-78₽, частные 120-140₽)."
         }
       ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 72.0,
+      "queues_hours": 0.2,
+      "ai95_price_rub": 70.0,
       "diesel_price_rub": 76.0,
       "source_urls": [
-        "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+        "https://atvmedia.ru/news/social/79000"
       ],
-      "note": "26.08: Ограничения ранних волн отменены. Топливо доступно свободно."
+      "note": "28.08 ротация: Вторая волна. Лимит 35л. Вернулись ограничения на конец августа."
     },
     {
       "region": "Тульская область",
