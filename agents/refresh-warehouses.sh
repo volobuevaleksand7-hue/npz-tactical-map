@@ -28,7 +28,11 @@ python3 agents/sync-warehouse-counts.py || { echo "refresh-warehouses: sync уп
 # Коммитим ТОЛЬКО свои файлы поимённо: `git add data/` соседа уже дважды уносил чужую работу.
 # 🔴 24.08: kakie-sklady-wildberries-ostalis.html не было в этом списке — gen-survivors-page.py
 # не входил ни в один плановый прогон, счётчик отставал (та же грабля, что уже была у чемпиона).
-FILES="data/warehouses.json skolko-skladov-wildberries-ozon.html udar-po-skladu-ozon.html ceny-marketpleysy-posle-udarov.html kakie-sklady-wildberries-ostalis.html"
+# 🔴 28.08: karta-skladov-wildberries.html подключена к sync-warehouse-counts.py, но её
+# не было в этом списке — синк переписывал бы мету, а git add о ней не знал. Ровно тот
+# же класс, что уже ловили на обложках .webp и на kakie-sklady-…: генератор кладёт,
+# коммит не забирает.
+FILES="data/warehouses.json skolko-skladov-wildberries-ozon.html udar-po-skladu-ozon.html ceny-marketpleysy-posle-udarov.html kakie-sklady-wildberries-ostalis.html karta-skladov-wildberries.html"
 CHANGED=""
 for f in $FILES; do
   [ -f "$f" ] && ! git diff --quiet -- "$f" && CHANGED="$CHANGED $f"

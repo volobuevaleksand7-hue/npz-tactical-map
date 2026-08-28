@@ -150,6 +150,15 @@ PLAIN = {
     "ataki-na-sklady-wildberries-hronika.html": [
         ("wb_hit", r'(<div class="status-card"><div class="val">)\d+( объектов</div><div class="lbl">уникальных складов сети Wildberries)'),
     ],
+    # 🔴 28.08: мета /karta-skladov-wildberries врала МЕСЯЦ — «56 крупных объектов … 19
+    # поражено» при фактических 75 и 35. Страница рукописная (клон SPA-шелла), в этом
+    # скрипте её не было, и снипет в выдаче расходился с картой, которую он описывает.
+    # Формулировка во всех четырёх слотах (description / og / twitter / JSON-LD) одна и
+    # та же — поэтому один re.subn чинит их разом. Дата dateModified СОЗНАТЕЛЬНО не
+    # синкается: она обязана меняться при правке контента, а не каждую ночь.
+    "karta-skladov-wildberries.html": [
+        ("total_hit", r'(, из них )\d+( поражено ударами БПЛА)'),
+    ],
     "kakie-sklady-wildberries-ostalis.html": [
         ("total_ok", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">объектов без сообщений об ударе</div></div>)'),
         ("wb_ok", r'(<div class="status-card"><div class="val">)\d+(</div><div class="lbl">Wildberries</div></div>)'),
@@ -160,6 +169,10 @@ PLAIN = {
 # --- якоря со склонением: (метрика, regex с prefix/suffix группами + альтернативой из трёх
 #     форм, функция согласования, формы one/few/many) ---
 DECLINED = {
+    "karta-skladov-wildberries.html": [
+        ("total_all", r'(Склады Ozon и Wildberries на карте России: )\d+ (крупный объект|крупных объекта|крупных объектов)( по городам и регионам)',
+         ru_count, ("крупный объект", "крупных объекта", "крупных объектов")),
+    ],
     "ceny-marketpleysy-posle-udarov.html": [
         ("wb_hit", r'(поражено <strong>)\d+ (складской объект|складских объекта|складских объектов)( Wildberries</strong>)',
          ru_count, ("складской объект", "складских объекта", "складских объектов")),
