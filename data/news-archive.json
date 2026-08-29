@@ -235,38 +235,41 @@
     "lat": 45.04,
     "lon": 38.98,
     "level": "critical",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Геленджик",
       "status": "limited",
       "level": "critical",
       "limit_l": null,
-      "note": "27.08: Критично. Очереди 18-20+ часов. АИ-92/95 только на одной АЗС. Туристический сезон."
+      "note": "29.08 ротация: Критично. Очереди 18-20+ часов. Туристический сезон. Вторая волна подтверждена."
      },
      {
       "name": "Новороссийск",
       "status": "limited",
       "level": "critical",
       "limit_l": null,
-      "note": "27.08: Бензин отсутствует на 70% АЗС. Только дизель на работающих."
+      "note": "29.08 ротация: Бензин отсутствует на большинстве АЗС. Только дизель работает."
      },
      {
-      "name": "Анапа",
+      "name": "Общее",
       "status": "limited",
-      "level": "limited",
-      "limit_l": 40,
-      "note": "27.08: Волнообразный завоз. Раскупается за часы. Лимит 40л."
+      "level": "critical",
+      "limit_l": null,
+      "note": "29.08 ротация: 920 АЗС работают. 120 АЗС временно закрыто. Вторая волна кризиса подтверждена."
      }
     ],
     "queues_hours": 6.0,
     "ai95_price_rub": 75.0,
     "diesel_price_rub": 80.0,
     "source_urls": [
-     "https://93.ru/text/transport/2026/08/21/76599593/",
-     "https://www.kavkaz-uzel.eu/articles/424684"
+     "https://www.avtovzglyad.ru/obshestvo/dorogi/73280-2026-07-09-estli-benzin-vkrasnodarskom-krae-segodnya-realnyie-tsenyi-ocheredi-nazapravkah-isituatsiya-nayuge-rossii/",
+     "https://www.kavkaz-uzel.org/articles/424623",
+     "https://93.ru/text/transport/2026/08/18/76593457/",
+     "https://www.yuga.ru/news/483707-benzina-ai-95-net-na-80-rossijskikh-zapravok-kakaya-situaciya-na-kubani/",
+     "https://abnews.ru/news/2026/8/21/na-azs-gelendzhika-21-avgusta-polnostyu-ischez-benzin"
     ],
-    "note": "27.08 ротация: Геленджик критичен (18-20ч очереди). Новороссийск 70% закрыто. Туристический сезон усугубляет кризис."
+    "note": "29.08 ротация: Вторая волна. 920 АЗС работают, 120 закрыто. Геленджик-Новороссийск критичны."
    },
    {
     "region": "Ростовская область",
@@ -588,24 +591,26 @@
     "lat": 56.84,
     "lon": 60.65,
     "level": "strained",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Газпром нефть/Крупные сети",
       "status": "limited",
       "level": "strained",
       "limit_l": 40,
-      "note": "27.08 ротация: АИ-92 67.99₽, АИ-95 72.35₽, ДТ 82.08₽. Локальные ограничения."
+      "note": "29.08 ротация: Цены стабильны. Локальные ограничения подтверждены. Карта АЗС доступна."
      }
     ],
     "queues_hours": 0.1,
     "ai95_price_rub": 72.35,
     "diesel_price_rub": 82.08,
     "source_urls": [
-     "https://eanews.ru/ekaterinburg/20260820121754/tseny-na-benzin-v-sverdlovskoy-oblasti-vernulis-k-rostu",
-     "https://www.petrolplus.ru/fuelindex/sverdlovskaya-oblast/ai95/"
+     "https://www.petrolplus.ru/fuelindex/sverdlovskaya-oblast/ai92/",
+     "https://www.petrolplus.ru/fuelindex/sverdlovskaya-oblast/ai95/",
+     "https://ura.news/articles/1053105269",
+     "https://fuelprice.ru/ekaterinburg"
     ],
-    "note": "27.08 ротация: Цены стабилизируются. Локальные ограничения. АИ-95: 72.35₽."
+    "note": "29.08 ротация: Локальные ограничения подтверждены. Цены стабильны. АИ-95: 72.35₽."
    },
    {
     "region": "Челябинская область",
@@ -1008,23 +1013,24 @@
     "lat": 44.23,
     "lon": 42.06,
     "level": "limited",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Лукойл / Роснефть",
       "status": "limited",
       "level": "limited",
       "limit_l": 30,
-      "note": "27.08 ротация: Лимит 30л бензина, 60л дизеля (город), 200л (трасса). Цены растут."
+      "note": "29.08 ротация: Лимит 30л бензина, 60л дизеля (город), 200л (трасса). Ограничения подтверждены."
      }
     ],
     "queues_hours": 0.5,
     "ai95_price_rub": 84.64,
     "diesel_price_rub": 81,
     "source_urls": [
-     "https://www.sravni.ru/text/ceny-na-toplivo-17-avgusta-26/"
+     "https://gde-benzin.ru/karachaevo-cherkesiya/",
+     "https://fuelprice.ru/karachaevsk"
     ],
-    "note": "27.08 ротация: Лимит 30л. Цены выросли на 7.64₽ с 17.08."
+    "note": "29.08 ротация: Лимит 30л. Статус unchanged, ограничения действуют."
    },
    {
     "region": "Краснодарский край (Черноморское побережье)",
@@ -1729,60 +1735,63 @@
     "lat": 61.0,
     "lon": 69.0,
     "level": "limited",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Газпром нефть",
       "status": "limited",
       "level": "limited",
       "limit_l": 40,
-      "note": "27.08 ротация: Лимит 40л бензина, 80л дизеля."
+      "note": "29.08 ротация: Лимит 40л бензина, 80л дизеля. Подтверждено WebSearch."
      },
      {
       "name": "Роснефть",
       "status": "limited",
       "level": "limited",
       "limit_l": 30,
-      "note": "27.08 ротация: Лимит 30л бензина. Поставки регулярны."
+      "note": "29.08 ротация: Лимит 30л бензина. Поставки регулярны."
      }
     ],
     "queues_hours": 0.15,
     "ai95_price_rub": 71.0,
     "diesel_price_rub": 85.0,
     "source_urls": [
-     "https://ura.news/news/1053119966"
+     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/",
+     "https://www.petrolplus.ru/fuelindex/khanty-mansiyskiy-avtonomniy-okrug-yugra/",
+     "https://gdezapravka.ru/zapravki/khanty-mansiysk"
     ],
-    "note": "27.08 ротация: Лимиты действуют. Ситуация под контролем."
+    "note": "29.08 ротация: Лимиты 30-40л подтверждены. Ситуация под контролем."
    },
    {
     "region": "Пермский край",
     "lat": 58.01,
     "lon": 56.25,
     "level": "limited",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Нефтехимпром",
       "status": "limited",
       "limit_l": 80,
       "level": "limited",
-      "note": "27.08 ротация: Лимит 80л бензина (без ограничений на канистры в общем лимите)."
+      "note": "29.08 ротация: Лимит 80л бензина (без ограничений на канистры в общем лимите)."
      },
      {
       "name": "Teboil",
       "status": "limited",
       "level": "limited",
       "limit_l": 40,
-      "note": "27.08: Лимит до 40л бензина, 80л дизеля. Запрет на канистры."
+      "note": "29.08 ротация: Лимит до 40л бензина, 80л дизеля. Запрет на канистры."
      }
     ],
     "queues_hours": 0.3,
     "ai95_price_rub": 85.0,
     "diesel_price_rub": 82,
-    "note": "27.08 ротация: Лимиты увеличены. Дизель без ограничений.",
+    "note": "29.08 ротация: Ограничения на отпуск. ~80 АЗС работают. Дизель без ограничений.",
     "source_urls": [
-     "https://www.business-class.su/news/2026/08/04/v-permi-na-azs-neftehimprom-uvelichil-limit-na-prodazhu-benzina",
-     "https://59.ru/text/transport/2026/08/14/76586090/"
+     "https://www.petrolplus.ru/fuelstations/perm/",
+     "https://www.petrolplus.ru/fuelindex/permskiy-kray/",
+     "https://gdezapravka.ru/zapravki/perm"
     ]
    },
    {
@@ -1790,46 +1799,50 @@
     "lat": 61.67,
     "lon": 50.84,
     "level": "calm",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Лукойл/Газпромнефть",
       "status": "open",
       "limit_l": null,
       "level": "calm",
-      "note": "27.08 ротация: Без ограничений. Стабильна."
+      "note": "29.08 ротация: Без ограничений. Цены снизились (Сыктывкар: АИ-92 63.90₽, АИ-98 96.85₽)."
      }
     ],
     "queues_hours": 0.1,
     "ai95_price_rub": 63.9,
     "diesel_price_rub": 81,
     "source_urls": [
-     "https://www.petrolplus.ru/fuelindex/respublika-komi/ai92/"
+     "https://www.bnkomi.ru/data/news/201869/",
+     "https://www.petrolplus.ru/fuelindex/respublika-komi/",
+     "https://fuelprice.ru/syktyvkar"
     ],
-    "note": "27.08 ротация: Цены снижаются. Ограничений нет. Стабильна."
+    "note": "29.08 ротация: Цены упали, особенно в Сыктывкаре. Без ограничений. Стабильна."
    },
    {
     "region": "Чукотский автономный округ",
     "lat": 64.73,
     "lon": 177.51,
     "level": "calm",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Региональные АЗС",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "27.08 ротация: Северный завоз работает по плану. Без ограничений."
+      "note": "29.08 ротация: Северный завоз продолжается по плану. На 21 тыс. тонн завезено (июнь-июль). Без ограничений."
      }
     ],
     "queues_hours": 0.0,
     "ai95_price_rub": null,
     "diesel_price_rub": null,
     "source_urls": [
-     "https://runews24.ru/anadyr/03/06/2026/na-chukotku-po-severnomu-zavozu-v-2026-godu-dostavyat-bolee-380-tyisyach-tonn-topliva-i-uglya"
+     "https://www.korabel.ru/news/comments/na_chukotku_dostavleno_svyshe_50_tys_tonn_tverdogo_i_zhidkogo_topliva.html",
+     "https://www.eastrussia.ru/news/na-chukotku-dostavili-21-tys-tonn-topliva-v-ramkakh-sezonnoy-navigatsii/",
+     "https://www.atomic-energy.ru/news/2026/07/03/166840"
     ],
-    "note": "27.08 ротация: Северный завоз стабилен. Без ограничений."
+    "note": "29.08 ротация: Северный завоз идёт по плану. 21 тыс. тонн нефтепродуктов завезено. Без ограничений."
    },
    {
     "region": "Чувашия",
@@ -1883,24 +1896,25 @@
     "lat": 51.96,
     "lon": 85.96,
     "level": "limited",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Все АЗС (суточные лимиты)",
       "status": "limited",
       "level": "limited",
       "limit_l": 50,
-      "note": "27.08 ротация: Единый суточный лимит 50л бензина, 100л дизеля. КОТ система."
+      "note": "29.08 ротация: Суточный лимит 50л бензина, 100л дизеля действует до 01.09. КОТ система. Очередей нет в Горно-Алтайске."
      }
     ],
     "queues_hours": 0.2,
     "ai95_price_rub": 105,
     "diesel_price_rub": 116,
     "source_urls": [
-     "https://tolknews.ru/respaltay/obsestvo/223006-kak-v-respublike-altay-smyagchili-ogranicheniya-na-prodazhu-topliva",
-     "https://www.vedomosti.ru/strana/siberian/news/2026/08/11/1220268-prodazhu-topliva"
+     "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/",
+     "https://forum.awd.ru/viewtopic.php?t=440480",
+     "https://altapress.ru/story/limiti-na-prodazhu-topliva-smyagchili-v-respublike-altay-392214"
     ],
-    "note": "27.08 ротация: Суточный лимит 50л бензина, 100л дизеля до 01.09. КОТ система."
+    "note": "29.08 ротация: Суточный лимит 50л/100л до 01.09. Локальные проблемы в отдаленных районах."
    },
    {
     "region": "Самарская область",
@@ -1930,72 +1944,77 @@
     "lat": 56.33,
     "lon": 44.0,
     "level": "calm",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Газпромнефть/Лукойл/Татнефть",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "27.08 ротация: Газпромнефть отменила ограничения. Лимиты полностью отменены. Запасы достаточны."
+      "note": "29.08 ротация: Ограничения отменены (август 2026). Свободная продажа. Кризис преодолён."
      }
     ],
     "queues_hours": 0.0,
     "ai95_price_rub": 73,
     "diesel_price_rub": 80,
     "source_urls": [
+     "https://pravda-nn.ru/news/v-nizhegorodskom-minenergo-obyasnili-prichiny-otsutstviya-topliva-na-nekotoryh-azs/",
      "https://nn.aif.ru/auto/set-azs-obyavila-ob-otmene-limitov-na-toplivo-v-nizhegorodskoy-oblasti",
-     "https://pravda-nn.ru/news/v-nizhegorodskom-minenergo-obyasnili-prichiny-otsutstviya-topliva-na-nekotoryh-azs/"
+     "https://www.nn.ru/text/transport/2026/08/04/76570033/"
     ],
-    "note": "27.08 ротация: Газпромнефть отменила ограничения. Кризис преодолён. Свободная продажа."
+    "note": "29.08 ротация: Ограничения отменены. Свободная продажа. Запасы достаточны. Стабильна."
    },
    {
     "region": "Кемеровская область",
     "lat": 55.35,
     "lon": 86.09,
-    "level": "strained",
-    "updated": "2026-08-27T16:20:00Z",
+    "level": "critical",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Газпромнефть/Лукойл",
       "status": "limited",
-      "level": "strained",
+      "level": "critical",
       "limit_l": 40,
-      "note": "27.08 ротация: Вторая волна. Закрыта Татнефть. Очереди в городе. Бензин расхватывается моментально. Запрет на канистры."
+      "note": "29.08 ротация: Вторая волна кризиса интенсифицирована (27-28.08). Татнефть закрыта. Очереди растут. Запрет на канистры."
      }
     ],
-    "queues_hours": 0.5,
+    "queues_hours": 1.5,
     "ai95_price_rub": 75,
     "diesel_price_rub": 79,
     "source_urls": [
+     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/",
+     "https://gdezapravka.ru/zapravki/kemerovo",
      "https://ngs42.ru/text/transport/2026/08/23/76603162/",
-     "https://fedpress.ru/news/42/society/3448072"
+     "https://fedpress.ru/news/42/society/3449273"
     ],
-    "note": "27.08 ротация: Вторая волна. Татнефть закрыта. Очереди. Запрет на канистры. Цены частников до 110₽."
+    "note": "29.08 ротация: Вторая волна. Закрытия, очереди растут. Цены частников ~110₽. Ситуация критична."
    },
    {
     "region": "Томская область",
     "lat": 56.49,
     "lon": 84.95,
     "level": "limited",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Газпром нефть/Роснефть",
       "status": "limited",
       "level": "limited",
       "limit_l": 40,
-      "note": "27.08 ротация: Вторая волна. Ажиотажный спрос на конец августа. Очереди и быстрое исчерпание запасов. Перебои в снабжении продолжаются."
+      "note": "29.08 ротация: Вторая волна. Ажиотаж продолжается. На 28.08 только 2-5 АЗС с АИ-95, 5-7 с АИ-92. Очереди 50+ авто. Цены выше средней."
      }
     ],
-    "queues_hours": 0.5,
+    "queues_hours": 2.0,
     "ai95_price_rub": 77.13,
     "diesel_price_rub": 79,
     "source_urls": [
+     "https://vtomske.ru/news/216326-benzin-ai-92-i-dizel-v-tomskoi-oblasti-stoyat-doroje-chem-v-srednem-po-rf",
+     "https://www.riatomsk.ru/article/20260827/lish-chetire-azs-otpuskayut-benzin-v-tomske-utrom-v-chetverg",
      "https://www.riatomsk.ru/article/20260826/vlasti-obvinyayut-azhiotazh-v-otsutstvii-benzina-na-tomskih-azs",
-     "https://gdezapravka.ru/zapravki/tomsk"
+     "https://tomsk.aif.ru/society/details/chislo-azs-s-benzinom-v-tomske-utrom-v-pyatnicu-ne-prevysilo-semi"
     ],
-    "note": "27.08 ротация: Вторая волна. Ажиотаж на конец августа. Очереди. Перебои в снабжении."
+    "note": "29.08 ротация: Вторая волна. На 28.08: 2-5 АЗС с АИ-95, очереди 50+ авто. Ажиотаж и паника."
    },
    {
     "region": "Красноярский край",
@@ -2073,24 +2092,25 @@
     "lat": 52.97,
     "lon": 36.07,
     "level": "limited",
-    "updated": "2026-08-27T16:20:00Z",
+    "updated": "2026-08-29T04:20:00Z",
     "networks": [
      {
       "name": "Все АЗС",
       "status": "limited",
       "limit_l": 30,
       "level": "limited",
-      "note": "27.08 ротация: Система чет-нечет по госномеру. Город: 30л, трасса: 50л. Запрет на канистры."
+      "note": "29.08 ротация: Система чет-нечет отменена (июль 2026). Лимиты действуют: 30л город, 50л трасса. Запрет на канистры."
      }
     ],
     "queues_hours": 0.2,
     "ai95_price_rub": 73.0,
     "diesel_price_rub": 77.0,
     "source_urls": [
-     "https://www.zr.ru/content/news/982753-benzin-po-nomeram-orlovskaya-o/",
-     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
+     "https://rg.ru/2026/07/16/reg-cfo/v-orlovskoj-oblasti-otmenena-sistema-realizacii-topliva-chet-nechet.html",
+     "https://iz.ru/2133814/v-orlovskoi-oblasti-otmenili-zapravku-avtomobilei-po-sisteme-chet-nechet-izi",
+     "https://abireg.ru/newsitem/115677/"
     ],
-    "note": "27.08 ротация: Система чет-нечет. Город 30л, трасса 50л. Запрет на канистры."
+    "note": "29.08 ротация: Чет-нечет отменена. Лимиты 30л город/50л трасса остаются. Ограничения контролируются."
    },
    {
     "region": "Рязанская область (уточнение)",
@@ -17685,22 +17705,6 @@
     },
     {
      "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Неизвестно",
-     "region": "Неизвестно",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "НПЗ LUKOIL-Nizhegorodnefteorgsintez — npz",
-     "casualties": "",
-     "title": "Неизвестно — НПЗ LUKOIL-Nizhegorodnefteorgsintez — npz",
-     "detail": "🚨 МОЛНИЯ · Новые удары по нефтегазовой инфраструктуре РФ 📍 Не указано, Не указано 🎯 НПЗ LUKOIL-Nizhegorodnefteorgsintez — npz ~ burning Украинские дроны поразили один из крупнейших НПЗ РФ мощностью ~1...",
-     "source_url": "t.me/NPZmap",
-     "confidence": "confirmed"
-    },
-    {
-     "date": "2026-08-28",
      "time": "ночь",
      "city": "Ярославль",
      "region": "Ярославская область",
@@ -17713,153 +17717,6 @@
      "source_url": "https://fakty.com.ua/ru/svit/20260828-zsu-znovu-urazyly-yaroslavskyj-npz-u-rf-na-zavodi-vyruye-pozhezha/",
      "confidence": "confirmed",
      "title": "Атака на НПЗ Славнефть-ЯНОС в Ярославле"
-    },
-    {
-     "id": "Афипский-20260828-3",
-     "title": "Афипский — НПЗ (нефтеперерабатывающий завод)",
-     "location": [
-      45.0355,
-      38.9753
-     ],
-     "description": "🔴 В Крыму – пожар и взрывы на складе боеприпасов Вечерняя сводка · 26 августа, 20:00 МСК · Топливный фронт РФ Главное событие суток — МОЛНИЯ выше. См. молнию для деталей. 👉 Подробности молнии 💥 Удары за сутки: 8 (3 — по НПЗ и энергетике) 📍 Афипский: Афипский нефтеперерабатывающий завод ~ 📍 Новошахти...",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "burning",
-     "city": "Афипский",
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🔴 В Крыму – пожар и взрывы на складе боеприпасов Вечерняя сводка · 26 августа, 20:00 МСК · Топливный фронт РФ Главное событие суток — МОЛНИЯ выше. См. молнию для деталей. 👉 Подробности молнии 💥 Удары за сутки: 8 (3 — по НПЗ и энергетике) 📍 Афипский: Афипский нефтеперерабатывающий завод ~ 📍 Новошахти...",
-     "lat": 45.0355,
-     "lon": 38.9753
-    },
-    {
-     "id": "Кстово-20260828-5",
-     "title": "Кстово — НПЗ (нефтеперерабатывающий завод)",
-     "location": null,
-     "description": "🔴 Кстово: НПЗ LUKOIL-Nizhegorodnefteorgsintez Утренняя сводка · 27 августа, 08:00 МСК · Топливный фронт РФ Кстово — НПЗ LUKOIL-Nizhegorodnefteorgsintez. крупный пожар на нефтеперерабатывающем заводе, один из крупнейших НПЗ РФ мощностью ~17 млн тонн в год Статус: ~ ожидает подтверждения. 💥 Удары за с...",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "burning",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🔴 Кстово: НПЗ LUKOIL-Nizhegorodnefteorgsintez Утренняя сводка · 27 августа, 08:00 МСК · Топливный фронт РФ Кстово — НПЗ LUKOIL-Nizhegorodnefteorgsintez. крупный пожар на нефтеперерабатывающем заводе, один из крупнейших НПЗ РФ мощностью ~17 млн тонн в год Статус: ~ ожидает подтверждения. 💥 Удары за с..."
-    },
-    {
-     "id": "Мониторинг канала @NPZmap + открытые источники за 12-20260828-8",
-     "title": "Мониторинг канала @NPZmap + открытые источники за 12 — НПЗ (нефтеперерабатывающий завод)",
-     "location": null,
-     "description": "🚨 МОЛНИЯ · NEWSWATCH 27.08 · 13:00 MSK За последний час новых ударов по нефтегазовой инфраструктуре РФ не зафиксировано. 📍 Мониторинг канала @NPZmap + открытые источники за 12:00–13:00 UTC. 🎯 НПЗ, нефтебазы, газовые объекты — без изменений. ~ Статус: ожидание (нет подтверждённых событий) Сводка: за ...",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "active",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🚨 МОЛНИЯ · NEWSWATCH 27.08 · 13:00 MSK За последний час новых ударов по нефтегазовой инфраструктуре РФ не зафиксировано. 📍 Мониторинг канала @NPZmap + открытые источники за 12:00–13:00 UTC. 🎯 НПЗ, нефтебазы, газовые объекты — без изменений. ~ Статус: ожидание (нет подтверждённых событий) Сводка: за ..."
-    },
-    {
-     "id": "Кстово-20260828-11",
-     "title": "Кстово — НПЗ (нефтеперерабатывающий завод)",
-     "location": null,
-     "description": "🔴 Атака БПЛА на логистический центр Ozon в Оренбурге Вечерняя сводка · 27 августа, 20:00 МСК · Топливный фронт РФ Главное событие суток — МОЛНИЯ выше. См. молнию для деталей. 👉 Подробности молнии 💥 Удары за сутки: 8 (1 — по НПЗ и энергетике) 📍 Кстово: НПЗ LUKOIL-Nizhegorodnefteorgsintez ~ 📍 Котовск:...",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "active",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🔴 Атака БПЛА на логистический центр Ozon в Оренбурге Вечерняя сводка · 27 августа, 20:00 МСК · Топливный фронт РФ Главное событие суток — МОЛНИЯ выше. См. молнию для деталей. 👉 Подробности молнии 💥 Удары за сутки: 8 (1 — по НПЗ и энергетике) 📍 Кстово: НПЗ LUKOIL-Nizhegorodnefteorgsintez ~ 📍 Котовск:..."
-    },
-    {
-     "id": "Самара, Самарская область 🎯 Куйбышевский НПЗ — нефтеперерабатывающий завод ✓ Подтверждено-20260828-13",
-     "title": "Самара — НПЗ (нефтеперерабатывающий завод)",
-     "location": [
-      53.1435,
-      50.04317
-     ],
-     "description": "🚨 МОЛНИЯ · Самара: Куйбышевский НПЗ 📍 Самара, Самарская область 🎯 Куйбышевский НПЗ — нефтеперерабатывающий завод ✓ Подтверждено: данные карты Атака примерно 29 БПЛА. Зафиксировано 7 очагов пожара. Прямые попадания в блоки AVT-4 и AVT-5, повреждены газовые, бензиновые и дизельные трубопроводы, устано...",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "burning",
-     "city": "Самара",
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🚨 МОЛНИЯ · Самара: Куйбышевский НПЗ 📍 Самара, Самарская область 🎯 Куйбышевский НПЗ — нефтеперерабатывающий завод ✓ Подтверждено: данные карты Атака примерно 29 БПЛА. Зафиксировано 7 очагов пожара. Прямые попадания в блоки AVT-4 и AVT-5, повреждены газовые, бензиновые и дизельные трубопроводы, устано...",
-     "lat": 53.1435,
-     "lon": 50.04317
-    },
-    {
-     "id": "Октябрьский-20260828-14",
-     "title": "Октябрьский — НПЗ (нефтеперерабатывающий завод)",
-     "location": null,
-     "description": "🔴 Самара: Куйбышевский НПЗ Утренняя сводка · 28 августа, 08:00 МСК · Топливный фронт РФ Главное событие суток — МОЛНИЯ выше. См. молнию для деталей. 👉 Подробности молнии 💥 Удары за сутки: 5 (1 — по НПЗ и энергетике) 📍 Октябрьский: жилая застройка ~ 📍 Бессоновка: жилая застройка ~ 📍 Уфа: Логистически...",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "active",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🔴 Самара: Куйбышевский НПЗ Утренняя сводка · 28 августа, 08:00 МСК · Топливный фронт РФ Главное событие суток — МОЛНИЯ выше. См. молнию для деталей. 👉 Подробности молнии 💥 Удары за сутки: 5 (1 — по НПЗ и энергетике) 📍 Октябрьский: жилая застройка ~ 📍 Бессоновка: жилая застройка ~ 📍 Уфа: Логистически..."
-    },
-    {
-     "id": "Ярославль, Ярославская область 🎯 НПЗ — удар дронами по нефтеперерабатывающему заводу ~ Ожидает подтверждения Видео подтверждает удар дронами по Ярославскому НПЗ. Источник-20260828-15",
-     "title": "Ярославль, Ярославская область 🎯 НПЗ — удар дронами по нефтеперерабатывающему заводу ~ Ожидает подтверждения Видео подтверждает удар дронами по Ярославскому НПЗ. Источник — НПЗ (нефтеперерабатывающий завод)",
-     "location": null,
-     "description": "🚨 МОЛНИЯ · Ярославль — НПЗ 📍 Ярославль, Ярославская область 🎯 НПЗ — удар дронами по нефтеперерабатывающему заводу ~ Ожидает подтверждения Видео подтверждает удар дронами по Ярославскому НПЗ. Источник: UA.NEWS , 28.08.2026 05:04 МСК. 👉 Карта https://npz-tactical-map.vercel.app",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "active",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🚨 МОЛНИЯ · Ярославль — НПЗ 📍 Ярославль, Ярославская область 🎯 НПЗ — удар дронами по нефтеперерабатывающему заводу ~ Ожидает подтверждения Видео подтверждает удар дронами по Ярославскому НПЗ. Источник: UA.NEWS , 28.08.2026 05:04 МСК. 👉 Карта https://npz-tactical-map.vercel.app"
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Самара",
-     "region": "Самарская область",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "Куйбышевский НПЗ — нефтеперерабатывающий завод ✓ Подтверждено: данные карты Атака примерно 29 БПЛА. Зафиксировано 7 очагов пожара. Прямые попадания в блоки AVT-4 и AVT-5, повреждены газовые, бензиновые и дизельные трубопроводы, установка производства водор 👉 Карта",
-     "casualties": "",
-     "title": "Самара — Куйбышевский НПЗ — нефтеперерабатывающий завод ✓ Подтверждено: данные карты Атака примерно 29 БПЛА. Зафиксировано 7 очагов пожара. Прямые попадания в блоки AVT-4 и AVT-5, повреждены газовые, бензиновые и дизельные трубопроводы, установка производства водор 👉 Карта",
-     "detail": "🚨 МОЛНИЯ · Самара: Куйбышевский НПЗ 📍 Самара, Самарская область 🎯 Куйбышевский НПЗ — нефтеперерабатывающий завод ✓ Подтверждено: данные карты Атака примерно 29 БПЛА. Зафиксировано 7 очагов пожара. Пря...",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Неизвестно",
-     "region": "Неизвестно",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "НПЗ — удар дронами по нефтеперерабатывающему заводу",
-     "casualties": "",
-     "title": "Неизвестно — НПЗ — удар дронами по нефтеперерабатывающему заводу",
-     "detail": "🚨 МОЛНИЯ · Ярославль — НПЗ 📍 Ярославль, Ярославская область 🎯 НПЗ — удар дронами по нефтеперерабатывающему заводу ~ Ожидает подтверждения Видео подтверждает удар дронами по Ярославскому НПЗ. Источник:...",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
     },
     {
      "date": "2026-08-28",
@@ -17891,223 +17748,6 @@
      "source_url": "https://76.ru/text/incidents/2026/08/28/76611919/",
      "confidence": "confirmed",
      "title": "Атака БПЛА на Костромскую область"
-    },
-    {
-     "id": "unknown-20260828-0",
-     "title": "Объект РФ",
-     "location": null,
-     "description": "🚨 МОЛНИЯ · В Крыму – пожар и взрывы на складе боеприпасов 📍 Крым 🎯 В Крыму – пожар и взрывы на складе боеприпасов — в Крыму в Красногвардейском районе предположительно после атаки беспилотников произошёл пожар, сообщается также о… ~ Ожидает подтверждения 👉 Карта",
-     "source": "t.me/NPZmap",
-     "category": "gas",
-     "impact": "burning",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🚨 МОЛНИЯ · В Крыму – пожар и взрывы на складе боеприпасов 📍 Крым 🎯 В Крыму – пожар и взрывы на складе боеприпасов — в Крыму в Красногвардейском районе предположительно после атаки беспилотников произошёл пожар, сообщается также о… ~ Ожидает подтверждения 👉 Карта"
-    },
-    {
-     "id": "unknown-20260828-4",
-     "title": "Объект РФ",
-     "location": null,
-     "description": "🚨 МОЛНИЯ · Новые удары по нефтегазовой инфраструктуре РФ 📍 Не указано, Не указано 🎯 НПЗ LUKOIL-Nizhegorodnefteorgsintez — npz ~ burning Украинские дроны поразили один из крупнейших НПЗ РФ мощностью ~17 млн тонн в год. Возник крупный пож... 📍 Не указано, Не указано 🎯 Логистический центр Wildberries —...",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "burning",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🚨 МОЛНИЯ · Новые удары по нефтегазовой инфраструктуре РФ 📍 Не указано, Не указано 🎯 НПЗ LUKOIL-Nizhegorodnefteorgsintez — npz ~ burning Украинские дроны поразили один из крупнейших НПЗ РФ мощностью ~17 млн тонн в год. Возник крупный пож... 📍 Не указано, Не указано 🎯 Логистический центр Wildberries —..."
-    },
-    {
-     "id": "unknown-20260828-6",
-     "title": "Объект РФ",
-     "location": null,
-     "description": "За последний час новых ударов по нефтегазовой инфраструктуре не зарегистрировано",
-     "source": "t.me/NPZmap",
-     "category": "gas",
-     "impact": "active",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "За последний час новых ударов по нефтегазовой инфраструктуре не зарегистрировано"
-    },
-    {
-     "id": "unknown-20260828-7",
-     "title": "Объект РФ",
-     "location": null,
-     "description": "За последний час новых ударов по нефтегазовой инфраструктуре не зафиксировано",
-     "source": "t.me/NPZmap",
-     "category": "gas",
-     "impact": "active",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "За последний час новых ударов по нефтегазовой инфраструктуре не зафиксировано"
-    },
-    {
-     "id": "unknown-20260828-9",
-     "title": "Объект РФ",
-     "location": null,
-     "description": "За последний час новых ударов по нефтегазовой инфраструктуре не зафиксировано",
-     "source": "t.me/NPZmap",
-     "category": "gas",
-     "impact": "active",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "За последний час новых ударов по нефтегазовой инфраструктуре не зафиксировано"
-    },
-    {
-     "id": "unknown-20260828-10",
-     "title": "Объект РФ",
-     "location": null,
-     "description": "🚨 МОЛНИЯ · 2 удара ~ 📍 Уфа, Республика Башкортостан — Логистический центр Ozon ~ 📍 Оренбург, Оренбургская область — Логистический центр Ozon ✓ подтверждено · ~ ожидает подтверждения 👉 Карта",
-     "source": "t.me/NPZmap",
-     "category": "gas",
-     "impact": "active",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "🚨 МОЛНИЯ · 2 удара ~ 📍 Уфа, Республика Башкортостан — Логистический центр Ozon ~ 📍 Оренбург, Оренбургская область — Логистический центр Ozon ✓ подтверждено · ~ ожидает подтверждения 👉 Карта"
-    },
-    {
-     "id": "unknown-20260828-12",
-     "title": "Объект РФ",
-     "location": null,
-     "description": "{ &quot;strikes&quot;: [ { &quot;id&quot;: &quot;Кстово-2026-08-27-1&quot;, &quot;title&quot;: &quot;Кстово — НПЗ LUKOIL-Nizhegorodnefteorgsintez&quot;, &quot;location&quot;: [58.0, 56.25], &quot;description&quot;: &quot;Кстово — НПЗ LUKOIL-Nizhegorodnefteorgsintez, крупный пожар на нефтеперерабатыв...",
-     "source": "t.me/NPZmap",
-     "category": "npz",
-     "impact": "burning",
-     "city": null,
-     "region": null,
-     "date": "2026-08-28",
-     "time": "15:06",
-     "confidence": "reported",
-     "detail": "{ &quot;strikes&quot;: [ { &quot;id&quot;: &quot;Кстово-2026-08-27-1&quot;, &quot;title&quot;: &quot;Кстово — НПЗ LUKOIL-Nizhegorodnefteorgsintez&quot;, &quot;location&quot;: [58.0, 56.25], &quot;description&quot;: &quot;Кстово — НПЗ LUKOIL-Nizhegorodnefteorgsintez, крупный пожар на нефтеперерабатыв..."
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Неизвестно",
-     "region": "Неизвестно",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "В Крыму – пожар и взрывы на складе боеприпасов — в Крыму в Красногвардейском районе предположительно после атаки беспилотников произошёл пожар, сообщается также о…",
-     "casualties": "",
-     "title": "Неизвестно — В Крыму – пожар и взрывы на складе боеприпасов — в Крыму в Красногвардейском районе предположительно после атаки беспилотников произошёл пожар, сообщается также о…",
-     "detail": "🚨 МОЛНИЯ · В Крыму – пожар и взрывы на складе боеприпасов 📍 Крым 🎯 В Крыму – пожар и взрывы на складе боеприпасов — в Крыму в Красногвардейском районе предположительно после атаки беспилотников произо...",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Крым",
-     "region": "Крым",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "Атаки ВСУ на Крым. Последние новости - РИА Новости Крым — 22 августа, 15:15 Еще Атаки ВСУ на Крым Воздушная тревога в Севастополе Севастополь Новости Севастополя Срочные…",
-     "casualties": "",
-     "title": "Крым — Атаки ВСУ на Крым. Последние новости - РИА Новости Крым — 22 августа, 15:15 Еще Атаки ВСУ на Крым Воздушная тревога в Севастополе Севастополь Новости Севастополя Срочные…",
-     "detail": "🚨 МОЛНИЯ · Атаки ВСУ на Крым. Последние новости - РИА Новости Крым 📍 Крым, Севастополь 🎯 Атаки ВСУ на Крым. Последние новости - РИА Новости Крым — 22 августа, 15:15 Еще Атаки ВСУ на Крым Воздушная тре...",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Крым",
-     "region": "Крым",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "Взрывы в Крыму последние новости на сегодня: Происшествия: Россия: Lenta.ru — Десятки беспилотников пытались этой ночью атаковать Крым.",
-     "casualties": "",
-     "title": "Крым — Взрывы в Крыму последние новости на сегодня: Происшествия: Россия: Lenta.ru — Десятки беспилотников пытались этой ночью атаковать Крым.",
-     "detail": "🚨 МОЛНИЯ · Взрывы в Крыму последние новости на сегодня: Происшествия: Россия… 📍 Крым, Севастополь 🎯 Взрывы в Крыму последние новости на сегодня: Происшествия: Россия: Lenta.ru — Десятки беспилотников ...",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Афипский",
-     "region": "Краснодарский край",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "объект РФ",
-     "casualties": "",
-     "title": "Афипский",
-     "detail": "🔴 В Крыму – пожар и взрывы на складе боеприпасов Вечерняя сводка · 26 августа, 20:00 МСК · Топливный фронт РФ Главное событие суток — МОЛНИЯ выше. См. молнию для деталей. 👉 Подробности молнии 💥 Удары ...",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Неизвестно",
-     "region": "Неизвестно",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "объект РФ",
-     "casualties": "",
-     "title": "Неизвестно",
-     "detail": "🚨 МОЛНИЯ · 2 удара ~ 📍 Уфа, Республика Башкортостан — Логистический центр Ozon ~ 📍 Оренбург, Оренбургская область — Логистический центр Ozon ✓ подтверждено · ~ ожидает подтверждения 👉 Карта",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Афипский",
-     "region": "Краснодарский край",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "объект РФ",
-     "casualties": "",
-     "title": "Афипский",
-     "detail": "🔴 В Крыму – пожар и взрывы на складе боеприпасов Вечерняя сводка · 26 августа, 20:00 МСК · Топливный фронт РФ Главное событие суток — МОЛНИЯ выше. См. молнию для деталей. 👉 Подробности молнии 💥 Удары ...",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
-    },
-    {
-     "date": "2026-08-28",
-     "time": "15:09",
-     "city": "Неизвестно",
-     "region": "Неизвестно",
-     "lat": 55.7558,
-     "lon": 37.6173,
-     "type": "drone",
-     "count": null,
-     "target": "объект РФ",
-     "casualties": "",
-     "title": "Неизвестно",
-     "detail": "🚨 МОЛНИЯ · 2 удара ~ 📍 Уфа, Республика Башкортостан — Логистический центр Ozon ~ 📍 Оренбург, Оренбургская область — Логистический центр Ozon ✓ подтверждено · ~ ожидает подтверждения 👉 Карта",
-     "source_url": "t.me/NPZmap",
-     "confidence": "reported"
     }
    ],
    "voices": [
@@ -18284,7 +17924,22 @@
      "author_hint": "водитель такси"
     }
    ],
-   "strikes": []
+   "strikes": [
+    {
+     "date": "2026-08-29",
+     "time": "03:00",
+     "city": "Ростов-на-Дону",
+     "region": "Ростовская область",
+     "lat": 47.23,
+     "lon": 39.72,
+     "type": "drone",
+     "count": null,
+     "target": "логистический центр Ozon",
+     "detail": "7 человек ранены (2 ребёнка, 1 в серьёзном состоянии), объект загорелся (пожар погашен), эвакуация завершена",
+     "source_url": "https://iz.ru/2157205/2026-08-29/logisticheskii-obekt-v-rostove-na-donu-podvergsia-atake-bpla",
+     "confidence": "confirmed"
+    }
+   ]
   }
  },
  "updated": "2026-08-29"
