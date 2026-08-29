@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Удмуртия": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1787968319,
+      "source_text": "29.08.2026 04:51 МСК\nРеспублика Удмуртия Ракетная опасность"
+    },
     "Нижегородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -52,16 +71,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1787965497,
-      "source_text": "29.08.2026 04:04 МСК\nТамбовская область Ракетная опасность\n\n29.08.2026 01:24 МСК\nРахманино, Петровский район, Тамбовская область - прошло от 2 БПЛА в сторону примерно Тамбов. 📡 Локатор России - @locatorru"
+      "fill": "#d8c06a",
+      "last_event_ts": 1787955874,
+      "source_text": "29.08.2026 01:24 МСК\nРахманино, Петровский район, Тамбовская область - прошло от 2 БПЛА в сторону примерно Тамбов. 📡 Локатор России - @locatorru"
     },
     "Тульская область": {
       "bpla": false,
@@ -470,16 +489,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1787967471,
-      "source_text": "29.08.2026 04:37 МСК\nРеспублика Марий Эл Кировская область Опасность по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1787968493,
+      "source_text": "29.08.2026 04:54 МСК\nКировская область Ракетная опасность\n\n29.08.2026 04:37 МСК\nРеспублика Марий Эл Кировская область Опасность по БПЛА"
     },
     "Белгородская область": {
       "bpla": false,
@@ -5017,6 +5036,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 86201,
+      "text": "Кировская область\nРакетная опасность",
+      "ts": 1787968493,
+      "time_label": "29.08.2026 04:54 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86200,
+      "text": "Республика Удмуртия\nРакетная опасность",
+      "ts": 1787968319,
+      "time_label": "29.08.2026 04:51 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86199,
+      "text": "Тамбовская область\nОтбой ракетной опасности",
+      "ts": 1787968187,
+      "time_label": "29.08.2026 04:49 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 86198,
       "text": "Липецкая область\nОтбой ракетной опасности",
       "ts": 1787968070,
@@ -5631,30 +5674,6 @@
       "time_label": "29.08.2026 03:42 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 86167,
-      "text": "Аксайский район\nРостовская область\nФиксации БПЛА",
-      "ts": 1787964131,
-      "time_label": "29.08.2026 03:42 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 82977,
-      "text": "Ульяновская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1787964127,
-      "time_label": "29.08.2026 03:42 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 268270,
-      "text": "Тульская область\nвнимание по бпла",
-      "ts": 1787964110,
-      "time_label": "29.08.2026 03:41 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -5664,15 +5683,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787968070,
-  "last_event_at": "2026-08-29T01:47:50Z",
-  "fetched_at": "2026-08-29T01:50:03.131363Z",
+  "timestamp": 1787968493,
+  "last_event_at": "2026-08-29T01:54:53Z",
+  "fetched_at": "2026-08-29T02:00:03.265622Z",
   "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-08-29T01:50:03.131363Z",
-    "source_age_seconds": 133,
+    "generated_at": "2026-08-29T02:00:03.265622Z",
+    "source_age_seconds": 310,
     "city_count": 122,
-    "region_count": 34,
+    "region_count": 35,
     "feed_count": 80
   }
 }
