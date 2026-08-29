@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Тульская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1787981368,
+      "source_text": "29.08.2026 08:29 МСК\nТульская область Опасность по БПЛА"
+    },
     "Орловская область": {
       "bpla": false,
       "bplaDim": false,
@@ -98,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1787966657,
-      "source_text": "29.08.2026 04:24 МСК\nБердянск и близлежащие Опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1787981892,
+      "source_text": "29.08.2026 08:38 МСК\nБердянск - Приазовское опасность по БПЛА трасса"
     },
     "Воронежская область": {
       "bpla": false,
@@ -299,16 +318,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1787981194,
-      "source_text": "29.08.2026 08:25 МСК\nШебекино Ракетная опасность\n\n29.08.2026 08:26 МСК\nБезлюдовка Графовка и близлежащие Шебекинский район Тревога по БПЛА"
+      "fill": "#d8c06a",
+      "last_event_ts": 1787981581,
+      "source_text": "29.08.2026 08:33 МСК\nШебекино Тревога по БПЛА"
     },
     "Республика Башкортостан": {
       "bpla": false,
@@ -388,6 +407,28 @@
     }
   },
   "cities": [
+    {
+      "key": "приазовское|запорожская область",
+      "name": "Приазовское",
+      "lat": 46.73123,
+      "lon": 35.64082,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787981892,
+      "source_text": "29.08.2026 08:38 МСК\nБердянск - Приазовское опасность по БПЛА трасса"
+    },
     {
       "key": "внуково|автономная республика крым",
       "name": "Внуково",
@@ -775,14 +816,14 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1787981105,
-      "source_text": "29.08.2026 08:25 МСК\nШебекино Ракетная опасность\n\n29.08.2026 07:46 МСК\nШебекино Юз, НТВ Тревога по БПЛА"
+      "fill": "#ea580c",
+      "last_event_ts": 1787981581,
+      "source_text": "29.08.2026 08:33 МСК\nШебекино Тревога по БПЛА"
     },
     {
       "key": "гвардейское|автономная республика крым",
@@ -915,28 +956,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1787950411,
       "source_text": "28.08.2026 23:53 МСК\nМариуполь и близлежащие, тревога по БпЛА"
-    },
-    {
-      "key": "пантелеймоновка|донецкая народная республика",
-      "name": "Пантелеймоновка",
-      "lat": 48.20155,
-      "lon": 37.97394,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787938509,
-      "source_text": "28.08.2026 20:35 МСК\nПантелеймоновка, Корсунь, Енакиево ДНР и близлежащие Опасность по БПЛА"
     },
     {
       "key": "армянск|автономная республика крым",
@@ -1083,14 +1102,14 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1787981030,
-      "source_text": "29.08.2026 08:23 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области\n\n29.08.2026 08:03 МСК\nБелгород Опасность по БПЛА"
+      "fill": "#ea580c",
+      "last_event_ts": 1787979838,
+      "source_text": "29.08.2026 08:03 МСК\nБелгород Опасность по БПЛА"
     },
     {
       "key": "бердянск|запорожская область",
@@ -1111,8 +1130,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1787966657,
-      "source_text": "29.08.2026 04:24 МСК\nБердянск и близлежащие Опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1787981892,
+      "source_text": "29.08.2026 08:38 МСК\nБердянск - Приазовское опасность по БПЛА трасса"
     },
     {
       "key": "брянск|брянская область",
@@ -1641,28 +1660,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1787947669,
       "source_text": "28.08.2026 23:07 МСК\nКороча, Новый Оскол и близлежащие, тревога по БпЛА"
-    },
-    {
-      "key": "енакиево|донецкая народная республика",
-      "name": "Енакиево",
-      "lat": 48.23857,
-      "lon": 38.20403,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1787938509,
-      "source_text": "28.08.2026 20:35 МСК\nПантелеймоновка, Корсунь, Енакиево ДНР и близлежащие Опасность по БПЛА"
     },
     {
       "key": "разумное|белгородская область",
@@ -2579,16 +2576,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
-      "rocketOnRegion": true,
-      "fill": "#dc2626",
-      "last_event_ts": 1787981030,
-      "source_text": "29.08.2026 08:23 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области\n\n29.08.2026 07:37 МСК\nБелгородский район Опасность по БПЛА"
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1787978239,
+      "source_text": "29.08.2026 07:37 МСК\nБелгородский район Опасность по БПЛА"
     },
     "UKR.26.10_1": {
       "gid_2": "UKR.26.10_1",
@@ -2682,6 +2679,62 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 268359,
+      "text": "Бердянск - Приазовское опасность по БПЛА трасса",
+      "ts": 1787981892,
+      "time_label": "29.08.2026 08:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 268358,
+      "text": "Троицкое Лнр\nБПЛА разведка",
+      "ts": 1787981712,
+      "time_label": "29.08.2026 08:35 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 268357,
+      "text": "Белгородская область\nОтбой ракетной опасности",
+      "ts": 1787981600,
+      "time_label": "29.08.2026 08:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 268356,
+      "text": "Шебекино\nТревога по БПЛА",
+      "ts": 1787981581,
+      "time_label": "29.08.2026 08:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 268355,
+      "text": "Брянская область село Высокое Унеческий район БПЛА в направлении Брянска-Сещи",
+      "ts": 1787981508,
+      "time_label": "29.08.2026 08:31 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 86237,
+      "text": "Тульская область\nОпасность по БПЛА",
+      "ts": 1787981368,
+      "time_label": "29.08.2026 08:29 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 268354,
+      "text": "Тульская область\nОпасность по БПЛА",
+      "ts": 1787981334,
+      "time_label": "29.08.2026 08:28 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 268353,
       "text": "Безлюдовка Графовка и близлежащие\nШебекинский район\nТревога по БПЛА",
@@ -3265,62 +3318,6 @@
       "time_label": "29.08.2026 05:29 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 86211,
-      "text": "Пензенская область\nОтбой ракетной опасности",
-      "ts": 1787970554,
-      "time_label": "29.08.2026 05:29 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 86210,
-      "text": "Саратовская область\nОтбой ракетной опасности",
-      "ts": 1787970480,
-      "time_label": "29.08.2026 05:28 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 268306,
-      "text": "Новофедоровка и близлежащие, тревога по БпЛА",
-      "ts": 1787970465,
-      "time_label": "29.08.2026 05:27 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 268305,
-      "text": "Пермский край\nвнимание по бпла",
-      "ts": 1787970203,
-      "time_label": "29.08.2026 05:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 86209,
-      "text": "Батайск\nРостовская область\nРабота ПВО по БПЛА",
-      "ts": 1787970155,
-      "time_label": "29.08.2026 05:22 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 268304,
-      "text": "Брянская область\nВыгоничский р-н\nНавлинский р-н\nФиксации БпЛА продолжаются",
-      "ts": 1787970142,
-      "time_label": "29.08.2026 05:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 86208,
-      "text": "Пермский край\nРакетная опасность",
-      "ts": 1787970037,
-      "time_label": "29.08.2026 05:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -3330,15 +3327,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1787981194,
-  "last_event_at": "2026-08-29T05:26:34Z",
-  "fetched_at": "2026-08-29T05:30:04.121285Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1787981892,
+  "last_event_at": "2026-08-29T05:38:12Z",
+  "fetched_at": "2026-08-29T05:40:03.012651Z",
+  "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-29T05:30:04.121285Z",
-    "source_age_seconds": 210,
-    "city_count": 73,
-    "region_count": 20,
+    "generated_at": "2026-08-29T05:40:03.012651Z",
+    "source_age_seconds": 111,
+    "city_count": 72,
+    "region_count": 21,
     "feed_count": 80
   }
 }
