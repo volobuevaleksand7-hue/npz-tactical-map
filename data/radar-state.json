@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788086896,
-      "source_text": "30.08.2026 13:48 МСК\nБердянск и близлежащие от Софиевка фиксации БПЛА Запорожская область РФ"
+      "last_event_ts": 1788088530,
+      "source_text": "30.08.2026 14:15 МСК\nБердянск, Бердянский район тревога по БПЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -460,28 +460,6 @@
       "source_text": "30.08.2026 07:00 МСК\nГорское Первомайск Лнр Тревога по БПЛА Хорнет"
     },
     {
-      "key": "мариуполь|донецкая народная республика",
-      "name": "Мариуполь",
-      "lat": 47.09514,
-      "lon": 37.54131,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788045428,
-      "source_text": "30.08.2026 02:17 МСК\nМариуполь и близлежащие ДНР Тревога по БПЛА"
-    },
-    {
       "key": "каланчак|херсонская область",
       "name": "Каланчак",
       "lat": 46.25495,
@@ -641,9 +619,9 @@
       "lat": 46.75578,
       "lon": 36.78815,
       "region": "Запорожская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -654,8 +632,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788086896,
-      "source_text": "30.08.2026 13:48 МСК\nБердянск и близлежащие от Софиевка фиксации БПЛА Запорожская область РФ"
+      "last_event_ts": 1788088530,
+      "source_text": "30.08.2026 14:15 МСК\nБердянск, Бердянский район тревога по БПЛА"
     },
     {
       "key": "геленджик|краснодарский край",
@@ -967,6 +945,28 @@
       "last_event_ts": 1788087742,
       "source_text": "30.08.2026 14:02 МСК\nТуапсинский район, ,г.Сочи, Мостовский район, г.Геленджик, г.Анапа г.Новороссийск, Абинский район, Крымский район, Темрюкский район, Краснодарский край - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
+    "UKR.26.16_1": {
+      "gid_2": "UKR.26.16_1",
+      "name_ru": "Бердянский район",
+      "region_ru": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788088530,
+      "source_text": "30.08.2026 14:15 МСК\nБердянск, Бердянский район тревога по БПЛА"
+    },
     "RUS.34.31_1": {
       "gid_2": "RUS.34.31_1",
       "name_ru": "Мостовский район",
@@ -1169,6 +1169,14 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 268876,
+      "text": "Бердянск, Бердянский район тревога по БПЛА",
+      "ts": 1788088530,
+      "time_label": "30.08.2026 14:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 268875,
       "text": "Чертковский район в направлении Кутейниково фиксация БПЛА",
@@ -1800,14 +1808,6 @@
       "time_label": "30.08.2026 11:58 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 86416,
-      "text": "Смоленская область\nТверская область\nОтбой опасности по БПЛА",
-      "ts": 1788080226,
-      "time_label": "30.08.2026 11:57 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1817,14 +1817,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788087896,
-  "last_event_at": "2026-08-30T11:04:56Z",
-  "fetched_at": "2026-08-30T11:10:02.636695Z",
+  "timestamp": 1788088530,
+  "last_event_at": "2026-08-30T11:15:30Z",
+  "fetched_at": "2026-08-30T11:20:03.240996Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-30T11:10:02.636695Z",
-    "source_age_seconds": 306,
-    "city_count": 28,
+    "generated_at": "2026-08-30T11:20:03.240996Z",
+    "source_age_seconds": 273,
+    "city_count": 27,
     "region_count": 11,
     "feed_count": 80
   }
