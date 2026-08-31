@@ -307,8 +307,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1788158303,
-      "source_text": "31.08.2026 09:30 МСК\nЧасов Яр, Артёмовск, Соледар и близлежащие и далее на восток Ракетная опасность ДНР, ЛНР\n\n31.08.2026 09:38 МСК\nГорловка ДНР и близлежащие Опасность по БПЛА и ФПВ, ещё фиксации"
+      "last_event_ts": 1788163779,
+      "source_text": "31.08.2026 09:30 МСК\nЧасов Яр, Артёмовск, Соледар и близлежащие и далее на восток Ракетная опасность ДНР, ЛНР\n\n31.08.2026 11:09 МСК\nГорловка ДНР и близлежащие Опасность по БПЛА и ФПВ повторно"
     }
   },
   "cities": [
@@ -1660,9 +1660,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1673,8 +1673,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788158303,
-      "source_text": "31.08.2026 09:38 МСК\nГорловка ДНР и близлежащие Опасность по БПЛА и ФПВ, ещё фиксации"
+      "last_event_ts": 1788163779,
+      "source_text": "31.08.2026 11:09 МСК\nГорловка ДНР и близлежащие Опасность по БПЛА и ФПВ повторно"
     },
     {
       "key": "старобешево|донецкая народная республика",
@@ -1919,28 +1919,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788153437,
       "source_text": "31.08.2026 08:17 МСК\nТуапсинский район, г.Сочи, Мостовский район, г.Геленджик, г.Анапа г.Новороссийск, Абинский район, Крымский район, Темрюкский район, Краснодарский край - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
-    },
-    "RUS.8.19_1": {
-      "gid_2": "RUS.8.19_1",
-      "name_ru": "Почепский район",
-      "region_ru": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788121016,
-      "source_text": "30.08.2026 23:16 МСК\nПочепский район Брянская область Тревога по БПЛА"
     },
     "UKR.26.16_1": {
       "gid_2": "UKR.26.16_1",
@@ -2188,6 +2166,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 269307,
+      "text": "Родинское Димитров Селидово ДНР УАБ",
+      "ts": 1788164292,
+      "time_label": "31.08.2026 11:18 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 269306,
+      "text": "Горловка ДНР и близлежащие\nОпасность по БПЛА и ФПВ повторно",
+      "ts": 1788163779,
+      "time_label": "31.08.2026 11:09 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 269305,
       "text": "Токмак и далее на юг\nФиксации БПЛА\nЗапорожская область РФ",
@@ -2811,22 +2805,6 @@
       "time_label": "31.08.2026 09:29 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 269251,
-      "text": "Пермский край",
-      "ts": 1788157745,
-      "time_label": "31.08.2026 09:29 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 269250,
-      "text": "Токмак и близлежащие\nОпасность по БПЛА\nЗапорожская область РФ",
-      "ts": 1788157671,
-      "time_label": "31.08.2026 09:27 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2836,13 +2814,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788163674,
-  "last_event_at": "2026-08-31T08:07:54Z",
-  "fetched_at": "2026-08-31T08:10:02.524389Z",
+  "timestamp": 1788164292,
+  "last_event_at": "2026-08-31T08:18:12Z",
+  "fetched_at": "2026-08-31T08:20:03.004036Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-08-31T08:10:02.524389Z",
-    "source_age_seconds": 128,
+    "generated_at": "2026-08-31T08:20:03.004036Z",
+    "source_age_seconds": 111,
     "city_count": 67,
     "region_count": 16,
     "feed_count": 80
