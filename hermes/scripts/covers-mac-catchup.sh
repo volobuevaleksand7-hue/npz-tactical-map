@@ -28,10 +28,12 @@ fi
 
 git fetch --quiet origin && git reset --quiet --hard origin/main || { say "SKIP: git не синкнулся"; exit 0; }
 
-# Codex жив? Дешёвая проба до генерации — иначе намолотим GENFAIL впустую.
-if ! codex login status >/dev/null 2>&1; then
-  say "SKIP: codex не авторизован на этой машине"; exit 0
-fi
+# 🔴 `codex login status` НЕ показывает живость: на hermes он бодро отвечал
+# "Logged in using ChatGPT", а любой реальный вызов падал с token_revoked.
+# Проверка авторизации, которая не проверяет авторизацию, хуже её отсутствия —
+# она даёт ложное «всё хорошо». Поэтому гейта здесь нет: пусть build-covers
+# честно отработает и вернёт GENFAIL, а сам факт мы увидим в логе.
+codex login status >>"$LOG" 2>&1 || true
 
 # 🔴 Окно, а не --missing: голый --missing добирает ВСЮ историю (первый прогон
 # 01.09 полез в июнь и намолотил 10 дат за 10 минут). Задаче по расписанию нужны
