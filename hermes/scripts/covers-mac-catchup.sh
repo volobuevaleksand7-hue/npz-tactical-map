@@ -33,7 +33,18 @@ if ! codex login status >/dev/null 2>&1; then
   say "SKIP: codex не авторизован на этой машине"; exit 0
 fi
 
-out="$(NPZ_COVER_BACKENDS=codex-local python3 hermes/scripts/build-covers.py --missing 2>&1)"
+# 🔴 Окно, а не --missing: голый --missing добирает ВСЮ историю (первый прогон
+# 01.09 полез в июнь и намолотил 10 дат за 10 минут). Задаче по расписанию нужны
+# свежие дни; исторические пробелы закрываются руками через --missing.
+DAYS="${NPZ_COVER_DAYS:-7}"
+dates=""
+for i in $(seq 0 $((DAYS - 1))); do
+  d="$(date -v-"${i}"d '+%Y-%m-%d' 2>/dev/null || date -d "-${i} day" '+%Y-%m-%d')"
+  [ -f "assets/cover-$d.png" ] || dates="${dates:+$dates,}$d"
+done
+if [ -z "$dates" ]; then say "все обложки за последние $DAYS дней на месте"; exit 0; fi
+say "добираю: $dates"
+out="$(NPZ_COVER_BACKENDS=codex-local python3 hermes/scripts/build-covers.py --dates "$dates" 2>&1)"
 ok="$(printf '%s\n' "$out" | grep -c '^OK ')"
 fail="$(printf '%s\n' "$out" | grep -c '^GENFAIL')"
 say "build-covers: ok=$ok genfail=$fail"
