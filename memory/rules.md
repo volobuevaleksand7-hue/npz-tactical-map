@@ -3,6 +3,7 @@ name: rules
 description: Жёсткие запреты проекта — нейтральный тон, деанон-границы, защита UI-shell, запрет разрушительного git. Читать перед ЛЮБОЙ правкой.
 type: rule
 trust: internal
+author: agent
 approved_by: 2ea839a6-91da-4d77-a654-1596ac52fe93
 ---
 
