@@ -128,16 +128,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
+      "rocket": false,
       "rocket_level": false,
-      "aviation": true,
+      "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1788297881,
-      "source_text": "01.09.2026 13:48 МСК\nХерсонская область РФ Авиационная опасность\n\n02.09.2026 00:24 МСК\nНовотроицкое Новоалексеевка Геническ и близлежащие Опасность по БПЛА Херсонская область РФ И далее в направлении Республики Крым"
+      "source_text": "02.09.2026 00:24 МСК\nНовотроицкое Новоалексеевка Геническ и близлежащие Опасность по БПЛА Херсонская область РФ И далее в направлении Республики Крым"
     },
     "Краснодарский край": {
       "bpla": false,
@@ -383,8 +383,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788301586,
-      "source_text": "02.09.2026 01:26 МСК\nБрянск и близлежащие Тревога по БПЛА сохраняется Брянская область"
+      "last_event_ts": 1788302354,
+      "source_text": "02.09.2026 01:39 МСК\nВыгоничский район Брянская область Тревога по БПЛА"
     },
     "Калужская область": {
       "bpla": false,
@@ -2584,6 +2584,28 @@
       "last_event_ts": 1788276052,
       "source_text": "01.09.2026 18:20 МСК\nЭкстренная информация РСЧС (Краснодарский край): БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г.Анапа г. Новороссийск, Абинский, Крымский, Темрюкский районы"
     },
+    "RUS.8.28_1": {
+      "gid_2": "RUS.8.28_1",
+      "name_ru": "Выгоничский район",
+      "region_ru": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788302354,
+      "source_text": "02.09.2026 01:39 МСК\nВыгоничский район Брянская область Тревога по БПЛА"
+    },
     "RUS.52.21_1": {
       "gid_2": "RUS.52.21_1",
       "name_ru": "Сосковский район",
@@ -2917,6 +2939,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 270073,
+      "text": "Выгоничский район\nБрянская область\nТревога по БПЛА",
+      "ts": 1788302354,
+      "time_label": "02.09.2026 01:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 86994,
       "text": "Геленджик\nКраснодарский край\nРабота ПВО по БПЛА\nМеры безопасности",
@@ -3548,14 +3578,6 @@
       "time_label": "01.09.2026 22:22 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 270031,
-      "text": "Мариуполь\nНовоазовский район и близлежащие\nОпасность по БПЛА\nДНР",
-      "ts": 1788290528,
-      "time_label": "01.09.2026 22:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3565,13 +3587,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788302343,
-  "last_event_at": "2026-09-01T22:39:03Z",
-  "fetched_at": "2026-09-01T22:40:02.960521Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1788302354,
+  "last_event_at": "2026-09-01T22:39:14Z",
+  "fetched_at": "2026-09-01T22:50:03.276323Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-01T22:40:02.960521Z",
-    "source_age_seconds": 59,
+    "generated_at": "2026-09-01T22:50:03.276323Z",
+    "source_age_seconds": 649,
     "city_count": 76,
     "region_count": 22,
     "feed_count": 80
