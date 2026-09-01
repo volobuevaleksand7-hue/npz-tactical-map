@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788272118,
-      "source_text": "01.09.2026 17:15 МСК\nШаблыкинский район Орловская область Фиксация БПЛА"
+      "last_event_ts": 1788272773,
+      "source_text": "01.09.2026 17:26 МСК\nУрицкий район Орловская область Фиксация БПЛА со стороны Хотынецкого района"
     },
     "Тульская область": {
       "bpla": false,
@@ -1253,6 +1253,28 @@
       "source_text": "01.09.2026 16:21 МСК\nПогарский район, Брянская область - фиксации БПЛА на электротяге. Клинцовский район, Климовский район - фиксации бензиновых БПЛА в тыл. Белая Берёзка, Трубчевский район, Брянская область - активность FPV-дронов, бьют по школе. 📡 Локатор России - @locatorru"
     },
     {
+      "key": "республика крым|автономная республика крым",
+      "name": "Республика Крым",
+      "lat": 44.948237,
+      "lon": 34.100318,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": true,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#f0c4a0",
+      "last_event_ts": 1788272656,
+      "source_text": "01.09.2026 17:24 МСК\nРаздольненский район и близлежащие Внимание по БПЛА с моря Республика Крым"
+    },
+    {
       "key": "шебекино|белгородская область",
       "name": "Шебекино",
       "lat": 50.41342,
@@ -2022,10 +2044,48 @@
       "fill": "#ea580c",
       "last_event_ts": 1788247705,
       "source_text": "01.09.2026 10:28 МСК\nНижние Серогозы, Мелитополь южнее, Новотроицкий район Новоалексеевка, Рыково, Генический район Тревога по БПЛА от Горностаевки"
+    },
+    "RUS.52.24_1": {
+      "gid_2": "RUS.52.24_1",
+      "name_ru": "Урицкий район",
+      "region_ru": "Орловская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788272773,
+      "source_text": "01.09.2026 17:26 МСК\nУрицкий район Орловская область Фиксация БПЛА со стороны Хотынецкого района"
     }
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 86931,
+      "text": "Урицкий район\nОрловская область\nФиксация БПЛА со стороны Хотынецкого района",
+      "ts": 1788272773,
+      "time_label": "01.09.2026 17:26 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 269944,
+      "text": "Раздольненский район и близлежащие\nВнимание по БПЛА с моря\nРеспублика Крым",
+      "ts": 1788272656,
+      "time_label": "01.09.2026 17:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 86930,
       "text": "Липецкая область\nОтбой опасности по БПЛА",
@@ -2649,22 +2709,6 @@
       "time_label": "01.09.2026 14:13 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 269892,
-      "text": "Орловская область тревога по БПЛА от Брянской области",
-      "ts": 1788261216,
-      "time_label": "01.09.2026 14:13 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 269891,
-      "text": "Карачев и близлежащие\nОпасность по БПЛА",
-      "ts": 1788261205,
-      "time_label": "01.09.2026 14:13 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2674,14 +2718,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788272192,
-  "last_event_at": "2026-09-01T14:16:32Z",
-  "fetched_at": "2026-09-01T14:20:03.937941Z",
+  "timestamp": 1788272773,
+  "last_event_at": "2026-09-01T14:26:13Z",
+  "fetched_at": "2026-09-01T14:30:02.953025Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-09-01T14:20:03.937941Z",
-    "source_age_seconds": 211,
-    "city_count": 58,
+    "generated_at": "2026-09-01T14:30:02.953025Z",
+    "source_age_seconds": 229,
+    "city_count": 59,
     "region_count": 18,
     "feed_count": 80
   }
