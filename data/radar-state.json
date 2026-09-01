@@ -47,7 +47,7 @@
     "Москва": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -59,9 +59,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1788269378,
-      "source_text": "01.09.2026 16:29 МСК\nМосковская область - отбой опасности по БПЛА. Режим внимания. 📡 Локатор России - @locatorru"
+      "fill": "#d8c06a",
+      "last_event_ts": 1788273840,
+      "source_text": "01.09.2026 17:44 МСК\nГО Шаховская Московская Область Фиксация БПЛА"
     },
     "Смоленская область": {
       "bpla": false,
@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788272773,
-      "source_text": "01.09.2026 17:26 МСК\nУрицкий район Орловская область Фиксация БПЛА со стороны Хотынецкого района"
+      "last_event_ts": 1788273754,
+      "source_text": "01.09.2026 17:42 МСК\nДмитровский район Орловская область Фиксация БПЛА"
     },
     "Тульская область": {
       "bpla": false,
@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788263763,
-      "source_text": "01.09.2026 14:56 МСК\nТульская область Опасность по БПЛА"
+      "last_event_ts": 1788273753,
+      "source_text": "01.09.2026 17:42 МСК\nАрсеньевский район Тульская область Фиксация БПЛА"
     },
     "Воронежская область": {
       "bpla": false,
@@ -269,8 +269,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788264140,
-      "source_text": "01.09.2026 15:02 МСК\nВеселое и близлежащие Запорожская область РФ Опасность по БПЛА (курсом на ЮВ)"
+      "last_event_ts": 1788274161,
+      "source_text": "01.09.2026 17:49 МСК\nЗапорожская область РФ Опасность по БПЛА"
     },
     "Ростовская область": {
       "bpla": false,
@@ -326,8 +326,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788269993,
-      "source_text": "01.09.2026 16:39 МСК\nКалуга Калужская область Работа ПВО по БПЛА"
+      "last_event_ts": 1788273749,
+      "source_text": "01.09.2026 17:42 МСК\nДуминичский район Калужская область Фиксация от 2 БПЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -894,7 +894,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1788269993,
@@ -1207,6 +1207,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788268279,
       "source_text": "01.09.2026 16:11 МСК\nПогребы Навля и близлежащие Опасность по БПЛА Брянская область"
+    },
+    {
+      "key": "шаховская|московская область",
+      "name": "Шаховская",
+      "lat": 56.031464,
+      "lon": 35.5102036,
+      "region": "Московская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788273840,
+      "source_text": "01.09.2026 17:44 МСК\nГО Шаховская Московская Область Фиксация БПЛА"
     },
     {
       "key": "клинцы|брянская область",
@@ -1649,6 +1671,28 @@
     }
   ],
   "districts": {
+    "RUS.23.4_1": {
+      "gid_2": "RUS.23.4_1",
+      "name_ru": "Думиничский район",
+      "region_ru": "Калужская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788273749,
+      "source_text": "01.09.2026 17:42 МСК\nДуминичский район Калужская область Фиксация от 2 БПЛА"
+    },
     "RUS.44.36_1": {
       "gid_2": "RUS.44.36_1",
       "name_ru": "Можайский район",
@@ -1846,6 +1890,50 @@
       "fill": "#ea580c",
       "last_event_ts": 1788238955,
       "source_text": "01.09.2026 08:02 МСК\nМелитопольский район Мелитополь и близлежащие Опасность по БПЛА Запорожская область РФ"
+    },
+    "RUS.52.2_1": {
+      "gid_2": "RUS.52.2_1",
+      "name_ru": "Дмитровский район",
+      "region_ru": "Орловская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788273754,
+      "source_text": "01.09.2026 17:42 МСК\nДмитровский район Орловская область Фиксация БПЛА"
+    },
+    "RUS.70.3_1": {
+      "gid_2": "RUS.70.3_1",
+      "name_ru": "Арсеньевский район",
+      "region_ru": "Тульская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788273753,
+      "source_text": "01.09.2026 17:42 МСК\nАрсеньевский район Тульская область Фиксация БПЛА"
     },
     "RUS.7.11_1": {
       "gid_2": "RUS.7.11_1",
@@ -2070,6 +2158,46 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 269946,
+      "text": "Запорожская область РФ\nОпасность по БПЛА",
+      "ts": 1788274161,
+      "time_label": "01.09.2026 17:49 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 86935,
+      "text": "ГО Шаховская\nМосковская Область\nФиксация БПЛА",
+      "ts": 1788273840,
+      "time_label": "01.09.2026 17:44 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86934,
+      "text": "Дмитровский район\nОрловская область\nФиксация БПЛА",
+      "ts": 1788273754,
+      "time_label": "01.09.2026 17:42 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86933,
+      "text": "Арсеньевский район\nТульская область\nФиксация БПЛА",
+      "ts": 1788273753,
+      "time_label": "01.09.2026 17:42 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86932,
+      "text": "Думиничский район\nКалужская область\nФиксация от 2 БПЛА",
+      "ts": 1788273749,
+      "time_label": "01.09.2026 17:42 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 269945,
       "text": "Орёл и близлежащие\nОпасность по БПЛА",
@@ -2669,46 +2797,6 @@
       "time_label": "01.09.2026 14:24 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 269897,
-      "text": "Валуйский район приграничье\nТревога по БПЛА Хорнет",
-      "ts": 1788261858,
-      "time_label": "01.09.2026 14:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 269896,
-      "text": "Напоминаем, что БЭК являются носителями ФПВ, БПЛА, БПЛА Баба Яга, РСЗО, ЗРК и ПКР.\nСоблюдаем меры предосторожности по объявленным районам тревоги по БЭК",
-      "ts": 1788261770,
-      "time_label": "01.09.2026 14:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 269895,
-      "text": "Всё побережье от Донузлав до Севастополя тревога по БЭК",
-      "ts": 1788261671,
-      "time_label": "01.09.2026 14:21 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 269894,
-      "text": "Тревога по БПЛА Лютый Конышевка, Железногорск и близлежащие и далее по стыку Брянской и Курской области в направлении Орловской области",
-      "ts": 1788261369,
-      "time_label": "01.09.2026 14:16 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 269893,
-      "text": "Белгородский район\nОпасность по БПЛА повторно",
-      "ts": 1788261245,
-      "time_label": "01.09.2026 14:14 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2718,14 +2806,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788273018,
-  "last_event_at": "2026-09-01T14:30:18Z",
-  "fetched_at": "2026-09-01T14:40:03.721197Z",
+  "timestamp": 1788274161,
+  "last_event_at": "2026-09-01T14:49:21Z",
+  "fetched_at": "2026-09-01T14:50:02.882045Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-09-01T14:40:03.721197Z",
-    "source_age_seconds": 585,
-    "city_count": 59,
+    "generated_at": "2026-09-01T14:50:02.882045Z",
+    "source_age_seconds": 41,
+    "city_count": 60,
     "region_count": 18,
     "feed_count": 80
   }
