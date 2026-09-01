@@ -326,8 +326,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788269493,
-      "source_text": "01.09.2026 16:31 МСК\nОрловская область Опасность по БПЛА от Брянской области"
+      "last_event_ts": 1788270369,
+      "source_text": "01.09.2026 16:46 МСК\nБрянск Тревога по БПЛА"
     },
     "Калужская область": {
       "bpla": false,
@@ -345,8 +345,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788262665,
-      "source_text": "01.09.2026 14:37 МСК\nКалужская область Опасность по БПЛА"
+      "last_event_ts": 1788269993,
+      "source_text": "01.09.2026 16:39 МСК\nКалуга Калужская область Работа ПВО по БПЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -828,8 +828,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788266686,
-      "source_text": "01.09.2026 15:44 МСК\nБрянск и близлежащие Брянская область Опасность по БПЛА"
+      "last_event_ts": 1788270369,
+      "source_text": "01.09.2026 16:46 МСК\nБрянск Тревога по БПЛА"
     },
     {
       "key": "дзержинск|донецкая народная республика",
@@ -874,6 +874,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788246823,
       "source_text": "01.09.2026 10:13 МСК\nВеликая Лепетиха, Горностаевка, Каховка и близлежащие тревога по БПЛА через р. Днепр и далее в тыл Направление Мелитополь или Геническ"
+    },
+    {
+      "key": "калуга|калужская область",
+      "name": "Калуга",
+      "lat": 54.53063,
+      "lon": 36.27,
+      "region": "Калужская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": true,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788269993,
+      "source_text": "01.09.2026 16:39 МСК\nКалуга Калужская область Работа ПВО по БПЛА"
     },
     {
       "key": "харцызск|донецкая народная республика",
@@ -1226,28 +1248,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788268901,
       "source_text": "01.09.2026 16:21 МСК\nПогарский район, Брянская область - фиксации БПЛА на электротяге. Клинцовский район, Климовский район - фиксации бензиновых БПЛА в тыл. Белая Берёзка, Трубчевский район, Брянская область - активность FPV-дронов, бьют по школе. 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "мариуполь|донецкая народная республика",
-      "name": "Мариуполь",
-      "lat": 47.09514,
-      "lon": 37.54131,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788226946,
-      "source_text": "01.09.2026 04:42 МСК\nМариуполь и близлежащие Тревога по БПЛА ДНР"
     },
     {
       "key": "шебекино|белгородская область",
@@ -1937,6 +1937,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 269939,
+      "text": "Брянск\nТревога по БПЛА",
+      "ts": 1788270369,
+      "time_label": "01.09.2026 16:46 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 86926,
+      "text": "Калуга\nКалужская область\nРабота ПВО по БПЛА",
+      "ts": 1788269993,
+      "time_label": "01.09.2026 16:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 269938,
       "text": "Запорожская область РФ\nЛДНР\nАвиационная ракетно бомбовая опасность",
       "ts": 1788269808,
@@ -2559,22 +2575,6 @@
       "time_label": "01.09.2026 14:02 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 83413,
-      "text": "Белгородская область - отбой ракетной опасности!\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1788260199,
-      "time_label": "01.09.2026 13:56 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 269884,
-      "text": "ДКАД ДНР, Еленовка, Докучаевск и близлежащие\nОпасность по БПЛА",
-      "ts": 1788259838,
-      "time_label": "01.09.2026 13:50 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2584,13 +2584,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788269808,
-  "last_event_at": "2026-09-01T13:36:48Z",
-  "fetched_at": "2026-09-01T13:40:03.512968Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1788270369,
+  "last_event_at": "2026-09-01T13:46:09Z",
+  "fetched_at": "2026-09-01T13:50:02.724302Z",
+  "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-09-01T13:40:03.512968Z",
-    "source_age_seconds": 195,
+    "generated_at": "2026-09-01T13:50:02.724302Z",
+    "source_age_seconds": 233,
     "city_count": 56,
     "region_count": 19,
     "feed_count": 80
