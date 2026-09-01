@@ -180,7 +180,7 @@
     "Москва": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -192,9 +192,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1788244086,
-      "source_text": "01.09.2026 09:28 МСК\nТульская область Московская область Калужская область внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1788245534,
+      "source_text": "01.09.2026 09:52 МСК\nМосковская область Опасность по БПЛА"
     },
     "Воронежская область": {
       "bpla": false,
@@ -250,13 +250,13 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788237756,
-      "source_text": "01.09.2026 07:42 МСК\nТульская область Опасность по БПЛА сохраняется"
+      "last_event_ts": 1788245817,
+      "source_text": "01.09.2026 09:56 МСК\nСуворовский район Тульская область Фиксация БПЛА"
     },
     "Московская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -268,9 +268,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1788244086,
-      "source_text": "01.09.2026 09:28 МСК\nТульская область Московская область Калужская область внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1788245830,
+      "source_text": "01.09.2026 09:57 МСК\nГО Рузский Московская область Фиксация БПЛА"
     },
     "Калужская область": {
       "bpla": false,
@@ -288,8 +288,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788243514,
-      "source_text": "01.09.2026 09:18 МСК\nКалуга Калужская область Продолжается работа ПВО по БПЛА"
+      "last_event_ts": 1788245819,
+      "source_text": "01.09.2026 09:56 МСК\nЖуковский район Калужская область Фиксация от 2 БПЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -445,28 +445,6 @@
       "source_text": "01.09.2026 09:17 МСК\nДорога Мелитополь - Бердянск опасность по БПЛА по всей трассе Р-280 ВЫСОКАЯ АКТИВНОСТЬ БПЛА ПРОТИВНИКА Запорожская область РФ"
     },
     {
-      "key": "клинцы|брянская область",
-      "name": "Клинцы",
-      "lat": 52.76033,
-      "lon": 32.23905,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788202578,
-      "source_text": "31.08.2026 21:56 МСК\nКлинцы, и близлежащие, Брянская область Опасность по БПЛА сохраняется"
-    },
-    {
       "key": "горское|луганская народная республика",
       "name": "Горское",
       "lat": 48.74981,
@@ -597,28 +575,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788206092,
       "source_text": "31.08.2026 22:54 МСК\nВолодарское Мангуш Мариуполь И близлежащие Тревога по БПЛА ДНР"
-    },
-    {
-      "key": "почеп|брянская область",
-      "name": "Почеп",
-      "lat": 52.9331,
-      "lon": 33.44702,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788202532,
-      "source_text": "31.08.2026 21:55 МСК\nПочеп и близлежащие Тревога по БПЛА сохраняется Брянская область"
     },
     {
       "key": "белёвский|тульская область",
@@ -1081,6 +1037,28 @@
       "fill": "#f0c4a0",
       "last_event_ts": 1788244086,
       "source_text": "01.09.2026 09:28 МСК\nТульская область Московская область Калужская область внимание по бпла"
+    },
+    {
+      "key": "рузский|московская область",
+      "name": "Рузский",
+      "lat": 55.6973772,
+      "lon": 36.2833954,
+      "region": "Московская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788245830,
+      "source_text": "01.09.2026 09:57 МСК\nГО Рузский Московская область Фиксация БПЛА"
     },
     {
       "key": "белгородская|курская область",
@@ -1567,28 +1545,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788215579,
       "source_text": "01.09.2026 01:32 МСК\nОсташковский район Вышневолоцкий район Тверская область Фиксации БПЛА"
-    },
-    "RUS.8.19_1": {
-      "gid_2": "RUS.8.19_1",
-      "name_ru": "Почепский район",
-      "region_ru": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788202702,
-      "source_text": "31.08.2026 21:58 МСК\nПогарский район Почепский район Стародубский район Тревога по БПЛА сохраняется Брянская область"
     },
     "RUS.23.2_1": {
       "gid_2": "RUS.23.2_1",
@@ -2093,8 +2049,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788205032,
-      "source_text": "31.08.2026 22:37 МСК\nСуворовский район Тульская область Фиксация от 2 БПЛА"
+      "last_event_ts": 1788245817,
+      "source_text": "01.09.2026 09:56 МСК\nСуворовский район Тульская область Фиксация БПЛА"
     },
     "RUS.23.22_1": {
       "gid_2": "RUS.23.22_1",
@@ -2203,8 +2159,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788220937,
-      "source_text": "01.09.2026 03:02 МСК\nЖуковский район Калужская область Фиксация БПЛА"
+      "last_event_ts": 1788245819,
+      "source_text": "01.09.2026 09:56 МСК\nЖуковский район Калужская область Фиксация от 2 БПЛА"
     },
     "RUS.23.19_1": {
       "gid_2": "RUS.23.19_1",
@@ -2271,6 +2227,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788206997,
       "source_text": "31.08.2026 23:09 МСК\nОрловский район Орловская область Фиксация БПЛА"
+    },
+    "RUS.44.57_1": {
+      "gid_2": "RUS.44.57_1",
+      "name_ru": "Рузский район",
+      "region_ru": "Московская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788245830,
+      "source_text": "01.09.2026 09:57 МСК\nГО Рузский Московская область Фиксация БПЛА"
     },
     "RUS.64.3_1": {
       "gid_2": "RUS.64.3_1",
@@ -2535,28 +2513,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788244744,
       "source_text": "01.09.2026 09:39 МСК\nИвнянский район, Обоянский район, Солнцевский район, Курский район и близлежащие Белгородская область, Курская область Опасность по БПЛА от Белгородской области"
-    },
-    "RUS.8.23_1": {
-      "gid_2": "RUS.8.23_1",
-      "name_ru": "Стародубский район",
-      "region_ru": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788202702,
-      "source_text": "31.08.2026 21:58 МСК\nПогарский район Почепский район Стародубский район Тревога по БПЛА сохраняется Брянская область"
     },
     "RUS.72.49_1": {
       "gid_2": "RUS.72.49_1",
@@ -3145,6 +3101,46 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 269816,
+      "text": "Московская область\nОпасность по реактивным БПЛА",
+      "ts": 1788245912,
+      "time_label": "01.09.2026 09:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 86907,
+      "text": "ГО Рузский\nМосковская область\nФиксация БПЛА",
+      "ts": 1788245830,
+      "time_label": "01.09.2026 09:57 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86906,
+      "text": "Жуковский район\nКалужская область\nФиксация от 2 БПЛА",
+      "ts": 1788245819,
+      "time_label": "01.09.2026 09:56 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86905,
+      "text": "Суворовский район\nТульская область\nФиксация БПЛА",
+      "ts": 1788245817,
+      "time_label": "01.09.2026 09:56 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86904,
+      "text": "Московская область\nОпасность по БПЛА",
+      "ts": 1788245534,
+      "time_label": "01.09.2026 09:52 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 269815,
       "text": "Скадовский район, Голая Пристань и близлежащие\nИ далее на Чаплынский район, Каланчак, АПП Армянск, АПП Перекоп, Армянск\nОпасность по БПЛА Хорнет",
@@ -3744,46 +3740,6 @@
       "time_label": "01.09.2026 06:28 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 86882,
-      "text": "Волгоградская область\nОтбой опасно по БПЛА",
-      "ts": 1788233254,
-      "time_label": "01.09.2026 06:27 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 269762,
-      "text": "Дорога Бердянск - Приазовское внимание по БПЛА Запорожская область РФ",
-      "ts": 1788233020,
-      "time_label": "01.09.2026 06:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 83398,
-      "text": "Псковская область, Новгородская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1788232864,
-      "time_label": "01.09.2026 06:21 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 269761,
-      "text": "Обоянский, Солнцевский, Курский район\nОпасность по БПЛА от Белгородской области",
-      "ts": 1788232777,
-      "time_label": "01.09.2026 06:19 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 83397,
-      "text": "Краснодарский край, Республика Адыгея, Ростовская область, Волгоградская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1788232628,
-      "time_label": "01.09.2026 06:17 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -3793,14 +3749,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788245271,
-  "last_event_at": "2026-09-01T06:47:51Z",
-  "fetched_at": "2026-09-01T06:50:02.975711Z",
+  "timestamp": 1788245912,
+  "last_event_at": "2026-09-01T06:58:32Z",
+  "fetched_at": "2026-09-01T07:00:03.615691Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-09-01T06:50:02.975711Z",
-    "source_age_seconds": 131,
-    "city_count": 45,
+    "generated_at": "2026-09-01T07:00:03.615691Z",
+    "source_age_seconds": 91,
+    "city_count": 44,
     "region_count": 16,
     "feed_count": 80
   }
