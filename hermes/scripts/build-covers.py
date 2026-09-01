@@ -34,7 +34,11 @@ import urllib.request
 from pathlib import Path
 
 HOME = Path.home()
-REPO = Path(os.environ.get("NPZ_REPO", str(HOME / "npz-tactical-map")))
+# Корень репо: из NPZ_REPO, иначе — от расположения самого скрипта
+# (hermes/scripts/build-covers.py → на два уровня вверх). Было жёстко
+# ~/npz-tactical-map, и вне VPS скрипт падал: живой чекаут на Маке лежит
+# в ~/Documents/npz-tactical-map, а из ворктри путь вообще другой.
+REPO = Path(os.environ.get("NPZ_REPO") or Path(__file__).resolve().parents[2])
 TMP = HOME / ".hermes" / "covers-tmp"          # codex image_gen sandbox tmp
 ARCHIVE = REPO / "data" / "news-archive.json"
 STRIKES = REPO / "data" / "strikes.json"
