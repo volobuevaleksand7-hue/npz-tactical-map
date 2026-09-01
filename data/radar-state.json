@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788300298,
-      "source_text": "02.09.2026 01:04 МСК\nАнапа и близлежащие Тревога по БПЛА Краснодарский край"
+      "last_event_ts": 1788300649,
+      "source_text": "02.09.2026 01:10 МСК\nНовороссийск Краснодарский край Опасность по БПЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -429,8 +429,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788299858,
-      "source_text": "02.09.2026 00:57 МСК\nГеленджик Новороссийск И близлежащие Тревога по БПЛА сохраняется Краснодарский край"
+      "last_event_ts": 1788300649,
+      "source_text": "02.09.2026 01:10 МСК\nНовороссийск Краснодарский край Опасность по БПЛА"
     },
     {
       "key": "ахтарский|краснодарский край",
@@ -1142,9 +1142,9 @@
       "lat": 44.58014,
       "lon": 38.06646,
       "region": "Краснодарский край",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1152,11 +1152,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788300195,
-      "source_text": "02.09.2026 01:03 МСК\nГеленджик Краснодарский край Продолжается работа ПВО по БПЛА"
+      "last_event_ts": 1788300626,
+      "source_text": "02.09.2026 01:10 МСК\nГеленджик Новороссийск И близлежащие Тревога по БПЛА сохраняется Соблюдайте меры безопасности Краснодарский край"
     },
     {
       "key": "керченский полуостров|автономная республика крым",
@@ -2814,6 +2814,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 86988,
+      "text": "Новороссийск\nКраснодарский край\nОпасность по БПЛА",
+      "ts": 1788300649,
+      "time_label": "02.09.2026 01:10 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 270068,
+      "text": "Геленджик\nНовороссийск\nИ близлежащие\nТревога по БПЛА сохраняется\nСоблюдайте меры безопасности\nКраснодарский край",
+      "ts": 1788300626,
+      "time_label": "02.09.2026 01:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 86987,
       "text": "Геленджик\nКраснодарский край\nМеры безопасности",
       "ts": 1788300523,
@@ -3436,22 +3452,6 @@
       "time_label": "01.09.2026 22:02 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 270021,
-      "text": "Донецк ДНР\nОпасность по БПЛА",
-      "ts": 1788288798,
-      "time_label": "01.09.2026 21:53 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 270020,
-      "text": "Климово и близлежащие\nТревога по БПЛА\nБрянская область",
-      "ts": 1788288681,
-      "time_label": "01.09.2026 21:51 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3461,13 +3461,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788300523,
-  "last_event_at": "2026-09-01T22:08:43Z",
-  "fetched_at": "2026-09-01T22:10:03.062521Z",
+  "timestamp": 1788300649,
+  "last_event_at": "2026-09-01T22:10:49Z",
+  "fetched_at": "2026-09-01T22:20:03.603129Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-09-01T22:10:03.062521Z",
-    "source_age_seconds": 80,
+    "generated_at": "2026-09-01T22:20:03.603129Z",
+    "source_age_seconds": 554,
     "city_count": 75,
     "region_count": 20,
     "feed_count": 80
