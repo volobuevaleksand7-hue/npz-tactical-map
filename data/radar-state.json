@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1788309270,
-      "source_text": "01.09.2026 19:09 МСК\nПарк Патриот Ракетная опасность Меры безопасности Московская область\n\n02.09.2026 03:34 МСК\nГО Волоколамск Московская область Фиксация БПЛА"
+      "last_event_ts": 1788311265,
+      "source_text": "01.09.2026 19:09 МСК\nПарк Патриот Ракетная опасность Меры безопасности Московская область\n\n02.09.2026 04:07 МСК\nМО Дубна Московская область Опасность по БПЛА"
     },
     "Смоленская область": {
       "bpla": false,
@@ -402,8 +402,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788307322,
-      "source_text": "02.09.2026 03:02 МСК\nМиллеровский район Ростовская область Тревога по БПЛА"
+      "last_event_ts": 1788311002,
+      "source_text": "02.09.2026 04:03 МСК\nРостовская область Опасность по БПЛА"
     },
     "Брянская область": {
       "bpla": false,
@@ -1101,6 +1101,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788308061,
       "source_text": "02.09.2026 03:14 МСК\nДальняя Игуменка и близлежащие Тревога по БПЛА Белгородская область"
+    },
+    {
+      "key": "о дубна|московская область",
+      "name": "О Дубна",
+      "lat": 56.7587721,
+      "lon": 37.1403831,
+      "region": "Московская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788311265,
+      "source_text": "02.09.2026 04:07 МСК\nМО Дубна Московская область Опасность по БПЛА"
     },
     {
       "key": "тула|тульская область",
@@ -3616,6 +3638,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 87035,
+      "text": "МО Дубна\nМосковская область\nОпасность по БПЛА",
+      "ts": 1788311265,
+      "time_label": "02.09.2026 04:07 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 87034,
+      "text": "Ростовская область\nОпасность по БПЛА",
+      "ts": 1788311002,
+      "time_label": "02.09.2026 04:03 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 87032,
       "text": "Россошанский район\nВоронежская область\nОпасность по БПЛА",
       "ts": 1788310568,
@@ -4238,22 +4276,6 @@
       "time_label": "02.09.2026 01:03 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 270065,
-      "text": "Брянск и близлежащие\nТревога по БПЛА\nБрянская область",
-      "ts": 1788300113,
-      "time_label": "02.09.2026 01:01 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 270064,
-      "text": "Днепрорудное\nЭнергодар и близлежащие\nЗапорожская область\nТревога по БПЛА с севера через реку. Днепр",
-      "ts": 1788300038,
-      "time_label": "02.09.2026 01:00 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4263,14 +4285,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788310568,
-  "last_event_at": "2026-09-02T00:56:08Z",
-  "fetched_at": "2026-09-02T01:00:03.627425Z",
+  "timestamp": 1788311265,
+  "last_event_at": "2026-09-02T01:07:45Z",
+  "fetched_at": "2026-09-02T01:10:03.259516Z",
   "poll_interval_sec": 25,
   "meta": {
-    "generated_at": "2026-09-02T01:00:03.627425Z",
-    "source_age_seconds": 235,
-    "city_count": 90,
+    "generated_at": "2026-09-02T01:10:03.259516Z",
+    "source_age_seconds": 138,
+    "city_count": 91,
     "region_count": 24,
     "feed_count": 80
   }
