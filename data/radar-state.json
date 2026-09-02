@@ -155,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788331530,
-      "source_text": "02.09.2026 09:45 МСК\nГорловка, Пантелеймоновка, Корсунь, Карло, Енакиево ДНР и близлежащие Опасность по БПЛА и ФПВ"
+      "last_event_ts": 1788332337,
+      "source_text": "02.09.2026 09:58 МСК\nЗугрэс, Шахтёрск, Торез ДНР и близлежащие Опасность по БПЛА Хорнет"
     },
     "Херсонская область": {
       "bpla": false,
@@ -364,8 +364,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788331702,
-      "source_text": "02.09.2026 09:48 МСК\nОрловский район Орловская область Фиксация от 5 БПЛА"
+      "last_event_ts": 1788332298,
+      "source_text": "02.09.2026 09:58 МСК\nОрёл и близлежащие Орловская область Опасность по БПЛА"
     },
     "Владимирская область": {
       "bpla": false,
@@ -478,8 +478,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788331747,
-      "source_text": "02.09.2026 09:49 МСК\nРоссошанский район Воронежская область Фиксация БПЛА"
+      "last_event_ts": 1788331757,
+      "source_text": "02.09.2026 09:49 МСК\nОльховатский район Воронежская область Фиксация БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -747,6 +747,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788313964,
       "source_text": "02.09.2026 04:52 МСК\nЛивны Орловская область Опасность по БПЛА"
+    },
+    {
+      "key": "шахтёрск|донецкая народная республика",
+      "name": "Шахтёрск",
+      "lat": 48.05657,
+      "lon": 38.43826,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788332337,
+      "source_text": "02.09.2026 09:58 МСК\nЗугрэс, Шахтёрск, Торез ДНР и близлежащие Опасность по БПЛА Хорнет"
     },
     {
       "key": "о бронницы|московская область",
@@ -1165,28 +1187,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788318257,
       "source_text": "02.09.2026 06:04 МСК\nНовый Оскол и близлежащие Тревога по БПЛА сохраняется, еще фиксации Белгородская область"
-    },
-    {
-      "key": "климово|брянская область",
-      "name": "Климово",
-      "lat": 52.37877,
-      "lon": 32.1963,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788288681,
-      "source_text": "01.09.2026 21:51 МСК\nКлимово и близлежащие Тревога по БПЛА Брянская область"
     },
     {
       "key": "геническ|херсонская область",
@@ -3341,8 +3341,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788303536,
-      "source_text": "02.09.2026 01:58 МСК\nОрёл и близлежащие Тревога по БПЛА Орловская область"
+      "last_event_ts": 1788332298,
+      "source_text": "02.09.2026 09:58 МСК\nОрёл и близлежащие Орловская область Опасность по БПЛА"
     },
     {
       "key": "россошь|воронежская область",
@@ -5462,9 +5462,9 @@
       "gid_2": "RUS.79.19_1",
       "name_ru": "Ольховатский район",
       "region_ru": "Воронежская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -5477,8 +5477,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788316958,
-      "source_text": "02.09.2026 05:42 МСК\nОльховатский район Воронежская область Тревога по БПЛА"
+      "last_event_ts": 1788331757,
+      "source_text": "02.09.2026 09:49 МСК\nОльховатский район Воронежская область Фиксация БПЛА"
     },
     "RUS.52.15_1": {
       "gid_2": "RUS.52.15_1",
@@ -5527,6 +5527,46 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 270234,
+      "text": "Зугрэс, Шахтёрск, Торез ДНР и близлежащие\nОпасность по БПЛА Хорнет",
+      "ts": 1788332337,
+      "time_label": "02.09.2026 09:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 270233,
+      "text": "Орёл и близлежащие\nОрловская область\nОпасность по БПЛА",
+      "ts": 1788332298,
+      "time_label": "02.09.2026 09:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 270232,
+      "text": "Орловская область\nОпасность по БПЛА",
+      "ts": 1788332204,
+      "time_label": "02.09.2026 09:56 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 270231,
+      "text": "Горловка ДНР и близлежащие БПЛА Шарк",
+      "ts": 1788332059,
+      "time_label": "02.09.2026 09:54 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 87113,
+      "text": "Ольховатский район\nВоронежская область\nФиксация БПЛА",
+      "ts": 1788331757,
+      "time_label": "02.09.2026 09:49 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 87112,
       "text": "Россошанский район\nВоронежская область\nФиксация БПЛА",
@@ -6126,46 +6166,6 @@
       "time_label": "02.09.2026 08:31 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 270190,
-      "text": "От  Сватово на Мостки - Старобельск фиксация БПЛА\nЛНР",
-      "ts": 1788327092,
-      "time_label": "02.09.2026 08:31 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 270189,
-      "text": "Камышеваха\nГорское опасность по БПЛА Хорнет\nЛНР",
-      "ts": 1788327001,
-      "time_label": "02.09.2026 08:30 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 87086,
-      "text": "Данковский район\nЛипецкая область\nФиксация БПЛА",
-      "ts": 1788326813,
-      "time_label": "02.09.2026 08:26 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 87085,
-      "text": "Новосильский район\nОрловская область\nФиксация БПЛА",
-      "ts": 1788326775,
-      "time_label": "02.09.2026 08:26 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 87084,
-      "text": "Арсеньевский район\nТульская область\nФиксация БПЛА",
-      "ts": 1788326715,
-      "time_label": "02.09.2026 08:25 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -6175,13 +6175,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788331747,
-  "last_event_at": "2026-09-02T06:49:07Z",
-  "fetched_at": "2026-09-02T06:50:03.073711Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1788332337,
+  "last_event_at": "2026-09-02T06:58:57Z",
+  "fetched_at": "2026-09-02T07:00:04.112679Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-02T06:50:03.073711Z",
-    "source_age_seconds": 56,
+    "generated_at": "2026-09-02T07:00:04.112679Z",
+    "source_age_seconds": 67,
     "city_count": 157,
     "region_count": 32,
     "feed_count": 80
