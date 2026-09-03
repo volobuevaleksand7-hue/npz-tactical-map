@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-02T23:20Z",
+ "generated_at": "2026-09-03T00:05Z",
  "data_mode": "СЛУХ / НЕПРОВЕРЕНО (вариант B)",
  "disclaimer": "Авто-детектор кандидатов в удары из ленты radar-map.ru. НЕ боевые данные, НЕ публикуется автоматически. Только для ручного/Hermes-подтверждения перед переносом в strikes.json.",
  "candidates": [
@@ -1663,11 +1663,12 @@
    "detail": "[Newsader] ВСУ ВЗОРВАЛИ УСТЬ-ЛУГУ: ТЕРМИНАЛ В ОГНЕ!",
    "source_url": "https://www.youtube.com/watch?v=tNN4ezYf2DI",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "tNN4ezYf2DI",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   },
   {
    "date": "2026-09-01",
@@ -1685,11 +1686,12 @@
    "detail": "[Newsader] АД В УСТЬ-ЛУГЕ: ВСУ СНЕСЛИ ТЕРМИНАЛ НОВАТЭКА И ТАНКЕР! Страшные кадры",
    "source_url": "https://www.youtube.com/watch?v=PQ0pmBdjxeo",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "PQ0pmBdjxeo",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   }
  ]
 }
