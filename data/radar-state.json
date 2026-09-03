@@ -47,7 +47,7 @@
     "Волгоградская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -59,9 +59,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1788391685,
-      "source_text": "03.09.2026 02:28 МСК\nВолгоградская область - внимание по БПЛА. 📡 Локатор России - @locatorru"
+      "fill": "#d8c06a",
+      "last_event_ts": 1788395937,
+      "source_text": "03.09.2026 03:38 МСК\nВолгоградская область Опасность по БПЛА"
     },
     "Белгородская область": {
       "bpla": false,
@@ -2081,28 +2081,6 @@
       "source_text": "02.09.2026 21:12 МСК\nЛуганск и близлежащие Опасность по БПЛА ЛНР"
     },
     {
-      "key": "каланчак|херсонская область",
-      "name": "Каланчак",
-      "lat": 46.25495,
-      "lon": 33.29061,
-      "region": "Херсонская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788353252,
-      "source_text": "02.09.2026 15:47 МСК\nКаланчак и близлежащие тревога по БПЛА Хорнет АПП Армянск, Армянск, АПП Перекоп, Титан внимание по БПЛА Хорнет"
-    },
-    {
       "key": "раздольное|автономная республика крым",
       "name": "Раздольное",
       "lat": 45.77083,
@@ -3465,28 +3443,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788387927,
       "source_text": "03.09.2026 01:25 МСК\nОт Анапы, Новороссийск до Сочи, Адлер, Краснодарский край - опасность по БПЛА с моря, возможно появление безэкипажных катеров (БЭК). 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "армянск|автономная республика крым",
-      "name": "Армянск",
-      "lat": 46.10919,
-      "lon": 33.69206,
-      "region": "Автономная Республика Крым",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788353252,
-      "source_text": "02.09.2026 15:47 МСК\nКаланчак и близлежащие тревога по БПЛА Хорнет АПП Армянск, Армянск, АПП Перекоп, Титан внимание по БПЛА Хорнет"
     },
     {
       "key": "шебекино|белгородская область",
@@ -5298,6 +5254,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 87345,
+      "text": "Кикведзенский район\nВолгоградская область\nФиксация группы БПЛА",
+      "ts": 1788396245,
+      "time_label": "03.09.2026 03:44 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 87344,
+      "text": "Волгоградская область\nОпасность по БПЛА",
+      "ts": 1788395937,
+      "time_label": "03.09.2026 03:38 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 270584,
       "text": "ЛНР очередная группа БПЛА на Воронежскую область, тревога по БПЛА сохраняется",
       "ts": 1788395920,
@@ -5920,22 +5892,6 @@
       "time_label": "02.09.2026 23:47 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 83582,
-      "text": "Таганрог, Ростовская область - внимание по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1788382051,
-      "time_label": "02.09.2026 23:47 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 270558,
-      "text": "Черноморский р-н\nЧерноморское, Межводное и близлежащие\nРеспублика Крым\nОпасность по БПЛА",
-      "ts": 1788382040,
-      "time_label": "02.09.2026 23:47 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -5945,14 +5901,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788395920,
-  "last_event_at": "2026-09-03T00:38:40Z",
-  "fetched_at": "2026-09-03T00:40:03.071342Z",
-  "poll_interval_sec": 25,
+  "timestamp": 1788396245,
+  "last_event_at": "2026-09-03T00:44:05Z",
+  "fetched_at": "2026-09-03T00:50:02.924368Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-03T00:40:03.071342Z",
-    "source_age_seconds": 83,
-    "city_count": 152,
+    "generated_at": "2026-09-03T00:50:02.924368Z",
+    "source_age_seconds": 357,
+    "city_count": 150,
     "region_count": 28,
     "feed_count": 80
   }
