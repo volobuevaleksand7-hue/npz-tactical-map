@@ -14,16 +14,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1788420960,
-      "source_text": "03.09.2026 10:36 МСК\nКубинка Московская область Работа ПВО по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1788422299,
+      "source_text": "03.09.2026 10:58 МСК\nРакетная опасность Московская область (возможно реактивные БПЛА)\n\n03.09.2026 10:57 МСК\nКубинка Московская область Работа ПВО по БПЛА"
     },
     "Липецкая область": {
       "bpla": false,
@@ -71,16 +71,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1788420960,
-      "source_text": "03.09.2026 10:36 МСК\nКубинка Московская область Работа ПВО по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1788422299,
+      "source_text": "03.09.2026 10:58 МСК\nРакетная опасность Московская область (возможно реактивные БПЛА)\n\n03.09.2026 10:57 МСК\nКубинка Московская область Работа ПВО по БПЛА"
     },
     "Смоленская область": {
       "bpla": false,
@@ -696,28 +696,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788411729,
       "source_text": "03.09.2026 08:02 МСК\nВоронеж и близлежащие Воронежская область Фиксация БПЛА"
-    },
-    {
-      "key": "весёлое|запорожская область",
-      "name": "Весёлое",
-      "lat": 47.00973,
-      "lon": 34.91843,
-      "region": "Запорожская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788378650,
-      "source_text": "02.09.2026 22:50 МСК\nВеселое и близлежащие Запорожская область РФ Тревога по БПЛА И далее возможно в направлении Мелитополь"
     },
     {
       "key": "тула|тульская область",
@@ -2209,7 +2187,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1788418089,
@@ -2960,8 +2938,8 @@
       "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788420960,
-      "source_text": "03.09.2026 10:36 МСК\nКубинка Московская область Работа ПВО по БПЛА"
+      "last_event_ts": 1788422269,
+      "source_text": "03.09.2026 10:57 МСК\nКубинка Московская область Работа ПВО по БПЛА"
     },
     {
       "key": "приморск|запорожская область",
@@ -4152,28 +4130,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788419558,
       "source_text": "03.09.2026 10:12 МСК\nЖуковский район Калужская область Фиксация БПЛА"
-    },
-    "RUS.52.20_1": {
-      "gid_2": "RUS.52.20_1",
-      "name_ru": "Шаблыкинский район",
-      "region_ru": "Орловская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788379109,
-      "source_text": "02.09.2026 22:58 МСК\nШаблыкинский район Орловская область Фиксации БПЛА"
     },
     "RUS.34.17_1": {
       "gid_2": "RUS.34.17_1",
@@ -5521,6 +5477,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 270694,
+      "text": "Ракетная опасность Московская область (возможно реактивные БПЛА)",
+      "ts": 1788422299,
+      "time_label": "03.09.2026 10:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 87450,
+      "text": "Кубинка\nМосковская область\nРабота ПВО по БПЛА",
+      "ts": 1788422269,
+      "time_label": "03.09.2026 10:57 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 270693,
       "text": "Курская область и близлежащие, Харьковская область РФ  авиационная ракетная бомбовая опасность",
       "ts": 1788421504,
@@ -6143,22 +6115,6 @@
       "time_label": "03.09.2026 09:25 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 87408,
-      "text": "Одоевский район\nТульская область\nФиксация от 3 БПЛА",
-      "ts": 1788416746,
-      "time_label": "03.09.2026 09:25 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 270666,
-      "text": "Севский район в направлении Орёл тревога по БПЛА, в том числе реактивным",
-      "ts": 1788416656,
-      "time_label": "03.09.2026 09:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -6168,14 +6124,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788421504,
-  "last_event_at": "2026-09-03T07:45:04Z",
-  "fetched_at": "2026-09-03T07:50:03.128555Z",
+  "timestamp": 1788422299,
+  "last_event_at": "2026-09-03T07:58:19Z",
+  "fetched_at": "2026-09-03T08:00:03.667604Z",
   "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-09-03T07:50:03.128555Z",
-    "source_age_seconds": 299,
-    "city_count": 126,
+    "generated_at": "2026-09-03T08:00:03.667604Z",
+    "source_age_seconds": 104,
+    "city_count": 125,
     "region_count": 27,
     "feed_count": 80
   }
