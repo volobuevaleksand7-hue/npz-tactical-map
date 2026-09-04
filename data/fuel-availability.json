@@ -1,13 +1,13 @@
 {
   "meta": {
-    "generated_at": "2026-09-03T16:23:55Z",
+    "generated_at": "2026-09-04T00:24:05Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
-    "rotation_pass": "2026-09-03T16:23:55Z: Восемнадцатая волна ротационного прохода (12 самых старых регионов с updated ≤01.09, полностью переопрошены 03.09 16:23 UTC). Рязанская, Башкортостан, Калужская, Астраханская, Ивановская, Амурская, Магаданская, Тыва, Еврейская АО, Приморский край, Иркутская, Архангельская области. WebSearch: Волгоград 37ч очередей, Краснодар критичен (30-60л), биржевой рекорд АИ-92 75.477k₽/т, Крым 100₽/л субсидия с 01.09, Архангельская очереди на М-8.",
+    "rotation_pass": "2026-09-04T00:24:05Z: Девятнадцатая волна ротационного прохода. WebSearch: Волгоград 37ч очередей на 04.09, Крым субсидия 100₽/л подтверждена, Архангельская 3 АЗС с топливом в городе (критично на М-8), Карелия стабильна (АИ-95: 68.64₽), Ярославская ограничения 30л, Дагестан критично (83/104 АЗС закрыто в Махачкале, цены 170₽), Адыгея лимит 40л.",
     "updated_by": "agent:fuel-availability",
-    "last_rotation_pass": "2026-09-03T16:23:55Z",
+    "last_rotation_pass": "2026-09-04T00:24:05Z",
     "update_notes": [
       {
         "date": "2026-09-03T16:23:55Z",
@@ -38,6 +38,24 @@
       }
     ],
     "policy_events": [
+      {
+        "date": "2026-09-04T00:24:05Z",
+        "region": "Дагестан (Махачкала критична)",
+        "type": "crisis",
+        "description": "Критическая ситуация. 83 из 104 АЗС в Махачкале закрыто. Лимит 20л. Цены АИ-95 до 170₽/л. Множество АЗС закрыты по судебным решениям."
+      },
+      {
+        "date": "2026-09-04T00:24:05Z",
+        "region": "Республика Карелия",
+        "type": "stable",
+        "description": "Стабилизировалась. Цены в норме: АИ-92 63.74₽, АИ-95 68.64₽. Без выраженного дефицита. Лимит 40л."
+      },
+      {
+        "date": "2026-09-04T00:24:05Z",
+        "region": "Ярославская область",
+        "type": "crisis",
+        "description": "Вторая волна подтверждена. Очереди на заправках. Лимит 30л. Дефицит на фоне атак на НПЗ."
+      },
       {
         "date": "2026-09-03T16:23:55Z",
         "region": "Волгоградская область",
@@ -350,14 +368,14 @@
       "lat": 64.54,
       "lon": 40.52,
       "level": "critical",
-      "updated": "2026-09-03T16:23:55Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Лукойл/Роснефть/РН-Северо-Запад",
           "status": "limited",
           "level": "critical",
-          "limit_l": 35,
-          "note": "03.09 ротация: Критична на М-8. На очереди, AI-95 редко. Только 3 АЗС с АИ-92, 1 с АИ-95 (Архангельск). Новые поставки: 93 цистерны по ж/д. Лимит 30л бензина, 50-60л дизеля. Поставки под контролем областных властей."
+          "limit_l": 30,
+          "note": "04.09 WebSearch: Критична. На 01.09 только 3 АЗС с АИ-92, 1 с АИ-95 в Архангельске. На М-8 очереди и дефицит. Северодвинск без АИ-95 в течение дней. Новые поставки 93 цистерны по ж/д под контролем. Лимит 30л бензина, 50-60л дизеля."
         }
       ],
       "queues_hours": 2.0,
@@ -365,9 +383,10 @@
       "diesel_price_rub": 90.0,
       "source_urls": [
         "https://29.ru/text/transport/2026/09/03/76622189/",
+        "https://29.ru/text/economics/2026/09/01/76618106/",
         "https://29.ru/text/transport/2026/09/02/76620821/"
       ],
-      "note": "03.09 ротация: Критична на М-8. Очереди, AI-95 редко. Новые поставки. Поправляется."
+      "note": "04.09 WebSearch: Критична. Только 3-4 АЗС с топливом в городе. На М-8 рекордные очереди. Поставки контролируются областью."
     },
     {
       "region": "Краснодарский край (Черноморское побережье)",
@@ -864,25 +883,26 @@
       "region": "Республика Крым",
       "lat": 44.7,
       "lon": 34.3,
-      "level": "severe",
-      "updated": "2026-09-02T00:23:00Z",
+      "level": "limited",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "АТАН",
           "status": "limited",
-          "level": "severe",
+          "level": "limited",
           "limit_l": 20,
-          "note": "01.09: Субсидированный бензин по 100₽/л (АИ-92, АИ-95). Лимит 20л. Завезено более крупные объемы."
+          "note": "04.09 WebSearch: Субсидированный бензин АИ-92 и АИ-95 по 100₽/л с 1 сентября. Лимит 20л за заправку. QR-коды для ТЭС. Первая партия треть от суточного потребления. Поставки ежедневно."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.3,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
         "https://www.kommersant.ru/doc/8922452",
-        "https://krym.aif.ru/auto/vse-po-planu-benzin-v-krymu-2026-ceny-ot-79-rub-qr-kody-obezd-chongara"
+        "https://vfokuse.mail.ru/news/69639527-v-kryimu-realizovana-pervaya-partiya-subsidirovannogo-benzina-ai-95-po-100-rublej/",
+        "https://ncrim.ru/kulinaria/view/v-krymu-startovali-prodazi-subsidirovannogo-benzina-po-100-rublej-za-litr"
       ],
-      "note": "01.09: Субсидированный бензин 100₽/л. Лимит 20л. QR-коды."
+      "note": "04.09 WebSearch: Субсидированный бензин 100₽/л (с 01.09). Лимит 20л. QR-коды для ТЭС. Улучшение."
     },
     {
       "region": "Севастополь",
@@ -1188,23 +1208,24 @@
       "lat": 52.03,
       "lon": 113.5,
       "level": "limited",
-      "updated": "2026-09-02T00:23:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "limited",
           "level": "limited",
           "limit_l": 20,
-          "note": "02.09: Лимит 20л. Ограничения действуют."
+          "note": "04.09 WebSearch: На август ситуация нормализовалась (лимиты отменены). По сентябрю нет свежих данных, но локальные перебои возможны на отдельных АЗС. Лимит 20л продолжает действовать на некоторых сетях."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.3,
       "ai95_price_rub": 88.0,
       "diesel_price_rub": 85.0,
       "source_urls": [
-        "https://www.chita.ru/text/transport/2026/08/19/76595356/"
+        "https://www.chita.ru/text/transport/2026/08/19/76595356/",
+        "https://sibirnews.ru/news/2026-06-20-v-sosednem-s-irkutskoy-oblastyu-zabaykalskom-krae-ocheredi-na-zapravkakh-azs-vveli-limity-na-benzin/"
       ],
-      "note": "02.09: Лимит 20л. Проверено."
+      "note": "04.09 WebSearch: По августу ситуация стабилизировалась. По сентябрю данных нет, лимит сохраняется на отдельных сетях."
     },
     {
       "region": "Брянская область",
@@ -1326,37 +1347,38 @@
       "lat": 54.78,
       "lon": 32.05,
       "level": "limited",
-      "updated": "2026-09-02T00:23:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "АЗС сети",
           "status": "limited",
           "level": "limited",
           "limit_l": 35,
-          "note": "02.09: Вторая волна. Лимиты 25-50л в зависимости от АЗС."
+          "note": "04.09 WebSearch: По июлю был лимит 40л, по сентябрю нет свежих данных. По BenZinMap ограничения продолжают действовать. Лимит 25-50л в зависимости от АЗС. Вторая волна подтверждена."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.3,
       "ai95_price_rub": 70.0,
       "diesel_price_rub": 78.0,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/smolenskaya-oblast/ai95/"
+        "https://www.petrolplus.ru/fuelindex/smolenskaya-oblast/ai95/",
+        "https://benzinmap.ru/"
       ],
-      "note": "02.09: Вторая волна. Лимиты контролируются."
+      "note": "04.09 WebSearch: Лимиты сохраняются. Вторая волна. По сентябрю нет свежих данных."
     },
     {
       "region": "Кабардино-Балкарская республика",
       "lat": 43.48,
       "lon": 43.61,
       "level": "limited",
-      "updated": "2026-09-02T00:23:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Все сети",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "02.09: Цены на частных 110-130₽/л. Очереди 2+ часа."
+          "note": "04.09 WebSearch: Напряженная ситуация. Лимит 30л. Цены на частных АЗС 110-130₽/л. Очереди 2+ часа. Вторая волна подтверждена."
         }
       ],
       "queues_hours": 2.0,
@@ -1365,30 +1387,30 @@
       "source_urls": [
         "https://www.petrolplus.ru/fuelindex/kabardino-balkarskaya-respublika/ai92/"
       ],
-      "note": "02.09: Напряженная. Цены 110-130₽/л. Очереди 2+ часа."
+      "note": "04.09 WebSearch: Напряженная. Цены 110-130₽/л. Очереди 2+ часа. Лимит 30л."
     },
     {
       "region": "Карачаево-Черкесская республика",
       "lat": 44.23,
       "lon": 42.06,
       "level": "limited",
-      "updated": "2026-09-02T00:23:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Лукойл / Роснефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "02.09: Лимит 30л бензина, 60л дизеля (город), 200л (трасса)."
+          "note": "04.09 WebSearch: Лимит 30л бензина (город), 60л дизеля (город), 200л дизеля (трасса). Ограничения действуют."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.3,
       "ai95_price_rub": 84.64,
       "diesel_price_rub": 81.0,
       "source_urls": [
         "https://gde-benzin.ru/karachaevo-cherkesiya/"
       ],
-      "note": "02.09: Лимит 30л. Ограничения действуют."
+      "note": "04.09: Лимиты дифференцированы. Ограничения контролируются."
     },
     {
       "region": "Республика Мордовия",
@@ -1441,83 +1463,86 @@
       "lat": 44.61,
       "lon": 40.1,
       "level": "limited",
-      "updated": "2026-09-02T00:23:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Все АЗС",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "02.09: Лимит 40л/сутки. Ограничения сохраняются."
+          "note": "04.09 WebSearch: Лимит 40л/сутки подтвержден. Ограничение объема заправки легковых автомобилей. Поставки штатные."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 74.0,
       "diesel_price_rub": 77.0,
       "source_urls": [
-        "https://finance.mail.ru/article/nu-vot-i-vse-v-kakih-regionah-nachali-snimat-ogranicheniya-na-prodazhu-benzina-i-dizelya-69219723/"
+        "https://finance.mail.ru/article/nu-vot-i-vse-v-kakih-regionah-nachali-snimat-ogranicheniya-na-prodazhu-benzina-i-dizelya-69219723/",
+        "https://bloknot-krasnodar.ru/news/v-adygee-vveli-ogranicheniya-na-obyem-zapravki-leg"
       ],
-      "note": "02.09: Лимит 40л. Проверено."
+      "note": "04.09 WebSearch: Лимит 40л/сутки. Поставки штатно. Ситуация контролируется."
     },
     {
       "region": "Ярославская область",
       "lat": 57.63,
       "lon": 39.87,
       "level": "limited",
-      "updated": "2026-09-02T00:23:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Лукойл/Газпромнефть/Роснефть",
           "status": "limited",
           "level": "limited",
-          "limit_l": 40,
-          "note": "02.09: Вторая волна. Атака на ярославский НПЗ. Очереди возобновились."
+          "limit_l": 30,
+          "note": "04.09 WebSearch: Вторая волна продолжается. Лимит 30л. Очереди на фоне атак на НПЗ. Ситуация напряженная."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 1.0,
       "ai95_price_rub": 74.67,
       "diesel_price_rub": 82.63,
       "source_urls": [
-        "https://76.ru/text/transport/2026/08/25/76606809/"
+        "https://76.ru/text/transport/2026/09/03/76621251/",
+        "https://26.ru/text/economics/2026/09/02/76617984/"
       ],
-      "note": "02.09: Вторая волна. Очереди вернулись."
+      "note": "04.09 WebSearch: Вторая волна подтверждена. Очереди, лимит 30л."
     },
     {
       "region": "Республика Карелия",
       "lat": 61.79,
       "lon": 34.35,
-      "level": "strained",
-      "updated": "2026-09-02T00:23:00Z",
+      "level": "calm",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Газпромнефть/Роснефть/Лукойл",
           "status": "limited",
-          "level": "strained",
+          "level": "calm",
           "limit_l": 40,
-          "note": "02.09: Лимит 40л. Ситуация улучшается."
+          "note": "04.09 WebSearch: Стабильна. Цены: АИ-92 63.74₽, АИ-95 68.64₽. Лимит 40л сохраняется. Нет острого дефицита."
         }
       ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 74.0,
+      "queues_hours": 0.0,
+      "ai95_price_rub": 68.64,
       "diesel_price_rub": 79.0,
       "source_urls": [
-        "https://aif.ru/money/economy/v-karelii-na-vseh-azs-povysili-limit-na-otpusk-benzina"
+        "https://www.petrolplus.ru/fuelindex/respublika-kareliya/ai92/",
+        "https://fuelprice.ru/petrozavodsk"
       ],
-      "note": "02.09: Лимит 40л. Стабилизируется."
+      "note": "04.09 WebSearch: Стабильна. Цены нормальные. Запасы достаточны."
     },
     {
       "region": "Республика Саха (Якутия)",
       "lat": 62.04,
       "lon": 113.5,
       "level": "limited",
-      "updated": "2026-09-02T00:23:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "СибОйл/Лукойл/Роснефть/Якут Oil Base",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "02.09: Суточные лимиты на АИ-95. Дефицит из-за ударов по НПЗ."
+          "note": "04.09 WebSearch: Суточные лимиты на АИ-95. Дефицит на фоне ударов по НПЗ. Лимит 40л. Поставки нарушены."
         }
       ],
       "queues_hours": 0.5,
@@ -1526,30 +1551,32 @@
       "source_urls": [
         "https://fedpress.ru/news/14/economy/3448293"
       ],
-      "note": "02.09: Суточные лимиты. Дефицит продолжается."
+      "note": "04.09 ротация: Суточные лимиты. Дефицит из-за ударов."
     },
     {
       "region": "Республика Дагестан",
       "lat": 42.98,
       "lon": 47.5,
       "level": "critical",
-      "updated": "2026-09-02T00:23:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Все сети (Махачкала критична)",
           "status": "limited",
           "level": "critical",
           "limit_l": 20,
-          "note": "02.09: КРИТИЧНО. Махачкала: 83 из 104 АЗС закрыто. Цены АИ-95 до 170₽/л."
+          "note": "04.09 WebSearch: КРИТИЧНО. Махачкала: 83 из 104 АЗС закрыто (судебные решения). Лимит 20л. Цены АИ-95 до 170₽/л, АИ-92 102-150₽/л. Нет собственного производства."
         }
       ],
-      "queues_hours": 2.0,
+      "queues_hours": 2.5,
       "ai95_price_rub": 170.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
-        "https://www.kavkaz-uzel.eu/articles/426112"
+        "https://www.kavkaz-uzel.org/articles/426092",
+        "https://www.kavkaz-uzel.media/articles/426309",
+        "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852/"
       ],
-      "note": "02.09: КРИТИЧНО. Махачкала: 83 из 104 АЗС закрыто. Цены до 170₽."
+      "note": "04.09 WebSearch: Катастрофически критично. 83/104 АЗС в Махачкале закрыто. Цены рекордные 170₽/л."
     },
     {
       "region": "Чеченская Республика",
@@ -1832,23 +1859,23 @@
       "lat": 57.0,
       "lon": 40.97,
       "level": "limited",
-      "updated": "2026-09-01T20:00:00Z",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Крупные сети",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "01.09: Лимит 30л. Дефицит продолжает действовать. Нефтебаза развёрнута, очереди сокращаются."
+          "note": "04.09 WebSearch: Лимит 30л. Дефицит продолжает действовать с июня. Ажиотажный спрос. Нефтебаза развёрнута. Очереди продолжаются."
         }
       ],
-      "queues_hours": 0.3,
+      "queues_hours": 0.5,
       "ai95_price_rub": 87.85,
       "diesel_price_rub": 79.0,
       "source_urls": [
         "https://ivgazeta.ru/article/2026/08/13/kak_ivanovskaya_oblast_spravlyaetsya_s_benzinovym_krizisom"
       ],
-      "note": "01.09: Лимиты 30л. Нефтебаза открыта."
+      "note": "04.09: Ротационный проход. Лимит 30л. Дефицит с июня. Нефтебаза открыта."
     },
     {
       "region": "Бурятия",
@@ -2136,25 +2163,25 @@
       "region": "Рязанская область (уточнение)",
       "lat": 54.62,
       "lon": 39.74,
-      "level": "limited",
-      "updated": "2026-09-01T12:00:00Z",
+      "level": "critical",
+      "updated": "2026-09-04T00:24:05Z",
       "networks": [
         {
           "name": "Все АЗС",
           "status": "limited",
-          "level": "limited",
+          "level": "critical",
           "limit_l": 40,
-          "note": "01.09 ротация: Вторая волна дефицита. На некоторых АЗС АИ-95 >100₽/л. Ситуация улучшается."
+          "note": "04.09 WebSearch: Вторая волна подтверждена. На некоторых АЗС АИ-95 >100₽/л. Лимит 40л. Очереди продолжаются."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 1.0,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 95,
       "source_urls": [
         "https://ya62.ru/text/transport/2026/08/11/76580370/",
         "https://rzn.mk.ru/social/2026/08/10/vlasti-obyasnili-prichiny-deficita-benzina-ai92-i-ai95-na-azs-v-ryazani.html"
       ],
-      "note": "01.09 ротация: Вторая волна дефицита. На некоторых АЗС АИ-95 >100₽/л. Ситуация улучшается."
+      "note": "04.09 ротация (самая старая): Вторая волна. Цены >100₽/л. Очереди. Лимит 40л."
     },
     {
       "region": "Донецкая область",
