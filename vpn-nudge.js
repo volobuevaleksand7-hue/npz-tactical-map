@@ -295,3 +295,75 @@
     }
   });
 })();
+
+/* ── Партнёрский баннер Timeweb (300×250) ───────────────────────────────────────
+   ponytail: живёт в vpn-nudge.js, а не отдельным файлом, по той же причине, что и
+   блок канала выше — этот файл build-nav.py сам инжектит на ВСЕ статические
+   страницы и перештамповывает ?v при правке. Отдельный файл потребовал бы правки
+   244 HTML + шести генераторов ради одного <script>.
+   Место: КОНЕЦ статьи — после блока «Смотрите также», перед дисклеймером. Ничего
+   не перекрывает и не конкурирует с нашими внутренними ссылками (глубина визита
+   важнее клика по партнёрке). На картах не появляется вовсе: build-nav не ставит
+   vpn-nudge.js на страницы с app.js.
+   Цели Метрики: timeweb_view (баннер реально попал в вьюпорт) и timeweb_click.
+   Две, а не одна, чтобы считался CTR — по одним кликам не отличить «не работает
+   оффер» от «баннер никто не видит». */
+(function () {
+  var SLOT = 'end';          // 'end' — после «Смотрите также»; 'mid' — после второго h2
+  var REF = 'https://timeweb.com/ru/?i=146483&a=413';
+  var IMG = 'https://wm.timeweb.ru/images/posters/300x250/300x250-24.jpg';
+  var CID = 110490245;
+
+  function goal(name) {
+    try { if (window.ym) ym(CID, 'reachGoal', name, { page: location.pathname }); } catch (e) {}
+    try { if (window.va) va('event', { name: name, data: { page: location.pathname } }); } catch (e) {}
+  }
+
+  function anchor() {
+    var main = document.querySelector('main') || document.querySelector('article');
+    if (!main) return null;
+    if (SLOT === 'mid') {
+      var hs = main.querySelectorAll('h2');
+      if (hs.length >= 3) return { el: hs[2], where: 'beforebegin' };
+    }
+    var note = main.querySelector('.osint-note');
+    if (note) return { el: note, where: 'beforebegin' };
+    return { el: main, where: 'beforeend' };
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.top !== window.self) return;                 // /embed/* — чужая страница
+    if (document.getElementById('map')) return;             // карта: не лезем поверх
+    if (document.querySelector('.tw-banner')) return;
+
+    var a = anchor();
+    if (!a) return;
+
+    var box = document.createElement('div');
+    box.className = 'tw-banner';
+    box.style.cssText = 'max-width:300px;margin:28px auto;text-align:center';
+    box.innerHTML =
+      '<div style="font-size:11px;letter-spacing:.04em;text-transform:uppercase;' +
+        'opacity:.45;margin-bottom:6px">Реклама</div>' +
+      '<a href="' + REF + '" target="_blank" rel="noopener nofollow sponsored">' +
+        '<img src="' + IMG + '" width="300" height="250" loading="lazy" ' +
+        'alt="Timeweb — хостинг и домены от 179 ₽ в год" ' +
+        'style="display:block;width:100%;height:auto;border-radius:10px">' +
+      '</a>';
+    box.querySelector('a').addEventListener('click', function () { goal('timeweb_click'); });
+    a.el.insertAdjacentElement(a.where, box);
+
+    // Показ считаем не по вставке в DOM, а по реальному попаданию в вьюпорт: баннер стоит
+    // внизу страницы, до него доскроллит меньшинство — иначе CTR был бы занижен в разы.
+    if (!window.IntersectionObserver) return;
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting) continue;
+        io.disconnect();
+        goal('timeweb_view');
+        return;
+      }
+    }, { threshold: 0.5 });
+    io.observe(box);
+  });
+})();
