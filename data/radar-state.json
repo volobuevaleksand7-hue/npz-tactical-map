@@ -174,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788596368,
-      "source_text": "05.09.2026 11:19 МСК\nКорсунь, Енакиево ДНР и близлежащие Опасность по БПЛА"
+      "last_event_ts": 1788604841,
+      "source_text": "05.09.2026 13:40 МСК\nДонецк и близлежащие Опасность по БПЛА ДНР"
     },
     "Белгородская область": {
       "bpla": false,
@@ -193,8 +193,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788597219,
-      "source_text": "05.09.2026 11:33 МСК\nБелгородский район опасность по БПЛА и ФПВ\n\n05.09.2026 10:39 МСК\nБорисовский район Белгородская область опасность по ФПВ (БПЛА)"
+      "last_event_ts": 1788605298,
+      "source_text": "05.09.2026 13:48 МСК\nБелгородский район опасность по БПЛА/ФПВ повторно"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -370,6 +370,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788565527,
       "source_text": "05.09.2026 02:45 МСК\nОт Вилино на Бахчисарай фиксация БПЛА"
+    },
+    {
+      "key": "донецк|донецкая народная республика",
+      "name": "Донецк",
+      "lat": 48.023,
+      "lon": 37.80224,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788604841,
+      "source_text": "05.09.2026 13:40 МСК\nДонецк и близлежащие Опасность по БПЛА ДНР"
     },
     {
       "key": "бердянск|запорожская область",
@@ -634,8 +656,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788597219,
-      "source_text": "05.09.2026 11:33 МСК\nБелгородский район опасность по БПЛА и ФПВ"
+      "last_event_ts": 1788605298,
+      "source_text": "05.09.2026 13:48 МСК\nБелгородский район опасность по БПЛА/ФПВ повторно"
     },
     "RUS.7.20_1": {
       "gid_2": "RUS.7.20_1",
@@ -669,7 +691,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -729,6 +751,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 271871,
+      "text": "Белгородский район опасность по БПЛА/ФПВ повторно",
+      "ts": 1788605298,
+      "time_label": "05.09.2026 13:48 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 271870,
+      "text": "Донецк и близлежащие\nОпасность по БПЛА\nДНР",
+      "ts": 1788604841,
+      "time_label": "05.09.2026 13:40 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 271869,
       "text": "Курская область и близлежащие\nАвиационная ракетная бомбовая опасность",
@@ -1352,22 +1390,6 @@
       "time_label": "05.09.2026 04:39 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 271806,
-      "text": "От Ивни в направлении Обояни\nОпасность по БПЛА\nБелгородская область",
-      "ts": 1788567626,
-      "time_label": "05.09.2026 03:20 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 88017,
-      "text": "Отбой опасности и внимания по БПЛА по ранее объявленным регионам\nСпасибо ПВО\n🤍",
-      "ts": 1788566346,
-      "time_label": "05.09.2026 02:59 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1377,14 +1399,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788604369,
-  "last_event_at": "2026-09-05T10:32:49Z",
-  "fetched_at": "2026-09-05T10:40:04.128961Z",
+  "timestamp": 1788605298,
+  "last_event_at": "2026-09-05T10:48:18Z",
+  "fetched_at": "2026-09-05T10:50:03.354507Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-05T10:40:04.128961Z",
-    "source_age_seconds": 435,
-    "city_count": 16,
+    "generated_at": "2026-09-05T10:50:03.354507Z",
+    "source_age_seconds": 105,
+    "city_count": 17,
     "region_count": 11,
     "feed_count": 80
   }
