@@ -6,25 +6,6 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
-    "Курская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1788537027,
-      "source_text": "04.09.2026 18:50 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла"
-    },
     "Рязанская область": {
       "bpla": false,
       "bplaDim": false,
@@ -62,25 +43,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1788554041,
       "source_text": "04.09.2026 23:34 МСК\nКропоткино Чернышево Раздольное и близлежащие Республика Крым Опасность по БПЛА"
-    },
-    "Воронежская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1788537027,
-      "source_text": "04.09.2026 18:50 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! Потенциальная опасность для Курской области и Воронежской области внимание по бпла"
     },
     "Херсонская область": {
       "bpla": false,
@@ -139,6 +101,25 @@
       "last_event_ts": 1788564444,
       "source_text": "05.09.2026 02:27 МСК\nВолодарское и близлежащие ДНР Опасность по БПЛА в т.ч. на электротяге"
     },
+    "Белгородская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1788580535,
+      "source_text": "05.09.2026 06:55 МСК\nБелгородский район Опасность по БПЛА повторно"
+    },
     "Луганская Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -147,16 +128,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1788561317,
-      "source_text": "04.09.2026 18:52 МСК\nБелянка, Больше Троицкое Ракетная опасность Шебекинский район\n\n05.09.2026 01:35 МСК\nЛНР тревога по БПЛА сохраняется"
+      "source_text": "05.09.2026 01:35 МСК\nЛНР тревога по БПЛА сохраняется"
     }
   },
   "cities": [
@@ -777,28 +758,6 @@
       "source_text": "04.09.2026 22:46 МСК\nСчастье и близлежащие Тревога по БПЛА сохраняется ЛНР"
     },
     {
-      "key": "керченский полуостров|автономная республика крым",
-      "name": "Керченский полуостров",
-      "lat": 45.250954,
-      "lon": 36.140668,
-      "region": "Автономная Республика Крым",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788537143,
-      "source_text": "04.09.2026 18:52 МСК\nКерченский полуостров Керчь Керченский пролив от Черного моря п. Волна Тамань Таманский Тревога по БПЛА"
-    },
-    {
       "key": "старобешево|донецкая народная республика",
       "name": "Старобешево",
       "lat": 47.75068,
@@ -1041,50 +1000,6 @@
       "source_text": "05.09.2026 00:26 МСК\nАнтрацит и далее на Свердловск ЛНР Тревога по группе Бпла"
     },
     {
-      "key": "керчь|автономная республика крым",
-      "name": "Керчь",
-      "lat": 45.35675,
-      "lon": 36.47542,
-      "region": "Автономная Республика Крым",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788537143,
-      "source_text": "04.09.2026 18:52 МСК\nКерченский полуостров Керчь Керченский пролив от Черного моря п. Волна Тамань Таманский Тревога по БПЛА"
-    },
-    {
-      "key": "троицкое|луганская народная республика",
-      "name": "Троицкое",
-      "lat": 49.91454,
-      "lon": 38.29265,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1788537147,
-      "source_text": "04.09.2026 18:52 МСК\nБелянка, Больше Троицкое Ракетная опасность Шебекинский район"
-    },
-    {
       "key": "светлодарск|донецкая народная республика",
       "name": "Светлодарск",
       "lat": 48.43374,
@@ -1129,6 +1044,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788555628,
       "source_text": "05.09.2026 00:00 МСК\nЧонгар, АПП Джанкой, Джанкойский район север, Арабатская Стрелка от Геническ, Новоалексеевка Тревога по БПЛА"
+    },
+    "RUS.7.4_1": {
+      "gid_2": "RUS.7.4_1",
+      "name_ru": "Белгородский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788580535,
+      "source_text": "05.09.2026 06:55 МСК\nБелгородский район Опасность по БПЛА повторно"
     }
   },
   "airport_markers": [
@@ -1178,6 +1115,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 271812,
+      "text": "Тульская область\nОтбой опасности БПЛА",
+      "ts": 1788580571,
+      "time_label": "05.09.2026 06:56 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 271811,
+      "text": "Белгородский район\nОпасность по БПЛА повторно",
+      "ts": 1788580535,
+      "time_label": "05.09.2026 06:55 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 83876,
       "text": "Отбой опасности по БПЛА во всех ранее объявленных регионах.\n📡\nЛокатор России -\n@locatorru",
@@ -1801,22 +1754,6 @@
       "time_label": "04.09.2026 22:55 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 271760,
-      "text": "Туапсе\nТревога по БПЛА",
-      "ts": 1788551675,
-      "time_label": "04.09.2026 22:54 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 271759,
-      "text": "Новороссийск, Геленджик, Кабардинка и близлежащие\nКраснодарский Край\nТревога по БПЛА",
-      "ts": 1788551647,
-      "time_label": "04.09.2026 22:54 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1826,15 +1763,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788579416,
-  "last_event_at": "2026-09-05T03:36:56Z",
-  "fetched_at": "2026-09-05T03:50:03.979726Z",
+  "timestamp": 1788580571,
+  "last_event_at": "2026-09-05T03:56:11Z",
+  "fetched_at": "2026-09-05T04:00:03.656245Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-05T03:50:03.979726Z",
-    "source_age_seconds": 787,
-    "city_count": 43,
-    "region_count": 8,
+    "generated_at": "2026-09-05T04:00:03.656245Z",
+    "source_age_seconds": 232,
+    "city_count": 40,
+    "region_count": 7,
     "feed_count": 80
   }
 }
