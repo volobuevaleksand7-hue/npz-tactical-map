@@ -193,8 +193,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788605298,
-      "source_text": "05.09.2026 13:48 МСК\nБелгородский район опасность по БПЛА/ФПВ повторно"
+      "last_event_ts": 1788605379,
+      "source_text": "05.09.2026 13:49 МСК\nНовый Ольшанец Белгородский район фиксация БПЛА"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -641,9 +641,9 @@
       "gid_2": "RUS.7.4_1",
       "name_ru": "Белгородский район",
       "region_ru": "Белгородская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -656,8 +656,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788605298,
-      "source_text": "05.09.2026 13:48 МСК\nБелгородский район опасность по БПЛА/ФПВ повторно"
+      "last_event_ts": 1788605379,
+      "source_text": "05.09.2026 13:49 МСК\nНовый Ольшанец Белгородский район фиксация БПЛА"
     },
     "RUS.7.20_1": {
       "gid_2": "RUS.7.20_1",
@@ -751,6 +751,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 271873,
+      "text": "ЛДНР\nЗапорожская область РФ\nОтбой авиационной ракетной бомбовой опасности",
+      "ts": 1788605873,
+      "time_label": "05.09.2026 13:57 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 271872,
+      "text": "Новый Ольшанец Белгородский район фиксация БПЛА",
+      "ts": 1788605379,
+      "time_label": "05.09.2026 13:49 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 271871,
       "text": "Белгородский район опасность по БПЛА/ФПВ повторно",
@@ -1374,22 +1390,6 @@
       "time_label": "05.09.2026 06:16 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 271808,
-      "text": "Экстренная информация РСЧС: УГРОЗА ПОВТОРНОЙ АТАКИ БПЛА в Валуйском МО 05:29. Оставайтесь дома, не подходите к окнам или пройдите в укрытие.",
-      "ts": 1788575531,
-      "time_label": "05.09.2026 05:32 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 271807,
-      "text": "Запорожская область РФ, отбой опасности БПЛА",
-      "ts": 1788572368,
-      "time_label": "05.09.2026 04:39 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1399,13 +1399,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788605298,
-  "last_event_at": "2026-09-05T10:48:18Z",
-  "fetched_at": "2026-09-05T10:50:03.354507Z",
+  "timestamp": 1788605873,
+  "last_event_at": "2026-09-05T10:57:53Z",
+  "fetched_at": "2026-09-05T11:00:04.557835Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-05T10:50:03.354507Z",
-    "source_age_seconds": 105,
+    "generated_at": "2026-09-05T11:00:04.557835Z",
+    "source_age_seconds": 131,
     "city_count": 17,
     "region_count": 11,
     "feed_count": 80
