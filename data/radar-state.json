@@ -174,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1788700694,
-      "source_text": "06.09.2026 12:05 МСК\nЗапорожская область РФ ЛДНР Авиационная ракетно бомбовая опасность\n\n06.09.2026 16:18 МСК\nПервомайск и близлежащие Опасность по БПЛА Хорнет ЛНР"
+      "last_event_ts": 1788702338,
+      "source_text": "06.09.2026 12:05 МСК\nЗапорожская область РФ ЛДНР Авиационная ракетно бомбовая опасность\n\n06.09.2026 16:45 МСК\nБрянка и ближайшие Опасность по БПЛА ЛНР"
     },
     "Курская область": {
       "bpla": false,
@@ -839,9 +839,9 @@
       "lat": 48.511,
       "lon": 38.67222,
       "region": "Луганская Народная Республика",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -852,8 +852,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788700079,
-      "source_text": "06.09.2026 16:07 МСК\nБрянка фиксация БПЛА над центром вдоль трассы ЛНР"
+      "last_event_ts": 1788702338,
+      "source_text": "06.09.2026 16:45 МСК\nБрянка и ближайшие Опасность по БПЛА ЛНР"
     },
     {
       "key": "черноморское|автономная республика крым",
@@ -1102,6 +1102,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 272392,
+      "text": "Брянка и ближайшие\nОпасность по БПЛА\nЛНР",
+      "ts": 1788702338,
+      "time_label": "06.09.2026 16:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 272391,
+      "text": "Сокологорск - Попасная\nЛНР\nОпасность по БПЛА",
+      "ts": 1788701985,
+      "time_label": "06.09.2026 16:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 272390,
       "text": "От Тарасовка на Корчму над дорогой и далее на юг тревога по БПЛА Дартс\nХерсонская область РФ",
@@ -1725,22 +1741,6 @@
       "time_label": "06.09.2026 12:43 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 272326,
-      "text": "Володарское и близлежащие\nДНР\nВнимание по БПЛА",
-      "ts": 1788687599,
-      "time_label": "06.09.2026 12:39 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 272325,
-      "text": "Запорожская область РФ\nЛДНР\nОтбой авиационной ракетно бомбовой опасности",
-      "ts": 1788687179,
-      "time_label": "06.09.2026 12:32 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1750,13 +1750,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788701420,
-  "last_event_at": "2026-09-06T13:30:20Z",
-  "fetched_at": "2026-09-06T13:40:04.509972Z",
+  "timestamp": 1788702338,
+  "last_event_at": "2026-09-06T13:45:38Z",
+  "fetched_at": "2026-09-06T13:50:04.565729Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-06T13:40:04.509972Z",
-    "source_age_seconds": 584,
+    "generated_at": "2026-09-06T13:50:04.565729Z",
+    "source_age_seconds": 266,
     "city_count": 34,
     "region_count": 11,
     "feed_count": 80
