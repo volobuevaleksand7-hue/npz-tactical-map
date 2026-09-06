@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788645380,
-      "source_text": "06.09.2026 00:56 МСК\nХерсонская область РФ Запорожская область РФ Опасность по БПЛА Повторно"
+      "last_event_ts": 1788674633,
+      "source_text": "06.09.2026 09:03 МСК\nБердянск в направлении Белосарайской косы и далее в Азовское море фиксация БПЛА"
     },
     "Брянская область": {
       "bpla": false,
@@ -657,28 +657,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788668962,
       "source_text": "06.09.2026 07:29 МСК\nТула Тульская область Фиксация БПЛА"
-    },
-    {
-      "key": "ялта|донецкая народная республика",
-      "name": "Ялта",
-      "lat": 46.96098,
-      "lon": 37.27446,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788631166,
-      "source_text": "05.09.2026 20:59 МСК\nМелекино, Мариуполь и близлежащие опасность по БПЛА от Ялта ДНР"
     },
     {
       "key": "старобельск|луганская народная республика",
@@ -1346,9 +1324,9 @@
       "lat": 46.75578,
       "lon": 36.78815,
       "region": "Запорожская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1359,8 +1337,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788635485,
-      "source_text": "05.09.2026 22:11 МСК\nБердянск Тревога по БПЛА сохраняется"
+      "last_event_ts": 1788674633,
+      "source_text": "06.09.2026 09:03 МСК\nБердянск в направлении Белосарайской косы и далее в Азовское море фиксация БПЛА"
     },
     {
       "key": "белокуракино|луганская народная республика",
@@ -3766,6 +3744,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 272238,
+      "text": "Бердянск в направлении Белосарайской косы и далее в Азовское море фиксация БПЛА",
+      "ts": 1788674633,
+      "time_label": "06.09.2026 09:03 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 272237,
       "text": "ЛДНР\nЗапорожская область РФ\nАвиационная ракетная бомбовая опасность",
       "ts": 1788674082,
@@ -4396,14 +4382,6 @@
       "time_label": "06.09.2026 06:03 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 88213,
-      "text": "Рязань\nРязанская область\nПродолжается работа ПВО\nМеры безопасности",
-      "ts": 1788663716,
-      "time_label": "06.09.2026 06:01 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -4413,14 +4391,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788674082,
-  "last_event_at": "2026-09-06T05:54:42Z",
-  "fetched_at": "2026-09-06T06:00:05.718252Z",
+  "timestamp": 1788674633,
+  "last_event_at": "2026-09-06T06:03:53Z",
+  "fetched_at": "2026-09-06T06:10:03.140422Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-06T06:00:05.718252Z",
-    "source_age_seconds": 323,
-    "city_count": 87,
+    "generated_at": "2026-09-06T06:10:03.140422Z",
+    "source_age_seconds": 370,
+    "city_count": 86,
     "region_count": 25,
     "feed_count": 80
   }
