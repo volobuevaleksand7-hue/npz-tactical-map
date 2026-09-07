@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788817327,
-      "source_text": "08.09.2026 00:42 МСК\nБутурлиновский район Калачеевский район Лискинский район Воронежская область Опасность по БПЛА"
+      "last_event_ts": 1788818922,
+      "source_text": "08.09.2026 01:08 МСК\nПавловский район Воронежская область Тревога по БПЛА м далее на Восток, северо-восток"
     },
     "Севастополь": {
       "bpla": false,
@@ -464,6 +464,28 @@
     }
   },
   "cities": [
+    {
+      "key": "калач|воронежская область",
+      "name": "Калач",
+      "lat": 50.425,
+      "lon": 41.01595,
+      "region": "Воронежская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788818592,
+      "source_text": "08.09.2026 01:03 МСК\nКалач и близлежащие, тревога по БпЛА Воронежская область"
+    },
     {
       "key": "светлодарск|донецкая народная республика",
       "name": "Светлодарск",
@@ -859,6 +881,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788807659,
       "source_text": "07.09.2026 22:00 МСК\nАчуево, Голубая Нива, Петровская, Полтавская, Славянск-на-Кубани, Краснодарский край - опасность по БПЛА с моря. 📡 Локатор России - @locatorru"
+    },
+    {
+      "key": "воронеж|воронежская область",
+      "name": "Воронеж",
+      "lat": 51.66833,
+      "lon": 39.19204,
+      "region": "Воронежская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788818753,
+      "source_text": "08.09.2026 01:05 МСК\nВоронеж Воронежская область Опасность по БПЛА"
     },
     {
       "key": "новоалексеевка|херсонская область",
@@ -3942,6 +3986,28 @@
       "last_event_ts": 1788801758,
       "source_text": "07.09.2026 20:22 МСК\nБолховский район Орловская область Фиксация БПЛА"
     },
+    "RUS.79.22_1": {
+      "gid_2": "RUS.79.22_1",
+      "name_ru": "Павловский район",
+      "region_ru": "Воронежская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788818922,
+      "source_text": "08.09.2026 01:08 МСК\nПавловский район Воронежская область Тревога по БПЛА м далее на Восток, северо-восток"
+    },
     "RUS.52.18_1": {
       "gid_2": "RUS.52.18_1",
       "name_ru": "Орловский район",
@@ -4970,6 +5036,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 273131,
+      "text": "Павловский район\nВоронежская область\nТревога по БПЛА м далее на Восток, северо-восток",
+      "ts": 1788818922,
+      "time_label": "08.09.2026 01:08 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 88615,
+      "text": "Воронеж\nВоронежская область\nОпасность по БПЛА",
+      "ts": 1788818753,
+      "time_label": "08.09.2026 01:05 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 273130,
+      "text": "Калач и близлежащие, тревога по БпЛА\nВоронежская область",
+      "ts": 1788818592,
+      "time_label": "08.09.2026 01:03 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 273129,
       "text": "Морозовский район\nРостовская область\nОпасность по БпЛА",
       "ts": 1788818335,
@@ -5584,30 +5674,6 @@
       "time_label": "07.09.2026 23:47 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 273077,
-      "text": "Черноморское и близлежащие, тревога по БпЛА",
-      "ts": 1788814026,
-      "time_label": "07.09.2026 23:47 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 273076,
-      "text": "Черноморское и близлежащие\nТревога по БПЛА сохраняется\nМеры безопасности\nРеспублика Крым",
-      "ts": 1788814023,
-      "time_label": "07.09.2026 23:47 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 273075,
-      "text": "Кропоткино\nРаздольное и близлежащие\nРеспублика Крым\nТревога по БПЛА",
-      "ts": 1788813930,
-      "time_label": "07.09.2026 23:45 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -5617,14 +5683,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788818335,
-  "last_event_at": "2026-09-07T21:58:55Z",
-  "fetched_at": "2026-09-07T22:00:15.222908Z",
+  "timestamp": 1788818922,
+  "last_event_at": "2026-09-07T22:08:42Z",
+  "fetched_at": "2026-09-07T22:10:08.581904Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-07T22:00:15.222908Z",
-    "source_age_seconds": 80,
-    "city_count": 132,
+    "generated_at": "2026-09-07T22:10:08.581904Z",
+    "source_age_seconds": 86,
+    "city_count": 134,
     "region_count": 24,
     "feed_count": 80
   }
