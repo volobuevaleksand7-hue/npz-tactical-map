@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788734778,
-      "source_text": "07.09.2026 01:46 МСК\nСызрань Самарская область Опасность по БПЛА"
+      "last_event_ts": 1788741525,
+      "source_text": "07.09.2026 03:38 МСК\nСызрань Самарская область Фиксации БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -573,8 +573,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788738185,
-      "source_text": "07.09.2026 02:43 МСК\nЗеленодольск, Казань, Елабуга, Нижнекамск, Набережные Челны, Альметьевск, Бугульма и близлежащие населённые пункты, Республика Татарстан - опасность по БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1788741552,
+      "source_text": "07.09.2026 03:39 МСК\nАлькеевский район Республика Татарстан Фиксации БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -2690,9 +2690,9 @@
       "lat": 53.1585,
       "lon": 48.4681,
       "region": "Самарская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -2703,8 +2703,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788734778,
-      "source_text": "07.09.2026 01:46 МСК\nСызрань Самарская область Опасность по БПЛА"
+      "last_event_ts": 1788741525,
+      "source_text": "07.09.2026 03:38 МСК\nСызрань Самарская область Фиксации БПЛА"
     },
     {
       "key": "железногорск|курская область",
@@ -3167,28 +3167,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788713660,
       "source_text": "06.09.2026 19:54 МСК\nДонузлав Черноморское и близлежащие Опасность по БПЛА Республика Крым"
-    },
-    {
-      "key": "новоайдар|луганская народная республика",
-      "name": "Новоайдар",
-      "lat": 48.96402,
-      "lon": 39.00559,
-      "region": "Луганская Народная Республика",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788697996,
-      "source_text": "06.09.2026 15:33 МСК\nВдоль трассы от Старобельска, Новоайдар через Счастье в сторону Луганска фиксации БПЛА"
     },
     {
       "key": "сочи|краснодарский край",
@@ -4754,6 +4732,28 @@
       "last_event_ts": 1788720730,
       "source_text": "06.09.2026 21:52 МСК\nХреновое, Бобровский район, Воронежская область - пролёт БПЛА в сторону Бобров или Таловая. 📡 Локатор России - @locatorru"
     },
+    "RUS.68.4_1": {
+      "gid_2": "RUS.68.4_1",
+      "name_ru": "Алькеевский район",
+      "region_ru": "Татарстан",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788741552,
+      "source_text": "07.09.2026 03:39 МСК\nАлькеевский район Республика Татарстан Фиксации БПЛА"
+    },
     "RUS.7.9_1": {
       "gid_2": "RUS.7.9_1",
       "name_ru": "Губкинский район",
@@ -6112,6 +6112,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 88437,
+      "text": "Алькеевский район\nРеспублика Татарстан\nФиксации БПЛА",
+      "ts": 1788741552,
+      "time_label": "07.09.2026 03:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 88436,
+      "text": "Сызрань\nСамарская область\nФиксации БПЛА",
+      "ts": 1788741525,
+      "time_label": "07.09.2026 03:38 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 84171,
       "text": "Матвеев Курган, Лысогорка, Новошахтинск,  Шахты, Красный Сулин, Гуково, Лиховской,  Каменск-Шахтинский, Ростовская область - опасность по БПЛА с запада.\n📡\nЛокатор России -\n@locatorru",
       "ts": 1788740952,
@@ -6734,22 +6750,6 @@
       "time_label": "07.09.2026 01:11 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 272605,
-      "text": "Западное побережье Крыма, опасность по БПЛА сохраняется, в том числе Севастополь.",
-      "ts": 1788732653,
-      "time_label": "07.09.2026 01:10 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 88402,
-      "text": "Гавриловский район\nТамбовская область\nФиксация БПЛА",
-      "ts": 1788732618,
-      "time_label": "07.09.2026 01:10 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -6759,14 +6759,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788740952,
-  "last_event_at": "2026-09-07T00:29:12Z",
-  "fetched_at": "2026-09-07T00:30:06.063698Z",
-  "poll_interval_sec": 45,
+  "timestamp": 1788741552,
+  "last_event_at": "2026-09-07T00:39:12Z",
+  "fetched_at": "2026-09-07T00:40:05.281081Z",
+  "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-09-07T00:30:06.063698Z",
-    "source_age_seconds": 54,
-    "city_count": 138,
+    "generated_at": "2026-09-07T00:40:05.281081Z",
+    "source_age_seconds": 53,
+    "city_count": 137,
     "region_count": 32,
     "feed_count": 80
   }
