@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1788775212,
-      "source_text": "07.09.2026 09:08 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n07.09.2026 13:00 МСК\nВрубовка-Горская ЛНР в направлении Первомайск Опасность по БПЛА Хорнет"
+      "last_event_ts": 1788781663,
+      "source_text": "07.09.2026 09:08 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n07.09.2026 14:47 МСК\nСтаробельск и далее на Северо-Восток фиксация БПЛА Хорнет ЛНР"
     },
     "Курская область": {
       "bpla": false,
@@ -273,7 +273,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -707,9 +707,9 @@
       "lat": 49.282243,
       "lon": 38.897393,
       "region": "Луганская Народная Республика",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -720,8 +720,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788765588,
-      "source_text": "07.09.2026 10:19 МСК\nСтаробельск близлежащие Опасность по БПЛА Хорнет"
+      "last_event_ts": 1788781663,
+      "source_text": "07.09.2026 14:47 МСК\nСтаробельск и далее на Северо-Восток фиксация БПЛА Хорнет ЛНР"
     },
     {
       "key": "горловка|донецкая народная республика",
@@ -889,7 +889,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -2017,6 +2017,38 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 272793,
+      "text": "Старобельск и далее на Северо-Восток фиксация БПЛА Хорнет\nЛНР",
+      "ts": 1788781663,
+      "time_label": "07.09.2026 14:47 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 272792,
+      "text": "Возможно применение противником РСЗО в течение дня  на направлении Белая Березка - Суземка\nБрянская область",
+      "ts": 1788781538,
+      "time_label": "07.09.2026 14:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 272791,
+      "text": "Марковка и далее в направлении Ставки БПЛА Хорнет\nХерсонская область РФ",
+      "ts": 1788781442,
+      "time_label": "07.09.2026 14:44 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 272790,
+      "text": "БПЛА в направлении Енакиево и далее на Юг\nДНР",
+      "ts": 1788781231,
+      "time_label": "07.09.2026 14:40 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 272789,
       "text": "Республика Крым\n❤️\n❤️\n❤️",
       "ts": 1788780154,
@@ -2623,38 +2655,6 @@
       "time_label": "07.09.2026 11:25 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 272719,
-      "text": "Енакиево, Ждановка, Кировское ДНР и близлежащие\nОпасность по БПЛА",
-      "ts": 1788769238,
-      "time_label": "07.09.2026 11:20 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 88539,
-      "text": "Орловская область\nОтбой опасности по БПЛА",
-      "ts": 1788769205,
-      "time_label": "07.09.2026 11:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 272718,
-      "text": "Врубовка\nПервомайск\nОпасность по БПЛА Хорнет\nЛНР",
-      "ts": 1788768987,
-      "time_label": "07.09.2026 11:16 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 272717,
-      "text": "Стаханов ЛНР внимание по возможным БПЛА",
-      "ts": 1788768491,
-      "time_label": "07.09.2026 11:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2664,13 +2664,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788780154,
-  "last_event_at": "2026-09-07T11:22:34Z",
-  "fetched_at": "2026-09-07T11:40:06.604970Z",
+  "timestamp": 1788781663,
+  "last_event_at": "2026-09-07T11:47:43Z",
+  "fetched_at": "2026-09-07T11:50:09.549846Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-07T11:40:06.604970Z",
-    "source_age_seconds": 1052,
+    "generated_at": "2026-09-07T11:50:09.549846Z",
+    "source_age_seconds": 146,
     "city_count": 64,
     "region_count": 11,
     "feed_count": 80
