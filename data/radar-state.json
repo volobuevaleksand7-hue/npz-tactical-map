@@ -185,16 +185,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1788843981,
-      "source_text": "08.09.2026 08:06 МСК\nАвдеевка, Очеретино, Ясиноватая ДНР и близлежащие Тревога по БПЛА Хорнет"
+      "fill": "#dc2626",
+      "last_event_ts": 1788844982,
+      "source_text": "08.09.2026 08:23 МСК\nБогатырь Курахово ДНР ракетная опасность Повторно\n\n08.09.2026 08:06 МСК\nАвдеевка, Очеретино, Ясиноватая ДНР и близлежащие Тревога по БПЛА Хорнет"
     },
     "Тульская область": {
       "bpla": false,
@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1788844167,
-      "source_text": "08.09.2026 08:09 МСК\nПриазовское и близлежащие Опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1788845175,
+      "source_text": "08.09.2026 08:26 МСК\nЗапорожская область РФ Опасность по БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -714,8 +714,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1788815642,
-      "source_text": "08.09.2026 00:14 МСК\nМелитополь и близлежащие Тревога по БПЛА Запорожская область РФ"
+      "last_event_ts": 1788844848,
+      "source_text": "08.09.2026 08:20 МСК\nМелитопольский район Мелитополь и близлежащие Опасность по БПЛА Запорожская область РФ"
     },
     {
       "key": "брянка|луганская народная республика",
@@ -1443,6 +1443,28 @@
       "source_text": "07.09.2026 21:02 МСК\nОт Стерегущее до Тарханкут тревога по БПЛА с моря повторно Направление на Новоозерное, Мирный, Евпатория, Саки и близлежащие по пути следования"
     },
     {
+      "key": "курахово|донецкая народная республика",
+      "name": "Курахово",
+      "lat": 47.9847,
+      "lon": 37.28069,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1788844982,
+      "source_text": "08.09.2026 08:23 МСК\nБогатырь Курахово ДНР ракетная опасность Повторно"
+    },
+    {
       "key": "счастье|луганская народная республика",
       "name": "Счастье",
       "lat": 48.73784,
@@ -1507,28 +1529,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788833291,
       "source_text": "08.09.2026 05:08 МСК\nТемкинский район Смоленская область Фиксации БПЛА"
-    },
-    {
-      "key": "ялта|донецкая народная республика",
-      "name": "Ялта",
-      "lat": 46.96098,
-      "lon": 37.27446,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1788801928,
-      "source_text": "07.09.2026 20:25 МСК\nМангуш Ялта Юрьевка И близлежащие Тревога по БПЛА от Володарское ДНР"
     },
     {
       "key": "горское|луганская народная республика",
@@ -2148,6 +2148,28 @@
       "last_event_ts": 1788823583,
       "source_text": "08.09.2026 02:26 МСК\nРакитянский район, Краснояружский район, Белгородская область - продолжается пролёт БПЛА в сторону Ивня, Обоянь, Прохоровка, Пристень, Солнцево, Губкин и далее в сторону Орловской области, Липецкой области, могут повернуть в сторону Воронежской области. 📡 Локатор России - @locatorru"
     },
+    "UKR.26.10_1": {
+      "gid_2": "UKR.26.10_1",
+      "name_ru": "Мелитопольский район",
+      "region_ru": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1788844848,
+      "source_text": "08.09.2026 08:20 МСК\nМелитопольский район Мелитополь и близлежащие Опасность по БПЛА Запорожская область РФ"
+    },
     "RUS.52.12_1": {
       "gid_2": "RUS.52.12_1",
       "name_ru": "Малоархангельский район",
@@ -2735,6 +2757,38 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 273235,
+      "text": "Запорожская область РФ\nОпасность по БПЛА",
+      "ts": 1788845175,
+      "time_label": "08.09.2026 08:26 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 273234,
+      "text": "Богатырь\nКурахово ДНР ракетная опасность\nПовторно",
+      "ts": 1788844982,
+      "time_label": "08.09.2026 08:23 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 273233,
+      "text": "Мелитопольский район\nМелитополь и близлежащие\nОпасность по БПЛА\nЗапорожская область РФ",
+      "ts": 1788844848,
+      "time_label": "08.09.2026 08:20 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 273232,
+      "text": "Богатырь\nКурахово и близлежащие\nРакетная опасность",
+      "ts": 1788844779,
+      "time_label": "08.09.2026 08:19 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 84306,
       "text": "От Суземка, Севск, Брянской области в сторону Комаричи, Локоть, Навля - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
@@ -3342,38 +3396,6 @@
       "time_label": "08.09.2026 06:05 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 88731,
-      "text": "Судогодский район\nВладимирская область\nФиксация БПЛА",
-      "ts": 1788836726,
-      "time_label": "08.09.2026 06:05 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 88730,
-      "text": "Московская область\nОпасность по БПЛА",
-      "ts": 1788836676,
-      "time_label": "08.09.2026 06:04 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 88729,
-      "text": "Владимирская область\nНижегородская область\nОпасность по БПЛА",
-      "ts": 1788836497,
-      "time_label": "08.09.2026 06:01 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 88728,
-      "text": "Саратов\nЭнгельс\nСаратовская область\nЕще фиксации над городом",
-      "ts": 1788835843,
-      "time_label": "08.09.2026 05:50 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -3383,13 +3405,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1788844705,
-  "last_event_at": "2026-09-08T05:18:25Z",
-  "fetched_at": "2026-09-08T05:20:08.594842Z",
+  "timestamp": 1788845175,
+  "last_event_at": "2026-09-08T05:26:15Z",
+  "fetched_at": "2026-09-08T05:30:06.258437Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-08T05:20:08.594842Z",
-    "source_age_seconds": 103,
+    "generated_at": "2026-09-08T05:30:06.258437Z",
+    "source_age_seconds": 231,
     "city_count": 65,
     "region_count": 13,
     "feed_count": 80
