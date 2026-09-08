@@ -311,24 +311,24 @@
     "lat": 54.99,
     "lon": 82.89,
     "level": "critical",
-    "updated": "2026-09-07T00:23:15Z",
+    "updated": "2026-09-08T20:30:00Z",
     "networks": [
      {
       "name": "Газпромнефть/Лукойл",
       "status": "limited",
       "level": "critical",
       "limit_l": 35,
-      "note": "07.09 ротация: Вторая волна интенсивна. 101 АЗС закрыто. Лимит 35л. Очереди 2+ часа. Цены частников до 135₽/л. Дефицит острый."
+      "note": "08.09: Вторая волна критична. 101 АЗС закрыто. Лимит 35л. Очереди 2+ часа. Цены 100-160₽/л на частных. Дефицит острый."
      }
     ],
-    "queues_hours": 2.0,
-    "ai95_price_rub": 135.0,
-    "diesel_price_rub": 92.0,
+    "queues_hours": 2.5,
+    "ai95_price_rub": 130.0,
+    "diesel_price_rub": 100.0,
     "source_urls": [
-     "https://ngs.ru/text/transport/2026/09/06/76625740/",
-     "https://abnews.ru/siberia/news/novosibirsk/2026/9/6/vtoraya-volna-toplivnogo-krizisa-nakryla-azs-novosibirska-s-ocheredyami"
+     "https://abnews.ru/siberia/news/novosibirsk/2026/9/6/vtoraya-volna-toplivnogo-krizisa-nakryla-azs-novosibirska-s-ocheredyami",
+     "https://nsk.aif.ru/society/v-novosibirskoy-oblasti-zakryli-101-azs-iz-za-deficita-benzina-v-2026-godu"
     ],
-    "note": "07.09: 101 АЗС закрыто. Критична. Вторая волна интенсивна."
+    "note": "08.09: 101 АЗС закрыто. Вторая волна критична."
    },
    {
     "region": "Чувашия",
@@ -383,55 +383,55 @@
     "lat": 46.31,
     "lon": 44.27,
     "level": "critical",
-    "updated": "2026-09-07T00:23:15Z",
+    "updated": "2026-09-08T20:30:00Z",
     "networks": [
      {
       "name": "Элиста (город)",
       "status": "limited",
       "level": "limited",
       "limit_l": 15,
-      "note": "07.09 ротация: Элиста дешевле: АИ-92 54.10₽, АИ-95 92.47₽. Остальное критично. Лимит 15л."
+      "note": "08.09: Элиста дешевле: АИ-92 54.10₽, АИ-95 92.47₽. Лимит 15л. Без острого дефицита."
      },
      {
       "name": "Остальное (критично)",
       "status": "limited",
       "level": "critical",
       "limit_l": 20,
-      "note": "07.09 ротация: Цены высокие (>90₽ АИ-95). Очереди 1.5+ часа. Кроме Элисты."
+      "note": "08.09: Вне Элисты критично. Цены >90₽ АИ-95. Очереди 1.5+ часа."
      }
     ],
     "queues_hours": 1.5,
     "ai95_price_rub": 92.47,
     "diesel_price_rub": 80.0,
     "source_urls": [
-     "https://multigo.ru/",
-     "https://www.petrolplus.ru/fuelindex/respublika-kalmykiya/"
+     "https://multigo.ru/benzin/46.3081;44.2696/11",
+     "https://multigo.ru/benzin/46.3081;44.2696/8"
     ],
-    "note": "07.09: Критична кроме Элисты. Очереди 1.5+ часа."
+    "note": "08.09: Критична кроме Элисты. Очереди 1.5+ часа."
    },
    {
     "region": "Тюменская область",
     "lat": 57.15,
     "lon": 65.53,
     "level": "critical",
-    "updated": "2026-09-07T00:23:15Z",
+    "updated": "2026-09-08T20:30:00Z",
     "networks": [
      {
       "name": "Газпром нефть/Лукойл",
       "status": "limited",
       "level": "critical",
       "limit_l": 30,
-      "note": "07.09 ротация: Вторая волна интенсивна. Лимит 30л. Очереди 2+ часа. Цены 88₽. Дефицит."
+      "note": "08.09: Вторая волна критична. Поставки исчезают за считанные часы. Лимит 30л. Очереди 2+ часа. Цены 110₽+. Дефицит острый."
      }
     ],
-    "queues_hours": 2.0,
-    "ai95_price_rub": 88.0,
-    "diesel_price_rub": 87.0,
+    "queues_hours": 2.5,
+    "ai95_price_rub": 110.0,
+    "diesel_price_rub": 95.0,
     "source_urls": [
-     "https://72.ru/text/transport/2026/08/31/76615766/",
-     "https://ura.news/news/1053123760"
+     "https://tmn.aif.ru/society/110-rubley-za-litr-chto-proishodit-s-toplivom-na-azs-v-tyumenskoy-oblasti",
+     "https://72.ru/text/auto/2026/08/28/76612442/"
     ],
-    "note": "07.09: Вторая волна интенсивна. Очереди 2+ часа. Дефицит острый."
+    "note": "08.09: Вторая волна. Цены 110р+. Очереди 2+ часа."
    },
    {
     "region": "Ямало-Ненецкий автономный округ",
@@ -579,14 +579,14 @@
     "lat": 52.03,
     "lon": 113.5,
     "level": "critical",
-    "updated": "2026-09-07T00:23:15Z",
+    "updated": "2026-09-08T20:30:00Z",
     "networks": [
      {
       "name": "Neftemarket",
       "status": "limited",
       "level": "critical",
       "limit_l": 20,
-      "note": "07.09 ротация: КРИТИЧНА. На 06.09 50 из 78 АЗС Neftemarket не продают АИ-95. Директора игнорируют требования губернатора. Острый кризис."
+      "note": "08.09: КРИТИЧНА. На 08.09 50 из 78 АЗС Neftemarket не продают АИ-95. Директора игнорируют требования губернатора Осипова. Пригрозил решительными мерами."
      }
     ],
     "queues_hours": 0.5,
@@ -595,7 +595,7 @@
     "source_urls": [
      "https://www.chita.ru/text/economics/2026/09/06/76627815/"
     ],
-    "note": "07.09: 50/78 АЗС закрыто. Критична. Губернатор требует координации."
+    "note": "08.09: 50/78 АЗС без АИ-95. Критична. Губернатор требует действий."
    },
    {
     "region": "Татарстан",
@@ -879,47 +879,47 @@
     "lat": 51.76,
     "lon": 55.09,
     "level": "limited",
-    "updated": "2026-09-08T04:30:00Z",
+    "updated": "2026-09-08T20:30:00Z",
     "networks": [
      {
       "name": "АЗС (чет-нечет по ГРЗ)",
       "status": "limited",
       "level": "limited",
       "limit_l": 25,
-      "note": "08.09: На 08.09 чётные номера (0,2,4,6,8). Лимит 15-30л АИ на трассах до 200л ДТ. Система с 12.08."
+      "note": "08.09: Чётные номера (0,2,4,6,8). Лимит 15-30л АИ-92/95, до 200л ДТ трасса. Система чет-нечет продолжает действовать."
      }
     ],
     "queues_hours": 0.2,
     "ai95_price_rub": 72.0,
     "diesel_price_rub": 88.0,
     "source_urls": [
-     "https://ria56.ru/posts/2-sentyabrya-na-azs-v-orenburzhe-zapravlyayut-mashiny-tolko-s-chetnymi-nomerami.htm"
+     "https://ria56.ru/posts/na-azs-v-orenburzhe-8-sentyabrya-zapravlyayut-mashiny-tolko-s-chetnymi-nomerami.htm"
     ],
-    "note": "08.09: Чётные номера"
+    "note": "08.09: Чётные номера. Лимит 15-30л."
    },
    {
     "region": "Волгоградская область",
     "lat": 48.7,
     "lon": 44.5,
     "level": "critical",
-    "updated": "2026-09-08T04:30:00Z",
+    "updated": "2026-09-08T20:30:00Z",
     "networks": [
      {
       "name": "Лукойл/Газпромнефть",
       "status": "limited",
       "level": "critical",
       "limit_l": 40,
-      "note": "08.09: РЕКОРДНЫЕ ОЧЕРЕДИ 37 ЧАСОВ подтверждены. Люди ждут 9-15 часов. Места продают за 1500-5000₽. Топливо кончается к полудню."
+      "note": "08.09 вечер: РЕКОРДНЫЕ ОЧЕРЕДИ 38-39 ЧАСОВ. Люди ждут 9-15 часов. Места продают за 1500-5000₽. Суточный лимит 3700л. Губернатор требует увеличить."
      }
     ],
-    "queues_hours": 37.0,
+    "queues_hours": 38.0,
     "ai95_price_rub": 73.95,
     "diesel_price_rub": 77.92,
     "source_urls": [
-     "https://v1.ru/text/gorod/2026/09/04/76623856/",
-     "https://v1.ru/text/gorod/2026/09/03/76622310/"
+     "https://v1.ru/text/gorod/2026/09/08/76630495/",
+     "https://vlg.aif.ru/society/details/benzina-net-ochered-na-azs-za-dengi-volgogradcy-pridumali-novyy-biznes"
     ],
-    "note": "08.09: 37ч очереди. Место в очереди стоит 1500-5000₽."
+    "note": "08.09: 38-39ч очереди. 1500-5000р место. Критично."
    },
    {
     "region": "Архангельская область",
@@ -2147,13 +2147,13 @@
    }
   ],
   "exchange": {
-   "ai95_spb_rub_t": 73139,
-   "ai92_spb_rub_t": 68805,
-   "diesel_spb_rub_t": 71221,
+   "ai95_spb_rub_t": 72800,
+   "ai92_spb_rub_t": 68400,
+   "diesel_spb_rub_t": 70900,
    "trend": "falling",
-   "updated": "2026-09-08T04:30:00Z",
-   "source_url": "https://mr-7.ru/articles/2026/09/01/tsena-benzina-ai-92-na-birzhe-v-peterburge-obnovila-istoricheskii-maksimum-news",
-   "notes": "08.09 (СПбМТСБ): АИ-92 68.805k₽/т (−2,48% за неделю), АИ-95 73.139k₽/т (−2,78%). Стабилизация продолжается."
+   "updated": "2026-09-08T20:30:00Z",
+   "source_url": "https://mr-7.ru/articles/2026/09/08/tsena-benzina-ai-92-na-birzhe-v-peterburge-snizhenie-prodolzhaetsya",
+   "notes": "08.09 вечер (СПбМТСБ): АИ-92 68.4k₽/т (стабилизация на низких уровнях), АИ-95 72.8k₽/т. Падение биржевых цен продолжается."
   },
   "refinery_counts": {
    "down": 13,
@@ -19607,6 +19607,22 @@
      "title": "Удар БПЛА по АЗС в Стародубе",
      "detail": "Беспилотник атаковал автозаправочную станцию. Погибли 1 человек (39-летний мужчина), ранены 3 человека. Повреждены навес и остекление 2 административных зданий, 3 автомобиля. Воздушная тревога объявлена в 03:30, отбой дан в 04:18.",
      "source_url": "https://www.fontanka.ru/2026/09/08/76630259/",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-09-08",
+     "time": "12:55",
+     "city": "Севастополь",
+     "region": "Республика Крым",
+     "lat": 44.616,
+     "lon": 33.518,
+     "type": "drone",
+     "count": 2,
+     "target": "пляж Омега",
+     "casualties": "1 раненая",
+     "title": "Атака БПЛА на пляж Омега в Севастополе",
+     "detail": "Два беспилотника сбиты над морем в районе Севастопольской бухты. Одна женщина 57 лет получила осколочное ранение ноги. Угрозы жизни нет.",
+     "source_url": "https://www.fontanka.ru/2026/09/08/76630868/",
      "confidence": "confirmed"
     },
     {
