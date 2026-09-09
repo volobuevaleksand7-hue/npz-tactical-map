@@ -18,13 +18,26 @@ env: NPZ_REPORT_CHAT (кому), NPZ_REPORT_TOKEN (файл токена бот�
 import os, sys, json, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
 
-from telethon.sync import TelegramClient
-from telethon.sessions import StringSession
-from telethon.tl.functions.channels import GetAdminLogRequest, GetFullChannelRequest
-from telethon.tl.types import ChannelAdminLogEventsFilter
-from telethon.tl.types import (ChannelAdminLogEventActionParticipantJoin,
-                               ChannelAdminLogEventActionParticipantJoinByInvite,
-                               ChannelAdminLogEventActionParticipantLeave)
+# telethon нужен только в режиме юзербота; без сессии отчёт живёт на одном Bot API
+try:
+    from telethon.sync import TelegramClient
+    from telethon.sessions import StringSession
+    from telethon.tl.functions.channels import GetAdminLogRequest, GetFullChannelRequest
+    from telethon.tl.types import ChannelAdminLogEventsFilter
+    from telethon.tl.types import (ChannelAdminLogEventActionParticipantJoin,
+                                   ChannelAdminLogEventActionParticipantJoinByInvite,
+                                   ChannelAdminLogEventActionParticipantLeave)
+except ImportError:                     # bot-only режим
+    TelegramClient = None
+
+    class ChannelAdminLogEventActionParticipantJoin:
+        pass
+
+    class ChannelAdminLogEventActionParticipantJoinByInvite:
+        pass
+
+    class ChannelAdminLogEventActionParticipantLeave:
+        pass
 
 SESSION = os.environ.get("NPZ_TG_SESSION", "/root/tg-recon/instances/nolan/session.txt")
 CHANNEL = os.environ.get("NPZ_CHANNEL", "@npz_karta_online")
@@ -68,6 +81,7 @@ def load_state():
     s.setdefault("total_joined", 0)
     s.setdefault("baseline_at", None)
     s.setdefault("baseline_total", None)
+    s.setdefault("last_total", None)
     return s
 
 
@@ -100,6 +114,20 @@ def bot_subs():
         return sum(1 for v in subs.values() if v.get("status") == "active")
     except Exception:
         return None
+
+
+def bot_api(method, **params):
+    token = open(TOKEN_FILE).read().strip()
+    url = "https://api.telegram.org/bot%s/%s?%s" % (
+        token, method, urllib.parse.urlencode(params))
+    with urllib.request.urlopen(url, timeout=20) as r:
+        return json.load(r)
+
+
+def read_total_bot():
+    """Общий счёт участников — единственное, что Bot API отдаёт без юзербота:
+    поимённого списка участников канала в Bot API нет в принципе."""
+    return bot_api("getChatMemberCount", chat_id=CHANNEL)["result"]
 
 
 def send(text):
@@ -146,6 +174,37 @@ def main():
     reset = "--reset-baseline" in sys.argv
     state = load_state()
     first = state["baseline_at"] is None or reset
+
+    if TelegramClient is None or not os.path.exists(SESSION):
+        # ponytail: сессия юзербота потеряна — журнала действий канала не видно,
+        # отдаём то, что даёт Bot API: общий счёт и суточную дельту.
+        total = read_total_bot()
+        prev = state["last_total"]
+        lines = ["\U0001f4ca %s — за сутки" % CHANNEL,
+                 "\U0001f465 в канале: %d (%s)" % (
+                     total, "%+d" % (total - prev) if prev is not None else "первый замер"),
+                 "",
+                 "\u26a0\ufe0f нет сессии юзербота (%s) — кто пришёл и кто ушёл, не видно." % SESSION,
+                 "Последний поимённый замер: %s, живых новичков %d." % (
+                     state["baseline_at"], len(state["newcomers"]))]
+        n = bot_subs()
+        if n is not None:
+            lines.append("\U0001f916 подписчиков бота: %d" % n)
+        lines.append(datetime.now(timezone(timedelta(hours=3))).strftime("%d.%m %H:%M МСК"))
+        text = "\n".join(lines)
+        if dry:
+            print(text)
+            print("\n[dry] состояние не сохранено; last_total=%s" % prev)
+            return 0
+        if not send(text):
+            print("отправка не удалась — состояние не двигаю")
+            return 1
+        state["last_total"] = total
+        with open(STATE, "w") as f:
+            json.dump(state, f, ensure_ascii=False)
+        print("отправлено (bot-only):", text.replace("\n", " · "))
+        return 0
+
     total, events = read_log(state)
 
     if first:
@@ -171,6 +230,7 @@ def main():
                      state["baseline_at"], state["total_joined"], len(newcomers)),
                  "👥 в канале: %d" % total]
 
+    state["last_total"] = total
     n = bot_subs()
     if n is not None:
         lines.append("🤖 подписчиков бота: %d" % n)
