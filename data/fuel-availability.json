@@ -1,14 +1,21 @@
 {
   "meta": {
-    "generated_at": "2026-09-09T00:00:00Z",
+    "generated_at": "2026-09-09T12:00:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
-    "rotation_pass": "2026-09-08T20:30:00Z: Тридцать восьмая волна ротационного прохода. WebSearch (6 горячих поисков за 08.09 + ротационный обновление 6 критичных регионов). Вторая волна дефицита набирает обороты: Волгоград 38ч очереди (спекуляция 1500-5000р место), Новосибирск 101 АЗС закрыто, Тюмень дефицит острый. Обновлены: Волгоград, Оренбург, Новосибирск, Тюмень, Забайкалье, Калмыкия.",
+    "rotation_pass": "2026-09-09T12:00:00Z: Тридцать девятая волна. WebSearch 6 горячих поисков (Волгоград 38-39ч очереди спекуляция 1500-5000р, Новосибирск 200 АЗС закрыто цены 150-160р, Оренбург чет-нечет 09.09 нечетные 1,3,5,7,9 лимит 15-30л, СПбМТСБ АИ-92 68.4k₽/т АИ-95 72.8k₽/т падение, Крым субсидия 100р/л работает, Тюмень 63-155р/л). Вторая волна острая.",
     "updated_by": "agent:fuel-availability",
-    "last_rotation_pass": "2026-09-08T20:30:00Z",
+    "last_rotation_pass": "2026-09-09T12:00:00Z",
     "update_notes": [
+      {
+        "date": "2026-09-09T12:00:00Z",
+        "action": "rotation_39_websearch_6hot",
+        "regions_updated": 6,
+        "hot_topics_searches": 6,
+        "message": "Тридцать девятая волна: WebSearch 6 горячих поисков (Волгоград 38-39ч очереди спекуляция 1500-5000р место суточный лимит 3700л; Новосибирск 200 АЗС закрыто из 400 цены независимых 150-160р; Оренбург 09.09 чет-нечет на нечетные 1,3,5,7,9 лимит 15-30л; СПбМТСБ АИ-92 68.4k₽/т АИ-95 72.8k₽/т падение; Крым субсидия 100р/л АТАН ТЭС работает; Тюмень цены 63-155р/л ситуация острая). Вторая волна интенсивна. Волгоград в глубоком кризисе с максимальными очередями за весь период."
+      },
       {
         "date": "2026-09-08T20:30:00Z",
         "action": "rotation_38_websearch_6hot_6regions",
@@ -39,6 +46,30 @@
       }
     ],
     "policy_events": [
+      {
+        "date": "2026-09-09T12:00:00Z",
+        "region": "Новосибирская область",
+        "type": "crisis",
+        "description": "200 АЗС закрыто из 400 станций. Вторая волна кризиса острая. На независимых АЗС цены 150-160р/л. Газпромнефть и Лукойл с перебоями в поставках."
+      },
+      {
+        "date": "2026-09-09T12:00:00Z",
+        "region": "Оренбургская область",
+        "type": "market",
+        "description": "На 09.09 (нечетная дата) система чет-нечет: нечетные номера (1,3,5,7,9). Лимит 15-30л АИ-92/95 в черте города, до 200л дизеля на трассах. Система действует с 12.08."
+      },
+      {
+        "date": "2026-09-09T12:00:00Z",
+        "region": "Республика Крым",
+        "type": "market",
+        "description": "Субсидированный бензин АИ-92/95 по 100р/л продолжает работать. Лимит 20л за заправку. На АЗС АТАН и ТЭС. QR-коды. По мере роста поставок планируется переход к свободной продаже."
+      },
+      {
+        "date": "2026-09-09T12:00:00Z",
+        "region": "Тюменская область",
+        "type": "crisis",
+        "description": "Вторая волна кризиса острая. Цены на разных АЗС от 63 до 155р/л. Лимиты 30л сохраняются. Поставки поступают с перебоями. Ситуация напряженная."
+      },
       {
         "date": "2026-09-09T00:00:00Z",
         "region": "Россия (федеральный мониторинг)",
@@ -124,9 +155,9 @@
     "ai92_spb_rub_t": 68400,
     "diesel_spb_rub_t": 70900,
     "trend": "falling",
-    "updated": "2026-09-09T00:00:00Z",
+    "updated": "2026-09-09T12:00:00Z",
     "source_url": "https://mr-7.ru/articles/2026/09/08/tsena-benzina-ai-92-na-birzhe-v-peterburge-snizhenie-prodolzhaetsya",
-    "notes": "08.09 вечер (СПбМТСБ): АИ-92 68.4k₽/т (стабилизация на низких уровнях), АИ-95 72.8k₽/т. Падение биржевых цен продолжается."
+    "notes": "09.09 (СПбМТСБ): АИ-92 68.4k₽/т, АИ-95 72.8k₽/т. Тренд падение продолжается."
   },
   "regions": [
     {
@@ -182,24 +213,24 @@
       "lat": 44.6,
       "lon": 33.5,
       "level": "limited",
-      "updated": "2026-09-07T20:15:00Z",
+      "updated": "2026-09-09T12:00:00Z",
       "networks": [
         {
           "name": "ТЭС",
           "status": "limited",
           "level": "limited",
           "limit_l": 20,
-          "note": "07.09 ротация: Субсидированный бензин АИ-92/95 по 100₽/л (с 01.09). Лимит 20л. QR-коды (10:00-16:00). Очереди сокращаются. По мере роста поставок планируется свободная продажа по 100₽. Стабилизируется."
+          "note": "09.09: Субсидированный бензин АИ-92/95 по 100р/л продолжает работать (с 01.09). Лимит 20л. QR-коды (10:00-16:00). Очереди сокращаются. По мере роста поставок планируется свободная продажа по 100р. Стабилизируется."
         }
       ],
       "queues_hours": 0.1,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
-        "https://www.kommersant.ru/doc/8923275",
-        "https://crimea.ria.ru/20260831/s-1-sentyabrya-v-sevastopole-budut-prodavat-benzin-ai92-i-ai95-po-100-rubley-za-litr-1158966617.html"
+        "https://crimea.ria.ru/20260831/s-1-sentyabrya-v-sevastopole-budut-prodavat-benzin-ai92-i-ai95-po-100-rubley-za-litr-1158966617.html",
+        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-8-sentyabrya-subsidii-nakonec-doshli"
       ],
-      "note": "07.09: Субсидированный 100₽/л с 01.09. QR-коды. Очереди сокращаются. Улучшение."
+      "note": "09.09: Субсидия 100р/л работает. QR-коды. Очереди сокращаются. Стабилизация."
     },
     {
       "region": "Кировская область",
@@ -426,24 +457,25 @@
       "lat": 54.99,
       "lon": 82.89,
       "level": "critical",
-      "updated": "2026-09-08T20:30:00Z",
+      "updated": "2026-09-09T12:00:00Z",
       "networks": [
         {
           "name": "Газпромнефть/Лукойл",
           "status": "limited",
           "level": "critical",
           "limit_l": 35,
-          "note": "08.09: Вторая волна критична. 101 АЗС закрыто. Лимит 35л. Очереди 2+ часа. Цены 100-160₽/л на частных. Дефицит острый."
+          "note": "09.09: Вторая волна критична. ~200 АЗС закрыто из 400. Лимит 35л. Очереди 2+ часа. На независимых АЗС цены 150-160р/л. Дефицит острый."
         }
       ],
       "queues_hours": 2.5,
       "ai95_price_rub": 130.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
-        "https://abnews.ru/siberia/news/novosibirsk/2026/9/6/vtoraya-volna-toplivnogo-krizisa-nakryla-azs-novosibirska-s-ocheredyami",
-        "https://nsk.aif.ru/society/v-novosibirskoy-oblasti-zakryli-101-azs-iz-za-deficita-benzina-v-2026-godu"
+        "https://nsk.aif.ru/society/v-novosibirske-iz-za-deficita-topliva-zakryli-okolo-200-iz-400-azs",
+        "https://ngs.ru/text/auto/2026/09/07/76628232/",
+        "https://abnews.ru/siberia/news/novosibirsk/2026/9/6/vtoraya-volna-toplivnogo-krizisa-nakryla-azs-novosibirska-s-ocheredyami"
       ],
-      "note": "08.09: 101 АЗС закрыто. Вторая волна критична."
+      "note": "09.09: 200 АЗС закрыто из 400. Цены 150-160р. Острый дефицит."
     },
     {
       "region": "Чувашия",
@@ -529,14 +561,14 @@
       "lat": 57.15,
       "lon": 65.53,
       "level": "critical",
-      "updated": "2026-09-08T20:30:00Z",
+      "updated": "2026-09-09T12:00:00Z",
       "networks": [
         {
           "name": "Газпром нефть/Лукойл",
           "status": "limited",
           "level": "critical",
           "limit_l": 30,
-          "note": "08.09: Вторая волна критична. Поставки исчезают за считанные часы. Лимит 30л. Очереди 2+ часа. Цены 110₽+. Дефицит острый."
+          "note": "09.09: Вторая волна критична. Цены варьируются от 63 до 155р/л на разных АЗС (вариативность высокая). Лимит 30л. Очереди 2+ часа. Поставки перебойные. Дефицит острый."
         }
       ],
       "queues_hours": 2.5,
@@ -544,9 +576,10 @@
       "diesel_price_rub": 95.0,
       "source_urls": [
         "https://tmn.aif.ru/society/110-rubley-za-litr-chto-proishodit-s-toplivom-na-azs-v-tyumenskoy-oblasti",
-        "https://72.ru/text/auto/2026/08/28/76612442/"
+        "https://megatyumen.ru/avto/benzin-v-tyumeni-4-sentyabrya-2026-gde-segodnya-est-ai-92-i-ai-95-i-skolko-stoit-toplivo/",
+        "https://driff.ru/fuel-dynamics/tyumen/"
       ],
-      "note": "08.09: Вторая волна. Цены 110р+. Очереди 2+ часа."
+      "note": "09.09: Цены 63-155р/л (высокая вариативность). Ситуация напряженная."
     },
     {
       "region": "Ямало-Ненецкий автономный округ",
@@ -994,37 +1027,37 @@
       "lat": 51.76,
       "lon": 55.09,
       "level": "limited",
-      "updated": "2026-09-08T20:30:00Z",
+      "updated": "2026-09-09T12:00:00Z",
       "networks": [
         {
           "name": "АЗС (чет-нечет по ГРЗ)",
           "status": "limited",
           "level": "limited",
           "limit_l": 25,
-          "note": "08.09: Чётные номера (0,2,4,6,8). Лимит 15-30л АИ-92/95, до 200л ДТ трасса. Система чет-нечет продолжает действовать."
+          "note": "09.09: Нечётные номера (1,3,5,7,9). Лимит 15-30л АИ-92/95 в городе, до 200л ДТ на трассах. Система чет-нечет продолжает действовать."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 72.0,
       "diesel_price_rub": 88.0,
       "source_urls": [
-        "https://ria56.ru/posts/na-azs-v-orenburzhe-8-sentyabrya-zapravlyayut-mashiny-tolko-s-chetnymi-nomerami.htm"
+        "https://ria56.ru/posts/9-sentyabrya-na-azs-v-orenburzhe-zapravlyayut-mashiny-tolko-s-nechetnymi-nomerami.htm"
       ],
-      "note": "08.09: Чётные номера. Лимит 15-30л."
+      "note": "09.09: Нечётные номера. Лимит 15-30л."
     },
     {
       "region": "Волгоградская область",
       "lat": 48.7,
       "lon": 44.5,
       "level": "critical",
-      "updated": "2026-09-08T20:30:00Z",
+      "updated": "2026-09-09T12:00:00Z",
       "networks": [
         {
           "name": "Лукойл/Газпромнефть",
           "status": "limited",
           "level": "critical",
           "limit_l": 40,
-          "note": "08.09 вечер: РЕКОРДНЫЕ ОЧЕРЕДИ 38-39 ЧАСОВ. Люди ждут 9-15 часов. Места продают за 1500-5000₽. Суточный лимит 3700л. Губернатор требует увеличить."
+          "note": "09.09: РЕКОРДНЫЕ ОЧЕРЕДИ 38-39 ЧАСОВ ПОДТВЕРЖДЕНЫ. Люди ждут 9-15 часов. Места в очередях продают за 1500-5000₽. Суточный лимит отпуска всего 3700л на все АЗС области. Губернатор требует увеличить лимит у нефтяников."
         }
       ],
       "queues_hours": 38.0,
@@ -1032,9 +1065,10 @@
       "diesel_price_rub": 77.92,
       "source_urls": [
         "https://v1.ru/text/gorod/2026/09/08/76630495/",
-        "https://vlg.aif.ru/society/details/benzina-net-ochered-na-azs-za-dengi-volgogradcy-pridumali-novyy-biznes"
+        "https://vlg.aif.ru/society/details/benzina-net-ochered-na-azs-za-dengi-volgogradcy-pridumali-novyy-biznes",
+        "https://abnews.ru/ug/news/volgograd/2026/9/7/v-volgogradskoj-oblasti-izmenili-shemu-postavok-benzina-benzin-vezut-po-novoj-sheme-chto-proishodit-na-zapravkah-volgograda"
       ],
-      "note": "08.09: 38-39ч очереди. 1500-5000р место. Критично."
+      "note": "09.09: 38-39ч очереди подтверждены. Места 1500-5000р. Суточный лимит 3700л."
     },
     {
       "region": "Архангельская область",
@@ -1942,24 +1976,24 @@
       "lat": 44.7,
       "lon": 34.3,
       "level": "limited",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-09T12:00:00Z",
       "networks": [
         {
           "name": "АТАН",
           "status": "limited",
           "level": "limited",
           "limit_l": 20,
-          "note": "08.09 ротация: Субсидированный бензин АИ-92 и АИ-95 по 100₽/л (с 01.09). Лимит 20л за заправку. На 86 АЗС полуострова. QR-коды для ТЭС (10:00-16:00). По мере роста поставок переход к свободной продаже."
+          "note": "09.09: Субсидированный бензин АИ-92 и АИ-95 по 100р/л продолжает работать (с 01.09). Лимит 20л за заправку. На 86 АЗС полуострова АТАН и ТЭС. QR-коды. По мере роста поставок планируется переход к свободной продаже."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
-        "https://ncrim.ru/kulinaria/view/v-krymu-startovali-prodazi-subsidirovannogo-benzina-po-100-rublej-za-litr",
-        "https://crimea.ria.ru/20260831/s-1-sentyabrya-v-sevastopole-budut-prodavat-benzin-ai92-i-ai95-po-100-rubley-za-litr-1158966617.html"
+        "https://crimea.ria.ru/20260831/s-1-sentyabrya-v-sevastopole-budut-prodavat-benzin-ai92-i-ai95-po-100-rubley-za-litr-1158966617.html",
+        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-8-sentyabrya-subsidii-nakonec-doshli"
       ],
-      "note": "08.09: Субсидия 100₽/л (с 01.09). Лимит 20л. QR/талоны. Улучшение."
+      "note": "09.09: Субсидия 100р/л работает. Лимит 20л. QR-коды. Стабилизируется."
     },
     {
       "region": "Ставропольский край",
