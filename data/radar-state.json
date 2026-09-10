@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1789047870,
-      "source_text": "10.09.2026 12:45 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n10.09.2026 16:44 МСК\nШахтёрск, Торез ДНР и близлежащие Опасность по БПЛА"
+      "last_event_ts": 1789048546,
+      "source_text": "10.09.2026 12:45 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n10.09.2026 16:55 МСК\nГорловка ДНР и близлежащие Опасность по БПЛА и ФПВ сохраняется, ещё фиксации"
     },
     "Брянская область": {
       "bpla": false,
@@ -2354,9 +2354,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -2367,8 +2367,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1789029541,
-      "source_text": "10.09.2026 11:39 МСК\nГорловка ДНР и близлежащие Тревога по БПЛА и ФПВ, а так же сбросам с БПЛА. Всем быть предельно осторожными!"
+      "last_event_ts": 1789048546,
+      "source_text": "10.09.2026 16:55 МСК\nГорловка ДНР и близлежащие Опасность по БПЛА и ФПВ сохраняется, ещё фиксации"
     }
   ],
   "districts": {
@@ -3102,6 +3102,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 274773,
+      "text": "Горловка ДНР и близлежащие\nОпасность по БПЛА и ФПВ сохраняется, ещё фиксации",
+      "ts": 1789048546,
+      "time_label": "10.09.2026 16:55 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 274772,
       "text": "Шахтёрск, Торез ДНР и близлежащие\nОпасность по БПЛА",
       "ts": 1789047870,
@@ -3732,14 +3740,6 @@
       "time_label": "10.09.2026 13:06 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 274717,
-      "text": "Комар ДНР уаб",
-      "ts": 1789034705,
-      "time_label": "10.09.2026 13:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3749,13 +3749,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789047870,
-  "last_event_at": "2026-09-10T13:44:30Z",
-  "fetched_at": "2026-09-10T13:50:04.189563Z",
+  "timestamp": 1789048546,
+  "last_event_at": "2026-09-10T13:55:46Z",
+  "fetched_at": "2026-09-10T14:00:09.712945Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-10T13:50:04.189563Z",
-    "source_age_seconds": 334,
+    "generated_at": "2026-09-10T14:00:09.712945Z",
+    "source_age_seconds": 263,
     "city_count": 89,
     "region_count": 21,
     "feed_count": 80
