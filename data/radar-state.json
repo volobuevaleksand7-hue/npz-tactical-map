@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Москва": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1789018709,
+      "source_text": "10.09.2026 08:38 МСК\nМосковская область Опасность по БПЛА"
+    },
     "Луганская Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -120,25 +139,6 @@
       "last_event_ts": 1789009973,
       "source_text": "10.09.2026 06:12 МСК\nТверская область Опасность по БПЛА"
     },
-    "Автономная Республика Крым": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1789002464,
-      "source_text": "10.09.2026 04:07 МСК\nСусанино, Войково, Каштановая и близлежащие, тревога по БпЛА Крым"
-    },
     "Брянская область": {
       "bpla": false,
       "bplaDim": false,
@@ -212,27 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1789017583,
-      "source_text": "10.09.2026 08:01 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! внимание по бпла\n\n10.09.2026 08:19 МСК\nПятницкое Волоконовский район Тревога по БПЛА"
-    },
-    "Севастополь": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1789002464,
-      "source_text": "10.09.2026 04:07 МСК\nСусанино, Войково, Каштановая и близлежащие, тревога по БпЛА Крым"
+      "last_event_ts": 1789018419,
+      "source_text": "10.09.2026 08:01 МСК\nБелгород, Белгородский район и ситуативно Белгородская область! Ракетная опасность! Займите Безопасные места! внимание по бпла\n\n10.09.2026 08:33 МСК\nВознесеновка и близлежащие Тревога по БПЛА Шебекинский район"
     },
     "Смоленская область": {
       "bpla": false,
@@ -252,6 +233,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1788995154,
       "source_text": "10.09.2026 02:05 МСК\nДорогобужский район Смоленская область Фиксация БПЛА"
+    },
+    "Московская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1789018709,
+      "source_text": "10.09.2026 08:38 МСК\nМосковская область Опасность по БПЛА"
     },
     "Новгородская область": {
       "bpla": false,
@@ -437,28 +437,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1788979295,
       "source_text": "09.09.2026 21:41 МСК\nАлчевск Брянка Стаханов И ближайшие Тревога по БПЛА ЛНР"
-    },
-    {
-      "key": "республика крым|автономная республика крым",
-      "name": "Республика Крым",
-      "lat": 44.948237,
-      "lon": 34.100318,
-      "region": "Автономная Республика Крым",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789000744,
-      "source_text": "10.09.2026 03:39 МСК\nЧерноморский район и близлежащие Опасность по БПЛА Республика Крым"
     },
     {
       "key": "донецк|донецкая народная республика",
@@ -877,6 +855,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1788982303,
       "source_text": "09.09.2026 22:31 МСК\nСвердловск ЛНР, Ровеньки и близлежащие тревога по БПЛА"
+    },
+    {
+      "key": "вознесеновка|луганская народная республика",
+      "name": "Вознесеновка",
+      "lat": 48.07613,
+      "lon": 39.79618,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789018419,
+      "source_text": "10.09.2026 08:33 МСК\nВознесеновка и близлежащие Тревога по БПЛА Шебекинский район"
     },
     {
       "key": "новые ивайтëнки|брянская область",
@@ -2750,6 +2750,28 @@
       "last_event_ts": 1788982403,
       "source_text": "09.09.2026 22:33 МСК\nХотынецкий район Знаменский район Орловская область Фиксации БПЛА"
     },
+    "RUS.7.20_1": {
+      "gid_2": "RUS.7.20_1",
+      "name_ru": "Шебекинский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789018419,
+      "source_text": "10.09.2026 08:33 МСК\nВознесеновка и близлежащие Тревога по БПЛА Шебекинский район"
+    },
     "RUS.37.28_1": {
       "gid_2": "RUS.37.28_1",
       "name_ru": "Советский район",
@@ -3194,6 +3216,70 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 274612,
+      "text": "Московская область\nОпасность по БПЛА",
+      "ts": 1789018709,
+      "time_label": "10.09.2026 08:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274611,
+      "text": "Чаплынка и далее на юг в направлении АПП Перекоп, Титан, Армянск и близлежащие\nТревога по БПЛА Хорнет",
+      "ts": 1789018645,
+      "time_label": "10.09.2026 08:37 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 89240,
+      "text": "Московская область\nОпасность по БПЛА",
+      "ts": 1789018591,
+      "time_label": "10.09.2026 08:36 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 274610,
+      "text": "Евпатория и близлежащие отбой опасности по БПЛА",
+      "ts": 1789018494,
+      "time_label": "10.09.2026 08:34 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274609,
+      "text": "Вознесеновка и близлежащие\nТревога по БПЛА\nШебекинский район",
+      "ts": 1789018419,
+      "time_label": "10.09.2026 08:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274608,
+      "text": "Вся трасса Новороссия Запорожская область РФ, Херсонская область РФ\nОсобое внимание по БПЛА. Высокая активность",
+      "ts": 1789018407,
+      "time_label": "10.09.2026 08:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274607,
+      "text": "Евпатория\nОпасность по БПЛА с моря",
+      "ts": 1789018380,
+      "time_label": "10.09.2026 08:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274606,
+      "text": "Скадовск\nТревога БПЛА\nХерсонская область РФ",
+      "ts": 1789018346,
+      "time_label": "10.09.2026 08:32 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 274605,
       "text": "Горловка, Пантелеймоновка ДНР и близлежащие\nОпасность по БПЛА и ФПВ",
@@ -3769,70 +3855,6 @@
       "time_label": "10.09.2026 05:13 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 84554,
-      "text": "Товарково, Первый Завод, Полотняный Завод, Мещовск, Бабынино, Боровск, Малоярославец, Жуков, Калуга, Обнинск, Таруса и близлежащие, Калужская область - опасность по БПЛА сохраняется.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1789006267,
-      "time_label": "10.09.2026 05:11 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 274555,
-      "text": "Калужская область\nвнимание по бпла",
-      "ts": 1789006211,
-      "time_label": "10.09.2026 05:10 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 274554,
-      "text": "Трасса Авилоуспенка - Донецк между Харцызском и Иловайском БпЛА на юг",
-      "ts": 1789006029,
-      "time_label": "10.09.2026 05:07 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 274553,
-      "text": "н.п. Тимошевка Запорожская\nобл.РФ\nТревога по БПЛА",
-      "ts": 1789005935,
-      "time_label": "10.09.2026 05:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 274552,
-      "text": "Брянская область\nКалужская область\nМосковская область\nСмоленская область\nТверская область\nНовгородская область\nИвановская область\nВладимирская область\nЯрославская область\nвнимание по бпла",
-      "ts": 1789005870,
-      "time_label": "10.09.2026 05:04 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 274551,
-      "text": "Брянская область и далее в тыловые регионы\nРакетная опасность, пролет через Трубчевск",
-      "ts": 1789005749,
-      "time_label": "10.09.2026 05:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 89222,
-      "text": "Болховский район\nОрловская область\nФиксации БПЛА",
-      "ts": 1789005328,
-      "time_label": "10.09.2026 04:55 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 274550,
-      "text": "Очередная группа БпЛА от Великой Лепетихи курсом на Мелитополь",
-      "ts": 1789005281,
-      "time_label": "10.09.2026 04:54 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3842,13 +3864,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789018117,
-  "last_event_at": "2026-09-10T05:28:37Z",
-  "fetched_at": "2026-09-10T05:30:06.720914Z",
+  "timestamp": 1789018709,
+  "last_event_at": "2026-09-10T05:38:29Z",
+  "fetched_at": "2026-09-10T05:40:05.307668Z",
   "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-09-10T05:30:06.720914Z",
-    "source_age_seconds": 89,
+    "generated_at": "2026-09-10T05:40:05.307668Z",
+    "source_age_seconds": 96,
     "city_count": 91,
     "region_count": 18,
     "feed_count": 80
