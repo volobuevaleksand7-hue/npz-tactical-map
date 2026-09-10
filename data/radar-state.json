@@ -147,16 +147,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1789045000,
-      "source_text": "10.09.2026 15:56 МСК\nПогар Погарский район Опасность по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1789046321,
+      "source_text": "10.09.2026 16:18 МСК\nЖирятино Жирятинский район Ракетная опасность!\n\n10.09.2026 15:56 МСК\nПогар Погарский район Опасность по БПЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1789033520,
-      "source_text": "10.09.2026 12:45 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n10.09.2026 11:57 МСК\nПопасное Первомайск и близлежащие Опасность по БПЛА Хорнет ЛНР"
+      "last_event_ts": 1789046070,
+      "source_text": "10.09.2026 12:45 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n10.09.2026 16:14 МСК\nСеверодонецк Рубежное Старобельск И близлежащие ЛНР Тревога по БПЛА"
     },
     "Белгородская область": {
       "bpla": false,
@@ -650,6 +650,33 @@
       "source_text": "10.09.2026 13:07 МСК\nВерхнеторецкое, Красный Партизан, Пантелеймоновка ДНР и близлежащие Опасность по БПЛА Шарк"
     },
     {
+      "key": "николаевская область",
+      "name": "Николаевская область",
+      "lat": 46.975571,
+      "lon": 31.993811,
+      "region": null,
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": true,
+      "fill": "#ea580c",
+      "last_event_ts": null,
+      "bplaLaunchTo": {
+        "to": {
+          "kind": "region",
+          "name": "Херсонская область"
+        }
+      }
+    },
+    {
       "key": "кировское|автономная республика крым",
       "name": "Кировское",
       "lat": 45.22967,
@@ -846,6 +873,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1789034539,
       "source_text": "10.09.2026 13:02 МСК\nЛюдиново Калужская область Фиксация БПЛА"
+    },
+    {
+      "key": "северодонецк|луганская народная республика",
+      "name": "Северодонецк",
+      "lat": 48.94628,
+      "lon": 38.48624,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789046070,
+      "source_text": "10.09.2026 16:14 МСК\nСеверодонецк Рубежное Старобельск И близлежащие ЛНР Тревога по БПЛА"
     },
     {
       "key": "горское|луганская народная республика",
@@ -1442,6 +1491,28 @@
       "source_text": "10.09.2026 10:40 МСК\nСимферопольский район Гвардейское и близлежащие Опасность по БПЛА Республика Крым"
     },
     {
+      "key": "рубежное|луганская народная республика",
+      "name": "Рубежное",
+      "lat": 49.00606,
+      "lon": 38.38119,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789046070,
+      "source_text": "10.09.2026 16:14 МСК\nСеверодонецк Рубежное Старобельск И близлежащие ЛНР Тревога по БПЛА"
+    },
+    {
       "key": "белгород|белгородская область",
       "name": "Белгород",
       "lat": 50.5955595,
@@ -1794,28 +1865,6 @@
       "source_text": "10.09.2026 09:47 МСК\nДорога Приазовское - Червоное Поле Опасность по БПЛА Хорнет Запорожская область РФ"
     },
     {
-      "key": "локоть|брянская область",
-      "name": "Локоть",
-      "lat": 52.57472,
-      "lon": 34.57673,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": true,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#f0c4a0",
-      "last_event_ts": 1789040268,
-      "source_text": "10.09.2026 14:37 МСК\nКарачев, Навля, Брянская область - внимание по БПЛА от Локоть. 📡 Локатор России - @locatorru"
-    },
-    {
       "key": "смоленск|смоленская область",
       "name": "Смоленск",
       "lat": 54.77826,
@@ -1836,6 +1885,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1789042050,
       "source_text": "10.09.2026 15:07 МСК\nЕршичи, Рославль, Хиславичи, Починок, Глинка, Смоленск, Смоленская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
+    },
+    {
+      "key": "почеп|брянская область",
+      "name": "Почеп",
+      "lat": 52.9331,
+      "lon": 33.44702,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1789046096,
+      "source_text": "10.09.2026 16:14 МСК\nПочеп, Брянская область - ракетная опасность"
     },
     {
       "key": "вознесеновка|луганская народная республика",
@@ -1924,6 +1995,50 @@
       "fill": "#ea580c",
       "last_event_ts": 1789026996,
       "source_text": "10.09.2026 10:56 МСК\nОктябрьское Раздольное Тревога по БПЛА Принять меры безопасности Республика Крым"
+    },
+    {
+      "key": "старобельск|луганская народная республика",
+      "name": "Старобельск",
+      "lat": 49.282243,
+      "lon": 38.897393,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789046070,
+      "source_text": "10.09.2026 16:14 МСК\nСеверодонецк Рубежное Старобельск И близлежащие ЛНР Тревога по БПЛА"
+    },
+    {
+      "key": "жирятино|брянская область",
+      "name": "Жирятино",
+      "lat": 53.22504,
+      "lon": 33.724644,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1789046321,
+      "source_text": "10.09.2026 16:18 МСК\nЖирятино Жирятинский район Ракетная опасность!"
     },
     {
       "key": "калуга|калужская область",
@@ -2653,6 +2768,28 @@
       "last_event_ts": 1789044963,
       "source_text": "10.09.2026 15:56 МСК\nСмоленский район Смоленская область Фиксация БПЛА"
     },
+    "RUS.8.29_1": {
+      "gid_2": "RUS.8.29_1",
+      "name_ru": "Жирятинский район",
+      "region_ru": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": true,
+      "fill": "#dc2626",
+      "last_event_ts": 1789046321,
+      "source_text": "10.09.2026 16:18 МСК\nЖирятино Жирятинский район Ракетная опасность!"
+    },
     "RUS.23.5_1": {
       "gid_2": "RUS.23.5_1",
       "name_ru": "Дзержинский район",
@@ -2832,6 +2969,94 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 274761,
+      "text": "И далее\nСельцо-Жуковка\nРакетная опасность",
+      "ts": 1789046352,
+      "time_label": "10.09.2026 16:19 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274760,
+      "text": "Жирятино\nЖирятинский район\nРакетная опасность!",
+      "ts": 1789046321,
+      "time_label": "10.09.2026 16:18 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 84577,
+      "text": "Белая Березка, Трубчевский район, Брянская область - возможно обстрел.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789046303,
+      "time_label": "10.09.2026 16:18 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 274759,
+      "text": "Одесская область от окраин Одессы в направлении моря реактивный пролёт",
+      "ts": 1789046233,
+      "time_label": "10.09.2026 16:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274758,
+      "text": "Брянская область\nРакетная опасность",
+      "ts": 1789046111,
+      "time_label": "10.09.2026 16:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 84576,
+      "text": "Почеп, Брянская область - ракетная опасность и далее в тыл.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789046096,
+      "time_label": "10.09.2026 16:14 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 274757,
+      "text": "Северодонецк\nРубежное\nСтаробельск\nИ близлежащие\nЛНР\nТревога по БПЛА",
+      "ts": 1789046070,
+      "time_label": "10.09.2026 16:14 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 84575,
+      "text": "Брянская область - ракетная опасность!\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789046067,
+      "time_label": "10.09.2026 16:14 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 274756,
+      "text": "Погарский район тревога по Дартс! Погар , внимание, быть ближе к укрытиям! Почепский район меры безопасности!",
+      "ts": 1789046010,
+      "time_label": "10.09.2026 16:13 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274755,
+      "text": "Мелетополь и близлижайшие опасность по МРШ со бросами\nЗапорожская область",
+      "ts": 1789045925,
+      "time_label": "10.09.2026 16:12 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 274754,
+      "text": "Противник готовит запуски БПЛА из Николаевской области в направлении западных районов Херсонской области РФ и далее на Черноморский и Раздольненский район Республики Крым",
+      "ts": 1789045826,
+      "time_label": "10.09.2026 16:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 89274,
       "text": "Ершичский район\nСмоленская область\nФиксация БПЛА",
@@ -3383,94 +3608,6 @@
       "time_label": "10.09.2026 12:39 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 89262,
-      "text": "Туапсе и близлежащие\nКраснодарский край\nОпасность по БПЛА",
-      "ts": 1789033119,
-      "time_label": "10.09.2026 12:38 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 274710,
-      "text": "Анапа, Новороссийск, Геленджик, Туапсе и далее на Сочи опасность по БПЛА, также прибрежные районы от Анапского района",
-      "ts": 1789033098,
-      "time_label": "10.09.2026 12:38 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 89261,
-      "text": "Сочи и близлежащие\nКраснодарский край\nОпасность по БПЛА",
-      "ts": 1789032984,
-      "time_label": "10.09.2026 12:36 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 89260,
-      "text": "Вяземский район\nСмоленская область\nФиксация БПЛА",
-      "ts": 1789032912,
-      "time_label": "10.09.2026 12:35 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 89259,
-      "text": "Дорогобужский район\nСмоленская область\nФиксация 2 БПЛА",
-      "ts": 1789032887,
-      "time_label": "10.09.2026 12:34 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 274709,
-      "text": "Экстренная информация РСЧС: УГРОЗА ПОВТОРНОЙ АТАКИ БПЛА в Белгородском МО 12:33. Оставайтесь дома, не подходите к окнам или пройдите в укрытие.",
-      "ts": 1789032861,
-      "time_label": "10.09.2026 12:34 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 89258,
-      "text": "Ульяновский район\nКалужская область\nФиксация БПЛА",
-      "ts": 1789032853,
-      "time_label": "10.09.2026 12:34 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 89257,
-      "text": "МО Можайский\nМосковская Область\nФиксация БПЛА",
-      "ts": 1789032814,
-      "time_label": "10.09.2026 12:33 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 89256,
-      "text": "ГО Наро-Фоминск\nМосковская область\nФиксация БПЛА",
-      "ts": 1789032734,
-      "time_label": "10.09.2026 12:32 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 89255,
-      "text": "Краснодарский край\nРеспублика Адыгея\nОпасность по БПЛА",
-      "ts": 1789032639,
-      "time_label": "10.09.2026 12:30 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 274708,
-      "text": "Анапа и близлежащие\nОпасность по БПЛА\nКраснодарский край",
-      "ts": 1789032564,
-      "time_label": "10.09.2026 12:29 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3480,14 +3617,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789045053,
-  "last_event_at": "2026-09-10T12:57:33Z",
-  "fetched_at": "2026-09-10T13:10:07.155500Z",
+  "timestamp": 1789046352,
+  "last_event_at": "2026-09-10T13:19:12Z",
+  "fetched_at": "2026-09-10T13:20:07.348245Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-10T13:10:07.155500Z",
-    "source_age_seconds": 754,
-    "city_count": 77,
+    "generated_at": "2026-09-10T13:20:07.348245Z",
+    "source_age_seconds": 55,
+    "city_count": 82,
     "region_count": 21,
     "feed_count": 80
   }
