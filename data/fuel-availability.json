@@ -5,10 +5,17 @@
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
-    "rotation_pass": "2026-09-09T12:00:00Z: Тридцать девятая волна. WebSearch 6 горячих поисков (Волгоград 38-39ч очереди спекуляция 1500-5000р, Новосибирск 200 АЗС закрыто цены 150-160р, Оренбург чет-нечет 09.09 нечетные 1,3,5,7,9 лимит 15-30л, СПбМТСБ АИ-92 68.4k₽/т АИ-95 72.8k₽/т падение, Крым субсидия 100р/л работает, Тюмень 63-155р/л). Вторая волна острая.",
+    "rotation_pass": "2026-09-10T16:00:00Z: Сороковая волна. WebSearch 6 горячих поисков (АЗС лимиты очереди, Адыгея, Башкортостан, Ростовская М-4, Москва Подмосковье, Белгородская Брянская Тульская, СПбМТСБ падение) + ротационный проход 12 самых старых регионов (Адыгея, Башкортостан, Ростовская область, Республика Хакасия, Республика Коми, Чукотский АО, Москва, Белгородская область, Брянская область, Тульская область, Алтайский край, Самарская область). Москва стабилизирована (очереди исчезли). Хакасия улучшилась (+20% запасы). Коми без жёстких ограничений. Чукотка: северный завоз идёт. Брянская: без админограничений. Центр держится, края критичны (Волгоград, Новосибирск, Тюмень).",
     "updated_by": "agent:fuel-availability",
-    "last_rotation_pass": "2026-09-09T12:00:00Z",
+    "last_rotation_pass": "2026-09-10T16:00:00Z",
     "update_notes": [
+      {
+        "date": "2026-09-10T16:00:00Z",
+        "action": "rotation_40_websearch_6hot_12regions",
+        "regions_updated": 12,
+        "hot_topics_searches": 6,
+        "message": "Сороковая волна: 6 горячих поисков (АЗС лимиты, Адыгея, Башкортостан, Ростовская М-4, Москва, Белгородская/Брянская/Тульская, СПбМТСБ) + ротационный проход 12 самых старых регионов (Адыгея, Башкортостан, Ростовская, Хакасия, Коми, Чукотка, Москва, Белгородская, Брянская, Тульская, Алтайский край, Самарская). Вывод: Москва стабилизирована (очереди исчезли, ограничения смягчены). Хакасия улучшилась (+20% запасы в августе). Коми без жёстких ограничений. Чукотка: северный завоз по плану. Брянская: без админограничений. Центр держится, края критичны (Волгоград 38-39ч очереди, Новосибирск 200 АЗС закрыто, Тюмень 63-155р/л)."
+      },
       {
         "date": "2026-09-09T12:00:00Z",
         "action": "rotation_39_websearch_6hot",
@@ -1099,46 +1106,48 @@
       "lat": 61.67,
       "lon": 50.84,
       "level": "calm",
-      "updated": "2026-09-07T16:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Лукойл/Газпромнефть",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "07.09: Стабилизирована. Без ограничений. Цены низкие 67-70₽."
+          "note": "10.09: Стабилизирована. Без жёстких ограничений. На «Компании 2000» до 20л, на Лукойле лимиты не распространяются на баки. Цены стабильны 67-70₽."
         }
       ],
       "queues_hours": 0.0,
       "ai95_price_rub": 70.0,
       "diesel_price_rub": 81.0,
       "source_urls": [
-        "https://reis.zr.ru/news/pochemu-v-komi-rezko-podorozhalo-toplivo-i-chto-delaet-ufas"
+        "https://komiinform.ru/news/296831",
+        "https://komi.aif.ru/society/na-azs-komi-vvedeny-limity-na-prodazhu-benzina"
       ],
-      "note": "07.09: Стабильна. Цены низкие."
+      "note": "10.09: Стабильна. Локальные лимиты на отдельных сетях."
     },
     {
       "region": "Чукотский автономный округ",
       "lat": 64.73,
       "lon": 177.51,
       "level": "calm",
-      "updated": "2026-09-07T16:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "07.09: Завоз по плану. Без ограничений."
+          "note": "10.09: Северный завоз 2026: 140тыс т дизеля, 31.2тыс т авиатоплива. Танкер «Антарес» доставил 6.3тыс т. Без ограничений."
         }
       ],
       "queues_hours": 0.0,
       "ai95_price_rub": null,
       "diesel_price_rub": null,
       "source_urls": [
-        "https://www.atomic-energy.ru/news/2026/07/03/166840"
+        "https://finance.mail.ru/article/na-chukotku-dostavili-pervuyu-partiyu-topliva-v-ramkah-severnogo-zavoza-2026-goda-69214117/",
+        "https://www.korabel.ru/news/comments/v_porty_chukotki_s_nachala_severnogo_zavoza_2026_goda_dostavleno_okolo_21_tysyachi_tonn_nefteproduktov.html"
       ],
-      "note": "07.09: Завоз идёт. Без ограничений."
+      "note": "10.09: Северный завоз идёт по плану. Без ограничений."
     },
     {
       "region": "Краснодарский край",
@@ -1169,53 +1178,55 @@
       "lat": 55.75,
       "lon": 37.62,
       "level": "limited",
-      "updated": "2026-09-07T16:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "07.09: Ограничения сняты. Свободная продажа."
+          "note": "10.09: Ограничения сняты. Свободная продажа. Очереди исчезли."
         },
         {
           "name": "Газпром нефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "07.09: На части АЗС 30л. Запрет канистр."
+          "note": "10.09: На части АЗС 30л. Запрет канистр. АИ-92 на 48% АЗС."
         }
       ],
-      "queues_hours": 0.1,
+      "queues_hours": 0.0,
       "ai95_price_rub": 69.0,
       "diesel_price_rub": 85.0,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/gorod-moskva/"
+        "https://ru.themoscowtimes.com/2026/08/13/naazs-vmoskovskom-regione-vnov-nachal-ischezat-benzin-a203406",
+        "https://www.mentoday.ru/life/news/10-09-2026/ocheredi-ischezli-no-razbros-cen-ostaetsya-situaciya-na-azs-moskvy-i-federalnyh-trassah/"
       ],
-      "note": "07.09: Стабилизируется. Ограничения смягчены."
+      "note": "10.09: Стабилизирована. Очереди исчезли. Ограничения смягчены."
     },
     {
       "region": "Башкортостан",
       "lat": 54.74,
       "lon": 55.97,
       "level": "limited",
-      "updated": "2026-09-07T12:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Газпромнефть/Лукойл",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "07.09: Лимит 30л. Запрет на канистры. Ограничения продолжаются."
+          "note": "10.09: Лимит 30л. Запрет на канистры. Ограничения продолжаются. Рынок напряжён из-за атак БПЛА."
         }
       ],
       "queues_hours": 0.3,
       "ai95_price_rub": 66.87,
       "diesel_price_rub": 75.0,
       "source_urls": [
-        "https://ufa1.ru/text/transport/2026/09/01/76618040/"
+        "https://www.petrolplus.ru/fuelindex/respublika-bashkortostan/ai92/",
+        "https://kazan.aif.ru/society/pusteyut-azs-toplivnyy-azhiotazh-v-regionah-rf-deficit-benzina-limity-mery"
       ],
-      "note": "07.09: Лимит 30л"
+      "note": "10.09: Лимит 30л. Запрет канистр. Ограничения продолжаются."
     },
     {
       "region": "Санкт-Петербург",
@@ -1246,138 +1257,144 @@
       "lat": 47.23,
       "lon": 39.72,
       "level": "limited",
-      "updated": "2026-09-07T12:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
-          "name": "Газпром нефть/Роснефть",
+          "name": "Газпром нефть/Роснефть/Лукойл",
           "status": "limited",
           "level": "limited",
           "limit_l": 35,
-          "note": "07.09: М-4 стабилизируется. Цены 63-67₽/л. Очереди продолжают сокращаться."
+          "note": "10.09: М-4 «Дон» имеет AЗС через 15-30 км. Топливо есть, но очереди. Водители могут пройти без серьёзных проблем при планировании."
         }
       ],
-      "queues_hours": 0.3,
+      "queues_hours": 0.5,
       "ai95_price_rub": 65.0,
       "diesel_price_rub": 80.0,
       "source_urls": [
-        "https://donday.ru/"
+        "https://gazetapik.ru/2026/08/12/azs-vdol-m-4-don-v-rostovskoj-oblasti/",
+        "https://mimobaka.ru/m4_don/"
       ],
-      "note": "07.09: М-4 стабилизируется"
+      "note": "10.09: М-4 стабилизируется. Есть заправки через 15-30км. Очереди контролируются."
     },
     {
       "region": "Белгородская область",
       "lat": 50.6,
       "lon": 36.6,
       "level": "strained",
-      "updated": "2026-09-07T16:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Лукойл",
           "status": "limited",
           "level": "strained",
           "limit_l": 30,
-          "note": "07.09: Лимит 30л бензина, 60л ДТ. Ограничения с конца июня."
+          "note": "10.09: Лимит 30л бензина, 60л ДТ. Запрет канистр на Роснефти. Ограничения с конца июня."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 82.0,
       "diesel_price_rub": 85.0,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/belgorodskaya-oblast/"
+        "https://zona.media/article/2026/06/26/fuel-limit",
+        "https://rg.ru/2026/07/04/reg-cfo/v-belgorodskoj-oblasti-ogranichili-prodazhu-benzina-i-diztopliva.html"
       ],
-      "note": "07.09: Лимит 30л. Контролируется."
+      "note": "10.09: Лимит 30л бензина, 60л ДТ. Запрет канистр."
     },
     {
       "region": "Брянская область",
       "lat": 53.24,
       "lon": 34.36,
       "level": "calm",
-      "updated": "2026-09-07T16:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Региональные АЗС",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "07.09: Летние ограничения отменены. Свободная продажа."
+          "note": "10.09: Летние ограничения отменены. Свободная продажа. Запрет на канистры действует локально."
         }
       ],
       "queues_hours": 0.0,
       "ai95_price_rub": 71.0,
       "diesel_price_rub": 76.0,
       "source_urls": [
+        "https://zona.media/article/2026/06/26/fuel-limit",
         "https://guberniya.tv/auto/339998"
       ],
-      "note": "07.09: Без ограничений. С 01.09 разрешен Евро-4."
+      "note": "10.09: Без административных ограничений. Евро-4 разрешён."
     },
     {
       "region": "Тульская область",
       "lat": 54.2,
       "lon": 37.3,
       "level": "limited",
-      "updated": "2026-09-07T16:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Газпромнефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "07.09: Лимит 30-50л. На 57% АЗС есть топливо."
+          "note": "10.09: Без административных лимитов (одна из 3 областей без них). На 57% АЗС есть топливо."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 74.0,
       "diesel_price_rub": 85.0,
       "source_urls": [
-        "https://benzinmap.ru/"
+        "https://zone.media/article/2026/06/26/fuel-limit",
+        "https://news.rambler.ru/community/56978265-tulskaya-oblast-bez-administrativnyh-ogranicheniy-na-zapravku/"
       ],
-      "note": "07.09: Лимит 30-50л. Вторая волна подтверждена."
+      "note": "10.09: Без административных лимитов. На 57% АЗС есть топливо."
     },
     {
       "region": "Алтайский край",
       "lat": 53.36,
       "lon": 83.76,
       "level": "limited",
-      "updated": "2026-09-07T16:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "БРК/Газпромнефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 50,
-          "note": "07.09: Лимит 50л бензина, 100л ДТ. КОТ система действует."
+          "note": "10.09: Лимит 50л бензина, 100л ДТ. Локальные сбои в поставках. Барнаул: перестройка логистики из-за перебоев АИ-92/95."
         }
       ],
       "queues_hours": 0.1,
       "ai95_price_rub": 62.0,
       "diesel_price_rub": 78.0,
       "source_urls": [
-        "https://ngs22.ru/text/economics/2026/09/04/76623998/"
+        "https://altai.aif.ru/society/vlasti-altayskogo-kraya-rasskazali-o-situacii-s-toplivom-na-azs",
+        "https://ngs.ru/text/business/2026/07/14/76531017/"
       ],
-      "note": "07.09: Лимит 50л/100л ДТ. Запасы достаточны."
+      "note": "10.09: Лимит 50л/100л ДТ. Локальные перебои в Барнауле."
     },
     {
       "region": "Самарская область",
       "lat": 53.2,
       "lon": 50.15,
       "level": "limited",
-      "updated": "2026-09-07T16:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Роснефть/Татнефть/Лукойл",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "07.09: Лимит 40л, на практике 30л. Поставки контролируются."
+          "note": "10.09: Лимит 40л бензина, 100л дизель. Запрет на канистры. Стратегические отрасли получают полный объём."
         }
       ],
       "queues_hours": 0.0,
       "ai95_price_rub": 83.34,
       "diesel_price_rub": 85.44,
       "source_urls": [
-        "https://www.samara.kp.ru/daily/277801/5282177/"
+        "https://63.ru/text/auto/2026/09/02/76621539/",
+        "https://kazan.aif.ru/society/vremennye-limity-chto-proishodit-s-benzinom-na-azs-povolzhya-v-2026"
       ],
-      "note": "07.09: Лимит 40л. Поставки улучшаются."
+      "note": "10.09: Лимит 40л. Запрет на канистры. Поставки контролируются."
     },
     {
       "region": "Костромская область",
@@ -1879,23 +1896,24 @@
       "lat": 53.72,
       "lon": 91.44,
       "level": "calm",
-      "updated": "2026-09-07T12:35:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Лукойл/Газпром нефть/Роснефть",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "07.09: Полностью стабилизирована. 37 АЗС. Лимиты отменены. Цены -2.8%."
+          "note": "10.09: Полностью стабилизирована. 37 АЗС. Лимиты отменены. Запасы выросли на 20% в августе. Ситуация улучшилась с дополнительными поставками."
         }
       ],
       "queues_hours": 0.0,
       "ai95_price_rub": 67.64,
       "diesel_price_rub": 82.95,
       "source_urls": [
-        "https://ftcard.ru/"
+        "https://www.osnmedia.ru/obshhestvo/vlasti-hakasii-soobshhili-o-smyagchenii-situatsii-s-toplivom",
+        "https://abnews.ru/siberia/news/respublika-hakasiya/2026/8/18/zapasy-topliva-v-hakasii-vyrosli-na-20"
       ],
-      "note": "07.09: Цены -2.8%"
+      "note": "10.09: Стабильна. Лимиты отменены. Запасы выросли на 20%."
     },
     {
       "region": "Омская область",
@@ -2026,23 +2044,24 @@
       "lat": 44.61,
       "lon": 40.1,
       "level": "limited",
-      "updated": "2026-09-07T04:30:00Z",
+      "updated": "2026-09-10T16:00:00Z",
       "networks": [
         {
           "name": "Все АЗС",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "05.09: Лимит 40л/сутки. Ограничение объема. Поставки штатные."
+          "note": "10.09: Лимит 40л/сутки. Ограничение объема. Поставки штатные. Контролируется."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 74.0,
       "diesel_price_rub": 77.0,
       "source_urls": [
-        "https://finance.mail.ru/"
+        "https://www.vbr.ru/novosti/avto/2026/07/28/v-regionah-na-azs-otmenyaut-limiti-na-toplivo/",
+        "https://www.kommersant.ru/doc/8763779"
       ],
-      "note": "05.09: Лимит 40л. Контролируется."
+      "note": "10.09: Лимит 40л. Контролируется."
     },
     {
       "region": "Ярославская область",
