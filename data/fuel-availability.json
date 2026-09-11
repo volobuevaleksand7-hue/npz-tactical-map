@@ -11,6 +11,13 @@
     "update_notes": [
       {
         "date": "2026-09-11T12:00:00Z",
+        "action": "rotation_42_websearch_12regions",
+        "regions_updated": 12,
+        "hot_topics_searches": 6,
+        "message": "42-я волна: ротац. проход 12 самых старых регионов (Иркутская, Ивановская, Липецкая, Челябинская, Ульяновская, Воронежская, Свердловская, Хабаровский, Ингушетия, Новгородская, Вологодская, Мордовия) + 6 горячих поисков (AЗС лимиты, регионы, СПбМТСБ, спекуляция). Вывод: Иркутская (30-50л ручное распределение), Ивановская (дефицит с июня спекуляции), Липецкая (чет-нечет 30л), Челябинская (кризис острый 3%), Ульяновская (40л), Вологодская (ликвидируется 700т/день), Свердловская (спекуляция 200-250р), Хабаровский (600т контролируется), Ингушетия (до 120р), остальные стабилизируются."
+      },
+      {
+        "date": "2026-09-11T12:00:00Z",
         "action": "rotation_41_websearch_12regions",
         "regions_updated": 12,
         "hot_topics_searches": 4,
@@ -60,6 +67,24 @@
       }
     ],
     "policy_events": [
+      {
+        "date": "2026-09-11T12:00:00Z",
+        "region": "Челябинская область",
+        "type": "crisis",
+        "description": "Острый кризис второй волны. Бензин доступен на 3% АЗС. Очереди 1-2 часа. Снижение качества топлива до Евро-2. Множество станций пустые."
+      },
+      {
+        "date": "2026-09-11T12:00:00Z",
+        "region": "Свердловская область",
+        "type": "crisis",
+        "description": "Спекуляция топливом интенсивна. На 285 АЗС отслеживается статус. Люди ждят часами. Черный рынок: 200-250₽/л за литр выше регулярных цен."
+      },
+      {
+        "date": "2026-09-11T12:00:00Z",
+        "region": "Вологодская область",
+        "type": "market",
+        "description": "Кризис ликвидируется. Возобновлены поставки 700т бензина в сутки (вместо дефицита). Подача топлива увеличена на 50%. Дефицит пообещали ликвидировать к 10.09."
+      },
       {
         "date": "2026-09-09T12:00:00Z",
         "region": "Новосибирская область",
@@ -203,24 +228,24 @@
       "lat": 52.29,
       "lon": 104.3,
       "level": "limited",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Роснефть / Крайснефть",
           "status": "limited",
           "level": "limited",
-          "limit_l": 30,
-          "note": "08.09 ротация: Лимит 30л бензина, 80л ДТ на трассе. Ручное распределение введено. Запрет на канистры (≤20л). Роснефть увеличила объемы до 50%. Ограничения действуют."
+          "limit_l": 40,
+          "note": "11.09: Лимит 30-50л бензина, 80л дизеля на трассе. Ручное распределение. Запрет на канистры. Роснефть увеличила объемы до 50%. Ограничения сохраняются."
         }
       ],
       "queues_hours": 0.3,
       "ai95_price_rub": 81.0,
       "diesel_price_rub": 88.0,
       "source_urls": [
-        "https://i38.ru/transport-pervie/irkutskaya-oblast-pereshla-na-ruchnoe-raspredelenie-benzina",
-        "https://i38.ru/pervaya-ekonomika/ryad-regionov-vnov-uzhestochil-ogranicheniya-pri-prodazhe-benzina-v-irkutske-poka-nebolshoe-uchudshenie-situatsii"
+        "https://irkutskmedia.ru/news/2618004/",
+        "https://www.irk.kp.ru/online/news/7120677/"
       ],
-      "note": "08.09: Ручное распределение. Лимит 30л. Роснефть +50% объемы. На Rosneft до 50л, на других до 30л."
+      "note": "11.09: 30-50л лимиты. Ручное распределение. Роснефть +50%. На Rosneft до 50л, на других до 30л."
     },
     {
       "region": "Севастополь",
@@ -856,24 +881,24 @@
       "lat": 57.0,
       "lon": 40.97,
       "level": "limited",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Крупные сети",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "08.09 ротация: Дефицит с июня сохраняется. Лимит 30л. Ажиотажный спрос. Поставки поступают, ситуация улучшается. Спекуляции продолжаются."
+          "note": "11.09: Дефицит с июня продолжается. Лимит 30л. Ажиотажный спрос. Спекуляции усугубляют ситуацию. Водители ездят в Татарстан за топливом."
         }
       ],
-      "queues_hours": 0.2,
+      "queues_hours": 0.3,
       "ai95_price_rub": 87.85,
       "diesel_price_rub": 79.0,
       "source_urls": [
         "https://novayagazeta.eu/articles/2026/07/04/na-dachu-ekhat-opasno-tam-mogut-slit-benzin",
-        "https://ivgazeta.ru/"
+        "https://ivgazeta.ru/article/2026/08/13/kak_ivanovskaya_oblast_spravlyaetsya_s_benzinovym_krizisom"
       ],
-      "note": "08.09: Дефицит сохраняется. Поставки улучшаются. Спекуляции."
+      "note": "11.09: Дефицит с июня. Спекуляции продолжаются. Люди ездят в Татарстан."
     },
     {
       "region": "Амурская область",
@@ -1500,77 +1525,79 @@
       "lat": 52.61,
       "lon": 39.57,
       "level": "limited",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Газпромнефть / Лукойл / Роснефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "08.09: Чет-нечет (с 13.08). Дефицит ~500т/день. Лимит 30л бензина, 60л дизель."
+          "note": "11.09: Чет-нечет система (с 13.08). Лимит 30л бензина, 60л дизеля. Запрет на канистры. Дефицит ~500т/день. На крупных сетях."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 69.0,
       "diesel_price_rub": 93.0,
       "source_urls": [
-        "https://finance.mail.ru/article/v-lipeckoj-oblasti-vozvrashayut-prodazhu-benzina-po-nomeram-avto-69222367/"
+        "https://finance.mail.ru/article/v-lipeckoj-oblasti-vozvrashayut-prodazhu-benzina-po-nomeram-avto-69222367/",
+        "https://semnasem.org/news/2026/08/12/lipeckaya-oblast-pervoj-v-rossii-vernula-prodazhu-benzina-po-sisteme-chet-nechet-posle-ego-otmeny"
       ],
-      "note": "08.09: Чет-нечет. Дефицит ~500т/день. Лимит 30л бензина."
+      "note": "11.09: Чет-нечет (с 13.08). Лимит 30л. Запрет канистр. Дефицит ~500т/день."
     },
     {
       "region": "Челябинская область",
       "lat": 55.16,
       "lon": 61.4,
       "level": "critical",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Лукойл/Газпромнефть",
           "status": "limited",
           "level": "critical",
           "limit_l": 30,
-          "note": "08.09: Вторая волна интенсивна. Множество АЗС пустые. Очереди 1-2 часа. Цены до 200₽ у частников."
+          "note": "11.09: ОСТРЫЙ КРИЗИС второй волны. Бензин доступен на 3% АЗС. Очереди 1-2 часа. Снижение качества до Евро-2. Множество станций пустые."
         }
       ],
       "queues_hours": 2.0,
       "ai95_price_rub": 75.0,
       "diesel_price_rub": 82.0,
       "source_urls": [
-        "https://74.ru/text/auto/2026/06/23/76491207/",
-        "https://rg.ru/2026/07/10/reg-urfo/cheliabincev-poprosili-sohraniat-spokojstvie-na-azs.html"
+        "https://74.ru/text/auto/2026/09/09/76630377/",
+        "https://74.ru/text/gorod/2026/08/28/76613352/"
       ],
-      "note": "08.09: Вторая волна критична. Множество АЗС пустые. Очереди 1-2 часа."
+      "note": "11.09: Острый кризис. Бензин на 3% АЗС. Качество Евро-2."
     },
     {
       "region": "Ульяновская область",
       "lat": 54.32,
       "lon": 48.39,
       "level": "limited",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Сети",
           "status": "limited",
           "level": "limited",
           "limit_l": 40,
-          "note": "08.09: Лимит 40л бензина, 100л дизель. Запрет канистр. С 25 июня. Контролируется."
+          "note": "11.09: Лимит 40л бензина, 100л дизеля. Запрет на канистры (только в топливный бак). Действует с 25.06. Спекуляции на топливном рынке контролируются."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 71.0,
       "diesel_price_rub": 85.0,
       "source_urls": [
-        "https://www.ul.kp.ru/daily/277792/5267768/"
+        "https://www.ul.kp.ru/daily/277792/5267768/",
+        "https://ulpressa.ru/2026/06/24/v-ulyanovskoj-oblasti-vvodyat-ogranicheniya-na-prodazhu-benzina-ne-bolee-40-litrov-na-mashinu/"
       ],
-      "note": "08.09: Лимит 40л. Запрет канистр."
+      "note": "11.09: Лимит 40л бензина, 100л ДТ. Запрет канистр (с 25.06)."
     },
     {
       "region": "Воронежская область",
       "lat": 51.66,
       "lon": 39.21,
       "level": "strained",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Газпром нефть / Лукойл / Роснефть",
@@ -1593,31 +1620,31 @@
       "lat": 56.84,
       "lon": 60.65,
       "level": "strained",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Газпром нефть/Лукойл",
           "status": "limited",
           "level": "strained",
           "limit_l": 40,
-          "note": "08.09: Спекуляция топливом. Очереди, люди ждут часами. На 285 АЗС отслеживается статус. Цены на черном рынке 200-250₽/л."
+          "note": "11.09: Спекуляция топливом интенсивна. Очереди, люди ждят часами. На 285 АЗС отслеживается статус. Черный рынок: 200-250₽/л выше регулярных цен."
         }
       ],
-      "queues_hours": 1.5,
+      "queues_hours": 2.0,
       "ai95_price_rub": 72.35,
       "diesel_price_rub": 82.08,
       "source_urls": [
         "https://51.ru/text/business/2026/09/05/76626916/",
         "https://www.e1.ru/text/business/2026/09/05/76622611/"
       ],
-      "note": "08.09: Спекуляция топливом. Очереди. На 285 АЗС отслеживается статус. Черный рынок 200-250₽."
+      "note": "11.09: Спекуляция интенсивна. Очереди. 285 АЗС отслеживается. Черный рынок 200-250₽ выше цены."
     },
     {
       "region": "Хабаровский край",
       "lat": 48.48,
       "lon": 135.08,
       "level": "limited",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "ДВК / НПЗ-Хабаровск",
@@ -1641,7 +1668,7 @@
       "lat": 43.17,
       "lon": 44.82,
       "level": "critical",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Назрань (исключение)",
@@ -1880,7 +1907,7 @@
       "lat": 58.52,
       "lon": 31.27,
       "level": "calm",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Крупные сети",
@@ -2097,31 +2124,32 @@
       "region": "Вологодская область",
       "lat": 59.22,
       "lon": 39.89,
-      "level": "strained",
-      "updated": "2026-09-08T04:30:00Z",
+      "level": "limited",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Газпромнефть/Лукойл/Роснефть",
           "status": "limited",
-          "level": "strained",
+          "level": "limited",
           "limit_l": 30,
-          "note": "08.09 ротация: На 12 АЗС топливо, на 11 - лимиты, на 21 - нет. Дефицит пообещали ликвидировать к 10.09. Губернатор под контролем."
+          "note": "11.09: Кризис ликвидируется. Возобновлены поставки 700т бензина в сутки. Подача топлива увеличена на 50%. Дефицит пообещали ликвидировать к 10.09. Ситуация улучшается."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.3,
       "ai95_price_rub": 91.31,
       "diesel_price_rub": 80.0,
       "source_urls": [
-        "https://vologda-poisk.ru/news/na-zlobu-dnya/defitsit-benzina-v-vologodskoj-oblasti-poobeschali-likvidirovat-k-10-sentyabrya"
+        "https://vologda-poisk.ru/news/na-zlobu-dnya/defitsit-benzina-v-vologodskoj-oblasti-poobeschali-likvidirovat-k-10-sentyabrya",
+        "https://www.osnmedia.ru/ekonomika/v-vologdskuyu-oblast-vnov-nachali-postavlyat-700-tonn-benzina-v-sutki"
       ],
-      "note": "08.09: На 12 АЗС топливо, на 11 - лимиты, на 21 - нет."
+      "note": "11.09: 700т/день поставляется. Дефицит ликвидируется (+50% подача). Улучшается."
     },
     {
       "region": "Республика Мордовия",
       "lat": 54.18,
       "lon": 45.18,
       "level": "limited",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-11T12:00:00Z",
       "networks": [
         {
           "name": "Сети (чет-нечет)",
