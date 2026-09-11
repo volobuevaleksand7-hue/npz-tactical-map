@@ -481,25 +481,6 @@
       "last_event_ts": 1789090141,
       "source_text": "11.09.2026 04:29 МСК\nСеверный Кавказ внимание по бпла"
     },
-    "Тверская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1789009973,
-      "source_text": "10.09.2026 06:12 МСК\nТверская область Опасность по БПЛА"
-    },
     "Пермский край": {
       "bpla": false,
       "bplaDim": false,
@@ -909,28 +890,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1789073889,
       "source_text": "10.09.2026 23:58 МСК\nМулино, Дзержинск, Кстово, Нижний Новгород, Нижегородская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "борисоглебск|воронежская область",
-      "name": "Борисоглебск",
-      "lat": 51.368015,
-      "lon": 42.075169,
-      "region": "Воронежская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789075949,
-      "source_text": "11.09.2026 00:32 МСК\nБорисоглебск И близлежащие Воронежская область Тревога по БПЛА"
     },
     {
       "key": "березники|пермский край",
@@ -4300,28 +4259,6 @@
       "last_event_ts": 1789069618,
       "source_text": "10.09.2026 22:46 МСК\nПочепский район Погарский район Брянская область Тревога по БПЛА сохраняется"
     },
-    "RUS.52.20_1": {
-      "gid_2": "RUS.52.20_1",
-      "name_ru": "Шаблыкинский район",
-      "region_ru": "Орловская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789053111,
-      "source_text": "10.09.2026 18:11 МСК\nШаблыкинский район Орловская область Фиксация БПЛА"
-    },
     "RUS.59.19_1": {
       "gid_2": "RUS.59.19_1",
       "name_ru": "Сараевский район",
@@ -6736,6 +6673,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 89624,
+      "text": "Борисоглебск\nВоронежская область\nОтбой опасности по БПЛА\nПо области опасность сохраняется",
+      "ts": 1789096558,
+      "time_label": "11.09.2026 06:15 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 89623,
       "text": "Липецкая область\nОтбой опасности по БПЛА",
       "ts": 1789095331,
@@ -7366,14 +7311,6 @@
       "time_label": "11.09.2026 03:56 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 89585,
-      "text": "Липецкая область\nОтбой ракетной опасности",
-      "ts": 1789088051,
-      "time_label": "11.09.2026 03:54 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7383,15 +7320,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789095331,
-  "last_event_at": "2026-09-11T02:55:31Z",
-  "fetched_at": "2026-09-11T03:10:07.143217Z",
+  "timestamp": 1789096558,
+  "last_event_at": "2026-09-11T03:15:58Z",
+  "fetched_at": "2026-09-11T03:20:08.187510Z",
   "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-09-11T03:10:07.143217Z",
-    "source_age_seconds": 876,
-    "city_count": 140,
-    "region_count": 44,
+    "generated_at": "2026-09-11T03:20:08.187510Z",
+    "source_age_seconds": 250,
+    "city_count": 139,
+    "region_count": 43,
     "feed_count": 80
   }
 }
