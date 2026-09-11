@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-09-11T04:11Z",
+    "generated_at": "2026-09-11T09:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
@@ -208,10 +208,10 @@
       "status": "down",
       "status_since": "2026-08-14",
       "est_output_pct": 0,
-      "damage": "Удар украинских дронов в ночь 13-14 августа 2026: полная остановка производства, повреждены установки первичной и вторичной переработки, вспыхнул масштабный пожар. Это повторная атака завода.",
+      "damage": "Ракеты FP-5 'Flamingo' атаковали завод, осколки упали на жилой дом, есть раненые",
       "note": "На 5 сентября завод полностью остановлен. Вторая атака на завод за две недели. Завод производил ~4% российского топлива (15.7 млн т/год). Восстановление критически затруднено.",
-      "source_url": "https://zn.ua/war/henshtab-podtverdil-udar-vsu-po-volhohradskomu-npz.html",
-      "confidence": "reported"
+      "source_url": "https://hvylya.net/news/329047-rakety-flamingo-udarili-po-himicheskomu-predpriyatiyu-v-volgograde-chto-ono-vypuskalo",
+      "confidence": "confirmed"
     },
     {
       "id": "omsk",
@@ -1250,6 +1250,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-09-11",
+      "text": "Удар по Волгоградский НПЗ (Волгоград): Ракеты FP-5 'Flamingo' атаковали завод, осколки упали на жилой дом, есть раненые",
+      "source_url": "https://hvylya.net/news/329047-rakety-flamingo-udarili-po-himicheskomu-predpriyatiyu-v-volgograde-chto-ono-vypuskalo"
+    },
     {
       "date": "2026-09-11",
       "text": "Удар по Саратовскому НПЗ (Саратовская обл.): Украинские БПЛА в ночь на 11 сентября поразили завод. Повреждены установки первичной переработки, зафиксирован пожар в промышленной зоне. По данным OSINT-анализа ASTRA, пожар подтверждён в районе завода. Это 5-я атака на Саратовский НПЗ в 2026 году.",
