@@ -163,7 +163,8 @@ def cover_for(date: str):
     """Возвращает (rel_path, exists) для обложки конкретной даты — ВСЕГДА .png.
     Только для og:image/twitter:image/JSON-LD: соцсети и Telegram надёжнее
     отдают превью с PNG, чем с WEBP — сюда webp не подставлять."""
-    rel = f"assets/cover-{date}.png"
+    restored = f"assets/cover-{date}-restored.png"
+    rel = restored if (ROOT / restored).exists() else f"assets/cover-{date}.png"
     return rel, (ROOT / rel).exists()
 
 
@@ -171,10 +172,10 @@ def cover_img_for(date: str):
     """Возвращает rel_path для <img> (hero/обложка) — .webp, если конвейер его уже
     сделал (optimize_cover пишет его рядом с .png при каждой генерации обложки),
     иначе откатываемся на .png, чтобы не показать битую картинку."""
-    webp_rel = f"assets/cover-{date}.webp"
+    rel, exists = cover_for(date)
+    webp_rel = str(Path(rel).with_suffix(".webp"))
     if (ROOT / webp_rel).exists():
         return webp_rel
-    rel, exists = cover_for(date)
     return rel if exists else None
 
 

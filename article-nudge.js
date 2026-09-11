@@ -13,6 +13,8 @@
 
   var K = "art_nudge";          // localStorage: 'dock' | 'seen:<date>'
   var GOAL = "art_read";
+  // Версионированная замена заглушки: старое имя закреплено в CDN-кэше.
+  var COVER_OVERRIDES = { "2026-09-11": "/assets/cover-2026-09-11-restored.png" };
   var MONTHS = ["января","февраля","марта","апреля","мая","июня","июля",
                 "августа","сентября","октября","ноября","декабря"];
 
@@ -52,7 +54,7 @@
   }
 
   function build(date, title) {
-    var cover = "/assets/cover-" + date + ".png";
+    var cover = COVER_OVERRIDES[date] || "/assets/cover-" + date + ".png";
     var href = "/news/" + date;
     var d = document.createElement("div");
     d.className = "art-nudge";
@@ -160,7 +162,7 @@
     var probe = new Image();
     probe.onload = function () { dispatch(date, makeTitle(briefs[date])); };
     probe.onerror = function () { resolveCover(dates, briefs, i + 1); };
-    probe.src = "/assets/cover-" + date + ".png";
+    probe.src = COVER_OVERRIDES[date] || "/assets/cover-" + date + ".png";
   }
 
   function dispatch(date, title) {
