@@ -405,6 +405,25 @@
       "last_event_ts": 1789168080,
       "source_text": "12.09.2026 02:08 МСК\nТаганрог, Танаис, Чалтырь, Красный Крым, Ростов-на-Дону, Порт Азов, г.Азов, Батайск, Койсуг, Новобатайск, Зерноград, Егорлыкская, Ростовская область - опасность по БПЛА сохраняется. Продолжаются фиксации БПЛА. 📡 Локатор России - @locatorru"
     },
+    "Татарстан": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1789181558,
+      "source_text": "12.09.2026 05:52 МСК\nРеспублика Татарстан Опасность по БПЛА"
+    },
     "Нижегородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -1039,28 +1058,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1789165298,
       "source_text": "12.09.2026 01:21 МСК\nФрунзе Николаевка и близлежащие Опасность по БПЛА Республика Крым"
-    },
-    {
-      "key": "шебекино|белгородская область",
-      "name": "Шебекино",
-      "lat": 50.41342,
-      "lon": 36.92537,
-      "region": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789138498,
-      "source_text": "11.09.2026 17:54 МСК\nШебекино Тревога по БПЛА"
     },
     {
       "key": "новый оскол|белгородская область",
@@ -5414,6 +5411,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 89770,
+      "text": "Республика Татарстан\nОпасность по БПЛА",
+      "ts": 1789181558,
+      "time_label": "12.09.2026 05:52 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 84854,
+      "text": "Республика Татарстан - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789181554,
+      "time_label": "12.09.2026 05:52 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
       "msg_id": 89769,
       "text": "Кузоватовский район\nУльяновская область\nФиксация от 2 БПЛА",
       "ts": 1789180393,
@@ -6036,22 +6049,6 @@
       "time_label": "12.09.2026 01:44 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 89730,
-      "text": "Михайловка\nВолгоградская область\nФиксация БПЛА",
-      "ts": 1789166575,
-      "time_label": "12.09.2026 01:42 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 275620,
-      "text": "Новоандреевка, Крым\nТревога по БпЛА сохраняется",
-      "ts": 1789166564,
-      "time_label": "12.09.2026 01:42 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -6061,15 +6058,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789180393,
-  "last_event_at": "2026-09-12T02:33:13Z",
-  "fetched_at": "2026-09-12T02:50:03.315802Z",
+  "timestamp": 1789181558,
+  "last_event_at": "2026-09-12T02:52:38Z",
+  "fetched_at": "2026-09-12T03:00:03.424708Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-12T02:50:03.315802Z",
-    "source_age_seconds": 1010,
-    "city_count": 137,
-    "region_count": 30,
+    "generated_at": "2026-09-12T03:00:03.424708Z",
+    "source_age_seconds": 445,
+    "city_count": 136,
+    "region_count": 31,
     "feed_count": 80
   }
 }
