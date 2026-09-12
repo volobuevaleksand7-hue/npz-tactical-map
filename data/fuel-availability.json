@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-09-12T16:45:00Z",
+    "generated_at": "2026-09-12T20:45:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
@@ -621,32 +621,32 @@
       "region": "Республика Калмыкия",
       "lat": 46.31,
       "lon": 44.27,
-      "level": "critical",
-      "updated": "2026-09-08T20:30:00Z",
+      "level": "limited",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "Элиста (город)",
           "status": "limited",
           "level": "limited",
           "limit_l": 15,
-          "note": "08.09: Элиста дешевле: АИ-92 54.10₽, АИ-95 92.47₽. Лимит 15л. Без острого дефицита."
+          "note": "12.09: Элиста дешевле: АИ-92 54.10р, АИ-95 92.47р. Лимит 15л."
         },
         {
-          "name": "Остальное (критично)",
+          "name": "Остальное (ограничено)",
           "status": "limited",
-          "level": "critical",
+          "level": "limited",
           "limit_l": 20,
-          "note": "08.09: Вне Элисты критично. Цены >90₽ АИ-95. Очереди 1.5+ часа."
+          "note": "12.09: Вне Элисты ограничено. Цены >90р АИ-95. Лимит 20л."
         }
       ],
-      "queues_hours": 1.5,
+      "queues_hours": 1.0,
       "ai95_price_rub": 92.47,
       "diesel_price_rub": 80.0,
       "source_urls": [
         "https://multigo.ru/benzin/46.3081;44.2696/11",
         "https://multigo.ru/benzin/46.3081;44.2696/8"
       ],
-      "note": "08.09: Критична кроме Элисты. Очереди 1.5+ часа."
+      "note": "12.09: Элиста дешевле (54.10р АИ-92, 92.47р АИ-95). WebSearch."
     },
     {
       "region": "Тюменская область",
@@ -774,7 +774,7 @@
       "lat": 52.29,
       "lon": 104.3,
       "level": "limited",
-      "updated": "2026-09-08T04:30:00Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "Роснефть / Крайснефть",
@@ -876,7 +876,7 @@
       "lat": 52.73,
       "lon": 41.44,
       "level": "calm",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "Все АЗС",
@@ -899,46 +899,48 @@
       "lat": 54.51,
       "lon": 36.27,
       "level": "calm",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "Лукойл / Роснефть",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "06.09 ротация: Чет-нечет отменена с 1.09. Свободная продажа в пределах лимитов сети. Цены стабильны."
+          "note": "12.09: Чет-нечет отменена с 1.09. Свободная продажа. Цены стабильны."
         }
       ],
       "queues_hours": 0.0,
-      "ai95_price_rub": 68.0,
+      "ai95_price_rub": 70.95,
       "diesel_price_rub": 77.0,
       "source_urls": [
-        "https://www.kommersant.ru/doc/8922431"
+        "https://www.petrolplus.ru/fuelindex/kaluzhskaya-oblast/ai95/",
+        "https://multigo.ru/benzin/54.5069;36.2527/11"
       ],
-      "note": "06.09: Чет-нечет отменена. Свободная продажа."
+      "note": "12.09: Цены стабильны 70.95р. Лимиты отменены. WebSearch."
     },
     {
       "region": "Астраханская область",
       "lat": 46.35,
       "lon": 48.04,
       "level": "limited",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "Лукойл / Газпром нефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "06.09 ротация: Лимит 30л. Чет-нечет действует (с 18.08). Поставки контролируются."
+          "note": "12.09: Лимит 30л (с 25.08). Чет-нечет действует. Поставки контролируются."
         }
       ],
-      "queues_hours": 0.1,
+      "queues_hours": 0.2,
       "ai95_price_rub": 75.0,
       "diesel_price_rub": 80.0,
       "source_urls": [
-        "https://www.kavkaz-uzel.eu/articles/425752"
+        "https://www.kommersant.ru/doc/8908285",
+        "https://www.kavkaz-uzel.eu/articles/426086"
       ],
-      "note": "06.09: Лимит 30л. Чет-нечет действует."
+      "note": "12.09: Лимит 30л (с 25.08). Чет-нечет. Контролируется. WebSearch."
     },
     {
       "region": "Ивановская область",
@@ -993,7 +995,7 @@
       "lat": 54.78,
       "lon": 32.05,
       "level": "limited",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "АЗС сети",
@@ -1016,76 +1018,79 @@
       "lat": 43.48,
       "lon": 43.61,
       "level": "limited",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "Все сети",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "06.09 ротация: Напряженная. Очереди 2+ часа. Лимит 30л. Цены на частных 110-130₽. Водители требуют мер властей."
+          "note": "12.09: Очереди 2+ часа. Цены 150р+ на частных. Лимит 30л. Ограничения на канистры."
         }
       ],
       "queues_hours": 2.0,
-      "ai95_price_rub": 120.0,
+      "ai95_price_rub": 150.0,
       "diesel_price_rub": 79.0,
       "source_urls": [
-        "https://www.kavkaz-uzel.org/articles/425897"
+        "https://www.petrolplus.ru/fuelindex/kabardino-balkarskaya-respublika/ai92/",
+        "https://www.kavkaz-uzel.org/articles/425284"
       ],
-      "note": "06.09: Напряженная. Очереди 2+ часа. Цены 110-130₽ на частных."
+      "note": "12.09: Очереди 2+ часа. Цены 150р+. Лимит 30л. WebSearch."
     },
     {
       "region": "Карачаево-Черкесская республика",
       "lat": 44.23,
       "lon": 42.06,
       "level": "limited",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "Лукойл / Роснефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "06.09 ротация: Очереди за дешевым. Лимит 30л бензина, 60л дизель. Ограничения на продажу в канистры."
+          "note": "12.09: Очереди за дешевым. Лимит 30л бензина, 60л дизель. Ограничения на канистры."
         }
       ],
       "queues_hours": 1.0,
       "ai95_price_rub": 84.64,
       "diesel_price_rub": 81.0,
       "source_urls": [
-        "https://gdezapravka.ru/zapravki/cherkessk"
+        "https://www.kavkaz-uzel.media/articles/425238",
+        "https://www.kavkaz-uzel.org/articles/424544"
       ],
-      "note": "06.09: Очереди. Лимит 30л. Запрет канистр."
+      "note": "12.09: Очереди за дешевым. Лимит 30л. Ограничения. WebSearch."
     },
     {
       "region": "Республика Тыва",
       "lat": 51.72,
       "lon": 94.45,
       "level": "severe",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "АЗС (чет-нечет)",
           "status": "limited",
           "level": "severe",
           "limit_l": 20,
-          "note": "06.09 ротация: 121.04₽/л — одна из самых высоких цен. Чет-нечет продолжается. Дефицит острый."
+          "note": "12.09: 121.04р/л — максимум в РФ. Чет-нечет продолжается. Дефицит острый."
         }
       ],
       "queues_hours": 1.5,
       "ai95_price_rub": 121.04,
       "diesel_price_rub": 100.0,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/respublika-tyva/"
+        "https://www.petrolplus.ru/fuelindex/respublika-tyva/",
+        "https://card-oil.ru/fuel-cost/respublika-tyva/"
       ],
-      "note": "06.09: 121.04₽/л. Чет-нечет. Острый дефицит."
+      "note": "12.09: 121.04р/л (максимум в РФ). Чет-нечет. Острый дефицит. WebSearch."
     },
     {
       "region": "Еврейская автономная область",
       "lat": 48.79,
       "lon": 132.92,
       "level": "calm",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "5 региональных АЗС",
@@ -1108,7 +1113,7 @@
       "lat": 43.12,
       "lon": 131.89,
       "level": "limited",
-      "updated": "2026-09-08T16:23:58Z",
+      "updated": "2026-09-12T20:45:00Z",
       "networks": [
         {
           "name": "ННК / Региональные АЗС",
