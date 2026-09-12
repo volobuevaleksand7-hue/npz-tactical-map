@@ -607,23 +607,31 @@
     "lat": 55.8,
     "lon": 49.1,
     "level": "calm",
-    "updated": "2026-09-08T16:23:58Z",
+    "updated": "2026-09-12T12:20:00Z",
     "networks": [
      {
-      "name": "Газпром нефть/Лукойл/Татнефть",
+      "name": "Лукойл",
+      "status": "limited",
+      "level": "strained",
+      "limit_l": null,
+      "note": "12.09: На Лукойле бензин исчез, продают только дизель."
+     },
+     {
+      "name": "Газпром нефть / Татнефть",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "06.09 ротация: Свободная продажа. АИ-92 67.81₽, АИ-95 73.28₽. Ограничения сняты. Кризис преодолён."
+      "note": "12.09: На АЗС работают, очереди без ажиотажа. Казань — остров стабильности в Поволжье. Цены 62-87р (разброс на независимых)."
      }
     ],
-    "queues_hours": 0.0,
-    "ai95_price_rub": 73.28,
+    "queues_hours": 0.2,
+    "ai95_price_rub": 74.6,
     "diesel_price_rub": 75.0,
     "source_urls": [
-     "https://kazan.aif.ru/society/rekord-ai-92-benzin-v-rossii-2-sentyabrya-birzhevye-ceny-roznica-mery"
+     "https://kazan.aif.ru/society/ostrovok-stabilnosti-benzin-v-kazani-ceny-ocheredi-limity-i-nehvatka",
+     "https://kazan.aif.ru/society/chto-tam-u-sosedey-benzin-v-tatarstane-2026-ceny-azs-kazani-i-limity"
     ],
-    "note": "06.09: Свободная продажа. Стабилизирована."
+    "note": "12.09: Стабильна, остров стабильности. На Лукойле нет бензина (только дизель), на Газпром/Татнефть АЗС работают. Цены 62-87р."
    },
    {
     "region": "Тамбовская область",
@@ -907,26 +915,26 @@
     "region": "Волгоградская область",
     "lat": 48.7,
     "lon": 44.5,
-    "level": "critical",
-    "updated": "2026-09-09T12:00:00Z",
+    "level": "strained",
+    "updated": "2026-09-12T12:20:00Z",
     "networks": [
      {
       "name": "Лукойл/Газпромнефть",
       "status": "limited",
-      "level": "critical",
+      "level": "strained",
       "limit_l": 40,
-      "note": "09.09: РЕКОРДНЫЕ ОЧЕРЕДИ 38-39 ЧАСОВ ПОДТВЕРЖДЕНЫ. Люди ждут 9-15 часов. Места в очередях продают за 1500-5000₽. Суточный лимит отпуска всего 3700л на все АЗС области. Губернатор требует увеличить лимит у нефтяников."
+      "note": "12.09: Очереди сократились. С 10 сентября поставки топлива удвоены. Лимит 30-40л бензина, до 60л дизеля. Ситуация улучшается, но остаётся напряженной. Спекуляция местами в очередях продолжается."
      }
     ],
-    "queues_hours": 38.0,
+    "queues_hours": 2.5,
     "ai95_price_rub": 73.95,
     "diesel_price_rub": 77.92,
     "source_urls": [
-     "https://v1.ru/text/gorod/2026/09/08/76630495/",
-     "https://vlg.aif.ru/society/details/benzina-net-ochered-na-azs-za-dengi-volgogradcy-pridumali-novyy-biznes",
+     "https://vlg.aif.ru/society/details/volgogradskie-novosti-12-sentyabrya-bpla-chto-na-azs-gde-den-goroda-pozhar",
+     "https://v1.ru/text/transport/2026/09/07/76627603/",
      "https://abnews.ru/ug/news/volgograd/2026/9/7/v-volgogradskoj-oblasti-izmenili-shemu-postavok-benzina-benzin-vezut-po-novoj-sheme-chto-proishodit-na-zapravkah-volgograda"
     ],
-    "note": "09.09: 38-39ч очереди подтверждены. Места 1500-5000р. Суточный лимит 3700л."
+    "note": "12.09: Очереди сократились. Поставки удвоены с 10.09. Лимит 30-40л. Улучшение, но ситуация напряженная."
    },
    {
     "region": "Архангельская область",
@@ -1004,25 +1012,25 @@
     "region": "Краснодарский край",
     "lat": 45.04,
     "lon": 38.98,
-    "level": "limited",
-    "updated": "2026-09-10T16:00:00Z",
+    "level": "strained",
+    "updated": "2026-09-12T12:20:00Z",
     "networks": [
      {
-      "name": "Краснодар (78 АЗС)",
+      "name": "Краснодар (77 АЗС на 12.09)",
       "status": "limited",
-      "level": "limited",
-      "limit_l": null,
-      "note": "10.09: Вторая волна. Очереди вернулись 7 сентября после относительно спокойного августа. Выбор: очереди по регулярным ценам или спекуляция до 146р/л на независимых АЗС. Высокий туристический сезон."
+      "level": "strained",
+      "limit_l": 30,
+      "note": "12.09: На момент проверки 77 АЗС работают в городе (снижение с 85 предыдущего дня). Лимит 30л. Очереди сохраняются."
      }
     ],
-    "queues_hours": 2.5,
+    "queues_hours": 1.0,
     "ai95_price_rub": 75.0,
     "diesel_price_rub": 80.0,
     "source_urls": [
-     "https://www.kavkaz-uzel.eu/articles/426411",
-     "https://www.yuga.ru/news/483862-gde-zapravitsya-na-poberezhe-8-sentyabrya-situaciya-s-toplivom-na-azs-novorossijska-gelendzhika-anapy-i-tamani/"
+     "https://93.ru/text/transport/2026/09/12/76639466/",
+     "https://www.kavkaz-uzel.org/articles/424623"
     ],
-    "note": "10.09: Вторая волна критична. Спекуляция до 146р/л."
+    "note": "12.09: В Краснодаре 77 АЗС работают. Побережье критично (см. отдельную запись)."
    },
    {
     "region": "Москва",
@@ -1840,31 +1848,32 @@
     "lat": 43.4,
     "lon": 39.5,
     "level": "critical",
-    "updated": "2026-09-12T16:45:00Z",
+    "updated": "2026-09-12T12:20:00Z",
     "networks": [
      {
       "name": "Геленджик",
       "status": "limited",
       "level": "critical",
       "limit_l": 30,
-      "note": "12.09: Вторая волна. Очереди возвращались 7 сентября после спокойного августа. Лимит 30л. Выбор: регулярные цены с очередями или спекуляция до 146р/л на независимых АЗС. Туристический сезон обостряет ситуацию. Бензин АИ-95 редко."
+      "note": "12.09: Острый дефицит. На Геленджике АИ-95 на 12 АЗС, АИ-92 на 4 АЗС, ДТ на 27 АЗС. Критична. Туристический сезон на пике — спрос максимален. Лимит 30л. Очереди 2+ часа."
      },
      {
       "name": "Новороссийск",
       "status": "limited",
       "level": "critical",
       "limit_l": 30,
-      "note": "12.09: АИ-95 на 12 АЗС, АИ-92 на 4 АЗС, ДТ на 27 АЗС. Критична. Лимит 30л. Очереди. Топливо доступно ограниченно."
+      "note": "12.09: На 11.09 в 09:00 работали 28 АЗС из общего числа. АИ-95 на ограниченном числе, АИ-92 редко. ДТ доступен. Лимит 30л максимум. Сотни независимых АЗС закрыты или работают на топливные карты."
      }
     ],
     "queues_hours": 2.5,
-    "ai95_price_rub": 75.0,
-    "diesel_price_rub": 80.0,
+    "ai95_price_rub": 90.0,
+    "diesel_price_rub": 85.0,
     "source_urls": [
      "https://93.ru/text/transport/2026/09/12/76639466/",
-     "https://news.ru/regions/situaciya-s-toplivom-na-kubani-11-sentyabrya-anapa-gelendzhik-novorossijsk-gde-kupit"
+     "https://news.ru/regions/situaciya-s-toplivom-na-kubani-11-sentyabrya-anapa-gelendzhik-novorossijsk-gde-kupit",
+     "https://www.kavkaz-uzel.org/articles/424623"
     ],
-    "note": "12.09: Побережье критично. Новороссийск: АИ-95 на 12 АЗС, спекуляция до 146р/л. Проверено WebSearch."
+    "note": "12.09: Побережье критично. Вторая волна + туристический сезон. Новороссийск/Геленджик в кризисе. Спекуляция до 146р/л."
    },
    {
     "region": "Республика Крым",
