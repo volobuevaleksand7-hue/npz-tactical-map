@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-09-12T16:15Z",
+    "generated_at": "2026-09-12T16:47Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.4,
@@ -208,10 +208,10 @@
       "status": "down",
       "status_since": "2026-08-14",
       "est_output_pct": 0,
-      "damage": "Ракеты FP-5 'Flamingo' атаковали завод, осколки упали на жилой дом, есть раненые",
+      "damage": "Ночная атака БПЛА/ракет по НПЗ в Волгограде. На установке первичной перегонки сырой нефти произошёл крупный пожар с открытыми языками пламени. Дым виден из жилых районов.",
       "note": "На 12 сентября завод полностью остановлен. Вторая атака на завод за две недели. Завод производил ~4% российского топлива (15.7 млн т/год). Восстановление критически затруднено.",
-      "source_url": "https://hvylya.net/news/329047-rakety-flamingo-udarili-po-himicheskomu-predpriyatiyu-v-volgograde-chto-ono-vypuskalo",
-      "confidence": "confirmed"
+      "source_url": "https://www.mentoday.ru/life/news/11-09-2026/bpla-atakovali-volgograd-gorit-neftezavod-chto-izvestno-o-nochnoi-atake-bespilotnikov-na-gorod/",
+      "confidence": "reported"
     },
     {
       "id": "omsk",
@@ -1250,6 +1250,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-09-12",
+      "text": "Удар по Волгоградский НПЗ (Волгоград): Удар по Волгоградскому НПЗ",
+      "source_url": "https://www.mentoday.ru/life/news/11-09-2026/bpla-atakovali-volgograd-gorit-neftezavod-chto-izvestno-o-nochnoi-atake-bespilotnikov-na-gorod/"
+    },
     {
       "date": "2026-09-12",
       "text": "Продление экспортных запретов подтверждено на новый период. Бензиновый запрет продлён до 31 января 2027 года. Дизельный запрет действует до 30 сентября 2026. На 12 сентября вторая волна топливного кризиса продолжается без признаков улучшения. 13+ НПЗ в полной остановке, 11+ на 15-50% мощности. Волна повторных ударов затрудняет восстановление восстановленных мощностей. На рынке наблюдаются дефициты бензина в 58-59 регионах, 12+ в критической фазе.",
