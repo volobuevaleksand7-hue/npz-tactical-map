@@ -345,8 +345,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1789169844,
-      "source_text": "11.09.2026 17:37 МСК\nРостовская область Краснодарский край Авиационная ракетно бомбовая опасность\n\n12.09.2026 02:37 МСК\nКраснодон и близлежащие, тревога по БпЛА Ростовская область, новые группы БпЛА от ЛНР"
+      "last_event_ts": 1789170697,
+      "source_text": "11.09.2026 17:37 МСК\nРостовская область Краснодарский край Авиационная ракетно бомбовая опасность\n\n12.09.2026 02:51 МСК\nРостов-на-Дону и близлежащие, тревога по БпЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -421,8 +421,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789168619,
-      "source_text": "12.09.2026 02:16 МСК\nСамарская область, Ульяновская область - опасность по БПЛА от Саратовской области. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1789170756,
+      "source_text": "12.09.2026 02:52 МСК\nКраснокутский район Саратовская область Фиксация от 2 БПЛА"
     },
     "Калужская область": {
       "bpla": false,
@@ -1118,9 +1118,9 @@
       "lat": 47.21997,
       "lon": 39.70769,
       "region": "Ростовская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1131,8 +1131,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1789168080,
-      "source_text": "12.09.2026 02:08 МСК\nТаганрог, Танаис, Чалтырь, Красный Крым, Ростов-на-Дону, Порт Азов, г.Азов, Батайск, Койсуг, Новобатайск, Зерноград, Егорлыкская, Ростовская область - опасность по БПЛА сохраняется. Продолжаются фиксации БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1789170697,
+      "source_text": "12.09.2026 02:51 МСК\nРостов-на-Дону и близлежащие, тревога по БпЛА"
     },
     {
       "key": "каланчак|херсонская область",
@@ -3445,28 +3445,6 @@
       "source_text": "11.09.2026 22:36 МСК\nРовеньки, Белгородская область - пролёты БПЛА в сторону Кривоносово, Россошь, Воронежская область. 📡 Локатор России - @locatorru"
     },
     {
-      "key": "ракитное|белгородская область",
-      "name": "Ракитное",
-      "lat": 50.84076,
-      "lon": 35.85212,
-      "region": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789127673,
-      "source_text": "11.09.2026 14:54 МСК\nРакитное Белгородский район Тревога по БПЛА Дартс"
-    },
-    {
       "key": "богучар|воронежская область",
       "name": "Богучар",
       "lat": 49.9324498,
@@ -3687,6 +3665,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1789161353,
       "source_text": "12.09.2026 00:15 МСК\nМиллеровский район, Чертковский район, Тарасовский район, Верхнедонской район, Кашарский район, Шолоховский район, Боковский район, Милютинский район, Ростовская область - опасность по БПЛА сохраняется и в направлении северной части Волгоградской области. 📡 Локатор России - @locatorru"
+    },
+    "RUS.63.45_1": {
+      "gid_2": "RUS.63.45_1",
+      "name_ru": "Татищевский район",
+      "region_ru": "Саратовская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789170687,
+      "source_text": "12.09.2026 02:51 МСК\nТатищевский район Саратовская область Фиксация от 2 БПЛА"
     },
     "RUS.52.5_1": {
       "gid_2": "RUS.52.5_1",
@@ -4238,6 +4238,28 @@
       "last_event_ts": 1789164220,
       "source_text": "12.09.2026 01:03 МСК\nТербунский район Липецкая область Фиксация БПЛА"
     },
+    "RUS.63.24_1": {
+      "gid_2": "RUS.63.24_1",
+      "name_ru": "Краснокутский район",
+      "region_ru": "Саратовская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789170756,
+      "source_text": "12.09.2026 02:52 МСК\nКраснокутский район Саратовская область Фиксация от 2 БПЛА"
+    },
     "RUS.7.4_1": {
       "gid_2": "RUS.7.4_1",
       "name_ru": "Белгородский район",
@@ -4567,6 +4589,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1789164129,
       "source_text": "12.09.2026 01:02 МСК\nКрасногвардейский район Тревога по БПЛА Республика Крым"
+    },
+    "RUS.63.41_1": {
+      "gid_2": "RUS.63.41_1",
+      "name_ru": "Ртищевский район",
+      "region_ru": "Саратовская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789170600,
+      "source_text": "12.09.2026 02:50 МСК\nРтищевский район Саратовская область Фиксация БПЛА"
     },
     "RUS.52.20_1": {
       "gid_2": "RUS.52.20_1",
@@ -5089,6 +5133,38 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 89739,
+      "text": "Краснокутский район\nСаратовская область\nФиксация от 2 БПЛА",
+      "ts": 1789170756,
+      "time_label": "12.09.2026 02:52 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 275633,
+      "text": "Ростов-на-Дону и близлежащие, тревога по БпЛА",
+      "ts": 1789170697,
+      "time_label": "12.09.2026 02:51 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 89738,
+      "text": "Татищевский район\nСаратовская область\nФиксация от 2 БПЛА",
+      "ts": 1789170687,
+      "time_label": "12.09.2026 02:51 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 89737,
+      "text": "Ртищевский район\nСаратовская область\nФиксация БПЛА",
+      "ts": 1789170600,
+      "time_label": "12.09.2026 02:50 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 275632,
       "text": "Ульяновская область\nСамарская область\nРеспублика Мордовия\nвнимание по бпла",
@@ -5696,38 +5772,6 @@
       "time_label": "12.09.2026 00:54 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 275594,
-      "text": "Евпатория\nПрибрежное\nСаки\nНовофедоровка и близлежащие\nОпасность по БПЛА\nПовторно",
-      "ts": 1789163647,
-      "time_label": "12.09.2026 00:54 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 84826,
-      "text": "Тамбовская область, Саратовская область, Пензенская область - опасность по БПЛА от Воронежской области.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1789163525,
-      "time_label": "12.09.2026 00:52 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 84825,
-      "text": "Новохопёрск, Воронежская область - фиксации БПЛА в сторону Грибановка.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1789163507,
-      "time_label": "12.09.2026 00:51 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 275593,
-      "text": "Октябрьское\nНижнегорский\nСоветский район и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1789163466,
-      "time_label": "12.09.2026 00:51 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -5737,14 +5781,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789170402,
-  "last_event_at": "2026-09-11T23:46:42Z",
-  "fetched_at": "2026-09-11T23:50:07.166322Z",
+  "timestamp": 1789170756,
+  "last_event_at": "2026-09-11T23:52:36Z",
+  "fetched_at": "2026-09-12T00:00:10.119568Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-09-11T23:50:07.166322Z",
-    "source_age_seconds": 205,
-    "city_count": 135,
+    "generated_at": "2026-09-12T00:00:10.119568Z",
+    "source_age_seconds": 454,
+    "city_count": 134,
     "region_count": 28,
     "feed_count": 80
   }
