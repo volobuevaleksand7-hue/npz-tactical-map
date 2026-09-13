@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789302415,
-      "source_text": "13.09.2026 15:26 МСК\nРостов-на-Дону и близлежащие Опасность по БПЛА"
+      "last_event_ts": 1789302735,
+      "source_text": "13.09.2026 15:32 МСК\nРостов-на-Дону Ростовская область Фиксация БПЛА"
     },
     "Московская область": {
       "bpla": false,
@@ -774,9 +774,9 @@
       "lat": 47.21997,
       "lon": 39.70769,
       "region": "Ростовская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -787,8 +787,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1789302415,
-      "source_text": "13.09.2026 15:26 МСК\nРостов-на-Дону и близлежащие Опасность по БПЛА"
+      "last_event_ts": 1789302735,
+      "source_text": "13.09.2026 15:32 МСК\nРостов-на-Дону Ростовская область Фиксация БПЛА"
     },
     {
       "key": "токмак|запорожская область",
@@ -2549,28 +2549,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1789296127,
       "source_text": "13.09.2026 13:42 МСК\nДорога Токмак- Мелитополь Опасность по БПЛА Запорожская область РФ"
-    },
-    {
-      "key": "белгород|белгородская область",
-      "name": "Белгород",
-      "lat": 50.5955595,
-      "lon": 36.5873394,
-      "region": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789259827,
-      "source_text": "13.09.2026 03:37 МСК\nг.Белгород - опасность по БПЛА. 📡 Локатор России - @locatorru"
     }
   ],
   "districts": {
@@ -3404,6 +3382,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 90127,
+      "text": "Ростов-на-Дону\nРостовская область\nФиксация БПЛА",
+      "ts": 1789302735,
+      "time_label": "13.09.2026 15:32 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 276464,
       "text": "Ростов-на-Дону и близлежащие\nОпасность по БПЛА",
       "ts": 1789302415,
@@ -4034,14 +4020,6 @@
       "time_label": "13.09.2026 13:45 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 276399,
-      "text": "Белогорский район и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1789296280,
-      "time_label": "13.09.2026 13:44 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4051,14 +4029,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789302415,
-  "last_event_at": "2026-09-13T12:26:55Z",
-  "fetched_at": "2026-09-13T12:30:03.185600Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1789302735,
+  "last_event_at": "2026-09-13T12:32:15Z",
+  "fetched_at": "2026-09-13T12:40:03.095975Z",
+  "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-09-13T12:30:03.185600Z",
-    "source_age_seconds": 188,
-    "city_count": 101,
+    "generated_at": "2026-09-13T12:40:03.095975Z",
+    "source_age_seconds": 468,
+    "city_count": 100,
     "region_count": 18,
     "feed_count": 80
   }
