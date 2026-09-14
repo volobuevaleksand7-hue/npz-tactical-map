@@ -215,6 +215,25 @@
       "last_event_ts": 1789328945,
       "source_text": "13.09.2026 22:49 МСК\nСаратовская область Тамбовская область Пензенская область внимание по бпла"
     },
+    "Белгородская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1789366944,
+      "source_text": "14.09.2026 09:22 МСК\nБелгородский район Опасность по БПЛА"
+    },
     "Калужская область": {
       "bpla": false,
       "bplaDim": false,
@@ -1500,28 +1519,6 @@
       "source_text": "14.09.2026 03:33 МСК\nЖуковка, Брянская область - фиксации БПЛА на Людиново, Жиздра, Калужская область. 📡 Локатор России - @locatorru"
     },
     {
-      "key": "ялта|донецкая народная республика",
-      "name": "Ялта",
-      "lat": 46.96098,
-      "lon": 37.27446,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789323703,
-      "source_text": "13.09.2026 21:21 МСК\nЯлта ДНР Опасность по БПЛА"
-    },
-    {
       "key": "карачев|брянская область",
       "name": "Карачев",
       "lat": 53.121594,
@@ -1808,6 +1805,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1789331624,
       "source_text": "13.09.2026 23:33 МСК\nТроснянский район Орловская область Фиксация БПЛА"
+    },
+    "RUS.7.4_1": {
+      "gid_2": "RUS.7.4_1",
+      "name_ru": "Белгородский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789366944,
+      "source_text": "14.09.2026 09:22 МСК\nБелгородский район Опасность по БПЛА"
     },
     "RUS.37.24_1": {
       "gid_2": "RUS.37.24_1",
@@ -2308,6 +2327,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 276973,
+      "text": "Белгородский район\nОпасность по БПЛА",
+      "ts": 1789366944,
+      "time_label": "14.09.2026 09:22 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 85202,
+      "text": "Белгородский район, Белгородская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789366785,
+      "time_label": "14.09.2026 09:19 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
     {
       "msg_id": 276972,
       "text": "ДКАД ДНР, Донецк - Макеевка и близлежащие\nОпасность по БПЛА\nОсобое внимание на дорогах!",
@@ -2931,22 +2966,6 @@
       "time_label": "14.09.2026 04:14 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 276930,
-      "text": "Брянск и близлежащие\nТревога по БПЛА, повторно",
-      "ts": 1789348122,
-      "time_label": "14.09.2026 04:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 85188,
-      "text": "северная часть Ставропольского края - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1789347983,
-      "time_label": "14.09.2026 04:06 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -2956,15 +2975,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789366204,
-  "last_event_at": "2026-09-14T06:10:04Z",
-  "fetched_at": "2026-09-14T06:20:03.487633Z",
+  "timestamp": 1789366944,
+  "last_event_at": "2026-09-14T06:22:24Z",
+  "fetched_at": "2026-09-14T06:30:03.515539Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-14T06:20:03.487633Z",
-    "source_age_seconds": 599,
-    "city_count": 57,
-    "region_count": 16,
+    "generated_at": "2026-09-14T06:30:03.515539Z",
+    "source_age_seconds": 459,
+    "city_count": 56,
+    "region_count": 17,
     "feed_count": 80
   }
 }
