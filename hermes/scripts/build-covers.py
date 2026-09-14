@@ -274,12 +274,20 @@ def _codex_instr(raw_path, ref_path, m):
             f"Save to exactly {raw_path} then ls -la it.")
 
 
+def _tail(tag, r):
+    """Хвост вывода упавшего бэкенда — иначе GENFAIL молчит и месяц никто не знает, почему."""
+    out = ((r.stdout or "") + (r.stderr or "")).strip().splitlines()
+    print(f"  {tag} rc={r.returncode}: " + " | ".join(l.strip() for l in out[-5:] if l.strip())[:500])
+
+
 def codex_local(m, ref, raw):
     """Codex на ЭТОЙ машине (на VPS = VPS-Codex, на Маке = Mac-Codex). True если raw записан."""
     instr = _codex_instr(str(raw), str(ref) if ref else None, m)
     try:
-        subprocess.run(["codex", "exec", "--dangerously-bypass-approvals-and-sandbox", instr],
-                       cwd=str(TMP), timeout=280, capture_output=True, text=True)
+        r = subprocess.run(["codex", "exec", "--dangerously-bypass-approvals-and-sandbox", instr],
+                           cwd=str(TMP), timeout=280, capture_output=True, text=True, stdin=subprocess.DEVNULL)
+        if not raw.exists():
+            _tail("codex-local", r)
     except Exception as e:  # noqa: BLE001
         print("  codex-local error:", e)
     return raw.exists()
@@ -301,8 +309,10 @@ def codex_vps(m, ref, raw):
             r_ref = None  # референс не доехал — сгенерим без него
         instr = _codex_instr(r_raw, r_ref, m)
         cmd = f"cd {VPS_TMP} && codex exec --dangerously-bypass-approvals-and-sandbox {shlex.quote(instr)}"
-        subprocess.run(["ssh", *ssh_o, VPS_SSH, cmd], timeout=300, capture_output=True, text=True)
+        r = subprocess.run(["ssh", *ssh_o, VPS_SSH, cmd], timeout=300, capture_output=True, text=True)
         subprocess.run(["scp", "-q", *ssh_o, f"{VPS_SSH}:{r_raw}", str(raw)], timeout=60, capture_output=True)
+        if not raw.exists():
+            _tail("codex-vps", r)
     except Exception as e:  # noqa: BLE001
         print(f"  codex-vps fail: {e}")
     return raw.exists()
@@ -388,10 +398,11 @@ def main():
         print("build-covers: все обложки на месте, нечего делать.")
         return
     ASSETS.mkdir(exist_ok=True)
+    TMP.mkdir(parents=True, exist_ok=True)
     print(f"build-covers: {len(dates)} дат → {dates[0]} … {dates[-1]}")
-    ok = skipped = 0
+    ok = skipped = failed = 0
     for d in dates:
-        meta = meta_for(d, briefs[d])
+        meta = meta_for(d, briefs.get(d, {}))
         if meta is None:
             skipped += 1
             print(f"SKIP {d} — лид-удара нет ни в брифе, ни в strikes.json; генерическую "
@@ -400,6 +411,8 @@ def main():
         meta["no_ref"] = a.no_ref or meta.get("no_ref", False)   # sea всегда без референса
         if build_one(d, meta):
             ok += 1
+        else:
+            failed += 1
     # Сжать свежие обложки (2МБ PNG → ~300КБ) — иначе жрут Fast Data Transfer на Vercel.
     # Идемпотентно (уже сжатые = mode P, пропускаются). Ловит и путь через OpenRouter.
     try:
@@ -410,7 +423,8 @@ def main():
         print("build-covers: optimize_covers skip:", _e)
     tail = f", пропущено {skipped}" if skipped else ""
     print(f"build-covers: готово {ok}/{len(dates)}{tail}. Дальше — python3 agents/gen-news.py + publish.")
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)

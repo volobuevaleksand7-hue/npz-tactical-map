@@ -217,29 +217,35 @@ def _run(cmd, timeout=300, env=None):
                           timeout=timeout, env=env)
 
 
+COVER_SRC = ""   # кто реально нарисовал обложку в последнем heal(): codex@vps/codex@mac/openrouter/none
+
+
 def heal(day: str):
     """Дособрать сводку за сегодня и запушить.
     -> (card_ok, cover_ok): card_ok — карточка собралась и запушилась (гарантия),
-    cover_ok — реальная обложка (не заглушка). Codex работает и на VPS (0.144.0),
-    и на Маке — обложка обычно собирается. Если Codex «out of credits», карточка
-    всё равно выходит с og-image (best-effort), обложку дорисуют позже."""
+    cover_ok — реальная обложка от штатного генератора (build-covers: Codex/OpenRouter).
+    🔴 14.09.2026: PIL-фолбэк gen_cover_today.py убран. Он рисовал тёмную абстракцию,
+    watchdog считал её «реальной» и логировал «(Codex)» — месяц никто не видел, что
+    штатная генерация падает. Нет обложки → честный долг cover-fallback, сайт и TG
+    показывают og-image.png, никаких подмен."""
+    global COVER_SRC
+    COVER_SRC = "none"
     env = {**os.environ, "NPZ_REPO": str(ROOT)}
     coverf = ROOT / "assets" / f"cover-{day}.png"
     try:
         _run([sys.executable, "agents/gen-news.py"])                  # карточка + архив
-        if not coverf.exists():
-            # best-effort: на Маке Codex сделает обложку, на VPS — молча GENFAIL
-            _run([sys.executable, "hermes/scripts/build-covers.py", "--dates", day],
-                 timeout=600, env=env)
-            if not coverf.exists():
-                # 🔴 26.08: Codex «out of credits», OpenRouter упёрся в кап (403) — вся
-                # цепочка build-covers молчала, сторож писал «долг», и сайт двое суток
-                # показывал в карточке сводки ОБЩУЮ og-заглушку вместо обложки дня, а в
-                # архиве /news зияли дыры (миниатюры 404). gen_cover_today.py рисует
-                # обложку локально через PIL, без сети и без кредитов — он и должен
-                # закрывать хвост, а не «долг-инцидент».
-                _run([sys.executable, "agents/gen_cover_today.py", "--date", day],
-                     timeout=180, env=env)
+        if coverf.exists():
+            COVER_SRC = "existing"
+        else:
+            r = _run([sys.executable, "hermes/scripts/build-covers.py", "--dates", day],
+                     timeout=900, env=env)
+            out = r.stdout + r.stderr
+            m = re.search(r"^OK\s+\S+\s+\[([^\]]+)\]", out, re.M)
+            if m:
+                COVER_SRC = m.group(1)
+            else:
+                tail = " | ".join(l for l in out.strip().splitlines()[-6:] if l.strip())
+                log(f"build-covers за {day}: обложки нет (rc={r.returncode}): {tail[:600]}")
             if coverf.exists():
                 _run([sys.executable, "agents/gen-news.py"])          # вшить обложку + миниатюру
     except Exception as e:  # noqa: BLE001
@@ -317,11 +323,11 @@ def main() -> int:
         _, cover_ok = heal(day)
         if cover_ok:
             update_incidents([], day)
-            log(f"обложку за {day} досоздал (Codex)")
+            log(f"обложку за {day} досоздал [{COVER_SRC}]")
             return 0
         if update_incidents(["cover-fallback"], day):
             git_sync(f"watchdog: обложка за {day} — заглушка, Codex не смог (долг)")
-        log(f"карточка за {day} на месте; обложка-заглушка (Codex out of credits?)")
+        log(f"карточка за {day} на месте; обложка-заглушка, штатный генератор не смог")
         return 0
 
     # ===== Карточки нет, но события есть → КРИТИЧНО: самолечение =====
@@ -332,10 +338,12 @@ def main() -> int:
         note = "" if cover_ok else " (обложка-заглушка, дорисуется на Маке)"
         tg_send(f"🛠 Топливный фронт: сводка за {day} не вышла по расписанию — "
                 f"досгенерил автоматически, живая{note}.\n{NEWS_URL}")
-        if not cover_ok:                                # оставить долг по обложке
-            update_incidents(["cover-fallback"], day)
+        # долг по обложке — и запушить: heal() уже сделал свой push, иначе инцидент
+        # оседал локально и никто его не видел (Codex Sol, 14.09)
+        if not cover_ok and update_incidents(["cover-fallback"], day):
+            git_sync(f"watchdog: обложка за {day} — заглушка, штатный генератор не смог (долг)")
         log(f"САМОЛЕЧЕНИЕ УСПЕШНО: карточка за {day} собрана; обложка="
-            f"{'реальная' if cover_ok else 'заглушка'}")
+            f"{COVER_SRC if cover_ok else 'заглушка'}")
         return 0
 
     # карточку собрать не смогли — громкий алерт + инцидент

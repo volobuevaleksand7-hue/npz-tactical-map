@@ -30,7 +30,7 @@ def make_webp_full(path, quality=FULL_WEBP_Q):
     """Полноразмерный .webp рядом с cover-*.png/analytics-*.png через cwebp (CLI, установлен).
 
     Вызывается сразу после сохранения PNG (хук optimize_cover, единая точка для
-    gen_cover_today.py/wave_cover.py/hermes/scripts/build-covers.py — все кладут
+    wave_cover.py/hermes/scripts/build-covers.py — все кладут
     финальный PNG через caption_cover.py, который зовёт optimize_cover). cwebp
     недоступен или упал → предупреждение в лог, генерация обложки НЕ падает.
     """

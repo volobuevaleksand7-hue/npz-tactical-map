@@ -45,12 +45,15 @@ path, log = with_covers(["2026-07-31"], [TODAY, "2026-07-31"], build_ok=True)
 assert path == B.cover_path_for(TODAY), path
 assert "🔴" not in log, log
 
-# 🔴 своей нет и собрать не вышло — чужая допустима, но об этом обязан быть крик в лог
+# 🔴 своей нет и собрать не вышло — чужую дату НЕ берём: og-image + крик в лог
+OG = os.path.join(B.REPO, "og-image.png")
+open(OG, "w").write("png")
 path, log = with_covers(["2026-07-31"], [TODAY, "2026-07-31"])
-assert path == B.cover_path_for("2026-07-31"), path
-assert "🔴" in log and "31" in log, log
+assert path == OG, path
+assert "🔴" in log and "og-image" in log, log
 
-# нет вообще ничего — None и предупреждение, а не тихий возврат
+# нет вообще ничего (и og-image тоже) — None и предупреждение, а не тихий возврат
+os.remove(OG)
 path, log = with_covers([], [TODAY])
 assert path is None and "🔴" in log, (path, log)
 

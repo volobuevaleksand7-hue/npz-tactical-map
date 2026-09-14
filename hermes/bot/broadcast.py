@@ -201,17 +201,13 @@ def latest_cover_path():
     print("обложка: за %s ещё нет — собираю" % today)
     if build_cover_for(today):
         return cover_path_for(today)
-    try:
-        strikes = (load("strikes.json") or {}).get("strikes", [])
-        dates = sorted({str(s.get("date", ""))[:10] for s in strikes if s.get("date")}, reverse=True)
-        for d in dates[:3]:
-            if d != today and os.path.exists(cover_path_for(d)):
-                print("🔴 обложка: своей за %s нет, беру чужую за %s — пост уйдёт "
-                      "с несовпадающей датой" % (today, d))
-                return cover_path_for(d)
-    except Exception as e:
-        print("обложка: не смог подобрать запасную (%s)" % e)
-    print("🔴 обложка: ни одной подходящей не нашёл")
+    # 🔴 14.09.2026: чужую дату больше НЕ отдаём — «Нижнекамск · 13 сентября» уехал под
+    # сводкой 14.09. Нет своей обложки → единая заглушка og-image.png (та же, что на сайте).
+    og = os.path.join(REPO, "og-image.png")
+    if os.path.exists(og):
+        print("🔴 обложка: своей за %s нет, штатный генератор не смог — шлю og-image" % today)
+        return og
+    print("🔴 обложка: ни своей за %s, ни og-image" % today)
     return None
 
 
