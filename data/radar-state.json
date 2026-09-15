@@ -421,8 +421,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789425183,
-      "source_text": "15.09.2026 01:33 МСК\nБелгородская область, тревога по БПЛА"
+      "last_event_ts": 1789429849,
+      "source_text": "15.09.2026 02:50 МСК\nБелгородская область, тревога по БПЛА от Гг повторно"
     },
     "Нижегородская область": {
       "bpla": false,
@@ -478,8 +478,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789428556,
-      "source_text": "15.09.2026 02:29 МСК\nНеверкинский район Пензенская область Фиксация БПЛА"
+      "last_event_ts": 1789429993,
+      "source_text": "15.09.2026 02:53 МСК\nНеверкинский район Пензенская область Ещё фиксация БПЛА"
     },
     "Тульская область": {
       "bpla": false,
@@ -3998,8 +3998,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -5653,8 +5653,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1789428556,
-      "source_text": "15.09.2026 02:29 МСК\nНеверкинский район Пензенская область Фиксация БПЛА"
+      "last_event_ts": 1789429993,
+      "source_text": "15.09.2026 02:53 МСК\nНеверкинский район Пензенская область Ещё фиксация БПЛА"
     },
     "RUS.8.19_1": {
       "gid_2": "RUS.8.19_1",
@@ -5759,6 +5759,38 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 90491,
+      "text": "Сызрань\nСамарская область\nМеры безопасности сохраняем\nЕсть ещё фиксации",
+      "ts": 1789430083,
+      "time_label": "15.09.2026 02:54 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 90490,
+      "text": "Неверкинский район\nПензенская область\nЕщё фиксация БПЛА",
+      "ts": 1789429993,
+      "time_label": "15.09.2026 02:53 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 277429,
+      "text": "Белгородская область, тревога по БПЛА от Гг повторно",
+      "ts": 1789429849,
+      "time_label": "15.09.2026 02:50 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 90489,
+      "text": "Неверкинский район\nПензенская область\nФиксация 2 БПЛА",
+      "ts": 1789429791,
+      "time_label": "15.09.2026 02:49 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 90488,
       "text": "Хвастовичский район\nДуминичский район\nКалужская область\nФиксация БПЛА",
@@ -6366,38 +6398,6 @@
       "time_label": "15.09.2026 00:24 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 277412,
-      "text": "Пензенская область\nРеспублика Мордовия\nвнимание по бпла",
-      "ts": 1789421017,
-      "time_label": "15.09.2026 00:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 90441,
-      "text": "Ульяновская область\nСамарская область\nВнимание по реактивным БПЛА",
-      "ts": 1789420977,
-      "time_label": "15.09.2026 00:22 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 90440,
-      "text": "Неверкинский район\nПензенская область\nЕщё фиксация реактивного БПЛА",
-      "ts": 1789420934,
-      "time_label": "15.09.2026 00:22 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 277411,
-      "text": "Продолжаются фиксации БПЛА противника от Гг, в Брянской, Курской, Белгородской области, тревога по БПЛА сохраняется",
-      "ts": 1789420918,
-      "time_label": "15.09.2026 00:21 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -6407,13 +6407,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789429664,
-  "last_event_at": "2026-09-14T23:47:44Z",
-  "fetched_at": "2026-09-14T23:50:02.824639Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1789430083,
+  "last_event_at": "2026-09-14T23:54:43Z",
+  "fetched_at": "2026-09-15T00:00:04.642327Z",
+  "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-09-14T23:50:02.824639Z",
-    "source_age_seconds": 138,
+    "generated_at": "2026-09-15T00:00:04.642327Z",
+    "source_age_seconds": 321,
     "city_count": 130,
     "region_count": 32,
     "feed_count": 80
