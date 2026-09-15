@@ -14,16 +14,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1789511317,
-      "source_text": "16.09.2026 00:12 МСК\nТемрюкский район, Анапский район, Крымский район, Абинский район, Краснодарский край - ракетная опасность от Азовского моря. 📡 Локатор России - @locatorru\n\n16.09.2026 01:28 МСК\nКраснодарский край Опасность по БпЛА"
+      "source_text": "16.09.2026 01:28 МСК\nКраснодарский край Опасность по БпЛА"
     },
     "Калужская область": {
       "bpla": false,
@@ -275,7 +275,7 @@
     "Смоленская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -287,9 +287,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1789502204,
-      "source_text": "15.09.2026 22:56 МСК\nКалужская область Смоленская область внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1789512074,
+      "source_text": "16.09.2026 01:41 МСК\nСмоленская область - опасность по БПЛА от Сураж, Унеча. 📡 Локатор России - @locatorru"
     },
     "Белгородская область": {
       "bpla": false,
@@ -967,6 +967,28 @@
       "source_text": "15.09.2026 23:04 МСК\nНовопетровка Бердянский район Тревога по БПЛА С выходом в Азовское море"
     },
     {
+      "key": "сураж|брянская область",
+      "name": "Сураж",
+      "lat": 53.01747,
+      "lon": 32.39178,
+      "region": "Брянская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789512061,
+      "source_text": "16.09.2026 01:41 МСК\nКлинцы и район, Брянская область - прошла группа БПЛА на Сураж, Унеча. 📡 Локатор России - @locatorru"
+    },
+    {
       "key": "уютное|автономная республика крым",
       "name": "Уютное",
       "lat": 45.199235,
@@ -1280,9 +1302,9 @@
       "lat": 52.76033,
       "lon": 32.23905,
       "region": "Брянская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1293,8 +1315,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1789511696,
-      "source_text": "16.09.2026 01:34 МСК\nКлинцы и близлежащие, тревога по БпЛА"
+      "last_event_ts": 1789512061,
+      "source_text": "16.09.2026 01:41 МСК\nКлинцы и район, Брянская область - прошла группа БПЛА на Сураж, Унеча. 📡 Локатор России - @locatorru"
     },
     {
       "key": "харцызск|донецкая народная республика",
@@ -1473,28 +1495,6 @@
       "source_text": "16.09.2026 00:49 МСК\nНовороссийск, Геленджик, Краснодарский край - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
     },
     {
-      "key": "шебекино|белгородская область",
-      "name": "Шебекино",
-      "lat": 50.41342,
-      "lon": 36.92537,
-      "region": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789469224,
-      "source_text": "15.09.2026 13:47 МСК\nШебекино Тревога по БПЛА Белгородская область"
-    },
-    {
       "key": "алчевск|луганская народная республика",
       "name": "Алчевск",
       "lat": 48.46893,
@@ -1625,6 +1625,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1789504083,
       "source_text": "15.09.2026 23:28 МСК\nУрзуф Мангуш Ялта Мариуполь И близлежащие Тревога по БПЛА"
+    },
+    {
+      "key": "унеча|брянская область",
+      "name": "Унеча",
+      "lat": 52.84294,
+      "lon": 32.68761,
+      "region": "Брянская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789512061,
+      "source_text": "16.09.2026 01:41 МСК\nКлинцы и район, Брянская область - прошла группа БПЛА на Сураж, Унеча. 📡 Локатор России - @locatorru"
     },
     {
       "key": "нижняя крынка|донецкая народная республика",
@@ -2089,28 +2111,6 @@
       "source_text": "15.09.2026 22:10 МСК\nПожарское Новоселовка Кольчугино и близлежащие Тревога по БПЛА"
     },
     {
-      "key": "афипский|краснодарский край",
-      "name": "Афипский",
-      "lat": 44.9040435,
-      "lon": 38.8426821,
-      "region": "Краснодарский край",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1789505916,
-      "source_text": "15.09.2026 23:58 МСК\nКраснодар Ильский Афипский ракетная опасность"
-    },
-    {
       "key": "бахчисарай|автономная республика крым",
       "name": "Бахчисарай",
       "lat": 44.754571,
@@ -2177,28 +2177,6 @@
       "source_text": "16.09.2026 01:08 МСК\nИловайск и близлежащие, тревога по БпЛА"
     },
     {
-      "key": "краснодар|краснодарский край",
-      "name": "Краснодар",
-      "lat": 45.04534,
-      "lon": 38.98178,
-      "region": "Краснодарский край",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1789505916,
-      "source_text": "15.09.2026 23:58 МСК\nКраснодар Ильский Афипский ракетная опасность"
-    },
-    {
       "key": "красный луч|луганская народная республика",
       "name": "Красный Луч",
       "lat": 48.13954,
@@ -2219,28 +2197,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1789502093,
       "source_text": "15.09.2026 22:54 МСК\nКрасный Луч и близлежащие, тревога по БпЛА ЛНР"
-    },
-    {
-      "key": "ильский|краснодарский край",
-      "name": "Ильский",
-      "lat": 44.8458544,
-      "lon": 38.5608255,
-      "region": "Краснодарский край",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1789505916,
-      "source_text": "15.09.2026 23:58 МСК\nКраснодар Ильский Афипский ракетная опасность"
     },
     {
       "key": "погар|брянская область",
@@ -3003,16 +2959,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
-      "rocketOnRegion": true,
-      "fill": "#dc2626",
-      "last_event_ts": 1789506739,
-      "source_text": "16.09.2026 00:12 МСК\nТемрюкский район, Анапский район, Крымский район, Абинский район, Краснодарский край - ракетная опасность от Азовского моря. 📡 Локатор России - @locatorru\n\n15.09.2026 21:02 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г.Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы. 15.09.2026"
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789495323,
+      "source_text": "15.09.2026 21:02 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г.Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы. 15.09.2026"
     },
     "RUS.8.25_1": {
       "gid_2": "RUS.8.25_1",
@@ -3311,16 +3267,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
-      "rocketOnRegion": true,
-      "fill": "#dc2626",
-      "last_event_ts": 1789506739,
-      "source_text": "16.09.2026 00:12 МСК\nТемрюкский район, Анапский район, Крымский район, Абинский район, Краснодарский край - ракетная опасность от Азовского моря. 📡 Локатор России - @locatorru\n\n15.09.2026 23:22 МСК\nАбинск, Крымск, Геленджик, Анапа, Новороссийск, Краснодарский край - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789503765,
+      "source_text": "15.09.2026 23:22 МСК\nАбинск, Крымск, Геленджик, Анапа, Новороссийск, Краснодарский край - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
     },
     "UKR.9.15_1": {
       "gid_2": "UKR.9.15_1",
@@ -3520,28 +3476,6 @@
       "last_event_ts": 1789508110,
       "source_text": "16.09.2026 00:35 МСК\nМиллеровский район, Чертковский район, Тарасовский район, Верхнедонской район, Кашарский район, Шолоховский район, Боковский район, Милютинский район, Ростовская область - опасность по БПЛА и в направлении северной части Волгоградской области 📡 Локатор России - @locatorru"
     },
-    "RUS.34.21_1": {
-      "gid_2": "RUS.34.21_1",
-      "name_ru": "Краснодар (горсовет)",
-      "region_ru": "Краснодарский край",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": true,
-      "fill": "#dc2626",
-      "last_event_ts": 1789505916,
-      "source_text": "15.09.2026 23:58 МСК\nКраснодар Ильский Афипский ракетная опасность"
-    },
     "RUS.34.1_1": {
       "gid_2": "RUS.34.1_1",
       "name_ru": "Абинский район",
@@ -3553,16 +3487,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
-      "rocketOnRegion": true,
-      "fill": "#dc2626",
-      "last_event_ts": 1789506739,
-      "source_text": "16.09.2026 00:12 МСК\nТемрюкский район, Анапский район, Крымский район, Абинский район, Краснодарский край - ракетная опасность от Азовского моря. 📡 Локатор России - @locatorru\n\n15.09.2026 21:02 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г.Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы. 15.09.2026"
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789495323,
+      "source_text": "15.09.2026 21:02 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г.Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы. 15.09.2026"
     },
     "RUS.34.48_1": {
       "gid_2": "RUS.34.48_1",
@@ -3597,16 +3531,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
-      "rocketOnRegion": true,
-      "fill": "#dc2626",
-      "last_event_ts": 1789506739,
-      "source_text": "16.09.2026 00:12 МСК\nТемрюкский район, Анапский район, Крымский район, Абинский район, Краснодарский край - ракетная опасность от Азовского моря. 📡 Локатор России - @locatorru\n\n15.09.2026 21:02 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г.Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы. 15.09.2026"
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789495323,
+      "source_text": "15.09.2026 21:02 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г.Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы. 15.09.2026"
     },
     "RUS.58.28_1": {
       "gid_2": "RUS.58.28_1",
@@ -3721,6 +3655,46 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 85459,
+      "text": "Краснодарский край - отбой ракетной опасности!\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789512118,
+      "time_label": "16.09.2026 01:41 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 277889,
+      "text": "Краснодарский край\nОтбой ракетной опасности",
+      "ts": 1789512087,
+      "time_label": "16.09.2026 01:41 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 85458,
+      "text": "Смоленская область - опасность по БПЛА от Сураж, Унеча.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789512074,
+      "time_label": "16.09.2026 01:41 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 85457,
+      "text": "Клинцы и район, Брянская область - прошла группа БПЛА на Сураж, Унеча.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789512061,
+      "time_label": "16.09.2026 01:41 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 277888,
+      "text": "Смоленская область\nвнимание по бпла",
+      "ts": 1789512000,
+      "time_label": "16.09.2026 01:40 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 85456,
       "text": "Чертково, Миллерово, Тарасовский, Глубокий, Каменск-Шахтинский, Ростовская область - внимание по массовому пролёту БПЛА с запада на восток.\n📡\nЛокатор России -\n@locatorru",
@@ -4320,46 +4294,6 @@
       "time_label": "15.09.2026 23:42 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 277838,
-      "text": "Красногвардейск\nЯнтарное и близлежащие, тревога по БпЛА",
-      "ts": 1789504900,
-      "time_label": "15.09.2026 23:41 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 277837,
-      "text": "Ровеньки\nСтаханов и близлежащие, тревога по БпЛА повторно\nЛНР",
-      "ts": 1789504804,
-      "time_label": "15.09.2026 23:40 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 85438,
-      "text": "Новороссийск, Геленджик, Краснодарский край - отбой ракетной опасности!\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1789504697,
-      "time_label": "15.09.2026 23:38 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 277836,
-      "text": "Мазанка\nДонское\nТрудовое\nТаврическая ТЭС\nИ близлежащие\nТревога по БПЛА\nРеспублика Крым",
-      "ts": 1789504689,
-      "time_label": "15.09.2026 23:38 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 277835,
-      "text": "Миллеровский\nТарасовский районы\nТревога по БпЛА",
-      "ts": 1789504551,
-      "time_label": "15.09.2026 23:35 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4369,14 +4303,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789511862,
-  "last_event_at": "2026-09-15T22:37:42Z",
-  "fetched_at": "2026-09-15T22:40:03.065706Z",
+  "timestamp": 1789512118,
+  "last_event_at": "2026-09-15T22:41:58Z",
+  "fetched_at": "2026-09-15T22:50:03.437089Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-15T22:40:03.065706Z",
-    "source_age_seconds": 141,
-    "city_count": 111,
+    "generated_at": "2026-09-15T22:50:03.437089Z",
+    "source_age_seconds": 485,
+    "city_count": 109,
     "region_count": 18,
     "feed_count": 80
   }
