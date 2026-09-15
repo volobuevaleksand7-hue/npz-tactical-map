@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789513710,
-      "source_text": "16.09.2026 02:08 МСК\nАстраханская область Опасность по БПЛА"
+      "last_event_ts": 1789513956,
+      "source_text": "16.09.2026 02:12 МСК\nАстраханская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     "Тульская область": {
       "bpla": false,
@@ -345,8 +345,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789509784,
-      "source_text": "16.09.2026 01:03 МСК\nВолгоградская область Опасность по БПЛА"
+      "last_event_ts": 1789514258,
+      "source_text": "16.09.2026 02:17 МСК\nВолгоград Волгоградская область Опасность по БПЛА"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -2721,6 +2721,28 @@
       "source_text": "16.09.2026 00:22 МСК\nПочеп, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     {
+      "key": "волгоград|волгоградская область",
+      "name": "Волгоград",
+      "lat": 48.71378,
+      "lon": 44.4976,
+      "region": "Волгоградская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789514258,
+      "source_text": "16.09.2026 02:17 МСК\nВолгоград Волгоградская область Опасность по БПЛА"
+    },
+    {
       "key": "луганск|луганская народная республика",
       "name": "Луганск",
       "lat": 48.56814,
@@ -3760,6 +3782,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 90559,
+      "text": "Волгоград\nВолгоградская область\nОпасность по БПЛА",
+      "ts": 1789514258,
+      "time_label": "16.09.2026 02:17 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 85461,
+      "text": "Астраханская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1789513956,
+      "time_label": "16.09.2026 02:12 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
       "msg_id": 90558,
       "text": "Республика Калмыкия\nОпасность по БПЛА",
       "ts": 1789513734,
@@ -4382,22 +4420,6 @@
       "time_label": "15.09.2026 23:54 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 277847,
-      "text": "Таганрог\nракетная опасность",
-      "ts": 1789505642,
-      "time_label": "15.09.2026 23:54 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 85440,
-      "text": "Таганрог, Танаис, Чалтырь, Красный Крым, Ростов-на-Дону, Порт Азов, г.Азов, Батайск, Койсуг, Ростовская область - ракетная опасность!\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1789505574,
-      "time_label": "15.09.2026 23:52 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -4407,14 +4429,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789513734,
-  "last_event_at": "2026-09-15T23:08:54Z",
-  "fetched_at": "2026-09-15T23:10:02.860049Z",
+  "timestamp": 1789514258,
+  "last_event_at": "2026-09-15T23:17:38Z",
+  "fetched_at": "2026-09-15T23:20:03.862590Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-15T23:10:02.860049Z",
-    "source_age_seconds": 68,
-    "city_count": 113,
+    "generated_at": "2026-09-15T23:20:03.862590Z",
+    "source_age_seconds": 145,
+    "city_count": 114,
     "region_count": 20,
     "feed_count": 80
   }
