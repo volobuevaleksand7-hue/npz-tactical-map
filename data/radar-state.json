@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789456030,
-      "source_text": "15.09.2026 10:07 МСК\nТрасса Токмак - Мелитополь тревога по БПЛА Запорожская область РФ"
+      "last_event_ts": 1789456609,
+      "source_text": "15.09.2026 10:16 МСК\nМелитополь западнее с севера тревога по БПЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789444964,
-      "source_text": "15.09.2026 07:02 МСК\nБрянская область, Смоленская область, Калужская область, Курская область, Орловская область, Тульская область - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1789456202,
+      "source_text": "15.09.2026 10:10 МСК\nБрянск и близлежащие опасность по БПЛА"
     },
     "Московская область": {
       "bpla": false,
@@ -236,6 +236,28 @@
     }
   },
   "cities": [
+    {
+      "key": "брянск|брянская область",
+      "name": "Брянск",
+      "lat": 53.27096,
+      "lon": 34.32143,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789456202,
+      "source_text": "15.09.2026 10:10 МСК\nБрянск и близлежащие опасность по БПЛА"
+    },
     {
       "key": "уразово|белгородская область",
       "name": "Уразово",
@@ -453,8 +475,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1789456030,
-      "source_text": "15.09.2026 10:07 МСК\nТрасса Токмак - Мелитополь тревога по БПЛА Запорожская область РФ"
+      "last_event_ts": 1789456609,
+      "source_text": "15.09.2026 10:16 МСК\nМелитополь западнее с севера тревога по БПЛА"
     },
     {
       "key": "приморск|запорожская область",
@@ -1045,6 +1067,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 277489,
+      "text": "Мелитополь западнее с севера тревога по БПЛА",
+      "ts": 1789456609,
+      "time_label": "15.09.2026 10:16 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 277488,
+      "text": "Брянск и близлежащие опасность по БПЛА и далее в направлении Жиздра Калужская область",
+      "ts": 1789456202,
+      "time_label": "15.09.2026 10:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 277487,
       "text": "Трасса Токмак - Мелитополь тревога по БПЛА\nЗапорожская область РФ",
@@ -1668,22 +1706,6 @@
       "time_label": "15.09.2026 06:10 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 85393,
-      "text": "Чувашская Республика, Республика Марий Эл - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1789441516,
-      "time_label": "15.09.2026 06:05 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 277437,
-      "text": "Тарханкут\nОленевка и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1789441501,
-      "time_label": "15.09.2026 06:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1693,14 +1715,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789456030,
-  "last_event_at": "2026-09-15T07:07:10Z",
-  "fetched_at": "2026-09-15T07:10:03.236272Z",
+  "timestamp": 1789456609,
+  "last_event_at": "2026-09-15T07:16:49Z",
+  "fetched_at": "2026-09-15T07:20:03.054200Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-15T07:10:03.236272Z",
-    "source_age_seconds": 173,
-    "city_count": 29,
+    "generated_at": "2026-09-15T07:20:03.054200Z",
+    "source_age_seconds": 194,
+    "city_count": 30,
     "region_count": 12,
     "feed_count": 80
   }
