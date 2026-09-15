@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-09-14T16:15:11Z",
+    "generated_at": "2026-09-15T03:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -112,9 +112,9 @@
       "status": "down",
       "status_since": "2026-08-15",
       "est_output_pct": 0,
-      "damage": "Атака украинских дронов 15 августа 2026. Удар привел к остановке производства. Установка ELOU-AVT-5 (~30% мощности завода) повреждена. Повторная атака в ночь на 24 августа: украинские БПЛА вновь поразили завод, взрывы и возгорания зафиксированы в районе Сызрани. На 12 сентября завод остаётся в полной остановке.",
+      "damage": "В ночь на 15 сентября по данным местных жителей произошла атака БПЛА по Сызранскому НПЗ. Слышны были взрывы в районе промышленной зоны.",
       "note": "На 12 сентября — завод не работает после серии атак (15 августа и 23-24 августа). По оценкам, восстановление требует нескольких недель. Завод производит ~800 тыс. т/год бензина и ~1.5 млн т/год дизеля.",
-      "source_url": "https://kyivindependent.com/ukraine-strikes-2-russian-refineries-other-targets-in-overnight-attack-military-says/",
+      "source_url": "https://kazan.aif.ru/incidents/details/sireny-i-vzryvy-ataka-bpla-na-samarskuyu-oblast-15-sentyabrya-chto-izvestno",
       "confidence": "reported"
     },
     {
@@ -1250,6 +1250,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-09-15",
+      "text": "Удар по Сызранский НПЗ (Сызрань): Ночная атака на Сызранский НПЗ",
+      "source_url": "https://kazan.aif.ru/incidents/details/sireny-i-vzryvy-ataka-bpla-na-samarskuyu-oblast-15-sentyabrya-chto-izvestno"
+    },
     {
       "date": "2026-09-14",
       "text": "Ночная атака 14 сентября: украинские дроны атаковали Киришинский нефтеперерабатывающий завод (Кинеф) в Ленинградской области, один из крупнейших НПЗ России. При падении сбитого обломками беспилотника начался пожар в промышленной зоне завода. Это третья атака на завод за два месяца (15 июля, 29-30 августа, 14 сентября). Завод остаётся полностью остановлен.",
