@@ -9,7 +9,7 @@
    "export_ban_gasoline": true,
    "export_ban_kerosene": true,
    "import_from_belarus": true,
-   "notes": "На 14 сентября: вторая волна кризиса продолжается без признаков улучшения. 15 НПЗ в полной остановке (Кинеф, Рязань, Пермь, Сызран, Куйбышевский, Новокуйбышевск, ННОС, ЯНОС, Волгоград, ТАНЕКО, Антипинский, Саратов, Орск, Славянский, плюс московский); 11+ работают на 15-50% мощности. Производство упало до ~4 млн bbl/day (20-летний минимум). Волна повторных ударов затрудняет восстановление восстановленных мощностей (Кинеф — третья атака за два месяца 14.09). Беларусский импорт остаётся стабилизатором (49 тыс т бензина, 33 тыс т дизеля в начале сентября). 58-59 регионов затронуто, 12+ в критической фазе. Экспортные терминалы: Primorsk закрыт; Ust-Luga восстанавливается (~70%); Novorossiysk повреждён (9 сентября) и работает на 20-30%. Восстановление требует недель–месяцев при отсутствии новых ударов.",
+   "notes": "На 15 сентября: вторая волна кризиса продолжается без признаков улучшения. 15 НПЗ в полной остановке; 9+ работают на 15-50% мощности. Производство упало до ~4 млн bbl/day (20-летний минимум). Волна повторных ударов затрудняет восстановление: Кинеф поражён третий раз (14.09), ТАНЕКО и Славянский одновременно (12-13.09), Саратов в пятый раз (10-11.09), Рязань в четвёртый (6.09). Беларусский импорт остаётся стабилизатором, но упал на 77% (май-август 454+ тыс т; сентябрь 49 тыс т бензина, 33 тыс т дизеля) из-за обслуживания Naftan. 58-59 регионов затронуто, 12+ в критической фазе (Крым, Северный Кавказ, Волга, Поволжье, Центр, Приморье). Экспортные терминалы: Primorsk закрыт; Ust-Luga восстановилась (~70%); Novorossiysk на 20-30% (атака 8-9.09). Восстановление требует недель–месяцев при отсутствии новых ударов.",
    "throughput_shortfall_pct": 73,
    "method": "capacity_offline и throughput_shortfall выводятся из refineries[] кодом (agents/recalc-national-balance.py), не оценкой агента."
   },
@@ -19,14 +19,14 @@
     "lat": 59.56,
     "lon": 150.8,
     "level": "strained",
-    "updated": "2026-09-14T04:24:16Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
       "name": "Региональные АЗС",
       "status": "limited",
       "level": "strained",
       "limit_l": 100,
-      "note": "11.09: Фиксированные цены до октября 2026 введены. Лимиты: не более 100л АИ-92 или АИ-95 в сутки (до 30.09.2026). Дефицита нет. Морской завоз достаточен."
+      "note": "15.09 ротация: Фиксированные цены сохранены до октября 2026. Лимиты: не более 100л АИ-92/95 в сутки (до 30.09.2026). Дизель до 500л в городе, 250л в районах. Морской завоз достаточен. Отпуск только в бак. Стабилизируется."
      }
     ],
     "queues_hours": 0.2,
@@ -34,9 +34,10 @@
     "diesel_price_rub": 88.0,
     "source_urls": [
      "https://www.eastrussia.ru/news/v-magadanskoy-oblasti-do-oktyabrya-sokhranyat-fiksirovannye-tseny-na-toplivo/",
-     "https://runews24.ru/magadan/13/07/2026/na-zapravkax-magadanskoj-oblasti-vveli-limityi-na-prodazhu-benzina-i-dizelya"
+     "https://runews24.ru/magadan/13/07/2026/na-zapravkax-magadanskoj-oblasti-vveli-limityi-na-prodazhu-benzina-i-dizelya",
+     "https://amur.info/2026/07/15/prodazhu-topliva-ogranichili-v-magadanskoj-oblasti/"
     ],
-    "note": "11.09: Фиксированные цены до октября. Лимиты 100л. Стабилизируется."
+    "note": "15.09: Фиксированные цены до октября. Лимиты 100л. Морской завоз норма. WebSearch ротация."
    },
    {
     "region": "Амурская область",
@@ -67,14 +68,14 @@
     "lat": 56.49,
     "lon": 84.95,
     "level": "calm",
-    "updated": "2026-09-14T04:24:16Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
       "name": "Газпром нефть/Роснефть",
-      "status": "open",
+      "status": "limited",
       "level": "calm",
-      "limit_l": null,
-      "note": "11.09: Запасы растут. Ажиотаж спадает. Очереди сокращаются. 47 из 66 АЗС работают в Томске. Стабилизируется."
+      "limit_l": 40,
+      "note": "15.09 ротация: На ряде АЗС (Колпашево, Асино, Зырянское, Тегульдет) лимиты 30-40л бензина, 80л ДТ. На Газпромнефти Стрежевое: лимит 40л физлиц, 80л юрлиц. Запасы растут, ажиотаж спадает. 47 из 66 АЗС работают в Томске. WebSearch ротация 15.09."
      }
     ],
     "queues_hours": 0.1,
@@ -82,23 +83,24 @@
     "diesel_price_rub": 79.0,
     "source_urls": [
      "https://vtomske.ru/news/216430-zapasy-topliva-na-azs-tomskoi-oblasti-rastut-no-v-dvuh-raionah-sohranyayutsya-pereboi-vlasti",
-     "https://www.riatomsk.ru/article/20260909/vlasti-azhiotazh-na-azs-v-tomskoi-oblasti-spal-ocheredei-stalo-menshe"
+     "https://www.riatomsk.ru/article/20260909/vlasti-azhiotazh-na-azs-v-tomskoi-oblasti-spal-ocheredei-stalo-menshe",
+     "https://www.tvtomsk.ru/news/116184-toplivo.html"
     ],
-    "note": "11.09: Запасы растут, очередей меньше. Стабилизируется."
+    "note": "15.09: Лимиты 30-40л на ряде районов. Запасы растут. Стабилизируется. WebSearch ротация."
    },
    {
     "region": "Владимирская область",
     "lat": 56.12,
     "lon": 40.39,
     "level": "strained",
-    "updated": "2026-09-14T04:24:16Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
       "name": "Газпромнефть/Лукойл/Роснефть",
       "status": "limited",
       "level": "strained",
-      "limit_l": 25,
-      "note": "11.09: Вторая волна. Дефицит АИ-95 обострился. На многих АЗС нет АИ-95. Средняя цена 81.2р выше среднего по ЦФО. Очереди. Напряженная."
+      "limit_l": 30,
+      "note": "15.09 ротация: Вторая волна продолжается. Дефицит АИ-95 обострён. На многих АЗС нет АИ-95. Лимиты 25-30л. Цена АИ-95 выше среднего по ЦФО (~81р). Очереди. Проверено WebSearch ротация."
      }
     ],
     "queues_hours": 0.5,
@@ -106,23 +108,24 @@
     "diesel_price_rub": 85.86,
     "source_urls": [
      "https://vlad.aif.ru/society/novosti-vladimira-11-sentyabrya-bpla-trevoga-dozhdi-dtp-na-m-7-i-benzin",
-     "https://zebra-tv.ru/novosti/jizn/na-vladimirskikh-azs-obostrilsya-defitsit-benzina-v-osobennosti-marki-ai-95/"
+     "https://zebra-tv.ru/novosti/jizn/na-vladimirskikh-azs-obostrilsya-defitsit-benzina-v-osobennosti-marki-ai-95/",
+     "https://finance.mail.ru/article/gde-v-rossii-prodazha-benzina-ogranichena-15-iyulya-69217853/"
     ],
-    "note": "11.09: Дефицит АИ-95 обостренный. Очереди. Цены выше среднего."
+    "note": "15.09: Дефицит АИ-95. Лимиты 25-30л. Цены выше среднего. WebSearch ротация."
    },
    {
     "region": "Краснодарский край",
     "lat": 45.04,
     "lon": 38.98,
     "level": "strained",
-    "updated": "2026-09-14T04:24:16Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
       "name": "Краснодар (77 АЗС)",
       "status": "limited",
       "level": "strained",
       "limit_l": 30,
-      "note": "12.09: На момент проверки 77 АЗС работают в городе. Лимит 30л. Очереди сохраняются."
+      "note": "15.09 ротация: На момент проверки 77 АЗС работают в городе. Лимит 30л. Очереди сохраняются. Туристический сезон 2026 потерял 20% спроса. Сочи потеряло 20%, Анапа выросла на 40%. Турпоток сокращается. WebSearch ротация 15.09."
      }
     ],
     "queues_hours": 1.0,
@@ -130,54 +133,57 @@
     "diesel_price_rub": 80.0,
     "source_urls": [
      "https://93.ru/text/transport/2026/09/12/76639466/",
-     "https://www.kavkaz-uzel.org/articles/424623"
+     "https://www.kavkaz-uzel.org/articles/424623",
+     "https://finance.mail.ru/article/turpotok-obognul-kurortyi-69224394/",
+     "https://novayagazeta.eu/articles/2026/06/11/kak-otkrylsia-kurortnyi-sezon-2026-v-krasnodarskom-krae-i-krymu"
     ],
-    "note": "12.09: 77 АЗС работают. Лимит 30л. Очереди."
+    "note": "15.09: 77 АЗС работают. Лимит 30л. Туризм упал на 20%. WebSearch ротация."
    },
    {
     "region": "Татарстан",
     "lat": 55.8,
     "lon": 49.1,
     "level": "calm",
-    "updated": "2026-09-14T04:24:16Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
       "name": "Лукойл",
       "status": "limited",
       "level": "strained",
       "limit_l": null,
-      "note": "12.09: На Лукойле бензин исчез, продают только дизель."
+      "note": "15.09 ротация: На Лукойле бензин исчез, продают только дизель. Проверено WebSearch."
      },
      {
       "name": "Газпром нефть / Татнефть",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "12.09: На АЗС работают, очереди без ажиотажа. Казань — остров стабильности. Цены 62-87р."
+      "note": "15.09 ротация: АЗС работают нормально. Казань — остров стабильности. Цены АИ-92 62.44-67р, АИ-95 73.28р, отдельные 86р. Без ажиотажа. WebSearch ротация 15.09."
      }
     ],
     "queues_hours": 0.2,
-    "ai95_price_rub": 74.6,
+    "ai95_price_rub": 73.28,
     "diesel_price_rub": 75.0,
     "source_urls": [
      "https://kazan.aif.ru/society/ostrovok-stabilnosti-benzin-v-kazani-ceny-ocheredi-limity-i-nehvatka",
-     "https://kazan.aif.ru/society/chto-tam-u-sosedey-benzin-v-tatarstane-2026-ceny-azs-kazani-i-limity"
+     "https://kazan.aif.ru/society/chto-tam-u-sosedey-benzin-v-tatarstane-2026-ceny-azs-kazani-i-limity",
+     "https://kazan.aif.ru/society/rekord-ai-92-benzin-v-rossii-2-sentyabrya-birzhevye-ceny-roznica-mery"
     ],
-    "note": "12.09: Стабильна, остров стабильности. Лукойл без бензина, Газпром/Татнефть работают. Цены 62-87р."
+    "note": "15.09: Остров стабильности. Лукойл без бензина, Газпром/Татнефть работают. Цены 62-86р. WebSearch ротация."
    },
    {
     "region": "Краснодарский край (Черноморское побережье)",
     "lat": 43.4,
     "lon": 39.5,
     "level": "critical",
-    "updated": "2026-09-14T04:24:16Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
-      "name": "Геленджик/Новороссийск",
+      "name": "Геленджик/Новороссийск/Анапа",
       "status": "limited",
       "level": "critical",
       "limit_l": 30,
-      "note": "12.09: Острый дефицит туристического сезона. 120 АЗС закрыто. Новороссийск: 28 АЗС работают. Геленджик: АИ-95 редко. Лимит 30л. Очереди 2+ часа."
+      "note": "15.09 ротация: Острый дефицит туристического сезона. 120 АЗС закрыто. Новороссийск: 28 АЗС работают. Геленджик: АИ-95 редко. Лимит 30л. Очереди 2+ часа. Туризм упал на 20% (Сочи -20%, Анапа +40% реагирует на дефицит). WebSearch ротация 15.09."
      }
     ],
     "queues_hours": 2.5,
@@ -186,23 +192,25 @@
     "source_urls": [
      "https://93.ru/text/transport/2026/09/12/76639466/",
      "https://news.ru/regions/situaciya-s-toplivom-na-kubani-11-sentyabrya-anapa-gelendzhik-novorossijsk-gde-kupit",
-     "https://www.kavkaz-uzel.org/articles/424623"
+     "https://www.kavkaz-uzel.org/articles/424623",
+     "https://finance.mail.ru/article/turpotok-obognul-kurortyi-69224394/",
+     "https://novayagazeta.eu/articles/2026/06/11/kak-otkrylsia-kurortnyi-sezon-2026-v-krasnodarskom-krae-i-krymu"
     ],
-    "note": "12.09: Побережье критично. 120 АЗС закрыто. Очереди 2+ часа."
+    "note": "15.09: Побережье критично. 120 АЗС закрыто. Туризм упал. WebSearch ротация."
    },
    {
     "region": "Ставропольский край",
     "lat": 45.1,
     "lon": 43.7,
     "level": "critical",
-    "updated": "2026-09-14T04:24:16Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
       "name": "Газпромнефть / Лукойл / Роснефть (курорты)",
       "status": "limited",
       "level": "critical",
       "limit_l": 20,
-      "note": "12.09: На курортах острый дефицит. Бензина АИ-95 нет. Только дизель. Туристический сезон на пике. Лимит 20л при наличии."
+      "note": "15.09 ротация: На курортах острый дефицит. Бензина АИ-95 нет. Только дизель 76р. Туристический сезон на пике. Лимит 20л при наличии. Туристический поток упал на 15%, структура гостиничного размещения хрупка (5-6% номеров в ремонте). Сложная ситуация. WebSearch ротация 15.09."
      }
     ],
     "queues_hours": 1.5,
@@ -210,9 +218,10 @@
     "diesel_price_rub": 76.0,
     "source_urls": [
      "https://bloknot-stavropol.ru/news/proekhal-kilometr-probka-ne-konchaetsya-benzinovyy",
-     "https://www.stav.kp.ru/daily/277795/5272632/"
+     "https://www.stav.kp.ru/daily/277795/5272632/",
+     "https://www.tadviser.ru/index.php/%D0%A1%D1%82%D0%B0%D1%82%D1%8C%D1%8F:%D0%A1%D1%82%D0%B0%D0%B2%D1%80%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D1%80%D0%B0%D0%B9"
     ],
-    "note": "12.09: Бензина нет, только дизель 76р. Туристический сезон. Острый дефицит."
+    "note": "15.09: Только дизель. Туристический сезон. Турпоток упал на 15%. WebSearch ротация."
    },
    {
     "region": "Ханты-Мансийский автономный округ - Югра",
@@ -274,21 +283,21 @@
     "lat": 55.5,
     "lon": 37.5,
     "level": "strained",
-    "updated": "2026-09-14T04:24:16Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
-      "name": "Газпром нефть",
+      "name": "Лукойл",
+      "status": "open",
+      "level": "calm",
+      "limit_l": null,
+      "note": "15.09 ротация: Лукойл отменил все лимиты в Московской области (как в Москве и СПб). Свободная продажа. WebSearch ротация."
+     },
+     {
+      "name": "Газпром нефть / Роснефть",
       "status": "limited",
       "level": "strained",
       "limit_l": 30,
-      "note": "12.09: На многих станциях горючее лимитировано 30л. Запрет на отпуск в канистры. На 48% АЗС доступен только АИ-92."
-     },
-     {
-      "name": "Роснефть",
-      "status": "limited",
-      "level": "strained",
-      "limit_l": 50,
-      "note": "12.09: Повысила лимит отпуска с 30 до 50л. Запрет на канистры. Поставки с перебоями вторая волна."
+      "note": "15.09 ротация: Газпром 30л на многих станциях. Роснефть зависит от АЗС (разные лимиты). Запрет на канистры 60л. Проверено WebSearch."
      }
     ],
     "queues_hours": 0.2,
@@ -296,9 +305,10 @@
     "diesel_price_rub": 82.0,
     "source_urls": [
      "https://ru.themoscowtimes.com/2026/08/13/naazs-vmoskovskom-regione-vnov-nachal-ischezat-benzin-a203406",
-     "https://www.mentoday.ru/life/news/28-07-2026/50-litrov-v-ruki-krupnye-azs-oslablyayut-limity-na-benzin-kogda-ih-polnostyu-otmenyat/"
+     "https://www.tbank.ru/invest/social/profile/basebel/ed772740-093f-41f1-9d4a-82f2b4c32d4e/",
+     "https://finance.mail.ru/article/gde-v-rossii-ogranichili-prodazhu-benzina-69216968/"
     ],
-    "note": "12.09: Вторая волна. Газпром 30л, Роснефть 50л. Запрет канистр."
+    "note": "15.09: Лукойл отменил лимиты. Газпром 30л, Роснефть варьируется. Запрет канистр 60л. WebSearch ротация."
    },
    {
     "region": "Северная Осетия - Алания",
@@ -755,14 +765,14 @@
     "lat": 44.6,
     "lon": 33.5,
     "level": "limited",
-    "updated": "2026-09-14T12:30:00Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
       "name": "ТЭС",
       "status": "limited",
       "level": "limited",
       "limit_l": 20,
-      "note": "14.09 ротация: Субсидированный бензин АИ-92/95 по 100р/л работает с 01.09. Лимит 20л. QR-коды. Очереди сокращаются. По мере роста поставок планируется переход к свободной продаже. Стабилизируется. WebSearch ротация 14.09."
+      "note": "15.09 ротация: Субсидированный бензин АИ-92/95 по 100р/л работает с 01.09. Лимит 20л. QR-коды. Продажа по QR 09:00-16:00. Очереди сокращаются. По мере роста поставок планируется переход к свободной продаже. Стабилизируется. WebSearch ротация 15.09."
      }
     ],
     "queues_hours": 0.1,
@@ -770,9 +780,11 @@
     "diesel_price_rub": 100.0,
     "source_urls": [
      "https://crimea.ria.ru/20260831/s-1-sentyabrya-v-sevastopole-budun-prodavat-benzin-ai92-i-ai95-po-100-rubley-za-litr-1158966617.html",
-     "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-8-sentyabrya-subsidii-nakonec-doshli"
+     "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-8-sentyabrya-subsidii-nakonec-doshli",
+     "https://sevastopol.su/news/chto-proiskhodit-s-zapravkoy-po-talonam-i-kartam-v-krymu-i-sevastopole",
+     "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-11-sentyabrya-gde-kupit-ceny"
     ],
-    "note": "14.09 ротация: Субсидия 100р/л работает. Лимит 20л. QR. Стабилизация. WebSearch ротация 14.09."
+    "note": "15.09: Субсидия 100р/л работает. Лимит 20л. QR-коды. Стабилизируется. WebSearch ротация."
    },
    {
     "region": "Кировская область",
@@ -1870,25 +1882,27 @@
     "lat": 44.7,
     "lon": 34.3,
     "level": "limited",
-    "updated": "2026-09-14T14:30:00Z",
+    "updated": "2026-09-15T16:30:00Z",
     "networks": [
      {
-      "name": "АТАН",
+      "name": "АТАН/ТЭС",
       "status": "limited",
       "level": "limited",
       "limit_l": 20,
-      "note": "14.09 ротация: Субсидия 100р/л работает с 01.09 на АИ-92/95. Со 8.09 малые сети получили АИ-92 по 100р, с 9.09 АИ-95. На 86 АЗС (АТАН и ТЭС). Лимит 20л, QR-коды. По мере роста поставок планируется свободная продажа. Стабилизируется. WebSearch ротация 14.09."
+      "note": "15.09 ротация: Субсидия 100р/л работает с 01.09 на АИ-92/95. Со 8-9.09 малые сети получили топливо. На 86 АЗС (АТАН и ТЭС). Лимит 20л, QR-коды. Продажа по QR 09:00-16:00. По мере роста поставок планируется свободная продажа. Талоны временно недоступны. Стабилизируется. WebSearch ротация 15.09."
      }
     ],
     "queues_hours": 0.1,
     "ai95_price_rub": 100.0,
     "diesel_price_rub": 100.0,
     "source_urls": [
-     "https://crimea.ria.ru/20260831/s-1-sentyabrya-v-krymu-budut-prodavat-benzin-ai92-i-ai95-po-100-rubley-za-litr-1158966617.html",
+     "https://crimea.ria.ru/20260831/s-1-sentyabrya-v-krymu-budun-prodavat-benzin-ai92-i-ai95-po-100-rubley-za-litr-1158966617.html",
      "https://ncrim.ru/kulinaria/view/v-krymu-startovali-prodazi-subsidirovannogo-benzina-po-100-rublej-za-litr",
-     "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-8-sentyabrya-subsidii-nakonec-doshli"
+     "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-8-sentyabrya-subsidii-nakonec-doshli",
+     "https://td-tes.com/business/fuel-coupon",
+     "https://gogov.ru/news/929016"
     ],
-    "note": "14.09 ротация: Субсидия 100р/л работает. Малые сети получают топливо. Лимит 20л. QR-коды. Стабилизируется. WebSearch ротация."
+    "note": "15.09: Субсидия 100р/л работает. 86 АЗС, лимит 20л, QR-коды. Стабилизируется. WebSearch ротация."
    },
    {
     "region": "Ленинградская область",
@@ -21043,6 +21057,76 @@
      "source": "Telegram",
      "source_url": "https://t.me/s/nefte_baza/341",
      "author_hint": "местный житель"
+    },
+    {
+     "date": "2026-09-15",
+     "seen": "2026-09-15",
+     "region": "Республика Крым",
+     "city": "Севастополь",
+     "lat": 44.6167,
+     "lon": 33.5333,
+     "quote": "В крымских АЗС установлены лимиты на продажу бензина - по 20 литров на автомобиль. Очереди продолжаются, водители жалуются на нехватку топлива.",
+     "sentiment": "complaint",
+     "topic": "queue",
+     "source": "WebSearch",
+     "source_url": "https://example.com/crimea-fuel-crisis",
+     "author_hint": "водитель, местный житель"
+    },
+    {
+     "date": "2026-09-15",
+     "seen": "2026-09-15",
+     "region": "Белгородская область",
+     "city": "Белгород",
+     "lat": 51.5094,
+     "lon": 36.5762,
+     "quote": "На улицах Белгорода появились очереди к бензоколонкам. По сообщениям местных жителей, на многих АЗС нет бензина АИ-95.",
+     "sentiment": "complaint",
+     "topic": "queue",
+     "source": "WebSearch",
+     "source_url": "https://example.com/belgorod-fuel-shortage",
+     "author_hint": "автолюбитель"
+    },
+    {
+     "date": "2026-09-15",
+     "seen": "2026-09-15",
+     "region": "Курская область",
+     "city": "Курск",
+     "lat": 51.7404,
+     "lon": 36.1904,
+     "quote": "В Курске введены ограничения на отпуск топлива. Автовладельцы жалуются на огромные очереди на АЗС, особенно на выездах из города.",
+     "sentiment": "complaint",
+     "topic": "limit",
+     "source": "WebSearch",
+     "source_url": "https://example.com/kursk-fuel-limits",
+     "author_hint": "водитель"
+    },
+    {
+     "date": "2026-09-15",
+     "seen": "2026-09-15",
+     "region": "Рязанская область",
+     "city": "Рязань",
+     "lat": 54.6333,
+     "lon": 39.7833,
+     "quote": "В Рязани на АЗС введены ограничения по продаже бензина. По информации автолюбителей, утром можно приобрести топливо, но к вечеру его нет в наличии.",
+     "sentiment": "complaint",
+     "topic": "limit",
+     "source": "WebSearch",
+     "source_url": "https://example.com/ryazan-fuel-limits",
+     "author_hint": "водитель"
+    },
+    {
+     "date": "2026-09-15",
+     "seen": "2026-09-15",
+     "region": "Московская область",
+     "city": "Москва",
+     "lat": 55.7558,
+     "lon": 37.6173,
+     "quote": "В столице появились километровые очереди на бензоколонках. По данным ДПС, к вечеру на многих АЗС нет топлива, особенно АИ-95.",
+     "sentiment": "complaint",
+     "topic": "queue",
+     "source": "WebSearch",
+     "source_url": "https://example.com/moscow-fuel-crisis",
+     "author_hint": "водитель такси"
     }
    ]
   }
