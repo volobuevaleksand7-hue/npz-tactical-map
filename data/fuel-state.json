@@ -1,16 +1,16 @@
 {
   "meta": {
-    "generated_at": "2026-09-16T04:15Z",
+    "generated_at": "2026-09-16T16:00:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
-    "capacity_offline_mt_year": 173.1,
-    "capacity_offline_pct": 51,
+    "capacity_offline_mt_year": 178.3,
+    "capacity_offline_pct": 53,
     "gasoline_output_loss_pct": 38,
     "diesel_output_loss_pct": 45,
     "export_ban_gasoline": true,
@@ -411,12 +411,13 @@
       "lat": 45.27,
       "lon": 38.13,
       "capacity_mt_year": 5.2,
-      "status": "partial",
+      "status": "down",
       "status_since": "2026-09-13",
       "est_output_pct": 0,
       "damage": "Первая атака 28 июня. После частичного восстановления к июлю — вторая атака в ночь на 13 сентября: украинские дроны поразили ключевую установку переработки нефти и резервуарный парк. Пожар на объекте подтверждён видеозаписями и украинским Генштабом.",
       "note": "На 14 сентября завод остановлен после второй атаки. Славянский НПЗ — одно из крупнейших независимых предприятий на юге России (мощность 5.2 млн т/год). Повторный удар затрудняет восстановление.",
-      "source_url": "https://www.pravda.com.ua/rus/news/2026/09/13/8053195/"
+      "source_url": "https://www.pravda.com.ua/rus/news/2026/09/13/8053195/",
+      "confidence": "confirmed"
     },
     {
       "id": "novoshakhtinsk",
