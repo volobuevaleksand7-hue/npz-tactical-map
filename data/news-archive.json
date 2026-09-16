@@ -2,14 +2,14 @@
  "snapshot": {
   "balance": {
    "refining_capacity_total_mt_year": 338.6,
-   "capacity_offline_mt_year": 173.1,
-   "capacity_offline_pct": 51,
+   "capacity_offline_mt_year": 178.3,
+   "capacity_offline_pct": 53,
    "gasoline_output_loss_pct": 38,
    "diesel_output_loss_pct": 45,
    "export_ban_gasoline": true,
    "export_ban_kerosene": true,
    "import_from_belarus": true,
-   "notes": "На 16 сентября: третья фаза углубления кризиса. 15+ НПЗ в полной остановке; 9+ работают на 15-50% мощности. Производство упало до ~4 млн bbl/day (20-летний минимум). Волна повторных ударов теперь нацелена на вторичные установки (AVT-6, дизельный гидротрейтинг, смешивание), требующие 6-8 месяцев на замену и критически усложняющие восстановление. Последняя волна ударов: Сызран третий раз (15.09), Кинеф третий (14.09), ТАНЕКО третий (12-13.09), Саратов пятый (10-11.09), Рязань четвёртый (6.09). Беларусский импорт упал на 77% (май-август 454+ тыс т; сентябрь 49 тыс т бензина, 33 тыс т дизеля) из-за планового обслуживания Naftan. Практически ВСЕ 83 российских региона испытывают дефициты или нарушения; 46 регионов с системой нормирования. Национальное предложение покрывает только ~70% спроса. 58-59 регионов в острой фазе, 12+ критические (Крым, Северный Кавказ, Волга, Поволжье, Центр, Приморье). Экспортные терминалы: Primorsk закрыт; Ust-Luga ~70%; Novorossiysk 20-30% (повреждена критичная инфраструктура при атаке 8-9.09). Восстановление может потребовать месяцев даже при прекращении ударов.",
+   "notes": "На 16 сентября: третья фаза углубления кризиса. Волна повторных ударов нацелена на вторичные установки переработки (AVT-6, дизельный гидротрейтинг, смешивание), требующие 6-8 месяцев на замену и критически усложняющие восстановление при условиях санкций. Последние удары: Сызран третий раз (15.09), Кинеф третий (14.09), ТАНЕКО третий (12-13.09), Саратов пятый (10-11.09), Рязань четвёртый (6.09). Производство упало до ~4 млн bbl/day (20-летний минимум); национальное предложение покрывает только ~70% спроса. Беларусский импорт упал на 77% (май-август 454+ тыс т; сентябрь 49 тыс т бензина, 33 тыс т дизеля) из-за планового обслуживания Naftan. Практически все 83 региона испытывают дефициты; 58-59 в острой фазе, включая Крым, Северный Кавказ, Волгу, Поволжье, Центр, Приморье. Экспортные терминалы: Primorsk закрыт; Ust-Luga ~70% (8-я атака 1.09); Novorossiysk 20-30% (атака 8-9.09). Восстановление требует недель–месяцев при отсутствии новых ударов.",
    "throughput_shortfall_pct": 73,
    "method": "capacity_offline и throughput_shortfall выводятся из refineries[] кодом (agents/recalc-national-balance.py), не оценкой агента."
   },
@@ -1485,50 +1485,49 @@
     "region": "Кировская область",
     "lat": 58.6,
     "lon": 49.65,
-    "level": "limited",
-    "updated": "2026-09-14T12:30:00Z",
+    "level": "strained",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
-      "name": "Все АЗС",
+      "name": "Движение / Лукойл",
       "status": "limited",
-      "level": "limited",
+      "level": "strained",
       "limit_l": 30,
-      "note": "14.09 ротация: Система чет-нечет отменена в начале августа (3.08). Сейчас вторая волна острая, но режим отменен. Лимит 30л. Дефицит продолжается. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Четные/нечетные по номерам (с 11.07). Движение лимит 30л АИ-92/95, 100л ДТ. Лукойл лимит 100л. Очереди 20-30 минут. WebSearch ротация 16.09."
      }
     ],
-    "queues_hours": 1.5,
-    "ai95_price_rub": 69.87,
-    "diesel_price_rub": 82.12,
+    "queues_hours": 0.5,
+    "ai95_price_rub": 72.0,
+    "diesel_price_rub": 82.0,
     "source_urls": [
-     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/",
-     "https://ria56.ru/posts/13-sentyabrya-na-azs-v-orenburzhe-zapravlyayut-mashiny-tolko-s-nechetnymi-nomerami.htm"
+     "https://www.newsler.ru/auto/2026/09/14/benzin-v-nalichii-ocheredi-na-meste-situaciya-na-azs-kirova-vecherom",
+     "https://finance.mail.ru/article/problemy-s-benzinom-v-rf-gde-dejstvuyut-ogranicheniya-i-kogda-normalizuetsya-situaciya-69215089/"
     ],
-    "note": "14.09 ротация: Чет-нечет отменена 03.08. Сейчас вторая волна. Лимит 30л. WebSearch ротация 14.09."
+    "note": "16.09 ротация: Четные/нечетные. Лимит 30л АИ-92/95, 100л ДТ. WebSearch ротация 16.09."
    },
    {
     "region": "Чеченская Республика",
     "lat": 43.32,
     "lon": 45.69,
     "level": "critical",
-    "updated": "2026-09-14T12:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
-      "name": "Грозный",
+      "name": "Роснефть / Частные",
       "status": "limited",
       "level": "critical",
       "limit_l": 20,
-      "note": "14.09 ротация: Острый дефицит продолжается. На Роснефти только 20л за 73р. Цена разброс: Роснефть 73р АИ-95, частные 105р+. Очереди за дешевым. Дефицит острый. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Острый дефицит АИ-95. Роснефть 20л (73р/л) вызывает очереди. Частные АЗС 105р+. Доступность 9% АЗС в Грозном. Дефицит острый. WebSearch ротация 16.09."
      }
     ],
-    "queues_hours": 1.5,
+    "queues_hours": 2.0,
     "ai95_price_rub": 87.77,
     "diesel_price_rub": 110.0,
     "source_urls": [
      "https://www.kavkaz-uzel.eu/articles/424821",
-     "https://gdezapravka.ru/zapravki/groznyy",
-     "https://multigo.ru/benzin/43.3167;45.6958/11"
+     "https://gdezapravka.ru/zapravki/groznyy"
     ],
-    "note": "14.09 ротация: Острый дефицит. Роснефть 20л (73р), частные 105р+. WebSearch ротация 14.09."
+    "note": "16.09 ротация: Острый дефицит. Роснефть 20л (73р), частные 105р+. WebSearch ротация 16.09."
    },
    {
     "region": "Новосибирская область",
@@ -1560,23 +1559,24 @@
     "lat": 51.76,
     "lon": 55.09,
     "level": "limited",
-    "updated": "2026-09-14T12:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
       "name": "АЗС (чет-нечет по ГРЗ)",
       "status": "limited",
       "level": "limited",
       "limit_l": 25,
-      "note": "14.09 ротация: Система чет-нечет ДЕЙСТВУЕТ в сентябре. Лимит 15-30л АИ-92/95 в городе, до 200л ДТ на трассах. Чередование по четным/нечетным дням (на 14.09 четные номера). WebSearch ротация 14.09."
+      "note": "16.09 ротация: Система чет-нечет. Лимит 15-30л АИ-92/95 в городе, 200л ДТ на трассах. Ремонт НПЗ Орск после атак БПЛА (13.08). Чередование по четным/нечетным. WebSearch ротация 16.09."
      }
     ],
-    "queues_hours": 0.2,
+    "queues_hours": 0.3,
     "ai95_price_rub": 72.0,
     "diesel_price_rub": 88.0,
     "source_urls": [
-     "https://ria56.ru/posts/14-sentyabrya-na-azs-v-orenburzhe-zapravlyayut-mashiny-tolko-s-chetnymi-nomerami.htm"
+     "https://ria56.ru/posts/14-sentyabrya-na-azs-v-orenburzhe-zapravlyayut-mashiny-tolko-s-chetnymi-nomerami.htm",
+     "https://expert.ru/news/v-orenburgskoy-oblasti-vveli-zapravku-na-azs-po-sisteme-chet-nechet"
     ],
-    "note": "14.09 ротация: Чет-нечет действует в сентябре. Лимит 15-30л. WebSearch ротация 14.09."
+    "note": "16.09 ротация: Чет-нечет действует. Лимит 15-30л. WebSearch ротация 16.09."
    },
    {
     "region": "Камчатский край",
@@ -1656,23 +1656,24 @@
     "lat": 68.97,
     "lon": 33.08,
     "level": "strained",
-    "updated": "2026-09-14T12:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
-      "name": "ВИТЭК / Газпромнефть / Лукойл / Роснефть",
+      "name": "Лукойл / Роснефть / Газпром нефть",
       "status": "limited",
       "level": "strained",
       "limit_l": 30,
-      "note": "14.09 ротация: Разные лимиты по сетям (30л, 50л, 99л). Логистические вызовы на Севере. Цена АИ-95 73.05р. Поставки контролируются. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Лукойл/Газпром 30л АИ-92/95, 60л ДТ. Роснефть 99л. Канистры запрещены. Логистические вызовы на Севере. WebSearch ротация 16.09."
      }
     ],
-    "queues_hours": 0.15,
+    "queues_hours": 0.2,
     "ai95_price_rub": 73.05,
     "diesel_price_rub": 87.78,
     "source_urls": [
-     "https://www.fontanka.ru/2026/08/15/76590338/"
+     "https://www.fontanka.ru/2026/08/15/76590338/",
+     "https://multigo.ru/benzin/66.4;33.1/11"
     ],
-    "note": "14.09 ротация: Разные лимиты 30-99л. Логистические вызовы. WebSearch ротация 14.09."
+    "note": "16.09 ротация: Лимиты 30л (Лукойл/Газпром), 99л (Роснефть). WebSearch ротация 16.09."
    },
    {
     "region": "Удмуртская республика",
@@ -1704,24 +1705,24 @@
     "lat": 56.63,
     "lon": 47.89,
     "level": "strained",
-    "updated": "2026-09-14T12:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
       "name": "Крупные сети",
       "status": "limited",
       "level": "strained",
-      "limit_l": null,
-      "note": "14.09 ротация: Кризис продолжается. Спекуляции усугубляют. Дефицит на ряде АЗС. Водители ездят в Татарстан за топливом. WebSearch ротация 14.09."
+      "limit_l": 30,
+      "note": "16.09 ротация: Кризис ослабляется. Цены выросли (АИ-92 +28%, АИ-95 +31%). Спекуляции контролируются. Водители ездят в Татарстан за топливом. WebSearch ротация 16.09."
      }
     ],
-    "queues_hours": 0.2,
+    "queues_hours": 0.3,
     "ai95_price_rub": 71.0,
     "diesel_price_rub": 80.0,
     "source_urls": [
      "https://ngs.ru/text/transport/2026/09/06/76625740/",
-     "https://www.marimedia.ru/review_article/transport/"
+     "https://marimedia.ru/review_article/transport/"
     ],
-    "note": "14.09 ротация: Кризис продолжается. Спекуляции. Дефицит. WebSearch ротация 14.09."
+    "note": "16.09 ротация: Кризис ослабляется. Цены выросли. Спекуляции. WebSearch ротация 16.09."
    },
    {
     "region": "Забайкальский край",
@@ -2015,115 +2016,111 @@
     "region": "Тюменская область",
     "lat": 57.15,
     "lon": 65.53,
-    "level": "strained",
-    "updated": "2026-09-14T14:30:00Z",
+    "level": "critical",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
-      "name": "Газпром нефть/Лукойл",
+      "name": "Газпром нефть / Лукойл",
       "status": "limited",
-      "level": "strained",
+      "level": "critical",
       "limit_l": 40,
-      "note": "14.09 ротация: Ситуация улучшается. Топливо есть на большинстве АЗС. Цены варьируются 63-155р (дифференциация между сетями и частными). Лимит 40л город, 200л трасса дизель. Поставки восстанавливаются. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Серьёзный дефицит. Зависимость от поставок. Антипинский НПЗ производит в основном ДТ. Переговоры о логистике, увеличение объёмов. Цены 85р. WebSearch ротация 16.09."
      }
     ],
-    "queues_hours": 0.8,
+    "queues_hours": 2.0,
     "ai95_price_rub": 85.0,
     "diesel_price_rub": 80.0,
     "source_urls": [
-     "https://fedpress.ru/article/3451472",
-     "https://megatyumen.ru/avto/benzin-v-tyumeni-4-sentyabrya-2026-gde-segodnya-est-ai-92-i-ai-95-i-skolko-stoit-toplivo/",
-     "https://fedpress.ru/article/3451148"
+     "https://megatyumen.ru/avto/pochemu-v-tyumeni-propal-benzin-i-kogda-zakonchitsya-deficit-chto-proishodit-na-gorodskih-azs/",
+     "https://fedpress.ru/article/3451472"
     ],
-    "note": "14.09 ротация: Улучшается. Топливо появляется. Ищут работающие АЗС. Поставки восстанавливаются. WebSearch ротация."
+    "note": "16.09 ротация: Серьёзный дефицит. Зависимость поставок. Переговоры логистики. WebSearch ротация 16.09."
    },
    {
     "region": "Ленинградская область",
     "lat": 59.5,
     "lon": 31.0,
-    "level": "strained",
-    "updated": "2026-09-14T14:30:00Z",
+    "level": "critical",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
       "name": "Газпромнефть / Лукойл / Роснефть",
       "status": "limited",
-      "level": "strained",
+      "level": "critical",
       "limit_l": 20,
-      "note": "14.09 ротация: НОВЫЕ перебои (июльский сценарий повторяется). Отгрузка топлива упала. Власти готовятся к новому снижению поставок. Рассматривают чет-нечет. Лимиты 20-30л. Логистические сбои от ударов БПЛА. Готовится совместно с СПб к третьей волне. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Третья волна критична. Новые перебои (июльский сценарий повторяется). Отгрузка упала. Чет-нечет планируется. Лимиты 20-30л. Логистические сбои от ударов БПЛА. Совместно с СПб. WebSearch ротация 16.09."
      }
     ],
-    "queues_hours": 0.3,
+    "queues_hours": 1.0,
     "ai95_price_rub": 70.0,
     "diesel_price_rub": 72.0,
     "source_urls": [
-     "https://www.tks.ru/reviews/2026/09/10/0003/v-lenoblasti-snova-nachalis-pereboi-s-postavkami-benzina-na-azs-po-letnemu-stsenariyu/",
-     "https://abnews.ru/szfo/news/lenobl/2026/9/10/leningradskaya-oblast-gotovitsya-k-novomu-snizheniyu-postavok-topliva",
-     "https://www.fontanka.ru/2026/09/10/76634584/"
+     "https://www.fontanka.ru/2026/09/10/76634584/",
+     "https://abnews.ru/szfo/news/lenobl/2026/9/10/leningradskaya-oblast-gotovitsya-k-novomu-snizheniyu-postavok-topliva"
     ],
-    "note": "14.09 ротация: Новые перебои начались. Готовится к снижению поставок. Лимиты 20-30л. Логистические сбои. WebSearch ротация."
+    "note": "16.09 ротация: Третья волна критична. Новые перебои. Лимиты 20-30л. WebSearch ротация 16.09."
    },
    {
     "region": "Самарская область",
     "lat": 53.2,
     "lon": 50.15,
     "level": "limited",
-    "updated": "2026-09-14T14:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
-      "name": "Роснефть/Татнефть/Лукойл",
+      "name": "Роснефть / Татнефть / Лукойл",
       "status": "limited",
       "level": "limited",
       "limit_l": 30,
-      "note": "14.09 ротация: Лимиты СУЖЕНЫ до 30л бензина (было 40л), 100л дизель. Запрет на канистры (только в бак). Стратегические отрасли получают полный объём. Лимиты установлены 23.06, сужены в сентябре. Контролируется. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Лимиты сужены до 30л (было 40л), 100л ДТ. Запрет канистры (только в бак). Стратегические отрасли получают полный объём. Контролируется. WebSearch ротация 16.09."
      }
     ],
-    "queues_hours": 0.1,
+    "queues_hours": 0.2,
     "ai95_price_rub": 83.34,
     "diesel_price_rub": 85.44,
     "source_urls": [
      "https://www.niasam.ru/transport/minpromtorg-samarskoj-oblasti-razyasnil-limity-na-otpusk-benzina-na-azs-281329.html",
-     "https://kazan.aif.ru/society/vremennye-limity-chto-proishodit-s-benzinom-na-azs-povolzhya-v-2026",
      "https://samara.aif.ru/society/details/bez-paniki-ogranicheniya-na-prodazhu-topliva-v-samare-prodleny"
     ],
-    "note": "14.09 ротация: Лимит сужен до 30л (было 40л). Запрет канистр. Контролируется. WebSearch ротация."
+    "note": "16.09 ротация: Лимит 30л (сужен с 40л). Запрет канистр. WebSearch ротация 16.09."
    },
    {
     "region": "Республика Хакасия",
     "lat": 53.72,
     "lon": 91.44,
     "level": "calm",
-    "updated": "2026-09-14T14:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
-      "name": "Лукойл/Газпром нефть/Роснефть",
+      "name": "Лукойл / Газпром нефть / Роснефть",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "14.09 ротация: Полностью стабилизирована. Лимиты отменены. АЗС Газпромнефть в Абакане: АИ-92 63.41р, АИ-95 67.64р (данные августа, стабильны). Запасы выросли на 20%. Без дефицита, без ограничений. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Полностью стабилизирована. Лимиты отменены. АИ-92 63.41р, АИ-95 67.64р (Абакан). Запасы выросли на 20%. Без дефицита. WebSearch ротация 16.09."
      }
     ],
     "queues_hours": 0.0,
-    "ai95_price_rub": 67.64,
+    "ai95_price_rub": 81.55,
     "diesel_price_rub": 82.95,
     "source_urls": [
      "https://www.osnmedia.ru/obshhestvo/vlasti-hakasii-soobshhili-o-smyagchenii-situatsii-s-toplivom",
-     "https://www.petrolplus.ru/fuelindex/respublika-khakasiya/",
-     "https://abnews.ru/siberia/news/respublika-hakasiya/2026/8/18/zapasy-topliva-v-hakasii-vyrosli-na-20"
+     "https://www.petrolplus.ru/fuelindex/respublika-khakasiya/"
     ],
-    "note": "14.09 ротация: Стабильна. Без ограничений. Цены 63-67р. Запасы выросли. WebSearch ротация."
+    "note": "16.09 ротация: Стабильна. Без ограничений. Цены низкие. Запасы выросли 20%. WebSearch ротация 16.09."
    },
    {
     "region": "Адыгея",
     "lat": 44.61,
     "lon": 40.1,
     "level": "limited",
-    "updated": "2026-09-14T14:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
       "name": "Все АЗС",
       "status": "limited",
       "level": "limited",
       "limit_l": 40,
-      "note": "14.09 ротация: Лимит 40л/сутки (установлен 21.07). Нет свежих данных по сентябрю (поиск вернул информацию июля). Ограничение объема на АЗС для предотвращения ажиотажа. Поставки штатные. Контролируется. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Лимит 40л/сутки (установлен 21.07). Поставки штатные. Ограничение объема для предотвращения ажиотажа. Контролируется. WebSearch ротация 16.09."
      }
     ],
     "queues_hours": 0.2,
@@ -2133,21 +2130,21 @@
      "https://www.kommersant.ru/doc/8763779",
      "https://finance.mail.ru/article/nu-vot-i-vse-v-kakih-regionah-nachali-snimat-ogranicheniya-na-prodazhu-benzina-i-dizelya-69219723/"
     ],
-    "note": "14.09 ротация: Лимит 40л (с 21.07). Нет свежих дат сентября. Контролируется. WebSearch ротация."
+    "note": "16.09 ротация: Лимит 40л/сутки. Поставки штатные. Контролируется. WebSearch ротация 16.09."
    },
    {
     "region": "Ярославская область",
     "lat": 57.63,
     "lon": 39.87,
     "level": "strained",
-    "updated": "2026-09-14T14:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
-      "name": "Лукойл/Газпромнефть/Роснефть",
+      "name": "Лукойл / Газпромнефть / Роснефть",
       "status": "limited",
       "level": "strained",
       "limit_l": 30,
-      "note": "14.09 ротация: Проблемы с поставками. На 35 АЗС подтверждено топливо, на 86 без него, на 78 ограничения. Очереди по утрам успешнее, днём появляются. Приоритет Москве, регионы остаточный принцип. Губернатор принял доп.меры 9.09. Напряженно. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Проблемы с поставками. На 35 АЗС топливо, на 86 без, на 78 ограничения. Приоритет Москве, регионы остаточный принцип. Туристический фактор. WebSearch ротация 16.09."
      }
     ],
     "queues_hours": 1.2,
@@ -2155,10 +2152,9 @@
     "diesel_price_rub": 82.63,
     "source_urls": [
      "https://yar.aif.ru/society/-situaciya-slozhnaya-na-azs-yaroslavskoy-oblasti-dopolnitelno-postavyat-benzin",
-     "https://yar.aif.ru/society/novosti-yaroslavlya-9-sentyabrya-ocheredi-na-azs-gosizmena-i-von-iz-za-himii",
      "https://76.ru/text/gorod/2026/09/08/76630242/"
     ],
-    "note": "14.09 ротация: Проблемы с поставками. 35 с топливом, 86 без. На 78 ограничения. Очереди. WebSearch ротация."
+    "note": "16.09 ротация: Проблемы поставок. 35 с топливом, 86 без. 78 ограничений. WebSearch ротация 16.09."
    },
    {
     "region": "Архангельская область",
@@ -2190,14 +2186,14 @@
     "lat": 61.67,
     "lon": 50.84,
     "level": "calm",
-    "updated": "2026-09-14T14:30:00Z",
+    "updated": "2026-09-16T12:00:00Z",
     "networks": [
      {
-      "name": "Лукойл/Газпромнефть",
+      "name": "Лукойл / Газпромнефть",
       "status": "open",
       "level": "calm",
       "limit_l": null,
-      "note": "14.09 ротация: Стабилизирована. Без жёстких ограничений. На Компании 2000 локальный лимит 20л (для локализации ажиотажа), остальные без. Цены упали: АИ-92 с 65.92р до 64.04р, АИ-95 с 71.77р до 68.04р. Сыктывкар стабилен. Без дефицита. WebSearch ротация 14.09."
+      "note": "16.09 ротация: Стабилизирована. Локальный лимит 20л на Компании 2000 для ажиотажа. Цены упали: АИ-92 64.04р, АИ-95 68.04р. Без дефицита. WebSearch ротация 16.09."
      }
     ],
     "queues_hours": 0.0,
@@ -2205,10 +2201,9 @@
     "diesel_price_rub": 81.0,
     "source_urls": [
      "https://komiinform.ru/news/297969",
-     "https://komi.aif.ru/money/dizel-v-komi-ruhnul-v-cene-na-15-rubley-benzin-tozhe-desheveet",
      "https://multigo.ru/benzin/61.6763;50.8381/8"
     ],
-    "note": "14.09 ротация: Стабильна. Цены упали. Локальные лимиты (20л на Компании 2000). WebSearch ротация."
+    "note": "16.09 ротация: Стабильна. Цены низкие. Локальный лимит 20л. WebSearch ротация 16.09."
    },
    {
     "region": "Чукотский автономный округ",
@@ -2295,8 +2290,8 @@
    "notes": "14.09 (СПбМТСБ): АИ-92 ~67.99р/л, АИ-95 ~72.35р/л, ДТ ~82р/л. Цены ПАДАЮТ несмотря на третью волну локального дефицита в Санкт-Петербурге и других регионах. Биржевые цены снижаются из-за нарушений сроков поставок и перенаправления импорта."
   },
   "refinery_counts": {
-   "down": 14,
-   "partial": 10,
+   "down": 15,
+   "partial": 9,
    "operational": 9
   },
   "timeline": [
@@ -2486,6 +2481,13 @@
     "date": "2026-09-14",
     "capacity_offline_pct": 51,
     "capacity_offline_mt_year": 173.1,
+    "gasoline_loss_pct": 38,
+    "diesel_loss_pct": 45
+   },
+   {
+    "date": "2026-09-16",
+    "capacity_offline_pct": 53,
+    "capacity_offline_mt_year": 178.3,
     "gasoline_loss_pct": 38,
     "diesel_loss_pct": 45
    }
@@ -20909,8 +20911,8 @@
      "time": "00:00",
      "city": "Сызрань",
      "region": "Самарская область",
-     "lat": 52.16,
-     "lon": 48.93,
+     "lat": 53.14,
+     "lon": 48.46,
      "type": "drone",
      "count": null,
      "target": "Сызранский нефтеперерабатывающий завод (НПЗ) «Роснефти»",
@@ -21138,7 +21140,52 @@
    ]
   },
   "2026-09-16": {
-   "strikes": [],
+   "strikes": [
+    {
+     "date": "2026-09-16",
+     "time": "ночь",
+     "city": "Сызрань",
+     "region": "Самарская область",
+     "lat": 53.14,
+     "lon": 48.46,
+     "type": "drone",
+     "count": null,
+     "target": "Сызранский нефтеперерабатывающий завод (НПЗ) «Роснефти»",
+     "casualties": "пострадавших нет",
+     "title": "Повторная атака БПЛА на Сызранский НПЗ",
+     "detail": "В ночь на 16 сентября Сызранский НПЗ вновь подвергся атаке беспилотников. По заявлению главы города Сергея Володченкова, цели атаки достичь не удалось; повреждены промышленные объекты и жилые дома (выбиты стёкла), пострадавших нет. По данным властей, над Самарской областью за ночь сбито более 40 БПЛА. Завод остановлен с 15 сентября после предыдущего удара.",
+     "source_url": "https://eadaily.com/ru/news/2026/09/16/vsu-popytalis-snova-atakovat-syzranskiy-npz-ne-vyshlo",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-09-16",
+     "time": "ночь",
+     "city": "Смородино",
+     "region": "Белгородская область",
+     "lat": 50.7,
+     "lon": 36.48,
+     "type": "drone",
+     "count": 1,
+     "target": "жилая застройка",
+     "detail": "Мирный житель (мужчина) погиб в результате удара беспилотника в селе Смородино Граворонского округа",
+     "source_url": "https://www.ptoday.ru/15071-ataka-bpla-na-russiju-16-sentjabrja-2026-regiony-pod-udarom-i-pervye-dannye-o-posledstvijah.html",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-09-16",
+     "time": "ночь",
+     "city": "Красная Яруга",
+     "region": "Белгородская область",
+     "lat": 50.87,
+     "lon": 36.6,
+     "type": "drone",
+     "count": 1,
+     "target": "автомобиль",
+     "detail": "Два человека ранены при ударе беспилотника по автомобилю в посёлке Красная Яруга",
+     "source_url": "https://www.ptoday.ru/15071-ataka-bpla-na-russiju-16-sentjabrja-2026-regiony-pod-udarom-i-pervye-dannye-o-posledstvijah.html",
+     "confidence": "reported"
+    }
+   ],
    "voices": [
     {
      "date": "2026-09-16",
