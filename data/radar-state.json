@@ -25,6 +25,25 @@
       "last_event_ts": 1789514920,
       "source_text": "16.09.2026 02:28 МСК\nРеспублики Северного Кавказа внимание по бпла"
     },
+    "Краснодарский край": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": false,
+      "aviation": true,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1789537536,
+      "source_text": "16.09.2026 08:45 МСК\nРСЧС: АВИАЦИОННАЯ ОПАСНОСТЬ на территории Краснодарского края."
+    },
     "Калужская область": {
       "bpla": false,
       "bplaDim": false,
@@ -843,28 +862,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1789502393,
       "source_text": "15.09.2026 22:59 МСК\nЕвпатория, Молочное, Уютное Заозёрное и близлежащие тревога по БПЛА с северо-запада"
-    },
-    {
-      "key": "красноперекопск|автономная республика крым",
-      "name": "Красноперекопск",
-      "lat": 45.95547,
-      "lon": 33.79261,
-      "region": "Автономная Республика Крым",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789494092,
-      "source_text": "15.09.2026 20:41 МСК\nАрмянск с запада. Перекопский залив, Красноперекопск, залив Красноперекопск Тревога по БПЛА Над заливом Перекопский фиксации БПЛА"
     },
     {
       "key": "новофёдоровка|автономная республика крым",
@@ -2236,6 +2233,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 277938,
+      "text": "РСЧС: АВИАЦИОННАЯ ОПАСНОСТЬ на территории Краснодарского края.",
+      "ts": 1789537536,
+      "time_label": "16.09.2026 08:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 277937,
+      "text": "ЛДНР Запорожская область РФ\nАвиационно ракетно бомбовая опасность",
+      "ts": 1789537288,
+      "time_label": "16.09.2026 08:41 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 277936,
       "text": "Красноармейск ДНР и близлежащие\nОпасность по БПЛА Хорнет",
       "ts": 1789536981,
@@ -2858,22 +2871,6 @@
       "time_label": "16.09.2026 02:06 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 277893,
-      "text": "От Морозовска фиксации БпЛА в направлении Волгограда",
-      "ts": 1789513529,
-      "time_label": "16.09.2026 02:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 277892,
-      "text": "Астраханская область\nвнимание по бпла",
-      "ts": 1789513208,
-      "time_label": "16.09.2026 02:00 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2883,15 +2880,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789536981,
-  "last_event_at": "2026-09-16T05:36:21Z",
-  "fetched_at": "2026-09-16T05:40:03.152685Z",
+  "timestamp": 1789537536,
+  "last_event_at": "2026-09-16T05:45:36Z",
+  "fetched_at": "2026-09-16T05:50:03.321050Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-16T05:40:03.152685Z",
-    "source_age_seconds": 222,
-    "city_count": 69,
-    "region_count": 22,
+    "generated_at": "2026-09-16T05:50:03.321050Z",
+    "source_age_seconds": 267,
+    "city_count": 68,
+    "region_count": 23,
     "feed_count": 80
   }
 }
