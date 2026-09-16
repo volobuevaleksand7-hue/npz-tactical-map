@@ -42,7 +42,8 @@ DAYS="${NPZ_COVER_DAYS:-7}"
 dates=""
 for i in $(seq 0 $((DAYS - 1))); do
   d="$(date -v-"${i}"d '+%Y-%m-%d' 2>/dev/null || date -d "-${i} day" '+%Y-%m-%d')"
-  [ -f "assets/cover-$d.png" ] || dates="${dates:+$dates,}$d"
+  # нет обложки, либо «тихая» (.quiet) — build-covers сам решит, есть ли теперь лид
+  [ -f "assets/cover-$d.png" ] && [ ! -f "assets/cover-$d.quiet" ] || dates="${dates:+$dates,}$d"
 done
 if [ -z "$dates" ]; then say "все обложки за последние $DAYS дней на месте"; exit 0; fi
 say "добираю: $dates"

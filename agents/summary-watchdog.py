@@ -232,9 +232,10 @@ def heal(day: str):
     COVER_SRC = "none"
     env = {**os.environ, "NPZ_REPO": str(ROOT)}
     coverf = ROOT / "assets" / f"cover-{day}.png"
+    quietf = ROOT / "assets" / f"cover-{day}.quiet"      # «тихая» обложка: пересобрать, если приехал лид
     try:
         _run([sys.executable, "agents/gen-news.py"])                  # карточка + архив
-        if coverf.exists():
+        if coverf.exists() and not (quietf.exists() and data_has_today(day)):
             COVER_SRC = "existing"
         else:
             r = _run([sys.executable, "hermes/scripts/build-covers.py", "--dates", day],
@@ -269,6 +270,7 @@ def heal(day: str):
             if (ROOT / sib).exists():
                 files.append(sib)
     _run(["git", "-C", str(ROOT), "add", "--", *files])
+    _run(["git", "-C", str(ROOT), "add", "-A", "--", f"assets/cover-{day}.quiet"])  # маркер: добавить или снять
     gs = ROOT / "agents" / "git-sync.sh"
     if not gs.exists():
         log("самолечение: git-sync.sh нет — собрал, но не запушил")

@@ -131,12 +131,17 @@ def meta_for(date, brief):
     elif vo:
         city = str(vo[0].get("city", "")).strip(); kind = "queue"; src = vo[0].get("source_url", "")
     else:
-        # ponytail: раньше тут было city="Россия"; kind="city" → обложка «Россия /
-        # атака дронов». Это враньё в проде: подпись обещает конкретный объект,
-        # которого нет, и на день без данных мы утверждали атаку. Лучше не собрать
-        # обложку вовсе — watchdog увидит её отсутствие и пересоберёт позже,
-        # когда удары приедут.
-        return None
+        # Тихие сутки: ударов в данных нет. Раньше возвращали None и сайт/TG показывали
+        # тёмную og-заглушку (16.09.2026 — «а это что?»). Врать «атака дронов» нельзя,
+        # но честную обложку «без ударов» собрать можно. Маркер .quiet даёт пересобрать
+        # её, если удары за день приедут позже (watchdog/--missing это учитывают).
+        return {"city": "Без ударов", "event": "подтверждённых ударов за сутки нет",
+                "date_rus": rus(date), "src": "", "no_ref": True, "quiet": True,
+                "prompt": ("Дневной документальный фотоснимок: спокойный российский промышленный "
+                           "город, на дальнем плане целый нефтезавод без дыма и огня, ясное небо, "
+                           "мирная обстановка, обычный будний день. Светлая ясная атмосфера, дневной "
+                           "свет, фотожурналистика, НЕ мрачно и НЕ ночь. Реализм, широкий городской "
+                           "план 1200x630 горизонталь. БЕЗ текста и букв.")}
     if not city:
         return None
     # Логистический склад (Wildberries/Ozon, распределительный центр) — не «топливная
@@ -369,6 +374,8 @@ def build_one(date, m):
                    capture_output=True)
     raw.unlink(missing_ok=True)
     if out.exists():
+        q = ASSETS / f"cover-{date}.quiet"
+        q.write_text("quiet\n") if m.get("quiet") else q.unlink(missing_ok=True)
         print(f"OK  {date}  [{mode}]  {m['city']} — {m['event']}")
         return True
     print(f"CAPFAIL {date}")
@@ -391,8 +398,9 @@ def main():
         dates = [d.strip() for d in a.dates.split(",") if d.strip()]
     elif a.all:
         dates = all_dates
-    else:  # --missing (дефолт)
-        dates = [d for d in all_dates if not (ASSETS / f"cover-{d}.png").exists()]
+    else:  # --missing (дефолт): нет обложки, либо стоит «тихая» и с тех пор появился лид
+        dates = [d for d in all_dates if not (ASSETS / f"cover-{d}.png").exists()
+                 or ((ASSETS / f"cover-{d}.quiet").exists() and not meta_for(d, briefs.get(d, {})).get("quiet"))]
 
     if not dates:
         print("build-covers: все обложки на месте, нечего делать.")
