@@ -130,6 +130,11 @@
 .link-card.lc-d{font-size:11px;color:var(--ink-dim)}
 .osint-note{margin-top:32px;font-size:11px;color:var(--ink-dim);background:var(--surface2);padding:12px;border-radius:10px;border-left:3px solid var(--amber);line-height:1.6}
 .updated-line{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:6px}
+.events-list{margin:8px 0 18px;display:flex;flex-direction:column;gap:6px}
+.ev-item{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:12.5px;line-height:1.5;color:var(--ink-dim)}
+.ev-item .ev-date{font-family:var(--mono);color:var(--ink);font-weight:700}
+.ev-item .ev-region{color:var(--ink);font-weight:600}
+.ev-item .ev-type{color:var(--red);font-weight:700}
  </style>
  <link rel="stylesheet" href="/search.css?v=5a32b7c1">
  <script defer src="/search.js?v=8b14567c"></script>
@@ -312,6 +317,38 @@
  addEventListener("message",function(e){if(e.origin===location.origin&&e.data==="npz:scroll-article"){var a=document.getElementById("article");if(a)a.scrollIntoView({behavior:"smooth",block:"start"});}});
  </script>
 
+ <!-- ПОСЛЕДНИЕ СОБЫТИЯ — текстовый слой под iframe для поисковика, генерируется
+ agents/gen-karta-bpla-events.py из data/strikes.json (вызов в hermes/publish-vps.sh) -->
+ <h2 class="section-h"><span class="ico">🕒</span> Последние события по регионам</h2>
+ <p class="lead-p">Свежие зафиксированные события БПЛА и ракетных угроз по регионам России — из архива хроники, автообновление при каждой публикации данных:</p>
+ <div class="events-list">
+ <!-- GEN:recent-events -->
+<div class="ev-item"><span class="ev-date">16 сентября 2026</span> · <span class="ev-region">Самарская область</span> · <span class="ev-type">БПЛА</span> · Сызранский нефтеперерабатывающий завод (НПЗ) «Роснефти»</div>
+<div class="ev-item"><span class="ev-date">16 сентября 2026</span> · <span class="ev-region">Белгородская область</span> · <span class="ev-type">БПЛА</span> · автомобиль</div>
+<div class="ev-item"><span class="ev-date">16 сентября 2026</span> · <span class="ev-region">Белгородская область</span> · <span class="ev-type">БПЛА</span> · жилая застройка</div>
+<div class="ev-item"><span class="ev-date">15 сентября 2026</span> · <span class="ev-region">Волгоградская область</span> · <span class="ev-type">БПЛА</span> · Себряковцемент (завод по производству цемента)</div>
+<div class="ev-item"><span class="ev-date">15 сентября 2026</span> · <span class="ev-region">Ростовская область</span> · <span class="ev-type">БПЛА и ракета</span> · Логистический центр Ozon</div>
+<div class="ev-item"><span class="ev-date">15 сентября 2026</span> · <span class="ev-region">Ростовская область</span> · <span class="ev-type">БПЛА и ракета</span> · Таганрогский авиационный научно-технический комплекс имени Г.М. Бериева</div>
+<div class="ev-item"><span class="ev-date">15 сентября 2026</span> · <span class="ev-region">Самарская область</span> · <span class="ev-type">БПЛА</span> · Сызранский нефтеперерабатывающий завод (НПЗ) «Роснефти»</div>
+<div class="ev-item"><span class="ev-date">14 сентября 2026</span> · <span class="ev-region">Брянская область</span> · <span class="ev-type">БПЛА</span> · гражданское лицо (велосипедист)</div>
+<div class="ev-item"><span class="ev-date">14 сентября 2026</span> · <span class="ev-region">Краснодарский край</span> · <span class="ev-type">БПЛА</span> · жилая инфраструктура</div>
+<div class="ev-item"><span class="ev-date">14 сентября 2026</span> · <span class="ev-region">Республика Крым</span> · <span class="ev-type">БПЛА</span> · детский сад &#x27;Маяк Детства&#x27;, жилые дома площади Нахимова</div> <!-- /GEN:recent-events -->
+ </div>
+
+ <!-- 4 H2 под интенты кластера «карта бпла». Не дублируют FAQ ниже — тот отвечает
+ на прямые вопросы, эти абзацы держат ключевые формулировки в теле статьи. -->
+ <h2 class="section-h"><span class="ico">📍</span> Где летит БПЛА прямо сейчас</h2>
+ <p class="lead-p">Список событий выше и карта-радар — это и есть ответ «где сейчас летит БПЛА»: регион подсвечивается сразу после того, как в открытых источниках появляется сообщение об угрозе. Точную траекторию конкретного аппарата открытые источники не дают, но по свежести и географии отметок видно, в каких регионах активность фиксируется в моменте.</p>
+
+ <h2 class="section-h"><span class="ico">🔄</span> Карта БПЛА в реальном времени: как читать</h2>
+ <p class="lead-p">«В реальном времени» здесь означает автоматическое обновление по мере поступления сообщений из открытых источников — обычно с задержкой в несколько минут от момента события до публикации в СМИ или Telegram-каналах. Это не радиолокационные данные и не сигнал системы оповещения, а агрегированная OSINT-оценка, поэтому в моменте возможна задержка в 5–15 минут.</p>
+
+ <h2 class="section-h"><span class="ico">🚀</span> Карта ракетной опасности и воздушных тревог</h2>
+ <p class="lead-p">Ракетная опасность — один из двух типов угрозы на этой карте наравне с БПЛА; метка на радаре показывает, какая именно объявлена. Отдельной «карты ракетной опасности» на сайте нет — это тот же слой радара, с разбивкой по регионам ниже и отдельными страницами по городам, где такие сигналы фиксируются чаще.</p>
+
+ <h2 class="section-h"><span class="ico">🗺️</span> Карта беспилотников по регионам России</h2>
+ <p class="lead-p">Радар подсвечивает все регионы страны сразу, но по части регионов и крупных городов ведутся отдельные страницы мониторинга — с историей фиксаций именно по этой территории. Полный список — в разделе перелинковки ниже, сводная картина по всей России — на самой карте-радаре.</p>
+
  <!-- ПЕРВОИСТОЧНИКИ (якорь #article — кнопка «Статья» из embed-карты скроллит сюда) -->
  <div class="osint-note" id="article" style="border-left-color:var(--teal);scroll-margin-top:16px">
  <strong>📚 Первоисточники (недоступны в РФ):</strong> удары БПЛА по НПЗ подтверждают независимые СМИ —
@@ -363,16 +400,22 @@
  <h2 class="section-h"><span class="ico">📍</span> Мониторинг БПЛА по регионам и городам</h2>
  <p class="lead-p">Сводная картина по всей стране — на карте-радаре выше: регион подсвечивается, если по нему есть отметка об угрозе, с указанием типа и свежести данных. Хроника конкретных ударов с датами — в <a href="/attacks">хронике ударов по НПЗ</a>. Кроме общей карты, по ряду регионов и крупных городов есть отдельные страницы мониторинга — с историей тревог именно по этому региону:</p>
  <div class="link-grid">
- <a class="link-card" href="/raketnaya-opasnost-moskovskaya-oblast"><div class="lc-h">📍 Московская область</div><div class="lc-d">Карта беспилотников онлайн и ракетной опасности по региону</div></a>
- <a class="link-card" href="/raketnaya-opasnost-kazan"><div class="lc-h">📍 Казань</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
- <a class="link-card" href="/raketnaya-opasnost-samara"><div class="lc-h">📍 Самара</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
- <a class="link-card" href="/raketnaya-opasnost-volgograd"><div class="lc-h">📍 Волгоград</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
- <a class="link-card" href="/raketnaya-opasnost-omsk"><div class="lc-h">📍 Омск</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
- <a class="link-card" href="/raketnaya-opasnost-ulyanovsk"><div class="lc-h">📍 Ульяновск</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
- <a class="link-card" href="/raketnaya-opasnost-penza"><div class="lc-h">📍 Пенза</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
- <a class="link-card" href="/raketnaya-opasnost-cheboksary"><div class="lc-h">📍 Чебоксары</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
- <a class="link-card" href="/raketnaya-opasnost-belgorod"><div class="lc-h">📍 Белгород</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
- <a class="link-card" href="/raketnaya-opasnost-tambovskaya-oblast"><div class="lc-h">📍 Тамбовская область</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
+ <!-- GEN:region-links -->
+<a class="link-card" href="/raketnaya-opasnost-volgograd"><div class="lc-h">📍 Волгоград</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности · Волгоградская область</div></a>
+<a class="link-card" href="/raketnaya-opasnost-cheboksary"><div class="lc-h">📍 Чебоксары</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности · Чувашия</div></a>
+<a class="link-card" href="/raketnaya-opasnost-omsk"><div class="lc-h">📍 Омск</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности · Омская область</div></a>
+<a class="link-card" href="/raketnaya-opasnost-ulyanovsk"><div class="lc-h">📍 Ульяновск</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности · Ульяновская область</div></a>
+<a class="link-card" href="/raketnaya-opasnost-kazan"><div class="lc-h">📍 Казань</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности · Республика Татарстан</div></a>
+<a class="link-card" href="/raketnaya-opasnost-moskovskaya-oblast"><div class="lc-h">📍 Московская область</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
+<a class="link-card" href="/raketnaya-opasnost-penza"><div class="lc-h">📍 Пенза</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности · Пензенская область</div></a>
+<a class="link-card" href="/raketnaya-opasnost-samara"><div class="lc-h">📍 Самара</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности · Самарская область</div></a>
+<a class="link-card" href="/raketnaya-opasnost-belgorod"><div class="lc-h">📍 Белгород</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности · Белгородская область</div></a>
+<a class="link-card" href="/raketnaya-opasnost-tambovskaya-oblast"><div class="lc-h">📍 Тамбовская область</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
+<a class="link-card" href="/raketnaya-opasnost-sverdlovskaya-oblast"><div class="lc-h">📍 Свердловская область</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
+<a class="link-card" href="/raketnaya-opasnost-rostovskaya-oblast"><div class="lc-h">📍 Ростовская область</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
+<a class="link-card" href="/raketnaya-opasnost-kirovskaya-oblast"><div class="lc-h">📍 Кировская область</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
+<a class="link-card" href="/raketnaya-opasnost-tyumenskaya-oblast"><div class="lc-h">📍 Тюменская область</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a>
+<a class="link-card" href="/raketnaya-opasnost-ryazanskaya-oblast"><div class="lc-h">📍 Рязанская область</div><div class="lc-d">Мониторинг БПЛА и ракетной опасности</div></a> <!-- /GEN:region-links -->
  </div>
 
  <!-- FAQ -->

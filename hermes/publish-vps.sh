@@ -47,6 +47,11 @@ if [ -f agents/gen-news.py ]; then
     # свежего fuel-state.json, неблокирующе. Без этого статус/дни простоя/FAQ на
     # странице отстают от данных ровно тем же классом дрейфа, что чинили на /refineries.
     python3 agents/gen-npz-status-page.py >/dev/null 2>&1 || echo "publish-vps: ⚠ gen-npz-status-page упал — пропускаю"
+    # /karta-bpla: тот же класс, что /refineries и /rabotayut-li-npz-rossii выше —
+    # «последние события» и перелинковка регионов из data/strikes.json +
+    # data/seo-topics.jsonl, а не рукописный текст (реопт кластера «карта бпла»,
+    # см. agents/gen-karta-bpla-events.py). Неблокирующе.
+    python3 agents/gen-karta-bpla-events.py >/dev/null 2>&1 || echo "publish-vps: ⚠ gen-karta-bpla-events упал — пропускаю"
     # 🔴 28.08.2026, ЧЕТВЁРТЫЙ рецидив класса «генератор пишет, git add не знает» —
     # но ломалось не то, что раньше: сама страница В списке git add ниже. Беда была
     # в порядке. Генераторы выше перевыпускают страницы из шаблона со СТАРОЙ
@@ -92,7 +97,7 @@ if [ -f agents/gen-news.py ]; then
     # именно на него — а в git add был только *.png. Итог: 6 обложек за 03–09.08
     # отдавали 404 на проде, /news неделю показывал битые картинки, а сами файлы
     # копились untracked и роняли `git pull --rebase` всем агентам.
-    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png assets/cover-*.webp assets/thumb/cover-*.webp refineries.html krupnejshie-npz-rossii.html rabotayut-li-npz-rossii.html 2>/dev/null; then
+    if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png assets/cover-*.webp assets/thumb/cover-*.webp refineries.html krupnejshie-npz-rossii.html rabotayut-li-npz-rossii.html karta-bpla.html 2>/dev/null; then
       echo "publish-vps: ОШИБКА — git add не удался" >&2
       exit 4
     fi
