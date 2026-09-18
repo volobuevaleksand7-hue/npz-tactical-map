@@ -251,8 +251,14 @@ fi
 # ---- 4. push with a clean-tree rebase retry (NO autostash) ------------------
 push_with_retry() {
   local tries=0 max=4
+  # 18.09.2026: прерванный pull --rebase оставил detached HEAD → голый `git push`
+  # и `pull --rebase` падали молча 12 часов (stderr в /dev/null), 30 коммитов зависли.
+  if ! git symbolic-ref -q HEAD >/dev/null; then
+    echo "git-sync: detached HEAD — re-attaching main" >&2
+    git checkout -q -B main && git branch -q --set-upstream-to=origin/main main
+  fi
   while [ "$tries" -lt "$max" ]; do
-    if git push --quiet 2>/dev/null; then
+    if git push --quiet origin HEAD:main 2>>"${LOG_DIR:-agents/logs}/git-sync-err.log"; then
       echo "git-sync: pushed -> live via GitHub raw"
       return 0
     fi
