@@ -313,7 +313,7 @@
     "Вологодская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -325,9 +325,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1789695402,
-      "source_text": "18.09.2026 04:36 МСК\nвосточная часть Вологодской области, Кировская область - внимание по БПЛА от Кологрив, Павино, Костромской области. 📡 Локатор России - @locatorru"
+      "fill": "#d8c06a",
+      "last_event_ts": 1789699182,
+      "source_text": "18.09.2026 05:39 МСК\nВологодская область Опасность по БПЛА"
     },
     "Ростовская область": {
       "bpla": false,
@@ -1372,28 +1372,6 @@
       "source_text": "18.09.2026 00:31 МСК\nКазачья бухта Камышовая бухта опасность по ФПВ Севастополь"
     },
     {
-      "key": "климово|брянская область",
-      "name": "Климово",
-      "lat": 52.37877,
-      "lon": 32.1963,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789656280,
-      "source_text": "17.09.2026 17:44 МСК\nКлимово и близлежащие Брянская область Опасность по БПЛА"
-    },
-    {
       "key": "волгореченск|костромская область",
       "name": "Волгореченск",
       "lat": 57.440105,
@@ -1854,28 +1832,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1789688722,
       "source_text": "18.09.2026 02:45 МСК\nЧертково, Миллерово, Тарасовский, Матвеев Курган, Куйбышево, Лысогорка, Новошахтинск, Шахты, Красный Сулин, Гуково, Лиховской, Донецк, Каменск-Шахтинский, Ростовская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "угледар|донецкая народная республика",
-      "name": "Угледар",
-      "lat": 47.77973,
-      "lon": 37.24999,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1789656470,
-      "source_text": "17.09.2026 17:47 МСК\nУгледар ДНР Ракетная опасность"
     },
     {
       "key": "макеевка|донецкая народная республика",
@@ -7857,6 +7813,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 91316,
+      "text": "Вологодская область\nОпасность по БПЛА",
+      "ts": 1789699182,
+      "time_label": "18.09.2026 05:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 279213,
       "text": "Волноваха и близлежащие\nОпасность по БПЛА\nДНР",
       "ts": 1789697737,
@@ -8487,14 +8451,6 @@
       "time_label": "18.09.2026 02:26 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 279198,
-      "text": "Ставропольский край\nопасность по БПЛА",
-      "ts": 1789687519,
-      "time_label": "18.09.2026 02:25 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -8504,14 +8460,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789697737,
-  "last_event_at": "2026-09-18T02:15:37Z",
-  "fetched_at": "2026-09-18T02:40:03.135356Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1789699182,
+  "last_event_at": "2026-09-18T02:39:42Z",
+  "fetched_at": "2026-09-18T02:50:02.886711Z",
+  "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-09-18T02:40:03.135356Z",
-    "source_age_seconds": 1466,
-    "city_count": 191,
+    "generated_at": "2026-09-18T02:50:02.886711Z",
+    "source_age_seconds": 620,
+    "city_count": 189,
     "region_count": 37,
     "feed_count": 80
   }
