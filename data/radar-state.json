@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1789831325,
-      "source_text": "19.09.2026 09:21 МСК\nЛДНР, Запорожская область авиационная опасность\n\n19.09.2026 18:22 МСК\nМелитополь - тревога по БПЛА ❗️ Никванта подписаться 🇷🇺 Никванта в МАХ"
+      "last_event_ts": 1789835438,
+      "source_text": "19.09.2026 09:21 МСК\nЛДНР, Запорожская область авиационная опасность\n\n19.09.2026 19:30 МСК\nПриморский Бердянский район Запорожская область РФ Тревога по БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -2505,28 +2505,6 @@
       "source_text": "19.09.2026 09:10 МСК\nНовотроицкое, Новоалексеевка, Геническ и близлежащие Херсонская область РФ Опасность по БПЛА Хорнет"
     },
     {
-      "key": "орел|орловская область",
-      "name": "Орел",
-      "lat": 52.96879,
-      "lon": 36.0791,
-      "region": "Орловская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789792402,
-      "source_text": "19.09.2026 07:33 МСК\nОрел Орловская область Работа ПВО по БПЛА Меры безопасности"
-    },
-    {
       "key": "сочи, адлер|краснодарский край",
       "name": "Сочи, Адлер",
       "lat": 43.4262255,
@@ -3664,8 +3642,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -4552,6 +4530,28 @@
       "last_event_ts": 1789825915,
       "source_text": "19.09.2026 16:51 МСК\nПриморско-Ахтарский район, Абинский район, Калининский район, Красноармейский район, Крымский район, Северский район, Славянский район, Темрюкский район, Тимашевский район, Брюховецкий район, Ейский район, Каневской район, Щербиновский район, Краснодарский край - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
+    "UKR.26.16_1": {
+      "gid_2": "UKR.26.16_1",
+      "name_ru": "Бердянский район",
+      "region_ru": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1789835438,
+      "source_text": "19.09.2026 19:30 МСК\nПриморский Бердянский район Запорожская область РФ Тревога по БПЛА"
+    },
     "RUS.23.19_1": {
       "gid_2": "RUS.23.19_1",
       "name_ru": "Мосальский район",
@@ -4985,6 +4985,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 279944,
+      "text": "Владимирская область\nвнимание по бпла",
+      "ts": 1789835896,
+      "time_label": "19.09.2026 19:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 279943,
+      "text": "Приморский\nБердянский район\nЗапорожская область РФ\nТревога по БПЛА",
+      "ts": 1789835438,
+      "time_label": "19.09.2026 19:30 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 279942,
       "text": "Курахово, Марьинка, Донецк, Еленовка, Докучаевск ДНР и близлежащие\nОпасность по БПЛА",
@@ -5608,22 +5624,6 @@
       "time_label": "19.09.2026 17:02 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 91709,
-      "text": "Новомосковский район\nТульская область\nФиксация БПЛА",
-      "ts": 1789826530,
-      "time_label": "19.09.2026 17:02 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 91708,
-      "text": "ГО Подольск\nМосковская область\nФиксации БПЛА",
-      "ts": 1789826501,
-      "time_label": "19.09.2026 17:01 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5633,14 +5633,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789835304,
-  "last_event_at": "2026-09-19T16:28:24Z",
-  "fetched_at": "2026-09-19T16:30:04.074322Z",
+  "timestamp": 1789835896,
+  "last_event_at": "2026-09-19T16:38:16Z",
+  "fetched_at": "2026-09-19T16:40:04.137018Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-09-19T16:30:04.074322Z",
-    "source_age_seconds": 100,
-    "city_count": 116,
+    "generated_at": "2026-09-19T16:40:04.137018Z",
+    "source_age_seconds": 108,
+    "city_count": 115,
     "region_count": 26,
     "feed_count": 80
   }
