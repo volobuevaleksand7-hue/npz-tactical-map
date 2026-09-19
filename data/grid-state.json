@@ -1,12 +1,24 @@
 {
  "meta": {
-  "generated_at": "2026-09-18T16:51:13Z",
+  "generated_at": "2026-09-19T04:51:16Z",
   "data_mode": "OSINT / ESTIMATE",
   "confidence": "Состояние подстанций, ТЭС и регионов с отключениями — по открытым источникам (региональные СМИ, заявления Россетей, тг-каналы губернаторов, заявления МАГАТЭЕ, Ukrenergo). Не official.",
   "refresh_seconds": 360,
   "updated_by": "agent:grid-status"
  },
  "substations": [
+  {
+   "id": "belgorod-tec-september19",
+   "name": "Белгородская тепловая электростанция (Белгород)",
+   "operator": "филиал ОАО «Россети»",
+   "lat": 50.6,
+   "lon": 36.6,
+   "status": "damaged",
+   "status_since": "2026-09-19",
+   "damage": "19 сентября 2026 года после удара украинских БПЛА по Белгородской ТЭЦ значительная часть города осталась без электричества. По состоянию на 19 сентября проводятся восстановительные работы.",
+   "source_url": "https://neftegaz.ru/news/incidental/901338-posle-udara-po-belgorodskoy-tets-znachitelnaya-chast-goroda-ostalas-bez-elektrichestva/",
+   "confidence": "reported"
+  },
   {
    "id": "krasnodar-region-september18-629drones",
    "name": "Энергообъекты Краснодарского края (18 сентября 2026, 629 дронов)",
@@ -598,6 +610,17 @@
  ],
  "blackout_regions": [
   {
+   "region": "Белгородская область — Белгород (Россия, 19 сентября 2026)",
+   "lat": 50.6,
+   "lon": 36.6,
+   "scope": "partial",
+   "affected_population": "~400000",
+   "cause": "19 сентября 2026 года украинские БПЛА нанесли удар по Белгородской тепловой электростанции. В результате удара значительная часть города осталась без электроснабжения.",
+   "since": "2026-09-19",
+   "source_url": "https://neftegaz.ru/news/incidental/901338-posle-udara-po-belgorodskoy-tets-znachitelnaya-chast-goroda-ostalas-bez-elektrichestva/",
+   "note": "По состоянию на 19 сентября проводятся восстановительные работы."
+  },
+  {
    "region": "Краснодарский край (Россия, 18 сентября 2026)",
    "lat": 45.035,
    "lon": 38.976,
@@ -1072,6 +1095,13 @@
   }
  ],
  "events": [
+  {
+   "date": "2026-09-19",
+   "region": "Белгородская область (Россия)",
+   "text": "19 сентября 2026 года украинские БПЛА провели удар по Белгородской области. Белгородская тепловая электростанция получила повреждения. По состоянию на 19 сентября значительная часть города осталась без электричества, проводятся восстановительные работы.",
+   "source_url": "https://neftegaz.ru/news/incidental/901338-posle-udara-po-belgorodskoy-tets-znachitelnaya-chast-goroda-ostalas-bez-elektrichestva/",
+   "confidence": "reported"
+  },
   {
    "date": "2026-09-18",
    "region": "Краснодарский край, Ростовская область, Московский регион, Дагестан, Вологодская область (Россия)",
