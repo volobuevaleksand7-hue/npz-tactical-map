@@ -9,7 +9,7 @@
    "export_ban_gasoline": true,
    "export_ban_kerosene": true,
    "import_from_belarus": true,
-   "notes": "На 20 сентября: волна повторных ударов на восстановленные мощности продолжается, нацелена на вторичные установки переработки (AVT-6, дизельный гидротрейтинг, смешивание), требующие 6-8 месяцев на восстановление в условиях санкций. За последние 4 дня: ЯНОС девятый (17.09), Кинеф третий (14.09), ТАНЕКО третий (12-13.09), Сызран третий (15.09), Саратов пятый (10-11.09), Рязань четвёртый (6.09). Производство остаётся на историческом минимуме ~4 млн bbl/day (~20% от номинала); национальное предложение покрывает только ~70% спроса. Беларусский импорт упал на 77% летом (май-август 454+ тыс т); в сентябре восстановился на 82 тыс т (49 тыс бензина, 33 тыс дизеля) несмотря на плановое обслуживание Naftan. Практически все 83 региона затронуты; 58-59 в острой фазе (12+ критические). Запреты экспорта: бензин до 31 января 2027; дизель/газойль до 30 сентября 2026 (производители могут вывозить после). Экспортные терминалы: Primorsk закрыт; Ust-Luga восстанавливается на ~70%; Novorossiysk 20-30%. Восстановление требует недель–месяцев при отсутствии новых ударов.",
+   "notes": "На 20 сентября: волна повторных ударов на восстановленные мощности ускоряется. Крупнейшая украинская атака в 2026 году: 152 дрона атаковали Газпромнефть-Московский НПЗ ночью 20 сентября, поражены первичная переработка (АВТ-6), рефининг-блок, изомеризация. Завод полностью остановлен. За последние 4 дня: Московский НПЗ (20.09), ЯНОС девятый (17.09), Кинеф третий (14.09), ТАНЕКО третий (12-13.09), Сызран третий (15.09), Саратов пятый (10-11.09), Рязань четвёртый (6.09). Удары нацелены на вторичные установки (AVT-6, гидротрейтинг, смешивание), требующие 6-8 месяцев на восстановление в условиях санкций. Производство на историческом минимуме ~4 млн bbl/day (~20% от номинала); национальное предложение покрывает только ~70% спроса. Беларусский импорт упал на 77% летом (май-август 454+ тыс т); сентябре стабилизировался: 49 тыс т бензина, 33 тыс т дизеля. Практически все 83 региона затронуты; 58-59 в острой фазе (12+ критические). Запреты экспорта: бензин до 31 января 2027; дизель/газойль до 30 сентября 2026. Цены (20 сентября): АИ-95 74.33 ₽/л, дизель 81.93 ₽/л. Доступность: АИ-95 не хватает на 53% АЗС, АИ-92 на 45%; очереди на 20-27% заправок. Восстановление требует недель–месяцев при отсутствии новых ударов.",
    "throughput_shortfall_pct": 73,
    "method": "capacity_offline и throughput_shortfall выводятся из refineries[] кодом (agents/recalc-national-balance.py), не оценкой агента."
   },
@@ -21717,6 +21717,22 @@
     },
     {
      "date": "2026-09-20",
+     "time": "03:30",
+     "city": "Орехово-Зуево",
+     "region": "Московская область",
+     "lat": 55.81,
+     "lon": 38.98,
+     "type": "drone",
+     "count": 1,
+     "target": "частный жилой дом",
+     "title": "Удар БПЛА по дому в Орехово-Зуеве, есть погибший",
+     "detail": "Обломки беспилотника попали в частный жилой дом, тот был разрушен и загорелся. Погибла 1 человек (пожилой мужчина).",
+     "casualties": 1,
+     "source_url": "https://ria.ru/20260920/ataka-2118847782.html",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-09-20",
      "time": "02:45",
      "city": "Софьино",
      "region": "Московская область",
@@ -21729,6 +21745,51 @@
      "title": "Удар по складскому комплексу в Софьино",
      "detail": "Атака на промышленный складской комплекс в поселке Софьино привела к возникновению пожара. По данным источников, ударные беспилотники повредили складские помещения в Подмосковье.",
      "source_url": "https://360.ru/news/ukrainian-crisis/za-noch-na-podlete-k-moskve-sistemy-pvo-sbili-61-bespilotnik-vsu/",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-09-20",
+     "time": "03:30",
+     "city": "Новые Котельники",
+     "region": "Московская область",
+     "lat": 55.66,
+     "lon": 37.85,
+     "type": "drone",
+     "count": 3,
+     "target": "многоквартирные жилые дома",
+     "title": "Удар БПЛА по жилым домам в Котельниках",
+     "detail": "Обломки беспилотников повредили три многоквартирных дома (14, 16, 20). Пожар охватил квартиры на трёх этажах дома 20.",
+     "source_url": "https://iz.ru/2170178/2026-09-20/bespilotniki-popali-v-tri-mnogokvartirnykh-doma-v-kotelnikakh",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-09-20",
+     "time": "17:34",
+     "city": "Анастасиевская",
+     "region": "Краснодарский край",
+     "lat": 45.22,
+     "lon": 37.89,
+     "type": "drone",
+     "count": 5,
+     "target": "частные жилые дома",
+     "title": "Удар БПЛА по Анастасиевской в Краснодарском крае",
+     "detail": "Обломки сбитых дронов повредили 5 частных домовладений в станице Анастасиевской Славянского района.",
+     "source_url": "https://kazan.aif.ru/incidents/details/sireny-v-sochi-i-krasnodare-ataka-bpla-na-kuban-i-adygeyu-chto-izvestno",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-09-20",
+     "time": "ночь",
+     "city": "Майкоп",
+     "region": "Республика Адыгея",
+     "lat": 44.6,
+     "lon": 40.77,
+     "type": "drone",
+     "count": 1,
+     "target": "жилой сектор",
+     "title": "Падение БПЛА в жилом секторе Майкопа",
+     "detail": "Беспилотник упал в жилом секторе города. По сообщению главы Адыгеи, пострадавших нет.",
+     "source_url": "https://ria.ru/20260920/majkop-2118831936.html",
      "confidence": "reported"
     }
    ],
@@ -21872,6 +21933,230 @@
      "source": "WebSearch",
      "source_url": "https://yandex.ru/search/?text=нет+бензина+заправка",
      "author_hint": "автомобилист"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "I posted a query on a forum and now I'm waiting for an answer. I have a query about my order. The librarian responded to my query.",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "This disambiguation page lists articles associated with the title Query. If an internal link incorrectly led you here, you may wish to …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "استعلام A query may be used to retrieve data from multiple tables at once. يمكن استخدام استعلام لسحب بيانات من عدة جداول في نفس الوقت. query [sth]⇒vtr …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "The teacher might query your answer if it's not well-supported. قد يشكك المعلم في إجابتك إذا لم تكن مدعومة جيدًا.",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "Query is a federated search platform for security data providing expanded data visibility without centralization.",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "A query is a question, or the search for a piece of information. The Latin root quaere means &quot;to ask&quot; and it's the basis of the words …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "query , inquiry, enquiry - A query is a single question; an inquiry (or enquiry) may be a single question or extensive investigation (i.e. …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "QUERY meaning: 1. a question, often expressing doubt about something or looking for an answer from an authority…. Learn more.",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "Ajax Call a local script on the server /api/getWeather with the query parameter zipcode=97201 and replace the element #weather …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: очереди АЗС бензин",
+     "text": "A formalized instruction to a database to either return a set of records or perform a specified action on a set of records as specified in …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "Official YouTube TV Help Center where you can find tips and tutorials on using YouTube TV and other answers to frequently asked …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "T&#233;l&#233;chargez l'application YouTube pour profiter d'une exp&#233;rience de visionnage enrichie sur votre appareil mobile. T&#233;l&#233;charger …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "3、国内注册的账号能否使用 YouTube 和 Google Play？ 完全可以。 Google 账号是全球通用的，注册成功后即可无缝登录谷歌全家 …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "YouTube 将自动为 添加翻译后的中文字幕，这一功能有效解决了语言障碍问题。 当你向下浏览时，部分 会标注相关信息。 例如，博 …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "When you sign up for YouTube TV, we’ll ask you to share your home zip code. We may also ask you to verify your area location via …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "Canlı yayın sırasında ve sonrasında YouTube Studio'daki Canlı Yayın Kontrol Odası'nda iki yayın i&#231;in birleştirilmiş canlı yayın …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "ترتبط كل قناة على YouTube بحساب Google واحد على الأقل. عندما تُخترَق قناة على YouTube، يعني ذلك أنّ حسابًا واحدًا على الأقل من حسابات Google المرتبطة بالقناة قد اختُرق أيضًا.",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "Aby chronić społeczność YouTube, możemy zablokować niezalogowanym użytkownikom dostęp do film&#243;w na YouTube, gdy pr&#243;bują …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "Centrul oficial de ajutor YouTube unde puteţi găsi sfaturi şi tutoriale despre utilizarea produsului şi alte răspunsuri la &#238;ntrebări frecvente.",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: нет бензина заправка",
+     "text": "Mettre en ligne des vid&#233;os YouTube Vous pouvez mettre en ligne des vid&#233;os sur YouTube en seulement quelques &#233;tapes. Suivez …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: лимиты топливо",
+     "text": "15 апр. 2019 г.&nbsp;&#0183;&#32;回复 (6) ML Mark Lam IT 个人解答 回复日期 2019/04/15 你好 这边是独立顾问Mark L. 我也是一名微软產品的用户 希 …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: лимиты топливо",
+     "text": "Door iets had ik ineens een gezin en kon ik niet meer op chrome want dan zei ie &quot;U heeft toegang nodig van een volwassene , stuur …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: лимиты топливо",
+     "text": "Ol&#225;! Estou com uma d&#250;vida no excel, possuo uma planilha de formul&#225;rio, eu quero que qndo determindas c&#233;lulas forem preenchidas …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: лимиты топливо",
+     "text": "Wenn ein Flug gestartet wird, friert die Systemzeit von Windows 10 ein. Nach Beenden der Software wird sie wieder korrekt …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: лимиты топливо",
+     "text": "Bonjour, Comment puis-je disposer des fonctions de Microsoft Lens sur une tablette Surface, pour par exemple photographier du …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: лимиты топливо",
+     "text": "Ich muss diese Woche ein Skype meeting halten und ben&#246;tige Skype for business. Ich habe Office 365. Skype habe ich …",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: лимиты топливо",
+     "text": "Microsoft Community",
+     "sentiment": "neutral"
+    },
+    {
+     "date": "2026-09-20",
+     "region": "",
+     "city": "",
+     "source": "Бing: лимиты топливо",
+     "text": "depuis hier impossible de se connecter sur skype sur Pc&quot;&#233;chec de la connexion, r&#233;essayez&quot;il s'agit d'un nouveau compte",
+     "sentiment": "neutral"
     }
    ]
   }
