@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1789873149,
-      "source_text": "20.09.2026 05:59 МСК\nЗаокский район Тульская область Фиксация БПЛА"
+      "last_event_ts": 1789879559,
+      "source_text": "20.09.2026 07:45 МСК\nТульская область Опасность по БПЛА сохраняется"
     },
     "Запорожская область": {
       "bpla": false,
@@ -269,8 +269,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1789865234,
-      "source_text": "19.09.2026 20:19 МСК\nЛДНР ракетная опасность\n\n20.09.2026 03:47 МСК\nМариуполь и близлежащие Тревога по БПЛА ДНР"
+      "last_event_ts": 1789879412,
+      "source_text": "20.09.2026 07:43 МСК\nКурахово ДНР ракетная опасность\n\n20.09.2026 03:47 МСК\nМариуполь и близлежащие Тревога по БПЛА ДНР"
     },
     "Нижегородская область": {
       "bpla": false,
@@ -952,7 +952,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1789875754,
@@ -1639,6 +1639,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1789852337,
       "source_text": "20.09.2026 00:12 МСК\nРовеньки, Белгородская область - пролёты БПЛА в сторону Ольховатка, Воронежской области. 📡 Локатор России - @locatorru"
+    },
+    {
+      "key": "курахово|донецкая народная республика",
+      "name": "Курахово",
+      "lat": 47.9847,
+      "lon": 37.28069,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1789879412,
+      "source_text": "20.09.2026 07:43 МСК\nКурахово ДНР ракетная опасность"
     },
     {
       "key": "болхов|орловская область",
@@ -6366,6 +6388,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 280258,
+      "text": "Тульская область\nОпасность по БПЛА сохраняется",
+      "ts": 1789879559,
+      "time_label": "20.09.2026 07:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 280257,
+      "text": "Курахово ДНР ракетная опасность",
+      "ts": 1789879412,
+      "time_label": "20.09.2026 07:43 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 92379,
       "text": "ГО Коломна\nМосковская область\nПродолжается работа ПВО по БПЛА\nМеры безопасности",
       "ts": 1789878892,
@@ -6988,22 +7026,6 @@
       "time_label": "20.09.2026 06:03 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 92308,
-      "text": "Люберцы\nМосковская область\nРабота ПВО по БПЛА",
-      "ts": 1789873406,
-      "time_label": "20.09.2026 06:03 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 92307,
-      "text": "Саратовская область\nОтбой опасности по БПЛА",
-      "ts": 1789873387,
-      "time_label": "20.09.2026 06:03 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7013,14 +7035,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1789878892,
-  "last_event_at": "2026-09-20T04:34:52Z",
-  "fetched_at": "2026-09-20T04:40:03.045642Z",
-  "poll_interval_sec": 40,
+  "timestamp": 1789879559,
+  "last_event_at": "2026-09-20T04:45:59Z",
+  "fetched_at": "2026-09-20T04:50:03.994044Z",
+  "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-09-20T04:40:03.045642Z",
-    "source_age_seconds": 311,
-    "city_count": 136,
+    "generated_at": "2026-09-20T04:50:03.994044Z",
+    "source_age_seconds": 244,
+    "city_count": 137,
     "region_count": 28,
     "feed_count": 80
   }
