@@ -183,6 +183,11 @@ LABELS = {
     "/skorost-remonta-npz":   ("🔧", "Сколько восстанавливают НПЗ"),
     "/rabotayut-li-npz-rossii": ("🚦", "Какие НПЗ работают, а какие стоят"),
     "/raketnaya-opasnost-belgorod": ("🚀", "Ракетная опасность: Белгород"),
+    "/raketnaya-opasnost-krasnodarskij-kraj": ("🚀", "Ракетная опасность: Краснодарский край"),
+    "/raketnaya-opasnost-bryanskaya-oblast": ("🚀", "Ракетная опасность: Брянская обл."),
+    "/raketnaya-opasnost-voronezhskaya-oblast": ("🚀", "Ракетная опасность: Воронежская обл."),
+    "/raketnaya-opasnost-leningradskaya-oblast": ("🚀", "Ракетная опасность: Ленинградская обл."),
+    "/raketnaya-opasnost-bashkortostan": ("🚀", "Ракетная опасность: Башкортостан"),
     # кластер складов маркетплейсов — подписи в одном стиле, без сырых «wildberries спб»
     "/udar-po-skladu-ozon":   ("📦", "Удар по складу Ozon"),
     "/sgorel-sklad-wildberries-chto-delat": ("❓", "Сгорел склад Wildberries: что делать"),
