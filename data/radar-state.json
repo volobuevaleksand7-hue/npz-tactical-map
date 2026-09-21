@@ -6,25 +6,6 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
-    "Калужская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1790002867,
-      "source_text": "21.09.2026 18:01 МСК\nТульская область Калужская область Опасность по БПЛА"
-    },
     "Белгородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -290,25 +271,6 @@
       "fill": "#e8e4c4",
       "last_event_ts": 1789968527,
       "source_text": "21.09.2026 08:28 МСК\nСвердловская область - отбой опасности по БПЛА. Республика Башкортостан - отбой опасности по БПЛА. Режим внимание. 📡 Локатор России - @locatorru"
-    },
-    "Смоленская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1790005488,
-      "source_text": "21.09.2026 18:44 МСК\nСмоленская область Единичные фиксации БПЛА от Брянской области"
     }
   },
   "cities": [
@@ -1009,7 +971,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1790004208,
@@ -1127,28 +1089,6 @@
     }
   ],
   "districts": {
-    "RUS.23.9_1": {
-      "gid_2": "RUS.23.9_1",
-      "name_ru": "Хвастовичский район",
-      "region_ru": "Калужская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1790002754,
-      "source_text": "21.09.2026 17:59 МСК\nХвастовичский район Калужская область Фиксация БПЛА"
-    },
     "RUS.7.24_1": {
       "gid_2": "RUS.7.24_1",
       "name_ru": "Валуйский район",
@@ -1170,28 +1110,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1789980502,
       "source_text": "21.09.2026 11:48 МСК\nВалуйский район Тревога по БПЛА сохраняется"
-    },
-    "RUS.23.27_1": {
-      "gid_2": "RUS.23.27_1",
-      "name_ru": "Жиздринский район",
-      "region_ru": "Калужская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789977036,
-      "source_text": "21.09.2026 10:50 МСК\nЖиздринский район Калужская область Фиксация БПЛА в вашем направлении со стороны Хвастовичского района"
     },
     "RUS.7.20_1": {
       "gid_2": "RUS.7.20_1",
@@ -1362,6 +1280,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 92685,
+      "text": "Тверская область\nОтбой опасности по БПЛА",
+      "ts": 1790007987,
+      "time_label": "21.09.2026 19:26 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 92684,
+      "text": "Калужская область\nСмоленская область\nОтбой опасности по БПЛА",
+      "ts": 1790007892,
+      "time_label": "21.09.2026 19:24 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 86633,
+      "text": "Калужская область, Тульская область, Рязанская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1790007854,
+      "time_label": "21.09.2026 19:24 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
     {
       "msg_id": 280819,
       "text": "Курск\nКурская область\nОпасность по БПЛА",
@@ -1977,30 +1919,6 @@
       "time_label": "21.09.2026 14:59 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 280769,
-      "text": "Харцызск\nЗугрэс\nИловайск\nИ близлежащие\nОпасность по БПЛА Шарк\nДНР",
-      "ts": 1789990182,
-      "time_label": "21.09.2026 14:29 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 280768,
-      "text": "Вейделевка Бгд на север опасность БПЛА",
-      "ts": 1789989801,
-      "time_label": "21.09.2026 14:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 280767,
-      "text": "От Новокиевка в направлении Каланчак фиксации БПЛА Хорнет\nХерсонская область РФ",
-      "ts": 1789989489,
-      "time_label": "21.09.2026 14:18 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2010,15 +1928,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790007480,
-  "last_event_at": "2026-09-21T16:18:00Z",
-  "fetched_at": "2026-09-21T16:20:03.394042Z",
+  "timestamp": 1790007987,
+  "last_event_at": "2026-09-21T16:26:27Z",
+  "fetched_at": "2026-09-21T16:30:03.386785Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-21T16:20:03.394042Z",
-    "source_age_seconds": 123,
+    "generated_at": "2026-09-21T16:30:03.386785Z",
+    "source_age_seconds": 216,
     "city_count": 37,
-    "region_count": 16,
+    "region_count": 14,
     "feed_count": 80
   }
 }
