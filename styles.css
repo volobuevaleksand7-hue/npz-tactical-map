@@ -120,6 +120,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .map{position:absolute;inset:0;z-index:0}/* z:0 создаёт stacking context — слои Leaflet (тайлы/маркеры z:200-600) заперты внутри и НЕ накрывают карточки (z:20); попап у угла панели автопанорамируется в видимую зону */
 .leaflet-container{background:var(--board)!important;font-family:var(--mono)!important}
 .leaflet-control-attribution{background:rgba(255,255,255,.55)!important;font-size:9px!important}
+[data-theme="dark"] .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9)}
 [data-theme="dark"] .leaflet-control-attribution{background:rgba(0,0,0,.5)!important;color:#5a7a6e!important}
 .leaflet-control-zoom a{background:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important}
 

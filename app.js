@@ -313,9 +313,10 @@
   }
 
   /* ---------- THEME ---------- */
+  // ponytail: CARTO с 09.2026 отдаёт анонимам тайл «API KEY REQUIRED» — ушли на OSM без ключа;
+  // тёмная тема = CSS-инверсия тайлов (styles.css), если OSM начнёт резать трафик — ключ MapTiler/Stadia
   function tileUrl() {
-    var dark = document.documentElement.getAttribute("data-theme") === "dark";
-    return "https://{s}.basemaps.cartocdn.com/" + (dark ? "dark_all" : "light_all") + "/{z}/{x}/{y}{r}.png";
+    return "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
   }
   function initTheme() {
     var saved = null;
@@ -370,7 +371,7 @@
   // нейтральная атрибуция: без дефолтного префикса Leaflet (флаг+ссылка)
   L.Control.Attribution.prototype.options.prefix = "Leaflet";
   function baseTiles() {
-    return L.tileLayer(tileUrl(), { attribution: "© OpenStreetMap · CARTO · OSINT ESTIMATE", subdomains: "abcd", maxZoom: 19 });
+    return L.tileLayer(tileUrl(), { attribution: "© OpenStreetMap · OSINT ESTIMATE", maxZoom: 19 });
   }
   function initRuMap() {
     // ponytail: на узком экране тот же zoom показывает меньше градусов по ширине — центр
