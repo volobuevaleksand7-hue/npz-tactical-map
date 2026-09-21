@@ -155,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1790002125,
-      "source_text": "21.09.2026 16:16 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n21.09.2026 17:48 МСК\nИловайск, Амвросиевка и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1790003419,
+      "source_text": "21.09.2026 16:16 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n21.09.2026 18:10 МСК\nМариуполь и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     "Московская область": {
       "bpla": false,
@@ -374,6 +374,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1789988533,
       "source_text": "21.09.2026 14:02 МСК\nДорога Владимировка - Приморск - Бердянск Опасность по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "мариуполь|донецкая народная республика",
+      "name": "Мариуполь",
+      "lat": 47.09514,
+      "lon": 37.54131,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790003419,
+      "source_text": "21.09.2026 18:10 МСК\nМариуполь и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     {
       "key": "вейделевка|белгородская область",
@@ -1122,28 +1144,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1789999174,
       "source_text": "21.09.2026 16:59 МСК\nШахтёрск, Торез, Снежное и близлежащие на восток Опасность по БПЛА ДНР"
-    },
-    {
-      "key": "урицкий|орловская область",
-      "name": "Урицкий",
-      "lat": 52.3825189,
-      "lon": 37.881624,
-      "region": "Орловская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1789960569,
-      "source_text": "21.09.2026 06:16 МСК\nУрицкий Орловская область Сбитие БПЛА"
     }
   ],
   "districts": {
@@ -1404,6 +1404,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 92679,
+      "text": "ГО Раменское\nМосковская область\nРаботы по утилизации обломков. Сохраняем спокойствие.\nТакже утилизация возможна во всех ГО переживых наслет с субботы на воскресенье.\nСлелим за оповешениями.",
+      "ts": 1790003721,
+      "time_label": "21.09.2026 18:15 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 280809,
+      "text": "Мариуполь и близлежащие\nОпасность по БПЛА Хорнет\nДНР",
+      "ts": 1790003419,
+      "time_label": "21.09.2026 18:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 280808,
       "text": "Брянск и близлежащие\nОпасность по БПЛА",
@@ -2027,22 +2043,6 @@
       "time_label": "21.09.2026 13:15 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 280752,
-      "text": "ДНР ракетная опасность от Селидово",
-      "ts": 1789984863,
-      "time_label": "21.09.2026 13:01 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 280751,
-      "text": "Краснодарский край\nАвиационная опасность\n(РСЧС)",
-      "ts": 1789984701,
-      "time_label": "21.09.2026 12:58 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2052,13 +2052,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790003159,
-  "last_event_at": "2026-09-21T15:05:59Z",
-  "fetched_at": "2026-09-21T15:10:03.410025Z",
+  "timestamp": 1790003721,
+  "last_event_at": "2026-09-21T15:15:21Z",
+  "fetched_at": "2026-09-21T15:20:03.095433Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-21T15:10:03.410025Z",
-    "source_age_seconds": 244,
+    "generated_at": "2026-09-21T15:20:03.095433Z",
+    "source_age_seconds": 282,
     "city_count": 37,
     "region_count": 17,
     "feed_count": 80
