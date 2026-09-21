@@ -149,7 +149,8 @@ def meta_for(date, brief):
     # горящий склад-ангар. classify() держим прежним (для лида/веса склад = city),
     # уточняем только сцену обложки. Триггер — Котовск 18.07: удар по складу
     # Wildberries, 7 погибших, лид дня по массовым жертвам.
-    tgt_l = (str(lead.get("target", "")) + " " + str(lead.get("title", ""))).lower()
+    # lead=None в ветке «ударов нет, есть голоса» — 19.09 тут падало AttributeError.
+    tgt_l = (str(lead.get("target", "")) + " " + str(lead.get("title", ""))).lower() if lead else ""
     is_warehouse = kind == "city" and any(
         k in tgt_l for k in ("wildberries", "вайлдберриз", "ozon", "озон",
                              "склад", "логистическ", "распределительн", "маркетплейс", "фулфилмент"))
