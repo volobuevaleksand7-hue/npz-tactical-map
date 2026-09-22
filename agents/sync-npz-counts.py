@@ -111,6 +111,14 @@ def total_capacity_mt():
     return round(sum(r["capacity_mt_year"] for r in _refineries()), 1)
 
 
+def today_ru():
+    """«22 сентября 2026» по МСК — для живых датированных фраз."""
+    import datetime as _dt
+    d = _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=3)))
+    m = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"][d.month-1]
+    return f"{d.day} {m} {d.year}"
+
+
 def mt_str(x):
     """Российский формат мощности с запятой: 338.4 -> "338,4"."""
     return ("%.1f" % x).replace(".", ",")
@@ -190,7 +198,6 @@ PLAIN = {
     "moskva.html": [
         ("down_cap_pct", r'(и общим выбытием около )\d+(% перерабатывающих мощностей РФ)'),
         ("down_cap_pct", r'(и общее выбытие около )\d+(% перерабатывающих мощностей РФ)'),
-        ("down_cap_pct", r'(выбытием ~)\d+(% мощностей РФ)'),
     ],
     "npz/kinef.html": [
         ("kinef_share_pct", r'(второй по мощности в стране — около )\d+(% всей нефтепереработки РФ)'),
@@ -206,11 +213,13 @@ PLAIN = {
         ("tuapse_pct", r'(<span class="station-name">Туапсинский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
         ("afipsky_pct", r'(<span class="station-name">Афипский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
         ("ilsky_pct", r'(<span class="station-name">Ильский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
-        ("slavyansk_pct", r'(<span class="station-name">Славянский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
+        ("slavyansk_pct", r'(<span class="station-name">Славянский НПЗ</span><span class="station-status [a-z]+">)\d+(%)'),
         ("krasnodar_rn_pct", r'(<span class="station-name">Краснодарский НПЗ</span><span class="station-status ok">)\d+(%</span>)'),
         ("krai_available_pct", r'(реально доступно около )\d+(% мощностей края)'),
-        ("tuapse_pct", r'(Туапсинский НПЗ \(крупнейший в крае, 12 млн т/год\) с 31 июля частично перезапущен \(около )\d+(% загрузки\))'),
-        ("tuapse_pct", r'(Туапсинский НПЗ \(Роснефть, 12 млн т/год — частично, )\d+(%\))'),
+        ("tuapse_pct", r'(Туапсинский НПЗ \(крупнейший в крае, 12 млн т/год\) работает на )\d+(% загрузки)'),
+        ("tuapse_pct", r'(Туапсинский НПЗ \(Роснефть, 12 млн т/год — )\d+(%\))'),
+        ("afipsky_pct", r'(Афипский НПЗ \(ГК Сафмар, 9 млн т/год — )\d+(%\))'),
+        ("ilsky_pct", r'(Ильский НПЗ \(ИНК/РНГО, 6,6 млн т/год — )\d+(%\))'),
         ("tuapse_pct", r'(Туапсинский \(Роснефть, 12 млн т/год — )\d+(%\), Афипский)'),
     ],
 }
@@ -246,7 +255,7 @@ DECLINED = {
 #     группами вокруг N чисел, функция сборки замены из groups()) ---
 MULTI = {
     "crisis.html": [
-        (r'(в июне, Bloomberg\)\. )\d+( крупных НПЗ полностью остановлены, ещё )\d+( работают с ограничениями\.)',
+        (r'()\d+( крупных НПЗ полностью остановлены, ещё )\d+( работают с ограничениями\.)',
          lambda g: g[0] + str(down_count()) + g[1] + str(partial_count()) + g[2]),
     ],
     "deficit.html": [
@@ -256,10 +265,11 @@ MULTI = {
          lambda g: g[0] + str(total_count()) + g[1] + str(down_count()) + g[2] + str(partial_count()) + g[3]),
         (r'(Из )\d+( крупных НПЗ — )\d+( полностью остановлены, )\d+( работают с ограничениями\.)',
          lambda g: g[0] + str(total_count()) + g[1] + str(down_count()) + g[2] + str(partial_count()) + g[3]),
-        (r'(Совокупная потеря мощностей — около )\d+(% \()\d+,\d+( из )\d+,\d+( млн тонн/год\)\.)',
+        (r'(Совокупная потеря мощностей — )\d+(% \()\d+,\d+( из )\d+,\d+( млн тонн/год\)\.)',
          lambda g: g[0] + str(down_capacity_pct()) + g[1] + mt_str(down_capacity_mt()) + g[2] + mt_str(total_capacity_mt()) + g[3]),
-        (r'(<div class="st">Падение переработки на )\d+(%</div><div class="se">)\d+,\d+( из )\d+,\d+( млн тонн/год мощностей простаивают\. Bloomberg: минимум переработки с 2005 года\.</div>)',
-         lambda g: g[0] + str(down_capacity_pct()) + g[1] + mt_str(down_capacity_mt()) + g[2] + mt_str(total_capacity_mt()) + g[3]),
+        (r'(<div class="st">Падение переработки на )\d+(%</div><div class="se">)\d+,\d+( из )\d+,\d+( млн тонн/год мощностей простаивают \(данные на )\d+ [а-я]+(\)\. Падение переработки \(throughput_shortfall\) — )\d+(%\.)',
+         lambda g: (g[0] + str(down_capacity_pct()) + g[1] + mt_str(down_capacity_mt()) + g[2] + mt_str(total_capacity_mt()) + g[3]
+                    + today_ru().rsplit(" ", 1)[0] + g[4] + str(throughput_shortfall_pct()) + g[5])),
     ],
     "attacks.html": [
         # "20" (сколько заводов затрагивалось ударами хоть раз, кумулятивно с апреля) —
@@ -269,14 +279,17 @@ MULTI = {
          lambda g: g[0] + str(total_count()) + g[1]),
     ],
     "situaciya-s-benzinom.html": [
-        (r'(из )\d+ (?:завод|завода|заводов)( <strong>)\d+( стоят полностью, )\d+( работают на пониженной загрузке и )\d+( — в штатном режиме</strong>)',
-         lambda g: (g[0] + str(total_count()) + " " + ru_count_gen(total_count(), "завода", "заводов") + g[1]
-                    + str(down_count()) + g[2] + str(partial_count()) + g[3] + str(normal_count()) + g[4])),
+        # живой снимок в лиде: дата + статусы + доля/тонны + недобор (исторический абзац про 19 августа — в прошедшем времени, сюда не попадает)
+        (r'(На )\d+ [а-я]+ 2026( картина тяжелее: из )\d+ (?:завод|завода|заводов)( <strong>)\d+( стоят полностью, )\d+( работают на пониженной загрузке и )\d+( — в штатном режиме</strong>\. Выбито <strong>)\d+(% мощностей</strong> \()\d+,\d+( из )\d+,\d+( млн т/год\), совокупный недобор по переработке с учётом частично работающих — <strong>)\d+(%</strong>\.)',
+         lambda g: (g[0] + today_ru() + g[1] + str(total_count()) + " " + ru_count_gen(total_count(), "завода", "заводов") + g[2]
+                    + str(down_count()) + g[3] + str(partial_count()) + g[4] + str(normal_count()) + g[5]
+                    + str(down_capacity_pct()) + g[6] + mt_str(down_capacity_mt()) + g[7] + mt_str(total_capacity_mt()) + g[8]
+                    + str(throughput_shortfall_pct()) + g[9])),
     ],
     "krasnodar.html": [
-        (r'(Туапсинский работает на )\d+(% \(с 31 июля вышел из полной остановки\), Афипский работает на )\d+(%, Ильский — на )\d+(%, Славянский — на )\d+(%\.)',
+        (r'(Туапсинский работает на )\d+(%, Афипский — на )\d+(% \(после удара 25 августа\), Ильский — на )\d+(%\.)',
          lambda g: (g[0] + str(refinery_output_pct("tuapse")) + g[1] + str(refinery_output_pct("afipsky"))
-                    + g[2] + str(refinery_output_pct("ilsky")) + g[3] + str(refinery_output_pct("slavyansk")) + g[4])),
+                    + g[2] + str(refinery_output_pct("ilsky")) + g[3])),
     ],
 }
 
