@@ -307,8 +307,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790028683,
-      "source_text": "22.09.2026 01:11 МСК\nПервомайск, Алчевск, Брянка, Стаханов Тревога по БПЛА ЛДНР"
+      "last_event_ts": 1790043717,
+      "source_text": "22.09.2026 05:21 МСК\nШахтёрск, Торез, Снежное и близлежащие Тревога по БПЛА ДНР"
     },
     "Московская область": {
       "bpla": false,
@@ -2145,6 +2145,28 @@
       "source_text": "21.09.2026 23:35 МСК\nКантемировка Богучар Опасность по БПЛА Воронежская область"
     },
     {
+      "key": "снежное|донецкая народная республика",
+      "name": "Снежное",
+      "lat": 48.02328,
+      "lon": 38.76205,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790043717,
+      "source_text": "22.09.2026 05:21 МСК\nШахтёрск, Торез, Снежное и близлежащие Тревога по БПЛА ДНР"
+    },
+    {
       "key": "хомутовка|курская область",
       "name": "Хомутовка",
       "lat": 51.9214393,
@@ -3700,8 +3722,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -4912,6 +4934,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 280992,
+      "text": "Шахтерск\nТорез\nМеры безопасности при БПЛА\nДНР",
+      "ts": 1790043840,
+      "time_label": "22.09.2026 05:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 280991,
+      "text": "Шахтёрск,\nТорез,\nСнежное и близлежащие\nТревога  по БПЛА\nДНР\nИ далее возможно на Ростовскую область",
+      "ts": 1790043717,
+      "time_label": "22.09.2026 05:21 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 280990,
       "text": "Республика Татарстан\nвнимание по бпла",
       "ts": 1790041627,
@@ -5534,22 +5572,6 @@
       "time_label": "22.09.2026 02:03 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 86697,
-      "text": "Явас, Барашево, Атюрьево, Краснослободск, Темниково, Ельники, Торбеево, Зубова Поляна и близлежащие, Республика Мордовия - внимание по пролётам БПЛА в сторону Нижегородской области от Пензенской области.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1790031700,
-      "time_label": "22.09.2026 02:01 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 92819,
-      "text": "Новоспасский район\nУльяновская область\nСбития БПЛА",
-      "ts": 1790031456,
-      "time_label": "22.09.2026 01:57 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5559,14 +5581,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790041627,
-  "last_event_at": "2026-09-22T01:47:07Z",
-  "fetched_at": "2026-09-22T02:20:02.813918Z",
-  "poll_interval_sec": 40,
+  "timestamp": 1790043840,
+  "last_event_at": "2026-09-22T02:24:00Z",
+  "fetched_at": "2026-09-22T02:30:03.281648Z",
+  "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-09-22T02:20:02.813918Z",
-    "source_age_seconds": 1975,
-    "city_count": 113,
+    "generated_at": "2026-09-22T02:30:03.281648Z",
+    "source_age_seconds": 363,
+    "city_count": 114,
     "region_count": 36,
     "feed_count": 80
   }
