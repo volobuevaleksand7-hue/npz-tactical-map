@@ -47,7 +47,8 @@ ALERT_CHAT = os.environ.get("NPZ_REPORT_CHAT", "609952529")
 # стояло 72ч: docs/heartbeat-plan.md обосновывал их тем, что «agents run at most
 # daily», хотя в кроне давно 6-часовые рутины. Цена ошибки — 15.07 флот лежал 19ч
 # на протухшем OAuth, а баннер показывал «1 агент не на связи» вместо десяти.
-# Фактический крон: 0,6,12,18 -> 6ч; fuel-availability */4; fuel-voices */8;
+# Фактический крон: 0,6,12,18 -> 6ч; fuel-availability 05:23/17:23 (2×/сутки
+# с 17.09, было */4 — окно hb выровнено на 14ч); fuel-voices */8;
 # radar */10мин; forecast/economy — ЕЖЕДНЕВНО 03:30/04:30 (доки врут про «weekly»).
 # Статичные файлы (azs-*, geojson) не проверяем.
 # Список, а не dict: файл больше НЕ уникальный ключ — data/fuel-state.json пишут
@@ -58,7 +59,9 @@ WATCH = [
     ("fuel-state.json",        "npz-data (npz)",        24, "npz-status",        15),
     ("history-crimea.json",    "npz-data (history)",    36, "history-crimea",    15),
     ("roads.json",             "npz-data (roads)",      36, "roads",             15),
-    ("fuel-availability.json", "fuel-availability",     18, "fuel-availability", 10),
+    # fuel-availability: крон 05:23/17:23 (12ч цикл) → окно 14ч, иначе «мёртв»
+    # каждые сутки с 10-го по 12-й час цикла (баннер «1 агент не на связи», 22.09).
+    ("fuel-availability.json", "fuel-availability",     18, "fuel-availability", 14),
     ("fuel-voices.json",       "fuel-voices",           24, "fuel-voices",       20),
     ("grid-state.json",        "grid-status",           18, "grid-status",       15),
     ("radar-state.json",       "radar-state",          0.5, "radar-state",        2),
