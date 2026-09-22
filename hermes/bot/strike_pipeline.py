@@ -376,7 +376,7 @@ def update_map(strike_data, dry_run=False):
         target_ref["status_since"] = today
     target_ref["est_output_pct"] = new_output
     target_ref["damage"] = detail[:500] if detail else target_ref.get("damage", "")
-    target_ref["source_url"] = strike_data.get("source_url", target_ref.get("source_url", ""))
+    target_ref["source_url"] = strike_data.get("source_url") or target_ref.get("source_url", "")  # пустой у удара не затирает старый
     target_ref["confidence"] = strike_data.get("confidence", "reported")
 
     # b. Recalculate national balance

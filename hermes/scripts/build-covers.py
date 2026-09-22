@@ -359,6 +359,23 @@ def openrouter_gen(m, ref, raw):
 
 
 def build_one(date, m):
+    # ponytail: замок на дату — два прогона (крон Гермеса + watchdog + Мак-догон) делили один
+    # raw-<date>.png и давали ЛОЖНЫЙ GENFAIL. Кто не первый — выходит, не трогая файл.
+    import fcntl
+    TMP.mkdir(parents=True, exist_ok=True)
+    lockf = open(TMP / f"lock-{date}", "w")
+    try:
+        fcntl.flock(lockf, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        print(f"BUSY {date} — обложку уже собирает другой прогон")
+        return False
+    try:
+        return _build_one_locked(date, m)
+    finally:
+        fcntl.flock(lockf, fcntl.LOCK_UN); lockf.close()
+
+
+def _build_one_locked(date, m):
     raw = TMP / f"raw-{date}.png"
     out = ASSETS / f"cover-{date}.png"
     raw.unlink(missing_ok=True)

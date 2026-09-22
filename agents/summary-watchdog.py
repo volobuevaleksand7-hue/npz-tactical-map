@@ -238,10 +238,16 @@ def heal(day: str):
         if coverf.exists() and not (quietf.exists() and data_has_today(day)):
             COVER_SRC = "existing"
         else:
-            r = _run([sys.executable, "hermes/scripts/build-covers.py", "--dates", day],
-                     timeout=900, env=env)
-            out = r.stdout + r.stderr
-            m = re.search(r"^OK\s+\S+\s+\[([^\]]+)\]", out, re.M)
+            # ponytail: две попытки — первая нередко флейкает (Codex/сеть), вторая проходит;
+            # раньше «долг» писался с первой неудачи.
+            for attempt in (1, 2):
+                r = _run([sys.executable, "hermes/scripts/build-covers.py", "--dates", day],
+                         timeout=900, env=env)
+                out = r.stdout + r.stderr
+                m = re.search(r"^OK\s+\S+\s+\[([^\]]+)\]", out, re.M)
+                if m or attempt == 2:
+                    break
+                log(f"build-covers за {day}: попытка 1 без обложки, повтор")
             if m:
                 COVER_SRC = m.group(1)
             else:

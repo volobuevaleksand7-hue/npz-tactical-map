@@ -58,6 +58,10 @@ def reason_invalid(x):
         return "lat/lon пустые или нулевые (lat=%r, lon=%r)" % (lat, lon)
     if str(x.get("city", "")).strip() == "Неизвестно":
         return "city == 'Неизвестно'"
+    if not str(x.get("source_url") or "").startswith("http"):
+        # gen-npz-status-page отказывает остановленному заводу без источника — удар без
+        # ссылки унёс бы source_url завода в пустоту и уронил бы страницу /rabotayut-li-npz-rossii
+        return "source_url пустой или не http — удар без проверяемого источника"
     scraped = reason_scraped(x)
     if scraped:
         return scraped
@@ -307,11 +311,11 @@ def selfcheck():
     json.dump(arch, open(ARCHIVE, "w", encoding="utf-8"), ensure_ascii=False)
     json.dump([
         {"id": "new-1", "date": D_NEW, "city": "Чёрное море", "target": "танкеры",
-         "lat": 43.5, "lon": 33.5},
+         "lat": 43.5, "lon": 33.5, "source_url": "https://example.org/n1"},
         {"id": "old-1", "date": D_OLD, "city": "Рязань", "target": "НПЗ",
-         "lat": 54.6, "lon": 39.7},                                                # дубль по id
+         "lat": 54.6, "lon": 39.7, "source_url": "https://example.org/o1"},                                                # дубль по id
         {"date": D_MID, "time": "ночь", "city": "Афипский", "target": "НПЗ",
-         "lat": 45.0, "lon": 38.8},                                                # дубль по составному
+         "lat": 45.0, "lon": 38.8, "source_url": "https://example.org/m1"},                                                # дубль по составному
         {"city": "без даты"},                                                      # мусор
         {"date": D_NEW, "city": "Неизвестно", "target": "х", "lat": 0.0, "lon": 0.0},  # битая: город+нули
     ], open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
@@ -377,7 +381,7 @@ def selfcheck():
         {"date": D_NEW, "time": "03:00", "city": "Неизвестно", "target": "аэродром",
          "lat": 45.1157, "lon": 34.0239},
         {"date": D_NEW, "time": "04:00", "city": "Гвардейское", "target": "аэродром",
-         "lat": 45.1157, "lon": 34.0239},                                  # годная — должна влиться
+         "lat": 45.1157, "lon": 34.0239, "source_url": "https://example.org/g4"},  # годная — должна влиться
     ], open(INBOX, "w", encoding="utf-8"), ensure_ascii=False)
     arch_before, added3, dupes3, rejected3 = merge(
         json.load(open(ARCHIVE, encoding="utf-8")),
@@ -392,6 +396,9 @@ def selfcheck():
                    if s.get("date") == D_NEW), \
         "запись с city='Неизвестно' просочилась в архив"
 
+    assert "source_url" in (reason_invalid({"city": "Сызрань", "lat": 53.14, "lon": 48.46,
+                                             "target": "НПЗ", "source_url": ""}) or ""), \
+        "удар без http-источника должен отклоняться"
     assert reason_scraped({"target": "объект РФ", "source_url": "t.me/NPZmap",
                            "lat": 55.7558, "lon": 37.6173}), \
         "эхо канала (корень без номера поста) не распознано"
