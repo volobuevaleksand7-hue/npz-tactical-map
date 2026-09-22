@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790084739,
-      "source_text": "22.09.2026 16:45 МСК\nСевер Северо-Запад Республика Крым опасность по БПЛА"
+      "last_event_ts": 1790086928,
+      "source_text": "22.09.2026 17:22 МСК\nРаздольное и близлежащие опасность по БПЛА Республика Крым"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -250,8 +250,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790084739,
-      "source_text": "22.09.2026 16:45 МСК\nСевер Северо-Запад Республика Крым опасность по БПЛА"
+      "last_event_ts": 1790086928,
+      "source_text": "22.09.2026 17:22 МСК\nРаздольное и близлежащие опасность по БПЛА Республика Крым"
     }
   },
   "cities": [
@@ -454,6 +454,28 @@
       "source_text": "22.09.2026 06:06 МСК\nЛисичанск м близлежащие Тревога по БПЛА Хорнет ЛНР"
     },
     {
+      "key": "раздольное|автономная республика крым",
+      "name": "Раздольное",
+      "lat": 45.77083,
+      "lon": 33.48777,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790086928,
+      "source_text": "22.09.2026 17:22 МСК\nРаздольное и близлежащие опасность по БПЛА Республика Крым"
+    },
+    {
       "key": "золотое|луганская народная республика",
       "name": "Золотое",
       "lat": 48.69516,
@@ -584,28 +606,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1790084718,
       "source_text": "22.09.2026 16:45 МСК\nАрмянск и близлежащие опасность по БПЛА Республика Крым"
-    },
-    {
-      "key": "снежное|донецкая народная республика",
-      "name": "Снежное",
-      "lat": 48.02328,
-      "lon": 38.76205,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1790043717,
-      "source_text": "22.09.2026 05:21 МСК\nШахтёрск, Торез, Снежное и близлежащие Тревога по БПЛА ДНР"
     },
     {
       "key": "алексеевка|белгородская область",
@@ -1351,6 +1351,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 281118,
+      "text": "Раздольное и близлежащие опасность по БПЛА\nРеспублика Крым",
+      "ts": 1790086928,
+      "time_label": "22.09.2026 17:22 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 86726,
       "text": "Брянская область, Курская область, Белгородская область - опасность по БПЛА сохраняется.\n📡\nЛокатор России -\n@locatorru",
       "ts": 1790085917,
@@ -1981,14 +1989,6 @@
       "time_label": "22.09.2026 11:00 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 281050,
-      "text": "Север\nРеспублика Крым\nОпасность по БПЛА",
-      "ts": 1790063993,
-      "time_label": "22.09.2026 10:59 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1998,13 +1998,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790085917,
-  "last_event_at": "2026-09-22T14:05:17Z",
-  "fetched_at": "2026-09-22T14:20:03.677556Z",
+  "timestamp": 1790086928,
+  "last_event_at": "2026-09-22T14:22:08Z",
+  "fetched_at": "2026-09-22T14:30:03.224613Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-22T14:20:03.677556Z",
-    "source_age_seconds": 886,
+    "generated_at": "2026-09-22T14:30:03.224613Z",
+    "source_age_seconds": 475,
     "city_count": 38,
     "region_count": 13,
     "feed_count": 80
