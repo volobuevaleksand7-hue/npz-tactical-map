@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-21T23:20Z",
+ "generated_at": "2026-09-22T00:05Z",
  "data_mode": "СЛУХ / НЕПРОВЕРЕНО (вариант B)",
  "disclaimer": "Авто-детектор кандидатов в удары из ленты radar-map.ru. НЕ боевые данные, НЕ публикуется автоматически. Только для ручного/Hermes-подтверждения перед переносом в strikes.json.",
  "candidates": [
@@ -2329,11 +2329,12 @@
    "detail": "[Newsader] НА МОСКВУ ОБРУШИЛСЯ АД: ВСУ РАЗНЕСЛИ НПЗ И СОЖГЛИ СКЛАДЫ ДОТЛА!",
    "source_url": "https://www.youtube.com/watch?v=xt2QIcCBqHQ",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "xt2QIcCBqHQ",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   },
   {
    "date": "2026-09-20",
@@ -2351,11 +2352,12 @@
    "detail": "[Newsader] СМЕРТОНОСНЫЙ ПРОРЫВ: УНИКАЛЬНЫЕ ДРОНЫ РАЗГРОМИЛИ МОСКОВСКИЙ НПЗ!",
    "source_url": "https://www.youtube.com/watch?v=YjONq9nkxCA",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "YjONq9nkxCA",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "expired_reason": "негеокодированный кандидат старше 2д — неактируем"
   },
   {
    "date": "2026-09-21",
