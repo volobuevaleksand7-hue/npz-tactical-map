@@ -46,8 +46,9 @@
       for (var i = 0; i < TG_GOALS.length; i++) {
         if (a.href.indexOf(TG_GOALS[i].match) === -1) continue;
         var goal = TG_GOALS[i].goal;
-        try { if (window.ym) ym(110490245, 'reachGoal', goal, { page: page }); } catch (err) {}
-        try { if (window.va) va('event', { name: goal, data: { page: page } }); } catch (err) {}
+        var place = a.getAttribute('data-cta') || 'other'; // strip/bar/inline/float/foreign — какое место сработало
+        try { if (window.ym) ym(110490245, 'reachGoal', goal, { page: page, place: place }); } catch (err) {}
+        try { if (window.va) va('event', { name: goal, data: { page: page, place: place } }); } catch (err) {}
         return;
       }
     }, true);
@@ -90,8 +91,86 @@
         '<div class="pp-vpn-t"><span class="pp-vpn-tag">телеграм-канал</span>' +
         '<b>Сводки об ударах дважды в день</b><div class="pp-vpn-b">Что произошло за ночь и за день: ' +
         'объекты, регионы, карта и цифры — коротко, без пересказа новостей.</div></div></div>' +
-      '<a class="pp-vpn-btn" href="' + CHANNEL_URL + '" target="_blank" rel="noopener">Подписаться на канал →</a>';
+      '<a class="pp-vpn-btn" href="' + CHANNEL_URL + '" target="_blank" rel="noopener" data-cta="inline">Подписаться на канал →</a>';
+    view('inline', d);
     return d;
+  }
+
+  // Показ CTA канала — отдельной целью, чтобы отличать слабый оффер от невидимого места
+  // (совет ревью Codex 23.09). Один раз на место за просмотр страницы.
+  function view(place, el) {
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      try { if (window.ym) ym(110490245, 'reachGoal', 'tg_cta_view', { page: location.pathname, place: place }); } catch (e) {}
+    });
+    io.observe(el);
+  }
+
+  // Сквозная полоса канала (23.09.2026). Подписки сейчас идут почти только с красной полосы
+  // «Сайт подвергается атакам» на главной: 0.66% входов против 0.1–0.2% на топ-лендингах, где
+  // CTA канала нет вовсе (на статьях VPN-карточка, на картах — свёрнутый язычок). Тот же мотив —
+  // на все страницы, кроме главной (там своя полоса) и iframe /radar?embed=1 внутри /karta-bpla.
+  // Ревью Codex: не сразу (8с или 25% скролла), крестик прячет на 3 дня, клик — на 7 (клик ≠ подписка).
+  var BAR_KEY = 'tg_bar_until';
+  function channelBar() {
+    var p = location.pathname.replace(/\/$/, '');
+    if (!p || p === '/index.html' || window.top !== window.self || /[?&]embed=/.test(location.search)) return;
+    try { if (Number(localStorage.getItem(BAR_KEY) || 0) > Date.now()) return; } catch (e) {}
+    function hide(b, days) { try { localStorage.setItem(BAR_KEY, String(Date.now() + days * 864e5)); } catch (e) {} b.remove(); }
+    var shown = false, t;
+    function onScroll() {
+      var h = document.documentElement;
+      if (h.scrollTop > (h.scrollHeight - h.clientHeight) * 0.25) show();
+    }
+    function show() {
+      if (shown) return;
+      shown = true; clearTimeout(t); window.removeEventListener('scroll', onScroll);
+      var s = document.createElement('style');
+      s.textContent =
+        '.tg-bar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:1100;' +
+        'display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100vw - 20px);padding:8px 44px 8px 16px;' +
+        'background:var(--surface,#fff);color:var(--ink,#111);border:1px solid rgba(210,58,46,.6);border-radius:12px;' +
+        'box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:13.5px;line-height:1.3;animation:tgBarIn .35s ease-out}' +
+        '.tg-bar p{margin:0}.tg-bar b{color:#a51e20}' +
+        '.tg-bar a{flex:none;display:inline-flex;align-items:center;min-height:36px;padding:0 16px;border-radius:9px;' +
+        'background:#2AABEE;color:#fff!important;font-weight:800;text-decoration:none;white-space:nowrap}' +
+        '.tg-bar a:hover{filter:brightness(1.07)}' +
+        '.tg-bar button{position:absolute;top:50%;right:6px;transform:translateY(-50%);width:32px;height:32px;border:0;' +
+        'background:none;color:var(--ink-dim,#777);font-size:22px;line-height:1;cursor:pointer}' +
+        '@keyframes tgBarIn{from{opacity:0;transform:translate(-50%,16px)}}' +
+        '@media(max-width:560px){.tg-bar{left:8px;right:8px;width:auto;transform:none;bottom:calc(8px + env(safe-area-inset-bottom));' +
+        'padding:8px 40px 8px 12px;font-size:12.5px;gap:8px}.tg-bar span{display:block}.tg-bar a{min-height:44px;padding:0 12px}' +
+        '@keyframes tgBarIn{from{opacity:0;transform:translateY(16px)}}}' +
+        '@media(prefers-reduced-motion:reduce){.tg-bar{animation:none}}' +
+        // на картах — компактная кнопка справа, над нижней панелью/тикером (/radar), карту не закрывает
+        '.tg-bar.tg-map{left:auto;right:10px;width:auto;transform:none;padding:4px 36px 4px 4px;animation:none}' +
+        '.tg-bar.tg-map p{display:none}.tg-bar.tg-map a{min-height:40px}';
+      document.head.appendChild(s);
+      var b = document.createElement('aside');
+      b.className = 'tg-bar';
+      b.setAttribute('aria-label', 'Telegram-канал карты');
+      b.innerHTML = '<p><b>Сайт могут заблокировать.</b> <span>Резервная ссылка и сводки об ударах — в Telegram.</span></p>' +
+        '<a href="' + CHANNEL_URL + '" target="_blank" rel="noopener" data-cta="bar">Подписаться</a>' +
+        '<button type="button" aria-label="Закрыть">×</button>';
+      b.querySelector('a').addEventListener('click', function () { setTimeout(function () { hide(b, 7); }, 0); });
+      b.querySelector('button').addEventListener('click', function () { hide(b, 3); });
+      if (document.getElementById('map')) {
+        b.classList.add('tg-map');
+        b.querySelector('a').textContent = '✈️ Резервная ссылка в Telegram';
+        var lo = window.innerHeight; // верх самой высокой нижней панели (мобильный лист /radar, тикер)
+        [].forEach.call(document.querySelectorAll('footer, .panel, .ticker'), function (e) {
+          var r = e.getBoundingClientRect();
+          if (r.height && r.top > window.innerHeight / 2) lo = Math.min(lo, r.top);
+        });
+        b.style.bottom = (window.innerHeight - lo + 10) + 'px';
+      }
+      document.body.appendChild(b);
+      view('bar', b);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    t = setTimeout(show, 8000);
   }
 
   // Dock: свернуть плавающую карточку у левого края в вертикальный «язычок» (не удалять) —
@@ -192,7 +271,7 @@
       '<span class="pp-vpn-ic">' + ANTENNA + '</span>' +
       '<div class="pp-vpn-float-t"><b>Сводки об ударах в Telegram</b>' +
         '<span>Два раза в день: что за ночь произошло, карта и цифры</span></div>' +
-      '<a class="pp-vpn-float-btn" href="' + CHANNEL_URL + '" target="_blank" rel="noopener">Подписаться на канал →</a>';
+      '<a class="pp-vpn-float-btn" href="' + CHANNEL_URL + '" target="_blank" rel="noopener" data-cta="float">Подписаться на канал →</a>';
     return d;
   }
 
@@ -231,7 +310,7 @@
     if (row) {
       var b = document.createElement('a');
       b.className = 'cta-btn secondary';
-      b.href = CHANNEL_URL; b.target = '_blank'; b.rel = 'noopener';
+      b.href = CHANNEL_URL; b.target = '_blank'; b.rel = 'noopener'; b.setAttribute('data-cta', 'foreign');
       b.textContent = '📡 Сводки в Telegram →';
       row.appendChild(b);
       return;
@@ -242,7 +321,7 @@
     box.style.cssText = 'margin:28px auto;max-width:900px;padding:14px 18px;border:1px solid ' +
       'rgba(18,165,148,.35);border-radius:12px;background:rgba(18,165,148,.07);font-size:15px';
     box.innerHTML = 'Следите за обстановкой в нашем Telegram-канале — сводки об ударах дважды ' +
-      'в день. <a href="' + CHANNEL_URL + '" target="_blank" rel="noopener" ' +
+      'в день. <a href="' + CHANNEL_URL + '" target="_blank" rel="noopener" data-cta="foreign" ' +
       'style="font-weight:700;white-space:nowrap">📡 Подписаться →</a>';
     main.appendChild(box);
   }
@@ -258,10 +337,19 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     trackBotInterest(); // до раннего return для карт — CTA бота есть и на radar/karta-azs
-    scheduleChannelCta();
+    channelBar();
     var isMap = !!document.getElementById('map');
+    var isFloat = FLOAT_PAGES.indexOf(location.pathname.replace(/\/$/, '')) !== -1;
+    // Карточка канала сразу под первым экраном статьи (hero с H1 и ответом), выше VPN-карточки.
+    // На картах и FLOAT_PAGES не ставим: там первым экраном карта, её не сдвигаем — хватает полосы.
+    var h1 = !isMap && !isFloat && document.querySelector('main h1');
+    if (h1) {
+      var ch = promoChannel();
+      if (ch) (h1.closest('.landing-hero,.news-hero') || h1).insertAdjacentElement('afterend', ch);
+    }
+    scheduleChannelCta();
     var firstBlocked = isMap ? null : markBlockedLinks();
-    if (isMap || FLOAT_PAGES.indexOf(location.pathname.replace(/\/$/, '')) !== -1) {
+    if (isMap || isFloat) {
       // На картах живут ОБЕ плашки (решение Серёги 15.07): слева внизу — язычок, справа —
       // карточка свежей сводки (article-nudge.js). Не конфликтуют: разные стороны дока
       // (side:'right' у сводки) + реестр __nudgeDocks сдвигает фазы подмигивания.
@@ -283,7 +371,7 @@
     // 🔴 Место, где стояло VPN-промо, не оставляем пустым: addChannelCta показывает кнопку
     // канала только там, где есть ссылка на ЧУЖОЙ телеграм («уводить некому»), а таких
     // страниц меньшинство — без этой ветки статьи остались бы вообще без CTA.
-    var card = VPN_ENABLED ? promo(!!firstBlocked) : promoChannel();
+    var card = VPN_ENABLED ? promo(!!firstBlocked) : null; // канал уже стоит под первым экраном
     if (!card) return;
     if (firstBlocked) {
       var box = firstBlocked.closest('li,p,article,section,div') || firstBlocked.parentNode;
