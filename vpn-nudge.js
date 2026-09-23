@@ -97,13 +97,14 @@
   }
 
   // Показ CTA канала — отдельной целью, чтобы отличать слабый оффер от невидимого места
-  // (совет ревью Codex 23.09). Один раз на место за просмотр страницы.
+  // (совет ревью Codex 23.09). Один раз на место за просмотр страницы. Ключ cta_view, а не
+  // place: параметры визита общие, иначе показы смешались бы с кликами в отчёте по place.
   function view(place, el) {
     if (!('IntersectionObserver' in window)) return;
     var io = new IntersectionObserver(function (es) {
       if (!es[0].isIntersecting) return;
       io.disconnect();
-      try { if (window.ym) ym(110490245, 'reachGoal', 'tg_cta_view', { page: location.pathname, place: place }); } catch (e) {}
+      try { if (window.ym) ym(110490245, 'reachGoal', 'tg_cta_view', { cta_view: place }); } catch (e) {}
     });
     io.observe(el);
   }
