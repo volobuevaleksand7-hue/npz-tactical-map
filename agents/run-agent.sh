@@ -24,8 +24,15 @@ if [ "${1:-}" = "--selftest" ]; then
 fi
 
 # load local secrets (ANTHROPIC_API_KEY и пр.) — файл ВНЕ репозитория
+# ponytail: NPZ_ENGINE, заданный ВЫЗЫВАЮЩИМ (crontab/shell), не должен затираться
+# значением из .npz-agent.env — .env трогать не велено (там же и секреты), а
+# .env исторически прибит на NPZ_ENGINE=claude (ручной откат 22.07, так и не снятый —
+# 1578 прогонов claude vs 0 openrouter). Приоритет вызывающего восстанавливает ротацию
+# без правки .env.
+_NPZ_ENGINE_CALLER="${NPZ_ENGINE:-}"
 [ -f /root/.npz-agent.env ] && . /root/.npz-agent.env
 [ -f "$HOME/.npz-agent.env" ] && . "$HOME/.npz-agent.env"
+[ -n "$_NPZ_ENGINE_CALLER" ] && NPZ_ENGINE="$_NPZ_ENGINE_CALLER"
 
 REPO="${NPZ_REPO:-/root/npz-tactical-map}"
 MODEL="${NPZ_MODEL:-claude-haiku-4-5-20251001}"
@@ -73,12 +80,31 @@ esac
 TIMEOUT_WRAP="timeout ${NPZ_AGENT_TIMEOUT:-1800}"
 command -v timeout >/dev/null 2>&1 || TIMEOUT_WRAP=""
 
-# --- Ротация движков (2026-07-22, экономия Claude-лимитов): MiMo-подписка →
-# OpenRouter-free (оба через mimo CLI, см. /usr/local/bin/mimo-rotate) → Claude Haiku.
-# NPZ_ENGINE=claude — принудительно только Claude (старое поведение).
+# --- Ротация движков (2026-09-23, чинили по поручению Серёги): OpenRouter-free
+# (через mimo CLI, см. /usr/local/bin/mimo-rotate) — ОСНОВНЫЕ исполнители → Claude
+# Haiku — ТОЛЬКО подстраховка. NPZ_ENGINE=claude — принудительно только Claude.
+# mimotoken/mimo-v2.5-pro (MiMo-подписка) исключена из цепочки 23.09: `Invalid API
+# Key` при живом тесте — платная ступень мертва, тратить на неё слот бессмысленно.
 # Не-Claude движкам добавляется преамбула с заменой WebSearch/WebFetch
 # (agents/websearch.sh = Tavily, curl) — сами спеки не трогаем.
+#
+# Явный список моделей (не дефолт mimo-rotate — тот всё ещё ставит первой мёртвую
+# mimotoken и живую-но-перегруженную ultra-550b): 4 free-модели с tool calling и
+# большим контекстом, проверены живым chat-запросом 23.09 —
+#   nex-n2.5-pro и nemotron-3.5-lightning ответили сразу; nemotron-3-super и
+#   laguna-s-2.1 (прежние) в моменте отдали 429/503 (перегруз), но это норма для
+#   free-пула — держим их дальше по цепочке как рабочий запасной путь.
+# MIMO_MODELS, если задан вызывающим, не перезаписываем (тот же принцип, что и с
+# NPZ_ENGINE выше).
+export MIMO_MODELS="${MIMO_MODELS:-openrouter/nex-agi/nex-n2.5-pro:free openrouter/nvidia/nemotron-3.5-lightning:free openrouter/nvidia/nemotron-3-super-120b-a12b:free openrouter/poolside/laguna-s-2.1:free}"
+
 RC=1
+# claude CLI 2.1.173 не имеет --max-turns (проверено --help) — раздувание сессий
+# (были ночные прогоны на 106 turns) ограничиваем ближайшим рабочим эквивалентом,
+# --max-budget-usd (подтверждено живым прогоном 23.09: флаг принимается и на
+# OAuth-подписке, не только на API-ключе). $2 — щедрый потолок для Haiku на один
+# JSON-апдейт; обычный прогон стоит центы.
+CLAUDE_MAX_BUDGET_USD="${NPZ_CLAUDE_MAX_BUDGET_USD:-2.00}"
 # Преамбула ОБЯЗАТЕЛЬНА для не-Claude движков (замена инструментов) — без неё
 # mimo-путь пропускаем, уходим сразу в claude (молча потерять её нельзя, Codex-ревью 22.07).
 if [ "${NPZ_ENGINE:-rotate}" = "rotate" ] && command -v mimo-rotate >/dev/null 2>&1 \
@@ -88,11 +114,17 @@ $PROMPT"
   # env -u: не отдавать секреты из .npz-agent.env внешне-модельному агенту (env-утечка;
   # websearch.sh сам пересорсит ключ в рантайме). Файл на диске root-агенту всё равно
   # доступен — остаточный риск принят (ключ Tavily одноразовый/заменяемый).
-  env -u TAVILY_API_KEY MIMO_TIMEOUT="${NPZ_MIMO_TIMEOUT:-900}" mimo-rotate "$GENERIC_PROMPT" \
+  env -u TAVILY_API_KEY MIMO_TIMEOUT="${NPZ_MIMO_TIMEOUT:-900}" MIMO_MODELS="$MIMO_MODELS" mimo-rotate "$GENERIC_PROMPT" \
     > "agents/logs/${LABEL}.log" 2>&1
   RC=$?
-  echo "engine mimo-rotate exit: $RC"
-  if [ "$RC" != "0" ]; then
+  # Какая именно модель отработала/фолбэкнула — по своим же маркерам mimo-rotate
+  # (`mimo-rotate → <model>` / `... failed; trying next`), которые иначе видны только
+  # в per-label логе, не в cron.log.
+  _WON="$(grep '^mimo-rotate →' "agents/logs/${LABEL}.log" 2>/dev/null | grep -v 'failed' | tail -1 | sed 's/^mimo-rotate → //')"
+  if [ "$RC" = "0" ]; then
+    echo "engine mimo-rotate exit: $RC (модель: ${_WON:-?})"
+  else
+    echo "engine mimo-rotate exit: $RC (все openrouter free-модели отказали — фолбэк в claude)"
     # упавший движок мог оставить полузаписанные файлы — чистим (дерево И индекс) перед fallback
     git checkout HEAD -- data/ 2>/dev/null || true
   fi
@@ -100,6 +132,7 @@ fi
 if [ "$RC" != "0" ]; then
   $TIMEOUT_WRAP claude -p "$PROMPT" \
     --model "$MODEL" \
+    --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
     --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
     --permission-mode acceptEdits \
     >> "agents/logs/${LABEL}.log" 2>&1
@@ -138,6 +171,7 @@ if [ "$RC" != "0" ] && tail -c 2000 "agents/logs/${LABEL}.log" 2>/dev/null | _is
     git checkout -- data/ 2>/dev/null || true
     $TIMEOUT_WRAP claude -p "$PROMPT" \
       --model "$MODEL" \
+      --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
       --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
       --permission-mode acceptEdits \
       >> "agents/logs/${LABEL}.log" 2>&1
@@ -181,6 +215,7 @@ if ! validate_data_json; then
   git checkout -- data/
   $TIMEOUT_WRAP claude -p "$PROMPT" \
     --model "$MODEL" \
+    --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
     --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
     --permission-mode acceptEdits \
     >> "agents/logs/${LABEL}.log" 2>&1
@@ -226,6 +261,7 @@ if [ -n "$AGENT_OUT" ]; then
     echo "!! [$LABEL] пустой прогон (попытка 1) — $AGENT_OUT не записан, повтор той же задачи"
     $TIMEOUT_WRAP claude -p "$PROMPT" \
       --model "$MODEL" \
+      --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
       --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
       --permission-mode acceptEdits \
       >> "agents/logs/${LABEL}.log" 2>&1
