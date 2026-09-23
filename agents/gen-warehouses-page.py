@@ -594,6 +594,11 @@ def main():
     html = build()
     with open(OUT, "w", encoding="utf8") as f:
         f.write(html)
+    # ponytail: шапку/меню/?v ассетов владеет build-nav — прогнать страницу через него,
+    # иначе шаблон генератора откатывает меню на каждой пересборке (23.09.2026)
+    import importlib.util as _u
+    _s = _u.spec_from_file_location("build_nav", os.path.join(os.path.dirname(os.path.abspath(__file__)), "build-nav.py"))
+    _bn = _u.module_from_spec(_s); _s.loader.exec_module(_bn); _bn.finish_page(OUT)
     print("gen-warehouses-page: %s (%.1f КБ)" % (os.path.basename(OUT), len(html.encode()) / 1024))
     return 0
 

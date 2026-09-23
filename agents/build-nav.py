@@ -679,6 +679,35 @@ def wire_tab_dropdown(html):
     return TAB_DROPDOWN_JS_RE.sub(TAB_DROPDOWN_JS, html, count=1)
 
 
+def render_landing(html, f, rows):
+    """Шапка/меню/футер/ассеты одной лендинг-страницы. Зовут и main(), и генераторы
+    страниц (gen-warehouses-page, gen-survivors-page) — иначе генератор выпускает страницу
+    со своим старым шаблоном, без выпадающего меню и со старым ?v стилей (23.09.2026)."""
+    current = "/" + str(f.relative_to(ROOT))[:-5]
+    # news-header-лендинги → build-nav владеет всей шапкой (лого + nav);
+    # radar (topbar, без news-header) → только внутренний nav, как раньше.
+    if '<header class="news-header">' in html:
+        new = HEADER_RE.sub(build_header(rows, current), html, count=1)
+    else:
+        new = NAV_RE.sub(build_nav(rows, current), html, count=1)
+    new = apply_footer(new, f.name)
+    new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
+    new = wire_dropdown(new)  # срезать старый инлайн-JS дропдауна + линковать shared /nav-dropdown.js
+    new = ensure_search_assets(new)  # search.css/search.js в <head> (поиск на всех страницах)
+    new = ensure_vpn_asset(new)  # vpn-nudge.js перед </body> (VPN-баннер на всех статических страницах)
+    return stamp_assets(new)  # освежить ?v на styles.css/news.css/nav-dropdown.js — иначе правка не доедет до вернувшихся
+
+
+def finish_page(path):
+    """Для генераторов: прогнать только что записанную страницу через render_landing."""
+    from pathlib import Path
+    f = Path(path).resolve()
+    html = f.read_text(encoding="utf-8")
+    new = render_landing(html, f, load_reg())
+    if new != html:
+        f.write_text(new, encoding="utf-8")
+
+
 def main():
     rows = load_reg()
     changed = 0
@@ -701,19 +730,7 @@ def main():
         # или news-nav без header (radar — только внутренний nav).
         if '<nav class="news-nav">' not in html and '<header class="news-header">' not in html:
             continue
-        current = "/" + str(f.relative_to(ROOT))[:-5]
-        # news-header-лендинги → build-nav владеет всей шапкой (лого + nav);
-        # radar (topbar, без news-header) → только внутренний nav, как раньше.
-        if '<header class="news-header">' in html:
-            new = HEADER_RE.sub(build_header(rows, current), html, count=1)
-        else:
-            new = NAV_RE.sub(build_nav(rows, current), html, count=1)
-        new = apply_footer(new, f.name)
-        new = DRAWER_RE.sub(lambda m: m.group(1) + build_drawer_analytics(rows) + m.group(3), new, count=1)
-        new = wire_dropdown(new)  # срезать старый инлайн-JS дропдауна + линковать shared /nav-dropdown.js
-        new = ensure_search_assets(new)  # search.css/search.js в <head> (поиск на всех страницах)
-        new = ensure_vpn_asset(new)  # vpn-nudge.js перед </body> (VPN-баннер на всех статических страницах)
-        new = stamp_assets(new)  # освежить ?v на styles.css/news.css/nav-dropdown.js — иначе правка не доедет до вернувшихся
+        new = render_landing(html, f, rows)
         if new != html:
             f.write_text(new, encoding="utf-8"); changed += 1; print("nav/footer updated", f.relative_to(ROOT))
 

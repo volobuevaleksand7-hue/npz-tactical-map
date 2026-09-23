@@ -13,6 +13,21 @@ COOLDOWN=3600                         # не спамить: не чаще ра�
 STATE=/root/.npz-bot/deadman-last-alert
 cd "$REPO" || exit 0
 [ -n "$TOKEN" ] && [ -n "$CHAT" ] || exit 0
+# 23.09.2026: Vercel выключил весь прод (402 DEPLOYMENT_DISABLED, неоплаченный счёт), а origin
+# при этом жил — сторож молчал. Проверяем и сам сайт; свой cooldown, чтобы не глушить алерт origin.
+code="$(curl -s -o /dev/null -m 20 -w '%{http_code}' https://npz-tactical-map.vercel.app/)"
+if [ "$code" != "200" ]; then
+  err="$(curl -sI -m 20 https://npz-tactical-map.vercel.app/ | grep -i '^x-vercel-error' | tr -d '\r')"
+  sla="$(cat "$STATE-site" 2>/dev/null || echo 0)"; snow="$(date +%s)"
+  if (( snow - sla > COOLDOWN )); then
+    curl -s "https://api.telegram.org/bot${TOKEN}/sendMessage" --data-urlencode "chat_id=${CHAT}" \
+      --data-urlencode "text=🔴 НПЗ-карта: прод отвечает HTTP ${code} ${err}. 402 DEPLOYMENT_DISABLED = биллинг Vercel (команда NPZavod → Settings → Billing)." \
+      -o /dev/null && echo "$snow" > "$STATE-site"
+    echo "ALERT sent: site HTTP $code $err"
+  else
+    echo "site HTTP $code, но в cooldown"
+  fi
+fi
 git fetch origin -q 2>/dev/null || true
 last="$(git log origin/main -1 --format=%ct 2>/dev/null)"; [ -n "$last" ] || exit 0
 now="$(date +%s)"; age=$(( (now - last) / 60 ))
