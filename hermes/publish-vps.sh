@@ -79,6 +79,8 @@ if [ -f agents/gen-news.py ]; then
     # синк держит под fuel-state, но его не звал НИКТО — страж --check краснел, а страницы
     # врали «данные на 22 сентября». Стоит внутри снимка, чтобы его файлы тоже ушли в коммит.
     python3 agents/sync-npz-counts.py >/dev/null 2>&1 || echo "publish-vps: ⚠ sync-npz-counts упал — пропускаю"
+    # карточки /npz/*: title/H1 «работает или нет» + блок статуса из fuel-state (меняется только при смене статуса)
+    python3 agents/gen-npz-card-status.py >/dev/null 2>&1 || echo "publish-vps: ⚠ gen-npz-card-status упал — пропускаю"
     python3 agents/build-nav.py >/dev/null 2>&1 || echo "publish-vps: ⚠ build-nav упал — навигация может отстать"
     _html_after="$(git status --porcelain -- '*.html' 'news/' 2>/dev/null | cut -c4- | sort)"
     _nav_touched="$(comm -13 <(printf '%s\n' "$_html_before") <(printf '%s\n' "$_html_after") | grep . || true)"
