@@ -36,8 +36,21 @@ START, END = "<!-- CARD-STATUS:START -->", "<!-- CARD-STATUS:END -->"
 BLOCK_RE = re.compile(re.escape(START) + r".*?" + re.escape(END), re.S)
 
 
+# Имя для title/H1 — поисковая форма, а не подпись меню: люди ищут «ярославский нпз
+# работает или нет», а не «НПЗ ЯНОС»; у /npz/kinef прежний title «Киришский НПЗ (КИНЕФ)»
+# держал самую посещаемую карточку — не терять.
+SEARCH_NAMES = {
+    "kinef": "Киришский НПЗ (КИНЕФ)",
+    "slavneft-yanos": "Ярославский НПЗ (ЯНОС)",
+    "lukojl-norsi": "Кстовский НПЗ (Лукойл-НОРСИ)",
+    "lukojl-permnefteorgsintez": "Пермский НПЗ (Лукойл-Пермнефтеоргсинтез)",
+    "salavat-npz": "Салаватский НПЗ (Газпром нефтехим Салават)",
+    "ns-oil": "Новоспасский НПЗ (NS-Oil)",
+}
+
+
 def label(slug):
-    return NAV.LABELS[f"/npz/{slug}"][1]
+    return SEARCH_NAMES.get(slug) or NAV.LABELS[f"/npz/{slug}"][1]
 
 
 def block(r, name):
