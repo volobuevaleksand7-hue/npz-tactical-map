@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-09-24T00:00Z",
+    "generated_at": "2026-09-24T17:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностями и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -127,11 +127,11 @@
       "capacity_mt_year": 12.0,
       "status": "partial",
       "status_since": "2026-07-31",
-      "est_output_pct": 20,
-      "damage": "Удар по крупному нефтеперерабатывающему заводу Роснефти на Чёрном море. Завод является ключевым объектом экспортной инфраструктуры РФ, мощность переработки около 12 млн тонн нефти в год.",
+      "est_output_pct": 15,
+      "damage": "Морские дроны атаковали пирс нефтеперегрузки в порту. Пострадали: 1 погибший, 1 раненый. Повреждена транспортная инфраструктура порта.",
       "note": "На 19 сентября переведён в режим пониженной переработки; восстановление ожидается ~ноябрь-декабрь 2026.",
-      "source_url": "https://kyivindependent.com/wildberries-warehouse-oil-refineries-reportedly-attacked-volgograd-krasnodar/",
-      "confidence": "reported"
+      "source_url": "https://www.obozrevatel.com/novosti-rossii/morskie-dronyi-atakovali-rossijskij-port-tuapse-chto-izvestno-foto-i-video.htm",
+      "confidence": "confirmed"
     },
     {
       "id": "kuibyshev",
@@ -1249,6 +1249,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-09-24",
+      "text": "Удар по Туапсинский НПЗ (Туапсе): Атака морских дронов по нефтяному терминалу в порту Туапсе",
+      "source_url": "https://www.obozrevatel.com/novosti-rossii/morskie-dronyi-atakovali-rossijskij-port-tuapse-chto-izvestno-foto-i-video.htm"
+    },
     {
       "date": "2026-09-24",
       "text": "Переинтродукция ограничений в регионах: Калужская область и Забайкальский край вновь ввели ограничения на продажу топлива. Калуга: система нечётных/чётных дней, запрет на канистры. Забайкалье: лимит 15 л на АИ-92/АИ-95 на 48 АЗС, резервы на 20 дней. Второе усиление волны кризиса демонстрирует, что волна повторных ударов замедляет восстановление мощностей.",
