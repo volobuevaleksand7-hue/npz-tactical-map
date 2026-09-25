@@ -1,14 +1,76 @@
 {
   "meta": {
-    "generated_at": "2026-09-24T17:27:55Z",
+    "generated_at": "2026-09-25T05:33:58Z",
     "updated_by": "agent:grid-status",
     "data_mode": "OSINT / ESTIMATE",
     "confidence": "Состояние подстанций, ТЭС и регионов с отключениями — по открытым источникам (региональные СМИ, заявления Россетей, тг-каналы губернаторов, заявления МАГАТЭЕ, Ukrenergo). Не official.",
     "refresh_seconds": 360
   },
-  "substations": [],
-  "blackout_regions": [],
+  "substations": [
+    {
+      "id": "rostov_substation_1",
+      "name": "Трансформаторная подстанция в Ростове-на-Дону",
+      "operator": "Россети Юг",
+      "lat": 47.2357,
+      "lon": 39.7015,
+      "status": "down",
+      "status_since": "2026-09-17",
+      "damage": "Повреждена из-за падения обломков БПЛА",
+      "source_url": "https://u-f.ru/news/society/u9/2026/09/17/425300",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "simferopol_tes_1",
+      "name": "Таврическая ТЭС",
+      "operator": "Россети",
+      "lat": 44.9521,
+      "lon": 34.1025,
+      "status": "damaged",
+      "status_since": "2026-09-23",
+      "damage": "Повреждена в результате ночной атаки дронов, возник пожар",
+      "source_url": "https://www.dw.com/ru/osintmonitoring-v-krymu-posle-nocnoj-ataki-gorit-tavriceskaa-tes/a-77635979",
+      "confidence": "confirmed"
+    }
+  ],
+  "blackout_regions": [
+    {
+      "region": "Ростов-на-Дону",
+      "lat": 47.2357,
+      "lon": 39.7015,
+      "scope": "partial",
+      "affected_population": 0,
+      "cause": "Повреждение подстанции из-за падения обломков БПЛА",
+      "since": "2026-09-17",
+      "source_url": "https://u-f.ru/news/society/u9/2026/09/17/425300",
+      "note": "Без электричества остались Ворошиловский, Ленинский, Октябрьский и Кировский районы города."
+    },
+    {
+      "region": "Крым",
+      "lat": 45.0355,
+      "lon": 35.3755,
+      "scope": "partial",
+      "affected_population": 0,
+      "cause": "Атака дронов на энергетическую инфраструктуру, включая ТЭС",
+      "since": "2026-09-23",
+      "source_url": "https://www.dw.com/ru/osintmonitoring-v-krymu-posle-nocnoj-ataki-gorit-tavriceskaa-tes/a-77635979",
+      "note": "Сообщения о перебоях с электричеством в различных районах Крыма."
+    }
+  ],
   "events": [
+    {
+      "date": "2026-09-23",
+      "region": "Республика Крым",
+      "text": "В Крыму после ночной атаки дронов загорелась Таврическая ТЭС, обеспечивающая электроэнергией значительную часть центрального Крыма. Сообщаются о перебоях с электричеством в регионе.",
+      "source_url": "https://www.dw.com/ru/osintmonitoring-v-krymu-posle-nocnoj-ataki-gorit-tavriceskaa-tes/a-77635979",
+      "confidence": "confirmed"
+    },
+    {
+      "date": "2026-09-23",
+      "region": "Республика Крым",
+      "text": "В результате атаки дронов на энергетическую инфраструктуру Крыма, включая Таврическую ТЭС, зафиксированы перебои с электричеством в различных районах полуострова.",
+      "source_url": "https://www.dw.com/ru/osintmonitoring-v-krymu-posle-nocnoj-ataki-gorit-tavriceskaa-tes/a-77635979",
+      "confidence": "confirmed"
+    },
     {
       "date": "2026-09-23",
       "region": "Множественные регионов России",
