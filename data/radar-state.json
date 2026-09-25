@@ -402,8 +402,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790302772,
-      "source_text": "25.09.2026 05:19 МСК\nГО Можайск Московская область Фиксация БПЛА"
+      "last_event_ts": 1790304148,
+      "source_text": "25.09.2026 05:42 МСК\nГО Серпухов Московская область Сбитие БПЛА"
     },
     "Московская область": {
       "bpla": false,
@@ -725,8 +725,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790303894,
-      "source_text": "25.09.2026 05:38 МСК\nАлексин Тульская область Работа ПВО по БПЛА"
+      "last_event_ts": 1790304039,
+      "source_text": "25.09.2026 05:40 МСК\nТула Тульская область Работа ПВО по БПЛА"
     },
     "Тамбовская область": {
       "bpla": false,
@@ -938,11 +938,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790293686,
-      "source_text": "25.09.2026 02:48 МСК\nГО Серпухов Московская область Фиксация БПЛА"
+      "last_event_ts": 1790304148,
+      "source_text": "25.09.2026 05:42 МСК\nГО Серпухов Московская область Сбитие БПЛА"
     },
     {
       "key": "мысхако|краснодарский край",
@@ -1368,9 +1368,9 @@
       "lat": 54.19609,
       "lon": 37.61822,
       "region": "Тульская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1378,11 +1378,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790286453,
-      "source_text": "25.09.2026 00:47 МСК\nАлексин, Тула, Узловая, Щёкино, Киреевск, Новомосковск, Кимовск, Донской и близлежащие, Тульская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1790304039,
+      "source_text": "25.09.2026 05:40 МСК\nТула Тульская область Работа ПВО по БПЛА"
     },
     {
       "key": "мариуполь|донецкая народная республика",
@@ -1755,8 +1755,8 @@
       "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790303894,
-      "source_text": "25.09.2026 05:38 МСК\nАлексин Тульская область Работа ПВО по БПЛА"
+      "last_event_ts": 1790304027,
+      "source_text": "25.09.2026 05:40 МСК\nАлексин Тульская область Ещё сбитие БПЛА"
     },
     {
       "key": "ростов-на-дону|ростовская область",
@@ -3270,11 +3270,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790291531,
-      "source_text": "25.09.2026 02:12 МСК\nГО Подольск Московская область Сбитие БПЛА"
+      "last_event_ts": 1790304122,
+      "source_text": "25.09.2026 05:42 МСК\nГО Подольск Московская область Сбитие БПЛА"
     },
     {
       "key": "авдеевка|донецкая народная республика",
@@ -3685,14 +3685,14 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "bplaLaunchAnim": false,
-      "fill": "#dc2626",
+      "fill": "#ea580c",
       "last_event_ts": 1790297803,
-      "source_text": "24.09.2026 17:44 МСК\nЛуганск ракетная опасность\n\n25.09.2026 03:56 МСК\nЛуганск и близлежащие тревога по БПЛА"
+      "source_text": "25.09.2026 03:56 МСК\nЛуганск и близлежащие тревога по БПЛА"
     },
     {
       "key": "подольск|московская область",
@@ -4744,7 +4744,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1790300433,
@@ -10301,6 +10301,38 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 93604,
+      "text": "ГО Серпухов\nМосковская область\nСбитие БПЛА",
+      "ts": 1790304148,
+      "time_label": "25.09.2026 05:42 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 93603,
+      "text": "ГО Подольск\nМосковская область\nСбитие БПЛА",
+      "ts": 1790304122,
+      "time_label": "25.09.2026 05:42 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 93602,
+      "text": "Тула\nТульская область\nРабота ПВО по БПЛА",
+      "ts": 1790304039,
+      "time_label": "25.09.2026 05:40 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 93601,
+      "text": "Алексин\nТульская область\nЕщё сбитие БПЛА",
+      "ts": 1790304027,
+      "time_label": "25.09.2026 05:40 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 93600,
       "text": "Алексин\nТульская область\nРабота ПВО по БПЛА",
       "ts": 1790303894,
@@ -10907,38 +10939,6 @@
       "time_label": "25.09.2026 03:48 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 282054,
-      "text": "Каменск-Шахтинский и близлежащие тревога по БПЛА на электрогяге\nРостовская область",
-      "ts": 1790297236,
-      "time_label": "25.09.2026 03:47 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 93549,
-      "text": "Неверкинский район\nПензенская область\nФиксация 4 реактивных БПЛА",
-      "ts": 1790297184,
-      "time_label": "25.09.2026 03:46 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 93548,
-      "text": "Воронеж\nВоронежская область\nПродолжается работа ПВО по БПЛА\nМеры безопасности",
-      "ts": 1790297180,
-      "time_label": "25.09.2026 03:46 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 93547,
-      "text": "Миллеровский район\nРостовская область\nФиксация БПЛА",
-      "ts": 1790297136,
-      "time_label": "25.09.2026 03:45 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -10948,13 +10948,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790303894,
-  "last_event_at": "2026-09-25T02:38:14Z",
-  "fetched_at": "2026-09-25T02:40:02.755268Z",
+  "timestamp": 1790304148,
+  "last_event_at": "2026-09-25T02:42:28Z",
+  "fetched_at": "2026-09-25T02:50:03.267391Z",
   "poll_interval_sec": 55,
   "meta": {
-    "generated_at": "2026-09-25T02:40:02.755268Z",
-    "source_age_seconds": 108,
+    "generated_at": "2026-09-25T02:50:03.267391Z",
+    "source_age_seconds": 455,
     "city_count": 219,
     "region_count": 40,
     "feed_count": 80
