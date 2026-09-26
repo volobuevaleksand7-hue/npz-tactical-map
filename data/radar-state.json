@@ -118,7 +118,7 @@
       "rocketOnRegion": false,
       "fill": "#dc2626",
       "last_event_ts": 1790433251,
-      "source_text": "26.09.2026 15:35 МСК\nБелая Берёзка и ближайшие ракетная опасность РСЗО Брянская область\n\n26.09.2026 17:34 МСК\nОрловская область опасность по БПЛА от Брянской области\n\n26.09.2026 14:45 МСК\nТрасса Клинцы ,Брянская область опасность по ФПВ"
+      "source_text": "26.09.2026 15:35 МСК\nБелая Берёзка и ближайшие ракетная опасность РСЗО Брянская область\n\n26.09.2026 17:34 МСК\nОрловская область опасность по БПЛА от Брянской области"
     },
     "Курская область": {
       "bpla": false,
@@ -269,8 +269,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790430329,
-      "source_text": "26.09.2026 16:45 МСК\nНовофедоровка и ближайшие тревога по БПЛА Республика Крым"
+      "last_event_ts": 1790434122,
+      "source_text": "26.09.2026 17:48 МСК\nБельбек, Севастополь и близлежащие опасность по БПЛА Республика Крым"
     }
   },
   "cities": [
@@ -389,9 +389,9 @@
       "lat": 44.60795,
       "lon": 33.52134,
       "region": "Севастополь",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -402,8 +402,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790428337,
-      "source_text": "26.09.2026 16:12 МСК\nКача, Орловка Севастополь С северо-востока фиксации БПЛА в направлении"
+      "last_event_ts": 1790434122,
+      "source_text": "26.09.2026 17:48 МСК\nБельбек, Севастополь и близлежащие опасность по БПЛА Республика Крым"
     },
     {
       "key": "волоконовка|белгородская область",
@@ -703,7 +703,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -2655,9 +2655,9 @@
       "gid_2": "UKR.20.1_1",
       "name_ru": "Севастополь",
       "region_ru": "Севастополь",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -2670,8 +2670,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790428337,
-      "source_text": "26.09.2026 16:12 МСК\nКача, Орловка Севастополь С северо-востока фиксации БПЛА в направлении"
+      "last_event_ts": 1790434122,
+      "source_text": "26.09.2026 17:48 МСК\nБельбек, Севастополь и близлежащие опасность по БПЛА Республика Крым"
     },
     "RUS.34.50_1": {
       "gid_2": "RUS.34.50_1",
@@ -3172,6 +3172,14 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 282844,
+      "text": "Бельбек, Севастополь и близлежащие опасность по БПЛА\nРеспублика Крым",
+      "ts": 1790434122,
+      "time_label": "26.09.2026 17:48 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 93877,
       "text": "Сочи и близлежащие\nКраснодарский край\nОтбой опасности по БПЛА",
@@ -3803,14 +3811,6 @@
       "time_label": "26.09.2026 15:24 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 282783,
-      "text": "Алчевск в направление  Луганск через Перевальск\nТревога по БПЛА Хорнет трасса",
-      "ts": 1790425446,
-      "time_label": "26.09.2026 15:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3820,13 +3820,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790433367,
-  "last_event_at": "2026-09-26T14:36:07Z",
-  "fetched_at": "2026-09-26T14:40:03.439996Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1790434122,
+  "last_event_at": "2026-09-26T14:48:42Z",
+  "fetched_at": "2026-09-26T14:50:04.055855Z",
+  "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-09-26T14:40:03.439996Z",
-    "source_age_seconds": 236,
+    "generated_at": "2026-09-26T14:50:04.055855Z",
+    "source_age_seconds": 82,
     "city_count": 93,
     "region_count": 14,
     "feed_count": 80
