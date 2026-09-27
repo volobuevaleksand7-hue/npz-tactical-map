@@ -834,149 +834,158 @@
       "lat": 55.35,
       "lon": 86.09,
       "level": "critical",
-      "updated": "2026-09-21T17:23:44Z",
+      "updated": "2026-09-27T05:33:01Z",
       "networks": [
         {
-          "name": "Газпромнефть/Лукойл",
+          "name": "Газпромнефть",
           "status": "limited",
           "level": "critical",
-          "limit_l": 30,
-          "note": "21.09 ротация: КРИТИЧНА. Вторая волна обострена. 50% АЗС закрыто (около 20 заправок работают). Очереди 2+ часа. Избирательные приоритеты: спец.службы, скорая, полиция, школьные автобусы. Дефицит persists. WebSearch 21.09."
+          "limit_l": 40,
+          "note": "25.09.2026: Спадает ажиотажный спрос на бензин. На АЗС Газпромнефти действует лимит до 40 литров на одного человека."
+        },
+        {
+          "name": "Лукойл",
+          "status": "limited",
+          "level": "critical",
+          "limit_l": 40,
+          "note": "25.09.2026: Ситуация улучшается, лимиты сохраняются на уровне 40 литров."
         }
       ],
-      "queues_hours": 2.5,
+      "queues_hours": 2.0,
       "ai95_price_rub": 75.0,
       "diesel_price_rub": 79.0,
       "source_urls": [
-        "https://ngs42.ru/text/auto/2026/09/03/76622292/",
-        "https://vse42.ru/news/33642873",
-        "https://www.city-n.ru/view/484209.html"
+        "https://www.kommersant.ru/doc/8799452",
+        "https://www.instagram.com/reel/Ddrrh9lK76Z"
       ],
-      "note": "21.09 ротация: КРИТИЧНА. 50% закрыто. Очереди 2+ часа. WebSearch 21.09."
+      "note": "25.09.2026: Спадает ажиотажный спрос на бензин. На АЗС Газпромнефти лимит до 40 литров. Очереди сокращаются."
     },
     {
       "region": "Волгоградская область",
       "lat": 48.7,
       "lon": 44.5,
       "level": "strained",
-      "updated": "2026-09-21T17:23:44Z",
+      "updated": "2026-09-27T05:33:01Z",
       "networks": [
         {
           "name": "Лукойл/Газпромнефть",
           "status": "limited",
-          "level": "strained",
+          "level": "limited",
           "limit_l": 40,
-          "note": "21.09 ротация: УЛУЧШЕНИЕ продолжается. Очереди сократились 2-3х с 10.09. Люди заправляются за 30 мин вместо часов. Цены стабильны (АИ-92 68.75р, АИ-95 75.89р). Поставки удвоены. Ситуация нормализуется. WebSearch 21.09."
+          "note": "25.09.2026: С 10 сентября поставки топлива увеличены вдвое. К третьей декаде сентября очереди заметно сократились, длинных очередей почти неделю нет. Цены стабильны."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.25,
       "ai95_price_rub": 75.89,
       "diesel_price_rub": 78.41,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/volgogradskaya-oblast/",
-        "https://card-oil.ru/fuel-cost/volgogradskaya-oblast/",
-        "https://v1.ru/text/transport/2026/09/13/76640421/"
+        "https://www.volgograd.kp.ru/daily/277814/5301724",
+        "https://vlg.aif.ru/auto/trans/v-volgograde-nazvany-sroki-sokrashcheniya-ocheredey-za-benzinom-na-azs"
       ],
-      "note": "21.09 ротация: Очереди улучшаются! Цены 68.75/75.89р. Поставки норм. WebSearch 21.09."
+      "note": "25.09.2026: С 10 сент. поставки удвоены. Очереди значительно сократились, длинных очередей почти неделю нет. Цены стабильны."
     },
     {
       "region": "Ростовская область",
       "lat": 47.23,
       "lon": 39.72,
-      "level": "limited",
-      "updated": "2026-09-21T17:23:44Z",
+      "level": "strained",
+      "updated": "2026-09-27T05:33:01Z",
       "networks": [
         {
           "name": "Газпром нефть/Роснефть/Лукойл",
           "status": "limited",
-          "level": "limited",
+          "level": "strained",
           "limit_l": 30,
-          "note": "21.09 ротация: М-4 «Дон» напряженность сохраняется. Лимит 30л бензина, 60л ДТ. Очереди 30 мин-1.5ч, реже до 2+ на часы пик. Цены 63-67р (низкие). Приоритет спец.службам. Поставки ограничены. WebSearch 21.09."
+          "note": "27.09.2026: Очереди на заправках достигают 100 машин (24.09). Средняя цена АИ-95 78,97р/л, ДТ 76,18р/л. Система ограничений 30л сохраняется."
         }
       ],
-      "queues_hours": 0.8,
-      "ai95_price_rub": 65.0,
-      "diesel_price_rub": 80.0,
+      "queues_hours": 4.0,
+      "ai95_price_rub": 78.97,
+      "diesel_price_rub": 76.18,
       "source_urls": [
-        "https://161.ru/text/economics/2026/09/20/76647921/",
-        "https://info24.ru/news/chto-s-benzinom-na-m-4-don-segodnya-3-sentyabrya-poslednie-novosti-gde-kupit-ceny.html"
+        "https://multigo.ru/benzin/47.2238;39.72/11",
+        "https://gogov.ru/bensin-prices-sep25/rst"
       ],
-      "note": "21.09 ротация: М-4 напряженность. Очереди 30м-1.5ч. Цены 63-67р. WebSearch 21.09."
+      "note": "27.09.2026: Очереди достигают 100 машин. Цены АИ-95 78,97р/л, ДТ 76,18р/л. Ограничения 30л сохраняются."
     },
     {
       "region": "Северная Осетия - Алания",
       "lat": 43.02,
       "lon": 44.68,
-      "level": "calm",
-      "updated": "2026-09-21T17:23:44Z",
+      "level": "strained",
+      "updated": "2026-09-27T05:33:01Z",
       "networks": [
         {
-          "name": "Лукойл / Роснефть / Другие (28 АЗС)",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "21.09 ротация: Стабильна. Цены на 21.09: АИ-92 68.54р, АИ-95 75.14р (выше среднего). 28 АЗС. Без дефицита. 90% общественного транспорта переведено на газ. Резервы созданы. WebSearch 21.09."
+          "name": "Лукойл / Роснефть / Другие",
+          "status": "limited",
+          "level": "strained",
+          "limit_l": 20,
+          "note": "16.09.2026: Каждая пятая заправка (19 из 90) осталась без горючего. На большинстве АЗС Роснефть и Газпром есть топливо, но очереди 20-30 машин. На Лукойл иногда только дизель и газ."
         }
       ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 75.14,
+      "queues_hours": 1.5,
+      "ai95_price_rub": 84.66,
       "diesel_price_rub": 78.0,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/respublika-severnaya-osetiya-alaniya/ai95/",
-        "https://fuelprice.ru/vladikavkaz",
-        "https://www.e-osetia.ru/news/proisshestviya/benzin-v-rso-alaniya-skolko-topliva-na-bazakh-gde-est-ocheredi-i-kogda-vsye-normalizuetsya/"
+        "https://www.kommersant.ru/doc/8778792",
+        "https://stav.aif.ru/society/transport/na-azs-severnoy-osetii-poyavilsya-benzin-no-sohranyayutsya-ocheredi"
       ],
-      "note": "21.09 ротация: Стабильна. Цены 68.54/75.14р. 28 АЗС. WebSearch 21.09."
+      "note": "16.09.2026: 19/90 АЗС без топлива. Очереди 20-30 машин на АЗС Роснефть/Газпром. Лукойл иногда только дизель/газ."
     },
     {
       "region": "Республика Бурятия",
       "lat": 51.83,
       "lon": 107.58,
-      "level": "calm",
-      "updated": "2026-09-21T17:23:44Z",
+      "level": "limited",
+      "updated": "2026-09-27T05:33:01Z",
       "networks": [
         {
           "name": "Роснефть / БРК / ННК / Независимые",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "21.09 ротация: Улан-Удэ стабильна. Цены НИЗКИЕ: АИ-92 63.96р, АИ-95 69.95р (среди самых низких в РФ). Поставки достаточны. Дефицита нет. Полностью стабилизирована. WebSearch 21.09."
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 30,
+          "note": "27.08.2026: На заправках Бурятии с утра выстроились длинные очереди. На некоторых АЗС ограничение 30л на заправку. Причина - повышенный спрос и логистические сложности с подвозом топлива, не общий дефицит. Частные заправки (биржевые закупки) испытывают дефицит."
         }
       ],
-      "queues_hours": 0.0,
+      "queues_hours": 2.0,
       "ai95_price_rub": 69.95,
       "diesel_price_rub": 83.32,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/respublika-buryatiya/",
-        "https://fuelprice.ru/ulan-ude",
-        "https://ftcard.ru/toplivo-cena/respublika-buryatiya/ulan-ude/"
+        "https://bgtrk.ru/news/society/271278",
+        "https://multigo.ru/benzin/51.8305;107.588/11"
       ],
-      "note": "21.09 ротация: Стабильна. Цены НИЗКИЕ 63.96/69.95р. WebSearch 21.09."
+      "note": "27.08.2026: Длинные очереди на некоторых АЗС. Ограничение 30л. Логистические сложности с подвозом. Частные АЗС имеют дефицит."
     },
     {
       "region": "Республика Алтай",
       "lat": 51.96,
       "lon": 85.96,
       "level": "critical",
-      "updated": "2026-09-21T17:23:44Z",
+      "updated": "2026-09-27T05:33:01Z",
       "networks": [
         {
-          "name": "ББК / Местные АЗС",
+          "name": "Роснефть",
           "status": "limited",
           "level": "critical",
           "limit_l": 30,
-          "note": "21.09 ротация: Туризм обостряет дефицит. Горноалтайск: цены достигали 180р/л. Лимиты 30-50л по районам. Отельеры заправляют машины гостей по документам. Туристический поток +20%. ББК контролирует распределение. WebSearch 21.09."
+          "note": "24.09.2026: На АЗС Роснефть в ряде районов АИ-95 — 64,25 рубль. Но очень большие очереди."
+        },
+        {
+          "name": "Местные/Независимые АЗС",
+          "status": "limited",
+          "level": "critical",
+          "limit_l": 20,
+          "note": "24.09.2026: Стоимость топлива достигла 84,5 рубля за литр АИ-92, 87,5 рубля за АИ-95 и 96,5 рубля за дизельное топливо на независимых заправках."
         }
       ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 105.0,
-      "diesel_price_rub": 116.0,
+      "queues_hours": 3.0,
+      "ai95_price_rub": 75.87,
+      "diesel_price_rub": 96.5,
       "source_urls": [
-        "https://www.kommersant.ru/doc/8831346",
-        "https://ngs42.ru/text/business/2026/07/14/76532236/",
-        "https://www.amic.ru/news/ocheredi-limity-i-ceny-chto-proishodit-s-benzinom-na-altae-i-drugih-regionah-sibiri-586852"
+        "https://www.amic.ru/news/ocheredi-limity-i-ceny-chto-proishodit-s-benzinom-na-altae-i-drugih-regionah-sibiri-586852",
+        "https://www.kommersant.ru/doc/8831346"
       ],
-      "note": "21.09 ротация: Туризм обостряет. Цены до 105-180р. WebSearch 21.09."
+      "note": "24.09.2026: Роснефть - цены низкие но большие очереди. Независимые АЗС - высокие цены (АИ-95 87,5р). Дефицит топлива сохраняется."
     },
     {
       "region": "Республика Крым",
