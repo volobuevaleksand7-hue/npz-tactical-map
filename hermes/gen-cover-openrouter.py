@@ -41,12 +41,26 @@ def load_key():
 
 
 def build_prompt(city, event):
-    scene = "на дальнем плане столб дыма над промышленным объектом" if event else "городская панорама"
-    if "нпз" in event.lower() or "нефтеб" in event.lower() or "завод" in event.lower():
-        scene = "на дальнем плане нефтеперерабатывающий завод/нефтебаза, лёгкий дым на горизонте"
-    return (f"Photorealistic daytime documentary news photograph of the city of {city}, Russia. {scene}. "
-            f"Bright clear daylight or golden hour, calm photojournalistic style, wide city skyline, "
-            f"16:9 horizontal composition. NOT dark, NOT night, NOT dramatic fire. NO text, NO letters, NO logos.")
+    ev = (event or "").lower()
+    if "нефтеб" in ev:
+        scene = ("a small oil-storage depot of white tanks on the horizon, seen from a dirt road "
+                 "across fields. One tank is scorched black with a thin dark wisp; the fire is out")
+    elif any(k in ev for k in ("нпз", "завод", "нефте")):
+        scene = ("an oil refinery small on the far riverbank. One unit is scorched and sends up "
+                 "a single black smoke column; the rest of the plant stands intact. Foreground is "
+                 "trees, an embankment or rooftops")
+    elif "склад" in ev:
+        scene = ("a long warehouse seen from a distance. Part of the roof is darkened and one dark "
+                 "smoke column rises; the rest of the building stands")
+    elif any(k in ev for k in ("танкер", "море")):
+        scene = "oil tankers small on the horizon of open water, one ship trailing a black smoke column"
+    elif ev:
+        scene = ("a city district seen from across a river. One dark smoke column rises from a single "
+                 "damaged building far away; the rest of the city looks ordinary")
+    else:
+        scene = "a calm wide city skyline in daylight"
+    return (f"Photorealistic daytime documentary news photograph of {city}, Russia, taken from far away. "
+            f"{scene}. Wide horizontal frame, calm daylight, photojournalism. No text, no letters, no logos.")
 
 
 def openrouter_image(key, prompt, model, ref_path=None):
