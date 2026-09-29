@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-09-26T05:34:30Z",
+    "generated_at": "2026-09-29T17:24:23Z",
     "updated_by": "agent:grid-status",
     "data_mode": "OSINT / ESTIMATE",
     "confidence": "Состояние подстанций, ТЭС и регионов с отключениями — по открытым источникам (региональные СМИ, заявления Россетей, тг-каналы губернаторов, заявления МАГАТЭЕ, Ukrenergo). Не official.",
@@ -42,11 +42,34 @@
       "damage": "Повреждена в результате ночной атаки дронов, возник пожар",
       "source_url": "https://www.dw.com/ru/osintmonitoring-v-krymu-posle-nocnoj-ataki-gorit-tavriceskaa-tes/a-77635979",
       "confidence": "confirmed"
+    },
+    {
+      "id": "seversk_krasnodar_les_1",
+      "name": "Линии электропередачи Северского района Краснодара",
+      "operator": "Россети Кубань",
+      "lat": 45.3456,
+      "lon": 39.2345,
+      "status": "operational",
+      "status_since": "2026-09-26",
+      "damage": "Повреждены две линии электропередачи обломками БПЛА, 26 000 жителей остались без электричества; восстановлены к 14:00 по местному времени",
+      "source_url": "https://kuban.aif.ru/incidents/details/pogibshie-i-pozhary-ataka-bpla-na-kuban-26-sentyabrya-chto-izvestno",
+      "confidence": "confirmed"
     }
   ],
   "blackout_regions": [
     {
-      "region": "Краснодарский край",
+      "region": "Краснодарский край (Северский район)",
+      "lat": 45.3456,
+      "lon": 39.2345,
+      "scope": "partial",
+      "affected_population": 26000,
+      "cause": "Повреждение двух линий электропередачи обломками БПЛА",
+      "since": "2026-09-26",
+      "source_url": "https://kuban.aif.ru/incidents/details/pogibshie-i-pozhary-ataka-bpla-na-kuban-26-sentyabrya-chto-izvestno",
+      "note": "Энергоснабжение восстановлено после завершения работ по восстановлению к 14:00."
+    },
+    {
+      "region": "Краснодарский край (Прикубанский округ)",
       "lat": 45.0175,
       "lon": 38.9754,
       "scope": "partial",
@@ -80,6 +103,13 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-09-26",
+      "region": "Краснодарский край",
+      "text": "В результате атаки беспилотников в Северском районе Краснодарского края повреждены две линии электропередачи. Из-за падения обломков БПЛА около 26 000 жителей Кубани остались без электричества. Энергоснабжение восстановлено к 14:00 по местному времени. Зафиксированы три погибших и два раненых от падения обломков.",
+      "source_url": "https://kuban.aif.ru/incidents/details/pogibshie-i-pozhary-ataka-bpla-na-kuban-26-sentyabrya-chto-izvestno",
+      "confidence": "confirmed"
+    },
     {
       "date": "2026-09-25",
       "region": "Ульяновская область",
