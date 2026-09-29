@@ -1,11 +1,11 @@
 {
 "meta": {
-    "generated_at": "2026-09-29T16:22:45Z",
+    "generated_at": "2026-09-29T17:15:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:npz-status"
+    "updated_by": "agent:fuel-market"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -16,7 +16,7 @@
     "export_ban_gasoline": true,
     "export_ban_kerosene": true,
     "import_from_belarus": true,
-    "notes": "Вторая волна повторных ударов на восстановленные мощности продолжается с интенсификацией. Атаки направлены на вторичные установки переработки, требующие 6–8 месяцев на восстановление при санкциях. Situation across roughly two-thirds of 83 regions under fuel restrictions, with four regions under emergency status. Belarusian import continues as key stabilization mechanism. Export bans on gasoline and diesel remain in effect.",
+    "notes": "На 29 сентября: вторая волна топливного кризиса с интенсификацией повторных ударов на восстановленные мощности НПЗ. Атаки направлены на вторичные установки (АВТ-6, дизельный гидротрейтинг, смешивание), требующие 6–8 месяцев на восстановление при санкциях. Примерно две трети из 83 регионов затронуты ограничениями; четыре объявили чрезвычайное положение (Пенза, Иркутск, Забайкалье, возможно Приморье). Беларусский импорт остаётся главным механизмом стабилизации рынка. Запреты экспорта бензина и дизеля остаются в действии.",
     "throughput_shortfall_pct": 76,
     "method": "capacity_offline и throughput_shortfall выводятся из refineries[] кодом (agents/recalc-national-balance.py), не оценкой агента."
   },
