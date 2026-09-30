@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790773133,
-      "source_text": "30.09.2026 15:58 МСК\nБелгородский район, Валуйский район, Шебекинский район, Белгородская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1790774224,
+      "source_text": "30.09.2026 16:17 МСК\nБорисовский район опасность по БПЛА Белгородская область"
     },
     "Ханты-Мансийский автономный округ": {
       "bpla": false,
@@ -1204,28 +1204,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1790761805,
       "source_text": "30.09.2026 12:50 МСК\nСевастополь Мыс Херсонес, Фиолент Балаклава Бухты Казачья, Камышовая, Стрелецкая, Севастопольская С моря с запада опасность по БПЛА"
-    },
-    {
-      "key": "истра|московская область",
-      "name": "Истра",
-      "lat": 55.91979,
-      "lon": 36.86876,
-      "region": "Московская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1790762752,
-      "source_text": "30.09.2026 13:05 МСК\nМО Истра Московская область Опасность по БПЛА"
     }
   ],
   "districts": {
@@ -1361,6 +1339,28 @@
       "last_event_ts": 1790754420,
       "source_text": "30.09.2026 10:47 МСК\nСоленое озеро Джанкойский район Опасность по БПЛА"
     },
+    "RUS.7.5_1": {
+      "gid_2": "RUS.7.5_1",
+      "name_ru": "Борисовский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790774224,
+      "source_text": "30.09.2026 16:17 МСК\nБорисовский район опасность по БПЛА Белгородская область"
+    },
     "RUS.7.20_1": {
       "gid_2": "RUS.7.20_1",
       "name_ru": "Шебекинский район",
@@ -1475,6 +1475,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 94501,
+      "text": "Челябинская область\nОтбой опасности по БПЛА",
+      "ts": 1790774305,
+      "time_label": "30.09.2026 16:18 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 284174,
+      "text": "Борисовский район опасность по БПЛА\nБелгородская область",
+      "ts": 1790774224,
+      "time_label": "30.09.2026 16:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 94500,
+      "text": "МО Истра\nМосковская область\nОтбой опасности по БПЛА\nНа территории региона опасность сохраняется",
+      "ts": 1790773835,
+      "time_label": "30.09.2026 16:10 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 284173,
       "text": "Железногорск и близлежащие внимание по возможным БПЛА противника\nКурская область",
@@ -2090,30 +2114,6 @@
       "time_label": "30.09.2026 11:23 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 284119,
-      "text": "Свердловская область\nотбой по бпла",
-      "ts": 1790756578,
-      "time_label": "30.09.2026 11:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 284118,
-      "text": "Осипенко и близлежащие\nОпасность по БПЛА\nЗапорожская область РФ",
-      "ts": 1790756500,
-      "time_label": "30.09.2026 11:21 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 284117,
-      "text": "Севск и близлежащие\nОпасность по БПЛА\nБрянская область",
-      "ts": 1790756193,
-      "time_label": "30.09.2026 11:16 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2123,14 +2123,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790773529,
-  "last_event_at": "2026-09-30T13:05:29Z",
-  "fetched_at": "2026-09-30T13:10:03.059536Z",
+  "timestamp": 1790774305,
+  "last_event_at": "2026-09-30T13:18:25Z",
+  "fetched_at": "2026-09-30T13:20:03.957855Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-30T13:10:03.059536Z",
-    "source_age_seconds": 274,
-    "city_count": 39,
+    "generated_at": "2026-09-30T13:20:03.957855Z",
+    "source_age_seconds": 98,
+    "city_count": 38,
     "region_count": 19,
     "feed_count": 80
   }
