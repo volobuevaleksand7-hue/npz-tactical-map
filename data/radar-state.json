@@ -250,8 +250,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790741346,
-      "source_text": "30.09.2026 07:09 МСК\nКаланчак и близлежащие Опасность по БПЛА Хорнет Херсонская область РФ"
+      "last_event_ts": 1790747703,
+      "source_text": "30.09.2026 08:55 МСК\nНовоалексеевка и близлежащие Генический район Херсонская область РФ Опасность по БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -1572,9 +1572,9 @@
       "lat": 46.22995,
       "lon": 34.64576,
       "region": "Херсонская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1585,8 +1585,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790724972,
-      "source_text": "30.09.2026 02:36 МСК\nНовоалексеевка фиксации БПЛА в сторону Крыма Херсонская область РФ"
+      "last_event_ts": 1790747703,
+      "source_text": "30.09.2026 08:55 МСК\nНовоалексеевка и близлежащие Генический район Херсонская область РФ Опасность по БПЛА"
     },
     {
       "key": "джанкой|автономная республика крым",
@@ -1631,28 +1631,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1790704906,
       "source_text": "29.09.2026 21:01 МСК\nШахтёрск, Торез, Снежное и близлежащие Опасность по БПЛА ДНР"
-    },
-    {
-      "key": "нижнегорский|автономная республика крым",
-      "name": "Нижнегорский",
-      "lat": 45.44789,
-      "lon": 34.73839,
-      "region": "Автономная Республика Крым",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1790704381,
-      "source_text": "29.09.2026 20:53 МСК\nНижнегорский Советский район Республика Крым Тревога по БПЛА от Джанкойского района"
     },
     {
       "key": "красный луч|луганская народная республика",
@@ -1897,6 +1875,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1790718620,
       "source_text": "30.09.2026 00:50 МСК\nХотынецкий район Орловская область Фиксация БПЛА"
+    },
+    "UKR.9.12_1": {
+      "gid_2": "UKR.9.12_1",
+      "name_ru": "Генический район",
+      "region_ru": "Херсонская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790747703,
+      "source_text": "30.09.2026 08:55 МСК\nНовоалексеевка и близлежащие Генический район Херсонская область РФ Опасность по БПЛА"
     },
     "RUS.55.40_1": {
       "gid_2": "RUS.55.40_1",
@@ -2320,6 +2320,14 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 284063,
+      "text": "Новоалексеевка и близлежащие\nГенический район\nХерсонская область РФ\nОпасность по БПЛА",
+      "ts": 1790747703,
+      "time_label": "30.09.2026 08:55 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 284062,
       "text": "Токмак\nПриморск\nБердянск\nЗапорожская область РФ\nОпасность по БПЛА",
@@ -2951,14 +2959,6 @@
       "time_label": "30.09.2026 06:30 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 94442,
-      "text": "Ростовская область\nОтбой ракетной опасности",
-      "ts": 1790739012,
-      "time_label": "30.09.2026 06:30 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -2968,14 +2968,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790747217,
-  "last_event_at": "2026-09-30T05:46:57Z",
-  "fetched_at": "2026-09-30T05:50:04.139676Z",
-  "poll_interval_sec": 40,
+  "timestamp": 1790747703,
+  "last_event_at": "2026-09-30T05:55:03Z",
+  "fetched_at": "2026-09-30T06:00:04.400262Z",
+  "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-09-30T05:50:04.139676Z",
-    "source_age_seconds": 187,
-    "city_count": 66,
+    "generated_at": "2026-09-30T06:00:04.400262Z",
+    "source_age_seconds": 301,
+    "city_count": 65,
     "region_count": 16,
     "feed_count": 80
   }
