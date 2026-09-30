@@ -288,8 +288,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790804880,
-      "source_text": "01.10.2026 00:48 МСК\nОрловская область, Липецкая область, Тульская область - опасность по БПЛА от Курской и Белгородской областей. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1790807968,
+      "source_text": "01.10.2026 01:39 МСК\nКурск Курчатов И близлежащие Тревога по БПЛА Курская область"
     },
     "Севастополь": {
       "bpla": false,
@@ -1020,8 +1020,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790779307,
-      "source_text": "30.09.2026 17:41 МСК\nКурск опасность по БПЛА"
+      "last_event_ts": 1790807968,
+      "source_text": "01.10.2026 01:39 МСК\nКурск Курчатов И близлежащие Тревога по БПЛА Курская область"
     },
     {
       "key": "рыльск|курская область",
@@ -2058,28 +2058,6 @@
       "source_text": "30.09.2026 23:47 МСК\nГубкин, Старый Оскол, Белгородская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     {
-      "key": "токмак|запорожская область",
-      "name": "Токмак",
-      "lat": 47.25554,
-      "lon": 35.70836,
-      "region": "Запорожская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1790764363,
-      "source_text": "30.09.2026 13:32 МСК\nВосточнее Токмак на юго-запад в направлении примерно Приазовское, трасса Приазовское - Приморск группа БПЛА противника Запорожская область РФ"
-    },
-    {
       "key": "щёкинский|тульская область",
       "name": "Щёкинский",
       "lat": 53.8906918,
@@ -2430,6 +2408,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1790793807,
       "source_text": "30.09.2026 21:43 МСК\nНавля Погребы Локоть и ближайшие опасность по БПЛА Брянская область"
+    },
+    {
+      "key": "курчатов|курская область",
+      "name": "Курчатов",
+      "lat": 51.65356,
+      "lon": 35.68651,
+      "region": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790807968,
+      "source_text": "01.10.2026 01:39 МСК\nКурск Курчатов И близлежащие Тревога по БПЛА Курская область"
     },
     {
       "key": "хотынец|орловская область",
@@ -3901,6 +3901,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 284459,
+      "text": "Курск\nКурчатов\nИ близлежащие\nТревога по БПЛА\nКурская область",
+      "ts": 1790807968,
+      "time_label": "01.10.2026 01:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 284458,
       "text": "Туапсе и ближайшие, тревога по БПЛА\nМеры безопасности\nКраснодарский край",
       "ts": 1790806908,
@@ -4531,14 +4539,6 @@
       "time_label": "30.09.2026 22:48 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 284409,
-      "text": "Донецк и близлежащие\nТревога по БПЛА повторно, в том числе и по реактивным БПЛА\nДНР",
-      "ts": 1790797643,
-      "time_label": "30.09.2026 22:47 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4548,13 +4548,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790806908,
-  "last_event_at": "2026-09-30T22:21:48Z",
-  "fetched_at": "2026-09-30T22:30:03.307394Z",
+  "timestamp": 1790807968,
+  "last_event_at": "2026-09-30T22:39:28Z",
+  "fetched_at": "2026-09-30T22:40:03.732822Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-09-30T22:30:03.307394Z",
-    "source_age_seconds": 495,
+    "generated_at": "2026-09-30T22:40:03.732822Z",
+    "source_age_seconds": 35,
     "city_count": 99,
     "region_count": 21,
     "feed_count": 80
