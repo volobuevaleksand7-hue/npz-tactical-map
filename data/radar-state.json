@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790856775,
-      "source_text": "01.10.2026 15:12 МСК\nКалужская область Московская область Опасность по БПЛА Повторно"
+      "last_event_ts": 1790865555,
+      "source_text": "01.10.2026 17:39 МСК\nМосковская область Опасность по БПЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790856775,
-      "source_text": "01.10.2026 15:12 МСК\nКалужская область Московская область Опасность по БПЛА Повторно"
+      "last_event_ts": 1790865555,
+      "source_text": "01.10.2026 17:39 МСК\nМосковская область Опасность по БПЛА"
     },
     "Смоленская область": {
       "bpla": false,
@@ -288,8 +288,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790864471,
-      "source_text": "01.10.2026 17:21 МСК\nНовые Ивайтенки пролёты БПЛА на северо-восток Брянская область"
+      "last_event_ts": 1790865253,
+      "source_text": "01.10.2026 17:34 МСК\nЖуковка и близлежащие Тревога по БПЛА сохраняется Брянская область"
     },
     "Тамбовская область": {
       "bpla": false,
@@ -412,6 +412,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1790863276,
       "source_text": "01.10.2026 17:01 МСК\nТёпло-Огарёвский район Богородицкий район Тульская область Фиксация БПЛА"
+    },
+    {
+      "key": "жуковка|брянская область",
+      "name": "Жуковка",
+      "lat": 53.53381,
+      "lon": 33.73075,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790865253,
+      "source_text": "01.10.2026 17:34 МСК\nЖуковка и близлежащие Тревога по БПЛА сохраняется Брянская область"
     },
     {
       "key": "осипенко|запорожская область",
@@ -2156,6 +2178,30 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 94731,
+      "text": "Московская область\nОпасность по БПЛА",
+      "ts": 1790865555,
+      "time_label": "01.10.2026 17:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 284723,
+      "text": "Жуковка и близлежащие\nТревога по БПЛА сохраняется\nБрянская область",
+      "ts": 1790865253,
+      "time_label": "01.10.2026 17:34 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 284722,
+      "text": "От Очакова пуски БПЛА",
+      "ts": 1790865229,
+      "time_label": "01.10.2026 17:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 284721,
       "text": "Горловка и близлежащие\nОпасность по БПЛА и ФПВ повторно, ещё фиксации\nДНР",
       "ts": 1790864788,
@@ -2770,30 +2816,6 @@
       "time_label": "01.10.2026 15:05 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 284685,
-      "text": "Горловка и близлежащие\nОпасность по БПЛА и возможным ФПВ\nДНР",
-      "ts": 1790856024,
-      "time_label": "01.10.2026 15:00 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 284684,
-      "text": "Черноморский район\nОпасность по БПЛА с моря\nРеспублика Крым",
-      "ts": 1790855782,
-      "time_label": "01.10.2026 14:56 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 94700,
-      "text": "Сочи и близлежащие\nКраснодарский край\nОпасность по БПЛА повторно",
-      "ts": 1790855747,
-      "time_label": "01.10.2026 14:55 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -2803,14 +2825,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790864788,
-  "last_event_at": "2026-10-01T14:26:28Z",
-  "fetched_at": "2026-10-01T14:30:02.615070Z",
+  "timestamp": 1790865555,
+  "last_event_at": "2026-10-01T14:39:15Z",
+  "fetched_at": "2026-10-01T14:40:02.768672Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-01T14:30:02.615070Z",
-    "source_age_seconds": 214,
-    "city_count": 51,
+    "generated_at": "2026-10-01T14:40:02.768672Z",
+    "source_age_seconds": 47,
+    "city_count": 52,
     "region_count": 19,
     "feed_count": 80
   }
