@@ -31,6 +31,15 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
+## [OPEN] card-missing-2026-10-01
+status: OPEN
+opened: 2026-10-01 08:15 МСК — summary-watchdog
+На живом /news НЕТ карточки-сводки за 2026-10-01.
+Что сделать:
+- если в data/strikes.json уже есть удары за 2026-10-01 → `python3 agents/gen-news.py` + git-sync + деплой;
+- если ударов за 2026-10-01 нет → прогони сборщик strikes (agents/update-prompt-strikes.md) за эту дату, затем gen-news;
+- проверь https://npz-tactical-map.vercel.app/news
+
 ## [RESOLVED] cover-fallback-2026-09-19
 status: RESOLVED
 opened: 2026-09-19 08:15 МСК — summary-watchdog
