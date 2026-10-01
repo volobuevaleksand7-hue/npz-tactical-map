@@ -516,8 +516,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790821640,
-      "source_text": "01.10.2026 05:27 МСК\nГО Ступино Московская область Работа ПВО по БПЛА"
+      "last_event_ts": 1790822203,
+      "source_text": "01.10.2026 05:36 МСК\nГО Наро-Фоминск Московская область Фиксация БПЛА"
     }
   },
   "cities": [
@@ -1224,28 +1224,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1790791964,
       "source_text": "30.09.2026 21:12 МСК\nГлебовка, Красная Поляна Черноморский район от Раздольное тревога по БПЛА по направлению Возможно на Новоозерное, Мирный, Витино, Штормовое, Молочное, Евпатория"
-    },
-    {
-      "key": "карачев|брянская область",
-      "name": "Карачев",
-      "lat": 53.121594,
-      "lon": 34.982805,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1790778655,
-      "source_text": "30.09.2026 17:30 МСК\nКарачев, Навля, Брянская область Опасность по БПЛА"
     },
     {
       "key": "красноперекопск|автономная республика крым",
@@ -2566,6 +2544,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1790811116,
       "source_text": "01.10.2026 02:31 МСК\nГлинищево, Сельцо, аэропорт Брянск, Супонево, Выгоничи, Брянск, Большое Полпино, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
+    },
+    {
+      "key": "о наро-фоминск|московская область",
+      "name": "О Наро-Фоминск",
+      "lat": 55.3878383,
+      "lon": 36.7355106,
+      "region": "Московская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790822203,
+      "source_text": "01.10.2026 05:36 МСК\nГО Наро-Фоминск Московская область Фиксация БПЛА"
     },
     {
       "key": "ирмино|луганская народная республика",
@@ -4103,6 +4103,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 94617,
+      "text": "ГО Наро-Фоминск\nМосковская область\nФиксация БПЛА",
+      "ts": 1790822203,
+      "time_label": "01.10.2026 05:36 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 94616,
       "text": "ГО Ступино\nМосковская область\nРабота ПВО по БПЛА",
       "ts": 1790821640,
@@ -4733,14 +4741,6 @@
       "time_label": "01.10.2026 02:17 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 284467,
-      "text": "Саки\nНовофедоровка\nПрибрежное и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1790810197,
-      "time_label": "01.10.2026 02:16 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4750,13 +4750,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790821640,
-  "last_event_at": "2026-10-01T02:27:20Z",
-  "fetched_at": "2026-10-01T02:30:03.179411Z",
+  "timestamp": 1790822203,
+  "last_event_at": "2026-10-01T02:36:43Z",
+  "fetched_at": "2026-10-01T02:40:03.222439Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-01T02:30:03.179411Z",
-    "source_age_seconds": 163,
+    "generated_at": "2026-10-01T02:40:03.222439Z",
+    "source_age_seconds": 200,
     "city_count": 105,
     "region_count": 27,
     "feed_count": 80
