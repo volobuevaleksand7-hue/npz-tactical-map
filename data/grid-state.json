@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-02T05:31:35Z",
+    "generated_at": "2026-10-02T17:31:00Z",
     "updated_by": "agent:grid-status",
     "data_mode": "OSINT / ESTIMATE",
     "confidence": "Состояние подстанций, ТЭС и регионов с отключениями — по открытым источникам (региональные СМИ, заявления Россетей, тг-каналы губернаторов, заявления МАГАТЭЕ, Ukrenergo). Не official.",
@@ -8,14 +8,26 @@
   },
   "substations": [
     {
+      "id": "volgograd_substation_1",
+      "name": "Трансформаторная подстанция в Волгограде",
+      "operator": "Россети Волга",
+      "lat": 48.7093,
+      "lon": 44.2769,
+      "status": "damaged",
+      "status_since": "2026-10-02",
+      "damage": "Пожар на трансформаторной подстанции в результате атаки БПЛА",
+      "source_url": "https://kazan.aif.ru/incidents/details/nochnaya-ataka-ataka-bpla-na-volgograd-2-oktyabrya-postradavshie-i-povrezhdeniya",
+      "confidence": "reported"
+    },
+    {
       "id": "krasnodar_substation_1",
       "name": "Подстанция Прикубанского округа Краснодара",
       "operator": "Россети Кубань",
       "lat": 45.0175,
       "lon": 38.9754,
-      "status": "damaged",
-      "status_since": "2026-09-20",
-      "damage": "Повреждение линии 6-10 кВ, отключение 24 трансформаторных подстанций",
+      "status": "operational",
+      "status_since": "2026-09-25",
+      "damage": "Повреждение линии 6-10 кВ 20 сентября, восстановлена к 25 сентября",
       "source_url": "https://kubnews.ru/obshchestvo/2026/09/20/v-prikubanskom-okruge-krasnodara-proizoshlo-avariynoe-otklyuchenie-elektrichestva-2",
       "confidence": "confirmed"
     },
@@ -106,6 +118,17 @@
   ],
   "blackout_regions": [
     {
+      "region": "Волгоградская область",
+      "lat": 48.7093,
+      "lon": 44.2769,
+      "scope": "partial",
+      "affected_population": 0,
+      "cause": "Пожар на трансформаторной подстанции в результате атаки БПЛА",
+      "since": "2026-10-02",
+      "source_url": "https://kazan.aif.ru/incidents/details/nochnaya-ataka-ataka-bpla-na-volgograd-2-oktyabrya-postradavshie-i-povrezhdeniya",
+      "note": "Пожар локализован, восстановление в процессе."
+    },
+    {
       "region": "Краснодарский край (Северский район)",
       "lat": 45.3456,
       "lon": 39.2345,
@@ -125,7 +148,7 @@
       "cause": "Повреждение линии 6-10 кВ в результате аварии на электросетях",
       "since": "2026-09-20",
       "source_url": "https://kubnews.ru/obshchestvo/2026/09/20/v-prikubanskom-okruge-krasnodara-proizoshlo-avariynoe-otklyuchenie-elektrichestva-2",
-      "note": "Аварийное отключение в Прикубанском округе Краснодара, отключено 24 трансформаторные подстанции."
+      "note": "Аварийное отключение в Прикубанском округе Краснодара, восстановлено к 25 сентября."
     },
     {
       "region": "Ростов-на-Дону",
@@ -147,7 +170,7 @@
       "cause": "Режим экстренного энергоснабжения. Системные плановые отключения после накопленного урона энергосистеме в июне 2026 и текущих атак на энергообъекты",
       "since": "2026-06-26",
       "source_url": "https://krym.aif.ru/incidents/novosti-kryma-30-sentyabrya-benzin-po-qr-kodam-bpla-pogoda-elektroenergiya",
-      "note": "Севастополь: группа 2–6 цикл, интервалы по 2 часа электроснабжения на группу. Электроограничения действуют по всему полуострову. После ночной атаки 1 октября 2026 на энергообъекты Крыма возможны дополнительные перебои."
+      "note": "Севастополь: группа 2–6 цикл, интервалы по 2 часа электроснабжения на группу. Электроограничения действуют по всему полуострову. После ночной атаки 1 октября 2026 на энергообъекты Крыма и повторной атаки 2 октября возможны дополнительные перебои."
     },
     {
       "region": "Армянск",
@@ -208,15 +231,22 @@
   "events": [
     {
       "date": "2026-10-02",
+      "region": "Множественные регионы РФ",
+      "text": "В ночь на 2 октября произведена массированная атака 646 украинских беспилотников на множество регионов России: Волгоград, Белгород, Брянск, Курск, Оренбург, Саратов, Волгоград, Астрахань и другие. Пожар зафиксирован на трансформаторной подстанции в Волгограде, частичные отключения электричества в затронутых регионах.",
+      "source_url": "https://kazan.aif.ru/society/details/646-dronov-massirovannaya-ataka-na-regiony-rf-2-oktyabrya-chto-izvestno",
+      "confidence": "reported"
+    },
+    {
+      "date": "2026-10-02",
       "region": "Крым",
-      "text": "Утром 2 октября 2026 года ремонтные бригады «Крымэнерго» продолжают восстанавливать электроснабжение в районах, affected by the attack of October 1. Energy objects in Armenisk, Krasnoperekopsk and Nizhnegorsk are still damaged.",
+      "text": "Утром 2 октября 2026 года ремонтные бригады \"Крымэнерго\" продолжают восстанавливать электроснабжение в районах, затронутых атакой 1 октября. Энергообъекты в Армянске, Красноперекопске и Нижнегорске остаются повреждены.",
       "source_url": "https://kazan.aif.ru/incidents/details/ataka-na-energetiku-kryma-1-oktyabrya-udary-bpla-gde-blekauty-est-li-zhertvy",
       "confidence": "reported"
     },
     {
       "date": "2026-10-01",
       "region": "Республика Крым",
-      "text": "В ночь на 1 октября произведена атака беспилотниками на энергетику Крыма. Сакская ТЭС отражала атаку посредством ПВО. По информации Минобороны РФ, перехвачены 330 украинских беспилотников samolётного типа. В регионе началось расширение графика плановых отключений электроэнергии.",
+      "text": "В ночь на 1 октября произведена атака беспилотниками на энергетику Крыма. Сакская ТЭС отражала атаку посредством ПВО. По информации Минобороны РФ, перехвачены 330 украинских беспилотников. В регионе началось расширение графика плановых отключений электроэнергии.",
       "source_url": "https://kazan.aif.ru/incidents/details/ataka-na-energetiku-kryma-1-oktyabrya-udary-bpla-gde-blekauty-est-li-zhertvy",
       "confidence": "reported"
     },
