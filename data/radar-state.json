@@ -440,8 +440,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1790902515,
-      "source_text": "02.10.2026 03:55 МСК\nСаратовская область Пензенская область Ракетная опасность\n\n02.10.2026 03:20 МСК\nЭнгельс Саратовская область Работа ПВО по БПЛА"
+      "last_event_ts": 1790904160,
+      "source_text": "02.10.2026 03:55 МСК\nСаратовская область Пензенская область Ракетная опасность\n\n02.10.2026 04:22 МСК\nБалаковский район Саратовская область Работа ПВО по БПЛА"
     },
     "Пензенская область": {
       "bpla": false,
@@ -516,8 +516,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790887741,
-      "source_text": "01.10.2026 23:49 МСК\nБердянск Осипенко И близлежащие Тревога по БПЛА Остаётся в действии Запорожская область РФ"
+      "last_event_ts": 1790904305,
+      "source_text": "02.10.2026 04:25 МСК\nБердянск и близлежащие Тревога по БПЛА"
     },
     "Смоленская область": {
       "bpla": false,
@@ -2279,8 +2279,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790887741,
-      "source_text": "01.10.2026 23:49 МСК\nБердянск Осипенко И близлежащие Тревога по БПЛА Остаётся в действии Запорожская область РФ"
+      "last_event_ts": 1790904305,
+      "source_text": "02.10.2026 04:25 МСК\nБердянск и близлежащие Тревога по БПЛА"
     },
     {
       "key": "бирюч|белгородская область",
@@ -2848,7 +2848,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1790900443,
@@ -7300,6 +7300,28 @@
       "last_event_ts": 1790892032,
       "source_text": "02.10.2026 01:00 МСК\nБолховской район Урицкий район Орловская область Фиксация группы БПЛА"
     },
+    "RUS.63.6_1": {
+      "gid_2": "RUS.63.6_1",
+      "name_ru": "Балаковский район",
+      "region_ru": "Саратовская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": true,
+      "explosionOnRegion": true,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790904160,
+      "source_text": "02.10.2026 04:22 МСК\nБалаковский район Саратовская область Работа ПВО по БПЛА"
+    },
     "UKR.20.1_1": {
       "gid_2": "UKR.20.1_1",
       "name_ru": "Севастополь",
@@ -7370,6 +7392,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 285050,
+      "text": "Бердянск и близлежащие\nТревога по БПЛА\nИ далее на Восток\nЗапорожская область РФ",
+      "ts": 1790904305,
+      "time_label": "02.10.2026 04:25 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 94976,
+      "text": "Балаковский район\nСаратовская область\nРабота ПВО по БПЛА",
+      "ts": 1790904160,
+      "time_label": "02.10.2026 04:22 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 94975,
       "text": "Ульяновская область\nРакетная опасность",
@@ -7993,22 +8031,6 @@
       "time_label": "02.10.2026 02:48 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 94917,
-      "text": "Калачевский район\nВолгоградская область\nФиксации БПЛА на Волгоград",
-      "ts": 1790898434,
-      "time_label": "02.10.2026 02:47 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 94916,
-      "text": "Обливская\nРостовская область\nФиксация группы реактивных БПЛА в направлении Суровикино, Волгоградская область далее Калач/Волгоград",
-      "ts": 1790898381,
-      "time_label": "02.10.2026 02:46 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -8018,13 +8040,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790903642,
-  "last_event_at": "2026-10-02T01:14:02Z",
-  "fetched_at": "2026-10-02T01:20:03.441344Z",
-  "poll_interval_sec": 50,
+  "timestamp": 1790904305,
+  "last_event_at": "2026-10-02T01:25:05Z",
+  "fetched_at": "2026-10-02T01:30:03.890774Z",
+  "poll_interval_sec": 55,
   "meta": {
-    "generated_at": "2026-10-02T01:20:03.441344Z",
-    "source_age_seconds": 361,
+    "generated_at": "2026-10-02T01:30:03.890774Z",
+    "source_age_seconds": 298,
     "city_count": 168,
     "region_count": 34,
     "feed_count": 80
