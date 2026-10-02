@@ -147,16 +147,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1790900956,
-      "source_text": "02.10.2026 03:29 МСК\nПавловский район Ульяновская область Фиксации БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1790903642,
+      "source_text": "02.10.2026 04:14 МСК\nУльяновская область Ракетная опасность\n\n02.10.2026 03:29 МСК\nПавловский район Ульяновская область Фиксации БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -470,16 +470,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1790891333,
-      "source_text": "02.10.2026 00:48 МСК\nСамарская область Опасность по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1790903616,
+      "source_text": "02.10.2026 04:13 МСК\nСамарская область Ракетная опасность\n\n02.10.2026 00:48 МСК\nСамарская область Опасность по БПЛА"
     },
     "Калмыкия": {
       "bpla": false,
@@ -573,8 +573,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790901278,
-      "source_text": "02.10.2026 03:34 МСК\nВолгоград Волгоградская область Фиксации БПЛА"
+      "last_event_ts": 1790903389,
+      "source_text": "02.10.2026 04:09 МСК\nКамышинский район Волгоградская область Фиксация БПЛА"
     },
     "Ростовская область": {
       "bpla": false,
@@ -2105,28 +2105,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1790887770,
       "source_text": "01.10.2026 23:49 МСК\nКача, Андреевка Севастополь Песчаное, Вилино Республика Крым С моря опасность по БПЛА"
-    },
-    {
-      "key": "ульяновская|самарская область",
-      "name": "Ульяновская",
-      "lat": 53.1977478,
-      "lon": 50.113902,
-      "region": "Самарская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": true,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#f0c4a0",
-      "last_event_ts": 1790891693,
-      "source_text": "02.10.2026 00:54 МСК\nУльяновская область Самарская область Повторно внимание по бпла"
     },
     {
       "key": "феодосия|автономная республика крым",
@@ -5119,8 +5097,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790894898,
-      "source_text": "02.10.2026 01:48 МСК\nКотовский район Камышинский район Ольховской район Волгоградская область Фиксации групп БПЛА"
+      "last_event_ts": 1790903389,
+      "source_text": "02.10.2026 04:09 МСК\nКамышинский район Волгоградская область Фиксация БПЛА"
     },
     "RUS.34.13_1": {
       "gid_2": "RUS.34.13_1",
@@ -6324,8 +6302,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -7393,6 +7371,38 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 94975,
+      "text": "Ульяновская область\nРакетная опасность",
+      "ts": 1790903642,
+      "time_label": "02.10.2026 04:14 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 94974,
+      "text": "Самарская область\nРакетная опасность",
+      "ts": 1790903616,
+      "time_label": "02.10.2026 04:13 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 285049,
+      "text": "Саратовская область\nвнимание по бпла",
+      "ts": 1790903502,
+      "time_label": "02.10.2026 04:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 94973,
+      "text": "Камышинский район\nВолгоградская область\nФиксация БПЛА",
+      "ts": 1790903389,
+      "time_label": "02.10.2026 04:09 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 285048,
       "text": "Каменский район\nРостовская область\nТревога по БПЛА",
       "ts": 1790903243,
@@ -7999,38 +8009,6 @@
       "time_label": "02.10.2026 02:46 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 94915,
-      "text": "Энгельс\nСаратовская область\nПродолжается работа ПВО",
-      "ts": 1790898241,
-      "time_label": "02.10.2026 02:44 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 285033,
-      "text": "Нижегородская область, повторно\nвнимание по бпла",
-      "ts": 1790898232,
-      "time_label": "02.10.2026 02:43 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 94914,
-      "text": "Волгоград\nВолгоградская область\nПродолжается работа ПВО",
-      "ts": 1790898053,
-      "time_label": "02.10.2026 02:40 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 285032,
-      "text": "Белокуракинский МО\nЛНР\nТревога по БПЛА сохраняется",
-      "ts": 1790897987,
-      "time_label": "02.10.2026 02:39 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -8040,14 +8018,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790903243,
-  "last_event_at": "2026-10-02T01:07:23Z",
-  "fetched_at": "2026-10-02T01:10:03.031588Z",
-  "poll_interval_sec": 45,
+  "timestamp": 1790903642,
+  "last_event_at": "2026-10-02T01:14:02Z",
+  "fetched_at": "2026-10-02T01:20:03.441344Z",
+  "poll_interval_sec": 50,
   "meta": {
-    "generated_at": "2026-10-02T01:10:03.031588Z",
-    "source_age_seconds": 160,
-    "city_count": 169,
+    "generated_at": "2026-10-02T01:20:03.441344Z",
+    "source_age_seconds": 361,
+    "city_count": 168,
     "region_count": 34,
     "feed_count": 80
   }
