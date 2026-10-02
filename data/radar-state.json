@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790966847,
-      "source_text": "02.10.2026 21:47 МСК\nАнапа Геленджик Новороссийск И близлежащие Тревога по БПЛА Краснодарский край"
+      "last_event_ts": 1790968475,
+      "source_text": "02.10.2026 22:14 МСК\nАрхипка, Туапсе И близлежащие Тревога по БПЛА Краснодарский край"
     },
     "Тамбовская область": {
       "bpla": false,
@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1790968084,
-      "source_text": "02.10.2026 22:08 МСК\nБолховский район Орловская область Фиксация 2 БПЛА"
+      "last_event_ts": 1790968413,
+      "source_text": "02.10.2026 22:13 МСК\nОрел Орловская область Фиксация группы БПЛА"
     },
     "Белгородская область": {
       "bpla": false,
@@ -751,6 +751,28 @@
       "source_text": "02.10.2026 10:59 МСК\nСелидово и близлежащие на восток Опасность по БПЛА ДНР"
     },
     {
+      "key": "туапсе|краснодарский край",
+      "name": "Туапсе",
+      "lat": 44.0984747,
+      "lon": 39.0718875,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790968475,
+      "source_text": "02.10.2026 22:14 МСК\nАрхипка, Туапсе И близлежащие Тревога по БПЛА Краснодарский край"
+    },
+    {
       "key": "каховка|херсонская область",
       "name": "Каховка",
       "lat": 46.81601,
@@ -881,6 +903,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1790950192,
       "source_text": "02.10.2026 17:09 МСК\nМангуш, Мариуполь, Володарское, Урзуф, Ялта ДНР Тревога по БПЛА повторно"
+    },
+    {
+      "key": "орел|орловская область",
+      "name": "Орел",
+      "lat": 52.96879,
+      "lon": 36.0791,
+      "region": "Орловская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1790968413,
+      "source_text": "02.10.2026 22:13 МСК\nОрел Орловская область Фиксация группы БПЛА"
     },
     {
       "key": "днепрорудное|запорожская область",
@@ -2971,8 +3015,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1790967867,
-      "source_text": "02.10.2026 22:04 МСК\nОрловский район Орловская область Работа ПВО по БПЛА"
+      "last_event_ts": 1790968162,
+      "source_text": "02.10.2026 22:09 МСК\nОрловский район Орловская область Продолжается работа ПВО по БПЛА"
     },
     "RUS.34.37_1": {
       "gid_2": "RUS.34.37_1",
@@ -4145,6 +4189,38 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 285382,
+      "text": "Архипка, Туапсе\nИ близлежащие\nТревога по БПЛА\nКраснодарский край",
+      "ts": 1790968475,
+      "time_label": "02.10.2026 22:14 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 95250,
+      "text": "Орел\nОрловская область\nФиксация группы БПЛА",
+      "ts": 1790968413,
+      "time_label": "02.10.2026 22:13 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 95249,
+      "text": "Орловский район\nОрловская область\nПродолжается работа ПВО по БПЛА",
+      "ts": 1790968162,
+      "time_label": "02.10.2026 22:09 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 95248,
+      "text": "Орловский район\nОрловская область\nФиксация БПЛА",
+      "ts": 1790968139,
+      "time_label": "02.10.2026 22:08 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 95247,
       "text": "Болховский район\nОрловская область\nФиксация 2 БПЛА",
       "ts": 1790968084,
@@ -4751,38 +4827,6 @@
       "time_label": "02.10.2026 20:39 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 285339,
-      "text": "Воронеж\nНововоронеж\nИ близлежащие\nТревога по БПЛА\nВоронежская область",
-      "ts": 1790962586,
-      "time_label": "02.10.2026 20:36 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 285338,
-      "text": "Погарский район\nТревога по БПЛА  и далее в тыл\nБрянская область",
-      "ts": 1790962571,
-      "time_label": "02.10.2026 20:36 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 95220,
-      "text": "Нововоронеж\nВоронежская область\nРабота ПВО по БПЛА",
-      "ts": 1790962532,
-      "time_label": "02.10.2026 20:35 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 285337,
-      "text": "Воронеж\nТревога по бпла повторно",
-      "ts": 1790962471,
-      "time_label": "02.10.2026 20:34 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4792,14 +4836,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1790968084,
-  "last_event_at": "2026-10-02T19:08:04Z",
-  "fetched_at": "2026-10-02T19:10:02.683768Z",
-  "poll_interval_sec": 40,
+  "timestamp": 1790968475,
+  "last_event_at": "2026-10-02T19:14:35Z",
+  "fetched_at": "2026-10-02T19:20:04.087207Z",
+  "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-10-02T19:10:02.683768Z",
-    "source_age_seconds": 118,
-    "city_count": 87,
+    "generated_at": "2026-10-02T19:20:04.087207Z",
+    "source_age_seconds": 329,
+    "city_count": 89,
     "region_count": 24,
     "feed_count": 80
   }
