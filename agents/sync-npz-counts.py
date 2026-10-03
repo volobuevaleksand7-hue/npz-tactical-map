@@ -212,14 +212,12 @@ PLAIN = {
     "krasnodar.html": [
         ("tuapse_pct", r'(<span class="station-name">Туапсинский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
         ("afipsky_pct", r'(<span class="station-name">Афипский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
-        ("ilsky_pct", r'(<span class="station-name">Ильский НПЗ</span><span class="station-status limited">)\d+(%</span>)'),
         ("slavyansk_pct", r'(<span class="station-name">Славянский НПЗ</span><span class="station-status [a-z]+">)\d+(%)'),
         ("krasnodar_rn_pct", r'(<span class="station-name">Краснодарский НПЗ</span><span class="station-status ok">)\d+(%</span>)'),
         ("krai_available_pct", r'(реально доступно около )\d+(% мощностей края)'),
         ("tuapse_pct", r'(Туапсинский НПЗ \(крупнейший в крае, 12 млн т/год\) работает на )\d+(% загрузки)'),
         ("tuapse_pct", r'(Туапсинский НПЗ \(Роснефть, 12 млн т/год — )\d+(%\))'),
         ("afipsky_pct", r'(Афипский НПЗ \(ГК Сафмар, 9 млн т/год — )\d+(%\))'),
-        ("ilsky_pct", r'(Ильский НПЗ \(ИНК/РНГО, 6,6 млн т/год — )\d+(%\))'),
         ("tuapse_pct", r'(Туапсинский \(Роснефть, 12 млн т/год — )\d+(%\), Афипский)'),
     ],
 }
@@ -287,9 +285,11 @@ MULTI = {
                     + str(throughput_shortfall_pct()) + g[9])),
     ],
     "krasnodar.html": [
-        (r'(Туапсинский работает на )\d+(%, Афипский — на )\d+(% \(после удара 25 августа\), Ильский — на )\d+(%\.)',
+        # Ильский с 26.09 описан словами («остановлен с 26 сентября») — процента в тексте нет,
+        # якорь по нему снят; вернётся в строй — дописать фразу и якорь заново.
+        (r'(Туапсинский работает на )\d+(%, Афипский — на ~)\d+(% \(после удара 26 сентября\), Ильский остановлен с 26 сентября\.)',
          lambda g: (g[0] + str(refinery_output_pct("tuapse")) + g[1] + str(refinery_output_pct("afipsky"))
-                    + g[2] + str(refinery_output_pct("ilsky")) + g[3])),
+                    + g[2])),
     ],
 }
 
