@@ -1,0 +1,169 @@
+<!doctype html>
+<!--
+  Шаблон ежедневного ролика-сводки «Топливный фронт РФ» (HyperFrames, 1080×1920).
+  НЕ редактировать как готовый ролик: {{…}} подставляет video/build.py из данных
+  проекта (data/news-archive.json + data/fuel-state.json), он же считает тайминги
+  сцен — их число и длина зависят от числа ударов по НПЗ за день.
+  Всё локальное: шрифты в assets/fonts, GSAP копируется из node_modules — рендер
+  не ходит в сеть.
+-->
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Rubik"; font-weight: 400; src: url("assets/fonts/rubik-400.ttf"); }
+      @font-face { font-family: "Rubik"; font-weight: 600; src: url("assets/fonts/rubik-600.ttf"); }
+      @font-face { font-family: "Rubik"; font-weight: 800; src: url("assets/fonts/rubik-800.ttf"); }
+      @font-face { font-family: "JB"; font-weight: 600; src: url("assets/fonts/jbmono-600.ttf"); }
+      :root { --bg:#e7e0d0; --surface:#fbf8f1; --ink:#2c2a24; --dim:#6f6755; --red:#d23a2e; --amber:#df8f17; --amber-ink:#8f5600; --green:#2f8a50; --teal:#146f6f; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:var(--bg); }
+      #root { position:relative; width:1080px; height:1920px; background:var(--bg); font-family:"Rubik",sans-serif; color:var(--ink); overflow:hidden; }
+      .scene { position:absolute; inset:0; padding:0 72px; opacity:0; }
+      #s1 { opacity:1; }
+      .brand { position:absolute; top:96px; left:72px; right:72px; display:flex; align-items:center; gap:18px; font-family:"JB",monospace; font-weight:600; font-size:34px; letter-spacing:.06em; }
+      .brand i { display:block; width:18px; height:18px; border-radius:50%; background:var(--red); }
+      .date { font-family:"JB",monospace; font-weight:600; font-size:38px; letter-spacing:.08em; color:var(--red); }
+      .bar { position:absolute; left:0; right:0; bottom:0; height:14px; background:var(--amber); }
+
+      /* S1 — обложка */
+      #s1 .cover { position:absolute; left:72px; top:400px; width:936px; height:491px; border-radius:22px; overflow:hidden; box-shadow:0 18px 44px rgba(70,52,24,.28); background:#cfc6b2; }
+      #s1 .cover img { width:100%; height:100%; object-fit:cover; display:block; }
+      #s1 .t { position:absolute; left:72px; right:72px; top:1050px; }
+      #s1 h1 { font-weight:800; font-size:128px; line-height:1.02; letter-spacing:-.02em; margin-top:26px; }
+      #s1 .sub { font-weight:600; font-size:58px; line-height:1.18; margin-top:44px; color:var(--dim); }
+
+      /* S2 — цифра */
+      #s2 .kicker { position:absolute; left:72px; top:520px; font-weight:600; font-size:50px; color:var(--dim); }
+      #s2 .big { position:absolute; left:72px; top:620px; font-weight:800; font-size:{{BIG_SIZE}}px; line-height:1; letter-spacing:-.04em; color:var(--ink); }
+      #s2 .lbl { position:absolute; left:72px; top:1230px; font-weight:800; font-size:92px; line-height:1.05; }
+      #s2 .pill { position:absolute; left:72px; top:1480px; color:#fff; border-radius:24px; padding:30px 44px; font-weight:800; font-size:76px; background:var(--red); white-space:nowrap; max-width:936px; }
+      #s2 .pill.calm { background:var(--green); font-size:64px; }
+      #s2 .note { position:absolute; left:72px; top:1680px; font-size:44px; color:var(--dim); font-weight:400; }
+
+      /* S3 — карточки НПЗ (0..3 штуки + «и ещё K») */
+      #s3 .hd { position:absolute; left:72px; right:72px; top:380px; font-weight:800; font-size:88px; line-height:1.05; }
+      #s3 .list { position:absolute; left:72px; width:936px; top:640px; bottom:90px; display:flex; flex-direction:column; gap:var(--gap); }
+      .card { width:936px; background:var(--surface); border-radius:26px; padding:var(--pad) 52px; box-shadow:0 12px 34px rgba(70,52,24,.18); border-left:16px solid var(--red); }
+      .card.reported { border-left-color:var(--amber); }
+      .card .row { display:flex; align-items:center; gap:22px; }
+      .card .tag { display:inline-block; font-weight:800; font-size:38px; color:#fff; background:var(--green); border-radius:14px; padding:8px 24px; white-space:nowrap; }
+      .card.reported .tag { background:var(--amber-ink); }
+      .card .city { font-weight:600; font-size:38px; color:var(--dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+      .card h3 { font-weight:800; font-size:var(--h3); line-height:1.06; margin-top:22px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+      .card p { font-weight:600; font-size:var(--p); line-height:1.25; margin-top:16px; color:var(--dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .card p b { color:var(--ink); font-weight:800; }
+      .more { font-weight:800; font-size:56px; color:var(--red); padding-left:8px; }
+      #s3.n1, #s3.n2 { --gap:44px; --pad:48px; --h3:80px; --p:48px; }
+      #s3.n3 { --gap:28px; --pad:34px; --h3:62px; --p:42px; }
+
+      /* S4 — источник */
+      #s4 .page { position:absolute; left:72px; width:936px; top:360px; background:var(--surface); border-radius:26px; padding:56px 56px 60px; box-shadow:0 18px 44px rgba(70,52,24,.22); border-top:16px solid var(--red); }
+      #s4 .page .k { font-family:"JB",monospace; font-weight:600; font-size:34px; letter-spacing:.06em; color:var(--red); }
+      #s4 .page h2 { font-weight:800; font-size:68px; line-height:1.1; margin-top:28px; display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+      #s4 .page .stats { display:flex; gap:22px; margin-top:40px; flex-wrap:wrap; }
+      #s4 .page .stats span { font-weight:800; font-size:40px; border-radius:14px; padding:12px 24px; background:#ece5d6; color:var(--ink); }
+      #s4 .page .stats span.r { background:var(--red); color:#fff; }
+      #s4 .src { position:absolute; left:72px; top:1250px; font-weight:600; font-size:52px; color:var(--dim); }
+      #s4 .url { position:absolute; left:72px; right:72px; top:1330px; font-family:"JB",monospace; font-weight:600; font-size:50px; line-height:1.3; color:var(--teal); word-break:break-all; }
+      #s4 .warn { position:absolute; left:72px; width:936px; top:1560px; background:var(--surface); border:3px solid rgba(70,58,38,.2); border-radius:22px; padding:34px 40px; font-size:44px; line-height:1.28; color:var(--dim); font-weight:400; }
+      #s4 .warn b { color:#9a5c00; font-weight:800; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{TOTAL}}" data-width="1080" data-height="1920">
+
+      <div id="s1" class="scene clip" data-start="0" data-duration="{{S1_DUR}}" data-track-index="1">
+        <div class="brand" data-layout-allow-overlap><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>
+        <div class="cover"><img src="{{COVER}}" alt="Обложка сводки" /></div>
+        <div class="t">
+          <div class="date">{{WEEKDAY_DATE}}</div>
+          <h1>Топливный фронт РФ</h1>
+          <div class="sub">Сводка за {{DATE_RUS}}</div>
+        </div>
+        <div class="bar"></div>
+      </div>
+
+      <div id="s2" class="scene clip" data-start="{{S2_START}}" data-duration="{{S2_DUR}}" data-track-index="2">
+        <div class="brand" data-layout-allow-overlap><i></i>СВОДКА · {{DATE_SHORT}}</div>
+        <div class="kicker" data-layout-allow-overlap>За сутки зафиксировано</div>
+        <div class="big" id="big">{{BIG_INITIAL}}</div>
+        <div class="lbl">{{STRIKES_WORD}}</div>
+        {{PILL}}
+        <div class="note">OSINT-агрегация по открытым источникам</div>
+        <div class="bar"></div>
+      </div>
+
+      {{S3_BLOCK}}
+
+      <div id="s4" class="scene clip" data-start="{{S4_START}}" data-duration="{{S4_DUR}}" data-track-index="4">
+        <div class="brand" data-layout-allow-overlap><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>
+        <div class="page">
+          <div class="k">СВОДКА ЗА {{DATE_SHORT}}</div>
+          <h2>{{HEADLINE}}</h2>
+          <div class="stats">{{STATS}}</div>
+        </div>
+        <div class="src">Источник — полная сводка:</div>
+        <div class="url">{{URL_HOST}}<br />{{URL_PATH}}</div>
+        <div class="warn"><b>ОЦЕНКА / ESTIMATE.</b> OSINT-данные, не официальная информация.</div>
+        <div class="bar"></div>
+      </div>
+    </div>
+    <script>
+      // Тайминги считает build.py: {s2, s3|null, s4, total, count, cards}
+      const P = {{PLAN_JSON}};
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const ease = "power3.out";
+      const X = 0.5; // длина кроссфейда
+      const fadeOut = (sel, t) => tl.fromTo(sel, {opacity:1}, {opacity:0, duration:X, ease:"power1.inOut", immediateRender:false}, t);
+      const fadeIn = (sel, t) => tl.fromTo(sel, {opacity:0}, {opacity:1, duration:X, immediateRender:false}, t);
+
+      // S1
+      tl.from("#s1 .cover", {y:60, opacity:0, duration:0.8, ease}, 0.1);
+      tl.from("#s1 .cover img", {scale:1.12, duration:P.s2 + X, ease:"none"}, 0);
+      tl.from("#s1 .date", {x:-40, opacity:0, duration:0.6, ease}, 0.7);
+      tl.from("#s1 h1", {y:50, opacity:0, duration:0.7, ease}, 0.9);
+      tl.from("#s1 .sub", {y:30, opacity:0, duration:0.6, ease}, 1.4);
+      fadeOut("#s1", P.s2); fadeIn("#s2", P.s2);
+
+      // S2
+      const s2 = P.s2;
+      tl.from("#s2 .kicker", {y:30, opacity:0, duration:0.5, ease}, s2 + 0.3);
+      tl.from("#s2 .big", {scale:0.85, transformOrigin:"0% 60%", opacity:0, duration:0.6, ease}, s2 + 0.4);
+      if (P.count > 0) {
+        const o = {v:0};
+        tl.fromTo(o, {v:0}, {v:P.count, duration:1.0, ease:"power2.out", immediateRender:false,
+          onUpdate:()=>{ document.getElementById("big").textContent = String(Math.round(o.v)); }}, s2 + 0.5);
+      }
+      tl.from("#s2 .lbl", {y:40, opacity:0, duration:0.5, ease}, s2 + 1.3);
+      tl.from("#s2 .pill", {x:-80, opacity:0, duration:0.6, ease}, s2 + 2.0);
+      tl.from("#s2 .note", {opacity:0, duration:0.5}, s2 + 2.7);
+
+      // S3 (может отсутствовать: в день без ударов по НПЗ сцену пропускаем)
+      if (P.s3 !== null) {
+        fadeOut("#s2", P.s3); fadeIn("#s3", P.s3);
+        tl.from("#s3 .hd", {y:40, opacity:0, duration:0.6, ease}, P.s3 + 0.3);
+        P.cards.forEach((t, i) => tl.from("#c" + (i + 1), {x:120, opacity:0, duration:0.7, ease}, t));
+        if (P.more !== null) tl.from("#s3 .more", {y:20, opacity:0, duration:0.5, ease}, P.more);
+        fadeOut("#s3", P.s4);
+      } else {
+        fadeOut("#s2", P.s4);
+      }
+
+      // S4
+      const s4 = P.s4;
+      fadeIn("#s4", s4);
+      tl.from("#s4 .page", {y:70, opacity:0, duration:0.7, ease}, s4 + 0.3);
+      tl.from("#s4 .src", {opacity:0, duration:0.5}, s4 + 1.4);
+      tl.from("#s4 .url", {y:20, opacity:0, duration:0.5, ease}, s4 + 1.7);
+      tl.from("#s4 .warn", {y:40, opacity:0, duration:0.6, ease}, s4 + 2.4);
+      // держим последний кадр до конца ролика
+      tl.to({}, {duration:0.01}, P.total - 0.01);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
