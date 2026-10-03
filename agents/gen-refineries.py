@@ -447,6 +447,7 @@ def faq_texts(R, meta):
     date = rus_date(meta["generated_at"][:10])
     cap_all = sum(r["capacity_mt_year"] for r in R)
     cap_oper = sum(r["capacity_mt_year"] for r in oper)
+    cap_down_pct = round(sum(r["capacity_mt_year"] for r in down) / cap_all * 100)
     d_list = ", ".join(short(r["name"]) for r in down)
     p_list = ", ".join(
         f'{short(r["name"])} (~{r["est_output_pct"]}%)' if r.get("est_output_pct") is not None
@@ -469,8 +470,8 @@ def faq_texts(R, meta):
         "Сколько НПЗ выведено из строя в России на сегодня?":
             (f"На {date} полностью остановлены (выведены из строя) {len(down)} НПЗ и ещё "
              f"{len(part)} работают с ограничениями по загрузке — итого {len(down) + len(part)} "
-             f"из {tot} заводов затронуты, это более половины нефтеперерабатывающих мощностей "
-             f"страны. Точное число зависит от трактовки: часть остановок связана с "
+             f"из {tot} заводов затронуты; на полностью остановленные приходится {cap_down_pct}% "
+             f"нефтеперерабатывающих мощностей страны. Точное число зависит от трактовки: часть остановок связана с "
              f"подтверждёнными ударами БПЛА, часть — с ремонтом и логистикой."),
         "Какие НПЗ остановлены в 2026 году?":
             (f"По состоянию на {date}, полностью остановлены {len(down)} НПЗ: {d_list}. "

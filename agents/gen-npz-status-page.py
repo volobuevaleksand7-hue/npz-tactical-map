@@ -197,6 +197,9 @@ def build():
     meta = doc["meta"]
     UPDATED = meta["generated_at"][:10]
     date_ru = rus_date(UPDATED)
+    import datetime as _dt
+    PAGE_DATE = max(UPDATED, (_dt.datetime.now(_dt.timezone.utc) + _dt.timedelta(hours=3)).strftime("%Y-%m-%d"))
+    page_date_ru = rus_date(PAGE_DATE)
 
     down = [r for r in R if r["status"] == "down"]
     partial = [r for r in R if r["status"] == "partial"]
@@ -227,6 +230,12 @@ def build():
     PARTIAL_LIST = group_list(R, "partial", UPDATED)
     OPER_LIST = group_list(R, "operational", UPDATED)
 
+    def _ph(r, first):
+        return ("остановлен" if r["status"] == "down" else
+                ("работает на ~%d%% мощности" if first else "работает на ~%d%%") % r["est_output_pct"])
+    mos_phrase = _ph(moscow, True)
+    yan_phrase = "остановлен" if yanos["status"] == "down" else "работает на ~%d%%" % yanos["est_output_pct"]
+
     faq = [
         ("Работают ли НПЗ России сейчас?",
          "Да, но не все и не в полную силу. На %s из %d крупных НПЗ России %d работают в "
@@ -250,24 +259,28 @@ def build():
              date_ru, len(partial), plural(len(partial), "завод", "завода", "заводов"), names_list(R, "partial"))),
 
         ("Работает ли Московский НПЗ в Капотне?",
-         "Да, но не в полную силу: на %s завод работает на ~%d%% мощности — статус "
-         "«ограничено» с %s (%s). Полная карточка завода со всеми ударами — /npz/moskovskij-npz."
-         % (date_ru, moscow["est_output_pct"], rus_date(moscow["status_since"]), days_txt(since_days(moscow)))),
+         (("Нет, на %s завод остановлен — статус «остановлен» с %s (%s)." if moscow["status"] == "down"
+           else "Да, но не в полную силу: на %s завод работает на ~%d%% мощности — статус «ограничено» с %s (%s).")
+          % ((date_ru, rus_date(moscow["status_since"]), days_txt(since_days(moscow))) if moscow["status"] == "down"
+             else (date_ru, moscow["est_output_pct"], rus_date(moscow["status_since"]), days_txt(since_days(moscow)))))
+         + " Полная карточка завода со всеми ударами — /npz/moskovskij-npz."),
 
         ("Когда заработает Московский НПЗ в Капотне?",
          "Точной даты нет: официальных графиков возобновления полной работы НПЗ в Капотне "
-         "в открытых источниках не публикуется. На %s завод уже %s работает в режиме "
-         "пониженной загрузки ~%d%% (с %s), и это не прогноз, а факт на сегодня. Как только "
-         "статус изменится в данных проекта, страница обновится автоматически. "
-         "Типичные сроки восстановления НПЗ после ударов по прошлым случаям — в материале "
-         "«Сколько времени восстанавливают НПЗ» (%s)."
-         % (date_ru, days_txt(since_days(moscow)), moscow["est_output_pct"], rus_date(moscow["status_since"]), SKOROST_URL)),
+         "в открытых источниках не публикуется. На %s завод уже %s %s (с %s), и это не прогноз, "
+         "а факт на сегодня. Как только статус изменится в данных проекта, страница обновится "
+         "автоматически. Типичные сроки восстановления НПЗ после ударов по прошлым случаям — "
+         "в материале «Сколько времени восстанавливают НПЗ» (%s)."
+         % (date_ru, days_txt(since_days(moscow)),
+            "остановлен" if moscow["status"] == "down" else "работает в режиме пониженной загрузки ~%d%%" % moscow["est_output_pct"],
+            rus_date(moscow["status_since"]), SKOROST_URL)),
 
         ("Работает ли Ярославский НПЗ?",
-         "Работает, но в минимальном режиме: на %s загрузка Славнефть-ЯНОС (Ярославского "
-         "НПЗ) — около %d%% мощности, статус «ограничено» с %s (%s). Подробная карточка "
-         "завода — /npz/slavneft-yanos."
-         % (date_ru, yanos["est_output_pct"], rus_date(yanos["status_since"]), days_txt(since_days(yanos)))),
+         (("Нет, на %s Славнефть-ЯНОС (Ярославский НПЗ) остановлен — статус «остановлен» с %s (%s)." if yanos["status"] == "down"
+           else "Работает, но в минимальном режиме: на %s загрузка Славнефть-ЯНОС (Ярославского НПЗ) — около %d%% мощности, статус «ограничено» с %s (%s).")
+          % ((date_ru, rus_date(yanos["status_since"]), days_txt(since_days(yanos))) if yanos["status"] == "down"
+             else (date_ru, yanos["est_output_pct"], rus_date(yanos["status_since"]), days_txt(since_days(yanos)))))
+         + " Подробная карточка завода — /npz/slavneft-yanos."),
 
         ("Названы ли даты, когда остановленные НПЗ снова заработают?",
          "Нет. В открытых источниках, которые отслеживает проект, официальных дат или "
@@ -325,7 +338,7 @@ def build():
     "@type": "Article",
     "headline": "{TITLE}",
     "datePublished": "2026-08-26",
-    "dateModified": "{UPDATED}",
+    "dateModified": "{PAGE_DATE}",
     "image": ["{OG}"],
     "author": {{"@type": "Organization", "name": "Топливный фронт РФ"}},
     "publisher": {{"@type": "Organization", "name": "Топливный фронт РФ", "url": "https://npz-tactical-map.vercel.app/"}},
@@ -441,12 +454,12 @@ def build():
           <div class="status-card"><div class="val" style="color:var(--red)">{len(down)}</div><div class="lbl">полностью остановлены</div></div>
           <div class="status-card"><div class="val">{cap_total:.1f}</div><div class="lbl">млн т/год суммарная мощность всех {tot}</div></div>
         </div>
-        <div class="updated-line">Обновлено {date_ru}, МСК · статусы — оценка по открытым источникам</div>
+        <div class="updated-line">Обновлено {page_date_ru}, МСК · статусы — оценка по открытым источникам</div>
       </div>
 
       <h2 class="section-h"><span class="ico">📍</span> Короткий ответ</h2>
       <p class="lead-p">На {date_ru} из {tot} крупных НПЗ России <strong>{len(oper)}</strong> работают в штатном режиме, <strong>{len(partial)}</strong> работают с ограничениями по загрузке и <strong>{len(down)}</strong> полностью остановлены. Суммарная мощность всех {tot} заводов — {cap_total:.1f} млн т/год. Статус каждого конкретного завода — в таблице ниже, с датой (или числом дней), с которой он в текущем режиме, оценкой загрузки и ссылкой на источник.</p>
-      <p class="lead-p">Отдельно про заводы с самым высоким спросом на статус: <strong>Московский НПЗ в Капотне</strong> работает на ~{moscow['est_output_pct']}% мощности с {rus_date(moscow['status_since'])}, <strong>Славнефть-ЯНОС (Ярославский НПЗ)</strong> — на ~{yanos['est_output_pct']}% с {rus_date(yanos['status_since'])}. Официальных дат возврата к полной мощности ни по одному заводу не публиковалось.</p>
+      <p class="lead-p">Отдельно про заводы с самым высоким спросом на статус: <strong>Московский НПЗ в Капотне</strong> {mos_phrase} с {rus_date(moscow['status_since'])}, <strong>Славнефть-ЯНОС (Ярославский НПЗ)</strong> — {yan_phrase} с {rus_date(yanos['status_since'])}. Официальных дат возврата к полной мощности ни по одному заводу не публиковалось.</p>
 
       <div class="link-grid">
         <a class="link-card" href="/npz/moskovskij-npz"><div class="lc-h">🛢️ Московский НПЗ (Капотня)</div><div class="lc-d">Карточка завода и хроника ударов</div></a>
