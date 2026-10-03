@@ -140,7 +140,7 @@ def short_block(doc):
     all_hit = [w for w in wh if w.get("status") == "hit"]
     if not hit:
         return '      <p class="lead-p">Поражений объектов Ozon в базе проекта не зафиксировано.</p>'
-    return ('      <p class="lead-p">Да, удары были — и не один. С %s 2026 года в базу проекта <code>strikes.json</code>, '
+    return ('      <p class="lead-p">Да, удары были — и не один. С %s 2026 года в хронику ударов проекта, '
             'куда эпизоды вносятся только после подтверждения открытыми источниками, добавлено <strong>%d %s</strong> '
             'Ozon. До 22 августа их не было ни одного.</p>\n'
             '      <p class="lead-p">Счёт по складам маркетплейсов — <strong>%d из %d</strong>: %d у Wildberries '
