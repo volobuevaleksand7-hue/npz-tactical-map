@@ -265,7 +265,7 @@ MULTI = {
          lambda g: g[0] + str(total_count()) + g[1] + str(down_count()) + g[2] + str(partial_count()) + g[3]),
         (r'(Совокупная потеря мощностей — )\d+(% \()\d+,\d+( из )\d+,\d+( млн тонн/год\)\.)',
          lambda g: g[0] + str(down_capacity_pct()) + g[1] + mt_str(down_capacity_mt()) + g[2] + mt_str(total_capacity_mt()) + g[3]),
-        (r'(<div class="st">Падение переработки на )\d+(%</div><div class="se">)\d+,\d+( из )\d+,\d+( млн тонн/год мощностей простаивают \(данные на )\d+ [а-я]+(\)\. Падение переработки \(throughput_shortfall\) — )\d+(%\.)',
+        (r'(<div class="st">Падение переработки на )\d+(%</div><div class="se">)\d+,\d+( из )\d+,\d+( млн тонн/год мощностей простаивают \(данные на )\d+ [а-я]+(\)\. Недобор переработки с учётом частично работающих заводов — )\d+(%\.)',
          lambda g: (g[0] + str(down_capacity_pct()) + g[1] + mt_str(down_capacity_mt()) + g[2] + mt_str(total_capacity_mt()) + g[3]
                     + today_ru().rsplit(" ", 1)[0] + g[4] + str(throughput_shortfall_pct()) + g[5])),
     ],
