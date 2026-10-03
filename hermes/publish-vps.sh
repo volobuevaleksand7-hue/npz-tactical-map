@@ -14,6 +14,11 @@
 # Ставится в cron ПОСЛЕ окна сбора (см. hermes/crontab.hermes).
 set -uo pipefail
 
+# --news-only: только шаг 1 (пересборка /news + коммит/пуш), без Telegram. Так его зовёт
+# hermes/news-refresh.sh (по событию после записи strikes/voices, и по таймеру).
+NEWS_ONLY=0
+[ "${1:-}" = "--news-only" ] && NEWS_ONLY=1
+
 # секреты окружения (ANTHROPIC_API_KEY / ключи) — файл ВНЕ репозитория
 [ -f /root/.npz-agent.env ] && . /root/.npz-agent.env
 [ -f "$HOME/.npz-agent.env" ] && . "$HOME/.npz-agent.env"
@@ -103,6 +108,14 @@ if [ -f agents/gen-news.py ]; then
     # именно на него — а в git add был только *.png. Итог: 6 обложек за 03–09.08
     # отдавали 404 на проде, /news неделю показывал битые картинки, а сами файлы
     # копились untracked и роняли `git pull --rebase` всем агентам.
+    # 🔴 03.10.2026: 01.10 в 04:55 коммит упал «data/fuel-state.json не парсится». Файл
+    # лежал в ИНДЕКСЕ: агент (fuel-market) записал битый JSON, `git add data/` из его
+    # git-sync успел положить файл в индекс, а откат `git checkout -- data/` берёт
+    # версию ИЗ ИНДЕКСА и битое возвращал обратно. Наш commit подбирал чужой индекс и
+    # хук (справедливо) отвечал отказом — вся публикация дня встала. Здесь коммитим
+    # только своё: чужой staged data/ снимаем (рабочие правки остаются, их подберёт
+    # git-sync владельца), а news-archive.json добавляется ниже явно.
+    git reset -q -- data/ 2>/dev/null || true
     if ! git add news.html sitemap.xml news-sitemap.xml rss.xml news/ data/news-archive.json assets/cover-*.png assets/cover-*.webp assets/thumb/cover-*.webp refineries.html krupnejshie-npz-rossii.html rabotayut-li-npz-rossii.html karta-bpla.html 2>/dev/null; then
       echo "publish-vps: ОШИБКА — git add не удался" >&2
       exit 4
@@ -124,6 +137,11 @@ if [ -f agents/gen-news.py ]; then
   else
     echo "publish-vps: ⚠ gen-news.py упал — пропускаю news"
   fi
+fi
+
+if [ "$NEWS_ONLY" = "1" ]; then
+  echo "publish-vps: --news-only, Telegram пропущен."
+  exit 0
 fi
 
 # 2. Telegram: poll подписчиков/кнопок + radar-алерты. Редполитика v2 (2026-07-07):

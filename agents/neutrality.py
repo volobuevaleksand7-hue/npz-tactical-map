@@ -179,8 +179,17 @@ def _scrub_plain(s):
     """SCRUB+LATIN_FIX и пробельный клинап, БЕЗ учёта защищённых секций."""
     n = 0
     for pat, rep in SCRUB + LATIN_FIX:
-        s, k = re.subn(pat, rep, s)
-        n += k
+        # Считаем только ФАКТИЧЕСКИЕ правки: «де[tт]...» заменял «детонировал» самим
+        # собой, и censor вечно рапортовал «вырезано эпитетов: 1» по 5 старым страницам.
+        hits = [0]
+
+        def _f(m, rep=rep, hits=hits):
+            out = rep(m) if callable(rep) else m.expand(rep)
+            if out != m.group(0):
+                hits[0] += 1
+            return out
+        s = re.sub(pat, _f, s)
+        n += hits[0]
     if n:
         # схлопываем пробелы, появившиеся на месте вырезанного слова, но НЕ трогаем
         # переводы строк — в HTML и постах они значимы
@@ -284,12 +293,120 @@ def _around(text, needle, width=60):
     return ("…" if a else "") + text[a:i + len(needle) + width // 2].strip() + "…"
 
 
+# --- украинизмы БЕЗ украинских букв ------------------------------------------
+# 03.10.2026: «протягом тривалого часу» (Волгоград) прошло фильтр: буквы іїєґ не
+# встретились, а слова не русские. Только однозначно украинские корни, которых нет в
+# русском: ложные срабатывания на живых страницах хуже пропуска.
+UA_WORD_RE = re.compile(
+    r"(?i)(?<![а-яё])(протягом|тривал\w*|внаслідок|унаслідок|повідомл\w*|пошкодж\w*|"
+    r"вибух\w*|обстріл\w*|також|влучанн\w*|ураженн\w*|наслідк\w*|відбувся|"
+    r"відбулос\w*|кілька|декілька|близько|мешканц\w*|постраждал\w*)(?![а-яё])")
+_SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")
+
+
+def strip_ua_sentences(text):
+    """Вырезает предложения с украинизмами. -> (новый_текст, сколько_вырезано).
+    Остаток предложений сохраняется: факт удара не должен пропасть из-за одной фразы."""
+    if not isinstance(text, str) or not UA_WORD_RE.search(text):
+        return text, 0
+    keep, cut = [], 0
+    for sent in _SENT_SPLIT.split(text):
+        if UA_WORD_RE.search(sent):
+            cut += 1
+        else:
+            keep.append(sent)
+    return " ".join(keep).strip(), cut
+
+
+# --- латиница вместо русского названия региона/цели -----------------------------
+# 03.10.2026 коллектор записал city/region «Orlovskaya oblast» и target «bas drone
+# launch base 'Tsymbulova'» — англоязычный источник один в один. Регион знаем
+# точно (85 имён ниже), поэтому ПЕРЕВОДИМ; цель угадать нельзя — ставим честное
+# «цель уточняется», а не выдумываем.
+REGIONS_RU = [
+    "Адыгея", "Алтайский край", "Амурская область", "Архангельская область",
+    "Астраханская область", "Башкортостан", "Белгородская область", "Брянская область",
+    "Бурятия", "Владимирская область", "Волгоградская область", "Вологодская область",
+    "Воронежская область", "Дагестан", "Ивановская область", "Ингушетия",
+    "Иркутская область", "Кабардино-Балкария", "Калининградская область", "Калмыкия",
+    "Калужская область", "Камчатский край", "Карачаево-Черкесия", "Карелия",
+    "Кемеровская область", "Кировская область", "Коми", "Костромская область",
+    "Краснодарский край", "Красноярский край", "Крым", "Курганская область",
+    "Курская область", "Ленинградская область", "Липецкая область", "Магаданская область",
+    "Марий Эл", "Мордовия", "Московская область", "Мурманская область",
+    "Ненецкий автономный округ", "Нижегородская область", "Новгородская область",
+    "Новосибирская область", "Омская область", "Оренбургская область", "Орловская область",
+    "Пензенская область", "Пермский край", "Приморский край", "Псковская область",
+    "Ростовская область", "Рязанская область", "Самарская область", "Санкт-Петербург",
+    "Саратовская область", "Сахалинская область", "Свердловская область", "Севастополь",
+    "Северная Осетия", "Смоленская область", "Ставропольский край", "Тамбовская область",
+    "Татарстан", "Тверская область", "Томская область", "Тульская область", "Тыва",
+    "Тюменская область", "Удмуртия", "Ульяновская область", "Хабаровский край",
+    "Хакасия", "Ханты-Мансийский автономный округ", "Челябинская область", "Чечня",
+    "Чувашия", "Ямало-Ненецкий автономный округ", "Ярославская область",
+    "Херсонская область", "Запорожская область", "Донецкая Народная Республика",
+    "Луганская Народная Республика",
+]
+_DIGRAPH = [("shch", "x"), ("sch", "x"), ("sh", "s"), ("ch", "c"), ("zh", "j"),
+            ("kh", "h"), ("ts", "z")]
+_RU2LAT = dict(zip("абвгдежзийклмнопрстуфхцчшщъыьэюя",
+                   ["a", "b", "v", "g", "d", "e", "zh", "z", "i", "i", "k", "l", "m", "n",
+                    "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "",
+                    "y", "", "e", "yu", "ya"]))
+_REGION_WORDS = re.compile(
+    r"(?i)\b(oblast|obl|region|krai|kray|respublika|republic|autonomous|okrug|city|"
+    r"область|край|республика|округ|автономный|народная|город)\b")
+
+
+def _skeleton(latin):
+    """Согласный скелет латиницы: устойчив к ya/ia, y/i, kh/h и прочим вариантам
+    транслитерации. Для сравнения со ~90 именами регионов коллизий нет (selftest)."""
+    t = _REGION_WORDS.sub(" ", latin.lower())
+    t = re.sub(r"[^a-z]", "", t)
+    for a, b in _DIGRAPH:
+        t = t.replace(a, b)
+    t = re.sub(r"[aeiouy]", "", t)
+    t = re.sub(r"(.)\1+", r"\1", t)
+    return re.sub(r"sk$", "", t)       # Krasnodar / Krasnodarskiy, Orlov / Orlovskaya
+
+
+def _ru_skeleton(ru):
+    t = _REGION_WORDS.sub(" ", ru.lower())
+    return _skeleton("".join(_RU2LAT.get(c, c if c.isascii() else "") for c in t))
+
+
+_REGION_BY_SKEL = {}
+for _r in REGIONS_RU:
+    _REGION_BY_SKEL.setdefault(_ru_skeleton(_r), _r)
+
+
+def region_ru(text):
+    """'Orlovskaya oblast' -> 'Орловская область'. None — не латиница или не регион."""
+    if not isinstance(text, str) or not text.strip():
+        return None
+    if re.search(r"[А-Яа-яЁё]", text) or not re.search(r"[A-Za-z]{4}", text):
+        return None
+    sk = _skeleton(text)
+    return _REGION_BY_SKEL.get(sk) if sk else None
+
+
+def is_english_text(text):
+    """Свободный текст без единой кириллической буквы и с 3+ латинскими словами."""
+    if not isinstance(text, str) or re.search(r"[А-Яа-яЁё]", text):
+        return False
+    return len(re.findall(r"[A-Za-z]{2,}", text)) >= 3
+
+
 # --- уровень ЗАПИСИ (strikes.json и подобные) ------------------------------
 SCRUB_FIELDS = ("detail", "target", "title", "city", "region")
 
 
 def scrub_record(x):
-    """Чистит текстовые поля записи на месте. True, если что-то изменилось."""
+    """Чистит текстовые поля записи на месте. True, если что-то изменилось.
+
+    Помимо эпитетов: латинский регион -> русский, англоязычная цель -> «цель
+    уточняется», англоязычное описание -> убрано, предложения с украинизмами в
+    detail -> вырезаны (запись остаётся)."""
     changed = False
     for f in SCRUB_FIELDS:
         v = x.get(f)
@@ -300,6 +417,24 @@ def scrub_record(x):
         if n and new != v:
             x[f] = new
             changed = True
+    for f in ("city", "region"):
+        ru = region_ru(x.get(f))
+        if ru and ru != x.get(f):
+            x[f] = ru
+            changed = True
+    if is_english_text(x.get("target")):
+        x["target"] = "цель уточняется"
+        changed = True
+    if is_english_text(x.get("detail")):
+        x["detail"] = ""
+        changed = True
+    for f in ("detail", "title"):
+        v = x.get(f)
+        if isinstance(v, str):
+            new, cut = strip_ua_sentences(v)
+            if cut:
+                x[f] = new
+                changed = True
     return changed
 
 
@@ -308,6 +443,8 @@ def reason_bad(x):
     import json
     blob = json.dumps(x, ensure_ascii=False)
     if any(c in blob for c in UA_CHARS):
+        return "UA-lang"
+    if UA_WORD_RE.search(blob):
         return "UA-lang"
     if slogan_hit(blob):
         return "propaganda"
@@ -398,6 +535,23 @@ def demo():
 
     r = {"city": "Севастополь", "detail": "Удар по оккупированному порту", "confidence": "reported"}
     assert scrub_record(r) and r["detail"] == "Удар по порту"
+
+    # 03.10.2026: украинизмы без украинских букв, латинский регион, англоязычная цель
+    r = {"city": "Волгоград", "region": "Волгоградская область", "confidence": "reported",
+         "target": "НПЗ", "detail": "Взрывы в городе. По сообщениям, протягом тривалого часу слышны залпы. Пожар на НПЗ."}
+    assert scrub_record(r) and "протягом" not in r["detail"] and "Пожар на НПЗ." in r["detail"], r
+    assert r["detail"].startswith("Взрывы в городе.")
+    assert reason_bad(r) is None
+    assert reason_bad({"city": "X", "target": "тривалий пожар", "confidence": "reported"}) == "UA-lang"
+    assert region_ru("Orlovskaya oblast") == "Орловская область"
+    assert region_ru("Krasnodar Krai") == "Краснодарский край"
+    assert region_ru("Volgogradskaya oblast") == "Волгоградская область"
+    assert region_ru("Орловская область") is None and region_ru("Wildberries") is None
+    assert len(_REGION_BY_SKEL) == len(REGIONS_RU), "коллизия скелетов регионов"
+    e = {"city": "Orlovskaya oblast", "region": "Orlovskaya oblast", "confidence": "rumored",
+         "target": "bas drone launch base 'Tsymbulova'", "detail": "drone launch site was hit overnight"}
+    assert scrub_record(e) and e["city"] == "Орловская область" and e["target"] == "цель уточняется"
+    assert e["detail"] == ""
 
     # латиница из англоязычного источника чинится переводом (пост 01.08 в канале)
     s, _ = scrub_text("нефтеперерабатывающий завод Bashneft-UNPZ")

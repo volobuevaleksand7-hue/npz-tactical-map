@@ -237,6 +237,13 @@ if git diff --cached -U0 -- data/ | grep -qE '^\+(<<<<<<<|=======|>>>>>>>)'; the
   exit 3
 fi
 
+# Страница дня /news/<сегодня> должна догонять данные, а не ждать крона (ревизия
+# 03.10.2026: отставала до 6 ч). Запоминаем, тронул ли этот коммит источники сводки.
+NEWS_TRIGGER=0
+if git diff --cached --name-only | grep -qE '^data/(strikes|fuel-voices|strikes-inbox)\.json$'; then
+  NEWS_TRIGGER=1
+fi
+
 # Distinguish "nothing to commit" from a real failure (the pre-commit hook also
 # exits 1 — we must NOT treat a hook rejection as a clean no-op and push anyway).
 if git diff --cached --quiet; then
@@ -293,4 +300,23 @@ push_with_retry() {
   return 5
 }
 
+# Пересборка /news по событию — только на VPS (там, где её делает hermes/news-refresh.sh),
+# в фоне и уже после успешного push, чтобы не задерживать агента. NPZ_NEWS_AUTOREFRESH=0
+# выключает, =1 включает вне VPS. fd 9 (лок агентов из run-agent.sh) ребёнку не отдаём.
+trigger_news_refresh() {
+  [ "$NEWS_TRIGGER" = "1" ] || return 0
+  [ "${NPZ_NEWS_AUTOREFRESH:-}" = "0" ] && return 0
+  [ -x hermes/news-refresh.sh ] || return 0
+  if [ "${NPZ_NEWS_AUTOREFRESH:-}" != "1" ] && [ "$(pwd -P)" != "/root/npz-tactical-map" ]; then
+    return 0
+  fi
+  mkdir -p "${LOG_DIR:-agents/logs}" 2>/dev/null || true
+  ( setsid nohup bash hermes/news-refresh.sh "git-sync:${MSG%% *}" \
+      >> "${LOG_DIR:-agents/logs}/news-refresh.log" 2>&1 9>&- 8>&- < /dev/null & ) 
+  echo "git-sync: пересборка /news запущена в фоне (news-refresh)"
+}
+
 push_with_retry
+_push_rc=$?
+[ "$_push_rc" = "0" ] && trigger_news_refresh
+exit "$_push_rc"

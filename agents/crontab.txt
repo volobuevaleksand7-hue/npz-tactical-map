@@ -54,3 +54,14 @@ MAILTO=root
 # Фронт читает health.json из GitHub raw («N агентов отстали»), поэтому статус
 # должен регулярно обновляться независимо от того, запускались ли сборщики.
 0 * * * * cd /root/npz-tactical-map && git pull --rebase --quiet >> agents/logs/cron.log 2>&1 && python3 agents/healthcheck.py >> agents/logs/cron.log 2>&1 && bash agents/git-sync.sh "health: watchdog check $(date -u +%Y-%m-%dT%H:%MZ)" >> agents/logs/cron.log 2>&1
+
+# ---- ПЕРЕСБОРКА СВОДОК /news (добавлено 03.10.2026) ----
+# Живой crontab на VPS правится вручную (бэкап /root/crontab.bak.20261003); это документирующая копия.
+# Обложка дня ДО утренней публикации 04:55 UTC (раньше её рисовал только сторож в 05:15):
+35 4 * * *   cd /root/npz-tactical-map && /usr/bin/python3 agents/summary-watchdog.py --scheduled >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+# Ночная пересборка в 00:10 МСК: страница нового дня появляется сразу после полуночи, не к утру:
+10 21 * * *  cd /root/npz-tactical-map && bash hermes/news-refresh.sh nightly >> /root/npz-tactical-map/agents/logs/news-refresh.log 2>&1
+# Ночной newswatch (00:00 UTC) — тот же путь, что 3,9,15,21:
+0 0 * * *    NPZ_MODEL=$HAIKU $R $NPZ_REPO/agents/update-prompt-newswatch.md newswatch >> $LOG 2>&1
+# Пересборка по событию: agents/git-sync.sh после push, тронувшего strikes/fuel-voices/strikes-inbox,
+# сам запускает hermes/news-refresh.sh в фоне (только на VPS; NPZ_NEWS_AUTOREFRESH=0 выключает).

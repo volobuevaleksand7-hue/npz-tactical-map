@@ -22,8 +22,12 @@ import html
 import os
 import hashlib
 import subprocess
-from datetime import datetime, timezone
+import sys
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import neutrality  # noqa: E402  — единый словарь чистки (эпитеты, укр. слова, латиница)
 
 ROOT = Path(__file__).resolve().parent.parent  # корень проекта
 DATA_DIR = ROOT / "data"
@@ -132,7 +136,10 @@ def cap(s: str) -> str:
 
 
 def today_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    """Сегодняшняя дата по МОСКВЕ. До 03.10.2026 здесь была UTC — страница нового дня
+    появлялась в 03:00 МСК, а сторож (summary-watchdog) считает день по МСК, и они
+    расходились ровно в окно 21:00-24:00 UTC."""
+    return datetime.now(timezone(timedelta(hours=3))).strftime("%Y-%m-%d")
 
 
 def escape(s) -> str:
@@ -242,7 +249,24 @@ def normalize_strike(s: dict) -> dict:
         s["detail"] = s["description"]
     if "lat" not in s and isinstance(s.get("location"), (list, tuple)) and len(s["location"]) == 2:
         s["lat"], s["lon"] = s["location"]
+    # Чистка на выходе: латинский регион -> русский, англоязычная цель -> «цель
+    # уточняется», украинизмы вырезаны, эпитеты убраны. Идемпотентно и совпадает с тем,
+    # что делает sanitize-strikes в pre-commit, поэтому страница не зависит от того,
+    # успел ли хук почистить strikes.json.
+    neutrality.scrub_record(s)
     return s
+
+
+_TIME_WORDS = {"ночь": "ночью", "ночью": "ночью", "утро": "утром", "утром": "утром",
+               "день": "днём", "днём": "днём", "днем": "днём", "вечер": "вечером",
+               "вечером": "вечером"}
+
+
+def time_label(t) -> str:
+    """Время для карточки. Точное HH:MM показываем как есть; слово-заглушка из данных
+    («ночь») даём наречием «ночью» — часа не выдумываем."""
+    t = str(t or "").strip()
+    return _TIME_WORDS.get(t.lower(), t)
 
 
 def level_label(level: str) -> str:
@@ -260,6 +284,21 @@ def level_css(level: str) -> str:
 
 # ═══════════════════════════════ архив ═══════════════════════════════
 
+def _clean_voice(v: dict):
+    """Голос людей: эпитеты вычищаем, цитату с украинизмом/лозунгом не публикуем (None)."""
+    v = dict(v)
+    q, _ = neutrality.scrub_text(str(v.get("quote", "")))
+    if (neutrality.UA_WORD_RE.search(q) or neutrality.text_reasons(q)
+            or neutrality.is_english_text(q)):
+        return None
+    v["quote"] = q
+    for f in ("city", "region"):
+        ru = neutrality.region_ru(v.get(f))
+        if ru:
+            v[f] = ru
+    return v
+
+
 def build_archive() -> dict:
     """Слить текущие strikes/voices в накопительный архив по датам и обновить снапшот.
     Старые даты, уже осевшие в архиве, сохраняются даже если источник обновился частично."""
@@ -267,7 +306,9 @@ def build_archive() -> dict:
     briefs = archive.get("briefs", {})
 
     strikes = [normalize_strike(s) for s in load_json("strikes.json").get("strikes", [])]
-    voices = load_json("fuel-voices.json").get("voices", [])
+    strikes = [s for s in strikes if neutrality.reason_bad(s) is None]
+    voices = [_clean_voice(v) for v in load_json("fuel-voices.json").get("voices", [])]
+    voices = [v for v in voices if v]
 
     # группируем по дате
     strikes_by_date = {}
@@ -417,7 +458,7 @@ def gen_strikes(strikes: list, max_n: int = 60) -> str:
         source = escape(s.get("source_url", ""))
         conf = escape(s.get("confidence", "reported"))
         conf_badge = "✅ Подтверждено" if conf == "confirmed" else ("📡 Сообщается" if conf == "reported" else "🗣️ Слух")
-        time_str = escape(s.get("time", ""))
+        time_str = escape(time_label(s.get("time", "")))
         rows.append(f"""<article class="news-strike">
   <div class="strike-head">
     <span class="strike-date">{date_str}{' · ' + time_str if time_str else ''}</span>
@@ -482,7 +523,77 @@ def gen_azs(regions: list, exchange: dict) -> str:
 {ex_html}"""
 
 
-def gen_voices(voices: list, max_n: int = 8) -> str:
+def _region_of(s: dict) -> str:
+    return str(s.get("region") or s.get("city") or "").strip()
+
+
+def day_summary_html(date: str, strikes: list, prev_strikes: list, fuel_state: dict,
+                     is_latest: bool) -> str:  # prev_strikes — удары календарного «вчера»
+    """Блок «Итог суток». Только числа из данных: удары за дату, сравнение с предыдущей
+    датой, регионы, статусы НПЗ из fuel-state. Оценок и прогнозов нет."""
+    n = len(strikes)
+    n_prev = len(prev_strikes)
+    cls = [2 if any(k in (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
+                    for k in _REF_K) else
+           (1 if any(k in (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
+                     for k in _GRID_K) else 0) for s in strikes]
+    n_ref, n_grid = cls.count(2), cls.count(1)
+    items = []
+    if n == 0:
+        items.append("В данных за эту дату нет зафиксированных ударов по топливной и "
+                     "энергетической инфраструктуре. Отсутствие записей не означает "
+                     "отсутствия событий: охват открытых источников неполный.")
+    else:
+        line = (f"Зафиксировано {n} {plural(n, 'удар', 'удара', 'ударов')}: "
+                f"по НПЗ, нефтебазам и терминалам — {n_ref}, по энергетике — {n_grid}, "
+                f"по прочим объектам — {n - n_ref - n_grid}.")
+        items.append(line)
+        diff = n - n_prev
+        if diff == 0:
+            cmp = f"Накануне — столько же ({n_prev})."
+        else:
+            cmp = (f"Накануне — {n_prev}; "
+                   f"{'больше' if diff > 0 else 'меньше'} на {abs(diff)}.")
+        items.append(cmp)
+        regs = []
+        for s in strikes:
+            r = _region_of(s)
+            if r and r not in regs:
+                regs.append(r)
+        if regs:
+            shown = ", ".join(escape(r) for r in regs[:10]) + (f" и ещё {len(regs) - 10}" if len(regs) > 10 else "")
+            items.append(f"Затронутые регионы ({len(regs)}): {shown}.")
+        conf = sum(1 for s in strikes if str(s.get("confidence", "")).lower() == "confirmed")
+        items.append(f"Подтверждено источниками: {conf} из {n}; остальное — сообщения, "
+                     "которые ещё не подтверждены.")
+    if is_latest:
+        refs = fuel_state.get("refineries", []) or []
+        down = [r for r in refs if r.get("status") == "down"]
+        part = [r for r in refs if r.get("status") == "partial"]
+        ok = [r for r in refs if r.get("status") == "operational"]
+        if refs:
+            gen = str(fuel_state.get("meta", {}).get("generated_at", ""))[:10]
+            items.append(
+                f"Статус НПЗ по данным карты{' на ' + rus_date(gen) if gen else ''}: "
+                f"остановлено — {len(down)}, работает с ограничениями — {len(part)}, "
+                f"работает — {len(ok)} (из {len(refs)} учтённых).")
+            for lbl, grp in (("Остановлены", down), ("Ограничены", part)):
+                if grp:
+                    names = [escape(str(r.get("name", ""))) for r in grp[:12]]
+                    more = f" и ещё {len(grp) - 12}" if len(grp) > 12 else ""
+                    items.append(f"{lbl}: {', '.join(names)}{more}.")
+        items.append("День не завершён: цифры обновляются по мере поступления данных.")
+    lis = "\n".join(f"          <li>{x}</li>" for x in items)
+    return f"""      <section class="news-section" id="summary">
+        <h2>📋 Итог суток</h2>
+        <ul class="summary-list">
+{lis}
+        </ul>
+      </section>
+"""
+
+
+def gen_voices(voices: list, max_n: int = 60) -> str:
     rows = []
     for v in voices[:max_n]:
         quote = escape(v.get("quote", ""))
@@ -801,6 +912,8 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
 
     date_rus = rus_date(date)
     is_latest = (next_date is None)
+    _yday = (datetime.strptime(date, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
+    prev_strikes = briefs.get(_yday, {}).get("strikes", [])
 
     cover_rel, cover_exists = cover_for(date)
     cover_path = asset_ver(cover_rel) if cover_exists else "/og-image.png"  # og:image/twitter — только .png
@@ -864,6 +977,7 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
         {DISCLAIMER_HTML}
       </section>
 """,
+        day_summary_html(date, strikes, prev_strikes, load_json("fuel-state.json", {}), is_latest),
         f"""      <section class="news-section" id="strikes">
         <h2>🎯 Удары за {date_rus}</h2>
         <div class="strikes-list">
@@ -1062,6 +1176,14 @@ def gen_sitemap(archive: dict) -> str:
 
 # ═══════════════════════════════ main ═══════════════════════════════
 
+def _clean(html_text: str) -> str:
+    """Тот же scrub_text, что гонит pre-commit-цензор по staged *.html. Если страница
+    уже вычищена здесь, цензору нечего «нейтрализовать»: 03.10.2026 он каждый коммит
+    переписывал 5 старых страниц (эпитет сидит в архивных данных), и сторож сводок
+    принимал эту правку за «самолечение»."""
+    return neutrality.scrub_text(html_text)[0]
+
+
 def main():
     print(f"[gen-news] Сборка архива из {DATA_DIR}...")
     archive = build_archive()
@@ -1069,7 +1191,7 @@ def main():
     print(f"[gen-news] Дат в архиве: {len(dates)} ({dates[-1] if dates else '—'} … {dates[0] if dates else '—'})")
 
     # индекс
-    INDEX_OUT.write_text(gen_index(archive), encoding="utf-8")
+    INDEX_OUT.write_text(_clean(gen_index(archive)), encoding="utf-8")
     print(f"[gen-news] ✅ {INDEX_OUT.name} (индекс)")
 
     # страницы по датам
@@ -1078,7 +1200,7 @@ def main():
         prev_date = dates[i + 1] if i + 1 < len(dates) else None   # старее
         next_date = dates[i - 1] if i - 1 >= 0 else None           # свежее
         (NEWS_DIR / f"{d}.html").write_text(
-            gen_date_page(d, archive, prev_date, next_date), encoding="utf-8")
+            _clean(gen_date_page(d, archive, prev_date, next_date)), encoding="utf-8")
     print(f"[gen-news] ✅ news/<date>.html — {len(dates)} страниц")
 
     # месячные архив-хабы news/<YYYY-MM>.html — SEO-лендинги «удары по нпз <месяц> <год>»
@@ -1088,7 +1210,7 @@ def main():
         prev_ym = yms[i - 1] if i - 1 >= 0 else None   # старее
         next_ym = yms[i + 1] if i + 1 < len(yms) else None  # свежее
         (NEWS_DIR / f"{ym}.html").write_text(
-            gen_month_page(ym, months[ym], archive, prev_ym, next_ym), encoding="utf-8")
+            _clean(gen_month_page(ym, months[ym], archive, prev_ym, next_ym)), encoding="utf-8")
     print(f"[gen-news] ✅ news/<YYYY-MM>.html — {len(yms)} месячных хабов ({', '.join(yms)})")
 
     # nav/footer в news.html + news/*.html — заполняет плейсхолдер выше единым

@@ -21,7 +21,14 @@
 Токен: env NPZ_BOT_TOKEN -> ~/.npz-bot/token. Чат: env NPZ_OWNER_CHAT -> 609952529.
 Запуск:  python3 agents/summary-watchdog.py            # проверка + самолечение
          python3 agents/summary-watchdog.py --dry-run  # проверка без правок/push
+         python3 agents/summary-watchdog.py --scheduled  # плановая сборка (cron 04:35 UTC):
+                                                         # без fetch/Telegram/инцидентов, только heal(today)
          python3 agents/summary-watchdog.py --test / --selfcheck
+
+Роль 05:15 UTC (08:15 МСК) выяснена 03.10.2026: это единственное место, где рождается
+обложка дня (build-covers), а сводка публикуется в 04:55 UTC (publish-vps) — то есть
+обложка приходила ПОСЛЕ утренней публикации. `--scheduled` в 04:35 UTC даёт обложку
+до неё; сам проверяющий проход 05:15 остаётся как страховка.
 """
 import json
 import os
@@ -297,6 +304,14 @@ def main() -> int:
         tg_send(f"✅ Тест сторожа сводки. Проверяю {NEWS_URL} за {day}.")
         log("тестовый пинг отправлен")
         return 0
+    if "--scheduled" in sys.argv:
+        # плановая сборка: тишина, без сети и пингов; события дня есть → дособрать и запушить
+        if not data_has_today(day):
+            log(f"scheduled: событий за {day} нет, тихий день — ничего не делаю")
+            return 0
+        card_ok, cover_ok = heal(day)
+        log(f"scheduled: {day} card_ok={card_ok} cover_ok={cover_ok} src={COVER_SRC}")
+        return 0 if card_ok else 1
     dry = "--dry-run" in sys.argv
     try:
         html = fetch(NEWS_URL)
@@ -380,6 +395,8 @@ def _selfcheck():
     assert update_incidents([], "2026-07-11") is True                 # авто-резолв
     t = INCIDENTS.read_text()
     assert "## [RESOLVED] card-missing-2026-07-11" in t and "## [OPEN]" not in t, t
+    src = Path(__file__).read_text(encoding="utf-8") if "Path" in globals() else open(__file__, encoding="utf-8").read()
+    assert '"--scheduled" in sys.argv' in src and "heal(day)" in src.split('"--scheduled"')[1][:500]
     print("selfcheck ok")
 
 

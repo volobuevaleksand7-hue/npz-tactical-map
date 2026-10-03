@@ -168,7 +168,7 @@ if [ "$RC" != "0" ] && tail -c 2000 "agents/logs/${LABEL}.log" 2>/dev/null | _is
     echo "[$LABEL] сеть вернулась через $(( $(date +%s) - _net_start ))с — повтор той же задачи"
     # Откат ДО повтора: упавший прогон мог оставить полузаписанный файл, иначе
     # модель перечитает собственный обрывок (та же причина, что у json-повтора ниже).
-    git checkout -- data/ 2>/dev/null || true
+    git checkout HEAD -- data/ 2>/dev/null || true
     $TIMEOUT_WRAP claude -p "$PROMPT" \
       --model "$MODEL" \
       --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
@@ -187,7 +187,7 @@ fi
 # The skipped heartbeat is the watchdog's signal that this run failed.
 if [ "$RC" != "0" ]; then
   echo "!! agent failed (RC=$RC) — reverting data/, no commit"
-  git checkout -- data/ 2>/dev/null || true
+  git checkout HEAD -- data/ 2>/dev/null || true
   exit "$RC"
 fi
 
@@ -212,7 +212,7 @@ validate_data_json() {
 # ponytail: один повтор, не цикл — стабильный отказ модели остаётся честным падением.
 if ! validate_data_json; then
   echo "!! [$LABEL] битый JSON (попытка 1) — откатываю data/ и повторяю ту же задачу"
-  git checkout -- data/
+  git checkout HEAD -- data/
   $TIMEOUT_WRAP claude -p "$PROMPT" \
     --model "$MODEL" \
     --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
@@ -223,7 +223,7 @@ if ! validate_data_json; then
   echo "engine claude($MODEL) json-retry exit: $RC"
   if [ "$RC" != "0" ] || ! validate_data_json; then
     echo "reverting data/ due to invalid JSON (после повтора)"
-    git checkout -- data/
+    git checkout HEAD -- data/
     exit 1
   fi
   echo "[$LABEL] повтор дал валидный JSON — продолжаем"
@@ -269,12 +269,12 @@ if [ -n "$AGENT_OUT" ]; then
     echo "engine claude($MODEL) retry exit: $RC"
     if [ "$RC" != "0" ]; then
       echo "!! agent retry failed (RC=$RC) — reverting data/, no commit"
-      git checkout -- data/ 2>/dev/null || true
+      git checkout HEAD -- data/ 2>/dev/null || true
       exit "$RC"
     fi
     if ! validate_data_json; then
       echo "reverting data/ due to invalid JSON (retry)"
-      git checkout -- data/
+      git checkout HEAD -- data/
       exit 1
     fi
     _out_ts="$( [ -f "$AGENT_OUT" ] && stat -c %Y "$AGENT_OUT" 2>/dev/null || echo 0 )"
