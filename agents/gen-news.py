@@ -143,7 +143,17 @@ def today_iso() -> str:
 
 
 def escape(s) -> str:
-    return html.escape(str(s), quote=True)
+    """Экранируем РОВНО один раз. Источники (RSS/Telegram) кладут в данные уже
+    экранированные сущности (&quot;, &nbsp;) — без unescape html.escape делал из них
+    видимое «&amp;quot;». Цикл — на случай двойной сущности &amp;quot; в самих данных."""
+    t = str(s)
+    for _ in range(3):
+        u = html.unescape(t)
+        if u == t:
+            break
+        t = u
+    t = t.replace("\xa0", " ")
+    return html.escape(t, quote=True)
 
 
 def plural(n: int, one: str, few: str, many: str) -> str:
@@ -611,6 +621,9 @@ def gen_voices(voices: list, max_n: int = 60) -> str:
 # ═══════════════════════════════ общие куски ═══════════════════════════════
 
 def head_html(title, description, canonical, cover_url, jsonld="") -> str:
+    # JSON-LD лежит в <script>, а scrub_text script-секции пропускает (_PROTECT) —
+    # чистим текст разметки здесь, иначе «украинских БПЛА» остаётся в структурированных данных.
+    jsonld = neutrality._scrub_plain(jsonld)[0]
     return f"""<!DOCTYPE html>
 <html lang="ru" data-theme="light">
 <head>
@@ -923,6 +936,15 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
 
     headline = brief_headline(date, strikes)
     title = f"Сводка за {date_rus}: {headline} | Топливный фронт РФ"
+    # H1 — по содержанию дня (дата + главное событие), URL не меняется. Пустой день:
+    # вместо шаблонной заглушки — что есть в данных (сообщения регионов).
+    if strikes:
+        h1_text = f"{date_rus}: {headline}"
+    elif voices:
+        h1_text = (f"{date_rus}: ударов не зафиксировано, ситуация на АЗС — "
+                   f"{len(voices)} {plural(len(voices), 'сообщение', 'сообщения', 'сообщений')} из регионов")
+    else:
+        h1_text = f"{date_rus}: сводка без подтверждённых ударов и сообщений"
     description = (f"Топливный фронт РФ за {date_rus}: {brief_teaser(strikes, voices)} "
                    f"Удары по НПЗ, дефицит бензина, лимиты на АЗС.")[:300]
 
@@ -972,7 +994,7 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
       <section class="news-hero">
         <img class="news-hero-image" src="{hero_img_path}" alt="Сводка за {date_rus}" width="1200" height="630" loading="eager">
         <span class="hero-kicker">{weekday_ru(date)}, {rus_date_short(date)}</span>
-        <h1>Топливный фронт РФ — сводка за {date_rus}</h1>
+        <h1>{escape(h1_text)}</h1>
         <p class="section-sub">{escape(' · '.join(sub_bits))}. OSINT-агрегация по открытым источникам.</p>
         {DISCLAIMER_HTML}
       </section>
