@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-02T16:30:00Z",
+    "generated_at": "2026-10-03T13:47Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:npz-status"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -96,9 +96,9 @@
       "status": "down",
       "status_since": "2026-09-25",
       "est_output_pct": 0,
-      "damage": "Первоначальная атака 21 августа поразила установку АВТ-5 с возникновением пожара. Повторная атака ночью 25 сентября: украинские дроны вновь атаковали завод (седьмой по величине НПЗ России), вызвав новый пожар. При атаке погиб один человек. Завод остаётся в полной остановке.",
+      "damage": "БПЛА атаковали жилые дома и промышленные объекты Пермской области. Погиб 1 человек, ранено 4. Противовоздушная оборона отразила 27 беспилотников. Введён режим «Ковёр».",
       "note": "На 30 сентября завод полностью остановлен после повторной атаки. Лукойл-Пермнефтеоргсинтез — седьмой по мощности НПЗ России (13.1 млн т/год). Восстановление требует месяцев отсутствия новых ударов.",
-      "source_url": "https://meduza.io/en/news/2026/09/25/reuters-russia-s-seventh-largest-refinery-halts-operations-after-a-ukrainian-drone-attack",
+      "source_url": "https://59.ru/text/gorod/2026/09/07/76628264/",
       "confidence": "confirmed"
     },
     {
@@ -176,9 +176,9 @@
       "status": "down",
       "status_since": "2026-08-26",
       "est_output_pct": 0,
-      "damage": "Первоначальная атака 8 августа. Повторная атака ночью 26 августа: украинские БПЛА вновь поразили крупнейший завод Лукойла, один из четырёх по величине НПЗ России мощностью ~17 млн тонн в год. Начался масштабный пожар, установки повреждены.",
+      "damage": "крупный пожар на нефтеперерабатывающем заводе, один из крупнейших НПЗ РФ мощностью ~17 млн тонн в год",
       "note": "На 30 сентября завод полностью остановлен. 4-й по величине нефтезавод России. Восстановление критически затруднено при активной воздушной деятельности.",
-      "source_url": "https://english.nv.ua/russian-war/drone-strikes-target-one-of-russia-s-largest-oil-refineries-50635690.html",
+      "source_url": "https://neftegaz.ru/news/incidental/925119-v-kstovo-padenie-oblomkov-bpla-vyzvalo-pozhary-na-prompredpriyatiyakh/",
       "confidence": "reported"
     },
     {
@@ -1250,6 +1250,16 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-03",
+      "text": "Удар по Лукойл-Пермнефтеоргсинтез (Пермь): Массированная атака БПЛА на Пермь 7 сентября",
+      "source_url": "https://59.ru/text/gorod/2026/09/07/76628264/"
+    },
+    {
+      "date": "2026-10-03",
+      "text": "Удар по Лукойл-Нижегороднефтеоргсинтез (Кстово) (Кстово): Удар по нефтеперерабатывающему заводу в Кстово",
+      "source_url": "https://neftegaz.ru/news/incidental/925119-v-kstovo-padenie-oblomkov-bpla-vyzvalo-pozhary-na-prompredpriyatiyakh/"
+    },
     {
       "date": "2026-10-02",
       "text": "Украинские дроны атаковали Волгоградский НПЗ (Лукойл), вызвав пожар в промышленной зоне и повредив ключевые установки первичной переработки."
