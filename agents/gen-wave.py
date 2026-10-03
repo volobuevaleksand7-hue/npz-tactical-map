@@ -397,6 +397,8 @@ def build_live_page(state, events):
     else:
         cover, active_title, chips, updated = "", "", "", ""
         active_style, quiet_style = "display:none", ""
+    # Один H1 на странице: заголовок — у блока, видимого при сборке; скрытый — div.
+    active_tag, quiet_tag = ("h1", "div") if active_style == "" else ("div", "h1")
     # last_event: agents/wave-detect.py пишет объект {"date","event_id"} (не голую строку —
     # расходится с прозой ТЗ §2, код детектора канон); поддержим и строку на всякий случай.
     _last_ev = state.get("last_event")
@@ -427,14 +429,14 @@ def build_live_page(state, events):
       <div class="landing-hero">
         <span class="hero-label">ВОЛНА ДРОНОВ · LIVE</span>
         <div id="waveActive" style="{active_style}">
-          <h1 class="hero-h" id="waveTitle">{esc(active_title)}</h1>
+          <{active_tag} class="hero-h" id="waveTitle">{esc(active_title)}</{active_tag}>
           <p class="hero-sub">Оценка по открытым источникам (мониторинговые чаты и каналы), не официальное оповещение. Обновляется автоматически.</p>
           {cover}
           <div class="wave-region-chips" id="waveChips">{chips}</div>
           <div class="updated-line" id="waveUpdated">{esc(updated)}</div>
         </div>
         <div id="waveQuiet" style="{quiet_style}">
-          <h1 class="hero-h">Крупных волн дронов сейчас не зафиксировано</h1>
+          <{quiet_tag} class="hero-h">Крупных волн дронов сейчас не зафиксировано</{quiet_tag}>
           <p class="hero-sub">Последняя волна повышенной активности БПЛА: <b id="waveLastDate">{esc(last_event_txt)}</b>. Обстановка может меняться быстро — смотрите живой радар.</p>
         </div>
         <a class="map-cta" href="/radar"><span class="mc-ico">📡</span> Радар угроз в реальном времени →</a>
