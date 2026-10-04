@@ -12,7 +12,8 @@ KEEP="${KEEP:-7}"
 cd "$OUT"
 shopt -s nullglob
 
-for marker in npz-*.uploaded; do
+for marker in npz-*.uploaded reel-*.uploaded; do
+  [ -e "$marker" ] || continue
   mp4="${marker%.uploaded}.mp4"
   [ -f "$mp4" ] || continue
   rm -f -- "$mp4" "${mp4%.mp4}.jpg"

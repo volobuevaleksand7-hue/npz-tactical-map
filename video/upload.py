@@ -3,6 +3,7 @@
 
   python3 upload.py auth            — разовая авторизация (refresh-токен -> .secrets/token.json)
   python3 upload.py [YYYY-MM-DD]    — залить out/npz-<дата>.mp4 (без даты — все незалитые)
+  python3 upload.py reel [YYYY-MM-DD] — то же для рилса out/reel-<дата>.mp4 (reel/render_reel.sh)
 
 Секреты лежат вне репозитория, в ~/.config/npz-youtube/ (или $NPZ_YT_SECRETS), права 600:
   client_secret.json — OAuth-клиент «Desktop» из Google Cloud (проект npz-youtube);
@@ -36,6 +37,7 @@ CLIENT = os.path.join(SECRETS, "client_secret.json")
 TOKEN = os.path.join(SECRETS, "token.json")
 SCOPE = "https://www.googleapis.com/auth/youtube.upload"
 PORT = 8765
+KIND = "npz"  # префикс файлов в out/: npz (ежедневный ролик) | reel (рилс)
 CATEGORY_NEWS = "25"  # News & Politics
 
 
@@ -121,7 +123,7 @@ def access_token():
 
 def meta(date):
     """Заголовок — первая строка out/npz-<дата>.txt, описание — остальное."""
-    path = os.path.join(OUT, f"npz-{date}.txt")
+    path = os.path.join(OUT, f"{KIND}-{date}.txt")
     with open(path, encoding="utf-8") as f:
         lines = f.read().strip().split("\n")
     clean = lambda s: s.replace("<", "‹").replace(">", "›")
@@ -132,7 +134,7 @@ def meta(date):
 
 
 def upload(date, token):
-    mp4 = os.path.join(OUT, f"npz-{date}.mp4")
+    mp4 = os.path.join(OUT, f"{KIND}-{date}.mp4")
     size = os.path.getsize(mp4)
     title, desc, tags = meta(date)
     body = {
@@ -160,7 +162,7 @@ def upload(date, token):
     set_thumbnail(date, vid, token)
     privacy = res.get("status", {}).get("privacyStatus")
     url = f"https://youtu.be/{vid}"
-    with open(os.path.join(OUT, f"npz-{date}.uploaded"), "w") as f:
+    with open(os.path.join(OUT, f"{KIND}-{date}.uploaded"), "w") as f:
         f.write(f"{vid}\t{url}\t{privacy}\t{title}\n")
     log(f"{date}: залит {url} ({privacy})")
     return url
@@ -169,7 +171,7 @@ def upload(date, token):
 def set_thumbnail(date, vid, token):
     """Обложка = кадр-постер out/npz-<дата>.jpg. Не вышло (канал без права на свои обложки,
     нет файла) — ролик всё равно залит, YouTube возьмёт кадр сам."""
-    jpg = os.path.join(OUT, f"npz-{date}.jpg")
+    jpg = os.path.join(OUT, f"{KIND}-{date}.jpg")
     if not os.path.exists(jpg):
         return
     with open(jpg, "rb") as f:
@@ -185,17 +187,20 @@ def set_thumbnail(date, vid, token):
 
 
 def main():
+    global KIND
     args = sys.argv[1:]
     if args[:1] == ["auth"]:
         return auth()
+    if args[:1] == ["reel"]:
+        KIND, args = "reel", args[1:]
     if args:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):
             raise SystemExit("upload: дата YYYY-MM-DD или 'auth'")
         dates = [args[0]]
     else:
         dates = sorted(m.group(1) for n in os.listdir(OUT)
-                       if (m := re.fullmatch(r"npz-(\d{4}-\d{2}-\d{2})\.mp4", n)))
-    dates = [d for d in dates if not os.path.exists(os.path.join(OUT, f"npz-{d}.uploaded"))]
+                       if (m := re.fullmatch(KIND + r"-(\d{4}-\d{2}-\d{2})\.mp4", n)))
+    dates = [d for d in dates if not os.path.exists(os.path.join(OUT, f"{KIND}-{d}.uploaded"))]
     if not dates:
         return log("нечего заливать")
     token = access_token()
