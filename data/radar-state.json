@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791095177,
-      "source_text": "04.10.2026 09:26 МСК\nХерсонская область РФ Особое внимание трассы Опасность по БПЛА Хорнет"
+      "last_event_ts": 1791096429,
+      "source_text": "04.10.2026 09:47 МСК\nКаланчак от Новоукраинка Херсонская область РФ Тревога по БПЛА Хорнет"
     },
     "Орловская область": {
       "bpla": false,
@@ -157,6 +157,25 @@
       "fill": "#dc2626",
       "last_event_ts": 1791095091,
       "source_text": "04.10.2026 08:53 МСК\nДимитров Гродовка ДНР ракетная опасность\n\n04.10.2026 09:24 МСК\nПантелеймоновка, Корсунь, Веровка, Енакиево и близлежащие Опасность по БПЛА ДНР"
+    },
+    "Кировская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1791095880,
+      "source_text": "04.10.2026 09:38 МСК\nКировская область Опасность по БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -1542,9 +1561,9 @@
       "lat": 46.25495,
       "lon": 33.29061,
       "region": "Херсонская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1555,8 +1574,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1791092921,
-      "source_text": "04.10.2026 08:48 МСК\nОт Каланчак в направлении АПП Армянск, Армянск фиксации БПЛА Хорнет"
+      "last_event_ts": 1791096429,
+      "source_text": "04.10.2026 09:47 МСК\nКаланчак от Новоукраинка Херсонская область РФ Тревога по БПЛА Хорнет"
     },
     {
       "key": "белокуракино|луганская народная республика",
@@ -2136,6 +2155,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 286283,
+      "text": "Каланчак от Новоукраинка Херсонская область РФ\nТревога по БПЛА Хорнет",
+      "ts": 1791096429,
+      "time_label": "04.10.2026 09:47 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 95777,
+      "text": "Кировская область\nОпасность по БПЛА",
+      "ts": 1791095880,
+      "time_label": "04.10.2026 09:38 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 286282,
       "text": "Противник готовит запуски БПЛА от Одессы",
@@ -2759,22 +2794,6 @@
       "time_label": "04.10.2026 08:29 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 95751,
-      "text": "Адлер\nКраснодарский край\nРабота ПВО по БПЛА",
-      "ts": 1791091556,
-      "time_label": "04.10.2026 08:25 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 88245,
-      "text": "За прошедшую ночь силами противовоздушной обороны было уничтожено\n559 БПЛА\nнад территориями Астраханской, Белгородской, Брянской, Волгоградской, Воронежской, Калужской, Курской, Орловской, Ростовской, Смоленской, Тульской областей, Московского региона, Республики Адыгея, Республики Крым, Краснодарского края и над акваториями Азовского и Черного морей.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1791091532,
-      "time_label": "04.10.2026 08:25 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -2784,15 +2803,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791095645,
-  "last_event_at": "2026-10-04T06:34:05Z",
-  "fetched_at": "2026-10-04T06:40:03.956687Z",
+  "timestamp": 1791096429,
+  "last_event_at": "2026-10-04T06:47:09Z",
+  "fetched_at": "2026-10-04T06:50:02.995731Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-04T06:40:03.956687Z",
-    "source_age_seconds": 358,
+    "generated_at": "2026-10-04T06:50:02.995731Z",
+    "source_age_seconds": 173,
     "city_count": 69,
-    "region_count": 11,
+    "region_count": 12,
     "feed_count": 80
   }
 }
