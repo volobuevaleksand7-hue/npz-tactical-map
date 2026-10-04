@@ -26,7 +26,7 @@ ROOT = VIDEO.parent
 TPL = REEL / "template"
 SITE_HOST = "npz-tactical-map.vercel.app"
 TG_HANDLE = "@npz_karta_online"
-MAX_STRIKES = 3
+MAX_STRIKES = int(os.environ.get("REEL_MAX", "12"))  # все удары дня; потолок — чтобы Shorts не вылез за ~2 мин
 
 
 def _load(name, path):
@@ -38,6 +38,10 @@ def _load(name, path):
 
 B = _load("daily_build", VIDEO / "build.py")   # общие функции ежедневного ролика (mix, matchers)
 G = B.G                                          # agents/gen-news.py
+try:
+    N = _load("neutrality", ROOT / "agents" / "neutrality.py")
+except Exception:  # noqa: BLE001 — без модуля просто без доп. проверки
+    N = None
 esc = lambda s: html.escape(str(s), quote=True)
 
 INFRA_KW = G.REFINERY_KW + ("лпдс", "нпс", "азс", "нефтепровод", "трубопровод", "резервуар")
@@ -99,19 +103,22 @@ def load_day(date):
 
 
 def select_strikes(date):
-    """(выбранные до 3, все удары дня). Топливо/энергетика -> промышленность -> прочее,
-    внутри — strike_rank gen-news (класс цели, confirmed). Один город — один раз.
+    """(остановки камеры, все удары дня). Все удары дня с координатами, один город — одна
+    остановка (остальные удары по городу — в s["_group"], их факты идут в озвучку).
+    Порядок: топливо/энергетика -> промышленность -> прочее, внутри — strike_rank gen-news.
     Слухи (rumored) не показываем."""
     day, _ = load_day(date)
     pool = [s for s in day if s["lat"] is not None
             and str(s.get("confidence", "reported")).lower() in ("confirmed", "reported")]
     pool.sort(key=lambda s: (s["cls"], G.strike_rank(s)), reverse=True)
-    out, cities = [], set()
+    out, by_city = [], {}
     for s in pool:
         c = str(s.get("city") or s.get("region") or "").strip().lower()
-        if c in cities:
+        if c in by_city:
+            by_city[c]["_group"].append(s)
             continue
-        cities.add(c)
+        s["_group"] = [s]
+        by_city[c] = s
         out.append(s)
         if len(out) >= MAX_STRIKES:
             break
@@ -258,23 +265,107 @@ def first_sentence(text):
     return t.rstrip(".")
 
 
-def narration(date, sel, day, refs):
-    """[(ключ, текст)]: intro, s0..sN, outro."""
+FACT_RX = (  # шаблонная озвучка, когда LLM недоступна: что произошло — по ключевым словам
+    (r"погиб|погибл|смерт", "есть погибшие"), (r"ранен|пострадал|травм", "есть пострадавшие"),
+    (r"пожар|возгоран|горит|горел", "пожар"), (r"остановл|приостановл|прекрат", "работа остановлена"),
+    (r"поврежд|разруш", "повреждения"), (r"обесточ|без света|отключени[ея] электр", "отключение света"),
+)
+
+
+def facts(s):
+    d = " ".join(str(x.get("detail") or "") for x in s.get("_group", [s])).lower()
+    out = []
+    for rx, label in FACT_RX:
+        if re.search(rx, d) and label not in out:
+            out.append(label)
+    return out[:3]
+
+
+def strike_template(s, refs):
+    place = str(s.get("city") or s.get("region") or "").strip()
+    obj = re.sub(r"\s*\(.*$", "", object_name(s, refs)).rstrip(" .…")
+    f = facts(s)
+    n = len(s.get("_group", [s]))
+    head = f"{place}: {'атаки беспилотников' if n > 1 else 'атака беспилотников'}, {obj}."
+    if f:
+        head += " " + ", ".join(f)[:1].upper() + ", ".join(f)[1:] + "."
+    if str(s.get("confidence")) != "confirmed":
+        head += " По сообщениям местных источников."
+    return speakable(head)
+
+
+HAIKU = os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001")
+LLM_PROMPT = """ЭТО ЗАДАНИЕ НА ИСПОЛНЕНИЕ. Ничего не спрашивай, сразу выведи ответ.
+
+Ты пишешь закадровый текст короткого видео «Топливный фронт РФ» — нейтральной OSINT-сводки об ударах
+беспилотников по объектам в России. Ниже JSON-массив остановок камеры: на каждой — город и факты из сводки.
+Для КАЖДОЙ остановки напиши одну реплику диктора:
+- 1–2 коротких предложения, не длиннее 150 знаков; читается за 5–7 секунд;
+- начинается с места (город; область — только если город малоизвестен);
+- что за объект и что произошло: пожар, повреждения, пострадавшие, остановка работы, последствия
+  для людей (свет, тепло, топливо). Самое важное — первым;
+- ТОЛЬКО факты из входных данных. Ничего не добавляй и не додумывай. Нет фактов — «Сообщается об атаке беспилотников».
+- если confidence = reported — одна оговорка «по сообщениям» (или «по данным местных властей», если так в фактах);
+- сухой нейтральный тон: без оценок, эпитетов, лозунгов, без слов «враг», «террорист», «доблестн»;
+- пиши для голоса: без скобок, кавычек, аббревиатур «БПЛА», «обл.», «г.», «р-н» — полными словами;
+  числа цифрами.
+Ответ — СТРОГО JSON-массив строк, по одной строке на остановку, в том же порядке, без пояснений.
+
+Остановки:
+"""
+
+
+def llm_lines(sel, refs):
+    """Реплики по ударам от Haiku; None — нет claude/сети/ответ не прошёл проверку."""
+    if os.environ.get("REEL_LLM", "1") == "0" or not shutil.which("claude"):
+        return None
+    stops = [{"город": s.get("city") or "", "область": s.get("region") or "", "объект": object_name(s, refs),
+              "confidence": s.get("confidence", "reported"),
+              "факты": [re.sub(r"\s+", " ", str(x.get("detail") or x.get("target") or ""))[:500]
+                        for x in s.get("_group", [s])]} for s in sel]
+    try:
+        r = subprocess.run(["claude", "-p", LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1),
+                            "--model", HAIKU, "--max-budget-usd", "0.10"],
+                           capture_output=True, text=True, timeout=180, stdin=subprocess.DEVNULL)
+        m = re.search(r"\[.*\]", r.stdout, re.S)
+        lines = json.loads(m.group(0)) if m else None
+    except (subprocess.TimeoutExpired, ValueError, OSError) as e:
+        print(f"build_reel: LLM-озвучка не получена ({e}) — шаблон", file=sys.stderr)
+        return None
+    if not (isinstance(lines, list) and len(lines) == len(sel) and all(isinstance(x, str) for x in lines)):
+        print(f"build_reel: LLM-ответ не по формату — шаблон: {r.stdout[-300:]!r}", file=sys.stderr)
+        return None
+    out = []
+    for x, s in zip(lines, sel):
+        x = speakable(re.sub(r"\s+", " ", x).strip())
+        bad = N.text_reasons(x) if N else []
+        if not x or len(x) > 190 or bad:
+            print(f"build_reel: реплика отклонена {bad or len(x)} — шаблон: {x!r}", file=sys.stderr)
+            x = strike_template(s, refs)
+        out.append(x)
+    return out
+
+
+def narration(date, sel, day, refs, build=None):
+    """[(ключ, текст)]: intro, s0..sN, outro. Числа — всегда скрипт; реплики по ударам — Haiku
+    (только факты из сводки, проверка нейтральности) или шаблон. Кэш — build/narration.json."""
     y, m, d = (int(x) for x in date.split("-"))
     n = len(day)
     n_fuel = sum(1 for s in day if s["cls"] == 2)
-    lines = [("intro", f"Топливный фронт. {ORD[d]} {MONTHS[m]}: {n} {G.plural(n, 'удар', 'удара', 'ударов')} за сутки.")]
-    for i, s in enumerate(sel):
-        place = str(s.get("city") or s.get("region") or "").strip()
-        obj = object_name(s, refs)
-        # одно предложение из таблички; длинное — голос не успеет, хватит объекта
-        obj = re.sub(r"\s*\(.*$", "", obj).rstrip(" .…")
-        what = first_sentence(s.get("detail"))
-        what = what if 0 < len(what) <= 100 else "Сообщается об атаке беспилотников"
-        lines.append((f"s{i}", speakable(f"{place}. {obj}. {what}.")))
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
-    lines.append(("outro", f"Всего за сутки {n} {G.plural(n, 'удар', 'удара', 'ударов')}{tail}. "
-                           "Карта ударов и сводки — по ссылке в описании и в Телеграм-канале."))
+    lines = [("intro", f"{ORD[d].capitalize()} {MONTHS[m]}. {n} {G.plural(n, 'удар', 'удара', 'ударов')} "
+                       f"по России за сутки{tail}.")]
+    cache = build / "narration.json" if build else None
+    per = None
+    if cache and cache.exists():
+        per = json.loads(cache.read_text(encoding="utf-8"))
+        per = per if len(per) == len(sel) else None
+    if per is None:
+        per = llm_lines(sel, refs) or [strike_template(s, refs) for s in sel]
+        if cache:
+            cache.write_text(json.dumps(per, ensure_ascii=False, indent=1), encoding="utf-8")
+    lines += [(f"s{i}", t) for i, t in enumerate(per)]
+    lines.append(("outro", "Карта всех ударов — по ссылке в описании."))
     return lines
 
 
@@ -320,7 +411,7 @@ def compose(date, build: Path):
     (build / "voice").mkdir(exist_ok=True)
     vo = {}  # ключ -> (файл, длительность)
     if os.environ.get("REEL_VOICE", "1") != "0":
-        for k, text in narration(date, sel, day, refs):
+        for k, text in narration(date, sel, day, refs, build):
             f = build / "voice" / f"{k}.mp3"
             d = tts(text, f)
             if d is None:
@@ -472,6 +563,7 @@ def compose(date, build: Path):
                "sfx": [{"name": a, "t": round(max(0, x), 2)} for a, x in sfx], "voice": voice}
     (build / "plan.json").write_text(json.dumps(mixplan, ensure_ascii=False, indent=1), encoding="utf-8")
     (build / "description.txt").write_text(describe(date, sel, day, refs, segs, clips), encoding="utf-8")
+    (build / "tg_caption.txt").write_text(tg_caption(date, sel, day, refs, clips), encoding="utf-8")
     print(json.dumps({"date": date, "total": total, "strikes": [s.get("city") for s in sel],
                       "footage": [c and c["src"] for c in clips]}, ensure_ascii=False))
 
@@ -504,6 +596,29 @@ def describe(date, sel, day, refs, segs, clips):
               "ОЦЕНКА: агрегация открытых источников (OSINT), не официальная информация.", "",
               "#НПЗ #ТопливныйФронт #новости"]
     return "\n".join(lines) + "\n"
+
+
+def tg_caption(date, sel, day, refs, clips):
+    """Подпись к ролику в Telegram-канале (лимит 1024). Ссылку на YouTube добавляет tg_post.py."""
+    n = len(day)
+    n_fuel = sum(1 for s in day if s["cls"] == 2)
+    tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
+    out = [f"🎬 <b>Удары за {G.rus_date(date)}</b>: {n}{tail}.", ""]
+    for s in sel:
+        k = len(s.get("_group", [s]))
+        out.append(f"• {html.escape(str(s.get('city') or s.get('region')))} — "
+                   f"{html.escape(object_name(s, refs))}{f' (×{k})' if k > 1 else ''}")
+    src = [c["src"] for c in clips if c]
+    if src:
+        out += ["", "Кадры: " + ", ".join(html.escape(u.replace("https://", "")) for u in src)]
+    out += ["", f'<a href="https://{SITE_HOST}/news/{date}.html">Сводка дня</a> · '
+                f'<a href="https://{SITE_HOST}/">карта ударов</a>',
+            "<i>ОЦЕНКА: открытые источники (OSINT), не официальная информация.</i>"]
+    text = "\n".join(out)
+    while len(text) > 900 and len(out) > 6:   # длинный день — режем список, служебное оставляем
+        out.pop(len(out) - 6)
+        text = "\n".join(out)
+    return text
 
 
 if __name__ == "__main__":

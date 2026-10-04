@@ -78,18 +78,25 @@ ssh hermes-vps 'cd /root/npz-tactical-map/video && ./render.sh 2026-10-03'
 python3; Chrome HyperFrames скачает при первом `npx hyperframes browser ensure`).
 На M-серии ~15–50 с на ролик.
 
-## Ежедневный конвейер (daily.sh, cron Гермеса 18:10 UTC = 21:10 МСК)
+## Ежедневные конвейеры (cron Гермеса)
 
-`daily.sh [дата]` — по очереди: ролик-сводка `render.sh` → `upload.py`; рилс `reel/render_reel.sh` →
-`upload.py reel`; ссылки на опубликованные ролики пишутся в `data/videos.json` и коммитятся через
-`agents/git-sync.sh` (страницы `/news/<дата>` показывают их после ночной пересборки); затем `cleanup.sh`.
-`NPZ_REEL=0` — без рилса. Квота YouTube API ≈ 6 загрузок в сутки (2 в день — с запасом).
+- **18:10 UTC (21:10 МСК) — `daily.sh [дата]`:** ролик-сводка `render.sh` → `upload.py` → реестр
+  `data/videos.json` через `agents/git-sync.sh` → `cleanup.sh`.
+- **06:40 UTC (выход ≈10:00 МСК) — `reel/morning.sh [дата]`:** рилс ВЧЕРАШНЕГО дня (к утру сборщики
+  ударов день закрыли) → `upload.py reel` → `tg_post.py reel` (канал @npz_karta_online, только анонимный
+  бот из `hermes/bot/channel_mirror.py`, видео пережимается до 720p < 50 МБ) → реестр → очистка.
+
+Страницы `/news/<дата>` показывают ссылки из `data/videos.json` после ночной пересборки.
+Квота YouTube API ≈ 6 загрузок в сутки (2 в день — с запасом).
 
 ### Рилс (video/reel/)
 
-Карта сайта (скриншот `capture_map.mjs`, Chrome) → наезд на каждый из 3 ударов дня, табличка,
+Карта сайта (скриншот `capture_map.mjs`, Chrome) → наезд на каждый удар дня (все, один город — одна
+остановка, потолок `REEL_MAX`=12), табличка,
 3–5 с кадров очевидцев (`fetch_clips.py`: t.me, yt-dlp; кэш `reel/cache/`) → итог с адресом сайта и
-Telegram. Голос — edge-tts `ru-RU-DmitryNeural` (+25%), текст только из публичной сводки
+Telegram. Голос — edge-tts `ru-RU-DmitryNeural` (+25%). Числа во вступлении/финале считает скрипт; реплику по
+каждому удару сжимает Haiku (`claude -p`, только факты из сводки, проверка `agents/neutrality.py`,
+`REEL_LLM=0` — выключить), нет ответа — шаблон по ключевым словам. Кэш — `.build/reel-<дата>/narration.json`
 (`REEL_VOICE=0` — без голоса, `REEL_VOICE_NAME` — другой голос). Плашка/голос удлиняют сегмент под фразу.
 
 Зависимости на Гермесе (разово):
