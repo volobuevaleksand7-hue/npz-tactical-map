@@ -18,6 +18,7 @@
 """
 
 import json
+import re
 import html
 import os
 import hashlib
@@ -223,31 +224,48 @@ def infra_label(s: dict) -> str:
     return "топливной инфраструктуре"
 
 
-# Классификация лида сводки — своя, шире strike_class.py (см. его шапку):
-# «нефтепрод», «нпс» ловятся тут, но не там. НПЗ/нефтебаза (2) > энергетика (1) >
-# прочее (0). Массовая гибель (>=5) поднимает удар над классом — гражданский
-# объект с погибшими ведёт день (Котовск 18.07: склад Wildberries, 7 погибших).
-_REF_K = ("нпз", "нефтеперераб", "нефтебаз", "нефтехим", "терминал",
-          "нефтепрод", "нефтеузел", "гпз", "перекачк", "нпс")
+# Классификация лида сводки — ЕДИНОЕ правило (build-covers берёт лид отсюда же).
+# Приоритет по классу цели: НПЗ (3) > нефтебаза/терминал/ГСМ/трубопровод (2) >
+# энергетика (1) > прочее (0). Массовая гибель (>=5) поднимает удар над классом, но
+# внутри «массовых» тоже решает класс (Самара-избирком 7 погибших не бьёт Саратовский
+# НПЗ с «10+»; Котовск 18.07 — склад Wildberries, 7 погибших — всё ещё ведёт, если
+# топливной массовой жертвы нет). Дальше confirmed, затем число погибших.
+_PLANT_K = ("нпз", "нефтеперераб", "переработ", "гпз")
+_DEPOT_K = ("нефтебаз", "нефтехим", "терминал", "гсм", "нефтепрод", "нефтепровод", "продуктопровод",
+            "лпдс", "нефтеузел", "перекачк", "нпс", "нефтехран", "резервуар")
 _GRID_K = ("подстанц", "тэц", "тэс", "грэс", "энергет", "электро",
            "компрессор", "газопровод")
 
 
 def _casualties(s: dict) -> int:
-    try:
-        return int(s.get("casualties") or 0)
-    except (TypeError, ValueError):
+    """Число из поля casualties. Принимаем int, «10», «10+»; свободный текст
+    («13 раненых», «пострадавших нет») за массовую гибель не считаем — 0."""
+    c = s.get("casualties")
+    if isinstance(c, bool):
         return 0
+    if isinstance(c, int):
+        return c
+    m = re.fullmatch(r"\s*(\d+)\s*\+?\s*", str(c or ""))
+    return int(m.group(1)) if m else 0
+
+
+def strike_class_rank(s: dict) -> int:
+    t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
+    if any(k in t for k in _PLANT_K):
+        return 3
+    if any(k in t for k in _DEPOT_K):
+        return 2
+    if any(k in t for k in _GRID_K):
+        return 1
+    return 0
 
 
 def strike_rank(s: dict) -> tuple:
-    """Вес удара для выбора лида дня и порядка карточек. Массовые жертвы (>=5) >
-    класс цели (НПЗ>энергетика>прочее) > confirmed. ponytail: порог 5 — ручка."""
-    t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
-    cls = 2 if any(k in t for k in _REF_K) else (1 if any(k in t for k in _GRID_K) else 0)
-    mass = 1 if _casualties(s) >= 5 else 0
+    """Вес удара для лида дня и порядка карточек: массовые жертвы (>=5) > класс цели >
+    confirmed > число погибших. ponytail: порог 5 — ручка."""
+    cas = _casualties(s)
     conf = 1 if str(s.get("confidence", "")).lower() == "confirmed" else 0
-    return (mass, cls, conf)
+    return (1 if cas >= 5 else 0, strike_class_rank(s), conf, cas)
 
 
 def normalize_strike(s: dict) -> dict:
@@ -543,11 +561,8 @@ def day_summary_html(date: str, strikes: list, prev_strikes: list, fuel_state: d
     датой, регионы, статусы НПЗ из fuel-state. Оценок и прогнозов нет."""
     n = len(strikes)
     n_prev = len(prev_strikes)
-    cls = [2 if any(k in (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
-                    for k in _REF_K) else
-           (1 if any(k in (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
-                     for k in _GRID_K) else 0) for s in strikes]
-    n_ref, n_grid = cls.count(2), cls.count(1)
+    cls = [strike_class_rank(s) for s in strikes]
+    n_ref, n_grid = sum(1 for c in cls if c >= 2), cls.count(1)
     items = []
     if n == 0:
         items.append("В данных за эту дату нет зафиксированных ударов по топливной и "
