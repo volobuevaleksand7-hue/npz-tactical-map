@@ -233,7 +233,7 @@
         let stageS = 1, ox = 540, oy = 960;
         P.segs.forEach((s, i) => {
           const el = signs[i];
-          const end = s.dive ? s.dive + P.dive : s.arrive + 2.3;
+          const end = s.dive ? s.dive + P.dive : (s.end || s.arrive + 2.3);
           const vis = t >= s.arrive - 0.05 && t < end;
           el.style.opacity = vis ? 1 : 0;
           if (!vis) return;

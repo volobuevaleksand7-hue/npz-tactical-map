@@ -11,6 +11,7 @@
 из agents/gen-news.py (нейтральность, украинизмы). Мощности/координаты НПЗ — fuel-state.json.
 """
 import html
+import os
 import importlib.util
 import json
 import re
@@ -222,6 +223,80 @@ def prepare(date, build: Path):
     print(json.dumps([{"city": s.get("city"), "clip": c} for s, c in zip(sel, clips)], ensure_ascii=False))
 
 
+# ───────────────────────────── озвучка ─────────────────────────────
+# Голос — edge-tts (нейросетевой голос Microsoft, бесплатно, без аккаунта и ключей). Текст — только
+# публичная сводка дня. Нет edge-tts или сети — ролик собирается без голоса, как раньше.
+VOICE = "ru-RU-DmitryNeural"
+VOICE_RATE = "+25%"
+ORD = ["", "первое", "второе", "третье", "четвёртое", "пятое", "шестое", "седьмое", "восьмое", "девятое",
+       "десятое", "одиннадцатое", "двенадцатое", "тринадцатое", "четырнадцатое", "пятнадцатое",
+       "шестнадцатое", "семнадцатое", "восемнадцатое", "девятнадцатое", "двадцатое", "двадцать первое",
+       "двадцать второе", "двадцать третье", "двадцать четвёртое", "двадцать пятое", "двадцать шестое",
+       "двадцать седьмое", "двадцать восьмое", "двадцать девятое", "тридцатое", "тридцать первое"]
+MONTHS = ["", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
+          "октября", "ноября", "декабря"]
+
+
+def speakable(t):
+    """Сокращения и типографика -> то, что голос прочтёт правильно."""
+    t = re.sub(r"[«»\"“”]", "", str(t))
+    for a, b in ((r"\bударн\w*\s+БПЛА\b", "беспилотников"), (r"\bБПЛА\b", "беспилотников"), (r"\bFPV-", ""), (r"\bобл\.", "области"), (r"\bр-н(а|е)?\b\.?", "район"),
+                 (r"\bг\.\s*", ""), (r"\bс\.\s*", "село "), (r"\bпос\.\s*", "посёлок "), (r"…", "."),
+                 (r"\s+[—–]\s+", ", ")):
+        t = re.sub(a, b, t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def first_sentence(text):
+    """Первое предложение, не разрезая «г. Самара», «Самарской обл.», «р-н.», «ул.», «с.», «пос.»."""
+    t = re.sub(r"\s+", " ", str(text or "")).strip()
+    for m in re.finditer(r"[.!?](?=\s+[А-ЯЁA-Z«])", t):
+        word = t[:m.start()].rsplit(" ", 1)[-1].lower()
+        if word in ("г", "с", "обл", "р-н", "ул", "пос", "п", "д", "ст", "им") or len(word) == 1:
+            continue
+        return t[:m.start()]
+    return t.rstrip(".")
+
+
+def narration(date, sel, day, refs):
+    """[(ключ, текст)]: intro, s0..sN, outro."""
+    y, m, d = (int(x) for x in date.split("-"))
+    n = len(day)
+    n_fuel = sum(1 for s in day if s["cls"] == 2)
+    lines = [("intro", f"Топливный фронт. {ORD[d]} {MONTHS[m]}: {n} {G.plural(n, 'удар', 'удара', 'ударов')} за сутки.")]
+    for i, s in enumerate(sel):
+        place = str(s.get("city") or s.get("region") or "").strip()
+        obj = object_name(s, refs)
+        # одно предложение из таблички; длинное — голос не успеет, хватит объекта
+        obj = re.sub(r"\s*\(.*$", "", obj).rstrip(" .…")
+        what = first_sentence(s.get("detail"))
+        what = what if 0 < len(what) <= 100 else "Сообщается об атаке беспилотников"
+        lines.append((f"s{i}", speakable(f"{place}. {obj}. {what}.")))
+    tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
+    lines.append(("outro", f"Всего за сутки {n} {G.plural(n, 'удар', 'удара', 'ударов')}{tail}. "
+                           "Карта ударов и сводки — по ссылке в описании и в Телеграм-канале."))
+    return lines
+
+
+def tts(text, out: Path):
+    """mp3 + длительность в секундах; None — голос недоступен."""
+    exe = shutil.which("edge-tts") or str(Path.home() / ".local/bin/edge-tts")
+    if not Path(exe).exists():
+        return None
+    voice = os.environ.get("REEL_VOICE_NAME", VOICE)
+    for _ in range(2):
+        r = subprocess.run([exe, "--voice", voice, f"--rate={VOICE_RATE}", "--text", text, "--write-media", str(out)],
+                           capture_output=True, timeout=90)
+        if r.returncode == 0 and out.exists() and out.stat().st_size > 1000:
+            break
+    else:
+        print(f"build_reel: голос не сгенерирован: {r.stderr.decode(errors='replace')[-200:]}", file=sys.stderr)
+        return None
+    d = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(out)],
+                       capture_output=True, text=True).stdout.strip()
+    return float(d) if d else None
+
+
 # ───────────────────────────── compose ─────────────────────────────
 
 POSTER = 1.3     # постер-обложка (первый кадр в ленте Shorts)
@@ -242,6 +317,17 @@ def compose(date, build: Path):
     mp = json.loads((build / "map-points.json").read_text(encoding="utf-8"))
     P = {p["id"]: p for p in mp["points"]}
     IW, IH = mp["w"], mp["h"]
+    (build / "voice").mkdir(exist_ok=True)
+    vo = {}  # ключ -> (файл, длительность)
+    if os.environ.get("REEL_VOICE", "1") != "0":
+        for k, text in narration(date, sel, day, refs):
+            f = build / "voice" / f"{k}.mp3"
+            d = tts(text, f)
+            if d is None:
+                vo = {}
+                break
+            vo[k] = (f"voice/{k}.mp3", d)
+    vdur = lambda k: vo[k][1] if k in vo else 0.0
 
     for f in ("fonts",):
         shutil.copytree(VIDEO / "template" / "assets" / f, build / "assets" / f, dirs_exist_ok=True)
@@ -251,18 +337,25 @@ def compose(date, build: Path):
     cx0, cy0 = IW / 2, IH / 2
     cam = [{"t": 0, "x": cx0, "y": cy0, "s": S0 * 1.25, "dip": 0}]
     t = POSTER
-    cam.append({"t": t + OVER, "x": cx0, "y": cy0, "s": S0, "dip": 0})
-    t += OVER
+    over = max(OVER, 0.15 + vdur("intro") + 0.2 - POSTER)
+    cam.append({"t": t + over, "x": cx0, "y": cy0, "s": S0, "dip": 0})
+    t += over
+    voice = [{"file": vo["intro"][0], "t": 0.15}] if "intro" in vo else []
     segs, sfx = [], [("impact", 0.05), ("whoosh", POSTER - 0.2)]
     for i, (s, c) in enumerate(zip(sel, clips)):
         p = P[f"s{i}"]
         arrive = t + FLY
+        if f"s{i}" in vo:
+            voice.append({"file": vo[f"s{i}"][0], "t": round(t + 0.1, 2)})
+        clip_len = float(c.get("dur", 4.0)) + DIVE * 0.6 if c else 0.0
+        natural = FLY + (SIGN if c else SIGN_ONLY) + clip_len
+        extra = max(0.0, 0.1 + vdur(f"s{i}") + 0.3 - natural)  # голос не должен наезжать на следующий удар
         cam.append({"t": arrive, "x": p["x"], "y": p["y"], "s": SZ, "dip": 0 if i == 0 else 0.55})
         sfx.append(("whoosh", t + 0.1))
         sfx.append(("click", arrive + 0.05))
         seg = {"i": i, "fly": round(t, 2), "arrive": round(arrive, 2), "x": p["x"], "y": p["y"]}
         if c:
-            dive = arrive + SIGN
+            dive = arrive + SIGN + extra
             vstart = dive + DIVE * 0.6
             vend = vstart + float(c.get("dur", 4.0))
             seg.update(dive=round(dive, 2), v0=round(vstart, 2), v1=round(vend, 2), clip=c["file"], kind=c["kind"])
@@ -270,15 +363,17 @@ def compose(date, build: Path):
             cam.append({"t": vend, "x": p["x"], "y": p["y"], "s": SZ, "dip": 0})  # стоим, пока идут кадры
             t = vend
         else:
-            seg.update(dive=None)
-            t = arrive + SIGN_ONLY
+            t = arrive + SIGN_ONLY + extra
+            seg.update(dive=None, end=round(t, 2))
             cam.append({"t": t, "x": p["x"], "y": p["y"], "s": SZ * 1.04, "dip": 0})
         segs.append(seg)
     outro = round(t + 0.15, 2)
     cam.append({"t": outro + 0.6, "x": cx0, "y": cy0 + IH * 0.04, "s": S0 * 1.05, "dip": 0})
     sfx.append(("whoosh", outro - 0.2))
     sfx.append(("impact", outro + 0.9))
-    total = round(outro + OUTRO, 2)
+    if "outro" in vo:
+        voice.append({"file": vo["outro"][0], "t": round(outro + 0.5, 2)})
+    total = round(outro + max(OUTRO, 0.5 + vdur("outro") + 0.8), 2)
 
     # ── тексты ──
     n = len(day)
@@ -374,7 +469,7 @@ def compose(date, build: Path):
 
     # plan.json в формате ежедневного ролика: его mix() кладёт эффекты + музыку
     mixplan = {"date": date, "total": total,
-               "sfx": [{"name": a, "t": round(max(0, x), 2)} for a, x in sfx]}
+               "sfx": [{"name": a, "t": round(max(0, x), 2)} for a, x in sfx], "voice": voice}
     (build / "plan.json").write_text(json.dumps(mixplan, ensure_ascii=False, indent=1), encoding="utf-8")
     (build / "description.txt").write_text(describe(date, sel, day, refs, segs, clips), encoding="utf-8")
     print(json.dumps({"date": date, "total": total, "strikes": [s.get("city") for s in sel],
@@ -394,7 +489,8 @@ def describe(date, sel, day, refs, segs, clips):
     tail = f" · {G.rus_date_short(date)} #shorts"
     if len(head) + len(tail) > 100:
         head = head[:100 - len(tail) - 1].rstrip(" ,.;:—-") + "…"
-    lines = [head + tail, "", f"«Топливный фронт РФ»: удары за {G.rus_date(date)} на карте сайта.", ""]
+    lines = [head + tail, "", f"Карта ударов: https://{SITE_HOST}/",
+             f"«Топливный фронт РФ»: удары за {G.rus_date(date)} на карте сайта.", ""]
     for s in sel:
         lines.append(f"— {s.get('city')}: {object_name(s, refs)}. {what_happened(s)}")
     n_fuel = sum(1 for s in day if s["cls"] == 2)
@@ -403,8 +499,7 @@ def describe(date, sel, day, refs, segs, clips):
     src = [c["src"] for c in clips if c]
     if src:
         lines += ["", "Кадры: открытые Telegram-каналы:"] + [f"— {u}" for u in src]
-    lines += ["", f"Карта ударов: https://{SITE_HOST}/",
-              f"Сводка дня: https://{SITE_HOST}/news/{date}.html",
+    lines += ["", f"Сводка дня: https://{SITE_HOST}/news/{date}.html",
               f"Telegram-канал: {B.TG_URL}", "",
               "ОЦЕНКА: агрегация открытых источников (OSINT), не официальная информация.", "",
               "#НПЗ #ТопливныйФронт #новости"]

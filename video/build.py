@@ -518,11 +518,17 @@ def mix(build: Path, silent: Path, out: Path):
         ms = max(0, int(ev["t"] * 1000))
         parts.append(f"[{i + 1}:a]volume={SFX_GAIN[ev['name']]},adelay={ms}|{ms}[e{i}]")
         labels.append(f"[e{i}]")
+    for j, v in enumerate(plan.get("voice", [])):  # озвучка рилса: файлы из build/, громче эффектов
+        cmd += ["-i", str(build / v["file"])]
+        ms = max(0, int(v["t"] * 1000))
+        parts.append(f"[{len(labels) + 1}:a]aresample=48000,aformat=channel_layouts=stereo,"
+                     f"volume=1.5,adelay={ms}|{ms}[v{j}]")
+        labels.append(f"[v{j}]")
     parts.append(f"{''.join(labels)}amix=inputs={len(labels)}:normalize=0:duration=longest,"
                  f"apad=whole_dur={total}[fx]")  # конечная длина: бесконечный apad вешал ffmpeg
     music = pick_music(plan["date"])
     if music:
-        mi = len(plan["sfx"]) + 1
+        mi = len(labels) + 1
         cmd += ["-stream_loop", "-1", "-i", str(music)]
         parts.append("[fx]asplit=2[fxa][fxb]")
         parts.append(f"[{mi}:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{total},"
