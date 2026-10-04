@@ -22,11 +22,44 @@
       html, body { width:1080px; height:1920px; overflow:hidden; background:var(--bg); }
       #root { position:relative; width:1080px; height:1920px; background:var(--bg); font-family:"Rubik",sans-serif; color:var(--ink); overflow:hidden; }
       .scene { position:absolute; inset:0; padding:0 72px; opacity:0; }
-      #s1 { opacity:1; }
+      #s0 { opacity:1; }
       .brand { position:absolute; top:96px; left:72px; right:72px; display:flex; align-items:center; gap:18px; font-family:"JB",monospace; font-weight:600; font-size:34px; letter-spacing:.06em; }
       .brand i { display:block; width:18px; height:18px; border-radius:50%; background:var(--red); }
       .date { font-family:"JB",monospace; font-weight:600; font-size:38px; letter-spacing:.08em; color:var(--red); }
       .bar { position:absolute; left:0; right:0; bottom:0; height:14px; background:var(--amber); }
+
+      /* S0 — интро: карта ударов (слои /radar: регионы, подсветка региона, огни ударов) */
+      #s0 { padding:0; background:#0b1419; overflow:hidden; }
+      #s0 .cam { position:absolute; left:0; top:0; width:1080px; height:1920px; transform-origin:0 0; }
+      #s0 .geo { position:absolute; left:0; top:0; overflow:visible; }
+      #s0 .geo path { vector-effect:non-scaling-stroke; }
+      #s0 .gr { stroke:#1d3340; stroke-width:1; fill:none; }
+      #s0 .rg { fill:#152630; stroke:#3d6273; stroke-width:1.2; stroke-linejoin:round; }
+      #s0 .rg.hot { fill:#ff3a2c; fill-opacity:.28; stroke:#ff6a4d; stroke-width:2; }
+      #s0 .pts { position:absolute; inset:0; }
+      #s0 .wk { position:absolute; width:12px; height:12px; margin:-6px 0 0 -6px; border-radius:50%; background:#ffb443; opacity:.38; }
+      #s0 .mk { position:absolute; width:0; height:0; }
+      #s0 .mk .halo { position:absolute; left:-70px; top:-70px; width:140px; height:140px; border-radius:50%;
+        background:radial-gradient(circle, rgba(255,120,40,.75) 0%, rgba(255,70,30,.35) 30%, rgba(255,40,20,0) 70%); }
+      #s0 .mk .core { position:absolute; left:-13px; top:-13px; width:26px; height:26px; border-radius:50%;
+        background:radial-gradient(circle, #fff7d6 0%, #ffd060 35%, #ff5a1f 75%); box-shadow:0 0 18px 6px rgba(255,110,40,.9), 0 0 46px 14px rgba(255,60,20,.5); }
+      #s0 .mk.ref .core { left:-17px; top:-17px; width:34px; height:34px; }
+      #s0 .mk .ring { position:absolute; left:-30px; top:-30px; width:60px; height:60px; border-radius:50%; border:4px solid #ff5a2c; opacity:0; }
+      #s0 .lab { position:absolute; font-family:"JB",monospace; font-weight:600; font-size:36px; color:#ffe2c8; white-space:nowrap;
+        text-shadow:0 2px 10px #0b1419, 0 0 4px #0b1419; transform:translateY(-50%); opacity:0; }
+      #s0 .vig { position:absolute; inset:0; background:
+        linear-gradient(180deg, rgba(11,20,25,.92) 0%, rgba(11,20,25,0) 22%, rgba(11,20,25,0) 72%, rgba(11,20,25,.95) 100%); }
+      #s0 .brand { color:#e9f1f4; }
+      #s0 .mt { position:absolute; left:72px; right:72px; top:190px; }
+      #s0 .mt .k { font-family:"JB",monospace; font-weight:600; font-size:38px; letter-spacing:.08em; color:#ff8a5c; }
+      #s0 .mt h1 { font-weight:800; font-size:104px; line-height:1.02; letter-spacing:-.02em; color:#fff; margin-top:14px; }
+      #s0 .cap { position:absolute; left:72px; right:72px; top:1560px; font-weight:600; font-size:64px; line-height:1.12; color:#e9f1f4; }
+      #s0 .cap b { color:#ff6a4d; font-weight:800; }
+      #s0 .legend { position:absolute; left:72px; right:72px; top:1730px; display:flex; flex-wrap:wrap; align-items:center; gap:14px 30px; font-family:"JB",monospace; font-weight:600; font-size:30px; color:#9fb6c1; }
+      #s0 .legend i.lg { display:inline-block; width:22px; height:22px; border-radius:50%; margin-right:12px; vertical-align:middle; }
+      #s0 .legend i.day { background:#ff6a2c; box-shadow:0 0 12px 3px rgba(255,90,40,.8); }
+      #s0 .legend i.lw { background:#ffb443; opacity:.5; }
+      #s0 .bar { background:var(--red); }
 
       /* S1 — обложка */
       #s1 .cover { position:absolute; left:72px; top:400px; width:936px; height:491px; border-radius:22px; overflow:hidden; box-shadow:0 18px 44px rgba(70,52,24,.28); background:#cfc6b2; }
@@ -75,7 +108,18 @@
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="{{TOTAL}}" data-width="1080" data-height="1920">
 
-      <div id="s1" class="scene clip" data-start="0" data-duration="{{S1_DUR}}" data-track-index="1">
+      <div id="s0" class="scene clip" data-start="0" data-duration="{{S0_DUR}}" data-track-index="0">
+        <div class="cam" id="cam">{{GEO_SVG}}</div>
+        <div class="pts" id="pts"></div>
+        <div class="vig"></div>
+        <div class="brand" data-layout-allow-overlap><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>
+        <div class="mt"><div class="k">{{MAP_DATE}}</div><h1>Карта ударов</h1></div>
+        <div class="cap">{{MAP_CAPTION}}</div>
+        <div class="legend">{{MAP_LEGEND}}</div>
+        <div class="bar"></div>
+      </div>
+
+      <div id="s1" class="scene clip" data-start="{{S1_START}}" data-duration="{{S1_DUR}}" data-track-index="1">
         <div class="brand" data-layout-allow-overlap><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>
         <div class="cover"><img src="{{COVER}}" alt="Обложка сводки" /></div>
         <div class="t">
@@ -112,7 +156,7 @@
       </div>
     </div>
     <script>
-      // Тайминги считает build.py: {s2, s3|null, s4, total, count, cards}
+      // Тайминги считает build.py: {s1, s2, s3|null, s4, total, count, cards, more, geo}
       const P = {{PLAN_JSON}};
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
@@ -121,12 +165,76 @@
       const fadeOut = (sel, t) => tl.fromTo(sel, {opacity:1}, {opacity:0, duration:X, ease:"power1.inOut", immediateRender:false}, t);
       const fadeIn = (sel, t) => tl.fromTo(sel, {opacity:0}, {opacity:1, duration:X, immediateRender:false}, t);
 
+      // S0 — интро-карта. Камера (Ken Burns к скоплению ударов) и пульс огней считаются
+      // от локального времени одного твина — кадр зависит только от seek, рендер детерминирован.
+      const M = P.geo, C = M.cam, pts = document.getElementById("pts"), cam = document.getElementById("cam");
+      const wkEl = M.week.map(w => { const d = document.createElement("div"); d.className = "wk"; pts.appendChild(d); return d; });
+      const mkEl = M.pts.map(p => {
+        const d = document.createElement("div"); d.className = "mk" + (p.ref ? " ref" : "");
+        d.innerHTML = '<div class="halo"></div><div class="ring"></div><div class="ring"></div><div class="core"></div>';
+        pts.appendChild(d); return d;
+      });
+      const lbEl = M.labels.map(l => {
+        const d = document.createElement("div"); d.className = "lab"; d.textContent = l.text; pts.appendChild(d); return d;
+      });
+      const hot = Array.from(document.querySelectorAll("#s0 .rg.hot"));
+      const clamp = v => Math.max(0, Math.min(1, v));
+      const inOut = u => u < .5 ? 4*u*u*u : 1 - Math.pow(-2*u + 2, 3) / 2;
+      const backOut = u => { const c = 1.9; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
+      const INTRO_LEN = P.s1 + X;
+      function drawMap(t) {
+        const e = inOut(clamp((t - 0.15) / (INTRO_LEN - 0.15)));
+        const s = Math.pow(C.z, e);
+        const cx = C.x0 + (C.x1 - C.x0) * e, cy = C.y0 + (C.y1 - C.y0) * e;
+        const fy = C.y0 + (C.fy - C.y0) * e;
+        const tx = 540 - cx * s, ty = fy - cy * s;
+        cam.style.transform = `translate(${tx}px,${ty}px) scale(${s})`;
+        const at = (x, y) => `translate(${tx + x * s}px,${ty + y * s}px)`;
+        M.week.forEach((w, i) => { wkEl[i].style.transform = at(w[0], w[1]); });
+        M.pts.forEach((p, i) => {
+          const el = mkEl[i], k = t - p.t;
+          el.style.transform = at(p.x, p.y);
+          el.style.opacity = k < 0 ? 0 : 1;
+          if (k < 0) return;
+          const pop = backOut(clamp(k / 0.35));
+          const fl = 0.85 + 0.15 * Math.sin(k * 11 + i);
+          el.children[3].style.transform = `scale(${pop * (0.9 + 0.2 * fl)})`;
+          el.children[0].style.transform = `scale(${pop * (0.8 + 0.35 * Math.sin(k * 4.2) * 0.5 + 0.2)})`;
+          el.children[0].style.opacity = 0.75 + 0.25 * fl;
+          [1, 2].forEach(j => {
+            const ph = ((k + (j - 1) * 0.6) / 1.2) % 1;
+            el.children[j].style.transform = `scale(${0.5 + 2.6 * ph})`;
+            el.children[j].style.opacity = k + (j - 1) * 0.6 < 0 ? 0 : (1 - ph) * 0.9;
+          });
+        });
+        M.labels.forEach((l, j) => {
+          const p = M.pts[l.i], sx = tx + p.x * s, sy = ty + p.y * s;
+          const el = lbEl[j];
+          el.style.left = l.side > 0 ? (sx + 34) + "px" : "auto";
+          el.style.right = l.side > 0 ? "auto" : (1080 - sx + 34) + "px";
+          el.style.top = sy + "px";
+          el.style.opacity = clamp((t - 2.1 - 0.15 * j) / 0.4);
+        });
+        const hp = 0.22 + 0.16 * (0.5 - 0.5 * Math.cos(t * 2 * Math.PI / 1.3));
+        hot.forEach(h => h.style.fillOpacity = t < 0.5 ? hp * clamp(t / 0.5) : hp);
+      }
+      const clock = {t:0};
+      tl.fromTo(clock, {t:0}, {t:INTRO_LEN, duration:INTRO_LEN, ease:"none", immediateRender:false,
+        onUpdate:() => drawMap(clock.t)}, 0);
+      drawMap(0);
+      tl.from("#s0 .geo", {opacity:0, duration:0.6, ease:"power1.out"}, 0);
+      tl.from("#s0 .mt", {y:-30, opacity:0, duration:0.6, ease}, 0.15);
+      tl.from("#s0 .cap", {y:30, opacity:0, duration:0.6, ease}, 1.2);
+      tl.from("#s0 .legend", {opacity:0, duration:0.5}, 1.6);
+      fadeOut("#s0", P.s1); fadeIn("#s1", P.s1);
+
       // S1
-      tl.from("#s1 .cover", {y:60, opacity:0, duration:0.8, ease}, 0.1);
-      tl.from("#s1 .cover img", {scale:1.12, duration:P.s2 + X, ease:"none"}, 0);
-      tl.from("#s1 .date", {x:-40, opacity:0, duration:0.6, ease}, 0.7);
-      tl.from("#s1 h1", {y:50, opacity:0, duration:0.7, ease}, 0.9);
-      tl.from("#s1 .sub", {y:30, opacity:0, duration:0.6, ease}, 1.4);
+      const s1 = P.s1;
+      tl.from("#s1 .cover", {y:60, opacity:0, duration:0.8, ease}, s1 + 0.1);
+      tl.from("#s1 .cover img", {scale:1.12, duration:P.s2 - s1 + X, ease:"none"}, s1);
+      tl.from("#s1 .date", {x:-40, opacity:0, duration:0.6, ease}, s1 + 0.7);
+      tl.from("#s1 h1", {y:50, opacity:0, duration:0.7, ease}, s1 + 0.9);
+      tl.from("#s1 .sub", {y:30, opacity:0, duration:0.6, ease}, s1 + 1.4);
       fadeOut("#s1", P.s2); fadeIn("#s2", P.s2);
 
       // S2
