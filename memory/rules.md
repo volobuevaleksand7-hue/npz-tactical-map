@@ -30,4 +30,4 @@ approved_by: 2ea839a6-91da-4d77-a654-1596ac52fe93
 - Агенты-сборщики меняют только статусы/даты/дефицит/события/`meta` в `data/fuel-state.json`. Координаты, названия, мощности объектов — не трогать.
 - **Никогда не запускать `git pull --rebase --autostash`, `git add -A` или `git reset --hard` в общем рабочем дереве** (`~/Documents/npz-tactical-map` на Маке, `/root/npz-tactical-map` на VPS). Данные — только через `agents/git-sync.sh`. Долгая/многофайловая работа — в отдельном `git worktree`. Подробности — `memory/facts/shared-worktree-git-hygiene.md`.
 - `data/strikes.json` и `data/fuel-voices.json` — накопительные архивы, коллекторы только дописывают, никогда не перезаписывают снапшотом целиком. Обход усечения — только осознанно (`ALLOW_STRIKES_SHRINK=1` / `ALLOW_VOICES_SHRINK=1`).
-- Обложки сводок (сайт `/news` + Telegram) рендерит только Codex (`hermes/scripts/build-covers.py`). Не рисовать самому, не звать другую модель для генерации картинки.
+- Обложки сводок (сайт `/news` + Telegram) рендерит Cursor (Мак) или Codex (VPS-крон) только через `hermes/scripts/build-covers.py` (решение владельца 03.10.2026). Не рисовать самому, PIL/другие модели запрещены.

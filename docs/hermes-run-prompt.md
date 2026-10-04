@@ -27,7 +27,7 @@
 
 ## Обложки — ТОЛЬКО через Codex
 
-Обложка сводки (город удара + подпись, едина для сайта `/news` и Telegram) генерируется **только Codex**: `python3 hermes/scripts/build-covers.py` (внутри `codex exec image_gen`, img2img по реальному фото события). НЕ рисовать обложку самому и НЕ звать другую модель. PIL-фолбэк `agents/gen_cover_today.py` УДАЛЁН 14.09.2026: он рисовал тёмную абстракцию, а сторож считал её штатной обложкой и месяц скрывал падение Codex. Нет обложки от Codex/OpenRouter → сайт и Telegram показывают общую `og-image.png`, сторож пишет долг `cover-fallback` в incidents. Никаких локальных/ручных подмен.
+Обложка сводки (город удара + подпись, едина для сайта `/news` и Telegram) генерируется **только через `python3 hermes/scripts/build-covers.py`**: Cursor (`cursor-agent` GenerateImage, на Маке) или Codex (`codex exec image_gen`, VPS-крон) — решение владельца 03.10.2026. Не рисовать обложку самому, PIL/другие модели запрещены. PIL-фолбэк `agents/gen_cover_today.py` УДАЛЁН 14.09.2026: он рисовал тёмную абстракцию, а сторож считал её штатной обложкой и месяц скрывал падение Codex. Нет обложки от Codex/OpenRouter → сайт и Telegram показывают общую `og-image.png`, сторож пишет долг `cover-fallback` в incidents. Никаких локальных/ручных подмен.
 
 ## Доставка и деплой
 

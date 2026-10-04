@@ -6,11 +6,13 @@ trust: internal
 approved_by: 2ea839a6-91da-4d77-a654-1596ac52fe93
 ---
 
-# Обложки — только через Codex, PIL — аварийный бэкстоп
+# Обложки — Cursor (Мак) или Codex (VPS) через build-covers.py; PIL удалён
+
+> Обновление 03.10.2026 (решение владельца): бэкенд `cursor` (cursor-agent GenerateImage) добавлен первым в цепочку на Маке; Codex остаётся на VPS и как резерв. Остальное ниже в силе.
 
 ## Решение
 
-Любой агент, которому нужна обложка сводки (сайт `/news` + Telegram), обязан идти через `python3 hermes/scripts/build-covers.py` — внутри `codex exec image_gen`, img2img по фото события. Рисовать самому или звать другую модель для генерации картинки запрещено `CLAUDE.md`.
+Любой агент, которому нужна обложка сводки (сайт `/news` + Telegram), обязан идти через `python3 hermes/scripts/build-covers.py` — бэкенды `cursor` / `codex exec image_gen`. Рисовать самому или звать иную модель запрещено `CLAUDE.md`.
 
 PIL-фолбэк `agents/gen_cover_today.py` УДАЛЁН 14.09.2026: он рисовал тёмную абстракцию, а сторож считал её штатной обложкой и месяц скрывал падение Codex. Нет обложки от Codex/OpenRouter → сайт и Telegram показывают общую `og-image.png`, сторож пишет долг `cover-fallback` в incidents. Никаких локальных/ручных подмен.
 
