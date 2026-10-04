@@ -4,7 +4,7 @@
   python3 upload.py auth            — разовая авторизация (refresh-токен -> .secrets/token.json)
   python3 upload.py [YYYY-MM-DD]    — залить out/npz-<дата>.mp4 (без даты — все незалитые)
 
-Секреты лежат в video/.secrets/ (в git не попадают, права 600):
+Секреты лежат вне репозитория, в ~/.config/npz-youtube/ (или $NPZ_YT_SECRETS), права 600:
   client_secret.json — OAuth-клиент «Desktop» из Google Cloud (проект npz-youtube);
   token.json         — refresh-токен, пишет `auth`.
 
@@ -31,7 +31,7 @@ import urllib.request
 
 VIDEO = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(VIDEO, "out")
-SECRETS = os.path.join(VIDEO, ".secrets")
+SECRETS = os.environ.get("NPZ_YT_SECRETS", os.path.expanduser("~/.config/npz-youtube"))
 CLIENT = os.path.join(SECRETS, "client_secret.json")
 TOKEN = os.path.join(SECRETS, "token.json")
 SCOPE = "https://www.googleapis.com/auth/youtube.upload"
