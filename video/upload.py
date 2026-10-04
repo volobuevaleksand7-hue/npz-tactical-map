@@ -157,12 +157,31 @@ def upload(date, token):
     except urllib.error.HTTPError as e:
         raise SystemExit(f"upload: {date}: HTTP {e.code}: {e.read().decode(errors='replace')[:800]}")
     vid = res["id"]
+    set_thumbnail(date, vid, token)
     privacy = res.get("status", {}).get("privacyStatus")
     url = f"https://youtu.be/{vid}"
     with open(os.path.join(OUT, f"npz-{date}.uploaded"), "w") as f:
         f.write(f"{vid}\t{url}\t{privacy}\t{title}\n")
     log(f"{date}: залит {url} ({privacy})")
     return url
+
+
+def set_thumbnail(date, vid, token):
+    """Обложка = кадр-постер out/npz-<дата>.jpg. Не вышло (канал без права на свои обложки,
+    нет файла) — ролик всё равно залит, YouTube возьмёт кадр сам."""
+    jpg = os.path.join(OUT, f"npz-{date}.jpg")
+    if not os.path.exists(jpg):
+        return
+    with open(jpg, "rb") as f:
+        data = f.read()
+    req = urllib.request.Request(
+        f"https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId={vid}",
+        data=data, method="POST", headers={"Authorization": f"Bearer {token}", "Content-Type": "image/jpeg"})
+    try:
+        with urllib.request.urlopen(req, timeout=120):
+            log(f"{date}: обложка поставлена")
+    except urllib.error.HTTPError as e:
+        log(f"{date}: обложка не поставлена: HTTP {e.code}: {e.read().decode(errors='replace')[:300]}")
 
 
 def main():

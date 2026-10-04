@@ -15,7 +15,7 @@ shopt -s nullglob
 for marker in npz-*.uploaded; do
   mp4="${marker%.uploaded}.mp4"
   [ -f "$mp4" ] || continue
-  rm -f -- "$mp4"
+  rm -f -- "$mp4" "${mp4%.mp4}.jpg"
   printf '%s\tdeleted %s\t%s\n' "$(date -u +%FT%TZ)" "$mp4" "$(head -c 300 "$marker" | tr '\n\t' '  ')" >> uploaded.log
   echo "cleanup: $mp4 залит — удалён"
 done
@@ -26,6 +26,6 @@ n=0
 for v in $(ls -1 npz-????-??-??.mp4 2>/dev/null | sort -r); do
   n=$((n + 1))
   [ "$n" -le "$KEEP" ] && continue
-  rm -f -- "$v"
+  rm -f -- "$v" "${v%.mp4}.jpg"
   echo "cleanup: $v удалён (храним $KEEP последних)"
 done

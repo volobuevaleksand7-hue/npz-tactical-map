@@ -277,6 +277,31 @@ def map_layer(date, strikes, briefs):
 
 # ───────────────────────────────── compose ─────────────────────────────────
 
+def poster_text(strikes: list) -> dict:
+    """Текст постера S1 (он же обложка Shorts): число, «ударов по РФ», лид дня, города."""
+    n = len(strikes)
+    if not n:
+        return {"head": "ударов за сутки", "lead": "Сводка: без подтверждённых ударов", "cities": ""}
+    ranked = sorted(strikes, key=G.strike_rank, reverse=True)
+    lead = ranked[0]
+    city = str(lead.get("city", "")).strip()
+    if G.is_refinery(lead):
+        lead_txt = f"Удар по {G.infra_label(lead)} в {G._prep_city(city)}"
+    elif lead.get("title"):
+        lead_txt = str(lead["title"]).strip().rstrip(".")
+    else:
+        lead_txt = f"{city}: {clean_target(lead)}" if city else clean_target(lead)
+    cities = []
+    for x in ranked:
+        c = str(x.get("city", "")).strip()
+        if c and c != city and c not in cities:
+            cities.append(c)
+    line = " · ".join(cities[:3])
+    if len(cities) > 3:
+        line += f" и ещё {len(cities) - 3}"
+    return {"head": f"{G.plural(n, 'удар', 'удара', 'ударов')} по РФ", "lead": lead_txt, "cities": line}
+
+
 def compose(date: str, build: Path):
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
         sys.exit(f"build.py: дата должна быть YYYY-MM-DD, получено {date!r}")
@@ -353,6 +378,7 @@ def compose(date: str, build: Path):
     legend = ('<span><i class="lg day"></i>удары за сутки</span>' if geo["pts"] else "") + \
              ('<span><i class="lg lw"></i>за прошлую неделю</span>' if geo["week"] else "")
 
+    poster = poster_text(strikes)
     plan = {"s1": s1, "s2": s2, "s3": s3, "s4": s4, "total": total, "count": n,
             "cards": card_t, "more": more_t, "geo": geo}
     host = G.SITE.split("://", 1)[-1]
@@ -361,6 +387,10 @@ def compose(date: str, build: Path):
         "S1_DUR": round(s2 - s1 + X, 2), "S2_START": s2,
         "GEO_SVG": geo_svg, "MAP_CAPTION": cap, "MAP_LEGEND": legend,
         "MAP_DATE": esc(G.rus_date(date).upper()),
+        "MAP_TITLE": esc(f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по РФ" if n else "Карта ударов"),
+        "POSTER_NUM": n, "POSTER_NUM_SIZE": 420 if n < 10 else 380 if n < 100 else 300,
+        "POSTER_HEAD": esc(poster["head"]), "POSTER_LEAD": esc(poster["lead"]),
+        "POSTER_CITIES": esc(poster["cities"]),
         "S2_DUR": round(((s3 if shown else s4) - s2) + X, 2),
         "S4_START": s4, "S4_DUR": round(total - s4, 2),
         "COVER": "assets/cover" + cover_src.suffix,

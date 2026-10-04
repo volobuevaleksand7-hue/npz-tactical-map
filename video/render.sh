@@ -28,6 +28,9 @@ node_modules/.bin/hyperframes render "$BUILD" -o "$BUILD/silent.mp4" \
   --quality "${HF_QUALITY:-looks}" --workers "${HF_WORKERS:-auto}" --quiet
 python3 build.py mix "$BUILD" "$BUILD/silent.mp4" "$OUT.tmp.mp4"
 mv -f "$OUT.tmp.mp4" "$OUT"
+# обложка для YouTube: кадр постера S1, когда весь текст уже выехал (upload.py ставит её через thumbnails.set)
+POSTER_T=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["s1"] + 1.8)' "$BUILD/plan.json")
+ffmpeg -loglevel error -y -ss "$POSTER_T" -i "$OUT" -frames:v 1 -q:v 3 "${OUT%.mp4}.jpg" || echo "render.sh: обложка не снята" >&2
 rm -rf "$BUILD"   # при ошибке каталог остаётся для разбора
 
 echo "[$(date -u +%FT%TZ)] ok $OUT ($(du -h "$OUT" | cut -f1), $(( $(date +%s) - t0 )) с)"
