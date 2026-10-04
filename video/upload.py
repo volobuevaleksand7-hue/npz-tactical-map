@@ -1,0 +1,188 @@
+#!/usr/bin/env python3
+"""Загрузка ежедневного ролика на YouTube (YouTube Data API v3), только stdlib.
+
+  python3 upload.py auth            — разовая авторизация (refresh-токен -> .secrets/token.json)
+  python3 upload.py [YYYY-MM-DD]    — залить out/npz-<дата>.mp4 (без даты — все незалитые)
+
+Секреты лежат в video/.secrets/ (в git не попадают, права 600):
+  client_secret.json — OAuth-клиент «Desktop» из Google Cloud (проект npz-youtube);
+  token.json         — refresh-токен, пишет `auth`.
+
+Авторизация на сервере без браузера — через проброс порта с Мака:
+  ssh -L 8765:127.0.0.1:8765 hermes-vps 'cd /root/npz-tactical-map/video && python3 upload.py auth'
+ссылку из вывода открыть в браузере под аккаунтом канала, «Дополнительно → Перейти → Разрешить».
+
+После успешной загрузки пишется маркер out/npz-<дата>.uploaded (id и ссылка) —
+по нему cleanup.sh удаляет mp4, а повторный запуск дату пропускает.
+Переменные: YT_PRIVACY (public|unlisted|private, по умолчанию public).
+"""
+import base64
+import hashlib
+import http.server
+import json
+import os
+import re
+import secrets
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+
+VIDEO = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(VIDEO, "out")
+SECRETS = os.path.join(VIDEO, ".secrets")
+CLIENT = os.path.join(SECRETS, "client_secret.json")
+TOKEN = os.path.join(SECRETS, "token.json")
+SCOPE = "https://www.googleapis.com/auth/youtube.upload"
+PORT = 8765
+CATEGORY_NEWS = "25"  # News & Politics
+
+
+def log(msg):
+    print(f"[{time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}] upload: {msg}", flush=True)
+
+
+def client():
+    with open(CLIENT) as f:
+        data = json.load(f)
+    return data.get("installed") or data["web"]
+
+
+def write_private(path, obj):
+    os.makedirs(SECRETS, mode=0o700, exist_ok=True)
+    fd = os.open(path + ".tmp", os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w") as f:
+        json.dump(obj, f)
+    os.replace(path + ".tmp", path)
+
+
+def post_form(url, fields):
+    req = urllib.request.Request(url, data=urllib.parse.urlencode(fields).encode())
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        raise SystemExit(f"upload: {url} -> HTTP {e.code}: {e.read().decode(errors='replace')[:500]}")
+
+
+def auth():
+    c = client()
+    redirect = f"http://127.0.0.1:{PORT}"
+    verifier = secrets.token_urlsafe(64)
+    challenge = base64.urlsafe_b64encode(hashlib.sha256(verifier.encode()).digest()).rstrip(b"=").decode()
+    state = secrets.token_urlsafe(16)
+    url = c["auth_uri"] + "?" + urllib.parse.urlencode({
+        "client_id": c["client_id"], "redirect_uri": redirect, "response_type": "code",
+        "scope": SCOPE, "access_type": "offline", "prompt": "consent", "state": state,
+        "code_challenge": challenge, "code_challenge_method": "S256",
+    })
+    got = {}
+
+    class H(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            if "code" not in q and "error" not in q:
+                self.send_response(404); self.end_headers(); return
+            got.update({k: v[0] for k, v in q.items()})
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.end_headers()
+            self.wfile.write("Готово, окно можно закрыть.".encode())
+
+        def log_message(self, *a):
+            pass
+
+    srv = http.server.HTTPServer(("127.0.0.1", PORT), H)
+    print("Открой ссылку в браузере под аккаунтом канала:\n\n" + url + "\n", flush=True)
+    while not got:
+        srv.handle_request()
+    if got.get("state") != state or "code" not in got:
+        raise SystemExit(f"upload: авторизация не прошла: {got.get('error', 'state mismatch')}")
+    tok = post_form(c["token_uri"], {
+        "code": got["code"], "client_id": c["client_id"], "client_secret": c["client_secret"],
+        "redirect_uri": redirect, "grant_type": "authorization_code", "code_verifier": verifier,
+    })
+    if "refresh_token" not in tok:
+        raise SystemExit("upload: Google не вернул refresh_token")
+    write_private(TOKEN, {"refresh_token": tok["refresh_token"], "scope": tok.get("scope")})
+    log(f"refresh-токен сохранён в {TOKEN}")
+
+
+def access_token():
+    c = client()
+    with open(TOKEN) as f:
+        rt = json.load(f)["refresh_token"]
+    return post_form(c["token_uri"], {
+        "client_id": c["client_id"], "client_secret": c["client_secret"],
+        "refresh_token": rt, "grant_type": "refresh_token",
+    })["access_token"]
+
+
+def meta(date):
+    """Заголовок — первая строка out/npz-<дата>.txt, описание — остальное."""
+    path = os.path.join(OUT, f"npz-{date}.txt")
+    with open(path, encoding="utf-8") as f:
+        lines = f.read().strip().split("\n")
+    clean = lambda s: s.replace("<", "‹").replace(">", "›")
+    title = clean(lines[0].strip())[:100]
+    desc = clean("\n".join(lines[1:]).strip())[:4900]
+    tags = re.findall(r"#(\w+)", desc)[:10]
+    return title, desc, tags
+
+
+def upload(date, token):
+    mp4 = os.path.join(OUT, f"npz-{date}.mp4")
+    size = os.path.getsize(mp4)
+    title, desc, tags = meta(date)
+    body = {
+        "snippet": {"title": title, "description": desc, "tags": tags,
+                    "categoryId": CATEGORY_NEWS, "defaultLanguage": "ru", "defaultAudioLanguage": "ru"},
+        "status": {"privacyStatus": os.environ.get("YT_PRIVACY", "public"),
+                   "selfDeclaredMadeForKids": False, "embeddable": True},
+    }
+    req = urllib.request.Request(
+        "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status",
+        data=json.dumps(body).encode(), method="POST",
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json; charset=UTF-8",
+                 "X-Upload-Content-Type": "video/mp4", "X-Upload-Content-Length": str(size)})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            session = r.headers["Location"]
+        with open(mp4, "rb") as f:
+            put = urllib.request.Request(session, data=f.read(), method="PUT",
+                                         headers={"Content-Type": "video/mp4", "Content-Length": str(size)})
+        with urllib.request.urlopen(put, timeout=600) as r:
+            res = json.load(r)
+    except urllib.error.HTTPError as e:
+        raise SystemExit(f"upload: {date}: HTTP {e.code}: {e.read().decode(errors='replace')[:800]}")
+    vid = res["id"]
+    privacy = res.get("status", {}).get("privacyStatus")
+    url = f"https://youtu.be/{vid}"
+    with open(os.path.join(OUT, f"npz-{date}.uploaded"), "w") as f:
+        f.write(f"{vid}\t{url}\t{privacy}\t{title}\n")
+    log(f"{date}: залит {url} ({privacy})")
+    return url
+
+
+def main():
+    args = sys.argv[1:]
+    if args[:1] == ["auth"]:
+        return auth()
+    if args:
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):
+            raise SystemExit("upload: дата YYYY-MM-DD или 'auth'")
+        dates = [args[0]]
+    else:
+        dates = sorted(m.group(1) for n in os.listdir(OUT)
+                       if (m := re.fullmatch(r"npz-(\d{4}-\d{2}-\d{2})\.mp4", n)))
+    dates = [d for d in dates if not os.path.exists(os.path.join(OUT, f"npz-{d}.uploaded"))]
+    if not dates:
+        return log("нечего заливать")
+    token = access_token()
+    for d in dates[-3:]:  # квота API ~6 загрузок в сутки — хвост накопившегося не тащим разом
+        upload(d, token)
+
+
+if __name__ == "__main__":
+    main()
