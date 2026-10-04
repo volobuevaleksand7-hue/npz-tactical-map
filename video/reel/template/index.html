@@ -1,0 +1,295 @@
+<!doctype html>
+<!--
+  Рилс «Топливный фронт РФ» (HyperFrames, 1080×1920). {{…}} подставляет video/reel/build_reel.py.
+  Постер (первый кадр = обложка в ленте) -> карта сайта (скриншот assets/map.jpg) -> наезд на удар ->
+  табличка -> «влёт» в табличку -> кадры очевидцев -> следующий удар -> итог суток.
+  Камера/маркеры/таблички считаются от одного часа (clock) — кадр зависит только от seek.
+  Всё локально: шрифты, GSAP, скриншот и клипы лежат в assets/.
+-->
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Rubik"; font-weight: 400; src: url("assets/fonts/rubik-400.ttf"); }
+      @font-face { font-family: "Rubik"; font-weight: 600; src: url("assets/fonts/rubik-600.ttf"); }
+      @font-face { font-family: "Rubik"; font-weight: 800; src: url("assets/fonts/rubik-800.ttf"); }
+      @font-face { font-family: "JB"; font-weight: 600; src: url("assets/fonts/jbmono-600.ttf"); }
+      :root { --ink:#1f1d18; --dim:#6f6755; --red:#d23a2e; --amber:#df8f17; --green:#2f8a50; --teal:#146f6f; --paper:#fbf8f1; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:#0b1419; }
+      #root { position:relative; width:1080px; height:1920px; overflow:hidden; font-family:"Rubik",sans-serif; color:var(--ink); background:#0b1419; }
+
+      /* карта сайта */
+      #mapsc { position:absolute; inset:0; overflow:hidden; background:#cfd8c8; }
+      #stage { position:absolute; inset:0; transform-origin:540px 960px; }
+      #cam { position:absolute; left:0; top:0; width:{{IW}}px; height:{{IH}}px; transform-origin:0 0; }
+      #cam img { display:block; width:{{IW}}px; height:{{IH}}px; }
+      #mk { position:absolute; inset:0; }
+      .m { position:absolute; width:0; height:0; }
+      .m .h { position:absolute; left:-46px; top:-46px; width:92px; height:92px; border-radius:50%;
+        background:radial-gradient(circle, rgba(255,120,40,.7) 0%, rgba(255,70,30,.3) 35%, rgba(255,40,20,0) 70%); }
+      .m .c { position:absolute; left:-11px; top:-11px; width:22px; height:22px; border-radius:50%; border:3px solid #fff;
+        background:radial-gradient(circle, #fff3c4 0%, #ffb02e 40%, #e8361f 80%); box-shadow:0 0 14px 4px rgba(255,90,30,.75); }
+      .m .r { position:absolute; left:-24px; top:-24px; width:48px; height:48px; border-radius:50%; border:4px solid #e8361f; opacity:0; }
+      .m.sel .c { left:-17px; top:-17px; width:34px; height:34px; border-width:4px; }
+      .m.sel .h { left:-80px; top:-80px; width:160px; height:160px; }
+      .m.sel .r { left:-36px; top:-36px; width:72px; height:72px; border-width:5px; }
+      #shade { position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,20,25,.78) 0%, rgba(11,20,25,0) 17%, rgba(11,20,25,0) 80%, rgba(11,20,25,.55) 100%); }
+
+      /* табличка над маркером */
+      .sign { position:absolute; left:80px; width:920px; opacity:0; transform-origin:50% 100%; }
+      .sg-in { background:var(--paper); border-radius:28px; padding:34px 44px 38px; border-top:14px solid var(--red);
+        box-shadow:0 24px 60px rgba(0,0,0,.42), 0 0 0 3px rgba(0,0,0,.08); }
+      .sg-stem { position:relative; left:50%; width:0; height:0; margin-left:-26px; border-left:26px solid transparent; border-right:26px solid transparent; border-top:44px solid var(--paper); }
+      .sg-row { display:flex; align-items:center; gap:20px; flex-wrap:nowrap; }
+      .sg-k { font-weight:800; font-size:34px; color:#fff; background:var(--red); border-radius:12px; padding:6px 18px; letter-spacing:.03em; white-space:nowrap; }
+      .sg-k.k1 { background:var(--amber); } .sg-k.k0 { background:#58606a; }
+      .sg-d { font-family:"JB",monospace; font-weight:600; font-size:30px; color:var(--dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .sg-city { font-weight:800; font-size:92px; line-height:1.02; letter-spacing:-.02em; margin-top:18px; }
+      .sg-obj { font-weight:800; font-size:50px; line-height:1.1; margin-top:8px; color:var(--red); }
+      .sg-txt { font-weight:600; font-size:38px; line-height:1.26; margin-top:16px; color:#3a372f; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+
+      /* HUD карты: бренд сайта + адрес */
+      #hud { position:absolute; left:0; right:0; top:0; height:330px; opacity:0; }
+      #hud .b { position:absolute; left:64px; top:92px; display:flex; align-items:center; gap:16px; font-weight:800; font-size:50px; color:#fff; letter-spacing:-.01em; text-shadow:0 2px 14px rgba(0,0,0,.5); }
+      #hud .b i { display:block; width:24px; height:24px; border-radius:50%; background:var(--red); box-shadow:0 0 16px 4px rgba(255,70,40,.7); }
+      #hud .u { position:absolute; left:64px; top:176px; font-family:"JB",monospace; font-weight:600; font-size:38px; color:#9fe0d6; text-shadow:0 2px 10px rgba(0,0,0,.7); }
+      #hud .d { position:absolute; right:64px; top:170px; font-family:"JB",monospace; font-weight:600; font-size:34px; color:#fff; background:var(--red); border-radius:12px; padding:8px 18px; }
+      #stamp { position:absolute; right:64px; top:250px; font-family:"JB",monospace; font-weight:600; font-size:24px; color:#2c2a24; background:rgba(251,248,241,.9); border:2px solid rgba(0,0,0,.18); border-radius:8px; padding:6px 12px; opacity:0; }
+
+      /* кадры очевидцев */
+      .fw { position:absolute; inset:0; opacity:0; background:#000; overflow:hidden; }
+      .fw video { position:absolute; left:0; top:0; width:1080px; height:1920px; object-fit:cover; }
+      #fhud { position:absolute; left:0; right:0; top:0; height:300px; opacity:0;
+        background:linear-gradient(180deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,0) 100%); }
+      #fhud .b { position:absolute; left:64px; top:92px; display:flex; align-items:center; gap:16px; font-weight:800; font-size:46px; color:#fff; }
+      #fhud .b i { display:block; width:20px; height:20px; border-radius:50%; background:var(--red); }
+      #fhud .u { position:absolute; left:64px; top:160px; font-family:"JB",monospace; font-weight:600; font-size:32px; color:#9fe0d6; }
+      #fhud .e { position:absolute; right:64px; top:100px; font-family:"JB",monospace; font-weight:600; font-size:26px; color:#ffd9a0; border:2px solid rgba(255,217,160,.6); border-radius:8px; padding:4px 12px; }
+      .lt { position:absolute; left:48px; right:48px; top:1180px; opacity:0; background:rgba(16,16,14,.86); border-left:16px solid var(--red); border-radius:18px; padding:28px 36px 30px; }
+      .lt-top { display:flex; align-items:center; gap:16px; font-family:"JB",monospace; font-weight:600; font-size:36px; color:#ffb48a; letter-spacing:.03em; }
+      .lt-top i { display:block; width:18px; height:18px; border-radius:50%; background:#ff4a2c; }
+      .lt-obj { font-weight:800; font-size:66px; line-height:1.06; color:#fff; margin-top:12px; }
+      .lt-src { font-weight:600; font-size:32px; color:#c9c1b2; margin-top:12px; }
+
+      /* постер: первый кадр = обложка в ленте Shorts. Текст — в верхних 2/3 (низ закрывает заголовок YouTube) */
+      #poster { position:absolute; inset:0; background:#120c08; overflow:hidden; }
+      #poster .bg { position:absolute; inset:-40px; background:url("{{POSTER_BG}}") center/cover no-repeat; filter:brightness(1.6) saturate(1.5) contrast(1.2); }
+      #poster .dk { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.7) 100%); }
+      #poster .k { position:absolute; left:64px; top:110px; display:flex; align-items:center; gap:16px; font-weight:800; font-size:44px; color:#fff; }
+      #poster .k i { display:block; width:22px; height:22px; border-radius:50%; background:var(--red); }
+      #poster .t { position:absolute; left:56px; right:56px; top:300px; font-weight:800; font-size:{{POSTER_TSIZE}}px; line-height:.98; letter-spacing:-.025em; color:#fff;
+        text-shadow:0 6px 30px rgba(0,0,0,.65); }
+      #poster .t { white-space:normal; } #poster .t span { background:var(--red); box-decoration-break:clone; -webkit-box-decoration-break:clone; padding:0 18px; }
+      #poster .c { position:absolute; left:40px; right:40px; top:820px; padding:22px 24px 120px; background:rgba(8,6,4,.78); border-radius:20px; font-weight:800; font-size:70px; line-height:1.1; color:#ffd36a; text-shadow:0 4px 18px rgba(0,0,0,.8); }
+      #poster .s { position:absolute; left:64px; right:64px; top:var(--sy,1010px); font-family:"JB",monospace; font-weight:600; font-size:40px; color:#fff; text-shadow:0 3px 12px rgba(0,0,0,.8); }
+      #poster .e { position:absolute; left:64px; top:calc(var(--sy,1010px) + 66px); font-family:"JB",monospace; font-weight:600; font-size:26px; color:#ffd9a0; border:2px solid rgba(255,217,160,.6); border-radius:8px; padding:4px 12px; }
+
+      /* итог суток */
+      #outro { position:absolute; inset:0; opacity:0; background:rgba(9,15,19,.88); }
+      #outro .b { position:absolute; left:64px; top:96px; display:flex; align-items:center; gap:16px; font-weight:800; font-size:52px; color:#fff; }
+      #outro .b i { display:block; width:22px; height:22px; border-radius:50%; background:var(--red); }
+      #outro .k { position:absolute; left:64px; top:200px; font-family:"JB",monospace; font-weight:600; font-size:36px; color:#ff8a5c; letter-spacing:.06em; }
+      #outro .big { position:absolute; left:58px; top:250px; font-weight:800; font-size:300px; line-height:1; letter-spacing:-.04em; color:#fff; }
+      #outro .bw { position:absolute; left:64px; top:560px; font-weight:800; font-size:76px; color:#fff; }
+      #outro .rows { position:absolute; left:64px; right:64px; top:680px; display:flex; flex-direction:column; gap:20px; }
+      #outro .row { display:flex; align-items:center; gap:24px; font-weight:600; font-size:44px; color:#e9f1f4; }
+      #outro .row b { display:inline-block; min-width:96px; text-align:center; font-weight:800; font-size:52px; color:#fff; background:var(--red); border-radius:14px; padding:4px 16px; }
+      #outro .row.o b { background:#58606a; }
+      #outro .rg { position:absolute; left:64px; right:64px; top:880px; font-weight:400; font-size:36px; line-height:1.3; color:#9fb6c1; }
+      #outro .site { position:absolute; left:64px; right:64px; top:1040px; background:var(--paper); border-radius:24px; padding:30px 40px 34px; border-top:12px solid var(--red); }
+      #outro .site .l { font-weight:600; font-size:36px; color:var(--dim); }
+      #outro .site .u { font-family:"JB",monospace; font-weight:600; font-size:52px; color:var(--teal); margin-top:8px; }
+      #outro .site .tg { font-weight:800; font-size:46px; color:var(--ink); margin-top:20px; }
+      #outro .site .tg span { color:#1d7fc4; }
+      #outro .w { position:absolute; left:64px; right:64px; top:1400px; font-size:30px; line-height:1.3; color:#9fb6c1; }
+      #outro .w b { color:#ffd9a0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{TOTAL}}" data-width="1080" data-height="1920">
+
+      <div id="mapsc" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="0">
+        <div id="stage">
+          <div id="cam"><img src="assets/map.jpg" alt="Карта сайта" /></div>
+          <div id="mk"></div>
+          <div id="shade"></div>
+          {{SIGNS}}
+        </div>
+        <div id="hud" data-layout-allow-overlap>
+          <div class="b"><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>
+          <div class="u">{{SITE}}</div>
+          <div class="d">{{DATE_SHORT}}</div>
+        </div>
+        <div id="stamp">ОЦЕНКА / ESTIMATE · npz-tactical-map</div>
+      </div>
+
+      {{VIDEOS}}
+
+      <div id="fhud" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="20" data-layout-allow-overlap>
+        <div class="b"><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>
+        <div class="u">{{SITE}}</div>
+        <div class="e">ОЦЕНКА · OSINT</div>
+      </div>
+      <div id="caps" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="21">
+        {{CAPS}}
+      </div>
+
+      <div id="outro" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="30">
+        <div class="b"><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>
+        <div class="k">ИТОГ СУТОК · {{DATE_RUS}}</div>
+        <div class="big" id="bign">{{N}}</div>
+        <div class="bw">{{N_WORD}} за сутки</div>
+        <div class="rows">
+          <div class="row"><b>{{N_FUEL}}</b>{{FUEL_WORD}}</div>
+          <div class="row o"><b>{{N_OTHER}}</b>другие объекты</div>
+        </div>
+        <div class="rg">Регионы: {{REGIONS}}</div>
+        <div class="site">
+          <div class="l">Карта ударов и сводки:</div>
+          <div class="u">{{SITE}}</div>
+          <div class="tg">Telegram: <span>{{TG}}</span></div>
+        </div>
+        <div class="w"><b>ОЦЕНКА.</b> OSINT по открытым источникам, не официальные данные. Кадры: открытые Telegram-каналы.</div>
+      </div>
+
+      <div id="poster" class="clip" data-start="0" data-duration="{{POSTER_END}}" data-track-index="40">
+        <div class="bg"></div>
+        <div class="dk"></div>
+        <div class="k"><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>
+        <div class="t"><span>{{POSTER_TITLE}}</span></div>
+        <div class="c">{{POSTER_CITIES}}</div>
+        <div class="s">{{POSTER_SUB}}</div>
+        <div class="e">ОЦЕНКА · OSINT</div>
+      </div>
+    </div>
+    <script>
+      const P = {{PLAN_JSON}};
+      // постер: самое длинное слово заголовка обязано влезть в ширину кадра
+      (() => { const t = document.querySelector("#poster .t"), sp = t.querySelector("span");
+        let fs = parseFloat(getComputedStyle(t).fontSize);
+        const words = sp.textContent.split(/\s+/), probe = document.createElement("span");
+        probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;padding:0 18px"; t.appendChild(probe);
+        const widest = () => Math.max(...words.map(w => { probe.textContent = w; return probe.offsetWidth; }));
+        while (fs > 60 && widest() > t.clientWidth) { fs -= 4; t.style.fontSize = fs + "px"; }
+        probe.remove();
+        const c = document.querySelector("#poster .c"); c.style.paddingBottom = "130px";
+        document.getElementById("poster").style.setProperty("--sy", (c.offsetTop + c.offsetHeight - 118) + "px"); })();
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const clamp = v => Math.max(0, Math.min(1, v));
+      const inOut = u => u < .5 ? 4*u*u*u : 1 - Math.pow(-2*u + 2, 3) / 2;
+      const outC = u => 1 - Math.pow(1 - u, 3);
+      const backOut = u => { const c = 1.7; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
+      const ramp = (t, a, b) => clamp((t - a) / (b - a));
+      const $ = id => document.getElementById(id);
+      const camEl = $("cam"), stage = $("stage"), mk = $("mk");
+      const S0 = 1080 / P.IW;
+
+      const mEls = P.marks.map(m => { const d = document.createElement("div"); d.className = "m" + (m.sel ? " sel" : "");
+        d.innerHTML = '<div class="h"></div><div class="r"></div><div class="r"></div><div class="c"></div>'; mk.appendChild(d); return d; });
+      const signs = P.segs.map(s => $("sg" + s.i));
+      const fws = P.segs.map(s => s.dive ? $("fw" + s.i) : null);
+      const lts = P.segs.map(s => s.dive ? $("lt" + s.i) : null);
+
+      function camera(t) {
+        const K = P.cam;
+        if (t <= K[0].t) return K[0];
+        for (let k = 0; k < K.length - 1; k++) {
+          const a = K[k], b = K[k + 1];
+          if (t < b.t) {
+            const e = inOut(clamp((t - a.t) / (b.t - a.t)));
+            const ls = Math.log(a.s) + (Math.log(b.s) - Math.log(a.s)) * e - b.dip * Math.sin(Math.PI * e);
+            return { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e, s: Math.exp(ls) };
+          }
+        }
+        return K[K.length - 1];
+      }
+      const FY = s => 960 + 260 * clamp((s - S0) / (1.15 - S0));   // удар — ниже центра, табличке место сверху
+
+      function draw(t) {
+        const c = camera(t), fy = FY(c.s);
+        const tx = 540 - c.x * c.s, ty = fy - c.y * c.s;
+        camEl.style.transform = `translate(${tx}px,${ty}px) scale(${c.s})`;
+        const scr = (x, y) => [tx + x * c.s, ty + y * c.s];
+
+        // маркеры: все удары дня пульсируют; выбранные — крупнее
+        P.marks.forEach((m, j) => {
+          const el = mEls[j], [x, y] = scr(m.x, m.y);
+          el.style.transform = `translate(${x}px,${y}px)`;
+          const k = t - P.poster - 0.2 - (m.sel ? 0 : 0.15 * j);
+          el.style.opacity = k < 0 ? 0 : 1;
+          if (k < 0) return;
+          const pop = backOut(clamp(k / 0.4));
+          el.children[3].style.transform = `scale(${pop})`;
+          el.children[0].style.transform = `scale(${pop * (0.85 + 0.15 * Math.sin(k * 6 + j))})`;
+          [1, 2].forEach(r => { const ph = ((k + (r - 1) * 0.6) / 1.2) % 1;
+            el.children[r].style.transform = `scale(${0.6 + 2.4 * ph})`; el.children[r].style.opacity = (1 - ph) * 0.9; });
+        });
+
+        // таблички + влёт
+        let stageS = 1, ox = 540, oy = 960;
+        P.segs.forEach((s, i) => {
+          const el = signs[i];
+          const end = s.dive ? s.dive + P.dive : s.arrive + 2.3;
+          const vis = t >= s.arrive - 0.05 && t < end;
+          el.style.opacity = vis ? 1 : 0;
+          if (!vis) return;
+          const [x, y] = scr(s.x, s.y);
+          const h = el.offsetHeight;
+          el.style.top = (y - h - 26) + "px";
+          const pop = backOut(clamp((t - s.arrive + 0.05) / 0.45));
+          el.style.transform = `scale(${Math.max(0.001, pop)})`;
+          el.style.transformOrigin = `${x - 80}px 100%`;
+          if (!s.dive) el.style.opacity = 1 - ramp(t, end - 0.35, end);
+          if (s.dive && t >= s.dive) {
+            const u = ramp(t, s.dive, s.dive + P.dive);
+            stageS = 1 + 9 * u * u * u;
+            ox = 540; oy = y - h / 2;
+          }
+        });
+        stage.style.transformOrigin = `${ox}px ${oy}px`;
+        stage.style.transform = `scale(${stageS})`;
+
+        // кадры очевидцев
+        let anyV = 0;
+        P.segs.forEach((s, i) => {
+          if (!s.dive) return;
+          const a = clamp((t - s.v0) / 0.22) * (1 - ramp(t, s.v1, s.v1 + 0.35));
+          fws[i].style.opacity = a;
+          fws[i].style.transform = `scale(${1.22 - 0.22 * outC(ramp(t, s.v0, s.v0 + 0.7))})`;
+          anyV = Math.max(anyV, a);
+          const l = lts[i], lu = outC(ramp(t, s.v0 + 0.25, s.v0 + 0.75)) * (1 - ramp(t, s.v1 - 0.2, s.v1 + 0.1));
+          l.style.opacity = lu; l.style.transform = `translateX(${(1 - lu) * -80}px)`;
+        });
+        $("fhud").style.opacity = anyV;
+
+        // HUD карты
+        const hud = ramp(t, P.poster, P.poster + 0.5) * (1 - ramp(t, P.outro, P.outro + 0.4));
+        $("hud").style.opacity = hud; $("stamp").style.opacity = hud;
+
+        // постер: последний кадр — быстрый уход в карту
+        const pu = ramp(t, P.poster, P.poster + 0.35);
+        $("poster").style.opacity = 1 - pu;
+        $("poster").style.transform = `scale(${1 + 0.25 * pu})`;
+        document.querySelector("#poster .bg").style.transform = `scale(${1.04 + 0.05 * clamp(t / P.poster)})`;
+
+        // итог
+        const ou = ramp(t, P.outro, P.outro + 0.5);
+        $("outro").style.opacity = ou;
+        ["#outro .k", "#outro .big", "#outro .bw", "#outro .rows", "#outro .rg", "#outro .site", "#outro .w"].forEach((q, j) => {
+          const u = outC(ramp(t, P.outro + 0.2 + 0.18 * j, P.outro + 0.7 + 0.18 * j));
+          const e = document.querySelector(q); e.style.opacity = u; e.style.transform = `translateY(${(1 - u) * 40}px)`;
+        });
+      }
+      const clock = { t: 0 };
+      tl.fromTo(clock, { t: 0 }, { t: P.total, duration: P.total, ease: "none", immediateRender: false,
+        onUpdate: () => draw(clock.t) }, 0);
+      draw(0);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
