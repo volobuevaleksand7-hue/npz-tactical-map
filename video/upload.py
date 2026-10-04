@@ -37,6 +37,7 @@ CLIENT = os.path.join(SECRETS, "client_secret.json")
 TOKEN = os.path.join(SECRETS, "token.json")
 SCOPE = "https://www.googleapis.com/auth/youtube.upload"
 PORT = 8765
+VIDEOS_JSON = os.path.join(os.path.dirname(VIDEO), "data", "videos.json")  # реестр для сайта (gen-news.py)
 KIND = "npz"  # префикс файлов в out/: npz (ежедневный ролик) | reel (рилс)
 CATEGORY_NEWS = "25"  # News & Politics
 
@@ -165,7 +166,24 @@ def upload(date, token):
     with open(os.path.join(OUT, f"{KIND}-{date}.uploaded"), "w") as f:
         f.write(f"{vid}\t{url}\t{privacy}\t{title}\n")
     log(f"{date}: залит {url} ({privacy})")
+    if privacy == "public":
+        register(date, vid, title)
     return url
+
+
+def register(date, vid, title):
+    """data/videos.json: {"videos": {дата: {"npz"|"reel": {"id", "title"}}}} — страница сводки
+    /news/<дата>.html показывает по нему ссылки на ролики. Коммитит daily.sh через git-sync."""
+    try:
+        with open(VIDEOS_JSON, encoding="utf-8") as f:
+            reg = json.load(f)
+    except (OSError, ValueError):
+        reg = {"videos": {}}
+    reg.setdefault("videos", {}).setdefault(date, {})[KIND] = {"id": vid, "title": title}
+    with open(VIDEOS_JSON + ".tmp", "w", encoding="utf-8") as f:
+        json.dump(reg, f, ensure_ascii=False, indent=1, sort_keys=True)
+        f.write("\n")
+    os.replace(VIDEOS_JSON + ".tmp", VIDEOS_JSON)
 
 
 def set_thumbnail(date, vid, token):

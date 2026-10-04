@@ -713,6 +713,42 @@ DISCLAIMER_HTML = ('<p class="news-disclaimer">⚠️ <strong>ОЦЕНКА / EST
                    'Данные агрегированы из открытых OSINT-источников. '
                    'Не являются официальной информацией. Возможны неточности.</p>')
 
+YT_CHANNEL = "https://www.youtube.com/@%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D0%92%D0%BE%D0%BB%D0%BE%D0%B1%D1%83%D0%B5%D0%B2-%D1%8B3%D1%8C"
+_VIDEOS = None
+
+
+def videos_for(date: str) -> dict:
+    """Ролики дня из data/videos.json (пишет video/upload.py после публикации)."""
+    global _VIDEOS
+    if _VIDEOS is None:
+        try:
+            _VIDEOS = json.loads((ROOT / "data" / "videos.json").read_text(encoding="utf-8")).get("videos", {})
+        except (OSError, ValueError):
+            _VIDEOS = {}
+    return _VIDEOS.get(date, {})
+
+
+def video_section(date: str) -> str:
+    v = videos_for(date)
+    links = []
+    for kind, label in (("reel", "▶ Короткое видео: удары дня на карте"), ("npz", "▶ Видео-сводка дня")):
+        if v.get(kind, {}).get("id"):
+            vid = html.escape(v[kind]["id"])
+            links.append(f'<a href="https://youtu.be/{vid}" class="cta-btn primary" target="_blank" rel="noopener">{label}</a>')
+    if not links:
+        return ""
+    return f"""      <section class="news-cta news-video">
+        <div class="cta-card">
+          <h2>🎬 Видео за {rus_date(date)}</h2>
+          <p>Удары дня на карте и итог суток — короткие ролики на YouTube.</p>
+          <div class="cta-buttons">
+            {chr(10).join("            " + l for l in links).strip()}
+          </div>
+        </div>
+      </section>
+"""
+
+
 CTA_HTML = """      <section class="news-cta">
         <div class="cta-card">
           <h2>🗺️ Открыть интерактивную карту</h2>
@@ -720,6 +756,7 @@ CTA_HTML = """      <section class="news-cta">
           <div class="cta-buttons">
             <a href="/" class="cta-btn primary">Открыть карту НПЗ →</a>
             <a href="/karta-azs" class="cta-btn secondary">Карта АЗС →</a>
+            <a href="https://www.youtube.com/@%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D0%92%D0%BE%D0%BB%D0%BE%D0%B1%D1%83%D0%B5%D0%B2-%D1%8B3%D1%8C" class="cta-btn secondary" target="_blank" rel="noopener">YouTube →</a>
           </div>
         </div>
       </section>
@@ -1053,6 +1090,7 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
         {nav_next}
       </nav>
 """)
+    parts.append(video_section(date))
     parts.append('      <p class="section-note">📊 По теме: '
                  '<a href="/deficit">почему нет бензина</a> · '
                  '<a href="/attacks">хроника ударов по НПЗ</a> · '

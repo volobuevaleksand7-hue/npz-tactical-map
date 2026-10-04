@@ -13,5 +13,9 @@ if [ -f "${NPZ_YT_SECRETS:-$HOME/.config/npz-youtube}/token.json" ]; then
 else
   echo "daily: нет токена YouTube — загрузка пропущена"
 fi
+# реестр data/videos.json (ссылки на ролики со страниц /news) — общим безопасным синком данных
+if [ -n "$(git -C .. status --porcelain -- data/videos.json)" ]; then
+  (cd .. && bash agents/git-sync.sh "data(video): реестр роликов YouTube") || rc=$?
+fi
 bash ./cleanup.sh || rc=$?
 exit $rc
