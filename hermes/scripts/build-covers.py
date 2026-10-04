@@ -14,7 +14,10 @@ image_gen (img2img по референсу; если реального фото
   python3 build-covers.py --all            # перегенерить все
   python3 build-covers.py --dates 2026-07-05,2026-07-04
 
-Цепочка бэкендов (env NPZ_COVER_BACKENDS, дефолт "codex-vps,codex-local,openrouter"):
+Цепочка бэкендов (env NPZ_COVER_BACKENDS; дефолт "cursor,codex-vps,codex-local,openrouter",
+если cursor-agent в PATH, иначе "codex-vps,codex-local,openrouter"):
+  0. cursor      — cursor-agent (встроенный GenerateImage), решение владельца 03.10.2026:
+                   на Маке предпочтителен. На VPS cursor-agent нет → там остаётся Codex.
   1. codex-vps   — Codex на VPS (всегда включён). На самом VPS = локальный codex; с Мака —
                    codex по ssh на VPS + картинку тащим обратно (env NPZ_VPS_SSH, деф. hermes-vps).
   2. codex-local — Codex на этой машине (на Маке — Mac-Codex).
@@ -28,6 +31,7 @@ import json
 import os
 import re
 import shlex
+import shutil
 import subprocess
 import sys
 import urllib.request
@@ -51,7 +55,9 @@ OPENROUTER_SCRIPT = REPO / "hermes" / "gen-cover-openrouter.py"
 IS_VPS = str(REPO).startswith("/root")
 VPS_SSH = os.environ.get("NPZ_VPS_SSH", "hermes-vps")
 VPS_TMP = "/root/.hermes/covers-tmp"
-DEFAULT_BACKENDS = "codex-vps,codex-local,openrouter"
+CURSOR_BIN = shutil.which("cursor-agent") or (
+    str(HOME / ".local" / "bin" / "cursor-agent") if (HOME / ".local" / "bin" / "cursor-agent").exists() else None)
+DEFAULT_BACKENDS = ("cursor," if CURSOR_BIN else "") + "codex-vps,codex-local,openrouter"
 
 MONTHS = ["", "января", "февраля", "марта", "апреля", "мая", "июня",
           "июля", "августа", "сентября", "октября", "ноября", "декабря"]
@@ -62,6 +68,81 @@ _sc = importlib.util.module_from_spec(_sc_spec)
 _sc_spec.loader.exec_module(_sc)
 classify, lead_score, EVENT_LABEL = _sc.classify, _sc.lead_score, _sc.EVENT_LABEL
 event_label = _sc.event_label   # уточняет refinery: нефтебаза ≠ НПЗ (редполитика §3)
+# Лид дня для H1 страницы news/<date>.html считает agents/gen-news.py (strike_rank,
+# brief_headline). Подпись обложки обязана быть про тот же удар, иначе 01.10 Краснозаводск
+# (химзавод, 7 погибших) подписывался «атака дронов». Грузим оттуда, не копируем.
+try:
+    _gn_spec = importlib.util.spec_from_file_location("gen_news_mod", str(REPO / "agents" / "gen-news.py"))
+    _gn = importlib.util.module_from_spec(_gn_spec)
+    sys.path.insert(0, str(REPO / "agents"))
+    _gn_spec.loader.exec_module(_gn)
+except Exception as _e:  # noqa: BLE001
+    print("build-covers: gen-news не загрузился, лид по strike_class:", _e)
+    _gn = None
+
+# Населённые пункты-сёла: сцена «сельская местность», а не городская панорама.
+# ponytail: список ручной (в strikes.json нет типа населённого пункта) — дополняй.
+VILLAGES = {"Ржевка", "Октябрьский"}
+_VILLAGE_WORDS = ("село", "посёлок", "поселок", "деревн", "хутор", "станица", "район")
+
+
+def is_village(city, lead):
+    t = (str(lead.get("target", "")) + " " + str(lead.get("title", ""))).lower() if lead else ""
+    return city in VILLAGES or any(w in city.lower() for w in _VILLAGE_WORDS) or "село" in t
+
+
+NO_PEOPLE = ("Без людей, жертв, ПВО, военной техники, флагов и крупного огня; сухой "
+             "документальный стиль, ровный дневной свет.")
+# Профили места по типу цели (порядок важен: первый совпавший). (ключи, подпись, сцена-без-города)
+PROFILES = [
+    (("химическ", "химзавод", "азот", "аммиак", "карбамид"), "удар по химзаводу", "industrial"),
+    (("автомобил", "легков", "автобус", "машин"), "удар по автомобилю", "vehicle"),
+    (("избират", "комисси", "администрац", "мэри", "здание", "здания", "жил", "дом"), "удар по зданию", "building"),
+    (("завод", "предприят", "нпп", "производств", "фабрик"), "удар по промышленному предприятию", "industrial"),
+]
+
+
+def scene_for(profile, city, lead):
+    """Сцена по типу места. Разные ландшафты, а не «река + дым над городом»."""
+    vil = is_village(city, lead)
+    if profile == "vehicle":
+        if vil:
+            return (f"Сельская местность, {city}: просёлочная дорога между полями и лесополосой, "
+                    "по сторонам несколько частных одноэтажных домов с огородами и заборами. "
+                    "На обочине одиноко стоит легковой автомобиль с тёмными следами повреждения "
+                    "и копоти, дыма почти нет. Снято с дороги, автомобиль на среднем плане. "
+                    "Реки и городской застройки в кадре нет")
+        return ("Обычная городская улица с асфальтом, тротуаром и деревьями; у бордюра стоит "
+                "легковой автомобиль с тёмными следами повреждения и копоти, рядом фасады "
+                "жилых домов. Снято с уровня улицы")
+    if profile == "building":
+        return ("Городская улица на уровне глаз: фасад многоэтажного здания с выбитыми окнами на "
+                "верхних этажах и следами копоти над ними, тротуар, деревья, припаркованные "
+                "гражданские машины. Дыма почти нет, пожар потушен. Реки в кадре нет")
+    if profile == "terminal":
+        return ("Морской нефтеналивной терминал: бетонные причалы, трубопроводные эстакады и "
+                "швартовые тумбы на переднем плане, за ними резервуарный парк на берегу; у причала "
+                "стоит один гражданский танкер. Над одним резервуаром тонкий тёмный дымок, остальные "
+                "резервуары и причалы целы. Вид с территории порта, морской горизонт")
+    # industrial
+    return ("Промзона: вид с подъездной дороги вдоль бетонного забора на заводские корпуса "
+            "предприятия, трубы, эстакады, склады, пустырь и опоры линий электропередачи. "
+            "На крыше одного корпуса следы повреждения и копоти, над ним тонкий тёмный дымок, "
+            "остальные корпуса целы. Реки и городской панорамы нет")
+
+
+def pick_lead(strikes):
+    """Лид дня тем же правилом, что H1 страницы (gen-news.strike_rank); фолбэк — strike_class."""
+    if not strikes:
+        return None
+    if _gn is not None:
+        try:
+            return max([_gn.normalize_strike(x) for x in strikes], key=_gn.strike_rank)
+        except Exception as e:  # noqa: BLE001
+            print("build-covers: gen-news lead fail:", e)
+    return max(strikes, key=lead_score)
+
+
 CITY_LOOK = {
     "Россия": "типичная российская АЗС в областном городе, ряд колонок и автомобили",
     "Чёрное море (акватория)": "открытая акватория Чёрного моря, морской горизонт, вдали силуэты судов",
@@ -100,6 +181,8 @@ def look(c, kind=None):
         sea = ("Чёрного моря" if "чёрн" in low or "черн" in low else
                "Азовского моря" if "азов" in low else "моря")
         return f"открытая акватория {sea}, морской горизонт, без берега и городской застройки"
+    if kind == "village":
+        return f"село {c}"
     return f"российский город {c}"
 
 
@@ -118,14 +201,14 @@ def lead_from_archive(date):
         return None
     ss = data["strikes"] if isinstance(data, dict) else data
     day = [s for s in ss if str(s.get("date", "")).strip() == date]
-    return max(day, key=lead_score) if day else None
+    return pick_lead(day) if day else None
 
 
 def meta_for(date, brief):
     """Мета обложки. None = лида нет → обложку НЕ выдумываем (см. main)."""
     st = brief.get("strikes", [])
     vo = brief.get("voices", [])
-    lead = max(st, key=lead_score) if st else lead_from_archive(date)
+    lead = pick_lead(st) if st else lead_from_archive(date)
     if lead:
         city = str(lead.get("city", "")).strip(); kind = classify(lead)
         src = lead.get("source_url", "")
@@ -201,6 +284,7 @@ def meta_for(date, brief):
         # Небрендовый склад ливреи не несёт — ему реальное фото полезнее.
         return {"city": city, "event": event, "date_rus": rus(date), "prompt": prompt,
                 "src": src, "no_ref": bool(brand)}
+    ev = prof_event = None   # подпись, если её уточнила ветка сцены
     if kind == "sea":
         # Главный объект кадра — сами танкеры, а не пустая вода: сцена упоминала
         # танкер вскользь, и генератор рисовал дым над пустым морем (обложка 15.07).
@@ -213,7 +297,12 @@ def meta_for(date, brief):
         # Дым чёрный и идёт от потемневшего блока: просто «столб дыма на дальнем
         # плане» генератор читал как штатную трубу (Ярославль, 17.09).
         ev = event_label(lead) if lead else "удар по НПЗ"
-        if ev == "удар по нефтебазе":
+        # Подпись и сцена — по infra_label из gen-news (то же слово, что в H1: «терминалу»).
+        if lead and _gn is not None and _gn.infra_label(lead) == "терминалу":
+            ev = "удар по терминалу"
+        if ev == "удар по терминалу":
+            scene = scene_for("terminal", city, lead)
+        elif ev == "удар по нефтебазе":
             scene = ("Снято издалека, с дороги через поле: нефтебаза из белых "
                      "цилиндрических резервуаров на горизонте, заводских колонн нет. "
                      "Один резервуар почернел, над ним тонкий тёмный дымок, пожар уже "
@@ -231,18 +320,27 @@ def meta_for(date, brief):
     elif kind == "queue":
         scene = "длинная очередь машин на заправке"
     else:
-        scene = ("Снято издалека, с противоположного берега или с холма: городской район "
-                 "на горизонте, дома и деревья. Над одним повреждённым зданием тёмный "
-                 "столб дыма, остальной район выглядит обычным. Передний план — река, "
-                 "крыши или дорога")
-    event = "дефицит топлива, очереди" if kind == "queue" else event_label(lead)
+        # Тип места по цели лида: химзавод → промзона, автомобиль → дорога/улица,
+        # здание → городская улица. Неопознанное — прежний нейтральный городской вид.
+        _t = (str(lead.get("target", "")) + " " + str(lead.get("title", ""))).lower() if lead else ""
+        prof = next(((lab, sc) for keys, lab, sc in PROFILES if any(k in _t for k in keys)), None)
+        if prof:
+            prof_event = prof[0]
+            scene = scene_for(prof[1], city, lead)
+        else:
+            scene = ("Снято издалека, с холма: городской район на горизонте, дома и деревья. "
+                     "Над одним повреждённым зданием тёмный столб дыма, остальной район "
+                     "выглядит обычным. Передний план — дорога или крыши")
+    event = ("дефицит топлива, очереди" if kind == "queue" else
+             (prof_event or ev or event_label(lead)))
     # для моря кадр морской: «широкий городской план» тянул генератор к застройке
     frame = ("широкий морской план" if kind == "sea" else
              "широкий городской план" if kind == "queue" else
              "широкий план с большого расстояния, объект не заполняет кадр")
-    prompt = (f"Дневной документальный новостной фотоснимок: {look(city, kind)}. {scene}. "
-              f"Светлая ясная атмосфера, дневной свет/золотой час, фотожурналистика, НЕ мрачно и НЕ ночь. "
-              f"Реализм, {frame} 1200x630 горизонталь. БЕЗ текста и букв.")
+    _vil = kind == "city" and lead is not None and is_village(city, lead)
+    prompt = (f"Дневной документальный новостной фотоснимок: {look(city, 'village' if _vil else kind)}. {scene}. "
+              f"Светлая ясная атмосфера, дневной свет, фотожурналистика, НЕ мрачно и НЕ ночь. "
+              f"Реализм, {frame} 1200x630 горизонталь. {NO_PEOPLE} БЕЗ текста и букв.")
     # ponytail: морским сюжетам референс ВРЕДЕН. og:image статьи про удар по танкерам —
     # почти всегда фото завода/города, и img2img тянет кадр к нему сильнее, чем текст
     # промпта: пересбор 15.07 с референсом дал промышленный город с трубами вместо моря.
@@ -361,6 +459,55 @@ def codex_vps(m, ref, raw):
     return raw.exists()
 
 
+def cursor_gen(m, ref, raw):
+    """Cursor (cursor-agent, встроенный GenerateImage) на ЭТОЙ машине. True если raw записан.
+
+    Решение владельца 03.10.2026: на Маке обложки рисует Cursor. Работаем в отдельной
+    папке (cursor-agent кладёт файл в cwd), таймаут — perl alarm (timeout/gtimeout на
+    Маке нет). Размер у генератора плавает → центр-кроп под 40:21 перед подписью.
+    """
+    if not CURSOR_BIN:
+        return False
+    work = TMP / f"cursor-{raw.stem.replace('raw-', '')}"
+    shutil.rmtree(work, ignore_errors=True)
+    work.mkdir(parents=True, exist_ok=True)
+    name = "cover.png"
+    ref_part = ""
+    if ref and Path(ref).exists():
+        shutil.copy(ref, work / "reference.png")
+        ref_part = (" Файл reference.png в текущей папке — реальное фото события: сохрани его "
+                    "композицию и главный объект, водяные знаки и текст убери.")
+    instr = (f"Сгенерируй фотореалистичное изображение 1200x630 (горизонталь): {m['prompt']}{ref_part} "
+             f"Без текста, букв и логотипов. Сохрани как {name} в текущей папке.")
+    try:
+        r = subprocess.run(["perl", "-e", "alarm 300; exec @ARGV", CURSOR_BIN, "-p", "--force",
+                            "--output-format", "text", instr],
+                           cwd=str(work), timeout=330, capture_output=True, text=True,
+                           stdin=subprocess.DEVNULL)
+        png = work / name
+        if not png.exists():   # агент мог назвать файл иначе
+            cand = sorted(work.glob("*.png")) + sorted(work.glob("*.jpg")) + sorted(work.glob("*.webp"))
+            cand = [c for c in cand if c.name != "reference.png"]
+            png = cand[0] if cand else png
+        if not png.exists():
+            _tail("cursor", r)
+        else:
+            from PIL import Image
+            im = Image.open(png).convert("RGB")
+            w, h = im.size
+            tw = int(h * 1200 / 630)           # целевое соотношение 1200:630
+            if tw <= w:
+                x = (w - tw) // 2; im = im.crop((x, 0, x + tw, h))
+            else:
+                th = int(w * 630 / 1200); y = (h - th) // 2; im = im.crop((0, y, w, y + th))
+            im.save(raw, "PNG")
+    except Exception as e:  # noqa: BLE001
+        print("  cursor error:", e)
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+    return raw.exists()
+
+
 def openrouter_gen(m, ref, raw):
     """FALLBACK (платный, opt-in): сгенерить обложку через OpenRouter (nano-banana). True при успехе."""
     if not OPENROUTER_SCRIPT.exists():
@@ -408,10 +555,12 @@ def _build_one_locked(date, m):
 
     ref = None if m.get("no_ref") else fetch_ref(m["src"], TMP / f"ref-{date}.png")
 
-    # Цепочка бэкендов по порядку (дефолт: codex-vps → codex-local → openrouter).
+    # Цепочка бэкендов по порядку (дефолт: cursor → codex-vps → codex-local → openrouter).
     order = [b.strip() for b in os.environ.get("NPZ_COVER_BACKENDS", DEFAULT_BACKENDS).split(",") if b.strip()]
     mode = ""
     for be in order:
+        if be == "cursor" and cursor_gen(m, ref, raw):
+            mode = "cursor"; break
         if be == "codex-vps" and codex_vps(m, ref, raw):
             mode = "codex@vps" + ("(local)" if IS_VPS else "(ssh)"); break
         if be == "codex-local" and codex_local(m, ref, raw):
