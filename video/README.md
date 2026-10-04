@@ -78,6 +78,27 @@ ssh hermes-vps 'cd /root/npz-tactical-map/video && ./render.sh 2026-10-03'
 python3; Chrome HyperFrames скачает при первом `npx hyperframes browser ensure`).
 На M-серии ~15–50 с на ролик.
 
+## Ежедневный конвейер (daily.sh, cron Гермеса 18:10 UTC = 21:10 МСК)
+
+`daily.sh [дата]` — по очереди: ролик-сводка `render.sh` → `upload.py`; рилс `reel/render_reel.sh` →
+`upload.py reel`; ссылки на опубликованные ролики пишутся в `data/videos.json` и коммитятся через
+`agents/git-sync.sh` (страницы `/news/<дата>` показывают их после ночной пересборки); затем `cleanup.sh`.
+`NPZ_REEL=0` — без рилса. Квота YouTube API ≈ 6 загрузок в сутки (2 в день — с запасом).
+
+### Рилс (video/reel/)
+
+Карта сайта (скриншот `capture_map.mjs`, Chrome) → наезд на каждый из 3 ударов дня, табличка,
+3–5 с кадров очевидцев (`fetch_clips.py`: t.me, yt-dlp; кэш `reel/cache/`) → итог с адресом сайта и
+Telegram. Голос — edge-tts `ru-RU-DmitryNeural` (+25%), текст только из публичной сводки
+(`REEL_VOICE=0` — без голоса, `REEL_VOICE_NAME` — другой голос). Плашка/голос удлиняют сегмент под фразу.
+
+Зависимости на Гермесе (разово):
+```
+python3 -m venv ~/.local/share/edge-tts-venv && ~/.local/share/edge-tts-venv/bin/pip install edge-tts yt-dlp
+ln -sfn ~/.local/share/edge-tts-venv/bin/{edge-tts,yt-dlp} ~/.local/bin/
+```
+Chrome — `/usr/bin/google-chrome` (под root запускается с `--no-sandbox`).
+
 ## Звук
 
 - Эффекты синтезированы ffmpeg-ом (`sfx/make-sfx.sh`, ничего не скачивается):

@@ -6,12 +6,23 @@
 set -uo pipefail
 VIDEO="$(cd "$(dirname "$0")" && pwd)"
 cd "$VIDEO"
+export PATH="$HOME/.local/bin:$PATH"   # edge-tts, yt-dlp (venv, см. README)
 rc=0
-./render.sh "$@" || rc=$?
-if [ -f "${NPZ_YT_SECRETS:-$HOME/.config/npz-youtube}/token.json" ]; then
-  python3 upload.py || rc=$?
+DATE="${1:-$(python3 build.py latest)}"
+TOKEN="${NPZ_YT_SECRETS:-$HOME/.config/npz-youtube}/token.json"
+./render.sh "$DATE" || rc=$?
+if [ -f "$TOKEN" ]; then
+  python3 upload.py || rc=$?   # без даты — заодно дольёт пропущенные раньше
 else
   echo "daily: нет токена YouTube — загрузка пропущена"
+fi
+# рилс того же дня: карта -> удары с кадрами очевидцев -> итог, с голосом. NPZ_REEL=0 — выключить.
+if [ "${NPZ_REEL:-1}" = 1 ]; then
+  if ./reel/render_reel.sh "$DATE"; then
+    if [ -f "$TOKEN" ]; then python3 upload.py reel || rc=$?; fi
+  else
+    rc=$?; echo "daily: рилс $DATE не собран (rc=$rc)"
+  fi
 fi
 # реестр data/videos.json (ссылки на ролики со страниц /news) — общим безопасным синком данных
 if [ -n "$(git -C .. status --porcelain -- data/videos.json)" ]; then

@@ -10,10 +10,14 @@ if (!outJson) { console.error("usage: node capture_map.mjs targets.json out.jpg 
 const T = JSON.parse(fs.readFileSync(tFile, "utf8"));
 const URL_ = T.url || "https://npz-tactical-map.vercel.app/";
 const CSS_W = 2160, CSS_H = 3840, DPR = 1.5;   // кадр 3240×5760 px, 9:16
-const CHROME = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME = process.env.CHROME_PATH || ["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "/usr/bin/google-chrome", "/usr/bin/chromium-browser", "/usr/bin/chromium"].find(p => fs.existsSync(p));
+// под root (крон Гермеса) Chrome без --no-sandbox не стартует
+const ROOT = typeof process.getuid === "function" && process.getuid() === 0;
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: "new",
-  args: ["--no-first-run", "--disable-extensions", "--hide-scrollbars"] });
+  args: ["--no-first-run", "--disable-extensions", "--hide-scrollbars", "--disable-dev-shm-usage",
+         ...(ROOT ? ["--no-sandbox"] : [])] });
 try {
   const page = await browser.newPage();
   await page.setViewport({ width: CSS_W, height: CSS_H, deviceScaleFactor: DPR });
