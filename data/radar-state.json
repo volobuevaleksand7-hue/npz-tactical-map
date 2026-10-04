@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791076654,
-      "source_text": "04.10.2026 04:17 МСК\nТула Тульская область Сбитие БПЛА"
+      "last_event_ts": 1791079331,
+      "source_text": "04.10.2026 05:02 МСК\nРязанская область - опасность по БПЛА от Тульской области. 📡 Локатор России - @locatorru"
     },
     "Краснодарский край": {
       "bpla": false,
@@ -214,6 +214,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1791062080,
       "source_text": "04.10.2026 00:14 МСК\nБелгородская область, от Грайворона, тревога по БПЛА, начались фиксации от Гг."
+    },
+    "Рязанская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1791079331,
+      "source_text": "04.10.2026 05:02 МСК\nРязанская область - опасность по БПЛА от Тульской области. 📡 Локатор России - @locatorru"
     },
     "Калужская область": {
       "bpla": false,
@@ -3758,6 +3777,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1791059358,
       "source_text": "03.10.2026 23:29 МСК\nСчастье ЛНР ещё группа БПЛА на восток"
+    },
+    {
+      "key": "рязанская|рязанская область",
+      "name": "Рязанская",
+      "lat": 54.6299981,
+      "lon": 39.7378264,
+      "region": "Рязанская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791079331,
+      "source_text": "04.10.2026 05:02 МСК\nРязанская область - опасность по БПЛА от Тульской области. 📡 Локатор России - @locatorru"
     },
     {
       "key": "богучар|воронежская область",
@@ -7814,6 +7855,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 286185,
+      "text": "Джанкой и далее в направлении Симферопольского района, тревога по БПЛА\nРеспублика Крым",
+      "ts": 1791079515,
+      "time_label": "04.10.2026 05:05 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 88223,
+      "text": "Рязанская область - опасность по БПЛА от Тульской области.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1791079331,
+      "time_label": "04.10.2026 05:02 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 286184,
+      "text": "Республика Адыгея повторно\nвнимание по бпла",
+      "ts": 1791079140,
+      "time_label": "04.10.2026 04:59 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 88222,
       "text": "Майкоп, аэ.Ханская и близлежащие, Республика Адыгея - опасность по БПЛА ещё действует. Ещё фиксации БПЛА.\n📡\nЛокатор России -\n@locatorru",
       "ts": 1791079029,
@@ -8428,30 +8493,6 @@
       "time_label": "04.10.2026 01:52 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 95649,
-      "text": "Саратовская область\nОпасность по БПЛА",
-      "ts": 1791067896,
-      "time_label": "04.10.2026 01:51 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 95648,
-      "text": "Майкоп\nРеспублика Адыгея\nРабота ПВО по БПЛА",
-      "ts": 1791067874,
-      "time_label": "04.10.2026 01:51 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 95647,
-      "text": "Волгоград\nВолгоградская область\nРабота ПВО по БПЛА",
-      "ts": 1791067752,
-      "time_label": "04.10.2026 01:49 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -8461,15 +8502,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791079029,
-  "last_event_at": "2026-10-04T01:57:09Z",
-  "fetched_at": "2026-10-04T02:00:03.461008Z",
+  "timestamp": 1791079515,
+  "last_event_at": "2026-10-04T02:05:15Z",
+  "fetched_at": "2026-10-04T02:10:03.083278Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-10-04T02:00:03.461008Z",
-    "source_age_seconds": 174,
-    "city_count": 193,
-    "region_count": 33,
+    "generated_at": "2026-10-04T02:10:03.083278Z",
+    "source_age_seconds": 288,
+    "city_count": 194,
+    "region_count": 34,
     "feed_count": 80
   }
 }
