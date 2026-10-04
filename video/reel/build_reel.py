@@ -289,8 +289,6 @@ def strike_template(s, refs):
     head = f"{place}: {'атаки беспилотников' if n > 1 else 'атака беспилотников'}, {obj}."
     if f:
         head += " " + ", ".join(f)[:1].upper() + ", ".join(f)[1:] + "."
-    if str(s.get("confidence")) != "confirmed":
-        head += " По сообщениям местных источников."
     return speakable(head)
 
 
@@ -305,7 +303,8 @@ LLM_PROMPT = """ЭТО ЗАДАНИЕ НА ИСПОЛНЕНИЕ. Ничего н
 - что за объект и что произошло: пожар, повреждения, пострадавшие, остановка работы, последствия
   для людей (свет, тепло, топливо). Самое важное — первым;
 - ТОЛЬКО факты из входных данных. Ничего не добавляй и не додумывай. Нет фактов — «Сообщается об атаке беспилотников».
-- если confidence = reported — одна оговорка «по сообщениям» (или «по данным местных властей», если так в фактах);
+- НЕ пиши «по сообщениям», «по данным», «сообщается» — общая оговорка уже звучит во вступлении;
+  исключение — когда источник важен для смысла (например, «власти заявили об остановке завода»);
 - сухой нейтральный тон: без оценок, эпитетов, лозунгов, без слов «враг», «террорист», «доблестн»;
 - пиши для голоса: без скобок, кавычек, аббревиатур «БПЛА», «обл.», «г.», «р-н» — полными словами;
   числа цифрами.
@@ -354,7 +353,7 @@ def narration(date, sel, day, refs, build=None):
     n_fuel = sum(1 for s in day if s["cls"] == 2)
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
     lines = [("intro", f"{ORD[d].capitalize()} {MONTHS[m]}. {n} {G.plural(n, 'удар', 'удара', 'ударов')} "
-                       f"по России за сутки{tail}.")]
+                       f"по России за сутки{tail}. По данным открытых источников.")]
     cache = build / "narration.json" if build else None
     per = None
     if cache and cache.exists():
@@ -606,11 +605,11 @@ def tg_caption(date, sel, day, refs, clips):
     out = [f"🎬 <b>Удары за {G.rus_date(date)}</b>: {n}{tail}.", ""]
     for s in sel:
         k = len(s.get("_group", [s]))
-        out.append(f"• {html.escape(str(s.get('city') or s.get('region')))} — "
-                   f"{html.escape(object_name(s, refs))}{f' (×{k})' if k > 1 else ''}")
+        out.append(f"• {html.escape(str(s.get('city') or s.get('region')), quote=False)} — "
+                   f"{html.escape(object_name(s, refs), quote=False)}{f' (×{k})' if k > 1 else ''}")
     src = [c["src"] for c in clips if c]
     if src:
-        out += ["", "Кадры: " + ", ".join(html.escape(u.replace("https://", "")) for u in src)]
+        out += ["", "Кадры: " + ", ".join(html.escape(u.replace("https://", ""), quote=False) for u in src)]
     out += ["", f'<a href="https://{SITE_HOST}/news/{date}.html">Сводка дня</a> · '
                 f'<a href="https://{SITE_HOST}/">карта ударов</a>',
             "<i>ОЦЕНКА: открытые источники (OSINT), не официальная информация.</i>"]

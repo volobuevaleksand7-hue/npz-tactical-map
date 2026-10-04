@@ -21,7 +21,7 @@ import subprocess
 import sys
 import urllib.parse
 import urllib.request
-from datetime import date as _date, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 REEL = Path(__file__).resolve().parent
@@ -53,6 +53,7 @@ def download(url, dest: Path):
 # ───────────────────────────── Telegram ─────────────────────────────
 
 TG_RX = re.compile(r"https?://t\.me/(?:s/)?([A-Za-z0-9_]{4,})/(\d+)")
+TG_CHAN_RX = re.compile(r"https?://t\.me/(?:s/)?([A-Za-z0-9_]{4,})/?(?:\?.*)?$")
 
 
 def _text(block):
@@ -63,7 +64,7 @@ def _text(block):
 def _media(block):
     vids = re.findall(r'<video[^>]*src="([^"]+)"', block)
     photos = re.findall(r"message_photo_wrap[^>]*background-image:url\('([^']+)'\)", block)
-    when = (re.findall(r'datetime="([^"]+)"', block) or [""])[0][:10]
+    when = (re.findall(r'datetime="([^"]+)"', block) or [""])[0]   # ISO с часовым поясом
     return [html.unescape(v) for v in vids], [html.unescape(p) for p in photos], when
 
 
@@ -102,20 +103,32 @@ def city_stem(city):
 
 
 def date_ok(when, day):
+    """Пост про удар даты D: от 00:00 МСК D до 12:00 МСК D+1 (ночные удары, утренние досъёмки).
+    Шире нельзя: «±1 день» цеплял вчерашнюю атаку на тот же город (Калуга, 04.10)."""
     if not when:
         return True
-    d0 = _date.fromisoformat(day)
-    return when in {(d0 + timedelta(days=k)).isoformat() for k in (-1, 0, 1)}
+    try:
+        t = datetime.fromisoformat(when).astimezone(timezone(timedelta(hours=3))).replace(tzinfo=None)
+    except ValueError:
+        return when[:10] == day
+    d0 = datetime.fromisoformat(day)
+    return d0 <= t < d0 + timedelta(hours=36)
 
 
 def tg_candidates(strike):
     """Посты с медиа по удару: сам пост, затем соседние/поиск с городом и датой."""
     src = str(strike.get("source_url") or "")
     m = TG_RX.match(src)
-    if not m:
-        return []
-    chan, pid = m.group(1), int(m.group(2))
     stem, day = city_stem(strike.get("city")), str(strike.get("date"))[:10]
+    if not m:
+        # ссылка на канал целиком (t.me/s/<канал>) — только поиск поста с городом и датой;
+        # «последнее видео канала» (так делал yt-dlp) — почти всегда чужой удар (инцидент 04.10)
+        c = TG_CHAN_RX.match(src)
+        if not (c and stem):
+            return []
+        return [p for p in tg_search(c.group(1), stem)
+                if stem in p["text"].lower() and date_ok(p["date"], day) and (p["videos"] or p["photos"])]
+    chan, pid = m.group(1), int(m.group(2))
     first = tg_post(chan, pid)
     posts = [first] if first else []
     near = []
@@ -283,7 +296,7 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
             log(f"{p['url']}: видео не годится ({e})")
     if not res:
         src = str(strike.get("source_url") or "")
-        if src and not TG_RX.match(src):
+        if src and "t.me/" not in src:   # Telegram — только через пост/поиск выше
             raw = ytdlp(src, d)
             if raw:
                 try:
