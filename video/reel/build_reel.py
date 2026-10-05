@@ -335,6 +335,25 @@ LLM_PROMPT = """ЭТО ЗАДАНИЕ НА ИСПОЛНЕНИЕ. Ничего н
 """
 
 
+def line_problems(x):
+    """Критерий качества реплики/текста плашки по эталону 04.10: «Место: событие, итог»,
+    40–150 знаков, без перечней районов, россыпи цифр и многоточия. [] — реплика годна."""
+    bad = []
+    if not 40 <= len(x) <= 150:
+        bad.append(f"длина {len(x)}")
+    if not re.match(r"^[А-ЯЁ][^:.]{1,45}: ", x):
+        bad.append("нет «Место: …»")
+    if len(re.findall(r"\d+", x)) > 3:
+        bad.append("много цифр")
+    if len(re.findall(r"район|округ", x)) > 1:
+        bad.append("перечень районов")
+    if "…" in x or "..." in x:
+        bad.append("многоточие")
+    if re.search(r"(?i)\bпо (сообщениям|данным)\b", x):
+        bad.append("«по сообщениям»")
+    return bad
+
+
 def llm_lines(sel, refs):
     """Реплики по ударам от Haiku; None — нет claude/сети/ответ не прошёл проверку."""
     if os.environ.get("REEL_LLM", "1") == "0" or not shutil.which("claude"):
@@ -358,8 +377,8 @@ def llm_lines(sel, refs):
     out = []
     for x, s in zip(lines, sel):
         x = speakable(re.sub(r"\s+", " ", x).strip())
-        bad = N.text_reasons(x) if N else []
-        if not x or len(x) > 150 or bad:
+        bad = (N.text_reasons(x) if N else []) + line_problems(x)
+        if not x or bad:
             print(f"build_reel: реплика отклонена {bad or len(x)} — шаблон: {x!r}", file=sys.stderr)
             x = strike_template(s, refs)
         out.append(x)
@@ -524,14 +543,18 @@ def compose(date, build: Path):
         if c and c not in cities and len(c) <= 16:
             cities.append(c)
     date_rus = G.rus_date(date)
+    nar = dict(narration(date, sel, day, refs, build, broll))
     signs = []
     for i, s in enumerate(sel):
+        spoken = nar.get(f"s{i}", "")
+        body = re.sub(r"^[^:]{1,45}:\s*", "", spoken).strip()
+        body = (body[:1].upper() + body[1:]) if body else what_happened(s)
         conf = "подтверждено" if str(s.get("confidence")).lower() == "confirmed" else "сообщается"
         signs.append(f'''<div class="sign" id="sg{i}"><div class="sg-in">
           <div class="sg-row"><span class="sg-k k{s["cls"]}">{esc(kind_label(s).upper())}</span><span class="sg-d">{esc(G.rus_date_short(date))} · {conf}</span></div>
           <div class="sg-city">{esc(s.get("city") or s.get("region") or "")}</div>
           <div class="sg-obj">{esc(object_name(s, refs))}</div>
-          <div class="sg-txt">{esc(what_happened(s))}</div>
+          <div class="sg-txt">{esc(body)}</div>
         </div><div class="sg-stem"></div></div>''')
     videos, caps = [], []
     for seg in segs:
