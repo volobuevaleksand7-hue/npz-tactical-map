@@ -165,14 +165,24 @@ def kind_label(s):
 
 
 def dative_object(name):
-    """«Волгоградский НПЗ» -> «Волгоградскому НПЗ»; «ЛПДС «Самара»» -> без изменений."""
-    w = name.split(" ", 1)
+    """«Волгоградский НПЗ» -> «Волгоградскому НПЗ»; «Энергетическая подстанция» -> «Энергетической подстанции»;
+    «ЛПДС «Самара»» -> без изменений."""
+    w = name.split(" ")
+    if w[0].endswith(("ая", "яя")):          # женский род: прилагательное + существительное на -ия/-ция/-а
+        hush = w[0][-3:-2] in ("ж", "ш", "ч", "щ")
+        w[0] = w[0][:-2] + ("ой" if w[0].endswith("ая") and not hush else "ей")
+        if len(w) > 1:
+            n = w[1]
+            w[1] = n[:-2] + "ии" if n.endswith("ия") else (n[:-1] + "ы" if n.endswith("а") and not n.endswith(("жа", "ша", "ча", "ща")) else n)
+        return " ".join(w)
+    if len(w) == 1 and w[0].endswith(("ция", "база")):   # «Нефтебаза» -> «Нефтебазе», «Подстанция» -> «Подстанции»
+        return w[0][:-1] + ("и" if w[0].endswith("ция") else "е")
     first = w[0]
     for a, b in (("ский", "скому"), ("ный", "ному"), ("кий", "кому"), ("ой", "ому")):
         if first.endswith(a):
             first = first[: -len(a)] + b
             break
-    return first + (" " + w[1] if len(w) > 1 else "")
+    return " ".join([first] + w[1:])
 
 
 def fire_score(path):
