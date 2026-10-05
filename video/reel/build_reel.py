@@ -18,6 +18,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 REEL = Path(__file__).resolve().parent
@@ -374,7 +375,11 @@ def tts(text, out: Path):
     if not Path(exe).exists():
         return None
     voice = os.environ.get("REEL_VOICE_NAME", VOICE)
-    for _ in range(2):
+    # сервис Microsoft сбоит на сериях запросов подряд (NoAudioReceived) — повторы с нарастающей паузой
+    for attempt in range(5):
+        if attempt:
+            time.sleep(3 * attempt)
+        out.unlink(missing_ok=True)
         r = subprocess.run([exe, "--voice", voice, f"--rate={VOICE_RATE}", "--text", text, "--write-media", str(out)],
                            capture_output=True, timeout=90)
         if r.returncode == 0 and out.exists() and out.stat().st_size > 1000:
