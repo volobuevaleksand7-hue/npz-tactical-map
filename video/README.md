@@ -82,8 +82,8 @@ python3; Chrome HyperFrames скачает при первом `npx hyperframes 
 
 - **18:10 UTC (21:10 МСК) — `daily.sh [дата]`:** ролик-сводка `render.sh` → `upload.py` → реестр
   `data/videos.json` через `agents/git-sync.sh` → `cleanup.sh`.
-- **06:40 UTC (выход ≈10:00 МСК) — `reel/morning.sh [дата]`:** рилс ВЧЕРАШНЕГО дня (к утру сборщики
-  ударов день закрыли) → `upload.py reel` → `tg_post.py reel` (канал @npz_karta_online, только анонимный
+- **18:30 UTC (21:30 МСК, выход ≈21:45) — `reel/daily.sh [дата]`:** рилс СЕГОДНЯШНЕГО дня (новости дня —
+  в тот же день; после вечернего прогона сборщика ударов 16:35 UTC, запоздавшие удары — в сводке и на карте) → `upload.py reel` → `tg_post.py reel` (канал @npz_karta_online, только анонимный
   бот из `hermes/bot/channel_mirror.py`, видео пережимается до 720p < 50 МБ) → реестр → очистка.
 
 Страницы `/news/<дата>` показывают ссылки из `data/videos.json` после ночной пересборки.
