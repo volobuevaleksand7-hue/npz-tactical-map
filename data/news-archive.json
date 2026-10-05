@@ -1273,24 +1273,38 @@
     "region": "Вологодская область",
     "lat": 59.22,
     "lon": 39.89,
-    "level": "limited",
-    "updated": "2026-09-30T05:46:23.202307Z",
+    "level": "strained",
+    "updated": "2026-10-05T05:30:00Z",
     "networks": [
      {
-      "name": "Газпромнефть/Лукойл/Роснефть",
+      "name": "Лукойл",
       "status": "limited",
-      "level": "limited",
+      "level": "strained",
       "limit_l": 30,
-      "note": "18.09: Восстановилась! Поставки 700т/день восстановлены к 10.09. Дефицит ликвидируется. Ситуация улучшается. Подача выросла на 50%."
+      "note": "05.10 WebSearch: 90% АЗС, лимит поднят"
+     },
+     {
+      "name": "Газпром Нефть",
+      "status": "open",
+      "level": "calm",
+      "limit_l": null,
+      "note": "05.10 WebSearch: Поставки есть"
+     },
+     {
+      "name": "Tatneft",
+      "status": "open",
+      "level": "calm",
+      "limit_l": null,
+      "note": "05.10 WebSearch: Регулярные поставки"
      }
     ],
-    "queues_hours": 0.2,
-    "ai95_price_rub": 91.31,
-    "diesel_price_rub": 80.0,
+    "queues_hours": 0.0,
+    "ai95_price_rub": 77.48,
+    "diesel_price_rub": 83.9,
     "source_urls": [
-     "https://tass.ru/ekonomika/28072473"
+     "https://finance.mail.ru/article/vologodskaya-oblast-smyagchila-toplivnyj-rezhim-na-azs-lukojl-69217721/"
     ],
-    "note": "На Вологодчине объемы поставок топлива планируют ..."
+    "note": "05.10 WebSearch: Улучшилась. Лимиты 30л, поставки восстановлены."
    },
    {
     "region": "Республика Мордовия",
@@ -1492,46 +1506,67 @@
     "lat": 56.12,
     "lon": 40.39,
     "level": "critical",
-    "updated": "2026-09-30T05:46:23.202307Z",
+    "updated": "2026-10-05T05:30:00Z",
     "networks": [
      {
-      "name": "Все сети",
+      "name": "Лукойл",
       "status": "limited",
       "level": "critical",
-      "limit_l": 30,
-      "note": "18.09: Дефицит АИ-95 ОСТРЫЙ. На многих АЗС нет АИ-95 вообще. Многочасовые очереди (до 150 машин). Лимиты 25-30л. Острый кризис второй волны."
+      "limit_l": null,
+      "note": "05.10 WebSearch: Очереди, основной оператор"
+     },
+     {
+      "name": "Газпром Нефть",
+      "status": "limited",
+      "level": "critical",
+      "limit_l": null,
+      "note": "05.10 WebSearch: Перебои в поставках"
+     },
+     {
+      "name": "Независимые АЗС",
+      "status": "open",
+      "level": "calm",
+      "limit_l": null,
+      "note": "05.10 WebSearch: Только АИ-92"
      }
     ],
-    "queues_hours": 2.5,
-    "ai95_price_rub": 81.2,
-    "diesel_price_rub": 85.86,
+    "queues_hours": 2.0,
+    "ai95_price_rub": 70.93,
+    "diesel_price_rub": 81.03,
     "source_urls": [
-     "https://vlad.aif.ru/society/novosti-vladimira-24-sentyabrya-otboy-bpla-konflikt-na-azs-i-gromkie-dela"
+     "https://gdezapravka.ru/zapravki/oblast/vladimirskaya-oblast"
     ],
-    "note": "Новости Владимира 24 сентября 2026: отбой беспилотной опасности, потасовка на АЗС и громкие дела | АиФ Владимир"
+    "note": "05.10 WebSearch: Критична. Очереди 2ч, только 14% АЗС работают."
    },
    {
     "region": "Краснодарский край (Черноморское побережье)",
     "lat": 43.4,
     "lon": 39.5,
-    "level": "critical",
-    "updated": "2026-09-30T05:46:23.202307Z",
+    "level": "severe",
+    "updated": "2026-10-05T05:30:00Z",
     "networks": [
      {
-      "name": "Побережье (Геленджик/Новороссийск/Анапа)",
+      "name": "Лукойл",
       "status": "limited",
-      "level": "critical",
+      "level": "severe",
       "limit_l": 30,
-      "note": "18.09: 120 АЗС закрыто. Острый дефицит туристического сезона. АИ-95 редко. Лимит 30л. Очереди 2+ часа. Туристический спрос упал на 20%."
+      "note": "05.10 WebSearch: Основной оператор Сочи/Анапы"
+     },
+     {
+      "name": "Независимые",
+      "status": "closed",
+      "level": "critical",
+      "limit_l": null,
+      "note": "05.10 WebSearch: Практически исчерпаны"
      }
     ],
-    "queues_hours": 2.5,
-    "ai95_price_rub": 90.0,
-    "diesel_price_rub": 85.0,
+    "queues_hours": 1.0,
+    "ai95_price_rub": 73.92,
+    "diesel_price_rub": 77.04,
     "source_urls": [
-     "https://ufocar.ru/v-tsentre-sobytij/situacziya-na-trasse-m-4-don-30-iyulya-gde-est-benzin-ocheredi-i-chto-proishodit-po-doroge-k-moryu"
+     "https://www.avtovzglyad.ru/obshestvo/dorogi/73280-2026-07-09-estli-benzin-vkrasnodarskom-krae-segodnya-realnyie-tsenyi-ocheredi-nazapravkah-isituatsiya-nayuge-rossii/"
     ],
-    "note": "Ситуация на трассе М-4 «Дон» 30 июля 2026: где есть ..."
+    "note": "05.10 WebSearch: SEVERE. Туристический сезон, очереди."
    },
    {
     "region": "Ставропольский край",
