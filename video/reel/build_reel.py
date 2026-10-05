@@ -227,7 +227,7 @@ def prepare(date, build: Path):
     (build / "assets").mkdir(exist_ok=True)
     clips = []
     for s in sel:
-        c = FC.fetch_for(s, build / "assets") if s["cls"] >= 1 else None
+        c = FC.fetch_for(s, build / "assets") if os.environ.get("REEL_CLIPS_MIN_CLS", "0") <= str(s["cls"]) else None
         clips.append(c)
     used = {c["src"] for c in clips if c}
     broll = FC.day_broll(date, used, n=int(os.environ.get("REEL_BROLL", "0")), out_dir=build / "assets") \
