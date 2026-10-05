@@ -254,12 +254,13 @@ def to_vertical(src, start, seg, dest: Path):
     """9:16 без звука: горизонталь — увеличенный центр поверх размытого фона (кадр заполнен),
     вертикаль — cover-кроп. Края с логотипами каналов частично срезаются."""
     w, h, _ = probe(src)
+    dl = delogo_filter(src, w, h)
     if h >= w * 1.4:   # вертикальное видео
-        vf = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1"
-        fc = None
+        fc = f"[0:v]{dl}scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1[v]"
+        vf = None
     else:
         fg_w = int(W * 1.5) // 2 * 2  # чуть больше ширины кадра — режем края (там часто логотипы)
-        fc = (f"[0:v]split=2[a][b];"
+        fc = (f"[0:v]{dl}split=2[a][b];"
               f"[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},boxblur=28:2,eq=brightness=-0.12[bg];"
               f"[b]scale={fg_w}:-2,crop={W}:ih[fg];"
               f"[bg][fg]overlay=0:(H-h)/2-60,setsar=1[v]")
@@ -273,6 +274,27 @@ def to_vertical(src, start, seg, dest: Path):
             "-movflags", "+faststart", str(dest)]
     subprocess.run(cmd, check=True, timeout=300)
     return dest
+
+
+# водяной знак канала-источника: центральный логотип (доли кадра x0,y0,x1,y1); фильтр delogo заменяет
+# область интерполяцией соседних пикселей. Бледная диагональная надпись по всему кадру остаётся.
+WATERMARKS = {"exilenova": (0.345, 0.468, 0.652, 0.53)}
+
+
+def delogo_filter(src, w, h):
+    """Префикс цепочки ffmpeg для источников с известным знаком: delogo по точным границам логотипа
+    (интерполяция соседних пикселей) + лёгкое размытие заплатки, чтобы сгладить полосы. Бледная
+    диагональная надпись по всему кадру остаётся. Иначе — пусто."""
+    if os.environ.get("REEL_DELOGO", "1") == "0":
+        return ""
+    for key, (x0, y0, x1, y1) in WATERMARKS.items():
+        if key in str(src).lower():
+            x, y = max(int(w * x0), 1), max(int(h * y0), 1)
+            bw, bh = min(int(w * (x1 - x0)), w - x - 2), min(int(h * (y1 - y0)), h - y - 2)
+            return (f"delogo=x={x}:y={y}:w={bw}:h={bh},split=2[wm0][wm1];"
+                    f"[wm1]crop={bw + 24}:{bh + 24}:{max(x - 12, 0)}:{max(y - 12, 0)},gblur=sigma=9[wmb];"
+                    f"[wm0][wmb]overlay={max(x - 12, 0)}:{max(y - 12, 0)},")
+    return ""
 
 
 def photo_clip(img, seg, dest: Path):
