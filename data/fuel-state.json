@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-05T18:30:00Z",
+    "generated_at": "2026-10-05T21:27Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -208,10 +208,10 @@
       "status": "down",
       "status_since": "2026-10-02",
       "est_output_pct": 0,
-      "damage": "Повреждены ключевые установки первичной переработки (АВТ-1 и АВТ-6) в результате массированной атаки дронов 2 октября 2026 г. ночью, пожар в промышленной зоне подтверждён спутниковыми данными.",
+      "damage": "пожар в жилом доме, один пострадавший",
       "note": "На 5 октября завод полностью остановлен после новой атаки. Завод производит ~4% российского топлива (15.7 млн т/год). Волна повторных ударов: данная атака не первая в 2026 году. Восстановление требует недель отсутствия новых ударов.",
-      "source_url": "https://ru.themoscowtimes.com/2026/10/02/v-volgograde-posle-massirovannoi-ataki-dronov-vspihnul-pozhar-v-raione-himzavoda-i-odnogo-iz-krupneishih-npz-rossii-a207592",
-      "confidence": "confirmed"
+      "source_url": "https://www.ptoday.ru/15582-ataka-bespilotnikov-na-rossiju-v-noch-na-5-oktjabrja-regiony-postradavshie-i-svezhie-dannye.html",
+      "confidence": "reported"
     },
     {
       "id": "omsk",
@@ -880,6 +880,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-05",
+      "text": "Удар по Волгоградский НПЗ (Волгоград): Удар по жилому дому в Волгограде",
+      "source_url": "https://www.ptoday.ru/15582-ataka-bespilotnikov-na-rossiju-v-noch-na-5-oktjabrja-regiony-postradavshie-i-svezhie-dannye.html"
+    },
     {
       "date": "2026-10-05",
       "text": "Калужская область введена система «чет-нечет» по регистрационным знакам (с 4 октября). Запрет на продажу в канистры. Забайкальский край ввёл лимит 15 л в сутки на АЗС. Дефицит топлива проявляется во всё новых регионах."
