@@ -220,8 +220,8 @@ def prepare(date, build: Path):
         c = FC.fetch_for(s, build / "assets") if s["cls"] >= 1 else None
         clips.append(c)
     used = {c["src"] for c in clips if c}
-    broll = FC.day_broll(date, used, n=int(os.environ.get("REEL_BROLL", "3")), out_dir=build / "assets") \
-        if os.environ.get("REEL_BROLL", "3") != "0" else []
+    broll = FC.day_broll(date, used, n=int(os.environ.get("REEL_BROLL", "0")), out_dir=build / "assets") \
+        if os.environ.get("REEL_BROLL", "0") != "0" else []
     (build / "broll.json").write_text(json.dumps(broll, ensure_ascii=False), encoding="utf-8")
     pts = [{"id": f"s{i}", "lat": s["lat"], "lon": s["lon"]} for i, s in enumerate(sel)]
     pts += [{"id": f"d{i}", "lat": s["lat"], "lon": s["lon"]} for i, s in enumerate(day) if s["lat"] is not None]
