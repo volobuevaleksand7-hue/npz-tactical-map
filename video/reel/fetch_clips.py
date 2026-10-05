@@ -15,6 +15,7 @@
 """
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -28,6 +29,13 @@ REEL = Path(__file__).resolve().parent
 CACHE = REEL / "cache"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36"
 SEG = 4.0          # длина отрезка, с
+# каналы с видео ударов: поиск по городу идёт и по ним, даже если source_url удара — новостной сайт
+CHANNELS = [c for c in os.environ.get("REEL_CHANNELS", "exilenova_plus").split(",") if c]
+ATTACK_RX = re.compile(r"взрыв|вибух|пожар|пожеж|бпла|беспилот|дрон|атак|удар|нпз|нефт|нафт|склад|пво|горит|палає|"
+                       r"прилёт|приліт|обстрел", re.I)
+# оккупированные/чужие территории — рилс про удары по России, такие кадры не берём
+OCC_RX = re.compile(r"окуп|крим|крым|севастоп|донец|донеч|мелітоп|мелитоп|херсон|запоріж|запорож|луганс|"
+                    r"маріупол|мариупол|волноваx|волноваха|бердянськ|бердянск|мост", re.I)
 W, H = 1080, 1920
 
 
@@ -115,7 +123,49 @@ def date_ok(when, day):
     return d0 <= t < d0 + timedelta(hours=36)
 
 
+def channel_posts(chan, pages=8):
+    """Свежие посты канала (t.me/s/<канал>, листание ?before=) — для кадров «хроники дня»."""
+    out, before = [], None
+    for _ in range(pages):
+        try:
+            page = get(f"https://t.me/s/{chan}" + (f"?before={before}" if before else "")).decode("utf-8", "replace")
+        except Exception as e:  # noqa: BLE001
+            log(f"t.me/s/{chan}: {e}")
+            break
+        ids = []
+        for block in page.split('class="tgme_widget_message_wrap')[1:]:
+            m = re.search(r'data-post="([^"/]+)/(\d+)"', block)
+            if not m:
+                continue
+            ids.append(int(m.group(2)))
+            vids, photos, when = _media(block)
+            out.append({"url": f"https://t.me/{m.group(1)}/{m.group(2)}", "videos": vids, "photos": photos,
+                        "date": when, "text": _text(block)})
+        if not ids:
+            break
+        before = min(ids)
+    return out
+
+
 def tg_candidates(strike):
+    """Посты по удару: из source_url, а если медиа нет — поиск города по известным каналам."""
+    posts = _own_candidates(strike)
+    if any(p["videos"] or p["photos"] for p in posts):
+        return posts
+    stem, day = city_stem(strike.get("city")), str(strike.get("date"))[:10]
+    if not stem:
+        return posts
+    seen = {p["url"] for p in posts}
+    for chan in CHANNELS:
+        for p in tg_search(chan, stem):
+            if p["url"] not in seen and stem in p["text"].lower() and ATTACK_RX.search(p["text"]) \
+                    and date_ok(p["date"], day) and (p["videos"] or p["photos"]):
+                posts.append(p)
+                seen.add(p["url"])
+    return posts
+
+
+def _own_candidates(strike):
     """Посты с медиа по удару: сам пост, затем соседние/поиск с городом и датой."""
     src = str(strike.get("source_url") or "")
     m = TG_RX.match(src)
@@ -326,6 +376,37 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
         log(f"{strike.get('city')}: {res['kind']} из {res['src']}")
     else:
         log(f"{strike.get('city')}: кадров нет — будет только табличка")
+    return res
+
+
+def day_broll(date, used_src, n=3, seg=3.2, out_dir: Path = None):
+    """Кадры дня без привязки к городу: свежие видео-посты каналов за сутки про атаки/пожары,
+    не из оккупированных территорий, не повторяющие уже взятые. -> [{"file","src","dur","orig"}]."""
+    out_dir = out_dir or CACHE
+    cands = []
+    for chan in CHANNELS:
+        for p in channel_posts(chan):
+            if p["videos"] and p["url"] not in used_src and ATTACK_RX.search(p["text"]) \
+                    and not OCC_RX.search(p["text"]) and date_ok(p["date"], date):
+                cands.append(p)
+    res = []
+    for p in cands:
+        if len(res) >= n:
+            break
+        d = CACHE / "broll"
+        d.mkdir(parents=True, exist_ok=True)
+        try:
+            raw = download(p["videos"][0], d / f"{slug(p['url'])}.mp4")
+            w, h, dur = probe(raw)
+            if dur < 2.5 or min(w, h) < 400:
+                continue
+            sg = min(seg, dur - 0.2)
+            final = out_dir / f"broll-{slug(p['url'])}.mp4"
+            to_vertical(raw, best_window(raw, dur, sg), sg, final)
+            res.append({"file": final.name, "kind": "video", "src": p["url"], "dur": round(sg, 2), "orig": f"{w}x{h}"})
+        except Exception as e:  # noqa: BLE001
+            log(f"{p['url']}: хроника — видео не годится ({e})")
+    log(f"хроника дня: {len(res)} из {len(cands)} кандидатов")
     return res
 
 

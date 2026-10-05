@@ -219,6 +219,10 @@ def prepare(date, build: Path):
     for s in sel:
         c = FC.fetch_for(s, build / "assets") if s["cls"] >= 1 else None
         clips.append(c)
+    used = {c["src"] for c in clips if c}
+    broll = FC.day_broll(date, used, n=int(os.environ.get("REEL_BROLL", "3")), out_dir=build / "assets") \
+        if os.environ.get("REEL_BROLL", "3") != "0" else []
+    (build / "broll.json").write_text(json.dumps(broll, ensure_ascii=False), encoding="utf-8")
     pts = [{"id": f"s{i}", "lat": s["lat"], "lon": s["lon"]} for i, s in enumerate(sel)]
     pts += [{"id": f"d{i}", "lat": s["lat"], "lon": s["lon"]} for i, s in enumerate(day) if s["lat"] is not None]
     targets = {"bounds": map_bounds([(p["lat"], p["lon"]) for p in pts]), "points": pts,
@@ -346,7 +350,7 @@ def llm_lines(sel, refs):
     return out
 
 
-def narration(date, sel, day, refs, build=None):
+def narration(date, sel, day, refs, build=None, broll=()):
     """[(ключ, текст)]: intro, s0..sN, outro. Числа — всегда скрипт; реплики по ударам — Haiku
     (только факты из сводки, проверка нейтральности) или шаблон. Кэш — build/narration.json."""
     y, m, d = (int(x) for x in date.split("-"))
@@ -365,6 +369,8 @@ def narration(date, sel, day, refs, build=None):
         if cache:
             cache.write_text(json.dumps(per, ensure_ascii=False, indent=1), encoding="utf-8")
     lines += [(f"s{i}", t) for i, t in enumerate(per)]
+    if broll:
+        lines.append(("broll", "Кадры за сутки из открытых источников. Привязка к месту не подтверждена."))
     lines.append(("outro", "Карта всех ударов — по ссылке в описании."))
     return lines
 
@@ -409,13 +415,15 @@ def compose(date, build: Path):
     sel, day = select_strikes(date)
     _, refs = load_day(date)
     clips = json.loads((build / "clips.json").read_text(encoding="utf-8"))
+    bf = build / "broll.json"
+    broll = json.loads(bf.read_text(encoding="utf-8")) if bf.exists() else []
     mp = json.loads((build / "map-points.json").read_text(encoding="utf-8"))
     P = {p["id"]: p for p in mp["points"]}
     IW, IH = mp["w"], mp["h"]
     (build / "voice").mkdir(exist_ok=True)
     vo = {}  # ключ -> (файл, длительность)
     if os.environ.get("REEL_VOICE", "1") != "0":
-        for k, text in narration(date, sel, day, refs, build):
+        for k, text in narration(date, sel, day, refs, build, broll):
             f = build / "voice" / f"{k}.mp3"
             d = tts(text, f)
             if d is None:
@@ -462,6 +470,21 @@ def compose(date, build: Path):
             seg.update(dive=None, end=round(t, 2))
             cam.append({"t": t, "x": p["x"], "y": p["y"], "s": SZ * 1.04, "dip": 0})
         segs.append(seg)
+    brolls = []
+    if broll:   # «хроника дня»: кадры без привязки к городу, на весь экран, пока звучит оговорка
+        t += 0.2
+        if "broll" in vo:
+            voice.append({"file": vo["broll"][0], "t": round(t + 0.3, 2)})
+        b_total = sum(float(b["dur"]) for b in broll) + 0.3 * len(broll)
+        t0 = t
+        for j, b in enumerate(broll):
+            v0 = t + 0.1
+            v1 = v0 + float(b["dur"])
+            brolls.append({"j": j, "v0": round(v0, 2), "v1": round(v1, 2), "clip": b["file"], "src": b["src"]})
+            sfx.append(("impact" if j == 0 else "click", v0))
+            t = v1 + 0.2
+        t = max(t, t0 + 0.3 + vdur("broll") + 0.4)
+        cam.append({"t": t, "x": cam[-1]["x"], "y": cam[-1]["y"], "s": cam[-1]["s"], "dip": 0})
     outro = round(t + 0.15, 2)
     cam.append({"t": outro + 0.6, "x": cx0, "y": cy0 + IH * 0.04, "s": S0 * 1.05, "dip": 0})
     sfx.append(("whoosh", outro - 0.2))
@@ -510,6 +533,17 @@ def compose(date, build: Path):
           <div class="lt-src">{what} · открытые Telegram-каналы</div>
         </div>''')
 
+    for b in brolls:
+        j = b["j"]
+        dur = round(b["v1"] - b["v0"] + 0.35, 2)
+        videos.append(f'<div class="fw" id="bw{j}"><video id="bv{j}" class="clip" src="assets/{esc(b["clip"])}" muted playsinline '
+                      f'data-start="{b["v0"]}" data-duration="{dur}" data-track-index="{60 + j}"></video></div>')
+        caps.append(f'''<div class="lt" id="bl{j}">
+          <div class="lt-top"><i></i>КАДРЫ ДНЯ · {esc(G.rus_date_short(date))}</div>
+          <div class="lt-obj">Хроника суток</div>
+          <div class="lt-src">привязка к месту не подтверждена · открытые Telegram-каналы</div>
+        </div>''')
+
     marks = []
     for k, p in P.items():
         if k.startswith("d"):
@@ -542,7 +576,7 @@ def compose(date, build: Path):
     pcities = " · ".join(c.upper() for c in cities[:3])
 
     plan = {"total": total, "poster": POSTER, "cam": cam, "segs": segs, "marks": marks,
-            "outro": outro, "IW": IW, "IH": IH, "dive": DIVE}
+            "outro": outro, "IW": IW, "IH": IH, "dive": DIVE, "broll": brolls}
     subs = {
         "TOTAL": total, "POSTER_END": POSTER + 0.35, "POSTER_BG": poster_bg,
         "POSTER_TITLE": esc(ptitle), "POSTER_TSIZE": 150 if len(ptitle) <= 22 else (124 if len(ptitle) <= 30 else 104),
@@ -566,13 +600,13 @@ def compose(date, build: Path):
     mixplan = {"date": date, "total": total,
                "sfx": [{"name": a, "t": round(max(0, x), 2)} for a, x in sfx], "voice": voice}
     (build / "plan.json").write_text(json.dumps(mixplan, ensure_ascii=False, indent=1), encoding="utf-8")
-    (build / "description.txt").write_text(describe(date, sel, day, refs, segs, clips), encoding="utf-8")
-    (build / "tg_caption.txt").write_text(tg_caption(date, sel, day, refs, clips), encoding="utf-8")
+    (build / "description.txt").write_text(describe(date, sel, day, refs, segs, clips, broll), encoding="utf-8")
+    (build / "tg_caption.txt").write_text(tg_caption(date, sel, day, refs, clips, broll), encoding="utf-8")
     print(json.dumps({"date": date, "total": total, "strikes": [s.get("city") for s in sel],
-                      "footage": [c and c["src"] for c in clips]}, ensure_ascii=False))
+                      "footage": [c and c["src"] for c in clips], "broll": [b["src"] for b in broll]}, ensure_ascii=False))
 
 
-def describe(date, sel, day, refs, segs, clips):
+def describe(date, sel, day, refs, segs, clips, broll):
     n = len(day)
     fuel = [s for s in sel if s["cls"] == 2]
     if fuel:
@@ -592,7 +626,7 @@ def describe(date, sel, day, refs, segs, clips):
     n_fuel = sum(1 for s in day if s["cls"] == 2)
     lines += ["", f"Всего за сутки: {n} {G.plural(n, 'удар', 'удара', 'ударов')}, из них {n_fuel} — по НПЗ, "
               f"нефтепроводам и энергетике."]
-    src = [c["src"] for c in clips if c]
+    src = [c["src"] for c in list(clips) + list(broll) if c]
     if src:
         lines += ["", "Кадры: открытые Telegram-каналы:"] + [f"— {u}" for u in src]
     lines += ["", f"Сводка дня: https://{SITE_HOST}/news/{date}.html",
@@ -602,7 +636,7 @@ def describe(date, sel, day, refs, segs, clips):
     return "\n".join(lines) + "\n"
 
 
-def tg_caption(date, sel, day, refs, clips):
+def tg_caption(date, sel, day, refs, clips, broll):
     """Подпись к ролику в Telegram-канале (лимит 1024). Ссылку на YouTube добавляет tg_post.py."""
     n = len(day)
     n_fuel = sum(1 for s in day if s["cls"] == 2)
@@ -612,7 +646,7 @@ def tg_caption(date, sel, day, refs, clips):
         k = len(s.get("_group", [s]))
         out.append(f"• {html.escape(str(s.get('city') or s.get('region')), quote=False)} — "
                    f"{html.escape(object_name(s, refs), quote=False)}{f' (×{k})' if k > 1 else ''}")
-    src = [c["src"] for c in clips if c]
+    src = [c["src"] for c in list(clips) + list(broll) if c]
     if src:
         out += ["", "Кадры: " + ", ".join(html.escape(u.replace("https://", ""), quote=False) for u in src)]
     out += ["", f'<a href="https://{SITE_HOST}/news/{date}.html">Сводка дня</a> · '

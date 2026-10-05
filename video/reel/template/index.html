@@ -264,6 +264,14 @@
           const l = lts[i], lu = outC(ramp(t, s.v0 + 0.25, s.v0 + 0.75)) * (1 - ramp(t, s.v1 - 0.2, s.v1 + 0.1));
           l.style.opacity = lu; l.style.transform = `translateX(${(1 - lu) * -80}px)`;
         });
+        P.broll.forEach(b => {
+          const a = clamp((t - b.v0) / 0.22) * (1 - ramp(t, b.v1, b.v1 + 0.2));
+          const w = $("bw" + b.j); w.style.opacity = a;
+          w.style.transform = `scale(${1.1 - 0.1 * outC(ramp(t, b.v0, b.v0 + 0.5))})`;
+          anyV = Math.max(anyV, a);
+          const l = $("bl" + b.j), lu = outC(ramp(t, b.v0 + 0.15, b.v0 + 0.55)) * (1 - ramp(t, b.v1 - 0.15, b.v1 + 0.05));
+          l.style.opacity = lu; l.style.transform = `translateX(${(1 - lu) * -80}px)`;
+        });
         $("fhud").style.opacity = anyV;
 
         // HUD карты
