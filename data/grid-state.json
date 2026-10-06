@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-03T18:15:00Z",
+    "generated_at": "2026-10-06T19:45:00Z",
     "updated_by": "agent:grid-status",
     "data_mode": "OSINT / ESTIMATE",
     "confidence": "Состояние подстанций, ТЭС и регионов с отключениями — по открытым источникам (региональные СМИ, заявления Россетей, тг-каналы губернаторов, заявления МАГАТЭЕ, Ukrenergo). Не official.",
@@ -9,14 +9,26 @@
   "substations": [
     {
       "id": "volgograd_substation_1",
-      "name": "Трансформаторная подстанция в Волгограде",
+      "name": "Подстанция Балашовская (ЛЭП)",
       "operator": "Россети Волга",
       "lat": 48.7093,
       "lon": 44.2769,
       "status": "damaged",
-      "status_since": "2026-10-02",
-      "damage": "Пожар на трансформаторной подстанции в результате атаки БПЛА",
-      "source_url": "https://kazan.aif.ru/incidents/details/nochnaya-ataka-ataka-bpla-na-volgograd-2-oktyabrya-postradavshie-i-povrezhdeniya",
+      "status_since": "2026-10-25",
+      "damage": "Повторная атака БПЛА 25 октября — пожар на подстанции. Предыдущая атака была 16 октября. Восстановление в процессе.",
+      "source_url": "https://fakty.com.ua/ru/svit/20251025-u-volgogradskij-oblasti-atakovano-pidstancziyu-lep-balashovska-tam-stalasya-pozhezha/",
+      "confidence": "reported"
+    },
+    {
+      "id": "ulyanovsk_veshkayma_substation_1",
+      "name": "Подстанция Вешкайма",
+      "operator": "Федеральная сетевая компания",
+      "lat": 51.8,
+      "lon": 46.9,
+      "status": "damaged",
+      "status_since": "2026-10-18",
+      "damage": "Удар БПЛА в ночь на 18 октября — четыре дрона попали, два взрыва. Потеря объекта подтверждена украинской стороной.",
+      "source_url": "https://news.liga.net/en/amp/politics/news/drones-hit-veshkayma-substation-in-russia-ukraine-says-russians-lost-the-facility-video",
       "confidence": "reported"
     },
     {
@@ -134,10 +146,32 @@
       "lon": 44.2769,
       "scope": "partial",
       "affected_population": 0,
-      "cause": "Пожар на трансформаторной подстанции в результате атаки БПЛА",
-      "since": "2026-10-02",
-      "source_url": "https://kazan.aif.ru/incidents/details/nochnaya-ataka-ataka-bpla-na-volgograd-2-oktyabrya-postradavshie-i-povrezhdeniya",
-      "note": "Пожар локализован, восстановление в процессе."
+      "cause": "Удары БПЛА по подстанции Балашовской (16 и 25 октября), пожар на инфраструктуре",
+      "since": "2026-10-16",
+      "source_url": "https://fakty.com.ua/ru/svit/20251025-u-volgogradskij-oblasti-atakovano-pidstancziyu-lep-balashovska-tam-stalasya-pozhezha/",
+      "note": "Первая атака 16 октября, повторная 25 октября. Восстановление в процессе."
+    },
+    {
+      "region": "Белгородская область",
+      "lat": 50.6,
+      "lon": 35.7,
+      "scope": "rolling",
+      "affected_population": 0,
+      "cause": "Массированные удары БПЛА по энергоинфраструктуре в октябре 2026",
+      "since": "2026-10-01",
+      "source_url": "https://novayagazeta.eu/amp/articles/2025/11/17/chislo-otkliuchenii-sveta-v-rf-v-2025-godu-vyroslo-na-tret-podschitala-novaia-evropa-news",
+      "note": "Зафиксировано 51 случай отключения электричества в октябре 2026 из-за ударов БПЛА. Рост по сравнению с сентябрём (34 случая) и августом (16 случаев)."
+    },
+    {
+      "region": "Уляновская область",
+      "lat": 54.3,
+      "lon": 48.4,
+      "scope": "partial",
+      "affected_population": 0,
+      "cause": "Удар БПЛА по подстанции Вешкайма в ночь на 18 октября",
+      "since": "2026-10-18",
+      "source_url": "https://news.liga.net/en/amp/politics/news/drones-hit-veshkayma-substation-in-russia-ukraine-says-russians-lost-the-facility-video",
+      "note": "Четыре дрона попали в подстанцию, два взрыва. Объект полностью выведен из строя по информации украинской стороны."
     },
     {
       "region": "Крым",
@@ -208,6 +242,27 @@
   ],
   "events": [
     {
+      "date": "2026-10-06",
+      "region": "Белгородская область",
+      "text": "В октябре 2026 года зафиксировано 51 случай отключения электричества в Белгородской области из-за ударов БПЛА по энергоинфраструктуре. Это значительный рост по сравнению с предыдущими месяцами.",
+      "source_url": "https://novayagazeta.eu/amp/articles/2025/11/17/chislo-otkliuchenii-sveta-v-rf-v-2025-godu-vyroslo-na-tret-podschitala-novaia-evropa-news",
+      "confidence": "reported"
+    },
+    {
+      "date": "2026-10-06",
+      "region": "Уляновская область",
+      "text": "Подтверждена атака БПЛА на подстанцию Вешкайма в ночь на 18 октября. Четыре дрона попали в объект, произошли два взрыва. Объект полностью выведен из строя.",
+      "source_url": "https://news.liga.net/en/amp/politics/news/drones-hit-veshkayma-substation-in-russia-ukraine-says-russians-lost-the-facility-video",
+      "confidence": "reported"
+    },
+    {
+      "date": "2026-10-06",
+      "region": "Волгоградская область",
+      "text": "Повторная атака БПЛА на подстанцию Балашовская 25 октября после первого удара 16 октября. Произошёл пожар, восстановление в процессе.",
+      "source_url": "https://fakty.com.ua/ru/svit/20251025-u-volgogradskij-oblasti-atakovano-pidstancziyu-lep-balashovska-tam-stalasya-pozhezha/",
+      "confidence": "reported"
+    },
+    {
       "date": "2026-10-03",
       "region": "Крым",
       "text": "В Крыму продолжают действовать ограничения потребления электроэнергии из-за атак на энергообъекты. Отключения возможны в зависимости от ситуации на сетях. Самая сложная ситуация сохраняется на северо-западе, востоке и юге полуострова.",
@@ -224,15 +279,8 @@
     {
       "date": "2026-10-02",
       "region": "Множественные регионы РФ",
-      "text": "В ночь на 2 октября произведена массированная атака беспилотников на множество регионов России: Волгоград, Белгород, Брянск, Курск, Оренбург, Саратов, Волгоград, Астрахань и другие. Пожар зафиксирован на трансформаторной подстанции в Волгограде, частичные отключения электричества в затронутых регионах.",
+      "text": "В ночь на 2 октября произведена массированная атака беспилотников на множество регионов России: Волгоград, Белгород, Брянск, Курск, Оренбург, Саратов, Астрахань и другие. Пожар зафиксирован на трансформаторной подстанции в Волгограде, частичные отключения электричества в затронутых регионах.",
       "source_url": "https://kazan.aif.ru/society/details/646-dronov-massirovannaya-ataka-na-regiony-rf-2-oktyabrya-chto-izvestno",
-      "confidence": "reported"
-    },
-    {
-      "date": "2026-10-02",
-      "region": "Крым",
-      "text": "Утром 2 октября 2026 года ремонтные бригады \"Крымэнерго\" продолжают восстанавливать электроснабжение в районах, затронутых атакой 1 октября. Энергообъекты в Армянске, Красноперекопске и Нижнегорске остаются повреждены.",
-      "source_url": "https://kazan.aif.ru/incidents/details/ataka-na-energetiku-kryma-1-oktyabrya-udary-bpla-gde-blekauty-est-li-zhertvy",
       "confidence": "reported"
     },
     {
@@ -247,27 +295,6 @@
       "region": "Россия (множественные)",
       "text": "Ночная атака беспилотников на регионы РФ: перехвачено 129 дронов. Атаки проводились на Белгородскую, Курскую, Брянскую, Орловскую, Смоленскую области, Крым и акватории Чёрного моря. Повреждена железнодорожная мост на участке Тятково–Людиново (Брянская область), сошло с рельс 10 вагонов. Прямых попаданий по крупным энергообъектам не зафиксировано.",
       "source_url": "https://kazan.aif.ru/incidents/details/21-dron-dnyom-vechernyaya-ataka-bpla-na-regiony-rf-29-sentyabrya-150-za-sutki",
-      "confidence": "reported"
-    },
-    {
-      "date": "2026-09-26",
-      "region": "Краснодарский край",
-      "text": "В результате атаки беспилотников в Северском районе Краснодарского края повреждены две линии электропередачи. Из-за падения обломков БПЛА около 26 000 жителей Кубани остались без электричества. Энергоснабжение восстановлено к 14:00 по местному времени. Зафиксированы три погибших и два раненых от падения обломков.",
-      "source_url": "https://kuban.aif.ru/incidents/details/pogibshie-i-pozhary-ataka-bpla-na-kuban-26-sentyabrya-chto-izvestno",
-      "confidence": "confirmed"
-    },
-    {
-      "date": "2026-09-25",
-      "region": "Ульяновская область",
-      "text": "В ночь на 25 сентября произведены удары по промышленным объектам в Ульяновске, включая завод Искра. Зафиксированы повреждения промышленных объектов.",
-      "source_url": "https://vz.ru/news/2026/9/25/1455137.html",
-      "confidence": "reported"
-    },
-    {
-      "date": "2026-09-25",
-      "region": "Пермь",
-      "text": "В ночь на 25 сентября поражены нефтеперерабатывающий завод и смежные промышленные объекты.",
-      "source_url": "https://war.obozrevatel.com/pod-pritselom-okazalis-zavod-i-npz-dronyi-atakovali-ulyanovsk-i-perm-posle-vzryivov-podnyalsya-dyim-foto-i-video.htm",
       "confidence": "reported"
     }
   ]
