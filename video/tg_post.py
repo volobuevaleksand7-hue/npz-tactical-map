@@ -47,11 +47,11 @@ def send_video(token, chat, path: Path, caption):
 
 def main():
     a = sys.argv[1:]
-    if len(a) != 2 or a[0] != "reel":
+    if len(a) != 2 or a[0] not in ("reel", "urgent"):
         sys.exit(__doc__)
-    date = a[1]
-    src = VIDEO / "out" / f"reel-{date}.mp4"
-    mark = VIDEO / "out" / f"reel-{date}.tg"
+    kind, date = a
+    src = VIDEO / "out" / f"{kind}-{date}.mp4"
+    mark = VIDEO / "out" / f"{kind}-{date}.tg"
     if mark.exists():
         return log(f"{date}: уже в канале")
     if not src.exists():
@@ -61,14 +61,14 @@ def main():
     token = CM.mirror_token()
     if not token:
         return log("нет токена анонимного бота — пропуск")
-    cap_f = VIDEO / ".build" / f"reel-{date}" / "tg_caption.txt"
+    cap_f = VIDEO / ".build" / f"{kind}-{date}" / "tg_caption.txt"
     caption = cap_f.read_text(encoding="utf-8").strip() if cap_f.exists() else f"🎬 Удары за {date}"
     try:
-        yt = json.loads((ROOT / "data" / "videos.json").read_text(encoding="utf-8"))["videos"][date]["reel"]["id"]
+        yt = json.loads((ROOT / "data" / "videos.json").read_text(encoding="utf-8"))["videos"][date][kind]["id"]
         caption += f'\n▶ <a href="https://youtu.be/{yt}">YouTube</a>'
     except (OSError, ValueError, KeyError):
         pass
-    small = VIDEO / "out" / f"reel-{date}.tg.mp4"
+    small = VIDEO / "out" / f"{kind}-{date}.tg.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-vf", "scale=720:1280",
                     "-c:v", "libx264", "-preset", "veryfast", "-crf", "28", "-c:a", "aac", "-b:a", "128k",
                     "-movflags", "+faststart", str(small)], check=True)

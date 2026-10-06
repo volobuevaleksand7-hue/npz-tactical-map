@@ -12,8 +12,9 @@ DATE="${1:?дата YYYY-MM-DD}"
 [ -x node_modules/.bin/hyperframes ] || { echo "render_reel.sh: нет node_modules — 'npm ci' в $VIDEO" >&2; exit 2; }
 export DO_NOT_TRACK=1 HYPERFRAMES_NO_TELEMETRY=1 HYPERFRAMES_NO_UPDATE_CHECK=1 \
        HYPERFRAMES_NO_FEEDBACK=1 HYPERFRAMES_NO_AUTO_INSTALL=1
-BUILD="$VIDEO/.build/reel-$DATE"
-OUT="$VIDEO/out/reel-$DATE.mp4"
+KIND="${REEL_KIND:-reel}"   # reel — рилс дня; urgent — срочный по REEL_ONLY (см. build_reel.py)
+BUILD="$VIDEO/.build/$KIND-$DATE"
+OUT="$VIDEO/out/$KIND-$DATE.mp4"
 mkdir -p "$VIDEO/out"
 t0=$(date +%s)
 [ "${REEL_KEEP_PREP:-0}" = 1 ] && [ -f "$BUILD/clips.json" ] || { rm -rf "$BUILD"; python3 reel/build_reel.py prepare "$DATE" "$BUILD"; }
@@ -22,5 +23,4 @@ node_modules/.bin/hyperframes render "$BUILD" -o "$BUILD/silent.mp4" \
   --quality "${HF_QUALITY:-looks}" --workers "${HF_WORKERS:-auto}" --quiet
 python3 build.py mix "$BUILD" "$BUILD/silent.mp4" "$OUT.tmp.mp4"
 mv -f "$OUT.tmp.mp4" "$OUT"
-[ -f "$VIDEO/out/reel-$DATE.txt" ] || true
 echo "[$(date -u +%FT%TZ)] ok $OUT ($(du -h "$OUT" | cut -f1), $(( $(date +%s) - t0 )) с)"

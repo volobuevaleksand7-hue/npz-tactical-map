@@ -10,6 +10,7 @@
 Данные — data/strikes.json (тот же файл, что рисует карта сайта), чистка — normalize_strike
 из agents/gen-news.py (нейтральность, украинизмы). Мощности/координаты НПЗ — fuel-state.json.
 """
+import hashlib
 import html
 import os
 import importlib.util
@@ -28,6 +29,17 @@ TPL = REEL / "template"
 SITE_HOST = "npz-tactical-map.vercel.app"
 TG_HANDLE = "@npz_karta_online"
 MAX_STRIKES = int(os.environ.get("REEL_MAX", "12"))  # все удары дня; потолок — чтобы Shorts не вылез за ~2 мин
+# Срочный рилс (REEL_KIND=urgent): только удары из REEL_ONLY — id через запятую, как _strike_id
+# в hermes/bot/strike_pipeline.py (его зовёт пайплайн сразу после молнии, без расписания).
+URGENT = os.environ.get("REEL_KIND", "reel") == "urgent"
+ONLY = {x for x in os.environ.get("REEL_ONLY", "").split(",") if x}
+
+
+def strike_id(raw):
+    """= strike_pipeline._strike_id: md5(date|time|city|target[:80])[:12]."""
+    parts = [str(raw.get("date", "")), str(raw.get("time", "")), str(raw.get("city", "")),
+             str(raw.get("target", ""))[:80]]
+    return hashlib.md5("|".join(parts).encode()).hexdigest()[:12]
 
 
 def _load(name, path):
@@ -91,6 +103,8 @@ def load_day(date):
     day = []
     for raw in arr:
         if str(raw.get("date", ""))[:10] != date:
+            continue
+        if ONLY and strike_id(raw) not in ONLY:
             continue
         s = G.normalize_strike(raw)
         ll = locate(s, refs, arr)
@@ -196,7 +210,7 @@ def fire_score(path):
 
 
 def poster_head(sel, day, refs):
-    lead = sel[0] if sel and sel[0]["cls"] == 2 else None
+    lead = sel[0] if sel and (sel[0]["cls"] == 2 or URGENT) else None
     n = len(day)
     if lead:
         return "УДАР ПО " + dative_object(object_name(lead, refs)).upper()
@@ -392,8 +406,13 @@ def narration(date, sel, day, refs, build=None, broll=()):
     n = len(day)
     n_fuel = sum(1 for s in day if s["cls"] == 2)
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
-    lines = [("intro", f"{ORD[d].capitalize()} {MONTHS[m]}. {n} {G.plural(n, 'удар', 'удара', 'ударов')} "
-                       f"по России за сутки{tail}. По данным открытых источников.")]
+    if URGENT:
+        lead = dative_object(object_name(sel[0], refs)) if sel else "объекту"
+        lines = [("intro", f"Срочно. {ORD[d].capitalize()} {MONTHS[m]}, удар по {lead}. "
+                           f"По данным открытых источников.")]
+    else:
+        lines = [("intro", f"{ORD[d].capitalize()} {MONTHS[m]}. {n} {G.plural(n, 'удар', 'удара', 'ударов')} "
+                           f"по России за сутки{tail}. По данным открытых источников.")]
     cache = build / "narration.json" if build else None
     per = None
     if cache and cache.exists():
@@ -632,6 +651,9 @@ def compose(date, build: Path):
     }
     page = (TPL / "index.html").read_text(encoding="utf-8")
     page = re.sub(r"\{\{([A-Z0-9_]+)\}\}", lambda m: str(subs[m.group(1)]), page)
+    if URGENT:   # один удар вне расписания — не «итог суток»
+        page = page.replace("ИТОГ СУТОК · ", "СРОЧНО · ")
+        page = re.sub(r'(<div class="bw">[^<]*?) за сутки<', r"\1 по данным OSINT<", page)
     (build / "index.html").write_text(page, encoding="utf-8")
     (build / "hyperframes.json").write_text(json.dumps({"paths": {"assets": "assets"}}), encoding="utf-8")
 
@@ -647,7 +669,7 @@ def compose(date, build: Path):
 
 def describe(date, sel, day, refs, segs, clips, broll):
     n = len(day)
-    fuel = [s for s in sel if s["cls"] == 2]
+    fuel = [s for s in sel if s["cls"] == 2 or URGENT]
     if fuel:
         names = [object_name(s, refs) for s in fuel]
         head = "Удар по " + dative_object(names[0])
@@ -680,7 +702,8 @@ def tg_caption(date, sel, day, refs, clips, broll):
     n = len(day)
     n_fuel = sum(1 for s in day if s["cls"] == 2)
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
-    out = [f"🎬 <b>Удары за {G.rus_date(date)}</b>: {n}{tail}.", ""]
+    out = ([f"⚡ <b>Срочно: удар {G.rus_date(date)}</b>", ""] if URGENT else
+           [f"🎬 <b>Удары за {G.rus_date(date)}</b>: {n}{tail}.", ""])
     for s in sel:
         k = len(s.get("_group", [s]))
         out.append(f"• {html.escape(str(s.get('city') or s.get('region')), quote=False)} — "

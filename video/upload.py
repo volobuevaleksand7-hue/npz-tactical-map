@@ -4,6 +4,7 @@
   python3 upload.py auth            — разовая авторизация (refresh-токен -> .secrets/token.json)
   python3 upload.py [YYYY-MM-DD]    — залить out/npz-<дата>.mp4 (без даты — все незалитые)
   python3 upload.py reel [YYYY-MM-DD] — то же для рилса out/reel-<дата>.mp4 (reel/render_reel.sh)
+  python3 upload.py urgent YYYY-MM-DD — срочный рилс out/urgent-<дата>.mp4
 
 Секреты лежат вне репозитория, в ~/.config/npz-youtube/ (или $NPZ_YT_SECRETS), права 600:
   client_secret.json — OAuth-клиент «Desktop» из Google Cloud (проект npz-youtube);
@@ -38,7 +39,7 @@ TOKEN = os.path.join(SECRETS, "token.json")
 SCOPE = "https://www.googleapis.com/auth/youtube.upload"
 PORT = 8765
 VIDEOS_JSON = os.path.join(os.path.dirname(VIDEO), "data", "videos.json")  # реестр для сайта (gen-news.py)
-KIND = "npz"  # префикс файлов в out/: npz (ежедневный ролик) | reel (рилс)
+KIND = "npz"  # префикс файлов в out/: npz (ежедневный ролик) | reel (рилс) | urgent (срочный рилс)
 CATEGORY_NEWS = "25"  # News & Politics
 
 
@@ -209,8 +210,8 @@ def main():
     args = sys.argv[1:]
     if args[:1] == ["auth"]:
         return auth()
-    if args[:1] == ["reel"]:
-        KIND, args = "reel", args[1:]
+    if args[:1] in (["reel"], ["urgent"]):
+        KIND, args = args[0], args[1:]
     if args:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):
             raise SystemExit("upload: дата YYYY-MM-DD или 'auth'")

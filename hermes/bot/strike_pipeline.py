@@ -200,10 +200,34 @@ def classify_and_publish(new_strikes, dry_run=False, force_major=False):
             for r in results:
                 if r.get("publish_result", {}).get("batched"):
                     r["publish_result"] = batch
+            if not dry_run:
+                launch_urgent_reel([s for s, _ in majors])
         else:
             print("  → [SKIP] radar_publish not available")
 
     return results
+
+
+def launch_urgent_reel(strikes):
+    """Срочный рилс по молнии — сразу, без расписания (video/reel/daily.sh, REEL_KIND=urgent).
+    Только удары сегодняшнего дня МСК (поздно докатившиеся вчерашние уйдут в рилс дня в 12:00);
+    один срочный на дату — daily.sh сам пропустит повтор. Фоном: рендер ~10 мин, пайплайн не ждёт;
+    очередь с рилсом дня — через общий лок /var/lock/npz-video.lock. Выключатель NPZ_URGENT_REEL=0."""
+    if os.environ.get("NPZ_URGENT_REEL", "1") == "0":
+        return
+    from datetime import timedelta
+    today = (datetime.now(timezone.utc) + timedelta(hours=3)).strftime("%Y-%m-%d")
+    ids = [_strike_id(s) for s in strikes if str(s.get("date", ""))[:10] == today]
+    script = os.path.join(BASE_DIR, "video", "reel", "daily.sh")
+    if not ids or not os.access(script, os.X_OK):
+        return
+    log = os.path.join(BASE_DIR, "agents", "logs", "video.log")
+    env = dict(os.environ, REEL_KIND="urgent", REEL_ONLY=",".join(ids))
+    cmd = (f"cd {os.path.join(BASE_DIR, 'video')} && flock -w 3600 /var/lock/npz-video.lock "
+           f"nice -n 10 ./reel/daily.sh {today} >> {log} 2>&1")
+    subprocess.Popen(["bash", "-c", cmd], env=env, start_new_session=True,
+                     stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    print(f"  → срочный рилс {today}: запущен ({len(ids)} уд.)")
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
