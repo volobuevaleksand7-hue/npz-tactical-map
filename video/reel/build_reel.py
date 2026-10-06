@@ -187,16 +187,30 @@ def dative_object(name):
         w[0] = w[0][:-2] + ("ой" if w[0].endswith("ая") and not hush else "ей")
         if len(w) > 1:
             n = w[1]
-            w[1] = n[:-2] + "ии" if n.endswith("ия") else (n[:-1] + "ы" if n.endswith("а") and not n.endswith(("жа", "ша", "ча", "ща")) else n)
+            w[1] = n[:-2] + "ии" if n.endswith("ия") else (n[:-1] + "е" if n.endswith(("а", "я")) else n)
+        return " ".join(w)
+    if w[0].endswith(("ое", "ее")) and len(w[0]) > 3:   # средний род: «Жилое здание» -> «Жилому зданию»
+        w[0] = w[0][:-2] + ("ому" if w[0].endswith("ое") else "ему")
+        if len(w) > 1:
+            n = w[1]
+            w[1] = (n[:-1] + ("у" if n[-2:-1] in "жшчщ" else "ю")) if n.endswith("е") else (n[:-1] + "у" if n.endswith("о") else n)
         return " ".join(w)
     if len(w) == 1 and w[0].endswith(("ция", "база")):   # «Нефтебаза» -> «Нефтебазе», «Подстанция» -> «Подстанции»
         return w[0][:-1] + ("и" if w[0].endswith("ция") else "е")
     first = w[0]
-    for a, b in (("ский", "скому"), ("ный", "ному"), ("кий", "кому"), ("ой", "ому")):
+    for a, b in (("ский", "скому"), ("ный", "ному"), ("кий", "кому"), ("ой", "ому"), ("ый", "ому"), ("ий", "ему")):
         if first.endswith(a):
             first = first[: -len(a)] + b
             break
-    return " ".join([first] + w[1:])
+    w = [first] + w[1:]
+    i = 1 if first != name.split(" ")[0] else 0   # существительное мужского рода: «дом» -> «дому»
+    if i < len(w) and re.fullmatch(r"[А-ЯЁа-яё][а-яё]+", w[i]):
+        n = w[i]
+        if n[-1] in "йь":
+            w[i] = n[:-1] + "ю"
+        elif n[-1] not in "аяоеиыуюэ":
+            w[i] = n + "у"
+    return " ".join(w)
 
 
 def fire_score(path):
