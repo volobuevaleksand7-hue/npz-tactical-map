@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Рилс дня (cron Гермеса 18:10 UTC = 21:10 МСК, выход ~21:30 МСК): все удары СЕГОДНЯШНЕГО дня (МСК) —
+# Рилс дня (cron Гермеса 18:10 UTC = 21:10 МСК: проход сборщика ударов, рендер, выход ~21:50 МСК): все удары СЕГОДНЯШНЕГО дня (МСК) —
 # новости дня выходят в тот же день, после вечернего прогона сборщика ударов (16:35 UTC).
 #   ./reel/daily.sh [YYYY-MM-DD]
 # Рендер -> YouTube -> Telegram-канал (анонимный бот) -> реестр data/videos.json -> очистка.
@@ -10,6 +10,13 @@ export PATH="$HOME/.local/bin:$PATH"   # edge-tts, yt-dlp (venv, см. README)
 DATE="${1:-$(TZ=Europe/Moscow date +%F)}"
 rc=0
 echo "[$(date -u +%FT%TZ)] daily reel $DATE"
+# свежий проход сборщика ударов прямо перед рендером: удары дня докатываются в strikes.json
+# с опозданием в часы (Волгоград 05.10 пришёл в 00:23 МСК — после рилса). REEL_REFRESH=0 — без прохода.
+if [ "${REEL_REFRESH:-1}" != "0" ] && [ -x ../agents/run-agent.sh ]; then
+  NPZ_MODEL="${NPZ_MODEL:-claude-haiku-4-5-20251001}" NPZ_LOCK_WAIT=900 \
+    ../agents/run-agent.sh "$(cd .. && pwd)/agents/update-prompt-strikes.md" strikes-reel \
+    || echo "reel: сборщик ударов не отработал — рендер по текущим данным"
+fi
 ./reel/render_reel.sh "$DATE" || { rc=$?; echo "reel: рилс $DATE не собран (rc=$rc)"; exit $rc; }
 python3 reel/audit.py "$DATE" || { echo "reel: аудит не пройден — YouTube/Telegram пропущены (REEL_AUDIT=0 отключает)"; [ "${REEL_AUDIT:-1}" = "0" ] || exit 3; }
 if [ -f "${NPZ_YT_SECRETS:-$HOME/.config/npz-youtube}/token.json" ]; then
