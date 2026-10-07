@@ -708,7 +708,7 @@ def describe(date, sel, day, refs, segs, clips, broll):
         names = [object_name(s, refs) for s in fuel]
         head = "Удар по " + dative_object(names[0])
         if len(names) > 1:
-            head = "Удары по " + dative_object(names[0]) + " и " + names[1]
+            head = "Удары по " + dative_object(names[0]) + " и " + dative_object(names[1])
     else:
         head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по РФ"
     tail = f" · {G.rus_date_short(date)} #shorts"
