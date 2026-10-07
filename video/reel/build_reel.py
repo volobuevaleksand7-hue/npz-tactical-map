@@ -500,6 +500,44 @@ S0 = 1080 / 3240   # масштаб общего плана (вся ширина
 SZ = 1.15          # масштаб у удара
 
 
+MAX_TOTAL = float(os.environ.get("REEL_MAX_SEC", "58"))   # аудит пускает ≤60 с
+CLIP_MIN = 2.5
+
+
+def est_total(clips, broll, vdur):
+    """Длина ролика по тем же формулам, что таймлайн в compose (без построения кадров)."""
+    t = POSTER + max(OVER, 0.15 + vdur("intro") + 0.2 - POSTER)
+    for i, c in enumerate(clips):
+        clip_len = float(c.get("dur", 4.0)) + DIVE * 0.6 if c else 0.0
+        natural = FLY + (SIGN if c else SIGN_ONLY) + clip_len
+        t += natural + max(0.0, 0.1 + vdur(f"s{i}") + 0.3 - natural)
+    if broll:
+        t0 = t + 0.2
+        t = t0 + sum(float(b["dur"]) + 0.3 for b in broll)
+        t = max(t, t0 + 0.3 + vdur("broll") + 0.4)
+    return t + 0.15 + max(OUTRO, 0.5 + vdur("outro") + 0.8)
+
+
+def fit_budget(clips, broll, vdur):
+    """Клипы очевидцев удлиняют ролик (07.10: 9 ударов + 4 клипа = 70 с, аудит не выпустил).
+    Сначала укорачиваем все клипы до CLIP_MIN, потом снимаем клипы с младших ударов (sel отсортирован
+    по важности). Голос не трогаем: реплики уже озвучены и привязаны к ударам."""
+    clips = [dict(c) if c else c for c in clips]
+    while est_total(clips, broll, vdur) > MAX_TOTAL:
+        long = [c for c in clips if c and float(c.get("dur", 4.0)) > CLIP_MIN + 0.01]
+        if long:
+            for c in long:
+                c["dur"] = round(max(CLIP_MIN, float(c.get("dur", 4.0)) - 0.5), 2)
+            continue
+        idx = [i for i, c in enumerate(clips) if c]
+        if not idx:
+            break
+        clips[idx[-1]] = None
+    got, total = sum(1 for c in clips if c), est_total(clips, broll, vdur)
+    print(f"build_reel: бюджет {MAX_TOTAL:.0f} с → {total:.1f} с, клипов {got}", file=sys.stderr)
+    return clips
+
+
 def compose(date, build: Path):
     sel, day = select_strikes(date)
     _, refs = load_day(date)
@@ -524,6 +562,8 @@ def compose(date, build: Path):
     for f in ("fonts",):
         shutil.copytree(VIDEO / "template" / "assets" / f, build / "assets" / f, dirs_exist_ok=True)
     shutil.copy2(VIDEO / "node_modules" / "gsap" / "dist" / "gsap.min.js", build / "assets" / "gsap.min.js")
+
+    clips = fit_budget(clips, broll, vdur)
 
     # камера: ключевые кадры (t, x, y, s) в пикселях скриншота; dip — «подъём» камеры на перелёте
     cx0, cy0 = IW / 2, IH / 2
