@@ -71,7 +71,7 @@ RUN_START_TS="$(date +%s)"
 # Write перезаписывает целиком → усыхание), см. agents/merge-strikes-inbox.py.
 AGENT_OUT=""
 case "$LABEL" in
-  strikes|newswatch) AGENT_OUT="data/strikes-inbox.json" ;;
+  strikes|strikes-*|newswatch) AGENT_OUT="data/strikes-inbox.json" ;;
 esac
 
 # Hard cap the agent run so a hung CLI can't block the cron slot forever.
