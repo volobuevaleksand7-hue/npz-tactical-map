@@ -30,7 +30,7 @@ CACHE = REEL / "cache"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36"
 SEG = 4.0          # длина отрезка, с
 # каналы с видео ударов: поиск по городу идёт и по ним, даже если source_url удара — новостной сайт
-CHANNELS = [c for c in os.environ.get("REEL_CHANNELS", "exilenova_plus,supernova_plus,astrapress").split(",") if c]
+CHANNELS = [c for c in os.environ.get("REEL_CHANNELS", "exilenova_plus,supernova_plus,astrapress,mash,tvrain,ostorozhno_novosti,shot_shot").split(",") if c]
 ATTACK_RX = re.compile(r"взрыв|вибух|пожар|пожеж|бпла|беспилот|дрон|атак|удар|нпз|нефт|нафт|склад|пво|горит|палає|"
                        r"прилёт|приліт|обстрел|ракет|вирв|воронк|наслідк|последств|уражен|поражен|танкер|разлив", re.I)
 # оккупированные/чужие территории — рилс про удары по России, такие кадры не берём
@@ -256,7 +256,7 @@ def _llm_json(prompt):
                     return json.loads(m.group(0)), model
             except Exception as e:  # noqa: BLE001 — 429/таймаут: следующая модель
                 log(f"проверка постов: {model}: {e}")
-    if shutil.which("claude"):
+    for _ in range(2 if shutil.which("claude") else 0):   # Haiku изредка не отвечает — второй заход
         try:
             r = subprocess.run(["claude", "-p", prompt, "--model",
                                 os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001")],
@@ -264,6 +264,7 @@ def _llm_json(prompt):
             m = re.search(r"\{.*\}", r.stdout, re.S)
             if m:
                 return json.loads(m.group(0)), "haiku"
+            log(f"проверка постов: haiku без JSON: {r.stdout[-120:]!r} {r.stderr[-120:]!r}")
         except Exception as e:  # noqa: BLE001
             log(f"проверка постов: haiku: {e}")
     return None, None
@@ -279,7 +280,7 @@ def verify_posts(strike, posts):
                          for i, p in enumerate(posts))
     ans, model = _llm_json(VERIFY_PROMPT.replace("{strike}", desc).replace("{posts}", listing))
     if ans is None:
-        strong = [p for p in posts if p.get("_score", 0) >= 3]
+        strong = [p for p in posts if p.get("_score", 0) >= 4]   # объект + город/тип — иначе лучше без клипа
         log(f"{strike.get('city')}: проверка недоступна — беру {len(strong)} сильных из {len(posts)}")
         return strong
     keep = []
@@ -296,7 +297,9 @@ def tg_candidates(strike):
     if any(p["videos"] or p["photos"] for p in posts):
         return posts
     seen = {p["url"] for p in posts}
-    for p in verify_posts(strike, channel_match(strike, seen)):
+    matched = channel_match(strike, seen)
+    seen |= {p["url"] for p in matched}   # отвергнутое моделью не вернётся через поиск по городу
+    for p in verify_posts(strike, matched):
         posts.append(p)
         seen.add(p["url"])
     if any(p["videos"] for p in posts):
@@ -304,13 +307,15 @@ def tg_candidates(strike):
     stem, day = city_stem(strike.get("city")), str(strike.get("date"))[:10]
     if not stem:
         return posts
+    found = []
     for chan in CHANNELS:
         for p in tg_search(chan, stem):
             if p["url"] not in seen and stem in p["text"].lower() and ATTACK_RX.search(p["text"]) \
                     and date_ok(p["date"], day) and (p["videos"] or p["photos"]):
-                posts.append(p)
+                found.append(dict(p, _score=2))   # без модели не берём: город в тексте ≠ удар по нему
                 seen.add(p["url"])
-    return posts
+    # поиск по городу ловит и «соседние» новости (пост про Москву, где Рязань в перечне) — та же проверка
+    return posts + verify_posts(strike, found)
 
 
 def _own_candidates(strike):

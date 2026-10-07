@@ -469,10 +469,11 @@ def tts(text, out: Path):
     if not Path(exe).exists():
         return None
     voice = os.environ.get("REEL_VOICE_NAME", VOICE)
-    # сервис Microsoft сбоит на сериях запросов подряд (NoAudioReceived) — повторы с нарастающей паузой
-    for attempt in range(5):
+    # сервис Microsoft сбоит на сериях запросов подряд (NoAudioReceived), а иногда лежит минуты: без голоса
+    # аудит ролик не выпустит, поэтому ждём до ~4 мин (07.10 тест-сборка потеряла озвучку на 5 повторах за 30 с)
+    for attempt, pause in enumerate((0, 3, 6, 10, 20, 40, 60, 90)):
         if attempt:
-            time.sleep(3 * attempt)
+            time.sleep(pause)
         out.unlink(missing_ok=True)
         r = subprocess.run([exe, "--voice", voice, f"--rate={VOICE_RATE}", "--text", text, "--write-media", str(out)],
                            capture_output=True, timeout=90)
