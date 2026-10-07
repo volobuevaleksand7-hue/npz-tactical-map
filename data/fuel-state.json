@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-07T12:15Z",
+    "generated_at": "2026-10-07T06:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -333,10 +333,10 @@
       "status": "down",
       "status_since": "2026-09-11",
       "est_output_pct": 0,
-      "damage": "Серия ударов БПЛА в августе-сентябре. Последние атаки: 8 сентября и ночь 10-11 сентября. Повреждены установки первичной переработки, зафиксированы пожары. Пятая атака на завод в 2026 году.",
+      "damage": "Атака беспилотников ночью, работа ПВО, закрыт аэропорт Гагарин",
       "note": "На 6 октября — завод остановлен. Завод поражен 5+ раз в 2026 году. Восстановление не началось или затруднено из-за постоянных атак. Установка ЭЛОУ-АВТ-6 (~20% мощности завода) критически повреждена.",
-      "confidence": "confirmed",
-      "source_url": "https://kyivindependent.com/ukrainian-drones-reportedly-strike-russian-oil-refinery-ozon-warehouse-in-saratov/"
+      "confidence": "reported",
+      "source_url": "https://www.ptoday.ru/15617-vzryvy-nad-saratovom-i-jengelsom-nochju-7-oktjabrja-pvo-otrazhala-ataku-bespilotnikov-vsu.html"
     },
     {
       "id": "orsk",
@@ -932,6 +932,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-07",
+      "text": "Удар по Саратовский НПЗ (Саратов): Атака БПЛА на Саратовский НПЗ",
+      "source_url": "https://www.ptoday.ru/15617-vzryvy-nad-saratovom-i-jengelsom-nochju-7-oktjabrja-pvo-otrazhala-ataku-bespilotnikov-vsu.html"
+    },
     {
       "date": "2026-10-07",
       "text": "Волна топливных ограничений охватила Урал и Западную Сибирь: Челябинская область (TAMIC Energy 30 л бензина, 70 л дизеля), Свердловская область и Тюменская область (сеть N-1 30 л бензина) ввели локальные лимиты. Распространение кризиса на новые макрорегионы на фоне восстановления редких штрафованных НПЗ (Киришский, Рязанский, Московский).",
