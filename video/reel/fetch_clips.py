@@ -30,9 +30,9 @@ CACHE = REEL / "cache"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36"
 SEG = 4.0          # длина отрезка, с
 # каналы с видео ударов: поиск по городу идёт и по ним, даже если source_url удара — новостной сайт
-CHANNELS = [c for c in os.environ.get("REEL_CHANNELS", "exilenova_plus").split(",") if c]
+CHANNELS = [c for c in os.environ.get("REEL_CHANNELS", "exilenova_plus,supernova_plus,astrapress").split(",") if c]
 ATTACK_RX = re.compile(r"взрыв|вибух|пожар|пожеж|бпла|беспилот|дрон|атак|удар|нпз|нефт|нафт|склад|пво|горит|палає|"
-                       r"прилёт|приліт|обстрел", re.I)
+                       r"прилёт|приліт|обстрел|ракет|вирв|воронк|наслідк|последств|уражен|поражен|танкер|разлив", re.I)
 # оккупированные/чужие территории — рилс про удары по России, такие кадры не берём
 OCC_RX = re.compile(r"окуп|крим|крым|севастоп|донец|донеч|мелітоп|мелитоп|херсон|запоріж|запорож|луганс|"
                     r"маріупол|мариупол|волноваx|волноваха|бердянськ|бердянск|мост", re.I)
@@ -147,15 +147,163 @@ def channel_posts(chan, pages=8):
     return out
 
 
+_UA2RU = str.maketrans({"ё": "е", "і": "и", "ї": "и", "є": "е", "ґ": "г", "ы": "и", "э": "е",
+                        "ь": None, "ъ": None, "'": None, "’": None, "ʼ": None})
+# Слова-родовые: по ним пост не опознать («завод», «область»). Опознаём по именам собственным.
+_GENERIC = re.compile(r"^(нефтеперерабат|нефтехим|нефтебаз|нефтеналив|нефтян|завод|станц|линейн|производств|"
+                      r"диспетчер|логистич|распредел|фулфилмент|центр|склад|терминал|област|район|республик|"
+                      r"край|округ|акватор|жил|здан|топлив|хранилищ|энерго|подстанц|тэц|грэс|нпз|лпдс|нпс|"
+                      r"танкер|порт|товар|крупногабарит|маркетплейс|компан|предприят|объект|"
+                      r"январ|феврал|март|апрел|мая|июн|июл|август|сентябр|октябр|ноябр|декабр)")
+
+
+def norm(s):
+    """Русский и украинский к одному виду: «Сочі»→«сочи», «Московський»→«московскии»."""
+    return str(s or "").lower().translate(_UA2RU)
+
+
+def strike_keys(strike):
+    """{основа: вес}. Имя объекта из target (Володарская, Московский, Ozon) — 2,
+    город — 2, если это не область целиком (тогда 1: «Московская область» слишком широко)."""
+    keys = {}
+
+    def add(word, w):
+        word = norm(re.sub(r"[^\w-]", "", word))
+        if len(word) < 4 or _GENERIC.match(word):
+            return
+        stem = word[:max(5, len(word) - 4)] if len(word) > 5 else word
+        keys[stem] = max(keys.get(stem, 0), w)
+
+    city = str(strike.get("city") or "")
+    wide = bool(re.search(r"област|край|республик|округ", city, re.I))
+    for w in re.findall(r"[А-ЯЁA-Z][\w-]+", re.sub(r"\(.*?\)", "", city)):
+        add(w, 1 if wide else 2)
+    target = str(strike.get("target") or "")
+    for w in re.findall(r"[А-ЯЁA-Z][\w-]+", target) + re.findall(r"«([^»]+)»", target):
+        for part in str(w).split():
+            add(part, 2)
+    return keys
+
+
+_FEED = {}
+
+
+def channel_feed(chan):
+    if chan not in _FEED:
+        _FEED[chan] = channel_posts(chan, pages=int(os.environ.get("REEL_FEED_PAGES", "14")))
+    return _FEED[chan]
+
+
+def channel_match(strike, seen=()):
+    """Посты каналов-хроник за окно удара с медиа, где названы город или объект.
+    Лента канала целиком, а не поиск t.me/s?q=: поиск отдаёт 20 старых совпадений
+    и не знает украинских форм («Московський НПЗ», «Сочі»), из-за этого 06–07.10
+    кадры Капотни, Володарской и танкера у Сочи лежали в канале, а рилс шёл без них."""
+    keys, day = strike_keys(strike), str(strike.get("date"))[:10]
+    if not keys:
+        return []
+    tgt = norm(strike.get("target"))
+    kinds = [k for k in ("нпз", "нефтебаз", "лпдс", "танкер", "склад", "подстанц", "тэц", "терминал", "порт")
+             if k in tgt]
+    scored = []
+    for chan in CHANNELS:
+        for p in channel_feed(chan):
+            if p["url"] in seen or not (p["videos"] or p["photos"]) or not date_ok(p["date"], day):
+                continue
+            t = norm(p["text"])
+            if OCC_RX.search(p["text"]) or not ATTACK_RX.search(p["text"]):
+                continue
+            score = sum(w for k, w in keys.items() if k in t)
+            score += sum(1 for k in kinds if k in t)   # тот же тип объекта: «НПЗ», «танкер»
+            if score >= 2:
+                scored.append((score, len(p["videos"]), dict(p, _score=score)))
+    scored.sort(key=lambda x: (-x[0], -x[1]))
+    if scored:
+        log(f"{strike.get('city')}: в лентах {len(scored)} постов — " +
+            ", ".join(f"{p['url'].rsplit('/', 2)[-2]}/{p['url'].rsplit('/', 1)[-1]}({sc})" for sc, _, p in scored[:4]))
+    return [p for _, _, p in scored]
+
+
+VERIFY_MODELS = [m for m in os.environ.get(
+    "REEL_VERIFY_MODELS", "nvidia/nemotron-3.5-lightning:free,google/gemma-4-31b-it:free,nvidia/nemotron-3-super-120b-a12b:free").split(",") if m]
+OR_KEY = Path(os.environ.get("OPENROUTER_KEY_FILE", "/root/.openrouter/api_key"))
+VERIFY_PROMPT = """Ниже удар по объекту в России и посты Telegram-каналов с видео за те же сутки.
+Отбери посты, где показан или описан ИМЕННО этот удар: то же место (город/объект), та же ночь.
+Не подходят: другой город или объект, общая сводка «атака на область» без этого места, удары
+по Украине, фронт, мемы, политика. Посты на украинском и русском равноправны.
+Ответь только JSON: {"ok": [номера подходящих постов по убыванию уверенности]}.
+
+Удар: {strike}
+
+Посты:
+{posts}"""
+
+
+def _llm_json(prompt):
+    """JSON-ответ дешёвой модели: OpenRouter free → Haiku (claude CLI). None — никто не ответил."""
+    if OR_KEY.exists():
+        key = OR_KEY.read_text().strip()
+        for model in VERIFY_MODELS:
+            body = json.dumps({"model": model, "temperature": 0,
+                               "messages": [{"role": "user", "content": prompt}]}).encode()
+            req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", body,
+                                         {"Authorization": "Bearer " + key, "Content-Type": "application/json"})
+            try:
+                with urllib.request.urlopen(req, timeout=90) as r:
+                    txt = json.load(r)["choices"][0]["message"]["content"] or ""
+                m = re.search(r"\{.*\}", txt, re.S)
+                if m:
+                    return json.loads(m.group(0)), model
+            except Exception as e:  # noqa: BLE001 — 429/таймаут: следующая модель
+                log(f"проверка постов: {model}: {e}")
+    if shutil.which("claude"):
+        try:
+            r = subprocess.run(["claude", "-p", prompt, "--model",
+                                os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001")],
+                               capture_output=True, text=True, timeout=120)
+            m = re.search(r"\{.*\}", r.stdout, re.S)
+            if m:
+                return json.loads(m.group(0)), "haiku"
+        except Exception as e:  # noqa: BLE001
+            log(f"проверка постов: haiku: {e}")
+    return None, None
+
+
+def verify_posts(strike, posts):
+    """Отсеять посты, где удар не тот. Модель недоступна — оставить только сильные совпадения."""
+    if not posts or os.environ.get("REEL_VERIFY", "1") == "0":
+        return posts
+    posts = posts[:8]
+    desc = f"{strike.get('date')}, {strike.get('city')}, {strike.get('region') or ''} — {strike.get('target')}"
+    listing = "\n".join(f"{i + 1}. [{p['date'][:16]}] {' '.join(p['text'].split())[:350]}"
+                         for i, p in enumerate(posts))
+    ans, model = _llm_json(VERIFY_PROMPT.replace("{strike}", desc).replace("{posts}", listing))
+    if ans is None:
+        strong = [p for p in posts if p.get("_score", 0) >= 3]
+        log(f"{strike.get('city')}: проверка недоступна — беру {len(strong)} сильных из {len(posts)}")
+        return strong
+    keep = []
+    for n in ans.get("ok", []):
+        if isinstance(n, int) and 1 <= n <= len(posts) and posts[n - 1] not in keep:
+            keep.append(posts[n - 1])
+    log(f"{strike.get('city')}: {model} подтвердил {len(keep)} из {len(posts)}")
+    return keep
+
+
 def tg_candidates(strike):
-    """Посты по удару: из source_url, а если медиа нет — поиск города по известным каналам."""
+    """Посты по удару: из source_url, затем ленты каналов-хроник, затем поиск города."""
     posts = _own_candidates(strike)
     if any(p["videos"] or p["photos"] for p in posts):
+        return posts
+    seen = {p["url"] for p in posts}
+    for p in verify_posts(strike, channel_match(strike, seen)):
+        posts.append(p)
+        seen.add(p["url"])
+    if any(p["videos"] for p in posts):
         return posts
     stem, day = city_stem(strike.get("city")), str(strike.get("date"))[:10]
     if not stem:
         return posts
-    seen = {p["url"] for p in posts}
     for chan in CHANNELS:
         for p in tg_search(chan, stem):
             if p["url"] not in seen and stem in p["text"].lower() and ATTACK_RX.search(p["text"]) \
@@ -227,27 +375,124 @@ def activity(path, fps=5):
     return rows
 
 
-def best_window(path, dur, seg=SEG):
-    """Начало самого «живого» отрезка: максимум движения (YDIF) + немного яркости (огонь/вспышки).
-    Первые 0,3 с пропускаем (часто чёрный кадр/заставка)."""
+def windows(path, dur, seg=SEG, k=1):
+    """Начала k самых «живых» непересекающихся отрезков: движение (медиана YDIF — одна склейка или
+    рывок камеры не решают) + немного яркости (огонь/вспышки). Первые 0,3 с пропускаем (часто
+    чёрный кадр/заставка)."""
     if dur <= seg + 0.4:
-        return 0.0
+        return [0.0]
     rows = activity(path)
     if len(rows) < 4:
-        return max(0.0, (dur - seg) / 2)
-    best, best_t = -1, 0.3
+        return [round(max(0.0, (dur - seg) / 2), 2)]
+    scored = []
     t = 0.3
     while t + seg <= dur - 0.1:
         win = [r for r in rows if t <= r["t"] < t + seg]
         if win:
-            ydif = sum(r.get("YDIF", 0) for r in win) / len(win)
+            difs = sorted(r.get("YDIF", 0) for r in win)
+            ydif = min(difs[len(difs) // 2], 30)
             yavg = sum(r.get("YAVG", 0) for r in win) / len(win)
             dark_pen = 8 if yavg < 18 else 0  # почти чёрный — не берём
-            score = ydif + 0.04 * yavg - dark_pen
-            if score > best:
-                best, best_t = score, t
+            scored.append((ydif + 0.04 * yavg - dark_pen, round(t, 2)))
         t += 0.25
-    return round(best_t, 2)
+    out = []
+    for _, t in sorted(scored, reverse=True):
+        if all(abs(t - o) >= seg for o in out):
+            out.append(t)
+        if len(out) >= k:
+            break
+    return out or [0.3]
+
+
+def best_window(path, dur, seg=SEG):
+    return windows(path, dur, seg, 1)[0]
+
+
+VISION_MODELS = [m for m in os.environ.get(
+    "REEL_VISION_MODELS", "google/gemma-4-31b-it:free,google/gemma-4-26b-a4b-it:free").split(",") if m]
+VISION_PROMPT = ("Это сетка из {n} кадров (слева направо, сверху вниз, номера 1..{n}) из видео очевидцев "
+                 "удара по объекту: {what}. Выбери кадр, где ЛУЧШЕ ВСЕГО и чётко видно пожар, дым, вспышку, "
+                 "взрыв или разрушения, без перекрытия посторонним предметом. Не подходят: заставка или логотип "
+                 "на весь кадр, размытое пятно, тёмный кадр без огня, люди крупным планом, пострадавшие. "
+                 'Ответь только JSON: {{"best": номер}} или {{"best": 0}}, если не подходит ни один.')
+
+
+def _vision_pick(tile, n, what):
+    """Номер лучшего кадра сетки (1..n), 0 — ни один, None — модель недоступна."""
+    prompt = VISION_PROMPT.format(n=n, what=what)
+    if OR_KEY.exists():
+        import base64
+        key = OR_KEY.read_text().strip()
+        img = "data:image/jpeg;base64," + base64.b64encode(Path(tile).read_bytes()).decode()
+        for model in VISION_MODELS:
+            body = json.dumps({"model": model, "temperature": 0, "messages": [{"role": "user", "content": [
+                {"type": "text", "text": prompt}, {"type": "image_url", "image_url": {"url": img}}]}]}).encode()
+            req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", body,
+                                         {"Authorization": "Bearer " + key, "Content-Type": "application/json"})
+            try:
+                with urllib.request.urlopen(req, timeout=90) as r:
+                    txt = json.load(r)["choices"][0]["message"]["content"] or ""
+                m = re.search(r'"best"\s*:\s*(\d+)', txt)
+                if m:
+                    return int(m.group(1)), model
+            except Exception as e:  # noqa: BLE001
+                log(f"выбор кадра: {model}: {e}")
+    if shutil.which("claude"):
+        try:
+            r = subprocess.run(["claude", "-p", f"Открой изображение {tile} инструментом Read. " + prompt,
+                                "--model", os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001"),
+                                "--allowedTools", "Read"], capture_output=True, text=True, timeout=180)
+            m = re.search(r'"best"\s*:\s*(\d+)', r.stdout)
+            if m:
+                return int(m.group(1)), "haiku"
+        except Exception as e:  # noqa: BLE001
+            log(f"выбор кадра: haiku: {e}")
+    return None, None
+
+
+def pick_window(cands, seg, what, work: Path):
+    """cands: [(raw, dur, payload)] — лучшие видео. Режем каждое на 3 окна-кандидата, кадры из
+    середины окон кладём в одну сетку и один раз спрашиваем модель со зрением, где виден удар.
+    -> (raw, start, payload) | None (модель видела и ничего не выбрала). Без модели — эвристика."""
+    opts = []
+    for raw, dur, payload in cands[:3]:
+        s = min(seg, dur - 0.2)
+        for t in windows(raw, dur, s, 3):
+            opts.append((raw, t, s, payload))
+    if os.environ.get("REEL_VISION", "1") == "0" or len(opts) < 2:
+        raw, t, s, payload = opts[0]
+        return raw, t, s, payload
+    frames = []
+    for i, (raw, t, s, _) in enumerate(opts):
+        fr = work / f"vis-{i}.jpg"
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", f"{t + s / 2:.2f}", "-i", str(raw),
+                        "-frames:v", "1", "-vf", "scale=360:360:force_original_aspect_ratio=decrease,"
+                        "pad=360:360:(ow-iw)/2:(oh-ih)/2", str(fr)], check=False)
+        if fr.exists():
+            frames.append((fr, i))
+    if len(frames) < 2:
+        raw, t, s, payload = opts[0]
+        return raw, t, s, payload
+    cols = 3 if len(frames) > 4 else 2
+    rows = -(-len(frames) // cols)
+    tile = work / "vis-tile.jpg"
+    inputs = sum((["-i", str(fr)] for fr, _ in frames), [])
+    lay = "|".join(f"{(j % cols) * 360}_{(j // cols) * 360}" for j in range(len(frames)))
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", *inputs, "-filter_complex",
+                    f"xstack=inputs={len(frames)}:layout={lay}:fill=black", str(tile)], check=False)
+    if not tile.exists():
+        raw, t, s, payload = opts[0]
+        return raw, t, s, payload
+    n, model = _vision_pick(tile, len(frames), what)
+    if n is None:
+        log("выбор кадра: модели недоступны — беру эвристику")
+        raw, t, s, payload = opts[0]
+        return raw, t, s, payload
+    log(f"выбор кадра: {model} → {n} из {len(frames)}")
+    if not 1 <= n <= len(frames):
+        return None
+    raw, t, s, payload = opts[frames[n - 1][1]]
+    return raw, t, s, payload
 
 
 def to_vertical(src, start, seg, dest: Path):
@@ -342,7 +587,7 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
     # все видео-кандидаты: качество = короткая сторона кадра; «кружки» 384×384 и огрызки <2 с —
     # в конец очереди (фото того же поста смотрится лучше «кружка»)
     vids = []
-    for p in posts:
+    for rank, p in enumerate(posts):
         for i, v in enumerate(p["videos"][:3]):
             try:
                 raw = download(v, d / f"{slug(p['url'])}-{i}.mp4")
@@ -351,21 +596,24 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
                 log(f"{p['url']}: видео не скачалось ({e})")
                 continue
             if dur >= 1.5:
-                vids.append((min(w, h) >= 400 and dur >= 2.5, min(w, h), -len(vids), raw, p, w, h, dur))
+                # сначала годность, потом релевантность поста (порядок после проверки), потом качество
+                vids.append((min(w, h) >= 400 and dur >= 2.5, -rank, min(w, h), raw, p, w, h, dur))
     vids.sort(key=lambda x: x[:3], reverse=True)
     has_photo = any(p["photos"] for p in posts)
-    for good, _, _, raw, p, w, h, dur in vids:
-        if not good and has_photo:
-            break
+    good = [(raw, dur, (p, w, h)) for ok, _, _, raw, p, w, h, dur in vids if ok or not has_photo]
+    if good:
+        what = f"{strike.get('target') or ''}, {strike.get('city') or ''}"
         try:
-            s = min(seg, dur - 0.2)
-            st = best_window(raw, dur, s)
-            to_vertical(raw, st, s, final)
-            res = {"file": final.name, "kind": "video", "src": p["url"], "start": st, "dur": round(s, 2),
-                   "orig": f"{w}x{h}"}
-            break
+            pick = pick_window(good, seg, what, d)
+            if pick:
+                raw, st, s, (p, w, h) = pick
+                to_vertical(raw, st, s, final)
+                res = {"file": final.name, "kind": "video", "src": p["url"], "start": st, "dur": round(s, 2),
+                       "orig": f"{w}x{h}"}
+            else:
+                vids = []  # модель смотрела кадры — удара не видно; «кружок» в конце тоже не нужен
         except Exception as e:  # noqa: BLE001
-            log(f"{p['url']}: видео не годится ({e})")
+            log(f"видео не годится ({e})")
     if not res:
         src = str(strike.get("source_url") or "")
         if src and "t.me/" not in src:   # Telegram — только через пост/поиск выше
