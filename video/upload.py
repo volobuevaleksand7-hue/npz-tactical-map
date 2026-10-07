@@ -210,7 +210,7 @@ def main():
     args = sys.argv[1:]
     if args[:1] == ["auth"]:
         return auth()
-    if args[:1] in (["reel"], ["urgent"]):
+    if args[:1] in (["reel"], ["urgent"]) or re.fullmatch(r"urgent-[a-z0-9]+", args[0] if args else ""):  # urgent-<метка> — второй срочный за дату
         KIND, args = args[0], args[1:]
     if args:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):

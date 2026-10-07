@@ -47,7 +47,7 @@ def send_video(token, chat, path: Path, caption):
 
 def main():
     a = sys.argv[1:]
-    if len(a) != 2 or a[0] not in ("reel", "urgent"):
+    if len(a) != 2 or not (a[0] in ("reel", "urgent") or a[0].startswith("urgent-")):   # urgent-<метка> — второй срочный за дату
         sys.exit(__doc__)
     kind, date = a
     src = VIDEO / "out" / f"{kind}-{date}.mp4"

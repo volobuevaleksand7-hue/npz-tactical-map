@@ -731,8 +731,9 @@ def videos_for(date: str) -> dict:
 def video_section(date: str) -> str:
     v = videos_for(date)
     links = []
+    urgent = [(k, "▶ Срочно: удар на карте") for k in sorted(v) if k.startswith("urgent-")]   # второй срочный за дату
     for kind, label in (("reel", "▶ Короткое видео: удары дня на карте"), ("urgent", "▶ Срочно: удар на карте"),
-                        ("npz", "▶ Видео-сводка дня")):
+                        *urgent, ("npz", "▶ Видео-сводка дня")):
         if v.get(kind, {}).get("id"):
             vid = html.escape(v[kind]["id"])
             links.append(f'<a href="https://youtu.be/{vid}" class="cta-btn primary" target="_blank" rel="noopener">{label}</a>')

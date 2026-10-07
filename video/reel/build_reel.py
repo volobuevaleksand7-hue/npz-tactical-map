@@ -232,14 +232,31 @@ def dative_object(name):
     return " ".join(w)
 
 
-def fire_score(path):
-    """Яркость + доля тёплых насыщенных пикселей (огонь/дым на свету) — для фона постера."""
+def fire_score(path, band=None):
+    """Яркость + доля тёплых насыщенных пикселей (огонь/дым на свету) — для фона постера.
+    band=(верх, низ) в долях высоты — считать только эту полосу кадра (огонь, не закрытый текстом)."""
     from PIL import Image
     im = Image.open(path).convert("RGB").resize((90, 160))
+    if band:
+        im = im.crop((0, int(160 * band[0]), 90, int(160 * band[1])))
     px = list(im.getdata())
     lum = sum(0.3 * r + 0.59 * g + 0.11 * b for r, g, b in px) / len(px)
     warm = sum(1 for r, g, b in px if r > 150 and r > g * 1.3 and r > b * 1.6) / len(px)
     return lum * 0.4 + warm * 300
+
+
+URGENT_CSS = """
+      #poster .k.urgk { top:96px; font-size:132px; line-height:1; letter-spacing:-.01em; color:#ff2a1a;
+        text-shadow:0 0 28px rgba(255,40,20,.85), 0 4px 0 #000, 0 0 60px rgba(0,0,0,.9); }
+      #poster .bg { filter:saturate(1.35) contrast(1.12) brightness(1.08); }
+      #poster .dk { background:linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.2) 40%, rgba(0,0,0,0) 62%, rgba(0,0,0,.35) 100%); }
+      #poster .t span { background:#e3140c; }
+      #outro .k { top:176px; }
+      .urg { display:inline-block; color:#fff; background:#e3140c; border-radius:10px; padding:2px 16px; font-weight:800;
+        box-shadow:0 0 22px rgba(255,40,20,.7); }
+      #fhud .b .urg { font-size:46px; margin-right:6px; }
+      #fhud .e { top:160px; }
+"""
 
 
 def poster_head(sel, day, refs):
@@ -525,7 +542,7 @@ def fit_budget(clips, broll, vdur):
     по важности). Голос не трогаем: реплики уже озвучены и привязаны к ударам."""
     clips = [dict(c) if c else c for c in clips]
     for c in clips:   # по эталону клип 2–3 с; файл режется на 4 с — лишнее просто не показываем
-        if c and c.get("kind") == "video":
+        if c and c.get("kind") == "video" and not URGENT:   # срочный: кадры очевидцев — суть ролика, не режем
             c["dur"] = min(float(c.get("dur", 4.0)), CLIP_MAX)
     while est_total(clips, broll, vdur) > MAX_TOTAL:
         long = [c for c in clips if c and float(c.get("dur", 4.0)) > CLIP_MIN + 0.01]
@@ -695,13 +712,13 @@ def compose(date, build: Path):
     # вводил бы в заблуждение); ночной кадр вытягиваем яркостью в CSS-фильтре
     best = None
     for sg in [sg for sg in segs if sg.get("dive")][:1]:
-        for ts in (0.6, 1.4, 2.2, 3.0):
+        for ts in (0.6, 1.4, 2.2, 3.0) + ((3.8, 4.4, 5.0, 7.0) if URGENT else ()):
             cand = build / "assets" / f"_pc{sg['i']}_{ts}.jpg"
             r = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", str(ts), "-i",
                                 str(build / "assets" / sg["clip"]), "-frames:v", "1", "-q:v", "3", str(cand)])
             if r.returncode or not cand.exists():
                 continue
-            sc = fire_score(cand)
+            sc = fire_score(cand, (0.58, 0.9) if URGENT else None)   # срочный: огонь под плашкой города, не за ней
             if not best or sc > best[0]:
                 best = (sc, cand)
     if best:
@@ -718,7 +735,8 @@ def compose(date, build: Path):
         "TOTAL": total, "POSTER_END": POSTER + 0.35, "POSTER_BG": poster_bg,
         "POSTER_TITLE": esc(ptitle), "POSTER_TSIZE": 150 if len(ptitle) <= 22 else (124 if len(ptitle) <= 30 else 104),
         "POSTER_CITIES": esc(pcities),
-        "POSTER_SUB": esc(f"{date_rus.upper()} · {n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')} ЗА СУТКИ"),
+        "POSTER_SUB": esc(f"{date_rus.upper()} · " + ("ОЦЕНКА ПО OSINT" if URGENT else
+                                                       f"{n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')} ЗА СУТКИ")),
         "IW": IW, "IH": IH, "DATE_RUS": esc(date_rus), "DATE_SHORT": esc(G.rus_date_short(date)),
         "SIGNS": "\n".join(signs), "VIDEOS": "\n".join(videos), "CAPS": "\n".join(caps),
         "N": n, "N_WORD": G.plural(n, "удар", "удара", "ударов"),
@@ -731,7 +749,13 @@ def compose(date, build: Path):
     page = (TPL / "index.html").read_text(encoding="utf-8")
     page = re.sub(r"\{\{([A-Z0-9_]+)\}\}", lambda m: str(subs[m.group(1)]), page)
     if URGENT:   # один удар вне расписания — не «итог суток»
-        page = page.replace("ИТОГ СУТОК · ", "СРОЧНО · ")
+        page = page.replace("ИТОГ СУТОК · ", '<span class="urg">⚡ СРОЧНО</span> · ')
+        # постер = обложка Shorts: крупное красное «⚡ СРОЧНО» над заголовком, огонь без пересвета
+        page = page.replace('<div class="k"><i></i>ТОПЛИВНЫЙ ФРОНТ РФ</div>\n        <div class="t">',
+                            '<div class="k urgk">⚡ СРОЧНО</div>\n        <div class="t">', 1)
+        page = page.replace('<div id="fhud" class="clip" data-start="0" data-duration="{0}" data-track-index="20" data-layout-allow-overlap>\n        <div class="b"><i></i>'.format(total),
+                            '<div id="fhud" class="clip" data-start="0" data-duration="{0}" data-track-index="20" data-layout-allow-overlap>\n        <div class="b"><span class="urg">⚡ СРОЧНО</span>'.format(total), 1)
+        page = page.replace("</style>", URGENT_CSS + "</style>", 1)
         page = re.sub(r'(<div class="bw">[^<]*?) за сутки<', r"\1 по данным OSINT<", page)
     (build / "index.html").write_text(page, encoding="utf-8")
     (build / "hyperframes.json").write_text(json.dumps({"paths": {"assets": "assets"}}), encoding="utf-8")
