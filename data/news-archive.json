@@ -321,7 +321,7 @@
     "lat": 54.62,
     "lon": 39.74,
     "level": "critical",
-    "updated": "2026-10-02T05:50:57Z",
+    "updated": "2026-10-07T05:42:12Z",
     "networks": [
      {
       "name": "Роснефть / Лукойл / Газпром нефть",
@@ -349,7 +349,7 @@
     "lat": 58.6,
     "lon": 49.65,
     "level": "strained",
-    "updated": "2026-10-02T05:50:57Z",
+    "updated": "2026-10-07T05:42:12Z",
     "networks": [
      {
       "name": "Движение / Лукойл",
@@ -375,7 +375,7 @@
     "lat": 51.76,
     "lon": 55.09,
     "level": "limited",
-    "updated": "2026-10-02T05:50:57Z",
+    "updated": "2026-10-07T05:42:12Z",
     "networks": [
      {
       "name": "АЗС (чет-нечет по ГРЗ)",
@@ -401,7 +401,7 @@
     "lat": 64.54,
     "lon": 40.52,
     "level": "limited",
-    "updated": "2026-10-02T05:50:57Z",
+    "updated": "2026-10-07T05:42:12Z",
     "networks": [
      {
       "name": "Лукойл/Роснефть/РН-Северо-Запад",
@@ -424,11 +424,155 @@
     "note": "25.09: М-8 очереди СОКРАЩАЮТСЯ! Волонтеры помогают. Стабилизируется. WebSearch 25.09."
    },
    {
+    "region": "Сахалинская область",
+    "lat": 49.15,
+    "lon": 142.0,
+    "level": "limited",
+    "updated": "2026-10-07T05:42:12Z",
+    "networks": [
+     {
+      "name": "Сахалин (Региональные)",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 40,
+      "note": "25.09 ротация: Южно-Сахалинск стабилизирован. Цены: АИ-92 75.5р, АИ-95 78.5р, ДТ 82.5р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+     }
+    ],
+    "queues_hours": 0.2,
+    "ai95_price_rub": 78.5,
+    "diesel_price_rub": 82.5,
+    "source_urls": [
+     "https://www.petrolplus.ru/fuelindex/sahalinskaya-oblast/",
+     "https://www.petrolplus.ru/fuelindex/sahalinskaya-oblast/diesel/"
+    ],
+    "note": "25.09 ротация: Южно-Сахалинск стабилизирован. Цены: АИ-92 75.5р, АИ-95 78.5р, ДТ 82.5р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+   },
+   {
+    "region": "Курганская область",
+    "lat": 55.45,
+    "lon": 65.35,
+    "level": "limited",
+    "updated": "2026-10-07T05:42:12Z",
+    "networks": [
+     {
+      "name": "Региональные АЗС",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 30,
+      "note": "25.09 ротация: Курган стабилизирован. Цены: АИ-92 65.0р, АИ-95 68.0р, ДТ 71.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+     }
+    ],
+    "queues_hours": 0.2,
+    "ai95_price_rub": 68.0,
+    "diesel_price_rub": 71.0,
+    "source_urls": [
+     "https://www.petrolplus.ru/fuelindex/kurganskaya-oblast/",
+     "https://www.petrolplus.ru/fuelindex/kurganskaya-oblast/diesel/"
+    ],
+    "note": "25.09 ротация: Курган стабилизирован. Цены: АИ-92 65.0р, АИ-95 68.0р, ДТ 71.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+   },
+   {
+    "region": "Иркутская область (уточнение №2)",
+    "lat": 52.3,
+    "lon": 104.3,
+    "level": "limited",
+    "updated": "2026-10-07T05:42:12Z",
+    "networks": [
+     {
+      "name": "Иркутскнефть / Региональные",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 30,
+      "note": "25.09 ротация: Иркутск стабилизирован. Цены: АИ-92 68.0р, АИ-95 71.0р, ДТ 74.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+     }
+    ],
+    "queues_hours": 0.2,
+    "ai95_price_rub": 71.0,
+    "diesel_price_rub": 74.0,
+    "source_urls": [
+     "https://www.petrolplus.ru/fuelindex/irkutskaya-oblast/",
+     "https://www.petrolplus.ru/fuelindex/irkutskaya-oblast/diesel/"
+    ],
+    "note": "25.09 ротация: Иркутск стабилизирован. Цены: АИ-92 68.0р, АИ-95 71.0р, ДТ 74.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+   },
+   {
+    "region": "Самарская область",
+    "lat": 53.2,
+    "lon": 50.2,
+    "level": "limited",
+    "updated": "2026-10-07T05:42:12Z",
+    "networks": [
+     {
+      "name": "Самара (Региональные АЗС)",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 30,
+      "note": "25.09 ротация: Самара стабилизирована. Цены: АИ-92 66.0р, АИ-95 69.0р, ДТ 72.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+     }
+    ],
+    "queues_hours": 0.2,
+    "ai95_price_rub": 69.0,
+    "diesel_price_rub": 72.0,
+    "source_urls": [
+     "https://www.petrolplus.ru/fuelindex/samarskaya-oblast/",
+     "https://www.petrolplus.ru/fuelindex/samarskaya-oblast/diesel/"
+    ],
+    "note": "25.09 ротация: Самара стабилизирована. Цены: АИ-92 66.0р, АИ-95 69.0р, ДТ 72.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+   },
+   {
+    "region": "Республика Хакасия",
+    "lat": 53.7,
+    "lon": 91.4,
+    "level": "limited",
+    "updated": "2026-10-07T05:42:12Z",
+    "networks": [
+     {
+      "name": "Хакасия (Региональные АЗС)",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 30,
+      "note": "25.09 ротация: Абакан стабилизирован. Цены: АИ-92 66.0р, АИ-95 69.0р, ДТ 72.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+     }
+    ],
+    "queues_hours": 0.2,
+    "ai95_price_rub": 69.0,
+    "diesel_price_rub": 72.0,
+    "source_urls": [
+     "https://www.petrolplus.ru/fuelindex/hakassiya/",
+     "https://www.petrolplus.ru/fuelindex/hakassiya/diesel/"
+    ],
+    "note": "25.09 ротация: Абакан стабилизирован. Цены: АИ-92 66.0р, АИ-95 69.0р, ДТ 72.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+   },
+   {
+    "region": "Адыгея",
+    "lat": 44.6,
+    "lon": 40.1,
+    "level": "limited",
+    "updated": "2026-10-07T05:42:12Z",
+    "networks": [
+     {
+      "name": "Адыгея (Региональные АЗС)",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 30,
+      "note": "25.09 ротация: Майкоп стабилизирован. Цены: АИ-92 66.0р, АИ-95 69.0р, ДТ 72.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+     }
+    ],
+    "queues_hours": 0.2,
+    "ai95_price_rub": 69.0,
+    "diesel_price_rub": 72.0,
+    "source_urls": [
+     "https://www.petrolplus.ru/fuelindex/adygeya/",
+     "https://www.petrolplus.ru/fuelindex/adygeya/diesel/"
+    ],
+    "note": "25.09 ротация: Майкоп стабилизирован. Цены: АИ-92 66.0р, АИ-95 69.0р, ДТ 72.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+   },
+   {
     "region": "Новосибирская область",
     "lat": 54.99,
     "lon": 82.89,
     "level": "limited",
-    "updated": "2026-10-02T05:53:25Z",
+    "updated": "2026-10-07T05:42:12Z",
     "networks": [
      {
       "name": "Газпромнефть/Лукойл",
@@ -444,7 +588,7 @@
     "source_urls": [
      "https://ngs.ru/text/auto/2026/09/25/76653705/",
      "https://ngs.ru/text/transport/2026/09/21/76650274/",
-     "https://nsk.aif.ru/society/v-novosibirske-iz-za-deficita-topliva-zakryli-okolo-200-iz-400-azs",
+     "https://nsk.aif.ru/society/v-novosibirske-iz-za-deficita-topliva-zakryли-okolo-200-iz-400-azs",
      "https://www.nsk.om1.ru/news/society/432771-toplivo_ischezaet_na_glazakh_situacija_na_zapravkakh_novosibirska_3_sentjabrja/",
      "https://infopro54.ru/news/ogranicheniya-na-otpusk-topliva-na-azs-vvedut-v-novosibirskoj-oblasti",
      "https://ngs.ru/text/auto/2026/07/11/76526677",
@@ -457,7 +601,7 @@
     "lat": 50.6,
     "lon": 36.6,
     "level": "limited",
-    "updated": "2026-10-02T05:53:25Z",
+    "updated": "2026-10-07T05:42:12Z",
     "networks": [
      {
       "name": "Лукойл/Роснефть/Gazprom",
@@ -2139,59 +2283,6 @@
     "note": "Цены на бензин сегодня и его наличие в Ульяновской ... 03.10 WebSearch: Checked. No relevant fuel data found (supermarket results)."
    },
    {
-    "region": "Сахалинская область",
-    "lat": 46.96,
-    "lon": 142.74,
-    "level": "calm",
-    "updated": "2026-10-02T05:50:57Z",
-    "networks": [
-     {
-      "name": "Региональные АЗС / ННК",
-      "status": "open",
-      "level": "calm",
-      "limit_l": null,
-      "note": "23.09 ротация: Стабильна. Морской завоз по плану. ННК на ДВ полностью обеспечены. Северный завоз 2026 на 3% превыполнения (+59.4тыс т). Запреты на продажу в канистры действуют. Без дефицита. WebSearch 23.09."
-     }
-    ],
-    "queues_hours": 0.0,
-    "ai95_price_rub": 77.0,
-    "diesel_price_rub": 96.0,
-    "source_urls": [
-     "https://www.eastrussia.ru/news/limarenko-sakhalin-sokhranyaet-stabilnyy-zapas-topliva-blagodarya-rabote-s-postavshchikami-/",
-     "https://sakhalin.aif.ru/society/azs-nnk-na-dalnem-vostoke-polnostyu-obespecheny-toplivom",
-     "https://sakhalinmedia.ru/news/2533885/",
-     "https://astv.ru/news/society/2026-09-16-gde-na-sahaline-mozhno-kupit-toplivo-v-kanistry-minenergo-opublikovalo-perechen-azs",
-     "https://gogov.ru/bensin-prices-sep25/skhl"
-    ],
-    "note": "23.09 ротация: Стабильна. Морской завоз норма. Северный завоз +3%. WebSearch 23.09."
-   },
-   {
-    "region": "Курганская область",
-    "lat": 55.44,
-    "lon": 65.34,
-    "level": "calm",
-    "updated": "2026-10-02T05:50:57Z",
-    "networks": [
-     {
-      "name": "Все АЗС",
-      "status": "limited",
-      "level": "calm",
-      "limit_l": 40,
-      "note": "23.09 ротация: Цены норм (АИ-92 66.29р, АИ-95 70.66р, ДТ 80.03р). 55 АЗС работают. Топливо доступно. Стабилизируется. WebSearch 23.09."
-     }
-    ],
-    "queues_hours": 0.1,
-    "ai95_price_rub": 70.66,
-    "diesel_price_rub": 80.03,
-    "source_urls": [
-     "https://multigo.ru/benzin/55.4423;65.3434/11",
-     "https://fuelprice.ru/kurgan",
-     "https://www.petrolplus.ru/fuelindex/kurganskaya-oblast/ai92/",
-     "https://www.kommersant.ru/doc/8763518"
-    ],
-    "note": "23.09 ротация: Цены норм (67-71р АИ-95). 55 АЗС работают. Стабилизируется. WebSearch 23.09."
-   },
-   {
     "region": "Рязанская область (уточнение)",
     "lat": 54.62,
     "lon": 39.74,
@@ -2215,33 +2306,6 @@
     "note": "Ситуация с бензином в Рязани 30 июня: есть ли топливо на АЗС, что говорят водители - МК Рязань 03.10 WebSearch: Checked. Fresh data 01.10: AI-92 80.25, AI-95 87.05, diesel 82.83. 2.4% decrease."
    },
    {
-    "region": "Иркутская область (уточнение №2)",
-    "lat": 52.29,
-    "lon": 104.3,
-    "level": "limited",
-    "updated": "2026-10-02T05:50:57Z",
-    "networks": [
-     {
-      "name": "Роснефть / КрайсНефть",
-      "status": "limited",
-      "level": "limited",
-      "limit_l": 30,
-      "note": "23.09 ротация: КрайсНефть снизила цены (20.09): АИ-92 65.2р, АИ-95 68.9р, ДТ 85.7р. Ослабила ограничения на канистры (до 30л). Лимит бензина 30л. Ручное распределение. Ситуация улучшается. WebSearch 23.09."
-     }
-    ],
-    "queues_hours": 0.3,
-    "ai95_price_rub": 68.9,
-    "diesel_price_rub": 85.7,
-    "source_urls": [
-     "https://i38.ru/",
-     "https://ircity.ru/text/society/2026/09/14/76640625/",
-     "https://ircity.ru/text/economics/2026/09/21/76652976/",
-     "https://sia.ru/?action=show_news&id=16832327&section=484",
-     "https://i38.ru/transport-pervie/ogranicheniya-na-azs-i-rost-tsen-chto-proischodit-s-benzinom-v-irkutskoy-oblasti"
-    ],
-    "note": "23.09 ротация: КрайсНефть снизила цены. Лимит 30л. Ситуация улучшается. WebSearch 23.09."
-   },
-   {
     "region": "Тюменская область",
     "lat": 57.15,
     "lon": 65.53,
@@ -2263,84 +2327,6 @@
      "https://tumen.bezformata.com/listnews/benzin-v-tyumeni-3/163330199"
     ],
     "note": "Бензин в Тюмени 3 сентября 2026: где сегодня есть топливо и сколько оно стоит | 03.09.2026 | Тюмень - БезФормата 03.10 WebSearch: Checked. Found limits on AZS, 5-10 hour queues (VK)."
-   },
-   {
-    "region": "Самарская область",
-    "lat": 53.2,
-    "lon": 50.15,
-    "level": "limited",
-    "updated": "2026-10-02T05:50:57Z",
-    "networks": [
-     {
-      "name": "Роснефть / Татнефть / Лукойл",
-      "status": "limited",
-      "level": "limited",
-      "limit_l": 30,
-      "note": "23.09 ротация: Лимиты сужены до 30л (было 40л), 100л ДТ. Запрет канистры (только в бак). Стратегические отрасли получают полный объём. Ограничения продлены. WebSearch 23.09."
-     }
-    ],
-    "queues_hours": 0.2,
-    "ai95_price_rub": 83.34,
-    "diesel_price_rub": 85.44,
-    "source_urls": [
-     "https://www.niasam.ru/transport/minpromtorg-samarskoj-oblasti-razyasnil-limity-na-otpusk-benzina-na-azs-281329.html",
-     "https://samara.aif.ru/society/details/bez-paniki-ogranicheniya-na-prodazhu-topliva-v-samare-prodleny",
-     "https://www.niasam.ru/transport/minpromtorg-samarskoj-oblasti-razyasnil-limity-na-otpusk-benzina-na-azs-281329.html",
-     "https://reis.zr.ru/news/kogda-v-samarskoi-oblasti-snimut-toplivnye-limity-na-azs"
-    ],
-    "note": "23.09 ротация: Лимит 30л (сужен с 40л). Запрет канистр. WebSearch 23.09."
-   },
-   {
-    "region": "Республика Хакасия",
-    "lat": 53.72,
-    "lon": 91.44,
-    "level": "calm",
-    "updated": "2026-10-02T05:50:57Z",
-    "networks": [
-     {
-      "name": "Лукойл / Газпром нефть / Роснефть",
-      "status": "open",
-      "level": "calm",
-      "limit_l": null,
-      "note": "23.09 ротация: Полностью стабилизирована. Лимиты отменены. Абакан: АИ-92 63.41р, АИ-95 81.55р (текущие). Запасы выросли на 20%. Без дефицита. WebSearch 23.09."
-     }
-    ],
-    "queues_hours": 0.0,
-    "ai95_price_rub": 81.55,
-    "diesel_price_rub": 82.95,
-    "source_urls": [
-     "https://www.osnmedia.ru/obshhestvo/vlasti-hakasii-soobshhili-o-smyagchenii-situatsii-s-toplivom",
-     "https://www.petrolplus.ru/fuelindex/respublika-khakasiya/",
-     "https://multigo.ru/benzin/53.7231;91.441/11",
-     "https://www.petrolplus.ru/fuelindex/respublika-khakasiya/ai92"
-    ],
-    "note": "23.09 ротация: Стабильна. Лимиты отменены. Цены переменные. Запасы +20%. WebSearch 23.09."
-   },
-   {
-    "region": "Адыгея",
-    "lat": 44.61,
-    "lon": 40.1,
-    "level": "limited",
-    "updated": "2026-10-02T05:50:57Z",
-    "networks": [
-     {
-      "name": "Все АЗС",
-      "status": "limited",
-      "level": "limited",
-      "limit_l": 40,
-      "note": "23.09 ротация: Лимит 40л/сутки (установлен 21.07). Поставки штатные. Ограничение объема для предотвращения ажиотажа. Контролируется. WebSearch 23.09."
-     }
-    ],
-    "queues_hours": 0.2,
-    "ai95_price_rub": 74.0,
-    "diesel_price_rub": 77.0,
-    "source_urls": [
-     "https://www.kommersant.ru/doc/8763779",
-     "https://finance.mail.ru/article/nu-vot-i-vse-v-kakih-regionah-nachali-snimat-ogranicheniya-na-prodazhu-benzina-i-dizelya-69219723/",
-     "https://gdezapravka.ru/ceny-na-benzin/maykop",
-     "https://benzonavt.ru/region/adygeya/2026-07-15"
-    ],
-    "note": "23.09 ротация: Лимит 40л/сутки. Поставки штатные. Контролируется. WebSearch 23.09."
    }
   ],
   "exchange": {
@@ -27346,7 +27332,24 @@
    ]
   },
   "2026-10-07": {
-   "strikes": [],
+   "strikes": [
+    {
+     "date": "2026-10-07",
+     "time": "01:52",
+     "city": "Саратов",
+     "region": "Саратовская область",
+     "lat": 51.5406,
+     "lon": 46.0086,
+     "type": "drone",
+     "count": null,
+     "target": "Саратовский нефтеперерабатывающий завод (НПЗ)",
+     "casualties": null,
+     "title": "Атака БПЛА на Саратовский НПЗ",
+     "detail": "Атака беспилотников ночью, работа ПВО, закрыт аэропорт Гагарин",
+     "source_url": "https://www.ptoday.ru/15617-vzryvy-nad-saratovom-i-jengelsom-nochju-7-oktjabrja-pvo-otrazhala-ataku-bespilotnikov-vsu.html",
+     "confidence": "reported"
+    }
+   ],
    "voices": []
   }
  },
