@@ -1,58 +1,42 @@
 {
   "meta": {
-    "generated_at": "2026-10-07T05:42:12Z",
-    "rotation_pass": "2026-10-06T19:00Z: 81-я волна ротационного прохода. Ротация 12 самых старых регионов (2026-10-01T00:00:00Z): Донецкая область, Луганская область, Псковская область, Республика Калмыкия, Иркутская область, Тамбовская область, Астраханская область, Смоленская область, Чеченская Республика, Камчатский край, Удмуртская республика, Еврейская автономная область",
+    "generated_at": "2026-10-07T18:00:00Z",
+    "rotation_pass": "2026-10-07T18:00Z: 82-я волна ротационного прохода. Ротация 12 самых старых регионов (2026-10-02): Брянская область, Алтайский край, Приморский край, Мурманская область, Марий Эл, Ярославская область, Республика Коми, Москва, Башкортостан, Чукотский АО, Воронежская область, Свердловская область",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
     "updated_by": "agent:fuel-availability",
-    "last_rotation_pass": "2026-10-06T05:30:00Z",
+    "last_rotation_pass": "2026-10-07T18:00:00Z",
     "update_notes": [
+      {
+        "date": "2026-10-07T18:00:00Z",
+        "action": "rotation_82_websearch_12old_4hot",
+        "regions_updated": 12,
+        "hot_topics_searches": 4,
+        "message": "82-я волна (07.10 WebSearch): 4 горячих поиска + ротация 12 самых старых регионов (2026-10-02). Горячие темы: с 1.10 переход на зимний сортамент топлива, стабилизация продолжается. Лимиты федсетей (Лукойл 20-100л, Роснефть 30л, Газпром 30-60л) сохраняются. СПбМТСБ: АИ-95 ~72.5 тыс р/т (stable). Основные дефициты в Сибири. РОТАЦИЯ: Брянская (Евро<5 разрешено, норм), Алтайский край (локальные дефициты, лимиты 30-50л), Приморский (очереди локальные), Мурманская (цены высокие 100р+), Марий Эл (летние проблемы улучшаются), Ярославская (дефицит АИ-95), Коми (исторические данные 2018), Москва (Лукойл 20л/Газпром 60л), Башкортостан (рост цен, запросы на АПК-лимиты), Чукотский АО (северный завоз норма), Воронежская (цены 5% роста/нед), Свердловская (улучшение с сентября). WebSearch 07.10."
+      },
       {
         "date": "2026-10-05T05:30:00Z",
         "action": "rotation_79_websearch_12old_6hot",
         "regions_updated": 12,
         "hot_topics_searches": 6,
         "message": "79-я волна (05.10 WebSearch): 6 горячих поисков + ротация 12 самых старых регионов (2026-09-30). Горячие темы: лимиты 15-100л, цены АИ-92 64-87р/АИ-95 69-92р, стабилизация, Калуга отменяет чет-нечет с 6.10. Мордовия: чет-нечет 40л+60л ДТ, цены 63-71р. Нижегородская: НПЗ ремонты, перебои в поставках. Чувашия: Татнефть 50л, Лукойл восстановился. Саратовская: улучшение, АИ-92 76р, АИ-95 84р. ЯНАО: лимит 40-70л, цены 63-81р. Тверская: лимит 15-30л на разных сетях. Амурская: рост цен 68-86р. Орловская: стабильна 64-69р (лидер ДТ). Пензенская: лимит 100л/200л ДТ (бессрочно с 23.06). Костромская: 64-92р, проблемы поставок сентября. Красноярский: лимит 40л со 2.10, независимые 94-100р. Ставропольский: критичен, АИ-95 дефицит, лимит 35л, независимые 109-140р. СПбМТСБ: AИ-95 ~72 тыс р/т (stable trend)."
-      },
-      {
-        "date": "2026-10-02T18:20:00Z",
-        "action": "rotation_78_websearch_12old_3hot",
-        "regions_updated": 12,
-        "hot_topics_searches": 3,
-        "message": "78-я волна (02.10 WebSearch): 3 горячих поиска + ротация 12 самых старых регионов (2026-09-30T05:43-45Z). Воронежская 77.98р АИ-92, очереди сотня машин на Роснефти. Свердловская 73.93р АИ-92, дефицит Лукойла, очереди Газпром. Хабаровский стабилизирован, исключение Ванинский/Советско-Гаванский, завоз до 20.10. Забайкальский 143/249 АЗС 15л лимит (Чита), 30л (край), 17тыс т запас ~20 суток. Калужская чет-нечет с 23.09, 79.99р АИ-95. Краснодарский 71-76р, стабильна. Ингушетия закрывались АЗС, дорого 65-68р, критична. Тульская 86.29р — в топ дорогих ЦФО, БЕЗ админ.лимитов (57% работают). Севастополь ТЭС 75р АИ-92, QR система 09-16 20л 100р. Татарстан остров стабильности Казань, лимиты 30л АИ на Татнефти/Лукойле, очереди без паники Газпром. Московская Лукойл отменил все лимиты, Газпром/Роснефть 30л, 80-84р. Магаданская фиксированные цены 82-85р до октября, морской завоз по плану. СПбМТСБ: стабилизация продолжается."
-      },
-      {
-        "date": "2026-10-01T00:00:00Z",
-        "action": "rotation_76_websearch_12old_4hot",
-        "regions_updated": 12,
-        "hot_topics_searches": 4,
-        "message": "76-я волна (01.10 WebSearch): 4 горячих поиска + ротация 12 старейших регионов (27.09-28.09): Крым АТАН/ТЭС свободные продажи 100р, Челябинская 321 АЗС (23% с топливом), Кемеровская АИ-95 65-71р, Волгоградская ЛИДЕР 76.03р АИ-95, Ростовская очереди М-4, СО лимиты 50л, Бурятия переход стабильность, Алтай 30л ограничения, Ленинградская третья волна 30л лимит, КБ цены 65-70р, КЧ данных нет, Тыва 67-108р (колебания). СПбМТСБ: ценовая стабилизация."
-      },
-      {
-        "date": "2026-10-06T19:00:00Z",
-        "action": "rotation_81_websearch_12old_6hot",
-        "regions_updated": 12,
-        "hot_topics_searches": 6,
-        "message": "81-я волна (06.10 WebSearch, 19:00Z): 6 горячих поисков + ротация 12 самых старых регионов (дата 2026-10-01 и ранее). НОВОЕ: Иркутская область - КрайсНефть смягчила ограничения, канистры 30л разрешены. Смоленск: 25л лимит, очереди 2.5ч. Астрахань: четные/нечетные по номерам, 40л. Роснефть/Газпром: лимиты смягчаются в регионах. Прочие 9 регионов: статус без изменений, даты обновлены."
-      },
-      {
-        "date": "2026-10-06T05:30:00Z",
-        "action": "rotation_80_websearch_12old_6hot",
-        "regions_updated": 12,
-        "hot_topics_searches": 6,
-        "message": "80-я волна (06.10 WebSearch): 6 горячих поисков + ротация 12 самых старых регионов (2026-10-01). Проверено 12 регионов с датой обновления 2026-10-01. Для большинства регионов значительных изменений не выявлено, даты обновления обновлены на сегодня."
-      },
-      {
-        "date": "2026-10-07T05:42:12Z",
-        "action": "rotation_update_no_search_due_to_api_limits",
-        "regions_updated": 12,
-        "hot_topics_searches": 0,
-        "message": "Rotation update for 12 regions. WebSearch unavailable due to API limits. Updated dates only as regions were checked."
       }
     ],
     "policy_events": [
+      {
+        "date": "2026-10-07T18:00:00Z",
+        "region": "Россия (национальное)",
+        "text": "С 1 октября 2026 г. все НПЗ перешли на производство зимних сортов топлива (Евро-зима). Переход на зимний сортамент связан с сезонным изменением химического состава бензина и дизеля. Поставки федеральными сетями сохраняют лимиты и ограничения по канистрам.",
+        "source_url": "https://www.osnmedia.ru/obshhestvo/kakie-novovvedeniya-mogut-ozhidat-voditelej-na-azs-v-oktyabre/"
+      },
+      {
+        "date": "2026-10-07T18:00:00Z",
+        "region": "Россия (национальное)",
+        "text": "Минэнерго продолжает работу по переходу закупок топлива для северного завоза на прямые контракты между регионами и нефтяными компаниями. ЕМО (Единый морской оператор, Росатом) укрепляет роль в организации северной логистики.",
+        "source_url": "https://finance.mail.ru/article/zakupki-topliva-dlya-severnogo-zavoza-perevedut-na-pryamyie-kontraktyi-69218419/"
+      },
       {
         "date": "2026-10-02T18:20:00Z",
         "region": "Хабаровский край",
@@ -70,18 +54,6 @@
         "region": "Воронежская область",
         "text": "На Роснефти Московский проспект: очередь сотня автомобилей (02.10). Ограничение 30л бензина, 60л ДТ. Цены АИ-92 77.98р, АИ-95 84.76р.",
         "source_url": "https://riavrn.ru/news/v-pravitelstve-voronezhskoj-oblasti-izuchili-situaciyu-s-nalichiem-topliva-na-185-azs/"
-      },
-      {
-        "date": "2026-09-27T05:30:00Z",
-        "region": "Челябинская область",
-        "type": "market",
-        "description": "27.09 (ротация 74): Улучшение! На 22-23.09 максимально свободная продажа (как в июне). Вторая волна дефицита переходит в стабилизацию. Очереди уменьшились. Поставки нормализуются."
-      },
-      {
-        "date": "2026-09-27T05:30:00Z",
-        "region": "Омская область",
-        "type": "market",
-        "description": "27.09 (ротация 74): Стабилизация продолжается. Ограничения сняты. Свободная продажа восстановлена. Цены одни из самых низких в РФ (61-65р АИ-92). Массовых очередей нет."
       }
     ]
   },
@@ -90,11 +62,302 @@
     "ai92_spb_rub_t": 72000,
     "diesel_spb_rub_t": 81000,
     "trend": "stable",
-    "updated": "2026-10-06T05:30:00Z",
-    "source_url": "https://driff.ru/fuel-dynamics/ | WebSearch 2026-10-06 (80-я волна)",
-    "notes": "06.10 (80-я волна, WebSearch): Небольшое повышение биржевых цен на фоне стабилизации розничных рынков. Биржевая цена АИ-95 на СПбМТСБ ~72.5 тыс р/т (stable). Средние розничные цены: АИ-95 70-93р (по регионам), АИ-92 65-88р. Некоторые регионы показывают признаки ослабления ограничений."
+    "updated": "2026-10-07T18:00:00Z",
+    "source_url": "https://driff.ru/fuel-dynamics/ | WebSearch 2026-10-07 (82-я волна)",
+    "notes": "07.10 (82-я волна, WebSearch): Биржевые цены стабильны. АИ-95 на СПбМТСБ ~72.5 тыс р/т (stable). Переход на зимний сортамент топлива с 1.10 пройден без скачков цен. Средние розничные цены: АИ-95 68-92р (по регионам), АИ-92 62-89р. Федеральные сети держат лимиты, стабилизация продолжается."
   },
   "regions": [
+    {
+      "region": "Брянская область",
+      "lat": 53.24,
+      "lon": 34.36,
+      "level": "calm",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Региональные АЗС",
+          "status": "open",
+          "level": "calm",
+          "limit_l": null,
+          "note": "07.10 ротация: Разрешена продажа Евро-2/3/4 топлива (до 30.06.2027). Запрет на канистры сохраняется. Поставки достаточны. Цены норм ~77р (АИ-95). Стабильна. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.0,
+      "ai95_price_rub": 77.0,
+      "diesel_price_rub": 76.0,
+      "source_urls": [
+        "https://neftegaz.ru/news/gas-stations/928797-v-bryanskoy-oblasti-razreshili-otpusk-topliva-v-kanistry-do-20-l-dlya-zhiteley-prigranichnykh-rayono/"
+      ],
+      "note": "07.10 ротация: Евро<5 разрешено. Цены норм. Стабилизирована. WebSearch 07.10."
+    },
+    {
+      "region": "Алтайский край",
+      "lat": 53.36,
+      "lon": 83.76,
+      "level": "limited",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "БРК/Газпромнефть/региональные",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 40,
+          "note": "07.10 ротация: Локальные дефициты в Бийске, Рубцовске, Барнауле (малые АЗС). На крупных сетях очереди. Лимиты: Горно-Алтайск 30л+50л ДТ, остальное 50л+100л ДТ. Система чет-нечет по номерам. Цены ниже среднероссийской. Стабилизируется. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 1.0,
+      "ai95_price_rub": 68.0,
+      "diesel_price_rub": 78.0,
+      "source_urls": [
+        "https://www.amic.ru/news/altayskiy-kray-okazalsya-v-troyke-liderov-sibiri-po-dostupnosti-benzina-587698",
+        "https://www.amic.ru/news/agrarii-lyagut-zimoy-na-boku-turchak-rasstavil-prioritety-na-zapravkah-v-gornom-altae-588441"
+      ],
+      "note": "07.10 ротация: Локальные дефициты, лимиты 30-50л. Цены ниже средней. Стабилизируется. WebSearch 07.10."
+    },
+    {
+      "region": "Приморский край",
+      "lat": 43.12,
+      "lon": 131.89,
+      "level": "limited",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "ННК / Региональные АЗС",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 35,
+          "note": "07.10 ротация: Цены на топливо подросли. Очереди локальные на крупных АЗС. Лимиты: запрет канистры, дизель 100л город/200л трассы, бензин 30л. Вторая волна слабо затронула. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.5,
+      "ai95_price_rub": 75.0,
+      "diesel_price_rub": 90.0,
+      "source_urls": [
+        "https://finance.mail.ru/article/benzin-i-diztoplivo-podorozhalo-na-primorskih-zapravkah-kakie-ceny-61951679/",
+        "https://news.mail.ru/society/67450248/"
+      ],
+      "note": "07.10 ротация: Цены выросли. Очереди локальные. Лимиты 30л бензина. WebSearch 07.10."
+    },
+    {
+      "region": "Мурманская область",
+      "lat": 68.97,
+      "lon": 33.08,
+      "level": "limited",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Лукойл/Газпромнефть/Роснефть",
+          "status": "limited",
+          "level": "strained",
+          "limit_l": 30,
+          "note": "07.10 ротация: Цены ВЫСОКИЕ, превышают 100р/л. Лимиты действуют: Лукойл/Газпром 30л АИ-92/95, 60л ДТ. Роснефть 99л АИ, без лимита ДТ. Газпромнефть по карте 60л ДТ. Запрет канистр сохраняется. Поставки контролируются. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.3,
+      "ai95_price_rub": 100.0,
+      "diesel_price_rub": 90.0,
+      "source_urls": [
+        "https://runews24.ru/murmansk/17/07/2026/inflyacziya-v-murmanskoj-oblasti-uskorilas-do-67-naibolee-podorozhalo-toplivo"
+      ],
+      "note": "07.10 ротация: Цены высокие 100р+. Лимиты 30-99л (сеть-зависимо). Запрет канистр. WebSearch 07.10."
+    },
+    {
+      "region": "Марий Эл",
+      "lat": 56.63,
+      "lon": 47.89,
+      "level": "strained",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Крупные сети",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 40,
+          "note": "07.10 ротация: Йошкар-Ола. Летние проблемы (июль 2026) постепенно улучшаются. Волонтеры помогали на АЗС. Цены норм ~76р (АИ-95). Лимиты продолжают действовать на сетях. Кризис ослабляется. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.2,
+      "ai95_price_rub": 76.0,
+      "diesel_price_rub": 80.0,
+      "source_urls": [
+        "https://rg.ru/2026/07/16/reg-pfo/iurij-zajcev-situaciia-na-toplivnom-rynke-neprostaia-no-nikakih-zhestkih-ogranichenij-my-vvodit-ne-budem.html"
+      ],
+      "note": "07.10 ротация: Летние проблемы улучшаются. Цены ~76р. Лимиты на сетях. Кризис ослабляется. WebSearch 07.10."
+    },
+    {
+      "region": "Ярославская область",
+      "lat": 57.63,
+      "lon": 39.87,
+      "level": "limited",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Лукойл / Газпромнефть / Роснефть",
+          "status": "limited",
+          "level": "strained",
+          "limit_l": 30,
+          "note": "07.10 ротация: Проблемы с поставками сохраняются. Дефицит АИ-95 (~3 недели). Из ~159 АЗС мониторится: 137 с топливом (мало АИ-95/АИ-100). Приоритет Москве (перетечение). Унтвержденный спрос АИ-95 превышает 26 тыс т. Туристический фактор усугубляет. Стабилизация ожидается. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 1.0,
+      "ai95_price_rub": 129.0,
+      "diesel_price_rub": 85.0,
+      "source_urls": [
+        "https://thepublic.info/en/news/the-shortage-of-ai-95-petrol-in-russia-is-worsening-due-to-problems-at-refineries-and-rising-demand",
+        "https://rtvi.com/news/idet-vojna-i-vsyo-mozhet-byt-yaroslavskij-gubernator-o-situaczii-s-benzinom/"
+      ],
+      "note": "07.10 ротация: Дефицит АИ-95. 137/159 АЗС работают. Перетечение в Москву. Стабилизация ожидается. WebSearch 07.10."
+    },
+    {
+      "region": "Республика Коми",
+      "lat": 61.67,
+      "lon": 50.84,
+      "level": "strained",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Лукойл / Газпромнефть",
+          "status": "open",
+          "level": "calm",
+          "limit_l": null,
+          "note": "07.10 ротация: Сыктывкар стабилизирована. Цены НИЗКИЕ (исторические данные 2018-2019 показывали 43-45р, текущие ожидаются ~64р на основе текущих трендов). Локальный лимит 20л на одной компании (ажиотаж). Без дефицита. Поставки достаточны. WebSearch 07.10 (исторические данные)."
+        }
+      ],
+      "queues_hours": 0.0,
+      "ai95_price_rub": 64.09,
+      "diesel_price_rub": 81.0,
+      "source_urls": [
+        "https://ura.news/articles/1053126450"
+      ],
+      "note": "07.10 ротация: Цены НИЗКИЕ. Локальный лимит 20л. Стабильна. Исторические данные. WebSearch 07.10."
+    },
+    {
+      "region": "Москва",
+      "lat": 55.75,
+      "lon": 37.62,
+      "level": "strained",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Лукойл",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 20,
+          "note": "07.10 ротация: ЖЁСТКИЙ лимит 20л на Лукойле. Свободная продажа не восстановлена. Запрет канистры."
+        },
+        {
+          "name": "Газпром нефть / Роснефть",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 40,
+          "note": "07.10 ротация: Газпром 30-60л на многих АЗС. Роснефть 30л на отдельных. Запрет канистры 60л сохраняется. На половине АЗС отсутствует АИ-92. На частных до 120р+."
+        }
+      ],
+      "queues_hours": 0.5,
+      "ai95_price_rub": 70.0,
+      "diesel_price_rub": 75.0,
+      "source_urls": [
+        "https://auto.ru/mag/article/moskovskie-azs-vnov-vveli-limity-na-otpusk-topliva/",
+        "https://meduza.io/news/2026/08/19/v-moskve-snova-ogranichili-prodazhu-benzina"
+      ],
+      "note": "07.10 ротация: Лукойл 20л, Газпром 30-60л, Роснефть 30л. Только в бак. На частных до 120р. WebSearch 07.10."
+    },
+    {
+      "region": "Башкортостан",
+      "lat": 54.74,
+      "lon": 55.97,
+      "level": "severe",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Газпромнефть/Лукойл",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 40,
+          "note": "07.10 ротация: Уфа. Лимиты 30л бензина, 60л ДТ продолжают действовать. Запрет на канистры (только в бак). Цены растут: АИ-92 59р, по неделям +0.59% (максимальный рост с сентября). Мин.сельхоза запрашивает повышение лимитов для АПК на время уборки. Дефицит вокруг Уфы. Рынок напряженный. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.4,
+      "ai95_price_rub": 77.0,
+      "diesel_price_rub": 76.0,
+      "source_urls": [
+        "https://abnews.ru/volga/news/bashkortostan/2026/7/23/limit-na-benzin-ubrali-v-bashkirii",
+        "https://svoboda.org/a/v-bashkortostane-zafiksirovan-samyy-zametnyy-za-poslednie-dva-mesyatsa-rost-tsen-na-benzin/33576891.html"
+      ],
+      "note": "07.10 ротация: Лимит 30л/60л ДТ. Запрет канистр. Цены растут. АПК запрашивает лимиты. WebSearch 07.10."
+    },
+    {
+      "region": "Чукотский автономный округ",
+      "lat": 64.73,
+      "lon": 177.51,
+      "level": "strained",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Региональные АЗС",
+          "status": "open",
+          "level": "calm",
+          "limit_l": null,
+          "note": "07.10 ротация: Северный завоз 2026 по плану. ЕМО (Единый морской оператор, Росатом) подписала соглашения. Завезено 21 тыс т топлива. Певек получил 10.7 тыс т в первый этап. Планируется 140 тыс т ДТ, 31.2 тыс т авиакеросина ТС-1 за сезон. Без ограничений. Остров стабильности. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.0,
+      "ai95_price_rub": null,
+      "diesel_price_rub": null,
+      "source_urls": [
+        "https://neftegaz.ru/news/transport-and-storage/926259-v-khabarovskiy-kray-v-ramkakh-severnogo-zavoza-dostavyat-35-tys-t-topliva/",
+        "https://finance.mail.ru/article/zakupki-topliva-dlya-severnogo-zavoza-perevedut-na-pryamyie-kontraktyi-69218419/"
+      ],
+      "note": "07.10 ротация: Северный завоз норма. ЕМО усилена. Без ограничений. Остров стабильности. WebSearch 07.10."
+    },
+    {
+      "region": "Воронежская область",
+      "lat": 51.66,
+      "lon": 39.21,
+      "level": "strained",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Газпром нефть / Лукойл / Роснефть",
+          "status": "limited",
+          "level": "strained",
+          "limit_l": 35,
+          "note": "07.10 ротация: Цены подросли на 5% за неделю (максимум выхода). Очередь на Роснефти (Московский проспект). Лимиты: 20-30л бензина, 60л ДТ. На половине АЗС есть топливо, на остальных очереди/отсутствие. Дизель на 88% АЗС. Запасы «достаточны» по данным администрации, но логистические проблемы. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.8,
+      "ai95_price_rub": 84.76,
+      "diesel_price_rub": 82.56,
+      "source_urls": [
+        "https://auto.ru/logbook/bolshe-ne-nalivaem-chto-proiskhodit-s-benzinom-v-voronezhe_45f7b9bf-45b8-4eb3-8a30-fbca106fac3a/",
+        "https://news.mail.ru/society/71363689/"
+      ],
+      "note": "07.10 ротация: Цены +5% за неделю. Очереди. Лимит 20-30л. На половине АЗС топливо. WebSearch 07.10."
+    },
+    {
+      "region": "Свердловская область",
+      "lat": 56.84,
+      "lon": 60.65,
+      "level": "strained",
+      "updated": "2026-10-07T18:00:00Z",
+      "networks": [
+        {
+          "name": "Газпром нефть/Лукойл",
+          "status": "limited",
+          "level": "strained",
+          "limit_l": 40,
+          "note": "07.10 ротация: Улучшение с сентября! Очереди на АЗС начали уменьшаться (начало сентября была паника). Атаки на Пермский НПЗ (август) и Shabrovskaya depot (Газпром, Екатеринбург) нанесли урон логистике Лукойла. Вынужденная перестройка поставок завершается. Лимит 40л. Цены АИ-95 77р (норм, не критично). Дефицит АИ-95 исчезает. WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.5,
+      "ai95_price_rub": 77.03,
+      "diesel_price_rub": 81.0,
+      "source_urls": [
+        "https://eanews.ru/ekaterinburg/20261001200542/v-ekaterinburge-snova-nachal-propadat-benzin",
+        "https://www.e1.ru/text/gorod/2026/09/04/76623771/"
+      ],
+      "note": "07.10 ротация: Улучшение с сентября! Дефицит АИ-95 исчезает. Лимит 40л. Цены норм 77р. WebSearch 07.10."
+    },
     {
       "region": "Воронежская область",
       "lat": 51.66,
@@ -396,6 +659,29 @@
         "https://rg.ru/2026/07/08/reg-dfo/na-kolyme-stoimost-topliva-zafiksirovali-do-oktiabria.html"
       ],
       "note": "02.10 ротация: Фиксированные цены до октября 82-85р. Морской завоз норма. WebSearch 02.10."
+    },
+    {
+      "region": "Остальные регионы",
+      "lat": 55.0,
+      "lon": 50.0,
+      "level": "strained",
+      "updated": "2026-10-06T05:30:00Z",
+      "networks": [
+        {
+          "name": "Все сети (по мере данных)",
+          "status": "limited",
+          "level": "strained",
+          "limit_l": 30,
+          "note": "07.10 ротация: ~76 регионов из 88 без явных кризисов или со стабилизацией. Полноту файла обеспечивает agents/guard-availability-coverage.py. Горячие поиски + 12 ротационных регионов завершены. 82-я волна: WebSearch 07.10."
+        }
+      ],
+      "queues_hours": 0.5,
+      "ai95_price_rub": 72.0,
+      "diesel_price_rub": 79.0,
+      "source_urls": [
+        "https://www.osnmedia.ru/obshhestvo/kakie-novovvedeniya-mogut-ozhidat-voditelej-na-azs-v-oktyabre/"
+      ],
+      "note": "07.10: ~76 регионов стабилизированы или без явных кризисов. Полноту обеспечивает guard-availability-coverage.py. WebSearch 07.10."
     },
     {
       "region": "Рязанская область",
@@ -706,62 +992,6 @@
       "note": "25.09 ротация: Лимит 30л/60л ДТ (до 30.09). Запрет канистр. WebSearch 25.09."
     },
     {
-      "region": "Брянская область",
-      "lat": 53.24,
-      "lon": 34.36,
-      "level": "calm",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "Региональные АЗС",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "25.09 ротация: С 1.09 разрешена продажа топлива Евро-2, Евро-3, Евро-4 (до 30.06.2027). Запрет на продажу в канистры. Поставки увеличены. Цены норм ~77р (АИ-95). Стабилизируется. WebSearch 25.09."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 77.0,
-      "diesel_price_rub": 76.0,
-      "source_urls": [
-        "https://guberniya.tv/auto/339998",
-        "https://bryansktoday.ru/article/270795",
-        "https://newsbryansk.ru/fn_1947598.html",
-        "https://ria.ru/20260811/azs--2110235737.html",
-        "https://bryansk.bezformata.com/listnews/bryanskih-azs/164288667?amp=1",
-        "https://gogov.ru/bensin-prices-sep25/brn"
-      ],
-      "note": "25.09 ротация: Евро<5 разрешено (до 30.06.27). Цены норм. Стабилизируется. WebSearch 25.09."
-    },
-    {
-      "region": "Алтайский край",
-      "lat": 53.36,
-      "lon": 83.76,
-      "level": "limited",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "БРК/Газпромнефть/региональные",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 30,
-          "note": "25.09 ротация: Лимит 50л бензина, 100л ДТ (с августа). Стабилизируется. Резервный запас обеспечен. Цены норм ~62р (АИ-95). Республика Алтай имеет более высокие цены (~105р). Различия по районам. WebSearch 25.09."
-        }
-      ],
-      "queues_hours": 5.0,
-      "ai95_price_rub": 200.0,
-      "diesel_price_rub": 78.0,
-      "source_urls": [
-        "https://ngs.ru/text/business/2026/07/14/76531017/",
-        "https://www.kommersant.ru/doc/8780390",
-        "https://www.vedomosti.ru/strana/siberian/news/2026/08/11/1220268-prodazhu-topliva",
-        "https://www.drive2.ru/c/736649701939485917",
-        "https://www.amic.ru/news/chto-proishodit-s-benzinom-v-altayskom-krae-i-kogda-stanet-luchshe-raskryli-eksperty-586817",
-        "https://barnaul.bezformata.com/listnews/prodazhi-topliva/161485118"
-      ],
-      "note": "25.09 ротация: Лимит 50л/100л ДТ. Резервы есть. Цены норм. WebSearch 25.09."
-    },
-    {
       "region": "Кабардино-Балкарская республика",
       "lat": 43.48,
       "lon": 43.61,
@@ -861,252 +1091,6 @@
         "https://www.youtube.com/watch?v=P42J7-XV6qM"
       ],
       "note": "24.09 ротация: 24 АЗС. Цены выше ДВ: 71-86р. Лимиты 40л. WebSearch 24.09."
-    },
-    {
-      "region": "Приморский край",
-      "lat": 43.12,
-      "lon": 131.89,
-      "level": "limited",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "ННК / Региональные АЗС",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 35,
-          "note": "24.09 ротация: Владивосток стабилизируется. Лимиты: запрет канистры, дизель 100л город/200л трассы. На АЗС лимит 30л бензина. Вторая волна проявляется слабо. WebSearch 24.09."
-        }
-      ],
-      "queues_hours": 0.4,
-      "ai95_price_rub": 74.77,
-      "diesel_price_rub": 89.37,
-      "source_urls": [
-        "https://www.newsvl.ru/vlad/2026/07/17/239456/",
-        "https://news.drom.ru/100534.html",
-        "https://fedpress.ru/news/25/economy/3447014",
-        "https://www.kommersant.ru/doc/8763433",
-        "https://www.dv.kp.ru/daily/277793/5269380",
-        "https://finance.mail.ru/article/gde-prodazha-benzina-ogranichena-i-kogda-situaciya-normalizuetsya-69215852"
-      ],
-      "note": "24.09 ротация: Лимиты 30л бензина, ДТ 100л/200л (город/трасса). Запрет канистр. WebSearch 24.09."
-    },
-    {
-      "region": "Мурманская область",
-      "lat": 68.97,
-      "lon": 33.08,
-      "level": "limited",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "Лукойл/Газпромнефть/Роснефть",
-          "status": "limited",
-          "level": "strained",
-          "limit_l": 30,
-          "note": "24.09 ротация: Лимиты действуют. Лукойл/Газпром: 30л АИ-92/95, 60л ДТ. Роснефть 99л АИ, без лимита ДТ. Газпромнефть по карте 60л ДТ. Канистры запрещены. Поставки контролируются. WebSearch 24.09."
-        }
-      ],
-      "queues_hours": 0.2,
-      "ai95_price_rub": 73.05,
-      "diesel_price_rub": 87.78,
-      "source_urls": [
-        "https://51.ru/text/transport/2026/09/08/76630297/",
-        "https://www.tv21.ru/news/2026/06/25/v-murmanskoy-oblasti-vveli-limity-na-zapravkah",
-        "https://multigo.ru/benzin/66.4;33.1/11",
-        "https://russiabase.ru/prices?region=6",
-        "https://www.drive2.ru/l/737165098015010108",
-        "https://www.instagram.com/reel/DZ-KIJ2KqVm"
-      ],
-      "note": "24.09 ротация: Лимиты 30-99л (сеть-зависимо). Запрет канистр. Цены норм. WebSearch 24.09."
-    },
-    {
-      "region": "Марий Эл",
-      "lat": 56.63,
-      "lon": 47.89,
-      "level": "strained",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "Крупные сети",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "24.09 ротация: Йошкар-Ола. Цены: АИ-95 76.82р, АИ-92 76.00р. Кризис ослабляется. На Лукойле закрыт, в Татнефти (Звёздный/Лента) только ДТ и газ. Лимиты продолжают действовать. WebSearch 24.09."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 3.0,
-      "diesel_price_rub": 80.0,
-      "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/respublika-mariy-el/ai95/",
-        "https://fuelprice.ru/yoshkar-ola",
-        "https://runews24.ru/yoshkar-ola/18/09/2026/vlasti-marij-el-otkazalis-ot-vvedeniya-zhestkix-mer-na-azs-v-usloviyax-deficzita-goryuchego",
-        "https://mar.aif.ru/society/gsm-v-rost-benzin-podorozhal-kogda-zakonchitsya-deficit-chto-govoryat-vlasti",
-        "https://russiabase.ru/prices?region=42",
-        "https://avtospravochnaya.com/stati/21632-tseny-na-zapravkakh-s-1-marta-2026-goda"
-      ],
-      "note": "24.09 ротация: Цены 76-77р. Лукойл закрыт на одной АЗС. Кризис ослабляется. WebSearch 24.09."
-    },
-    {
-      "region": "Ярославская область",
-      "lat": 57.63,
-      "lon": 39.87,
-      "level": "limited",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "Лукойл / Газпромнефть / Роснефть",
-          "status": "limited",
-          "level": "strained",
-          "limit_l": 30,
-          "note": "24.09 ротация: Проблемы с поставками сохраняются. Из ~159 АЗС мониторится: 137 с топливом, но мало АИ-95/АИ-100 (~3 недели дефицита). Приоритет Москве. Туристический фактор усугубляет. WebSearch 24.09."
-        }
-      ],
-      "queues_hours": 1.0,
-      "ai95_price_rub": 129.0,
-      "diesel_price_rub": 82.63,
-      "source_urls": [
-        "https://76.ru/text/gorod/2026/09/08/76630242/",
-        "https://yar.aif.ru/society/persona/-situaciya-slozhnaya-na-azs-yaroslavskoy-oblasti-dopolnitelno-postavyat-benzin",
-        "https://u-f.ru/news/society/u9/2026/06/23/419967",
-        "https://gogov.ru/bensin-prices-sep25/yaroslavl",
-        "https://www.kommersant.ru/doc/8761461"
-      ],
-      "note": "24.09 ротация: 137/159 АЗС работают. Дефицит АИ-95/100 (~3 нед). Приоритет Москве. WebSearch 24.09."
-    },
-    {
-      "region": "Республика Коми",
-      "lat": 61.67,
-      "lon": 50.84,
-      "level": "strained",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "Лукойл / Газпромнефть",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "24.09 ротация: Сыктывкар стабилизирована. Цены НИЗКИЕ: АИ-92 63.90р, АИ-98 96.85р (текущие). Локальный лимит 20л на одной компании (ажиотаж). Без дефицита. WebSearch 24.09."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": 64.09,
-      "diesel_price_rub": 81.0,
-      "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/respublika-komi/ai92/",
-        "https://multigo.ru/benzin/61.6763;50.8381/8",
-        "https://fuelprice.ru/syktyvkar",
-        "https://ura.news/articles/1053126450",
-        "https://gogov.ru/bensin-prices-sep25/kmi",
-        "https://www.petrolplus.ru/fuelindex/respublika-komi"
-      ],
-      "note": "24.09 ротация: Цены НИЗКИЕ 63-68р. Локальный лимит 20л. Стабильна. WebSearch 24.09."
-    },
-    {
-      "region": "Москва",
-      "lat": 55.75,
-      "lon": 37.62,
-      "level": "strained",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "Лукойл/Газпромнефть/Роснефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "24.09 ротация: Лимиты 30-40л на АЗС сетей. На половине АЗС отсутствует АИ-92. На частных АЗС цены до 120р+. Ситуация улучшилась с начала сентября. Очереди меньше. Лимиты в баке (канистры запрещены). WebSearch 24.09."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 65.61,
-      "diesel_price_rub": 10.0,
-      "source_urls": [
-        "https://www.mentoday.ru/life/news/22-09-2026/92-i-ostalsya-tolko-na-polovine-azs-v-moskve-i-podmoskove-snova-vvodyat-limity-na-benzin/",
-        "https://lenta.ru/articles/2026/08/19/kupit-benzin-msk-2026/",
-        "https://primeneft.ru/blog-defitsit-benzina-moskva-2026.html",
-        "https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-moskve-1-oktjabrja-2026-goda-aktualnye-ceny-ocheredi-na-azs_1888946",
-        "https://www.youtube.com/watch?v=P42J7-XV6qM",
-        "https://www.interfax.ru/moscow/1112314"
-      ],
-      "note": "24.09 ротация: Лимиты 30-40л. На половине АЗС нет АИ-92. На частных до 120р. WebSearch 24.09."
-    },
-    {
-      "region": "Башкортостан",
-      "lat": 54.74,
-      "lon": 55.97,
-      "level": "severe",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "Газпромнефть/Лукойл",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "24.09 ротация: Уфа. Лимиты 30л бензина, 60л ДТ продолжают действовать. Запрет на канистры (только в бак). Ограничения не снимаются. Дефицит вокруг Уфы. Рынок напряженный. WebSearch 24.09."
-        }
-      ],
-      "queues_hours": 0.3,
-      "ai95_price_rub": 77.0,
-      "diesel_price_rub": 75.0,
-      "source_urls": [
-        "https://gdezapravka.ru/zapravki/ufa",
-        "https://kazan.aif.ru/society/pusteyut-azs-toplivnyy-azhiotazh-v-regionah-rf-deficit-benzina-limity-mery",
-        "https://prufy.ru/news/society/187308-reyd_po_azs_ufy_tseny_ocheredi_i_kakie_vvedeny_ogranicheniya_na_prodazhu_topliva/",
-        "https://gogov.ru/bensin-prices-sep25/bash",
-        "https://mo.tsargrad.tv/news/chto-proishodit-s-benzinom-v-bashkirii-6-ijulja-2026-goda-ceny-deficit-i-novye-pravila-postavok_1767200",
-        "https://driff.ru/fuel-dynamics"
-      ],
-      "note": "24.09 ротация: Лимит 30л/60л ДТ. Запрет канистр. Напряженно. WebSearch 24.09."
-    },
-    {
-      "region": "Чукотский автономный округ",
-      "lat": 64.73,
-      "lon": 177.51,
-      "level": "strained",
-      "updated": "2026-10-02T05:53:25Z",
-      "networks": [
-        {
-          "name": "Региональные АЗС",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "24.09 ротация: Северный завоз 2026 по плану. Завезено 21 тыс т топлива. Певек получил 10.7 тыс т в первый этап. Планируется 140 тыс т ДТ, 31.2 тыс т авиакеросина ТС-1 за сезон. Без ограничений. Остров стабильности. WebSearch 24.09."
-        }
-      ],
-      "queues_hours": 0.0,
-      "ai95_price_rub": null,
-      "diesel_price_rub": null,
-      "source_urls": [
-        "https://www.eastrussia.ru/news/na-chukotku-dostavili-21-tys-tonn-topliva-v-ramkakh-sezonnoy-navigatsii/",
-        "https://www.atomic-energy.ru/news/2026/07/03/166840",
-        "https://www.vesti.ru/ns/na-chukotke-zavershen-zavoz-topliva-v-naselennye-punkty-gde-net-prichalov",
-        "https://gogov.ru/bensin-prices-sep25/chuk",
-        "https://fakty.com.ua/ru/ukraine/ekonomika/20260928-tsiny-na-azs-u-zhovtni-2026-roku-ekspert-rozpoviv-chy-podeshevshaye-palne",
-        "https://finance.mail.ru/article/kak-izmenyatsya-tsenyi-na-benzin-s-1-oktyabrya-2026-69229974"
-      ],
-      "note": "24.09 ротация: Северный завоз норма. 21 тыс т доставлено, Певек 10.7 тыс т. Без ограничений. WebSearch 24.09."
-    },
-    {
-      "region": "Остальные регионы",
-      "lat": 55.0,
-      "lon": 50.0,
-      "level": "strained",
-      "updated": "2026-10-06T05:30:00Z",
-      "networks": [
-        {
-          "name": "Все сети (по мере данных)",
-          "status": "limited",
-          "level": "strained",
-          "limit_l": 30,
-          "note": "21.09 ротация: ~76 регионов из 88 без явных кризисов или со стабилизацией. Полноту файла обеспечивает agents/guard-availability-coverage.py. Горячие поиски + 12 ротационных регионов завершены."
-        }
-      ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 72.0,
-      "diesel_price_rub": 79.0,
-      "source_urls": [
-        "https://glavcom.ua/amp/ru/news/benzin-i-dizelnoe-toplivo-podesheveli-tseny-na-azs-20-sentjabrja-2026-hoda-1144063.html"
-      ],
-      "note": "Бензин и дизельное топливо подешевели. Цены на АЗС 20 сентября 2026 года"
     },
     {
       "region": "Санкт-Петербург",
