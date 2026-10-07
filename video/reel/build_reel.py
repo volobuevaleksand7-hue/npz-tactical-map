@@ -33,6 +33,17 @@ MAX_STRIKES = int(os.environ.get("REEL_MAX", "12"))  # все удары дня;
 # в hermes/bot/strike_pipeline.py (его зовёт пайплайн сразу после молнии, без расписания).
 URGENT = os.environ.get("REEL_KIND", "reel") == "urgent"
 ONLY = {x for x in os.environ.get("REEL_ONLY", "").split(",") if x}
+# Рилс дня — новостная сводка к 12:00 МСК: всё, что случилось с прошлой сводки («за ночь и до ролика»).
+# Время удара в strikes.json обычно «ночь», поэтому окно — удары за дату выпуска и накануне,
+# минус уже показанные в прошлых сводках (out/reel-shown.json, пишет daily.sh после публикации).
+SHOWN_F = VIDEO / "out" / "reel-shown.json"
+
+
+def shown_ids():
+    try:
+        return set(json.loads(SHOWN_F.read_text(encoding="utf-8")))
+    except (OSError, ValueError):
+        return set()
 
 
 def strike_id(raw):
@@ -101,12 +112,20 @@ def load_day(date):
     fuel = json.loads((ROOT / "data" / "fuel-state.json").read_text(encoding="utf-8"))
     refs = fuel.get("refineries", [])
     day = []
+    if URGENT or os.environ.get("REEL_WINDOW", "1") == "0":
+        dates, seen = {date}, set()
+    else:
+        import datetime as _dt
+        prev = (_dt.date.fromisoformat(date) - _dt.timedelta(days=1)).isoformat()
+        dates, seen = {date, prev}, shown_ids()
     for raw in arr:
-        if str(raw.get("date", ""))[:10] != date:
+        if str(raw.get("date", ""))[:10] not in dates:
             continue
-        if ONLY and strike_id(raw) not in ONLY:
+        sid = strike_id(raw)
+        if (ONLY and sid not in ONLY) or sid in seen:
             continue
         s = G.normalize_strike(raw)
+        s["_sid"] = sid
         ll = locate(s, refs, arr)
         if ll:
             s["lat"], s["lon"] = ll
@@ -253,6 +272,7 @@ def prepare(date, build: Path):
         sys.exit(f"build_reel: за {date} нет ударов с координатами — рилс не собирается")
     build.mkdir(parents=True, exist_ok=True)
     (build / "assets").mkdir(exist_ok=True)
+    (build / "ids.json").write_text(json.dumps(sorted(s["_sid"] for s in day)), encoding="utf-8")
     clips = []
     for s in sel:
         c = FC.fetch_for(s, build / "assets") if os.environ.get("REEL_CLIPS_MIN_CLS", "0") <= str(s["cls"]) else None
@@ -695,7 +715,7 @@ def describe(date, sel, day, refs, segs, clips, broll):
     if len(head) + len(tail) > 100:
         head = head[:100 - len(tail) - 1].rstrip(" ,.;:—-") + "…"
     lines = [head + tail, "", f"Карта ударов: https://{SITE_HOST}/",
-             f"«Топливный фронт РФ»: удары за {G.rus_date(date)} на карте сайта.", ""]
+             f"«Топливный фронт РФ»: удары за сутки на {G.rus_date(date)} на карте сайта.", ""]
     for s in sel:
         lines.append(f"— {s.get('city')}: {object_name(s, refs)}. {what_happened(s)}")
     n_fuel = sum(1 for s in day if s["cls"] == 2)
@@ -717,7 +737,7 @@ def tg_caption(date, sel, day, refs, clips, broll):
     n_fuel = sum(1 for s in day if s["cls"] == 2)
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
     out = ([f"⚡ <b>Срочно: удар {G.rus_date(date)}</b>", ""] if URGENT else
-           [f"🎬 <b>Удары за {G.rus_date(date)}</b>: {n}{tail}.", ""])
+           [f"🎬 <b>Удары за сутки на {G.rus_date(date)}</b>: {n}{tail}.", ""])
     for s in sel:
         k = len(s.get("_group", [s]))
         out.append(f"• {html.escape(str(s.get('city') or s.get('region')), quote=False)} — "

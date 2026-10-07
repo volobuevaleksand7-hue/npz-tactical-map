@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Рилс дня — cron Гермеса 08:00 UTC: собирает рилс за ВЧЕРА (МСК, день уже полный, как эталон 04.10)
-# и публикует ровно в 12:00 МСК (REEL_PUBLISH_AT, UTC). Перед рендером — свежий проход сборщика ударов.
+# Рилс дня — новостная сводка: cron Гермеса 08:00 UTC собирает всё, что случилось с прошлой сводки
+# (за ночь и до ролика: удары за дату выпуска и накануне минус показанные — out/reel-shown.json),
+# и публикует ровно в 12:00 МСК (REEL_PUBLISH_AT, UTC; пусто — сразу). Перед рендером — проход сборщика ударов.
 #   ./reel/daily.sh [YYYY-MM-DD]
 # Срочный рилс (без расписания): REEL_KIND=urgent REEL_ONLY=<id,...> ./reel/daily.sh <дата> —
 # зовёт hermes/bot/strike_pipeline.py после молнии; один срочный на дату, публикуется сразу.
@@ -15,7 +16,7 @@ if [ "$KIND" = urgent ]; then
   REEL_REFRESH=0                       # удар только что пришёл из strikes.json — проход не нужен
   PUBLISH_AT=""                        # срочный — сразу
 else
-  DATE="${1:-$(TZ=Europe/Moscow date -d yesterday +%F)}"
+  DATE="${1:-$(TZ=Europe/Moscow date +%F)}"
   PUBLISH_AT="${REEL_PUBLISH_AT-09:00}" # 12:00 МСК; пусто — публиковать сразу после сборки
 fi
 rc=0
@@ -38,6 +39,15 @@ if [ -f "${NPZ_YT_SECRETS:-$HOME/.config/npz-youtube}/token.json" ]; then
   python3 upload.py "$KIND" "$DATE" || rc=$?
 fi
 python3 tg_post.py "$KIND" "$DATE" || rc=$?
+if [ "$KIND" = reel ] && [ -f "out/reel-$DATE.uploaded" ]; then   # показанное в сводке не повторяем завтра
+  python3 - "$DATE" <<'PY'
+import json, sys
+from pathlib import Path
+f, ids = Path("out/reel-shown.json"), Path(f".build/reel-{sys.argv[1]}/ids.json")
+old = set(json.loads(f.read_text())) if f.exists() else set()
+f.write_text(json.dumps(sorted(old | set(json.loads(ids.read_text()))), indent=0))
+PY
+fi
 if [ -n "$(git -C .. status --porcelain -- data/videos.json)" ]; then
   (cd .. && bash agents/git-sync.sh "data(video): реестр роликов YouTube") || rc=$?
 fi
