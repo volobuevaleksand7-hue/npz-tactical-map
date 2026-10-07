@@ -500,8 +500,9 @@ S0 = 1080 / 3240   # масштаб общего плана (вся ширина
 SZ = 1.15          # масштаб у удара
 
 
-MAX_TOTAL = float(os.environ.get("REEL_MAX_SEC", "58"))   # аудит пускает ≤60 с
+MAX_TOTAL = float(os.environ.get("REEL_MAX_SEC", "80"))   # аудит пускает ≤90 с
 CLIP_MIN = 2.5
+CLIP_MAX = 3.0
 
 
 def est_total(clips, broll, vdur):
@@ -519,10 +520,13 @@ def est_total(clips, broll, vdur):
 
 
 def fit_budget(clips, broll, vdur):
-    """Клипы очевидцев удлиняют ролик (07.10: 9 ударов + 4 клипа = 70 с, аудит не выпустил).
+    """Клипы очевидцев удлиняют ролик (07.10: 9 ударов + 4 клипа = 70 с при прежнем лимите аудита 60).
     Сначала укорачиваем все клипы до CLIP_MIN, потом снимаем клипы с младших ударов (sel отсортирован
     по важности). Голос не трогаем: реплики уже озвучены и привязаны к ударам."""
     clips = [dict(c) if c else c for c in clips]
+    for c in clips:   # по эталону клип 2–3 с; файл режется на 4 с — лишнее просто не показываем
+        if c and c.get("kind") == "video":
+            c["dur"] = min(float(c.get("dur", 4.0)), CLIP_MAX)
     while est_total(clips, broll, vdur) > MAX_TOTAL:
         long = [c for c in clips if c and float(c.get("dur", 4.0)) > CLIP_MIN + 0.01]
         if long:
