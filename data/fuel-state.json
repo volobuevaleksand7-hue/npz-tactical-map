@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-08T16:30:00Z",
+    "generated_at": "2026-10-08T06:47Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -380,11 +380,11 @@
       "capacity_mt_year": 10.0,
       "status": "partial",
       "status_since": "2026-08-13",
-      "est_output_pct": 30,
-      "damage": "Поражена установка первичной переработки АВТ-6 в ночь на 13-14 июля. Вторая атака 13 августа 2026: украинские дроны «Лютый» нанесли удар по заводу. Производственные мощности сокращены из-за повторных повреждений.",
+      "est_output_pct": 20,
+      "damage": "Поражен крупный нефтеперерабатывающий завод Газпрома в Башкортостане.",
       "note": "На 8 октября: продолжает работать в режиме пониженной переработки после второй атаки. Завод расположен в 1200 км от линии фронта.",
-      "source_url": "https://www.bloomberg.com/news/articles/2026-08-13/ukraine-says-it-hit-oil-refinery-in-russia-s-urals-region",
-      "confidence": "confirmed"
+      "source_url": "https://t.me/exilenova_plus",
+      "confidence": "reported"
     },
     {
       "id": "ilsky",
@@ -932,6 +932,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-08",
+      "text": "Удар по Газпром нефтехим Салават (Салават): Удар по НПЗ в Салавате",
+      "source_url": "https://t.me/exilenova_plus"
+    },
     {
       "date": "2026-10-08",
       "text": "Дефицит топлива распространяется на новые регионы: энергетические чиновники обсудили ситуацию в 10 регионах (Оренбургская, Липецкая, Тверская области, Краснодарский край, Забайкальский край, Приморский край, Красноярский край, Орловская область, Тува, Хакасия). Ограничения на продажу бензина и дизеля вводятся по мере нехватки поставок. Уровень offline-мощностей НПЗ остаётся на уровне ~57% от общей переработки.",
