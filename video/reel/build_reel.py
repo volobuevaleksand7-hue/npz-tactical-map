@@ -197,10 +197,16 @@ def kind_label(s):
     return "объект"
 
 
+BRANDS = {"Газпром", "Лукойл", "Роснефть", "Татнефть", "Транснефть", "Башнефть", "Сургутнефтегаз", "ТАНЕКО",
+          "Новатэк", "НОВАТЭК", "Сибур", "СИБУР", "КИНЕФ"}
+
+
 def dative_object(name):
     """«Волгоградский НПЗ» -> «Волгоградскому НПЗ»; «Энергетическая подстанция» -> «Энергетической подстанции»;
     «ЛПДС «Самара»» -> без изменений."""
     w = name.split(" ")
+    if len(w) > 1 and w[0] in BRANDS:   # «Газпром нефтехим Салават» не склоняем («по Газпрому нефтехим» — криво)
+        return name
     if w[0].endswith(("ая", "яя")):          # женский род: прилагательное + существительное на -ия/-ция/-а
         hush = w[0][-3:-2] in ("ж", "ш", "ч", "щ")
         w[0] = w[0][:-2] + ("ой" if w[0].endswith("ая") and not hush else "ей")
@@ -569,6 +575,14 @@ def compose(date, build: Path):
     sel, day = select_strikes(date)
     _, refs = load_day(date)
     clips = json.loads((build / "clips.json").read_text(encoding="utf-8"))
+    # 08.10: один пост про Салават сборщик клипов приписал четырём городам — один кадр = один удар
+    used = set()
+    for i, c in enumerate(clips):
+        if c and (c.get("src"), c.get("file")) in used:
+            print(f"build_reel: клип {c.get('src')} уже показан у другого удара — у s{i} без кадров", file=sys.stderr)
+            clips[i] = None
+        elif c:
+            used.add((c.get("src"), c.get("file")))
     bf = build / "broll.json"
     broll = json.loads(bf.read_text(encoding="utf-8")) if bf.exists() else []
     mp = json.loads((build / "map-points.json").read_text(encoding="utf-8"))
