@@ -188,6 +188,7 @@ LABELS = {
     "/raketnaya-opasnost-voronezhskaya-oblast": ("🚀", "Ракетная опасность: Воронежская обл."),
     "/raketnaya-opasnost-leningradskaya-oblast": ("🚀", "Ракетная опасность: Ленинградская обл."),
     "/raketnaya-opasnost-bashkortostan": ("🚀", "Ракетная опасность: Башкортостан"),
+    "/udar-po-data-centru-yandeksa": ("🖥", "Удар по дата-центру «Яндекса»"),
     # кластер складов маркетплейсов — подписи в одном стиле, без сырых «wildberries спб»
     "/udar-po-skladu-ozon":   ("📦", "Удар по складу Ozon"),
     "/sgorel-sklad-wildberries-chto-delat": ("❓", "Сгорел склад Wildberries: что делать"),
