@@ -31,7 +31,7 @@ TG_HANDLE = "@npz_karta_online"
 MAX_STRIKES = int(os.environ.get("REEL_MAX", "12"))  # все удары дня; потолок — чтобы Shorts не вылез за ~2 мин
 # Срочный рилс (REEL_KIND=urgent): только удары из REEL_ONLY — id через запятую, как _strike_id
 # в hermes/bot/strike_pipeline.py (его зовёт пайплайн сразу после молнии, без расписания).
-URGENT = os.environ.get("REEL_KIND", "reel") == "urgent"
+URGENT = os.environ.get("REEL_KIND", "reel").startswith("urgent")   # urgent | urgent-<метка> (второй срочный за дату)
 ONLY = {x for x in os.environ.get("REEL_ONLY", "").split(",") if x}
 # Рилс дня — новостная сводка к 12:00 МСК: всё, что случилось с прошлой сводки («за ночь и до ролика»).
 # Время удара в strikes.json обычно «ночь», поэтому окно — удары за дату выпуска и накануне,

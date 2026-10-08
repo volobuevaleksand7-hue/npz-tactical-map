@@ -11,7 +11,7 @@ VIDEO="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$VIDEO"
 export PATH="$HOME/.local/bin:$PATH"   # edge-tts, yt-dlp (venv, см. README)
 KIND="${REEL_KIND:-reel}"; export REEL_KIND="$KIND"
-if [ "$KIND" = urgent ]; then
+if [ "${KIND%%-*}" = urgent ]; then   # urgent | urgent-<метка> — второй срочный за дату
   DATE="${1:-$(TZ=Europe/Moscow date +%F)}"
   REEL_REFRESH=0                       # удар только что пришёл из strikes.json — проход не нужен
   PUBLISH_AT=""                        # срочный — сразу
