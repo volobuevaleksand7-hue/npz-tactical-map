@@ -135,6 +135,8 @@ def meta(date):
     title = clean(lines[0].strip())[:100]
     desc = clean("\n".join(lines[1:]).strip())[:4900]
     tags = re.findall(r"#(\w+)", desc)[:10]
+    if lang() == "en" and re.search(r"[А-Яа-яЁё]", title + desc):
+        raise SystemExit(f"upload: {path}: кириллица в заголовке/описании английского ролика — сначала reel/en_pass.py")
     return title, desc, tags
 
 

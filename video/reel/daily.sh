@@ -5,7 +5,7 @@
 #   ./reel/daily.sh [YYYY-MM-DD]
 # Срочный рилс (без расписания): REEL_KIND=urgent REEL_ONLY=<id,...> ./reel/daily.sh <дата> —
 # зовёт hermes/bot/strike_pipeline.py после молнии; один срочный на дату, публикуется сразу.
-# Рендер -> аудит -> YouTube -> Telegram-канал (анонимный бот) -> реестр data/videos.json -> очистка.
+# Рендер -> аудит -> YouTube -> Telegram-канал (анонимный бот) -> английская версия (Fuel Front) -> реестр data/videos.json -> очистка.
 set -uo pipefail
 VIDEO="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$VIDEO"
@@ -39,6 +39,17 @@ if [ -f "${NPZ_YT_SECRETS:-$HOME/.config/npz-youtube}/token.json" ]; then
   python3 upload.py "$KIND" "$DATE" || rc=$?
 fi
 python3 tg_post.py "$KIND" "$DATE" || rc=$?
+# Английская версия того же ролика для Fuel Front (@NPZ-eng): перевод + озвучка + рендер (~10 мин),
+# заливка своим токеном. Нужна русская сборка .build/$KIND-DATE. REEL_EN=0 — без неё.
+EN_SECRETS="${NPZ_YT_EN_SECRETS:-$HOME/.config/npz-youtube-en}"
+if [ "${REEL_EN:-1}" != "0" ] && [ -f "$EN_SECRETS/token.json" ] && [ -f ".build/$KIND-$DATE/plan.json" ] \
+   && [ ! -f "out/en-$KIND-$DATE.uploaded" ]; then
+  if python3 reel/en_pass.py "$KIND" "$DATE"; then
+    NPZ_YT_SECRETS="$EN_SECRETS" python3 upload.py "en-$KIND" "$DATE" || rc=$?
+  else
+    rc=1; echo "reel: английская версия $KIND $DATE не собрана"
+  fi
+fi
 if [ "$KIND" = reel ] && [ -f "out/reel-$DATE.uploaded" ]; then   # показанное в сводке не повторяем завтра
   python3 - "$DATE" <<'PY'
 import json, sys
@@ -52,5 +63,5 @@ if [ -n "$(git -C .. status --porcelain -- data/videos.json)" ]; then
   (cd .. && bash agents/git-sync.sh "data(video): реестр роликов YouTube") || rc=$?
 fi
 bash ./cleanup.sh || rc=$?
-find .build -maxdepth 1 \( -name "reel-*" -o -name "urgent-*" \) -mtime +3 -exec rm -rf {} + 2>/dev/null   # черновики рендера
+find .build -maxdepth 1 \( -name "reel-*" -o -name "urgent-*" -o -name "en-*" \) -mtime +3 -exec rm -rf {} + 2>/dev/null   # черновики рендера
 exit $rc

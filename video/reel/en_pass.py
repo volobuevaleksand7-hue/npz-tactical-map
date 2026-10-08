@@ -163,6 +163,18 @@ def main():
                     "description_ru": (dst / "description.txt").read_text(encoding="utf-8")[:1500]},
     }
     tr = ask(payload)
+    # .txt (заголовок + описание для upload.py) — сразу после перевода, до рендера: 08.10 в out/ лежал
+    # русский .txt, и английский ролик ушёл с русским заголовком. summary бывает не строками — приводим.
+    summary = "\n".join(str(s).strip() for s in (tr.get("summary") or []) if str(s).strip())
+    desc = (f"{tr['title'].strip()}\n\n"
+            f"Strike map (all events, Russian-language site): {SITE}\n"
+            f"Fuel Front tracks attacks on fuel infrastructure and the fuel balance, from open sources.\n\n"
+            f"{summary}\n\n"
+            f"ESTIMATE: aggregated open-source (OSINT) reporting, not official data. "
+            f"Footage: public Telegram channels, locations not independently verified.\n\n"
+            f"#FuelFront #oil #refinery #Russia #energy #news")
+    out.parent.mkdir(exist_ok=True)
+    out.with_suffix(".txt").write_text(desc + "\n", encoding="utf-8")
 
     for a, b in zip(ui, tr["ui"]):
         page = page.replace(">" + html.escape(a, quote=False) + "<", ">" + html.escape(b, quote=False) + "<")
@@ -198,15 +210,6 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "0.6", "-i", str(mp4), "-frames:v", "1", "-q:v", "3",
                     str(out.with_suffix(".jpg"))], check=True)
 
-    summary = "\n".join(tr.get("summary") or [])
-    desc = (f"{tr['title'].strip()}\n\n"
-            f"Strike map (all events, Russian-language site): {SITE}\n"
-            f"Fuel Front tracks attacks on fuel infrastructure and the fuel balance, from open sources.\n\n"
-            f"{summary}\n\n"
-            f"ESTIMATE: aggregated open-source (OSINT) reporting, not official data. "
-            f"Footage: public Telegram channels, locations not independently verified.\n\n"
-            f"#FuelFront #oil #refinery #Russia #energy #news")
-    out.with_suffix(".txt").write_text(desc + "\n", encoding="utf-8")
     log(f"готово: {mp4} ({duration(mp4):.1f} с), заголовок: {tr['title']}")
 
 
