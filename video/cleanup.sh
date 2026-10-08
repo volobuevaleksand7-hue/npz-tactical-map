@@ -24,7 +24,9 @@ done
 # имена npz-YYYY-MM-DD.mp4 сортируются как даты; tmp-файлы недорендера не трогаем
 # (без mapfile — на Маке системный bash 3.2)
 n=0
-for v in $(ls -1 npz-????-??-??.mp4 2>/dev/null | sort -r); do
+# Без ls: при nullglob пустой глоб давал голый `ls -1` = ВСЕ файлы out/, и «храним 7» сносил
+# reel-shown.json и маркеры .uploaded -> повторы сюжетов и повторные заливки (07.10).
+for v in $(printf '%s\n' npz-????-??-??.mp4 | sort -r); do
   n=$((n + 1))
   [ "$n" -le "$KEEP" ] && continue
   rm -f -- "$v" "${v%.mp4}.jpg"
