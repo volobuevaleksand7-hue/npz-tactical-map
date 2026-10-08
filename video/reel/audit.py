@@ -22,7 +22,7 @@ def audit(date, build: Path):
         hard.append(f"голос: озвучено {len(plan.get('voice', []))} из {len(nar) + 2} реплик")
     lo = 12 if build.name.startswith("urgent-") else 30   # срочный — один удар
     # 60 → 90 с (07.10): с клипами очевидцев день из 9 ударов — 70 с; Shorts принимает до 3 мин
-    hi = 90
+    hi = 60   # цель ~45 с (REEL_MAX_SEC); 60 — жёсткий потолок
     if not lo <= plan.get("total", 0) <= hi:
         hard.append(f"длительность {plan.get('total')} с вне {lo}–{hi}")
     desc = (build / "description.txt").read_text(encoding="utf-8").splitlines()[0]

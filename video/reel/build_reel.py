@@ -517,7 +517,9 @@ S0 = 1080 / 3240   # масштаб общего плана (вся ширина
 SZ = 1.15          # масштаб у удара
 
 
-MAX_TOTAL = float(os.environ.get("REEL_MAX_SEC", "80"))   # аудит пускает ≤90 с
+# 08.10: лучше всего смотрятся шортсы 17–44 с; ролики 47 и 68 с проседали — целимся в ~45 с
+MAX_TOTAL = float(os.environ.get("REEL_MAX_SEC", "45"))
+MIN_STOPS = 3   # меньше остановок не режем: остальное дня — в описании
 CLIP_MIN = 2.5
 CLIP_MAX = 3.0
 
@@ -536,10 +538,11 @@ def est_total(clips, broll, vdur):
     return t + 0.15 + max(OUTRO, 0.5 + vdur("outro") + 0.8)
 
 
-def fit_budget(clips, broll, vdur):
+def fit_budget(sel, clips, broll, vdur):
     """Клипы очевидцев удлиняют ролик (07.10: 9 ударов + 4 клипа = 70 с при прежнем лимите аудита 60).
     Сначала укорачиваем все клипы до CLIP_MIN, потом снимаем клипы с младших ударов (sel отсортирован
-    по важности). Голос не трогаем: реплики уже озвучены и привязаны к ударам."""
+    по важности), затем снимаем младшие удары целиком (их реплики s{i} в конце — просто не звучат;
+    в описании они остаются). Порядок: короче клипы → меньше ударов → меньше клипов."""
     clips = [dict(c) if c else c for c in clips]
     for c in clips:   # по эталону клип 2–3 с; файл режется на 4 с — лишнее просто не показываем
         if c and c.get("kind") == "video" and not URGENT:   # срочный: кадры очевидцев — суть ролика, не режем
@@ -550,13 +553,16 @@ def fit_budget(clips, broll, vdur):
             for c in long:
                 c["dur"] = round(max(CLIP_MIN, float(c.get("dur", 4.0)) - 0.5), 2)
             continue
+        if len(clips) > MIN_STOPS and not URGENT:
+            sel, clips = sel[:-1], clips[:-1]
+            continue
         idx = [i for i, c in enumerate(clips) if c]
         if not idx:
             break
         clips[idx[-1]] = None
     got, total = sum(1 for c in clips if c), est_total(clips, broll, vdur)
-    print(f"build_reel: бюджет {MAX_TOTAL:.0f} с → {total:.1f} с, клипов {got}", file=sys.stderr)
-    return clips
+    print(f"build_reel: бюджет {MAX_TOTAL:.0f} с → {total:.1f} с, ударов {len(sel)}, клипов {got}", file=sys.stderr)
+    return sel, clips
 
 
 def compose(date, build: Path):
@@ -584,7 +590,8 @@ def compose(date, build: Path):
         shutil.copytree(VIDEO / "template" / "assets" / f, build / "assets" / f, dirs_exist_ok=True)
     shutil.copy2(VIDEO / "node_modules" / "gsap" / "dist" / "gsap.min.js", build / "assets" / "gsap.min.js")
 
-    clips = fit_budget(clips, broll, vdur)
+    sel_all = sel
+    sel, clips = fit_budget(sel, clips, broll, vdur)
 
     # камера: ключевые кадры (t, x, y, s) в пикселях скриншота; dip — «подъём» камеры на перелёте
     cx0, cy0 = IW / 2, IH / 2
@@ -658,7 +665,7 @@ def compose(date, build: Path):
         if c and c not in cities and len(c) <= 16:
             cities.append(c)
     date_rus = G.rus_date(date)
-    nar = dict(narration(date, sel, day, refs, build, broll))
+    nar = dict(narration(date, sel_all, day, refs, build, broll))   # кэш реплик — по всем ударам
     signs = []
     for i, s in enumerate(sel):
         spoken = nar.get(f"s{i}", "")
@@ -764,8 +771,8 @@ def compose(date, build: Path):
     mixplan = {"date": date, "total": total,
                "sfx": [{"name": a, "t": round(max(0, x), 2)} for a, x in sfx], "voice": voice}
     (build / "plan.json").write_text(json.dumps(mixplan, ensure_ascii=False, indent=1), encoding="utf-8")
-    (build / "description.txt").write_text(describe(date, sel, day, refs, segs, clips, broll), encoding="utf-8")
-    (build / "tg_caption.txt").write_text(tg_caption(date, sel, day, refs, clips, broll), encoding="utf-8")
+    (build / "description.txt").write_text(describe(date, sel_all, day, refs, segs, clips, broll), encoding="utf-8")
+    (build / "tg_caption.txt").write_text(tg_caption(date, sel_all, day, refs, clips, broll), encoding="utf-8")
     print(json.dumps({"date": date, "total": total, "strikes": [s.get("city") for s in sel],
                       "footage": [c and c["src"] for c in clips], "broll": [b["src"] for b in broll]}, ensure_ascii=False))
 
