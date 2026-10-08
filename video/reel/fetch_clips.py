@@ -240,7 +240,18 @@ VERIFY_PROMPT = """Ниже удар по объекту в России и по
 
 
 def _llm_json(prompt):
-    """JSON-ответ дешёвой модели: OpenRouter free → Haiku (claude CLI). None — никто не ответил."""
+    """JSON-ответ модели: Haiku (claude CLI) → OpenRouter free (запас: free-модели почти всегда 429). None — никто не ответил."""
+    for _ in range(2 if shutil.which("claude") else 0):   # Haiku изредка не отвечает — второй заход
+        try:
+            r = subprocess.run(["claude", "-p", prompt, "--model",
+                                os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001")],
+                               capture_output=True, text=True, timeout=120)
+            m = re.search(r"\{.*\}", r.stdout, re.S)
+            if m:
+                return json.loads(m.group(0)), "haiku"
+            log(f"проверка постов: haiku без JSON: {r.stdout[-120:]!r} {r.stderr[-120:]!r}")
+        except Exception as e:  # noqa: BLE001
+            log(f"проверка постов: haiku: {e}")
     if OR_KEY.exists():
         key = OR_KEY.read_text().strip()
         for model in VERIFY_MODELS:
@@ -256,17 +267,6 @@ def _llm_json(prompt):
                     return json.loads(m.group(0)), model
             except Exception as e:  # noqa: BLE001 — 429/таймаут: следующая модель
                 log(f"проверка постов: {model}: {e}")
-    for _ in range(2 if shutil.which("claude") else 0):   # Haiku изредка не отвечает — второй заход
-        try:
-            r = subprocess.run(["claude", "-p", prompt, "--model",
-                                os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001")],
-                               capture_output=True, text=True, timeout=120)
-            m = re.search(r"\{.*\}", r.stdout, re.S)
-            if m:
-                return json.loads(m.group(0)), "haiku"
-            log(f"проверка постов: haiku без JSON: {r.stdout[-120:]!r} {r.stderr[-120:]!r}")
-        except Exception as e:  # noqa: BLE001
-            log(f"проверка постов: haiku: {e}")
     return None, None
 
 
@@ -425,6 +425,16 @@ VISION_PROMPT = ("Это сетка из {n} кадров (слева напра
 def _vision_pick(tile, n, what):
     """Номер лучшего кадра сетки (1..n), 0 — ни один, None — модель недоступна."""
     prompt = VISION_PROMPT.format(n=n, what=what)
+    if shutil.which("claude"):
+        try:
+            r = subprocess.run(["claude", "-p", f"Открой изображение {tile} инструментом Read. " + prompt,
+                                "--model", os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001"),
+                                "--allowedTools", "Read"], capture_output=True, text=True, timeout=180)
+            m = re.search(r'"best"\s*:\s*(\d+)', r.stdout)
+            if m:
+                return int(m.group(1)), "haiku"
+        except Exception as e:  # noqa: BLE001
+            log(f"выбор кадра: haiku: {e}")
     if OR_KEY.exists():
         import base64
         key = OR_KEY.read_text().strip()
@@ -442,16 +452,6 @@ def _vision_pick(tile, n, what):
                     return int(m.group(1)), model
             except Exception as e:  # noqa: BLE001
                 log(f"выбор кадра: {model}: {e}")
-    if shutil.which("claude"):
-        try:
-            r = subprocess.run(["claude", "-p", f"Открой изображение {tile} инструментом Read. " + prompt,
-                                "--model", os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001"),
-                                "--allowedTools", "Read"], capture_output=True, text=True, timeout=180)
-            m = re.search(r'"best"\s*:\s*(\d+)', r.stdout)
-            if m:
-                return int(m.group(1)), "haiku"
-        except Exception as e:  # noqa: BLE001
-            log(f"выбор кадра: haiku: {e}")
     return None, None
 
 
