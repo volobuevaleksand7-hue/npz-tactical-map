@@ -41,7 +41,8 @@ Input JSON:
   ТОПЛИВНЫЙ ФРОНТ РФ -> FUEL FRONT · RUSSIA; ОЦЕНКА -> ESTIMATE; подтверждено -> confirmed;
   сообщается -> reported; СРОЧНО -> BREAKING; нефтебаза -> oil depot; ЛПДС/НПС -> pumping station;
   обл. -> region; dates 06.10.2026 -> Oct 6, 2026; "6 октября 2026" -> "October 6, 2026".
-  Standard English place names (Moscow, Ryazan, Novorossiysk, Tuapse, Bashkortostan).
+  Standard English place names (Moscow, Ryazan, Novorossiysk, Tuapse, Bashkortostan, Salavat, Sterlitamak;
+  Russian "в" is "v", never "w").
 - "voice": spoken lines keyed s0, s1... Translate into natural spoken English, one sentence each,
   no abbreviations, numbers as words if under 20, max ~20 words.
 - "context": facts for the intro line.
