@@ -25,6 +25,25 @@
       "last_event_ts": 1791442306,
       "source_text": "08.10.2026 09:51 МСК\nЯмало-Ненецкий автономный округ - опасность по БПЛА, Ханты-Мансийский автономный округ — Югра, Тюменская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
+    "Омская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1791446316,
+      "source_text": "08.10.2026 10:58 МСК\nОмская область Опасность по БПЛА"
+    },
     "Запорожская область": {
       "bpla": false,
       "bplaDim": false,
@@ -123,7 +142,7 @@
     "Автономная Республика Крым": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -135,9 +154,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1791435892,
-      "source_text": "08.10.2026 08:04 МСК\nКрым и Севастополь отбой опасности по БПЛА. Режим повышенного внимания сохраняется"
+      "fill": "#d8c06a",
+      "last_event_ts": 1791446219,
+      "source_text": "08.10.2026 10:56 МСК\nКерченский полуостров Керчь и близлежащие Опасность по БПЛА Республика Крым"
     },
     "Белгородская область": {
       "bpla": false,
@@ -234,25 +253,6 @@
       "last_event_ts": 1791409287,
       "source_text": "08.10.2026 00:41 МСК\nВладимирская область Ярославская область Ивановская область внимание по бпла"
     },
-    "Пермский край": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1791444850,
-      "source_text": "08.10.2026 10:34 МСК\nПермь Пермский край Работа ПВО по БПЛА Меры безопасности"
-    },
     "Тюменская область": {
       "bpla": false,
       "bplaDim": false,
@@ -345,8 +345,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791415924,
-      "source_text": "08.10.2026 02:32 МСК\nТрубчевск и близлежащие Тревога по БПЛА Брянская область"
+      "last_event_ts": 1791445835,
+      "source_text": "08.10.2026 10:50 МСК\nКлинцы, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     "Севастополь": {
       "bpla": false,
@@ -364,8 +364,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791445326,
-      "source_text": "08.10.2026 10:42 МСК\nЛенинский район Кировское Чауда Феодосия и близлежащие Республика Крым Опасность по БПЛА"
+      "last_event_ts": 1791446219,
+      "source_text": "08.10.2026 10:56 МСК\nКерченский полуостров Керчь и близлежащие Опасность по БПЛА Республика Крым"
     },
     "Курганская область": {
       "bpla": false,
@@ -785,6 +785,28 @@
       "source_text": "07.10.2026 23:45 МСК\nМценск, Болхов, Шаблыкино, Орёл, Орловская область - ракетная опасность и в направлении Тульской области. 📡 Локатор России - @locatorru"
     },
     {
+      "key": "керчь|автономная республика крым",
+      "name": "Керчь",
+      "lat": 45.35675,
+      "lon": 36.47542,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791446219,
+      "source_text": "08.10.2026 10:56 МСК\nКерченский полуостров Керчь и близлежащие Опасность по БПЛА Республика Крым"
+    },
+    {
       "key": "шебекино|белгородская область",
       "name": "Шебекино",
       "lat": 50.41342,
@@ -917,14 +939,14 @@
       "source_text": "08.10.2026 00:17 МСК\nЗапорожская область РФ с севера от г. Запорожье многочисленные фиксации БПЛА Николаевская область продолжаются фиксации БПЛА в направлении Херсонской области РФ"
     },
     {
-      "key": "пермь|пермский край",
-      "name": "Пермь",
-      "lat": 58.01046,
-      "lon": 56.25017,
-      "region": "Пермский край",
-      "bpla": true,
+      "key": "керченский полуостров|автономная республика крым",
+      "name": "Керченский полуостров",
+      "lat": 45.250954,
+      "lon": 36.140668,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -932,11 +954,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1791444850,
-      "source_text": "08.10.2026 10:34 МСК\nПермь Пермский край Работа ПВО по БПЛА Меры безопасности"
+      "last_event_ts": 1791446219,
+      "source_text": "08.10.2026 10:56 МСК\nКерченский полуостров Керчь и близлежащие Опасность по БПЛА Республика Крым"
     },
     {
       "key": "тюмень|тюменская область",
@@ -1049,6 +1071,28 @@
       "source_text": "07.10.2026 23:16 МСК\nКурск и район, Курская область - опасность по БПЛА. К вам фиксации БПЛА от Рыльска и района. 📡 Локатор России - @locatorru"
     },
     {
+      "key": "клинцы|брянская область",
+      "name": "Клинцы",
+      "lat": 52.76033,
+      "lon": 32.23905,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791445835,
+      "source_text": "08.10.2026 10:50 МСК\nКлинцы, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
+    },
+    {
       "key": "мценск|орловская область",
       "name": "Мценск",
       "lat": 53.278984,
@@ -1091,28 +1135,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1791404158,
       "source_text": "07.10.2026 23:15 МСК\nКлимово, Стародуб, Унеча, Сураж, Почеп, Мглин и близлежащие, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "брянск|брянская область",
-      "name": "Брянск",
-      "lat": 53.27096,
-      "lon": 34.32143,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1791402593,
-      "source_text": "07.10.2026 22:49 МСК\nБрянск Бежица и близлежащие Тревога по БПЛА Брянская область"
     },
     {
       "key": "унеча|брянская область",
@@ -1269,28 +1291,6 @@
       "source_text": "08.10.2026 09:32 МСК\nФедеральная трасса Шебекино - Белгород Тревога по БПЛА Хорнет"
     },
     {
-      "key": "бердянск|запорожская область",
-      "name": "Бердянск",
-      "lat": 46.75578,
-      "lon": 36.78815,
-      "region": "Запорожская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1791402797,
-      "source_text": "07.10.2026 22:53 МСК\nОсипенко Бердянск и близлежащие Тревога по БПЛА сохраняется Запорожская область РФ"
-    },
-    {
       "key": "горловка|донецкая народная республика",
       "name": "Горловка",
       "lat": 48.29986,
@@ -1399,28 +1399,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1791404158,
       "source_text": "07.10.2026 23:15 МСК\nКлимово, Стародуб, Унеча, Сураж, Почеп, Мглин и близлежащие, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "бежица|брянская область",
-      "name": "Бежица",
-      "lat": 53.3405637,
-      "lon": 34.2337526,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1791402593,
-      "source_text": "07.10.2026 22:49 МСК\nБрянск Бежица и близлежащие Тревога по БПЛА Брянская область"
     },
     {
       "key": "красногоровка|донецкая народная республика",
@@ -1599,50 +1577,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1791416392,
       "source_text": "08.10.2026 02:39 МСК\nОктябрьский район в направлении Нижнегорского района фиксация БПЛА Республика Крым"
-    },
-    "RUS.55.15_1": {
-      "gid_2": "RUS.55.15_1",
-      "name_ru": "Гайнский район",
-      "region_ru": "Пермский край",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1791443464,
-      "source_text": "08.10.2026 10:11 МСК\nГайнский район Пермский край Фиксация БПЛА"
-    },
-    "RUS.55.40_1": {
-      "gid_2": "RUS.55.40_1",
-      "name_ru": "Пермь (горсовет)",
-      "region_ru": "Пермский край",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1791444850,
-      "source_text": "08.10.2026 10:34 МСК\nПермь Пермский край Работа ПВО по БПЛА Меры безопасности"
     },
     "UKR.20.1_1": {
       "gid_2": "UKR.20.1_1",
@@ -1846,6 +1780,78 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 96977,
+      "text": "Омская область\nОпасность по БПЛА",
+      "ts": 1791446316,
+      "time_label": "08.10.2026 10:58 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 288282,
+      "text": "Керченский полуостров\nКерчь и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
+      "ts": 1791446219,
+      "time_label": "08.10.2026 10:56 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 288281,
+      "text": "Луговое и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
+      "ts": 1791446040,
+      "time_label": "08.10.2026 10:54 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 288280,
+      "text": "Ленинский район, Калиновка и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
+      "ts": 1791446012,
+      "time_label": "08.10.2026 10:53 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 288279,
+      "text": "Херсонская область РФ\nОтбой авиационной ракетно бомбовой опасности",
+      "ts": 1791445906,
+      "time_label": "08.10.2026 10:51 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 88825,
+      "text": "Клинцы, Брянская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1791445835,
+      "time_label": "08.10.2026 10:50 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 96976,
+      "text": "Пермский край\nОтбой опасности по БПЛА",
+      "ts": 1791445829,
+      "time_label": "08.10.2026 10:50 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 288278,
+      "text": "Клинцы и близлежащие\nБрянская область\nОпасность по БПЛА",
+      "ts": 1791445773,
+      "time_label": "08.10.2026 10:49 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 88824,
+      "text": "Пермский край - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1791445729,
+      "time_label": "08.10.2026 10:48 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
     {
       "msg_id": 288277,
       "text": "Трасса р-280\nЗапорожская область РФ\nВысокая активность БПЛА Хорнет",
@@ -2413,78 +2419,6 @@
       "time_label": "08.10.2026 09:01 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 88805,
-      "text": "Красноуфимск, Михайловск, Екатеринбург и близлежащие, Свердловская область - внимание по БПЛА от Республики Башкортостан, Пермского края.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1791438425,
-      "time_label": "08.10.2026 08:47 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 288248,
-      "text": "Луганск , Краснодонский, Лутугинский районы, Брянка, Кировск, Стаханов, Первомайск\nОпасность по БПЛА\nЛНР",
-      "ts": 1791438242,
-      "time_label": "08.10.2026 08:44 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 88804,
-      "text": "Закамск, Култаево, г.Пермь, Пермский край - опасность по БПЛА от Республики Башкортостан.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1791438131,
-      "time_label": "08.10.2026 08:42 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 88803,
-      "text": "Оренбургская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1791438113,
-      "time_label": "08.10.2026 08:41 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 288247,
-      "text": "Красноуфимск, Бисерть, Екатеринбург опасность по БПЛА от Пермского края",
-      "ts": 1791438016,
-      "time_label": "08.10.2026 08:40 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 96949,
-      "text": "Оренбургская область\nОтбой опасности по БПЛА",
-      "ts": 1791437841,
-      "time_label": "08.10.2026 08:37 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 288246,
-      "text": "Свердловская область\nвнимание по бпла",
-      "ts": 1791437666,
-      "time_label": "08.10.2026 08:34 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 96948,
-      "text": "Свердловская область\nОпасность по БПЛА",
-      "ts": 1791437658,
-      "time_label": "08.10.2026 08:34 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 88802,
-      "text": "Свердловская область - опасность по БПЛА от Пермского края.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1791437493,
-      "time_label": "08.10.2026 08:31 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -2494,14 +2428,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791445660,
-  "last_event_at": "2026-10-08T07:47:40Z",
-  "fetched_at": "2026-10-08T07:50:04.130358Z",
+  "timestamp": 1791446316,
+  "last_event_at": "2026-10-08T07:58:36Z",
+  "fetched_at": "2026-10-08T08:00:03.789613Z",
   "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-10-08T07:50:04.130358Z",
-    "source_age_seconds": 144,
-    "city_count": 53,
+    "generated_at": "2026-10-08T08:00:03.789613Z",
+    "source_age_seconds": 87,
+    "city_count": 52,
     "region_count": 20,
     "feed_count": 80
   }
