@@ -33,6 +33,10 @@ _NPZ_ENGINE_CALLER="${NPZ_ENGINE:-}"
 [ -f /root/.npz-agent.env ] && . /root/.npz-agent.env
 [ -f "$HOME/.npz-agent.env" ] && . "$HOME/.npz-agent.env"
 [ -n "$_NPZ_ENGINE_CALLER" ] && NPZ_ENGINE="$_NPZ_ENGINE_CALLER"
+# 08.10.2026, решение владельца: агенты — сразу на Haiku. Free-пул OpenRouter отказал в 37 из 40
+# прогонов, каждый отказ держал общий лок до 15 мин, и сборщик ударов 06–08.10 семь раз подряд
+# не дождался лока (мимо прошёл Омский НПЗ). Ротацию вернуть — только явно NPZ_ENGINE_FORCE_ROTATE=1.
+[ "${NPZ_ENGINE_FORCE_ROTATE:-0}" = 1 ] || NPZ_ENGINE=claude
 
 REPO="${NPZ_REPO:-/root/npz-tactical-map}"
 MODEL="${NPZ_MODEL:-claude-haiku-4-5-20251001}"
@@ -138,6 +142,20 @@ if [ "$RC" != "0" ]; then
     >> "agents/logs/${LABEL}.log" 2>&1
   RC=$?
   echo "engine claude($MODEL) exit: $RC"
+  # Лимит подписки (claude CLI: «hit your … limit») — повтор тем же Haiku по API-ключу владельца
+  # (/root/.anthropic-api-key, 600, вне репо; выдан 08.10.2026). Только при лимите: ключ платный.
+  if [ "$RC" != "0" ] && [ -s /root/.anthropic-api-key ] \
+     && tail -5 "agents/logs/${LABEL}.log" | grep -qi "hit your .*limit\|usage limit\|rate.limit"; then
+    git checkout HEAD -- data/ 2>/dev/null || true
+    ANTHROPIC_API_KEY="$(cat /root/.anthropic-api-key)" $TIMEOUT_WRAP claude -p "$PROMPT" \
+      --model "$MODEL" \
+      --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
+      --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
+      --permission-mode acceptEdits \
+      >> "agents/logs/${LABEL}.log" 2>&1
+    RC=$?
+    echo "engine claude($MODEL) api-key exit: $RC"
+  fi
 fi
 
 # --- Обрыв сети: дождаться возврата и повторить один раз (21.08.2026) ---
