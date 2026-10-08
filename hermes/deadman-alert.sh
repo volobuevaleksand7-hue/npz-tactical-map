@@ -28,6 +28,25 @@ if [ "$code" != "200" ]; then
     echo "site HTTP $code, но в cooldown"
   fi
 fi
+# 08.10.2026: сборщик ударов 06–08.10 семь раз подряд не дождался лока (SKIP) — мимо прошёл
+# Омский НПЗ, а сторож молчал: origin жил за счёт radar. Плюс проверяем, что рилс дня вышел.
+# Оба алерта — не чаще раза в сутки (state хранит дату).
+alert_daily() {  # $1 — ключ, $2 — текст
+  local today; today="$(date -u +%F)"
+  [ "$(cat "$STATE-$1" 2>/dev/null)" = "$today" ] && { echo "$1: уже сообщал сегодня"; return; }
+  curl -s "https://api.telegram.org/bot${TOKEN}/sendMessage" --data-urlencode "chat_id=${CHAT}" \
+    --data-urlencode "text=$2" -o /dev/null && echo "$today" > "$STATE-$1"
+  echo "ALERT sent: $1"
+}
+last_strikes="$(grep -ah '^=== \[strikes\(-reel\)\?\] model=' agents/logs/cron.log agents/logs/video.log 2>/dev/null | grep -o '20[0-9-]*T[0-9:]*Z' | sort | tail -1)"
+if [ -n "$last_strikes" ]; then
+  sage=$(( ($(date +%s) - $(date -d "$last_strikes" +%s)) / 3600 ))
+  (( sage >= 14 )) && alert_daily strikes "🟠 НПЗ-карта: сборщик ударов не отрабатывал ${sage} ч (последний прогон ${last_strikes}). Смотри SKIP в agents/logs/cron.log — очередь за локом."
+fi
+reel_date="$(TZ=Europe/Moscow date +%F)"
+if [ "$(date -u +%H%M)" -ge 0940 ] && [ ! -f video/out/reel-$reel_date.uploaded ]; then
+  alert_daily reel "🟠 НПЗ-карта: рилс дня $reel_date не вышел (нет video/out/reel-$reel_date.uploaded). Лог: agents/logs/video.log."
+fi
 git fetch origin -q 2>/dev/null || true
 last="$(git log origin/main -1 --format=%ct 2>/dev/null)"; [ -n "$last" ] || exit 0
 now="$(date +%s)"; age=$(( (now - last) / 60 ))
