@@ -40,7 +40,7 @@ TOKEN = os.path.join(SECRETS, "token.json")
 # Англоязычный канал (Fuel Front, @NPZ-eng) — свой каталог секретов NPZ_YT_SECRETS=~/.config/npz-youtube-en
 # и шире scope (NPZ_YT_SCOPE): с правом управления роликами, чтобы скрывать дубли без Studio.
 SCOPE = os.environ.get("NPZ_YT_SCOPE", "https://www.googleapis.com/auth/youtube.upload")
-PORT = 8765
+PORT = int(os.environ.get("NPZ_YT_PORT", "8765"))  # второй порт — чтобы две авторизации ждали параллельно
 VIDEOS_JSON = os.path.join(os.path.dirname(VIDEO), "data", "videos.json")  # реестр для сайта (gen-news.py)
 KIND = "npz"  # префикс файлов в out/: npz (ежедневный ролик) | reel (рилс) | urgent (срочный рилс); en-* — английские
 CATEGORY_NEWS = "25"  # News & Politics
@@ -212,11 +212,46 @@ def set_thumbnail(date, vid, token):
         log(f"{date}: обложка не поставлена: HTTP {e.code}: {e.read().decode(errors='replace')[:300]}")
 
 
+def api(method, path, body=None, token=None):
+    req = urllib.request.Request("https://www.googleapis.com/youtube/v3/" + path, method=method,
+                                 data=json.dumps(body).encode() if body is not None else None,
+                                 headers={"Authorization": f"Bearer {token or access_token()}",
+                                          "Content-Type": "application/json; charset=UTF-8"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        raise SystemExit(f"upload: {path} -> HTTP {e.code}: {e.read().decode(errors='replace')[:500]}")
+
+
+def whoami():
+    """Какой канал за токеном — проверять перед правками (нужен scope youtube)."""
+    for c in api("GET", "channels?part=snippet&mine=true").get("items", []):
+        print(c["id"], c["snippet"]["title"], c["snippet"].get("customUrl", ""))
+
+
+def privacy(vid, status):
+    """Скрыть дубль: upload.py privacy <id> unlisted|private|public (scope youtube, не youtube.upload)."""
+    tok = access_token()
+    items = api("GET", f"videos?part=status&id={vid}", token=tok).get("items", [])
+    if not items:
+        raise SystemExit(f"upload: {vid} не найден на канале токена")
+    st = items[0]["status"]
+    st["privacyStatus"] = status
+    st.pop("publishAt", None)
+    res = api("PUT", "videos?part=status", {"id": vid, "status": st}, token=tok)
+    log(f"{vid}: {res['status']['privacyStatus']}")
+
+
 def main():
     global KIND
     args = sys.argv[1:]
     if args[:1] == ["auth"]:
         return auth()
+    if args[:1] == ["whoami"]:
+        return whoami()
+    if args[:1] == ["privacy"] and len(args) == 3 and args[2] in ("unlisted", "private", "public"):
+        return privacy(args[1], args[2])
     # urgent-<метка> — второй срочный за дату; en-reel / en-urgent — англоязычный канал
     if re.fullmatch(r"(en-)?(reel|urgent(-[a-z0-9]+)?)", args[0] if args else ""):
         KIND, args = args[0], args[1:]
