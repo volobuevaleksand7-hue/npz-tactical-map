@@ -20,6 +20,12 @@ else
   PUBLISH_AT="${REEL_PUBLISH_AT-09:00}" # 12:00 МСК; пусто — публиковать сразу после сборки
 fi
 rc=0
+# 09.10.2026: один срочный на дату резал крупные удары (Ухтинский НПЗ ушёл без ролика после Редкино).
+# Срочный за дату уже вышел, а в молнии есть НПЗ — второй срочный urgent-npz, только по этим ударам.
+if [ "$KIND" = urgent ] && [ -f "out/urgent-$DATE.uploaded" ] && [ -n "${REEL_ONLY_NPZ:-}" ] \
+   && [ ! -f "out/urgent-npz-$DATE.uploaded" ]; then
+  KIND=urgent-npz; export REEL_KIND="$KIND" REEL_ONLY="$REEL_ONLY_NPZ"
+fi
 echo "[$(date -u +%FT%TZ)] $KIND $DATE"
 if [ -f "out/$KIND-$DATE.uploaded" ]; then echo "reel: $KIND $DATE уже залит — пропуск"; exit 0; fi
 # свежий проход сборщика ударов прямо перед рендером: удары дня докатываются в strikes.json
@@ -29,8 +35,29 @@ if [ "${REEL_REFRESH:-1}" != "0" ] && [ -x ../agents/run-agent.sh ]; then
     ../agents/run-agent.sh "$(cd .. && pwd)/agents/update-prompt-strikes.md" strikes-reel \
     || echo "reel: сборщик ударов не отработал — рендер по текущим данным"
 fi
-./reel/render_reel.sh "$DATE" || { rc=$?; echo "reel: $KIND $DATE не собран (rc=$rc)"; exit $rc; }
-python3 reel/audit.py "$DATE" "$KIND" || { echo "reel: аудит не пройден — YouTube/Telegram пропущены (REEL_AUDIT=0 отключает)"; [ "${REEL_AUDIT:-1}" = "0" ] || exit 3; }
+alert() {  # владельцу — тем же ботом, что hermes/deadman-alert.sh
+  local t c; t="$(cat /root/.npz-bot/token 2>/dev/null)"; c="$(cat /root/.npz-bot/chat_id 2>/dev/null)"
+  [ -n "$t" ] && [ -n "$c" ] && curl -s "https://api.telegram.org/bot$t/sendMessage" \
+    --data-urlencode "chat_id=$c" --data-urlencode "text=$1" -o /dev/null
+}
+# 09.10.2026: два дня подряд ролик не выходил из-за сбоя озвучки (edge-tts лежит минутами) —
+# аудит не прошёл → одна пересборка через REEL_RETRY_WAIT с (600); снова нет → алерт владельцу.
+for try in 1 2; do
+  ./reel/render_reel.sh "$DATE" || { rc=$?; echo "reel: $KIND $DATE не собран (rc=$rc)"; \
+    alert "🟠 НПЗ-карта: ролик $KIND $DATE не собран (rc=$rc). Лог: agents/logs/video.log"; exit $rc; }
+  audit_out="$(python3 reel/audit.py "$DATE" "$KIND")" && break
+  echo "$audit_out"
+  [ "${REEL_AUDIT:-1}" = "0" ] && break
+  if [ "$try" = 1 ]; then
+    echo "reel: аудит не пройден — пересборка через ${REEL_RETRY_WAIT:-600} с"; sleep "${REEL_RETRY_WAIT:-600}"
+  else
+    echo "reel: аудит не пройден дважды — YouTube/Telegram пропущены (REEL_AUDIT=0 отключает)"
+    alert "🟠 НПЗ-карта: ролик $KIND $DATE не вышел — аудит не пройден дважды:
+$(echo "$audit_out" | grep FAIL | head -5)"
+    exit 3
+  fi
+done
+echo "$audit_out"
 if [ -n "$PUBLISH_AT" ]; then
   wait_s=$(( $(date -u -d "today $PUBLISH_AT" +%s) - $(date -u +%s) ))
   [ "$wait_s" -gt 0 ] && { echo "reel: собран, выход в $PUBLISH_AT UTC (через ${wait_s} с)"; sleep "$wait_s"; }

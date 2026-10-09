@@ -208,6 +208,12 @@ def classify_and_publish(new_strikes, dry_run=False, force_major=False):
     return results
 
 
+def _is_refinery(strike):
+    """Удар по НПЗ: «НПЗ»/«нефтеперераб» в цели/заголовке или совпадение с заводом из fuel-state.json."""
+    txt = f"{strike.get('target', '')} {strike.get('title', '')}".lower()
+    return "нпз" in txt or "нефтеперераб" in txt or bool(_match_refinery_id(strike)[0])
+
+
 def launch_urgent_reel(strikes):
     """Срочный рилс по молнии — сразу, без расписания (video/reel/daily.sh, REEL_KIND=urgent).
     Удары сегодняшнего или вчерашнего дня МСК (ночная молния 00:27 МСК про удар 06.10 — тоже срочно);
@@ -218,11 +224,13 @@ def launch_urgent_reel(strikes):
     from datetime import timedelta
     now = datetime.now(timezone.utc) + timedelta(hours=3)
     fresh = {now.strftime("%Y-%m-%d"), (now - timedelta(days=1)).strftime("%Y-%m-%d")}
-    by_date = {}
+    by_date, npz_by_date = {}, {}
     for s in strikes:
         d = str(s.get("date", ""))[:10]
         if d in fresh:
             by_date.setdefault(d, []).append(_strike_id(s))
+            if _is_refinery(s):   # второй срочный за дату — только НПЗ (daily.sh, REEL_ONLY_NPZ)
+                npz_by_date.setdefault(d, []).append(_strike_id(s))
         else:
             print(f"  → срочный рилс: удар за {d or '?'} — старше вчера, пропуск")
     script = os.path.join(BASE_DIR, "video", "reel", "daily.sh")
@@ -230,7 +238,8 @@ def launch_urgent_reel(strikes):
         return print("  → срочный рилс: нет video/reel/daily.sh")
     log = os.path.join(BASE_DIR, "agents", "logs", "video.log")
     for d, ids in sorted(by_date.items()):
-        env = dict(os.environ, REEL_KIND="urgent", REEL_ONLY=",".join(ids))
+        env = dict(os.environ, REEL_KIND="urgent", REEL_ONLY=",".join(ids),
+                   REEL_ONLY_NPZ=",".join(npz_by_date.get(d, [])))
         cmd = (f"cd {os.path.join(BASE_DIR, 'video')} && flock -w 3600 /var/lock/npz-video.lock "
                f"nice -n 10 ./reel/daily.sh {d} >> {log} 2>&1")
         subprocess.Popen(["bash", "-c", cmd], env=env, start_new_session=True,
