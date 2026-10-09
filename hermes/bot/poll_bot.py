@@ -75,6 +75,9 @@ logging.basicConfig(
     level=logging.INFO,
     handlers=[logging.StreamHandler(sys.stderr)],
 )
+# httpx на INFO печатает полный URL запроса вместе с токеном бота (журнал systemd) — глушим (09.10.2026)
+for _n in ("httpx","httpcore","telegram"):
+    logging.getLogger(_n).setLevel(logging.WARNING)
 logger = logging.getLogger("npz-bot")
 
 
