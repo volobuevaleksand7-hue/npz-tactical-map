@@ -554,8 +554,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791555258,
-      "source_text": "09.10.2026 17:14 МСК\nГорловка и близлежащие Тревога по БПЛА ДНР"
+      "last_event_ts": 1791556004,
+      "source_text": "09.10.2026 17:26 МСК\nГорловка и близлежащие Опасность по БПЛА повторно, ещё фиксации ДНР"
     },
     "Херсонская область": {
       "bpla": false,
@@ -738,9 +738,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -751,8 +751,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1791555258,
-      "source_text": "09.10.2026 17:14 МСК\nГорловка и близлежащие Тревога по БПЛА ДНР"
+      "last_event_ts": 1791556004,
+      "source_text": "09.10.2026 17:26 МСК\nГорловка и близлежащие Опасность по БПЛА повторно, ещё фиксации ДНР"
     },
     {
       "key": "новоалексеевка|херсонская область",
@@ -3412,6 +3412,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 288894,
+      "text": "Горловка и близлежащие\nОпасность по БПЛА повторно, ещё фиксации\nДНР",
+      "ts": 1791556004,
+      "time_label": "09.10.2026 17:26 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 288893,
       "text": "Горловка и близлежащие\nТревога по БПЛА\nДНР",
       "ts": 1791555258,
@@ -4042,14 +4050,6 @@
       "time_label": "09.10.2026 15:06 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 288867,
-      "text": "Тульская область\nвнимание по бпла",
-      "ts": 1791547371,
-      "time_label": "09.10.2026 15:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4059,13 +4059,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791555258,
-  "last_event_at": "2026-10-09T14:14:18Z",
-  "fetched_at": "2026-10-09T14:20:05.206156Z",
-  "poll_interval_sec": 50,
+  "timestamp": 1791556004,
+  "last_event_at": "2026-10-09T14:26:44Z",
+  "fetched_at": "2026-10-09T14:30:04.647914Z",
+  "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-10-09T14:20:05.206156Z",
-    "source_age_seconds": 347,
+    "generated_at": "2026-10-09T14:30:04.647914Z",
+    "source_age_seconds": 200,
     "city_count": 87,
     "region_count": 30,
     "feed_count": 80
