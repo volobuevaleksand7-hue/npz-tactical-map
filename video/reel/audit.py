@@ -15,6 +15,7 @@ def audit(date, build: Path):
     nar = json.loads((build / "narration.json").read_text(encoding="utf-8"))
     plan = json.loads((build / "plan.json").read_text(encoding="utf-8"))
     clips = json.loads((build / "clips.json").read_text(encoding="utf-8"))
+    nar = nar[:plan.get("n_strikes", len(nar))]   # только удары, попавшие в ролик
     for i, x in enumerate(nar):
         for p in B.line_problems(x):
             hard.append(f"реплика {i}: {p}: {x[:70]!r}")

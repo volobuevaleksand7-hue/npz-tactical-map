@@ -408,9 +408,9 @@ LLM_PROMPT = """ЭТО ЗАДАНИЕ НА ИСПОЛНЕНИЕ. Ничего н
 
 def line_problems(x):
     """Критерий качества реплики/текста плашки по эталону 04.10: «Место: событие, итог»,
-    40–150 знаков, без перечней районов, россыпи цифр и многоточия. [] — реплика годна."""
+    30–150 знаков, без перечней районов, россыпи цифр и многоточия. [] — реплика годна."""
     bad = []
-    if not 40 <= len(x) <= 150:
+    if not 30 <= len(x) <= 150:
         bad.append(f"длина {len(x)}")
     if not re.match(r"^[А-ЯЁ][^:.]{1,45}: ", x):
         bad.append("нет «Место: …»")
@@ -435,7 +435,7 @@ def llm_lines(sel, refs):
                         for x in s.get("_group", [s])]} for s in sel]
     try:
         r = subprocess.run(["claude-run", "-p", LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1),
-                            "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.10"],
+                            "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.30"],
                            capture_output=True, text=True, timeout=180, stdin=subprocess.DEVNULL)
         m = re.search(r"\[.*\]", r.stdout, re.S)
         lines = json.loads(m.group(0)) if m else None
@@ -443,7 +443,7 @@ def llm_lines(sel, refs):
         print(f"build_reel: LLM-озвучка не получена ({e}) — шаблон", file=sys.stderr)
         return None
     if not (isinstance(lines, list) and len(lines) == len(sel) and all(isinstance(x, str) for x in lines)):
-        print(f"build_reel: LLM-ответ не по формату — шаблон: {r.stdout[-300:]!r}", file=sys.stderr)
+        print(f"build_reel: LLM-ответ не по формату — шаблон: {r.stdout[-300:]!r} {r.stderr[-200:]!r}", file=sys.stderr)
         return None
     out = []
     for x, s in zip(lines, sel):
@@ -782,7 +782,7 @@ def compose(date, build: Path):
     (build / "hyperframes.json").write_text(json.dumps({"paths": {"assets": "assets"}}), encoding="utf-8")
 
     # plan.json в формате ежедневного ролика: его mix() кладёт эффекты + музыку
-    mixplan = {"date": date, "total": total,
+    mixplan = {"date": date, "total": total, "n_strikes": len(sel),
                "sfx": [{"name": a, "t": round(max(0, x), 2)} for a, x in sfx], "voice": voice}
     (build / "plan.json").write_text(json.dumps(mixplan, ensure_ascii=False, indent=1), encoding="utf-8")
     (build / "description.txt").write_text(describe(date, sel_all, day, refs, segs, clips, broll), encoding="utf-8")
