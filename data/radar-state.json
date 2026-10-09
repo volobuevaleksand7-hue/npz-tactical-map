@@ -155,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791519652,
-      "source_text": "09.10.2026 07:20 МСК\nГорловка и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1791522361,
+      "source_text": "09.10.2026 08:06 МСК\nГорловка и близлежащие Опасность по БПЛА повторно, ещё фиксации ДНР"
     },
     "Марий Эл": {
       "bpla": false,
@@ -250,8 +250,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791507073,
-      "source_text": "09.10.2026 03:51 МСК\nКрасный Луч, Боково, Платона и близлежащие, тревога по БпЛА ЛНР"
+      "last_event_ts": 1791521992,
+      "source_text": "09.10.2026 07:59 МСК\nПархоменко ЛНР Тревога по БПЛА"
     },
     "Адыгея": {
       "bpla": false,
@@ -3006,7 +3006,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1791518569,
@@ -3194,9 +3194,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -3207,8 +3207,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1791519652,
-      "source_text": "09.10.2026 07:20 МСК\nГорловка и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1791522361,
+      "source_text": "09.10.2026 08:06 МСК\nГорловка и близлежащие Опасность по БПЛА повторно, ещё фиксации ДНР"
     },
     {
       "key": "карачев|брянская область",
@@ -5395,6 +5395,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 288741,
+      "text": "Горловка и близлежащие\nОпасность по БПЛА повторно, ещё фиксации\nДНР",
+      "ts": 1791522361,
+      "time_label": "09.10.2026 08:06 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 288740,
+      "text": "Пархоменко ЛНР\nТревога по БПЛА",
+      "ts": 1791521992,
+      "time_label": "09.10.2026 07:59 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 288739,
       "text": "От Волчанское в направлении Розовки\nТревога по БПЛА\nЗапорожская область РФ",
       "ts": 1791521890,
@@ -6017,22 +6033,6 @@
       "time_label": "09.10.2026 04:12 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 97290,
-      "text": "Владимир и близлежащие\nВладимирская область\nФиксация БПЛА",
-      "ts": 1791508206,
-      "time_label": "09.10.2026 04:10 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 288711,
-      "text": "По всему причерноморью Краснодарского края сохраняется беспилотная опасность!",
-      "ts": 1791508150,
-      "time_label": "09.10.2026 04:09 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -6042,13 +6042,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791521890,
-  "last_event_at": "2026-10-09T04:58:10Z",
-  "fetched_at": "2026-10-09T05:00:04.781135Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1791522361,
+  "last_event_at": "2026-10-09T05:06:01Z",
+  "fetched_at": "2026-10-09T05:10:03.168203Z",
+  "poll_interval_sec": 45,
   "meta": {
-    "generated_at": "2026-10-09T05:00:04.781135Z",
-    "source_age_seconds": 114,
+    "generated_at": "2026-10-09T05:10:03.168203Z",
+    "source_age_seconds": 242,
     "city_count": 161,
     "region_count": 18,
     "feed_count": 80
