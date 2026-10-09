@@ -25,7 +25,7 @@ if [ -f "out/$KIND-$DATE.uploaded" ]; then echo "reel: $KIND $DATE уже зал
 # свежий проход сборщика ударов прямо перед рендером: удары дня докатываются в strikes.json
 # с опозданием в часы (Волгоград 05.10 пришёл в 00:23 МСК). REEL_REFRESH=0 — без прохода.
 if [ "${REEL_REFRESH:-1}" != "0" ] && [ -x ../agents/run-agent.sh ]; then
-  NPZ_MODEL="${NPZ_MODEL:-claude-haiku-4-5-20251001}" NPZ_LOCK_WAIT=900 \
+  NPZ_MODEL="${NPZ_MODEL:-claude-haiku-5-5}" NPZ_LOCK_WAIT=900 \
     ../agents/run-agent.sh "$(cd .. && pwd)/agents/update-prompt-strikes.md" strikes-reel \
     || echo "reel: сборщик ударов не отработал — рендер по текущим данным"
 fi

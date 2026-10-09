@@ -378,7 +378,7 @@ def strike_template(s, refs):
     return speakable(head)
 
 
-HAIKU = os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001")
+HAIKU = os.environ.get("REEL_LLM_MODEL", "claude-haiku-5-5")
 LLM_PROMPT = """ЭТО ЗАДАНИЕ НА ИСПОЛНЕНИЕ. Ничего не спрашивай, сразу выведи ответ.
 
 Ты пишешь закадровый текст короткого видео «Топливный фронт РФ» — нейтральной OSINT-сводки об ударах
@@ -435,7 +435,7 @@ def llm_lines(sel, refs):
                         for x in s.get("_group", [s])]} for s in sel]
     try:
         r = subprocess.run(["claude", "-p", LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1),
-                            "--model", HAIKU, "--max-budget-usd", "0.10"],
+                            "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.10"],
                            capture_output=True, text=True, timeout=180, stdin=subprocess.DEVNULL)
         m = re.search(r"\[.*\]", r.stdout, re.S)
         lines = json.loads(m.group(0)) if m else None

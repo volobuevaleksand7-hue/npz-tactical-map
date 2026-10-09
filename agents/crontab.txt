@@ -27,19 +27,19 @@ MAILTO=root
 # Сдвиг по минутам — чтобы агенты не толкались при git push.
 
 # A) NPZ-STATUS  (Haiku) — статусы заводов и терминалов  → data/fuel-state.json
-5 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-npz.md npz-status >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+5 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-5-5 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-npz.md npz-status >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
 
 # B) FUEL-MARKET (Haiku) — дефицит/баланс/меры          → data/fuel-state.json
-15 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-market.md fuel-market >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+15 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-5-5 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-market.md fuel-market >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
 
 # C) HISTORY-CRIMEA (Haiku) — хроника + Крым            → data/history-crimea.json
-25 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-history.md history-crimea >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+25 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-5-5 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-history.md history-crimea >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
 
 # E) STRIKES (Haiku) — удары по городам БПЛА/ракетами    → data/strikes.json
-35 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-strikes.md strikes >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+35 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-5-5 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-strikes.md strikes >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
 
 # F) ROADS (Haiku) — дороги/топливная логистика, Мариуполь → data/roads.json
-45 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-4-5-20251001 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-roads.md roads >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
+45 0,6,12,18 * * * NPZ_REPO=/root/npz-tactical-map NPZ_MODEL=claude-haiku-5-5 /root/npz-tactical-map/agents/run-agent.sh /root/npz-tactical-map/agents/update-prompt-roads.md roads >> /root/npz-tactical-map/agents/logs/cron.log 2>&1
 
 # H) NEWSWATCH — fast-lane по ударам. Промпт — agents/update-prompt-newswatch.md.
 # ⚠️ Устарело: тут было написано «живёт облачным Remote-trigger Anthropic

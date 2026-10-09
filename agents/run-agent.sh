@@ -39,7 +39,7 @@ _NPZ_ENGINE_CALLER="${NPZ_ENGINE:-}"
 [ "${NPZ_ENGINE_FORCE_ROTATE:-0}" = 1 ] || NPZ_ENGINE=claude
 
 REPO="${NPZ_REPO:-/root/npz-tactical-map}"
-MODEL="${NPZ_MODEL:-claude-haiku-4-5-20251001}"
+MODEL="${NPZ_MODEL:-claude-haiku-5-5}"
 PROMPT_FILE="${1:?prompt file required}"
 LABEL="${2:?label required}"
 
@@ -136,6 +136,7 @@ fi
 if [ "$RC" != "0" ]; then
   $TIMEOUT_WRAP claude -p "$PROMPT" \
     --model "$MODEL" \
+    --effort high \
     --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
     --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
     --permission-mode acceptEdits \
@@ -149,6 +150,7 @@ if [ "$RC" != "0" ]; then
     git checkout HEAD -- data/ 2>/dev/null || true
     ANTHROPIC_API_KEY="$(cat /root/.anthropic-api-key)" $TIMEOUT_WRAP claude -p "$PROMPT" \
       --model "$MODEL" \
+      --effort high \
       --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
       --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
       --permission-mode acceptEdits \
@@ -189,6 +191,7 @@ if [ "$RC" != "0" ] && tail -c 2000 "agents/logs/${LABEL}.log" 2>/dev/null | _is
     git checkout HEAD -- data/ 2>/dev/null || true
     $TIMEOUT_WRAP claude -p "$PROMPT" \
       --model "$MODEL" \
+      --effort high \
       --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
       --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
       --permission-mode acceptEdits \
@@ -233,6 +236,7 @@ if ! validate_data_json; then
   git checkout HEAD -- data/
   $TIMEOUT_WRAP claude -p "$PROMPT" \
     --model "$MODEL" \
+    --effort high \
     --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
     --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
     --permission-mode acceptEdits \
@@ -279,6 +283,7 @@ if [ -n "$AGENT_OUT" ]; then
     echo "!! [$LABEL] пустой прогон (попытка 1) — $AGENT_OUT не записан, повтор той же задачи"
     $TIMEOUT_WRAP claude -p "$PROMPT" \
       --model "$MODEL" \
+      --effort high \
       --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
       --allowedTools "Read,Edit,Write,WebSearch,WebFetch" \
       --permission-mode acceptEdits \

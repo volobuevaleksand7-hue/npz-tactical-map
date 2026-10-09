@@ -244,7 +244,7 @@ def _llm_json(prompt):
     for _ in range(2 if shutil.which("claude") else 0):   # Haiku изредка не отвечает — второй заход
         try:
             r = subprocess.run(["claude", "-p", prompt, "--model",
-                                os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001")],
+                                os.environ.get("REEL_LLM_MODEL", "claude-haiku-5-5"), "--effort", "high"],
                                capture_output=True, text=True, timeout=120)
             m = re.search(r"\{.*\}", r.stdout, re.S)
             if m:

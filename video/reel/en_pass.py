@@ -21,7 +21,7 @@ from pathlib import Path
 
 REEL = Path(__file__).resolve().parent
 VIDEO = REEL.parent
-HAIKU = os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001")
+HAIKU = os.environ.get("REEL_LLM_MODEL", "claude-haiku-5-5")
 VOICE = os.environ.get("REEL_EN_VOICE", "en-US-ChristopherNeural")
 RATE = os.environ.get("REEL_EN_RATE", "+10%")
 CYR = re.compile(r"[А-Яа-яЁё]")
@@ -78,7 +78,7 @@ def ui_strings(page):
 def ask(payload):
     for attempt in range(2):
         r = subprocess.run(["claude", "-p", PROMPT + json.dumps(payload, ensure_ascii=False, indent=1),
-                            "--model", HAIKU, "--max-budget-usd", "0.30"],
+                            "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.30"],
                            capture_output=True, text=True, timeout=300, stdin=subprocess.DEVNULL)
         m = re.search(r"\{.*\}", r.stdout, re.S)
         try:
