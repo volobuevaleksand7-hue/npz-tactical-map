@@ -134,7 +134,7 @@ $PROMPT"
   fi
 fi
 if [ "$RC" != "0" ]; then
-  $TIMEOUT_WRAP claude -p "$PROMPT" \
+  $TIMEOUT_WRAP claude-run -p "$PROMPT" \
     --model "$MODEL" \
     --effort high \
     --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
@@ -189,7 +189,7 @@ if [ "$RC" != "0" ] && tail -c 2000 "agents/logs/${LABEL}.log" 2>/dev/null | _is
     # Откат ДО повтора: упавший прогон мог оставить полузаписанный файл, иначе
     # модель перечитает собственный обрывок (та же причина, что у json-повтора ниже).
     git checkout HEAD -- data/ 2>/dev/null || true
-    $TIMEOUT_WRAP claude -p "$PROMPT" \
+    $TIMEOUT_WRAP claude-run -p "$PROMPT" \
       --model "$MODEL" \
       --effort high \
       --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
@@ -234,7 +234,7 @@ validate_data_json() {
 if ! validate_data_json; then
   echo "!! [$LABEL] битый JSON (попытка 1) — откатываю data/ и повторяю ту же задачу"
   git checkout HEAD -- data/
-  $TIMEOUT_WRAP claude -p "$PROMPT" \
+  $TIMEOUT_WRAP claude-run -p "$PROMPT" \
     --model "$MODEL" \
     --effort high \
     --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \
@@ -281,7 +281,7 @@ if [ -n "$AGENT_OUT" ]; then
   _out_ts="$( [ -f "$AGENT_OUT" ] && stat -c %Y "$AGENT_OUT" 2>/dev/null || echo 0 )"
   if [ "$_out_ts" -lt "$RUN_START_TS" ]; then
     echo "!! [$LABEL] пустой прогон (попытка 1) — $AGENT_OUT не записан, повтор той же задачи"
-    $TIMEOUT_WRAP claude -p "$PROMPT" \
+    $TIMEOUT_WRAP claude-run -p "$PROMPT" \
       --model "$MODEL" \
       --effort high \
       --max-budget-usd "$CLAUDE_MAX_BUDGET_USD" \

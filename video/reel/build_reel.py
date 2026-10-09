@@ -434,7 +434,7 @@ def llm_lines(sel, refs):
               "факты": [re.sub(r"\s+", " ", str(x.get("detail") or x.get("target") or ""))[:500]
                         for x in s.get("_group", [s])]} for s in sel]
     try:
-        r = subprocess.run(["claude", "-p", LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1),
+        r = subprocess.run(["claude-run", "-p", LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1),
                             "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.10"],
                            capture_output=True, text=True, timeout=180, stdin=subprocess.DEVNULL)
         m = re.search(r"\[.*\]", r.stdout, re.S)

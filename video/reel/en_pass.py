@@ -77,7 +77,7 @@ def ui_strings(page):
 
 def ask(payload):
     for attempt in range(2):
-        r = subprocess.run(["claude", "-p", PROMPT + json.dumps(payload, ensure_ascii=False, indent=1),
+        r = subprocess.run(["claude-run", "-p", PROMPT + json.dumps(payload, ensure_ascii=False, indent=1),
                             "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.30"],
                            capture_output=True, text=True, timeout=300, stdin=subprocess.DEVNULL)
         m = re.search(r"\{.*\}", r.stdout, re.S)

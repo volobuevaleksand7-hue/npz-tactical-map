@@ -243,7 +243,7 @@ def _llm_json(prompt):
     """JSON-ответ модели: Haiku (claude CLI) → OpenRouter free (запас: free-модели почти всегда 429). None — никто не ответил."""
     for _ in range(2 if shutil.which("claude") else 0):   # Haiku изредка не отвечает — второй заход
         try:
-            r = subprocess.run(["claude", "-p", prompt, "--model",
+            r = subprocess.run(["claude-run", "-p", prompt, "--model",
                                 os.environ.get("REEL_LLM_MODEL", "claude-haiku-5-5"), "--effort", "high"],
                                capture_output=True, text=True, timeout=120)
             m = re.search(r"\{.*\}", r.stdout, re.S)
@@ -427,7 +427,7 @@ def _vision_pick(tile, n, what):
     prompt = VISION_PROMPT.format(n=n, what=what)
     if shutil.which("claude"):
         try:
-            r = subprocess.run(["claude", "-p", f"Открой изображение {tile} инструментом Read. " + prompt,
+            r = subprocess.run(["claude-run", "-p", f"Открой изображение {tile} инструментом Read. " + prompt,
                                 "--model", os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001"),
                                 "--allowedTools", "Read"], capture_output=True, text=True, timeout=180)
             m = re.search(r'"best"\s*:\s*(\d+)', r.stdout)
