@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-09T06:30:00Z",
+    "generated_at": "2026-10-09T09:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -472,12 +472,13 @@
       "lat": 63.55,
       "lon": 53.7,
       "capacity_mt_year": 4.0,
-      "status": "operational",
-      "status_since": "2026-06-19",
-      "est_output_pct": 100,
-      "damage": "",
+      "status": "partial",
+      "status_since": "2026-10-09",
+      "est_output_pct": 70,
+      "damage": "По данным канала exilenova_plus (06:48–07:30 МСК), на Ухтинском НПЗ в Республике Коми произошёл пожар после атаки БПЛА. Поиск по открытым источникам подтверждения за 09.10.2026 не нашёл; сообщение основано на одном канале.",
       "note": "Север — вне зоны ударов.",
-      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+      "source_url": "https://t.me/exilenova_plus/32206",
+      "confidence": "rumored"
     },
     {
       "id": "astrakhan-gpz",
@@ -932,6 +933,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-09",
+      "text": "Удар по Ухтинский НПЗ (Лукойл) (Ухта): Ухтинский НПЗ (Коми): по данным канала, пожар после атаки БПЛА",
+      "source_url": "https://t.me/exilenova_plus/32206"
+    },
     {
       "date": "2026-10-09",
       "text": "Ситуация на 9 октября: Ограничения на продажу топлива затронули 83+ региона РФ. Острый дефицит в Сибири (Иркутск, Бурятия, Новосибирск) и на Урале (Челябинская, Свердловская, Тюменская области) сохраняется. Цены на бензин АИ-95 — ~81 руб/л, дизель — ~87 руб/л. Белорусский импорт частично стабилизирует рынок.",
