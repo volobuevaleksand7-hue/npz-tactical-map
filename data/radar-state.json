@@ -63,6 +63,44 @@
       "last_event_ts": 1791533562,
       "source_text": "09.10.2026 11:12 МСК\nВалуйский район опасность по БПЛА повторно Белгородская область"
     },
+    "Москва": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1791534000,
+      "source_text": "09.10.2026 11:20 МСК\nМО Истра Московская область Опасность по БПЛА"
+    },
+    "Московская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1791533993,
+      "source_text": "09.10.2026 11:19 МСК\nМосковская область Опасность по БПЛА"
+    },
     "Калужская область": {
       "bpla": false,
       "bplaDim": false,
@@ -1319,6 +1357,28 @@
       "source_text": "09.10.2026 10:09 МСК\nОсипенко, Бердянск опасность по БПЛА Запорожская область РФ"
     },
     {
+      "key": "истра|московская область",
+      "name": "Истра",
+      "lat": 55.91979,
+      "lon": 36.86876,
+      "region": "Московская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791534000,
+      "source_text": "09.10.2026 11:20 МСК\nМО Истра Московская область Опасность по БПЛА"
+    },
+    {
       "key": "кача|автономная республика крым",
       "name": "Кача",
       "lat": 44.772916,
@@ -1632,6 +1692,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 288809,
+      "text": "Весёлое и далее на Мелитополь\nОпасность по БПЛА Хорнет\nЗапорожская область РФ",
+      "ts": 1791534185,
+      "time_label": "09.10.2026 11:23 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 97350,
+      "text": "МО Истра\nМосковская область\nОпасность по БПЛА",
+      "ts": 1791534000,
+      "time_label": "09.10.2026 11:20 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 97349,
+      "text": "Московская область\nОпасность по БПЛА",
+      "ts": 1791533993,
+      "time_label": "09.10.2026 11:19 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 288808,
       "text": "Валуйский район опасность по БПЛА повторно\nБелгородская область",
@@ -2247,30 +2331,6 @@
       "time_label": "09.10.2026 08:56 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 288762,
-      "text": "Туапсе и близлежащие\nТревога по БПЛА сохраняется",
-      "ts": 1791525337,
-      "time_label": "09.10.2026 08:55 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 288761,
-      "text": "Луганск и близлежащие\nОпасность по БПЛА",
-      "ts": 1791525171,
-      "time_label": "09.10.2026 08:52 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 288760,
-      "text": "Белгородский район\nОпасность по БПЛА",
-      "ts": 1791525013,
-      "time_label": "09.10.2026 08:50 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2280,15 +2340,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791533562,
-  "last_event_at": "2026-10-09T08:12:42Z",
-  "fetched_at": "2026-10-09T08:20:04.211794Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1791534185,
+  "last_event_at": "2026-10-09T08:23:05Z",
+  "fetched_at": "2026-10-09T08:30:03.735822Z",
+  "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-10-09T08:20:04.211794Z",
-    "source_age_seconds": 442,
-    "city_count": 45,
-    "region_count": 18,
+    "generated_at": "2026-10-09T08:30:03.735822Z",
+    "source_age_seconds": 418,
+    "city_count": 46,
+    "region_count": 20,
     "feed_count": 80
   }
 }
