@@ -428,7 +428,7 @@ def _vision_pick(tile, n, what):
     if shutil.which("claude"):
         try:
             r = subprocess.run(["claude-run", "-p", f"Открой изображение {tile} инструментом Read. " + prompt,
-                                "--model", os.environ.get("REEL_LLM_MODEL", "claude-haiku-4-5-20251001"),
+                                "--model", os.environ.get("REEL_LLM_MODEL", "claude-haiku-5-5"), "--effort", "high",
                                 "--allowedTools", "Read"], capture_output=True, text=True, timeout=180)
             m = re.search(r'"best"\s*:\s*(\d+)', r.stdout)
             if m:

@@ -28,7 +28,7 @@ echo "[3] Аутентификация Claude headless"
 if [ -n "${ANTHROPIC_API_KEY:-}" ]; then ok "ANTHROPIC_API_KEY задан в окружении";
 else
   # быстрый smoke-тест OAuth-логина
-  if echo "reply with the single word PONG" | claude -p --model claude-haiku-4-5-20251001 2>/dev/null | grep -qi pong; then
+  if echo "reply with the single word PONG" | claude -p --model claude-haiku-5-5 --effort high 2>/dev/null | grep -qi pong; then
     ok "claude залогинен (OAuth), headless работает"
   else
     bad "claude НЕ залогинен и нет ANTHROPIC_API_KEY — Гермес не сможет собирать данные."
