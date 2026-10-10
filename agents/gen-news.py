@@ -751,6 +751,31 @@ def video_section(date: str) -> str:
 """
 
 
+def video_jsonld(date: str, description: str, thumb_url: str) -> str:
+    """JSON-LD VideoObject на каждый загруженный ролик дня (русские каналы; en-* — другой язык, не нужны).
+    10.10.2026: данные — data/videos.json (id, title; duration/uploaded пишет video/upload.py). Нет роликов — пустая строка."""
+    out = []
+    for kind, rec in sorted(videos_for(date).items()):
+        if kind.startswith("en-") or not isinstance(rec, dict) or not rec.get("id"):
+            continue
+        vid = str(rec["id"])
+        name = re.sub(r"\s*#shorts\s*$", "", str(rec.get("title") or f"Видео за {rus_date(date)}")).strip()
+        obj = {
+            "@context": "https://schema.org", "@type": "VideoObject",
+            "name": name, "description": description,
+            "thumbnailUrl": [thumb_url, f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"],
+            "uploadDate": str(rec.get("uploaded") or date),
+            "embedUrl": f"https://www.youtube.com/embed/{vid}",
+            "inLanguage": "ru",
+        }
+        dur = rec.get("duration")
+        if isinstance(dur, (int, float)) and dur > 0:
+            sec = int(round(dur))
+            obj["duration"] = f"PT{sec // 60}M{sec % 60}S" if sec >= 60 else f"PT{sec}S"
+        out.append(f'\n  <script type="application/ld+json">{json.dumps(obj, ensure_ascii=False)}</script>')
+    return "".join(out)
+
+
 CTA_HTML = """      <section class="news-cta">
         <div class="cta-card">
           <h2>🗺️ Открыть интерактивную карту</h2>
@@ -1028,6 +1053,7 @@ def gen_date_page(date: str, archive: dict, prev_date, next_date) -> str:
         ],
     }
     jsonld += f'\n  <script type="application/ld+json">{json.dumps(breadcrumb, ensure_ascii=False)}</script>'
+    jsonld += video_jsonld(date, description, cover_url)
 
     # навигация «предыдущая/следующая»
     nav_prev = (f'<a class="brief-nav-btn prev" href="/news/{prev_date}">← {rus_date_nodots(prev_date)}</a>'

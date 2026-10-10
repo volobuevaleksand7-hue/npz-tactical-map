@@ -473,11 +473,12 @@ def narration(date, sel, day, refs, build=None, broll=()):
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
     if URGENT:
         lead = dative_object(object_name(sel[0], refs)) if sel else "объекту"
-        lines = [("intro", f"Срочно. {ORD[d].capitalize()} {MONTHS[m]}, удар по {lead}. "
-                           f"По данным открытых источников.")]
+        # хук: без даты (она на постере) и без «по данным открытых источников» — атрибуция и «ОЦЕНКА» теперь
+        # в кадре на каждой сцене (строка контекста), а длинное интро держало общий план ~5 с
+        lines = [("intro", f"Срочно. Удар по {lead}.")]
     else:
-        lines = [("intro", f"{ORD[d].capitalize()} {MONTHS[m]}. {n} {G.plural(n, 'удар', 'удара', 'ударов')} "
-                           f"по России за сутки{tail}. По данным открытых источников.")]
+        # хук (10.10.2026): сразу цифра, без «Четвёртое октября.» — дата и так на постере и плашке
+        lines = [("intro", f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по России за сутки{tail}.")]
     cache = build / "narration.json" if build else None
     per = None
     if cache and cache.exists():
@@ -490,7 +491,7 @@ def narration(date, sel, day, refs, build=None, broll=()):
     lines += [(f"s{i}", t) for i, t in enumerate(per)]
     if broll:
         lines.append(("broll", "Кадры за сутки из открытых источников. Привязка к месту не подтверждена."))
-    lines.append(("outro", "Карта всех ударов — по ссылке в описании."))
+    lines.append(("outro", OUTRO_LINE))
     return lines
 
 
@@ -509,7 +510,9 @@ def tts_all(lines, voice_dir: Path):
 
 # ───────────────────────────── compose ─────────────────────────────
 
-POSTER = 1.3     # постер-обложка (первый кадр в ленте Shorts)
+# 10.10.2026 (рост канала, плейбук youtube-growth): хук с первого кадра — постер с крупной цифрой/местом
+# держим ~1 с (было 1.3), без долгого интро; голос стартует сразу (см. narration: без даты в начале).
+POSTER = 1.0     # постер-обложка (первый кадр в ленте Shorts)
 OVER = 1.1       # общий план карты
 FLY = 1.6        # перелёт к удару
 SIGN = 1.6       # табличка висит
@@ -525,6 +528,47 @@ MAX_TOTAL = float(os.environ.get("REEL_MAX_SEC", "45"))
 MIN_STOPS = 3   # меньше остановок не режем: остальное дня — в описании
 CLIP_MIN = 2.5
 CLIP_MAX = 3.0
+
+# ── Мягкий лимит чужих кадров (10.10.2026) ──
+# Причина: обновление YouTube от 01.10.2026 режет охват перезаливов чужого видео (reused content),
+# плюс риск страйка. Правило: суммарно чужие кадры (клипы очевидцев + «хроника дня») <= 1/3 длины ролика,
+# каждый фрагмент <= 5 с, на каждом чужом кадре — подпись источника (название канала), людей не показываем
+# (проверка кадра в fetch_clips.VISION_PROMPT). Лишнее ВЫБРАСЫВАЕМ (сначала укорачиваем до FOREIGN_CLIP_FLOOR,
+# затем снимаем клипы с младших ударов) — ролик не растягиваем. audit.py: > MAX_SHARE — FAIL, > WARN_SHARE — предупреждение.
+# Отключить: REEL_FOREIGN_LIMIT=0 (только для отладки; аудит всё равно сообщит о превышении).
+FOREIGN_MAX_SHARE = 1 / 3
+FOREIGN_WARN_SHARE = 0.30
+FOREIGN_TARGET_SHARE = 0.28  # к этой доле режем при сборке (запас под кадр постера и округления)
+FOREIGN_SEG_MAX = 5.0        # один чужой фрагмент, с (fetch_clips.SEG = 4.0 — в пределах)
+FOREIGN_CLIP_FLOOR = 2.0     # ниже не укорачиваем: короче 2 с кадр не читается
+FOREIGN_LIMIT_ON = os.environ.get("REEL_FOREIGN_LIMIT", "1") != "0"
+# Контекст в кадре (EDSA, 10.10.2026): строка «место · дата · источник · ОЦЕНКА» на каждой сцене удара,
+# финальная плашка про шапку канала (ссылки в Shorts некликабельны — URL в плашке не пишем).
+# Отключить: REEL_CTX=0.
+CTX_ON = os.environ.get("REEL_CTX", "1") != "0"
+FINAL_PLATE = 2.2            # сколько секунд в конце висит плашка «Карта — ссылка в шапке канала»
+OUTRO_LINE = "Карта всех ударов — по ссылке в шапке канала."
+
+
+def source_name(url):
+    """Название источника для подписи в кадре: t.me/<канал>/<id> -> @канал, youtube -> YouTube, иначе домен."""
+    u = str(url or "")
+    m = re.match(r"https?://(?:www\.)?t\.me/(?:s/)?([A-Za-z0-9_]{4,})", u)
+    if m:
+        return "@" + m.group(1)
+    m = re.match(r"https?://(?:www\.)?([^/]+)", u)
+    if not m:
+        return "открытые источники"
+    h = m.group(1).lower()
+    return "YouTube" if h.endswith(("youtube.com", "youtu.be")) else h
+
+
+def foreign_share(clips, broll, total):
+    """Доля чужих кадров в ролике (0..1) и сумма секунд (с кадром постера)."""
+    sec = sum(float(c.get("dur", 4.0)) for c in clips if c) + sum(float(b["dur"]) for b in broll)
+    if any(clips):
+        sec += POSTER   # фон постера — кадр первого клипа (с подписью источника), считаем его чужим
+    return (sec / total if total else 0.0), sec
 
 
 def est_total(clips, broll, vdur):
@@ -563,9 +607,33 @@ def fit_budget(sel, clips, broll, vdur):
         if not idx:
             break
         clips[idx[-1]] = None
+    if FOREIGN_LIMIT_ON:
+        # лимит доли чужих кадров: сначала укорачиваем (не ниже FOREIGN_CLIP_FLOOR), затем выбрасываем
+        # клипы младших ударов; хронику дня снимаем первой. Ролик не растягиваем.
+        for c in clips:
+            if c:
+                c["dur"] = min(float(c.get("dur", 4.0)), FOREIGN_SEG_MAX)
+        broll = [dict(b, dur=min(float(b["dur"]), FOREIGN_SEG_MAX)) for b in broll]
+        while True:
+            share, _ = foreign_share(clips, broll, est_total(clips, broll, vdur))
+            if share <= FOREIGN_TARGET_SHARE:
+                break
+            if broll:
+                broll = broll[:-1]
+                continue
+            long = [c for c in clips if c and float(c.get("dur", 4.0)) > FOREIGN_CLIP_FLOOR + 0.01]
+            if long:
+                for c in long:
+                    c["dur"] = round(max(FOREIGN_CLIP_FLOOR, float(c.get("dur", 4.0)) - 0.5), 2)
+                continue
+            idx = [i for i, c in enumerate(clips) if c]
+            if not idx:
+                break
+            print(f"build_reel: чужих кадров {share:.0%} > цели {FOREIGN_TARGET_SHARE:.0%} (лимит {FOREIGN_MAX_SHARE:.0%}) — клип у s{idx[-1]} снят", file=sys.stderr)
+            clips[idx[-1]] = None
     got, total = sum(1 for c in clips if c), est_total(clips, broll, vdur)
     print(f"build_reel: бюджет {MAX_TOTAL:.0f} с → {total:.1f} с, ударов {len(sel)}, клипов {got}", file=sys.stderr)
-    return sel, clips
+    return sel, clips, broll
 
 
 def compose(date, build: Path):
@@ -596,7 +664,7 @@ def compose(date, build: Path):
     shutil.copy2(VIDEO / "node_modules" / "gsap" / "dist" / "gsap.min.js", build / "assets" / "gsap.min.js")
 
     sel_all = sel
-    sel, clips = fit_budget(sel, clips, broll, vdur)
+    sel, clips, broll = fit_budget(sel, clips, broll, vdur)
 
     # камера: ключевые кадры (t, x, y, s) в пикселях скриншота; dip — «подъём» камеры на перелёте
     cx0, cy0 = IW / 2, IH / 2
@@ -623,7 +691,8 @@ def compose(date, build: Path):
             dive = arrive + SIGN + extra
             vstart = dive + DIVE * 0.6
             vend = vstart + float(c.get("dur", 4.0))
-            seg.update(dive=round(dive, 2), v0=round(vstart, 2), v1=round(vend, 2), clip=c["file"], kind=c["kind"])
+            seg.update(dive=round(dive, 2), v0=round(vstart, 2), v1=round(vend, 2), clip=c["file"], kind=c["kind"],
+                       src=c.get("src", ""))
             sfx.append(("impact", vstart))
             cam.append({"t": vend, "x": p["x"], "y": p["y"], "s": SZ, "dip": 0})  # стоим, пока идут кадры
             t = vend
@@ -692,11 +761,11 @@ def compose(date, build: Path):
         dur = round(seg["v1"] - seg["v0"] + 0.35, 2)
         videos.append(f'<div class="fw" id="fw{i}"><video id="v{i}" class="clip" src="assets/{esc(seg["clip"])}" muted playsinline '
                       f'data-start="{seg["v0"]}" data-duration="{dur}" data-track-index="{10 + i}"></video></div>')
-        what = "кадры очевидцев" if seg["kind"] == "video" else "фото очевидцев"
+        what = "кадры" if seg["kind"] == "video" else "фото"
         caps.append(f'''<div class="lt" id="lt{i}">
           <div class="lt-top"><i></i>{esc(s.get("city") or "")} · {esc(G.rus_date_short(date))}</div>
           <div class="lt-obj">{esc(object_name(s, refs))}</div>
-          <div class="lt-src">{what} · открытые Telegram-каналы</div>
+          <div class="lt-src">{what}: {esc(source_name(seg["src"]))} · место не подтверждено</div>
         </div>''')
 
     for b in brolls:
@@ -707,8 +776,17 @@ def compose(date, build: Path):
         caps.append(f'''<div class="lt" id="bl{j}">
           <div class="lt-top"><i></i>КАДРЫ ДНЯ · {esc(G.rus_date_short(date))}</div>
           <div class="lt-obj">Хроника суток</div>
-          <div class="lt-src">привязка к месту не подтверждена · открытые Telegram-каналы</div>
+          <div class="lt-src">кадры: {esc(source_name(b["src"]))} · привязка к месту не подтверждена</div>
         </div>''')
+
+    # строка контекста на каждой сцене удара: «место · дата · источник · ОЦЕНКА» (защита от EDSA)
+    ctxs = []
+    if CTX_ON:
+        for seg in segs:
+            s = sel[seg["i"]]
+            src = source_name(seg["src"]) if seg.get("dive") else source_name(s.get("source_url"))
+            place = str(s.get("city") or s.get("region") or "").strip()
+            ctxs.append(f'<div class="cx" id="cx{seg["i"]}">{esc(place)} · {esc(G.rus_date_short(date))} · {esc(src)} · ОЦЕНКА</div>')
 
     marks = []
     for k, p in P.items():
@@ -720,6 +798,7 @@ def compose(date, build: Path):
 
     # постер: фон — кадр из клипа главного удара (огонь), нет — фрагмент карты
     poster_bg = "assets/map.jpg"
+    poster_src = ""
     # самый яркий/«огненный» кадр клипа ГЛАВНОГО удара (заголовок постера про него — чужой огонь под ним
     # вводил бы в заблуждение); ночной кадр вытягиваем яркостью в CSS-фильтре
     best = None
@@ -736,20 +815,35 @@ def compose(date, build: Path):
     if best:
         best[1].replace(build / "assets" / "poster.jpg")
         poster_bg = "assets/poster.jpg"
+        poster_src = next((sg.get("src") for sg in segs if sg.get("dive")), "")
     for f in (build / "assets").glob("_pc*.jpg"):
         f.unlink()
+    # хук: постер не должен быть пустой картой. Нет кадра — карта наезжает на главный удар (маркер в кадре)
+    if poster_src:
+        bgcss, pmark = "center/cover no-repeat", ""
+    else:
+        k = 3200.0 / IW
+        lead = P["s0"]
+        x0 = min(0.0, max(1160 - IW * k, 580 - lead["x"] * k))
+        y0 = min(0.0, max(2000 - IH * k, 1450 - lead["y"] * k))
+        bgcss = f"{x0:.0f}px {y0:.0f}px/{IW * k:.0f}px {IH * k:.0f}px no-repeat"
+        mx, my = lead["x"] * k + x0 - 40, lead["y"] * k + y0 - 40   # координаты в системе постера (inset:-40px)
+        pmark = f'<div class="pm" style="left:{mx:.0f}px;top:{my:.0f}px"></div>'
     ptitle = poster_head(sel, day, refs)
     pcities = " · ".join(c.upper() for c in cities[:3])
 
     plan = {"total": total, "poster": POSTER, "cam": cam, "segs": segs, "marks": marks,
-            "outro": outro, "IW": IW, "IH": IH, "dive": DIVE, "broll": brolls}
+            "outro": outro, "IW": IW, "IH": IH, "dive": DIVE, "broll": brolls, "total_end": total,
+            "plate": FINAL_PLATE if CTX_ON else 0}
     subs = {
-        "TOTAL": total, "POSTER_END": POSTER + 0.35, "POSTER_BG": poster_bg,
+        "TOTAL": total, "POSTER_END": POSTER + 0.35, "POSTER_BG": poster_bg, "POSTER_BGCSS": bgcss, "POSTER_MARK": pmark,
+        "POSTER_E": esc("ОЦЕНКА · OSINT" + (f" · кадр: {source_name(poster_src)}" if poster_src else "")),
         "POSTER_TITLE": esc(ptitle), "POSTER_TSIZE": 150 if len(ptitle) <= 22 else (124 if len(ptitle) <= 30 else 104),
         "POSTER_CITIES": esc(pcities),
         "POSTER_SUB": esc(f"{date_rus.upper()} · " + ("ОЦЕНКА ПО OSINT" if URGENT else
                                                        f"{n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')} ЗА СУТКИ")),
         "IW": IW, "IH": IH, "DATE_RUS": esc(date_rus), "DATE_SHORT": esc(G.rus_date_short(date)),
+        "CTXS": "\n".join(ctxs), "FINAL_PLATE": esc("Карта — ссылка в шапке канала") if CTX_ON else "",
         "SIGNS": "\n".join(signs), "VIDEOS": "\n".join(videos), "CAPS": "\n".join(caps),
         "N": n, "N_WORD": G.plural(n, "удар", "удара", "ударов"),
         "N_FUEL": n_fuel, "N_OTHER": n - n_fuel,
@@ -773,7 +867,14 @@ def compose(date, build: Path):
     (build / "hyperframes.json").write_text(json.dumps({"paths": {"assets": "assets"}}), encoding="utf-8")
 
     # plan.json в формате ежедневного ролика: его mix() кладёт эффекты + музыку
+    foreign = [{"i": sg["i"], "dur": round(sg["v1"] - sg["v0"], 2), "src": sg.get("src", ""),
+                "caption": source_name(sg.get("src", ""))} for sg in segs if sg.get("dive")]
+    foreign += [{"i": f"b{b['j']}", "dur": round(b["v1"] - b["v0"], 2), "src": b["src"],
+                 "caption": source_name(b["src"])} for b in brolls]
     mixplan = {"date": date, "total": total, "n_strikes": len(sel),
+               "foreign": foreign, "poster_src": poster_src, "poster_sec": POSTER if poster_src else 0,
+               "foreign_share": round((sum(f["dur"] for f in foreign) + (POSTER if poster_src else 0)) / total, 3) if total else 0,
+               "ctx_lines": len(ctxs), "final_plate": bool(CTX_ON),
                "sfx": [{"name": a, "t": round(max(0, x), 2)} for a, x in sfx], "voice": voice}
     (build / "plan.json").write_text(json.dumps(mixplan, ensure_ascii=False, indent=1), encoding="utf-8")
     (build / "description.txt").write_text(describe(date, sel_all, day, refs, segs, clips, broll), encoding="utf-8")

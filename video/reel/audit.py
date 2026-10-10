@@ -31,6 +31,26 @@ def audit(date, build: Path):
         hard.append(f"заголовок: падеж: {desc!r}")
     if len(nar) < 3 and not build.name.startswith("urgent-"):
         warn.append(f"мало ударов: {len(nar)} (эталон — 5)")
+    # ── чужие кадры (лимит 10.10.2026, см. build_reel.FOREIGN_*) ──
+    total = float(plan.get("total", 0)) or 1.0
+    foreign = plan.get("foreign", [])
+    for f in foreign:
+        if float(f["dur"]) > B.FOREIGN_SEG_MAX + 0.05:
+            hard.append(f"чужой фрагмент {f['i']}: {f['dur']} с > {B.FOREIGN_SEG_MAX} с")
+        if not str(f.get("caption") or "").strip() or f.get("caption") == "открытые источники":
+            hard.append(f"чужой фрагмент {f['i']}: нет подписи источника ({f.get('src')!r})")
+    share = float(plan.get("foreign_share", 0))
+    if share > B.FOREIGN_MAX_SHARE + 0.001:
+        hard.append(f"чужих кадров {share:.0%} длины ролика > {B.FOREIGN_MAX_SHARE:.0%}")
+    elif share > B.FOREIGN_WARN_SHARE:
+        warn.append(f"чужих кадров {share:.0%} длины ролика — близко к лимиту {B.FOREIGN_MAX_SHARE:.0%}")
+    # ── контекст в кадре и финальная плашка ──
+    page = (build / "index.html").read_text(encoding="utf-8")
+    if B.CTX_ON:
+        if plan.get("ctx_lines", 0) < plan.get("n_strikes", 0) or "ОЦЕНКА</div>" not in page:
+            hard.append("нет строки контекста «место · дата · источник · ОЦЕНКА» на сценах ударов")
+        if "ссылка в шапке канала" not in page:
+            hard.append("нет финальной плашки «Карта — ссылка в шапке канала»")
     got = sum(1 for c in clips if c)
     if not got:
         warn.append("нет ни одного клипа (карта и плашки без кадров)")

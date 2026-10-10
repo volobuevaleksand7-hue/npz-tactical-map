@@ -40,7 +40,9 @@ Input JSON:
   (layout is fixed). Glossary: НПЗ -> refinery (in names: "Moscow Refinery (Kapotnya)", "Ryazan Refinery");
   ТОПЛИВНЫЙ ФРОНТ РФ -> FUEL FRONT · RUSSIA; ОЦЕНКА -> ESTIMATE; подтверждено -> confirmed;
   сообщается -> reported; СРОЧНО -> BREAKING; нефтебаза -> oil depot; ЛПДС/НПС -> pumping station;
-  обл. -> region; dates 06.10.2026 -> Oct 6, 2026; "6 октября 2026" -> "October 6, 2026".
+  обл. -> region; context lines "Place · 10.10.2026 · @source · ОЦЕНКА" -> "Place · Oct 10, 2026 · @source · ESTIMATE"
+  (keep @handles as is); "Карта — ссылка в шапке канала" -> "Map — link in channel header";
+  "кадры: X · место не подтверждено" -> "footage: X · location unconfirmed"; dates 06.10.2026 -> Oct 6, 2026; "6 октября 2026" -> "October 6, 2026".
   Standard English place names (Moscow, Ryazan, Novorossiysk, Tuapse, Bashkortostan, Salavat, Sterlitamak;
   Russian "в" is "v", never "w").
 - "voice": spoken lines keyed s0, s1... Translate into natural spoken English, one sentence each,
@@ -199,7 +201,7 @@ def main():
 
     lines = dict(tr["voice"])
     lines["intro"] = tr["intro"]
-    lines["outro"] = "Map of all strikes: link in the description."
+    lines["outro"] = "Map of all strikes: link in the channel header."
     lines["broll"] = "Footage from open sources. Locations not independently verified."
     voice = plan.get("voice", [])
     keys = [Path(v["file"]).stem for v in voice]

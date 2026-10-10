@@ -76,7 +76,9 @@
 
       /* постер: первый кадр = обложка в ленте Shorts. Текст — в верхних 2/3 (низ закрывает заголовок YouTube) */
       #poster { position:absolute; inset:0; background:#120c08; overflow:hidden; }
-      #poster .bg { position:absolute; inset:-40px; background:url("{{POSTER_BG}}") center/cover no-repeat; filter:brightness(1.6) saturate(1.5) contrast(1.2); }
+      #poster .bg { position:absolute; inset:-40px; background:url("{{POSTER_BG}}") {{POSTER_BGCSS}}; filter:brightness(1.6) saturate(1.5) contrast(1.2); }
+      #poster .pm { position:absolute; width:44px; height:44px; margin:-22px 0 0 -22px; border-radius:50%; border:5px solid #fff;
+        background:radial-gradient(circle,#fff3c4 0%,#ffb02e 40%,#e8361f 80%); box-shadow:0 0 40px 16px rgba(255,90,30,.8); }
       #poster .dk { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.7) 100%); }
       #poster .k { position:absolute; left:64px; top:110px; display:flex; align-items:center; gap:16px; font-weight:800; font-size:44px; color:#fff; }
       #poster .k i { display:block; width:22px; height:22px; border-radius:50%; background:var(--red); }
@@ -86,6 +88,13 @@
       #poster .c { position:absolute; left:40px; right:40px; top:820px; padding:22px 24px 120px; background:rgba(8,6,4,.78); border-radius:20px; font-weight:800; font-size:70px; line-height:1.1; color:#ffd36a; text-shadow:0 4px 18px rgba(0,0,0,.8); }
       #poster .s { position:absolute; left:64px; right:64px; top:var(--sy,1010px); font-family:"JB",monospace; font-weight:600; font-size:40px; color:#fff; text-shadow:0 3px 12px rgba(0,0,0,.8); }
       #poster .e { position:absolute; left:64px; top:calc(var(--sy,1010px) + 66px); font-family:"JB",monospace; font-weight:600; font-size:26px; color:#ffd9a0; border:2px solid rgba(255,217,160,.6); border-radius:8px; padding:4px 12px; }
+
+      /* контекст в кадре: «место · дата · источник · ОЦЕНКА» (EDSA). Ниже табличек, выше зоны интерфейса Shorts */
+      .cx { position:absolute; left:48px; right:110px; top:1520px; opacity:0; font-family:"Rubik",sans-serif; font-weight:600; font-size:30px;
+        line-height:1.2; color:#fff; background:rgba(8,12,15,.82); border-left:10px solid var(--red); border-radius:12px; padding:12px 22px; }
+      /* финальная плашка: ссылки в Shorts некликабельны — отсылаем к шапке канала, URL не пишем */
+      #plate { position:absolute; left:64px; right:64px; top:1520px; opacity:0; text-align:center; font-weight:800; font-size:56px; line-height:1.15;
+        color:#fff; background:var(--red); border-radius:20px; padding:22px 24px; box-shadow:0 10px 40px rgba(0,0,0,.45); }
 
       /* итог суток */
       #outro { position:absolute; inset:0; opacity:0; background:rgba(9,15,19,.88); }
@@ -162,8 +171,14 @@
         <div class="t"><span>{{POSTER_TITLE}}</span></div>
         <div class="c">{{POSTER_CITIES}}</div>
         <div class="s">{{POSTER_SUB}}</div>
-        <div class="e">ОЦЕНКА · OSINT</div>
+        {{POSTER_MARK}}
+        <div class="e">{{POSTER_E}}</div>
       </div>
+
+      <div id="ctxs" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="22" data-layout-allow-overlap>
+        {{CTXS}}
+      </div>
+      <div id="plate" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="31" data-layout-allow-overlap>{{FINAL_PLATE}}</div>
     </div>
     <script>
       const P = {{PLAN_JSON}};
@@ -283,6 +298,14 @@
         $("poster").style.opacity = 1 - pu;
         $("poster").style.transform = `scale(${1 + 0.25 * pu})`;
         document.querySelector("#poster .bg").style.transform = `scale(${1.04 + 0.05 * clamp(t / P.poster)})`;
+
+        // строка контекста на сцене удара (до конца кадров/таблички)
+        P.segs.forEach((s, i) => { const el = $("cx" + i); if (!el) return;
+          const a0 = s.arrive - 0.05, a1 = s.dive ? s.v1 + 0.1 : (s.end || s.arrive + 2.3);
+          el.style.opacity = clamp((t - a0) / 0.25) * (1 - ramp(t, a1 - 0.25, a1)); });
+        // финальная плашка: последние P.plate секунд
+        if (P.plate) { const pl = $("plate"), a0 = P.total_end - P.plate;
+          pl.style.opacity = clamp((t - a0) / 0.3); pl.style.transform = `translateY(${(1 - outC(ramp(t, a0, a0 + 0.4))) * 30}px)`; }
 
         // итог
         const ou = ramp(t, P.outro, P.outro + 0.5);

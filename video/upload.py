@@ -218,7 +218,18 @@ def register(date, vid, title):
             reg = json.load(f)
     except (OSError, ValueError):
         reg = {"videos": {}}
-    reg.setdefault("videos", {}).setdefault(date, {})[KIND] = {"id": vid, "title": title}
+    rec = {"id": vid, "title": title}
+    # 10.10.2026: для JSON-LD VideoObject на /news/<дата>.html (gen-news.py): длительность и время заливки
+    try:
+        import subprocess, datetime
+        d = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                            os.path.join(OUT, f"{KIND}-{date}.mp4")], capture_output=True, text=True, timeout=30).stdout.strip()
+        if d:
+            rec["duration"] = round(float(d))
+        rec["uploaded"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    except Exception:  # noqa: BLE001 — реестр важнее метаданных
+        pass
+    reg.setdefault("videos", {}).setdefault(date, {})[KIND] = rec
     with open(VIDEOS_JSON + ".tmp", "w", encoding="utf-8") as f:
         json.dump(reg, f, ensure_ascii=False, indent=1, sort_keys=True)
         f.write("\n")
