@@ -500,6 +500,24 @@ def tts(text, out: Path):
     if not Path(exe).exists():
         return None
     voice = os.environ.get("REEL_VOICE_NAME", VOICE)
+    # 10.10.2026: сервис отдаёт NoAudioReceived на отдельных фразах подряд минутами, и одна такая фраза
+    # снимала голос со всего ролика, а пересборка заново просила все фразы. Кэш по тексту: удачные фразы
+    # (и неизменная концовка) берутся с диска, пересборка через 10 мин добирает только недостающие.
+    import hashlib
+    cached = REEL / "cache" / "tts" / (hashlib.md5(f"{voice}|{VOICE_RATE}|{text}".encode()).hexdigest() + ".mp3")
+    if cached.exists() and cached.stat().st_size > 1000:
+        shutil.copy2(cached, out)
+    else:
+        if not _tts_call(exe, voice, text, out):
+            return None
+        cached.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(out, cached)
+    d = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(out)],
+                       capture_output=True, text=True).stdout.strip()
+    return float(d) if d else None
+
+
+def _tts_call(exe, voice, text, out: Path):
     # сервис Microsoft сбоит на сериях запросов подряд (NoAudioReceived), а иногда лежит минуты: без голоса
     # аудит ролик не выпустит, поэтому ждём до ~4 мин (07.10 тест-сборка потеряла озвучку на 5 повторах за 30 с)
     for attempt, pause in enumerate((0, 3, 6, 10, 20, 40, 60, 90)):
@@ -511,11 +529,10 @@ def tts(text, out: Path):
         if r.returncode == 0 and out.exists() and out.stat().st_size > 1000:
             break
     else:
-        print(f"build_reel: голос не сгенерирован: {r.stderr.decode(errors='replace')[-200:]}", file=sys.stderr)
-        return None
-    d = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(out)],
-                       capture_output=True, text=True).stdout.strip()
-    return float(d) if d else None
+        print(f"build_reel: голос не сгенерирован ({text[:40]!r}): {r.stderr.decode(errors='replace')[-200:]}",
+              file=sys.stderr)
+        return False
+    return True
 
 
 # ───────────────────────────── compose ─────────────────────────────
@@ -603,9 +620,11 @@ def compose(date, build: Path):
             f = build / "voice" / f"{k}.mp3"
             d = tts(text, f)
             if d is None:
-                vo = {}
-                break
+                vo[k] = None   # озвучиваем остальные: удачные фразы лягут в кэш для пересборки
+                continue
             vo[k] = (f"voice/{k}.mp3", d)
+        if None in vo.values():
+            vo = {}
     vdur = lambda k: vo[k][1] if k in vo else 0.0
 
     for f in ("fonts",):
