@@ -578,6 +578,67 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")[:60] or "x"
 
 
+YT_HINTS = CACHE / "yt-hints.json"
+
+
+def yt_hint_clip(strike, d: Path, final: Path, seg=SEG):
+    """Кадры с YouTube-хроники (agents/yt-watch.py, 10.10.2026): ролик вышел в окне даты удара, город —
+    в заголовке/субтитрах. Качаем ~40 с вокруг упоминания, кадр выбирает та же проверка, что для Telegram.
+    Без звука (to_vertical -an): голос чужого канала не берём; источник — ссылка на ролик с таймкодом."""
+    try:
+        hints = json.loads(YT_HINTS.read_text())
+    except (OSError, ValueError):
+        return None
+    st, day = city_stem(strike.get("city")), str(strike.get("date", ""))[:10]
+    what = f"{strike.get('target') or ''}, {strike.get('city') or ''}"
+    for h in sorted(hints.values(), key=lambda h: h.get("start") is None):
+        if not st or h.get("stem") != st or not date_ok(h.get("published"), day):
+            continue
+        start = int(h.get("start") or 0)
+        lo = max(0, start - 3)
+        for f in d.glob(f"yt-{h['video']}-{lo}.*"):
+            raw = f
+            break
+        else:
+            ytd = shutil.which("yt-dlp") or os.path.expanduser("~/.local/bin/yt-dlp")   # venv (см. daily.sh)
+            if not os.access(ytd, os.X_OK):
+                return None
+            r = subprocess.run([ytd, "-q", "--no-playlist", "-f", "bv*[height<=720][ext=mp4]/b[height<=720]/best",
+                                "--download-sections", f"*{lo}-{lo + 45}", "--force-keyframes-at-cuts",
+                                "-o", str(d / f"yt-{h['video']}-{lo}.%(ext)s"), h["url"]],
+                               capture_output=True, text=True, timeout=300)
+            files = sorted(d.glob(f"yt-{h['video']}-{lo}.*"))
+            if r.returncode or not files:
+                log(f"youtube {h['url']}: фрагмент не скачался {r.stderr[-150:]!r}")
+                continue
+            raw = files[0]
+        try:
+            w, hh, dur = probe(raw)
+            # 45 с ролика — три куска по 15 с: pick_window берёт по 3 окна с куска, итого 9 кадров
+            # (одно 45-секундное видео давало 3 окна, и в них попадали заставка и чужой сюжет)
+            parts = []
+            for off in range(0, int(dur) - 3, 15):
+                part = d / f"{raw.stem}-p{off}.mp4"
+                if not part.exists():
+                    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", str(off), "-t", "15", "-i", str(raw),
+                                    "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", str(part)],
+                                   check=True, timeout=180)
+                parts.append((part, probe(part)[2], off))
+            pick = pick_window([p for p in parts if p[1] >= seg], seg, what, d)
+            if not pick:
+                log(f"youtube {h['url']}: в кадрах удара не видно")
+                continue
+            part, s0, s, off = pick
+            to_vertical(part, s0, s, final)
+            s0 += off
+        except Exception as e:  # noqa: BLE001
+            log(f"youtube {h['url']}: не годится ({e})")
+            continue
+        return {"file": final.name, "kind": "video", "src": f"{h['url']}&t={lo + int(s0)}s", "start": s0,
+                "dur": round(s, 2), "orig": f"{w}x{hh}"}
+    return None
+
+
 def fetch_for(strike, out_dir: Path, seg=SEG):
     """-> {"file", "kind": video|photo, "src": url_поста, "start"} или None."""
     key = slug(str(strike.get("source_url") or "") + "-" + str(strike.get("city") or ""))
@@ -631,6 +692,8 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
                     res = {"file": final.name, "kind": "video", "src": src, "dur": round(s, 2), "orig": f"{w}x{h}"}
                 except Exception as e:  # noqa: BLE001
                     log(f"yt-dlp-файл не годится: {e}")
+    if not res:   # YouTube-хроника (Ukraine365 и др.) — раньше фото: живые кадры лучше статики
+        res = yt_hint_clip(strike, d, final, seg)
     if not res:
         for p in posts:
             if p["photos"]:

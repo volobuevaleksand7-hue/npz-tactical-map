@@ -254,8 +254,8 @@ def main():
         return whoami()
     if args[:1] == ["privacy"] and len(args) == 3 and args[2] in ("unlisted", "private", "public"):
         return privacy(args[1], args[2])
-    # urgent-<метка> — второй срочный за дату; en-reel / en-urgent — англоязычный канал
-    if re.fullmatch(r"(en-)?(reel|urgent(-[a-z0-9]+)?)", args[0] if args else ""):
+    # urgent-<метка> — второй срочный за дату; reel-evening — вечерняя сводка; en-* — англоязычный канал
+    if re.fullmatch(r"(en-)?(reel(-evening)?|urgent(-[a-z0-9]+)?)", args[0] if args else ""):
         KIND, args = args[0], args[1:]
     if args:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):

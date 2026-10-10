@@ -76,3 +76,8 @@
 # bash agents/git-sync.sh "<msg>" "<hb-ключ>". Обложки (по событию, не по крону):
 #   python3 hermes/scripts/build-covers.py — город удара + подпись, светло, НЕ мрачно.
 # ============================================================================
+
+# ---- 10.10.2026: ролики дня 10:00 и 20:00 МСК + наблюдатель YouTube-хроник (живой crontab — источник истины) ----
+# 15 6 * * *  ... flock -w 2400 /var/lock/npz-video.lock nice -n 10 env REEL_PUBLISH_AT=07:00 ./reel/daily.sh                         # утро, выход 10:00 МСК
+# 15 16 * * * ... flock -w 2400 /var/lock/npz-video.lock nice -n 10 env REEL_KIND=reel-evening REEL_PUBLISH_AT=17:00 ./reel/daily.sh # вечер, выход 20:00 МСК
+# 4,24,44 * * * *  cd $NPZ_REPO && PATH=/root/.local/bin:$PATH timeout 900 python3 agents/yt-watch.py >> $NPZ_REPO/agents/logs/yt-watch.log 2>&1
