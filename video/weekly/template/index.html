@@ -1,0 +1,255 @@
+<!doctype html>
+<!--
+  Недельный обзор «Топливный фронт РФ» (HyperFrames, 1920×1080, 16:9). {{…}} подставляет video/weekly/build_weekly.py.
+  Хук (карта + итог недели) -> по дням: карточка дня -> наезд на удар -> карточка объекта + кадры очевидцев справа ->
+  итог: баланс, статусы заводов, ссылка на карту. План таймлайна — assets/plan.js (window.PLAN).
+  Камера, маркеры, карточки и субтитры считаются от одного времени (clock): кадр зависит только от seek.
+-->
+<html lang="{{LANG}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/plan.js"></script>
+    <style>
+      @font-face { font-family: "Rubik"; font-weight: 400; src: url("assets/fonts/rubik-400.ttf"); }
+      @font-face { font-family: "Rubik"; font-weight: 600; src: url("assets/fonts/rubik-600.ttf"); }
+      @font-face { font-family: "Rubik"; font-weight: 800; src: url("assets/fonts/rubik-800.ttf"); }
+      @font-face { font-family: "JB"; font-weight: 600; src: url("assets/fonts/jbmono-600.ttf"); }
+      :root { --ink:#1f1d18; --dim:#6f6755; --red:#d23a2e; --amber:#df8f17; --green:#2f8a50; --teal:#146f6f; --paper:#fbf8f1; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1920px; height:1080px; overflow:hidden; background:#0b1419; }
+      #root { position:relative; width:1920px; height:1080px; overflow:hidden; font-family:"Rubik",sans-serif; color:var(--ink); background:#0b1419; }
+
+      /* карта сайта */
+      #mapsc { position:absolute; inset:0; overflow:hidden; background:#10181d; }
+      #cam { position:absolute; left:0; top:0; width:{{IW}}px; height:{{IH}}px; transform-origin:0 0; }
+      #cam img { display:block; width:{{IW}}px; height:{{IH}}px; }
+      #mk { position:absolute; inset:0; }
+      .m { position:absolute; width:0; height:0; }
+      .m .h { position:absolute; left:-40px; top:-40px; width:80px; height:80px; border-radius:50%;
+        background:radial-gradient(circle, rgba(255,120,40,.7) 0%, rgba(255,70,30,.3) 35%, rgba(255,40,20,0) 70%); }
+      .m .c { position:absolute; left:-9px; top:-9px; width:18px; height:18px; border-radius:50%; border:3px solid #fff;
+        background:radial-gradient(circle, #fff3c4 0%, #ffb02e 40%, #e8361f 80%); box-shadow:0 0 12px 3px rgba(255,90,30,.75); }
+      .m .r { position:absolute; left:-20px; top:-20px; width:40px; height:40px; border-radius:50%; border:3px solid #e8361f; opacity:0; }
+      .m.sel .c { left:-14px; top:-14px; width:28px; height:28px; border-width:4px; }
+      .m.sel .h { left:-70px; top:-70px; width:140px; height:140px; }
+      .m.sel .r { left:-30px; top:-30px; width:60px; height:60px; border-width:4px; }
+      #shade { position:absolute; inset:0; background:linear-gradient(90deg, rgba(11,20,25,.62) 0%, rgba(11,20,25,.34) 38%, rgba(11,20,25,0) 62%), linear-gradient(180deg, rgba(11,20,25,.7) 0%, rgba(11,20,25,0) 11%, rgba(11,20,25,0) 90%, rgba(11,20,25,.7) 100%); }
+
+      /* верхняя и нижняя полосы: всегда в кадре */
+      #top { position:absolute; left:0; right:0; top:0; height:84px; }
+      #brand { position:absolute; left:56px; top:22px; display:flex; align-items:center; gap:14px; font-weight:800; font-size:34px; color:#fff; letter-spacing:-.01em; text-shadow:0 2px 12px rgba(0,0,0,.6); opacity:0; }
+      #brand i { display:block; width:18px; height:18px; border-radius:50%; background:var(--red); box-shadow:0 0 14px 3px rgba(255,70,40,.7); }
+      #est { position:absolute; right:56px; top:20px; font-family:"JB",monospace; font-weight:600; font-size:26px; color:#ffd9a0; background:rgba(16,16,14,.72); border:2px solid rgba(255,217,160,.65); border-radius:8px; padding:6px 14px; }
+      .dp { position:absolute; right:340px; top:20px; font-family:"JB",monospace; font-weight:600; font-size:28px; color:#fff; background:var(--red); border-radius:10px; padding:6px 16px; opacity:0; white-space:nowrap; }
+      #bot { position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(0deg, rgba(8,12,15,.85), rgba(8,12,15,0)); }
+      #bot .l { position:absolute; left:56px; bottom:12px; font-family:"JB",monospace; font-weight:600; font-size:22px; color:#d6dde0; text-shadow:0 1px 6px #000; }
+      #bot .r { position:absolute; right:56px; bottom:12px; font-family:"JB",monospace; font-weight:600; font-size:24px; color:#9fe0d6; text-shadow:0 1px 6px #000; }
+
+      /* субтитры */
+      #sub { position:absolute; left:56px; width:980px; bottom:78px; font-weight:600; font-size:42px; line-height:1.2; color:#fff; background:rgba(8,12,15,.78); border-radius:14px; padding:12px 22px 14px; opacity:0; }
+
+      /* карточки: общий контейнер слева */
+      .card { position:absolute; left:56px; top:116px; width:980px; opacity:0; transform-origin:0 0; }
+      .glass { background:rgba(9,15,19,.84); border-left:14px solid var(--red); border-radius:22px; padding:30px 40px 34px; color:#fff; box-shadow:0 20px 50px rgba(0,0,0,.4); }
+      .gk { font-family:"JB",monospace; font-weight:600; font-size:30px; color:#ff8a5c; letter-spacing:.05em; }
+      .hbig { font-weight:800; font-size:300px; line-height:.95; letter-spacing:-.04em; margin-top:6px; }
+      .hw { font-weight:800; font-size:64px; line-height:1.05; margin-top:4px; }
+      .hrow { display:flex; align-items:center; gap:22px; margin-top:22px; font-weight:600; font-size:44px; color:#e9f1f4; }
+      .hrow b { display:inline-block; min-width:92px; text-align:center; font-weight:800; font-size:56px; color:#fff; background:var(--red); border-radius:14px; padding:2px 16px; }
+      .hdt { font-family:"JB",monospace; font-weight:600; font-size:28px; color:#9fb6c1; margin-top:20px; }
+      .dwd { font-weight:800; font-size:120px; line-height:1; letter-spacing:-.03em; margin-top:8px; }
+      .ddt { font-weight:800; font-size:78px; line-height:1.05; color:#ffd36a; margin-top:6px; }
+
+      .paper { background:var(--paper); border-top:14px solid var(--red); border-radius:26px; padding:26px 40px 30px; box-shadow:0 22px 56px rgba(0,0,0,.42), 0 0 0 3px rgba(0,0,0,.08); }
+      .c-row { display:flex; align-items:center; gap:20px; flex-wrap:nowrap; }
+      .c-k { font-weight:800; font-size:30px; color:#fff; background:var(--red); border-radius:10px; padding:4px 16px; letter-spacing:.03em; white-space:nowrap; }
+      .c-k.k1 { background:var(--amber); } .c-k.k0 { background:#58606a; }
+      .c-d { font-family:"JB",monospace; font-weight:600; font-size:27px; color:var(--dim); white-space:nowrap; }
+      .c-city { font-weight:800; font-size:84px; line-height:1.02; letter-spacing:-.02em; margin-top:14px; }
+      .c-obj { font-weight:800; font-size:46px; line-height:1.1; margin-top:6px; color:var(--red); }
+      .c-cap { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; margin-top:14px; font-weight:600; font-size:30px; color:#3a372f; }
+      .c-cap .lb { font-family:"JB",monospace; font-size:22px; color:var(--dim); letter-spacing:.06em; }
+      .c-cap b { font-weight:800; font-size:34px; color:var(--ink); }
+      .c-cap .u { color:var(--dim); margin-right:18px; }
+      .c-cap .st { font-weight:800; color:#fff; border-radius:8px; padding:0 12px; margin-right:6px; }
+      .st.down { background:var(--red); } .st.partial { background:var(--amber); } .st.operational { background:var(--green); }
+      .c-txt { font-weight:600; font-size:34px; line-height:1.24; margin-top:14px; color:#3a372f; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+
+      /* кадры очевидцев: вертикальная панель справа */
+      .fw { position:absolute; left:1455px; top:230px; width:410px; height:740px; opacity:0; background:#000; overflow:hidden; border-radius:22px; border:6px solid var(--paper); box-shadow:0 22px 56px rgba(0,0,0,.55); }
+      .fw video { position:absolute; left:0; top:0; width:398px; height:728px; object-fit:cover; }
+      .fw .src { position:absolute; left:0; right:0; bottom:0; padding:60px 20px 16px; background:linear-gradient(0deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.6) 55%, rgba(0,0,0,0) 100%); }
+      .fw .src span { display:block; font-weight:600; font-size:22px; color:#ffd9a0; }
+      .fw .src b { display:block; font-family:"JB",monospace; font-weight:600; font-size:19px; color:#fff; margin-top:4px; word-break:break-all; }
+
+      /* итоговые слайды */
+      .slide { position:absolute; inset:0; opacity:0; background:linear-gradient(100deg, rgba(9,15,19,.95) 0%, rgba(9,15,19,.92) 100%); padding:120px 96px 0; color:#fff; }
+      .sl-k { font-family:"JB",monospace; font-weight:600; font-size:32px; color:#ff8a5c; letter-spacing:.06em; }
+      .sl-big { font-weight:800; font-size:260px; line-height:1; letter-spacing:-.04em; margin-top:8px; }
+      .sl-big i { font-style:normal; font-size:150px; color:#ff8a5c; }
+      .sl-cap { font-weight:800; font-size:56px; margin-top:-6px; }
+      .bars { position:absolute; left:1040px; right:96px; top:190px; display:flex; flex-direction:column; gap:34px; }
+      .bar .bl { font-weight:800; font-size:40px; color:#fff; }
+      .bar .bt { height:30px; border-radius:15px; background:rgba(255,255,255,.14); margin-top:8px; overflow:hidden; }
+      .bar .bf { height:100%; width:100%; background:var(--red); border-radius:15px; transform-origin:0 0; }
+      .bar .bf.a { background:var(--amber); }
+      .bar .bv { font-family:"JB",monospace; font-weight:600; font-size:30px; color:#c9d4d8; margin-top:6px; }
+      .flags { position:absolute; left:96px; right:96px; top:640px; display:flex; flex-wrap:wrap; gap:14px; }
+      .flags span { font-weight:600; font-size:30px; color:#ffd9a0; border:2px solid rgba(255,217,160,.55); border-radius:10px; padding:4px 16px; }
+      .sl-src { position:absolute; left:96px; right:96px; top:722px; font-size:28px; color:#9fb6c1; }
+      table.tab { width:1728px; border-collapse:collapse; margin-top:26px; }
+      table.tab th { text-align:left; font-family:"JB",monospace; font-weight:600; font-size:26px; color:#9fb6c1; padding:0 18px 10px; border-bottom:2px solid rgba(255,255,255,.25); letter-spacing:.05em; }
+      table.tab td { font-weight:600; font-size:40px; padding:11px 18px; border-bottom:1px solid rgba(255,255,255,.12); white-space:nowrap; }
+      table.tab td.n { font-weight:800; max-width:760px; overflow:hidden; text-overflow:ellipsis; }
+      table.tab td.m { font-family:"JB",monospace; font-size:34px; color:#e4eaec; }
+      .chip { display:inline-block; font-weight:800; font-size:32px; color:#fff; border-radius:10px; padding:2px 16px; }
+      .chip.down { background:var(--red); } .chip.partial { background:var(--amber); } .chip.operational { background:var(--green); }
+      .cta-big { font-weight:800; font-size:120px; line-height:1.04; letter-spacing:-.03em; margin-top:26px; max-width:1500px; }
+      .cta-url { font-family:"JB",monospace; font-weight:600; font-size:56px; color:#9fe0d6; margin-top:34px; }
+      .cta-tg { font-weight:800; font-size:48px; margin-top:22px; }
+      .cta-tg span { color:#5fb8f0; }
+      .cta-w { font-size:30px; line-height:1.3; color:#9fb6c1; margin-top:40px; max-width:1500px; }
+      .cta-w b { color:#ffd9a0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{TOTAL}}" data-width="1920" data-height="1080">
+
+      <div id="mapsc" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="0">
+        <div id="cam"><img src="assets/map.jpg" alt="map" /></div>
+        <div id="mk"></div>
+        <div id="shade"></div>
+      </div>
+
+      {{VIDEOS}}
+
+      <div id="cards" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="20">
+        {{CARDS}}
+      </div>
+
+      <div id="slides" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="30">
+        {{SLIDES}}
+      </div>
+
+      <div id="bars" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="40" data-layout-allow-overlap>
+        <div id="top">
+          <div id="brand"><i></i>{{BRAND}}</div>
+          {{PILLS}}
+          <div id="est">ОЦЕНКА · OSINT</div>
+        </div>
+        <div id="bot"><div class="l">{{FOOT_L}}</div><div class="r">{{SITE}}</div></div>
+        <div id="sub"></div>
+      </div>
+    </div>
+    <script>
+      const P = window.PLAN;
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const clamp = v => Math.max(0, Math.min(1, v));
+      const inOut = u => u < .5 ? 4*u*u*u : 1 - Math.pow(-2*u + 2, 3) / 2;
+      const outC = u => 1 - Math.pow(1 - u, 3);
+      const backOut = u => { const c = 1.5; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
+      const ramp = (t, a, b) => clamp((t - a) / (b - a));
+      const $ = id => document.getElementById(id);
+      const camEl = $("cam"), mk = $("mk"), sub = $("sub");
+      const S0 = P.S0, SZ = P.SZ;
+
+      const mEls = P.marks.map(m => { const d = document.createElement("div"); d.className = "m" + (m.sel ? " sel" : "");
+        d.innerHTML = '<div class="h"></div><div class="r"></div><div class="r"></div><div class="c"></div>'; mk.appendChild(d); return d; });
+      const segEl = s => s.id ? $(s.id) : null;
+      const segs = P.segs.map(s => Object.assign({}, s, { el: segEl(s) }));
+      const pills = {};
+      document.querySelectorAll(".dp").forEach(e => pills[e.id] = e);
+
+      function camera(t) {
+        const K = P.cam;
+        if (t <= K[0].t) return K[0];
+        for (let k = 0; k < K.length - 1; k++) {
+          const a = K[k], b = K[k + 1];
+          if (t < b.t) {
+            const e = inOut(clamp((t - a.t) / (b.t - a.t)));
+            const ls = Math.log(a.s) + (Math.log(b.s) - Math.log(a.s)) * e - b.dip * Math.sin(Math.PI * e);
+            return { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e, s: Math.exp(ls),
+                     ax: a.ax + (b.ax - a.ax) * e, ay: a.ay + (b.ay - a.ay) * e };
+          }
+        }
+        return K[K.length - 1];
+      }
+
+      function curSeg(t) { for (const s of segs) if (t >= s.t0 && t < s.t1) return s; return segs[segs.length - 1]; }
+
+      function draw(t) {
+        const c = camera(t);
+        const tx = c.ax - c.x * c.s, ty = c.ay - c.y * c.s;
+        camEl.style.transform = `translate(${tx}px,${ty}px) scale(${c.s})`;
+        const cs = curSeg(t);
+        const focus = cs.type === "stop" ? cs.m : -1;
+
+        // маркеры: недельные удары появляются по дням в хуке; дальше — яркие у текущего дня
+        P.marks.forEach((m, j) => {
+          const el = mEls[j];
+          el.style.transform = `translate(${tx + m.x * c.s}px,${ty + m.y * c.s}px)`;
+          const k = t - m.on;
+          if (k < 0) { el.style.opacity = 0; return; }
+          const inDay = (cs.type === "hook" || cs.type === "bal" || cs.type === "tab" || cs.type === "cta") ? 1 : (m.day === cs.di ? 1 : 0.28);
+          el.style.opacity = inDay;
+          const pop = backOut(clamp(k / 0.4));
+          el.children[3].style.transform = `scale(${pop})`;
+          el.children[0].style.transform = `scale(${pop * (0.85 + 0.15 * Math.sin(k * 6 + j))})`;
+          const act = (j === focus);
+          [1, 2].forEach(r => { const ph = ((k + (r - 1) * 0.6) / 1.2) % 1;
+            el.children[r].style.transform = `scale(${0.6 + 2.4 * ph})`; el.children[r].style.opacity = act ? (1 - ph) * 0.9 : 0; });
+        });
+
+        // карточки и слайды
+        segs.forEach(s => {
+          if (!s.el) return;
+          const a = ramp(t, s.t0 + (s.d0 || 0), s.t0 + (s.d0 || 0) + 0.4) * (1 - ramp(t, s.t1 - 0.3, s.t1));
+          if (s.type === "stop") {
+            const pop = backOut(clamp((t - s.arrive + 0.05) / 0.45));
+            s.el.style.opacity = t >= s.arrive - 0.05 && t < s.t1 ? 1 - ramp(t, s.t1 - 0.3, s.t1) : 0;
+            s.el.style.transform = `scale(${Math.max(0.001, pop)})`;
+          } else if (s.type === "bal" || s.type === "tab" || s.type === "cta") {
+            s.el.style.opacity = a;
+          } else {
+            s.el.style.opacity = a;
+            s.el.style.transform = `translateX(${(1 - outC(ramp(t, s.t0, s.t0 + 0.5))) * -60}px)`;
+          }
+        });
+        // шкалы баланса
+        const bal = segs.find(s => s.type === "bal");
+        document.querySelectorAll(".bf").forEach((b, i) => { const u = outC(ramp(t, bal.t0 + 0.6 + 0.35 * i, bal.t0 + 1.8 + 0.35 * i));
+          b.style.transform = `scaleX(${(parseFloat(b.dataset.w) / 100) * u})`; });
+
+        // кадры очевидцев
+        P.clips.forEach(cl => {
+          const w = $(cl.id);
+          const a = clamp((t - cl.v0) / 0.25) * (1 - ramp(t, cl.v1, cl.v1 + 0.3));
+          w.style.opacity = a;
+          w.style.transform = `translateX(${(1 - outC(ramp(t, cl.v0, cl.v0 + 0.5))) * 120}px)`;
+        });
+
+        // плашка дня
+        Object.keys(pills).forEach(k => {
+          const on = cs.pill === k;
+          pills[k].style.opacity = on ? 1 : 0;
+        });
+        $("brand").style.opacity = ramp(t, P.hook_end - 0.5, P.hook_end + 0.3);
+
+        // субтитры
+        let txt = "";
+        for (const u of P.subs) if (t >= u.t0 && t < u.t1) { txt = u.text; break; }
+        if (sub.dataset.t !== txt) { sub.textContent = txt; sub.dataset.t = txt; }
+        sub.style.opacity = txt ? 1 : 0;
+      }
+      const clock = { t: 0 };
+      tl.fromTo(clock, { t: 0 }, { t: P.total, duration: P.total, ease: "none", immediateRender: false,
+        onUpdate: () => draw(clock.t) }, 0);
+      draw(0);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

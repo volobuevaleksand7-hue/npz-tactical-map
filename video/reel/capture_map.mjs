@@ -9,7 +9,8 @@ const [tFile, outImg, outJson] = process.argv.slice(2);
 if (!outJson) { console.error("usage: node capture_map.mjs targets.json out.jpg out.json"); process.exit(2); }
 const T = JSON.parse(fs.readFileSync(tFile, "utf8"));
 const URL_ = T.url || "https://npz-tactical-map.vercel.app/";
-const CSS_W = 2160, CSS_H = 3840, DPR = 1.5;   // кадр 3240×5760 px, 9:16
+// 9:16 по умолчанию (кадр 3240×5760 px); недельный обзор 16:9 задаёт CAP_W/CAP_H/CAP_DPR (3840×2160 css, DPR 1.5 → 5760×3240)
+const CSS_W = +process.env.CAP_W || 2160, CSS_H = +process.env.CAP_H || 3840, DPR = +process.env.CAP_DPR || 1.5;
 const CHROME = process.env.CHROME_PATH || ["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
   "/usr/bin/google-chrome", "/usr/bin/chromium-browser", "/usr/bin/chromium"].find(p => fs.existsSync(p));
 // под root (крон Гермеса) Chrome без --no-sandbox не стартует
