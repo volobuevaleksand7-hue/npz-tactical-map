@@ -28,8 +28,10 @@ def is_crimea(s):
     return bool(CRIMEA_RX.search(str(s.get("region") or "") + " " + str(s.get("city") or "")))
 
 
-def scrub(text, head=False):
+def scrub(text, head=False, whole_sentence=False):
     """Вырезает из текста обороты про людей. head=True — формат «Город: …» (город сохраняется).
+    whole_sentence=True — предложение с упоминанием потерь отбрасывается целиком (сырые поля detail: остаток клаузы
+    после запятой часто тоже про людей, напр. «…повреждена смена строителей»).
     Возвращает очищенный текст либо None, если осмысленного остатка нет (вызывающий берёт нейтральный запасной)."""
     t = re.sub(r"\s+", " ", str(text or "")).strip()
     if not t:
@@ -41,8 +43,8 @@ def scrub(text, head=False):
             prefix, t = m.group(1), m.group(2)
     sents = []
     for sent in re.split(r"(?<=[.!?])\s+", t):
-        sent = sent.strip().rstrip(".!? ")
-        if not sent:
+        sent = sent.strip().rstrip(".!? …")
+        if not sent or (whole_sentence and CASUALTY_RU.search(sent)):
             continue
         keep = []
         for c in re.split(r",\s*|;\s*", sent):

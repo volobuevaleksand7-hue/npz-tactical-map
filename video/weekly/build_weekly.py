@@ -305,7 +305,7 @@ def clean_line(s, line, refs):
 
 def clean_what(s, refs):
     """R.what_happened без людских потерь; запасной — нейтральная фраза про объект."""
-    wh = SF.scrub(R.what_happened(s)) or f"Сообщается об атаке БПЛА. Объект: {R.object_name(s, refs)}."
+    wh = SF.scrub(R.what_happened(s), whole_sentence=True) or f"Сообщается об атаке БПЛА. Объект: {R.object_name(s, refs)}."
     if SF.is_crimea(s):
         wh += f" Крым — {SF.CRIMEA_NOTE}."
     return wh
