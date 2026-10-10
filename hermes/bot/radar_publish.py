@@ -283,6 +283,23 @@ def _short_why(strike):
     return ""
 
 
+STRIKES_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "strikes.json")
+
+
+def strikes_on_day(date_iso):
+    """Сколько ударов в data/strikes.json за дату. Молния строится из записи, уже лежащей
+    в strikes.json, поэтому текущий удар входит в счёт."""
+    if not date_iso:
+        return 0
+    try:
+        with open(STRIKES_JSON, encoding="utf-8") as f:
+            d = json.load(f)
+    except (OSError, ValueError):
+        return 0
+    rows = d.get("strikes", []) if isinstance(d, dict) else d
+    return sum(1 for x in rows if str(x.get("date", ""))[:10] == date_iso)
+
+
 def strike_to_molniya_event(strike, reason=""):
     """Конвертирует запись из strikes.json в event-payload для render.render_molniya().
     `reason` (внутренняя причина TIER1-классификации) НЕ идёт в текст поста —
@@ -320,6 +337,8 @@ def strike_to_molniya_event(strike, reason=""):
         "sources": sources,
         "context": context,
         "url": SITE,
+        "date": str(strike.get("date", ""))[:10],
+        "day_total": strikes_on_day(str(strike.get("date", ""))[:10]),
     }
 
 

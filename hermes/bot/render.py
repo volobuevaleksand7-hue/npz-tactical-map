@@ -38,7 +38,7 @@ CAPTION_HARD_MAX = 1024
 CAPTION_TARGET = 900
 TEXT_HARD_MAX = 4096
 TEXT_TARGET = 3800
-MOLNIYA_MAX = 500
+MOLNIYA_MAX = 580   # +80 на хвост «итог дня» (10.10.2026)
 BLOCKQUOTE_MAX = 1800  # потолок содержимого раскрываемого blockquote в сводке
 UAV_ALERT_MAX = 200
 
@@ -414,15 +414,16 @@ def render_molniya(event):
     # пост печатал одно и то же дважды. Печатаем только если это правда другой текст.
     if context and not (why and context.strip().startswith(why.strip().rstrip("…"))):
         L.append(esc(context))
-    L.append('👉 <a href="%s">Карта</a>' % esc_attr(url))
-
+        L.append("")
+    # хвост «итог дня» не должен уйти под обрезку (она режет строки снизу) — режем только тело
+    foot = "\n\n" + "\n".join(_day_footer([event], url))
     text = "\n".join(L).strip()
-    if entity_len(text) > MOLNIYA_MAX:
-        text = _truncate_to(text, MOLNIYA_MAX)
-    return text
+    if entity_len(text + foot) > MOLNIYA_MAX:
+        text = _truncate_to(text, MOLNIYA_MAX - entity_len(foot))
+    return text + foot
 
 
-MOLNIYA_BATCH_MAX = 900          # длиннее одиночной: строк много, но всё ещё одно сообщение
+MOLNIYA_BATCH_MAX = 980          # длиннее одиночной: строк много, но всё ещё одно сообщение
 MOLNIYA_BATCH_LINES = 6          # больше — «и ещё N на карте»
 
 
@@ -433,6 +434,25 @@ def _udarov(n):
     if 2 <= a <= 4 and not (12 <= b <= 14):
         return "удара"
     return "ударов"
+
+
+_MONTHS_GEN = ("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
+               "сентября", "октября", "ноября", "декабря")
+
+
+def _day_footer(events, url):
+    """Хвост молнии: сколько ударов за день и куда смотреть остальные (просьба Сергея 10.10.2026).
+    Раньше одиночная молния кончалась одним «👉 Карта» — читатель не знал, что за день их больше."""
+    dates = sorted(str(e.get("date") or "")[:10] for e in events if e.get("date"))
+    total = max([int(e.get("day_total") or 0) for e in events] + [len(events)])
+    day = dates[-1] if dates else ""
+    try:
+        y, m, d = (int(x) for x in day.split("-"))
+        when = "%d %s" % (d, _MONTHS_GEN[m - 1])
+    except (ValueError, IndexError):
+        when = "сутки"
+    return ["📊 <b>За %s — %d %s</b>" % (when, total, _udarov(total)),
+            'Все удары дня — в канале @NPZmap и 👉 <a href="%s">на карте</a>' % esc_attr(url)]
 
 
 def render_molniya_batch(events, url=None):
@@ -458,12 +478,13 @@ def render_molniya_batch(events, url=None):
         L.append("… и ещё %d на карте" % (n - MOLNIYA_BATCH_LINES))
     L.append("")
     L.append("✓ подтверждено · ~ ожидает подтверждения")
-    L.append('👉 <a href="%s">Карта</a>' % esc_attr(url))
-
+    L.append("")
+    # хвост «итог дня» не должен уйти под обрезку (она режет строки снизу) — режем только тело
+    foot = "\n\n" + "\n".join(_day_footer(events, url))
     text = "\n".join(L).strip()
-    if entity_len(text) > MOLNIYA_BATCH_MAX:
-        text = _truncate_to(text, MOLNIYA_BATCH_MAX)
-    return text
+    if entity_len(text + foot) > MOLNIYA_BATCH_MAX:
+        text = _truncate_to(text, MOLNIYA_BATCH_MAX - entity_len(foot))
+    return text + foot
 
 
 # ──────────────────────────────────────────────────────────────
