@@ -19,7 +19,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-CHANNELS = os.environ.get("NPZ_YT_CHANNELS", "UCoD1pcjTPWhEBTf83SIqmcw").split(",")   # Украина 365
+CHANNELS = os.environ.get("NPZ_YT_CHANNELS", "UCoD1pcjTPWhEBTf83SIqmcw,UCS-cgYslpMpH5FkxJ2e0Vpg").split(",")   # Украина 365, Newsader (10.10)
 STATE = Path(os.environ.get("NPZ_YT_STATE", "/root/.npz-yt-watch/seen.json"))
 HINTS = REPO / "video" / "reel" / "cache" / "yt-hints.json"
 WORK = Path("/root/.npz-yt-watch/work")
