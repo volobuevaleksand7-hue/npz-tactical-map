@@ -9,6 +9,39 @@ import sys
 from pathlib import Path
 
 VIDEO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import safety as SF  # noqa: E402
+
+
+def screen_text(html):
+    """Видимый текст страницы ролика (без script/style/тегов)."""
+    html = re.sub(r"(?is)<(script|style).*?</\1>", " ", html)
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html))
+
+
+def casualty_hits(date, kind):
+    """Озвучка, экранный текст и описание не должны содержать упоминаний погибших/раненых."""
+    b = VIDEO / ".build" / f"{kind}-{date}"
+    srcs = {"описание": VIDEO / "out" / f"{kind}-{date}.txt"}
+    if kind.startswith("en-"):
+        srcs["озвучка"] = b / "narration.en.json"
+    else:
+        srcs["озвучка"] = b / "texts.json"
+        srcs["объекты"] = b / "objects.json"
+    hits = []
+    for name, f in srcs.items():
+        if f.exists():
+            for m in SF.CASUALTY_ANY.finditer(f.read_text(encoding="utf-8")):
+                hits.append(f"{name}: «{m.group(0)}»")
+    page = b / "index.html"
+    if page.exists():
+        for m in SF.CASUALTY_ANY.finditer(screen_text(page.read_text(encoding="utf-8"))):
+            hits.append(f"экран: «{m.group(0)}»")
+    subs = b / "assets" / "plan.js"
+    if subs.exists():
+        for m in SF.CASUALTY_ANY.finditer(subs.read_text(encoding="utf-8")):
+            hits.append(f"субтитры: «{m.group(0)}»")
+    return hits
 
 
 def probe(mp4):
@@ -59,7 +92,9 @@ def audit(date, kind):
             hard.append("нет дисклеймера ОЦЕНКА/ESTIMATE")
         if kind.startswith("en-") and re.search(r"[А-Яа-яЁё]", t):
             hard.append("кириллица в EN-описании")
-    plan = VIDEO / ".build" / f"weekly-{date}" / "assets" / "plan.js"
+    for h in dict.fromkeys(casualty_hits(date, kind)):
+        hard.append(f"упоминание погибших/раненых (запрещено) — {h}")
+    plan = VIDEO / ".build" / f"{kind}-{date}" / "assets" / "plan.js"
     if plan.exists():
         p = json.loads(plan.read_text(encoding="utf-8").split("=", 1)[1].strip().rstrip(";"))
         clips = sum(min(c["v1"] - c["v0"], 99) for c in p["clips"])

@@ -24,6 +24,7 @@ sys.path.insert(0, str(VIDEO / "reel"))
 sys.path.insert(0, str(HERE))
 import en_pass as E                  # noqa: E402
 import build_weekly as W             # noqa: E402
+import safety as SF                  # noqa: E402
 
 SITE = "https://npz-tactical-map.vercel.app/?utm_source=youtube_en&utm_medium=weekly"
 MON_EN = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -44,6 +45,9 @@ Input JSON:
   ПН ВТ СР ЧТ ПТ СБ ВС -> MON TUE WED THU FRI SAT SUN; month abbreviations ЯНВ.. -> JAN..; "4 ОКТ" -> "OCT 4";
   "4–10 ОКТЯБРЯ" -> "OCT 4–10"; dates dd.mm stay dd.mm. Standard English place names (Moscow, Ryazan, Salavat,
   Sterlitamak, Omsk, Ukhta, Saratov, Samara; Russian "в" is "v").
+- Never mention people killed, wounded or injured, casualties or victims, even if the Russian text hints at it:
+  state only the strike, the facility and damage to infrastructure. Keep neutral source notes such as
+  "Crimea, according to open sources" as given.
 - "voice": spoken lines keyed by id. Translate into natural spoken English, same meaning and facts, no
   abbreviations, max ~1.3x the length of the Russian line. Dates as "October 4th". "миллиона тонн" -> "million tonnes".
 - "chapters": short YouTube chapter names (translate, same order).
@@ -82,6 +86,8 @@ def ask(payload):
             bad = "summary: не та длина"
         elif E.CYR.search(json.dumps(out, ensure_ascii=False)):
             bad = "осталась кириллица"
+        elif SF.has_casualty(json.dumps(out, ensure_ascii=False)):
+            bad = "упоминание погибших/раненых (запрещено)"
         if not bad:
             return out
         log(f"перевод не прошёл проверку ({bad}), попытка {attempt + 1}: {r.stdout[-200:]!r}")
@@ -151,10 +157,10 @@ def main():
     (dst / "index.html").write_text(page, encoding="utf-8")
 
     voice, subs = plan["voice"], []
+    E.tts_all([(tr["voice"][Path(v["file"]).stem], dst / v["file"]) for v in voice])   # каскад озвучки, один провайдер
     for j, v in enumerate(voice):
         k = Path(v["file"]).stem
         mp3 = dst / v["file"]
-        E.tts(tr["voice"][k], mp3)
         nxt = voice[j + 1]["t"] if j + 1 < len(voice) else plan["total"]
         d = E.fit(mp3, nxt - v["t"] - 0.15)
         subs += W.sub_chunks(tr["voice"][k], v["t"], d)

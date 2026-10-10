@@ -28,6 +28,8 @@ VIDEO = HERE.parent
 sys.path.insert(0, str(VIDEO / "reel"))
 import build_reel as R                      # noqa: E402
 import fetch_clips as FC                    # noqa: E402
+sys.path.insert(0, str(HERE))
+import safety as SF                     # noqa: E402
 
 B, G, N = R.B, R.G, R.N
 R.VOICE_RATE = os.environ.get("WEEKLY_RATE", "+12%")   # обзор длиннее рилса: темп спокойнее
@@ -263,7 +265,11 @@ def mt_words(x):        # 20.1 -> «20,1 миллиона», 12 -> «12 милл
 
 def stop_voice(s, refs, line):
     """Реплика Haiku/шаблон + факты из fuel-state — числа и статус всегда скриптом."""
-    parts = [line.rstrip(".") + "."]
+    line = line.rstrip(".")
+    if SF.is_crimea(s):       # нейтральная пометка источника (решение владельца 10.10.2026)
+        line = re.sub(r"^([^:]{1,40}):", lambda m: m.group(1) + (", Крым" if "Крым" not in m.group(1) else "") +
+                      ", " + SF.CRIMEA_NOTE + ":", line, count=1)
+    parts = [line + "."]
     r = refinery_of(s, refs)
     if r and r.get("capacity_mt_year"):
         st = {"down": "остановлен", "partial": "работает частично", "operational": "работает"}.get(r.get("status"), "")
@@ -285,7 +291,24 @@ def narr_lines(stops, refs, build):
         for s, x in zip(todo, got):
             per[s["_sid"]] = x
         cache.write_text(json.dumps(per, ensure_ascii=False, indent=1), encoding="utf-8")
-    return per
+    return {s["_sid"]: clean_line(s, per[s["_sid"]], refs) for s in stops}
+
+
+def clean_line(s, line, refs):
+    """Реплика без упоминаний погибших/раненых: вырезаем обороты; не осталось смысла — шаблон, затем минимум."""
+    x = SF.scrub(line, head=True) or SF.scrub(R.strike_template(s, refs), head=True)
+    if not x:
+        place = str(s.get("city") or s.get("region") or "").strip()
+        x = f"{place}: удар по объекту {R.object_name(s, refs)}."
+    return x
+
+
+def clean_what(s, refs):
+    """R.what_happened без людских потерь; запасной — нейтральная фраза про объект."""
+    wh = SF.scrub(R.what_happened(s)) or f"Сообщается об атаке БПЛА. Объект: {R.object_name(s, refs)}."
+    if SF.is_crimea(s):
+        wh += f" Крым — {SF.CRIMEA_NOTE}."
+    return wh
 
 
 def sub_chunks(text, t0, dur, limit=88):
@@ -309,11 +332,6 @@ def sub_chunks(text, t0, dur, limit=88):
 
 
 # ───────────────────────────── compose ─────────────────────────────
-
-def tts_must(text, f):
-    d = R.tts(text, f)
-    return d
-
 
 def compose(end, build):
     week, stops, info = load_week(end)
@@ -382,14 +400,11 @@ def compose(end, build):
                         (" и " if len(names) > 1 else "") + names[-1] + ".")
     texts["cta"] = "Полная карта всех ударов — по ссылке в описании. Это оценка по открытым источникам, а не официальные данные."
     (build / "texts.json").write_text(json.dumps(texts, ensure_ascii=False, indent=1), encoding="utf-8")
-    vo, failed = {}, []
-    for k, text in texts.items():
-        f = build / "voice" / f"{k}.mp3"
-        d = tts_must(text, f)
-        if d is None:
-            failed.append(k)
-        else:
-            vo[k] = (f"voice/{k}.mp3", d)
+    leak = [k for k, t in texts.items() if SF.has_casualty(t)]
+    if leak:
+        raise SystemExit(f"weekly: в озвучке остались упоминания потерь {leak} — правьте safety.py")
+    vo = R.tts_all(list(texts.items()), build / "voice")     # каскад edge -> gemini -> edge2 -> piper
+    failed = [k for k in texts if k not in vo]
     if failed:
         print(f"weekly: голос не получен для {failed} — повторите сборку позже (удачные фразы в кэше)", file=sys.stderr)
         sys.exit(5)
@@ -510,7 +525,7 @@ def compose(end, build):
         s = stops[i]
         r = refinery_of(s, refs)
         conf = str(s.get("confidence", "reported")).lower()
-        wh = R.what_happened(s)
+        wh = clean_what(s, refs)
         if N and N.text_reasons(wh):
             wh = per[s["_sid"]]
         cap = ""
@@ -603,7 +618,7 @@ def compose(end, build):
         "N": n_all, "M": m_all, "dates": dates, "range": range_label(dates), "end": end,
         "bal": {"total": cap_total, "offline": cap_off, "pct": pct} if have_bal else None,
         "objects": [{"city": stops[i].get("city") or stops[i].get("region") or "", "object": R.object_name(stops[i], refs),
-                     "what": R.what_happened(stops[i]), "date": stops[i]["date"]} for i in keep]},
+                     "what": clean_what(stops[i], refs), "date": stops[i]["date"]} for i in keep]},
         ensure_ascii=False, indent=1), encoding="utf-8")
     (build / "chapters.json").write_text(json.dumps(tl["chapters"], ensure_ascii=False), encoding="utf-8")
     (build / "description.txt").write_text(describe(end, info, [stops[i] for i in keep], tl["chapters"], shown_src, changed, nb, have_bal),
@@ -630,7 +645,7 @@ def describe(end, info, sel, chapters, src, changed, nb, have_bal):
             lines.append(f"▸ {dd} {R.MONTHS[mm]}: https://{SITE}/news/{d}.html")
     lines += [f"Telegram-канал: {B.TG_URL}", "", "Объекты обзора:"]
     for s in sel:
-        lines.append(f"— {s.get('city')}: {R.object_name(s, info['refs'])}. {R.what_happened(s)}")
+        lines.append(f"— {s.get('city')}: {R.object_name(s, info['refs'])}. {clean_what(s, info['refs'])}")
     if have_bal:
         lines += ["", f"Баланс по оценке карты: остановлено {num_ru(float(nb['capacity_offline_mt_year']))} из "
                       f"{num_ru(float(nb['refining_capacity_total_mt_year']))} млн т/год мощностей ({int(round(nb['capacity_offline_pct']))}%)."]
