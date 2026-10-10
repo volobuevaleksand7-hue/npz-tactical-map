@@ -33,6 +33,9 @@ MAX_STRIKES = int(os.environ.get("REEL_MAX", "12"))  # все удары дня;
 # в hermes/bot/strike_pipeline.py (его зовёт пайплайн сразу после молнии, без расписания).
 URGENT = os.environ.get("REEL_KIND", "reel").startswith("urgent")   # urgent | urgent-<метка> (второй срочный за дату)
 ONLY = {x for x in os.environ.get("REEL_ONLY", "").split(",") if x}
+# 10.10.2026: две сводки в день — утро 10:00 МСК (reel) и вечер 20:00 МСК (reel-evening).
+# Вечерняя берёт то, чего не было в утренней (reel-shown.json пишут обе).
+EVENING = os.environ.get("REEL_KIND", "reel") == "reel-evening"
 # Рилс дня — новостная сводка к 12:00 МСК: всё, что случилось с прошлой сводки («за ночь и до ролика»).
 # Время удара в strikes.json обычно «ночь», поэтому окно — удары за дату выпуска и накануне,
 # минус уже показанные в прошлых сводках (out/reel-shown.json, пишет daily.sh после публикации).
@@ -296,7 +299,8 @@ def prepare(date, build: Path):
     import fetch_clips as FC
     sel, day = select_strikes(date)
     if not sel:
-        sys.exit(f"build_reel: за {date} нет ударов с координатами — рилс не собирается")
+        print(f"build_reel: за {date} нет новых ударов с координатами — рилс не собирается", file=sys.stderr)
+        sys.exit(4)   # daily.sh: 4 = нечего показывать, не авария
     build.mkdir(parents=True, exist_ok=True)
     (build / "assets").mkdir(exist_ok=True)
     (build / "ids.json").write_text(json.dumps(sorted(s["_sid"] for s in day)), encoding="utf-8")
@@ -805,7 +809,7 @@ def describe(date, sel, day, refs, segs, clips, broll):
             head = "Удары по " + dative_object(names[0]) + " и " + dative_object(names[1])
     else:
         head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по РФ"
-    tail = f" · {G.rus_date_short(date)} #shorts"
+    tail = f" · {'вечер ' if EVENING else ''}{G.rus_date_short(date)} #shorts"
     if len(head) + len(tail) > 100:
         head = head[:100 - len(tail) - 1].rstrip(" ,.;:—-") + "…"
     lines = [head + tail, "", f"Карта ударов: https://{SITE_HOST}/",
@@ -831,7 +835,7 @@ def tg_caption(date, sel, day, refs, clips, broll):
     n_fuel = sum(1 for s in day if s["cls"] == 2)
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
     out = ([f"⚡ <b>Срочно: удар {G.rus_date(date)}</b>", ""] if URGENT else
-           [f"🎬 <b>Удары за сутки на {G.rus_date(date)}</b>: {n}{tail}.", ""])
+           [f"🎬 <b>{'Вечерняя сводка' if EVENING else 'Удары за сутки'} на {G.rus_date(date)}</b>: {n}{tail}.", ""])
     for s in sel:
         k = len(s.get("_group", [s]))
         out.append(f"• {html.escape(str(s.get('city') or s.get('region')), quote=False)} — "

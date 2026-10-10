@@ -17,7 +17,7 @@ if [ "${KIND%%-*}" = urgent ]; then   # urgent | urgent-<метка> — вто�
   PUBLISH_AT=""                        # срочный — сразу
 else
   DATE="${1:-$(TZ=Europe/Moscow date +%F)}"
-  PUBLISH_AT="${REEL_PUBLISH_AT-09:00}" # 12:00 МСК; пусто — публиковать сразу после сборки
+  PUBLISH_AT="${REEL_PUBLISH_AT-07:00}" # 10:00 МСК (вечер — cron даёт 17:00 = 20:00 МСК); пусто — сразу
 fi
 rc=0
 # 09.10.2026: один срочный на дату резал крупные удары (Ухтинский НПЗ ушёл без ролика после Редкино).
@@ -43,7 +43,9 @@ alert() {  # владельцу — тем же ботом, что hermes/deadma
 # 09.10.2026: два дня подряд ролик не выходил из-за сбоя озвучки (edge-tts лежит минутами) —
 # аудит не прошёл → одна пересборка через REEL_RETRY_WAIT с (600); снова нет → алерт владельцу.
 for try in 1 2; do
-  ./reel/render_reel.sh "$DATE" || { rc=$?; echo "reel: $KIND $DATE не собран (rc=$rc)"; \
+  ./reel/render_reel.sh "$DATE" || { rc=$?; [ "$rc" = 4 ] && { echo "reel: $KIND $DATE — новых ударов нет, выпуск пропущен"; \
+    alert "ℹ️ НПЗ-карта: выпуск $KIND $DATE пропущен — новых ударов с прошлой сводки нет"; exit 0; }
+    echo "reel: $KIND $DATE не собран (rc=$rc)"; \
     alert "🟠 НПЗ-карта: ролик $KIND $DATE не собран (rc=$rc). Лог: agents/logs/video.log"; exit $rc; }
   audit_out="$(python3 reel/audit.py "$DATE" "$KIND")" && break
   echo "$audit_out"
@@ -77,11 +79,11 @@ if [ "${REEL_EN:-1}" != "0" ] && [ -f "$EN_SECRETS/token.json" ] && [ -f ".build
     rc=1; echo "reel: английская версия $KIND $DATE не собрана"
   fi
 fi
-if [ "$KIND" = reel ] && [ -f "out/reel-$DATE.uploaded" ]; then   # показанное в сводке не повторяем завтра
-  python3 - "$DATE" <<'PY'
+if [ "${KIND%%-*}" = reel ] && [ -f "out/$KIND-$DATE.uploaded" ]; then   # показанное в сводке не повторяем в следующей
+  python3 - "$DATE" "$KIND" <<'PY'
 import json, sys
 from pathlib import Path
-f, ids = Path("out/reel-shown.json"), Path(f".build/reel-{sys.argv[1]}/ids.json")
+f, ids = Path("out/reel-shown.json"), Path(f".build/{sys.argv[2]}-{sys.argv[1]}/ids.json")
 old = set(json.loads(f.read_text())) if f.exists() else set()
 f.write_text(json.dumps(sorted(old | set(json.loads(ids.read_text()))), indent=0))
 PY
