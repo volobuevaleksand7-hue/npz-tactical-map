@@ -494,45 +494,17 @@ def narration(date, sel, day, refs, build=None, broll=()):
     return lines
 
 
-def tts(text, out: Path):
-    """mp3 + длительность в секундах; None — голос недоступен."""
-    exe = shutil.which("edge-tts") or str(Path.home() / ".local/bin/edge-tts")
-    if not Path(exe).exists():
-        return None
+def tts_all(lines, voice_dir: Path):
+    """Озвучка всего ролика одним провайдером (каскад edge -> gemini -> edge2 -> piper, см. tts_cascade.py).
+    10.10.2026: основной голос edge-tts массово отдавал NoAudioReceived, ролик выходил без голоса.
+    Возвращает {ключ: (файл, длительность)} либо {} — голос недоступен совсем."""
+    import tts_cascade
     voice = os.environ.get("REEL_VOICE_NAME", VOICE)
-    # 10.10.2026: сервис отдаёт NoAudioReceived на отдельных фразах подряд минутами, и одна такая фраза
-    # снимала голос со всего ролика, а пересборка заново просила все фразы. Кэш по тексту: удачные фразы
-    # (и неизменная концовка) берутся с диска, пересборка через 10 мин добирает только недостающие.
-    import hashlib
-    cached = REEL / "cache" / "tts" / (hashlib.md5(f"{voice}|{VOICE_RATE}|{text}".encode()).hexdigest() + ".mp3")
-    if cached.exists() and cached.stat().st_size > 1000:
-        shutil.copy2(cached, out)
-    else:
-        if not _tts_call(exe, voice, text, out):
-            return None
-        cached.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(out, cached)
-    d = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(out)],
-                       capture_output=True, text=True).stdout.strip()
-    return float(d) if d else None
-
-
-def _tts_call(exe, voice, text, out: Path):
-    # сервис Microsoft сбоит на сериях запросов подряд (NoAudioReceived), а иногда лежит минуты: без голоса
-    # аудит ролик не выпустит, поэтому ждём до ~4 мин (07.10 тест-сборка потеряла озвучку на 5 повторах за 30 с)
-    for attempt, pause in enumerate((0, 3, 6, 10, 20, 40, 60, 90)):
-        if attempt:
-            time.sleep(pause)
-        out.unlink(missing_ok=True)
-        r = subprocess.run([exe, "--voice", voice, f"--rate={VOICE_RATE}", "--text", text, "--write-media", str(out)],
-                           capture_output=True, timeout=90)
-        if r.returncode == 0 and out.exists() and out.stat().st_size > 1000:
-            break
-    else:
-        print(f"build_reel: голос не сгенерирован ({text[:40]!r}): {r.stderr.decode(errors='replace')[-200:]}",
-              file=sys.stderr)
-        return False
-    return True
+    items = [(text, voice_dir / f"{k}.mp3") for k, text in lines]
+    pid, durs = tts_cascade.synth_all(items, "ru", voice, VOICE_RATE)
+    if pid is None:
+        return {}
+    return {k: (f"voice/{k}.mp3", d) for (k, _), d in zip(lines, durs)}
 
 
 # ───────────────────────────── compose ─────────────────────────────
@@ -616,15 +588,7 @@ def compose(date, build: Path):
     (build / "voice").mkdir(exist_ok=True)
     vo = {}  # ключ -> (файл, длительность)
     if os.environ.get("REEL_VOICE", "1") != "0":
-        for k, text in narration(date, sel, day, refs, build, broll):
-            f = build / "voice" / f"{k}.mp3"
-            d = tts(text, f)
-            if d is None:
-                vo[k] = None   # озвучиваем остальные: удачные фразы лягут в кэш для пересборки
-                continue
-            vo[k] = (f"voice/{k}.mp3", d)
-        if None in vo.values():
-            vo = {}
+        vo = tts_all(narration(date, sel, day, refs, build, broll), build / "voice")
     vdur = lambda k: vo[k][1] if k in vo else 0.0
 
     for f in ("fonts",):

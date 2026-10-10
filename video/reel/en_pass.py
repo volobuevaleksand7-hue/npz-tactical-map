@@ -108,15 +108,13 @@ def problems(out, payload):
     return None
 
 
-def tts(text, out: Path):
-    exe = shutil.which("edge-tts") or str(Path.home() / ".local/bin/edge-tts")
-    for _ in range(5):
-        out.unlink(missing_ok=True)
-        subprocess.run([exe, "--voice", VOICE, f"--rate={RATE}", "--text", text, "--write-media", str(out)],
-                       capture_output=True, timeout=90)
-        if out.exists() and out.stat().st_size > 1000:
-            return duration(out)
-    raise SystemExit(f"en_pass: голос не сгенерирован для {out.name}")
+def tts_all(items):
+    """Каскад озвучки (edge -> gemini -> edge2 -> piper), весь ролик одним провайдером; 10.10.2026."""
+    import tts_cascade
+    pid, durs = tts_cascade.synth_all(items, "en", VOICE, RATE)
+    if pid is None:
+        raise SystemExit("en_pass: голос не сгенерирован ни одним провайдером")
+    return durs
 
 
 def duration(p):
@@ -204,10 +202,10 @@ def main():
     lines["outro"] = "Map of all strikes: link in the description."
     lines["broll"] = "Footage from open sources. Locations not independently verified."
     voice = plan.get("voice", [])
+    keys = [Path(v["file"]).stem for v in voice]
+    tts_all([(lines[k], dst / v["file"]) for k, v in zip(keys, voice)])
     for j, v in enumerate(voice):
-        key = Path(v["file"]).stem
         mp3 = dst / v["file"]
-        tts(lines[key], mp3)
         end = voice[j + 1]["t"] if j + 1 < len(voice) else plan["total"]
         fit(mp3, end - v["t"] - 0.15)
     (dst / "narration.en.json").write_text(json.dumps(lines, ensure_ascii=False, indent=1), encoding="utf-8")
