@@ -126,6 +126,35 @@ def access_token():
     })["access_token"]
 
 
+PHRASES = {
+    "ru": ["удар по НПЗ", "атака беспилотников", "атака дронов", "Топливный фронт", "НПЗ России",
+           "нефтебаза", "бензин", "OSINT"],
+    "en": ["Russia refinery strike", "drone attack", "oil refinery", "Fuel Front", "Russian oil",
+           "Ukraine drones", "OSINT"],
+}
+
+
+def video_tags(title, desc):
+    """Скрытые теги ролика (snippet.tags, 10.10.2026). Раньше — только 3 хэштега описания. Теперь:
+    хэштеги из заголовка и описания, поисковые фразы и города из строк «— Город: …».
+    Вес в выдаче у тегов малый (YouTube: помогают с опечатками), основное — заголовок и описание;
+    лимит API — 500 символов на все теги вместе."""
+    tags = re.findall(r"#(\w+)", title + "\n" + desc)
+    tags += PHRASES[lang()]
+    for m in re.finditer(r"^—\s*(?!http)([^:\n]{2,40}):", desc, re.M):
+        tags += [c.strip() for c in re.split(r",| and | и ", m.group(1)) if c.strip() and "http" not in c]
+    out, size = [], 0
+    for t in tags:
+        if t.lower() in (x.lower() for x in out):
+            continue
+        cost = len(t) + (2 if " " in t else 0) + 1
+        if size + cost > 480:
+            break
+        out.append(t)
+        size += cost
+    return out
+
+
 def meta(date):
     """Заголовок — первая строка out/npz-<дата>.txt, описание — остальное."""
     path = os.path.join(OUT, f"{KIND}-{date}.txt")
@@ -134,7 +163,7 @@ def meta(date):
     clean = lambda s: s.replace("<", "‹").replace(">", "›")
     title = clean(lines[0].strip())[:100]
     desc = clean("\n".join(lines[1:]).strip())[:4900]
-    tags = re.findall(r"#(\w+)", desc)[:10]
+    tags = video_tags(title, desc)
     if lang() == "en" and re.search(r"[А-Яа-яЁё]", title + desc):
         raise SystemExit(f"upload: {path}: кириллица в заголовке/описании английского ролика — сначала reel/en_pass.py")
     return title, desc, tags

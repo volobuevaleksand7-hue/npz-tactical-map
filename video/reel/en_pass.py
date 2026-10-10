@@ -138,6 +138,17 @@ def fit(mp3: Path, slot):
     return duration(mp3)
 
 
+def en_city_tags(summary):
+    """«— Bataysk and Azov: …» → «#Bataysk #Azov » (до трёх городов, 10.10.2026)."""
+    out = []
+    for m in re.finditer(r"^—\s*([^:\n]+):", summary, re.M):
+        for c in re.split(r",| and ", m.group(1)):
+            t = "".join(w[:1].upper() + w[1:] for w in re.findall(r"[A-Za-z]+", c))
+            if t and t not in out:
+                out.append(t)
+    return "".join("#%s " % t for t in out[:3])
+
+
 def main():
     if len(sys.argv) != 3 or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", sys.argv[2]):
         raise SystemExit(__doc__)
@@ -174,7 +185,7 @@ def main():
             f"{summary}\n\n"
             f"ESTIMATE: aggregated open-source (OSINT) reporting, not official data. "
             f"Footage: public Telegram channels, locations not independently verified.\n\n"
-            f"#FuelFront #oil #refinery #Russia #energy #news")
+            f"#FuelFront #oil #refinery #Russia #drones {en_city_tags(summary)}#news")
     out.parent.mkdir(exist_ok=True)
     (dst / "description.txt").write_text(desc + "\n", encoding="utf-8")
     out.with_suffix(".txt").write_text(desc + "\n", encoding="utf-8")

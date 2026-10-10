@@ -844,8 +844,28 @@ def describe(date, sel, day, refs, segs, clips, broll):
     lines += ["", f"Сводка дня: https://{SITE_HOST}/news/{date}.html",
               f"Telegram-канал: {B.TG_URL}", "",
               "ОЦЕНКА: агрегация открытых источников (OSINT), не официальная информация.", "",
-              "#НПЗ #ТопливныйФронт #новости"]
+              hashtags(sel)]
     return "\n".join(lines) + "\n"
+
+
+def _tag(text):
+    """«Ростов-на-Дону» → «РостовНаДону», «Ростовская область» → «РостовскаяОбласть»."""
+    parts = re.findall(r"\w+", str(text or ""))
+    return "".join(w[:1].upper() + w[1:] for w in parts)
+
+
+def hashtags(sel):
+    """Хэштеги описания (10.10.2026): общие + города/регионы из ролика. На Shorts они кликабельны и
+    ведут на ленту хэштега; больше 15 YouTube игнорирует все, держим ≤10."""
+    tags = ["#НПЗ", "#ТопливныйФронт", "#беспилотники"]
+    for key, cap in (("city", 3), ("region", 2)):
+        seen = []
+        for st in sel:
+            t = _tag(st.get(key))
+            if t and t not in seen and "#" + t not in tags:
+                seen.append(t)
+        tags += ["#" + t for t in seen[:cap]]
+    return " ".join(tags[:9] + ["#новости"])
 
 
 def tg_caption(date, sel, day, refs, clips, broll):
