@@ -12,7 +12,7 @@ KEEP="${KEEP:-7}"
 cd "$OUT"
 shopt -s nullglob
 
-for marker in npz-*.uploaded reel-*.uploaded urgent-*.uploaded en-reel-*.uploaded en-urgent-*.uploaded; do
+for marker in npz-*.uploaded reel-*.uploaded urgent-*.uploaded en-reel-*.uploaded en-urgent-*.uploaded weekly-*.uploaded en-weekly-*.uploaded; do
   [ -e "$marker" ] || continue
   mp4="${marker%.uploaded}.mp4"
   [ -f "$mp4" ] || continue

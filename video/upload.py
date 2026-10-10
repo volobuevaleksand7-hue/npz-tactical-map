@@ -201,9 +201,39 @@ def upload(date, token):
     with open(os.path.join(OUT, f"{KIND}-{date}.uploaded"), "w") as f:
         f.write(f"{vid}\t{url}\t{privacy}\t{title}\n")
     log(f"{date}: залит {url} ({privacy})")
+    if KIND in ("weekly", "en-weekly"):
+        add_to_playlist(vid, token)
     if privacy == "public" and lang() == "ru":  # реестр сайта — только русский канал
         register(date, vid, title)
     return url
+
+
+PLAYLIST_TITLES = {"weekly": "Неделя ударов", "en-weekly": "Weekly strike review"}
+
+
+def add_to_playlist(vid, token):
+    """Недельный обзор -> плейлист «Неделя ударов» / «Weekly strike review» (создаётся при первом обзоре).
+    Нужен scope youtube (RU-токен с youtube.upload получит 403): ошибка не фатальна, ролик уже залит,
+    а плейлист можно собрать вручную в Studio или после upload.py auth с NPZ_YT_SCOPE=https://www.googleapis.com/auth/youtube."""
+    title = PLAYLIST_TITLES[KIND]
+    cache = os.path.join(OUT, f"playlist-{KIND}.id")
+    try:
+        pid = open(cache).read().strip() if os.path.exists(cache) else ""
+        if not pid:
+            for it in api("GET", "playlists?part=snippet&mine=true&maxResults=50", token=token).get("items", []):
+                if it["snippet"]["title"] == title:
+                    pid = it["id"]
+            if not pid:
+                pid = api("POST", "playlists?part=snippet,status",
+                          {"snippet": {"title": title, "defaultLanguage": lang()},
+                           "status": {"privacyStatus": "public"}}, token=token)["id"]
+            with open(cache, "w") as f:
+                f.write(pid)
+        api("POST", "playlistItems?part=snippet",
+            {"snippet": {"playlistId": pid, "resourceId": {"kind": "youtube#video", "videoId": vid}}}, token=token)
+        log(f"{vid}: добавлен в плейлист «{title}»")
+    except (SystemExit, OSError, KeyError) as e:
+        log(f"{vid}: плейлист «{title}» не обновлён (не фатально): {e}")
 
 
 def lang():
@@ -294,8 +324,8 @@ def main():
         return whoami()
     if args[:1] == ["privacy"] and len(args) == 3 and args[2] in ("unlisted", "private", "public"):
         return privacy(args[1], args[2])
-    # urgent-<метка> — второй срочный за дату; reel-evening — вечерняя сводка; en-* — англоязычный канал
-    if re.fullmatch(r"(en-)?(reel(-evening)?|urgent(-[a-z0-9]+)?)", args[0] if args else ""):
+    # urgent-<метка> — второй срочный за дату; reel-evening — вечерняя сводка; weekly — недельный обзор 16:9 (дата = последний день недели); en-* — англоязычный канал
+    if re.fullmatch(r"(en-)?(reel(-evening)?|weekly|urgent(-[a-z0-9]+)?)", args[0] if args else ""):
         KIND, args = args[0], args[1:]
     if args:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):
