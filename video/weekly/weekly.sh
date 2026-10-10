@@ -42,8 +42,21 @@ for try in 1 2; do
   vlock python3 weekly/build_weekly.py compose --end-date "$DATE" || { r=$?
     if [ "$r" = 5 ] && [ "$try" = 1 ]; then echo "weekly: озвучка недоступна — повтор через ${WEEKLY_RETRY_WAIT:-600} с"; sleep "${WEEKLY_RETRY_WAIT:-600}"; WEEKLY_KEEP_PREP=1; continue; fi
     alert "🟠 НПЗ-карта: недельный обзор $DATE не собран (compose rc=$r)"; exit "$r"; }
+  # Место под кадры: ~1 МБ/кадр (7,9 ГБ на 330 с × 24 к/с); не хватает — снижаем частоту кадров (24 -> 20 -> 16), иначе стоп.
+  FPS="${HF_FPS:-24}"; FITS=0
+  TOTAL="$(python3 -c "import json;print(json.load(open('$BUILD/plan.json'))['total'])")"
+  FREE="$(df -Pm "$VIDEO/.build" | awk 'NR==2{print $4}')"
+  for f in $FPS 20 16; do
+    [ "$f" -le "$FPS" ] || continue
+    NEED="$(python3 -c "print(int($TOTAL*$f*1.05+800))")"
+    [ "$FREE" -ge "$NEED" ] && { FPS="$f"; FITS=1; break; }
+  done
+  [ "${FITS:-0}" = 1 ] || { echo "weekly: мало места ($FREE МБ) под кадры рендера"; alert "🟠 НПЗ-карта: недельный обзор $DATE: мало места на диске ($FREE МБ)"; exit 1; }
+  export HF_FPS="$FPS"     # английская версия рендерится с той же частотой
+  echo "weekly: рендер $FPS к/с, воркеров $HF_WORKERS, свободно $FREE МБ"
+  rm -f "$BUILD/silent.mp4"
   nice -n 19 ionice -c3 node_modules/.bin/hyperframes render "$BUILD" -o "$BUILD/silent.mp4" --quality "${HF_QUALITY:-looks}" \
-    --workers "$HF_WORKERS" --fps "${HF_FPS:-24}" --quiet || { echo "weekly: рендер упал"; alert "🟠 НПЗ-карта: рендер недельного обзора $DATE упал"; exit 1; }
+    --workers "$HF_WORKERS" --fps "$FPS" --quiet || { echo "weekly: рендер упал"; alert "🟠 НПЗ-карта: рендер недельного обзора $DATE упал"; exit 1; }
   vlock python3 build.py mix "$BUILD" "$BUILD/silent.mp4" "$OUT.tmp.mp4" && mv -f "$OUT.tmp.mp4" "$OUT" || exit 1
   python3 weekly/build_weekly.py thumb --end-date "$DATE" || true
   echo "[$(date -u +%FT%TZ)] ok $OUT ($(du -h "$OUT" | cut -f1), $(( $(date +%s) - t0 )) с)"
