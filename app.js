@@ -1001,7 +1001,30 @@
     }
     return p.join(" ");
   }
+  /* Удары по дата-центрам (ЦОД «Яндекса» и др.): серверная стойка в огне + подпись */
+  function isYandexDC(s) { return /яндекс|yandex/i.test((s.target || "") + " " + (s.title || "")); }
+  function isDataCenter(s) { return isYandexDC(s) || /дата-?центр|\bцод\b|data.?cent/i.test((s.target || "") + " " + (s.title || "")); }
+  function dataCenterMarker(s, hot) {
+    var label = isYandexDC(s) ? "ЯНДЕКС" : "ЦОД";
+    var w = 64, h = 52, k = hot ? 1.15 : 1;
+    var flameOuter = "M17 1 C22 7.5 27 12 26 19 C25 26 20 29 17 33 C14 29 9 26 8 19 C7 12 12 7.5 17 1 Z";
+    var flameMid = "M17 7.5 C20 12 23.5 15 22.5 20.5 C21.5 25 19 27 17 29.5 C15 27 12.5 25 11.5 20.5 C10.5 15 14 12 17 7.5 Z";
+    var flameCore = "M17 14 C18.6 17.2 20.2 18.8 19.6 21.6 C19 23.8 17.8 25 17 27 C16.2 25 15 23.8 14.4 21.6 C13.8 18.8 15.4 17.2 17 14 Z";
+    var rack = '<rect x="6" y="19" width="22" height="19" rx="2.5" fill="#1b2230" stroke="#fff" stroke-width="1.6"/>' +
+      [22.5, 28, 33.5].map(function (y) {
+        return '<rect x="8.5" y="' + y + '" width="17" height="3.4" rx="1" fill="#3b4558"/><circle cx="11.2" cy="' + (y + 1.7) + '" r="1" fill="#ff5a36"/><circle cx="14.4" cy="' + (y + 1.7) + '" r="1" fill="#ffd255"/>';
+      }).join("");
+    var html = '<div class="strike dc-strike ' + (hot ? "hot" : "") + '" style="width:' + w * k + 'px">' +
+      '<svg class="dc-flame" width="' + 34 * k + '" height="' + 40 * k + '" viewBox="0 0 34 40" style="margin:0 auto;display:block;overflow:visible">' +
+      rack +
+      '<g class="flame"><path d="' + flameOuter + '" fill="#d8170d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" transform="translate(0,-4)"/>' +
+      '<path d="' + flameMid + '" fill="#ff7019" transform="translate(0,-4)"/>' +
+      '<path d="' + flameCore + '" fill="#ffd255" transform="translate(0,-4)"/></g>' +
+      '</svg><div class="dc-label">' + label + '</div></div>';
+    return L.divIcon({ className: "", html: html, iconSize: [w * k, h * k], iconAnchor: [w * k / 2, 36 * k], popupAnchor: [0, -30 * k] });
+  }
   function strikeMarker(s, hot) {
+    if (isDataCenter(s)) return dataCenterMarker(s, hot);
     var missile = (s.type === "missile" || s.type === "both");
     var outer = missile ? "#a00a0a" : "#d8170d";  // ракета — тёмно-красный, БПЛА — красный
     var mid = missile ? "#e6451a" : "#ff7019";
@@ -1167,12 +1190,12 @@
     renderedStrikes = [];
     shown.forEach(function (s) {
       if (typeof s.lat !== "number" || typeof s.lon !== "number") return;
-      var id = s.id || (s.date + "|" + s.lat + "|" + s.lon + "|" + (s.time || ""));
+      var id = s.id || (s.date + "|" + s.lat + "|" + s.lon + "|" + (s.time || "") + "|" + (s.target || ""));
       shownIds[id] = 1;
       var cached = strikeMarkerCache[id];
       var fp = JSON.stringify(s);
       if (!cached) {
-        var m = L.marker([s.lat, s.lon], { icon: strikeMarker(s, hot), zIndexOffset: 600 }).bindPopup(strikePopup(s), POPUP_OPTS);
+        var m = L.marker([s.lat, s.lon], { icon: strikeMarker(s, hot), zIndexOffset: isDataCenter(s) ? 900 : 600 }).bindPopup(strikePopup(s), POPUP_OPTS);
         cached = strikeMarkerCache[id] = { marker: m, hot: hot, fp: fp };
       } else if (cached.fp !== fp) {
         cached.marker.setLatLng([s.lat, s.lon]).setIcon(strikeMarker(s, hot)).setPopupContent(strikePopup(s));
