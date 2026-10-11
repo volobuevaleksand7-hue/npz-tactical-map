@@ -109,6 +109,37 @@ def locate(s, refineries, all_strikes):
     return None
 
 
+def _multi_dates():
+    return sorted(x for x in os.environ.get("REEL_DATES", "").split(",") if x)
+
+
+def span_rus(date):
+    """Дата выпуска; для сюжета на несколько дат (REEL_DATES) — диапазон «8–9 октября 2026»."""
+    ds = _multi_dates()
+    if len(ds) > 1:
+        a, b = ds[0], ds[-1]
+        if a[:7] == b[:7]:
+            return f"{int(a[8:10])}–{G.rus_date(b)}"
+        return f"{G.rus_date_nodots(a)} – {G.rus_date(b)}"
+    return G.rus_date(date)
+
+
+def span_short(date):
+    """То же в коротком виде: 08–09.10.2026."""
+    ds = _multi_dates()
+    if len(ds) > 1:
+        a, b = ds[0], ds[-1]
+        if a[:7] == b[:7]:
+            return f"{a[8:10]}–{G.rus_date_short(b)}"
+        return f"{G.rus_date_short(a)[:5]} – {G.rus_date_short(b)}"
+    return G.rus_date_short(date)
+
+
+def strike_short(s, date):
+    """Дата самого удара для плашки (в многодатном сюжете у ударов разные даты)."""
+    return G.rus_date_short(str(s.get("date") or date)) if _multi_dates() else G.rus_date_short(date)
+
+
 def load_day(date):
     data = json.loads((ROOT / "data" / "strikes.json").read_text(encoding="utf-8"))
     arr = data.get("strikes", data) if isinstance(data, dict) else data
@@ -740,7 +771,7 @@ def compose(date, build: Path):
         c = str(s.get("city") or "").strip()
         if c and c not in cities and len(c) <= 16:
             cities.append(c)
-    date_rus = G.rus_date(date)
+    date_rus = span_rus(date)
     nar = dict(narration(date, sel_all, day, refs, build, broll))   # кэш реплик — по всем ударам
     signs = []
     for i, s in enumerate(sel):
@@ -749,7 +780,7 @@ def compose(date, build: Path):
         body = (body[:1].upper() + body[1:]) if body else what_happened(s)
         conf = "подтверждено" if str(s.get("confidence")).lower() == "confirmed" else "сообщается"
         signs.append(f'''<div class="sign" id="sg{i}"><div class="sg-in">
-          <div class="sg-row"><span class="sg-k k{s["cls"]}">{esc(kind_label(s).upper())}</span><span class="sg-d">{esc(G.rus_date_short(date))} · {conf}</span></div>
+          <div class="sg-row"><span class="sg-k k{s["cls"]}">{esc(kind_label(s).upper())}</span><span class="sg-d">{esc(strike_short(s, date))} · {conf}</span></div>
           <div class="sg-city">{esc(s.get("city") or s.get("region") or "")}</div>
           <div class="sg-obj">{esc(object_name(s, refs))}</div>
           <div class="sg-txt">{esc(body)}</div>
@@ -765,7 +796,7 @@ def compose(date, build: Path):
                       f'data-start="{seg["v0"]}" data-duration="{dur}" data-track-index="{10 + i}"></video></div>')
         what = "кадры" if seg["kind"] == "video" else "фото"
         caps.append(f'''<div class="lt" id="lt{i}">
-          <div class="lt-top"><i></i>{esc(s.get("city") or "")} · {esc(G.rus_date_short(date))}</div>
+          <div class="lt-top"><i></i>{esc(s.get("city") or "")} · {esc(strike_short(s, date))}</div>
           <div class="lt-obj">{esc(object_name(s, refs))}</div>
           <div class="lt-src">{what}: {esc(source_name(seg["src"]))} · место не подтверждено</div>
         </div>''')
@@ -776,7 +807,7 @@ def compose(date, build: Path):
         videos.append(f'<div class="fw" id="bw{j}"><video id="bv{j}" class="clip" src="assets/{esc(b["clip"])}" muted playsinline '
                       f'data-start="{b["v0"]}" data-duration="{dur}" data-track-index="{60 + j}"></video></div>')
         caps.append(f'''<div class="lt" id="bl{j}">
-          <div class="lt-top"><i></i>КАДРЫ ДНЯ · {esc(G.rus_date_short(date))}</div>
+          <div class="lt-top"><i></i>КАДРЫ ДНЯ · {esc(span_short(date))}</div>
           <div class="lt-obj">Хроника суток</div>
           <div class="lt-src">кадры: {esc(source_name(b["src"]))} · привязка к месту не подтверждена</div>
         </div>''')
@@ -788,7 +819,7 @@ def compose(date, build: Path):
             s = sel[seg["i"]]
             src = source_name(seg["src"]) if seg.get("dive") else source_name(s.get("source_url"))
             place = str(s.get("city") or s.get("region") or "").strip()
-            ctxs.append(f'<div class="cx" id="cx{seg["i"]}">{esc(place)} · {esc(G.rus_date_short(date))} · {esc(src)} · ОЦЕНКА</div>')
+            ctxs.append(f'<div class="cx" id="cx{seg["i"]}">{esc(place)} · {esc(strike_short(s, date))} · {esc(src)} · ОЦЕНКА</div>')
 
     marks = []
     for k, p in P.items():
@@ -844,7 +875,7 @@ def compose(date, build: Path):
         "POSTER_CITIES": esc(pcities),
         "POSTER_SUB": esc(f"{date_rus.upper()} · " + ("ОЦЕНКА ПО OSINT" if URGENT else
                                                        f"{n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')} ЗА СУТКИ")),
-        "IW": IW, "IH": IH, "DATE_RUS": esc(date_rus), "DATE_SHORT": esc(G.rus_date_short(date)),
+        "IW": IW, "IH": IH, "DATE_RUS": esc(date_rus), "DATE_SHORT": esc(span_short(date)),
         "CTXS": "\n".join(ctxs), "FINAL_PLATE": esc("Карта — ссылка в шапке канала") if CTX_ON else "",
         "SIGNS": "\n".join(signs), "VIDEOS": "\n".join(videos), "CAPS": "\n".join(caps),
         "N": n, "N_WORD": G.plural(n, "удар", "удара", "ударов"),
@@ -895,11 +926,11 @@ def describe(date, sel, day, refs, segs, clips, broll):
             head = "Удары по " + dative_object(names[0]) + " и " + dative_object(names[1])
     else:
         head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по РФ"
-    tail = f" · {'вечер ' if EVENING else ''}{G.rus_date_short(date)} #shorts"
+    tail = f" · {'вечер ' if EVENING else ''}{span_short(date)} #shorts"
     if len(head) + len(tail) > 100:
         head = head[:100 - len(tail) - 1].rstrip(" ,.;:—-") + "…"
     lines = [head + tail, "", f"Карта ударов: https://{SITE_HOST}/",
-             f"«Топливный фронт РФ»: удары за сутки на {G.rus_date(date)} на карте сайта.", ""]
+             f"«Топливный фронт РФ»: удары за сутки на {span_rus(date)} на карте сайта.", ""]
     for s in sel:
         lines.append(f"— {s.get('city')}: {object_name(s, refs)}. {what_happened(s)}")
     n_fuel = sum(1 for s in day if s["cls"] == 2)
@@ -940,8 +971,8 @@ def tg_caption(date, sel, day, refs, clips, broll):
     n = len(day)
     n_fuel = sum(1 for s in day if s["cls"] == 2)
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
-    out = ([f"⚡ <b>Срочно: удар {G.rus_date(date)}</b>", ""] if URGENT else
-           [f"🎬 <b>{'Вечерняя сводка' if EVENING else 'Удары за сутки'} на {G.rus_date(date)}</b>: {n}{tail}.", ""])
+    out = ([f"⚡ <b>Срочно: удар {span_rus(date)}</b>", ""] if URGENT else
+           [f"🎬 <b>{'Вечерняя сводка' if EVENING else 'Удары за сутки'} на {span_rus(date)}</b>: {n}{tail}.", ""])
     for s in sel:
         k = len(s.get("_group", [s]))
         out.append(f"• {html.escape(str(s.get('city') or s.get('region')), quote=False)} — "
