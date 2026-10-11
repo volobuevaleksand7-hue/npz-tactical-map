@@ -253,6 +253,10 @@ def strike_class_rank(s: dict) -> int:
     t = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
     if any(k in t for k in _PLANT_K):
         return 3
+    # ЦОД «Яндекса» — отдельный сюжет недели (08–11.10): подтверждённый/сообщённый удар — в лид
+    if ("яндекс" in t and any(k in t for k in ("дата-центр", "дата центр", "цод"))
+            and str(s.get("confidence", "")).lower() in ("confirmed", "reported")):
+        return 3
     if any(k in t for k in _DEPOT_K):
         return 2
     if any(k in t for k in _GRID_K):
