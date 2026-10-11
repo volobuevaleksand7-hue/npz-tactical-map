@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Ростовская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1791728208,
+      "source_text": "11.10.2026 17:16 МСК\nТарасовский район Ростовская область Фиксация БПЛА"
+    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -22,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1791727205,
-      "source_text": "11.10.2026 15:10 МСК\nЛДНР Херсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n11.10.2026 17:00 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ сохраняется ДНР"
+      "last_event_ts": 1791728164,
+      "source_text": "11.10.2026 15:10 МСК\nЛДНР Херсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n11.10.2026 17:16 МСК\nДонецк аэропорт и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     "Московская область": {
       "bpla": false,
@@ -155,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1791725244,
-      "source_text": "11.10.2026 15:10 МСК\nЛДНР Херсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n11.10.2026 16:27 МСК\nОсипенко и ближайшие Бердянский МО опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1791728222,
+      "source_text": "11.10.2026 15:10 МСК\nЛДНР Херсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n11.10.2026 17:17 МСК\nСветлодолинское и ближайшие опасность по БПЛА разведку Запорожская область РФ"
     },
     "Краснодарский край": {
       "bpla": false,
@@ -199,7 +218,7 @@
     "Севастополь": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -211,9 +230,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1791727428,
-      "source_text": "11.10.2026 17:03 МСК\nСевастополь Отбой опасность по БПЛА. Режим повышенного внимания сохраняется"
+      "fill": "#d8c06a",
+      "last_event_ts": 1791728080,
+      "source_text": "11.10.2026 17:14 МСК\nКача Бельбек Севастополь Опасность по БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -372,8 +391,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1791725127,
-      "source_text": "11.10.2026 16:25 МСК\nДонецк и близлежащие Опасность по БПЛА Киевский, Куйбышевский районы особенно аккуратно ДНР"
+      "last_event_ts": 1791728164,
+      "source_text": "11.10.2026 17:16 МСК\nДонецк аэропорт и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     {
       "key": "новоалексеевка|херсонская область",
@@ -596,6 +615,28 @@
       "source_text": "11.10.2026 14:45 МСК\nДебальцево - Красный Луч Тревога по БПЛА сохраняется В том числе на электротяге Особое внимание автотрассы ЛДНР"
     },
     {
+      "key": "кача|автономная республика крым",
+      "name": "Кача",
+      "lat": 44.772916,
+      "lon": 33.543659,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791728080,
+      "source_text": "11.10.2026 17:14 МСК\nКача Бельбек Севастополь Опасность по БПЛА"
+    },
+    {
       "key": "новогродовка|донецкая народная республика",
       "name": "Новогродовка",
       "lat": 48.20052,
@@ -669,8 +710,8 @@
       "region": "Севастополь",
       "bpla": false,
       "bplaDim": false,
-      "danger": false,
-      "attention": true,
+      "danger": true,
+      "attention": false,
       "uab": false,
       "uabDim": false,
       "fpv": false,
@@ -679,9 +720,9 @@
       "aviation": false,
       "pvo": false,
       "bplaLaunchAnim": false,
-      "fill": "#f0c4a0",
-      "last_event_ts": 1791727428,
-      "source_text": "11.10.2026 17:03 МСК\nСевастополь Отбой опасность по БПЛА. Режим повышенного внимания сохраняется"
+      "fill": "#ea580c",
+      "last_event_ts": 1791728080,
+      "source_text": "11.10.2026 17:14 МСК\nКача Бельбек Севастополь Опасность по БПЛА"
     },
     {
       "key": "скадовск|херсонская область",
@@ -1240,8 +1281,8 @@
       "region_ru": "Севастополь",
       "bpla": false,
       "bplaDim": false,
-      "danger": false,
-      "attention": true,
+      "danger": true,
+      "attention": false,
       "uab": false,
       "uabDim": false,
       "fpv": false,
@@ -1252,9 +1293,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#f0c4a0",
-      "last_event_ts": 1791727428,
-      "source_text": "11.10.2026 17:03 МСК\nСевастополь Отбой опасность по БПЛА. Режим повышенного внимания сохраняется"
+      "fill": "#ea580c",
+      "last_event_ts": 1791728080,
+      "source_text": "11.10.2026 17:14 МСК\nКача Бельбек Севастополь Опасность по БПЛА"
     },
     "RUS.23.16_1": {
       "gid_2": "RUS.23.16_1",
@@ -1520,6 +1561,28 @@
       "last_event_ts": 1791713180,
       "source_text": "11.10.2026 13:06 МСК\nКрасногвардейский район, Волоконовский район, Белгородский район, Валуйский район, Белгородская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
+    "RUS.58.47_1": {
+      "gid_2": "RUS.58.47_1",
+      "name_ru": "Тарасовский район",
+      "region_ru": "Ростовская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791728208,
+      "source_text": "11.10.2026 17:16 МСК\nТарасовский район Ростовская область Фиксация БПЛА"
+    },
     "RUS.23.27_1": {
       "gid_2": "RUS.23.27_1",
       "name_ru": "Жиздринский район",
@@ -1579,6 +1642,78 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 289792,
+      "text": "Валуйки\nБелгородская область\nОтбой ракетной опасности",
+      "ts": 1791728300,
+      "time_label": "11.10.2026 17:18 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 289791,
+      "text": "Светлодолинское и ближайшие опасность по БПЛА разведку\nЗапорожская область РФ",
+      "ts": 1791728222,
+      "time_label": "11.10.2026 17:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 98093,
+      "text": "Тарасовский район\nРостовская область\nФиксация БПЛА",
+      "ts": 1791728208,
+      "time_label": "11.10.2026 17:16 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 98092,
+      "text": "Ростовская область\nОпасность по БПЛА",
+      "ts": 1791728169,
+      "time_label": "11.10.2026 17:16 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 289790,
+      "text": "Донецк аэропорт и близлежащие\nОпасность по БПЛА Хорнет\nДНР",
+      "ts": 1791728164,
+      "time_label": "11.10.2026 17:16 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 289789,
+      "text": "Кача\nБельбек\nСевастополь\nОпасность по БПЛА",
+      "ts": 1791728080,
+      "time_label": "11.10.2026 17:14 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 289788,
+      "text": "Бельбек и близлежащие\nОпасность по БПЛА",
+      "ts": 1791728068,
+      "time_label": "11.10.2026 17:14 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 98091,
+      "text": "Ярославская область\nОпасность по МВШ",
+      "ts": 1791727993,
+      "time_label": "11.10.2026 17:13 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 289787,
+      "text": "Валуйки\nБелгородская область\nРакетная опасность",
+      "ts": 1791727914,
+      "time_label": "11.10.2026 17:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 289786,
       "text": "Валуйский МО опасность по БПЛА повторно\nБелгородская область",
@@ -2146,78 +2281,6 @@
       "time_label": "11.10.2026 13:32 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 98077,
-      "text": "Ростовская область\nОтбой опасности по БПЛА",
-      "ts": 1791714655,
-      "time_label": "11.10.2026 13:30 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 289733,
-      "text": "Еще пуски РСЗО в направлении Белая Березка\nБрянская область",
-      "ts": 1791714581,
-      "time_label": "11.10.2026 13:29 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 289732,
-      "text": "Белая Березка\nРСЗО\nБрянская область",
-      "ts": 1791714420,
-      "time_label": "11.10.2026 13:27 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 289731,
-      "text": "Брянская область\nОпасность по БПЛА сохраняется",
-      "ts": 1791713592,
-      "time_label": "11.10.2026 13:13 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 98076,
-      "text": "Знаменский район\nОрловская область\nФиксация БПЛА",
-      "ts": 1791713534,
-      "time_label": "11.10.2026 13:12 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 289730,
-      "text": "Трубчевск\nТрубчевский район\nБрянская область\nОпасность по БПЛА",
-      "ts": 1791713282,
-      "time_label": "11.10.2026 13:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 89526,
-      "text": "Красногвардейский район, Волоконовский район, Белгородский район, Валуйский район, Белгородская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1791713180,
-      "time_label": "11.10.2026 13:06 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 98075,
-      "text": "Хотынецкий район\nОрловская область\nФиксация БПЛА",
-      "ts": 1791713148,
-      "time_label": "11.10.2026 13:05 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 289729,
-      "text": "Каланчак и близлежащие\nХерсонская область РФ\nОпасность по БПЛА",
-      "ts": 1791713108,
-      "time_label": "11.10.2026 13:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2227,15 +2290,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791727527,
-  "last_event_at": "2026-10-11T14:05:27Z",
-  "fetched_at": "2026-10-11T14:10:03.252409Z",
+  "timestamp": 1791728300,
+  "last_event_at": "2026-10-11T14:18:20Z",
+  "fetched_at": "2026-10-11T14:20:04.167025Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-11T14:10:03.252409Z",
-    "source_age_seconds": 276,
-    "city_count": 36,
-    "region_count": 17,
+    "generated_at": "2026-10-11T14:20:04.167025Z",
+    "source_age_seconds": 104,
+    "city_count": 37,
+    "region_count": 18,
     "feed_count": 80
   }
 }
