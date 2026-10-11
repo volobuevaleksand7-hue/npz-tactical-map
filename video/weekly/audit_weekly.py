@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Аудит недельного обзора: python3 weekly/audit_weekly.py YYYY-MM-DD [weekly|en-weekly]
-Код 1 — жёсткий провал (не публиковать): длина вне 180–480 с, не 1920×1080, нет звука/тишина, главы не с 00:00,
-кадры очевидцев > трети длины или фрагмент > 5 с, нет дисклеймера ОЦЕНКА, кириллица в EN-описании."""
+Код 1 — жёсткий провал (не публиковать): длина вне 180–505 с, не 1920×1080, нет звука/тишина, главы не с 00:00,
+кадры очевидцев > трети длины или фрагмент > 5 с, нет дисклеймера ОЦЕНКА, кириллица в EN-описании.
+Удержание/подписка (12.10.2026), тоже жёстко: нет зацепки в первых 15 с (цифры + что узнает зритель), нет тизера концовки
+(«в конце — общий отчёт»), финальная плашка без сайта/канала/призыва подписаться, в описании нет подписки и utm-ссылок."""
 import json
 import re
 import subprocess
@@ -61,14 +63,63 @@ def loudness(mp4):
     return (float(m.group(1)) if m else None), (float(x.group(1)) if x else None)
 
 
+def retention_checks(date, kind, txt, hard, warn):
+    """Зацепка, тизер концовки, финальная плашка с ресурсами, подписка в описании."""
+    en = kind.startswith("en-")
+    b = VIDEO / ".build" / f"{kind}-{date}"
+    plan, page = b / "assets" / "plan.js", b / "index.html"
+    if plan.exists():
+        p = json.loads(plan.read_text(encoding="utf-8").split("=", 1)[1].strip().rstrip(";"))
+        subs = p["subs"]
+        early = [u for u in subs if u["t0"] < 15.0]
+        etxt = " ".join(u["text"] for u in early)
+        if not early or early[0]["t0"] > 2.5:
+            hard.append("зацепка: титры не начинаются в первые 2,5 с")
+        if not re.search(r"\d", etxt) or len(etxt) < 120:
+            hard.append("зацепка: в первых 15 с нет цифр недели и перечня, что узнает зритель")
+        tz = [u for u in subs if re.search(r"в конце|at the end", u["text"], re.I) and re.search(r"отч[её]т|report", u["text"], re.I)]
+        if not tz:
+            hard.append("нет тизера концовки («в конце — общий отчёт»)")
+        elif tz[0]["t0"] > 15.0:
+            hard.append(f"тизер концовки начинается на {tz[0]['t0']:.0f} с (>15)")
+        elif tz[0]["t1"] > 19.0:
+            warn.append(f"тизер концовки заканчивается на {tz[0]['t1']:.0f} с (желательно до ~17)")
+        mids = [u for u in subs if re.search(r"подписывайтесь|subscribe", u["text"], re.I)]
+        if len(mids) < 2:
+            warn.append("нет мягкого призыва подписаться в середине ролика (перебивка «mid»)")
+        cta = next((sg for sg in p["segs"] if sg["type"] == "cta"), None)
+        if not cta:
+            hard.append("нет финальной плашки (cta)")
+        elif cta["t1"] < p["total"] - 12:
+            hard.append("финальная плашка не в конце ролика")
+        last = [u for u in subs if u["t0"] >= (cta["t0"] if cta else p["total"] - 12)]
+        if not any(re.search(r"подписывайтесь|subscribe", u["text"], re.I) for u in last):
+            hard.append("в финале нет призыва подписаться (озвучка/титры)")
+        if not any(re.search(r"итогов|final report|as promised", u["text"], re.I) for u in subs):
+            warn.append("нет обратной отсылки на итоговый отчёт")
+    else:
+        warn.append("нет plan.js сборки — проверки зацепки/финала пропущены")
+    if page.exists():
+        st = screen_text(page.read_text(encoding="utf-8")[page.read_text(encoding="utf-8").find('id="s_cta"'):][:2500])
+        if "npz-tactical-map" not in st or not re.search(r"@npz_karta_online|t\.me", st) or not re.search(r"ПОДПИШ|SUBSCRIBE", st, re.I):
+            hard.append("финальная плашка: нет сайта, Telegram-канала или призыва подписаться")
+    if txt is not None:
+        head = "\n".join(txt.splitlines()[:12])
+        want = "youtube_en" if en else "youtube_ru"
+        if f"utm_source={want}" not in head or "utm_medium=video_desc" not in head:
+            hard.append(f"в первых строках описания нет ссылки с utm_source={want}&utm_medium=video_desc")
+        if not re.search(r"Подписывайтесь|Subscribe", head):
+            hard.append("в первых строках описания нет призыва подписаться")
+
+
 def audit(date, kind):
     hard, warn = [], []
     mp4, txt = VIDEO / "out" / f"{kind}-{date}.mp4", VIDEO / "out" / f"{kind}-{date}.txt"
     if not mp4.exists():
         return [f"нет {mp4}"], []
     dur, w, h, audio = probe(mp4)
-    if not 180 <= dur <= 480:
-        hard.append(f"длительность {dur:.0f} с вне 180–480")
+    if not 180 <= dur <= 505:
+        hard.append(f"длительность {dur:.0f} с вне 180–505")
     if (w, h) != (1920, 1080):
         hard.append(f"разрешение {w}×{h}, нужно 1920×1080")
     if not audio:
@@ -92,6 +143,7 @@ def audit(date, kind):
             hard.append("нет дисклеймера ОЦЕНКА/ESTIMATE")
         if kind.startswith("en-") and re.search(r"[А-Яа-яЁё]", t):
             hard.append("кириллица в EN-описании")
+    retention_checks(date, kind, txt.read_text(encoding="utf-8") if txt.exists() else None, hard, warn)
     for h in dict.fromkeys(casualty_hits(date, kind)):
         hard.append(f"упоминание погибших/раненых (запрещено) — {h}")
     plan = VIDEO / ".build" / f"{kind}-{date}" / "assets" / "plan.js"
