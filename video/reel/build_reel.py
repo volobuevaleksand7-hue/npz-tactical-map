@@ -117,6 +117,8 @@ def load_day(date):
     day = []
     if URGENT or os.environ.get("REEL_WINDOW", "1") == "0":
         dates, seen = {date}, set()
+        if os.environ.get("REEL_DATES"):   # сюжет на несколько дат (удары по одному объекту, 08–11.10): REEL_DATES=d1,d2
+            dates = {x for x in os.environ["REEL_DATES"].split(",") if x}
     else:
         import datetime as _dt
         prev = (_dt.date.fromisoformat(date) - _dt.timedelta(days=1)).isoformat()
