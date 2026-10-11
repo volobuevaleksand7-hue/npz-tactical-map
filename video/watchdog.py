@@ -89,6 +89,9 @@ def judge(kind, day, now_min, start_hm, dead_hm, seg_start, seg):
     if "уже залит" in text:
         return None, "уже залит"
     if "аудит не пройден дважды" in text:
+        # тихая ночь: обзор короткий и отбракован, но тот же daily.sh выпустил срочный ролик
+        if any(OUT.glob(f"urgent*-{day}.uploaded")):
+            return None, "обзор отбракован (тихо), за день вышел срочный ролик"
         fails = [l for l in seg if "audit FAIL" in l][:4]
         return "audit-failed", "\n".join(fails) or "аудит не пройден дважды"
     m = re.search(r"не собран \(rc=(\d+)\)", text)
@@ -183,7 +186,7 @@ def run(now, dry):
         reason, detail = judge(kind, day, now_min, start_hm, dead_hm, seg_start, seg)
         iid = f"video-{kind}-{day}"
         if reason is None:
-            if detail in ("залит",):
+            if detail == "залит" or detail.startswith("обзор отбракован (тихо)"):
                 closed.add(iid)
             continue
         want[iid] = incident_block(iid, reason, kind, day, detail)
