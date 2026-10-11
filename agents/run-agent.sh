@@ -76,6 +76,7 @@ RUN_START_TS="$(date +%s)"
 AGENT_OUT=""
 case "$LABEL" in
   strikes|strikes-*|newswatch) AGENT_OUT="data/strikes-inbox.json" ;;
+  world-events) AGENT_OUT="data/world/events-queue.json" ;;
 esac
 
 # Hard cap the agent run so a hung CLI can't block the cron slot forever.
