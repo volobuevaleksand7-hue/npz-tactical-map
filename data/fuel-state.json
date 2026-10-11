@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-11T04:06Z",
+    "generated_at": "2026-10-11T04:15Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:npz-status"
+    "updated_by": "agent:fuel-market"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -930,9 +930,23 @@
       "restriction": "На 8 октября: сеть N-1 установила жёсткий лимит 30 л на бензин (АИ-92, АИ-95). Дефицит коснулся всех топлив. Волна повторных ударов 6-7 октября затронула логистику региона; Антипинский НПЗ остановлен с 28 июля.",
       "since": "2026-10-06",
       "source_url": "https://www.kyivpost.com/amp/post/61700"
+    },
+    {
+      "region": "Краснодарский край",
+      "lat": 45.07,
+      "lon": 38.93,
+      "level": "medium",
+      "restriction": "На 10 октября: в Анапе на 17 АЗС действуют лимиты отпуска в бак (АИ-92/АИ-95 — 30–40 л, ДТ — 40–60 л); в Краснодаре топливо продают на 86 АЗС. Локальные ограничения, массовых закрытий АЗС не зафиксировано.",
+      "since": "2026-10-10",
+      "source_url": "https://news.ru/regions/situaciya-s-toplivom-na-kubani-10-oktyabrya-anapa-gelendzhik-krasnodar-gde-kupit"
     }
   ],
   "events": [
+    {
+      "date": "2026-10-10",
+      "text": "Краснодарский край: на 10 октября в Анапе на 17 АЗС действуют лимиты отпуска топлива в бак, в Краснодаре продажу ведут 86 АЗС. Ограничения носят локальный характер.",
+      "source_url": "https://news.ru/regions/situaciya-s-toplivom-na-kubani-10-oktyabrya-anapa-gelendzhik-krasnodar-gde-kupit"
+    },
     {
       "date": "2026-10-10",
       "text": "Экспорт: запрет на вывоз дизельного топлива для производителей продлён до 31 октября 2026 (постановление № 1252 от 29.09.2026, действует с 30.09.2026). Для остальных экспортёров запрет — до 31 января 2027. Бензин: полный запрет экспорта до 31 января 2027.",
@@ -977,11 +991,6 @@
       "date": "2026-10-06",
       "text": "Массированная атака БПЛА на Московский регион в ночь 5-6 октября. ЛПДС Володарская (крупнейшая нефтебаза Москвы) получила прямые попадания. Атака включала более 650 БПЛА, из них более 100 направлены на Москву. Московский НПЗ (Капотня) поражен.",
       "source_url": "https://fontanka.ru/2026/10/06/76680684"
-    },
-    {
-      "date": "2026-10-06",
-      "text": "Удар по Рязанскому НПЗ (Рязань): В результате массированной атаки беспилотников зафиксированы возгорания на территории завода. Повреждены основные установки первичной переработки и резервуарный парк.",
-      "source_url": "https://news.liga.net/war/news/v-rossii-iz-za-ataki-bespilotnikov-gorit-krupneishaya-neftebaza-podmoskovya-video"
     }
   ]
 }
