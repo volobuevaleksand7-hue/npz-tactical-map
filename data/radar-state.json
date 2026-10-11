@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1791722447,
-      "source_text": "11.10.2026 15:10 МСК\nЛДНР Херсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n11.10.2026 15:40 МСК\nКарло, Енакиево, Ждановка и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1791724392,
+      "source_text": "11.10.2026 15:10 МСК\nЛДНР Херсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n11.10.2026 16:13 МСК\nНовогродовка и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     "Московская область": {
       "bpla": false,
@@ -218,7 +218,7 @@
     "Севастополь": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -230,9 +230,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1791711154,
-      "source_text": "11.10.2026 12:32 МСК\nСевер Крыма Отбой опасности по БПЛА Режим повышенного внимания сохраняется"
+      "fill": "#d8c06a",
+      "last_event_ts": 1791724573,
+      "source_text": "11.10.2026 16:16 МСК\nСевастополь и близлежащие опасность по БПЛА с моря"
     },
     "Херсонская область": {
       "bpla": false,
@@ -615,6 +615,28 @@
       "source_text": "11.10.2026 14:45 МСК\nДебальцево - Красный Луч Тревога по БПЛА сохраняется В том числе на электротяге Особое внимание автотрассы ЛДНР"
     },
     {
+      "key": "новогродовка|донецкая народная республика",
+      "name": "Новогродовка",
+      "lat": 48.20052,
+      "lon": 37.33883,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791724392,
+      "source_text": "11.10.2026 16:13 МСК\nНовогродовка и близлежащие Опасность по БПЛА Хорнет ДНР"
+    },
+    {
       "key": "енакиево|донецкая народная республика",
       "name": "Енакиево",
       "lat": 48.23857,
@@ -657,6 +679,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1791713108,
       "source_text": "11.10.2026 13:05 МСК\nКаланчак и близлежащие Херсонская область РФ Опасность по БПЛА"
+    },
+    {
+      "key": "севастополь|севастополь",
+      "name": "Севастополь",
+      "lat": 44.60795,
+      "lon": 33.52134,
+      "region": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791724573,
+      "source_text": "11.10.2026 16:16 МСК\nСевастополь и близлежащие опасность по БПЛА с моря"
     },
     {
       "key": "скадовск|херсонская область",
@@ -1187,6 +1231,28 @@
       "last_event_ts": 1791715067,
       "source_text": "11.10.2026 13:37 МСК\nАдлер Сочи и близлежащие Отбой опасность по БПЛА и Бэк Режим повышенного внимания сохраняется Краснодарский край"
     },
+    "UKR.20.1_1": {
+      "gid_2": "UKR.20.1_1",
+      "name_ru": "Севастополь",
+      "region_ru": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791724573,
+      "source_text": "11.10.2026 16:16 МСК\nСевастополь и близлежащие опасность по БПЛА с моря"
+    },
     "RUS.23.16_1": {
       "gid_2": "RUS.23.16_1",
       "name_ru": "Малоярославецкий район",
@@ -1532,6 +1598,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 289773,
+      "text": "Севастополь и близлежащие опасность по БПЛА с моря",
+      "ts": 1791724573,
+      "time_label": "11.10.2026 16:16 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 289772,
+      "text": "Новогродовка и близлежащие\nОпасность по БПЛА Хорнет\nДНР",
+      "ts": 1791724392,
+      "time_label": "11.10.2026 16:13 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 289771,
       "text": "Новая Таволжанка\nШебекинский район\nУдарный БПЛА в направлении",
@@ -2155,22 +2237,6 @@
       "time_label": "11.10.2026 12:27 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 289717,
-      "text": "Дорога в  направление Токмак Бердянск район Зеленовка ударный БПЛА курсом юго-восток\nЗапорожская область РФ",
-      "ts": 1791710752,
-      "time_label": "11.10.2026 12:25 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 289716,
-      "text": "Ивановка фиксации БПЛА Направление на Малониколаевку вдоль трассы\nЛНР",
-      "ts": 1791710193,
-      "time_label": "11.10.2026 12:16 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2180,14 +2246,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791723946,
-  "last_event_at": "2026-10-11T13:05:46Z",
-  "fetched_at": "2026-10-11T13:10:03.426430Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1791724573,
+  "last_event_at": "2026-10-11T13:16:13Z",
+  "fetched_at": "2026-10-11T13:20:03.857041Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-11T13:10:03.426430Z",
-    "source_age_seconds": 257,
-    "city_count": 33,
+    "generated_at": "2026-10-11T13:20:03.857041Z",
+    "source_age_seconds": 230,
+    "city_count": 35,
     "region_count": 18,
     "feed_count": 80
   }
