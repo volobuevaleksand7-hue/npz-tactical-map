@@ -26,7 +26,8 @@ import en_pass as E                  # noqa: E402
 import build_weekly as W             # noqa: E402
 import safety as SF                  # noqa: E402
 
-SITE = "https://npz-tactical-map.vercel.app/?utm_source=youtube_en&utm_medium=weekly"
+SITE = "https://npz-tactical-map.vercel.app/?utm_source=youtube_en&utm_medium=video_desc"
+TG_URL = "https://t.me/npz_karta_online"   # канал русскоязычный; бота для читателей нет (31.07.2026 CTA переведены на канал)
 MON_EN = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 PROMPT = """THIS IS AN EXECUTION TASK. Do not ask anything, output only the JSON.
@@ -48,6 +49,13 @@ Input JSON:
 - Never mention people killed, wounded or injured, casualties or victims, even if the Russian text hints at it:
   state only the strike, the facility and damage to infrastructure. Keep neutral source notes such as
   "Crimea, according to open sources" as given.
+- Retention structure (keep it in the translation): the "hook" line must keep BOTH the list of what the viewer will
+  see and the teaser that the final report comes "At the end" (use the words "At the end" and "report");
+  the "mid" line and the "cta" line are soft, non-pushy subscription asks ("subscribe to follow the data"):
+  keep them calm, no hype, no exclamation marks. "Итоговый отчёт, как обещали" -> "The final report, as promised".
+  ПОДПИШИТЕСЬ · СЛЕДИТЕ ЗА ДАННЫМИ -> SUBSCRIBE · FOLLOW THE DATA; ТОПЛИВНЫЙ -> FUEL FRONT.
+  "Подписывайтесь на канал — кнопка под роликом" -> "Subscribe to the channel: button under the video";
+  "В КОНЦЕ — ОБЩИЙ ОТЧЁТ: ВЫБИТАЯ МОЩНОСТЬ" -> "AT THE END: FULL REPORT ON OFFLINE CAPACITY".
 - "voice": spoken lines keyed by id. Translate into natural spoken English, same meaning and facts, no
   abbreviations, max ~1.3x the length of the Russian line. Dates as "October 4th". "миллиона тонн" -> "million tonnes".
 - "chapters": short YouTube chapter names (translate, same order).
@@ -112,7 +120,8 @@ def main():
     shutil.rmtree(dst, ignore_errors=True)
     shutil.copytree(src, dst, ignore=shutil.ignore_patterns("silent.mp4", "*.tmp.mp4"))
     page = (dst / "index.html").read_text(encoding="utf-8")
-    page = re.sub(r'<div class="cta-tg">.*?</div>', "", page, flags=re.S)     # Telegram-канал русскоязычный
+    page = re.sub(r'<div class="cta-tg">.*?</div>', '<div class="cta-tg">Telegram (in Russian): <span>@npz_karta_online</span></div>',
+                  page, flags=re.S)     # канал русскоязычный — помечаем
     plan = json.loads((dst / "plan.json").read_text(encoding="utf-8"))
     texts = json.loads((dst / "texts.json").read_text(encoding="utf-8"))
     ob = json.loads((dst / "objects.json").read_text(encoding="utf-8"))
@@ -125,11 +134,15 @@ def main():
     rng = en_range(ob["dates"])
     title = f"Strikes on Russian Refineries This Week, {rng}: Recap, Map, Balance"[:100]
     n, m = ob["N"], ob["M"]
+    off = (f"about {int(round(ob['bal']['pct']))}% of refining capacity is offline" if ob.get("bal") else "how much capacity is offline")
     lines = [title, "",
              f"Weekly recap, {rng}: {n} strike{'s' if n != 1 else ''} across Russia" + (f", {m} of them on refineries and energy." if m else ".")
-             + " Open-source (OSINT) assessment of fuel infrastructure hits, capacities and refinery status.", "", "Chapters:"]
+             + " In this video: the key strikes, which refineries are knocked out, how much capacity is unavailable, and the state of gasoline, diesel and regional shortages."
+             + f" At the end, the full report: {off}, and what is being done.",
+             "Subscribe to follow the data, the map and updates are refreshed daily:",
+             f"Strike map (Russian-language site): {SITE}", f"Telegram channel (in Russian): {TG_URL}", "", "Chapters:"]
     lines += [f"{W.mmss(c[0])} {name.strip()}" for c, name in zip(chapters, tr["chapters"])]
-    lines += ["", f"Strike map (all events, Russian-language site): {SITE}", "", "Objects covered:"]
+    lines += ["", "Objects covered:"]
     lines += [re.sub(r"^[-–—]*\s*", "— ", str(s).strip()) for s in tr["summary"]]
     if ob.get("bal"):
         b = ob["bal"]

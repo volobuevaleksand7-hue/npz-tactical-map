@@ -35,10 +35,10 @@ B, G, N = R.B, R.G, R.N
 R.VOICE_RATE = os.environ.get("WEEKLY_RATE", "+12%")   # обзор длиннее рилса: темп спокойнее
 esc = R.esc
 SITE = R.SITE_HOST
-MAP_URL = f"https://{SITE}/?utm_source=youtube&utm_medium=weekly"
+MAP_URL = f"https://{SITE}/?utm_source=youtube_ru&utm_medium=video_desc"   # описание под роликом (12.10.2026: подписка)
 
 MAX_PER_DAY = int(os.environ.get("WEEKLY_PER_DAY", "5"))
-MAX_TOTAL = float(os.environ.get("WEEKLY_MAX_SEC", "470"))
+MAX_TOTAL = float(os.environ.get("WEEKLY_MAX_SEC", "490"))
 MIN_TOTAL = 180.0
 CLIP_SHARE = 0.33          # кадры очевидцев — не больше трети ролика (по правилам канала)
 CLIP_CAP = 4.5             # один фрагмент — не дольше 5 с
@@ -263,6 +263,16 @@ def mt_words(x):        # 20.1 -> «20,1 миллиона», 12 -> «12 милл
     return f"{n} {plural(n, 'миллион', 'миллиона', 'миллионов')}"
 
 
+def hook_text(dates, n, m, pct):
+    """Зацепка первых ~15 с: что узнает зритель (реальные числа недели) + тизер концовки."""
+    t = f"За неделю: {n} {plural(n, 'удар', 'удара', 'ударов')} по России"       # даты — на карточке хука
+    t += (f", {m} из них — по НПЗ и энергетике." if m else ".")
+    t += " Покажу ключевые удары, выбитые заводы и что с бензином, дизелем и дефицитом."
+    t += (f" В конце — общий отчёт: выбито около {int(round(pct))} процентов мощностей и что делается." if pct is not None
+          else " В конце — общий отчёт: сколько мощности выбито и что делается.")
+    return t
+
+
 def stop_voice(s, refs, line):
     """Реплика Haiku/шаблон + факты из fuel-state — числа и статус всегда скриптом."""
     line = line.rstrip(".")
@@ -369,10 +379,11 @@ def compose(end, build):
     (build / "voice").mkdir(exist_ok=True)
     nb = fuel.get("national_balance", {})
     per = narr_lines(stops, refs, build)
+    cap_total, cap_off = nb.get("refining_capacity_total_mt_year"), nb.get("capacity_offline_mt_year")
+    pct, gl, dl = nb.get("capacity_offline_pct"), nb.get("gasoline_output_loss_pct"), nb.get("diesel_output_loss_pct")
+    have_bal = all(isinstance(x, (int, float)) for x in (cap_total, cap_off, pct))
     texts = {}
-    hook = f"{range_voice(dates)}: {n_all} {plural(n_all, 'удар', 'удара', 'ударов')} по России"
-    hook += (f", из них {m_all} — по НПЗ и энергетике" if m_all else "") + ". По данным открытых источников."
-    texts["hook"] = hook
+    texts["hook"] = hook_text(dates, n_all, m_all, pct if have_bal else None)
     for di, d in enumerate(dates):
         pd = info["per_day"][d]
         if not pd["n"]:
@@ -380,13 +391,16 @@ def compose(end, build):
         dd, mm, _ = dmy(d)
         t = f"{R.ORD[dd].capitalize()} {R.MONTHS[mm]}, {WD[dt.date.fromisoformat(d).weekday()]}. {pd['n']} {plural(pd['n'], 'удар', 'удара', 'ударов')}"
         texts[f"d{di}"] = t + (f", из них {pd['m']} — по топливу и энергетике." if pd["m"] else ".")
+    days_n = [(d, info["per_day"][d]) for d in dates if info["per_day"][d]["n"]]
+    if len(days_n) >= 3:      # перебивка удержания №1: тизер самого тяжёлого дня (по числу ударов по топливу, затем всех)
+        hd = max(days_n, key=lambda x: (x[1]["m"], x[1]["n"]))[0]
+        texts[f"d{dates.index(hd)}"] = "Дальше — самый тяжёлый день недели. Не переключайтесь. " + texts[f"d{dates.index(hd)}"]
+    texts["mid"] = ("Что это значит для бензина и цен — в итоговом отчёте в конце. "
+                    "Хотите следить за данными — подписывайтесь.")
     for i, s in enumerate(stops):
         texts[f"s{i}"] = stop_voice(s, refs, per[s["_sid"]])
-    cap_total, cap_off = nb.get("refining_capacity_total_mt_year"), nb.get("capacity_offline_mt_year")
-    pct, gl, dl = nb.get("capacity_offline_pct"), nb.get("gasoline_output_loss_pct"), nb.get("diesel_output_loss_pct")
-    have_bal = all(isinstance(x, (int, float)) for x in (cap_total, cap_off, pct))
     if have_bal:
-        t = (f"Баланс переработки по оценке карты. Из {num_ru(float(cap_total))} миллионов тонн годовых мощностей "
+        t = (f"Итоговый отчёт, как обещали, по оценке карты. Из {num_ru(float(cap_total))} миллионов тонн годовых мощностей "
              f"остановлено {num_ru(float(cap_off))}, это {int(round(pct))} процентов.")
         if isinstance(gl, (int, float)) and isinstance(dl, (int, float)):
             t += f" Выпуск бензина ниже на {int(round(gl))} процентов, дизеля — на {int(round(dl))}."
@@ -398,7 +412,8 @@ def compose(end, build):
         names = [r["name"] for r in changed[:5]]
         texts["tab"] = ("Заводы, у которых за неделю изменился статус на карте: " + ", ".join(names[:-1]) +
                         (" и " if len(names) > 1 else "") + names[-1] + ".")
-    texts["cta"] = "Полная карта всех ударов — по ссылке в описании. Это оценка по открытым источникам, а не официальные данные."
+    texts["cta"] = ("Подписывайтесь, чтобы следить за данными: карта ударов на сайте и Telegram-канал — ссылки на экране и в описании. "
+                    "Это оценка по открытым источникам, а не официальные данные.")
     (build / "texts.json").write_text(json.dumps(texts, ensure_ascii=False, indent=1), encoding="utf-8")
     leak = [k for k, t in texts.items() if SF.has_casualty(t)]
     if leak:
@@ -423,6 +438,9 @@ def compose(end, build):
         subs += sub_chunks(texts["hook"], 0.4, vo["hook"][1])
         sfx += [("impact", 0.05)]
         T = hook_end
+        mid_i = None
+        if "mid" in vo and len(keep) >= 5:
+            mid_i = keep[int(len(keep) * 0.55)]       # перебивка удержания №2 + мягкий призыв: после ~55% остановок
         chapters = [(0.0, "Итог недели")]
         pos = ov
         marks_day = {}
@@ -456,6 +474,11 @@ def compose(end, build):
                     v0 = arrive + 1.7
                     v1 = v0 + min(c["dur"], CLIP_CAP)
                 t1 = max(vend + 0.5, (v1 + 0.4) if v1 else 0, arrive + 3.0)
+                if i == mid_i:
+                    ms = max(vend, v1 or 0) + 0.35
+                    voice.append({"file": vo["mid"][0], "t": round(ms, 2)})
+                    subs += sub_chunks(texts["mid"], ms, vo["mid"][1])
+                    t1 = max(t1, ms + vo["mid"][1] + 0.5)
                 segs.append({"type": "stop", "id": f"st{i}", "t0": round(t0, 2), "t1": round(t1, 2), "arrive": round(arrive, 2),
                              "m": mj, "pill": f"dp{di}", "di": di})
                 arrive_to(arrive, tgt, 0.3)
@@ -469,7 +492,7 @@ def compose(end, build):
                 marks_day[mj] = di
                 T = t1
         # итоговые слайды
-        for k, title in (("bal", "Баланс переработки"), ("tab", "Статусы заводов"), ("cta", "Полная карта")):
+        for k, title in (("bal", "Итоговый отчёт: баланс переработки"), ("tab", "Статусы заводов"), ("cta", "Подписка и ссылки")):
             if k not in vo:
                 continue
             dur = max(7.0 if k != "cta" else 7.5, vo[k][1] + 1.2)
@@ -545,7 +568,8 @@ def compose(end, build):
     cards = [f'<div class="card glass" id="c_hook"><div class="gk">НЕДЕЛЯ {esc(range_label(dates).upper())}</div>'
              f'<div class="hbig">{n_all}</div><div class="hw">{plural(n_all, "удар", "удара", "ударов")} по России</div>'
              + (f'<div class="hrow"><b>{m_all}</b><span>по НПЗ и энергетике</span></div>' if m_all else "")
-             + '<div class="hdt">ОЦЕНКА ПО ОТКРЫТЫМ ИСТОЧНИКАМ</div></div>']
+             + '<div class="hdt">ОЦЕНКА ПО ОТКРЫТЫМ ИСТОЧНИКАМ</div>'
+             '<div class="hdt tz">В КОНЦЕ — ОБЩИЙ ОТЧЁТ: ВЫБИТАЯ МОЩНОСТЬ</div></div>']
     for di, d in enumerate(dates):
         if f"d{di}" not in vo:
             continue
@@ -587,10 +611,11 @@ def compose(end, build):
         slides.append('<div class="slide" id="s_tab"><div class="sl-k">СТАТУСЫ ЗАВОДОВ ЗА НЕДЕЛЮ · ОЦЕНКА КАРТЫ</div>'
                       '<table class="tab"><thead><tr><th>ЗАВОД</th><th>РЕГИОН</th><th>МОЩНОСТЬ, МЛН Т/ГОД</th><th>СТАТУС</th><th>С</th></tr></thead>'
                       f'<tbody>{rows}</tbody></table></div>')
-    slides.append('<div class="slide" id="s_cta"><div class="sl-k">ПОЛНАЯ КАРТА</div>'
-                  '<div class="cta-big">Все удары, заводы и баланс — на карте</div>'
+    slides.append('<div class="slide" id="s_cta"><div class="sl-k">ПОДПИШИТЕСЬ · СЛЕДИТЕ ЗА ДАННЫМИ</div>'
+                  '<div class="cta-big">Карта ударов и баланс — каждый день</div>'
                   f'<div class="cta-url">{SITE}</div><div class="cta-tg">Telegram: <span>{R.TG_HANDLE}</span></div>'
-                  '<div class="cta-w">Ссылка — в описании. <b>ОЦЕНКА:</b> агрегация открытых источников (OSINT), не официальные данные. '
+                  '<div class="cta-sub">Подписывайтесь на канал — кнопка под роликом</div>'
+                  '<div class="cta-w">Ссылки — в описании. <b>ОЦЕНКА:</b> агрегация открытых источников (OSINT), не официальные данные. '
                   'Слухи в обзор не включены.</div></div>')
     pills = "".join(f'<div class="dp" id="dp{di}">{WD_SHORT[dt.date.fromisoformat(d).weekday()]} · {dmy(d)[0]} {MON_SHORT[dmy(d)[1]]}</div>'
                     for di, d in enumerate(dates))
@@ -634,16 +659,20 @@ def describe(end, info, sel, chapters, src, changed, nb, have_bal):
     n, m = info["N"], info["M"]
     title = f"Удары по НПЗ России за неделю {rng}: итоги, карта, баланс"
     lines = [title, "",
-             f"Итоги недели {rng}: {n} {plural(n, 'удар', 'удара', 'ударов')} по России" + (f", из них {m} — по НПЗ и энергетике." if m else ".")
-             + " Обзор по открытым источникам (OSINT): объекты, мощности и статусы заводов на карте сайта.", "",
+             f"Неделя {rng}: {n} {plural(n, 'удар', 'удара', 'ударов')} по России" + (f", из них {m} — по НПЗ и энергетике." if m else ".")
+             + " В ролике: ключевые удары, какие заводы выбиты, какая мощность недоступна, что с бензином, дизелем и дефицитом по регионам."
+             + (f" В конце — общий отчёт: выбито около {int(round(nb['capacity_offline_pct']))}% мощностей и что делается." if have_bal
+                else " В конце — общий отчёт: сколько мощности выбито и что делается."),
+             "Подписывайтесь, чтобы следить за данными — карта и канал обновляются каждый день:",
+             f"Карта ударов: {MAP_URL}", f"Telegram-канал: {B.TG_URL}", "",
              "Главы:"]
     lines += [f"{mmss(t)} {name}" for t, name in chapters]
-    lines += ["", f"Полная карта: {MAP_URL}", "Сводки по дням:"]
+    lines += ["", "Сводки по дням:"]
     for d in dates:
         if info["per_day"][d]["n"]:
             dd, mm, _ = dmy(d)
             lines.append(f"▸ {dd} {R.MONTHS[mm]}: https://{SITE}/news/{d}.html")
-    lines += [f"Telegram-канал: {B.TG_URL}", "", "Объекты обзора:"]
+    lines += ["", "Объекты обзора:"]
     for s in sel:
         lines.append(f"— {s.get('city')}: {R.object_name(s, info['refs'])}. {clean_what(s, info['refs'])}")
     if have_bal:
