@@ -206,6 +206,7 @@ def object_name(s, refs):
     t = re.sub(r"\s*\((?:линейная[^)]*)\)", "", t, flags=re.I)  # «ЛПДС (линейная …) «Самара»» -> «ЛПДС «Самара»»
     t = re.split(r",|;|\s+[—–]\s+", t)[0].strip()
     t = re.sub(r"нефтеперерабатывающий завод", "НПЗ", t, flags=re.I)
+    t = re.sub(r"\s*\([^)]*\)?\s*$", "", t)   # хвостовое пояснение «(ЦОД с суперкомпьютерами)» — в названии лишнее
     t = t[:1].upper() + t[1:]
     return t if len(t) <= 46 else t[:44].rstrip() + "…"
 
@@ -241,6 +242,9 @@ def dative_object(name):
     """«Волгоградский НПЗ» -> «Волгоградскому НПЗ»; «Энергетическая подстанция» -> «Энергетической подстанции»;
     «ЛПДС «Самара»» -> без изменений."""
     w = name.split(" ")
+    if w[0].lower() == "дата-центр":          # «Дата-центр «Яндекса»» -> «Дата-центру «Яндекса»»
+        w[0] = w[0] + "у"
+        return " ".join(w)
     if len(w) > 1 and w[0] in BRANDS:   # «Газпром нефтехим Салават» не склоняем («по Газпрому нефтехим» — криво)
         return name
     if w[0].endswith(("ая", "яя")):          # женский род: прилагательное + существительное на -ия/-ция/-а
@@ -309,7 +313,8 @@ def poster_head(sel, day, refs):
     lead = sel[0] if sel and (sel[0]["cls"] == 2 or URGENT) else None
     n = len(day)
     if lead:
-        return "УДАР ПО " + dative_object(object_name(lead, refs)).upper()
+        same = len(sel) > 1 and len({object_name(s, refs) for s in sel}) == 1
+        return ("УДАРЫ ПО " if same else "УДАР ПО ") + dative_object(object_name(lead, refs)).upper()
     return f"{n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')} ПО РФ"
 
 
@@ -922,7 +927,9 @@ def describe(date, sel, day, refs, segs, clips, broll):
     if fuel:
         names = [object_name(s, refs) for s in fuel]
         head = "Удар по " + dative_object(names[0])
-        if len(names) > 1:
+        if len(names) > 1 and len(set(names)) == 1:   # один и тот же объект в разных городах: «Удары по Дата-центру «Яндекса»: Сасово, Калуга»
+            head = "Удары по " + dative_object(names[0]) + ": " + ", ".join(str(s.get("city")) for s in fuel if s.get("city"))
+        elif len(names) > 1:
             head = "Удары по " + dative_object(names[0]) + " и " + dative_object(names[1])
     else:
         head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по РФ"
@@ -934,8 +941,8 @@ def describe(date, sel, day, refs, segs, clips, broll):
     for s in sel:
         lines.append(f"— {s.get('city')}: {object_name(s, refs)}. {what_happened(s)}")
     n_fuel = sum(1 for s in day if s["cls"] == 2)
-    lines += ["", f"Всего за сутки: {n} {G.plural(n, 'удар', 'удара', 'ударов')}, из них {n_fuel} — по НПЗ, "
-              f"нефтепроводам и энергетике."]
+    lines += ["", f"Всего за сутки: {n} {G.plural(n, 'удар', 'удара', 'ударов')}" + (
+              f", из них {n_fuel} — по НПЗ, нефтепроводам и энергетике." if n_fuel else ".")]
     src = [c["src"] for c in list(clips) + list(broll) if c]
     if src:
         lines += ["", "Кадры: открытые Telegram-каналы:"] + [f"— {u}" for u in src]
