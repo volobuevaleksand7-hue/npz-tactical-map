@@ -1,0 +1,535 @@
+{
+ "generated_at": "2026-10-11T09:30:00Z",
+ "methodology_version": "0.1-demo",
+ "demo": true,
+ "world": {
+  "value": 53,
+  "level": "crisis",
+  "delta_1d": 2,
+  "coverage": 0.7
+ },
+ "regions": {
+  "europe": {
+   "name": "Европа",
+   "value": 56,
+   "level": "crisis",
+   "delta_1d": -1,
+   "coverage": 0.8,
+   "components": [
+    {
+     "id": "chokepoints",
+     "label": "Узкие места",
+     "score": 62,
+     "weight": 0.25,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "prices",
+     "label": "Цены",
+     "score": 58,
+     "weight": 0.15,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "diesel_crack",
+     "label": "Крэк дизеля",
+     "score": 71,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "retail",
+     "label": "Розница",
+     "score": 47,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "stocks",
+     "label": "Запасы",
+     "score": 40,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "shortage_news",
+     "label": "Новости о дефиците",
+     "score": 35,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "georisk",
+     "label": "Геориск",
+     "score": 55,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    }
+   ]
+  },
+  "russia_cis": {
+   "name": "Россия / СНГ",
+   "value": 63,
+   "level": "crisis",
+   "delta_1d": 0,
+   "coverage": 0.8,
+   "components": [
+    {
+     "id": "chokepoints",
+     "label": "Узкие места",
+     "score": 55,
+     "weight": 0.25,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "prices",
+     "label": "Цены",
+     "score": 66,
+     "weight": 0.15,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "diesel_crack",
+     "label": "Крэк дизеля",
+     "score": 74,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "retail",
+     "label": "Розница",
+     "score": 60,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "stocks",
+     "label": "Запасы",
+     "score": 52,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "shortage_news",
+     "label": "Новости о дефиците",
+     "score": 70,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "georisk",
+     "label": "Геориск",
+     "score": 88,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    }
+   ]
+  },
+  "middle_east": {
+   "name": "Ближний Восток",
+   "value": 75,
+   "level": "critical",
+   "delta_1d": 4,
+   "coverage": 0.8,
+   "components": [
+    {
+     "id": "chokepoints",
+     "label": "Узкие места",
+     "score": 92,
+     "weight": 0.25,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "prices",
+     "label": "Цены",
+     "score": 70,
+     "weight": 0.15,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "diesel_crack",
+     "label": "Крэк дизеля",
+     "score": 66,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "retail",
+     "label": "Розница",
+     "score": 58,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "stocks",
+     "label": "Запасы",
+     "score": 61,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "shortage_news",
+     "label": "Новости о дефиците",
+     "score": 64,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "georisk",
+     "label": "Геориск",
+     "score": 90,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    }
+   ]
+  },
+  "east_asia": {
+   "name": "Восточная Азия",
+   "value": 39,
+   "level": "tense",
+   "delta_1d": 0,
+   "coverage": 0.8,
+   "components": [
+    {
+     "id": "chokepoints",
+     "label": "Узкие места",
+     "score": 38,
+     "weight": 0.25,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "prices",
+     "label": "Цены",
+     "score": 49,
+     "weight": 0.15,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "diesel_crack",
+     "label": "Крэк дизеля",
+     "score": 44,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "retail",
+     "label": "Розница",
+     "score": 36,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "stocks",
+     "label": "Запасы",
+     "score": 30,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "shortage_news",
+     "label": "Новости о дефиците",
+     "score": 28,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "georisk",
+     "label": "Геориск",
+     "score": 41,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    }
+   ]
+  },
+  "south_asia": {
+   "name": "Южная Азия",
+   "value": 64,
+   "level": "crisis",
+   "delta_1d": 0,
+   "coverage": 0.8,
+   "components": [
+    {
+     "id": "chokepoints",
+     "label": "Узкие места",
+     "score": 72,
+     "weight": 0.25,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "prices",
+     "label": "Цены",
+     "score": 63,
+     "weight": 0.15,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "diesel_crack",
+     "label": "Крэк дизеля",
+     "score": 58,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "retail",
+     "label": "Розница",
+     "score": 55,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "stocks",
+     "label": "Запасы",
+     "score": 66,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "shortage_news",
+     "label": "Новости о дефиците",
+     "score": 71,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "georisk",
+     "label": "Геориск",
+     "score": 44,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    }
+   ]
+  },
+  "north_america": {
+   "name": "Северная Америка",
+   "value": 22,
+   "level": "calm",
+   "delta_1d": 0,
+   "coverage": 0.55,
+   "components": [
+    {
+     "id": "prices",
+     "label": "Цены",
+     "score": 24,
+     "weight": 0.15,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "diesel_crack",
+     "label": "Крэк дизеля",
+     "score": 27,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "retail",
+     "label": "Розница",
+     "score": 20,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "stocks",
+     "label": "Запасы",
+     "score": 22,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "shortage_news",
+     "label": "Новости о дефиците",
+     "score": 10,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "georisk",
+     "label": "Геориск",
+     "score": 18,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    }
+   ]
+  },
+  "latin_america": {
+   "name": "Латинская Америка",
+   "value": null,
+   "level": null,
+   "delta_1d": 0,
+   "coverage": 0.3,
+   "components": [
+    {
+     "id": "prices",
+     "label": "Цены",
+     "score": 30,
+     "weight": 0.15,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "retail",
+     "label": "Розница",
+     "score": 33,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "georisk",
+     "label": "Геориск",
+     "score": 20,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    }
+   ]
+  },
+  "africa": {
+   "name": "Африка",
+   "value": 50,
+   "level": "crisis",
+   "delta_1d": 0,
+   "coverage": 0.7,
+   "components": [
+    {
+     "id": "chokepoints",
+     "label": "Узкие места",
+     "score": 50,
+     "weight": 0.25,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "prices",
+     "label": "Цены",
+     "score": 52,
+     "weight": 0.15,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "retail",
+     "label": "Розница",
+     "score": 45,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "stocks",
+     "label": "Запасы",
+     "score": 48,
+     "weight": 0.1,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "shortage_news",
+     "label": "Новости о дефиците",
+     "score": 62,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    },
+    {
+     "id": "georisk",
+     "label": "Геориск",
+     "score": 40,
+     "weight": 0.05,
+     "raw": "демо",
+     "as_of": "2026-10-11",
+     "source": "ДЕМО"
+    }
+   ]
+  }
+ }
+}
