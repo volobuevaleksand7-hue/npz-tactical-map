@@ -64,6 +64,19 @@
       ]
     },
     {
+      "source": "/lab/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=120, stale-while-revalidate=600"
+        }
+      ]
+    },
+    {
       "source": "/api/radar-state",
       "headers": [
         {

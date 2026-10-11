@@ -77,10 +77,10 @@ def cutoff(years):
 
 
 # ---------------------------------------------------------------- источники
-def fred(sid):
+def fred(sid, years=5.2):
     def run():
         # cosd обязателен: запрос полной истории FRED часто виснет (проверено 2026-10-11)
-        txt = get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd={cutoff(5.2)}", timeout=30, retries=3).decode()
+        txt = get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd={cutoff(years)}", timeout=30, retries=3).decode()
         rows = list(csv.reader(io.StringIO(txt)))[1:]
         out = []
         for r in rows:
@@ -320,9 +320,10 @@ def gdelt(region):
 
 
 # --------------------------------------------------------------- реестр
-def spec(id_, label, unit, source, url, license_, freq, fn, keep_years, stale_days, agg=None, note=None):
+def spec(id_, label, unit, source, url, license_, freq, fn, keep_years, stale_days, agg=None, note=None,
+         compact=False):
     return dict(id=id_, label=label, unit=unit, source=source, url=url, license=license_, freq=freq,
-                fn=fn, keep_years=keep_years, stale_days=stale_days, agg=agg, note=note)
+                fn=fn, keep_years=keep_years, stale_days=stale_days, agg=agg, note=note, compact=compact)
 
 
 def build_registry():
@@ -335,7 +336,7 @@ def build_registry():
         ("DGASNYH", "gasoline_nyh", "Бензин NYH", "USD/гал."),
     ]:
         R.append(spec(i, label, unit, "FRED / EIA", fred_url + sid, "Public domain (U.S. Gov / EIA)",
-                      "daily", fred(sid), 5, 6))
+                      "daily", fred(sid, 10.2), 10.2, 6, compact=True))
     R.append(spec("diesel_retail_us", "Дизель, розница США", "USD/гал.", "FRED / EIA",
                   fred_url + "GASDESW", "Public domain (U.S. Gov / EIA)", "weekly", fred("GASDESW"), 5, 15))
     R.append(spec("us_crude_stocks", "Запасы сырой нефти США (без SPR)", "млн барр.", "EIA API v2",
@@ -379,6 +380,21 @@ def merge_history(old, new, keep_years):
     d.update({k: v for k, v in new})
     c = cutoff(keep_years)
     return [[k, d[k]] for k in sorted(d) if k >= c]
+
+
+def compact_weekly(hist, keep_daily_years=1.0):
+    """Точки старше keep_daily_years -> недельные средние (метка = понедельник ISO-недели). Свежее — как есть."""
+    c = cutoff(keep_daily_years)
+    old, recent, weeks = [], [], {}
+    for d, v in hist:
+        if d >= c:
+            recent.append([d, v])
+        else:
+            day = dt.date.fromisoformat(d)
+            weeks.setdefault(iso(day - dt.timedelta(days=day.weekday())), []).append(v)
+    for k in sorted(weeks):
+        old.append([k, round(sum(weeks[k]) / len(weeks[k]), 4)])
+    return old + recent
 
 
 def is_stale(as_of, stale_days):
@@ -429,7 +445,11 @@ def main():
         try:
             fn = sp["fn"]
             pts = fn() if sid != "gpr_daily" else fn()
-            hist = merge_history(old.get("history"), pts, sp["keep_years"])
+            if sp.get("compact"):  # старое хранится недельными средними; полная история приходит из источника
+                old_recent = [p for p in old.get("history", []) if p[0] >= cutoff(1.0)]
+                hist = compact_weekly(merge_history(old_recent, pts, sp["keep_years"]))
+            else:
+                hist = merge_history(old.get("history"), pts, sp["keep_years"])
             if not hist:
                 raise RuntimeError("пустой ряд после слияния")
             v, as_of = last_value(sp, hist)

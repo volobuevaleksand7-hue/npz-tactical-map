@@ -6,7 +6,7 @@
   --offline — явная отметка «только пересчёт из series.json». Скрипт и так ничего не качает
   (сбор — agents/world/collect.py), флаг оставлен для единообразия вызова.
 
-Методика v0.1 (docs/world-lab-spec.md): пропущенный компонент НЕ перераспределяет вес:
+Методика v0.2 (docs/world-lab-spec.md): пропущенный компонент НЕ перераспределяет вес:
 value = Σ(score·w) / Σ(w доступных); coverage = Σ(w доступных); coverage < 0.5 -> value = null.
 Устаревший (stale) или ошибочный без значения ряд выпадает из компонента.
 """
@@ -23,8 +23,12 @@ D = os.path.join(ROOT, "data", "world")
 SERIES = os.path.join(D, "series.json")
 OUT = os.path.join(D, "index.json")
 HIST = os.path.join(D, "index-history.json")
-VERSION = "0.1"
+VERSION = "0.2"
+BRAND = {"short": "FFI", "ru": "Индекс топливного фронта", "en": "Fuel Front Index"}
+PRICE_YEARS = 10
 MIN_COVERAGE = 0.5
+CHOKE_FULL_DROP = 0.8
+CHOKE_FULL_RISE = 0.5
 
 REGIONS = {  # id: (название, вес в мировом индексе ~ доля потребления нефти)
     "north_america": ("Северная Америка", 0.24),
@@ -36,8 +40,10 @@ REGIONS = {  # id: (название, вес в мировом индексе ~ 
     "russia_cis": ("Россия и СНГ", 0.04),
     "africa": ("Африка", 0.04),
 }
-WEIGHTS = {"chokepoints": 0.25, "phys_premium": 0.20, "prices": 0.15, "diesel_crack": 0.10,
-           "retail": 0.10, "stocks": 0.10, "shortage_news": 0.05, "georisk": 0.05}
+# v0.2: упор на региональные компоненты; общие для всех регионов (prices, diesel_crack, georisk) — 20% вместо 30%.
+WEIGHTS = {"chokepoints": 0.30, "shortage_news": 0.15, "retail": 0.15, "stocks": 0.15, "prices": 0.10,
+           "diesel_crack": 0.05, "georisk": 0.05, "phys_premium": 0.05}
+assert abs(sum(WEIGHTS.values()) - 1.0) < 1e-9
 LABELS = {"chokepoints": "Узкие места (проливы)", "phys_premium": "Физическая премия",
           "prices": "Цены нефти и дизеля", "diesel_crack": "Дизельный крэк-спред",
           "retail": "Розничные цены на дизель", "stocks": "Запасы",
@@ -84,6 +90,22 @@ def pct_low(cur, vals):
     return 100.0 * sum(1 for v in vals if v < cur) / len(vals)
 
 
+def pct_hist(cur, hist, years=PRICE_YEARS):
+    """Процентиль к истории за years лет. Точки старше года — недельные средние (collect.py compact_weekly),
+    поэтому весят ×5, чтобы недельная и дневная часть вносили вклад пропорционально календарному времени."""
+    c1 = (TODAY - dt.timedelta(days=365)).isoformat()
+    pts = [(d, v) for d, v in window(hist, years)]
+    tot = less = eq = 0.0
+    for d, v in pts:
+        w = 1.0 if d >= c1 else 5.0
+        tot += w
+        if v < cur:
+            less += w
+        elif v == cur:
+            eq += w
+    return 100.0 * (less + 0.5 * eq) / tot if tot else None
+
+
 def window(hist, years):
     c = (TODAY - dt.timedelta(days=int(365.25 * years))).isoformat()
     return [[d, v] for d, v in hist if d >= c]
@@ -127,11 +149,12 @@ def choke_score(s, invert):
     if len(m) < 60:
         return None
     cur = m[-1][1]
-    # «падение» = 1 − ma7/медиана; для Мыса Доброй Надежды знак обратный (рост = обход)
-    sign = -1.0 if invert else 1.0
-    delta_series = [sign * (1.0 - v / med) for _, v in m]
-    cur_d = delta_series[-1]
-    sc = pct_mid(cur_d, delta_series)
+    # v0.2: линейная шкала, не процентиль. Отклонение трафика от медианы года: «падение» = 1 − ma7/медиана
+    # (для Мыса Доброй Надежды знак обратный: рост = обход). 0% -> 0 баллов; падение на CHOKE_FULL_DROP (80%) и
+    # глубже -> 100 (0 танкеров = 100); для Мыса рост на CHOKE_FULL_RISE (50%) -> 100. Нормальные колебания ±10% дают <13.
+    dev = (cur / med - 1.0) if invert else (1.0 - cur / med)
+    full = CHOKE_FULL_RISE if invert else CHOKE_FULL_DROP
+    sc = 100.0 * max(0.0, min(1.0, dev / full))
     return sc, cur, med, s["as_of"]
 
 
@@ -150,23 +173,22 @@ def compute_common(S):
     for sid, nm, unit in (("brent_spot", "Brent", "$/барр."), ("ulsd_nyh", "ULSD NYH", "$/гал.")):
         s = live(S, sid)
         if s:
-            h3 = [v for _, v in window(s["history"], 3)]
-            p = pct_mid(s["value"], h3)
+            p = pct_hist(s["value"], s["history"])
             if p is not None:
                 ps.append(p); raws.append(f"{nm} {fmt(s['value'], 2)} {unit} (p{p:.0f})")
                 aos.append(s["as_of"]); srcs.append(s["source"])
     if ps:
-        C["prices"] = (sum(ps) / len(ps), "; ".join(raws) + ", процентиль к 3 годам", aos, srcs)
+        C["prices"] = (sum(ps) / len(ps), "; ".join(raws) + ", процентиль к 10 годам", aos, srcs)
     # crack
     b, u = live(S, "brent_spot"), live(S, "ulsd_nyh")
     if b and u:
         bm = dict(b["history"])
         cr = [[d, v * 42.0 - bm[d]] for d, v in u["history"] if d in bm]
-        cr3 = window(cr, 3)
+        cr3 = window(cr, PRICE_YEARS)
         if len(cr3) > 100:
             cur = cr3[-1][1]
-            p = pct_mid(cur, [v for _, v in cr3])
-            C["diesel_crack"] = (p, f"ULSD×42 − Brent = {fmt(cur)} $/барр. (p{p:.0f} к 3 годам)", [cr3[-1][0]],
+            p = pct_hist(cur, cr3)
+            C["diesel_crack"] = (p, f"ULSD×42 − Brent = {fmt(cur)} $/барр. (p{p:.0f} к 10 годам)", [cr3[-1][0]],
                                  ["FRED / EIA"])
     # georisk
     g = live(S, "gpr_daily")
@@ -230,12 +252,12 @@ def build_region(S, C, region):
     items = [(cid, C[("choke", cid)]) for cid, (ru, regs, inv) in CHOKE.items()
              if region in regs and ("choke", cid) in C]
     if items:
-        sc = sum(x[1][0] for x in items) / len(items)
+        sc = max(x[1][0] for x in items)  # v0.2: берём худший пролив региона, а не среднее
         comps.append(comp("chokepoints", sc, "; ".join(x[1][1] for x in items), [x[1][2] for x in items],
                           [x[1][3] for x in items]))
     else:
         comps.append(absent("chokepoints", "нет контролируемых проливов в регионе или нет свежих данных"))
-    comps.append(absent("phys_premium", "бесплатного ряда физической премии (фьючерс/спред) в v0.1 нет — компонент не подменяется"))
+    comps.append(absent("phys_premium", "бесплатного ряда физической премии (фьючерс/спред) в v0.2 нет — компонент не подменяется"))
 
     def add(cid, r, why):
         if r:
@@ -300,7 +322,7 @@ def main():
              "regions_missing": [r for r in REGIONS if r not in av]}
 
     doc = {"generated_at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-           "methodology_version": VERSION, "world": world, "regions": regions}
+           "methodology_version": VERSION, "brand": BRAND, "world": world, "regions": regions}
 
     entry = {"date": today, "world": wv, "regions": {r: regions[r]["value"] for r in REGIONS}}
     hist = [h for h in hist if h["date"] != today] + [entry]
