@@ -31,6 +31,15 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
+## [OPEN] video-reel-2026-10-12
+status: OPEN
+opened: 2026-10-12 09:50 МСК — video-watchdog
+reel за 2026-10-12: audit-failed. audit FAIL: длительность 21.0 с вне 30–60
+audit FAIL: длительность 21.45 с вне 30–60
+Что сделать:
+- прочитай в video.log блок «audit» за 2026-10-12: если мало ударов (тихая ночь) — решить, нужен ли ролик
+- иначе чини причину (озвучка/клипы/длительность) и перезапусти `REEL_KIND=reel ./reel/daily.sh 2026-10-12` в tmux
+
 ## [RESOLVED] video-reel-2026-10-11
 status: RESOLVED
 opened: 2026-10-11 10:11 МСК — video-watchdog
