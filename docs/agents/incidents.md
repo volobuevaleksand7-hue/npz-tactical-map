@@ -31,8 +31,8 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
-## [OPEN] video-reel-evening-2026-10-12
-status: OPEN
+## [RESOLVED] video-reel-evening-2026-10-12
+status: RESOLVED
 opened: 2026-10-12 19:50 МСК — video-watchdog
 reel-evening за 2026-10-12: audit-failed. audit FAIL: длительность 21.45 с вне 30–60
 audit FAIL: длительность 19.77 с вне 30–60
@@ -40,8 +40,9 @@ audit FAIL: длительность 19.77 с вне 30–60
 - прочитай в video.log блок «audit» за 2026-10-12: если мало ударов (тихая ночь) — решить, нужен ли ролик
 - иначе чини причину (озвучка/клипы/длительность) и перезапусти `REEL_KIND=reel-evening ./reel/daily.sh 2026-10-12` в tmux
 
-## [OPEN] video-reel-2026-10-12
-status: OPEN
+resolved: 2026-10-12 20:15 МСК — проблема исчезла (авто, сторож)
+## [RESOLVED] video-reel-2026-10-12
+status: RESOLVED
 opened: 2026-10-12 09:50 МСК — video-watchdog
 reel за 2026-10-12: audit-failed. audit FAIL: длительность 21.0 с вне 30–60
 audit FAIL: длительность 21.45 с вне 30–60
@@ -49,6 +50,7 @@ audit FAIL: длительность 21.45 с вне 30–60
 - прочитай в video.log блок «audit» за 2026-10-12: если мало ударов (тихая ночь) — решить, нужен ли ролик
 - иначе чини причину (озвучка/клипы/длительность) и перезапусти `REEL_KIND=reel ./reel/daily.sh 2026-10-12` в tmux
 
+resolved: 2026-10-12 20:15 МСК — проблема исчезла (авто, сторож)
 ## [RESOLVED] video-reel-2026-10-11
 status: RESOLVED
 opened: 2026-10-11 10:11 МСК — video-watchdog
