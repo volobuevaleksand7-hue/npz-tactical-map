@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-11T16:52:09Z",
+    "generated_at": "2026-10-12T04:52:04Z",
     "updated_by": "agent:grid-status",
     "data_mode": "OSINT / ESTIMATE",
     "confidence": "Состояние подстанций, ТЭС и регионов с отключениями — по открытым источникам (региональные СМИ, заявления Россетей, тг-каналы губернаторов, заявления МАГАТЭ, Ukrenergo). Не official.",
@@ -126,6 +126,18 @@
       "damage": "Удар по крупной электроподстанции в поселке Нижнегорский",
       "source_url": "https://www.svoboda.org/amp/v-krymu-posle-ataki-bpla-chastj-naselennyh-punktov-ostalasj-bez-sveta/33867760.html",
       "confidence": "reported"
+    },
+    {
+      "id": "orel_znamensky_substation_1",
+      "name": "Электроподстанция в Знаменском районе Орловской области",
+      "operator": "не уточнён",
+      "lat": 52.9651,
+      "lon": 36.0785,
+      "status": "damaged",
+      "status_since": "2026-10-10",
+      "damage": "Повреждена при атаке БПЛА 10 октября; часть домов в районе осталась без электроснабжения, идут работы. Точное расположение не уточнено, координаты — по Орлу.",
+      "source_url": "https://vz.ru/news/2026/10/10/1461292.html",
+      "confidence": "confirmed"
     }
   ],
   "blackout_regions": [
@@ -172,6 +184,17 @@
       "since": "2025-10-18",
       "source_url": "https://news.liga.net/en/amp/politics/news/drones-hit-veshkayma-substation-in-russia-ukraine-says-russians-lost-the-facility-video",
       "note": "Четыре дрона попали в подстанцию, два взрыва. Объект полностью выведен из строя по информации украинской стороны."
+    },
+    {
+      "region": "Владимирская область",
+      "lat": 56.129,
+      "lon": 40.4066,
+      "scope": "partial",
+      "affected_population": 5000,
+      "cause": "Атака БПЛА на инфраструктуру в пригороде Владимира, отключение двух подстанций",
+      "since": "2026-10-11",
+      "source_url": "https://runews24.ru/incidents/11/10/2026/vo-vladimirskoj-oblasti-posle-ataki-bespilotnikov-evakuirovali-zhitelej-i-otklyuchilis-dve-podstanczii",
+      "note": "Подстанции питали около 5 тыс. жителей. Жители пригорода эвакуированы. К утру электроснабжение восстановлено на 80%, тепло- и водоснабжение — полностью."
     },
     {
       "region": "Крым",
@@ -252,6 +275,20 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-11",
+      "region": "Владимирская область",
+      "text": "После атаки БПЛА в пригороде Владимира отключились две подстанции, без электроснабжения оказались около 5 тыс. жителей; жители пригорода эвакуированы. К утру электроснабжение восстановлено на 80%, тепло- и водоснабжение — полностью.",
+      "source_url": "https://runews24.ru/incidents/11/10/2026/vo-vladimirskoj-oblasti-posle-ataki-bespilotnikov-evakuirovali-zhitelej-i-otklyuchilis-dve-podstanczii",
+      "confidence": "confirmed"
+    },
+    {
+      "date": "2026-10-10",
+      "region": "Орловская область",
+      "text": "В Знаменском районе после атаки БПЛА повреждена электроподстанция; часть домов в районе осталась без электроснабжения, идут работы по восстановлению.",
+      "source_url": "https://vz.ru/news/2026/10/10/1461292.html",
+      "confidence": "confirmed"
+    },
     {
       "date": "2026-10-08",
       "region": "Республика Крым",
