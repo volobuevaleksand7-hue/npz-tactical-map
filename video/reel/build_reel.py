@@ -921,16 +921,26 @@ def compose(date, build: Path):
                       "footage": [c and c["src"] for c in clips], "broll": [b["src"] for b in broll]}, ensure_ascii=False))
 
 
+GENERIC_HEADS = ("дата-центр", "промышленн", "инфраструктурн", "жил", "предприят", "нефтебаз", "подстанц",
+                 "аэропорт", "склад", "завод", "объект", "энергетическ", "железнодорожн", "административн")
+
+
+def in_title(name):
+    """В заголовке после «по» нарицательное — со строчной («по дата-центру «Яндекса»»), имя собственное
+    («Волгоградскому НПЗ») — как есть. 13.10.2026: вышло «по Дата-центру … и Промышленному объекту»."""
+    return name[:1].lower() + name[1:] if name.lower().startswith(GENERIC_HEADS) else name
+
+
 def describe(date, sel, day, refs, segs, clips, broll):
     n = len(day)
     fuel = [s for s in sel if s["cls"] == 2 or URGENT]
     if fuel:
         names = [object_name(s, refs) for s in fuel]
-        head = "Удар по " + dative_object(names[0])
+        head = "Удар по " + in_title(dative_object(names[0]))
         if len(names) > 1 and len(set(names)) == 1:   # один и тот же объект в разных городах: «Удары по Дата-центру «Яндекса»: Сасово, Калуга»
-            head = "Удары по " + dative_object(names[0]) + ": " + ", ".join(str(s.get("city")) for s in fuel if s.get("city"))
+            head = "Удары по " + in_title(dative_object(names[0])) + ": " + ", ".join(str(s.get("city")) for s in fuel if s.get("city"))
         elif len(names) > 1:
-            head = "Удары по " + dative_object(names[0]) + " и " + dative_object(names[1])
+            head = "Удары по " + in_title(dative_object(names[0])) + " и " + in_title(dative_object(names[1]))
     else:
         head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по РФ"
     tail = f" · {'вечер ' if EVENING else ''}{span_short(date)} #shorts"
