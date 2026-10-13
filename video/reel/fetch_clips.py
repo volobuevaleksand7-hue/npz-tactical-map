@@ -691,9 +691,18 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
             if raw:
                 try:
                     w, h, dur = probe(raw)
-                    s = min(seg, dur - 0.2)
-                    to_vertical(raw, best_window(raw, dur, s), s, final)
-                    res = {"file": final.name, "kind": "video", "src": src, "dur": round(s, 2), "orig": f"{w}x{h}"}
+                    # 13.10.2026: со страницы статьи yt-dlp берёт ЛЮБОЕ встроенное видео — vz.ru отдал
+                    # студийный эфир с ведущим, и он ушёл в ролик про Невинномысск. Как и Telegram-видео,
+                    # только через модель со зрением: удара не видно — клип не берём.
+                    what = f"{strike.get('target') or ''}, {strike.get('city') or ''}"
+                    pick = pick_window([(raw, dur, ({"url": src}, w, h))], seg, what, d)
+                    if pick:
+                        raw, st, s, _ = pick
+                        to_vertical(raw, st, s, final)
+                        res = {"file": final.name, "kind": "video", "src": src, "start": st, "dur": round(s, 2),
+                               "orig": f"{w}x{h}"}
+                    else:
+                        log(f"видео со страницы {src} — удара не видно, не берём")
                 except Exception as e:  # noqa: BLE001
                     log(f"yt-dlp-файл не годится: {e}")
     if not res:   # YouTube-хроника (Ukraine365 и др.) — раньше фото: живые кадры лучше статики
