@@ -155,11 +155,17 @@ def load_day(date):
         import datetime as _dt
         prev = (_dt.date.fromisoformat(date) - _dt.timedelta(days=1)).isoformat()
         dates, seen = {date, prev}, shown_ids()
+    # Дата+время суток+город тоже: та же атака из второго источника приходит с новым id (Шебекино 13.10 — дважды).
+    def _key(r):
+        return str(r.get("date", ""))[:10], str(r.get("time", "")).strip().lower(), str(r.get("city", "")).strip().lower()
+    seen_city = {_key(r) for r in arr if strike_id(r) in seen}
     for raw in arr:
         if str(raw.get("date", ""))[:10] not in dates:
             continue
         sid = strike_id(raw)
         if (ONLY and sid not in ONLY) or sid in seen:
+            continue
+        if _key(raw) in seen_city:
             continue
         s = G.normalize_strike(raw)
         s["_sid"] = sid
