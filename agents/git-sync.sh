@@ -204,6 +204,14 @@ if [ "${ALLOW_FRONTEND_RELEASE:-}" != "1" ]; then
       git checkout -- "$_f" 2>/dev/null || true
     done
   fi
+  # 13.10.2026: то же для ЛЮБОЙ страницы, где build-nav поменял только ?v= (дрейф хэша после
+  # правки styles.css/app.js на Mac): 97 таких html сутки клинили pull --rebase всех агентов.
+  # Сбрасываем только если в диффе нет ничего, кроме строк со штампом ?v= — контент не трогаем.
+  for _f in $(git diff --name-only -- '*.html' 2>/dev/null); do
+    if [ -z "$(git diff -U0 -- "$_f" | grep -E '^[-+][^-+]' | grep -v '?v=')" ]; then
+      git checkout -- "$_f" 2>/dev/null && echo "git-sync: сброшен дрейф ?v в $_f (чинится бампом на Mac)" >&2
+    fi
+  done
 fi
 
 # Nothing staged-worthy? still commit (heartbeat + stamp change every run).
