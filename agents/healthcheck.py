@@ -10,7 +10,8 @@
   stale_dead  — данные просрочены и heartbeat просрочен/отсутствует (агент мёртв)
   unknown     — generated_at не найден
 """
-import json, os, datetime, subprocess
+import json
+import re, os, datetime, subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -356,9 +357,40 @@ def bump_hwm(hwm, now_sizes):
     return out
 
 
+# 13.10.2026: 12–13.10 флот сутки стоял на «You've hit your weekly limit», а health.json
+# писал healthy — агенты выходили с rc=0 и heartbeat'ы стучали. Признак «LLM упёрся в
+# лимит» — хвост свежего лога агента (последний прогон) содержит текст лимита.
+LIMIT_RX = re.compile(r"hit your [^\n]{0,20}limit|usage limit|limit reached", re.I)
+
+
+def llm_limit_hits(now, fresh_h=6, tail_bytes=4096):
+    logs = os.path.join(ROOT, "agents", "logs")
+    hits = []
+    try:
+        names = os.listdir(logs)
+    except OSError:
+        return hits
+    for n in sorted(names):
+        f = os.path.join(logs, n)
+        if not n.endswith(".log") or not os.path.isfile(f):
+            continue
+        try:
+            if now.timestamp() - os.path.getmtime(f) > fresh_h * 3600:
+                continue
+            with open(f, "rb") as fh:
+                fh.seek(max(0, os.path.getsize(f) - tail_bytes))
+                tail = fh.read().decode("utf-8", "replace")
+        except OSError:
+            continue
+        if LIMIT_RX.search(tail):
+            hits.append(n[:-4])
+    return hits
+
+
 def main():
     now = datetime.datetime.now(datetime.timezone.utc)
     unpushed, publish_lag_h, publish_stuck = publish_status(now)
+    limit_hits = llm_limit_hits(now)
     heartbeats = load_heartbeats()
     files = []
     stale_count = 0
@@ -420,7 +452,9 @@ def main():
             # показывал «1 агент не на связи» вместо десяти. Баннер в app.js:589
             # печатает именно dead_count и подписан «не на связи» — теперь совпадает.
             "checked_at": now.strftime("%Y-%m-%dT%H:%MZ"),
-            "overall": "degraded" if (dead_count or publish_stuck or critical or arch_bad) else "healthy",
+            "overall": "degraded" if (dead_count or publish_stuck or critical or arch_bad or limit_hits) else "healthy",
+            # агенты, чей последний прогон упёрся в лимит LLM (подписка и запасной API-ключ)
+            "llm_limit": limit_hits,
             "stale_count": stale_count,
             # Файлы, чья протухшесть означает сломанный сбор, а не тишину в
             # новостях. Пустой список = всё, что должно обновляться, обновляется.
@@ -462,6 +496,7 @@ def main():
                    for f, _a, h in critical]
     alert_lines += ["• архив %s: %s (было %s, стало %s)" % (f, r, p, c)
                     for f, p, c, r in arch_bad]
+    alert_lines += ["• LLM-лимит у агентов: %s — подписка и запасной API не ответили" % ", ".join(limit_hits)] if limit_hits else []
     if alert_lines:
         alert_owner("🔴 <b>Карта: сбор сломан</b>\n" + "\n".join(alert_lines))
     if publish_stuck:
