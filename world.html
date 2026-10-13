@@ -3,9 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
 <meta name="color-scheme" content="light">
-<title>Всемирный топливный фронт · закрытая лаборатория</title>
+<title>Всемирный топливный фронт — индекс топливной напряжённости и карта событий</title>
+<meta name="description" content="Индекс топливной напряжённости (ИТН) по регионам мира: проливы, розница, запасы, цены и новости о дефиците. Карта событий топливного рынка с источниками. Оценка OSINT.">
+<link rel="canonical" href="https://npz-tactical-map.vercel.app/world">
+<meta property="og:title" content="Всемирный топливный фронт · индекс топливной напряжённости">
+<meta property="og:description" content="Индекс 0–100 по восьми регионам мира и карта событий с источниками. Обновляется каждые 6 часов.">
+<meta property="og:url" content="https://npz-tactical-map.vercel.app/world">
+<meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
 <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css">
 <style>
 :root{--bg:#e7e0d0;--paper:#fbf8f1;--paper2:#f1ecdf;--ink:#2c2a24;--muted:#625d52;--line:#d8d1c2;--red:#d23a2e;--green:#367866;--shadow:0 6px 25px #463a261c;--radius:14px;
@@ -238,12 +243,11 @@ select{width:100%;background:var(--paper2);border:1px solid var(--line);padding:
 <div class="app">
 <header class="topbar">
   <div class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 4h13v24H8zM11 8h7v7h-7zM21 10h4l3 5v9a2 2 0 0 1-4 0v-6h-3M5 28h19" stroke="#d23a2e" stroke-width="2.4" stroke-linejoin="round"/></svg><span>ВСЕМИРНЫЙ ТОПЛИВНЫЙ ФРОНТ<small>Независимый мониторинг · OSINT</small></span></div>
-  <span class="top-r"><a class="ru-link" href="https://npz-tactical-map.vercel.app/" target="_blank" rel="noopener">Карта НПЗ России →</a><span class="private">Закрытая лаборатория /lab/world</span></span>
+  <span class="top-r"><a class="ru-link" href="/">Карта НПЗ России →</a><span class="private">Обновление каждые 6 часов</span></span>
 </header>
-<div class="lab-banner">ЗАКРЫТАЯ ЛАБОРАТОРИЯ — не для распространения</div>
 <div class="demo-banner" id="demoBanner" hidden>ДЕМО-ДАННЫЕ — числа индекса условные</div>
 <div class="page-head">
-  <div><h1 id="h1Brand">Индекс топливного фронта</h1><p>Весь мир на одном экране · география давления и последние события</p></div>
+  <div><h1 id="h1Brand">Индекс топливной напряжённости</h1><p>Весь мир на одном экране · география давления и последние события</p></div>
   <div class="head-meta"><span class="assessment">ОЦЕНКА · OSINT, не официальные данные</span><time id="headTime"></time><a href="#method" id="methodTop">Методика расчёта ↓</a></div>
 </div>
 
@@ -374,7 +378,7 @@ var ICONS={
  opec:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/>',
  other:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>'};
 
-var BRAND_FALLBACK={short:"FFI",ru:"Индекс топливного фронта",en:"Fuel Front Index"};
+var BRAND_FALLBACK={short:"ИТН",ru:"Индекс топливной напряжённости",en:"Fuel Tension Index"};
 var NOW_PARAM=(/[?&]now=([^&]+)/.exec(location.search)||[])[1];
 var NOW_MS=NOW_PARAM&&!isNaN(Date.parse(decodeURIComponent(NOW_PARAM)))?Date.parse(decodeURIComponent(NOW_PARAM)):null;
 function nowMs(){return NOW_MS!==null?NOW_MS:Date.now();}
