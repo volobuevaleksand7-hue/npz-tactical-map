@@ -147,7 +147,8 @@ def load_day(date):
     refs = fuel.get("refineries", [])
     day = []
     if URGENT or os.environ.get("REEL_WINDOW", "1") == "0":
-        dates, seen = {date}, set()
+        # Срочный ждёт лок за сводкой дня и мог её пропустить: уже показанное в сводке — не повторяем (дубль 13.10).
+        dates, seen = {date}, (shown_ids() if URGENT else set())
         if os.environ.get("REEL_DATES"):   # сюжет на несколько дат (удары по одному объекту, 08–11.10): REEL_DATES=d1,d2
             dates = {x for x in os.environ["REEL_DATES"].split(",") if x}
     else:
