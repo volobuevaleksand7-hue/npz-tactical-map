@@ -81,3 +81,9 @@
 # 15 6 * * *  ... flock -w 2400 /var/lock/npz-video.lock nice -n 10 env REEL_PUBLISH_AT=07:00 ./reel/daily.sh                         # утро, выход 10:00 МСК
 # 15 16 * * * ... flock -w 2400 /var/lock/npz-video.lock nice -n 10 env REEL_KIND=reel-evening REEL_PUBLISH_AT=17:00 ./reel/daily.sh # вечер, выход 20:00 МСК
 # 4,24,44 * * * *  cd $NPZ_REPO && PATH=/root/.local/bin:$PATH timeout 900 python3 agents/yt-watch.py >> $NPZ_REPO/agents/logs/yt-watch.log 2>&1
+
+# ---- МИРОВОЙ ТОПЛИВНЫЙ ФРОНТ (/world), добавлено 11.10.2026 по «да» владельца ----
+# ряды+индекс+сторож (без LLM), 4 раза в сутки; GDELT медленный (до ~25 мин) — свой лок
+35 1,7,13,19 * * *  cd $NPZ_REPO && git pull --rebase --quiet 2>/dev/null; flock -n /var/lock/npz-world.lock sh -c "python3 agents/world/collect.py && python3 agents/world/index.py && python3 agents/world/watch.py --notify" >> $LOG 2>&1; bash agents/git-sync.sh "data(world): ряды и индекс $(date -u +\%Y-\%m-\%dT\%H:\%MZ)" >> $LOG 2>&1
+# разведчик событий (Haiku; цепочка OpenRouter-free -> Haiku по подписке -> Haiku по API-ключу), валидатор, уведомление владельцу — 3 раза в сутки
+20 3,11,19 * * *    NPZ_ENGINE=rotate NPZ_ENGINE_FORCE_ROTATE=1 NPZ_MODEL=$HAIKU $R $NPZ_REPO/agents/update-prompt-world-events.md world-events >> $LOG 2>&1; cd $NPZ_REPO && python3 agents/world/validate-events.py >> $LOG 2>&1; python3 agents/world/notify.py >> $LOG 2>&1; bash agents/git-sync.sh "data(world-events): валидация очереди $(date -u +\%Y-\%m-\%dT\%H:\%MZ)" >> $LOG 2>&1
