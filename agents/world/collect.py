@@ -251,15 +251,21 @@ def iea_stocks(region):
     return run
 
 
+_eia_cache = {}
+
+
 def eia(series_id, scale=1000.0):
-    """EIA API v2, ключ DEMO_KEY (лимитирован; при 429 backoff). Тыс. барр. -> млн барр."""
+    """EIA API v2, ключ DEMO_KEY (лимит общий, 429 частый). Обе серии берём ОДНИМ запросом (кэш на запуск):
+    второй отдельный запрос подряд стабильно ловил 429. Тыс. барр. -> млн барр."""
     def run():
-        q = [("api_key", "DEMO_KEY"), ("frequency", "weekly"), ("data[0]", "value"),
-             ("facets[series][]", series_id), ("sort[0][column]", "period"),
-             ("sort[0][direction]", "desc"), ("length", 300)]
-        d = get_json("https://api.eia.gov/v2/petroleum/stoc/wstk/data/?" + urllib.parse.urlencode(q), retries=6)  # DEMO_KEY: общий лимит, 429 частый
-        rows = d["response"]["data"]
-        out = [[r["period"], round(float(r["value"]) / scale, 3)] for r in rows if r.get("value") not in (None, "")]
+        if "rows" not in _eia_cache:
+            q = [("api_key", "DEMO_KEY"), ("frequency", "weekly"), ("data[0]", "value"),
+                 ("facets[series][]", "WCESTUS1"), ("facets[series][]", "WDISTUS1"),
+                 ("sort[0][column]", "period"), ("sort[0][direction]", "desc"), ("length", 600)]
+            d = get_json("https://api.eia.gov/v2/petroleum/stoc/wstk/data/?" + urllib.parse.urlencode(q), retries=6)
+            _eia_cache["rows"] = d["response"]["data"]
+        out = [[r["period"], round(float(r["value"]) / scale, 3)] for r in _eia_cache["rows"]
+               if r.get("series") == series_id and r.get("value") not in (None, "")]
         if not out:
             raise RuntimeError("EIA: пустой ответ")
         return sorted(out)
