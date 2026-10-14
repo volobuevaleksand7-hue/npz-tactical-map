@@ -336,7 +336,7 @@ def build_registry():
         ("DGASNYH", "gasoline_nyh", "Бензин NYH", "USD/гал."),
     ]:
         R.append(spec(i, label, unit, "FRED / EIA", fred_url + sid, "Public domain (U.S. Gov / EIA)",
-                      "daily", fred(sid, 10.2), 10.2, 6, compact=True))
+                      "daily", fred(sid, 10.2), 10.2, 10, compact=True))  # лаг FRED/EIA ~5-7 дн.: порог 6 выбивал цены из индекса
     R.append(spec("diesel_retail_us", "Дизель, розница США", "USD/гал.", "FRED / EIA",
                   fred_url + "GASDESW", "Public domain (U.S. Gov / EIA)", "weekly", fred("GASDESW"), 5, 15))
     R.append(spec("us_crude_stocks", "Запасы сырой нефти США (без SPR)", "млн барр.", "EIA API v2",
@@ -358,7 +358,11 @@ def build_registry():
            ("suez", "Suez Canal", "Суэцкий канал"),
            ("malacca", "Malacca Strait", "Малаккский пролив"),
            ("bosporus", "Bosporus Strait", "Босфор"),
-           ("cape", "Cape of Good Hope", "Мыс Доброй Надежды")]
+           ("cape", "Cape of Good Hope", "Мыс Доброй Надежды"),
+           # v0.2.1: проливы для Латинской Америки и Африки (PortWatch, тот же слой, CC BY 4.0)
+           ("panama", "Panama Canal", "Панамский канал"),
+           ("yucatan", "Yucatan Channel", "Юкатанский пролив"),
+           ("gibraltar", "Gibraltar Strait", "Гибралтарский пролив")]
     for cid, pn, ru in cps:
         R.append(spec(f"chokepoint_{cid}_tankers", f"{ru}: танкеры в сутки", "судов/сут.", "IMF PortWatch",
                       "https://portwatch.imf.org/", "CC BY 4.0 (IMF PortWatch / Oxford)", "daily",
@@ -432,9 +436,12 @@ def main():
                                                     for d, _ in prev.get("iea_stocks_days_europe", {}).get("history", [])}}
 
     ok = bad = 0
-    for sp in reg:
-        if args.only and not sp["id"].startswith(args.only):
-            continue
+    todo = [sp for sp in reg if not args.only or sp["id"].startswith(args.only)]
+    retried = set()
+    i = 0
+    while i < len(todo):
+        sp = todo[i]
+        i += 1
         sid = sp["id"]
         old = prev.get(sid, {})
         ent = {"label": sp["label"], "unit": sp["unit"], "source": sp["source"], "url": sp["url"],
@@ -464,6 +471,16 @@ def main():
                        history=old.get("history", []))
             ent["stale"] = is_stale(old["as_of"], sp["stale_days"]) if old.get("as_of") else True
             log(f"FAIL {sid:38s} {msg}")
+            # GDELT: 429 — лимит по IP; второй проход в конце, после длинной паузы (один раз на ряд)
+            if sid.startswith("gdelt_") and sid not in retried and "429" in msg:
+                retried.add(sid)
+                todo.append(sp)
+                if len(retried) == 1:
+                    log("  GDELT 429: пауза 90 с перед повторным проходом")
+                    time.sleep(90)
+        else:
+            if sid in retried:
+                bad -= 1  # повтор удался: ранний FAIL не считаем
         series[sid] = ent
 
     known = {sp["id"] for sp in reg}

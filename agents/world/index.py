@@ -55,7 +55,13 @@ CHOKE = {  # пролив -> (подпись, регионы, инверсия: 
     "malacca": ("Малакка", ["east_asia"], False),
     "bosporus": ("Босфор", ["europe", "russia_cis"], False),
     "cape": ("Мыс Доброй Надежды", ["africa"], True),
+    # v0.2.1: добавлены проливы для регионов с покрытием 0.20 (латам) и без своих проливов (Африка).
+    # Вес компонента chokepoints (0.30) и методика не менялись — только состав проливов.
+    "panama": ("Панамский канал", ["latin_america"], False),
+    "yucatan": ("Юкатанский пролив", ["latin_america"], False),
+    "gibraltar": ("Гибралтарский пролив", ["africa", "europe"], False),
 }
+CHOKE_MA = {"panama": 14}  # мало танкеров в сутки (медиана ~13): шире окно сглаживания, иначе шум даёт ложный балл
 LEVELS = [(25, "calm", "спокойно"), (50, "tense", "напряжённо"), (75, "crisis", "кризис"),
           (101, "critical", "критично")]
 TODAY = dt.date.today()
@@ -137,7 +143,7 @@ def comp(cid, score, raw, as_ofs, sources):
 
 
 # ---- вычисление компонентов (по данным, не зависящим от региона, кэшируется)
-def choke_score(s, invert):
+def choke_score(s, invert, n=7):
     h = s["history"]
     h365 = window(h, 1.0)
     if len(h365) < 120:
@@ -145,7 +151,7 @@ def choke_score(s, invert):
     med = statistics.median(v for _, v in h365)
     if med <= 0:
         return None
-    m = ma(h365, 7)
+    m = ma(h365, n)
     if len(m) < 60:
         return None
     cur = m[-1][1]
@@ -163,10 +169,10 @@ def compute_common(S):
     # chokepoints
     for cid, (ru, regs, inv) in CHOKE.items():
         s = live(S, f"chokepoint_{cid}_tankers")
-        r = choke_score(s, inv) if s else None
+        r = choke_score(s, inv, CHOKE_MA.get(cid, 7)) if s else None
         if r:
             sc, cur, med, as_of = r
-            word = "рост к медиане" if inv else "7-дн. среднее"
+            word = "рост к медиане" if inv else f"{CHOKE_MA.get(cid, 7)}-дн. среднее"
             C[("choke", cid)] = (sc, f"{ru}: {fmt(cur)} танк./сут. при медиане года {fmt(med)} ({word})", as_of, s["source"])
     # prices
     ps, raws, aos, srcs = [], [], [], []
