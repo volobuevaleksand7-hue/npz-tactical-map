@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791978203,
-      "source_text": "14.10.2026 14:43 МСК\nПо обстановке на 14:30. Опасность по БПЛА + FPV-дронов в приграничных районах Брянской области, Курской области, Белгородской области. Возможны единичные появления БПЛА в Рославльском районе, Смоленской области. Валуйский район, Белгородская область - активность БПЛА «Хорнет». По остальным регионам пока тихо. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1791983187,
+      "source_text": "14.10.2026 16:06 МСК\nВалуйки Опасность по БПЛА Белгородская область"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1791975406,
-      "source_text": "14.10.2026 13:56 МСК\nСкадовск опасность по БПЛА Хорнет Херсонская область РФ"
+      "last_event_ts": 1791983388,
+      "source_text": "14.10.2026 16:09 МСК\nКаховка и ближайшие опасность по БПЛА разведчик Херсонская область РФ"
     }
   },
   "cities": [
@@ -392,6 +392,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1791976100,
       "source_text": "14.10.2026 14:08 МСК\nАвдеевка, Донецк, Ясиноватая и близлежащие Опасность по БПЛА ДНР"
+    },
+    {
+      "key": "валуйки|белгородская область",
+      "name": "Валуйки",
+      "lat": 50.19661,
+      "lon": 38.11674,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791983187,
+      "source_text": "14.10.2026 16:06 МСК\nВалуйки Опасность по БПЛА Белгородская область"
     },
     {
       "key": "макеевка|донецкая народная республика",
@@ -766,6 +788,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1791972256,
       "source_text": "14.10.2026 13:04 МСК\nКорчма, Каланчак, Ставки, Мирное АПП Армянск, Армянск Опасность по БПЛА Хорнет"
+    },
+    {
+      "key": "каховка|херсонская область",
+      "name": "Каховка",
+      "lat": 46.81601,
+      "lon": 33.47862,
+      "region": "Херсонская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1791983388,
+      "source_text": "14.10.2026 16:09 МСК\nКаховка и ближайшие опасность по БПЛА разведчик Херсонская область РФ"
     }
   ],
   "districts": {
@@ -960,6 +1004,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 291065,
+      "text": "Каховка и ближайшие опасность по БПЛА разведчик\nХерсонская область РФ",
+      "ts": 1791983388,
+      "time_label": "14.10.2026 16:09 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 291064,
+      "text": "Валуйки\nОпасность по БПЛА\nБелгородская область",
+      "ts": 1791983187,
+      "time_label": "14.10.2026 16:06 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 291063,
       "text": "Воронежская область опасность по БПЛА",
@@ -1583,22 +1643,6 @@
       "time_label": "14.10.2026 08:42 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 291018,
-      "text": "Курская область\nОтбой опасности БПЛА",
-      "ts": 1791956492,
-      "time_label": "14.10.2026 08:41 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 90000,
-      "text": "Ростовская область, Брянская область, Смоленская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1791956474,
-      "time_label": "14.10.2026 08:41 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -1608,14 +1652,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791981330,
-  "last_event_at": "2026-10-14T12:35:30Z",
-  "fetched_at": "2026-10-14T13:00:04.423704Z",
+  "timestamp": 1791983388,
+  "last_event_at": "2026-10-14T13:09:48Z",
+  "fetched_at": "2026-10-14T13:10:03.613186Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-14T13:00:04.423704Z",
-    "source_age_seconds": 1474,
-    "city_count": 25,
+    "generated_at": "2026-10-14T13:10:03.613186Z",
+    "source_age_seconds": 15,
+    "city_count": 27,
     "region_count": 11,
     "feed_count": 80
   }
