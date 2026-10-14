@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Москва": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1791951315,
+      "source_text": "14.10.2026 07:15 МСК\nГО Дубна Московская область Работа ПВО по БПЛА"
+    },
     "Калужская область": {
       "bpla": false,
       "bplaDim": false,
@@ -1684,11 +1703,11 @@
       "source_text": "13.10.2026 21:09 МСК\nБежица Брянск И близлежащие Тревога по БПЛА Брянская область"
     },
     {
-      "key": "борисовка|белгородская область",
-      "name": "Борисовка",
-      "lat": 50.6089408,
-      "lon": 36.0124922,
-      "region": "Белгородская область",
+      "key": "о дубна|московская область",
+      "name": "О Дубна",
+      "lat": 56.7587721,
+      "lon": 37.1403831,
+      "region": "Московская область",
       "bpla": true,
       "bplaDim": false,
       "danger": false,
@@ -1699,11 +1718,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1791907980,
-      "source_text": "13.10.2026 19:13 МСК\nБорисовка, Волоконовский район, Белгородская область - пролёты БПЛА в сторону Волоконовка, Староивановка, Новый Оскол. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1791951315,
+      "source_text": "14.10.2026 07:15 МСК\nГО Дубна Московская область Работа ПВО по БПЛА"
     },
     {
       "key": "орел|орловская область",
@@ -3202,28 +3221,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1791916545,
       "source_text": "13.10.2026 21:35 МСК\nБелевский район Тульская область Фиксация 2 БПЛА"
-    },
-    "RUS.7.26_1": {
-      "gid_2": "RUS.7.26_1",
-      "name_ru": "Волоконовский район",
-      "region_ru": "Белгородская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1791907980,
-      "source_text": "13.10.2026 19:13 МСК\nБорисовка, Волоконовский район, Белгородская область - пролёты БПЛА в сторону Волоконовка, Староивановка, Новый Оскол. 📡 Локатор России - @locatorru"
     },
     "RUS.8.19_1": {
       "gid_2": "RUS.8.19_1",
@@ -5155,6 +5152,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 99156,
+      "text": "ГО Дубна\nМосковская область\nРабота ПВО по БПЛА",
+      "ts": 1791951315,
+      "time_label": "14.10.2026 07:15 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 291009,
       "text": "Спасибо огромное\n❤️\n❤️\n❤️\nhttps://pay.cloudtips.ru/p/f2a9c1d8",
       "ts": 1791950931,
@@ -5785,14 +5790,6 @@
       "time_label": "14.10.2026 04:43 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 99103,
-      "text": "Демидовский район\nДуховищский район\nСмоленская область\nФиксации БПЛА",
-      "ts": 1791942178,
-      "time_label": "14.10.2026 04:42 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5802,15 +5799,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1791950931,
-  "last_event_at": "2026-10-14T04:08:51Z",
-  "fetched_at": "2026-10-14T04:10:03.836686Z",
+  "timestamp": 1791951315,
+  "last_event_at": "2026-10-14T04:15:15Z",
+  "fetched_at": "2026-10-14T04:20:04.032597Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-14T04:10:03.836686Z",
-    "source_age_seconds": 72,
+    "generated_at": "2026-10-14T04:20:04.032597Z",
+    "source_age_seconds": 289,
     "city_count": 99,
-    "region_count": 21,
+    "region_count": 22,
     "feed_count": 80
   }
 }
