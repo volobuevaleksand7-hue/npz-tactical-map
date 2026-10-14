@@ -151,29 +151,72 @@ function pinHtml(e){
   var pul=fresh?'<span class="pulse r1"></span><span class="pulse r2"></span>':'';
   return '<div class="pin '+st+(fresh&&isHot(e)?' hot':'')+'" data-id="'+esc(e.id)+'">'+pul+head+'<span class="pin-lbl">'+esc(shortTitle(e.title))+'</span></div>';
 }
-function placeEvents(){
-  evGroup.clearLayers();zonesGroup.clearLayers();MARK={};ZONE={};
-  var groups=[];
+/* события: стопки (почти одна точка) раскрываются веером, близкие на экране — в кластер с числом */
+var CL_PX=56;
+function evUnits(){
+  var u=[];
   EVENTS.forEach(function(e){
-    var g=null;for(var i=0;i<groups.length;i++){if(Math.abs(groups[i].lat-e.lat)<1&&Math.abs(groups[i].lon-e.lon)<1){g=groups[i];break;}}
-    if(!g){g={lat:e.lat,lon:e.lon,list:[]};groups.push(g);}g.list.push(e);
+    var g=null;for(var i=0;i<u.length;i++){if(Math.abs(u[i].lat-e.lat)<.3&&Math.abs(u[i].lon-e.lon)<.3){g=u[i];break;}}
+    if(!g){g={lat:e.lat,lon:e.lon,list:[]};u.push(g);}g.list.push(e);
   });
-  groups.forEach(function(g){
-    var n=g.list.length;
-    g.list.forEach(function(e,i){
+  return u;
+}
+function pinMarker(e,dx,dy,ll){
+  var ic=L.divIcon({className:"ev-wrap",html:pinHtml(e),iconSize:[40,50],iconAnchor:[20-dx,50-dy]});
+  var m=L.marker(ll||[e.lat,e.lon],{icon:ic,keyboard:true,title:e.title,riseOnHover:true,zIndexOffset:Math.round(dy)}).addTo(evGroup);
+  m.on("click",function(){openCard(e.id,false);});
+  MARK[e.id]=m;
+}
+function clusterMarker(c){
+  var n=c.list.length,lat=0,lon=0,hot=false,rep=false,ids=[];
+  c.list.forEach(function(e){lat+=e.lat;lon+=e.lon;ids.push(e.id);if(isFresh(e)&&isHot(e))hot=true;if(e.status!=="confirmed")rep=true;});
+  lat/=n;lon/=n;
+  var sz=n<5?38:n<10?44:50;
+  var ic=L.divIcon({className:"ev-wrap",html:'<div class="clu'+(rep?' reported':'')+(hot?' hot':'')+'" data-ids="'+esc(ids.join(" "))+'" style="width:'+sz+'px;height:'+sz+'px">'+(hot?'<span class="pulse r1"></span>':'')+'<b class="num">'+n+'</b></div>',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
+  var m=L.marker([lat,lon],{icon:ic,keyboard:true,title:n+" "+(EN?t("ev5"):(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?t("ev2"):n%10===1&&n%100!==11?t("ev1"):t("ev5"))),riseOnHover:true,zIndexOffset:500}).addTo(evGroup);
+  var tip=c.list.slice(0,5).map(function(e){return "· "+esc(shortTitle(evT(e,"title")));}).join("<br>")+(n>5?"<br>…":"");
+  m.bindTooltip(tip,{direction:"top",offset:[0,-sz/2]});
+  m.on("click",function(){
+    var b=L.latLngBounds(c.list.map(function(e){return [e.lat,e.lon];}));
+    map.flyToBounds(b,{padding:[80,80],maxZoom:Math.min(map.getMaxZoom(),Math.max(map.getZoom()+2,6)),duration:.7});
+  });
+  c.list.forEach(function(e){MARK[e.id]=m;});
+}
+function drawEvents(){
+  if(!EVENTS.length)return;
+  evGroup.clearLayers();MARK={};
+  var z=map.getZoom(),units=evUnits(),cl=[];
+  units.forEach(function(u){
+    var p=map.project([u.lat,u.lon],z),g=null;
+    for(var i=0;i<cl.length;i++){if(cl[i].p.distanceTo(p)<CL_PX){g=cl[i];break;}}
+    if(!g){g={p:p,units:[],list:[]};cl.push(g);}
+    g.units.push(u);g.list=g.list.concat(u.list);
+  });
+  /* на крупном масштабе кластер больше не дробится приближением — раскрываем веером вокруг центра */
+  var fanZ=z>=7;
+  cl.forEach(function(c){
+    if(c.units.length>1&&!fanZ){clusterMarker(c);return;}
+    var n=c.list.length,ll=null;
+    if(c.units.length>1){var la=0,lo=0;c.list.forEach(function(e){la+=e.lat;lo+=e.lon;});ll=[la/n,lo/n];}
+    c.list.forEach(function(e,i){
       var dx=0,dy=0;
-      if(n>1){var a=-Math.PI/2+i*2*Math.PI/n,r=n===2?24:36;dx=Math.cos(a)*r;dy=Math.sin(a)*r-(n>2?10:0);}
-      var ic=L.divIcon({className:"ev-wrap",html:pinHtml(e),iconSize:[40,50],iconAnchor:[20-dx,50-dy]});
-      var m=L.marker([e.lat,e.lon],{icon:ic,keyboard:true,title:e.title,riseOnHover:true,zIndexOffset:Math.round(dy)}).addTo(evGroup);
-      m.on("click",function(){openCard(e.id,false);});
-      MARK[e.id]=m;
-      if(e.precision==="zone"&&e.radius_km>0){
-        var col=e.status==="confirmed"?"#367866":"#b38b38";
-        ZONE[e.id]=L.circle([e.lat,e.lon],{radius:e.radius_km*1000,pane:"zones",color:col,weight:1.2,dashArray:"4 4",fillColor:col,fillOpacity:.1,interactive:false,className:isFresh(e)?"zone-pulse":""}).addTo(zonesGroup);
-      }
+      if(n>1){var a=-Math.PI/2+i*2*Math.PI/n,r=n===2?24:Math.max(36,n*8);dx=Math.cos(a)*r;dy=Math.sin(a)*r-(n>2?10:0);}
+      pinMarker(e,dx,dy,ll);
     });
   });
+  markActive();
 }
+function placeEvents(){
+  zonesGroup.clearLayers();ZONE={};
+  EVENTS.forEach(function(e){
+    if(e.precision==="zone"&&e.radius_km>0){
+      var col=e.status==="confirmed"?"#367866":"#b38b38";
+      ZONE[e.id]=L.circle([e.lat,e.lon],{radius:e.radius_km*1000,pane:"zones",color:col,weight:1.2,dashArray:"4 4",fillColor:col,fillOpacity:.1,interactive:false,className:isFresh(e)?"zone-pulse":""}).addTo(zonesGroup);
+    }
+  });
+  drawEvents();
+}
+map.on("zoomend",drawEvents);
 function zoomClasses(){
   var z=map.getZoom(),c=map.getContainer();
   c.classList.toggle("z-labels",z>=6);c.classList.toggle("z-cplabels",z>=3.5);
@@ -210,6 +253,7 @@ function openCard(id,fly){
 }
 function closeCard(){ACTIVE=null;$("card").hidden=true;markActive();}
 function markActive(){
+  var cs=document.querySelectorAll(".clu");for(var k=0;k<cs.length;k++){cs[k].classList.toggle("active",!!ACTIVE&&(" "+cs[k].getAttribute("data-ids")+" ").indexOf(" "+ACTIVE+" ")>=0);}
   var ps=document.querySelectorAll(".pin");for(var i=0;i<ps.length;i++){ps[i].classList.toggle("active",ps[i].getAttribute("data-id")===ACTIVE);}
   var ts=document.querySelectorAll(".t-item");for(var j=0;j<ts.length;j++){ts[j].classList.toggle("active",ts[j].getAttribute("data-id")===ACTIVE);}
 }

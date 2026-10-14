@@ -100,6 +100,12 @@ select{width:100%;background:var(--paper2);border:1px solid var(--line);padding:
 .pin.active .pin-head{box-shadow:0 0 0 3px var(--red),0 3px 10px #2c2a2440}
 .pin-lbl{display:none;position:absolute;left:46px;top:6px;white-space:nowrap;max-width:170px;overflow:hidden;text-overflow:ellipsis;font-size:11px;font-weight:650;background:var(--paper);padding:3px 7px;border-radius:5px;box-shadow:0 2px 6px #2c2a2430}
 .z-labels .pin-lbl{display:block}
+.clu{position:relative;border-radius:50%;background:var(--calm);border:3px solid var(--paper);box-shadow:0 0 0 2px var(--calm),0 3px 10px #2c2a2450;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.clu.reported{background:var(--tense);box-shadow:0 0 0 2px var(--tense),0 3px 10px #2c2a2450}
+.clu.hot{--pc:var(--hot)}
+.clu b{color:#fff;font-size:15px;font-weight:800;line-height:1}
+.clu.active{box-shadow:0 0 0 3px var(--red),0 3px 10px #2c2a2450}
+.clu .pulse{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px solid var(--pc,var(--warm));opacity:0;animation:wl-ring 2s ease-out infinite;pointer-events:none}
 .cp-wrap{background:none;border:0}
 .cp{position:relative;width:16px;height:16px}
 .cp i{position:absolute;left:2px;top:2px;width:12px;height:12px;background:var(--ink);border:2px solid var(--paper);transform:rotate(45deg);box-shadow:0 1px 4px #0005}
