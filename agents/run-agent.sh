@@ -101,6 +101,12 @@ command -v timeout >/dev/null 2>&1 || TIMEOUT_WRAP=""
 #   free-пула — держим их дальше по цепочке как рабочий запасной путь.
 # MIMO_MODELS, если задан вызывающим, не перезаписываем (тот же принцип, что и с
 # NPZ_ENGINE выше).
+# world-events (14.10.2026): общий пул содержит nex-n2.5-pro, которого уже нет в каталоге OpenRouter
+# (и qwen3.8-27b:free даёт ProviderModelNotFound) — для разведчика мира свой пул из моделей, реально
+# присутствующих в /api/v1/models с tools. Общий пул других агентов не трогаем. Явный MIMO_MODELS важнее.
+if [ "${LABEL:-}" = "world-events" ] && [ -z "${MIMO_MODELS:-}" ]; then
+  MIMO_MODELS="openrouter/nvidia/nemotron-3.5-lightning:free openrouter/nvidia/nemotron-3-super-120b-a12b:free openrouter/poolside/laguna-s-2.1:free openrouter/poolside/laguna-xs-2.1:free openrouter/google/gemma-4-31b-it:free"
+fi
 export MIMO_MODELS="${MIMO_MODELS:-openrouter/nex-agi/nex-n2.5-pro:free openrouter/nvidia/nemotron-3.5-lightning:free openrouter/nvidia/nemotron-3-super-120b-a12b:free openrouter/poolside/laguna-s-2.1:free}"
 
 RC=1
