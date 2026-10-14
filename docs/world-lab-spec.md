@@ -59,7 +59,7 @@ coverage < 0.5 → `value:null` («мало данных»). Мировой = с
 
 ## data/world/events.json — опубликованные карточки
 Схема как в seed (id, occurred_at, type, region, status confirmed|reported, title, summary, fuel_effect,
-lat, lon, precision point|zone, radius_km, photo{url,page,license,author}|null, sources[]) + `review`
+lat, lon, precision point|zone, radius_km, photo{url,page,license,author}|null, sources[]) + `title_en`, `summary_en`, `fuel_effect_en` (английский перевод русского текста; без них EN-страница показывает русский с пометкой, валидатор даёт warning в `checks.translation`) + `review`
 (`approved` — владелец; `lab` — видно только в лаборатории) + `index_effect` (текст, напр. «Ближний Восток: компонент проливов ↑»).
 
 ## data/world/events-queue.json — кандидаты от агента (не публикуются)
@@ -94,3 +94,7 @@ v0.1 вышел сжатым кверху (мир 87, регионы 76–94, в
 4. В index.json появилось поле `brand` (одна константа BRAND в index.py). Имя утверждено 13.10.2026: «Индекс топливной напряжённости» (ИТН) / Fuel Tension Index (FTI).
 Известные слабости: у регионов без розницы/запасов/проливов (Латинская Америка, Африка) значение держится на общих компонентах
 (и Латинская Америка остаётся «мало данных», coverage 0,35); запасы IEA без сезонной поправки; GDELT-процентиль по 71 дню шумит.
+
+## Английская версия и рубрика (14.10.2026)
+`/en/world` — тот же код (`world-app.js`, `world.css`), язык из `<html lang>`. hreflang ru/en/x-default на обеих страницах, редиректа по IP нет.
+Рубрика «Всемирные новости»: `/world/news`, `/world/news/<date>`; генератор `agents/world/gen-news.py` без LLM, план — `docs/world-news-plan.md`.

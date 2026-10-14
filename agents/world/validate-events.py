@@ -29,6 +29,21 @@ except Exception:  # noqa: BLE001
 LOCAL_SLUR = ("терорист", "террорист", "русня", "кацап", "москал", "хохл", "слава украин",
               "доблестн", "возмездие", "героическ")
 TEXT_FIELDS = ("title", "summary", "fuel_effect")
+EN_FIELDS = ("title_en", "summary_en", "fuel_effect_en")
+
+
+def translation_warning(c):
+    """Мягкая проверка английской версии: -> строка-предупреждение или None. Verdict не меняет."""
+    miss = [f for f in EN_FIELDS if not (isinstance(c.get(f), str) and c.get(f).strip())]
+    # fuel_effect_en не нужен, если fuel_effect пуст
+    if not c.get("fuel_effect") and "fuel_effect_en" in miss:
+        miss.remove("fuel_effect_en")
+    if miss:
+        return "warning: нет " + ", ".join(miss)
+    bad = [f for f in EN_FIELDS if isinstance(c.get(f), str) and set(c[f].lower()) & set("абвгдеёжзийклмнопрстуфхцчшщъыьэюя")]
+    if bad:
+        return "warning: кириллица в " + ", ".join(bad)
+    return None
 
 
 def check_schema(c, today=None):
@@ -155,6 +170,8 @@ def validate(cands, existing, url_results=None, today=None):
                        "urls_alive": "unknown",
                        "neutral_lexicon": "ok" if not lex else "fail: " + "; ".join(lex),
                        "independent_sources": 0}
+        tw = translation_warning(c)
+        c["checks"]["translation"] = tw or "ok"
         if errs:
             reasons.append("schema")
         if lex:
