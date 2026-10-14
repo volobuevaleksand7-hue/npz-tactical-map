@@ -27,3 +27,9 @@
 
 ## Тесты
 `python3 -m unittest tests.world.test_pipeline` (без сети).
+
+## Рубрика «Всемирные новости» (gen-news.py)
+
+`python3 agents/world/gen-news.py [--date D] [--archive P] [--events P] [--index P] [--out DIR] [--dry|--rebuild]`
+
+Берёт события с `review: approved`, ещё не вошедшие в выпуски; не более одного выпуска в сутки; пустых выпусков нет. Снимок ИТН и тексты замораживаются в `data/world/news-archive.json`. Лид — шаблон из фактов (или `lead_ru`/`lead_en` в архиве). EN-страницы только при полном переводе (`title_en`, `summary_en`, `fuel_effect_en` при непустом `fuel_effect`). Тексты проходят `neutrality.text_reasons`. Пишет `world/news*.html`, `en/world/news*.html`, `*/rss.xml`, `sitemap-world.xml`. Запуск по расписанию на VPS после `approve.py` (не из этой ветки).
