@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>World Fuel Front — Fuel Tension Index (FTI) and verified events map</title>
+<meta name="description" content="Fuel Tension Index (FTI) for eight world regions: shipping chokepoints, retail prices, stocks, prices and fuel-shortage news. A map of verified fuel-market events with sources. ESTIMATE based on open data (OSINT).">
+<link rel="canonical" href="https://npz-tactical-map.vercel.app/en/world">
+<link rel="alternate" hreflang="ru" href="https://npz-tactical-map.vercel.app/world">
+<link rel="alternate" hreflang="en" href="https://npz-tactical-map.vercel.app/en/world">
+<link rel="alternate" hreflang="x-default" href="https://npz-tactical-map.vercel.app/world">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="World Fuel Front · Fuel Tension Index (FTI)">
+<meta property="og:description" content="A 0–100 index for eight world regions and a map of events with sources. Updated every 6 hours.">
+<meta property="og:url" content="https://npz-tactical-map.vercel.app/en/world">
+<meta property="og:image" content="https://npz-tactical-map.vercel.app/og-image.png">
+<link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css">
+<link rel="stylesheet" href="/world.css">
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 4h13v24H8zM11 8h7v7h-7zM21 10h4l3 5v9a2 2 0 0 1-4 0v-6h-3M5 28h19" stroke="#d23a2e" stroke-width="2.4" stroke-linejoin="round"/></svg><span>WORLD FUEL FRONT<small>Independent monitoring · OSINT</small></span></div>
+  <span class="top-r"><span class="lang-sw" role="group" aria-label="Language"><a href="/world" hreflang="ru" lang="ru" title="Русская версия">RU</a><b aria-current="true">EN</b></span><a class="ru-link" href="/">Russian refinery map (RU) →</a><span class="private">Updated every 6 hours</span></span>
+</header>
+<div class="demo-banner" id="demoBanner" hidden>DEMO DATA — index values are illustrative</div>
+<div class="page-head">
+  <div><h1 id="h1Brand">Fuel Tension Index</h1><p>The whole world on one screen · geography of pressure and latest events</p></div>
+  <div class="head-meta"><span class="assessment">ESTIMATE · OSINT, not official data</span><time id="headTime"></time><a href="#method" id="methodTop">Methodology ↓</a><a href="/en/world/news">World news →</a></div>
+</div>
+
+<main class="hq">
+  <div class="col-left">
+    <section class="panel" id="gaugePanel" aria-label="Index">
+      <div class="gauge-wrap">
+        <div class="sel"><label for="regionSelect">Region overview</label><select id="regionSelect"></select></div>
+        <div class="gauge" id="gaugeBox">
+          <svg viewBox="0 0 250 145" aria-hidden="true">
+            <path d="M25 120 A100 100 0 0 1 225 120" pathLength="100" fill="none" stroke="#ddd7c9" stroke-width="14"/>
+            <path d="M25 120 A100 100 0 0 1 225 120" pathLength="100" fill="none" stroke="#367866" stroke-width="14" stroke-dasharray="24 76"/>
+            <path d="M25 120 A100 100 0 0 1 225 120" pathLength="100" fill="none" stroke="#b38b38" stroke-width="14" stroke-dasharray="24 76" stroke-dashoffset="-25"/>
+            <path d="M25 120 A100 100 0 0 1 225 120" pathLength="100" fill="none" stroke="#cb6035" stroke-width="14" stroke-dasharray="24 76" stroke-dashoffset="-50"/>
+            <path d="M25 120 A100 100 0 0 1 225 120" pathLength="100" fill="none" stroke="#a92522" stroke-width="14" stroke-dasharray="25 75" stroke-dashoffset="-75"/>
+            <path id="needle" d="" stroke="#2c2a24" stroke-width="4" stroke-linecap="round" visibility="hidden"/>
+            <text x="18" y="142">0</text><text x="219" y="142">100</text>
+          </svg>
+          <div class="gauge-number" id="gaugeNum">—<span id="gaugeCap">out of 100</span></div>
+        </div>
+        <div class="gauge-side">
+          <h2 id="gaugeTitle">World index</h2>
+          <div class="gauge-brand" data-brand></div>
+          <div class="gauge-status" id="gaugeStatus"><span class="status-dot"></span>no data</div>
+          <div class="gauge-meta" id="gaugeMeta"></div>
+        </div>
+      </div>
+      <div class="noidx" id="noIdx" hidden>The index is being computed — no data yet.</div>
+      <p class="note hide-m">Events do not affect the score: the index is computed by a script from data series only.</p>
+      <a class="method-link" href="#method" id="methodLink">How the index works ↓</a>
+    </section>
+    <section class="panel" id="compPanel" aria-label="Region components">
+      <h2 id="compTitle">Components</h2>
+      <div id="compList"></div>
+      <div class="legend" aria-label="Index thresholds">
+        <span><i style="background:#367866"></i>0–24 calm</span>
+        <span><i style="background:#b38b38"></i>25–49 tense</span>
+        <span><i style="background:#cb6035"></i>50–74 crisis</span>
+        <span><i style="background:#a92522"></i>75–100 critical</span>
+        <span><i class="hatch"></i>insufficient data</span>
+        <span><i style="background:var(--ink);transform:rotate(45deg)"></i>chokepoint</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="map-stage" id="stage">
+    <button type="button" class="now-banner" id="nowBanner" hidden aria-label="Latest events"><i class="now-dot"></i><b>NOW</b><span class="now-txt" id="nowTxt"></span><em class="now-n" id="nowN"></em></button>
+    <div id="map" role="region" aria-label="Fuel tension map"></div>
+    <div class="map-toolbar">
+      <label><input type="checkbox" id="tCountries" checked> <span class="lg">Index by country</span><span class="sh">Countries</span></label>
+      <label><input type="checkbox" id="tZones" checked> <span class="lg">Event zones</span><span class="sh">Zones</span></label>
+      <button id="resetMap" type="button"><span class="lg">Whole world</span><span class="sh">World</span></button>
+    </div>
+    <div class="map-msg" id="mapMsg" role="status"></div>
+    <article class="card" id="card" hidden aria-live="polite"></article>
+  </div>
+
+  <aside class="panel chron" aria-label="Timeline">
+    <div class="rail-title"><h2>Timeline</h2><span id="chronCount"></span></div>
+    <p class="rail-intro">Region · date · headline. Newest first. Click to fly the map to the event.</p>
+    <div class="timeline" id="timeline"></div>
+  </aside>
+</main>
+</div>
+
+<div class="page-content">
+<details class="method" id="method">
+  <summary>Index methodology<span id="methodVer"></span></summary>
+  <h3>What is measured</h3>
+  <p><b data-brand></b> (0–100) is computed separately for eight regions and for the world as a whole. The calculation is deterministic and run by a script over open data series; language models do not set the number. The result is an OSINT estimate, not official data.</p>
+  <h3>Components and base weights</h3>
+  <table class="wtable"><tbody>
+    <tr><th>Component</th><th>Weight</th></tr>
+    <tr><td>Chokepoints: straits and canals (drop in tanker traffic)</td><td>30</td></tr>
+    <tr><td>Shortage news (share of “fuel shortage” articles)</td><td>15</td></tr>
+    <tr><td>Retail prices</td><td>15</td></tr>
+    <tr><td>Stocks</td><td>15</td></tr>
+    <tr><td>Prices (crude, diesel, gasoline)</td><td>10</td></tr>
+    <tr><td>Diesel crack spread</td><td>5</td></tr>
+    <tr><td>Geopolitical risk</td><td>5</td></tr>
+    <tr><td>Physical premium (no free futures series yet: the component is absent and is not substituted)</td><td>5</td></tr>
+  </tbody></table>
+  <h3>Normalisation</h3>
+  <p>Each component is converted to a 0–100 score as the percentile of its current value against its history: 10 years for prices and the crack spread, 5 years for the other series. For chokepoints, the score is a linear scale of the drop in the 7-day average of tanker transits against the 365-day median (no drop = 0, a drop of 80% or more = 100); a region takes its worst chokepoint. For the Cape of Good Hope, growth in traffic reads as rerouting, that is, a signal.</p>
+  <h3>Formula</h3>
+  <div class="formula">region value = Σ (score · weight) / Σ (weights of available components)<br>coverage = Σ weights of available components</div>
+  <ul>
+    <li>A missing component <b>does not redistribute weight</b>: the gap is not filled with an estimate, it lowers coverage.</li>
+    <li>Coverage below 50%: no value is shown (“insufficient data”, grey hatching on the map).</li>
+    <li>A stale series (older than two update periods) drops out and coverage falls.</li>
+    <li>The world index is an import-weighted average of regions (weights are constants in the calculation script).</li>
+  </ul>
+  <h3>Levels</h3>
+  <p>0–24 calm · 25–49 tense · 50–74 crisis · 75–100 critical.</p>
+  <h3>Events</h3>
+  <p><b>Events do not affect the score.</b> Event cards are an editorial layer: only records checked by a script and approved by the owner are published. “Confirmed” means at least two independent publishers; “reported, single source” means one source. The text “effect on the index” appears only when a change in a series supports it. Event texts are translated from the Russian originals; where an English translation is not yet available the card shows the Russian text with a note.</p>
+  <h3>Chokepoints</h3>
+  <p>Strait of Hormuz, Bab el-Mandeb, Suez Canal, Strait of Malacca, Bosporus and the Cape of Good Hope: IMF PortWatch data (number of tanker transits).</p>
+  <p class="footer">Country borders: Natural Earth (public domain); base map © OpenStreetMap. ESTIMATE: OSINT, not official data. Component notes from the calculation script are in Russian and are hidden on this page.</p>
+</details>
+</div>
+
+<script src="/vendor/leaflet-1.9.4/leaflet.js"></script>
+<script src="/world-app.js"></script>
+</body>
+</html>
