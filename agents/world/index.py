@@ -242,9 +242,21 @@ def stocks_for(S, region):
             [p[2] for p in parts], [p[3] for p in parts])
 
 
+GDELT_OUTAGE_DAYS = 5
+
+
+def gdelt_outage(S):
+    """Сбой GDELT: у ВСЕХ регионов последние N дней — нули. Реальное затишье по всему миру
+    сразу невероятно; так выглядит остановка ингеста (10.2026: нули с 03.10 и в общем запросе).
+    Тогда компонент выпадает из индекса, а не тянет его к нулю."""
+    tails = [[v for _, v in S[k]["history"][-GDELT_OUTAGE_DAYS:]] for k in S
+             if k.startswith("gdelt_shortage_") and S[k].get("history")]
+    return bool(tails) and all(len(t) == GDELT_OUTAGE_DAYS and not any(t) for t in tails)
+
+
 def shortage_for(S, region):
     s = live(S, f"gdelt_shortage_{region}")
-    if not s or len(s["history"]) < 30:
+    if not s or len(s["history"]) < 30 or gdelt_outage(S):
         return None
     m = ma(s["history"], 7)
     cur = m[-1][1]
@@ -274,7 +286,7 @@ def build_region(S, C, region):
     add("diesel_crack", C.get("diesel_crack"), "нет свежих рядов Brent/ULSD")
     add("retail", retail_for(S, region), "нет бесплатного ряда розничных цен для региона")
     add("stocks", stocks_for(S, region), "нет бесплатного ряда запасов для региона")
-    add("shortage_news", shortage_for(S, region), "ряд GDELT недоступен или < 30 дней истории")
+    add("shortage_news", shortage_for(S, region), "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)")
     add("georisk", C.get("georisk"), "нет ряда GPR")
     order = list(WEIGHTS)
     comps.sort(key=lambda c: order.index(c["id"]))
