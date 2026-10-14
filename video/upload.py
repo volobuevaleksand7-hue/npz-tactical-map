@@ -203,7 +203,7 @@ def upload(date, token):
     log(f"{date}: залит {url} ({privacy})")
     if KIND in ("weekly", "en-weekly"):
         add_to_playlist(vid, token)
-    if privacy == "public" and lang() == "ru":  # реестр сайта — только русский канал
+    if privacy == "public" and lang() == "ru" and KIND != "world":  # реестр сайта — только русский канал
         register(date, vid, title)
     return url
 
@@ -325,7 +325,7 @@ def main():
     if args[:1] == ["privacy"] and len(args) == 3 and args[2] in ("unlisted", "private", "public"):
         return privacy(args[1], args[2])
     # urgent-<метка> — второй срочный за дату; reel-evening — вечерняя сводка; weekly — недельный обзор 16:9 (дата = последний день недели); en-* — англоязычный канал
-    if re.fullmatch(r"(en-)?(reel(-evening)?|weekly|urgent(-[a-z0-9]+)?)", args[0] if args else ""):
+    if re.fullmatch(r"(en-)?(reel(-evening)?|weekly|urgent(-[a-z0-9]+)?|world)", args[0] if args else ""):
         KIND, args = args[0], args[1:]
     if args:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):

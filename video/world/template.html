@@ -1,0 +1,201 @@
+<!doctype html>
+<!--
+  Ролик «Всемирный топливный фронт» / «World Fuel Front» (HyperFrames, 1080x1920). {{…}} подставляет video/world/build_world.py.
+  Хук с числом ИТН -> карта мира по регионам + рейтинг -> что двигает индекс -> 3 одобренных события -> итог/призыв.
+  Камера, плашки и бары считаются от одного «часа» (clock): кадр зависит только от seek. Всё локально: шрифты, GSAP, SVG карты.
+-->
+<html lang="{{LANG}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Rubik"; font-weight: 400; src: url("assets/fonts/rubik-400.ttf"); }
+      @font-face { font-family: "Rubik"; font-weight: 600; src: url("assets/fonts/rubik-600.ttf"); }
+      @font-face { font-family: "Rubik"; font-weight: 800; src: url("assets/fonts/rubik-800.ttf"); }
+      @font-face { font-family: "JB"; font-weight: 600; src: url("assets/fonts/jbmono-600.ttf"); }
+      :root { --bg:#0b1419; --ink:#f2efe6; --dim:#93a1a8; --card:#142027; --line:#2a3a43; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:var(--bg); }
+      #root { position:relative; width:1080px; height:1920px; overflow:hidden; font-family:"Rubik",sans-serif; color:var(--ink); background:var(--bg); }
+      #mapsc { position:absolute; inset:0; overflow:hidden; background:radial-gradient(ellipse at 50% 40%, #13222b 0%, #0b1419 70%); }
+      #cam { position:absolute; left:0; top:0; width:{{MAP_W}}px; height:{{MAP_H}}px; transform-origin:0 0; }
+      #cam svg { display:block; }
+      #cam svg path { stroke:#0b1419; stroke-width:.6; }
+      #lab, #pins { position:absolute; inset:0; }
+      .rl { position:absolute; transform:translate(-50%,-50%); text-align:center; font-weight:800; white-space:nowrap; text-shadow:0 2px 6px rgba(0,0,0,.85), 0 0 3px rgba(0,0,0,.9); }
+      .rl b { display:block; font-size:38px; line-height:1; color:#fff; }
+      .rl i { display:block; font-style:normal; font-size:19px; font-weight:600; color:#e3e8ea; letter-spacing:.02em; margin-top:2px; }
+      .pin { position:absolute; width:0; height:0; opacity:0; }
+      .pin .c { position:absolute; left:-9px; top:-9px; width:18px; height:18px; border-radius:50%; background:#fff; border:3px solid #e5483b; box-shadow:0 0 12px 4px rgba(229,72,59,.8); }
+      .pin .r { position:absolute; border-radius:50%; border:2px solid #fff; opacity:.8; }
+      .pin.hz .c { border-color:#e8843f; box-shadow:0 0 12px 4px rgba(232,132,63,.8); }
+      #shade { position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, rgba(11,20,25,.85) 0%, rgba(11,20,25,0) 20%, rgba(11,20,25,0) 62%, rgba(11,20,25,.8) 100%); }
+      #dim { position:absolute; inset:0; background:#0b1419; opacity:0; }
+
+      #hud { position:absolute; left:0; right:0; top:0; height:300px; }
+      #hud .b { position:absolute; left:64px; top:96px; font-weight:800; font-size:40px; letter-spacing:.02em; color:#fff; display:flex; align-items:center; gap:16px; }
+      #hud .b i { display:block; width:22px; height:22px; border-radius:50%; background:#e5483b; box-shadow:0 0 16px 4px rgba(229,72,59,.7); }
+      #hud .s { position:absolute; right:64px; top:162px; font-family:"JB",monospace; font-weight:600; font-size:26px; color:#0b1419; background:#d9b04a; border-radius:8px; padding:6px 14px; }
+      #hud .a { position:absolute; left:64px; top:166px; font-family:"JB",monospace; font-weight:600; font-size:30px; color:#9fd8cd; }
+
+      .sc { position:absolute; left:0; right:0; opacity:0; }
+      /* хук */
+      #s-hook { top:290px; text-align:center; }
+      #s-hook .t { font-weight:600; font-size:46px; padding:0 64px; line-height:1.15; color:var(--dim); letter-spacing:.04em; }
+      #s-hook .n { font-weight:800; font-size:380px; line-height:1; letter-spacing:-.04em; margin-top:6px; }
+      #s-hook .o { font-family:"JB",monospace; font-weight:600; font-size:56px; color:var(--dim); margin-top:-20px; }
+      #s-hook .lv { display:inline-block; margin-top:36px; font-weight:800; font-size:92px; letter-spacing:.06em; color:#0b1419; border-radius:20px; padding:6px 40px; }
+      #s-hook .dl { font-family:"JB",monospace; font-weight:600; font-size:44px; color:#fff; margin-top:30px; }
+      /* карта + рейтинг */
+      #s-map { top:1010px; padding:0 64px; }
+      #s-map .h { font-family:"JB",monospace; font-weight:600; font-size:28px; color:#9fd8cd; margin-bottom:22px; }
+      .rw { display:flex; align-items:center; gap:18px; height:78px; }
+      .rw .nm { width:410px; font-weight:600; font-size:36px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .rw .tr { flex:1; height:34px; background:#1b2a32; border-radius:17px; overflow:hidden; }
+      .rw .bar { height:100%; width:0; border-radius:17px; }
+      .rw .vl { width:84px; text-align:right; font-weight:800; font-size:46px; }
+      .rw .nd { flex:1; font-family:"JB",monospace; font-weight:600; font-size:28px; color:var(--dim); }
+      /* драйверы */
+      #s-drv { top:1010px; padding:0 64px; }
+      #s-drv .h { font-family:"JB",monospace; font-weight:600; font-size:30px; color:#e8843f; margin-bottom:22px; letter-spacing:.04em; }
+      .cd { background:var(--card); border:2px solid var(--line); border-radius:26px; padding:26px 34px 28px; margin-bottom:24px; opacity:0; }
+      .cd .t { font-weight:800; font-size:40px; }
+      .cd .v { font-weight:800; font-size:92px; line-height:1.05; letter-spacing:-.02em; margin-top:6px; }
+      .cd .v small { font-size:40px; font-weight:600; color:var(--dim); letter-spacing:0; margin-left:12px; }
+      .cd .m { font-weight:600; font-size:36px; color:#d9dfe1; margin-top:6px; }
+      .cd .src { font-family:"JB",monospace; font-weight:600; font-size:23px; color:var(--dim); margin-top:14px; }
+      /* события */
+      .ev { top:1010px; padding:0 64px; }
+      .ev .card { background:var(--card); border:2px solid var(--line); border-radius:28px; padding:30px 36px 32px; }
+      .ev .row { display:flex; align-items:center; gap:18px; }
+      .ev .k { font-weight:800; font-size:30px; color:#fff; border-radius:10px; padding:5px 16px; letter-spacing:.04em; white-space:nowrap; }
+      .ev .k.confirmed { background:#2f8a50; } .ev .k.reported { background:#c07a1a; }
+      .ev .d { font-family:"JB",monospace; font-weight:600; font-size:30px; color:#b7c3c8; white-space:nowrap; }
+      .ev .rg { font-weight:800; font-size:56px; margin-top:16px; }
+      .ev .tx { font-weight:600; font-size:44px; line-height:1.24; margin-top:12px; color:#eef1ef; }
+      .ev .sr { font-family:"JB",monospace; font-weight:600; font-size:26px; color:var(--dim); margin-top:18px; }
+      .ev .ct { position:absolute; right:84px; top:-62px; font-family:"JB",monospace; font-weight:600; font-size:30px; color:#9fd8cd; }
+      /* итог */
+      #s-out { top:1000px; padding:0 64px; text-align:center; }
+      #s-out .a { font-weight:800; font-size:62px; line-height:1.12; }
+      #s-out .b { font-weight:600; font-size:48px; color:#9fd8cd; margin-top:14px; }
+      #s-out .u { display:inline-block; margin-top:40px; font-family:"JB",monospace; font-weight:600; font-size:52px; color:#0b1419; background:#f2efe6; border-radius:18px; padding:14px 30px; }
+      #s-out .tg { font-family:"JB",monospace; font-weight:600; font-size:46px; color:#fff; margin-top:26px; }
+      #s-out .pl { display:inline-block; margin-top:26px; font-weight:800; font-size:38px; color:#0b1419; background:#d9b04a; border-radius:14px; padding:8px 22px; }
+      #foot { position:absolute; left:64px; right:64px; top:1640px; font-family:"JB",monospace; font-weight:600; font-size:24px; line-height:1.35; color:var(--dim); text-align:center; opacity:0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{TOTAL}}" data-width="1080" data-height="1920">
+      <div id="mapsc" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="0">
+        <div id="cam">
+          <svg xmlns="http://www.w3.org/2000/svg" width="{{MAP_W}}" height="{{MAP_H}}" viewBox="0 0 {{MAP_W}} {{MAP_H}}">
+            <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#26323a"/><rect width="3" height="8" fill="#5b6670"/></pattern></defs>
+            {{PATHS}}
+          </svg>
+          <div id="lab"></div><div id="pins"></div>
+        </div>
+        <div id="dim"></div>
+        <div id="shade"></div>
+      </div>
+      <div id="ui" class="clip" data-start="0" data-duration="{{TOTAL}}" data-track-index="20" data-layout-allow-overlap>
+        <div id="hud"><div class="b"><i></i><span id="brand"></span></div><div class="s" id="stamp"></div><div class="a" id="asof"></div></div>
+        <div class="sc" id="s-hook"><div class="t" id="h-t"></div><div class="n" id="h-n"></div><div class="o" id="h-o"></div><div class="lv" id="h-lv"></div><div class="dl" id="h-dl"></div></div>
+        <div class="sc" id="s-map"><div class="h" id="m-h"></div><div id="m-rows"></div></div>
+        <div class="sc" id="s-drv"><div class="h" id="d-h"></div><div class="cd" id="d-hz"></div><div class="cd" id="d-df"></div></div>
+        <div id="evs"></div>
+        <div class="sc" id="s-out"><div class="a" id="o-a"></div><div class="b" id="o-b"></div><div class="u" id="o-u"></div><div class="tg" id="o-tg"></div><div class="pl" id="o-pl"></div></div>
+        <div id="foot"></div>
+      </div>
+    </div>
+    <script>
+      const P = {{PLAN_JSON}};
+      const U = P.U;
+      const $ = q => document.querySelector(q);
+      const esc = s => String(s).replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+      $("#brand").textContent = U.brand; $("#stamp").textContent = U.stamp; $("#asof").textContent = U.asof;
+      $("#h-t").textContent = U.title + " · " + U.abbr; $("#h-o").textContent = U.of100;
+      $("#h-lv").textContent = U.level; $("#h-lv").style.background = P.wcol; $("#h-dl").textContent = U.delta;
+      $("#m-h").textContent = U.map_head;
+      $("#m-rows").innerHTML = P.rows.map(r => `<div class="rw"><div class="nm">${esc(r.name)}</div>` + (r.v === null
+        ? `<div class="nd">${esc(U.nodata)}</div>`
+        : `<div class="tr"><div class="bar" style="background:${r.col}"></div></div><div class="vl" style="color:${r.col}">${r.v}</div>`) + `</div>`).join("");
+      $("#d-h").textContent = U.drv_head;
+      $("#d-hz").innerHTML = `<div class="t">${esc(U.h_title)}</div><div class="v">${U.h_now}<small>${esc(U.h_unit)}</small></div><div class="m">${esc(U.h_med_lbl)}: ${U.h_med}</div><div class="src">${esc(U.h_src)}</div>`;
+      $("#d-df").innerHTML = `<div class="t">${esc(U.d_title)}</div><div class="v" style="font-size:66px">${esc(U.d_us)}</div><div class="v" style="font-size:66px;margin-top:0">${esc(U.d_eu)}</div><div class="m">${esc(U.d_pct)}</div><div class="src">${esc(U.d_src)}</div>`;
+      $("#evs").innerHTML = P.events.map(e => `<div class="sc ev" id="ev${e.i}"><div class="ct">${U.ev_head} ${e.i + 1}/${P.events.length}</div><div class="card"><div class="row"><div class="k ${e.conf}">${esc(e.status)}</div><div class="d">${esc(e.date)}</div></div><div class="rg">${esc(e.region)}</div><div class="tx">${esc(e.text)}</div><div class="sr">${esc(U.ev_src)}: ${esc(e.src)}</div></div></div>`).join("");
+      $("#o-a").textContent = U.out_a; $("#o-b").textContent = U.out_b; $("#o-u").textContent = U.out_site; $("#o-tg").textContent = U.out_tg; $("#o-pl").textContent = U.out_plate;
+      $("#foot").textContent = U.out_foot;
+      $("#lab").innerHTML = P.labels.map(l => `<div class="rl" style="left:${l.px}px;top:${l.py}px"><b style="color:${l.v === null ? "#aab4ba" : "#fff"}">${l.v === null ? "–" : l.v}</b><i>${esc(l.name)}</i></div>`).join("");
+      $("#pins").innerHTML = `<div class="pin hz" id="pin-hz" style="left:${P.hz.px}px;top:${P.hz.py}px"><div class="c"></div><div class="r" id="pin-hz-r"></div></div>`
+        + P.events.map(e => `<div class="pin" id="pin${e.i}" style="left:${e.px}px;top:${e.py}px"><div class="c"></div><div class="r" id="pin${e.i}r" style="left:${-e.r}px;top:${-e.r}px;width:${e.r * 2}px;height:${e.r * 2}px"></div></div>`).join("");
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const clamp = v => Math.max(0, Math.min(1, v));
+      const inOut = u => u < .5 ? 4*u*u*u : 1 - Math.pow(-2*u + 2, 3) / 2;
+      const outC = u => 1 - Math.pow(1 - u, 3);
+      const scene = Object.fromEntries(P.scenes.map(s => [s.id, s]));
+      const camEl = $("#cam");
+      function camAt(t) {
+        const k = P.cam; let i = 0;
+        while (i < k.length - 1 && k[i + 1].t <= t) i++;
+        const a = k[i], b = k[Math.min(i + 1, k.length - 1)];
+        const u = b.t > a.t ? inOut(clamp((t - a.t) / (b.t - a.t))) : 0;
+        // интерполяция в логарифме масштаба, чтобы наезд был ровным
+        const s = Math.exp(Math.log(a.s) + (Math.log(b.s) - Math.log(a.s)) * u);
+        const L = (x, y) => x + (y - x) * u;
+        const px = L(a.px, b.px), py = L(a.py, b.py), sx = L(a.sx, b.sx), sy = L(a.sy, b.sy);
+        return { s, x: sx - s * px, y: sy - s * py };
+      }
+      // плавная плашка сцены: появление 0.4 с, исчезновение 0.3 с
+      function vis(s, t, inD = .4, outD = .3, lag = .1) {
+        return clamp((t - s.t0 - lag) / inD) * clamp((s.t1 - t) / outD);
+      }
+      function setSc(q, u, dy = 36) { const e = $(q); e.style.opacity = u; e.style.transform = `translateY(${(1 - u) * dy}px)`; }
+      function draw(t) {
+        const c = camAt(t);
+        camEl.style.transform = `translate(${c.x}px,${c.y}px) scale(${c.s})`;
+        // подписи регионов: видны на общем плане, гаснут при наезде; масштаб компенсируется
+        const lab = $("#lab"); const lu = clamp(1 - (c.s - 1) / .6);
+        lab.style.opacity = lu * (t < .5 ? clamp(t / .5) : 1);
+        lab.querySelectorAll(".rl").forEach(e => { e.style.transform = `translate(-50%,-50%) scale(${1 / c.s})`; });
+        $("#dim").style.opacity = (c.s > 1.2 ? .3 : (t < scene.map.t0 ? .2 : .1));
+        // пины
+        const d = scene.drivers, hv = clamp((t - d.t0 - 1.2) / .5) * clamp((d.t1 - t) / .3);
+        const hp = $("#pin-hz"); hp.style.opacity = hv; hp.style.transform = `scale(${1 / c.s})`;
+        const hr = $("#pin-hz-r"); const ph = (t * .9) % 1; const rr = 14 + 46 * ph; hr.style.cssText = `left:${-rr}px;top:${-rr}px;width:${rr * 2}px;height:${rr * 2}px;opacity:${.8 * (1 - ph)}`;
+        P.events.forEach(e => {
+          const s = scene["ev" + e.i], v = clamp((t - s.t0 - .8) / .4) * clamp((s.t1 - t) / .3);
+          const p = $("#pin" + e.i); p.style.opacity = v;
+          const q = p.firstChild; q.style.transform = `scale(${1 / c.s})`;
+        });
+        // хук
+        const h = scene.hook, hu = vis(h, t, .3, .3, 0);
+        setSc("#s-hook", hu, 24);
+        const nu = outC(clamp((t - .1) / 1.1));
+        $("#h-n").textContent = Math.round(P.world * nu); $("#h-n").style.color = P.wcol;
+        // карта + бары
+        const m = scene.map; setSc("#s-map", vis(m, t, .4, .3, .5), 30);
+        P.rows.forEach((r, i) => { if (r.v === null) return;
+          const b = $("#m-rows").children[i].querySelector(".bar"); b.style.width = (r.v * outC(clamp((t - m.t0 - .8 - i * .35) / .7))) + "%"; });
+        // драйверы
+        setSc("#s-drv", clamp((t - d.t0 - .1) / .3) * clamp((d.t1 - t) / .3), 20);
+        setSc("#d-hz", clamp((t - d.t0 - 1.4) / .5) * clamp((d.t1 - t) / .3), 30);
+        setSc("#d-df", clamp((t - d.t0 - 3.4) / .5) * clamp((d.t1 - t) / .3), 30);
+        // события
+        P.events.forEach(e => { const s = scene["ev" + e.i]; setSc("#ev" + e.i, vis(s, t, .45, .3, .7), 40); });
+        // итог
+        const o = scene.outro; setSc("#s-out", vis(o, t, .5, 0.01, .5), 30);
+        $("#foot").style.opacity = clamp((t - o.t0 - 1.6) / .5);
+      }
+      const clock = { t: 0 };
+      tl.fromTo(clock, { t: 0 }, { t: P.total, duration: P.total, ease: "none", immediateRender: false,
+        onUpdate: () => draw(clock.t) }, 0);
+      draw(0);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
