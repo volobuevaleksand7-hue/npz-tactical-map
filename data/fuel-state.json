@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-14T16:16:24Z",
+    "generated_at": "2026-10-14T20:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -64,10 +64,10 @@
       "status": "down",
       "status_since": "2026-10-06",
       "est_output_pct": 0,
-      "damage": "В результате массированной атаки беспилотников зафиксированы возгорания на территории завода. По данным местных властей, пострадали 6 человек. Ночь 5-6 октября: новая атака, повреждены основные установки первичной переработки и резервуарный парк.",
+      "damage": "Вице-премьер Александр Новак 14.10 со ссылкой на Минэнерго и компании заявил об атаке БПЛА на НПЗ в Рязанской области; масштаб повреждений не назван. Губернатор Павел Малков сообщил, что пострадавших и повреждений нет.",
       "note": "На 8 октября завод остаётся полностью остановлен после пятой атаки. Один из главных источников снабжения Рязанской области и Москвы. Волна повторных ударов; критически влияет на регион и столицу.",
-      "source_url": "https://news.liga.net/war/news/v-rossii-iz-za-ataki-bespilotnikov-gorit-krupneishaya-neftebaza-podmoskovya-video",
-      "confidence": "confirmed"
+      "source_url": "https://verstka.media/aleksandr-novak-zayavil-ob-udarah-ukrainy-po-dvum-npz-vlasti-regionov-ob-etom-ne-soobshhali",
+      "confidence": "reported"
     },
     {
       "id": "moscow",
@@ -333,10 +333,10 @@
       "status": "down",
       "status_since": "2026-10-07",
       "est_output_pct": 0,
-      "damage": "Массированная атака БПЛА. Аэропорт закрыт. Вторая атака на регион за два дня (первая - 7 октября).",
+      "damage": "Вице-премьер Александр Новак 14.10 со ссылкой на Минэнерго и компании заявил об атаке БПЛА на НПЗ в Саратовской области; масштаб повреждений не назван. Местные СМИ сообщают о 68 сбитых над областью дронах. Власти региона о повреждениях завода не сообщали.",
       "note": "На 8 октября — завод остановлен. Завод поражен 5+ раз в 2026 году. Волна повторных ударов на вторичные установки (АВТ, гидротрейтинг); восстановление затруднено при санкциях.",
       "confidence": "reported",
-      "source_url": "https://www.ptoday.ru/15641-ataka-bpla-na-saratov-i-jengels-8-oktjabrja-zakryty-ajeroporty-trevoga-ohvatila-poltora-desjatka-regionov.html"
+      "source_url": "https://www.kommersant.ru/doc/9026634"
     },
     {
       "id": "orsk",
@@ -952,6 +952,16 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-14",
+      "text": "Удар по Рязанский НПЗ (Рязань): Вице-премьер Александр Новак 14.10 со ссылкой на Минэнерго и компании заявил об атаке БПЛА на НПЗ в ",
+      "source_url": "https://verstka.media/aleksandr-novak-zayavil-ob-udarah-ukrainy-po-dvum-npz-vlasti-regionov-ob-etom-ne-soobshhali"
+    },
+    {
+      "date": "2026-10-14",
+      "text": "Удар по Саратовский НПЗ (Саратов): Вице-премьер Александр Новак 14.10 со ссылкой на Минэнерго и компании заявил об атаке БПЛА на НПЗ в ",
+      "source_url": "https://www.kommersant.ru/doc/9026634"
+    },
     {
       "date": "2026-10-14",
       "text": "Новосибирская область: на АЗС «Газпром нефть» сняты лимиты на отпуск бензина, возвращена постоплата (решение регионального штаба по топливообеспечению). Данных о снятии лимитов на остальных сетях нет.",
