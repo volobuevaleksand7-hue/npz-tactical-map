@@ -257,7 +257,7 @@ def eia(series_id, scale=1000.0):
         q = [("api_key", "DEMO_KEY"), ("frequency", "weekly"), ("data[0]", "value"),
              ("facets[series][]", series_id), ("sort[0][column]", "period"),
              ("sort[0][direction]", "desc"), ("length", 300)]
-        d = get_json("https://api.eia.gov/v2/petroleum/stoc/wstk/data/?" + urllib.parse.urlencode(q))
+        d = get_json("https://api.eia.gov/v2/petroleum/stoc/wstk/data/?" + urllib.parse.urlencode(q), retries=6)  # DEMO_KEY: общий лимит, 429 частый
         rows = d["response"]["data"]
         out = [[r["period"], round(float(r["value"]) / scale, 3)] for r in rows if r.get("value") not in (None, "")]
         if not out:
@@ -315,6 +315,13 @@ def gdelt(region):
         out = {}
         for p in tl[0]["data"]:
             out[iso(parse_day(p["date"][:8]))] = round(float(p["value"]), 5)
+        # GDELT не отдаёт дни без совпадений: пропуск = 0 (иначе as_of застревает на последнем дне с
+        # упоминанием и ряд ложно «устаревает», а 7-дн. среднее считается по записям, а не по дням).
+        # Конец окна — вчера: запрос прошёл успешно, значит, источник жив.
+        if out:
+            d0, d1 = dt.date.fromisoformat(min(out)), TODAY - dt.timedelta(days=1)
+            for n in range((d1 - d0).days + 1):
+                out.setdefault(iso(d0 + dt.timedelta(days=n)), 0.0)
         return sorted([k, v] for k, v in out.items())
     return run
 
@@ -449,6 +456,16 @@ def main():
         if sp.get("note"):
             ent["note"] = sp["note"]
         t0 = time.time()
+        # GDELT — суточный ряд, а лимит 429 жёсткий: свежий (<20 ч) успешный ряд не перекачиваем
+        if sid.startswith("gdelt_") and not args.only and not old.get("error") and old.get("fetched_at"):
+            try:
+                age_h = (dt.datetime.now(dt.timezone.utc) - dt.datetime.fromisoformat(old["fetched_at"].replace("Z", "+00:00"))).total_seconds() / 3600
+            except Exception:
+                age_h = 99
+            if age_h < 20 and old.get("history"):
+                series[sid] = old
+                log(f"SKIP {sid:38s} свежий кэш ({age_h:.1f} ч)")
+                continue
         try:
             fn = sp["fn"]
             pts = fn() if sid != "gpr_daily" else fn()
@@ -460,14 +477,15 @@ def main():
             if not hist:
                 raise RuntimeError("пустой ряд после слияния")
             v, as_of = last_value(sp, hist)
-            ent.update(as_of=as_of, value=v, error=None, history=hist)
+            ent.update(as_of=as_of, value=v, error=None, history=hist,
+                       fetched_at=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
             ent["stale"] = is_stale(as_of, sp["stale_days"])
             ok += 1
             log(f"OK   {sid:38s} {as_of} {v} ({len(hist)} pts, {time.time()-t0:.1f}s)")
         except Exception as e:
             bad += 1
             msg = f"{type(e).__name__}: {e}"[:300]
-            ent.update(error=msg, as_of=old.get("as_of"), value=old.get("value"),
+            ent.update(error=msg, as_of=old.get("as_of"), value=old.get("value"), fetched_at=old.get("fetched_at"),
                        history=old.get("history", []))
             ent["stale"] = is_stale(old["as_of"], sp["stale_days"]) if old.get("as_of") else True
             log(f"FAIL {sid:38s} {msg}")
