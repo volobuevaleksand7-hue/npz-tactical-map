@@ -222,3 +222,10 @@ select{width:100%;background:var(--paper2);border:1px solid var(--line);padding:
   .map-toolbar .lg{display:none}.map-toolbar .sh{display:inline}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* переключатель языка */
+.lang-sw{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden;font-size:11px;font-weight:700}
+.lang-sw b,.lang-sw a{padding:5px 9px;text-decoration:none;min-width:34px;text-align:center}
+.lang-sw b{background:var(--ink);color:var(--paper)}
+.lang-sw a:hover{background:var(--paper2)}
+.head-meta a+a{margin-top:2px}
