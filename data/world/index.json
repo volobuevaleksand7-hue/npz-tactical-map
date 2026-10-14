@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-14T01:58:14Z",
+ "generated_at": "2026-10-14T05:09:42Z",
  "methodology_version": "0.2",
  "brand": {
   "short": "ИТН",
@@ -8,23 +8,21 @@
   "en": "Fuel Tension Index"
  },
  "world": {
-  "value": 79,
-  "level": "critical",
-  "level_ru": "критично",
-  "delta_1d": 0,
-  "coverage": 0.93,
-  "regions_missing": [
-   "latin_america"
-  ]
+  "value": 67,
+  "level": "crisis",
+  "level_ru": "кризис",
+  "delta_1d": -12,
+  "coverage": 1.0,
+  "regions_missing": []
  },
  "regions": {
   "north_america": {
    "name": "Северная Америка",
-   "value": 78,
-   "level": "critical",
-   "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": 70,
+   "level": "crisis",
+   "level_ru": "кризис",
+   "delta_1d": -8,
+   "coverage": 0.65,
    "weight_world": 0.24,
    "components": [
     {
@@ -39,10 +37,10 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": 56.3,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "доля статей о дефиците топлива 0,0017% (7-дн. среднее; p56 к 71 дн.)",
-     "as_of": "2026-10-10",
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 86 дн.)",
+     "as_of": "2026-10-13",
      "source": "GDELT DOC 2.0"
     },
     {
@@ -66,20 +64,20 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": null,
+     "score": 99.2,
      "weight": 0.1,
-     "raw": "нет свежих рядов цен",
-     "as_of": null,
-     "source": null
+     "raw": "Brent 125,44 $/барр. (p100); ULSD NYH 4,71 $/гал. (p99), процентиль к 10 годам",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": null,
+     "score": 95.7,
      "weight": 0.05,
-     "raw": "нет свежих рядов Brent/ULSD",
-     "as_of": null,
-     "source": null
+     "raw": "ULSD×42 − Brent = 72,5 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "georisk",
@@ -103,11 +101,11 @@
   },
   "east_asia": {
    "name": "Восточная Азия и АТР",
-   "value": 85,
+   "value": 76,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.65,
+   "delta_1d": -9,
+   "coverage": 0.8,
    "weight_world": 0.3,
    "components": [
     {
@@ -122,10 +120,10 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": 60.6,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "доля статей о дефиците топлива 0,0003% (7-дн. среднее; p61 к 71 дн.)",
-     "as_of": "2026-10-10",
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 86 дн.)",
+     "as_of": "2026-10-13",
      "source": "GDELT DOC 2.0"
     },
     {
@@ -149,20 +147,20 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": null,
+     "score": 99.2,
      "weight": 0.1,
-     "raw": "нет свежих рядов цен",
-     "as_of": null,
-     "source": null
+     "raw": "Brent 125,44 $/барр. (p100); ULSD NYH 4,71 $/гал. (p99), процентиль к 10 годам",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": null,
+     "score": 95.7,
      "weight": 0.05,
-     "raw": "нет свежих рядов Brent/ULSD",
-     "as_of": null,
-     "source": null
+     "raw": "ULSD×42 − Brent = 72,5 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "georisk",
@@ -186,11 +184,11 @@
   },
   "europe": {
    "name": "Европа",
-   "value": 78,
-   "level": "critical",
-   "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.8,
+   "value": 67,
+   "level": "crisis",
+   "level_ru": "кризис",
+   "delta_1d": -11,
+   "coverage": 0.95,
    "weight_world": 0.15,
    "components": [
     {
@@ -198,17 +196,17 @@
      "label": "Узкие места (проливы)",
      "score": 52.7,
      "weight": 0.3,
-     "raw": "Баб-эль-Мандеб: 9,0 танк./сут. при медиане года 12,0 (7-дн. среднее); Суэц: 15,6 танк./сут. при медиане года 16,0 (7-дн. среднее); Босфор: 12,1 танк./сут. при медиане года 21,0 (7-дн. среднее)",
+     "raw": "Баб-эль-Мандеб: 9,0 танк./сут. при медиане года 12,0 (7-дн. среднее); Суэц: 15,6 танк./сут. при медиане года 16,0 (7-дн. среднее); Босфор: 12,1 танк./сут. при медиане года 21,0 (7-дн. среднее); Гибралтарский пролив: 42,1 танк./сут. при медиане года 45,0 (7-дн. среднее)",
      "as_of": "2026-10-04",
      "source": "IMF PortWatch"
     },
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": 94.4,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "доля статей о дефиците топлива 0,0085% (7-дн. среднее; p94 к 71 дн.)",
-     "as_of": "2026-10-10",
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 86 дн.)",
+     "as_of": "2026-10-13",
      "source": "GDELT DOC 2.0"
     },
     {
@@ -232,20 +230,20 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": null,
+     "score": 99.2,
      "weight": 0.1,
-     "raw": "нет свежих рядов цен",
-     "as_of": null,
-     "source": null
+     "raw": "Brent 125,44 $/барр. (p100); ULSD NYH 4,71 $/гал. (p99), процентиль к 10 годам",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": null,
+     "score": 95.7,
      "weight": 0.05,
-     "raw": "нет свежих рядов Brent/ULSD",
-     "as_of": null,
-     "source": null
+     "raw": "ULSD×42 − Brent = 72,5 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "georisk",
@@ -269,11 +267,11 @@
   },
   "middle_east": {
    "name": "Ближний Восток",
-   "value": 91,
-   "level": "critical",
-   "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": 70,
+   "level": "crisis",
+   "level_ru": "кризис",
+   "delta_1d": -21,
+   "coverage": 0.65,
    "weight_world": 0.09,
    "components": [
     {
@@ -288,10 +286,10 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": 94.4,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "доля статей о дефиците топлива 0,0012% (7-дн. среднее; p94 к 71 дн.)",
-     "as_of": "2026-10-10",
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 86 дн.)",
+     "as_of": "2026-10-13",
      "source": "GDELT DOC 2.0"
     },
     {
@@ -315,20 +313,20 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": null,
+     "score": 99.2,
      "weight": 0.1,
-     "raw": "нет свежих рядов цен",
-     "as_of": null,
-     "source": null
+     "raw": "Brent 125,44 $/барр. (p100); ULSD NYH 4,71 $/гал. (p99), процентиль к 10 годам",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": null,
+     "score": 95.7,
      "weight": 0.05,
-     "raw": "нет свежих рядов Brent/ULSD",
-     "as_of": null,
-     "source": null
+     "raw": "ULSD×42 − Brent = 72,5 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "georisk",
@@ -352,11 +350,11 @@
   },
   "south_asia": {
    "name": "Южная Азия",
-   "value": 83,
-   "level": "critical",
-   "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": 70,
+   "level": "crisis",
+   "level_ru": "кризис",
+   "delta_1d": -13,
+   "coverage": 0.65,
    "weight_world": 0.07,
    "components": [
     {
@@ -371,10 +369,10 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": 69.0,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "доля статей о дефиците топлива 0,0011% (7-дн. среднее; p69 к 71 дн.)",
-     "as_of": "2026-10-10",
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 86 дн.)",
+     "as_of": "2026-10-13",
      "source": "GDELT DOC 2.0"
     },
     {
@@ -398,20 +396,20 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": null,
+     "score": 99.2,
      "weight": 0.1,
-     "raw": "нет свежих рядов цен",
-     "as_of": null,
-     "source": null
+     "raw": "Brent 125,44 $/барр. (p100); ULSD NYH 4,71 $/гал. (p99), процентиль к 10 годам",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": null,
+     "score": 95.7,
      "weight": 0.05,
-     "raw": "нет свежих рядов Brent/ULSD",
-     "as_of": null,
-     "source": null
+     "raw": "ULSD×42 − Brent = 72,5 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "georisk",
@@ -435,29 +433,29 @@
   },
   "latin_america": {
    "name": "Латинская Америка",
-   "value": null,
-   "level": null,
-   "level_ru": "мало данных",
+   "value": 37,
+   "level": "tense",
+   "level_ru": "напряжённо",
    "delta_1d": null,
-   "coverage": 0.2,
+   "coverage": 0.65,
    "weight_world": 0.07,
    "components": [
     {
      "id": "chokepoints",
      "label": "Узкие места (проливы)",
-     "score": null,
+     "score": 17.2,
      "weight": 0.3,
-     "raw": "нет контролируемых проливов в регионе или нет свежих данных",
-     "as_of": null,
-     "source": null
+     "raw": "Панамский канал: 12,1 танк./сут. при медиане года 14,0 (14-дн. среднее); Юкатанский пролив: 26,3 танк./сут. при медиане года 28,0 (7-дн. среднее)",
+     "as_of": "2026-10-04",
+     "source": "IMF PortWatch"
     },
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": 54.9,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "доля статей о дефиците топлива 0,0001% (7-дн. среднее; p55 к 71 дн.)",
-     "as_of": "2026-10-10",
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 86 дн.)",
+     "as_of": "2026-10-13",
      "source": "GDELT DOC 2.0"
     },
     {
@@ -481,20 +479,20 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": null,
+     "score": 99.2,
      "weight": 0.1,
-     "raw": "нет свежих рядов цен",
-     "as_of": null,
-     "source": null
+     "raw": "Brent 125,44 $/барр. (p100); ULSD NYH 4,71 $/гал. (p99), процентиль к 10 годам",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": null,
+     "score": 95.7,
      "weight": 0.05,
-     "raw": "нет свежих рядов Brent/ULSD",
-     "as_of": null,
-     "source": null
+     "raw": "ULSD×42 − Brent = 72,5 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "georisk",
@@ -518,11 +516,11 @@
   },
   "russia_cis": {
    "name": "Россия и СНГ",
-   "value": 63,
+   "value": 54,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "delta_1d": -9,
+   "coverage": 0.65,
    "weight_world": 0.04,
    "components": [
     {
@@ -537,10 +535,10 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": 74.6,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "доля статей о дефиците топлива 0,0005% (7-дн. среднее; p75 к 71 дн.)",
-     "as_of": "2026-10-10",
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 86 дн.)",
+     "as_of": "2026-10-13",
      "source": "GDELT DOC 2.0"
     },
     {
@@ -564,20 +562,20 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": null,
+     "score": 99.2,
      "weight": 0.1,
-     "raw": "нет свежих рядов цен",
-     "as_of": null,
-     "source": null
+     "raw": "Brent 125,44 $/барр. (p100); ULSD NYH 4,71 $/гал. (p99), процентиль к 10 годам",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": null,
+     "score": 95.7,
      "weight": 0.05,
-     "raw": "нет свежих рядов Brent/ULSD",
-     "as_of": null,
-     "source": null
+     "raw": "ULSD×42 − Brent = 72,5 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "georisk",
@@ -601,11 +599,11 @@
   },
   "africa": {
    "name": "Африка",
-   "value": 32,
+   "value": 33,
    "level": "tense",
    "level_ru": "напряжённо",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "delta_1d": 1,
+   "coverage": 0.65,
    "weight_world": 0.04,
    "components": [
     {
@@ -613,17 +611,17 @@
      "label": "Узкие места (проливы)",
      "score": 7.9,
      "weight": 0.3,
-     "raw": "Мыс Доброй Надежды: 18,7 танк./сут. при медиане года 18,0 (рост к медиане)",
+     "raw": "Мыс Доброй Надежды: 18,7 танк./сут. при медиане года 18,0 (рост к медиане); Гибралтарский пролив: 42,1 танк./сут. при медиане года 45,0 (7-дн. среднее)",
      "as_of": "2026-10-04",
      "source": "IMF PortWatch"
     },
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": 62.0,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "доля статей о дефиците топлива 0,0002% (7-дн. среднее; p62 к 71 дн.)",
-     "as_of": "2026-10-10",
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 86 дн.)",
+     "as_of": "2026-10-13",
      "source": "GDELT DOC 2.0"
     },
     {
@@ -647,20 +645,20 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": null,
+     "score": 99.2,
      "weight": 0.1,
-     "raw": "нет свежих рядов цен",
-     "as_of": null,
-     "source": null
+     "raw": "Brent 125,44 $/барр. (p100); ULSD NYH 4,71 $/гал. (p99), процентиль к 10 годам",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": null,
+     "score": 95.7,
      "weight": 0.05,
-     "raw": "нет свежих рядов Brent/ULSD",
-     "as_of": null,
-     "source": null
+     "raw": "ULSD×42 − Brent = 72,5 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-10-06",
+     "source": "FRED / EIA"
     },
     {
      "id": "georisk",
