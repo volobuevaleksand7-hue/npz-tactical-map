@@ -949,7 +949,8 @@ def describe(date, sel, day, refs, segs, clips, broll):
         elif len(names) > 1:
             head = "Удары по " + in_title(dative_object(names[0])) + " и " + in_title(dative_object(names[1]))
     else:
-        head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по РФ"
+        # 14.10.2026, владелец: «писать за день сколько» — вместо «N ударов по РФ»
+        head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} за {'день' if EVENING else 'сутки'}"
     tail = f" · {'вечер ' if EVENING else ''}{span_short(date)} #shorts"
     if len(head) + len(tail) > 100:
         head = head[:100 - len(tail) - 1].rstrip(" ,.;:—-") + "…"
@@ -958,8 +959,9 @@ def describe(date, sel, day, refs, segs, clips, broll):
     for s in sel:
         lines.append(f"— {s.get('city')}: {object_name(s, refs)}. {what_happened(s)}")
     n_fuel = sum(1 for s in day if s["cls"] == 2)
-    lines += ["", f"Всего за сутки: {n} {G.plural(n, 'удар', 'удара', 'ударов')}" + (
-              f", из них {n_fuel} — по НПЗ, нефтепроводам и энергетике." if n_fuel else ".")]
+    if not URGENT:   # в срочном day — только удары молнии, «всего за сутки: 2» врёт (14.10.2026)
+        lines += ["", f"Всего за сутки: {n} {G.plural(n, 'удар', 'удара', 'ударов')}" + (
+                  f", из них {n_fuel} — по НПЗ, нефтепроводам и энергетике." if n_fuel else ".")]
     src = [c["src"] for c in list(clips) + list(broll) if c]
     if src:
         lines += ["", "Кадры: открытые Telegram-каналы:"] + [f"— {u}" for u in src]
