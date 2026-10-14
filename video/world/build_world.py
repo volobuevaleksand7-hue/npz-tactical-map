@@ -323,7 +323,7 @@ def compose(lang, build, date=None):
     sfx.append({"name": "impact", "t": round(sc["outro"]["t0"] + 0.3, 2)})
     plan = {"date": date, "total": total, "sfx": sfx,
             "voice": [{"file": f"voice/{s['id']}.mp3", "t": s["voice_t"]} for s in scenes],
-            "poster_t": 1.0, "texts": T, "ui": U}
+            "poster_t": 1.6, "texts": T, "ui": U}
     (build / "plan.json").write_text(json.dumps(plan, ensure_ascii=False, indent=1), encoding="utf-8")
     (build / "description.txt").write_text(describe(lang, D, date), encoding="utf-8")
     (build / "narration.json").write_text(json.dumps(T, ensure_ascii=False, indent=1), encoding="utf-8")
