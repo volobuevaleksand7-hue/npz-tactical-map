@@ -249,7 +249,7 @@ $("nowBanner").addEventListener("click",function(){var e=NOWLIST[nowI];if(e)open
 /* индикатор и панели */
 function renderSelect(){
   var h='<option value="">'+t("allWorld")+''+(IDX&&IDX.world&&typeof IDX.world.value==="number"?" · "+IDX.world.value:"")+'</option>';
-  REGIONS.forEach(function(r){var v=regionVal(r[0]);h+='<option value="'+r[0]+'"'+(SEL===r[0]?" selected":"")+'>'+esc(r[1])+(IDX?" · "+(v===null?"мало данных":v):"")+'</option>';});
+  REGIONS.forEach(function(r){var v=regionVal(r[0]);h+='<option value="'+r[0]+'"'+(SEL===r[0]?" selected":"")+'>'+esc(r[1])+(IDX?" · "+(v===null?t("low"):v):"")+'</option>';});
   $("regionSelect").innerHTML=h;
 }
 function setNeedle(v){
@@ -260,46 +260,46 @@ function setNeedle(v){
   n.setAttribute("visibility","visible");
 }
 function renderGauge(){
-  var src=null,title="Мировой индекс";
-  if(IDX){src=SEL?regionInfo(SEL):IDX.world;title=SEL?(RNAME[SEL]||SEL):"Мировой индекс";}
+  var src=null,title=t("world");
+  if(IDX){src=SEL?regionInfo(SEL):IDX.world;title=SEL?(RNAME[SEL]||SEL):t("world");}
   $("gaugeTitle").textContent=title;
   $("noIdx").hidden=!!IDX;
   var v=src&&typeof src.value==="number"?src.value:null;
   $("gaugeNum").firstChild.nodeValue=v===null?"—":String(v);
-  $("gaugeCap").textContent=v===null?(IDX?"мало данных":"нет данных"):"из 100";
+  $("gaugeCap").textContent=v===null?(IDX?t("low"):t("nodata")):t("of100");
   setNeedle(v);
   var dot=document.querySelector("#gaugeStatus .status-dot"),lv=v===null?null:levelOf(v);
   var d=src&&typeof src.delta_1d==="number"?src.delta_1d:null;
-  $("gaugeStatus").innerHTML='<span class="status-dot" style="background:'+(lv?LEVELS[lv][1]:"#9a968a")+'"></span>'+(lv?LEVELS[lv][0]:(IDX?"мало данных":"нет данных"))+(d!==null&&v!==null?'<span class="delta '+(d>0?"up":d<0?"down":"")+'">'+(d>0?"+":"")+d+' за сутки</span>':'');
+  $("gaugeStatus").innerHTML='<span class="status-dot" style="background:'+(lv?LEVELS[lv][1]:"#9a968a")+'"></span>'+(lv?LEVELS[lv][0]:(IDX?t("low"):t("nodata")))+(d!==null&&v!==null?'<span class="delta '+(d>0?"up":d<0?"down":"")+'">'+(d>0?"+":"")+d+' '+t("perDay")+'</span>':'');
   var m="";
-  if(src&&typeof src.coverage==="number")m+='покрытие данных <b>'+Math.round(src.coverage*100)+'%</b><br>';
-  if(IDX&&IDX.generated_at)m+='расчёт: <b>'+fmtUtc(IDX.generated_at)+'</b><br>';
-  if(IDX&&IDX.methodology_version)m+='методика: <b>v'+esc(IDX.methodology_version)+'</b>';
+  if(src&&typeof src.coverage==="number")m+=t("cover")+' <b>'+Math.round(src.coverage*100)+'%</b><br>';
+  if(IDX&&IDX.generated_at)m+=t("calc")+' <b>'+fmtUtc(IDX.generated_at)+'</b><br>';
+  if(IDX&&IDX.methodology_version)m+=t("meth")+' <b>v'+esc(IDX.methodology_version)+'</b>';
   $("gaugeMeta").innerHTML=m;
 }
 function renderComps(){
-  var title=SEL?"Компоненты · "+(RNAME[SEL]||SEL):"Компоненты · выберите регион";
+  var title=SEL?t("comps")+" · "+(RNAME[SEL]||SEL):t("compsPick");
   $("compTitle").textContent=title;
   var box=$("compList");
-  if(!IDX){box.innerHTML='<p class="note">Индекс считается — данных пока нет.</p>';return;}
-  if(!SEL){box.innerHTML='<p class="note">Выберите регион в списке или нажмите на страну на карте: здесь появится разбивка по компонентам (балл × вес).</p>';return;}
-  var info=regionInfo(SEL);if(!info){box.innerHTML='<p class="note">Нет данных по региону.</p>';return;}
+  if(!IDX){box.innerHTML='<p class="note">'+t("computing")+'</p>';return;}
+  if(!SEL){box.innerHTML='<p class="note">'+t("compsHint")+'</p>';return;}
+  var info=regionInfo(SEL);if(!info){box.innerHTML='<p class="note">'+t("noReg")+'</p>';return;}
   var have={};(info.components||[]).forEach(function(c){have[c.id]=c;});
   var h="";
   COMPS.forEach(function(b){
     var c=have[b[0]];
-    if(c){
+    if(c&&typeof c.score==="number"){
       var w=Math.round((typeof c.weight==="number"?c.weight:b[2]/100)*100),col=LEVELS[levelOf(c.score)][1];
-      h+='<div class="comp-row"><div class="comp-top"><strong>'+esc(c.label||b[1])+'</strong><span class="num">'+Math.round(c.score)+' × '+w+'%</span></div><div class="comp-bar"><span style="width:'+Math.max(2,Math.min(100,c.score))+'%;background:'+col+'"></span></div><div class="comp-sub"><span>'+esc(c.raw||"")+'</span><span>вклад '+(c.score*(c.weight||b[2]/100)).toFixed(1)+'</span></div></div>';
+      h+='<div class="comp-row"><div class="comp-top"><strong>'+esc(EN?b[1]:(c.label||b[1]))+'</strong><span class="num">'+Math.round(c.score)+' × '+w+'%</span></div><div class="comp-bar"><span style="width:'+Math.max(2,Math.min(100,c.score))+'%;background:'+col+'"></span></div><div class="comp-sub"><span>'+(EN?esc(c.raw_en||[c.source,c.as_of].filter(Boolean).join(" · ")):esc(c.raw||""))+'</span><span>'+t("contrib")+' '+(c.score*(c.weight||b[2]/100)).toFixed(1)+'</span></div></div>';
     }else{
-      h+='<div class="comp-row comp-miss"><div class="comp-top"><strong>'+esc(b[1])+'</strong><span>нет данных</span></div><div class="comp-bar"></div><div class="comp-sub"><span>вес '+b[2]+'% не перераспределяется</span></div></div>';
+      h+='<div class="comp-row comp-miss"><div class="comp-top"><strong>'+esc(b[1])+'</strong><span>'+t("nodata")+'</span></div><div class="comp-bar"></div><div class="comp-sub"><span>'+t("wNoRedist",{w:b[2]})+'</span></div></div>';
     }
   });
   box.innerHTML=h;
 }
 function renderAll(){renderBrand();placeChoke();renderSelect();renderGauge();renderComps();restyle();
-  var t=IDX&&IDX.generated_at?"Срез: "+fmtUtc(IDX.generated_at):"Индекс: данных пока нет";$("headTime").textContent=t;
-  $("methodVer").textContent=IDX&&IDX.methodology_version?"версия методики "+IDX.methodology_version:"";}
+  var ht=IDX&&IDX.generated_at?t("slice")+fmtUtc(IDX.generated_at):t("idxNone");$("headTime").textContent=ht;
+  $("methodVer").textContent=IDX&&IDX.methodology_version?t("methVer")+IDX.methodology_version:"";}
 function selectRegion(r,fit){
   if(fit)touched=true;
   SEL=r||null;renderSelect();renderGauge();renderComps();restyle();
