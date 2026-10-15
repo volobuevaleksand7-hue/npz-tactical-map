@@ -109,16 +109,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": true,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1792090061,
-      "source_text": "15.10.2026 14:26 МСК\nКурская область и близлежащие Авиационная ракетно бомбовая опасность\n\n15.10.2026 21:47 МСК\nСтуденок, Курская область - пролёты БПЛА на г.Железногорск"
+      "source_text": "15.10.2026 21:47 МСК\nСтуденок, Курская область - пролёты БПЛА на г.Железногорск"
     },
     "Костромская область": {
       "bpla": false,
@@ -693,7 +693,7 @@
     "Псковская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -705,9 +705,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1792098891,
-      "source_text": "16.10.2026 00:14 МСК\nПсковская область В том числе Псков внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1792106916,
+      "source_text": "16.10.2026 02:28 МСК\nКуньинский район Псковская область Фиксации БПЛА"
     }
   },
   "cities": [
@@ -7554,6 +7554,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1792105535,
       "source_text": "16.10.2026 02:05 МСК\nРуднянский район Краснинский район Смоленская область Фиксации БПЛА"
+    },
+    "RUS.57.6_1": {
+      "gid_2": "RUS.57.6_1",
+      "name_ru": "Куньинский район",
+      "region_ru": "Псковская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792106916,
+      "source_text": "16.10.2026 02:28 МСК\nКуньинский район Псковская область Фиксации БПЛА"
     }
   },
   "airport_markers": [
@@ -7581,6 +7603,54 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 99825,
+      "text": "Куньинский район\nПсковская область\nФиксации БПЛА",
+      "ts": 1792106916,
+      "time_label": "16.10.2026 02:28 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 99824,
+      "text": "Ленинградская область\nВнимание по БПЛА",
+      "ts": 1792106880,
+      "time_label": "16.10.2026 02:28 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 99823,
+      "text": "Псковская область\nОпасность по БПЛА",
+      "ts": 1792106856,
+      "time_label": "16.10.2026 02:27 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 291663,
+      "text": "Тревога по БпЛА в тыловых регионах сохраняется!",
+      "ts": 1792106543,
+      "time_label": "16.10.2026 02:22 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 90365,
+      "text": "Липовка, Рославльский район, Смоленская область - пролёты ударных БПЛА в сторону Рославль, Смоленск.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1792106488,
+      "time_label": "16.10.2026 02:21 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 99822,
+      "text": "Кстово\nНижегородская область\nПродолжается работа ПВО",
+      "ts": 1792106474,
+      "time_label": "16.10.2026 02:21 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 291662,
       "text": "Тверская область\nСмоленска область\nвнимание по бпла",
@@ -8172,54 +8242,6 @@
       "time_label": "16.10.2026 01:10 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 99786,
-      "text": "Ростовская область\nОтбой ракетной опасности",
-      "ts": 1792102227,
-      "time_label": "16.10.2026 01:10 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 90340,
-      "text": "Энергетик, Юрьевец, г.Владимир и близлежащие, опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792102192,
-      "time_label": "16.10.2026 01:09 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 90339,
-      "text": "Переславль и район, Ярославская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792102142,
-      "time_label": "16.10.2026 01:09 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 99785,
-      "text": "Владимир\nВладимирская область\nПродолжается работа ПВО",
-      "ts": 1792102064,
-      "time_label": "16.10.2026 01:07 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 90338,
-      "text": "Бояновичи, ​Хвастовичский район, Калужская область - продолжаются пролёты БПЛА со стороны Брянска в сторону Киевской трассы и далее на Козельск, Калуга.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792102063,
-      "time_label": "16.10.2026 01:07 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 291644,
-      "text": "Кантемировка и далее на восток опасность по БПЛА\nВоронежская область",
-      "ts": 1792102055,
-      "time_label": "16.10.2026 01:07 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -8229,13 +8251,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792106246,
-  "last_event_at": "2026-10-15T23:17:26Z",
-  "fetched_at": "2026-10-15T23:20:03.426420Z",
+  "timestamp": 1792106916,
+  "last_event_at": "2026-10-15T23:28:36Z",
+  "fetched_at": "2026-10-15T23:30:04.050471Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-10-15T23:20:03.426420Z",
-    "source_age_seconds": 157,
+    "generated_at": "2026-10-15T23:30:04.050471Z",
+    "source_age_seconds": 88,
     "city_count": 178,
     "region_count": 37,
     "feed_count": 80
