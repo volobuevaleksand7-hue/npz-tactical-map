@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1792061999,
-      "source_text": "15.10.2026 13:59 МСК\nБогатырь Ракетная опасность ДНР\n\n15.10.2026 13:04 МСК\nКрасноармейск и близлежащие Опасность по БПЛА Хорнет ДНР"
+      "last_event_ts": 1792065893,
+      "source_text": "15.10.2026 13:59 МСК\nБогатырь Ракетная опасность ДНР\n\n15.10.2026 15:04 МСК\nКурахово - Селидово и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     "Севастополь": {
       "bpla": false,
@@ -727,7 +727,7 @@
       "region": "Донецкая Народная Республика",
       "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -738,8 +738,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#dc2626",
-      "last_event_ts": 1792043978,
-      "source_text": "15.10.2026 08:59 МСК\nКурахово Ракетная опасность ДНР"
+      "last_event_ts": 1792065893,
+      "source_text": "15.10.2026 08:59 МСК\nКурахово Ракетная опасность ДНР\n\n15.10.2026 15:04 МСК\nКурахово - Селидово и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     {
       "key": "балаклава|севастополь",
@@ -960,6 +960,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1792063273,
       "source_text": "15.10.2026 14:21 МСК\nКурчанская и близлежащие Опасность по БПЛА Краснодарский край"
+    },
+    {
+      "key": "селидово|донецкая народная республика",
+      "name": "Селидово",
+      "lat": 48.1465,
+      "lon": 37.3022,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792065893,
+      "source_text": "15.10.2026 15:04 МСК\nКурахово - Селидово и близлежащие Опасность по БПЛА Хорнет ДНР"
     }
   ],
   "districts": {
@@ -1099,6 +1121,14 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 291400,
+      "text": "Курахово - Селидово и близлежащие\nОпасность по БПЛА Хорнет\nДНР",
+      "ts": 1792065893,
+      "time_label": "15.10.2026 15:04 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 291399,
       "text": "Чаплинка тревога по БПЛА Хорнет\nХерсонская область РФ",
@@ -1730,14 +1760,6 @@
       "time_label": "15.10.2026 12:25 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 99478,
-      "text": "Пермский край\nРакетная опасность",
-      "ts": 1792056268,
-      "time_label": "15.10.2026 12:24 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1747,14 +1769,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792065041,
-  "last_event_at": "2026-10-15T11:50:41Z",
-  "fetched_at": "2026-10-15T12:00:05.032444Z",
+  "timestamp": 1792065893,
+  "last_event_at": "2026-10-15T12:04:53Z",
+  "fetched_at": "2026-10-15T12:10:03.870103Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-15T12:00:05.032444Z",
-    "source_age_seconds": 564,
-    "city_count": 31,
+    "generated_at": "2026-10-15T12:10:03.870103Z",
+    "source_age_seconds": 310,
+    "city_count": 32,
     "region_count": 14,
     "feed_count": 80
   }
