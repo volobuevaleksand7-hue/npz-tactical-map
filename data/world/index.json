@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T13:36:07Z",
+ "generated_at": "2026-10-15T19:35:36Z",
  "methodology_version": "0.2",
  "brand": {
   "short": "ИТН",
@@ -8,20 +8,20 @@
   "en": "Fuel Tension Index"
  },
  "world": {
-  "value": 85,
+  "value": 87,
   "level": "critical",
   "level_ru": "критично",
-  "delta_1d": 0,
+  "delta_1d": 2,
   "coverage": 1.0,
   "regions_missing": []
  },
  "regions": {
   "north_america": {
    "name": "Северная Америка",
-   "value": 91,
+   "value": 95,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 0,
+   "delta_1d": 4,
    "coverage": 0.5,
    "weight_world": 0.24,
    "components": [
@@ -55,10 +55,10 @@
     {
      "id": "stocks",
      "label": "Запасы",
-     "score": 77.5,
+     "score": 92.9,
      "weight": 0.15,
-     "raw": "США сырая нефть: 424 млн барр. (p38; меньше = хуже); США дистилляты: 105 млн барр. (p7; меньше = хуже) (без сезонной поправки)",
-     "as_of": "2026-10-02",
+     "raw": "США сырая нефть: 416 млн барр. (p12; меньше = хуже); США дистилляты: 103 млн барр. (p2; меньше = хуже) (без сезонной поправки)",
+     "as_of": "2026-10-09",
      "source": "EIA API v2"
     },
     {
