@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1792059278,
-      "source_text": "15.10.2026 13:14 МСК\nРаздольненский район Черноморский район Ракетная опасность Республика Крым\n\n15.10.2026 13:09 МСК\nСевер Северо-Запад Республика Крым Опасность по БПЛА"
+      "last_event_ts": 1792059908,
+      "source_text": "15.10.2026 13:25 МСК\nРеспублика Крым Севастополь Ракетная опасность\n\n15.10.2026 13:20 МСК\nВитино Уютное Раздольное Евпатория Карьерное Саки и близлежащие Опасность по БПЛА Хорнет Республика Крым"
     },
     "Брянская область": {
       "bpla": false,
@@ -193,8 +193,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1792059248,
-      "source_text": "15.10.2026 13:14 МСК\nМежводное и близлежащие Ракетная опасность Республика Крым\n\n15.10.2026 13:09 МСК\nСевер Северо-Запад Республика Крым Опасность по БПЛА"
+      "last_event_ts": 1792059908,
+      "source_text": "15.10.2026 13:25 МСК\nРеспублика Крым Севастополь Ракетная опасность\n\n15.10.2026 13:20 МСК\nВитино Уютное Раздольное Евпатория Карьерное Саки и близлежащие Опасность по БПЛА Хорнет Республика Крым"
     },
     "Ростовская область": {
       "bpla": false,
@@ -464,28 +464,6 @@
       "source_text": "15.10.2026 11:16 МСК\nГорловка и близлежащие Опасность по БПЛА и возможным ФПВ ДНР"
     },
     {
-      "key": "амвросиевка|донецкая народная республика",
-      "name": "Амвросиевка",
-      "lat": 47.79062,
-      "lon": 38.47851,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792016724,
-      "source_text": "15.10.2026 01:25 МСК\nАмвросиевка и близлежащие, тревога по БпЛА повторно"
-    },
-    {
       "key": "севастополь|севастополь",
       "name": "Севастополь",
       "lat": 44.60795,
@@ -493,19 +471,19 @@
       "region": "Севастополь",
       "bpla": false,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792016920,
-      "source_text": "15.10.2026 01:28 МСК\nСевастополь и близлежащие Опасность по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1792059908,
+      "source_text": "15.10.2026 13:25 МСК\nРеспублика Крым Севастополь Ракетная опасность"
     },
     {
       "key": "скадовск|херсонская область",
@@ -880,13 +858,13 @@
       "fill": "#ea580c",
       "last_event_ts": 1792058686,
       "source_text": "15.10.2026 13:04 МСК\nКрасноармейск и близлежащие Опасность по БПЛА Хорнет ДНР"
-    }
-  ],
-  "districts": {
-    "UKR.20.1_1": {
-      "gid_2": "UKR.20.1_1",
-      "name_ru": "Севастополь",
-      "region_ru": "Севастополь",
+    },
+    {
+      "key": "саки|автономная республика крым",
+      "name": "Саки",
+      "lat": 45.13293,
+      "lon": 33.605237,
+      "region": "Автономная Республика Крым",
       "bpla": false,
       "bplaDim": false,
       "danger": true,
@@ -898,12 +876,34 @@
       "rocket_level": false,
       "aviation": false,
       "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792059641,
+      "source_text": "15.10.2026 13:20 МСК\nВитино Уютное Раздольное Евпатория Карьерное Саки и близлежащие Опасность по БПЛА Хорнет Республика Крым"
+    }
+  ],
+  "districts": {
+    "UKR.20.1_1": {
+      "gid_2": "UKR.20.1_1",
+      "name_ru": "Севастополь",
+      "region_ru": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792016920,
-      "source_text": "15.10.2026 01:28 МСК\nСевастополь и близлежащие Опасность по БПЛА"
+      "rocketOnRegion": true,
+      "fill": "#dc2626",
+      "last_event_ts": 1792059908,
+      "source_text": "15.10.2026 13:25 МСК\nРеспублика Крым Севастополь Ракетная опасность"
     },
     "UKR.4.20_1": {
       "gid_2": "UKR.4.20_1",
@@ -953,6 +953,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 291368,
+      "text": "Республика Крым\nСевастополь\nРакетная опасность",
+      "ts": 1792059908,
+      "time_label": "15.10.2026 13:25 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 99486,
+      "text": "Республика Башкортостан\nОтбой ракетной опасности.",
+      "ts": 1792059699,
+      "time_label": "15.10.2026 13:21 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 291367,
+      "text": "Витино\nУютное\nРаздольное\nЕвпатория\nКарьерное\nСаки и близлежащие\nОпасность по БПЛА Хорнет\nРеспублика Крым",
+      "ts": 1792059641,
+      "time_label": "15.10.2026 13:20 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 291366,
       "text": "Запорожская область РФ ракетная опасность",
@@ -1568,30 +1592,6 @@
       "time_label": "15.10.2026 11:34 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 291338,
-      "text": "ЛНР\nОтбой Ракетной опасности",
-      "ts": 1792053195,
-      "time_label": "15.10.2026 11:33 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 90153,
-      "text": "Оренбургская область, Республика Татарстан, Чувашская Республика - внимание возможно будет объявлена ракетная опасность!\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792053155,
-      "time_label": "15.10.2026 11:32 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 99462,
-      "text": "Предварительно выход баллистики",
-      "ts": 1792053127,
-      "time_label": "15.10.2026 11:32 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1601,13 +1601,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792059420,
-  "last_event_at": "2026-10-15T10:17:00Z",
-  "fetched_at": "2026-10-15T10:20:07.053657Z",
+  "timestamp": 1792059908,
+  "last_event_at": "2026-10-15T10:25:08Z",
+  "fetched_at": "2026-10-15T10:30:05.327084Z",
   "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-10-15T10:20:07.053657Z",
-    "source_age_seconds": 187,
+    "generated_at": "2026-10-15T10:30:05.327084Z",
+    "source_age_seconds": 297,
     "city_count": 25,
     "region_count": 17,
     "feed_count": 80
