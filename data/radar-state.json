@@ -204,16 +204,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1792042754,
-      "source_text": "15.10.2026 08:39 МСК\nПрогресс и близлежащие Опасность по БПЛА Хорнет ДНР"
+      "fill": "#dc2626",
+      "last_event_ts": 1792043978,
+      "source_text": "15.10.2026 08:59 МСК\nКурахово Ракетная опасность ДНР\n\n15.10.2026 08:39 МСК\nПрогресс и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     "Калужская область": {
       "bpla": false,
@@ -1764,6 +1764,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1792038652,
       "source_text": "15.10.2026 07:30 МСК\nВеневский район Заокский район Тульская область Фиксация БПЛА"
+    },
+    {
+      "key": "курахово|донецкая народная республика",
+      "name": "Курахово",
+      "lat": 47.9847,
+      "lon": 37.28069,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1792043978,
+      "source_text": "15.10.2026 08:59 МСК\nКурахово Ракетная опасность ДНР"
     }
   ],
   "districts": {
@@ -3378,6 +3400,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 291316,
+      "text": "Курахово\nРакетная опасность\nДНР",
+      "ts": 1792043978,
+      "time_label": "15.10.2026 08:59 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 99438,
       "text": "⚡️\nВ течение прошедшей ночи дежурными силами ПВО\nперехвачены и уничтожены 166 украинских беспилотных летательных аппаратов самолетного типа\nнад территориями Белгородской, Брянской, Курской, Тульской, Рязанской, Орловской, Липецкой, Воронежской, Нижегородской, Тамбовской, Ростовской областей, Московского региона, Краснодарского края и Республики Крым.\n🔹\nMAКС – территория СВОих",
       "ts": 1792043948,
@@ -4008,14 +4038,6 @@
       "time_label": "15.10.2026 06:31 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 99405,
-      "text": "Московская область\nОтбой ракетной опасности",
-      "ts": 1792034870,
-      "time_label": "15.10.2026 06:27 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -4025,14 +4047,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792043948,
-  "last_event_at": "2026-10-15T05:59:08Z",
-  "fetched_at": "2026-10-15T06:00:04.367893Z",
+  "timestamp": 1792043978,
+  "last_event_at": "2026-10-15T05:59:38Z",
+  "fetched_at": "2026-10-15T06:10:03.945940Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-15T06:00:04.367893Z",
-    "source_age_seconds": 56,
-    "city_count": 60,
+    "generated_at": "2026-10-15T06:10:03.945940Z",
+    "source_age_seconds": 625,
+    "city_count": 61,
     "region_count": 23,
     "feed_count": 80
   }
