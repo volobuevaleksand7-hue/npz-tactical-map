@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792109758,
-      "source_text": "16.10.2026 03:15 МСК\nСамарская область, Ульяновская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1792113522,
+      "source_text": "16.10.2026 04:18 МСК\nНиколаевский район Ульяновская область Сбития БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -1751,28 +1751,6 @@
       "fill": "#f0c4a0",
       "last_event_ts": 1792096387,
       "source_text": "15.10.2026 23:33 МСК\nВнуково Москва внимание по бпла"
-    },
-    {
-      "key": "амвросиевка|донецкая народная республика",
-      "name": "Амвросиевка",
-      "lat": 47.79062,
-      "lon": 38.47851,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792070135,
-      "source_text": "15.10.2026 16:15 МСК\nАмвросиевка и близлежащие Опасность по БПЛА на электротяге ДНР"
     },
     {
       "key": "клин|московская область",
@@ -7847,6 +7825,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1792112375,
       "source_text": "16.10.2026 03:59 МСК\nНеверкинский район Пензенская область Фиксация БПЛА"
+    },
+    "RUS.75.11_1": {
+      "gid_2": "RUS.75.11_1",
+      "name_ru": "Николаевский район",
+      "region_ru": "Ульяновская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": true,
+      "explosionOnRegion": true,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792113522,
+      "source_text": "16.10.2026 04:18 МСК\nНиколаевский район Ульяновская область Сбития БПЛА"
     }
   },
   "airport_markers": [
@@ -7874,6 +7874,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 99868,
+      "text": "Николаевский район\nУльяновская область\nСбития БПЛА",
+      "ts": 1792113522,
+      "time_label": "16.10.2026 04:18 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 99867,
+      "text": "ГО Домодедово\nМосковская область\nПродолжается работа ПВО",
+      "ts": 1792113279,
+      "time_label": "16.10.2026 04:14 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 99866,
       "text": "Кузнецкий район\nПензенская область\nПродолжаются фиксации БПЛА",
@@ -8497,22 +8513,6 @@
       "time_label": "16.10.2026 02:21 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 99822,
-      "text": "Кстово\nНижегородская область\nПродолжается работа ПВО",
-      "ts": 1792106474,
-      "time_label": "16.10.2026 02:21 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 291662,
-      "text": "Тверская область\nСмоленска область\nвнимание по бпла",
-      "ts": 1792106246,
-      "time_label": "16.10.2026 02:17 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -8522,14 +8522,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792112868,
-  "last_event_at": "2026-10-16T01:07:48Z",
-  "fetched_at": "2026-10-16T01:10:03.251727Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1792113522,
+  "last_event_at": "2026-10-16T01:18:42Z",
+  "fetched_at": "2026-10-16T01:20:03.752262Z",
+  "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-10-16T01:10:03.251727Z",
-    "source_age_seconds": 135,
-    "city_count": 176,
+    "generated_at": "2026-10-16T01:20:03.752262Z",
+    "source_age_seconds": 81,
+    "city_count": 175,
     "region_count": 42,
     "feed_count": 80
   }
