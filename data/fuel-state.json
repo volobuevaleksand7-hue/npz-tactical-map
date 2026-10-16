@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-16T04:15:46Z",
+    "generated_at": "2026-10-16T06:27Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -64,10 +64,10 @@
       "status": "down",
       "status_since": "2026-10-06",
       "est_output_pct": 0,
-      "damage": "По данным канала «Радар по всей России», при атаке БПЛА повреждён склад другого предприятия в Рязани; в том же посту сообщается о возгорании Рязанского НПЗ (уже учтено в архиве). Независимого подтверждения по поиску не найдено.",
+      "damage": "По сообщениям Telegram-канала, ночью повторно атаковали Рязанский НПЗ; пожар продолжался до утра. Губернатор области сообщил о падении обломков БПЛА на территории промышленного предприятия. Количество БПЛА не указано.",
       "note": "На 8 октября завод остаётся полностью остановлен после пятой атаки. Один из главных источников снабжения Рязанской области и Москвы. Волна повторных ударов; критически влияет на регион и столицу.",
-      "source_url": "https://t.me/radarrussiia/100107",
-      "confidence": "rumored"
+      "source_url": "https://t.me/s/exilenova_plus",
+      "confidence": "reported"
     },
     {
       "id": "moscow",
@@ -144,9 +144,9 @@
       "status": "down",
       "status_since": "2026-09-22",
       "est_output_pct": 0,
-      "damage": "Четвёртая волна атак. Ночь 21-22 сентября: украинские дроны вновь атаковали Куйбышевский НПЗ (~910 км от границы). Ключевые установки переработки поражены, пожары зафиксированы. Завод остаётся в полной остановке.",
+      "damage": "Губернатор Самарской области подтвердил атаку беспилотников на Новокуйбышевск, повреждение одного из промышленных предприятий и гибель одного человека. По сообщениям СМИ, на НПЗ зафиксированы пожары. Количество БПЛА не указано.",
       "note": "На 8 октября завод остаётся полностью остановлен. Четвёртая атака на завод за 2026 год. Возобновление работы требует восстановления критичных установок и отсутствия новых ударов.",
-      "source_url": "https://kyivindependent.com/ukrainian-forces-strike-russian-oil-refinery-in-samara-oblast-in-overnight-drone-attack/",
+      "source_url": "https://profile.ru/news/accidents/ukrainskie-bpla-atakovali-novokujbyshevsk-pogib-chelovek-1893607/",
       "confidence": "confirmed"
     },
     {
@@ -952,6 +952,16 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-16",
+      "text": "Удар по Куйбышевский НПЗ (Новокуйбышевск): Атака БПЛА на Новокуйбышевск, погиб человек",
+      "source_url": "https://profile.ru/news/accidents/ukrainskie-bpla-atakovali-novokujbyshevsk-pogib-chelovek-1893607/"
+    },
+    {
+      "date": "2026-10-16",
+      "text": "Удар по Рязанский НПЗ (Рязань): Повторная ночная атака на Рязанский НПЗ",
+      "source_url": "https://t.me/s/exilenova_plus"
+    },
     {
       "date": "2026-10-12",
       "text": "Ростов-на-Дону, нефтеналивной терминал «Юг Руси» (НЗНП): по сообщению The Moscow Times, на третьи сутки пожара 7 из 12 резервуаров терминала уничтожены.",
