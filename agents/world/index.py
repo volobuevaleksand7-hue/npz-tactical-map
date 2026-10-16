@@ -242,16 +242,23 @@ def stocks_for(S, region):
             [p[2] for p in parts], [p[3] for p in parts])
 
 
-GDELT_OUTAGE_DAYS = 5
+GDELT_OUTAGE_WINDOW = 10    # окно проверки сбоя GDELT, дней
+GDELT_OUTAGE_LIVE_MAX = 2   # живых дней в окне не больше — считаем сбоем
 
 
 def gdelt_outage(S):
-    """Сбой GDELT: у ВСЕХ регионов последние N дней — нули. Реальное затишье по всему миру
-    сразу невероятно; так выглядит остановка ингеста (10.2026: нули с 03.10 и в общем запросе).
-    Тогда компонент выпадает из индекса, а не тянет его к нулю."""
-    tails = [[v for _, v in S[k]["history"][-GDELT_OUTAGE_DAYS:]] for k in S
-             if k.startswith("gdelt_shortage_") and S[k].get("history")]
-    return bool(tails) and all(len(t) == GDELT_OUTAGE_DAYS and not any(t) for t in tails)
+    """Сбой GDELT: за последние GDELT_OUTAGE_WINDOW дней почти все дни — нули во ВСЕХ регионах
+    (живых дней ≤ GDELT_OUTAGE_LIVE_MAX). Реальное затишье по всему миру сразу невероятно;
+    так выглядит остановка ингеста (10.2026: нули с 03.10 и в общем запросе).
+    Тогда компонент выпадает из индекса, а не тянет его к нулю.
+    16.10.2026: прежнее правило «N нулевых дней подряд» снималось одним днём с крохами
+    (15.10: 0.001 в трёх регионах) — компонент с p≈0 вошёл в индекс и уронил мир 87 → 72."""
+    hist = [dict(S[k]["history"]) for k in S if k.startswith("gdelt_shortage_") and S[k].get("history")]
+    if not hist:
+        return False
+    days = sorted(set().union(*hist))[-GDELT_OUTAGE_WINDOW:]
+    live_days = sum(1 for d in days if any(h.get(d) for h in hist))
+    return len(days) == GDELT_OUTAGE_WINDOW and live_days <= GDELT_OUTAGE_LIVE_MAX
 
 
 def shortage_for(S, region):
