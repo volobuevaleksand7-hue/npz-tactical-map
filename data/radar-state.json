@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Калужская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792248728,
+      "source_text": "17.10.2026 17:52 МСК\nКалужская область Опасность по БПЛА"
+    },
     "Луганская Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -136,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792248346,
-      "source_text": "17.10.2026 17:45 МСК\nЗнаменский район Орловская область Фиксация БПЛА"
+      "last_event_ts": 1792248639,
+      "source_text": "17.10.2026 17:50 МСК\nОрловская область Опасность по БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -1248,6 +1267,38 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 100381,
+      "text": "Калужская область\nОпасность по БПЛА",
+      "ts": 1792248728,
+      "time_label": "17.10.2026 17:52 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 90641,
+      "text": "Калужская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1792248686,
+      "time_label": "17.10.2026 17:51 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 292216,
+      "text": "Орловская область\nОпасность по БПЛА",
+      "ts": 1792248639,
+      "time_label": "17.10.2026 17:50 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 90640,
+      "text": "Орловская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1792248603,
+      "time_label": "17.10.2026 17:50 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
       "msg_id": 100380,
       "text": "Знаменский район\nОрловская область\nФиксация БПЛА",
       "ts": 1792248346,
@@ -1854,38 +1905,6 @@
       "time_label": "17.10.2026 12:58 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 90630,
-      "text": "От Туапсе до Сочи, Адлер, Краснодарский край - опасность по БПЛА с моря.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792231039,
-      "time_label": "17.10.2026 12:57 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 100364,
-      "text": "Новороссийск и близлежащие\nКраснодарский край\nОтбой опасности по БПЛА\nНа территории региона опасность сохраняется",
-      "ts": 1792230948,
-      "time_label": "17.10.2026 12:55 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 90629,
-      "text": "Геленджик, Анапа, Новороссийск, Краснодарский край - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792230571,
-      "time_label": "17.10.2026 12:49 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 90628,
-      "text": "Брянская область, Курская область, Воронежская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792230529,
-      "time_label": "17.10.2026 12:48 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -1895,15 +1914,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792248346,
-  "last_event_at": "2026-10-17T14:45:46Z",
-  "fetched_at": "2026-10-17T14:50:03.167728Z",
+  "timestamp": 1792248728,
+  "last_event_at": "2026-10-17T14:52:08Z",
+  "fetched_at": "2026-10-17T15:00:04.596885Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-17T14:50:03.167728Z",
-    "source_age_seconds": 257,
+    "generated_at": "2026-10-17T15:00:04.596885Z",
+    "source_age_seconds": 476,
     "city_count": 35,
-    "region_count": 14,
+    "region_count": 15,
     "feed_count": 80
   }
 }
