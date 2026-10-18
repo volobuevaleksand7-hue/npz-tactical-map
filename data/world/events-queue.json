@@ -978,13 +978,13 @@
    "agent": "world-events",
    "checks": {
     "schema": "ok",
-    "urls_alive": "unknown",
+    "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "ready",
-   "reject_reason": null,
+   "verdict": "rejected",
+   "reject_reason": "dead_url",
    "notified_at": "2026-10-18T11:39:11Z"
   },
   {
@@ -1024,5 +1024,5 @@
    "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-10-18T11:39:10Z"
+ "validated_at": "2026-10-18T19:40:22Z"
 }
