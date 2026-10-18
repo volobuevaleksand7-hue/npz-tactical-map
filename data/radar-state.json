@@ -142,7 +142,7 @@
     "Тульская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -154,9 +154,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1792316746,
-      "source_text": "18.10.2026 12:45 МСК\nТульская область Калужская область внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1792337438,
+      "source_text": "18.10.2026 18:30 МСК\nКалужская область Тульская область Тревога по БПЛА внимание по бпла"
     },
     "Запорожская область": {
       "bpla": false,
@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792325806,
-      "source_text": "18.10.2026 15:16 МСК\nКалужская область Смоленская область Опасность по БПЛА от Брянской области внимание по бпла"
+      "last_event_ts": 1792337438,
+      "source_text": "18.10.2026 18:30 МСК\nКалужская область Тульская область Тревога по БПЛА внимание по бпла"
     },
     "Курская область": {
       "bpla": false,
@@ -242,16 +242,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1792337300,
-      "source_text": "18.10.2026 18:28 МСК\nКурская область, тревога по БПЛА, высокая активность"
+      "fill": "#dc2626",
+      "last_event_ts": 1792337485,
+      "source_text": "18.10.2026 18:31 МСК\nКурская область и близлежащие Авиационная ракетно бомбовая опасность\n\n18.10.2026 18:28 МСК\nКурская область, тревога по БПЛА, высокая активность"
     },
     "Севастополь": {
       "bpla": false,
@@ -1154,6 +1154,30 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 292669,
+      "text": "ЛДНР, Запорожская область, авиационная ракетная бомбовая опасность",
+      "ts": 1792337508,
+      "time_label": "18.10.2026 18:31 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 292668,
+      "text": "Курская область и близлежащие\nАвиационная ракетно бомбовая опасность",
+      "ts": 1792337485,
+      "time_label": "18.10.2026 18:31 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 292667,
+      "text": "Калужская область\nТульская область\nТревога по БПЛА\nвнимание по бпла",
+      "ts": 1792337438,
+      "time_label": "18.10.2026 18:30 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 292666,
       "text": "Курская область, тревога по БПЛА, высокая активность",
       "ts": 1792337300,
@@ -1768,30 +1792,6 @@
       "time_label": "18.10.2026 12:45 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 292607,
-      "text": "Приморск и близлежащие\nОпасность по БПЛА\nЗапорожская область РФ",
-      "ts": 1792316578,
-      "time_label": "18.10.2026 12:42 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 292606,
-      "text": "Счастье и близлежащие\nОпасность по БПЛА\nЛНР",
-      "ts": 1792316558,
-      "time_label": "18.10.2026 12:42 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 292605,
-      "text": "Горловка и близлежащие\nОпасность по БПЛА и ФПВ\nДНР",
-      "ts": 1792316436,
-      "time_label": "18.10.2026 12:40 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1801,13 +1801,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792337300,
-  "last_event_at": "2026-10-18T15:28:20Z",
-  "fetched_at": "2026-10-18T15:30:04.374520Z",
+  "timestamp": 1792337508,
+  "last_event_at": "2026-10-18T15:31:48Z",
+  "fetched_at": "2026-10-18T15:40:03.158537Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-18T15:30:04.374520Z",
-    "source_age_seconds": 104,
+    "generated_at": "2026-10-18T15:40:03.158537Z",
+    "source_age_seconds": 495,
     "city_count": 35,
     "region_count": 16,
     "feed_count": 80
