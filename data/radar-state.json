@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1792435062,
-      "source_text": "19.10.2026 18:40 МСК\nУкраинск ДНР ракетная опасность повторно\n\n19.10.2026 12:35 МСК\nЛДНР Запорожская область, Авиационная ракетно бомбовая опасность\n\n19.10.2026 21:37 МСК\nХанжёнково, Макеевка, Харцызск и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1792438752,
+      "source_text": "19.10.2026 18:40 МСК\nУкраинск ДНР ракетная опасность повторно\n\n19.10.2026 12:35 МСК\nЛДНР Запорожская область, Авиационная ракетно бомбовая опасность\n\n19.10.2026 22:39 МСК\nСелидово Курахово Угледар И близлежащие Тревога по БПЛА"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -785,7 +785,7 @@
       "region": "Донецкая Народная Республика",
       "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -796,8 +796,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#dc2626",
-      "last_event_ts": 1792424176,
-      "source_text": "19.10.2026 18:36 МСК\nСелидово ДНР Ракетная опасность"
+      "last_event_ts": 1792438752,
+      "source_text": "19.10.2026 18:36 МСК\nСелидово ДНР Ракетная опасность\n\n19.10.2026 22:39 МСК\nСелидово Курахово Угледар И близлежащие Тревога по БПЛА"
     },
     {
       "key": "новоайдар|луганская народная республика",
@@ -952,6 +952,50 @@
       "fill": "#ea580c",
       "last_event_ts": 1792436854,
       "source_text": "19.10.2026 22:07 МСК\nСватово, Кременная, Троицикое и близлежащие Тревога по БПЛА Далее в тыл ЛНР"
+    },
+    {
+      "key": "курахово|донецкая народная республика",
+      "name": "Курахово",
+      "lat": 47.9847,
+      "lon": 37.28069,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792438752,
+      "source_text": "19.10.2026 22:39 МСК\nСелидово Курахово Угледар И близлежащие Тревога по БПЛА"
+    },
+    {
+      "key": "угледар|донецкая народная республика",
+      "name": "Угледар",
+      "lat": 47.77973,
+      "lon": 37.24999,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792438752,
+      "source_text": "19.10.2026 22:39 МСК\nСелидово Курахово Угледар И близлежащие Тревога по БПЛА"
     }
   ],
   "districts": {
@@ -1244,6 +1288,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 293031,
+      "text": "Селидово\nКурахово\nУгледар\nИ близлежащие\nТревога по БПЛА\nИ далее в тыл\nДНР",
+      "ts": 1792438752,
+      "time_label": "19.10.2026 22:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 293030,
       "text": "Старобельск и далее в направлении\nБеловодск\nТревога по БПЛА\nЛНР",
@@ -1875,14 +1927,6 @@
       "time_label": "19.10.2026 15:06 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 292967,
-      "text": "Донецк аэропорт и близлежащие\nОпасность по БПЛА Хорнет\nДНР",
-      "ts": 1792411235,
-      "time_label": "19.10.2026 15:00 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1892,14 +1936,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792437647,
-  "last_event_at": "2026-10-19T19:20:47Z",
-  "fetched_at": "2026-10-19T19:30:04.388946Z",
+  "timestamp": 1792438752,
+  "last_event_at": "2026-10-19T19:39:12Z",
+  "fetched_at": "2026-10-19T19:40:03.999721Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-19T19:30:04.388946Z",
-    "source_age_seconds": 557,
-    "city_count": 30,
+    "generated_at": "2026-10-19T19:40:03.999721Z",
+    "source_age_seconds": 51,
+    "city_count": 32,
     "region_count": 15,
     "feed_count": 80
   }
