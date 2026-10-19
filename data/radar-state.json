@@ -120,6 +120,25 @@
       "last_event_ts": 1792402881,
       "source_text": "19.10.2026 12:41 МСК\nБрянская область, Калужская область, Курская область, Орловская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
+    "Ростовская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792411113,
+      "source_text": "19.10.2026 14:58 МСК\nСевер Бердянска, район Софиевка в направлении Осипенко - Нововасильевка Опасность по БПЛА Запорожская область РФ"
+    },
     "Белгородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -250,8 +269,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1792405557,
-      "source_text": "19.10.2026 13:25 МСК\nКрасноармейск ДНР ракетная опасность\n\n19.10.2026 12:35 МСК\nЛДНР Запорожская область, Авиационная ракетно бомбовая опасность\n\n19.10.2026 13:14 МСК\nКрасноармейск и близлежащие Опасность по БПЛА Хорнет ДНР"
+      "last_event_ts": 1792411113,
+      "source_text": "19.10.2026 13:25 МСК\nКрасноармейск ДНР ракетная опасность\n\n19.10.2026 12:35 МСК\nЛДНР Запорожская область, Авиационная ракетно бомбовая опасность\n\n19.10.2026 14:58 МСК\nСевер Бердянска, район Софиевка в направлении Осипенко - Нововасильевка Опасность по БПЛА Запорожская область РФ"
     },
     "Санкт-Петербург": {
       "bpla": false,
@@ -802,9 +821,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -815,8 +834,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1792401516,
-      "source_text": "19.10.2026 12:18 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ сохраняется, ещё фиксации ДНР"
+      "last_event_ts": 1792411060,
+      "source_text": "19.10.2026 14:57 МСК\nГорловка и близлежащие Опасность по БПЛА и возможным ФПВ с запада ДНР"
     },
     {
       "key": "приморск|запорожская область",
@@ -839,6 +858,50 @@
       "fill": "#ea580c",
       "last_event_ts": 1792397179,
       "source_text": "19.10.2026 11:06 МСК\nТрасса Р-280 район Бановка - Приморск Опасность по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "север|ростовская область",
+      "name": "Север",
+      "lat": 48.9236255,
+      "lon": 40.4006446,
+      "region": "Ростовская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792411113,
+      "source_text": "19.10.2026 14:58 МСК\nСевер Бердянска, район Софиевка в направлении Осипенко - Нововасильевка Опасность по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "софиевка|донецкая народная республика",
+      "name": "Софиевка",
+      "lat": 48.2638,
+      "lon": 38.15928,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792411113,
+      "source_text": "19.10.2026 14:58 МСК\nСевер Бердянска, район Софиевка в направлении Осипенко - Нововасильевка Опасность по БПЛА Запорожская область РФ"
     }
   ],
   "districts": {
@@ -1241,6 +1304,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 292966,
+      "text": "Север Бердянска, район Софиевка  в направлении Осипенко - Нововасильевка\nОпасность по БПЛА\nЗапорожская область РФ",
+      "ts": 1792411113,
+      "time_label": "19.10.2026 14:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 292965,
+      "text": "Горловка и близлежащие\nОпасность по БПЛА и возможным ФПВ с запада\nДНР",
+      "ts": 1792411060,
+      "time_label": "19.10.2026 14:57 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 292964,
       "text": "ДНР\n❤️\n❤️\n❤️",
@@ -1864,22 +1943,6 @@
       "time_label": "19.10.2026 08:17 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 100970,
-      "text": "Краснодарский край\nРеспублика Адыгея\nОпасность по БПЛА",
-      "ts": 1792387011,
-      "time_label": "19.10.2026 08:16 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 100969,
-      "text": "Орловская область\nОтбой опасности по БПЛА",
-      "ts": 1792387003,
-      "time_label": "19.10.2026 08:16 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1889,15 +1952,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792409678,
-  "last_event_at": "2026-10-19T11:34:38Z",
-  "fetched_at": "2026-10-19T11:50:02.835585Z",
+  "timestamp": 1792411113,
+  "last_event_at": "2026-10-19T11:58:33Z",
+  "fetched_at": "2026-10-19T12:00:05.392133Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-19T11:50:02.835585Z",
-    "source_age_seconds": 924,
-    "city_count": 24,
-    "region_count": 16,
+    "generated_at": "2026-10-19T12:00:05.392133Z",
+    "source_age_seconds": 92,
+    "city_count": 26,
+    "region_count": 17,
     "feed_count": 80
   }
 }
