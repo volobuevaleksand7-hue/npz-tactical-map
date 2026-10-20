@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792479628,
-      "source_text": "20.10.2026 10:00 МСК\nДонецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР"
+      "last_event_ts": 1792480913,
+      "source_text": "20.10.2026 10:21 МСК\nПервомайское, Пески, Донецк и близлежащие Опасность по БПЛА ДНР"
     },
     "Вологодская область": {
       "bpla": false,
@@ -82,6 +82,25 @@
       "last_event_ts": 1792478456,
       "source_text": "20.10.2026 09:40 МСК\nАрмянск Красноперекопск и близлежащие Республика Крым Опасность по БПЛА"
     },
+    "Курская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792480841,
+      "source_text": "20.10.2026 10:20 МСК\nКореневский район и близлежащие Курская область Опасность по БПЛА разведчик"
+    },
     "Севастополь": {
       "bpla": false,
       "bplaDim": false,
@@ -98,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792478456,
-      "source_text": "20.10.2026 09:40 МСК\nАрмянск Красноперекопск и близлежащие Республика Крым Опасность по БПЛА"
+      "last_event_ts": 1792481245,
+      "source_text": "20.10.2026 10:27 МСК\nот Тарханкут до Севастополь Опасность по БПЛА с моря"
     }
   },
   "cities": [
@@ -109,9 +128,9 @@
       "lat": 48.023,
       "lon": 37.80224,
       "region": "Донецкая Народная Республика",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -122,8 +141,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1792479628,
-      "source_text": "20.10.2026 10:00 МСК\nДонецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР"
+      "last_event_ts": 1792480913,
+      "source_text": "20.10.2026 10:21 МСК\nПервомайское, Пески, Донецк и близлежащие Опасность по БПЛА ДНР"
     },
     {
       "key": "макеевка|донецкая народная республика",
@@ -278,11 +297,110 @@
       "fill": "#ea580c",
       "last_event_ts": 1792480008,
       "source_text": "20.10.2026 10:06 МСК\nГорское и близлежащие ЛНР Опасность по БПЛА"
+    },
+    {
+      "key": "севастополь|севастополь",
+      "name": "Севастополь",
+      "lat": 44.60795,
+      "lon": 33.52134,
+      "region": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792481245,
+      "source_text": "20.10.2026 10:27 МСК\nот Тарханкут до Севастополь Опасность по БПЛА с моря"
     }
   ],
-  "districts": {},
+  "districts": {
+    "RUS.37.11_1": {
+      "gid_2": "RUS.37.11_1",
+      "name_ru": "Кореневский район",
+      "region_ru": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792480841,
+      "source_text": "20.10.2026 10:20 МСК\nКореневский район и близлежащие Курская область Опасность по БПЛА разведчик"
+    },
+    "UKR.20.1_1": {
+      "gid_2": "UKR.20.1_1",
+      "name_ru": "Севастополь",
+      "region_ru": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792481245,
+      "source_text": "20.10.2026 10:27 МСК\nот Тарханкут до Севастополь Опасность по БПЛА с моря"
+    }
+  },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 293141,
+      "text": "от Тарханкут до Севастополь\nОпасность по БПЛА с моря",
+      "ts": 1792481245,
+      "time_label": "20.10.2026 10:27 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 293140,
+      "text": "Сочи\nКраснодарский край\nУчения",
+      "ts": 1792481200,
+      "time_label": "20.10.2026 10:26 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 293139,
+      "text": "Первомайское, Пески, Донецк и близлежащие\nОпасность по БПЛА\nДНР",
+      "ts": 1792480913,
+      "time_label": "20.10.2026 10:21 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 293138,
+      "text": "Кореневский район и близлежащие\nКурская область\nОпасность по БПЛА разведчик",
+      "ts": 1792480841,
+      "time_label": "20.10.2026 10:20 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 293137,
       "text": "Горловка Гольмовский и далее на восток опасность по БПЛА\nКондратьевка, Углегорск и близлежащие внимание!\nДНР",
@@ -890,38 +1008,6 @@
       "time_label": "20.10.2026 05:53 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 91226,
-      "text": "Новоникольское, Стаево, Мичуринск и близлежащие, Тамбовская область - опасность атаки БПЛА сохраняется.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792464541,
-      "time_label": "20.10.2026 05:49 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 101076,
-      "text": "Ивановская область\nВладимирская область\nОпасность по БПЛА",
-      "ts": 1792464146,
-      "time_label": "20.10.2026 05:42 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 91225,
-      "text": "Псковская область - опасность по БПЛА сохраняется.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792464136,
-      "time_label": "20.10.2026 05:42 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 91224,
-      "text": "Ленинградская область, Новгородская область - на данный момент обстановка спокойная.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792464085,
-      "time_label": "20.10.2026 05:41 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -931,15 +1017,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792480475,
-  "last_event_at": "2026-10-20T07:14:35Z",
-  "fetched_at": "2026-10-20T07:20:03.731249Z",
+  "timestamp": 1792481245,
+  "last_event_at": "2026-10-20T07:27:25Z",
+  "fetched_at": "2026-10-20T07:30:04.107997Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-20T07:20:03.731249Z",
-    "source_age_seconds": 328,
-    "city_count": 8,
-    "region_count": 5,
+    "generated_at": "2026-10-20T07:30:04.107997Z",
+    "source_age_seconds": 159,
+    "city_count": 9,
+    "region_count": 6,
     "feed_count": 80
   }
 }
