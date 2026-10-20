@@ -193,8 +193,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792455343,
-      "source_text": "20.10.2026 03:15 МСК\nТепло-Огаревский район Тульская область Фиксация БПЛА"
+      "last_event_ts": 1792455607,
+      "source_text": "20.10.2026 03:20 МСК\nНовомосковск Тульская область Сбитие БПЛА"
     },
     "Вологодская область": {
       "bpla": false,
@@ -2057,9 +2057,9 @@
       "lat": 54.01098,
       "lon": 38.29084,
       "region": "Тульская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -2067,11 +2067,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1792455258,
-      "source_text": "20.10.2026 03:14 МСК\nНовомосковск Тульская область Опасность по БПЛА"
+      "last_event_ts": 1792455607,
+      "source_text": "20.10.2026 03:20 МСК\nНовомосковск Тульская область Сбитие БПЛА"
     },
     {
       "key": "тёпло-огарёвский|тульская область",
@@ -3531,6 +3531,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 293087,
+      "text": "Новоазовский район\nи близлежащие\nТревога по БПЛА.\nМеры безопасности\nДНР",
+      "ts": 1792456082,
+      "time_label": "20.10.2026 03:28 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 101043,
+      "text": "Новомосковск\nТульская область\nСбитие БПЛА",
+      "ts": 1792455607,
+      "time_label": "20.10.2026 03:20 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 101042,
       "text": "Тепло-Огаревский район\nТульская область\nФиксация БПЛА",
       "ts": 1792455343,
@@ -4153,22 +4169,6 @@
       "time_label": "20.10.2026 00:42 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 91170,
-      "text": "Кривая, Жарковский район, Тверская область - пролёты БПЛА в сторону Псковской и Новгородской областей и далее на север.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792446116,
-      "time_label": "20.10.2026 00:41 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 293063,
-      "text": "Сосково и близлежащие\nОпасность по БПЛА\nОрловская область",
-      "ts": 1792445993,
-      "time_label": "20.10.2026 00:39 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4178,13 +4178,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792455343,
-  "last_event_at": "2026-10-20T00:15:43Z",
-  "fetched_at": "2026-10-20T00:20:03.736929Z",
+  "timestamp": 1792456082,
+  "last_event_at": "2026-10-20T00:28:02Z",
+  "fetched_at": "2026-10-20T00:30:02.884709Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-20T00:20:03.736929Z",
-    "source_age_seconds": 260,
+    "generated_at": "2026-10-20T00:30:02.884709Z",
+    "source_age_seconds": 120,
     "city_count": 77,
     "region_count": 23,
     "feed_count": 80
