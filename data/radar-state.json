@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792479125,
-      "source_text": "20.10.2026 09:52 МСК\nЖелобок Славяносербск и близлежащие ЛНР Опасность по БПЛА"
+      "last_event_ts": 1792480008,
+      "source_text": "20.10.2026 10:06 МСК\nГорское и близлежащие ЛНР Опасность по БПЛА"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792477253,
-      "source_text": "20.10.2026 09:20 МСК\nСелидово и близлежащие на восток Опасность по БПЛА повторно, ещё фиксации ДНР"
+      "last_event_ts": 1792479628,
+      "source_text": "20.10.2026 10:00 МСК\nДонецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР"
     },
     "Вологодская область": {
       "bpla": false,
@@ -103,6 +103,50 @@
     }
   },
   "cities": [
+    {
+      "key": "донецк|донецкая народная республика",
+      "name": "Донецк",
+      "lat": 48.023,
+      "lon": 37.80224,
+      "region": "Донецкая Народная Республика",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792479628,
+      "source_text": "20.10.2026 10:00 МСК\nДонецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР"
+    },
+    {
+      "key": "макеевка|донецкая народная республика",
+      "name": "Макеевка",
+      "lat": 48.04782,
+      "lon": 37.92576,
+      "region": "Донецкая Народная Республика",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792479628,
+      "source_text": "20.10.2026 10:00 МСК\nДонецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР"
+    },
     {
       "key": "селидово|донецкая народная республика",
       "name": "Селидово",
@@ -212,11 +256,57 @@
       "fill": "#ea580c",
       "last_event_ts": 1792479125,
       "source_text": "20.10.2026 09:52 МСК\nЖелобок Славяносербск и близлежащие ЛНР Опасность по БПЛА"
+    },
+    {
+      "key": "горское|луганская народная республика",
+      "name": "Горское",
+      "lat": 48.74981,
+      "lon": 38.49518,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792480008,
+      "source_text": "20.10.2026 10:06 МСК\nГорское и близлежащие ЛНР Опасность по БПЛА"
     }
   ],
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 293135,
+      "text": "Горское и близлежащие\nЛНР\nОпасность по БПЛА",
+      "ts": 1792480008,
+      "time_label": "20.10.2026 10:06 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 293134,
+      "text": "Шовкуновка и далее на северо -восток\nЛНР\nОпасность по БПЛА",
+      "ts": 1792479646,
+      "time_label": "20.10.2026 10:00 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 293133,
+      "text": "Донецк, Макеевка и близлежащие\nОпасность по БПЛА, единичные фиксации\nДНР",
+      "ts": 1792479628,
+      "time_label": "20.10.2026 10:00 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 293132,
       "text": "Желобок\nСлавяносербск и близлежащие\nЛНР\nОпасность по БПЛА",
@@ -832,30 +922,6 @@
       "time_label": "20.10.2026 05:32 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 101075,
-      "text": "Мичуринский район\nТамбовская область\nРабота ПВО по БПЛА",
-      "ts": 1792463491,
-      "time_label": "20.10.2026 05:31 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 101074,
-      "text": "Воронеж\nВоронежская область\nСбитие БПЛА",
-      "ts": 1792463428,
-      "time_label": "20.10.2026 05:30 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 293097,
-      "text": "Горшечное и близлежащие\nТревога по БПЛА\nКурская область",
-      "ts": 1792462965,
-      "time_label": "20.10.2026 05:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -865,14 +931,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792479125,
-  "last_event_at": "2026-10-20T06:52:05Z",
-  "fetched_at": "2026-10-20T07:00:04.467311Z",
+  "timestamp": 1792480008,
+  "last_event_at": "2026-10-20T07:06:48Z",
+  "fetched_at": "2026-10-20T07:10:03.629582Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-20T07:00:04.467311Z",
-    "source_age_seconds": 479,
-    "city_count": 5,
+    "generated_at": "2026-10-20T07:10:03.629582Z",
+    "source_age_seconds": 195,
+    "city_count": 8,
     "region_count": 5,
     "feed_count": 80
   }
