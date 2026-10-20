@@ -82,6 +82,25 @@
       "last_event_ts": 1792495599,
       "source_text": "20.10.2026 14:25 МСК\nЛуганск ракетная опасность\n\n20.10.2026 14:26 МСК\nСчастье в направление Луганска опасность по БПЛА ЛНР"
     },
+    "Адыгея": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792495822,
+      "source_text": "20.10.2026 14:30 МСК\nКраснодарский край Республика Адыгея Опасность по БПЛА"
+    },
     "Запорожская область": {
       "bpla": false,
       "bplaDim": false,
@@ -155,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792495692,
-      "source_text": "20.10.2026 14:28 МСК\nЭкстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г.Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы"
+      "last_event_ts": 1792495822,
+      "source_text": "20.10.2026 14:30 МСК\nКраснодарский край Республика Адыгея Опасность по БПЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -1191,6 +1210,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 101097,
+      "text": "Краснодарский край\nРеспублика Адыгея\nОпасность по БПЛА",
+      "ts": 1792495822,
+      "time_label": "20.10.2026 14:30 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 293199,
       "text": "Тарханкут и близлежащие с моря тревога по БПЛА.\nОт Тарханкут до Севастополя всё побережье опасность по БПЛА",
       "ts": 1792495735,
@@ -1821,14 +1848,6 @@
       "time_label": "20.10.2026 09:21 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 293124,
-      "text": "Селидово и близлежащие на восток\nОпасность по БПЛА повторно, ещё фиксации\nДНР",
-      "ts": 1792477253,
-      "time_label": "20.10.2026 09:20 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1838,15 +1857,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792495735,
-  "last_event_at": "2026-10-20T11:28:55Z",
-  "fetched_at": "2026-10-20T11:30:04.398363Z",
+  "timestamp": 1792495822,
+  "last_event_at": "2026-10-20T11:30:22Z",
+  "fetched_at": "2026-10-20T11:40:02.980290Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-20T11:30:04.398363Z",
-    "source_age_seconds": 69,
+    "generated_at": "2026-10-20T11:40:02.980290Z",
+    "source_age_seconds": 580,
     "city_count": 35,
-    "region_count": 11,
+    "region_count": 12,
     "feed_count": 80
   }
 }
