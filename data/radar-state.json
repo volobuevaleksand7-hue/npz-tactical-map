@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792599958,
-      "source_text": "21.10.2026 19:25 МСК\nНововоронеж Воронежская область Опасность по БПЛА"
+      "last_event_ts": 1792602176,
+      "source_text": "21.10.2026 20:02 МСК\nОстрогожский район Воронежская область Фиксация БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792595855,
-      "source_text": "21.10.2026 18:17 МСК\nБелгородская область Курская область Орловская область Тревога по БПЛА внимание по бпла"
+      "last_event_ts": 1792602255,
+      "source_text": "21.10.2026 20:04 МСК\nТроснянский район Орловская область Фиксация БПЛА"
     },
     "Тамбовская область": {
       "bpla": false,
@@ -174,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1792600685,
-      "source_text": "21.10.2026 17:25 МСК\nНовая Полтавка ДНР ракетная опасность\n\n21.10.2026 19:38 МСК\nЮжный ДКАД, Донецк и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1792602141,
+      "source_text": "21.10.2026 20:02 МСК\nДНР ракетная опасность/опасность по реактивным БПЛА от Новоалександровки, Очеретино\n\n21.10.2026 19:38 МСК\nЮжный ДКАД, Донецк и близлежащие Опасность по БПЛА ДНР"
     },
     "Брянская область": {
       "bpla": false,
@@ -745,28 +745,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1792577080,
       "source_text": "21.10.2026 13:04 МСК\nКрасногоровка, Марьинка, Донецк, Докучаевск, Волноваха и близлежащие Опасность по БПЛА ДНР"
-    },
-    {
-      "key": "углегорск|донецкая народная республика",
-      "name": "Углегорск",
-      "lat": 48.31488,
-      "lon": 38.27179,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792559189,
-      "source_text": "21.10.2026 08:06 МСК\nНоволуганское, Светлодарск Дебальцево, Углегорск и близлежащие Опасность по БПЛА ДНР"
     },
     {
       "key": "белгород|белгородская область",
@@ -2160,9 +2138,9 @@
       "gid_2": "RUS.79.20_1",
       "name_ru": "Острогожский район",
       "region_ru": "Воронежская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -2175,8 +2153,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1792599247,
-      "source_text": "21.10.2026 19:14 МСК\nОстрогожский район Лискинский район Воронежская область Опасность по БПЛА"
+      "last_event_ts": 1792602176,
+      "source_text": "21.10.2026 20:02 МСК\nОстрогожский район Воронежская область Фиксация БПЛА"
     },
     "RUS.79.15_1": {
       "gid_2": "RUS.79.15_1",
@@ -2199,10 +2177,72 @@
       "fill": "#ea580c",
       "last_event_ts": 1792599247,
       "source_text": "21.10.2026 19:14 МСК\nОстрогожский район Лискинский район Воронежская область Опасность по БПЛА"
+    },
+    "RUS.52.23_1": {
+      "gid_2": "RUS.52.23_1",
+      "name_ru": "Троснянский район",
+      "region_ru": "Орловская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792602255,
+      "source_text": "21.10.2026 20:04 МСК\nТроснянский район Орловская область Фиксация БПЛА"
     }
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 101375,
+      "text": "Троснянский район\nОрловская область\nФиксация БПЛА",
+      "ts": 1792602255,
+      "time_label": "21.10.2026 20:04 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 293639,
+      "text": "Продолжаются пролеты БпЛА через Брянскую область",
+      "ts": 1792602231,
+      "time_label": "21.10.2026 20:03 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 101374,
+      "text": "Орловская область\nОпасность по БПЛА",
+      "ts": 1792602222,
+      "time_label": "21.10.2026 20:03 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 101373,
+      "text": "Острогожский район\nВоронежская область\nФиксация БПЛА",
+      "ts": 1792602176,
+      "time_label": "21.10.2026 20:02 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 293638,
+      "text": "ДНР ракетная опасность/опасность по реактивным БПЛА от Новоалександровки, Очеретино",
+      "ts": 1792602141,
+      "time_label": "21.10.2026 20:02 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 293637,
       "text": "Геническ и близлежащие, тревога по БпЛА\nХерсонская область РФ",
@@ -2802,46 +2842,6 @@
       "time_label": "21.10.2026 17:51 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 293575,
-      "text": "Новогродовка и близлежащие\nОпасность по БПЛА Хорнет\nДНР",
-      "ts": 1792594167,
-      "time_label": "21.10.2026 17:49 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 293574,
-      "text": "Валуйки и близлежащие\nТревога по БПЛА\nБелгородская область",
-      "ts": 1792593693,
-      "time_label": "21.10.2026 17:41 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 293573,
-      "text": "Белгородская область\nТревога по БПЛА\nПринять меры безопасности",
-      "ts": 1792593655,
-      "time_label": "21.10.2026 17:40 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 293572,
-      "text": "От Тарханкут до Севастополь\nОпасность по БПЛА с моря\nРеспублика Крым",
-      "ts": 1792593207,
-      "time_label": "21.10.2026 17:33 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 293571,
-      "text": "ЛНР\nВоронежская область\nРостовская область\nПриготовиться к объявлению опасность по БПЛА",
-      "ts": 1792592909,
-      "time_label": "21.10.2026 17:28 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2851,14 +2851,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792601657,
-  "last_event_at": "2026-10-21T16:54:17Z",
-  "fetched_at": "2026-10-21T17:00:04.737034Z",
+  "timestamp": 1792602255,
+  "last_event_at": "2026-10-21T17:04:15Z",
+  "fetched_at": "2026-10-21T17:10:02.856321Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-21T17:00:04.737034Z",
+    "generated_at": "2026-10-21T17:10:02.856321Z",
     "source_age_seconds": 347,
-    "city_count": 59,
+    "city_count": 58,
     "region_count": 18,
     "feed_count": 80
   }
