@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-21T13:36:47Z",
+ "generated_at": "2026-10-21T19:35:54Z",
  "methodology_version": "0.2",
  "brand": {
   "short": "ИТН",
@@ -8,20 +8,20 @@
   "en": "Fuel Tension Index"
  },
  "world": {
-  "value": 82,
+  "value": 81,
   "level": "critical",
   "level_ru": "критично",
-  "delta_1d": 1,
+  "delta_1d": 0,
   "coverage": 1.0,
   "regions_missing": []
  },
  "regions": {
   "north_america": {
    "name": "Северная Америка",
-   "value": 91,
+   "value": 90,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 3,
+   "delta_1d": 2,
    "coverage": 0.65,
    "weight_world": 0.24,
    "components": [
@@ -55,27 +55,27 @@
     {
      "id": "stocks",
      "label": "Запасы",
-     "score": 92.9,
+     "score": 93.9,
      "weight": 0.15,
-     "raw": "США сырая нефть: 416 млн барр. (p12; меньше = хуже); США дистилляты: 103 млн барр. (p2; меньше = хуже) (без сезонной поправки)",
-     "as_of": "2026-10-09",
+     "raw": "США сырая нефть: 413 млн барр. (p5; меньше = хуже); США дистилляты: 104 млн барр. (p7; меньше = хуже) (без сезонной поправки)",
+     "as_of": "2026-10-16",
      "source": "EIA API v2"
     },
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 99.5,
+     "score": 96.4,
      "weight": 0.1,
-     "raw": "Brent 126,55 $/барр. (p99); ULSD NYH 5,07 $/гал. (p99), процентиль к 10 годам",
+     "raw": "Brent 126,55 $/барр. (p96); ULSD NYH 5,07 $/гал. (p97), процентиль к 10 годам",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 96.9,
+     "score": 83.3,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p97 к 10 годам)",
+     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p83 к 10 годам)",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
@@ -101,10 +101,10 @@
   },
   "east_asia": {
    "name": "Восточная Азия и АТР",
-   "value": 96,
+   "value": 95,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 0,
+   "delta_1d": -1,
    "coverage": 0.8,
    "weight_world": 0.3,
    "components": [
@@ -147,18 +147,18 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 99.5,
+     "score": 96.4,
      "weight": 0.1,
-     "raw": "Brent 126,55 $/барр. (p99); ULSD NYH 5,07 $/гал. (p99), процентиль к 10 годам",
+     "raw": "Brent 126,55 $/барр. (p96); ULSD NYH 5,07 $/гал. (p97), процентиль к 10 годам",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 96.9,
+     "score": 83.3,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p97 к 10 годам)",
+     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p83 к 10 годам)",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
@@ -184,10 +184,10 @@
   },
   "europe": {
    "name": "Европа",
-   "value": 62,
+   "value": 61,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 0,
+   "delta_1d": -1,
    "coverage": 0.95,
    "weight_world": 0.15,
    "components": [
@@ -214,8 +214,8 @@
      "label": "Розничные цены на дизель",
      "score": 98.3,
      "weight": 0.15,
-     "raw": "Дизель ЕС 2136 €/1000 л (p98 к 5 годам, номинал)",
-     "as_of": "2026-10-12",
+     "raw": "Дизель ЕС 2139 €/1000 л (p98 к 5 годам, номинал)",
+     "as_of": "2026-10-19",
      "source": "EU Weekly Oil Bulletin"
     },
     {
@@ -230,18 +230,18 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 99.5,
+     "score": 96.4,
      "weight": 0.1,
-     "raw": "Brent 126,55 $/барр. (p99); ULSD NYH 5,07 $/гал. (p99), процентиль к 10 годам",
+     "raw": "Brent 126,55 $/барр. (p96); ULSD NYH 5,07 $/гал. (p97), процентиль к 10 годам",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 96.9,
+     "score": 83.3,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p97 к 10 годам)",
+     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p83 к 10 годам)",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
@@ -267,10 +267,10 @@
   },
   "middle_east": {
    "name": "Ближний Восток",
-   "value": 93,
+   "value": 91,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 5,
+   "delta_1d": 3,
    "coverage": 0.65,
    "weight_world": 0.09,
    "components": [
@@ -313,18 +313,18 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 99.5,
+     "score": 96.4,
      "weight": 0.1,
-     "raw": "Brent 126,55 $/барр. (p99); ULSD NYH 5,07 $/гал. (p99), процентиль к 10 годам",
+     "raw": "Brent 126,55 $/барр. (p96); ULSD NYH 5,07 $/гал. (p97), процентиль к 10 годам",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 96.9,
+     "score": 83.3,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p97 к 10 годам)",
+     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p83 к 10 годам)",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
@@ -350,10 +350,10 @@
   },
   "south_asia": {
    "name": "Южная Азия",
-   "value": 93,
+   "value": 92,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 4,
+   "delta_1d": 3,
    "coverage": 0.65,
    "weight_world": 0.07,
    "components": [
@@ -396,18 +396,18 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 99.5,
+     "score": 96.4,
      "weight": 0.1,
-     "raw": "Brent 126,55 $/барр. (p99); ULSD NYH 5,07 $/гал. (p99), процентиль к 10 годам",
+     "raw": "Brent 126,55 $/барр. (p96); ULSD NYH 5,07 $/гал. (p97), процентиль к 10 годам",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 96.9,
+     "score": 83.3,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p97 к 10 годам)",
+     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p83 к 10 годам)",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
@@ -433,10 +433,10 @@
   },
   "latin_america": {
    "name": "Латинская Америка",
-   "value": 57,
+   "value": 55,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 0,
+   "delta_1d": -2,
    "coverage": 0.65,
    "weight_world": 0.07,
    "components": [
@@ -479,18 +479,18 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 99.5,
+     "score": 96.4,
      "weight": 0.1,
-     "raw": "Brent 126,55 $/барр. (p99); ULSD NYH 5,07 $/гал. (p99), процентиль к 10 годам",
+     "raw": "Brent 126,55 $/барр. (p96); ULSD NYH 5,07 $/гал. (p97), процентиль к 10 годам",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 96.9,
+     "score": 83.3,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p97 к 10 годам)",
+     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p83 к 10 годам)",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
@@ -516,10 +516,10 @@
   },
   "russia_cis": {
    "name": "Россия и СНГ",
-   "value": 55,
+   "value": 54,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 0,
+   "delta_1d": -1,
    "coverage": 0.65,
    "weight_world": 0.04,
    "components": [
@@ -562,18 +562,18 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 99.5,
+     "score": 96.4,
      "weight": 0.1,
-     "raw": "Brent 126,55 $/барр. (p99); ULSD NYH 5,07 $/гал. (p99), процентиль к 10 годам",
+     "raw": "Brent 126,55 $/барр. (p96); ULSD NYH 5,07 $/гал. (p97), процентиль к 10 годам",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 96.9,
+     "score": 83.3,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p97 к 10 годам)",
+     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p83 к 10 годам)",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
@@ -599,10 +599,10 @@
   },
   "africa": {
    "name": "Африка",
-   "value": 36,
+   "value": 35,
    "level": "tense",
    "level_ru": "напряжённо",
-   "delta_1d": 0,
+   "delta_1d": -1,
    "coverage": 0.65,
    "weight_world": 0.04,
    "components": [
@@ -645,18 +645,18 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 99.5,
+     "score": 96.4,
      "weight": 0.1,
-     "raw": "Brent 126,55 $/барр. (p99); ULSD NYH 5,07 $/гал. (p99), процентиль к 10 годам",
+     "raw": "Brent 126,55 $/барр. (p96); ULSD NYH 5,07 $/гал. (p97), процентиль к 10 годам",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 96.9,
+     "score": 83.3,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p97 к 10 годам)",
+     "raw": "ULSD×42 − Brent = 86,2 $/барр. (p83 к 10 годам)",
      "as_of": "2026-10-14",
      "source": "FRED / EIA"
     },
