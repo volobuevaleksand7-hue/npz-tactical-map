@@ -1799,28 +1799,6 @@
       "source_text": "21.10.2026 00:43 МСК\nКарачев и близлежащие, Брянская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     {
-      "key": "скадовск|херсонская область",
-      "name": "Скадовск",
-      "lat": 46.11313,
-      "lon": 32.90978,
-      "region": "Херсонская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792501623,
-      "source_text": "20.10.2026 16:07 МСК\nСкадовск опасность по БПЛА Хорнет Херсонская область РФ"
-    },
-    {
       "key": "калужская область|брянская область",
       "name": "Калужская область",
       "lat": 53.3089062,
@@ -5202,8 +5180,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -5257,6 +5235,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 101275,
+      "text": "Смоленск\nСмоленская область\nПродолжается работа ПВО",
+      "ts": 1792544863,
+      "time_label": "21.10.2026 04:07 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 101273,
       "text": "Республика Марий Эл\nОтбой опасности по БПЛА",
@@ -5888,14 +5874,6 @@
       "time_label": "21.10.2026 01:21 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 101229,
-      "text": "Сафоновский район\nСмоленская область\nФиксация от 3 БПЛА",
-      "ts": 1792534881,
-      "time_label": "21.10.2026 01:21 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5905,14 +5883,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792544289,
-  "last_event_at": "2026-10-21T00:58:09Z",
-  "fetched_at": "2026-10-21T01:00:04.147843Z",
+  "timestamp": 1792544863,
+  "last_event_at": "2026-10-21T01:07:43Z",
+  "fetched_at": "2026-10-21T01:10:03.455040Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-21T01:00:04.147843Z",
-    "source_age_seconds": 115,
-    "city_count": 122,
+    "generated_at": "2026-10-21T01:10:03.455040Z",
+    "source_age_seconds": 140,
+    "city_count": 121,
     "region_count": 34,
     "feed_count": 80
   }
