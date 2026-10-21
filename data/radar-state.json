@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792584203,
-      "source_text": "21.10.2026 15:03 МСК\nТрасса Р-280 Бердянский район Опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1792585505,
+      "source_text": "21.10.2026 15:25 МСК\nТрасса Токмак - Мелитополь Опасность по БПЛА Запорожская область РФ"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -495,28 +495,6 @@
       "source_text": "21.10.2026 07:46 МСК\nСтерегущее, Раздольное, Портовое с моря опасность по БПЛА."
     },
     {
-      "key": "луганск|луганская народная республика",
-      "name": "Луганск",
-      "lat": 48.56814,
-      "lon": 39.30553,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792542306,
-      "source_text": "21.10.2026 03:25 МСК\nЛуганск и ближайшие, тревога по БПЛА сохраняется ЛНР"
-    },
-    {
       "key": "дебальцево|донецкая народная республика",
       "name": "Дебальцево",
       "lat": 48.33592,
@@ -557,8 +535,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1792574479,
-      "source_text": "21.10.2026 12:21 МСК\nМелитополь и близлежащие тревога по БПЛА Запорожская область РФ"
+      "last_event_ts": 1792585505,
+      "source_text": "21.10.2026 15:25 МСК\nТрасса Токмак - Мелитополь Опасность по БПЛА Запорожская область РФ"
     },
     {
       "key": "бердянск|запорожская область",
@@ -801,6 +779,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1792576166,
       "source_text": "21.10.2026 12:49 МСК\nШахтёрск, Торез, Снежное и близлежащие Опасность по БПЛА ДНР"
+    },
+    {
+      "key": "токмак|запорожская область",
+      "name": "Токмак",
+      "lat": 47.25554,
+      "lon": 35.70836,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792585505,
+      "source_text": "21.10.2026 15:25 МСК\nТрасса Токмак - Мелитополь Опасность по БПЛА Запорожская область РФ"
     },
     {
       "key": "горловка|донецкая народная республика",
@@ -1335,6 +1335,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 293549,
+      "text": "Светлодолинское\nи далее на юг\nОпасность по БПЛА Хорнет\nЗапорожская область РФ",
+      "ts": 1792585606,
+      "time_label": "21.10.2026 15:26 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 293548,
+      "text": "Трасса\nТокмак - Мелитополь\nОпасность по БПЛА\nЗапорожская область РФ",
+      "ts": 1792585505,
+      "time_label": "21.10.2026 15:25 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 293547,
       "text": "Севастополь и близлежащие\nОпасность по БПЛА",
@@ -1958,22 +1974,6 @@
       "time_label": "21.10.2026 10:39 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 293489,
-      "text": "Псков , Любятово и близлежащие\nОпасность по БПЛА",
-      "ts": 1792568072,
-      "time_label": "21.10.2026 10:34 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 293488,
-      "text": "Ленинградская область\nВолосовский район\nЛопухинка\nЛомоносовский район\nвнимание по бпла",
-      "ts": 1792567773,
-      "time_label": "21.10.2026 10:29 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1983,13 +1983,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792585134,
-  "last_event_at": "2026-10-21T12:18:54Z",
-  "fetched_at": "2026-10-21T12:20:03.661223Z",
-  "poll_interval_sec": 7,
+  "timestamp": 1792585606,
+  "last_event_at": "2026-10-21T12:26:46Z",
+  "fetched_at": "2026-10-21T12:30:04.211901Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-21T12:20:03.661223Z",
-    "source_age_seconds": 69,
+    "generated_at": "2026-10-21T12:30:04.211901Z",
+    "source_age_seconds": 198,
     "city_count": 35,
     "region_count": 14,
     "feed_count": 80
