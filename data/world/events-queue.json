@@ -288,13 +288,13 @@
    "agent": "world-events",
    "checks": {
     "schema": "ok",
-    "urls_alive": "ok",
+    "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 2,
     "translation": "warning: нет title_en, summary_en, fuel_effect_en"
    },
-   "verdict": "ready",
-   "reject_reason": null,
+   "verdict": "rejected",
+   "reject_reason": "dead_url",
    "notified_at": "2026-10-14T03:37:39Z"
   },
   {
@@ -1282,5 +1282,5 @@
    "notified_at": "2026-10-21T03:27:59Z"
   }
  ],
- "validated_at": "2026-10-21T03:27:58Z"
+ "validated_at": "2026-10-21T11:27:54Z"
 }
