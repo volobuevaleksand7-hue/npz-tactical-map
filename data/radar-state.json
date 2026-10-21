@@ -214,6 +214,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1792588019,
       "source_text": "21.10.2026 16:06 МСК\nХвастовичский район Калужская область Фиксация БПЛА"
+    },
+    "Севастополь": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792593207,
+      "source_text": "21.10.2026 17:33 МСК\nОт Тарханкут до Севастополь Опасность по БПЛА с моря Республика Крым"
     }
   },
   "cities": [
@@ -724,6 +743,28 @@
       "source_text": "21.10.2026 14:12 МСК\nПриморск, Бердянск и близлежащие опасность по БПЛА Запорожская область РФ"
     },
     {
+      "key": "севастополь|севастополь",
+      "name": "Севастополь",
+      "lat": 44.60795,
+      "lon": 33.52134,
+      "region": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792593207,
+      "source_text": "21.10.2026 17:33 МСК\nОт Тарханкут до Севастополь Опасность по БПЛА с моря Республика Крым"
+    },
+    {
       "key": "приазовское|запорожская область",
       "name": "Приазовское",
       "lat": 46.73123,
@@ -1165,6 +1206,28 @@
       "last_event_ts": 1792576405,
       "source_text": "21.10.2026 12:53 МСК\nОт Нежеголь до Большого городища Опасность по БПЛА Шебекинский район"
     },
+    "UKR.20.1_1": {
+      "gid_2": "UKR.20.1_1",
+      "name_ru": "Севастополь",
+      "region_ru": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792593207,
+      "source_text": "21.10.2026 17:33 МСК\nОт Тарханкут до Севастополь Опасность по БПЛА с моря Республика Крым"
+    },
     "RUS.23.15_1": {
       "gid_2": "RUS.23.15_1",
       "name_ru": "Людиновский район",
@@ -1300,6 +1363,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 293572,
+      "text": "От Тарханкут до Севастополь\nОпасность по БПЛА с моря\nРеспублика Крым",
+      "ts": 1792593207,
+      "time_label": "21.10.2026 17:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 293571,
       "text": "ЛНР\nВоронежская область\nРостовская область\nПриготовиться к объявлению опасность по БПЛА",
@@ -1931,14 +2002,6 @@
       "time_label": "21.10.2026 12:12 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 293508,
-      "text": "Горловка и близлежащие\nОпасность по БПЛА сохраняется\nДНР",
-      "ts": 1792573721,
-      "time_label": "21.10.2026 12:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1948,15 +2011,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792592909,
-  "last_event_at": "2026-10-21T14:28:29Z",
-  "fetched_at": "2026-10-21T14:30:03.821079Z",
+  "timestamp": 1792593207,
+  "last_event_at": "2026-10-21T14:33:27Z",
+  "fetched_at": "2026-10-21T14:40:03.113071Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-21T14:30:03.821079Z",
-    "source_age_seconds": 94,
-    "city_count": 36,
-    "region_count": 11,
+    "generated_at": "2026-10-21T14:40:03.113071Z",
+    "source_age_seconds": 396,
+    "city_count": 37,
+    "region_count": 12,
     "feed_count": 80
   }
 }
