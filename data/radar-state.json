@@ -44,25 +44,6 @@
       "last_event_ts": 1792516801,
       "source_text": "20.10.2026 20:20 МСК\nПсковская область Вологодская область Новгородская область Опасность по БПЛА от Смоленской области внимание по бпла"
     },
-    "Липецкая область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1792572665,
-      "source_text": "21.10.2026 11:51 МСК\nЛипецкая область Опасность по БПЛА"
-    },
     "Смоленская область": {
       "bpla": false,
       "bplaDim": false,
@@ -213,7 +194,7 @@
       "rocketOnRegion": false,
       "fill": "#d8c06a",
       "last_event_ts": 1792576622,
-      "source_text": "21.10.2026 12:57 МСК\nБрянская область, Курская область, Калужская область, Орловская область - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru\n\n21.10.2026 11:38 МСК\nРыльск и близлежащие опасность по ФПВ и ударным БПЛА Курская область"
+      "source_text": "21.10.2026 12:57 МСК\nБрянская область, Курская область, Калужская область, Орловская область - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
     },
     "Белгородская область": {
       "bpla": false,
@@ -393,7 +374,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -1289,6 +1270,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 101366,
+      "text": "Липецкая область\nОтбой опасности по БПЛА",
+      "ts": 1792582348,
+      "time_label": "21.10.2026 14:32 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 293539,
       "text": "Очеретино и близлежащие\nОпасность по БПЛА Хорнет\nДНР",
       "ts": 1792582003,
@@ -1919,14 +1908,6 @@
       "time_label": "21.10.2026 09:57 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 293482,
-      "text": "Брянская область\nОтбой ракетной опасности",
-      "ts": 1792565680,
-      "time_label": "21.10.2026 09:54 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1936,15 +1917,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792582003,
-  "last_event_at": "2026-10-21T11:26:43Z",
-  "fetched_at": "2026-10-21T11:30:03.992639Z",
+  "timestamp": 1792582348,
+  "last_event_at": "2026-10-21T11:32:28Z",
+  "fetched_at": "2026-10-21T11:40:03.853903Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-21T11:30:03.992639Z",
-    "source_age_seconds": 200,
+    "generated_at": "2026-10-21T11:40:03.853903Z",
+    "source_age_seconds": 455,
     "city_count": 33,
-    "region_count": 15,
+    "region_count": 14,
     "feed_count": 80
   }
 }
