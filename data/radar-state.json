@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Ростовская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792592909,
+      "source_text": "21.10.2026 17:28 МСК\nЛНР Воронежская область Ростовская область Приготовиться к объявлению опасность по БПЛА"
+    },
     "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
@@ -43,6 +62,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1792576405,
       "source_text": "21.10.2026 12:53 МСК\nОт Нежеголь до Большого городища Опасность по БПЛА Шебекинский район"
+    },
+    "Воронежская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792592909,
+      "source_text": "21.10.2026 17:28 МСК\nЛНР Воронежская область Ростовская область Приготовиться к объявлению опасность по БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -90,16 +128,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1792589075,
-      "source_text": "21.10.2026 16:24 МСК\nСпартак, Донецк и близлежащие Опасность по БПЛА Хорнет ДНР"
+      "fill": "#dc2626",
+      "last_event_ts": 1792592759,
+      "source_text": "21.10.2026 17:25 МСК\nНовая Полтавка ДНР ракетная опасность\n\n21.10.2026 16:24 МСК\nСпартак, Донецк и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     "Брянская область": {
       "bpla": false,
@@ -155,8 +193,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792581268,
-      "source_text": "21.10.2026 14:14 МСК\nСтаробельск и близлежащие опасность по БПЛА ЛНР"
+      "last_event_ts": 1792592909,
+      "source_text": "21.10.2026 17:28 МСК\nЛНР Воронежская область Ростовская область Приготовиться к объявлению опасность по БПЛА"
     },
     "Калужская область": {
       "bpla": false,
@@ -1263,6 +1301,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 293571,
+      "text": "ЛНР\nВоронежская область\nРостовская область\nПриготовиться к объявлению опасность по БПЛА",
+      "ts": 1792592909,
+      "time_label": "21.10.2026 17:28 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 293570,
+      "text": "Новая Полтавка ДНР ракетная опасность",
+      "ts": 1792592759,
+      "time_label": "21.10.2026 17:25 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 293569,
       "text": "Фиксируем группу ударных БПЛА от Харьковской области в направлении Белгородской области",
       "ts": 1792592346,
@@ -1885,22 +1939,6 @@
       "time_label": "21.10.2026 12:08 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 91377,
-      "text": "Железногорск, Курская область - громкие взрывы связаны с работой в карьере.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792573575,
-      "time_label": "21.10.2026 12:06 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 293507,
-      "text": "От Дебальцево в сторону Алчевска БПЛА Хорнет, и далее в направлении Луганска",
-      "ts": 1792573542,
-      "time_label": "21.10.2026 12:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1910,15 +1948,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792592346,
-  "last_event_at": "2026-10-21T14:19:06Z",
-  "fetched_at": "2026-10-21T14:20:03.141662Z",
-  "poll_interval_sec": 6,
+  "timestamp": 1792592909,
+  "last_event_at": "2026-10-21T14:28:29Z",
+  "fetched_at": "2026-10-21T14:30:03.821079Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-21T14:20:03.141662Z",
-    "source_age_seconds": 57,
+    "generated_at": "2026-10-21T14:30:03.821079Z",
+    "source_age_seconds": 94,
     "city_count": 36,
-    "region_count": 9,
+    "region_count": 11,
     "feed_count": 80
   }
 }
