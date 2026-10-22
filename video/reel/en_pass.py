@@ -221,7 +221,7 @@ def main():
     subprocess.run([sys.executable, "build.py", "mix", str(dst), str(dst / "silent.mp4"), str(mp4) + ".tmp.mp4"],
                    check=True, cwd=VIDEO)
     os.replace(str(mp4) + ".tmp.mp4", mp4)
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "0.6", "-i", str(mp4), "-frames:v", "1", "-q:v", "3",
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "0.9", "-i", str(mp4), "-frames:v", "1", "-q:v", "3",
                     str(out.with_suffix(".jpg"))], check=True)
 
     log(f"готово: {mp4} ({duration(mp4):.1f} с), заголовок: {tr['title']}")
