@@ -35,12 +35,12 @@
    "checks": {
     "schema": "ok",
     "urls_alive": "ok",
-    "neutral_lexicon": "ok",
-    "independent_sources": 2,
+    "neutral_lexicon": "fail: fuel_effect: UA-lang",
+    "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "ready",
-   "reject_reason": null
+   "verdict": "rejected",
+   "reject_reason": "lexicon"
   },
   {
    "id": "2026-10-21-hormuz-two-tankers-struck",
@@ -77,11 +77,12 @@
     "schema": "ok",
     "urls_alive": "ok",
     "neutral_lexicon": "ok",
-    "independent_sources": 2,
+    "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "ready",
-   "reject_reason": null
+   "verdict": "needs_source",
+   "reject_reason": "нужен второй независимый издатель"
   }
- ]
+ ],
+ "validated_at": "2026-10-22T03:27:01Z"
 }
