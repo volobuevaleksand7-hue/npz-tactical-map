@@ -864,16 +864,17 @@ def compose(date, build: Path):
     for f in (build / "assets").glob("_pc*.jpg"):
         f.unlink()
     # хук: постер не должен быть пустой картой. Нет кадра — карта наезжает на главный удар (маркер в кадре)
+    k = 3200.0 / IW
+    lead = P["s0"]
+    x0 = min(0.0, max(1160 - IW * k, 580 - lead["x"] * k))
+    y0 = min(0.0, max(2000 - IH * k, 1450 - lead["y"] * k))
+    map_bgcss = f"{x0:.0f}px {y0:.0f}px/{IW * k:.0f}px {IH * k:.0f}px no-repeat"
+    mx, my = lead["x"] * k + x0 - 40, lead["y"] * k + y0 - 40   # координаты в системе постера (inset:-40px)
+    map_pmark = f'<div class="pm" style="left:{mx:.0f}px;top:{my:.0f}px"></div>'
     if poster_src:
         bgcss, pmark = "center/cover no-repeat", ""
     else:
-        k = 3200.0 / IW
-        lead = P["s0"]
-        x0 = min(0.0, max(1160 - IW * k, 580 - lead["x"] * k))
-        y0 = min(0.0, max(2000 - IH * k, 1450 - lead["y"] * k))
-        bgcss = f"{x0:.0f}px {y0:.0f}px/{IW * k:.0f}px {IH * k:.0f}px no-repeat"
-        mx, my = lead["x"] * k + x0 - 40, lead["y"] * k + y0 - 40   # координаты в системе постера (inset:-40px)
-        pmark = f'<div class="pm" style="left:{mx:.0f}px;top:{my:.0f}px"></div>'
+        bgcss, pmark = map_bgcss, map_pmark
     ptitle = poster_head(sel, day, refs)
     pcities = " · ".join(c.upper() for c in cities[:3])
 
@@ -910,6 +911,31 @@ def compose(date, build: Path):
         page = re.sub(r'(<div class="bw">[^<]*?) за сутки<', r"\1 по данным OSINT<", page)
     (build / "index.html").write_text(page, encoding="utf-8")
     (build / "hyperframes.json").write_text(json.dumps({"paths": {"assets": "assets"}}), encoding="utf-8")
+
+    # Обложка YouTube «поверх карты» (Сергей, 23.10.2026): та же страница, но фон постера — карта сайта
+    # с наездом на главный удар и отметкой, а не серый кадр клипа. Снимок: render_reel.sh / en_pass.py.
+    thumb = build / "thumb"
+    shutil.rmtree(thumb, ignore_errors=True)
+    thumb.mkdir(parents=True)
+    tpage = page
+    if poster_src:   # кадр клипа -> карта; подпись «кадр: …» не нужна
+        tpage = tpage.replace(f'url("{poster_bg}") {bgcss}', f'url("assets/map.jpg") {map_bgcss}', 1)
+        tpage = tpage.replace(f" · кадр: {esc(source_name(poster_src))}", "", 1)
+    # отметка главного удара: .bg на 0,9 с увеличен до 1,085 вокруг центра постера — сдвигаем отметку так же
+    sc = 1.04 + 0.05 * min(1.0, 0.9 / POSTER)
+    tx, ty = 540 + (mx - 540) * sc, 960 + (my - 960) * sc   # mx,my уже в координатах постера
+    tmark = f'<div class="pm" style="left:{tx:.0f}px;top:{ty:.0f}px"></div>'
+    if pmark:
+        tpage = tpage.replace(pmark, "", 1)
+    i0 = tpage.index('<div id="poster"')
+    i1 = tpage.index('<div class="e">', i0)
+    tpage = tpage[:i1] + tmark + tpage[i1:]
+    # карта сайта светлая: без пересвета кадра, плашки читаемы; отметка крупнее для превью
+    tpage = tpage.replace("</style>", "#poster .bg{filter:brightness(.82) saturate(1.15)} "
+                          "#poster .pm{width:60px;height:60px;margin:-30px 0 0 -30px}</style>", 1)
+    (thumb / "index.html").write_text(tpage, encoding="utf-8")
+    (thumb / "hyperframes.json").write_text(json.dumps({"paths": {"assets": "assets"}}), encoding="utf-8")
+    (thumb / "assets").symlink_to("../assets")
 
     # plan.json в формате ежедневного ролика: его mix() кладёт эффекты + музыку
     foreign = [{"i": sg["i"], "dur": round(sg["v1"] - sg["v0"], 2), "src": sg.get("src", ""),

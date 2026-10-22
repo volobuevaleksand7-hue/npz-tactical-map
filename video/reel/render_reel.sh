@@ -23,6 +23,9 @@ node_modules/.bin/hyperframes render "$BUILD" -o "$BUILD/silent.mp4" \
   --quality "${HF_QUALITY:-looks}" --workers "${HF_WORKERS:-auto}" --quiet
 python3 build.py mix "$BUILD" "$BUILD/silent.mp4" "$OUT.tmp.mp4"
 mv -f "$OUT.tmp.mp4" "$OUT"
-# Обложка YouTube = кадр сцены-постера (заголовок виден целиком, до POSTER_END в build_reel.py)
-ffmpeg -y -v error -ss "${REEL_POSTER_T:-0.9}" -i "$OUT" -frames:v 1 -q:v 3 "${OUT%.mp4}.jpg" || echo "render_reel.sh: обложка не вырезана" >&2
+# Обложка YouTube = заголовок и плашки постера поверх КАРТЫ сайта (снимок страницы <сборка>/thumb, 23.10.2026).
+# Не вышло — кадр сцены-постера из готового mp4 (заголовок виден целиком, до POSTER_END в build_reel.py)
+"$VIDEO/reel/make_thumb.sh" "$BUILD" "${OUT%.mp4}.jpg" \
+  || ffmpeg -y -v error -ss "${REEL_POSTER_T:-0.9}" -i "$OUT" -frames:v 1 -q:v 3 "${OUT%.mp4}.jpg" \
+  || echo "render_reel.sh: обложка не вырезана" >&2
 echo "[$(date -u +%FT%TZ)] ok $OUT ($(du -h "$OUT" | cut -f1), $(( $(date +%s) - t0 )) с)"

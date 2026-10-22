@@ -159,7 +159,7 @@ def main():
     if not (src / "plan.json").exists():
         raise SystemExit(f"en_pass: нет русской сборки {src}")
     shutil.rmtree(dst, ignore_errors=True)
-    shutil.copytree(src, dst, ignore=shutil.ignore_patterns("silent.mp4", "*.tmp.mp4"))
+    shutil.copytree(src, dst, ignore=shutil.ignore_patterns("silent.mp4", "*.tmp.mp4", "thumb", "thumb-snap"))
 
     page = (dst / "index.html").read_text(encoding="utf-8")
     plan = json.loads((dst / "plan.json").read_text(encoding="utf-8"))
@@ -199,6 +199,21 @@ def main():
         log(f"не переведено на экране: {left}")
     (dst / "index.html").write_text(page, encoding="utf-8")
 
+    # страница обложки «поверх карты» (build_reel.py compose -> thumb/): тот же перевод
+    tsrc = src / "thumb" / "index.html"
+    if tsrc.exists():
+        tp = tsrc.read_text(encoding="utf-8")
+        for a, b in zip(ui, tr["ui"]):
+            tp = tp.replace(">" + html.escape(a, quote=False) + "<", ">" + html.escape(b, quote=False) + "<")
+            tp = tp.replace(">" + a + "<", ">" + html.escape(b, quote=False) + "<")
+        tp = tp.replace(">ОЦЕНКА · OSINT<", ">ESTIMATE · OSINT<").replace('<html lang="ru"', '<html lang="en"')
+        if ui_strings(tp):
+            log(f"обложка: не переведено {ui_strings(tp)}")
+        (dst / "thumb").mkdir()
+        (dst / "thumb" / "index.html").write_text(tp, encoding="utf-8")
+        (dst / "thumb" / "hyperframes.json").write_text((src / "thumb" / "hyperframes.json").read_text(encoding="utf-8"), encoding="utf-8")
+        (dst / "thumb" / "assets").symlink_to("../assets")
+
     lines = dict(tr["voice"])
     lines["intro"] = tr["intro"]
     lines["outro"] = "Map of all strikes: link in the channel header."
@@ -221,8 +236,11 @@ def main():
     subprocess.run([sys.executable, "build.py", "mix", str(dst), str(dst / "silent.mp4"), str(mp4) + ".tmp.mp4"],
                    check=True, cwd=VIDEO)
     os.replace(str(mp4) + ".tmp.mp4", mp4)
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "0.9", "-i", str(mp4), "-frames:v", "1", "-q:v", "3",
-                    str(out.with_suffix(".jpg"))], check=True)
+    # обложка: заголовок поверх карты (снимок thumb/); не вышло — кадр постера из mp4
+    if subprocess.run([str(REEL / "make_thumb.sh"), str(dst), str(out.with_suffix(".jpg"))]).returncode:
+        log("обложка поверх карты не вышла — кадр из mp4")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "0.9", "-i", str(mp4), "-frames:v", "1", "-q:v", "3",
+                        str(out.with_suffix(".jpg"))], check=True)
 
     log(f"готово: {mp4} ({duration(mp4):.1f} с), заголовок: {tr['title']}")
 
