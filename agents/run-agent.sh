@@ -79,6 +79,18 @@ case "$LABEL" in
   world-events) AGENT_OUT="data/world/events-queue.json" ;;
 esac
 
+# 🔴 22.10.2026: инцидент «strikes stale_dead 18ч». merge-strikes-inbox.py после каждого
+# прогона оставляет в inbox `[]`. Haiku 5.5 видит «файл уже []», решает «менять нечего»,
+# НЕ пишет файл — mtime старый — раннер считает прогон пустым (RC=0, heartbeat НЕ пишем),
+# хотя агент честно отработал (16:35 и ретрай: см. strikes.log). Итог: heartbeat встал на
+# 04:36, данные не штамповались — healthcheck: stale_dead. Лечение: перед прогоном убираем
+# ПУСТОЙ inbox (`[]`), чтобы агент вынужден был его создать; непустой (недовлитый) не трогаем.
+# Отката не нужно: любой сбой ниже делает `git checkout HEAD -- data/`, merge при успехе
+# сам пишет `[]` обратно.
+if [ -n "$AGENT_OUT" ] && [ -f "$AGENT_OUT" ] && [ "$(tr -d '[:space:]' < "$AGENT_OUT")" = "[]" ]; then
+  rm -f "$AGENT_OUT"
+fi
+
 # Hard cap the agent run so a hung CLI can't block the cron slot forever.
 # `timeout` exits 124 on timeout (treated as failure below). Skip the wrapper
 # if `timeout` is unavailable (e.g. stock macOS without coreutils).
