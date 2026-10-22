@@ -33,16 +33,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
+      "rocket": false,
       "rocket_level": false,
-      "aviation": true,
+      "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
+      "fill": "#d8c06a",
       "last_event_ts": 1792677475,
-      "source_text": "22.10.2026 14:44 МСК\nХерсонская область РФ Авиационная опасность\n\n22.10.2026 16:57 МСК\nСкадовск Скадовский район Опасность по БПЛА Херсонская область РФ"
+      "source_text": "22.10.2026 16:57 МСК\nСкадовск Скадовский район Опасность по БПЛА Херсонская область РФ"
     },
     "Белгородская область": {
       "bpla": false,
@@ -1131,27 +1131,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1792667139,
       "source_text": "22.10.2026 14:05 МСК\nКрасная яруга Тревога по БПЛА"
-    },
-    {
-      "key": "одесская область",
-      "name": "Одесская область",
-      "lat": 46.484207,
-      "lon": 30.731689,
-      "region": null,
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": true,
-      "fill": "#ea580c",
-      "last_event_ts": null
     }
   ],
   "districts": {
@@ -1422,6 +1401,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 294101,
+      "text": "Пуляевка, Нижний Ольшанец, Соломино, Соломинский мост\nУдарный БПЛА в направлении\nБелгородский район",
+      "ts": 1792680503,
+      "time_label": "22.10.2026 17:48 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 294100,
+      "text": "Херсонская область РФ\nОтбой авиационной опасности",
+      "ts": 1792679982,
+      "time_label": "22.10.2026 17:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 101825,
       "text": "Хвастовичский район\nКалужская область\nФиксация БПЛА",
@@ -2045,22 +2040,6 @@
       "time_label": "22.10.2026 12:06 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 294024,
-      "text": "Бердянск с северо-запада, Луначарское кольцо, Осипенко\nОпасность по БПЛА\nЗапорожская область РФ",
-      "ts": 1792659928,
-      "time_label": "22.10.2026 12:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 294023,
-      "text": "Белгородский район опасность по БПЛА",
-      "ts": 1792659506,
-      "time_label": "22.10.2026 11:58 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2070,14 +2049,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792679887,
-  "last_event_at": "2026-10-22T14:38:07Z",
-  "fetched_at": "2026-10-22T14:40:02.743183Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1792680503,
+  "last_event_at": "2026-10-22T14:48:23Z",
+  "fetched_at": "2026-10-22T14:50:03.809454Z",
+  "poll_interval_sec": 6,
   "meta": {
-    "generated_at": "2026-10-22T14:40:02.743183Z",
-    "source_age_seconds": 115,
-    "city_count": 40,
+    "generated_at": "2026-10-22T14:50:03.809454Z",
+    "source_age_seconds": 100,
+    "city_count": 39,
     "region_count": 14,
     "feed_count": 80
   }
