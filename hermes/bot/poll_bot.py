@@ -553,6 +553,39 @@ async def on_digest_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         context.user_data["awaiting_edit"] = payload_id
 
 
+# ─── кнопки одобрения событий /lab/world (wev:a|r:<hash>) ───
+async def on_world_event_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    import asyncio
+    query = update.callback_query
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "agents", "world"))
+    try:
+        import tg_actions
+        toast, line, approved = await asyncio.to_thread(
+            tg_actions.handle, query.data or "", query.from_user.id)
+    except Exception as e:
+        logger.error(f"world callback error: {e}")
+        await query.answer("Ошибка обработчика", show_alert=True)
+        return
+    await query.answer(toast)
+    if line and query.message:
+        try:
+            # убираем кнопки решённого кандидата, итог дописываем в текст
+            h = (query.data or "").rsplit(":", 1)[-1]
+            kb = query.message.reply_markup.inline_keyboard if query.message.reply_markup else []
+            rows = [r for r in kb if not any((b.callback_data or "").endswith(":" + h) for b in r)]
+            await query.edit_message_text(
+                (query.message.text or "") + "\n" + line,
+                reply_markup=InlineKeyboardMarkup(rows) if rows else None,
+                disable_web_page_preview=True)
+        except Exception as e:
+            logger.warning(f"world edit failed: {e}")
+    if approved:
+        try:
+            tg_actions.trigger_news()
+        except Exception as e:
+            logger.error(f"world run-news trigger failed: {e}")
+
+
 # ─── main ───
 def main():
     token_path = os.path.join(BOT_DIR, "token")
@@ -576,6 +609,7 @@ def main():
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(CallbackQueryHandler(on_region_callback, pattern="^reg:"))
     app.add_handler(CallbackQueryHandler(on_timer_callback, pattern="^timer:"))
+    app.add_handler(CallbackQueryHandler(on_world_event_callback, pattern="^wev:"))
     app.add_handler(CallbackQueryHandler(on_digest_callback, pattern="^digest_"))
     app.add_handler(CallbackQueryHandler(
         on_publish_callback, pattern=r"^(pub_to_group\||reject\||publish_to_group|\{)"))

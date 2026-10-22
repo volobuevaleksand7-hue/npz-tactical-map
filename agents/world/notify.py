@@ -8,6 +8,8 @@
 успешной отправки. send(text) -> bool вынесена для подмены в тестах.
 """
 import argparse
+import hashlib
+import inspect
 import os
 import sys
 import urllib.parse
@@ -25,7 +27,22 @@ REGION_RU = {"europe": "Европа", "russia_cis": "Россия и СНГ", "
              "africa": "Африка"}
 
 
-def tg_send(text):
+def short_id(cid):
+    """Короткий хэш id для callback_data (лимит Telegram 64 байта): wev:a:<10 hex>."""
+    return hashlib.sha1(str(cid).encode()).hexdigest()[:10]
+
+
+def build_markup(cands):
+    """Inline-клавиатура: по строке на кандидата, кнопки с порядковым номером."""
+    rows = []
+    for i, c in enumerate(cands, 1):
+        h = short_id(c["id"])
+        rows.append([{"text": f"\u2705 Одобрить {i}", "callback_data": f"wev:a:{h}"},
+                     {"text": f"\u274c Отклонить {i}", "callback_data": f"wev:r:{h}"}])
+    return {"inline_keyboard": rows}
+
+
+def tg_send(text, markup=None):
     token = os.environ.get("NPZ_BOT_TOKEN", "").strip()
     if not token:
         p = Path.home() / ".npz-bot" / "token"
@@ -34,8 +51,10 @@ def tg_send(text):
         print("notify: нет токена бота, сообщение не отправлено", file=sys.stderr)
         return False
     chat = os.environ.get("NPZ_OWNER_CHAT", OWNER_DEFAULT).strip()
-    data = urllib.parse.urlencode({"chat_id": chat, "text": text,
-                                   "disable_web_page_preview": "true"}).encode()
+    fields = {"chat_id": chat, "text": text, "disable_web_page_preview": "true"}
+    if markup:
+        fields["reply_markup"] = json.dumps(markup)
+    data = urllib.parse.urlencode(fields).encode()
     try:
         url = f"https://api.telegram.org/bot{token}/sendMessage"
         with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=20) as r:
@@ -53,14 +72,15 @@ def pending(queue, limit=8):
 def format_message(cands, total_pending=None):
     lines = ["Здравствуйте, Сергей. Это ИИ-ассистент. "
              f"Кандидатов в события /lab/world, прошедших проверку: {len(cands)}."]
-    for c in cands:
+    for i, c in enumerate(cands, 1):
         lines.append("")
-        lines.append(f"{c['id']}")
+        lines.append(f"{i}. {c['id']}")
         lines.append(f"{REGION_RU.get(c.get('region'), c.get('region'))} | {c.get('occurred_at')} | {c.get('status')}")
         lines.append(str(c.get("title")))
         for s in c.get("sources", []):
             lines.append(f"  {s.get('publisher')}: {s.get('url')}")
-        lines.append(f"approve {c['id']}  /  reject {c['id']}")
+    lines.append("")
+    lines.append("Кнопки ниже: Одобрить N / Отклонить N.")
     if total_pending and total_pending > len(cands):
         lines.append("")
         lines.append(f"Ещё в очереди: {total_pending - len(cands)}, придут следующим сообщением.")
@@ -76,7 +96,12 @@ def run(queue, send, limit=8, dry=False):
     text = format_message(cands, len(allp))
     if dry:
         return 0, text
-    if send(text):
+    markup = build_markup(cands)
+    try:
+        two = len(inspect.signature(send).parameters) >= 2
+    except (TypeError, ValueError):
+        two = False
+    if send(text, markup) if two else send(text):
         now = C.now_iso()
         for c in cands:
             c["notified_at"] = now
@@ -97,6 +122,7 @@ def main(argv=None):
         return 0
     if a.dry_run:
         print(text)
+        print(json.dumps(build_markup(pending(q, a.max)), ensure_ascii=False))
         return 0
     if n:
         C.write_json_atomic(a.queue, q)

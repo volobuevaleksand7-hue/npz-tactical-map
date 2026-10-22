@@ -124,7 +124,7 @@ class TestNotify(unittest.TestCase):
         sent = []
         n, text = N.run(q, lambda t: sent.append(t) or True)
         self.assertEqual((n, len(sent)), (8, 1))
-        self.assertIn("approve c0", text)
+        self.assertIn("1. c0", text)
         n2, _ = N.run(q, lambda t: True)
         self.assertEqual(n2, 2)
         self.assertEqual(N.run(q, lambda t: True)[0], 0)
