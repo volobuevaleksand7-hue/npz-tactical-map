@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792665246,
-      "source_text": "22.10.2026 13:34 МСК\nБелгородский район Опасность по БПЛА сохраняется"
+      "last_event_ts": 1792667139,
+      "source_text": "22.10.2026 14:05 МСК\nКрасная яруга Тревога по БПЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -579,8 +579,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1792663883,
-      "source_text": "22.10.2026 13:11 МСК\nШебекино Тревога по БПЛА"
+      "last_event_ts": 1792666995,
+      "source_text": "22.10.2026 14:03 МСК\nШебекино и район Тревога по БПЛА и Фпв Крайне высокая активность"
     },
     {
       "key": "армянск|автономная республика крым",
@@ -779,28 +779,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1792637893,
       "source_text": "22.10.2026 05:58 МСК\nЧонгар Апп Джанкой и близлежащие Тревога по БПЛА Республика Крым"
-    },
-    {
-      "key": "орел|орловская область",
-      "name": "Орел",
-      "lat": 52.96879,
-      "lon": 36.0791,
-      "region": "Орловская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792623900,
-      "source_text": "22.10.2026 02:05 МСК\nОрел Орловская область Работа ПВО по БПЛА"
     },
     {
       "key": "локоть|брянская область",
@@ -1087,6 +1065,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1792662585,
       "source_text": "22.10.2026 12:49 МСК\nСчастье с направления Новоайдар и по пути следования тревога по БПЛА ЛНР"
+    },
+    {
+      "key": "красная яруга|белгородская область",
+      "name": "Красная Яруга",
+      "lat": 50.80198,
+      "lon": 35.65774,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792667139,
+      "source_text": "22.10.2026 14:05 МСК\nКрасная яруга Тревога по БПЛА"
     }
   ],
   "districts": {
@@ -1489,6 +1489,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 294045,
+      "text": "Красная яруга\nТревога по БПЛА",
+      "ts": 1792667139,
+      "time_label": "22.10.2026 14:05 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 294044,
+      "text": "Шебекино и район\nТревога по БПЛА и Фпв\nКрайне высокая активность",
+      "ts": 1792666995,
+      "time_label": "22.10.2026 14:03 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 294043,
       "text": "Приморск и близлежащие, Бердянск от Приморск тревога по БПЛА",
@@ -2112,22 +2128,6 @@
       "time_label": "22.10.2026 09:12 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 293982,
-      "text": "Костромская область\nИвановская область\nВладимирская область\nотбой по бпла",
-      "ts": 1792649434,
-      "time_label": "22.10.2026 09:10 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 101813,
-      "text": "Московская область\nОтбой опасности по БПЛА",
-      "ts": 1792649428,
-      "time_label": "22.10.2026 09:10 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -2137,13 +2137,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792666754,
-  "last_event_at": "2026-10-22T10:59:14Z",
-  "fetched_at": "2026-10-22T11:00:04.883123Z",
+  "timestamp": 1792667139,
+  "last_event_at": "2026-10-22T11:05:39Z",
+  "fetched_at": "2026-10-22T11:10:02.947274Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-22T11:00:04.883123Z",
-    "source_age_seconds": 50,
+    "generated_at": "2026-10-22T11:10:02.947274Z",
+    "source_age_seconds": 263,
     "city_count": 37,
     "region_count": 14,
     "feed_count": 80
