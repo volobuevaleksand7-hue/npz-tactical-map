@@ -694,6 +694,29 @@ def handle_callback(callback_query):
     query_id = callback_query.get("id")
     from_chat = callback_query.get("from", {}).get("id")
 
+    # ── срочный ролик по слуху с одним источником (video/reel/urgent_gate.py) ──
+    if data.startswith(("urg_ok|", "urg_no|")):
+        sid = data.split("|", 1)[1]
+        verdict = "🚫 Без ролика"
+        if data.startswith("urg_ok|"):
+            sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "video", "reel"))
+            try:
+                import urgent_gate
+                r = urgent_gate.approve(sid)
+                verdict = (f"🎬 Срочный ролик: старт {r['slot'][11:16]} UTC" if isinstance(r, dict) else
+                           "ℹ️ Лимит срочных за сутки — удар уйдёт в сводку" if r == "over" else
+                           "ℹ️ Удар уже в срочном ролике" if r == "done" else "⚠️ Удар не найден в данных")
+            except Exception as e:  # noqa: BLE001
+                verdict = f"⚠️ Не запустился: {e}"
+        api_call("answerCallbackQuery", callback_query_id=query_id, text=verdict[:190], show_alert=False)
+        try:
+            msg = callback_query.get("message", {})
+            api_call("editMessageText", chat_id=msg.get("chat", {}).get("id"), message_id=msg.get("message_id"),
+                     text=(msg.get("text") or "") + "\n\n" + verdict, disable_web_page_preview=True)
+        except Exception:
+            pass
+        return True
+
     # ── publish_to_group (подтверждение TIER 2) ──
     if data.startswith("pub_to_group|"):
         payload_id = data.split("|", 1)[1]

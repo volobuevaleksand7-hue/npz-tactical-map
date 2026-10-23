@@ -538,6 +538,44 @@ def llm_lines(sel, refs):
     return out
 
 
+ORD = ["", "первый", "второй", "третий", "четвёртый", "пятый", "шестой", "седьмой", "восьмой", "девятый", "десятый",
+       "одиннадцатый", "двенадцатый", "тринадцатый", "четырнадцатый", "пятнадцатый", "шестнадцатый", "семнадцатый",
+       "восемнадцатый", "девятнадцатый", "двадцатый"]
+ORD_EN = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"]
+
+
+def day_count(date, sel):
+    """Срочный (Сергей, 24.10.2026): «на сегодня это уже третий удар». Удары даты по strikes.json — один город
+    = один удар (два источника про ту же атаку не плодят счёт); слухи не считаем, кроме ударов самого ролика."""
+    arr = json.loads((ROOT / "data" / "strikes.json").read_text(encoding="utf-8"))
+    arr = arr.get("strikes", arr) if isinstance(arr, dict) else arr
+    mine = {x.get("_sid") for x in sel}
+    cities = {str(r.get("city") or r.get("region") or "").strip().lower() for r in arr
+              if str(r.get("date", ""))[:10] == date
+              and (strike_id(r) in mine or str(r.get("confidence", "reported")).lower() in ("confirmed", "reported"))}
+    return max(len(cities - {""}), 1)
+
+
+def urgent_outro(date, sel):
+    """(голос, плашка, голос EN) финала срочного: счёт ударов за дату + куда смотреть подробности."""
+    import datetime as _dt
+    n = day_count(date, sel)
+    today = (_dt.datetime.now(_dt.timezone.utc) + _dt.timedelta(hours=3)).date().isoformat() == date
+    when, when_en = ("На сегодня", "today") if today else ("За сутки", "in the past day")
+    if n < 2:
+        return ("Подробности — на сайте и на канале.", "Подробности — на сайте и на канале",
+                "Details on the website and the channel.")
+    if len({x.get("city") for x in sel}) > 1:
+        ru = f"{when} уже {n} {G.plural(n, 'удар', 'удара', 'ударов')}."
+        en = f"That makes {n} strikes {when_en}."
+    else:
+        ru = f"{when} это уже {ORD[n] if n < len(ORD) else f'{n}-й'} удар."
+        en = f"This is the {ORD_EN[n] if n < len(ORD_EN) else f'{n}th'} strike {when_en}."
+    return (ru + " Подробности — на сайте и на канале.", f"{n}-й удар за сутки · подробности на сайте и на канале"
+            if "это" in ru else f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} за сутки · подробности на сайте и на канале",
+            en + " Details on the website and the channel.")
+
+
 def narration(date, sel, day, refs, build=None, broll=()):
     """[(ключ, текст)]: intro, s0..sN, outro. Числа — всегда скрипт; реплики по ударам — Haiku
     (только факты из сводки, проверка нейтральности) или шаблон. Кэш — build/narration.json."""
@@ -566,7 +604,7 @@ def narration(date, sel, day, refs, build=None, broll=()):
     lines += [(f"s{i}", t) for i, t in enumerate(per)]
     if broll:
         lines.append(("broll", "Кадры за сутки из открытых источников. Привязка к месту не подтверждена."))
-    lines.append(("outro", OUTRO_LINE))
+    lines.append(("outro", urgent_outro(date, sel)[0] if URGENT else OUTRO_LINE))
     return lines
 
 
@@ -911,6 +949,8 @@ def compose(date, build: Path):
     plan = {"total": total, "poster": POSTER, "cam": cam, "segs": segs, "marks": marks,
             "outro": outro, "IW": IW, "IH": IH, "dive": DIVE, "broll": brolls, "total_end": total,
             "plate": FINAL_PLATE if CTX_ON else 0}
+    if URGENT:
+        plan["outro_ru"], plan["plate_ru"], plan["outro_en"] = urgent_outro(date, sel)
     subs = {
         "TOTAL": total, "POSTER_END": POSTER + 0.35, "POSTER_BG": poster_bg, "POSTER_BGCSS": bgcss, "POSTER_MARK": pmark,
         "POSTER_E": esc("ОЦЕНКА · OSINT" + (f" · кадр: {source_name(poster_src)}" if poster_src else "")),
@@ -919,7 +959,7 @@ def compose(date, build: Path):
         "POSTER_SUB": esc(f"{date_rus.upper()} · " + ("ОЦЕНКА ПО OSINT" if URGENT else
                                                        f"{n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')} ЗА СУТКИ")),
         "IW": IW, "IH": IH, "DATE_RUS": esc(date_rus), "DATE_SHORT": esc(span_short(date)),
-        "CTXS": "\n".join(ctxs), "FINAL_PLATE": esc("Карта — ссылка в шапке канала") if CTX_ON else "",
+        "CTXS": "\n".join(ctxs), "FINAL_PLATE": esc(urgent_outro(date, sel)[1] if URGENT else "Карта — ссылка в шапке канала") if CTX_ON else "",
         "SIGNS": "\n".join(signs), "VIDEOS": "\n".join(videos), "CAPS": "\n".join(caps),
         "N": n, "N_WORD": G.plural(n, "удар", "удара", "ударов"),
         "N_FUEL": n_fuel, "N_OTHER": n - n_fuel,

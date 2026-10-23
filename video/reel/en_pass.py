@@ -229,7 +229,7 @@ def main():
 
     lines = dict(tr["voice"])
     lines["intro"] = tr["intro"]
-    lines["outro"] = "Map of all strikes: link in the channel header."
+    lines["outro"] = plan.get("outro_en") or "Map of all strikes: link in the channel header."   # срочный: счёт ударов
     lines["broll"] = "Footage from open sources. Locations not independently verified."
     voice = plan.get("voice", [])
     keys = [Path(v["file"]).stem for v in voice]

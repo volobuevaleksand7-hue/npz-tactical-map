@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Наблюдатель за YouTube-каналами-хрониками (10.10.2026, просьба владельца): новое видео →
-Haiku по заголовку/описанию решает, есть ли реальный удар по топливу/энергетике РФ →
+Haiku по заголовку/описанию/субтитрам решает, есть ли крупный удар по объекту на территории РФ
+(с 24.10.2026 — любые крупные: ТЭК, промышленность, оборонка, порты, аэродромы, логистика) →
   • удара нет в data/strikes.json — внеочередной проход сборщика ударов (удары не выдумываем:
     сборщик сам проверит по СМИ, дальше strike_pipeline даст молнию и срочный рилс);
-  • удар есть, но ни в одном вышедшем ролике его не было — срочный рилс сразу;
+  • удар есть — хроника = ещё один источник (video/out/strike-confirm.json: слух с ≥2 источниками идёт в ролик);
+    ни в одном вышедшем ролике его не было — срочный рилс через video/reel/urgent_gate.py;
+  • лимит Haiku кончился — запасные бесплатные модели OpenRouter (mimo-rotate, YT_FALLBACK_MODELS);
   • по субтитрам ищем таймкод города → подсказка в video/reel/cache/yt-hints.json:
     fetch_clips.fetch_for берёт оттуда кадры (без звука, источник — ссылка YouTube), если в Telegram пусто.
 Обнаружение — RSS, без LLM; LLM только на новое видео. cron */20. Состояние — /root/.npz-yt-watch/seen.json.
@@ -27,15 +30,19 @@ MSK = timezone(timedelta(hours=3))
 MAX_AGE_H = 30
 YTDLP = os.path.expanduser("~/.local/bin/yt-dlp")
 DRY = "--dry" in sys.argv
+FALLBACK = os.environ.get("YT_FALLBACK_MODELS", "openrouter/nvidia/nemotron-3.5-lightning:free "
+                          "openrouter/nvidia/nemotron-3-super-120b-a12b:free openrouter/poolside/laguna-s-2.1:free "
+                          "openrouter/google/gemma-4-31b-it:free")
 NS = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015",
       "m": "http://search.yahoo.com/mrss/"}
 
 PROMPT = """Ниже свежее видео YouTube-канала новостей войны: заголовок, описание, расшифровка
-с секундами в начале строк. Есть ли в нём сообщение о РЕАЛЬНОМ ударе (дроны/ракеты) по объекту
-топливно-энергетической инфраструктуры НА ТЕРРИТОРИИ РОССИИ: НПЗ, нефтебаза, нефтяной/наливной терминал,
-ЛПДС, нефтепровод, резервуарный парк, ГПЗ, электростанция, подстанция, порт с танкерами, танкер?
-Не считать: удары по Украине, фронт, оккупированные территории Украины, прогнозы, слухи «могут ударить»,
-политика, экономика без удара, архив прошлых месяцев.
+с секундами в начале строк. Есть ли в нём сообщение о РЕАЛЬНОМ крупном ударе (дроны/ракеты) по объекту
+НА ТЕРРИТОРИИ РОССИИ: топливо и энергетика (НПЗ, нефтебаза, терминал, ЛПДС, трубопровод, ГПЗ, электростанция,
+подстанция, танкер), промышленность и оборонка (завод, комбинат, химия), транспорт и логистика (порт, аэропорт,
+аэродром, ж/д узел, склады), с попаданием, пожаром или пострадавшими?
+Не считать: удары по Украине, фронт, оккупированные территории Украины и Крым, всё сбито без попадания,
+прогнозы, слухи «могут ударить», политика, экономика без удара, архив прошлых месяцев.
 Для каждого удара: если это тот же удар, что в списке «Уже в данных» (тот же объект/населённый пункт,
 даже если в видео назван областной центр или имя терминала) — укажи его номер в match, иначе null.
 start — секунда расшифровки, с которой в видео рассказывают/показывают этот удар (null — не понять).
@@ -84,16 +91,20 @@ def ask_haiku(v, known, cues):
          .replace("{desc}", v["desc"] or "—").replace("{subs}", "\n".join(lines)[:6000] or "—")
          .replace("{known}", "\n".join(f"{i + 1}. {r.get('date')} {r.get('city')}, {r.get('region') or ''} — "
                                        f"{str(r.get('target') or '')[:90]}" for i, r in enumerate(known)) or "—"))
-    for _ in range(2):
+    # 12.10.2026: недельный лимит Haiku — yt-watch молчал весь вечер. Второй заход — бесплатные модели
+    # OpenRouter через mimo-rotate (в промпте только публичные заголовок/описание/субтитры, секретов нет).
+    calls = [("haiku", ["claude-run", "-p", p, "--model", "claude-haiku-5-5", "--effort", "high"], {}),
+             ("openrouter", ["mimo-rotate", p], {"MIMO_MODELS": FALLBACK, "MIMO_TIMEOUT": "240",
+                                                 "LLM_CALLER": "npz-yt-watch"})]
+    for name, cmd, env in calls:
         try:
-            r = subprocess.run(["claude-run", "-p", p, "--model", "claude-haiku-5-5", "--effort", "high"],
-                               capture_output=True, text=True, timeout=180)
-            m = re.search(r"\{.*\}", r.stdout, re.S)
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=300, env=dict(os.environ, **env))
+            m = re.search(r"\{\s*\"strikes\".*\}", r.stdout, re.S)
             if m:
                 return json.loads(m.group(0)).get("strikes") or []
-            log(f"haiku без JSON: {r.stdout[-150:]!r} {r.stderr[-150:]!r}")
+            log(f"{name} без JSON: {r.stdout[-150:]!r} {r.stderr[-150:]!r}")
         except Exception as e:  # noqa: BLE001
-            log(f"haiku: {e}")
+            log(f"{name}: {e}")
     return None
 
 
@@ -197,7 +208,7 @@ def handle(v, hints):
         return True
     log(f"{v['id']}: удары {[(s.get('city'), s.get('object'), s.get('match'), s.get('start')) for s in found]}"
         f" — «{v['title'][:80]}»")
-    missing, uncovered = [], {}
+    missing, uncovered = [], []
     for s in found:
         m = s.get("match")
         r = rows[m - 1] if isinstance(m, int) and 1 <= m <= len(rows) else None
@@ -212,25 +223,30 @@ def handle(v, hints):
         if not r:
             missing.append(f"{s.get('city')} ({s.get('object')})")
             continue
-        d = str(r["date"])[:10]
-        sid = strike_id(r)
-        if sid not in shown_ids(d):
-            uncovered.setdefault(d, []).append(sid)
+        if not DRY and gate().confirm(r, f"yt:{v['channel']}", url):
+            log(f"{v['id']}: второй источник для {r.get('city')} ({r.get('confidence')})")
+        if strike_id(r) not in shown_ids(str(r["date"])[:10]):
+            uncovered.append(r)
     if missing:
-        alert(f"📺 Ukraine365: {', '.join(missing)} — в данных нет, запускаю сборщик ударов.\n{url}")
+        alert(f"📺 Хроника: {', '.join(missing)} — в данных нет, запускаю сборщик ударов.\n{url}")
         launch(f"cd {REPO} && NPZ_MODEL=claude-haiku-5-5 NPZ_LOCK_WAIT=900 ./agents/run-agent.sh "
                f"{REPO}/agents/update-prompt-strikes.md strikes-yt >> {REPO}/agents/logs/cron.log 2>&1")
-    for d, ids in uncovered.items():
-        v_dir = REPO / "video" / "out"
-        kind = "urgent" if not (v_dir / f"urgent-{d}.uploaded").exists() else (
-            "urgent-yt" if not (v_dir / f"urgent-yt-{d}.uploaded").exists() else None)
-        if not kind:
-            log(f"{d}: срочные за дату исчерпаны — удары уйдут в сводку")
-            continue
-        alert(f"📺 Ukraine365: удар есть в данных, но без ролика — срочный {kind} {d}.\n{url}")
-        launch(f"cd {REPO}/video && flock -w 3600 /var/lock/npz-video.lock nice -n 10 ./reel/daily.sh {d} "
-               f">> {REPO}/agents/logs/video.log 2>&1", {"REEL_KIND": kind, "REEL_ONLY": ",".join(sorted(set(ids)))})
+    if uncovered:
+        jobs, ask, over = gate().dispatch(uncovered, by=f"YouTube {v['id']}", dry=DRY)
+        for j in jobs:
+            log(f"срочный {j['kind']} {j['date']}: {len(j['ids'])} уд., слот {j['slot'][11:16]} UTC")
+            if not DRY:
+                alert(f"📺 Хроника: удар есть в данных, но без ролика — срочный {j['kind']} {j['date']}"
+                      f"{' (слух, ≥2 источника)' if j['rumored'] else ''}.\n{url}")
+        if over:
+            log(f"лимит срочных за сутки — {len(over)} уд. уйдут в сводку")
     return True
+
+
+def gate():
+    sys.path.insert(0, str(REPO / "video" / "reel"))
+    import urgent_gate
+    return urgent_gate
 
 
 def main():

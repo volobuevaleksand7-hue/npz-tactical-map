@@ -3,8 +3,8 @@
 # (за ночь и до ролика: удары за дату выпуска и накануне минус показанные — out/reel-shown.json),
 # и публикует ровно в 12:00 МСК (REEL_PUBLISH_AT, UTC; пусто — сразу). Перед рендером — проход сборщика ударов.
 #   ./reel/daily.sh [YYYY-MM-DD]
-# Срочный рилс (без расписания): REEL_KIND=urgent REEL_ONLY=<id,...> ./reel/daily.sh <дата> —
-# зовёт hermes/bot/strike_pipeline.py после молнии; один срочный на дату, публикуется сразу.
+# Срочный рилс (без расписания): REEL_KIND=urgent-<id6> REEL_ONLY=<id,...> ./reel/daily.sh <дата> —
+# зовёт video/reel/urgent_gate.py (молния, yt-watch, кнопка владельца): свой ролик на удар, ≤5 в сутки, публикуется сразу.
 # Рендер -> аудит -> YouTube -> Telegram-канал (анонимный бот) -> английская версия (Fuel Front) -> реестр data/videos.json -> очистка.
 set -uo pipefail
 VIDEO="$(cd "$(dirname "$0")/.." && pwd)"
@@ -20,12 +20,6 @@ else
   PUBLISH_AT="${REEL_PUBLISH_AT-07:00}" # 10:00 МСК (вечер — cron даёт 17:00 = 20:00 МСК); пусто — сразу
 fi
 rc=0
-# 09.10.2026: один срочный на дату резал крупные удары (Ухтинский НПЗ ушёл без ролика после Редкино).
-# Срочный за дату уже вышел, а в молнии есть НПЗ — второй срочный urgent-npz, только по этим ударам.
-if [ "$KIND" = urgent ] && [ -f "out/urgent-$DATE.uploaded" ] && [ -n "${REEL_ONLY_NPZ:-}" ] \
-   && [ ! -f "out/urgent-npz-$DATE.uploaded" ]; then
-  KIND=urgent-npz; export REEL_KIND="$KIND" REEL_ONLY="$REEL_ONLY_NPZ"
-fi
 echo "[$(date -u +%FT%TZ)] $KIND $DATE"
 if [ -f "out/$KIND-$DATE.uploaded" ]; then echo "reel: $KIND $DATE уже залит — пропуск"; exit 0; fi
 # свежий проход сборщика ударов прямо перед рендером: удары дня докатываются в strikes.json

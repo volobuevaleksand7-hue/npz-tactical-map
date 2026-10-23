@@ -464,7 +464,7 @@ def pick_window(cands, seg, what, work: Path):
     середины окон кладём в одну сетку и один раз спрашиваем модель со зрением, где виден удар.
     -> (raw, start, payload) | None (модель видела и ничего не выбрала). Без модели — эвристика."""
     opts = []
-    for raw, dur, payload in cands[:3]:
+    for raw, dur, payload in cands[:4]:   # 2 Telegram + 2 YouTube (24.10.2026)
         s = min(seg, dur - 0.2)
         for t in windows(raw, dur, s, 3):
             opts.append((raw, t, s, payload))
@@ -585,18 +585,21 @@ def slug(s):
 YT_HINTS = CACHE / "yt-hints.json"
 
 
-def yt_hint_clip(strike, d: Path, final: Path, seg=SEG):
-    """Кадры с YouTube-хроники (agents/yt-watch.py, 10.10.2026): ролик вышел в окне даты удара, город —
-    в заголовке/субтитрах. Качаем ~40 с вокруг упоминания, кадр выбирает та же проверка, что для Telegram.
-    Без звука (to_vertical -an): голос чужого канала не берём; источник — ссылка на ролик с таймкодом."""
+def yt_hint_parts(strike, d: Path, seg=SEG):
+    """Кадры YouTube-хроник (agents/yt-watch.py, 10.10.2026): ролик вышел в окне даты удара, город —
+    в заголовке/субтитрах. Качаем ~45 с вокруг упоминания, режем на куски по 15 с (pick_window берёт по 3 окна
+    с куска — заставка и чужой сюжет не забивают выбор). С 24.10.2026 — наравне с Telegram: куски идут в ту же
+    проверку зрением, что и видео постов. Без звука (голос чужого канала не берём), верх и низ кадра срезаны —
+    там плашки, бегущая строка и логотип канала. -> [(кусок, длительность, ({url, t0, yt}, w, h))]"""
     try:
         hints = json.loads(YT_HINTS.read_text())
     except (OSError, ValueError):
-        return None
+        return []
     st, day = city_stem(strike.get("city")), str(strike.get("date", ""))[:10]
-    what = f"{strike.get('target') or ''}, {strike.get('city') or ''}"
+    out, used = [], set()
     for h in sorted(hints.values(), key=lambda h: h.get("start") is None):
-        if not st or h.get("stem") != st or not date_ok(h.get("published"), day):
+        if not st or h.get("stem") != st or not date_ok(h.get("published"), day) or h["video"] in used \
+                or len(used) >= 2:
             continue
         start = int(h.get("start") or 0)
         lo = max(0, start - 3)
@@ -606,7 +609,7 @@ def yt_hint_clip(strike, d: Path, final: Path, seg=SEG):
         else:
             ytd = shutil.which("yt-dlp") or os.path.expanduser("~/.local/bin/yt-dlp")   # venv (см. daily.sh)
             if not os.access(ytd, os.X_OK):
-                return None
+                return out
             r = subprocess.run([ytd, "-q", "--no-playlist", "-f", "bv*[height<=720][ext=mp4]/b[height<=720]/best",
                                 "--download-sections", f"*{lo}-{lo + 45}", "--force-keyframes-at-cuts",
                                 "-o", str(d / f"yt-{h['video']}-{lo}.%(ext)s"), h["url"]],
@@ -618,29 +621,25 @@ def yt_hint_clip(strike, d: Path, final: Path, seg=SEG):
             raw = files[0]
         try:
             w, hh, dur = probe(raw)
-            # 45 с ролика — три куска по 15 с: pick_window берёт по 3 окна с куска, итого 9 кадров
-            # (одно 45-секундное видео давало 3 окна, и в них попадали заставка и чужой сюжет)
-            parts = []
             for off in range(0, int(dur) - 3, 15):
-                part = d / f"{raw.stem}-p{off}.mp4"
+                part = d / f"{raw.stem}-c{off}.mp4"
                 if not part.exists():
                     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", str(off), "-t", "15", "-i", str(raw),
-                                    "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", str(part)],
+                                    "-an", "-vf", "crop=iw:trunc(ih*0.80/2)*2:0:trunc(ih*0.08/2)*2",
+                                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", str(part)],
                                    check=True, timeout=180)
-                parts.append((part, probe(part)[2], off))
-            pick = pick_window([p for p in parts if p[1] >= seg], seg, what, d)
-            if not pick:
-                log(f"youtube {h['url']}: в кадрах удара не видно")
-                continue
-            part, s0, s, off = pick
-            to_vertical(part, s0, s, final)
-            s0 += off
+                pd = probe(part)[2]
+                if pd >= seg:
+                    out.append((part, pd, ({"url": h["url"], "t0": lo + off, "yt": True}, w, hh)))
+            used.add(h["video"])
         except Exception as e:  # noqa: BLE001
             log(f"youtube {h['url']}: не годится ({e})")
-            continue
-        return {"file": final.name, "kind": "video", "src": f"{h['url']}&t={lo + int(s0)}s", "start": s0,
-                "dur": round(s, 2), "orig": f"{w}x{hh}"}
-    return None
+    return out
+
+
+def clip_src(p, st):
+    """Ссылка-источник кадра: YouTube — с таймкодом момента, Telegram/страница — как есть."""
+    return f"{p['url']}&t={p['t0'] + int(st)}s" if p.get("yt") else p["url"]
 
 
 def fetch_for(strike, out_dir: Path, seg=SEG):
@@ -671,6 +670,8 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
     vids.sort(key=lambda x: x[:3], reverse=True)
     has_photo = any(p["photos"] for p in posts)
     good = [(raw, dur, (p, w, h)) for ok, _, _, raw, p, w, h, dur in vids if ok or not has_photo]
+    yt = yt_hint_parts(strike, d, seg)   # хроники YouTube — в тот же выбор зрением, по два лучших от каждого
+    good = (good[:2] + yt[:2]) if yt else good
     if good:
         what = f"{strike.get('target') or ''}, {strike.get('city') or ''}"
         try:
@@ -678,7 +679,7 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
             if pick:
                 raw, st, s, (p, w, h) = pick
                 to_vertical(raw, st, s, final)
-                res = {"file": final.name, "kind": "video", "src": p["url"], "start": st, "dur": round(s, 2),
+                res = {"file": final.name, "kind": "video", "src": clip_src(p, st), "start": st, "dur": round(s, 2),
                        "orig": f"{w}x{h}"}
             else:
                 vids = []  # модель смотрела кадры — удара не видно; «кружок» в конце тоже не нужен
@@ -705,8 +706,13 @@ def fetch_for(strike, out_dir: Path, seg=SEG):
                         log(f"видео со страницы {src} — удара не видно, не берём")
                 except Exception as e:  # noqa: BLE001
                     log(f"yt-dlp-файл не годится: {e}")
-    if not res:   # YouTube-хроника (Ukraine365 и др.) — раньше фото: живые кадры лучше статики
-        res = yt_hint_clip(strike, d, final, seg)
+    if not res and yt and not any(x[2][0].get("yt") for x in good):   # хроника не попала в общий выбор
+        pick = pick_window(yt, seg, f"{strike.get('target') or ''}, {strike.get('city') or ''}", d)
+        if pick:
+            raw, st, s, (p, w, h) = pick
+            to_vertical(raw, st, s, final)
+            res = {"file": final.name, "kind": "video", "src": clip_src(p, st), "start": st, "dur": round(s, 2),
+                   "orig": f"{w}x{h}"}
     if not res:
         for p in posts:
             if p["photos"]:
