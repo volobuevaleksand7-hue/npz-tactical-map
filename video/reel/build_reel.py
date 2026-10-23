@@ -33,6 +33,8 @@ MAX_STRIKES = int(os.environ.get("REEL_MAX", "12"))  # все удары дня;
 # в hermes/bot/strike_pipeline.py (его зовёт пайплайн сразу после молнии, без расписания).
 URGENT = os.environ.get("REEL_KIND", "reel").startswith("urgent")   # urgent | urgent-<метка> (второй срочный за дату)
 ONLY = {x for x in os.environ.get("REEL_ONLY", "").split(",") if x}
+# Слухи в рилс — только явным решением владельца (24.10.2026, Рязань) и только вместе с REEL_ONLY: в кадре и в озвучке «не подтверждено»
+RUMORS = os.environ.get("REEL_ALLOW_RUMORED") == "1" and bool(ONLY)
 # 10.10.2026: две сводки в день — утро 10:00 МСК (reel) и вечер 20:00 МСК (reel-evening).
 # Вечерняя берёт то, чего не было в утренней (reel-shown.json пишут обе).
 EVENING = os.environ.get("REEL_KIND", "reel") == "reel-evening"
@@ -186,7 +188,7 @@ def select_strikes(date):
     Слухи (rumored) не показываем."""
     day, _ = load_day(date)
     pool = [s for s in day if s["lat"] is not None
-            and str(s.get("confidence", "reported")).lower() in ("confirmed", "reported")]
+            and (RUMORS or str(s.get("confidence", "reported")).lower() in ("confirmed", "reported"))]
     pool.sort(key=lambda s: (s["cls"], G.strike_rank(s)), reverse=True)
     out, by_city = [], {}
     for s in pool:
@@ -348,7 +350,8 @@ def thumb_params(sel, day, cities, date_rus, P):
     date = date_rus.upper() + ("" if URGENT or n == 1 else " · ЗА СУТКИ")
     pts = [[P[f"s{i}"]["x"], P[f"s{i}"]["y"]] for i in range(len(sel)) if f"s{i}" in P]
     return {"count": f"{n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')}", "obj": obj, "place": place, "date": date,
-            "urgent": "СРОЧНО", "brand": "ТОПЛИВНЫЙ ФРОНТ РФ", "disc": "ОЦЕНКА · OSINT", "pts": pts}
+            "urgent": "СРОЧНО", "brand": "ТОПЛИВНЫЙ ФРОНТ РФ",
+            "disc": "НЕ ПОДТВЕРЖДЕНО · OSINT" if any(str(x.get("confidence")).lower() == "rumored" for x in sel) else "ОЦЕНКА · OSINT", "pts": pts}
 
 
 # ───────────────────────────── prepare ─────────────────────────────
@@ -546,7 +549,8 @@ def narration(date, sel, day, refs, build=None, broll=()):
         lead = dative_object(object_name(sel[0], refs)) if sel else "объекту"
         # хук: без даты (она на постере) и без «по данным открытых источников» — атрибуция и «ОЦЕНКА» теперь
         # в кадре на каждой сцене (строка контекста), а длинное интро держало общий план ~5 с
-        lines = [("intro", f"Срочно. Удар по {lead}.")]
+        unconf = any(str(x.get("confidence")).lower() == "rumored" for x in sel)
+        lines = [("intro", f"Срочно. По неподтверждённым данным, удар по {lead}." if unconf else f"Срочно. Удар по {lead}.")]
     else:
         # хук (10.10.2026): сразу цифра, без «Четвёртое октября.» — дата и так на постере и плашке
         lines = [("intro", f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по России за сутки{tail}.")]
