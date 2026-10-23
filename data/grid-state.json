@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-23T04:51:42Z",
+    "generated_at": "2026-10-23T16:51:45Z",
     "updated_by": "agent:grid-status",
     "data_mode": "OSINT / ESTIMATE",
     "confidence": "Состояние подстанций, ТЭС и регионов с отключениями — по открытым источникам (региональные СМИ, заявления Россетей, тг-каналы губернаторов, заявления МАГАТЭ, Ukrenergo). Не official.",
@@ -174,6 +174,18 @@
       "damage": "После атаки БПЛА 18 октября 2026 отключены две подстанции; без электроснабжения около 20 тыс. жителей и около 50 многоквартирных домов. Объём повреждений не уточнён.",
       "source_url": "https://www.fontanka.ru/2026/10/18/76708361/",
       "confidence": "confirmed"
+    },
+    {
+      "id": "chertkov_lep_1",
+      "name": "Опора ЛЭП в Чертковском районе Ростовской области (хутор Нагибин)",
+      "operator": "не уточнён",
+      "lat": 49.4,
+      "lon": 40.2,
+      "status": "operational",
+      "status_since": "2026-10-21",
+      "damage": "Атака БПЛА 21 октября 2026 повредила опору ЛЭП; без электричества остались более 200 домов. Электроснабжение восстановлено к утру.",
+      "source_url": "https://rtvi.com/news/v-rostovskoj-oblasti-iz-za-ataki-bpla-povrezhdena-opora-lep/",
+      "confidence": "reported"
     }
   ],
   "blackout_regions": [
@@ -297,9 +309,27 @@
       "since": "2026-10-01",
       "source_url": "https://www.svoboda.org/amp/v-krymu-posle-ataki-bpla-chastj-naselennyh-punktov-ostalasj-bez-sveta/33867760.html",
       "note": "Красногвардейский район остался частично без электричества после атаки БПЛА на энергообъекты Крыма 1 октября 2026 года."
+    },
+    {
+      "region": "Ростовская область (Чертковский район)",
+      "lat": 49.4,
+      "lon": 40.2,
+      "scope": "partial",
+      "affected_population": 0,
+      "cause": "Атака БПЛА 21 октября 2026, повреждена опора ЛЭП",
+      "since": "2026-10-21",
+      "source_url": "https://rtvi.com/news/v-rostovskoj-oblasti-iz-za-ataki-bpla-povrezhdena-opora-lep/",
+      "note": "Более 200 домов без электричества; электроснабжение восстановлено к утру. Число пострадавших не сообщалось."
     }
   ],
   "events": [
+    {
+      "date": "2026-10-21",
+      "region": "Ростовская область",
+      "text": "В ночь на 21 октября атака БПЛА в Чертковском районе повредила опору ЛЭП. Без электричества остались более 200 домов; к утру электроснабжение восстановлено.",
+      "source_url": "https://rtvi.com/news/v-rostovskoj-oblasti-iz-za-ataki-bpla-povrezhdena-opora-lep/",
+      "confidence": "reported"
+    },
     {
       "date": "2026-10-18",
       "region": "Запорожская область (ЗАЭС)",
@@ -361,13 +391,6 @@
       "region": "Приморский край",
       "text": "Авария на подстанции 110 кВ «Штыково» в ночь на 28 сентября: без холодной воды остались около 650 тыс. жителей Владивостока, Артёма и Надеждинского района из-за отказа насосных станций.",
       "source_url": "https://ru.themoscowtimes.com/2026/09/28/vprimore-650-tisyach-chelovek-ostalis-bez-vodi-iz-za-avarii-a207128",
-      "confidence": "reported"
-    },
-    {
-      "date": "2025-10-18",
-      "region": "Ульяновская область",
-      "text": "Подстанция Вешкайма повреждена в результате атаки беспилотников. Четыре дрона поразили объект, произошли два взрыва. Украинская сторона заявляла о полной потере объекта; региональный диспетчерский центр сообщал о восстановлении электроснабжения в штатном режиме.",
-      "source_url": "https://news.liga.net/en/amp/politics/news/drones-hit-veshkayma-substation-in-russia-ukraine-says-russians-lost-the-facility-video",
       "confidence": "reported"
     }
   ]
