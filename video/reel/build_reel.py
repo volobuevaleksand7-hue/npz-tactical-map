@@ -325,6 +325,32 @@ def poster_head(sel, day, refs):
     return f"{n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')} ПО РФ"
 
 
+OBJ_DAT = {"НПЗ": ("НПЗ", "НПЗ"), "нефтепровод": ("НЕФТЕПРОВОДУ", "НЕФТЕПРОВОДАМ"), "нефтебаза": ("НЕФТЕБАЗЕ", "НЕФТЕБАЗАМ"),
+           "терминал": ("ТЕРМИНАЛУ", "ТЕРМИНАЛАМ"), "энергетика": ("ЭНЕРГЕТИКЕ", "ЭНЕРГЕТИКЕ"),
+           "промышленность": ("ПРОМЫШЛЕННОСТИ", "ПРОМЫШЛЕННОСТИ")}
+
+
+def thumb_params(sel, day, cities, date_rus, P):
+    """Строки и точки обложки V4 (reel/thumb_v4.py): «СРОЧНО», число ударов, объект, плашка места, дата."""
+    n = len(day)
+    kinds = {kind_label(s) for s in day}
+    k = next(iter(kinds)) if len(kinds) == 1 else ""
+    obj = "ПО " + OBJ_DAT[k][0 if n == 1 else 1] if k in OBJ_DAT else ("ПО ОБЪЕКТУ" if n == 1 else "ПО РФ")
+    lead = sel[0]
+    city = str(lead.get("city") or lead.get("region") or "").strip()
+    region = re.sub(r"\s*область$", " обл.", str(lead.get("region") or "").strip())
+    others = [c for c in cities if c.lower() != city.lower()][:2]
+    place = [[city.upper(), "y"]]
+    if len(sel) > 1 and others:
+        place.append([" · ".join(c.upper() for c in others), "w"])
+    elif region and region.lower() != city.lower():
+        place.append([region.upper(), "w"])
+    date = date_rus.upper() + ("" if URGENT or n == 1 else " · ЗА СУТКИ")
+    pts = [[P[f"s{i}"]["x"], P[f"s{i}"]["y"]] for i in range(len(sel)) if f"s{i}" in P]
+    return {"count": f"{n} {G.plural(n, 'УДАР', 'УДАРА', 'УДАРОВ')}", "obj": obj, "place": place, "date": date,
+            "urgent": "СРОЧНО", "brand": "ТОПЛИВНЫЙ ФРОНТ РФ", "disc": "ОЦЕНКА · OSINT", "pts": pts}
+
+
 # ───────────────────────────── prepare ─────────────────────────────
 
 def map_bounds(points):
@@ -936,6 +962,17 @@ def compose(date, build: Path):
     (thumb / "index.html").write_text(tpage, encoding="utf-8")
     (thumb / "hyperframes.json").write_text(json.dumps({"paths": {"assets": "assets"}}), encoding="utf-8")
     (thumb / "assets").symlink_to("../assets")
+
+    # Обложка V4 (Сергей, 23.10.2026, «берем!»): жёлтая шапка, красный заголовок, «СРОЧНО», число ударов, карта крупно.
+    # Перекрывает страницу выше; не вышло — остаётся прежняя обложка «поверх карты».
+    try:
+        import thumb_v4
+        tparams = thumb_params(sel, day, cities, date_rus, P)
+        assert tparams["pts"], "нет точек ударов"
+        (thumb / "params.json").write_text(json.dumps(tparams, ensure_ascii=False, indent=1), encoding="utf-8")
+        (thumb / "index.html").write_text(thumb_v4.render(tparams, build / "assets" / "fonts" / "rubik-800.ttf"), encoding="utf-8")
+    except Exception as ex:   # noqa: BLE001
+        print(f"thumb v4: не вышло ({ex!r}) — прежняя обложка", file=sys.stderr)
 
     # plan.json в формате ежедневного ролика: его mix() кладёт эффекты + музыку
     foreign = [{"i": sg["i"], "dur": round(sg["v1"] - sg["v0"], 2), "src": sg.get("src", ""),

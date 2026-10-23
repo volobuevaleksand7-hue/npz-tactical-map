@@ -165,6 +165,11 @@ def main():
     plan = json.loads((dst / "plan.json").read_text(encoding="utf-8"))
     per = json.loads((dst / "narration.json").read_text(encoding="utf-8"))
     ui = ui_strings(page)
+    tparams = None   # обложка V4: строки перевода идут тем же запросом, что и экран ролика
+    if (src / "thumb" / "params.json").exists():
+        import thumb_v4
+        tparams = json.loads((src / "thumb" / "params.json").read_text(encoding="utf-8"))
+        ui = ui + [t for t in thumb_v4.strings(tparams) if t not in ui]
     keys = [Path(v["file"]).stem for v in plan.get("voice", [])]
     payload = {
         "ui": ui,
@@ -201,7 +206,15 @@ def main():
 
     # страница обложки «поверх карты» (build_reel.py compose -> thumb/): тот же перевод
     tsrc = src / "thumb" / "index.html"
-    if tsrc.exists():
+    if tparams:
+        tq = thumb_v4.translate(tparams, dict(zip(ui, tr["ui"])))
+        (dst / "thumb").mkdir()
+        (dst / "thumb" / "index.html").write_text(
+            thumb_v4.render(tq, dst / "assets" / "fonts" / "rubik-800.ttf", lang="en"), encoding="utf-8")
+        (dst / "thumb" / "hyperframes.json").write_text((src / "thumb" / "hyperframes.json").read_text(encoding="utf-8"), encoding="utf-8")
+        (dst / "thumb" / "assets").symlink_to("../assets")
+        log(f"обложка V4: {tq['urgent']} / {tq['count']} / {tq['obj']} / {[t for t, _ in tq['place']]}")
+    elif tsrc.exists():
         tp = tsrc.read_text(encoding="utf-8")
         for a, b in zip(ui, tr["ui"]):
             tp = tp.replace(">" + html.escape(a, quote=False) + "<", ">" + html.escape(b, quote=False) + "<")
