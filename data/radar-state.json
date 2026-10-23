@@ -120,6 +120,25 @@
       "last_event_ts": 1792764154,
       "source_text": "23.10.2026 17:02 МСК\nКостромская область - опасность по БПЛА + опасность по малоразмерным воздушным шарам. 📡 Локатор России - @locatorru"
     },
+    "Тверская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792771401,
+      "source_text": "23.10.2026 19:03 МСК\nТверская область Опасность по БПЛА"
+    },
     "Орловская область": {
       "bpla": false,
       "bplaDim": false,
@@ -328,6 +347,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1792768168,
       "source_text": "23.10.2026 18:09 МСК\nКорочанский район Опасность по БПЛА Белогородская область"
+    },
+    "Вологодская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792771456,
+      "source_text": "23.10.2026 19:04 МСК\nВологодская область - опасность по БПЛА + опасность по малоразмерным воздушным шарам. 📡 Локатор России - @locatorru"
     }
   },
   "cities": [
@@ -1493,6 +1531,38 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 91877,
+      "text": "Вологодская область - опасность по БПЛА + опасность по малоразмерным воздушным шарам.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1792771456,
+      "time_label": "23.10.2026 19:04 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 102224,
+      "text": "Тверская область\nОпасность по БПЛА",
+      "ts": 1792771401,
+      "time_label": "23.10.2026 19:03 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 294612,
+      "text": "Белгородская область все районы\nТревога по БПЛА сохраняется",
+      "ts": 1792771248,
+      "time_label": "23.10.2026 19:00 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 102223,
+      "text": "Вологодская область\nОпасность по БПЛА",
+      "ts": 1792771172,
+      "time_label": "23.10.2026 18:59 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 294611,
       "text": "Навля\nНавлинский район и близлежайшие\nОпасность по БПЛА\nВозможно разведка\nБрянская область",
       "ts": 1792771109,
@@ -2099,38 +2169,6 @@
       "time_label": "23.10.2026 17:12 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 91864,
-      "text": "Рыжково, Орловская область - 2 ракеты на Орёл.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792764743,
-      "time_label": "23.10.2026 17:12 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 91863,
-      "text": "Тульская область - ракетная опасность от Орла.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792764725,
-      "time_label": "23.10.2026 17:12 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 91862,
-      "text": "Красное Знамя, Дмитровский район, Орловская область - ракета в сторону Орёл.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792764702,
-      "time_label": "23.10.2026 17:11 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 294573,
-      "text": "Тепловка\nФрунзе\nНиколаевка и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1792764699,
-      "time_label": "23.10.2026 17:11 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2140,15 +2178,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792771109,
-  "last_event_at": "2026-10-23T15:58:29Z",
-  "fetched_at": "2026-10-23T16:00:04.403072Z",
+  "timestamp": 1792771456,
+  "last_event_at": "2026-10-23T16:04:16Z",
+  "fetched_at": "2026-10-23T16:10:03.079220Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-23T16:00:04.403072Z",
-    "source_age_seconds": 95,
+    "generated_at": "2026-10-23T16:10:03.079220Z",
+    "source_age_seconds": 347,
     "city_count": 35,
-    "region_count": 17,
+    "region_count": 19,
     "feed_count": 80
   }
 }
