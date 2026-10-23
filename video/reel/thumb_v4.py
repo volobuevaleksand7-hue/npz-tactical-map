@@ -40,8 +40,9 @@ def place_map(pts):
         cx, cy = pts[0]
     else:
         bw, bh = max(max(xs) - min(xs), 1), max(max(ys) - min(ys), 1)
-        sc = min(1.0, max(0.5, min(720.0 / bw, 480.0 / bh)))
+        sc = min(1.0, max(0.38, min(720.0 / bw, 480.0 / bh)))
         cx, cy = (max(xs) + min(xs)) / 2, (max(ys) + min(ys)) / 2
+        cy0 = 1060.0   # группа ударов ниже центра: верхние отметки не прячутся под ленту
         if bw * sc > 760 or bh * sc > 520:   # не помещаются все — держим главный удар по центру
             cx, cy = pts[0]
     left = min(0.0, max(W - MW * sc, cx0 - cx * sc))
