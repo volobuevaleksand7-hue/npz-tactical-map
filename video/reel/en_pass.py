@@ -254,6 +254,8 @@ def main():
         log("обложка поверх карты не вышла — кадр из mp4")
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "0.9", "-i", str(mp4), "-frames:v", "1", "-q:v", "3",
                         str(out.with_suffix(".jpg"))], check=True)
+    elif subprocess.run([str(REEL / "poster_intro.sh"), str(mp4), str(out.with_suffix(".jpg"))]).returncode:
+        log("обложка в начало ролика не вшита")  # Shorts берут превью из кадра видео
 
     log(f"готово: {mp4} ({duration(mp4):.1f} с), заголовок: {tr['title']}")
 

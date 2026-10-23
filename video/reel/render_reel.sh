@@ -25,7 +25,10 @@ python3 build.py mix "$BUILD" "$BUILD/silent.mp4" "$OUT.tmp.mp4"
 mv -f "$OUT.tmp.mp4" "$OUT"
 # Обложка YouTube = заголовок и плашки постера поверх КАРТЫ сайта (снимок страницы <сборка>/thumb, 23.10.2026).
 # Не вышло — кадр сцены-постера из готового mp4 (заголовок виден целиком, до POSTER_END в build_reel.py)
-"$VIDEO/reel/make_thumb.sh" "$BUILD" "${OUT%.mp4}.jpg" \
-  || ffmpeg -y -v error -ss "${REEL_POSTER_T:-0.9}" -i "$OUT" -frames:v 1 -q:v 3 "${OUT%.mp4}.jpg" \
+if "$VIDEO/reel/make_thumb.sh" "$BUILD" "${OUT%.mp4}.jpg"; then
+  # та же обложка — первыми кадрами ролика: Shorts берут превью из видео
+  "$VIDEO/reel/poster_intro.sh" "$OUT" "${OUT%.mp4}.jpg" || echo "render_reel.sh: обложка в начало не вшита" >&2
+else ffmpeg -y -v error -ss "${REEL_POSTER_T:-0.9}" -i "$OUT" -frames:v 1 -q:v 3 "${OUT%.mp4}.jpg" \
   || echo "render_reel.sh: обложка не вырезана" >&2
+fi
 echo "[$(date -u +%FT%TZ)] ok $OUT ($(du -h "$OUT" | cut -f1), $(( $(date +%s) - t0 )) с)"
