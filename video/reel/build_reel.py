@@ -590,7 +590,7 @@ def day_totals(date, n0, f0):
         c = str(r.get("city") or r.get("region") or "").strip().lower()
         if c:
             by[c] = max(by.get(c, 0), strike_class(G.normalize_strike(r)))
-    return max(len(by), n0), max(sum(1 for v in by.values() if v == 2), f0)
+    return (len(by) or n0), (sum(1 for v in by.values() if v == 2) if by else f0)
 
 
 def urgent_outro(date, sel):
