@@ -9,13 +9,16 @@ Haiku по заголовку/описанию/субтитрам решает, 
   • лимит Haiku кончился — запасные бесплатные модели OpenRouter (mimo-rotate, YT_FALLBACK_MODELS);
   • по субтитрам ищем таймкод города → подсказка в video/reel/cache/yt-hints.json:
     fetch_clips.fetch_for берёт оттуда кадры (без звука, источник — ссылка YouTube), если в Telegram пусто.
-Обнаружение — RSS, без LLM; LLM только на новое видео. cron */20. Состояние — /root/.npz-yt-watch/seen.json.
+Обнаружение — YouTube API (токен канала), при сбое RSS, затем yt-dlp. LLM только на новое видео.
+cron */20. Состояние — /root/.npz-yt-watch/seen.json.
   python3 agents/yt-watch.py [--dry] [--video <id>]"""
 import json
 import os
 import re
 import subprocess
 import sys
+import urllib.error
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
@@ -94,6 +97,57 @@ def feed_ytdlp(channel, seen):
                     "desc": (j.get("description") or "")[:1500]})
     if not out and r.returncode:
         raise RuntimeError(r.stderr[-200:])
+    return out
+
+
+def yt_access_token():
+    """Refresh-токен загрузчика НПЗ. В лог не попадает."""
+    cached = getattr(yt_access_token, "value", None)
+    if cached:
+        return cached
+    sys.path.insert(0, str(REPO / "video"))
+    import upload
+    try:
+        yt_access_token.value = upload.access_token()
+    except SystemExit as e:
+        raise RuntimeError(str(e)[:200]) from None
+    return yt_access_token.value
+
+
+def api_json(path, params, token):
+    url = "https://www.googleapis.com/youtube/v3/" + path + "?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"Authorization": "Bearer " + token, "User-Agent": "npz-yt-watch"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f"HTTP {e.code}") from None
+
+
+def feed_api(channel):
+    """Последние ролики: playlistItems.list (uploads) и videos.list snippet."""
+    if not channel.startswith("UC") or len(channel) < 4:
+        raise RuntimeError("плохой id канала")
+    token = yt_access_token()
+    data = api_json("playlistItems", {
+        "part": "contentDetails", "maxResults": "15", "playlistId": "UU" + channel[2:],
+    }, token)
+    ids = [it.get("contentDetails", {}).get("videoId") for it in data.get("items") or []]
+    ids = [v for v in ids if v]
+    if not ids:
+        raise RuntimeError("пустой список")
+    vids = api_json("videos", {"part": "snippet", "id": ",".join(ids)}, token)
+    by_id = {it["id"]: it for it in vids.get("items") or []}
+    out = []
+    for vid in ids:
+        sn = (by_id.get(vid) or {}).get("snippet") or {}
+        published = (sn.get("publishedAt") or "").replace("Z", "+00:00")
+        if not published:
+            continue
+        out.append({"id": vid, "title": sn.get("title") or "", "published": published,
+                    "channel": channel, "desc": (sn.get("description") or "")[:1500]})
+    if not out:
+        raise RuntimeError("пустой список")
     return out
 
 
@@ -283,15 +337,23 @@ def main():
     only = sys.argv[sys.argv.index("--video") + 1] if "--video" in sys.argv else None
     now = datetime.now(timezone.utc)
     for ch in CHANNELS:
+        items = None
         try:
-            items = feed(ch)
+            items = feed_api(ch)
+            log(f"{ch}: список через API ({len(items)})")
         except Exception as e:  # noqa: BLE001
+            log(f"{ch}: API: {e}")
             try:
-                items = feed_ytdlp(ch, seen)
-                log(f"{ch}: RSS: {e} — взял список через yt-dlp ({len(items)} новых)")
+                items = feed(ch)
             except Exception as e2:  # noqa: BLE001
-                log(f"{ch}: RSS: {e}; yt-dlp: {e2}")
-                continue
+                try:
+                    items = feed_ytdlp(ch, seen)
+                    log(f"{ch}: RSS: {e2} — взял список через yt-dlp ({len(items)} новых)")
+                except Exception as e3:  # noqa: BLE001
+                    log(f"{ch}: API: {e}; RSS: {e2}; yt-dlp: {e3}")
+                    continue
+        if not items:
+            continue
         for v in items:
             if only and v["id"] != only:
                 continue
