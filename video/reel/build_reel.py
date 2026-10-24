@@ -553,7 +553,7 @@ def day_count(date, sel):
     mine = {x.get("_sid") for x in sel}
     cities = {str(r.get("city") or r.get("region") or "").strip().lower() for r in arr
               if str(r.get("date", ""))[:10] == date
-              and (strike_id(r) in mine or str(r.get("confidence", "reported")).lower() in ("confirmed", "reported"))}
+              and str(r.get("confidence", "reported")).lower() in ("confirmed", "reported", "rumored")}  # 24.10: счёт — все места дня (слух с ≥2 источниками тоже выходит в ролик)
     return max(len(cities - {""}), 1)
 
 
