@@ -52,8 +52,8 @@ def audit(date, build: Path):
     if B.CTX_ON:
         if plan.get("ctx_lines", 0) < plan.get("n_strikes", 0) or "ОЦЕНКА</div>" not in page:
             hard.append("нет строки контекста «место · дата · источник · ОЦЕНКА» на сценах ударов")
-        if "ссылка в шапке канала" not in page:
-            hard.append("нет финальной плашки «Карта — ссылка в шапке канала»")
+        if "ссылка в шапке канала" not in page and "подробности на сайте и на канале" not in page.lower():
+            hard.append("нет финальной плашки «Карта — ссылка в шапке канала» (у срочных — «подробности на сайте и на канале»)")
     got = sum(1 for c in clips if c)
     if not got:
         warn.append("нет ни одного клипа (карта и плашки без кадров)")
