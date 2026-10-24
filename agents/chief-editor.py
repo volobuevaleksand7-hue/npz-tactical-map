@@ -7,6 +7,7 @@ ROOT = os.environ.get("NPZ_REPO", "/root/npz-tactical-map")
 OUT = f"{ROOT}/video/out"
 STATE = f"{OUT}/chief-editor-state.json"
 LATE_MIN = 30
+MAX_BURST, BURST_WIN = 2, 60
 
 def alert(text):
     try:
@@ -35,24 +36,28 @@ def main():
     if not stuck:
         json.dump(state, open(STATE, "w")); return
     ready = [p for p in stuck if p[1]]
-    if len(ready) == 1 and len(stuck) == 1:
-        e = ready[0][0]
-        a = subprocess.run(["python3", f"{ROOT}/video/reel/audit.py", e["date"], e["kind"]], capture_output=True, text=True, cwd=f"{ROOT}/video")
-        if a.returncode == 0:
+    # правило владельца (24.10): не больше MAX_BURST роликов за BURST_WIN мин — иначе бан
+    recent = sum(1 for f in os.listdir(OUT) if f.startswith("urgent-") and f.endswith(".uploaded")
+                 and time.time() - os.path.getmtime(f"{OUT}/{f}") < BURST_WIN * 60)
+    room = MAX_BURST - recent
+    if room > 0 and ready and len(stuck) <= MAX_BURST:
+        for e, _, _ in ready[:room]:
+            a = subprocess.run(["python3", f"{ROOT}/video/reel/audit.py", e["date"], e["kind"]], capture_output=True, text=True, cwd=f"{ROOT}/video")
+            if a.returncode != 0:
+                key = f"audit:{e['kind']}"
+                if key not in state:
+                    state[key] = int(time.time())
+                    alert(f"🟠 Главред: {e['kind']} собран, но аудит не прошёл:\n{(a.stdout or a.stderr)[-400:]}")
+                continue
             for cmd in ("upload.py", "tg_post.py"):
                 subprocess.run(["python3", cmd, e["kind"], e["date"]], cwd=f"{ROOT}/video")
             alert(f"🎬 Главред: {e['kind']} задержался, залил сам.")
-            return
-        key = f"audit:{e['kind']}"
-        if key not in state:
-            state[key] = int(time.time())
-            alert(f"🟠 Главред: {e['kind']} собран, но аудит не прошёл:\n{(a.stdout or a.stderr)[-400:]}")
     else:
-        key = "backlog:" + ",".join(sorted(p[0]["kind"] for p in stuck))
+        key = "backlog:" + ",".join(sorted(p[0]["kind"] for p in stuck)) + f":{recent}"
         if key not in state:
             state[key] = int(time.time())
             alert("🟠 Главред: не вышли " + ", ".join(p[0]["kind"] + (" (собран)" if p[1] else " (нет файла)") for p in stuck)
-                  + ". Скопом не заливаю — нужна склейка в один ролик.")
+                  + f". Больше {MAX_BURST} за {BURST_WIN} мин не заливаю (бан) — нужна склейка в один ролик.")
     json.dump(state, open(STATE, "w"))
 
 if __name__ == "__main__":
