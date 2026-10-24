@@ -101,25 +101,6 @@
       "last_event_ts": 1792840055,
       "source_text": "24.10.2026 12:06 МСК\nКурахово ДНР ракетная опасность повторно\n\n24.10.2026 14:07 МСК\nНовогродовка и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
-    "Тюменская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1792841944,
-      "source_text": "24.10.2026 14:39 МСК\nКонево, Абатский район, Тюменская область - пролёт от 3 БПЛА в сторону Омска. 📡 Локатор России - @locatorru"
-    },
     "Орловская область": {
       "bpla": false,
       "bplaDim": false,
@@ -364,8 +345,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792845385,
-      "source_text": "24.10.2026 15:36 МСК\nОмск и близлежащие, Омская область - опасность по БПЛА сохраняется. Не попадите под атаку БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1792845675,
+      "source_text": "24.10.2026 15:41 МСК\nОмск Омская область Продолжается работа ПВО по БПЛА Меры безопасности"
     },
     "Новгородская область": {
       "bpla": false,
@@ -607,28 +588,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1792831241,
       "source_text": "24.10.2026 11:40 МСК\nДорога Токмак- Бердянск Опасность по БПЛА"
-    },
-    {
-      "key": "тобольск|тюменская область",
-      "name": "Тобольск",
-      "lat": 58.1998048,
-      "lon": 68.2512924,
-      "region": "Тюменская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792834842,
-      "source_text": "24.10.2026 12:40 МСК\nТобольск и близлежащие, Тюменская область - опасность по БПЛА. Скорее всего вы цель БПЛА. 📡 Локатор России - @locatorru"
     },
     {
       "key": "новогродовка|донецкая народная республика",
@@ -1032,9 +991,9 @@
       "lat": 54.991375,
       "lon": 73.371529,
       "region": "Омская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1042,11 +1001,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1792845385,
-      "source_text": "24.10.2026 15:36 МСК\nОмск и близлежащие, Омская область - опасность по БПЛА сохраняется. Не попадите под атаку БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1792845675,
+      "source_text": "24.10.2026 15:41 МСК\nОмск Омская область Продолжается работа ПВО по БПЛА Меры безопасности"
     },
     {
       "key": "осипенко|запорожская область",
@@ -1424,28 +1383,6 @@
       "last_event_ts": 1792831526,
       "source_text": "24.10.2026 11:45 МСК\nМелитопольский район Запорожская область РФ Опасность по БПЛА"
     },
-    "RUS.73.1_1": {
-      "gid_2": "RUS.73.1_1",
-      "name_ru": "Абатский район",
-      "region_ru": "Тюменская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1792841944,
-      "source_text": "24.10.2026 14:39 МСК\nКонево, Абатский район, Тюменская область - пролёт от 3 БПЛА в сторону Омска. 📡 Локатор России - @locatorru"
-    },
     "RUS.34.42_1": {
       "gid_2": "RUS.34.42_1",
       "name_ru": "Сочи (горсовет)",
@@ -1615,6 +1552,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 102554,
+      "text": "Тюменская область\nОтбой опасности по БПЛА",
+      "ts": 1792846004,
+      "time_label": "24.10.2026 15:46 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 102553,
+      "text": "Омск\nОмская область\nПродолжается работа ПВО по БПЛА\nМеры безопасности",
+      "ts": 1792845675,
+      "time_label": "24.10.2026 15:41 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 92065,
       "text": "Омск и близлежащие, Омская область - опасность по БПЛА сохраняется. Не попадите под атаку БПЛА.\n📡\nЛокатор России -\n@locatorru",
@@ -2238,22 +2191,6 @@
       "time_label": "24.10.2026 12:16 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 295071,
-      "text": "Сочи, Адлер и близлежащие\nОпасность по БПЛА\nКраснодарский край",
-      "ts": 1792833367,
-      "time_label": "24.10.2026 12:16 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 295070,
-      "text": "Курахово ДНР ракетная опасность повторно",
-      "ts": 1792832795,
-      "time_label": "24.10.2026 12:06 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2263,15 +2200,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792845385,
-  "last_event_at": "2026-10-24T12:36:25Z",
-  "fetched_at": "2026-10-24T12:40:03.875176Z",
+  "timestamp": 1792846004,
+  "last_event_at": "2026-10-24T12:46:44Z",
+  "fetched_at": "2026-10-24T12:50:04.363270Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-24T12:40:03.875176Z",
-    "source_age_seconds": 218,
-    "city_count": 45,
-    "region_count": 20,
+    "generated_at": "2026-10-24T12:50:04.363270Z",
+    "source_age_seconds": 200,
+    "city_count": 44,
+    "region_count": 19,
     "feed_count": 80
   }
 }
