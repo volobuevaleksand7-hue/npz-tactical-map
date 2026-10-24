@@ -157,6 +157,8 @@ def load_day(date):
         import datetime as _dt
         prev = (_dt.date.fromisoformat(date) - _dt.timedelta(days=1)).isoformat()
         dates, seen = {date, prev}, shown_ids()
+        if EVENING:   # 24.10: вечерний — итог дня: ВСЕ удары даты (и показанные в срочных/утренней), с общим счётом
+            dates, seen = {date}, set()
     # Дата+время суток+город тоже: та же атака из второго источника приходит с новым id (Шебекино 13.10 — дважды).
     def _key(r):
         return str(r.get("date", ""))[:10], str(r.get("time", "")).strip().lower(), str(r.get("city", "")).strip().lower()
@@ -181,14 +183,24 @@ def load_day(date):
     return day, refs
 
 
+def urgent_ids(date):
+    try:
+        log = json.loads((VIDEO / "out" / "urgent-log.json").read_text(encoding="utf-8"))
+        log = log if isinstance(log, list) else log.get("items", [])
+        return {i for e in log if e.get("date") == date for i in e.get("ids", [])}
+    except (OSError, ValueError):
+        return set()
+
+
 def select_strikes(date):
     """(остановки камеры, все удары дня). Все удары дня с координатами, один город — одна
     остановка (остальные удары по городу — в s["_group"], их факты идут в озвучку).
     Порядок: топливо/энергетика -> промышленность -> прочее, внутри — strike_rank gen-news.
     Слухи (rumored) не показываем."""
     day, _ = load_day(date)
+    urg = urgent_ids(date) if EVENING else set()   # слухи, ушедшие в срочные (≥2 источника), — в итог дня тоже
     pool = [s for s in day if s["lat"] is not None
-            and (RUMORS or str(s.get("confidence", "reported")).lower() in ("confirmed", "reported"))]
+            and (RUMORS or s["_sid"] in urg or str(s.get("confidence", "reported")).lower() in ("confirmed", "reported"))]
     pool.sort(key=lambda s: (s["cls"], G.strike_rank(s)), reverse=True)
     out, by_city = [], {}
     for s in pool:
@@ -413,11 +425,8 @@ MONTHS = ["", "января", "февраля", "марта", "апреля", "�
 
 
 # Ударения (U+0301 после ударной гласной): голос edge-tts на названиях ошибается. Только озвучка, на экране текста не меняет.
-STRESS = [(r"\bТамань\b", "Тама\u0301нь"), (r"\bТамани\b", "Тама\u0301ни"), (r"\bНовокуйбышевск", "Новокуйбы\u0301шевск"),
-          (r"\bТольятти\b", "Толья\u0301тти"), (r"\bСызран", "Сы\u0301зран"), (r"\bКириши\b", "Кири\u0301ши"),
-          (r"\bТуапсе\b", "Туапсе\u0301"), (r"\bАфипск", "Афи\u0301пск"), (r"\bКстов", "Ксто\u0301в"),
-          (r"\bНовошахтинск", "Новошахти\u0301нск"), (r"\bВолгоград", "Волгогра\u0301д"), (r"\bНижнекамск", "Нижнека\u0301мск"),
-          (r"\bУхт[аыеу]\b", lambda m: "Ухт" + m.group(0)[3:]), (r"\bподстанци", "подста\u0301нци")]
+STRESS = []   # 24.10 на слух: знак ударения и «+» голос читает неверно; «Озон» обычным написанием — верно
+
 
 
 def speakable(t):
@@ -427,7 +436,6 @@ def speakable(t):
     t = re.sub(r"\bOzon\b", "Озон", t)   # латиницу голос читает по-английски
     for a_, b_ in STRESS:
         t = re.sub(a_, b_, t)
-    t = re.sub(r"\b([Оо])зон(а|у|ом|е)?\b", lambda m: m.group(1) + "зо\u0301н" + (m.group(2) or ""), t)  # Озо́н: ударение на второй слог
     for a, b in ((r"\bударн\w*\s+БПЛА\b", "беспилотников"), (r"\bБПЛА\b", "беспилотников"), (r"\bFPV-", ""), (r"\bобл\.", "области"), (r"\bр-н(а|е)?\b\.?", "район"),
                  (r"\bг\.\s*", ""), (r"\bс\.\s*", "село "), (r"\bпос\.\s*", "посёлок "), (r"…", "."),
                  (r"\s+[—–]\s+", ", ")):
@@ -869,7 +877,7 @@ def compose(date, build: Path):
     # ── тексты ──
     n = len(day)
     n_fuel = sum(1 for s in day if s["cls"] == 2)
-    if URGENT:
+    if URGENT or EVENING:
         n, n_fuel = day_totals(date, n, n_fuel)
     regions = []
     for s in day:
