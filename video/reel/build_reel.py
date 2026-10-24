@@ -433,6 +433,11 @@ def speakable(t):
     """Сокращения и типографика -> то, что голос прочтёт правильно."""
     t = re.sub(r"[«»\"“”]", "", str(t))
     t = re.sub(r"\b\d[\d/.,]*\s*(?:-\s*)?(?:кВ|киловольт\w*|МВт|мегаватт\w*|кв\.?\s*м|тыс\.?|т\b|тонн\w*|м3|куб\.?\s*м)\b\.?", "", t)  # «500/220 кВ» голос читает криво — характеристики опускаем
+    try:
+        import voice_check
+        t = voice_check.apply_fixes(t)   # выученные произношения (voice-lexicon.json)
+    except Exception:
+        pass
     t = re.sub(r"\bOzon\b", "Озон", t)   # латиницу голос читает по-английски
     for a_, b_ in STRESS:
         t = re.sub(a_, b_, t)
@@ -645,6 +650,23 @@ def narration(date, sel, day, refs, build=None, broll=()):
     return lines
 
 
+def voice_check_run(items, voice_dir: Path):
+    """Слух whisper: сверяем озвученное с текстом, пишем отчёт и копим словарь подозрительных слов. Ничего не блокирует."""
+    try:
+        import subprocess, tempfile
+        py = "/root/voice-venv/bin/python"
+        if not os.path.exists(py) or os.environ.get("REEL_NO_VOICE_CHECK"):
+            return
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+            json.dump([[t, str(p)] for t, p in items if p.exists() and p.stem not in ("intro",)], f, ensure_ascii=False)
+        r = subprocess.run([py, str(Path(__file__).with_name("voice_check.py")), "run", voice_dir.parent.name, f.name],
+                           capture_output=True, text=True, timeout=240)
+        os.unlink(f.name)
+        print("voice-check:", (r.stdout or r.stderr).strip()[:300])
+    except Exception as e:
+        print("voice-check пропущен:", str(e)[:120])
+
+
 def tts_all(lines, voice_dir: Path):
     """Озвучка всего ролика одним провайдером (каскад edge -> gemini -> edge2 -> piper, см. tts_cascade.py).
     10.10.2026: основной голос edge-tts массово отдавал NoAudioReceived, ролик выходил без голоса.
@@ -655,6 +677,7 @@ def tts_all(lines, voice_dir: Path):
     pid, durs = tts_cascade.synth_all(items, "ru", voice, VOICE_RATE)
     if pid is None:
         return {}
+    voice_check_run(items, voice_dir)
     return {k: (f"voice/{k}.mp3", d) for (k, _), d in zip(lines, durs)}
 
 
