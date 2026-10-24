@@ -22,7 +22,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-CHANNELS = os.environ.get("NPZ_YT_CHANNELS", "UCoD1pcjTPWhEBTf83SIqmcw,UCS-cgYslpMpH5FkxJ2e0Vpg").split(",")   # Украина 365, Newsader (10.10)
+CHANNELS = os.environ.get("NPZ_YT_CHANNELS", "UCoD1pcjTPWhEBTf83SIqmcw,UCS-cgYslpMpH5FkxJ2e0Vpg,UCOHviJPZ2Y2sHdOuqG82t2g").split(",")
+# Украина 365, Newsader (10.10), Ян Матвеев (24.10)
 STATE = Path(os.environ.get("NPZ_YT_STATE", "/root/.npz-yt-watch/seen.json"))
 HINTS = REPO / "video" / "reel" / "cache" / "yt-hints.json"
 WORK = Path("/root/.npz-yt-watch/work")
@@ -68,6 +69,32 @@ def get(url, timeout=30):
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read()
+
+
+def feed_ytdlp(channel, seen):
+    """RSS YouTube то и дело отдаёт 404/500 часами (24.10.2026: 01:44–06:44 UTC по всем каналам) —
+    тогда список последних роликов берём yt-dlp, метаданные — только для ещё не виденных."""
+    r = subprocess.run([YTDLP, "--flat-playlist", "--playlist-end", "8", "--print", "%(id)s",
+                        f"https://www.youtube.com/channel/{channel}/videos"], capture_output=True, text=True, timeout=180)
+    out = []
+    for vid in r.stdout.split():
+        if vid in seen:
+            continue
+        m = subprocess.run([YTDLP, "-j", "--skip-download", f"https://www.youtube.com/watch?v={vid}"],
+                           capture_output=True, text=True, timeout=180)
+        try:
+            j = json.loads(m.stdout)
+        except ValueError:
+            continue
+        ts = j.get("timestamp") or j.get("release_timestamp")
+        if not ts:
+            continue
+        out.append({"id": vid, "title": j.get("title") or "", "channel": channel,
+                    "published": datetime.fromtimestamp(ts, timezone.utc).isoformat(),
+                    "desc": (j.get("description") or "")[:1500]})
+    if not out and r.returncode:
+        raise RuntimeError(r.stderr[-200:])
+    return out
 
 
 def feed(channel):
@@ -204,7 +231,7 @@ def handle(v, hints):
     if found is None:
         return False          # модель не ответила — повторим следующим проходом
     if not found:
-        log(f"{v['id']}: ударов по топливу РФ нет — «{v['title'][:80]}»")
+        log(f"{v['id']}: крупных ударов по РФ нет — «{v['title'][:80]}»")
         return True
     log(f"{v['id']}: удары {[(s.get('city'), s.get('object'), s.get('match'), s.get('start')) for s in found]}"
         f" — «{v['title'][:80]}»")
@@ -259,8 +286,12 @@ def main():
         try:
             items = feed(ch)
         except Exception as e:  # noqa: BLE001
-            log(f"{ch}: RSS: {e}")
-            continue
+            try:
+                items = feed_ytdlp(ch, seen)
+                log(f"{ch}: RSS: {e} — взял список через yt-dlp ({len(items)} новых)")
+            except Exception as e2:  # noqa: BLE001
+                log(f"{ch}: RSS: {e}; yt-dlp: {e2}")
+                continue
         for v in items:
             if only and v["id"] != only:
                 continue
