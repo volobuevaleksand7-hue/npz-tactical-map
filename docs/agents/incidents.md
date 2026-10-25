@@ -31,14 +31,15 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
-## [OPEN] video-reel-evening-2026-10-25
-status: OPEN
+## [RESOLVED] video-reel-evening-2026-10-25
+status: RESOLVED
 opened: 2026-10-25 19:30 МСК — video-watchdog
 reel-evening за 2026-10-25: cron-missed. в video.log нет строки «reel-evening 2026-10-25» — cron не стартовал
 Что сделать:
 - `crontab -l | grep -n daily.sh` — строка на месте? `systemctl status cron`, `grep CRON /var/log/syslog | tail`
 - запусти вручную в tmux (без pty рендер падает): `tmux new -d -s v "cd /root/npz-tactical-map/video && REEL_KIND=reel-evening ./reel/daily.sh"`
 
+resolved: 2026-10-25 20:15 МСК — проблема исчезла (авто, сторож)
 ## [RESOLVED] video-reel-evening-2026-10-24
 status: RESOLVED
 opened: 2026-10-24 19:30 МСК — video-watchdog
