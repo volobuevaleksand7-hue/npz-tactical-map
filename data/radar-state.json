@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792888107,
-      "source_text": "25.10.2026 03:28 МСК\nУдмуртская Республика - опасность по БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1792888209,
+      "source_text": "25.10.2026 03:30 МСК\nРеспублика Удмуртия Опасность по БПЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -364,8 +364,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1792887227,
-      "source_text": "25.10.2026 03:13 МСК\nТольятти и близлежащие, Самарская область - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1792888234,
+      "source_text": "25.10.2026 03:30 МСК\nТольятти Самарская область Работа ПВО по БПЛА"
     },
     "Татарстан": {
       "bpla": false,
@@ -1540,9 +1540,9 @@
       "lat": 53.5303,
       "lon": 49.3461,
       "region": "Самарская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1550,11 +1550,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1792887227,
-      "source_text": "25.10.2026 03:13 МСК\nТольятти и близлежащие, Самарская область - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1792888234,
+      "source_text": "25.10.2026 03:30 МСК\nТольятти Самарская область Работа ПВО по БПЛА"
     },
     {
       "key": "скадовск|херсонская область",
@@ -6018,6 +6018,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 102757,
+      "text": "Тольятти\nСамарская область\nМеры безопасности сохраняем\nЕщё фиксации",
+      "ts": 1792888305,
+      "time_label": "25.10.2026 03:31 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 102756,
+      "text": "Тольятти\nСамарская область\nРабота ПВО по БПЛА",
+      "ts": 1792888234,
+      "time_label": "25.10.2026 03:30 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 102755,
+      "text": "Республика Удмуртия\nОпасность по БПЛА",
+      "ts": 1792888209,
+      "time_label": "25.10.2026 03:30 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 92202,
       "text": "Удмуртская Республика - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
       "ts": 1792888107,
@@ -6632,30 +6656,6 @@
       "time_label": "25.10.2026 01:27 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 92181,
-      "text": "Ладожская, Усть-Лабинский район, Краснодарский край - ещё пролёт БПЛА в сторону Белореченск.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1792880788,
-      "time_label": "25.10.2026 01:26 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 102715,
-      "text": "Белореченск\nКраснодарский край\nЕще фиксация БПЛА в направлении Майкоп, Республика Адыгея",
-      "ts": 1792880786,
-      "time_label": "25.10.2026 01:26 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 102714,
-      "text": "Майкоп\nРеспублика Адыгея\nСбитие БПЛА",
-      "ts": 1792880726,
-      "time_label": "25.10.2026 01:25 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -6665,13 +6665,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792888107,
-  "last_event_at": "2026-10-25T00:28:27Z",
-  "fetched_at": "2026-10-25T00:30:03.801825Z",
+  "timestamp": 1792888305,
+  "last_event_at": "2026-10-25T00:31:45Z",
+  "fetched_at": "2026-10-25T00:40:03.663062Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-25T00:30:03.801825Z",
-    "source_age_seconds": 96,
+    "generated_at": "2026-10-25T00:40:03.663062Z",
+    "source_age_seconds": 498,
     "city_count": 142,
     "region_count": 34,
     "feed_count": 80
