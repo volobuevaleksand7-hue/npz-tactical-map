@@ -195,6 +195,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1792895010,
       "source_text": "25.10.2026 05:23 МСК\nАлчевск, Луганск и близлежащие Тревога по БПЛА"
+    },
+    "Белгородская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1792909058,
+      "source_text": "25.10.2026 09:17 МСК\nШебекино Тревога по БПЛА"
     }
   },
   "cities": [
@@ -1011,6 +1030,28 @@
       "fill": "#f0c4a0",
       "last_event_ts": 1792900001,
       "source_text": "25.10.2026 06:46 МСК\nКалужская область Внимание по БПЛА от Брянской области"
+    },
+    {
+      "key": "шебекино|белгородская область",
+      "name": "Шебекино",
+      "lat": 50.41342,
+      "lon": 36.92537,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1792909058,
+      "source_text": "25.10.2026 09:17 МСК\nШебекино Тревога по БПЛА"
     }
   ],
   "districts": {
@@ -1161,6 +1202,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 295450,
+      "text": "Шебекино\nТревога по БПЛА",
+      "ts": 1792909058,
+      "time_label": "25.10.2026 09:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 295449,
+      "text": "Активность БПЛА Хорнет Чаплынский район, Скадовский район Каланчак\nАПП Армянск, АПП Перекоп, Титан режим повышенного внимания",
+      "ts": 1792908793,
+      "time_label": "25.10.2026 09:13 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 92214,
       "text": "За прошедшую ночь и утро силами противовоздушной обороны было уничтожено\n532 БПЛА\nнад территориями Белгородской, Брянской, Курской, Воронежской, Тульской, Орловской, Липецкой, Калужской, Рязанской, Ростовской, Саратовской, Самарской, Пензенской, Волгоградской, Ульяновской областей, Московского региона, Пермского края, Краснодарского края, республик Татарстан, Адыгея, Марий Эл, Крым, Удмуртской Республики и над акваторией Азовского моря.\n📡\nЛокатор России -\n@locatorru",
@@ -1784,22 +1841,6 @@
       "time_label": "25.10.2026 04:10 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 102761,
-      "text": "Рязанская область\nОтбой опасности по БПЛА",
-      "ts": 1792890439,
-      "time_label": "25.10.2026 04:07 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 295407,
-      "text": "Бежань Брянская область и далее в направлении Калужской области\nОпасность по БПЛА",
-      "ts": 1792889995,
-      "time_label": "25.10.2026 03:59 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1809,15 +1850,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1792908335,
-  "last_event_at": "2026-10-25T06:05:35Z",
-  "fetched_at": "2026-10-25T06:10:03.267951Z",
+  "timestamp": 1792909058,
+  "last_event_at": "2026-10-25T06:17:38Z",
+  "fetched_at": "2026-10-25T06:20:03.645453Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-25T06:10:03.267951Z",
-    "source_age_seconds": 268,
-    "city_count": 37,
-    "region_count": 10,
+    "generated_at": "2026-10-25T06:20:03.645453Z",
+    "source_age_seconds": 145,
+    "city_count": 38,
+    "region_count": 11,
     "feed_count": 80
   }
 }
