@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-26T16:16:12Z",
+    "generated_at": "2026-10-26T18:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -96,10 +96,10 @@
       "status": "down",
       "status_since": "2026-10-03",
       "est_output_pct": 0,
-      "damage": "Вторая волна атак. Ночь 25 сентября: БПЛА атаковали объекты Пермской области. Ночь 2-3 октября: вторая массированная атака, повреждена установка АВТ-5, вспыхнули новые пожары. Повреждены основные установки первичной переработки и интегрированный рефининг-блок. Завод полностью остановлен.",
+      "damage": "По данным Reuters со ссылкой на источники в отрасли, после удара беспилотников в пятницу 23.10 завод остановил работу. Пожар, повреждены трубопроводы, резервуары для нефти и технологические установки.",
       "note": "На 8 октября завод полностью остановлен после второй атаки за неделю. Лукойл-Пермнефтеоргсинтез — седьмой по мощности НПЗ России (13.1 млн т/год). Восстановление затруднено волной повторных ударов; требует недель отсутствия новых ударов.",
-      "source_url": "https://kazan.aif.ru/incidents/details/218-sbityh-dronov-ataka-bpla-na-regiony-rf-3-oktyabrya-podrobnosti",
-      "confidence": "confirmed"
+      "source_url": "https://www.dialog.ua/russia/permskiy-npz-paralizovan-udarom-ukrainy-zavod-poluchil-kriticheskie-povrezhdeniya-reuters.html",
+      "confidence": "reported"
     },
     {
       "id": "syzran",
@@ -1016,6 +1016,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-26",
+      "text": "Удар по Лукойл-Пермнефтеоргсинтез (Пермь): По данным Reuters со ссылкой на источники в отрасли, после удара беспилотников в пятницу 23.10 завод",
+      "source_url": "https://www.dialog.ua/russia/permskiy-npz-paralizovan-udarom-ukrainy-zavod-poluchil-kriticheskie-povrezhdeniya-reuters.html"
+    },
     {
       "date": "2026-10-26",
       "text": "Башкирия, 26 октября: глава республики на оперативном совещании сообщил о снятии всех лимитов и ограничений на АЗС и запрета на продажу в канистры; очереди, по его словам, заметно сократились",
