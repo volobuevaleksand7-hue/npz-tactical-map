@@ -6,10 +6,10 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
-    "Псковская область": {
+    "Белгородская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -21,9 +21,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1793046384,
-      "source_text": "26.10.2026 23:26 МСК\nПсковская область Тверская область внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1793083785,
+      "source_text": "27.10.2026 09:49 МСК\nШебекино Тревога по БПЛА"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -44,25 +44,6 @@
       "last_event_ts": 1793083545,
       "source_text": "27.10.2026 09:45 МСК\nДКАД, Донецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР Особое внимание на дорогах!"
     },
-    "Волгоградская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": true,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1793040037,
-      "source_text": "26.10.2026 21:40 МСК\nВолгоградская область внимание по бпла"
-    },
     "Запорожская область": {
       "bpla": false,
       "bplaDim": false,
@@ -79,33 +60,11 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793083137,
-      "source_text": "27.10.2026 09:38 МСК\nТрасса Приазовское - Приморск от Инзовка опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1793084135,
+      "source_text": "27.10.2026 09:55 МСК\nМелитополь - Приазовское трасса опасность по БПЛА"
     }
   },
   "cities": [
-    {
-      "key": "макеевка|донецкая народная республика",
-      "name": "Макеевка",
-      "lat": 48.04782,
-      "lon": 37.92576,
-      "region": "Донецкая Народная Республика",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793083545,
-      "source_text": "27.10.2026 09:45 МСК\nДКАД, Донецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР Особое внимание на дорогах!"
-    },
     {
       "key": "приморск|запорожская область",
       "name": "Приморск",
@@ -129,10 +88,10 @@
       "source_text": "27.10.2026 09:38 МСК\nТрасса Приазовское - Приморск от Инзовка опасность по БПЛА Запорожская область РФ"
     },
     {
-      "key": "донецк|донецкая народная республика",
-      "name": "Донецк",
-      "lat": 48.023,
-      "lon": 37.80224,
+      "key": "макеевка|донецкая народная республика",
+      "name": "Макеевка",
+      "lat": 48.04782,
+      "lon": 37.92576,
       "region": "Донецкая Народная Республика",
       "bpla": true,
       "bplaDim": false,
@@ -149,6 +108,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1793083545,
       "source_text": "27.10.2026 09:45 МСК\nДКАД, Донецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР Особое внимание на дорогах!"
+    },
+    {
+      "key": "шебекино|белгородская область",
+      "name": "Шебекино",
+      "lat": 50.41342,
+      "lon": 36.92537,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793083785,
+      "source_text": "27.10.2026 09:49 МСК\nШебекино Тревога по БПЛА"
     },
     {
       "key": "приазовское|запорожская область",
@@ -169,13 +150,73 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793083137,
-      "source_text": "27.10.2026 09:38 МСК\nТрасса Приазовское - Приморск от Инзовка опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1793084135,
+      "source_text": "27.10.2026 09:55 МСК\nМелитополь - Приазовское трасса опасность по БПЛА"
+    },
+    {
+      "key": "мелитополь|запорожская область",
+      "name": "Мелитополь",
+      "lat": 46.85754363636364,
+      "lon": 35.35915090909091,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793084135,
+      "source_text": "27.10.2026 09:55 МСК\nМелитополь - Приазовское трасса опасность по БПЛА"
+    },
+    {
+      "key": "донецк|донецкая народная республика",
+      "name": "Донецк",
+      "lat": 48.023,
+      "lon": 37.80224,
+      "region": "Донецкая Народная Республика",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793083545,
+      "source_text": "27.10.2026 09:45 МСК\nДКАД, Донецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР Особое внимание на дорогах!"
     }
   ],
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 296206,
+      "text": "Мелитополь - Приазовское трасса опасность по БПЛА",
+      "ts": 1793084135,
+      "time_label": "27.10.2026 09:55 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 296205,
+      "text": "Шебекино\nТревога по БПЛА",
+      "ts": 1793083785,
+      "time_label": "27.10.2026 09:49 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 296204,
       "text": "ДКАД, Донецк, Макеевка и близлежащие\nОпасность по БПЛА, единичные фиксации\nДНР\nОсобое внимание на дорогах!",
@@ -799,22 +840,6 @@
       "time_label": "27.10.2026 03:23 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 296168,
-      "text": "Трубчевск\nВыгоничи\nБрянск\nИ близлежащие\nТревога по БПЛА\nБрянская область",
-      "ts": 1793060526,
-      "time_label": "27.10.2026 03:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 296167,
-      "text": "Приморск\nПриморский район\nТревога по БПЛА\nЗапорожская область РФ",
-      "ts": 1793059597,
-      "time_label": "27.10.2026 03:06 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -824,15 +849,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793083545,
-  "last_event_at": "2026-10-27T06:45:45Z",
-  "fetched_at": "2026-10-27T06:50:03.476936Z",
+  "timestamp": 1793084135,
+  "last_event_at": "2026-10-27T06:55:35Z",
+  "fetched_at": "2026-10-27T07:00:04.738092Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-27T06:50:03.476936Z",
-    "source_age_seconds": 258,
-    "city_count": 4,
-    "region_count": 4,
+    "generated_at": "2026-10-27T07:00:04.738092Z",
+    "source_age_seconds": 269,
+    "city_count": 6,
+    "region_count": 3,
     "feed_count": 80
   }
 }
