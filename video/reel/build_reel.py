@@ -605,7 +605,7 @@ def urgent_outro(date, sel):
     today = (_dt.datetime.now(_dt.timezone.utc) + _dt.timedelta(hours=3)).date().isoformat() == date
     when, when_en = ("На сегодня", "today") if today else ("За сутки", "in the past day")
     if n < 2:
-        return ("Подробности — на сайте и на канале.", "Подробности — на сайте и на канале",
+        return ("Подробности — на сайте и на канале.", "Подробности на сайте и на канале",
                 "Details on the website and the channel.")
     if len({x.get("city") for x in sel}) > 1:
         ru = f"{when} уже {n} {G.plural(n, 'удар', 'удара', 'ударов')}."
