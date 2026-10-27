@@ -334,7 +334,16 @@
     }
    ],
    "found_at": "2026-10-27T11:35:00Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "ok",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "needs_source",
+   "reject_reason": "нужен второй независимый издатель"
   },
   {
    "id": "2026-10-27-iran-hormuz-sinokor-enforcement",
@@ -361,8 +370,17 @@
     }
    ],
    "found_at": "2026-10-27T11:35:00Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-10-27T03:29:17Z"
+ "validated_at": "2026-10-27T11:29:37Z"
 }
