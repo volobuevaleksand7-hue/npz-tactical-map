@@ -25,6 +25,7 @@ def main():
     log = log if isinstance(log, list) else log.get("items", [])
     pending = []
     for e in log:
+        if "slot" not in e: continue   # служебные записи {"asked": ...} от urgent_gate
         slot = dt.datetime.fromisoformat(e["slot"])
         kind, date = e["kind"], e["date"]
         if (now - slot).total_seconds() < LATE_MIN * 60 or (now - slot).total_seconds() > 36 * 3600: continue

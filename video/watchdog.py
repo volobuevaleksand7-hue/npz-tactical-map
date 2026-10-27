@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Сторож запусков видео (cron */10 на VPS). Следит ТОЛЬКО за видео-кронами:
-  reel (06:15 UTC), reel-evening (16:15 UTC), weekly (вс 15:00 UTC).
+  reel (06:15 UTC), reel-evening (17:45 UTC), weekly (вс 15:00 UTC).
 
 Для каждого запуска проверяет три вещи:
   1. СТАРТ: после «старт+12 мин» в agents/logs/video.log есть строка «[ts] <kind> <дата>».
@@ -34,7 +34,7 @@ MSK = timezone(timedelta(hours=3))
 # kind, дни недели (0=пн, None=ежедневно), старт UTC, дедлайн итога UTC
 SCHEDULE = [
     ("reel",         None, "06:15", "08:00"),
-    ("reel-evening", None, "16:15", "18:30"),
+    ("reel-evening", None, "17:45", "19:30"),
     ("weekly",       6,    "15:00", "19:30"),
 ]
 START_GRACE_MIN = 12
