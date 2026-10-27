@@ -25,6 +25,25 @@
       "last_event_ts": 1793046384,
       "source_text": "26.10.2026 23:26 МСК\nПсковская область Тверская область внимание по бпла"
     },
+    "Донецкая Народная Республика": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793083545,
+      "source_text": "27.10.2026 09:45 МСК\nДКАД, Донецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР Особое внимание на дорогах!"
+    },
     "Волгоградская область": {
       "bpla": false,
       "bplaDim": false,
@@ -66,6 +85,28 @@
   },
   "cities": [
     {
+      "key": "макеевка|донецкая народная республика",
+      "name": "Макеевка",
+      "lat": 48.04782,
+      "lon": 37.92576,
+      "region": "Донецкая Народная Республика",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793083545,
+      "source_text": "27.10.2026 09:45 МСК\nДКАД, Донецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР Особое внимание на дорогах!"
+    },
+    {
       "key": "приморск|запорожская область",
       "name": "Приморск",
       "lat": 46.73415,
@@ -86,6 +127,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1793083137,
       "source_text": "27.10.2026 09:38 МСК\nТрасса Приазовское - Приморск от Инзовка опасность по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "донецк|донецкая народная республика",
+      "name": "Донецк",
+      "lat": 48.023,
+      "lon": 37.80224,
+      "region": "Донецкая Народная Республика",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793083545,
+      "source_text": "27.10.2026 09:45 МСК\nДКАД, Донецк, Макеевка и близлежащие Опасность по БПЛА, единичные фиксации ДНР Особое внимание на дорогах!"
     },
     {
       "key": "приазовское|запорожская область",
@@ -113,6 +176,14 @@
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 296204,
+      "text": "ДКАД, Донецк, Макеевка и близлежащие\nОпасность по БПЛА, единичные фиксации\nДНР\nОсобое внимание на дорогах!",
+      "ts": 1793083545,
+      "time_label": "27.10.2026 09:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 296203,
       "text": "Трасса Приазовское - Приморск от Инзовка опасность по БПЛА\nЗапорожская область РФ",
@@ -744,14 +815,6 @@
       "time_label": "27.10.2026 03:06 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 296166,
-      "text": "Симферопольский район\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1793059433,
-      "time_label": "27.10.2026 03:03 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -761,15 +824,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793083137,
-  "last_event_at": "2026-10-27T06:38:57Z",
-  "fetched_at": "2026-10-27T06:40:03.134414Z",
+  "timestamp": 1793083545,
+  "last_event_at": "2026-10-27T06:45:45Z",
+  "fetched_at": "2026-10-27T06:50:03.476936Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-27T06:40:03.134414Z",
-    "source_age_seconds": 66,
-    "city_count": 2,
-    "region_count": 3,
+    "generated_at": "2026-10-27T06:50:03.476936Z",
+    "source_age_seconds": 258,
+    "city_count": 4,
+    "region_count": 4,
     "feed_count": 80
   }
 }
