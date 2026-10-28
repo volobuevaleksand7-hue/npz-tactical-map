@@ -98,6 +98,21 @@ PW_URL = ("https://services9.arcgis.com/weJ1QsnbMYJlCHdG/arcgis/rest/services/"
           "Daily_Chokepoints_Data/FeatureServer/0/query")
 
 
+def arcgis_json(url, retries=4):
+    """ArcGIS отдаёт лимит (6000 units/мин) как HTTP 200 с error.code=429 в теле — get() его не видит.
+    Ждём окно квоты и повторяем; между запросами небольшая пауза, чтобы 8 проливов не бились в потолок."""
+    for i in range(retries + 1):
+        d = get_json(url)
+        err = d.get("error") if isinstance(d, dict) else None
+        if not err:
+            time.sleep(1.5)
+            return d
+        if err.get("code") != 429 or i == retries:
+            raise RuntimeError(f"ArcGIS: {err}")
+        log(f"ArcGIS 429, жду 65 с (попытка {i + 1}/{retries})")
+        time.sleep(65)
+
+
 def portwatch(portname, days=800):
     def run():
         since = TODAY - dt.timedelta(days=days)
@@ -106,9 +121,7 @@ def portwatch(portname, days=800):
             q = {"where": f"portname='{portname}'", "outFields": "date,portname,n_tanker,n_total",
                  "orderByFields": "date DESC", "resultRecordCount": 2000,
                  "resultOffset": offset, "f": "json"}
-            d = get_json(PW_URL + "?" + urllib.parse.urlencode(q))
-            if "error" in d:
-                raise RuntimeError(f"ArcGIS: {d['error']}")
+            d = arcgis_json(PW_URL + "?" + urllib.parse.urlencode(q))
             feats = d.get("features", [])
             if not feats:
                 break
