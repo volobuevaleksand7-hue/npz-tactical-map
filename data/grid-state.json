@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-28T04:51:52Z",
+    "generated_at": "2026-10-28T16:51:31Z",
     "updated_by": "agent:grid-status",
     "data_mode": "OSINT / ESTIMATE",
     "confidence": "Состояние подстанций, ТЭС и регионов с отключениями — по открытым источникам (региональные СМИ, заявления Россетей, тг-каналы губернаторов, заявления МАГАТЭ, Ukrenergo). Не official.",
@@ -186,6 +186,18 @@
       "damage": "Атака БПЛА 21 октября 2026 повредила опору ЛЭП; без электричества остались более 200 домов. Электроснабжение восстановлено к утру.",
       "source_url": "https://rtvi.com/news/v-rostovskoj-oblasti-iz-za-ataki-bpla-povrezhdena-opora-lep/",
       "confidence": "reported"
+    },
+    {
+      "id": "taman_substation_1",
+      "name": "Подстанция 500/220 кВ «Тамань»",
+      "operator": "не уточнён",
+      "lat": 45.21,
+      "lon": 36.71,
+      "status": "damaged",
+      "status_since": "2026-10-24",
+      "damage": "По данным OSINT-мониторинга, атака БПЛА в ночь на 24 октября могла прийтись на подстанцию; тепловая аномалия на объекте по данным NASA FIRMS, возможный пожар. Официального подтверждения и данных о восстановлении нет. Координаты — по станице Тамань, приблизительные.",
+      "source_url": "https://united24media.com/war-in-ukraine/russian-occupied-crimea-goes-dark-after-drone-strikes-hit-power-infrastructure-23770",
+      "confidence": "rumored"
     }
   ],
   "blackout_regions": [
@@ -336,6 +348,13 @@
   "events": [
     {
       "date": "2026-10-24",
+      "region": "Краснодарский край (Тамань)",
+      "text": "По данным OSINT-мониторинга, в ночь на 24 октября атака БПЛА могла прийтись на подстанцию 500/220 кВ «Тамань», связывающую энергосистему Крыма с общероссийской. Спутниковые данные NASA FIRMS зафиксировали тепловую аномалию на объекте; официального подтверждения нет. В те же сутки сообщалось о взрывах в Ростове и отключениях в Крыму.",
+      "source_url": "https://united24media.com/war-in-ukraine/russian-occupied-crimea-goes-dark-after-drone-strikes-hit-power-infrastructure-23770",
+      "confidence": "rumored"
+    },
+    {
+      "date": "2026-10-24",
       "region": "Севастополь",
       "text": "В ночь на 24 октября атака БПЛА на энергетическую инфраструктуру за пределами Севастополя. По сообщению губернатора, город временно остался без электроснабжения; к утру подача начала восстанавливаться, в отдельных населённых пунктах света ещё не было.",
       "source_url": "https://www.ptoday.ru/16057-sevastopol-bez-sveta-posle-nochnoj-ataki-bpla-na-krym-gorod-obestochen-zhiteli-slyshali-moschnye-vzryvy.html",
@@ -395,13 +414,6 @@
       "region": "Крым",
       "text": "Повторная атака беспилотников на энергетические объекты Крыма. В результате обесточена часть населенных пунктов региона. Введены дополнительные ограничения электроснабжения, свет отключается точечно и по мере необходимости.",
       "source_url": "https://kurs.com.ua/ru/novost/1471280-krim-chastichno-ostalsja-bez-sveta-posle-udarov-po-anergeticheskoi-infrastrukture",
-      "confidence": "reported"
-    },
-    {
-      "date": "2026-10-02",
-      "region": "Множественные регионы РФ",
-      "text": "В ночь на 2 октября произведена массированная атака беспилотников на множество регионов России: Волгоград, Белгород, Брянск, Курск, Оренбург, Саратов, Астрахань и другие. Пожар зафиксирован на трансформаторной подстанции в Волгограде, частичные отключения электричества в затронутых регионах.",
-      "source_url": "https://kazan.aif.ru/society/details/646-dronov-massirovannaya-ataka-na-regiony-rf-2-oktyabrya-chto-izvestno",
       "confidence": "reported"
     }
   ]
