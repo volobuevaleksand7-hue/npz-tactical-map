@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1793176071,
-      "source_text": "28.10.2026 11:27 МСК\nКурская область и близлежащие Авиационная ракетно бомбовая опасность\n\n28.10.2026 11:20 МСК\nКурская область Опасность по БПЛА сохраняется Принять меры безопасности"
+      "last_event_ts": 1793177887,
+      "source_text": "28.10.2026 11:27 МСК\nКурская область и близлежащие Авиационная ракетно бомбовая опасность\n\n28.10.2026 11:58 МСК\nЖелезногорск и близлежащие Опасность по БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -146,6 +146,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1793153690,
       "source_text": "28.10.2026 05:14 МСК\nДонецк, Макеевка, Ясиноватая и близлежащие Тревога по БПЛА ДНР"
+    },
+    {
+      "key": "железногорск|курская область",
+      "name": "Железногорск",
+      "lat": 52.34198,
+      "lon": 35.35917,
+      "region": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793177887,
+      "source_text": "28.10.2026 11:58 МСК\nЖелезногорск и близлежащие Опасность по БПЛА"
     },
     {
       "key": "донецк|донецкая народная республика",
@@ -318,6 +340,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 296517,
+      "text": "Железногорск и близлежащие\nОпасность по БПЛА",
+      "ts": 1793177887,
+      "time_label": "28.10.2026 11:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 103401,
+      "text": "Московская область\nОтбой опасности по БПЛА",
+      "ts": 1793177590,
+      "time_label": "28.10.2026 11:53 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 296516,
       "text": "Приморск\nИнзовка и близлежащие\nОпасность по БПЛА\nЗапорожская область РФ",
@@ -941,22 +979,6 @@
       "time_label": "28.10.2026 06:59 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 92622,
-      "text": "Ещё группа БПЛА от Орловской области на Тульскую область.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793159931,
-      "time_label": "28.10.2026 06:58 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 296488,
-      "text": "Тульская область\nОсобое внимание г.Алексин\nвнимание по бпла",
-      "ts": 1793159892,
-      "time_label": "28.10.2026 06:58 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -966,14 +988,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793176936,
-  "last_event_at": "2026-10-28T08:42:16Z",
-  "fetched_at": "2026-10-28T08:50:03.880509Z",
+  "timestamp": 1793177887,
+  "last_event_at": "2026-10-28T08:58:07Z",
+  "fetched_at": "2026-10-28T09:00:04.253043Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-10-28T08:50:03.880509Z",
-    "source_age_seconds": 467,
-    "city_count": 7,
+    "generated_at": "2026-10-28T09:00:04.253043Z",
+    "source_age_seconds": 117,
+    "city_count": 8,
     "region_count": 5,
     "feed_count": 80
   }
