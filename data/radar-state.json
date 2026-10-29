@@ -166,16 +166,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": true,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1793275387,
-      "source_text": "29.10.2026 15:03 МСК\nСелидово ДНР ракетная опасность\n\n29.10.2026 14:34 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n29.10.2026 11:19 МСК\nДонецк и близлежащие Опасность по БПЛА ДНР"
+      "fill": "#d8c06a",
+      "last_event_ts": 1793261956,
+      "source_text": "29.10.2026 11:19 МСК\nДонецк и близлежащие Опасность по БПЛА ДНР"
     },
     "Воронежская область": {
       "bpla": false,
@@ -204,16 +204,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": true,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1793273665,
-      "source_text": "29.10.2026 14:34 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n29.10.2026 05:51 МСК\nСвердловск ЛНР Тревога по БПЛА"
+      "fill": "#d8c06a",
+      "last_event_ts": 1793242313,
+      "source_text": "29.10.2026 05:51 МСК\nСвердловск ЛНР Тревога по БПЛА"
     },
     "Брянская область": {
       "bpla": false,
@@ -261,16 +261,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": true,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1793273665,
-      "source_text": "29.10.2026 14:34 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n29.10.2026 14:26 МСК\nЗапорожская область РФ Опасность по БПЛА"
+      "fill": "#d8c06a",
+      "last_event_ts": 1793273194,
+      "source_text": "29.10.2026 14:26 МСК\nЗапорожская область РФ Опасность по БПЛА"
     },
     "Краснодарский край": {
       "bpla": false,
@@ -380,28 +380,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793244416,
       "source_text": "29.10.2026 06:26 МСК\nАлександровка, Оренбурская область - пролёт от 2 БПЛА в сторону Стерлитамак, Салават. 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "селидово|донецкая народная республика",
-      "name": "Селидово",
-      "lat": 48.1465,
-      "lon": 37.3022,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1793275387,
-      "source_text": "29.10.2026 15:03 МСК\nСелидово ДНР ракетная опасность"
     },
     {
       "key": "борисовка|белгородская область",
@@ -735,6 +713,14 @@
       "time_label": "29.10.2026 15:09 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 296907,
+      "text": "ЛДНР\nЗапорожская область РФ\nОтбой Авиационной ракетной бомбовой опасности",
+      "ts": 1793275766,
+      "time_label": "29.10.2026 15:09 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
     },
     {
       "msg_id": 296906,
@@ -1359,14 +1345,6 @@
       "time_label": "29.10.2026 09:51 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 296854,
-      "text": "Приазовское и близлежащие\nОпасность по БПЛА\nЗапорожская область РФ",
-      "ts": 1793256560,
-      "time_label": "29.10.2026 09:49 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1378,12 +1356,12 @@
   ],
   "timestamp": 1793275783,
   "last_event_at": "2026-10-29T12:09:43Z",
-  "fetched_at": "2026-10-29T12:10:02.896521Z",
-  "poll_interval_sec": 35,
+  "fetched_at": "2026-10-29T12:20:04.390450Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-29T12:10:02.896521Z",
-    "source_age_seconds": 19,
-    "city_count": 15,
+    "generated_at": "2026-10-29T12:20:04.390450Z",
+    "source_age_seconds": 621,
+    "city_count": 14,
     "region_count": 15,
     "feed_count": 80
   }
