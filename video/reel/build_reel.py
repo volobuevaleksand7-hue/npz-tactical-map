@@ -1098,7 +1098,7 @@ def compose(date, build: Path):
 
 
 GENERIC_HEADS = ("дата-центр", "промышленн", "инфраструктурн", "жил", "предприят", "нефтебаз", "подстанц",
-                 "аэропорт", "склад", "завод", "объект", "энергетическ", "железнодорожн", "административн")
+                 "аэропорт", "территор", "городск", "автобус", "склад", "завод", "объект", "энергетическ", "железнодорожн", "административн")
 
 
 def in_title(name):
@@ -1110,17 +1110,29 @@ def in_title(name):
 def describe(date, sel, day, refs, segs, clips, broll):
     n = len(day)
     fuel = [s for s in sel if s["cls"] == 2 or URGENT]
-    if fuel:
-        names = [object_name(s, refs) for s in fuel]
-        head = "Удар по " + in_title(dative_object(names[0]))
-        if len(names) > 1 and len(set(names)) == 1:   # один и тот же объект в разных городах: «Удары по Дата-центру «Яндекса»: Сасово, Калуга»
-            head = "Удары по " + in_title(dative_object(names[0])) + ": " + ", ".join(str(s.get("city")) for s in fuel if s.get("city"))
-        elif len(names) > 1:
-            head = "Удары по " + in_title(dative_object(names[0])) + " и " + in_title(dative_object(names[1]))
-    else:
-        # 14.10.2026, владелец: «писать за день сколько» — вместо «N ударов по РФ»
-        head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} за {'день' if EVENING else 'сутки'}"
+    pool = fuel or list(sel)   # 29.10.2026, владелец: в заголовке — какие именно удары, а не «N ударов» (конверсия выше)
+    names = []
+    for s in pool:
+        nm = object_name(s, refs)
+        if nm and nm not in names:
+            names.append(nm)
+    names.sort(key=lambda x: x.lower().startswith(GENERIC_HEADS) and "«" not in x)   # названные объекты вперёд, безымянные в хвост
     tail = f" · {'вечер ' if EVENING else ''}{span_short(date)} #shorts"
+    if names:
+        cities = list(dict.fromkeys(str(s.get("city")) for s in pool if s.get("city")))
+        if len(names) == 1 and len(pool) > 1 and len(cities) > 1:   # один объект в разных городах
+            head = "Удары по " + in_title(dative_object(names[0])) + ": " + ", ".join(cities)
+        else:
+            head = ("Удар по " if len(names) == 1 else "Удары по ") + in_title(dative_object(names[0]))
+            for i, nm in enumerate(names[1:], 1):
+                rest = len(names) - i
+                cand = head + (" и " if rest == 1 else ", ") + in_title(dative_object(nm))
+                if len(cand) + len(tail) > 100:
+                    head += f" и ещё {rest}"
+                    break
+                head = cand
+    else:
+        head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} за {'день' if EVENING else 'сутки'}"
     if len(head) + len(tail) > 100:
         head = head[:100 - len(tail) - 1].rstrip(" ,.;:—-") + "…"
     lines = [head + tail, "", f"Карта ударов: https://{SITE_HOST}/",
