@@ -281,6 +281,9 @@ def dative_object(name):
             n = w[1]
             w[1] = (n[:-1] + ("у" if n[-2:-1] in "жшчщ" else "ю")) if n.endswith("е") else (n[:-1] + "у" if n.endswith("о") else n)
         return " ".join(w)
+    if len(w) > 1 and w[0].lower() in ("подстанция", "электроподстанция", "нефтебаза"):
+        w[0] = w[0][:-1] + ("и" if w[0].endswith("ция") else "е")
+        return " ".join(w)
     if len(w) == 1 and w[0].endswith(("ция", "база")):   # «Нефтебаза» -> «Нефтебазе», «Подстанция» -> «Подстанции»
         return w[0][:-1] + ("и" if w[0].endswith("ция") else "е")
     # склоняем ВСЕ прилагательные подряд: «Редкинский опытный завод» -> «Редкинскому опытному заводу»
@@ -1111,26 +1114,27 @@ def describe(date, sel, day, refs, segs, clips, broll):
     n = len(day)
     fuel = [s for s in sel if s["cls"] == 2 or URGENT]
     pool = fuel or list(sel)   # 29.10.2026, владелец: в заголовке — какие именно удары, а не «N ударов» (конверсия выше)
-    names = []
+    items = []   # (название объекта, город) — уникальные пары; названные объекты вперёд, безымянные в хвост
     for s in pool:
         nm = object_name(s, refs)
-        if nm and nm not in names:
-            names.append(nm)
-    names.sort(key=lambda x: x.lower().startswith(GENERIC_HEADS) and "«" not in x)   # названные объекты вперёд, безымянные в хвост
-    tail = f" · {'вечер ' if EVENING else ''}{span_short(date)} #shorts"
-    if names:
-        cities = list(dict.fromkeys(str(s.get("city")) for s in pool if s.get("city")))
-        if len(names) == 1 and len(pool) > 1 and len(cities) > 1:   # один объект в разных городах
-            head = "Удары по " + in_title(dative_object(names[0])) + ": " + ", ".join(cities)
-        else:
-            head = ("Удар по " if len(names) == 1 else "Удары по ") + in_title(dative_object(names[0]))
-            for i, nm in enumerate(names[1:], 1):
-                rest = len(names) - i
-                cand = head + (" и " if rest == 1 else ", ") + in_title(dative_object(nm))
-                if len(cand) + len(tail) > 100:
-                    head += f" и ещё {rest}"
-                    break
+        key = (nm, re.sub(r"\s*\(.*", "", str(s.get("city") or s.get("region") or "")))
+        if nm and key not in items:
+            items.append(key)
+    items.sort(key=lambda x: x[0].lower().startswith(GENERIC_HEADS) and "«" not in x[0])
+    tail = f" · {'вечер ' if EVENING else ''}{span_short(date)}"
+    if items:
+        def part(it):
+            return in_title(dative_object(it[0])) + (f" ({it[1]})" if it[1] else "")
+        parts = [part(it) for it in items]
+        lead = "Удар по " if len(items) == 1 else "Удары по "
+        head = lead + parts[0]
+        for k in range(len(parts), 0, -1):   # максимум объектов, что влезает в 100 знаков вместе с «и ещё N»
+            rest = len(parts) - k
+            body = ", ".join(parts[:k]) if rest else (", ".join(parts[:k - 1]) + " и " + parts[k - 1] if k > 1 else parts[0])
+            cand = lead + (body if rest == 0 else body + f" и ещё {rest}")
+            if len(cand) + len(tail) <= 100:
                 head = cand
+                break
     else:
         head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} за {'день' if EVENING else 'сутки'}"
     if len(head) + len(tail) > 100:
