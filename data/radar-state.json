@@ -651,6 +651,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1793234200,
       "source_text": "29.10.2026 03:36 МСК\nРеспублика Татарстан Опасность по БПЛА"
+    },
+    "Марий Эл": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793234522,
+      "source_text": "29.10.2026 03:42 МСК\nРеспублика Марий Эл Опасность по БПЛА"
     }
   },
   "cities": [
@@ -983,28 +1002,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793212711,
       "source_text": "28.10.2026 21:38 МСК\nМакеевка, Харцызск, Зугрэс, Иловайск и близлежащие Опасность по БПЛА сохраняется ДНР"
-    },
-    {
-      "key": "трубчевск|брянская область",
-      "name": "Трубчевск",
-      "lat": 52.58031,
-      "lon": 33.76574,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793191383,
-      "source_text": "28.10.2026 15:43 МСК\nТрубчевск в направлении Почеп опасность по БПЛА Брянская область"
     },
     {
       "key": "губкинский|белгородская область",
@@ -3882,7 +3879,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1793230782,
@@ -4219,28 +4216,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793214803,
       "source_text": "28.10.2026 22:13 МСК\nНововоронеж, Воронеж, Каширский район, Хохольский район, Рамонский район, Новоусманский район, Семилукский район, Аннинский район, Таловский район, Воронежская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
-    },
-    "UKR.26.10_1": {
-      "gid_2": "UKR.26.10_1",
-      "name_ru": "Мелитопольский район",
-      "region_ru": "Запорожская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793191640,
-      "source_text": "28.10.2026 15:47 МСК\nМелитопольский район Опасность по БПЛА Запорожская область РФ"
     },
     "RUS.23.6_1": {
       "gid_2": "RUS.23.6_1",
@@ -6920,6 +6895,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 103672,
+      "text": "Республика Марий Эл\nОпасность по БПЛА",
+      "ts": 1793234522,
+      "time_label": "29.10.2026 03:42 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 296792,
       "text": "Республика Татарстан\nвнимание по бпла",
       "ts": 1793234260,
@@ -7550,14 +7533,6 @@
       "time_label": "29.10.2026 01:58 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 103604,
-      "text": "ГО Серпухов\nМосковская область\nСбитие БПЛА\nМеры безопасности",
-      "ts": 1793228270,
-      "time_label": "29.10.2026 01:57 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7567,15 +7542,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793234260,
-  "last_event_at": "2026-10-29T00:37:40Z",
-  "fetched_at": "2026-10-29T00:40:03.632972Z",
+  "timestamp": 1793234522,
+  "last_event_at": "2026-10-29T00:42:02Z",
+  "fetched_at": "2026-10-29T00:50:03.118586Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-10-29T00:40:03.632972Z",
-    "source_age_seconds": 143,
-    "city_count": 157,
-    "region_count": 34,
+    "generated_at": "2026-10-29T00:50:03.118586Z",
+    "source_age_seconds": 481,
+    "city_count": 156,
+    "region_count": 35,
     "feed_count": 80
   }
 }
