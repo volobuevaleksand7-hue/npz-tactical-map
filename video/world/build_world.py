@@ -335,13 +335,29 @@ def regs_name(D, k, lang):
 
 
 # ───────────────────────── описание YouTube ─────────────────────────
+
+def yt_title(lang, D, ds):
+    """Заголовок YouTube (29.10.2026, владелец): сначала что случилось (конкретный факт дня), потом индекс."""
+    ru = lang == "ru"
+    v, d1 = D["w"]["value"], D["w"].get("delta_1d") or 0
+    sign = "−" if d1 < 0 else "+"
+    dl = f" ({sign}{abs(d1)})" if d1 else ""
+    h = D["hormuz"]
+    p = round(h["now"] / h["med"] * 100) if h["med"] else None
+    if p is not None and p < 90:
+        lead = (f"Ормуз: танкеров — {p}% от нормы" if ru else f"Hormuz tanker traffic at {p}% of normal")
+    else:
+        lead = (f"Дизель дороже, чем в {D['pct']}% дней за 5 лет" if ru else f"Diesel at a {D['pct']}th-percentile 5-year high")
+    tail = (f". Топливный индекс мира: {v}/100{dl} · {ds}" if ru else f" — world fuel stress index {v}/100{dl} · {ds}")
+    return (lead + tail)[:100]
+
 def describe(lang, D, date):
     ru = lang == "ru"
     w, rk = D["w"], D["ranked"]
     v = w["value"]
     ds = fdate(D["data_date"], lang)
     if ru:
-        title = f"Мир на уровне {v} из 100: индекс топливной напряжённости · {ds} #shorts"
+        title = yt_title("ru", D, ds)
         l = [title, "",
              f"Индекс топливной напряжённости (ИТН) на {ds}: мир — {v} из 100, уровень «{w['level_ru']}». "
              f"Регионы: " + "; ".join(f"{r['name']} — {r['value']}" for _, r in rk) + ".",
@@ -355,7 +371,7 @@ def describe(lang, D, date):
               "ОЦЕНКА: индекс рассчитан по открытым данным (OSINT), это не официальная информация; методика открыта.",
               "", "#ТопливныйФронт #нефть #дизель #Ормуз #энергетика #news"]
     else:
-        title = f"World fuel tension at {v}/100: Fuel Tension Index · {ds} #shorts"
+        title = yt_title("en", D, ds)
         l = [title, "",
              f"Fuel Tension Index (FTI) as of {ds}: the world is at {v} out of 100 ({LEVEL_EN[w['level']]}). "
              f"Regions: " + "; ".join(f"{REGION_EN[k]} {r['value']}" for k, r in rk) + ".",
