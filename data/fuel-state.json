@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-29T16:15:35Z",
+    "generated_at": "2026-10-29T21:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -504,12 +504,13 @@
       "lat": 56.2,
       "lon": 48.1,
       "capacity_mt_year": 1.4,
-      "status": "operational",
-      "status_since": "2026-06-19",
-      "est_output_pct": 100,
-      "damage": "",
+      "status": "partial",
+      "status_since": "2026-10-29",
+      "est_output_pct": 70,
+      "damage": "Ночью БПЛА атаковали Марийский НПЗ в Табашино. Глава Марий Эл Юрий Зайцев сообщил о ночной атаке беспилотников и обломках, упавших в Новоспасском районе; по его словам, значительного ущерба нет. По сообщениям очевидцев и ОСИНТ-публикаций, на территории завода наблюдались пожар и взрывы. Масштаб повреждений не подтверждён.",
       "note": "Средний НПЗ Поволжья.",
-      "source_url": "https://ru.wikipedia.org/wiki/Нефтеперерабатывающая_промышленность_России"
+      "source_url": "https://www.svoboda.org/a/nochyu-bpla-atakovali-neftezavody-v-mariy-el-i-ulyanovskoy-oblasti-a-takzhe-himpredpriyatie-v-stavropolskom-krae/33575320.html",
+      "confidence": "reported"
     },
     {
       "id": "yaya",
@@ -1061,6 +1062,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-29",
+      "text": "Удар по Марийский НПЗ (Табашино (Йошкар-Ола)): Атака БПЛА на Марийский НПЗ в Табашино",
+      "source_url": "https://www.svoboda.org/a/nochyu-bpla-atakovali-neftezavody-v-mariy-el-i-ulyanovskoy-oblasti-a-takzhe-himpredpriyatie-v-stavropolskom-krae/33575320.html"
+    },
     {
       "date": "2026-10-29",
       "text": "Регионы, 29 октября (сводка СМИ): ограничения на продажу топлива на АЗС отменены в ряде регионов Центра, Поволжья, Сибири, Урала, Северо-Запада, Юга и Крыма; в Ленинградской области снятие поэтапное",
