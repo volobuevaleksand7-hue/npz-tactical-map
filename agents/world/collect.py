@@ -107,10 +107,13 @@ def arcgis_json(url, retries=4):
         if not err:
             time.sleep(1.5)
             return d
-        if err.get("code") != 429 or i == retries:
+        code = err.get("code")
+        if code not in (400, 429, 500, 502, 503, 504) or i == retries:
             raise RuntimeError(f"ArcGIS: {err}")
-        log(f"ArcGIS 429, жду 65 с (попытка {i + 1}/{retries})")
-        time.sleep(65)
+        # 400 «Invalid query parameters» у PortWatch бывает плавающим при тех же параметрах — повторяем коротко
+        wait = 65 if code == 429 else 10 * (i + 1)
+        log(f"ArcGIS {code}, жду {wait} с (попытка {i + 1}/{retries})")
+        time.sleep(wait)
 
 
 def portwatch(portname, days=800):
