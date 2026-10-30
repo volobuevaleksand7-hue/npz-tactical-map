@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-30T04:16Z",
+    "generated_at": "2026-10-30T16:05:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -158,12 +158,12 @@
       "lon": 49.94,
       "capacity_mt_year": 8.8,
       "status": "down",
-      "status_since": "2026-08-22",
+      "status_since": "2026-10-19",
       "est_output_pct": 0,
-      "damage": "В ночь на 22 августа 2026 украинские БПЛА атаковали НПЗ. Зафиксированы мощные пожары на объекте. Завод полностью остановлен.",
-      "note": "На 8 октября завод полностью остановлен. Входит в Самарскую группу НПЗ Роснефти (8.8 млн т/год). Производит авиационное топливо и другие нефтепродукты.",
-      "source_url": "https://www.bloomberg.com/news/articles/2026-08-22/ukraine-drones-strike-samara-oil-refinery-e-commerce-warehouse",
-      "confidence": "confirmed"
+      "damage": "19.10 по данным Reuters со ссылкой на источники: после атаки БПЛА и масштабного пожара остановлена первичная переработка (вторая атака за месяц). Ранее: 22.08 атака БПЛА, пожары, завод остановлен (Bloomberg).",
+      "note": "По источникам Reuters, возобновление возможно в начале ноября; официальных сроков нет. Входит в Самарскую группу НПЗ Роснефти (8.8 млн т/год). Производит авиационное топливо и другие нефтепродукты.",
+      "source_url": "https://www.ukrinform.net/rubric-ato/4049511-novokuybyshevsk-oil-refinery-stops-after-drone-attack-reuters.html",
+      "confidence": "reported"
     },
     {
       "id": "nnos",
@@ -1099,6 +1099,11 @@
   ],
   "events": [
     {
+      "date": "2026-10-19",
+      "text": "Новокуйбышевский НПЗ: по данным Reuters со ссылкой на источники, первичная переработка остановлена 19 октября после атаки БПЛА (вторая за месяц); по источникам, возможный возврат — начало ноября",
+      "source_url": "https://www.ukrinform.net/rubric-ato/4049511-novokuybyshevsk-oil-refinery-stops-after-drone-attack-reuters.html"
+    },
+    {
       "date": "2026-10-30",
       "text": "Сводки СМИ 29–30 октября: ограничения на продажу бензина на АЗС отменены в ряде регионов (Рязанская, Липецкая, Костромская, Воронежская, Владимирская, Новосибирская, Тюменская, Томская, Красноярский край, Ставропольский край, Карелия, Мордовия, Крым); число регионов в разных сводках расходится",
       "source_url": "https://ru.themoscowtimes.com/2026/10/29/rossiiskie-regioni-nachali-otmenyat-ogranicheniya-na-prodazhu-benzina-posle-priostanovki-ukrainoi-udarov-po-npz-a209979"
@@ -1142,11 +1147,6 @@
       "date": "2026-10-27",
       "text": "ЦФО, 21–24 октября (обзор «РГ» от 27 октября): отменены бензиновые ограничения в Липецкой области (21.10), приостановлен «чет-нечет» на двух сетях в Тамбовской области (23.10, на трёх АЗС сохранён), снят «чет-нечет» в Рязанской области (24.10); в Курской области «чет-нечет» сохраняется",
       "source_url": "https://rg.ru/2026/10/27/reg-cfo/do-polnogo-baka.html"
-    },
-    {
-      "date": "2026-10-26",
-      "text": "Удар по Лукойл-Пермнефтеоргсинтез (Пермь): По данным Reuters со ссылкой на источники в отрасли, после удара беспилотников в пятницу 23.10 завод",
-      "source_url": "https://www.dialog.ua/russia/permskiy-npz-paralizovan-udarom-ukrainy-zavod-poluchil-kriticheskie-povrezhdeniya-reuters.html"
     }
   ]
 }
