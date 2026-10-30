@@ -99,7 +99,7 @@
       "rocketOnRegion": false,
       "fill": "#dc2626",
       "last_event_ts": 1793390539,
-      "source_text": "30.10.2026 20:25 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n30.10.2026 23:02 МСК\nАвдеевка и близлежащие, тревога по БпЛА\n\n30.10.2026 21:24 МСК\nДимитров и близлежащие Опасность по БПЛА Баба Яга ДНР"
+      "source_text": "30.10.2026 20:25 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n30.10.2026 23:02 МСК\nАвдеевка и близлежащие, тревога по БпЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -251,7 +251,7 @@
       "rocketOnRegion": false,
       "fill": "#d8c06a",
       "last_event_ts": 1793385219,
-      "source_text": "30.10.2026 21:33 МСК\nТрубчевск и ближайшие Тревога по БПЛА сохраняется Брянская область\n\n30.10.2026 21:22 МСК\nНовоямск Севский район Брянская область опасность по БПЛА баба яга"
+      "source_text": "30.10.2026 21:33 МСК\nТрубчевск и ближайшие Тревога по БПЛА сохраняется Брянская область"
     },
     "Астраханская область": {
       "bpla": false,
@@ -3971,7 +3971,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -4173,8 +4173,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -4316,6 +4316,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 297476,
+      "text": "Реутов\nМО\nвнимание по бпла",
+      "ts": 1793395613,
+      "time_label": "31.10.2026 00:26 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 297475,
       "text": "Ульяновская область\nвнимание по бпла",
@@ -4947,14 +4955,6 @@
       "time_label": "30.10.2026 22:23 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297448,
-      "text": "Опытное,\nАвдеевка\nСпартак,\nДонецк и близлежащие\nОпасность по БПЛА\nДНР",
-      "ts": 1793388118,
-      "time_label": "30.10.2026 22:21 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4964,13 +4964,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793395005,
-  "last_event_at": "2026-10-30T21:16:45Z",
-  "fetched_at": "2026-10-30T21:20:03.819488Z",
+  "timestamp": 1793395613,
+  "last_event_at": "2026-10-30T21:26:53Z",
+  "fetched_at": "2026-10-30T21:30:04.214706Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-10-30T21:20:03.819488Z",
-    "source_age_seconds": 198,
+    "generated_at": "2026-10-30T21:30:04.214706Z",
+    "source_age_seconds": 191,
     "city_count": 92,
     "region_count": 25,
     "feed_count": 80
