@@ -6,25 +6,6 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
-    "Рязанская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1793355635,
-      "source_text": "30.10.2026 13:20 МСК\nРязанская область Ракетная опасность"
-    },
     "Смоленская область": {
       "bpla": false,
       "bplaDim": false,
@@ -1249,28 +1230,6 @@
       "source_text": "30.10.2026 08:47 МСК\nЛюдиновский район Куйбышевский район Спас-Деменский район Барятинский район Хвастовичский район Калужская область Фиксации БПЛА"
     },
     {
-      "key": "истра|московская область",
-      "name": "Истра",
-      "lat": 55.91979,
-      "lon": 36.86876,
-      "region": "Московская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793329286,
-      "source_text": "30.10.2026 06:01 МСК\nМО Истра Московская область Сбитие БПЛА"
-    },
-    {
       "key": "о бронницы|московская область",
       "name": "О Бронницы",
       "lat": 55.4157463,
@@ -2108,28 +2067,6 @@
       "last_event_ts": 1793348278,
       "source_text": "30.10.2026 11:17 МСК\nШебекинский район, Белгородский район, Белгородская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
-    "RUS.52.24_1": {
-      "gid_2": "RUS.52.24_1",
-      "name_ru": "Урицкий район",
-      "region_ru": "Орловская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793313237,
-      "source_text": "30.10.2026 01:33 МСК\nУрицкий район Орловская область Работа ПВО по БПЛА"
-    },
     "RUS.8.25_1": {
       "gid_2": "RUS.8.25_1",
       "name_ru": "Суземский район",
@@ -2563,6 +2500,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 104255,
+      "text": "МО Истра\nМосковская область\nОтбой опасности по БПЛА\nНа территории региона опасность сохраняется",
+      "ts": 1793356461,
+      "time_label": "30.10.2026 13:34 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104254,
+      "text": "Рязанская область\nОтбой ракетной опасности",
+      "ts": 1793356381,
+      "time_label": "30.10.2026 13:33 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 297284,
+      "text": "Белгородская область\n❤️\n❤️\n❤️\nвнимание по бпла",
+      "ts": 1793356331,
+      "time_label": "30.10.2026 13:32 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 104253,
       "text": "Рязанская область\nРакетная опасность",
@@ -3178,30 +3139,6 @@
       "time_label": "30.10.2026 09:37 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104241,
-      "text": "Республика Татарстан\nОтбой опасности по БПЛА",
-      "ts": 1793342202,
-      "time_label": "30.10.2026 09:36 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104240,
-      "text": "Ульяновская область\nОтбой опасности по БПЛА",
-      "ts": 1793342154,
-      "time_label": "30.10.2026 09:35 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104239,
-      "text": "Саратовская область\nОтбой опасности по БПЛА",
-      "ts": 1793342081,
-      "time_label": "30.10.2026 09:34 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -3211,15 +3148,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793355635,
-  "last_event_at": "2026-10-30T10:20:35Z",
-  "fetched_at": "2026-10-30T10:30:03.416722Z",
+  "timestamp": 1793356461,
+  "last_event_at": "2026-10-30T10:34:21Z",
+  "fetched_at": "2026-10-30T10:40:04.037913Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-10-30T10:30:03.416722Z",
-    "source_age_seconds": 568,
-    "city_count": 75,
-    "region_count": 12,
+    "generated_at": "2026-10-30T10:40:04.037913Z",
+    "source_age_seconds": 343,
+    "city_count": 74,
+    "region_count": 11,
     "feed_count": 80
   }
 }
