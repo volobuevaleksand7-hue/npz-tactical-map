@@ -480,6 +480,44 @@
       "fill": "#dc2626",
       "last_event_ts": 1793394753,
       "source_text": "30.10.2026 20:25 МСК\nЛДНР Запорожская область РФ Харьковская область РФ Белгородская область Авиационная ракетная бомбовая опасность\n\n31.10.2026 00:12 МСК\nГрайворон и близлежащие, тревога по БпЛА"
+    },
+    "Автономная Республика Крым": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793396749,
+      "source_text": "31.10.2026 00:45 МСК\nСоляное Кировское Владиславовка и близлежащие Тревога по БПЛА От Азовского моря Республика Крым"
+    },
+    "Севастополь": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793396749,
+      "source_text": "31.10.2026 00:45 МСК\nСоляное Кировское Владиславовка и близлежащие Тревога по БПЛА От Азовского моря Республика Крым"
     }
   },
   "cities": [
@@ -2506,6 +2544,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1793393785,
       "source_text": "30.10.2026 23:56 МСК\nБелгородская область Начались фиксации БпЛА от госграницы Октябрьский Таврово Разумное"
+    },
+    {
+      "key": "кировское|автономная республика крым",
+      "name": "Кировское",
+      "lat": 45.22967,
+      "lon": 35.19987,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793396749,
+      "source_text": "31.10.2026 00:45 МСК\nСоляное Кировское Владиславовка и близлежащие Тревога по БПЛА От Азовского моря Республика Крым"
     }
   ],
   "districts": {
@@ -4317,6 +4377,30 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 297477,
+      "text": "Соляное\nКировское\nВладиславовка и близлежащие\nТревога по БПЛА\nОт Азовского моря\nРеспублика Крым",
+      "ts": 1793396749,
+      "time_label": "31.10.2026 00:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 104340,
+      "text": "Ряжский район\nРязанская область\nФиксация в направлении Рязань",
+      "ts": 1793396392,
+      "time_label": "31.10.2026 00:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104339,
+      "text": "Скопинский район\nРязанская область\nФиксация в направлении Рязань",
+      "ts": 1793396376,
+      "time_label": "31.10.2026 00:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 104338,
       "text": "Самарская область\nОпасность по БПЛА",
       "ts": 1793396328,
@@ -4931,30 +5015,6 @@
       "time_label": "30.10.2026 22:33 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104301,
-      "text": "Глазуновский район\nОрловская область\nФиксации БПЛА",
-      "ts": 1793388757,
-      "time_label": "30.10.2026 22:32 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104300,
-      "text": "Республика Мордовия\nОпасность по БПЛА",
-      "ts": 1793388563,
-      "time_label": "30.10.2026 22:29 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104299,
-      "text": "Орел\nОрловская область\nПродолжается работа ПВО по БПЛА",
-      "ts": 1793388341,
-      "time_label": "30.10.2026 22:25 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -4964,15 +5024,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793396328,
-  "last_event_at": "2026-10-30T21:38:48Z",
-  "fetched_at": "2026-10-30T21:40:03.564656Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1793396749,
+  "last_event_at": "2026-10-30T21:45:49Z",
+  "fetched_at": "2026-10-30T21:50:03.718569Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-30T21:40:03.564656Z",
-    "source_age_seconds": 75,
-    "city_count": 92,
-    "region_count": 25,
+    "generated_at": "2026-10-30T21:50:03.718569Z",
+    "source_age_seconds": 254,
+    "city_count": 93,
+    "region_count": 27,
     "feed_count": 80
   }
 }
