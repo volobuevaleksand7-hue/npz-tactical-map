@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793399835,
-      "source_text": "31.10.2026 01:37 МСК\nРязань Рязанская область Фиксация БПЛА"
+      "last_event_ts": 1793399987,
+      "source_text": "31.10.2026 01:39 МСК\nРязань Рязанская область Сбитие БПЛА"
     },
     "Самарская область": {
       "bpla": false,
@@ -307,8 +307,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793398002,
-      "source_text": "31.10.2026 01:06 МСК\nГородищенский район Пензенская область Фиксация БПЛА"
+      "last_event_ts": 1793399974,
+      "source_text": "31.10.2026 01:39 МСК\nКузнецкий район Пензенская область Фиксация группы БПЛА в направлении Новоспасский район, Ульяновская область"
     },
     "Тульская область": {
       "bpla": false,
@@ -627,28 +627,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793398381,
       "source_text": "31.10.2026 01:13 МСК\nТула Тульская область Опасность по БПЛА Фиксация в вашем направлении"
-    },
-    {
-      "key": "рязань|рязанская область",
-      "name": "Рязань",
-      "lat": 54.62696,
-      "lon": 39.70415,
-      "region": "Рязанская область",
-      "bpla": true,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793399835,
-      "source_text": "31.10.2026 01:37 МСК\nРязань Рязанская область Фиксация БПЛА"
     },
     {
       "key": "курск|курская область",
@@ -4743,10 +4721,56 @@
       "fill": "#ea580c",
       "last_event_ts": 1793399608,
       "source_text": "31.10.2026 01:33 МСК\nНиколаевский район Ульяновская область Сбитие БПЛА"
+    },
+    "RUS.54.14_1": {
+      "gid_2": "RUS.54.14_1",
+      "name_ru": "Кузнецкий район",
+      "region_ru": "Пензенская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793399974,
+      "source_text": "31.10.2026 01:39 МСК\nКузнецкий район Пензенская область Фиксация группы БПЛА в направлении Новоспасский район, Ульяновская область"
     }
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 104361,
+      "text": "Рязань\nРязанская область\nОтбой опасности по БПЛА",
+      "ts": 1793400370,
+      "time_label": "31.10.2026 01:46 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104360,
+      "text": "Рязань\nРязанская область\nСбитие БПЛА",
+      "ts": 1793399987,
+      "time_label": "31.10.2026 01:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104359,
+      "text": "Кузнецкий район\nПензенская область\nФиксация группы БПЛА в направлении Новоспасский район, Ульяновская область",
+      "ts": 1793399974,
+      "time_label": "31.10.2026 01:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 297486,
       "text": "Молодогвардейск и близлежащие, тревога по БпЛА сохраняется",
@@ -5362,30 +5386,6 @@
       "time_label": "30.10.2026 23:11 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297463,
-      "text": "Светлодолинское и близлежащие, тревога по БпЛА\nЗапорожская область РФ",
-      "ts": 1793390923,
-      "time_label": "30.10.2026 23:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297462,
-      "text": "Московская область\nвнимание по бпла",
-      "ts": 1793390786,
-      "time_label": "30.10.2026 23:06 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297461,
-      "text": "Авдеевка и близлежащие, тревога по БпЛА",
-      "ts": 1793390539,
-      "time_label": "30.10.2026 23:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -5395,14 +5395,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793399943,
-  "last_event_at": "2026-10-30T22:39:03Z",
-  "fetched_at": "2026-10-30T22:40:03.794120Z",
+  "timestamp": 1793400370,
+  "last_event_at": "2026-10-30T22:46:10Z",
+  "fetched_at": "2026-10-30T22:50:04.678166Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-10-30T22:40:03.794120Z",
-    "source_age_seconds": 60,
-    "city_count": 97,
+    "generated_at": "2026-10-30T22:50:04.678166Z",
+    "source_age_seconds": 234,
+    "city_count": 96,
     "region_count": 28,
     "feed_count": 80
   }
