@@ -1113,30 +1113,29 @@ def in_title(name):
 def describe(date, sel, day, refs, segs, clips, broll):
     n = len(day)
     fuel = [s for s in sel if s["cls"] == 2 or URGENT]
-    pool = fuel or list(sel)   # 29.10.2026, владелец: в заголовке — какие именно удары, а не «N ударов» (конверсия выше)
-    items = []   # (название объекта, город) — уникальные пары; названные объекты вперёд, безымянные в хвост
-    for s in pool:
+    pool = list(sel)   # 30.10.2026, владелец: «3 удара по РФ: …» — число видно сразу, дальше объекты через запятую (именительный, без склонений)
+    total_n = max(n, len(pool))
+    items = []   # (название, город): топливные и названные вперёд, безымянные в хвост
+    for s in sorted(pool, key=lambda x: (not (x["cls"] == 2), object_name(x, refs).lower().startswith(GENERIC_HEADS) and "«" not in object_name(x, refs))):
         nm = object_name(s, refs)
         key = (nm, re.sub(r"\s*\(.*", "", str(s.get("city") or s.get("region") or "")))
         if nm and key not in items:
             items.append(key)
-    items.sort(key=lambda x: x[0].lower().startswith(GENERIC_HEADS) and "«" not in x[0])
-    tail = f" · {'вечер ' if EVENING else ''}{span_short(date)}"
+    tail = f" · {'вечер ' if EVENING else ''}{span_short(date).replace('.2026', '')}"   # год в хвосте не нужен — место под объекты
     if items:
         def part(it):
-            return in_title(dative_object(it[0])) + (f" ({it[1]})" if it[1] else "")
+            return in_title(it[0]) + (f" ({it[1]})" if it[1] else "")
         parts = [part(it) for it in items]
-        lead = "Удар по " if len(items) == 1 else "Удары по "
+        lead = (f"{total_n} {G.plural(total_n, 'удар', 'удара', 'ударов')} по РФ: " if total_n > 1 else "Удар по РФ: ")
         head = lead + parts[0]
         for k in range(len(parts), 0, -1):   # максимум объектов, что влезает в 100 знаков вместе с «и ещё N»
-            rest = len(parts) - k
-            body = ", ".join(parts[:k]) if rest else (", ".join(parts[:k - 1]) + " и " + parts[k - 1] if k > 1 else parts[0])
-            cand = lead + (body if rest == 0 else body + f" и ещё {rest}")
+            rest = total_n - k
+            cand = lead + ", ".join(parts[:k]) + (f" и ещё {rest}" if rest > 0 else "")
             if len(cand) + len(tail) <= 100:
                 head = cand
                 break
     else:
-        head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} за {'день' if EVENING else 'сутки'}"
+        head = f"{n} {G.plural(n, 'удар', 'удара', 'ударов')} по РФ за {'день' if EVENING else 'сутки'}"
     if len(head) + len(tail) > 100:
         head = head[:100 - len(tail) - 1].rstrip(" ,.;:—-") + "…"
     lines = [head + tail, "", f"Карта ударов: https://{SITE_HOST}/",
