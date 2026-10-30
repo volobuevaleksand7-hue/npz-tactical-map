@@ -1179,28 +1179,6 @@
       "source_text": "30.10.2026 23:11 МСК\nГубкинский ГО Ивановка фиксация БПЛА на Старый Оскол"
     },
     {
-      "key": "новозыбков|брянская область",
-      "name": "Новозыбков",
-      "lat": 52.53711,
-      "lon": 31.93659,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793360325,
-      "source_text": "30.10.2026 14:38 МСК\nНовозыбков и близлежащие Опасность по БПЛА Дартс Брянская область"
-    },
-    {
       "key": "самара|самарская область",
       "name": "Самара",
       "lat": 53.20767,
@@ -2761,6 +2739,50 @@
       "fill": "#ea580c",
       "last_event_ts": 1793401418,
       "source_text": "31.10.2026 02:03 МСК\nБарыш, Топорнино, Павловка, Старая Кулатка, Радищево, Николаевка, Новоспасское и близлежащие, Ульяновская область - опасность по БПЛА от Сосновоборск, Индерка, Кузнецк. 📡 Локатор России - @locatorru"
+    },
+    {
+      "key": "казань|татарстан",
+      "name": "Казань",
+      "lat": 55.78874,
+      "lon": 49.12214,
+      "region": "Татарстан",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": true,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#f0c4a0",
+      "last_event_ts": 1793403241,
+      "source_text": "31.10.2026 02:34 МСК\nКазань Республика Татарстан Внимание по БПЛА"
+    },
+    {
+      "key": "зеленодольск|татарстан",
+      "name": "Зеленодольск",
+      "lat": 55.8477605,
+      "lon": 48.5097031,
+      "region": "Татарстан",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": true,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#f0c4a0",
+      "last_event_ts": 1793403269,
+      "source_text": "31.10.2026 02:34 МСК\nЗеленодольск Республика Татарстан Внимание по БПЛА"
     }
   ],
   "districts": {
@@ -4846,8 +4868,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -4901,6 +4923,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 104364,
+      "text": "Зеленодольск\nРеспублика Татарстан\nВнимание по БПЛА",
+      "ts": 1793403269,
+      "time_label": "31.10.2026 02:34 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104363,
+      "text": "Казань\nРеспублика Татарстан\nВнимание по БПЛА",
+      "ts": 1793403241,
+      "time_label": "31.10.2026 02:34 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 93099,
       "text": "Новоусманский район, Воронежская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
@@ -5524,22 +5562,6 @@
       "time_label": "30.10.2026 23:21 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104321,
-      "text": "Чертковский район\nМиллеровский район\nРостовская область\nФиксации БПЛА",
-      "ts": 1793391624,
-      "time_label": "30.10.2026 23:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 93083,
-      "text": "Елец, Липецк, Долгоруково и близлежащие, Липецкая область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793391575,
-      "time_label": "30.10.2026 23:19 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -5549,14 +5571,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793402328,
-  "last_event_at": "2026-10-30T23:18:48Z",
-  "fetched_at": "2026-10-30T23:30:04.370210Z",
+  "timestamp": 1793403269,
+  "last_event_at": "2026-10-30T23:34:29Z",
+  "fetched_at": "2026-10-30T23:40:03.354293Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-30T23:30:04.370210Z",
-    "source_age_seconds": 676,
-    "city_count": 101,
+    "generated_at": "2026-10-30T23:40:03.354293Z",
+    "source_age_seconds": 334,
+    "city_count": 102,
     "region_count": 28,
     "feed_count": 80
   }
