@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-10-30T04:06Z",
+    "generated_at": "2026-10-30T04:07Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:npz-status"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -144,10 +144,10 @@
       "status": "down",
       "status_since": "2026-09-22",
       "est_output_pct": 0,
-      "damage": "По сообщениям СМИ, в ночную атаку БПЛА был поражён промышленный объект в Новокуйбышевске; в Самарской и Пензенской областях погибли два человека. В Самарской области введены временные ограничения мобильного интернета. Принадлежность объекта к топливной инфраструктуре не подтверждена.",
+      "damage": "Местные сообщения в Telegram (канал exilenova_plus, 03:24–03:49 UTC) о пожаре на Новокуйбышевском НПЗ. Радар зафиксировал работу ПВО над Новокуйбышевском и Чапаевском 30.10 (06:02–06:47 МСК). Официального подтверждения от властей или региональных СМИ не найдено.",
       "note": "На 8 октября завод остаётся полностью остановлен. Четвёртая атака на завод за 2026 год. Возобновление работы требует восстановления критичных установок и отсутствия новых ударов.",
-      "source_url": "https://www.svoboda.org/a/v-povolzhe-v-rezultate-nochnoy-ataki-bpla-pogibli-dva-cheloveka-v-penzenskoy-i-samarskoy-oblastyah-/33492587.html",
-      "confidence": "reported"
+      "source_url": "https://t.me/exilenova_plus/33697",
+      "confidence": "rumored"
     },
     {
       "id": "novokuibyshevsk",
@@ -1062,6 +1062,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-10-30",
+      "text": "Удар по Куйбышевский НПЗ (Новокуйбышевск): Пожар на Новокуйбышевском НПЗ после атаки БПЛА (по данным Telegram)",
+      "source_url": "https://t.me/exilenova_plus/33697"
+    },
     {
       "date": "2026-10-29",
       "text": "Удар по Марийский НПЗ (Табашино (Йошкар-Ола)): Атака БПЛА на Марийский НПЗ в Табашино",
