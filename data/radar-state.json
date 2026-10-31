@@ -44,6 +44,25 @@
       "last_event_ts": 1793459840,
       "source_text": "31.10.2026 18:17 МСК\nСаратовская область Тамбовская область Пензенская область внимание по бпла"
     },
+    "Рязанская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793464732,
+      "source_text": "31.10.2026 19:38 МСК\nРязанская область Опасность по БПЛА"
+    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -73,7 +92,7 @@
       "fpv": false,
       "rocket": true,
       "rocket_level": true,
-      "aviation": true,
+      "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
@@ -868,6 +887,38 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 104482,
+      "text": "Рязанская область\nОпасность по БПЛА",
+      "ts": 1793464732,
+      "time_label": "31.10.2026 19:38 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 93185,
+      "text": "Рязанская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1793464673,
+      "time_label": "31.10.2026 19:37 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 297615,
+      "text": "Экстренная информация РСЧС (Орловская область): Внимание! Отбой авиационной опасности.",
+      "ts": 1793464532,
+      "time_label": "31.10.2026 19:35 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 297614,
+      "text": "✅\nКурская область: внимание! Отбой авиационной опасности.",
+      "ts": 1793464294,
+      "time_label": "31.10.2026 19:31 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 104481,
       "text": "Калужская область\nОтбой опасности по МВШ",
       "ts": 1793463001,
@@ -1474,38 +1525,6 @@
       "time_label": "31.10.2026 11:24 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 93172,
-      "text": "Воротынск, Калуга, Ахлебинино, Пучково и близлежащие, Калужская область - опасность по БПЛА и в сторону Детчино, Малоярославец, Обнинск, Жуков, Боровск и далее по выше указанному маршруту Московской области.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793435077,
-      "time_label": "31.10.2026 11:24 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 297569,
-      "text": "Вознесеновка, Ржевка, Нежеголь\nШебекинский район\nУдарный БПЛА в направлении",
-      "ts": 1793435035,
-      "time_label": "31.10.2026 11:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297568,
-      "text": "Белгородская область, Харьковская область РФ авиационная ракетная бомбовая тревога от Харькова",
-      "ts": 1793435026,
-      "time_label": "31.10.2026 11:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 93171,
-      "text": "Московская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793435010,
-      "time_label": "31.10.2026 11:23 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -1515,15 +1534,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793463001,
-  "last_event_at": "2026-10-31T16:10:01Z",
-  "fetched_at": "2026-10-31T16:30:04.400148Z",
+  "timestamp": 1793464732,
+  "last_event_at": "2026-10-31T16:38:52Z",
+  "fetched_at": "2026-10-31T16:40:02.704990Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-31T16:30:04.400148Z",
-    "source_age_seconds": 1203,
+    "generated_at": "2026-10-31T16:40:02.704990Z",
+    "source_age_seconds": 70,
     "city_count": 15,
-    "region_count": 16,
+    "region_count": 17,
     "feed_count": 80
   }
 }
