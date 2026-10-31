@@ -101,6 +101,25 @@
       "last_event_ts": 1793405417,
       "source_text": "30.10.2026 20:25 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n31.10.2026 03:10 МСК\nДонецк и близлежащие, тревога по БпЛА ДНР"
     },
+    "Республика Башкортостан": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793407691,
+      "source_text": "31.10.2026 03:48 МСК\nРеспублика Башкортостан - опасность по БПЛА. 📡 Локатор России - @locatorru"
+    },
     "Курская область": {
       "bpla": false,
       "bplaDim": false,
@@ -307,8 +326,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793401357,
-      "source_text": "31.10.2026 02:02 МСК\nКузнецк, Сосновоборск, Евлашево, Неверкинский и близлежащие, Пензенская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1793407481,
+      "source_text": "31.10.2026 03:44 МСК\nКузнецкий район Пензенская область Ещё фиксация БПЛА"
     },
     "Тульская область": {
       "bpla": false,
@@ -554,8 +573,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793407149,
-      "source_text": "31.10.2026 03:39 МСК\nУдмуртская Республика - опасность по БПЛА. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1793407253,
+      "source_text": "31.10.2026 03:40 МСК\nРеспублика Удмуртия Опасность по БПЛА"
     }
   },
   "cities": [
@@ -756,28 +775,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793382388,
       "source_text": "30.10.2026 20:46 МСК\nБелокуракино, ЛНР - пролёты БПЛА в направлении примерно Ровеньки, Белгородская область, далее на Кантемировка, Россошь, Воронежская область. 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "таганрог|ростовская область",
-      "name": "Таганрог",
-      "lat": 47.215495,
-      "lon": 38.928362,
-      "region": "Ростовская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793364255,
-      "source_text": "30.10.2026 15:44 МСК\nТаганрог и близлежащие Тревога по БПЛА Ростовская область"
     },
     {
       "key": "коренево|курская область",
@@ -5090,8 +5087,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793399974,
-      "source_text": "31.10.2026 01:39 МСК\nКузнецкий район Пензенская область Фиксация группы БПЛА в направлении Новоспасский район, Ульяновская область"
+      "last_event_ts": 1793407481,
+      "source_text": "31.10.2026 03:44 МСК\nКузнецкий район Пензенская область Ещё фиксация БПЛА"
     },
     "RUS.75.16_1": {
       "gid_2": "RUS.75.16_1",
@@ -5140,6 +5137,46 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 93103,
+      "text": "Республика Башкортостан - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1793407691,
+      "time_label": "31.10.2026 03:48 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 104376,
+      "text": "Кузнецкий район\nПензенская область\nЕщё фиксация БПЛА",
+      "ts": 1793407481,
+      "time_label": "31.10.2026 03:44 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104375,
+      "text": "Кузнецкий район\nПензенская область\nФиксация БПЛА",
+      "ts": 1793407295,
+      "time_label": "31.10.2026 03:41 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104374,
+      "text": "Республика Удмуртия\nОпасность по БПЛА",
+      "ts": 1793407253,
+      "time_label": "31.10.2026 03:40 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104373,
+      "text": "Каменск-Шахтинский\nРостовская область\nМеры безопасности",
+      "ts": 1793407159,
+      "time_label": "31.10.2026 03:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 93102,
       "text": "Удмуртская Республика - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
@@ -5739,46 +5776,6 @@
       "time_label": "30.10.2026 23:56 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104335,
-      "text": "Татищевский район\nСаратовская область\nФиксация БПЛА",
-      "ts": 1793393782,
-      "time_label": "30.10.2026 23:56 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104334,
-      "text": "Мценский район\nОрловская область\nФиксации БПЛА в направлении Белевский район, Тульская область",
-      "ts": 1793393454,
-      "time_label": "30.10.2026 23:50 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104333,
-      "text": "Уваровский район\nТамбовская область\nФиксации БПЛА",
-      "ts": 1793393392,
-      "time_label": "30.10.2026 23:49 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 297470,
-      "text": "Молодогвардейск и близлежащие, тревога по БпЛА\nЛНР",
-      "ts": 1793393362,
-      "time_label": "30.10.2026 23:49 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104332,
-      "text": "Тербунский район\nХлевенский район\nЛипецкая область\nФиксации БПЛА",
-      "ts": 1793393344,
-      "time_label": "30.10.2026 23:49 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5788,15 +5785,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793407149,
-  "last_event_at": "2026-10-31T00:39:09Z",
-  "fetched_at": "2026-10-31T00:40:03.472312Z",
+  "timestamp": 1793407691,
+  "last_event_at": "2026-10-31T00:48:11Z",
+  "fetched_at": "2026-10-31T00:50:02.926641Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-31T00:40:03.472312Z",
-    "source_age_seconds": 54,
-    "city_count": 110,
-    "region_count": 29,
+    "generated_at": "2026-10-31T00:50:02.926641Z",
+    "source_age_seconds": 111,
+    "city_count": 109,
+    "region_count": 30,
     "feed_count": 80
   }
 }
