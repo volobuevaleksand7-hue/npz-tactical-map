@@ -234,6 +234,25 @@
       "last_event_ts": 1793456918,
       "source_text": "31.10.2026 17:28 МСК\nОрел Орловская область Фиксация БПЛА"
     },
+    "Воронежская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793458708,
+      "source_text": "31.10.2026 17:58 МСК\nОстрогожский район Воронежская область Опасность по БПЛА"
+    },
     "Белгородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -250,8 +269,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793452444,
-      "source_text": "31.10.2026 16:14 МСК\nБелгородская область, Брянская область, Курская область, Калужская область, Орловская область, Московская область - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1793458551,
+      "source_text": "31.10.2026 17:55 МСК\nАлексеевский район, Белгородская область - опасность по БПЛА и в направлении Воронежской области. 📡 Локатор России - @locatorru"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -274,6 +293,28 @@
     }
   },
   "cities": [
+    {
+      "key": "нововоронеж|воронежская область",
+      "name": "Нововоронеж",
+      "lat": 51.5384471,
+      "lon": 39.2884588,
+      "region": "Воронежская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793458638,
+      "source_text": "31.10.2026 17:57 МСК\nНововоронеж и близлежащие Воронежская область Опасность по БПЛА"
+    },
     {
       "key": "шебекино|белгородская область",
       "name": "Шебекино",
@@ -539,28 +580,6 @@
       "source_text": "31.10.2026 12:17 МСК\nАвдеевка, Донецк, Ясиноватая и близлежащие Опасность по БПЛА сохраняется, ещё фиксации ДНР"
     },
     {
-      "key": "михайловка|донецкая народная республика",
-      "name": "Михайловка",
-      "lat": 48.1435,
-      "lon": 37.348527,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793415079,
-      "source_text": "31.10.2026 05:51 МСК\nМударисово, Михайловка, Суровка. Красный Яр, Алексеевка, мкр-н Тимашево, г.Уфа и близлежащие - опасность по БПЛА. 📡 Локатор России - @locatorru"
-    },
-    {
       "key": "новая таволжанка|белгородская область",
       "name": "Новая Таволжанка",
       "lat": 50.35123,
@@ -760,6 +779,50 @@
     }
   ],
   "districts": {
+    "RUS.7.2_1": {
+      "gid_2": "RUS.7.2_1",
+      "name_ru": "Алексеевский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793458551,
+      "source_text": "31.10.2026 17:55 МСК\nАлексеевский район, Белгородская область - опасность по БПЛА и в направлении Воронежской области. 📡 Локатор России - @locatorru"
+    },
+    "RUS.79.20_1": {
+      "gid_2": "RUS.79.20_1",
+      "name_ru": "Острогожский район",
+      "region_ru": "Воронежская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793458708,
+      "source_text": "31.10.2026 17:58 МСК\nОстрогожский район Воронежская область Опасность по БПЛА"
+    },
     "RUS.7.13_1": {
       "gid_2": "RUS.7.13_1",
       "name_ru": "Красногвардейский район",
@@ -851,6 +914,78 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 104476,
+      "text": "Острогожский район\nВоронежская область\nОпасность по БПЛА",
+      "ts": 1793458708,
+      "time_label": "31.10.2026 17:58 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 297606,
+      "text": "Острогожск и далее в направлении Лиски\nТревога по БПЛА\nВоронежская область",
+      "ts": 1793458699,
+      "time_label": "31.10.2026 17:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 104475,
+      "text": "Нововоронеж и близлежащие\nВоронежская область\nОпасность по БПЛА",
+      "ts": 1793458638,
+      "time_label": "31.10.2026 17:57 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 93182,
+      "text": "Гнилое, Острогожский район, Воронежская область - пролёт БПЛА в сторону Нововоронежа.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1793458632,
+      "time_label": "31.10.2026 17:57 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 104474,
+      "text": "Нововоронеж\nВоронежская область\nОпасность по БПЛА",
+      "ts": 1793458627,
+      "time_label": "31.10.2026 17:57 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 93181,
+      "text": "Алексеевский район, Белгородская область - опасность по БПЛА и в направлении Воронежской области.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1793458551,
+      "time_label": "31.10.2026 17:55 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 93180,
+      "text": "Воронежская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1793458535,
+      "time_label": "31.10.2026 17:55 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 297605,
+      "text": "Воронежская область\nОпасность для жизни",
+      "ts": 1793458517,
+      "time_label": "31.10.2026 17:55 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 104473,
+      "text": "Воронежская область\nОпасность по БПЛА",
+      "ts": 1793458507,
+      "time_label": "31.10.2026 17:55 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 104472,
       "text": "Орел\nОрловская область\nФиксация БПЛА",
@@ -1418,78 +1553,6 @@
       "time_label": "31.10.2026 10:44 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 297561,
-      "text": "Курский район внимание по возможным БПЛА противника от д. Гремячка",
-      "ts": 1793431625,
-      "time_label": "31.10.2026 10:27 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297560,
-      "text": "Республика Башкортостан отбой опасности по БПЛА\nотбой по бпла",
-      "ts": 1793431040,
-      "time_label": "31.10.2026 10:17 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 93167,
-      "text": "❤️\nДорогие наши близкие, коллеги и друзья!\nМы решили продлить наш «День сотки» ещё на один день! Возможно, кто-то не успел присоединиться вчера, кто-то только сегодня увидел наше обращение, а кто-то ещё раздумывал.\nНапоминаем, что даже 100 рублей — это небольшой вклад, который по силам многим, но вместе такие маленькие шаги складываются в большую помощь.\nБудем искренне благодарны каждому, кто откликнется и поддержит нас! А если есть возможность внести больше — это тоже будет огромной помощью.\nСпасибо всем, кто рядом, кто не проходит мимо и продолжает верить в нас!\n❤️\n🙏\nНаши реквизиты:\nСервис от Т-Банка:\nhttps://pay.cloudtips.ru/p/45774fc7\nвнимание по бпла",
-      "ts": 1793430793,
-      "time_label": "31.10.2026 10:13 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 297559,
-      "text": "Владимирская область внимание по единичным БПЛА от Рязанской области",
-      "ts": 1793430576,
-      "time_label": "31.10.2026 10:09 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104453,
-      "text": "Республика Башкортостан\nОтбой опасности по БПЛА",
-      "ts": 1793430556,
-      "time_label": "31.10.2026 10:09 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 93166,
-      "text": "Республика Башкортостан - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793430537,
-      "time_label": "31.10.2026 10:08 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 297558,
-      "text": "Оренбургская область отбой опасности по БПЛА",
-      "ts": 1793430531,
-      "time_label": "31.10.2026 10:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297557,
-      "text": "Донецк и близлежащие\nОпасность по БПЛА, в том числе и на электротяге\nДНР",
-      "ts": 1793430424,
-      "time_label": "31.10.2026 10:07 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297556,
-      "text": "Белгородский район опасность по БПЛА",
-      "ts": 1793430409,
-      "time_label": "31.10.2026 10:06 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1499,15 +1562,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793456918,
-  "last_event_at": "2026-10-31T14:28:38Z",
-  "fetched_at": "2026-10-31T14:50:03.288439Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1793458708,
+  "last_event_at": "2026-10-31T14:58:28Z",
+  "fetched_at": "2026-10-31T15:00:04.224562Z",
+  "poll_interval_sec": 6,
   "meta": {
-    "generated_at": "2026-10-31T14:50:03.288439Z",
-    "source_age_seconds": 1285,
+    "generated_at": "2026-10-31T15:00:04.224562Z",
+    "source_age_seconds": 96,
     "city_count": 22,
-    "region_count": 14,
+    "region_count": 15,
     "feed_count": 80
   }
 }
