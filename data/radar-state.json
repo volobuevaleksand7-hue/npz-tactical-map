@@ -44,6 +44,25 @@
       "last_event_ts": 1793416597,
       "source_text": "31.10.2026 06:16 МСК\nКолтубановский, Бузулукский район, Оренбургская область - пролёт от 2 БПЛА в сторону Республики Башкортостан. 📡 Локатор России - @locatorru"
     },
+    "Рязанская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793428734,
+      "source_text": "31.10.2026 09:38 МСК\nКораблинский район Рязанская область Фиксация БПЛА"
+    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -79,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793426873,
-      "source_text": "31.10.2026 09:07 МСК\nКушнаренковский район Республика Башкортостан Работа ПВО по БПЛА"
+      "last_event_ts": 1793428721,
+      "source_text": "31.10.2026 09:38 МСК\nУчалинский район Республика Башкортостан Фиксация БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -176,25 +195,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1793397428,
       "source_text": "31.10.2026 00:57 МСК\nБлижнее Насыпное Феодосия И близлежащие Тревога по БПЛА Республика Крым"
-    },
-    "Пермский край": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1793415015,
-      "source_text": "31.10.2026 05:50 МСК\nПермский край Опасность по БПЛА"
     }
   },
   "cities": [
@@ -793,10 +793,134 @@
       "fill": "#ea580c",
       "last_event_ts": 1793426873,
       "source_text": "31.10.2026 09:07 МСК\nКушнаренковский район Республика Башкортостан Работа ПВО по БПЛА"
+    },
+    "RUS.6.63_1": {
+      "gid_2": "RUS.6.63_1",
+      "name_ru": "Учалинский район",
+      "region_ru": "Республика Башкортостан",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793428721,
+      "source_text": "31.10.2026 09:38 МСК\nУчалинский район Республика Башкортостан Фиксация БПЛА"
+    },
+    "RUS.59.7_1": {
+      "gid_2": "RUS.59.7_1",
+      "name_ru": "Кораблинский район",
+      "region_ru": "Рязанская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793428734,
+      "source_text": "31.10.2026 09:38 МСК\nКораблинский район Рязанская область Фиксация БПЛА"
     }
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 104449,
+      "text": "Кораблинский район\nРязанская область\nФиксация БПЛА",
+      "ts": 1793428734,
+      "time_label": "31.10.2026 09:38 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104448,
+      "text": "Учалинский район\nРеспублика Башкортостан\nФиксация БПЛА",
+      "ts": 1793428721,
+      "time_label": "31.10.2026 09:38 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104447,
+      "text": "Александро-Невский район\nРязанская область\nФиксация БПЛА",
+      "ts": 1793428665,
+      "time_label": "31.10.2026 09:37 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 297553,
+      "text": "Рязанская область\nвнимание по бпла",
+      "ts": 1793428596,
+      "time_label": "31.10.2026 09:36 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 297552,
+      "text": "Пермский край\nотбой по бпла",
+      "ts": 1793428449,
+      "time_label": "31.10.2026 09:34 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 297551,
+      "text": "Тульская область\nотбой по бпла",
+      "ts": 1793428424,
+      "time_label": "31.10.2026 09:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 104446,
+      "text": "Рязанская область\nОпасность по БПЛА",
+      "ts": 1793428404,
+      "time_label": "31.10.2026 09:33 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104445,
+      "text": "Владимирская область\nОтбой опасности по БПЛА",
+      "ts": 1793428250,
+      "time_label": "31.10.2026 09:30 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104444,
+      "text": "Тульская область\nОтбой опасности по БПЛА",
+      "ts": 1793428241,
+      "time_label": "31.10.2026 09:30 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104443,
+      "text": "Московская область\nОтбой опасности по БПЛА",
+      "ts": 1793428232,
+      "time_label": "31.10.2026 09:30 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 104442,
       "text": "Воронежская область\nОтбой опасности по БПЛА",
@@ -1356,86 +1480,6 @@
       "time_label": "31.10.2026 07:29 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 297528,
-      "text": "Валуйский район приграничье\nАктивность БПЛА разведки\nБелгородская область",
-      "ts": 1793420549,
-      "time_label": "31.10.2026 07:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297527,
-      "text": "Республика Татарстан\nотбой по бпла",
-      "ts": 1793420491,
-      "time_label": "31.10.2026 07:21 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104415,
-      "text": "Ульяновская область\nОтбой опасности по БПЛА",
-      "ts": 1793420439,
-      "time_label": "31.10.2026 07:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 297526,
-      "text": "Калужская область\nвнимание по бпла",
-      "ts": 1793420438,
-      "time_label": "31.10.2026 07:20 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297525,
-      "text": "Опасность по БПЛА\nПриазовский район\nЗапорожская область РФ",
-      "ts": 1793420343,
-      "time_label": "31.10.2026 07:19 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297524,
-      "text": "Липецкая область\nотбой по бпла",
-      "ts": 1793420163,
-      "time_label": "31.10.2026 07:16 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104414,
-      "text": "Астраханская область\nОтбой опасности по БПЛА",
-      "ts": 1793419662,
-      "time_label": "31.10.2026 07:07 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 297523,
-      "text": "Волгоградская\nСамарская\nУльяновская\nотбой по бпла",
-      "ts": 1793419483,
-      "time_label": "31.10.2026 07:04 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 297522,
-      "text": "Острогожский район\nВоронежская область\nТревога по БПЛА",
-      "ts": 1793419427,
-      "time_label": "31.10.2026 07:03 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 93140,
-      "text": "Острогожск, Лиски, Воронежская область - опасность по БПЛА сохраняется.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793419413,
-      "time_label": "31.10.2026 07:03 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -1445,13 +1489,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793428158,
-  "last_event_at": "2026-10-31T06:29:18Z",
-  "fetched_at": "2026-10-31T06:30:03.799957Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1793428734,
+  "last_event_at": "2026-10-31T06:38:54Z",
+  "fetched_at": "2026-10-31T06:40:04.047521Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-31T06:30:03.799957Z",
-    "source_age_seconds": 45,
+    "generated_at": "2026-10-31T06:40:04.047521Z",
+    "source_age_seconds": 70,
     "city_count": 23,
     "region_count": 10,
     "feed_count": 80
