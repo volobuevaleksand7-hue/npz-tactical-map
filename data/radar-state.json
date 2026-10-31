@@ -25,6 +25,25 @@
       "last_event_ts": 1793427596,
       "source_text": "31.10.2026 09:19 МСК\nСаратовская область Ульяновская область Опасность по БПЛА"
     },
+    "Рязанская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793446329,
+      "source_text": "31.10.2026 14:32 МСК\nРязанская область Опасность по БПЛА"
+    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -54,14 +73,14 @@
       "fpv": false,
       "rocket": true,
       "rocket_level": true,
-      "aviation": false,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1793443300,
-      "source_text": "31.10.2026 11:22 МСК\nКурская область и близлежащие авиационная ракетная бомбовая опасность\n\n31.10.2026 13:41 МСК\nКурская область Опасность по БПЛА"
+      "last_event_ts": 1793446463,
+      "source_text": "31.10.2026 14:34 МСК\nКурская область и близлежащие Авиационная ракетно бомбовая опасность\n\n31.10.2026 13:41 МСК\nКурская область Опасность по БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -482,14 +501,14 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "bplaLaunchAnim": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1793446123,
-      "source_text": "31.10.2026 14:28 МСК\nДонецк ракетная опасность\n\n31.10.2026 12:49 МСК\nДонецк, п. Октябрьское опасность по БПЛА ДНР"
+      "fill": "#ea580c",
+      "last_event_ts": 1793440165,
+      "source_text": "31.10.2026 12:49 МСК\nДонецк, п. Октябрьское опасность по БПЛА ДНР"
     },
     {
       "key": "авдеевка|донецкая народная республика",
@@ -914,6 +933,30 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 297592,
+      "text": "Курская область и близлежащие\nАвиационная ракетно бомбовая опасность",
+      "ts": 1793446463,
+      "time_label": "31.10.2026 14:34 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 297591,
+      "text": "Донецк отбой ракетной опасности",
+      "ts": 1793446406,
+      "time_label": "31.10.2026 14:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 104467,
+      "text": "Рязанская область\nОпасность по БПЛА",
+      "ts": 1793446329,
+      "time_label": "31.10.2026 14:32 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 297590,
       "text": "Донецк ракетная опасность",
@@ -1529,30 +1572,6 @@
       "time_label": "31.10.2026 09:25 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 93163,
-      "text": "Воронежская область, Тамбовская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793427905,
-      "time_label": "31.10.2026 09:25 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 93162,
-      "text": "Рязанская область, Владимирская область, Нижегородская область, Липецкая область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793427824,
-      "time_label": "31.10.2026 09:23 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 297549,
-      "text": "Республика Мордовия\nотбой по бпла",
-      "ts": 1793427786,
-      "time_label": "31.10.2026 09:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1562,15 +1581,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793446123,
-  "last_event_at": "2026-10-31T11:28:43Z",
-  "fetched_at": "2026-10-31T11:30:03.796029Z",
+  "timestamp": 1793446463,
+  "last_event_at": "2026-10-31T11:34:23Z",
+  "fetched_at": "2026-10-31T11:40:03.693983Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-10-31T11:30:03.796029Z",
-    "source_age_seconds": 80,
+    "generated_at": "2026-10-31T11:40:03.693983Z",
+    "source_age_seconds": 340,
     "city_count": 24,
-    "region_count": 15,
+    "region_count": 16,
     "feed_count": 80
   }
 }
