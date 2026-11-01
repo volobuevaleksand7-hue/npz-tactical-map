@@ -31,6 +31,13 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
+## [OPEN] video-weekly-2026-11-01
+status: OPEN
+opened: 2026-11-01 22:30 МСК — video-watchdog
+weekly за 2026-11-01: no-result. дедлайн прошёл, .uploaded нет, процессов нет
+Что сделать:
+- `tail -80 agents/logs/video.log`; проверь `df -h /`, `ls video/out`, замок /var/lock/npz-video.lock
+
 ## [RESOLVED] video-reel-evening-2026-10-27
 status: RESOLVED
 opened: 2026-10-27 19:30 МСК — video-watchdog
