@@ -272,6 +272,25 @@
       "last_event_ts": 1793484911,
       "source_text": "01.11.2026 01:15 МСК\nВладимирская область Ивановская область Опасность по БПЛА"
     },
+    "Чувашия": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793493695,
+      "source_text": "01.11.2026 03:41 МСК\nРеспублика Чувашия Опасность по БПЛА"
+    },
     "Нижегородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -402,8 +421,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793493388,
-      "source_text": "01.11.2026 03:36 МСК\nНечаевка, Пензенская область - массовый пролёт БПЛА БПЛА в сторону примерно Мокшан, далее на Республику Мордовия. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1793493897,
+      "source_text": "01.11.2026 03:44 МСК\nМокшанский район Пензенская область Фиксация БПЛА"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -4945,6 +4964,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1793492848,
       "source_text": "01.11.2026 03:27 МСК\nНевежкино, Белинский район, Пензенская область - пролёты БПЛА в сторону Каменки, Пензы. 📡 Локатор России - @locatorru"
+    },
+    "RUS.54.18_1": {
+      "gid_2": "RUS.54.18_1",
+      "name_ru": "Мокшанский район",
+      "region_ru": "Пензенская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793493897,
+      "source_text": "01.11.2026 03:44 МСК\nМокшанский район Пензенская область Фиксация БПЛА"
     }
   },
   "airport_markers": [
@@ -5016,6 +5057,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 104622,
+      "text": "Мокшанский район\nПензенская область\nФиксация БПЛА",
+      "ts": 1793493897,
+      "time_label": "01.11.2026 03:44 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104621,
+      "text": "Республика Чувашия\nОпасность по БПЛА",
+      "ts": 1793493695,
+      "time_label": "01.11.2026 03:41 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 93301,
       "text": "Нечаевка, Пензенская область - массовый пролёт БПЛА БПЛА в сторону примерно Мокшан, далее на Республику Мордовия.\n📡\nЛокатор России -\n@locatorru",
@@ -5639,22 +5696,6 @@
       "time_label": "01.11.2026 01:20 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104585,
-      "text": "МО Истра\nМосковская область\nОпасность по БПЛА",
-      "ts": 1793485236,
-      "time_label": "01.11.2026 01:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104584,
-      "text": "Московская область\nОпасность по БПЛА",
-      "ts": 1793485228,
-      "time_label": "01.11.2026 01:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5664,15 +5705,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793493388,
-  "last_event_at": "2026-11-01T00:36:28Z",
-  "fetched_at": "2026-11-01T00:40:03.946272Z",
+  "timestamp": 1793493897,
+  "last_event_at": "2026-11-01T00:44:57Z",
+  "fetched_at": "2026-11-01T00:50:03.276018Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-01T00:40:03.946272Z",
-    "source_age_seconds": 215,
+    "generated_at": "2026-11-01T00:50:03.276018Z",
+    "source_age_seconds": 306,
     "city_count": 87,
-    "region_count": 34,
+    "region_count": 35,
     "feed_count": 80
   }
 }
