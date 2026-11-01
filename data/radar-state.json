@@ -307,8 +307,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793494286,
-      "source_text": "01.11.2026 03:51 МСК\nКстово Нижегородская область Опасность по БПЛА"
+      "last_event_ts": 1793495742,
+      "source_text": "01.11.2026 04:15 МСК\nКстово Нижегородская область Работа ПВО по БПЛА Меры безопасности Ещё фиксации"
     },
     "Владимирская область": {
       "bpla": false,
@@ -1244,28 +1244,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793474149,
       "source_text": "31.10.2026 22:15 МСК\nДонецк, Макеевка и близлежащие Тревога по БПЛА ДНР"
-    },
-    {
-      "key": "белая берёзка|брянская область",
-      "name": "Белая Берёзка",
-      "lat": 52.38481,
-      "lon": 33.4823,
-      "region": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793452438,
-      "source_text": "31.10.2026 16:13 МСК\nБелая Берёзка и близлежащие Брянская область Опасность по БПЛА"
     },
     {
       "key": "губкинский|белгородская область",
@@ -2593,9 +2571,9 @@
       "lat": 56.1475,
       "lon": 44.19865,
       "region": "Нижегородская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -2603,11 +2581,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793494286,
-      "source_text": "01.11.2026 03:51 МСК\nКстово Нижегородская область Опасность по БПЛА"
+      "last_event_ts": 1793495742,
+      "source_text": "01.11.2026 04:15 МСК\nКстово Нижегородская область Работа ПВО по БПЛА Меры безопасности Ещё фиксации"
     }
   ],
   "districts": {
@@ -3615,8 +3593,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -5080,6 +5058,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 104626,
+      "text": "Кстово\nНижегородская область\nРабота ПВО по БПЛА\nМеры безопасности\nЕщё фиксации",
+      "ts": 1793495742,
+      "time_label": "01.11.2026 04:15 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 104625,
       "text": "Кстово\nНижегородская область\nМеры безопасности",
       "ts": 1793495307,
@@ -5710,14 +5696,6 @@
       "time_label": "01.11.2026 01:26 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 93285,
-      "text": "Липяги, Терновский район, Воронежская область - более 10 БПЛА в сторону Тамбовской области.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793485516,
-      "time_label": "01.11.2026 01:25 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -5727,14 +5705,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793495307,
-  "last_event_at": "2026-11-01T01:08:27Z",
-  "fetched_at": "2026-11-01T01:10:03.316550Z",
+  "timestamp": 1793495742,
+  "last_event_at": "2026-11-01T01:15:42Z",
+  "fetched_at": "2026-11-01T01:20:04.035045Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-01T01:10:03.316550Z",
-    "source_age_seconds": 96,
-    "city_count": 88,
+    "generated_at": "2026-11-01T01:20:04.035045Z",
+    "source_age_seconds": 262,
+    "city_count": 87,
     "region_count": 35,
     "feed_count": 80
   }
