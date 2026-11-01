@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793514849,
-      "source_text": "01.11.2026 09:34 МСК\nМонастырщинский район Смоленская область Фиксация БПЛА"
+      "last_event_ts": 1793515889,
+      "source_text": "01.11.2026 09:51 МСК\nРуднянский район Смоленская область Фиксация БПЛА"
     },
     "Московская область": {
       "bpla": false,
@@ -250,8 +250,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793514613,
-      "source_text": "01.11.2026 09:30 МСК\nМосковская область Опасность по БПЛА"
+      "last_event_ts": 1793515975,
+      "source_text": "01.11.2026 09:52 МСК\nГО Серпухов Московская область Фиксация БПЛА"
     },
     "Брянская область": {
       "bpla": false,
@@ -883,6 +883,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1793515078,
       "source_text": "01.11.2026 09:37 МСК\nГорловка и близлежащие Опасность по БПЛА и возможным ФПВ ДНР"
+    },
+    {
+      "key": "о серпухов|московская область",
+      "name": "О Серпухов",
+      "lat": 54.9111787,
+      "lon": 37.4241953,
+      "region": "Московская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793515975,
+      "source_text": "01.11.2026 09:52 МСК\nГО Серпухов Московская область Фиксация БПЛА"
     }
   ],
   "districts": {
@@ -995,6 +1017,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1793514849,
       "source_text": "01.11.2026 09:34 МСК\nМонастырщинский район Смоленская область Фиксация БПЛА"
+    },
+    "RUS.64.19_1": {
+      "gid_2": "RUS.64.19_1",
+      "name_ru": "Руднянский район",
+      "region_ru": "Смоленская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793515889,
+      "source_text": "01.11.2026 09:51 МСК\nРуднянский район Смоленская область Фиксация БПЛА"
     }
   },
   "airport_markers": [
@@ -1066,6 +1110,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 104676,
+      "text": "ГО Серпухов\nМосковская область\nФиксация БПЛА",
+      "ts": 1793515975,
+      "time_label": "01.11.2026 09:52 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 104674,
+      "text": "Руднянский район\nСмоленская область\nФиксация БПЛА",
+      "ts": 1793515889,
+      "time_label": "01.11.2026 09:51 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 297833,
       "text": "Горловка и близлежащие\nОпасность по БПЛА и возможным ФПВ\nДНР",
@@ -1689,22 +1749,6 @@
       "time_label": "01.11.2026 06:31 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104648,
-      "text": "Кстово\nНижегородская область\nМеры безопасности",
-      "ts": 1793503158,
-      "time_label": "01.11.2026 06:19 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 297796,
-      "text": "ЛНР. Угроза атаки БПЛА.\nВ границах муниципальных округов: Краснодонский, Лутугинский, Славяносербский, и городов Луганск, Брянка, Кировск, Стаханов, Первомайск",
-      "ts": 1793502916,
-      "time_label": "01.11.2026 06:15 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1714,14 +1758,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793515078,
-  "last_event_at": "2026-11-01T06:37:58Z",
-  "fetched_at": "2026-11-01T06:50:03.893374Z",
+  "timestamp": 1793515975,
+  "last_event_at": "2026-11-01T06:52:55Z",
+  "fetched_at": "2026-11-01T07:00:04.766877Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-01T06:50:03.893374Z",
-    "source_age_seconds": 725,
-    "city_count": 26,
+    "generated_at": "2026-11-01T07:00:04.766877Z",
+    "source_age_seconds": 429,
+    "city_count": 27,
     "region_count": 16,
     "feed_count": 80
   }
