@@ -63,6 +63,25 @@
       "last_event_ts": 1793626003,
       "source_text": "02.11.2026 16:26 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ сохраняется, ещё фиксации ДНР"
     },
+    "Калужская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793628524,
+      "source_text": "02.11.2026 17:08 МСК\nКалужская область Смоленская область Опасность по БПЛА"
+    },
     "Белгородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -196,6 +215,25 @@
       "last_event_ts": 1793624031,
       "source_text": "02.11.2026 15:53 МСК\nКировский район, Ленинский район, Феодосия, Чауда и близлежащие опасность по БПЛА Республика Крым"
     },
+    "Смоленская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793628524,
+      "source_text": "02.11.2026 17:08 МСК\nКалужская область Смоленская область Опасность по БПЛА"
+    },
     "Запорожская область": {
       "bpla": false,
       "bplaDim": false,
@@ -231,8 +269,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1793627565,
-      "source_text": "02.11.2026 10:41 МСК\nАвиационная ракетная опасность все приграничные регионы по возможной подготовке к пускам Штормов\n\n02.11.2026 16:52 МСК\nМиллеровский район повторно опасность по БПЛА"
+      "last_event_ts": 1793628467,
+      "source_text": "02.11.2026 10:41 МСК\nАвиационная ракетная опасность все приграничные регионы по возможной подготовке к пускам Штормов\n\n02.11.2026 17:07 МСК\nМиллерово и близлежащие Опасность по БПЛА Ростовская область"
     }
   },
   "cities": [
@@ -651,8 +689,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793624294,
-      "source_text": "02.11.2026 15:58 МСК\nВолошино, Миллерово, Мальчевская и близлежащие Ростовская область опасность по БПЛА"
+      "last_event_ts": 1793628467,
+      "source_text": "02.11.2026 17:07 МСК\nМиллерово и близлежащие Опасность по БПЛА Ростовская область"
     },
     {
       "key": "шебекино|белгородская область",
@@ -1299,6 +1337,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 104921,
+      "text": "Калужская область\nСмоленская область\nОпасность по БПЛА",
+      "ts": 1793628524,
+      "time_label": "02.11.2026 17:08 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 298343,
+      "text": "Миллерово и близлежащие\nОпасность по БПЛА\nРостовская область",
+      "ts": 1793628467,
+      "time_label": "02.11.2026 17:07 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 298342,
       "text": "Мелитополь - тревога по БПЛА\nНикванта подписаться\n🇷🇺\nНикванта в МАХ",
       "ts": 1793627821,
@@ -1921,22 +1975,6 @@
       "time_label": "02.11.2026 11:32 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 298276,
-      "text": "Луганск\nСтаница Луганская\nи близлежащие\nТревога по БПЛА\nИ далее в направлении\nМиллерово\nРостовская область",
-      "ts": 1793607781,
-      "time_label": "02.11.2026 11:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 298275,
-      "text": "ЛНР. Угроза атаки БПЛА.\nВ границах муниципальных округов: Краснодонский, Лутугинский, Славяносербский, и городов Луганск, Брянка, Кировск, Стаханов, Первомайск",
-      "ts": 1793607737,
-      "time_label": "02.11.2026 11:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1946,15 +1984,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793627821,
-  "last_event_at": "2026-11-02T13:57:01Z",
-  "fetched_at": "2026-11-02T14:00:04.210124Z",
+  "timestamp": 1793628524,
+  "last_event_at": "2026-11-02T14:08:44Z",
+  "fetched_at": "2026-11-02T14:10:03.596172Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-02T14:00:04.210124Z",
-    "source_age_seconds": 183,
+    "generated_at": "2026-11-02T14:10:03.596172Z",
+    "source_age_seconds": 79,
     "city_count": 33,
-    "region_count": 12,
+    "region_count": 14,
     "feed_count": 80
   }
 }
