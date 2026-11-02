@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793653577,
-      "source_text": "03.11.2026 00:06 МСК\nГО Подольск Московская область Сбитие БПЛА"
+      "last_event_ts": 1793654030,
+      "source_text": "03.11.2026 00:13 МСК\nГО Одинцово Московская область Сбитие БПЛА"
     },
     "Тульская область": {
       "bpla": false,
@@ -155,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793653064,
-      "source_text": "02.11.2026 23:57 МСК\nКалужская область Тульская область Орловская область Московская область Продолжаются фиксации групп БПЛА по ранее объявленым районам Меры безопасности"
+      "last_event_ts": 1793654253,
+      "source_text": "03.11.2026 00:17 МСК\nОрел Орловская область Сбитие БПЛА"
     },
     "Ростовская область": {
       "bpla": false,
@@ -364,8 +364,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793650484,
-      "source_text": "02.11.2026 23:14 МСК\nБелгородская область Курская область Брянская область Орловская область Тревога по БПЛА сохраняется"
+      "last_event_ts": 1793654223,
+      "source_text": "03.11.2026 00:17 МСК\nКороча в направлении Новый Оскол фиксации БПЛА Белгородская область"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -540,7 +540,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1793650241,
@@ -2388,11 +2388,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793650680,
-      "source_text": "02.11.2026 23:18 МСК\nГО Одинцово Московская область Фиксации БПЛА"
+      "last_event_ts": 1793654030,
+      "source_text": "03.11.2026 00:13 МСК\nГО Одинцово Московская область Сбитие БПЛА"
     },
     {
       "key": "алексин|тульская область",
@@ -2542,7 +2542,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1793650212,
@@ -2564,7 +2564,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1793650282,
@@ -2586,7 +2586,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1793650282,
@@ -2608,7 +2608,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1793650355,
@@ -2833,6 +2833,50 @@
       "fill": "#ea580c",
       "last_event_ts": 1793653589,
       "source_text": "03.11.2026 00:06 МСК\nСедово, Новоазовск, Таганрог опасность по БПЛА"
+    },
+    {
+      "key": "короча|белгородская область",
+      "name": "Короча",
+      "lat": 50.81087,
+      "lon": 37.19607,
+      "region": "Белгородская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793654223,
+      "source_text": "03.11.2026 00:17 МСК\nКороча в направлении Новый Оскол фиксации БПЛА Белгородская область"
+    },
+    {
+      "key": "орел|орловская область",
+      "name": "Орел",
+      "lat": 52.96879,
+      "lon": 36.0791,
+      "region": "Орловская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": true,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793654253,
+      "source_text": "03.11.2026 00:17 МСК\nОрел Орловская область Сбитие БПЛА"
     }
   ],
   "districts": {
@@ -4676,8 +4720,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -4775,6 +4819,17 @@
       "source_text": "▫️\nАэропорт\nДОМОДЕДОВО\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ"
     },
     {
+      "key": "жуковский (раменское)",
+      "name": "ЖУКОВСКИЙ",
+      "match_text": "ЖУКОВСКИЙ (Раменское)",
+      "lat": 55.553299,
+      "lon": 38.150002,
+      "closed": true,
+      "last_event_ts": 1793654338,
+      "city": "Жуковский",
+      "source_text": "▫️\nАэропорт\nЖУКОВСКИЙ\n(Раменское)\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ"
+    },
+    {
       "key": "калуга (грабцево)",
       "name": "КАЛУГА",
       "match_text": "КАЛУГА (Грабцево)",
@@ -4787,6 +4842,46 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 298542,
+      "text": "Брянская область\nТревога по Реактивным БПЛА",
+      "ts": 1793654272,
+      "time_label": "03.11.2026 00:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 105027,
+      "text": "Орел\nОрловская область\nСбитие БПЛА",
+      "ts": 1793654253,
+      "time_label": "03.11.2026 00:17 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 298541,
+      "text": "Короча в направлении Новый Оскол фиксации БПЛА Белгородская область",
+      "ts": 1793654223,
+      "time_label": "03.11.2026 00:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 105026,
+      "text": "ГО Одинцово\nМосковская область\nСбитие БПЛА",
+      "ts": 1793654030,
+      "time_label": "03.11.2026 00:13 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 298540,
+      "text": "Советский район\nФокинский район\nВолодарский район\nИ близлежащие\nТревога по БПЛА сохраняется\nБрянская область",
+      "ts": 1793654008,
+      "time_label": "03.11.2026 00:13 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 298539,
       "text": "Снежное ДНР и далее на Матвеев Курган, Куйбышево, Таганрог\nТревога по БПЛА",
@@ -5386,46 +5481,6 @@
       "time_label": "02.11.2026 23:09 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104990,
-      "text": "Калуга\nКалужская область\nСбитие БПЛА",
-      "ts": 1793650124,
-      "time_label": "02.11.2026 23:08 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104989,
-      "text": "ГО Серпухов\nМосковская область\nСбитие БПЛА",
-      "ts": 1793650098,
-      "time_label": "02.11.2026 23:08 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 298498,
-      "text": "Красный Бор\nСмоленская область\nИ далее на север\nвнимание по бпла",
-      "ts": 1793650065,
-      "time_label": "02.11.2026 23:07 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104988,
-      "text": "Новомосковский район\nТульская область\nФиксация БПЛА",
-      "ts": 1793649886,
-      "time_label": "02.11.2026 23:04 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104987,
-      "text": "Смоленский район\nСмоленская область\nФиксация БПЛА",
-      "ts": 1793649862,
-      "time_label": "02.11.2026 23:04 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5435,14 +5490,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793653724,
-  "last_event_at": "2026-11-02T21:08:44Z",
-  "fetched_at": "2026-11-02T21:10:03.785554Z",
+  "timestamp": 1793654272,
+  "last_event_at": "2026-11-02T21:17:52Z",
+  "fetched_at": "2026-11-02T21:20:03.318704Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-02T21:10:03.785554Z",
-    "source_age_seconds": 79,
-    "city_count": 106,
+    "generated_at": "2026-11-02T21:20:03.318704Z",
+    "source_age_seconds": 131,
+    "city_count": 108,
     "region_count": 26,
     "feed_count": 80
   }
