@@ -598,7 +598,16 @@
     }
    ],
    "found_at": "2026-11-02T11:35:00Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 3,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   },
   {
    "id": "2026-11-02-malawi-petrol-shortage-queues",
@@ -625,7 +634,17 @@
     }
    ],
    "found_at": "2026-11-02T11:35:00Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "ok",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "ready",
+   "reject_reason": null,
+   "notified_at": "2026-11-02T11:27:03Z"
   },
   {
    "id": "2026-11-01-hormuz-irgc-two-tankers-mine-claim",
@@ -657,7 +676,16 @@
     }
    ],
    "found_at": "2026-11-02T11:35:00Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "unknown",
+    "neutral_lexicon": "ok",
+    "independent_sources": 2,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "duplicate:2026-10-30-hormuz-irgc-four-tankers-mine-claim"
   },
   {
    "id": "2026-11-01-hormuz-selat-storm-tug-struck",
@@ -684,7 +712,16 @@
     }
    ],
    "found_at": "2026-11-02T11:35:00Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "ok",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "needs_source",
+   "reject_reason": "нужен второй независимый издатель"
   },
   {
    "id": "2026-11-02-arabian-gulf-tanker-two-projectiles-saudi",
@@ -716,8 +753,17 @@
     }
    ],
    "found_at": "2026-11-02T11:35:00Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 2,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-02T03:26:32Z"
+ "validated_at": "2026-11-02T11:27:02Z"
 }
