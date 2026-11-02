@@ -101,6 +101,25 @@
       "last_event_ts": 1793605263,
       "source_text": "02.11.2026 10:41 МСК\nАвиационная ракетная опасность все приграничные регионы по возможной подготовке к пускам Штормов"
     },
+    "Запорожская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793608811,
+      "source_text": "02.11.2026 11:40 МСК\nОсипенко Бердянск Приморск И близлежащие Тревога по БПЛА Запорожская область РФ"
+    },
     "Ростовская область": {
       "bpla": false,
       "bplaDim": false,
@@ -141,6 +160,72 @@
     }
   },
   "cities": [
+    {
+      "key": "осипенко|запорожская область",
+      "name": "Осипенко",
+      "lat": 46.919104,
+      "lon": 36.821647999999996,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793608811,
+      "source_text": "02.11.2026 11:40 МСК\nОсипенко Бердянск Приморск И близлежащие Тревога по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "приморск|запорожская область",
+      "name": "Приморск",
+      "lat": 46.73415,
+      "lon": 36.34599,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793608811,
+      "source_text": "02.11.2026 11:40 МСК\nОсипенко Бердянск Приморск И близлежащие Тревога по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "бердянск|запорожская область",
+      "name": "Бердянск",
+      "lat": 46.755673,
+      "lon": 36.789317,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793608811,
+      "source_text": "02.11.2026 11:40 МСК\nОсипенко Бердянск Приморск И близлежащие Тревога по БПЛА Запорожская область РФ"
+    },
     {
       "key": "великая новосёлка|донецкая народная республика",
       "name": "Великая Новосёлка",
@@ -212,6 +297,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 93479,
+      "text": "Отбой опасности по БПЛА во всех ранее объявленных регионах.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1793608917,
+      "time_label": "02.11.2026 11:41 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 298280,
+      "text": "Осипенко\nБердянск\nПриморск\nИ близлежащие\nТревога по БПЛА\nЗапорожская область РФ",
+      "ts": 1793608811,
+      "time_label": "02.11.2026 11:40 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 104919,
       "text": "Отбой опасности и внимания по БПЛА по ранее объявленным регионам\nСпасибо ПВО\n🤍",
@@ -835,22 +936,6 @@
       "time_label": "02.11.2026 07:08 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104901,
-      "text": "Нижегородская область\nЛибо опасности по БПЛА",
-      "ts": 1793592260,
-      "time_label": "02.11.2026 07:04 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104900,
-      "text": "Московская область\nОтбой опасности по БПЛА",
-      "ts": 1793592234,
-      "time_label": "02.11.2026 07:03 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -860,15 +945,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793608709,
-  "last_event_at": "2026-11-02T08:38:29Z",
-  "fetched_at": "2026-11-02T08:40:04.111560Z",
+  "timestamp": 1793608917,
+  "last_event_at": "2026-11-02T08:41:57Z",
+  "fetched_at": "2026-11-02T08:50:03.826888Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-02T08:40:04.111560Z",
-    "source_age_seconds": 95,
-    "city_count": 1,
-    "region_count": 7,
+    "generated_at": "2026-11-02T08:50:03.826888Z",
+    "source_age_seconds": 486,
+    "city_count": 4,
+    "region_count": 8,
     "feed_count": 80
   }
 }
