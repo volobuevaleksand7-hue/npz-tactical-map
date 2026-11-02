@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Курская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1793594393,
+      "source_text": "02.11.2026 07:39 МСК\nКурская область и близлежащие Авиационно ракетно бомбовая опасность"
+    },
     "Адыгея": {
       "bpla": false,
       "bplaDim": false,
@@ -954,28 +973,6 @@
       "source_text": "01.11.2026 23:41 МСК\nМелитополь и близлежащие, тревога по БпЛА"
     },
     {
-      "key": "брянка|луганская народная республика",
-      "name": "Брянка",
-      "lat": 48.511,
-      "lon": 38.67222,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793551637,
-      "source_text": "01.11.2026 19:47 МСК\nАлмазная Брянка и близлежащие опасность по БПЛА, в т.ч. на электротяге ЛНР"
-    },
-    {
       "key": "енакиево|донецкая народная республика",
       "name": "Енакиево",
       "lat": 48.23857,
@@ -1128,28 +1125,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793564971,
       "source_text": "01.11.2026 23:29 МСК\nАвдеевка, Ханженково и близлежащие, тревога по БпЛА"
-    },
-    {
-      "key": "белое|луганская народная республика",
-      "name": "Белое",
-      "lat": 48.49523,
-      "lon": 39.05051,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793551589,
-      "source_text": "01.11.2026 19:46 МСК\nБелое И близлежащие Тревога по БПЛА ЛНР"
     },
     {
       "key": "беловодск|луганская народная республика",
@@ -2544,12 +2519,28 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 298226,
+      "text": "Курская область и близлежащие\nАвиационно ракетно бомбовая опасность",
+      "ts": 1793594393,
+      "time_label": "02.11.2026 07:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 104905,
       "text": "Республика Башкортостан\nОтбой опасности по БПЛА",
       "ts": 1793594333,
       "time_label": "02.11.2026 07:38 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 298225,
+      "text": "Республика Крым\nСевастополь\nОтбой беспилотной опасности по ранее объявленным\nРежим повышенного внимания сохраняем.",
+      "ts": 1793594331,
+      "time_label": "02.11.2026 07:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
     },
     {
       "msg_id": 104904,
@@ -3166,22 +3157,6 @@
       "time_label": "02.11.2026 04:03 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 104867,
-      "text": "Новокуйбышевск\nСамарская область\nМеры безопасности",
-      "ts": 1793581193,
-      "time_label": "02.11.2026 03:59 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 104866,
-      "text": "Просвет\nВолжский район\nСамарская область\nСбитие БПЛА",
-      "ts": 1793581046,
-      "time_label": "02.11.2026 03:57 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -3191,15 +3166,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793594333,
-  "last_event_at": "2026-11-02T04:38:53Z",
-  "fetched_at": "2026-11-02T04:40:03.419076Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1793594393,
+  "last_event_at": "2026-11-02T04:39:53Z",
+  "fetched_at": "2026-11-02T04:50:03.626548Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-02T04:40:03.419076Z",
-    "source_age_seconds": 70,
-    "city_count": 80,
-    "region_count": 15,
+    "generated_at": "2026-11-02T04:50:03.626548Z",
+    "source_age_seconds": 610,
+    "city_count": 78,
+    "region_count": 16,
     "feed_count": 80
   }
 }
