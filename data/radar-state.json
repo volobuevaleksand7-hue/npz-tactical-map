@@ -82,6 +82,25 @@
       "last_event_ts": 1793696699,
       "source_text": "03.11.2026 12:04 МСК\nСнежное ДНР Тревога по БПЛА Хорнет"
     },
+    "Луганская Народная Республика": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793697908,
+      "source_text": "03.11.2026 12:25 МСК\nСтаробельск в направлении Евсуга Тревога по БПЛА Хорнет"
+    },
     "Автономная Республика Крым": {
       "bpla": false,
       "bplaDim": false,
@@ -124,6 +143,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1793697199,
       "source_text": "03.11.2026 12:13 МСК\nОсипенко, Бердянск, Луначарское кольцо тревога по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "старобельск|луганская народная республика",
+      "name": "Старобельск",
+      "lat": 49.282243,
+      "lon": 38.897393,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793697908,
+      "source_text": "03.11.2026 12:25 МСК\nСтаробельск в направлении Евсуга Тревога по БПЛА Хорнет"
     },
     {
       "key": "приморск|запорожская область",
@@ -304,6 +345,22 @@
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 298690,
+      "text": "Южные районы Ростовская область опасность по БПЛА",
+      "ts": 1793697983,
+      "time_label": "03.11.2026 12:26 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 298689,
+      "text": "Старобельск в направлении  Евсуга\nТревога по БПЛА Хорнет",
+      "ts": 1793697908,
+      "time_label": "03.11.2026 12:25 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 298688,
       "text": "Ростовская область\nОпасность по БПЛА",
@@ -927,22 +984,6 @@
       "time_label": "03.11.2026 07:26 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 105252,
-      "text": "Суворовский район\nТульская область\nФиксация БПЛА",
-      "ts": 1793679968,
-      "time_label": "03.11.2026 07:26 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 105251,
-      "text": "ГО Богородский\nГО Орехово-Зуево\nМО Егорьевск\nМосковская область\nФиксации БПЛА",
-      "ts": 1793679932,
-      "time_label": "03.11.2026 07:25 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -952,15 +993,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793697378,
-  "last_event_at": "2026-11-03T09:16:18Z",
-  "fetched_at": "2026-11-03T09:20:06.594607Z",
+  "timestamp": 1793697983,
+  "last_event_at": "2026-11-03T09:26:23Z",
+  "fetched_at": "2026-11-03T09:30:04.059258Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-03T09:20:06.594607Z",
-    "source_age_seconds": 228,
-    "city_count": 9,
-    "region_count": 5,
+    "generated_at": "2026-11-03T09:30:04.059258Z",
+    "source_age_seconds": 221,
+    "city_count": 10,
+    "region_count": 6,
     "feed_count": 80
   }
 }
