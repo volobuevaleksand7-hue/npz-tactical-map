@@ -44,6 +44,25 @@
       "last_event_ts": 1793693180,
       "source_text": "03.11.2026 11:06 МСК\nР-280 Владимировка - Инзовка - Приморск - Бердянск - Осипенко Внимание по БпЛА Запорожская область РФ С севера одиночные пролеты БПЛА"
     },
+    "Херсонская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793696145,
+      "source_text": "03.11.2026 11:55 МСК\nЧаплынка опасность по БПЛА Хорнет Херсонская область РФ"
+    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -326,6 +345,28 @@
       "source_text": "03.11.2026 10:24 МСК\nп. Октябрьский Донецк ДНР опасность по БПЛА. Меры безопасности"
     },
     {
+      "key": "чаплынка|херсонская область",
+      "name": "Чаплынка",
+      "lat": 46.36454,
+      "lon": 33.54087,
+      "region": "Херсонская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793696145,
+      "source_text": "03.11.2026 11:55 МСК\nЧаплынка опасность по БПЛА Хорнет Херсонская область РФ"
+    },
+    {
       "key": "иловайск|донецкая народная республика",
       "name": "Иловайск",
       "lat": 47.92498,
@@ -395,6 +436,14 @@
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 298680,
+      "text": "Чаплынка опасность по БПЛА Хорнет\nХерсонская область РФ",
+      "ts": 1793696145,
+      "time_label": "03.11.2026 11:55 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 298679,
       "text": "Продолжается активность БПЛА Хорнет от р. Днепр в направлении Скадовск, Каланчак, Чаплынка\nВсе трассы особое внимание",
@@ -1026,14 +1075,6 @@
       "time_label": "03.11.2026 07:10 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 93616,
-      "text": "Липецкая область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793678923,
-      "time_label": "03.11.2026 07:08 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -1043,15 +1084,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793695635,
-  "last_event_at": "2026-11-03T08:47:15Z",
-  "fetched_at": "2026-11-03T08:50:03.706529Z",
+  "timestamp": 1793696145,
+  "last_event_at": "2026-11-03T08:55:45Z",
+  "fetched_at": "2026-11-03T09:00:04.398205Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-03T08:50:03.706529Z",
-    "source_age_seconds": 168,
-    "city_count": 14,
-    "region_count": 4,
+    "generated_at": "2026-11-03T09:00:04.398205Z",
+    "source_age_seconds": 259,
+    "city_count": 15,
+    "region_count": 5,
     "feed_count": 80
   }
 }
