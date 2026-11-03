@@ -432,16 +432,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1793667118,
-      "source_text": "03.11.2026 03:51 МСК\nЛутугино, Краснодон и близлежащие опасность по БПЛА ЛНР"
+      "fill": "#dc2626",
+      "last_event_ts": 1793677398,
+      "source_text": "03.11.2026 06:43 МСК\nСчастье ЛНР и близлежащие ракетная опасность\n\n03.11.2026 03:51 МСК\nЛутугино, Краснодон и близлежащие опасность по БПЛА ЛНР"
     },
     "Калужская область": {
       "bpla": false,
@@ -1635,6 +1635,28 @@
       "source_text": "03.11.2026 02:59 МСК\nПриазовский Кучугуры Ильич и близлежащие Тревога по БПЛА с моря Краснодарский край"
     },
     {
+      "key": "счастье|луганская народная республика",
+      "name": "Счастье",
+      "lat": 48.73784,
+      "lon": 39.23047,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1793677398,
+      "source_text": "03.11.2026 06:43 МСК\nСчастье ЛНР и близлежащие ракетная опасность"
+    },
+    {
       "key": "тазово|курская область",
       "name": "Тазово",
       "lat": 51.9172222222222,
@@ -2073,28 +2095,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793665334,
       "source_text": "03.11.2026 03:22 МСК\nЕщё массовый пролёт БПЛА через Почеп на Жирятино, Брянской области"
-    },
-    {
-      "key": "скадовск|херсонская область",
-      "name": "Скадовск",
-      "lat": 46.11313,
-      "lon": 32.90978,
-      "region": "Херсонская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793634411,
-      "source_text": "02.11.2026 18:46 МСК\nСкадовск и близлежащие Опасность по БПЛА Хорнет Херсонская область РФ"
     },
     {
       "key": "донецк|донецкая народная республика",
@@ -3982,7 +3982,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1793673817,
@@ -7788,8 +7788,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -7844,6 +7844,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 298629,
+      "text": "Север ЛНР\nВ направлении Ростовской области\nТревога по Фламинго",
+      "ts": 1793677563,
+      "time_label": "03.11.2026 06:46 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 298628,
+      "text": "Счастье ЛНР и близлежащие ракетная опасность",
+      "ts": 1793677398,
+      "time_label": "03.11.2026 06:43 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 298627,
       "text": "Беловодск ЛНР и далее в направлении Чертково  ракетная опасность",
@@ -8467,22 +8483,6 @@
       "time_label": "03.11.2026 05:24 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 105184,
-      "text": "Комсомольский район\nИвановская область\nФиксация БПЛА",
-      "ts": 1793672682,
-      "time_label": "03.11.2026 05:24 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 105183,
-      "text": "Фурмановский район\nИвановская область\nФиксация БПЛА",
-      "ts": 1793672677,
-      "time_label": "03.11.2026 05:24 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -8492,13 +8492,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793676506,
-  "last_event_at": "2026-11-03T03:28:26Z",
-  "fetched_at": "2026-11-03T03:40:03.222067Z",
+  "timestamp": 1793677563,
+  "last_event_at": "2026-11-03T03:46:03Z",
+  "fetched_at": "2026-11-03T03:50:04.670339Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-03T03:40:03.222067Z",
-    "source_age_seconds": 697,
+    "generated_at": "2026-11-03T03:50:04.670339Z",
+    "source_age_seconds": 241,
     "city_count": 177,
     "region_count": 30,
     "feed_count": 80
