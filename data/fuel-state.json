@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-11-04T04:16:16Z",
+    "generated_at": "2026-11-04T16:06:08Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -176,9 +176,9 @@
       "status": "down",
       "status_since": "2026-08-26",
       "est_output_pct": 0,
-      "damage": "В ночь на 1 ноября атака беспилотников: на территории Кстовского НПЗ пожар. По сообщению Kyiv Independent со ссылкой на сообщения СМИ, завод приостановил работу. Количество БПЛА и последствия не уточнены; официальных данных о степени поражения установок нет.",
+      "damage": "В ночь на 1 ноября атака беспилотников: на территории Кстовского НПЗ пожар. По сообщению Kyiv Independent со ссылкой на сообщения СМИ, завод приостановил работу. В ночь на 4 ноября новая атака (по сообщениям СМИ, более 100 БПЛА в промзоне Кстово): пожар в промзоне, где расположены НПЗ Лукойла, химические предприятия и ТЭЦ; по данным властей, обломки БПЛА упали на территорию «Сибур-Кстово» и вызвали пожар, пострадавших нет. Официальных данных о степени поражения установок НПЗ нет.",
       "note": "На 8 октября завод полностью остановлен. 4-й по величине нефтезавод России. Восстановление критически затруднено при активной воздушной деятельности.",
-      "source_url": "https://kyivindependent.com/russian-oil-refinery-in-kstovo-ablaze-after-reported-overnight-drone-strike/",
+      "source_url": "https://censor.net/en/photonews/3583153/drone-attack-in-kstovo-explosions-and-fire-near-oil-enterprises-in-russia",
       "confidence": "reported"
     },
     {
@@ -1126,6 +1126,11 @@
   ],
   "events": [
     {
+      "date": "2026-11-04",
+      "text": "Кстово (Нижегородская обл.): в ночь на 4 ноября новая атака беспилотников; по сообщениям СМИ, пожар в промзоне у Лукойл-Нижегороднефтеоргсинтез; по данным властей, обломки БПЛА вызвали пожар на «Сибур-Кстово», пострадавших нет. Официальных данных о степени поражения установок НПЗ нет",
+      "source_url": "https://censor.net/en/photonews/3583153/drone-attack-in-kstovo-explosions-and-fire-near-oil-enterprises-in-russia"
+    },
+    {
       "date": "2026-11-03",
       "text": "Удар по Саратовский НПЗ (Саратов): в ночь на 3 ноября по видеозаписям виден пожар в западной части завода, в районе установки АВТ-6 (по сообщениям СМИ; официального подтверждения от властей и компании не найдено)",
       "source_url": "https://news.liga.net/politics/news/saratov-nochyu-atakovali-drony-zamechen-pozhar-v-raione-neftezavoda"
@@ -1169,11 +1174,6 @@
       "date": "2026-10-30",
       "text": "Новак (30 октября): правительство готовит продление запрета на экспорт дизеля для производителей до конца января 2027 с исключениями; в ноябре часть поставок пойдёт по квотам (договорённость Путина и Трампа). Постановление в найденных источниках ещё не опубликовано",
       "source_url": "https://www.vedomosti.ru/business/news/2026/10/30/1241598-zapret-na-eksport"
-    },
-    {
-      "date": "2026-10-30",
-      "text": "Удар по Куйбышевский НПЗ (Новокуйбышевск): Пожар на Новокуйбышевском НПЗ после атаки БПЛА (по данным Telegram)",
-      "source_url": "https://t.me/exilenova_plus/33697"
     }
   ]
 }
