@@ -392,6 +392,19 @@ def do_briefing(mode, dry=False, test_chat=None, force=False):
             print("--- (split) TEXT MESSAGE ---\n%s\n---" % rendered["text"])
         return
 
+    # 04.11.2026, владелец: «2 одинаковых поста» — утренняя и вечерняя сводка 4.11 вышли с тем же текстом и
+    # той же обложкой, новых событий между ними не было. Если после вычета шапки (вид сводки/время) текст
+    # такой же, как у прошлой отправленной сводки за последние 20 ч, вторую не шлём.
+    import hashlib as _h, re as _re, time as _t
+    _norm = _re.sub(r"(Утренняя|Вечерняя) сводка[^\n]*", "", caption_or_text)
+    _norm = _re.sub(r"\s+", " ", _re.sub(r"<[^>]+>", "", _norm)).strip()
+    _sig = _h.sha1(_norm.encode("utf-8")).hexdigest()
+    _sig_path = os.path.join(BOT_DIR, "last-briefing-sig.json")
+    _prev = jload(_sig_path, {})
+    if not (test_chat or force) and _prev.get("sig") == _sig and _t.time() - _prev.get("ts", 0) < 20 * 3600:
+        print("briefing %s: текст не изменился с прошлой сводки (%s) — пропуск" % (mode, _prev.get("mode")))
+        return
+
     img = render_briefing_card(mode)
 
     if test_chat:
@@ -408,6 +421,11 @@ def do_briefing(mode, dry=False, test_chat=None, force=False):
         media_res, text_res = send_card_or_text(CHANNEL, img, caption_or_text)
         ok = bool((media_res and media_res[0]) or (text_res and text_res[0]))
         print("briefing %s: канал %s -> %s" % (mode, CHANNEL, "ok" if ok else "ERR"))
+        if ok:
+            try:
+                json.dump({"sig": _sig, "ts": _t.time(), "mode": mode}, open(_sig_path, "w"))
+            except OSError:
+                pass
         if media_res and media_res[0]:
             media_message_id = (media_res[0].get("result") or {}).get("message_id")
         if text_res and text_res[0]:
