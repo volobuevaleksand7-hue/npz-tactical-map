@@ -295,6 +295,10 @@ def lead_from_archive(date):
         return None
     ss = data["strikes"] if isinstance(data, dict) else data
     day = [s for s in ss if str(s.get("date", "")).strip() == date]
+    if not day:   # 04.11.2026: удар в 23:58 вчера — это событие «суток» для сводки; без него обложка шла «Не указано»
+        import datetime as _dt
+        prev = (_dt.date.fromisoformat(date) - _dt.timedelta(days=1)).isoformat()
+        day = [s for s in ss if str(s.get("date", "")).strip() == prev and re.match(r"^(2[1-3]):\d\d$", str(s.get("time", "")))]
     return pick_lead(day) if day else None
 
 
@@ -307,7 +311,9 @@ def meta_for(date, brief):
         city = str(lead.get("city", "")).strip(); kind = classify(lead)
         src = lead.get("source_url", "")
     elif vo:
-        city = str(vo[0].get("city", "")).strip(); kind = "queue"; src = vo[0].get("source_url", "")
+        # 04.11.2026: fetch_voices кладёт city="Не указано" — раньше оно попадало прямо в подпись обложки
+        city = next((c for c in (str(v.get("city", "")).strip() for v in vo) if c and c != "Не указано"), "Россия")
+        kind = "queue"; src = vo[0].get("source_url", "")
     else:
         # Тихие сутки: ударов в данных нет. Раньше возвращали None и сайт/TG показывали
         # тёмную og-заглушку (16.09.2026 — «а это что?»). Врать «атака дронов» нельзя,
