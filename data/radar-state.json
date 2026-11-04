@@ -348,6 +348,25 @@
       "last_event_ts": 1793751034,
       "source_text": "04.11.2026 03:10 МСК\nБрянская область Курская область Орловская область Белгородская область Воронежская область Север ЛНР Тревога по БПЛА сохраняется"
     },
+    "Пензенская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793768957,
+      "source_text": "04.11.2026 08:09 МСК\nКузнецкий район Пензенская область Фиксация БПЛА"
+    },
     "Московская область": {
       "bpla": false,
       "bplaDim": false,
@@ -4754,28 +4773,6 @@
       "last_event_ts": 1793762287,
       "source_text": "04.11.2026 06:15 МСК\nСевастополь ЮБК Ракетная опасность\n\n04.11.2026 06:18 МСК\nСевастополь Опасность по БПЛА, в т.ч. реактивным"
     },
-    "RUS.8.27_1": {
-      "gid_2": "RUS.8.27_1",
-      "name_ru": "Унечский район",
-      "region_ru": "Брянская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793726273,
-      "source_text": "03.11.2026 20:17 МСК\nУнечский район Почепский район Навлинский район Опасность по БПЛА Брянская область"
-    },
     "RUS.8.20_1": {
       "gid_2": "RUS.8.20_1",
       "name_ru": "Погарский район",
@@ -5678,6 +5675,28 @@
       "last_event_ts": 1793758498,
       "source_text": "04.11.2026 05:14 МСК\nМоршанский район Тамбовская область Фиксация БПЛА"
     },
+    "RUS.54.14_1": {
+      "gid_2": "RUS.54.14_1",
+      "name_ru": "Кузнецкий район",
+      "region_ru": "Пензенская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793768957,
+      "source_text": "04.11.2026 08:09 МСК\nКузнецкий район Пензенская область Фиксация БПЛА"
+    },
     "RUS.47.48_1": {
       "gid_2": "RUS.47.48_1",
       "name_ru": "Вачский район",
@@ -5924,6 +5943,14 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 105528,
+      "text": "Кузнецкий район\nПензенская область\nФиксация БПЛА",
+      "ts": 1793768957,
+      "time_label": "04.11.2026 08:09 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 299220,
       "text": "Владимирская область\nОпасность сохраняется\nвнимание по бпла",
@@ -6555,14 +6582,6 @@
       "time_label": "04.11.2026 06:18 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299188,
-      "text": "Севастополь\nОпасность по БПЛА, в т.ч. реактивным",
-      "ts": 1793762287,
-      "time_label": "04.11.2026 06:18 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -6572,15 +6591,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793768918,
-  "last_event_at": "2026-11-04T05:08:38Z",
-  "fetched_at": "2026-11-04T05:10:03.556463Z",
+  "timestamp": 1793768957,
+  "last_event_at": "2026-11-04T05:09:17Z",
+  "fetched_at": "2026-11-04T05:20:03.661557Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-04T05:10:03.556463Z",
-    "source_age_seconds": 85,
+    "generated_at": "2026-11-04T05:20:03.661557Z",
+    "source_age_seconds": 646,
     "city_count": 133,
-    "region_count": 32,
+    "region_count": 33,
     "feed_count": 80
   }
 }
