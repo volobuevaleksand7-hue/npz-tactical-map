@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793801573,
-      "source_text": "04.11.2026 17:12 МСК\nМелитопольский район Опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1793803586,
+      "source_text": "04.11.2026 17:46 МСК\nМелитопольский район Опасность по БПЛА Повторно Запорожская область РФ"
     },
     "Краснодарский край": {
       "bpla": false,
@@ -92,14 +92,14 @@
       "fpv": false,
       "rocket": true,
       "rocket_level": true,
-      "aviation": false,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1793803043,
-      "source_text": "04.11.2026 17:37 МСК\nПриазовье Краснодарского края - ракетная опасность! 📡 Локатор России - @locatorru"
+      "last_event_ts": 1793803427,
+      "source_text": "04.11.2026 17:43 МСК\nКраснодарский край Авиационная ракетно бомбовая опасность"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -793,6 +793,28 @@
       "source_text": "04.11.2026 10:10 МСК\nТокмак Мелитополь и близлежащие Опасность по БПЛА Запорожская область РФ"
     },
     {
+      "key": "азовского моря|краснодарский край",
+      "name": "Азовского моря",
+      "lat": 46.7282552,
+      "lon": 38.2812151,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1793803319,
+      "source_text": "04.11.2026 17:41 МСК\nКраснодарский край Ракетная опасность С Азовского моря"
+    },
+    {
       "key": "северный|белгородская область",
       "name": "Северный",
       "lat": 50.676468,
@@ -1275,8 +1297,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793801573,
-      "source_text": "04.11.2026 17:12 МСК\nМелитопольский район Опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1793803586,
+      "source_text": "04.11.2026 17:46 МСК\nМелитопольский район Опасность по БПЛА Повторно Запорожская область РФ"
     },
     "RUS.7.5_1": {
       "gid_2": "RUS.7.5_1",
@@ -1303,6 +1325,30 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 299363,
+      "text": "Мелитопольский район\nОпасность по БПЛА\nПовторно\nЗапорожская область РФ",
+      "ts": 1793803586,
+      "time_label": "04.11.2026 17:46 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299362,
+      "text": "Краснодарский край\nАвиационная ракетно бомбовая опасность",
+      "ts": 1793803427,
+      "time_label": "04.11.2026 17:43 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299361,
+      "text": "Краснодарский край\nРакетная опасность\nС Азовского моря",
+      "ts": 1793803319,
+      "time_label": "04.11.2026 17:41 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 93812,
       "text": "Приазовье Краснодарского края - ракетная опасность!\n📡\nЛокатор России -\n@locatorru",
@@ -1918,30 +1964,6 @@
       "time_label": "04.11.2026 13:23 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 105588,
-      "text": "Пермский край\nОтбой опасности по БПЛА",
-      "ts": 1793787765,
-      "time_label": "04.11.2026 13:22 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 299304,
-      "text": "Республика Удмуртия\nотбой по бпла",
-      "ts": 1793787724,
-      "time_label": "04.11.2026 13:22 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 105587,
-      "text": "Республика Башкортостан\nОтбой опасности по БПЛА",
-      "ts": 1793787654,
-      "time_label": "04.11.2026 13:20 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1951,14 +1973,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793803043,
-  "last_event_at": "2026-11-04T14:37:23Z",
-  "fetched_at": "2026-11-04T14:40:03.168152Z",
+  "timestamp": 1793803586,
+  "last_event_at": "2026-11-04T14:46:26Z",
+  "fetched_at": "2026-11-04T14:50:03.920233Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-04T14:40:03.168152Z",
-    "source_age_seconds": 160,
-    "city_count": 41,
+    "generated_at": "2026-11-04T14:50:03.920233Z",
+    "source_age_seconds": 217,
+    "city_count": 42,
     "region_count": 10,
     "feed_count": 80
   }
