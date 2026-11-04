@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T19:48:20Z",
+ "generated_at": "2026-11-04T01:54:20Z",
  "methodology_version": "0.2",
  "brand": {
   "short": "ИТН",
@@ -8,10 +8,10 @@
   "en": "Fuel Tension Index"
  },
  "world": {
-  "value": 80,
+  "value": 79,
   "level": "critical",
   "level_ru": "критично",
-  "delta_1d": 16,
+  "delta_1d": -1,
   "coverage": 1.0,
   "regions_missing": []
  },
@@ -21,7 +21,7 @@
    "value": 93,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 21,
+   "delta_1d": 0,
    "coverage": 0.5,
    "weight_world": 0.24,
    "components": [
@@ -82,7 +82,7 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 54.4,
+     "score": 54.3,
      "weight": 0.05,
      "raw": "GPR (7-дн. среднее) 137,6; p54 к 5 годам",
      "as_of": "2026-11-02",
@@ -101,19 +101,19 @@
   },
   "east_asia": {
    "name": "Восточная Азия и АТР",
-   "value": 90,
+   "value": 86,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 17,
+   "delta_1d": -4,
    "coverage": 0.65,
    "weight_world": 0.3,
    "components": [
     {
      "id": "chokepoints",
      "label": "Узкие места (проливы)",
-     "score": 89.3,
+     "score": 82.1,
      "weight": 0.3,
-     "raw": "Ормуз: 0,9 танк./сут. при медиане года 3,0 (7-дн. среднее); Малакка: 75,9 танк./сут. при медиане года 76,0 (7-дн. среднее)",
+     "raw": "Ормуз: 0,9 танк./сут. при медиане года 2,5 (7-дн. среднее); Малакка: 75,9 танк./сут. при медиане года 76,0 (7-дн. среднее)",
      "as_of": "2026-10-25",
      "source": "IMF PortWatch"
     },
@@ -165,7 +165,7 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 54.4,
+     "score": 54.3,
      "weight": 0.05,
      "raw": "GPR (7-дн. среднее) 137,6; p54 к 5 годам",
      "as_of": "2026-11-02",
@@ -187,7 +187,7 @@
    "value": 67,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 11,
+   "delta_1d": 0,
    "coverage": 0.8,
    "weight_world": 0.15,
    "components": [
@@ -248,7 +248,7 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 54.4,
+     "score": 54.3,
      "weight": 0.05,
      "raw": "GPR (7-дн. среднее) 137,6; p54 к 5 годам",
      "as_of": "2026-11-02",
@@ -267,19 +267,19 @@
   },
   "middle_east": {
    "name": "Ближний Восток",
-   "value": 88,
+   "value": 84,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 20,
+   "delta_1d": -4,
    "coverage": 0.5,
    "weight_world": 0.09,
    "components": [
     {
      "id": "chokepoints",
      "label": "Узкие места (проливы)",
-     "score": 89.3,
+     "score": 82.1,
      "weight": 0.3,
-     "raw": "Ормуз: 0,9 танк./сут. при медиане года 3,0 (7-дн. среднее); Баб-эль-Мандеб: 9,6 танк./сут. при медиане года 12,0 (7-дн. среднее)",
+     "raw": "Ормуз: 0,9 танк./сут. при медиане года 2,5 (7-дн. среднее); Баб-эль-Мандеб: 9,6 танк./сут. при медиане года 12,0 (7-дн. среднее)",
      "as_of": "2026-10-25",
      "source": "IMF PortWatch"
     },
@@ -331,7 +331,7 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 54.4,
+     "score": 54.3,
      "weight": 0.05,
      "raw": "GPR (7-дн. среднее) 137,6; p54 к 5 годам",
      "as_of": "2026-11-02",
@@ -350,19 +350,19 @@
   },
   "south_asia": {
    "name": "Южная Азия",
-   "value": 88,
+   "value": 84,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 20,
+   "delta_1d": -4,
    "coverage": 0.5,
    "weight_world": 0.07,
    "components": [
     {
      "id": "chokepoints",
      "label": "Узкие места (проливы)",
-     "score": 89.3,
+     "score": 82.1,
      "weight": 0.3,
-     "raw": "Ормуз: 0,9 танк./сут. при медиане года 3,0 (7-дн. среднее)",
+     "raw": "Ормуз: 0,9 танк./сут. при медиане года 2,5 (7-дн. среднее)",
      "as_of": "2026-10-25",
      "source": "IMF PortWatch"
     },
@@ -414,7 +414,7 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 54.4,
+     "score": 54.3,
      "weight": 0.05,
      "raw": "GPR (7-дн. среднее) 137,6; p54 к 5 годам",
      "as_of": "2026-11-02",
@@ -436,7 +436,7 @@
    "value": 37,
    "level": "tense",
    "level_ru": "напряжённо",
-   "delta_1d": 9,
+   "delta_1d": 0,
    "coverage": 0.5,
    "weight_world": 0.07,
    "components": [
@@ -497,7 +497,7 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 54.4,
+     "score": 54.3,
      "weight": 0.05,
      "raw": "GPR (7-дн. среднее) 137,6; p54 к 5 годам",
      "as_of": "2026-11-02",
@@ -519,7 +519,7 @@
    "value": 50,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 11,
+   "delta_1d": 0,
    "coverage": 0.5,
    "weight_world": 0.04,
    "components": [
@@ -580,7 +580,7 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 54.4,
+     "score": 54.3,
      "weight": 0.05,
      "raw": "GPR (7-дн. среднее) 137,6; p54 к 5 годам",
      "as_of": "2026-11-02",
@@ -602,7 +602,7 @@
    "value": 60,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 14,
+   "delta_1d": 0,
    "coverage": 0.5,
    "weight_world": 0.04,
    "components": [
@@ -663,7 +663,7 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 54.4,
+     "score": 54.3,
      "weight": 0.05,
      "raw": "GPR (7-дн. среднее) 137,6; p54 к 5 годам",
      "as_of": "2026-11-02",
