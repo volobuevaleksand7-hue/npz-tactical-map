@@ -789,7 +789,16 @@
     }
    ],
    "found_at": "2026-11-04T11:25:26Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "ok",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "needs_source",
+   "reject_reason": "нужен второй независимый издатель"
   },
   {
    "id": "2026-11-02-qeshm-island-us-strikes",
@@ -826,7 +835,17 @@
     }
    ],
    "found_at": "2026-11-04T11:25:26Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "unknown",
+    "neutral_lexicon": "ok",
+    "independent_sources": 3,
+    "translation": "ok"
+   },
+   "verdict": "ready",
+   "reject_reason": null,
+   "notified_at": "2026-11-04T11:26:56Z"
   },
   {
    "id": "2026-11-04-iran-hormuz-plan-us-reply-unconvincing",
@@ -853,8 +872,18 @@
     }
    ],
    "found_at": "2026-11-04T11:25:26Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "ok",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "ready",
+   "reject_reason": null,
+   "notified_at": "2026-11-04T11:26:56Z"
   }
  ],
- "validated_at": "2026-11-04T03:28:02Z"
+ "validated_at": "2026-11-04T11:26:55Z"
 }
