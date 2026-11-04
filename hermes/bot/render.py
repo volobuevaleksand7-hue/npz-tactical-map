@@ -189,6 +189,27 @@ def _strike_repeat_count(strike, all_strikes):
     return len(dates), dates
 
 
+def _world_lines():
+    """🌍 Индекс топливной напряжённости мира + Ормуз (из data/world/index.json, считается ежедневно)."""
+    import json as _j, os as _o, re as _r
+    repo = _o.environ.get("NPZ_REPO", "/root/npz-tactical-map")
+    idx = _j.load(open(_o.path.join(repo, "data", "world", "index.json"), encoding="utf-8"))
+    w, regs = idx["world"], idx["regions"]
+    v, d1 = w["value"], w.get("delta_1d") or 0
+    bits = ["индекс 79".replace("79", str(v)) + "/100" + (" (%s%d)" % ("−" if d1 < 0 else "+", abs(d1)) if d1 else "")]
+    hz = None
+    for r in regs.values():
+        for c in r.get("components", []):
+            m = _r.search(r"Ормуз: ([\d,]+) танк\./сут\. при медиане года ([\d,]+)", c.get("raw") or "")
+            if hz is None and c.get("id") == "chokepoints" and m:
+                now, med = float(m.group(1).replace(",", ".")), float(m.group(2).replace(",", "."))
+                if med:
+                    hz = "Ормуз %d%% от нормы" % round(now / med * 100)
+    if hz:
+        bits.append(hz)
+    return ['🌍 <b>Мир:</b> <a href="https://npz-tactical-map.vercel.app/world">%s</a>' % esc(" · ".join(bits))]
+
+
 def render_briefing(data, kind="morning"):
     """Строит сводку по редполитике v2. data — dict с ключами:
        strikes (list), voices (list), azs (list), exchange (dict), fuel (dict),
@@ -325,6 +346,12 @@ def render_briefing(data, kind="morning"):
         if exch.get("ai92_spb_rub_t"):
             biржа += ", АИ-92 %s ₽/т" % esc(spaced(exch["ai92_spb_rub_t"]))
         L.append(biржа)
+
+    # 04.11.2026, владелец: «разбавляй международными и индексом топлива в мире» — строка про мир в каждой сводке
+    try:
+        L.extend(_world_lines())
+    except Exception:   # noqa: BLE001 — сводка важнее мира
+        pass
 
     # Детали второго слоя (экспорт/розница/энергетика) — только если есть что сказать.
     detail_bits = []
