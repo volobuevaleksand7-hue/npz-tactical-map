@@ -771,6 +771,28 @@
       "source_text": "05.11.2026 14:44 МСК\nАлчевск Луганск Опасность по БПЛА ЛНР"
     },
     {
+      "key": "токмак|запорожская область",
+      "name": "Токмак",
+      "lat": 47.255103,
+      "lon": 35.709191,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793885800,
+      "source_text": "05.11.2026 16:36 МСК\nТокмак Токмакский район Опасность по БПЛА Запорожская область РФ"
+    },
+    {
       "key": "брянка|луганская народная республика",
       "name": "Брянка",
       "lat": 48.511,
@@ -945,6 +967,27 @@
       "fill": "#ea580c",
       "last_event_ts": 1793883721,
       "source_text": "05.11.2026 16:02 МСК\nСимферопольский р-н Гвардейское и близлежащие Республика Крым Опасность по БПЛА"
+    },
+    {
+      "key": "николаевская область",
+      "name": "Николаевская область",
+      "lat": 46.975571,
+      "lon": 31.993811,
+      "region": null,
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": true,
+      "fill": "#ea580c",
+      "last_event_ts": null
     },
     {
       "key": "новоалексеевка|херсонская область",
@@ -1347,6 +1390,38 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 299866,
+      "text": "Ростовская область\nОтбой опасности по БПЛА",
+      "ts": 1793885869,
+      "time_label": "05.11.2026 16:37 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299865,
+      "text": "Николаевская область с запада на Николаев и далее на Херсонскую область РФ фиксации БПЛА",
+      "ts": 1793885808,
+      "time_label": "05.11.2026 16:36 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299864,
+      "text": "Запуски БПЛА от Николаевской области",
+      "ts": 1793885801,
+      "time_label": "05.11.2026 16:36 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299863,
+      "text": "Токмак\nТокмакский район\nОпасность по БПЛА\nЗапорожская область РФ",
+      "ts": 1793885800,
+      "time_label": "05.11.2026 16:36 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 299862,
       "text": "Трасса Лобаново - Джанкой\nОпасность по БПЛА\nРеспублика Крым",
@@ -1954,38 +2029,6 @@
       "time_label": "05.11.2026 12:43 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299796,
-      "text": "Новотроицкое, Новоалексеевка, Геническ, Чонгар и близлежащие\nОпасность по БПЛА\nХерсонская область РФ",
-      "ts": 1793871820,
-      "time_label": "05.11.2026 12:43 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 93982,
-      "text": "Ростовская область - опасность по БПЛА по югу.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793871789,
-      "time_label": "05.11.2026 12:43 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 93981,
-      "text": "Чертково, Миллерово, Тарасовский, Матвеев Курган, Куйбышево, Лысогорка, Новошахтинск, Шахты, Красный Сулин, Гуково, Лиховской, Донецк, Каменск-Шахтинский, Ростовская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793871764,
-      "time_label": "05.11.2026 12:42 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 299795,
-      "text": "🟢\nКурская область: внимание! Отбой ракетной опасности.",
-      "ts": 1793871678,
-      "time_label": "05.11.2026 12:41 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1995,14 +2038,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793885322,
-  "last_event_at": "2026-11-05T13:28:42Z",
-  "fetched_at": "2026-11-05T13:30:03.285327Z",
+  "timestamp": 1793885869,
+  "last_event_at": "2026-11-05T13:37:49Z",
+  "fetched_at": "2026-11-05T13:40:03.805776Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-05T13:30:03.285327Z",
-    "source_age_seconds": 81,
-    "city_count": 44,
+    "generated_at": "2026-11-05T13:40:03.805776Z",
+    "source_age_seconds": 134,
+    "city_count": 46,
     "region_count": 10,
     "feed_count": 80
   }
