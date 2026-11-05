@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Орловская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1793880386,
+      "source_text": "05.11.2026 15:06 МСК\nОрловская область Опасность по БПЛА"
+    },
     "Луганская Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -1741,6 +1760,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 299838,
+      "text": "Орловская область\nОпасность по БПЛА",
+      "ts": 1793880386,
+      "time_label": "05.11.2026 15:06 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 105845,
+      "text": "Орловская область\nОпасность по БПЛА",
+      "ts": 1793880312,
+      "time_label": "05.11.2026 15:05 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 299837,
       "text": "Новоалексеевка\nГеническ и близлежащие\nТревога по БПЛА\nХерсонская область РФ",
       "ts": 1793879727,
@@ -2363,22 +2398,6 @@
       "time_label": "05.11.2026 12:13 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299774,
-      "text": "Шебекино и район\nОпасность по БПЛА",
-      "ts": 1793869693,
-      "time_label": "05.11.2026 12:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299773,
-      "text": "Старооскольский район\nМеры безопасности\nОпасность по БПЛА",
-      "ts": 1793869329,
-      "time_label": "05.11.2026 12:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2388,15 +2407,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793879727,
-  "last_event_at": "2026-11-05T11:55:27Z",
-  "fetched_at": "2026-11-05T12:00:04.846414Z",
+  "timestamp": 1793880386,
+  "last_event_at": "2026-11-05T12:06:26Z",
+  "fetched_at": "2026-11-05T12:10:03.480156Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-05T12:00:04.846414Z",
-    "source_age_seconds": 277,
+    "generated_at": "2026-11-05T12:10:03.480156Z",
+    "source_age_seconds": 217,
     "city_count": 54,
-    "region_count": 11,
+    "region_count": 12,
     "feed_count": 80
   }
 }
