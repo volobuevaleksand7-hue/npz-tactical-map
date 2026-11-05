@@ -120,25 +120,6 @@
       "last_event_ts": 1793890893,
       "source_text": "05.11.2026 18:01 МСК\nВеликая Лепетиха Нижние Сирогозы Новоалексеевка Геническ И близлежащие Опасность по БПЛА"
     },
-    "Адыгея": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1793887607,
-      "source_text": "05.11.2026 17:06 МСК\nКраснодарский край Республика Адыгея Опасность по БПЛА"
-    },
     "Автономная Республика Крым": {
       "bpla": false,
       "bplaDim": false,
@@ -818,6 +799,27 @@
       "source_text": "05.11.2026 18:05 МСК\nПантелеймоновка, Ясиноватая, Корсунь, Енакиево, Макеевка и близлежащие Опасность по БПЛА ДНР"
     },
     {
+      "key": "одесская область",
+      "name": "Одесская область",
+      "lat": 46.484207,
+      "lon": 30.731689,
+      "region": null,
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": true,
+      "fill": "#ea580c",
+      "last_event_ts": null
+    },
+    {
       "key": "шахтёрск|донецкая народная республика",
       "name": "Шахтёрск",
       "lat": 48.05657,
@@ -1173,6 +1175,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 105853,
+      "text": "Краснодарский край\nРеспублика Адыгея\nОтбой опасности по БПЛА",
+      "ts": 1793891753,
+      "time_label": "05.11.2026 18:15 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 299878,
+      "text": "Противник готовит запуски БПЛА от Одессы",
+      "ts": 1793891683,
+      "time_label": "05.11.2026 18:14 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 299877,
       "text": "Экстренная информация РСЧС: Отмена БЕСПИЛОТНОЙ ОПАСНОСТИ на территории муниципальных образований: г. Геленджик, г.Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы.",
@@ -1796,22 +1814,6 @@
       "time_label": "05.11.2026 13:36 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299815,
-      "text": "Валуйский район приграничье\nАктивность БПЛА разведки",
-      "ts": 1793874930,
-      "time_label": "05.11.2026 13:35 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299814,
-      "text": "ОТБОЙ ОПАСНОСТИ АТАКИ БПЛА в Ивнянском МО",
-      "ts": 1793874818,
-      "time_label": "05.11.2026 13:33 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1821,15 +1823,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793891316,
-  "last_event_at": "2026-11-05T15:08:36Z",
-  "fetched_at": "2026-11-05T15:10:03.530074Z",
+  "timestamp": 1793891753,
+  "last_event_at": "2026-11-05T15:15:53Z",
+  "fetched_at": "2026-11-05T15:20:04.260046Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-05T15:10:03.530074Z",
-    "source_age_seconds": 87,
-    "city_count": 43,
-    "region_count": 9,
+    "generated_at": "2026-11-05T15:20:04.260046Z",
+    "source_age_seconds": 251,
+    "city_count": 44,
+    "region_count": 8,
     "feed_count": 80
   }
 }
