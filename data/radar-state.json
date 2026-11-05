@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793866419,
-      "source_text": "05.11.2026 11:13 МСК\nг. Белгород Опасность по БПЛА"
+      "last_event_ts": 1793868407,
+      "source_text": "05.11.2026 11:46 МСК\nБелгородский район Опасность по БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -79,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793867016,
-      "source_text": "05.11.2026 11:23 МСК\nМелитополь в направлении Акимовки фиксация БПЛА Запорожская область РФ"
+      "last_event_ts": 1793867953,
+      "source_text": "05.11.2026 11:39 МСК\nМелитополь и близлежащие Тревога по БПЛА Запорожская область РФ"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -155,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1793867568,
-      "source_text": "05.11.2026 11:32 МСК\nРостовская область Ракетная опасность"
+      "last_event_ts": 1793867788,
+      "source_text": "05.11.2026 11:36 МСК\nРостовская область Ракетная опасность"
     },
     "Севастополь": {
       "bpla": false,
@@ -317,9 +317,9 @@
       "lat": 46.85754363636364,
       "lon": 35.35915090909091,
       "region": "Запорожская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -330,8 +330,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793867016,
-      "source_text": "05.11.2026 11:23 МСК\nМелитополь в направлении Акимовки фиксация БПЛА Запорожская область РФ"
+      "last_event_ts": 1793867953,
+      "source_text": "05.11.2026 11:39 МСК\nМелитополь и близлежащие Тревога по БПЛА Запорожская область РФ"
     },
     {
       "key": "геническ|херсонская область",
@@ -466,9 +466,72 @@
       "source_text": "05.11.2026 10:59 МСК\nНовотроицкое, Новоалексеевка, Геническ, Чонгар и близлежащие Опасность по БПЛА Херсонская область РФ"
     }
   ],
-  "districts": {},
+  "districts": {
+    "RUS.7.4_1": {
+      "gid_2": "RUS.7.4_1",
+      "name_ru": "Белгородский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1793868407,
+      "source_text": "05.11.2026 11:46 МСК\nБелгородский район Опасность по БПЛА"
+    }
+  },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 299770,
+      "text": "Белгородский район\nОпасность по БПЛА",
+      "ts": 1793868407,
+      "time_label": "05.11.2026 11:46 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299769,
+      "text": "Мелитополь и близлежащие\nТревога по БПЛА\nЗапорожская область РФ",
+      "ts": 1793867953,
+      "time_label": "05.11.2026 11:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299768,
+      "text": "Ростовская область\nРакетная опасность",
+      "ts": 1793867788,
+      "time_label": "05.11.2026 11:36 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299767,
+      "text": "Благодатное и далее в направлении Каланчак\nОпасность по БПЛА Хорнет\nХерсонская область РФ",
+      "ts": 1793867741,
+      "time_label": "05.11.2026 11:35 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 93971,
+      "text": "Ростовская область - ракетная опасность!\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1793867717,
+      "time_label": "05.11.2026 11:35 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
     {
       "msg_id": 299766,
       "text": "Трасса от г.Счастье в направлении г.Луганск\nТревога по БПЛА Хорнет",
@@ -1068,46 +1131,6 @@
       "time_label": "05.11.2026 07:54 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299718,
-      "text": "Авдеевка, Ясиноватая, Макеевка, Донецк и близлежащие\nОпасность по БПЛА\nДНР",
-      "ts": 1793853821,
-      "time_label": "05.11.2026 07:43 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299717,
-      "text": "",
-      "ts": 1793853602,
-      "time_label": "05.11.2026 07:40 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299716,
-      "text": "Горловка и близлежащие\nОпасность по БПЛА и ФПВ\nДНР\nОсобое внимание на дорогах!",
-      "ts": 1793853322,
-      "time_label": "05.11.2026 07:35 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 93953,
-      "text": "Воронежская область, Тамбовская область, Липецкая область, Нижегородская область, Владимирская область, Ивановская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1793853275,
-      "time_label": "05.11.2026 07:34 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 105824,
-      "text": "Владикавказ\nРеспублика Северная Осетия\nФиксация БПЛА",
-      "ts": 1793853199,
-      "time_label": "05.11.2026 07:33 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1117,13 +1140,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793867591,
-  "last_event_at": "2026-11-05T08:33:11Z",
-  "fetched_at": "2026-11-05T08:40:03.134123Z",
+  "timestamp": 1793868407,
+  "last_event_at": "2026-11-05T08:46:47Z",
+  "fetched_at": "2026-11-05T08:50:03.163208Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-05T08:40:03.134123Z",
-    "source_age_seconds": 412,
+    "generated_at": "2026-11-05T08:50:03.163208Z",
+    "source_age_seconds": 196,
     "city_count": 13,
     "region_count": 9,
     "feed_count": 80
