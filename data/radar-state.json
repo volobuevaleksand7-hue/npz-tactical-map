@@ -5249,8 +5249,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -5498,28 +5498,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1793836507,
       "source_text": "05.11.2026 02:55 МСК\nМелитопольский район Мелитополь и близлежащие Тревога по БПЛА Запорожская область РФ"
-    },
-    "RUS.7.5_1": {
-      "gid_2": "RUS.7.5_1",
-      "name_ru": "Борисовский район",
-      "region_ru": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1793801367,
-      "source_text": "04.11.2026 17:09 МСК\nБорисовский МО И близлежащие Опасность по БПЛА Белгородская область"
     },
     "RUS.7.6_1": {
       "gid_2": "RUS.7.6_1",
@@ -6527,6 +6505,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 105802,
+      "text": "Рязань\nРязанская область\nПродолжается работа ПВО",
+      "ts": 1793844854,
+      "time_label": "05.11.2026 05:14 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 105801,
+      "text": "⛔\nНапоминаем важное!\n📩\nВ обратную связь направляется только оперативная информация\n(факты, наблюдения, подтверждённые данные).\n🚫\nВопросы «когда отбой?», «будет ли атака в моей области?», прогнозы, догадки и личные предположения —\nмы оставляем без ответа.\nПредсказывать и комментировать «а что будет» — не наша задача.\n📲\nКнопка обратной связи находится в самом Радаре, не в чате.\n🤝\nСпасибо за понимание и дисциплину. Это помогает нам работать быстрее и точнее.",
+      "ts": 1793844850,
+      "time_label": "05.11.2026 05:14 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 105800,
       "text": "МО Истра\nГО Клин\nМосковская область\nОпасность по БПЛА",
       "ts": 1793844403,
@@ -7149,22 +7143,6 @@
       "time_label": "05.11.2026 03:42 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 105734,
-      "text": "Рязань\nРязанская область\nПродолжается работа ПВО\nОт окон!",
-      "ts": 1793839318,
-      "time_label": "05.11.2026 03:41 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 105733,
-      "text": "Нововоронеж\nВоронежская область\nФиксация БПЛА",
-      "ts": 1793839292,
-      "time_label": "05.11.2026 03:41 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7174,13 +7152,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793844403,
-  "last_event_at": "2026-11-05T02:06:43Z",
-  "fetched_at": "2026-11-05T02:10:03.233991Z",
+  "timestamp": 1793844854,
+  "last_event_at": "2026-11-05T02:14:14Z",
+  "fetched_at": "2026-11-05T02:20:03.696896Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-05T02:10:03.233991Z",
-    "source_age_seconds": 200,
+    "generated_at": "2026-11-05T02:20:03.696896Z",
+    "source_age_seconds": 349,
     "city_count": 153,
     "region_count": 33,
     "feed_count": 80
