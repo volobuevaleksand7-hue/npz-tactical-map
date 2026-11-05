@@ -288,8 +288,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793918968,
-      "source_text": "06.11.2026 01:49 МСК\nГеленджик и близлежащие, тревога по БпЛА сохраняется!"
+      "last_event_ts": 1793919552,
+      "source_text": "06.11.2026 01:59 МСК\nГеленджик и близлежащие Краснодарский край Работа ПВО по БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -1900,9 +1900,9 @@
       "lat": 44.58014,
       "lon": 38.06646,
       "region": "Краснодарский край",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1910,11 +1910,11 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
+      "pvo": true,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793918968,
-      "source_text": "06.11.2026 01:49 МСК\nГеленджик и близлежащие, тревога по БпЛА сохраняется!"
+      "last_event_ts": 1793919552,
+      "source_text": "06.11.2026 01:59 МСК\nГеленджик и близлежащие Краснодарский край Работа ПВО по БПЛА"
     },
     {
       "key": "таганрогский залив|краснодарский край",
@@ -3176,9 +3176,9 @@
       "gid_2": "RUS.34.13_1",
       "name_ru": "Геленджик (горсовет)",
       "region_ru": "Краснодарский край",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -3191,8 +3191,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793918968,
-      "source_text": "06.11.2026 01:49 МСК\nГеленджик и близлежащие, тревога по БпЛА сохраняется!"
+      "last_event_ts": 1793919552,
+      "source_text": "06.11.2026 01:59 МСК\nГеленджик и близлежащие Краснодарский край Работа ПВО по БПЛА"
     },
     "RUS.7.12_1": {
       "gid_2": "RUS.7.12_1",
@@ -3725,6 +3725,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 105891,
+      "text": "Геленджик и близлежащие\nКраснодарский край\nРабота ПВО по БПЛА",
+      "ts": 1793919552,
+      "time_label": "06.11.2026 01:59 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 300051,
       "text": "Геленджик и близлежащие, тревога по БпЛА сохраняется!",
@@ -4356,14 +4364,6 @@
       "time_label": "05.11.2026 23:34 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299991,
-      "text": "Южнее Красной Яруги единичная фиксация БпЛА от госграницы",
-      "ts": 1793910681,
-      "time_label": "05.11.2026 23:31 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -4373,13 +4373,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793918968,
-  "last_event_at": "2026-11-05T22:49:28Z",
-  "fetched_at": "2026-11-05T22:50:03.894800Z",
+  "timestamp": 1793919552,
+  "last_event_at": "2026-11-05T22:59:12Z",
+  "fetched_at": "2026-11-05T23:00:04.794228Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-05T22:50:03.894800Z",
-    "source_age_seconds": 35,
+    "generated_at": "2026-11-05T23:00:04.794228Z",
+    "source_age_seconds": 52,
     "city_count": 109,
     "region_count": 24,
     "feed_count": 80
