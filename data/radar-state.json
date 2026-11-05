@@ -120,25 +120,6 @@
       "last_event_ts": 1793894127,
       "source_text": "05.11.2026 18:55 МСК\nХерсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n05.11.2026 16:47 МСК\nТрасса Приазовское - Приморск - Бердянск - Осипенко Тревога по БПЛА Запорожская область РФ"
     },
-    "Краснодарский край": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1793893996,
-      "source_text": "05.11.2026 18:53 МСК\nАвиационная ракетная бомбовая опасность Краснодарский край"
-    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -174,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1793894724,
-      "source_text": "05.11.2026 18:55 МСК\nХерсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n05.11.2026 19:05 МСК\nНовоалексеевка И близлежащие Тревога по БПЛА Херсонская область РФ"
+      "last_event_ts": 1793895850,
+      "source_text": "05.11.2026 18:55 МСК\nХерсонская область РФ Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n05.11.2026 19:24 МСК\nКаланчак и близлежащие тревога по БПЛА Хорнет"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -205,7 +186,7 @@
       "uabDim": false,
       "fpv": false,
       "rocket": true,
-      "rocket_level": true,
+      "rocket_level": false,
       "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
@@ -497,8 +478,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793894019,
-      "source_text": "05.11.2026 18:53 МСК\nКаланчак И близлежащие Опасность по БПЛА Херсонская область РФ"
+      "last_event_ts": 1793895850,
+      "source_text": "05.11.2026 19:24 МСК\nКаланчак и близлежащие тревога по БПЛА Хорнет"
     },
     {
       "key": "приморск|запорожская область",
@@ -1253,6 +1234,30 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 299888,
+      "text": "Калужская область\nвнимание по бпла",
+      "ts": 1793895861,
+      "time_label": "05.11.2026 19:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299887,
+      "text": "Каланчак и близлежащие тревога по БПЛА Хорнет",
+      "ts": 1793895850,
+      "time_label": "05.11.2026 19:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 299886,
+      "text": "Отбой авиационной ракетной опасности Краснодарский край, Ростовская область",
+      "ts": 1793895774,
+      "time_label": "05.11.2026 19:22 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 299885,
       "text": "Волоконовский, Валуйский районы\nПролет ударных БПЛА в тыл",
       "ts": 1793895497,
@@ -1867,30 +1872,6 @@
       "time_label": "05.11.2026 14:33 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299827,
-      "text": "Крымск и близлежащие\nТревога по БПЛА\nКраснодарский край",
-      "ts": 1793878363,
-      "time_label": "05.11.2026 14:32 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 299826,
-      "text": "Трасса\nВесёлое - Мелитополь\nТревога по БПЛА Хорнет\nЗапорожская область РФ",
-      "ts": 1793878343,
-      "time_label": "05.11.2026 14:32 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 105842,
-      "text": "Анапа и близлежащие\nКраснодарский край\nОпасность по БПЛА",
-      "ts": 1793878189,
-      "time_label": "05.11.2026 14:29 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1900,15 +1881,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793895497,
-  "last_event_at": "2026-11-05T16:18:17Z",
-  "fetched_at": "2026-11-05T16:20:03.742435Z",
+  "timestamp": 1793895861,
+  "last_event_at": "2026-11-05T16:24:21Z",
+  "fetched_at": "2026-11-05T16:30:03.833213Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-05T16:20:03.742435Z",
-    "source_age_seconds": 106,
+    "generated_at": "2026-11-05T16:30:03.833213Z",
+    "source_age_seconds": 342,
     "city_count": 44,
-    "region_count": 12,
+    "region_count": 11,
     "feed_count": 80
   }
 }
