@@ -109,16 +109,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1793972809,
-      "source_text": "06.11.2026 16:46 МСК\nМиллерово и близлежащие Тревога по БПЛА Ростовская область"
+      "fill": "#dc2626",
+      "last_event_ts": 1793980401,
+      "source_text": "06.11.2026 18:53 МСК\nРостовская область ракетная опасность\n\n06.11.2026 16:46 МСК\nМиллерово и близлежащие Тревога по БПЛА Ростовская область"
     },
     "Калужская область": {
       "bpla": false,
@@ -261,16 +261,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1793978512,
-      "source_text": "06.11.2026 18:21 МСК\nДонецк Поселок Октябрьский Опасность по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1793980688,
+      "source_text": "06.11.2026 18:58 МСК\nАвиационная ракетная бомбовая опасность Краснодарский край\n\n06.11.2026 18:21 МСК\nДонецк Поселок Октябрьский Опасность по БПЛА"
     },
     "Смоленская область": {
       "bpla": false,
@@ -1267,6 +1267,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 300280,
+      "text": "Авиационная ракетная бомбовая опасность\nКраснодарский край",
+      "ts": 1793980688,
+      "time_label": "06.11.2026 18:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 300279,
+      "text": "Ростовская область\nракетная опасность",
+      "ts": 1793980401,
+      "time_label": "06.11.2026 18:53 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 300278,
       "text": "ЛДНР\nЗапорожская область РФ\nАвиационная ракетная бомбовая опасность",
       "ts": 1793979810,
@@ -1889,22 +1905,6 @@
       "time_label": "06.11.2026 13:54 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 300217,
-      "text": "Север\nСеверо-Запад\nРеспублика Крым\nОпасность по БПЛА",
-      "ts": 1793962383,
-      "time_label": "06.11.2026 13:53 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 300216,
-      "text": "Владимировка—Инзовка\nтрасса р-280 большая активность бпла\nЗапорожская область РФ",
-      "ts": 1793962163,
-      "time_label": "06.11.2026 13:49 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1914,13 +1914,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793979810,
-  "last_event_at": "2026-11-06T15:43:30Z",
-  "fetched_at": "2026-11-06T15:50:03.741590Z",
+  "timestamp": 1793980688,
+  "last_event_at": "2026-11-06T15:58:08Z",
+  "fetched_at": "2026-11-06T16:00:03.812415Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-06T15:50:03.741590Z",
-    "source_age_seconds": 393,
+    "generated_at": "2026-11-06T16:00:03.812415Z",
+    "source_age_seconds": 115,
     "city_count": 41,
     "region_count": 15,
     "feed_count": 80
