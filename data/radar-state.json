@@ -155,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1793955417,
-      "source_text": "06.11.2026 11:56 МСК\nБердянск от Новотроицка Запорожская область РФ Фиксация БПЛА"
+      "last_event_ts": 1793955879,
+      "source_text": "06.11.2026 12:04 МСК\nБердянск и близлежащие Тревога по БПЛА с севера Запорожская область РФ"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -689,9 +689,9 @@
       "lat": 46.755673,
       "lon": 36.789317,
       "region": "Запорожская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -702,8 +702,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1793955417,
-      "source_text": "06.11.2026 11:56 МСК\nБердянск от Новотроицка Запорожская область РФ Фиксация БПЛА"
+      "last_event_ts": 1793955879,
+      "source_text": "06.11.2026 12:04 МСК\nБердянск и близлежащие Тревога по БПЛА с севера Запорожская область РФ"
     },
     {
       "key": "старобельск|луганская народная республика",
@@ -2119,6 +2119,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 300188,
+      "text": "Бердянск и близлежащие\nТревога по БПЛА с севера\nЗапорожская область РФ",
+      "ts": 1793955879,
+      "time_label": "06.11.2026 12:04 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 300187,
       "text": "Бердянск от Новотроицка Запорожская область РФ\nФиксация БПЛА",
       "ts": 1793955417,
@@ -2749,14 +2757,6 @@
       "time_label": "06.11.2026 07:34 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 105926,
-      "text": "Краснодар\nКраснодарский край\nПродолжается работа ПВО\nМеры безопасности",
-      "ts": 1793939428,
-      "time_label": "06.11.2026 07:30 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -2766,13 +2766,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1793955417,
-  "last_event_at": "2026-11-06T08:56:57Z",
-  "fetched_at": "2026-11-06T09:00:04.263972Z",
+  "timestamp": 1793955879,
+  "last_event_at": "2026-11-06T09:04:39Z",
+  "fetched_at": "2026-11-06T09:10:03.484377Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-06T09:00:04.263972Z",
-    "source_age_seconds": 187,
+    "generated_at": "2026-11-06T09:10:03.484377Z",
+    "source_age_seconds": 324,
     "city_count": 53,
     "region_count": 17,
     "feed_count": 80
