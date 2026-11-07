@@ -31,9 +31,10 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
-## [OPEN] cover-fallback-2026-11-07
-status: OPEN
+## [RESOLVED] cover-fallback-2026-11-07
+status: RESOLVED
 opened: 2026-11-07 08:15 МСК — summary-watchdog
+resolved: 2026-11-07 10:15 МСК — Antigravity/Mac: собрана обложка через build-covers.py (Codex на VPS), перегенерированы news/2026-11-07.html и news.html. В Telegram-канале @NPZmap (пост 1253) и зеркале @npz_karta_online (пост 746) обложка обновлена через editMessageMedia.
 Карточка за 2026-11-07 на месте, но обложка = заглушка og-image. Обычно самолечение чинит само (Codex работает и на VPS, и на Маке); если висит — вероятно кончились image-кредиты Codex-воркспейса.
 Что сделать:
 - `python3 hermes/scripts/build-covers.py --dates 2026-11-07` (Codex-first) → `python3 agents/gen-news.py` → git-sync + деплой;
