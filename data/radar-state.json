@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Херсонская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794034146,
+      "source_text": "07.11.2026 09:49 МСК\nЧаплынка, АПП Перекоп, Титан и близлежащие населенные пункты и объекты, дороги Опасность по БПЛА Хорнет"
+    },
     "Курская область": {
       "bpla": false,
       "bplaDim": false,
@@ -26,10 +45,49 @@
       "source_text": "07.11.2026 09:19 МСК\nКурская область и близлежащие Авиационно ракетно бомбовая опасность"
     }
   },
-  "cities": [],
+  "cities": [
+    {
+      "key": "чаплынка|херсонская область",
+      "name": "Чаплынка",
+      "lat": 46.36454,
+      "lon": 33.54087,
+      "region": "Херсонская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794034146,
+      "source_text": "07.11.2026 09:49 МСК\nЧаплынка, АПП Перекоп, Титан и близлежащие населенные пункты и объекты, дороги Опасность по БПЛА Хорнет"
+    }
+  ],
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 300576,
+      "text": "Чаплынка, АПП Перекоп, Титан и близлежащие населенные пункты и объекты, дороги\nОпасность по БПЛА Хорнет",
+      "ts": 1794034146,
+      "time_label": "07.11.2026 09:49 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 300575,
+      "text": "Ростовская область отбой опасности по БПЛА (РСЧС)",
+      "ts": 1794033564,
+      "time_label": "07.11.2026 09:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 106181,
       "text": "Отбой опасности и внимания по БПЛА по ранее объявленным регионам\nСпасибо ПВО\n🤍",
@@ -653,22 +711,6 @@
       "time_label": "07.11.2026 06:04 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 94217,
-      "text": "Пензенская область, Республика Мордовия, Нижегородская область - по БПЛА чисто, опасность сохраняется.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794020575,
-      "time_label": "07.11.2026 06:02 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 106149,
-      "text": "Саратов, Энгельс\nСаратовская область\nПовторно фиксации БПЛА",
-      "ts": 1794020262,
-      "time_label": "07.11.2026 05:57 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -678,15 +720,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794033500,
-  "last_event_at": "2026-11-07T06:38:20Z",
-  "fetched_at": "2026-11-07T06:40:03.460133Z",
+  "timestamp": 1794034146,
+  "last_event_at": "2026-11-07T06:49:06Z",
+  "fetched_at": "2026-11-07T06:50:03.473548Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-07T06:40:03.460133Z",
-    "source_age_seconds": 103,
-    "city_count": 0,
-    "region_count": 1,
+    "generated_at": "2026-11-07T06:50:03.473548Z",
+    "source_age_seconds": 57,
+    "city_count": 1,
+    "region_count": 2,
     "feed_count": 80
   }
 }
