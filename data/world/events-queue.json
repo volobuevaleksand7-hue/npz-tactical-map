@@ -33,14 +33,14 @@
    "found_at": "2026-10-25T10:30:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 2,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "dead_url"
+   "reject_reason": "schema, dead_url"
   },
   {
    "id": "2026-10-23-iea-stock-release",
@@ -74,14 +74,14 @@
    "found_at": "2026-10-25T11:00:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 2,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "dead_url"
+   "reject_reason": "schema, dead_url"
   },
   {
    "id": "2026-10-24-germany-reserves-release",
@@ -579,5 +579,5 @@
    "reject_reason": "duplicate:2026-11-01-hormuz-irgc-two-tankers-mine-claim"
   }
  ],
- "validated_at": "2026-11-06T19:24:39Z"
+ "validated_at": "2026-11-07T03:29:21Z"
 }
