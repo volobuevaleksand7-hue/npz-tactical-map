@@ -44,6 +44,25 @@
       "last_event_ts": 1794032353,
       "source_text": "07.11.2026 09:19 МСК\nКурская область и близлежащие Авиационно ракетно бомбовая опасность"
     },
+    "Автономная Республика Крым": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794038172,
+      "source_text": "07.11.2026 10:56 МСК\nГруппа БПЛА от Чаплынки на Армянск. От 3-х единиц"
+    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -151,6 +170,28 @@
       "source_text": "07.11.2026 10:13 МСК\nг. Белгород с юга и близлежащие населенные пункты тревога по БПЛА"
     },
     {
+      "key": "армянск|автономная республика крым",
+      "name": "Армянск",
+      "lat": 46.10919,
+      "lon": 33.69206,
+      "region": "Автономная Республика Крым",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794038172,
+      "source_text": "07.11.2026 10:56 МСК\nГруппа БПЛА от Чаплынки на Армянск. От 3-х единиц"
+    },
+    {
       "key": "донецк|донецкая народная республика",
       "name": "Донецк",
       "lat": 48.023,
@@ -220,6 +261,30 @@
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 300586,
+      "text": "Группа БПЛА от Чаплынки на Армянск. От 3-х единиц",
+      "ts": 1794038172,
+      "time_label": "07.11.2026 10:56 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 300585,
+      "text": "От Чаплынки на АПП Перекоп, Титан, Армянск, трасса тревога по БПЛА Хорнет",
+      "ts": 1794038121,
+      "time_label": "07.11.2026 10:55 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 300584,
+      "text": "Чаплынка с севера БПЛА Хорнет\nХерсонская область РФ",
+      "ts": 1794037792,
+      "time_label": "07.11.2026 10:49 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 300583,
       "text": "Внимание по БПЛА по трассе Мариуполь - Новоазовск\nДНР",
@@ -835,30 +900,6 @@
       "time_label": "07.11.2026 06:44 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 106152,
-      "text": "Саратов\nСаратовская область\nФиксации БПЛА",
-      "ts": 1794021419,
-      "time_label": "07.11.2026 06:16 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 94222,
-      "text": "Саратовская область - массовость отбили, возможно появление единичных групп.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794021233,
-      "time_label": "07.11.2026 06:13 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 106151,
-      "text": "Тамбовская область\nОтбой опасности по БПЛА",
-      "ts": 1794021203,
-      "time_label": "07.11.2026 06:13 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -868,15 +909,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794036357,
-  "last_event_at": "2026-11-07T07:25:57Z",
-  "fetched_at": "2026-11-07T07:50:03.719345Z",
+  "timestamp": 1794038172,
+  "last_event_at": "2026-11-07T07:56:12Z",
+  "fetched_at": "2026-11-07T08:00:04.430329Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-07T07:50:03.719345Z",
-    "source_age_seconds": 1446,
-    "city_count": 6,
-    "region_count": 4,
+    "generated_at": "2026-11-07T08:00:04.430329Z",
+    "source_age_seconds": 232,
+    "city_count": 7,
+    "region_count": 5,
     "feed_count": 80
   }
 }
