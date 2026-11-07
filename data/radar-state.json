@@ -14,16 +14,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794068236,
-      "source_text": "07.11.2026 19:17 МСК\nКаланчак и близлежащие Опасность по БПЛА Херсонская область РФ"
+      "fill": "#dc2626",
+      "last_event_ts": 1794070744,
+      "source_text": "07.11.2026 19:59 МСК\nХерсонская область РФ Авиационная ракетно бомбовая опасность\n\n07.11.2026 19:17 МСК\nКаланчак и близлежащие Опасность по БПЛА Херсонская область РФ"
     },
     "Брянская область": {
       "bpla": false,
@@ -174,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794069017,
-      "source_text": "07.11.2026 19:30 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ повторно, ещё фиксации ДНР"
+      "last_event_ts": 1794070759,
+      "source_text": "07.11.2026 19:59 МСК\nАвдеевка, Донецк, Ясиноватая и близлежащие Опасность по БПЛА ДНР"
     },
     "Белгородская область": {
       "bpla": false,
@@ -441,6 +441,28 @@
       "source_text": "07.11.2026 10:56 МСК\nГруппа БПЛА от Чаплынки на Армянск. От 3-х единиц"
     },
     {
+      "key": "авдеевка|донецкая народная республика",
+      "name": "Авдеевка",
+      "lat": 48.14019,
+      "lon": 37.75008,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794070759,
+      "source_text": "07.11.2026 19:59 МСК\nАвдеевка, Донецк, Ясиноватая и близлежащие Опасность по БПЛА ДНР"
+    },
+    {
       "key": "токмак|запорожская область",
       "name": "Токмак",
       "lat": 47.255103,
@@ -503,8 +525,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794060739,
-      "source_text": "07.11.2026 17:12 МСК\nДонецк - Пески ДНР тревога по БПЛА типа Хорнет, а так же ФПВ"
+      "last_event_ts": 1794070759,
+      "source_text": "07.11.2026 19:59 МСК\nАвдеевка, Донецк, Ясиноватая и близлежащие Опасность по БПЛА ДНР"
     },
     {
       "key": "горловка|донецкая народная республика",
@@ -1083,6 +1105,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 300698,
+      "text": "Авдеевка, Донецк, Ясиноватая и близлежащие\nОпасность по БПЛА\nДНР",
+      "ts": 1794070759,
+      "time_label": "07.11.2026 19:59 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 300697,
+      "text": "Херсонская область РФ\nАвиационная ракетно бомбовая опасность",
+      "ts": 1794070744,
+      "time_label": "07.11.2026 19:59 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 300696,
       "text": "Север\nСеверо-Запад\nРеспублика Крым\nОпасность по БПЛА",
@@ -1706,22 +1744,6 @@
       "time_label": "07.11.2026 14:00 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 300622,
-      "text": "Трасса Р-280\nБановка - Азов  фиксации БПЛА противнкика\nЗапорожская область РФ",
-      "ts": 1794048946,
-      "time_label": "07.11.2026 13:55 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 300621,
-      "text": "Курская область и близлежащие\nАвиационная ракетно бомбовая опасность",
-      "ts": 1794048506,
-      "time_label": "07.11.2026 13:48 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1731,14 +1753,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794069825,
-  "last_event_at": "2026-11-07T16:43:45Z",
-  "fetched_at": "2026-11-07T16:50:03.405169Z",
+  "timestamp": 1794070759,
+  "last_event_at": "2026-11-07T16:59:19Z",
+  "fetched_at": "2026-11-07T17:00:03.772651Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-07T16:50:03.405169Z",
-    "source_age_seconds": 378,
-    "city_count": 36,
+    "generated_at": "2026-11-07T17:00:03.772651Z",
+    "source_age_seconds": 44,
+    "city_count": 37,
     "region_count": 10,
     "feed_count": 80
   }
