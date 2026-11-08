@@ -575,6 +575,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1794171163,
       "source_text": "08.11.2026 23:52 МСК\nБрянская область Курская область Белгородская область Орловская область Множественные фиксации БПЛА в том числе реактивные БПЛА"
+    },
+    "Вологодская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794176319,
+      "source_text": "09.11.2026 01:18 МСК\nВологодская область Опасность по БПЛА"
     }
   },
   "cities": [
@@ -1415,28 +1434,6 @@
       "source_text": "08.11.2026 21:54 МСК\nРохманово и близлежащие Тревога по БПЛА сохраняется"
     },
     {
-      "key": "антрацит|луганская народная республика",
-      "name": "Антрацит",
-      "lat": 48.11503,
-      "lon": 39.09128,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1794132819,
-      "source_text": "08.11.2026 13:13 МСК\nКрасный луч, Антрацит трасса Тревога по БПЛА Хорнет ЛНР"
-    },
-    {
       "key": "почеп|брянская область",
       "name": "Почеп",
       "lat": 52.9287784,
@@ -2117,28 +2114,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1794159745,
       "source_text": "08.11.2026 20:42 МСК\nБатрацие дачи Короча и близлежащие Тревога по БПЛА Белгородская область"
-    },
-    {
-      "key": "красный луч|луганская народная республика",
-      "name": "Красный Луч",
-      "lat": 48.13954,
-      "lon": 38.93715,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1794132819,
-      "source_text": "08.11.2026 13:13 МСК\nКрасный луч, Антрацит трасса Тревога по БПЛА Хорнет ЛНР"
     },
     {
       "key": "бирюч|белгородская область",
@@ -6140,6 +6115,14 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 106381,
+      "text": "Вологодская область\nОпасность по БПЛА",
+      "ts": 1794176319,
+      "time_label": "09.11.2026 01:18 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 106380,
       "text": "Воронеж\nВоронежская область\nСбитие БПЛА",
       "ts": 1794175703,
@@ -6770,14 +6753,6 @@
       "time_label": "09.11.2026 00:00 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301288,
-      "text": "Между Далёкое и Стерегущее заходят с моря большое количество БПЛА\nРаздольненский район",
-      "ts": 1794171599,
-      "time_label": "08.11.2026 23:59 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -6787,15 +6762,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794175703,
-  "last_event_at": "2026-11-08T22:08:23Z",
-  "fetched_at": "2026-11-08T22:10:21.807152Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1794176319,
+  "last_event_at": "2026-11-08T22:18:39Z",
+  "fetched_at": "2026-11-08T22:20:11.411013Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-08T22:10:21.807152Z",
-    "source_age_seconds": 118,
-    "city_count": 127,
-    "region_count": 30,
+    "generated_at": "2026-11-08T22:20:11.411013Z",
+    "source_age_seconds": 92,
+    "city_count": 125,
+    "region_count": 31,
     "feed_count": 80
   }
 }
