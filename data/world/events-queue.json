@@ -115,14 +115,14 @@
    "found_at": "2026-10-25T14:30:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 2,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "dead_url"
+   "reject_reason": "schema, dead_url"
   },
   {
    "id": "2026-10-23-pakistan-lpg-shortage-border-closure",
@@ -579,5 +579,5 @@
    "reject_reason": "duplicate:2026-11-01-hormuz-irgc-two-tankers-mine-claim"
   }
  ],
- "validated_at": "2026-11-07T19:22:51Z"
+ "validated_at": "2026-11-08T03:22:29Z"
 }
