@@ -919,6 +919,33 @@
       "source_text": "08.11.2026 11:55 МСК\nКрасная яруга Тревога по БПЛА Дартс Белгородская область"
     },
     {
+      "key": "одесская область",
+      "name": "Одесская область",
+      "lat": 46.484207,
+      "lon": 30.731689,
+      "region": null,
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": true,
+      "fill": "#ea580c",
+      "last_event_ts": null,
+      "bplaLaunchTo": {
+        "to": {
+          "kind": "region",
+          "name": "Автономная Республика Крым"
+        }
+      }
+    },
+    {
       "key": "перевальск|луганская народная республика",
       "name": "Перевальск",
       "lat": 48.43779,
@@ -1517,6 +1544,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301085,
+      "text": "Новоайдар и далее в направлении\nСчастье\nСтарый Айдар\nТревога по БПЛА\nЛНР",
+      "ts": 1794150554,
+      "time_label": "08.11.2026 18:09 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301084,
+      "text": "Запуски БПЛА от Одесской области в направлении Крыма",
+      "ts": 1794150137,
+      "time_label": "08.11.2026 18:02 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 301083,
       "text": "Красный Партизан, Пантелеймоновка, Ясиноватая и близлежащие\nОпасность по БПЛА\nДНР",
@@ -2140,22 +2183,6 @@
       "time_label": "08.11.2026 13:24 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301010,
-      "text": "ЛНР. Угроза атаки БПЛА.\nВ границах муниципальных округов: Станично-Луганский, Новоайдарский, Старобельский, Сватовский.",
-      "ts": 1794133430,
-      "time_label": "08.11.2026 13:23 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301009,
-      "text": "Херсонская область РФ\nЗапорожская область РФ\nЛДНР\nАвиационно ракетно бомбовая опасность",
-      "ts": 1794133244,
-      "time_label": "08.11.2026 13:20 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2165,14 +2192,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794149524,
-  "last_event_at": "2026-11-08T14:52:04Z",
-  "fetched_at": "2026-11-08T15:00:04.362598Z",
+  "timestamp": 1794150554,
+  "last_event_at": "2026-11-08T15:09:14Z",
+  "fetched_at": "2026-11-08T15:10:03.419614Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-08T15:00:04.362598Z",
-    "source_age_seconds": 480,
-    "city_count": 44,
+    "generated_at": "2026-11-08T15:10:03.419614Z",
+    "source_age_seconds": 49,
+    "city_count": 45,
     "region_count": 12,
     "feed_count": 80
   }
