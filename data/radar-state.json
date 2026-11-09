@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1794239169,
-      "source_text": "09.11.2026 18:46 МСК\nЛДНР Запорожская область РФ Авиационная ракетная бомбовая опасность\n\n09.11.2026 17:09 МСК\nНовогродовка и близлежащие Опасность по БПЛА Хорнет ДНР"
+      "last_event_ts": 1794241431,
+      "source_text": "09.11.2026 18:46 МСК\nЛДНР Запорожская область РФ Авиационная ракетная бомбовая опасность\n\n09.11.2026 19:23 МСК\nГорловка, Углегорск и близлежащие Опасность по БПЛА и возможным ФПВ ДНР"
     }
   },
   "cities": [
@@ -418,9 +418,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -431,8 +431,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794230183,
-      "source_text": "09.11.2026 16:16 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ сохраняется, ещё фиксации ДНР"
+      "last_event_ts": 1794241431,
+      "source_text": "09.11.2026 19:23 МСК\nГорловка, Углегорск и близлежащие Опасность по БПЛА и возможным ФПВ ДНР"
     },
     {
       "key": "каланчак|херсонская область",
@@ -828,6 +828,28 @@
       "bplaLaunchAnim": true,
       "fill": "#ea580c",
       "last_event_ts": null
+    },
+    {
+      "key": "углегорск|донецкая народная республика",
+      "name": "Углегорск",
+      "lat": 48.31488,
+      "lon": 38.27179,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794241431,
+      "source_text": "09.11.2026 19:23 МСК\nГорловка, Углегорск и близлежащие Опасность по БПЛА и возможным ФПВ ДНР"
     }
   ],
   "districts": {
@@ -1054,6 +1076,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301579,
+      "text": "Горловка, Углегорск и близлежащие\nОпасность по БПЛА и возможным ФПВ\nДНР",
+      "ts": 1794241431,
+      "time_label": "09.11.2026 19:23 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301578,
+      "text": "Севастополь учения",
+      "ts": 1794241366,
+      "time_label": "09.11.2026 19:22 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 301577,
       "text": "Ростовская область\nРакетная опасность",
@@ -1677,22 +1715,6 @@
       "time_label": "09.11.2026 14:44 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 106490,
-      "text": "Калужская область\nОпасность по БПЛА",
-      "ts": 1794224354,
-      "time_label": "09.11.2026 14:39 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 301503,
-      "text": "Бердянский район и близлежащие\nЗапорожская область РФ\nОпасность по БПЛА\nПовторно",
-      "ts": 1794224224,
-      "time_label": "09.11.2026 14:37 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1702,14 +1724,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794241111,
-  "last_event_at": "2026-11-09T16:18:31Z",
-  "fetched_at": "2026-11-09T16:20:03.917682Z",
+  "timestamp": 1794241431,
+  "last_event_at": "2026-11-09T16:23:51Z",
+  "fetched_at": "2026-11-09T16:30:03.606153Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-09T16:20:03.917682Z",
-    "source_age_seconds": 92,
-    "city_count": 27,
+    "generated_at": "2026-11-09T16:30:03.606153Z",
+    "source_age_seconds": 372,
+    "city_count": 28,
     "region_count": 12,
     "feed_count": 80
   }
