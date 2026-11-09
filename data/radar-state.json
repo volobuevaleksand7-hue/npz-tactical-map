@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Краснодарский край": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794263924,
+      "source_text": "10.11.2026 01:38 МСК\nКерчь, Тамань и близлежащие Опасность по БПЛА"
+    },
     "Севастополь": {
       "bpla": false,
       "bplaDim": false,
@@ -269,8 +288,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794262794,
-      "source_text": "10.11.2026 01:19 МСК\nВосточная часть Крыма. Феодосия и близлежащие опасность по БПЛА Республика Крым"
+      "last_event_ts": 1794263924,
+      "source_text": "10.11.2026 01:38 МСК\nКерчь, Тамань и близлежащие Опасность по БПЛА"
     },
     "Воронежская область": {
       "bpla": false,
@@ -502,6 +521,28 @@
       "source_text": "09.11.2026 21:42 МСК\nДонецк, Макеевка, Харцызск, Зугрэс и близлежащие Тревога по БПЛА сохраняется, ещё фиксации ДНР"
     },
     {
+      "key": "тамань|краснодарский край",
+      "name": "Тамань",
+      "lat": 45.2158646,
+      "lon": 36.7191326,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794263924,
+      "source_text": "10.11.2026 01:38 МСК\nКерчь, Тамань и близлежащие Опасность по БПЛА"
+    },
+    {
       "key": "курчатов|курская область",
       "name": "Курчатов",
       "lat": 51.65356,
@@ -654,6 +695,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794252896,
       "source_text": "09.11.2026 22:34 МСК\nПогар и близлежащие, тревога по БПЛА Брянская область"
+    },
+    {
+      "key": "керчь|автономная республика крым",
+      "name": "Керчь",
+      "lat": 45.35675,
+      "lon": 36.47542,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794263924,
+      "source_text": "10.11.2026 01:38 МСК\nКерчь, Тамань и близлежащие Опасность по БПЛА"
     },
     {
       "key": "севастополь|севастополь",
@@ -2795,6 +2858,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 301716,
+      "text": "Керчь, Тамань и близлежащие\nОпасность по БПЛА",
+      "ts": 1794263924,
+      "time_label": "10.11.2026 01:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 94548,
       "text": "Новгородская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
       "ts": 1794262862,
@@ -3425,14 +3496,6 @@
       "time_label": "09.11.2026 22:57 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301694,
-      "text": "Аэропорт Донецк\nТревога по БПЛА\nЛНР",
-      "ts": 1794254023,
-      "time_label": "09.11.2026 22:53 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3442,15 +3505,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794262862,
-  "last_event_at": "2026-11-09T22:21:02Z",
-  "fetched_at": "2026-11-09T22:30:03.752213Z",
+  "timestamp": 1794263924,
+  "last_event_at": "2026-11-09T22:38:44Z",
+  "fetched_at": "2026-11-09T22:40:03.525404Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-09T22:30:03.752213Z",
-    "source_age_seconds": 541,
-    "city_count": 64,
-    "region_count": 19,
+    "generated_at": "2026-11-09T22:40:03.525404Z",
+    "source_age_seconds": 79,
+    "city_count": 66,
+    "region_count": 20,
     "feed_count": 80
   }
 }
