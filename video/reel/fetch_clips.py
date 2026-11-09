@@ -270,6 +270,25 @@ def _llm_json(prompt):
                     return json.loads(m.group(0)), model
             except Exception as e:  # noqa: BLE001 — 429/таймаут: следующая модель
                 log(f"проверка постов: {model}: {e}")
+    # 09.11.2026: Claude в лимите, OpenRouter free мёртв — резерв DeepSeek V4.1 Flash (OpenCode Go)
+    try:
+        key = ""
+        for line in open("/root/.opencode-go.env", encoding="utf-8"):
+            if line.startswith("OPENCODE_API_KEY="):
+                key = line.split("=", 1)[1].strip().strip("\"'")
+        if key:
+            body = json.dumps({"model": "deepseek-v4.1-flash", "max_tokens": 2000, "temperature": 0,
+                               "messages": [{"role": "user", "content": prompt}]}).encode()
+            req = urllib.request.Request("https://opencode.ai/zen/go/v1/chat/completions", body,
+                                         {"Authorization": "Bearer " + key, "Content-Type": "application/json",
+                                          "User-Agent": "curl/8.7.1", "x-opencode-session": "clips"})
+            with urllib.request.urlopen(req, timeout=120) as r:
+                txt = json.load(r)["choices"][0]["message"]["content"] or ""
+            m = re.search(r"\{.*\}", txt, re.S)
+            if m:
+                return json.loads(m.group(0)), "deepseek-v4.1-flash"
+    except Exception as e:  # noqa: BLE001
+        log(f"проверка постов: deepseek: {e}")
     return None, None
 
 

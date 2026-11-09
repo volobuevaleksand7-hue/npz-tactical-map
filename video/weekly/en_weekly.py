@@ -99,6 +99,16 @@ def ask(payload):
         if not bad:
             return out
         log(f"перевод не прошёл проверку ({bad}), попытка {attempt + 1}: {r.stdout[-200:]!r}")
+    out = E._opencode_ask(PROMPT + json.dumps(payload, ensure_ascii=False, indent=1))
+    if (isinstance(out, dict) and isinstance(out.get("ui"), list) and len(out["ui"]) == len(payload["ui"])
+            and set(out.get("voice") or {}) == set(payload["voice"])
+            and isinstance(out.get("chapters"), list) and len(out["chapters"]) == len(payload["chapters"])
+            and isinstance(out.get("summary"), list) and len(out["summary"]) == len(payload["objects"])
+            and not E.CYR.search(json.dumps(out, ensure_ascii=False))
+            and not SF.has_casualty(json.dumps(out, ensure_ascii=False))):
+        log("перевод получен через DeepSeek")
+        return out
+    log("DeepSeek-перевод не прошёл проверку")
     raise SystemExit("en_weekly: перевод не получен")
 
 

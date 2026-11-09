@@ -17,6 +17,7 @@ import re
 import shutil
 import subprocess
 import sys
+import urllib.request
 from pathlib import Path
 
 REEL = Path(__file__).resolve().parent
@@ -77,6 +78,74 @@ def ui_strings(page):
     return seen
 
 
+def _mimo_ask(prompt):
+    """Резерв, когда подписка Claude исчерпана: MiMo V2.6 Flash (Token Plan, прямой API)."""
+    key = base = ""
+    try:
+        with open("/root/.hermes/.env", encoding="utf-8") as f:
+            for line in f:
+                line = line.rstrip("\n")
+                if line.startswith("XIAOMI_API_KEY="):
+                    key = line.split("=", 1)[1].strip().strip("\"'")
+                elif line.startswith("XIAOMI_BASE_URL="):
+                    base = line.split("=", 1)[1].strip().strip("\"'")
+    except OSError:
+        return None
+    if not key or not base:
+        return None
+    body = {"model": os.environ.get("REEL_MIMO_MODEL", "mimo-v2.6-flash"), "max_tokens": 3000,
+            "temperature": 0.2, "messages": [{"role": "user", "content": prompt}]}
+    try:
+        req = urllib.request.Request(base.rstrip("/") + "/chat/completions",
+                                     data=json.dumps(body).encode(),
+                                     headers={"Authorization": "Bearer " + key,
+                                              "Content-Type": "application/json"})
+        d = json.loads(urllib.request.urlopen(req, timeout=240).read())
+        raw = d["choices"][0]["message"]["content"] or ""
+    except Exception as e:  # noqa: BLE001
+        log(f"MiMo-перевод не получен ({type(e).__name__})")
+        return None
+    m = re.search(r"\{.*\}", raw, re.S)
+    try:
+        return json.loads(m.group(0)) if m else None
+    except ValueError:
+        return None
+
+
+def _opencode_ask(prompt):
+    """Вторая резервная ступень: DeepSeek V4.1 Flash через подписку OpenCode Go."""
+    key = ""
+    try:
+        with open("/root/.opencode-go.env", encoding="utf-8") as f:
+            for line in f:
+                if line.startswith("OPENCODE_API_KEY="):
+                    key = line.split("=", 1)[1].strip().strip("\"'")
+    except OSError:
+        return None
+    if not key:
+        return None
+    body = {"model": os.environ.get("REEL_OPENCODE_MODEL", "deepseek-v4.1-flash"),
+            "max_tokens": 4000, "temperature": 0.2,
+            "messages": [{"role": "user", "content": prompt}]}
+    try:
+        req = urllib.request.Request("https://opencode.ai/zen/go/v1/chat/completions",
+                                     data=json.dumps(body).encode(),
+                                     headers={"Authorization": "Bearer " + key,
+                                              "x-opencode-session": "en-%d" % os.getpid(),
+                                              "User-Agent": "curl/8.7.1",
+                                              "Content-Type": "application/json"})
+        d = json.loads(urllib.request.urlopen(req, timeout=240).read())
+        raw = d["choices"][0]["message"].get("content") or ""
+    except Exception as e:  # noqa: BLE001
+        log(f"DeepSeek-перевод не получен ({type(e).__name__})")
+        return None
+    m = re.search(r"\{.*\}", raw, re.S)
+    try:
+        return json.loads(m.group(0)) if m else None
+    except ValueError:
+        return None
+
+
 def ask(payload):
     for attempt in range(2):
         r = subprocess.run(["claude-run", "-p", PROMPT + json.dumps(payload, ensure_ascii=False, indent=1),
@@ -91,6 +160,20 @@ def ask(payload):
         if not bad:
             return out
         log(f"перевод не прошёл проверку ({bad}), попытка {attempt + 1}: {r.stdout[-300:]!r}")
+    out = _mimo_ask(PROMPT + json.dumps(payload, ensure_ascii=False, indent=1))
+    if out is not None:
+        bad = problems(out, payload)
+        if not bad:
+            log("перевод получен через MiMo")
+            return out
+        log(f"MiMo-перевод не прошёл проверку ({bad})")
+    out = _opencode_ask(PROMPT + json.dumps(payload, ensure_ascii=False, indent=1))
+    if out is not None:
+        bad = problems(out, payload)
+        if not bad:
+            log("перевод получен через DeepSeek")
+            return out
+        log(f"DeepSeek-перевод не прошёл проверку ({bad})")
     raise SystemExit("en_pass: перевод не получен")
 
 

@@ -20,6 +20,7 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.request
 from pathlib import Path
 
 REEL = Path(__file__).resolve().parent
@@ -538,6 +539,83 @@ def line_problems(x):
     return bad
 
 
+def _mimo_lines(prompt):
+    """Резерв, когда подписка Claude исчерпана: MiMo V2.6 Flash (Token Plan, прямой API)."""
+    key = base = ""
+    try:
+        with open("/root/.hermes/.env", encoding="utf-8") as f:
+            for line in f:
+                line = line.rstrip("\n")
+                if line.startswith("XIAOMI_API_KEY="):
+                    key = line.split("=", 1)[1].strip().strip("\"'")
+                elif line.startswith("XIAOMI_BASE_URL="):
+                    base = line.split("=", 1)[1].strip().strip("\"'")
+    except OSError:
+        return None
+    if not key or not base:
+        return None
+    body = {"model": os.environ.get("REEL_MIMO_MODEL", "mimo-v2.6-flash"), "max_tokens": 1200,
+            "temperature": 0.3, "messages": [{"role": "user", "content": prompt}]}
+    try:
+        req = urllib.request.Request(base.rstrip("/") + "/chat/completions",
+                                     data=json.dumps(body).encode(),
+                                     headers={"Authorization": "Bearer " + key,
+                                              "Content-Type": "application/json"})
+        d = json.loads(urllib.request.urlopen(req, timeout=240).read())
+        raw = d["choices"][0]["message"]["content"] or ""
+    except Exception as e:  # noqa: BLE001 — любой сбой = шаблонные реплики
+        print(f"build_reel: MiMo-озвучка не получена ({type(e).__name__}) — шаблон", file=sys.stderr)
+        return None
+    m = re.search(r"\[.*\]", raw, re.S)
+    try:
+        if m:
+            return json.loads(m.group(0))
+    except ValueError:
+        pass
+    print(f"build_reel: MiMo-ответ не JSON-массив: {raw[:200]!r}", file=sys.stderr)
+    return None
+
+
+def _opencode_lines(prompt):
+    """Вторая резервная ступень: DeepSeek V4.1 Flash через подписку OpenCode Go."""
+    key = ""
+    for p in ("/root/.opencode-go.env", "/root/.hermes/.env"):
+        try:
+            with open(p, encoding="utf-8") as f:
+                for line in f:
+                    if line.startswith("OPENCODE_API_KEY="):
+                        key = line.split("=", 1)[1].strip().strip("\"'")
+        except OSError:
+            pass
+        if key:
+            break
+    if not key:
+        return None
+    body = {"model": os.environ.get("REEL_OPENCODE_MODEL", "deepseek-v4.1-flash"),
+            "max_tokens": 4000, "temperature": 0.3,
+            "messages": [{"role": "user", "content": prompt}]}
+    try:
+        req = urllib.request.Request("https://opencode.ai/zen/go/v1/chat/completions",
+                                     data=json.dumps(body).encode(),
+                                     headers={"Authorization": "Bearer " + key,
+                                              "x-opencode-session": "reel-%d" % os.getpid(),
+                                              "User-Agent": "curl/8.7.1",
+                                              "Content-Type": "application/json"})
+        d = json.loads(urllib.request.urlopen(req, timeout=240).read())
+        raw = d["choices"][0]["message"].get("content") or ""
+    except Exception as e:  # noqa: BLE001
+        print(f"build_reel: DeepSeek-озвучка не получена ({type(e).__name__}) — шаблон", file=sys.stderr)
+        return None
+    m = re.search(r"\[.*\]", raw, re.S)
+    try:
+        if m:
+            return json.loads(m.group(0))
+    except ValueError:
+        pass
+    print(f"build_reel: DeepSeek-ответ не JSON-массив: {raw[:200]!r}", file=sys.stderr)
+    return None
+
+
 def llm_lines(sel, refs):
     """Реплики по ударам от Haiku; None — нет claude/сети/ответ не прошёл проверку."""
     if os.environ.get("REEL_LLM", "1") == "0" or not shutil.which("claude"):
@@ -552,9 +630,16 @@ def llm_lines(sel, refs):
                            capture_output=True, text=True, timeout=180, stdin=subprocess.DEVNULL)
         m = re.search(r"\[.*\]", r.stdout, re.S)
         lines = json.loads(m.group(0)) if m else None
+        if not (isinstance(lines, list) and len(lines) == len(sel)):
+            lines = _mimo_lines(LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1))
+        if not (isinstance(lines, list) and len(lines) == len(sel)):
+            lines = _opencode_lines(LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1))
     except (subprocess.TimeoutExpired, ValueError, OSError) as e:
         print(f"build_reel: LLM-озвучка не получена ({e}) — шаблон", file=sys.stderr)
-        return None
+        lines = _mimo_lines(LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1))
+        if not (isinstance(lines, list) and len(lines) == len(sel)):
+            lines = _opencode_lines(LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1))
+        return lines if isinstance(lines, list) and len(lines) == len(sel) else None
     if not (isinstance(lines, list) and len(lines) == len(sel) and all(isinstance(x, str) for x in lines)):
         print(f"build_reel: LLM-ответ не по формату — шаблон: {r.stdout[-300:]!r} {r.stderr[-200:]!r}", file=sys.stderr)
         return None
