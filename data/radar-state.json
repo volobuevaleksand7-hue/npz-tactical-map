@@ -120,6 +120,25 @@
       "last_event_ts": 1794224354,
       "source_text": "09.11.2026 14:39 МСК\nКалужская область Опасность по БПЛА"
     },
+    "Брянская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794228929,
+      "source_text": "09.11.2026 15:55 МСК\nКистёр , Борщово , Погар опасность по бпла Блискавка"
+    },
     "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
@@ -212,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794225040,
-      "source_text": "09.11.2026 14:50 МСК\nДонецк и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794228686,
+      "source_text": "09.11.2026 15:51 МСК\nВолноваха и близлежащие ДНР Опасность по БПЛА на электротяге"
     }
   },
   "cities": [
@@ -260,6 +279,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794225032,
       "source_text": "09.11.2026 14:50 МСК\nБелгород Тревога по БПЛА"
+    },
+    {
+      "key": "погар|брянская область",
+      "name": "Погар",
+      "lat": 52.554283,
+      "lon": 33.263706,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794228929,
+      "source_text": "09.11.2026 15:55 МСК\nКистёр , Борщово , Погар опасность по бпла Блискавка"
     },
     {
       "key": "керчь|автономная республика крым",
@@ -480,6 +521,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794228174,
       "source_text": "09.11.2026 15:42 МСК\nКача Бельбек Севастополь Опасность по БПЛА"
+    },
+    {
+      "key": "волноваха|донецкая народная республика",
+      "name": "Волноваха",
+      "lat": 47.6008,
+      "lon": 37.49358,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794228686,
+      "source_text": "09.11.2026 15:51 МСК\nВолноваха и близлежащие ДНР Опасность по БПЛА на электротяге"
     }
   ],
   "districts": {
@@ -552,6 +615,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301527,
+      "text": "Кистёр , Борщово , Погар опасность по бпла Блискавка",
+      "ts": 1794228929,
+      "time_label": "09.11.2026 15:55 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301526,
+      "text": "Волноваха и близлежащие\nДНР\nОпасность по БПЛА на электротяге",
+      "ts": 1794228686,
+      "time_label": "09.11.2026 15:51 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 301525,
       "text": "ЛДНР\nЗапорожская область РФ\nОтбой Авиационной Ракетной бомбовой опасности",
@@ -1175,22 +1254,6 @@
       "time_label": "09.11.2026 11:41 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301451,
-      "text": "Курортное и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1794213523,
-      "time_label": "09.11.2026 11:38 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301450,
-      "text": "Керченский полуостров\nОпасность по БПЛА\nРеспублика Крым",
-      "ts": 1794213501,
-      "time_label": "09.11.2026 11:38 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1200,15 +1263,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794228526,
-  "last_event_at": "2026-11-09T12:48:46Z",
-  "fetched_at": "2026-11-09T12:50:03.752412Z",
+  "timestamp": 1794228929,
+  "last_event_at": "2026-11-09T12:55:29Z",
+  "fetched_at": "2026-11-09T13:00:05.523235Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-09T12:50:03.752412Z",
-    "source_age_seconds": 77,
-    "city_count": 12,
-    "region_count": 11,
+    "generated_at": "2026-11-09T13:00:05.523235Z",
+    "source_age_seconds": 276,
+    "city_count": 14,
+    "region_count": 12,
     "feed_count": 80
   }
 }
