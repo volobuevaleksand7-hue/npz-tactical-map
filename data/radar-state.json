@@ -44,25 +44,6 @@
       "last_event_ts": 1794228174,
       "source_text": "09.11.2026 15:42 МСК\nКача Бельбек Севастополь Опасность по БПЛА\n\n09.11.2026 14:47 МСК\nКерчь Порт Крым Переправа Опасность по Фпв Республика Крым"
     },
-    "Ростовская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794223020,
-      "source_text": "09.11.2026 14:17 МСК\nРостовская область Опасность по БПЛА"
-    },
     "Белгородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -98,8 +79,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794224708,
-      "source_text": "09.11.2026 14:45 МСК\nСмелое и близлежащие ЛНР Опасность по БПЛА"
+      "last_event_ts": 1794229725,
+      "source_text": "09.11.2026 16:08 МСК\nЛуганск и близлежащие ЛНР Опасность по БПЛА Хорнет"
     },
     "Калужская область": {
       "bpla": false,
@@ -391,6 +372,28 @@
       "source_text": "09.11.2026 15:21 МСК\nКаланчак и близлежащие Херсонская область РФ Опасность по БПЛА Хорнет"
     },
     {
+      "key": "луганск|луганская народная республика",
+      "name": "Луганск",
+      "lat": 48.56814,
+      "lon": 39.30553,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794229725,
+      "source_text": "09.11.2026 16:08 МСК\nЛуганск и близлежащие ЛНР Опасность по БПЛА Хорнет"
+    },
+    {
       "key": "приморск|запорожская область",
       "name": "Приморск",
       "lat": 46.73415,
@@ -615,6 +618,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301528,
+      "text": "Луганск и близлежащие\nЛНР\nОпасность по БПЛА Хорнет",
+      "ts": 1794229725,
+      "time_label": "09.11.2026 16:08 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 106491,
+      "text": "Ростовская область\nОтбой опасности по БПЛА",
+      "ts": 1794229537,
+      "time_label": "09.11.2026 16:05 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 301527,
       "text": "Кистёр , Борщово , Погар опасность по бпла Блискавка",
@@ -1238,22 +1257,6 @@
       "time_label": "09.11.2026 11:45 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301453,
-      "text": "Тревога по БПЛА в Луганске,\nСеверодонецке, Кировске, Ровеньках, Алчевске, Лисичанске, Новоайдарском, Старобельском, Белокуракинском муниципальных округах.",
-      "ts": 1794213796,
-      "time_label": "09.11.2026 11:43 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301452,
-      "text": "Республика Крым\nОпасность по БПЛА\nВосточные районы особое внимание",
-      "ts": 1794213695,
-      "time_label": "09.11.2026 11:41 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1263,15 +1266,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794228929,
-  "last_event_at": "2026-11-09T12:55:29Z",
-  "fetched_at": "2026-11-09T13:00:05.523235Z",
+  "timestamp": 1794229725,
+  "last_event_at": "2026-11-09T13:08:45Z",
+  "fetched_at": "2026-11-09T13:10:03.320574Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-09T13:00:05.523235Z",
-    "source_age_seconds": 276,
-    "city_count": 14,
-    "region_count": 12,
+    "generated_at": "2026-11-09T13:10:03.320574Z",
+    "source_age_seconds": 78,
+    "city_count": 15,
+    "region_count": 11,
     "feed_count": 80
   }
 }
