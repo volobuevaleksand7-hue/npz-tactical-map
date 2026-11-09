@@ -93,7 +93,7 @@ def _mimo_ask(prompt):
         return None
     if not key or not base:
         return None
-    body = {"model": os.environ.get("REEL_MIMO_MODEL", "mimo-v2.6-flash"), "max_tokens": 3000,
+    body = {"model": os.environ.get("REEL_MIMO_MODEL", "mimo-v2.6-flash"), "max_tokens": 6000,
             "temperature": 0.2, "messages": [{"role": "user", "content": prompt}]}
     try:
         req = urllib.request.Request(base.rstrip("/") + "/chat/completions",
@@ -106,9 +106,13 @@ def _mimo_ask(prompt):
         log(f"MiMo-перевод не получен ({type(e).__name__})")
         return None
     m = re.search(r"\{.*\}", raw, re.S)
+    if not m:
+        log(f"MiMo raw (no JSON): {raw[:300]!r}")
+        return None
     try:
-        return json.loads(m.group(0)) if m else None
-    except ValueError:
+        return json.loads(m.group(0))
+    except ValueError as e:
+        log(f"MiMo raw (bad JSON: {e}): {raw[:300]!r}")
         return None
 
 
@@ -125,7 +129,7 @@ def _opencode_ask(prompt):
     if not key:
         return None
     body = {"model": os.environ.get("REEL_OPENCODE_MODEL", "deepseek-v4.1-flash"),
-            "max_tokens": 4000, "temperature": 0.2,
+            "max_tokens": 8000, "temperature": 0.2,
             "messages": [{"role": "user", "content": prompt}]}
     try:
         req = urllib.request.Request("https://opencode.ai/zen/go/v1/chat/completions",
@@ -140,15 +144,29 @@ def _opencode_ask(prompt):
         log(f"DeepSeek-перевод не получен ({type(e).__name__})")
         return None
     m = re.search(r"\{.*\}", raw, re.S)
+    if not m:
+        log(f"DeepSeek raw (no JSON): {raw[:300]!r}")
+        return None
     try:
-        return json.loads(m.group(0)) if m else None
-    except ValueError:
+        return json.loads(m.group(0))
+    except ValueError as e:
+        log(f"DeepSeek raw (bad JSON: {e}): {raw[:300]!r}")
         return None
 
 
 def ask(payload):
+    prompt = PROMPT + json.dumps(payload, ensure_ascii=False, indent=1)
+    # 09.11.2026: DeepSeek первым (OpenCode Go), MiMo резервом, Claude последним.
+    for name, fn in (("DeepSeek", _opencode_ask), ("MiMo", _mimo_ask)):
+        out = fn(prompt)
+        if out is not None:
+            bad = problems(out, payload)
+            if not bad:
+                log(f"перевод получен через {name}")
+                return out
+            log(f"{name}-перевод не прошёл проверку ({bad})")
     for attempt in range(2):
-        r = subprocess.run(["claude-run", "-p", PROMPT + json.dumps(payload, ensure_ascii=False, indent=1),
+        r = subprocess.run(["claude-run", "-p", prompt,
                             "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.30"],
                            capture_output=True, text=True, timeout=300, stdin=subprocess.DEVNULL)
         m = re.search(r"\{.*\}", r.stdout, re.S)
@@ -160,20 +178,6 @@ def ask(payload):
         if not bad:
             return out
         log(f"перевод не прошёл проверку ({bad}), попытка {attempt + 1}: {r.stdout[-300:]!r}")
-    out = _mimo_ask(PROMPT + json.dumps(payload, ensure_ascii=False, indent=1))
-    if out is not None:
-        bad = problems(out, payload)
-        if not bad:
-            log("перевод получен через MiMo")
-            return out
-        log(f"MiMo-перевод не прошёл проверку ({bad})")
-    out = _opencode_ask(PROMPT + json.dumps(payload, ensure_ascii=False, indent=1))
-    if out is not None:
-        bad = problems(out, payload)
-        if not bad:
-            log("перевод получен через DeepSeek")
-            return out
-        log(f"DeepSeek-перевод не прошёл проверку ({bad})")
     raise SystemExit("en_pass: перевод не получен")
 
 

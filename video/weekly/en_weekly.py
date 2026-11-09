@@ -71,9 +71,37 @@ def log(m):
     print(f"en_weekly: {m}", flush=True)
 
 
+def _bad(out, payload):
+    if not isinstance(out, dict):
+        return "не JSON"
+    if not (isinstance(out.get("ui"), list) and len(out["ui"]) == len(payload["ui"])):
+        return "ui: не та длина"
+    if set(out.get("voice") or {}) != set(payload["voice"]):
+        return "voice: не те ключи"
+    if not (isinstance(out.get("chapters"), list) and len(out["chapters"]) == len(payload["chapters"])):
+        return "chapters: не та длина"
+    if not (isinstance(out.get("summary"), list) and len(out["summary"]) == len(payload["objects"])):
+        return "summary: не та длина"
+    if E.CYR.search(json.dumps(out, ensure_ascii=False)):
+        return "осталась кириллица"
+    if SF.has_casualty(json.dumps(out, ensure_ascii=False)):
+        return "упоминание погибших/раненых (запрещено)"
+    return None
+
+
 def ask(payload):
+    prompt = PROMPT + json.dumps(payload, ensure_ascii=False, indent=1)
+    # 09.11.2026: DeepSeek первым (OpenCode Go), MiMo резервом, Claude последним.
+    for name, fn in (("DeepSeek", E._opencode_ask), ("MiMo", E._mimo_ask)):
+        out = fn(prompt)
+        if out is not None:
+            bad = _bad(out, payload)
+            if not bad:
+                log(f"перевод получен через {name}")
+                return out
+            log(f"{name}-перевод не прошёл проверку ({bad})")
     for attempt in range(3):
-        r = subprocess.run(["claude-run", "-p", PROMPT + json.dumps(payload, ensure_ascii=False, indent=1),
+        r = subprocess.run(["claude-run", "-p", prompt,
                             "--model", E.HAIKU, "--effort", "high", "--max-budget-usd", "0.60"],
                            capture_output=True, text=True, timeout=420, stdin=subprocess.DEVNULL)
         m = re.search(r"\{.*\}", r.stdout, re.S)
@@ -81,34 +109,10 @@ def ask(payload):
             out = json.loads(m.group(0)) if m else None
         except ValueError:
             out = None
-        bad = None
-        if not isinstance(out, dict):
-            bad = "не JSON"
-        elif not (isinstance(out.get("ui"), list) and len(out["ui"]) == len(payload["ui"])):
-            bad = "ui: не та длина"
-        elif set(out.get("voice") or {}) != set(payload["voice"]):
-            bad = "voice: не те ключи"
-        elif not (isinstance(out.get("chapters"), list) and len(out["chapters"]) == len(payload["chapters"])):
-            bad = "chapters: не та длина"
-        elif not (isinstance(out.get("summary"), list) and len(out["summary"]) == len(payload["objects"])):
-            bad = "summary: не та длина"
-        elif E.CYR.search(json.dumps(out, ensure_ascii=False)):
-            bad = "осталась кириллица"
-        elif SF.has_casualty(json.dumps(out, ensure_ascii=False)):
-            bad = "упоминание погибших/раненых (запрещено)"
+        bad = _bad(out, payload)
         if not bad:
             return out
         log(f"перевод не прошёл проверку ({bad}), попытка {attempt + 1}: {r.stdout[-200:]!r}")
-    out = E._opencode_ask(PROMPT + json.dumps(payload, ensure_ascii=False, indent=1))
-    if (isinstance(out, dict) and isinstance(out.get("ui"), list) and len(out["ui"]) == len(payload["ui"])
-            and set(out.get("voice") or {}) == set(payload["voice"])
-            and isinstance(out.get("chapters"), list) and len(out["chapters"]) == len(payload["chapters"])
-            and isinstance(out.get("summary"), list) and len(out["summary"]) == len(payload["objects"])
-            and not E.CYR.search(json.dumps(out, ensure_ascii=False))
-            and not SF.has_casualty(json.dumps(out, ensure_ascii=False))):
-        log("перевод получен через DeepSeek")
-        return out
-    log("DeepSeek-перевод не прошёл проверку")
     raise SystemExit("en_weekly: перевод не получен")
 
 

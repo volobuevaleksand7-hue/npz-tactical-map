@@ -592,7 +592,7 @@ def _opencode_lines(prompt):
     if not key:
         return None
     body = {"model": os.environ.get("REEL_OPENCODE_MODEL", "deepseek-v4.1-flash"),
-            "max_tokens": 4000, "temperature": 0.3,
+            "max_tokens": 8000, "temperature": 0.3,
             "messages": [{"role": "user", "content": prompt}]}
     try:
         req = urllib.request.Request("https://opencode.ai/zen/go/v1/chat/completions",
@@ -617,31 +617,32 @@ def _opencode_lines(prompt):
 
 
 def llm_lines(sel, refs):
-    """Реплики по ударам от Haiku; None — нет claude/сети/ответ не прошёл проверку."""
-    if os.environ.get("REEL_LLM", "1") == "0" or not shutil.which("claude"):
+    """Реплики по ударам: DeepSeek → MiMo → Claude; None — все отказали."""
+    if os.environ.get("REEL_LLM", "1") == "0":
         return None
     stops = [{"город": s.get("city") or "", "область": s.get("region") or "", "объект": object_name(s, refs),
               "confidence": s.get("confidence", "reported"),
               "факты": [re.sub(r"\s+", " ", str(x.get("detail") or x.get("target") or ""))[:500]
                         for x in s.get("_group", [s])]} for s in sel]
-    try:
-        r = subprocess.run(["claude-run", "-p", LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1),
-                            "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.30"],
-                           capture_output=True, text=True, timeout=180, stdin=subprocess.DEVNULL)
-        m = re.search(r"\[.*\]", r.stdout, re.S)
-        lines = json.loads(m.group(0)) if m else None
-        if not (isinstance(lines, list) and len(lines) == len(sel)):
-            lines = _mimo_lines(LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1))
-        if not (isinstance(lines, list) and len(lines) == len(sel)):
-            lines = _opencode_lines(LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1))
-    except (subprocess.TimeoutExpired, ValueError, OSError) as e:
-        print(f"build_reel: LLM-озвучка не получена ({e}) — шаблон", file=sys.stderr)
-        lines = _mimo_lines(LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1))
-        if not (isinstance(lines, list) and len(lines) == len(sel)):
-            lines = _opencode_lines(LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1))
-        return lines if isinstance(lines, list) and len(lines) == len(sel) else None
+    prompt = LLM_PROMPT + json.dumps(stops, ensure_ascii=False, indent=1)
+    # 09.11.2026: DeepSeek V4.1 Flash первым (OpenCode Go), MiMo резервом, Claude последним.
+    lines = _opencode_lines(prompt)
+    if not (isinstance(lines, list) and len(lines) == len(sel)):
+        lines = _mimo_lines(prompt)
+    r = None
+    if not (isinstance(lines, list) and len(lines) == len(sel)) and shutil.which("claude"):
+        try:
+            r = subprocess.run(["claude-run", "-p", prompt,
+                                "--model", HAIKU, "--effort", "high", "--max-budget-usd", "0.30"],
+                               capture_output=True, text=True, timeout=180, stdin=subprocess.DEVNULL)
+            m = re.search(r"\[.*\]", r.stdout, re.S)
+            lines = json.loads(m.group(0)) if m else None
+        except (subprocess.TimeoutExpired, ValueError, OSError) as e:
+            print(f"build_reel: LLM-озвучка не получена ({e}) — шаблон", file=sys.stderr)
+            lines = None
     if not (isinstance(lines, list) and len(lines) == len(sel) and all(isinstance(x, str) for x in lines)):
-        print(f"build_reel: LLM-ответ не по формату — шаблон: {r.stdout[-300:]!r} {r.stderr[-200:]!r}", file=sys.stderr)
+        extra = f": {r.stdout[-300:]!r}" if r else ""
+        print(f"build_reel: LLM-ответ не по формату — шаблон{extra}", file=sys.stderr)
         return None
     out = []
     for x, s in zip(lines, sel):
