@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794233162,
-      "source_text": "09.11.2026 17:06 МСК\nБольшетроицкое Шебенский МО Опасность по БПЛА Белгородская область"
+      "last_event_ts": 1794234524,
+      "source_text": "09.11.2026 17:28 МСК\nБелгородский район Тревога по БПЛА"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -438,6 +438,28 @@
       "source_text": "09.11.2026 16:11 МСК\nШебекино и близлежащие Опасность по БПЛА БГД"
     },
     {
+      "key": "таврово|белгородская область",
+      "name": "Таврово",
+      "lat": 50.505,
+      "lon": 36.5763888888889,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794234486,
+      "source_text": "09.11.2026 17:28 МСК\nТаврово И близлежащие Опасность по БПЛА Белгородская область"
+    },
+    {
       "key": "азовского моря|краснодарский край",
       "name": "Азовского моря",
       "lat": 46.7282552,
@@ -703,6 +725,28 @@
     }
   ],
   "districts": {
+    "RUS.7.4_1": {
+      "gid_2": "RUS.7.4_1",
+      "name_ru": "Белгородский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794234524,
+      "source_text": "09.11.2026 17:28 МСК\nБелгородский район Тревога по БПЛА"
+    },
     "RUS.58.25_1": {
       "gid_2": "RUS.58.25_1",
       "name_ru": "Миллеровский район",
@@ -838,6 +882,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301555,
+      "text": "Белгородский район\nТревога по БПЛА",
+      "ts": 1794234524,
+      "time_label": "09.11.2026 17:28 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301554,
+      "text": "Таврово\nИ близлежащие\nОпасность по БПЛА\nБелгородская область",
+      "ts": 1794234486,
+      "time_label": "09.11.2026 17:28 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 301553,
       "text": "Беловской район\nИ близлежащие опасность по БПЛА и далее северо-восток\nКурская область",
@@ -1461,22 +1521,6 @@
       "time_label": "09.11.2026 13:34 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301480,
-      "text": "Пуски Уаб от Павлограда",
-      "ts": 1794220201,
-      "time_label": "09.11.2026 13:30 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301479,
-      "text": "Алексеевка и близлежащие\nОпасность по БПЛА\nБелгородская область",
-      "ts": 1794220169,
-      "time_label": "09.11.2026 13:29 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1486,14 +1530,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794233568,
-  "last_event_at": "2026-11-09T14:12:48Z",
-  "fetched_at": "2026-11-09T14:20:04.295069Z",
+  "timestamp": 1794234524,
+  "last_event_at": "2026-11-09T14:28:44Z",
+  "fetched_at": "2026-11-09T14:30:04.261963Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-09T14:20:04.295069Z",
-    "source_age_seconds": 436,
-    "city_count": 22,
+    "generated_at": "2026-11-09T14:30:04.261963Z",
+    "source_age_seconds": 80,
+    "city_count": 23,
     "region_count": 11,
     "feed_count": 80
   }
