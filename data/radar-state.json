@@ -53,15 +53,15 @@
       "uabDim": false,
       "fpv": false,
       "rocket": true,
-      "rocket_level": false,
+      "rocket_level": true,
       "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1794306192,
-      "source_text": "10.11.2026 13:23 МСК\nКраснодарский край, Ростовская область, Волгоградская область - авиационная опасность из-за активности вражеской авиации в районе Днепропетровской области. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1794309546,
+      "source_text": "10.11.2026 14:18 МСК\nРостовская область Ракетная опасность\n\n10.11.2026 13:23 МСК\nКраснодарский край, Ростовская область, Волгоградская область - авиационная опасность из-за активности вражеской авиации в районе Днепропетровской области. 📡 Локатор России - @locatorru\n\n10.11.2026 14:19 МСК\nРостовская область Опасность по БПЛА"
     },
     "Белгородская область": {
       "bpla": false,
@@ -234,6 +234,25 @@
       "last_event_ts": 1794307885,
       "source_text": "10.11.2026 13:51 МСК\nЧерноморское, Тарханкут, Оленевка и близлежащие тревога по БПЛА"
     },
+    "Воронежская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1794309501,
+      "source_text": "10.11.2026 14:18 МСК\nВоронежская область Ракетная опасность"
+    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -250,8 +269,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794308597,
-      "source_text": "10.11.2026 14:03 МСК\nДонецк и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794309464,
+      "source_text": "10.11.2026 14:17 МСК\nПо трассе Мариуполь Донецк от Волновахи в сторону Донецка Тревога по БПЛА Хорнет"
     },
     "Орловская область": {
       "bpla": false,
@@ -293,8 +312,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794308597,
-      "source_text": "10.11.2026 14:03 МСК\nДонецк и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794309464,
+      "source_text": "10.11.2026 14:17 МСК\nПо трассе Мариуполь Донецк от Волновахи в сторону Донецка Тревога по БПЛА Хорнет"
     },
     {
       "key": "пантелеймоновка|донецкая народная республика",
@@ -896,9 +915,9 @@
       "lat": 47.09514,
       "lon": 37.54131,
       "region": "Донецкая Народная Республика",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -909,8 +928,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794303639,
-      "source_text": "10.11.2026 12:40 МСК\nОт Волновахи ДНР фиксация БПЛА в западном направлении Трасса Р 280 Новоазовск - Мариуполь -Осипенко Опасность по БПЛА"
+      "last_event_ts": 1794309464,
+      "source_text": "10.11.2026 14:17 МСК\nПо трассе Мариуполь Донецк от Волновахи в сторону Донецка Тревога по БПЛА Хорнет"
     },
     {
       "key": "суджа|курская область",
@@ -1600,6 +1619,54 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 106570,
+      "text": "Ростовская область\nОпасность по БПЛА",
+      "ts": 1794309546,
+      "time_label": "10.11.2026 14:19 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 301843,
+      "text": "Ростовская область\nРакетная опасность",
+      "ts": 1794309527,
+      "time_label": "10.11.2026 14:18 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301842,
+      "text": "Воронежская область\nРакетная опасность",
+      "ts": 1794309501,
+      "time_label": "10.11.2026 14:18 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301841,
+      "text": "Счастье ЛНР возможно крылатая ракета в направлении Ростовской, Волгоградской области",
+      "ts": 1794309488,
+      "time_label": "10.11.2026 14:18 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301840,
+      "text": "По трассе Мариуполь Донецк от Волновахи в сторону Донецка\nТревога по БПЛА Хорнет",
+      "ts": 1794309464,
+      "time_label": "10.11.2026 14:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301839,
+      "text": "Отбой авиационно ракетно бомбовой опасности по всем раннее объявленным",
+      "ts": 1794309328,
+      "time_label": "10.11.2026 14:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 301838,
       "text": "Шебекино\nШебекинский район\nТревога по БПЛА и Фпв\nВысокая активность",
       "ts": 1794308947,
@@ -2190,54 +2257,6 @@
       "time_label": "10.11.2026 11:24 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301777,
-      "text": "Надеждовка\nЧаплынка и близлежащие\nХерсонская область РФ\nОпасность по БПЛА Хорнет",
-      "ts": 1794298711,
-      "time_label": "10.11.2026 11:18 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301776,
-      "text": "Угледар\nДНР\nРакетная опасность",
-      "ts": 1794298122,
-      "time_label": "10.11.2026 11:08 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301775,
-      "text": "Богатырь ДНР ракетная опасность",
-      "ts": 1794298025,
-      "time_label": "10.11.2026 11:07 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301774,
-      "text": "Снежное, Шахтёрск, Торез и близлежащие\nОпасность по БПЛА\nДНР",
-      "ts": 1794297803,
-      "time_label": "10.11.2026 11:03 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301773,
-      "text": "Горловка и близлежащие\nОпасность по БПЛА и возможным ФПВ с запада\nДНР",
-      "ts": 1794297716,
-      "time_label": "10.11.2026 11:01 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301772,
-      "text": "Валуйский район\nОпасность по БПЛА",
-      "ts": 1794297631,
-      "time_label": "10.11.2026 11:00 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2247,15 +2266,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794308947,
-  "last_event_at": "2026-11-10T11:09:07Z",
-  "fetched_at": "2026-11-10T11:10:03.347812Z",
+  "timestamp": 1794309546,
+  "last_event_at": "2026-11-10T11:19:06Z",
+  "fetched_at": "2026-11-10T11:20:03.492816Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-10T11:10:03.347812Z",
-    "source_age_seconds": 56,
+    "generated_at": "2026-11-10T11:20:03.492816Z",
+    "source_age_seconds": 57,
     "city_count": 51,
-    "region_count": 14,
+    "region_count": 15,
     "feed_count": 80
   }
 }
