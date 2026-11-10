@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Адыгея": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794269423,
+      "source_text": "10.11.2026 03:10 МСК\nРеспублика Адыгея Опасность по БПЛА"
+    },
     "Краснодарский край": {
       "bpla": false,
       "bplaDim": false,
@@ -2732,6 +2751,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 106545,
+      "text": "Республика Адыгея\nОпасность по БПЛА",
+      "ts": 1794269423,
+      "time_label": "10.11.2026 03:10 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 106544,
       "text": "Геленджик и близлежащие\nАнапа и близлежащие\nНовороссийск и близлежащие\nТемрюкский район\nКрымский район\nАбинский район\nКраснодарский край\nОпасность по БПЛА",
       "ts": 1794269262,
@@ -3362,14 +3389,6 @@
       "time_label": "09.11.2026 23:35 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 94528,
-      "text": "Приморско-Ахтарский район, Брюховецкий район, Ейский район, Каневской район, Щербиновский район, Краснодарский край - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794256502,
-      "time_label": "09.11.2026 23:35 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -3379,15 +3398,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794269262,
-  "last_event_at": "2026-11-10T00:07:42Z",
-  "fetched_at": "2026-11-10T00:10:02.716901Z",
+  "timestamp": 1794269423,
+  "last_event_at": "2026-11-10T00:10:23Z",
+  "fetched_at": "2026-11-10T00:20:03.887706Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-10T00:10:02.716901Z",
-    "source_age_seconds": 140,
+    "generated_at": "2026-11-10T00:20:03.887706Z",
+    "source_age_seconds": 580,
     "city_count": 60,
-    "region_count": 18,
+    "region_count": 19,
     "feed_count": 80
   }
 }
