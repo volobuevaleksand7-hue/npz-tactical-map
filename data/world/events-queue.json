@@ -189,14 +189,14 @@
    "found_at": "2026-10-27T11:35:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "ok",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "needs_source",
-   "reject_reason": "нужен второй независимый издатель"
+   "verdict": "rejected",
+   "reject_reason": "schema"
   },
   {
    "id": "2026-10-28-hormuz-tanker-fire-mine-claim-iran",
@@ -614,8 +614,7 @@
     "urls_alive": "unknown",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
-    "translation": "ok",
-    "downgraded": "confirmed->reported: <2 независимых издателей"
+    "translation": "ok"
    },
    "verdict": "needs_source",
    "reject_reason": "нужен второй независимый издатель"
@@ -662,5 +661,5 @@
    "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-09T19:34:38Z"
+ "validated_at": "2026-11-10T03:34:35Z"
 }
