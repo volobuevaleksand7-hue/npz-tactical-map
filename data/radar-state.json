@@ -291,6 +291,25 @@
       "last_event_ts": 1794261937,
       "source_text": "10.11.2026 01:05 МСК\nПо обстановке на 01:00. 1. Брянская область, Курская область, Смоленская область, Орловская область, Калужская область, Новгородская область, Тверская область - опасность по БПЛА сохраняется. Основные функции БПЛА были над Смоленской областью, практически все цели были уничтожены. 2. Белгородская область, Воронежская область, Ростовская область - опасность по БПЛА сохраняется. Возможны единичные …"
     },
+    "Автономная Республика Крым": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794276504,
+      "source_text": "10.11.2026 05:08 МСК\nКерчь и близлежащие, опасность по БПЛА"
+    },
     "Воронежская область": {
       "bpla": false,
       "bplaDim": false,
@@ -629,6 +648,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794252896,
       "source_text": "09.11.2026 22:34 МСК\nПогар и близлежащие, тревога по БПЛА Брянская область"
+    },
+    {
+      "key": "керчь|автономная республика крым",
+      "name": "Керчь",
+      "lat": 45.35675,
+      "lon": 36.47542,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794276504,
+      "source_text": "10.11.2026 05:08 МСК\nКерчь и близлежащие, опасность по БПЛА"
     },
     {
       "key": "севастополь|севастополь",
@@ -1091,28 +1132,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1794274011,
       "source_text": "10.11.2026 04:26 МСК\nРодаково в направлении Белой, опасность по БПЛА ЛНР"
-    },
-    {
-      "key": "большетроицкое|белгородская область",
-      "name": "Большетроицкое",
-      "lat": 50.542103,
-      "lon": 37.290577,
-      "region": "Белгородская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1794233162,
-      "source_text": "09.11.2026 17:06 МСК\nБольшетроицкое Шебенский МО Опасность по БПЛА Белгородская область"
     },
     {
       "key": "обоянь|курская область",
@@ -2098,8 +2117,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -2836,6 +2855,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 301739,
+      "text": "Керчь и близлежащие, опасность по БПЛА",
+      "ts": 1794276504,
+      "time_label": "10.11.2026 05:08 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 301738,
       "text": "Севастополь, весь город. Тревога по БПЛА",
       "ts": 1794275227,
@@ -3466,14 +3493,6 @@
       "time_label": "09.11.2026 23:48 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 94533,
-      "text": "Брянская область, Смоленская область - опасность по реактивным БПЛА.\nОт госграницы в сторону Почепского района реактивные БПЛА и далее на север, северо-восток.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794257149,
-      "time_label": "09.11.2026 23:45 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -3483,15 +3502,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794275227,
-  "last_event_at": "2026-11-10T01:47:07Z",
-  "fetched_at": "2026-11-10T02:00:03.994480Z",
+  "timestamp": 1794276504,
+  "last_event_at": "2026-11-10T02:08:24Z",
+  "fetched_at": "2026-11-10T02:10:03.386374Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-10T02:00:03.994480Z",
-    "source_age_seconds": 776,
+    "generated_at": "2026-11-10T02:10:03.386374Z",
+    "source_age_seconds": 99,
     "city_count": 58,
-    "region_count": 20,
+    "region_count": 21,
     "feed_count": 80
   }
 }
