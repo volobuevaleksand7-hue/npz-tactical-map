@@ -25,6 +25,25 @@
       "last_event_ts": 1794294887,
       "source_text": "10.11.2026 10:14 МСК\nГвардейское и близлежащие Опасность по БПЛА Республика Крым"
     },
+    "Белгородская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794295267,
+      "source_text": "10.11.2026 10:21 МСК\nДубовое и близлежащие Белгородская область Опасность по БПЛА"
+    },
     "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
@@ -62,6 +81,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1794294102,
       "source_text": "10.11.2026 10:01 МСК\nВнимание Дорожное направление трасса Р-280 Владимировка - Инзовка - Приморск Опасность по БПЛА"
+    },
+    "Курская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794295697,
+      "source_text": "10.11.2026 10:28 МСК\nБольшое Солдатское и близлежащие Курская область Опасность по БПЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -302,6 +340,28 @@
       "source_text": "10.11.2026 09:07 МСК\nНовогродовка и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     {
+      "key": "дубовое|белгородская область",
+      "name": "Дубовое",
+      "lat": 50.5375923,
+      "lon": 36.5846443,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794295267,
+      "source_text": "10.11.2026 10:21 МСК\nДубовое и близлежащие Белгородская область Опасность по БПЛА"
+    },
+    {
       "key": "белицкое|донецкая народная республика",
       "name": "Белицкое",
       "lat": 48.40642,
@@ -349,6 +409,22 @@
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301764,
+      "text": "Большое Солдатское и близлежащие\nКурская область\nОпасность по БПЛА",
+      "ts": 1794295697,
+      "time_label": "10.11.2026 10:28 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301763,
+      "text": "Дубовое и близлежащие\nБелгородская область\nОпасность по БПЛА",
+      "ts": 1794295267,
+      "time_label": "10.11.2026 10:21 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 301762,
       "text": "Гвардейское и близлежащие\nОпасность по БПЛА\nРеспублика Крым",
@@ -972,22 +1048,6 @@
       "time_label": "10.11.2026 01:19 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301714,
-      "text": "Псковская область\nотбой по бпла",
-      "ts": 1794262430,
-      "time_label": "10.11.2026 01:13 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 106542,
-      "text": "Псковская область\nОтбой опасности по БПЛА",
-      "ts": 1794261974,
-      "time_label": "10.11.2026 01:06 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -997,15 +1057,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794294887,
-  "last_event_at": "2026-11-10T07:14:47Z",
-  "fetched_at": "2026-11-10T07:20:03.907433Z",
+  "timestamp": 1794295697,
+  "last_event_at": "2026-11-10T07:28:17Z",
+  "fetched_at": "2026-11-10T07:30:03.155851Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-10T07:20:03.907433Z",
-    "source_age_seconds": 316,
-    "city_count": 11,
-    "region_count": 5,
+    "generated_at": "2026-11-10T07:30:03.155851Z",
+    "source_age_seconds": 106,
+    "city_count": 12,
+    "region_count": 7,
     "feed_count": 80
   }
 }
