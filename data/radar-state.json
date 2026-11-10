@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794285758,
-      "source_text": "10.11.2026 07:42 МСК\nТрасса Р - 280 Запорожская область РФ Опасность по БПЛА"
+      "last_event_ts": 1794294102,
+      "source_text": "10.11.2026 10:01 МСК\nВнимание Дорожное направление трасса Р-280 Владимировка - Инзовка - Приморск Опасность по БПЛА"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1794293779,
-      "source_text": "10.11.2026 09:27 МСК\nДонецк ракетная опасность ДНР\n\n10.11.2026 09:56 МСК\nДонецк и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794294102,
+      "source_text": "10.11.2026 09:27 МСК\nДонецк ракетная опасность ДНР\n\n10.11.2026 10:01 МСК\nВнимание Дорожное направление трасса Р-280 Владимировка - Инзовка - Приморск Опасность по БПЛА"
     }
   },
   "cities": [
@@ -176,6 +176,28 @@
       "source_text": "10.11.2026 09:41 МСК\nКаланчак и близлежащие Херсонская область РФ Опасность по БПЛА Хорнет"
     },
     {
+      "key": "приморск|запорожская область",
+      "name": "Приморск",
+      "lat": 46.73415,
+      "lon": 36.34599,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794294102,
+      "source_text": "10.11.2026 10:01 МСК\nВнимание Дорожное направление трасса Р-280 Владимировка - Инзовка - Приморск Опасность по БПЛА"
+    },
+    {
       "key": "чаплинка|херсонская область",
       "name": "Чаплинка",
       "lat": 46.36454,
@@ -240,11 +262,41 @@
       "fill": "#ea580c",
       "last_event_ts": 1794289428,
       "source_text": "10.11.2026 08:43 МСК\nБелицкое, Родинское, Димитров, Красноармейск и близлежащие Опасность по БПЛА Хорнет ДНР"
+    },
+    {
+      "key": "владимировка|донецкая народная республика",
+      "name": "Владимировка",
+      "lat": 47.73391,
+      "lon": 37.3882,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794294102,
+      "source_text": "10.11.2026 10:01 МСК\nВнимание Дорожное направление трасса Р-280 Владимировка - Инзовка - Приморск Опасность по БПЛА"
     }
   ],
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301761,
+      "text": "Внимание\nДорожное направление трасса Р-280\nВладимировка - Инзовка - Приморск\nОпасность по БПЛА",
+      "ts": 1794294102,
+      "time_label": "10.11.2026 10:01 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 301760,
       "text": "Донецк и близлежащие\nОпасность по БПЛА\nДНР",
@@ -876,14 +928,6 @@
       "time_label": "10.11.2026 01:05 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 301713,
-      "text": "Мелитополь и близлежащие\nОпасность по БПЛА\nЗапорожская область РФ",
-      "ts": 1794261912,
-      "time_label": "10.11.2026 01:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -893,14 +937,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794293779,
-  "last_event_at": "2026-11-10T06:56:19Z",
-  "fetched_at": "2026-11-10T07:00:04.584003Z",
+  "timestamp": 1794294102,
+  "last_event_at": "2026-11-10T07:01:42Z",
+  "fetched_at": "2026-11-10T07:10:02.626934Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-10T07:00:04.584003Z",
-    "source_age_seconds": 225,
-    "city_count": 8,
+    "generated_at": "2026-11-10T07:10:02.626934Z",
+    "source_age_seconds": 500,
+    "city_count": 10,
     "region_count": 3,
     "feed_count": 80
   }
