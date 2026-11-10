@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794296763,
-      "source_text": "10.11.2026 10:46 МСК\nР-280! Бердянск - Осипенко - Север опасность по БПЛА Запорожская область РФ"
+      "last_event_ts": 1794297097,
+      "source_text": "10.11.2026 10:51 МСК\nАкимовка и близлежащие Запорожская область РФ Опасность по БПЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794296910,
-      "source_text": "10.11.2026 10:48 МСК\nЛьгов и близлежащие Курская область Опасность по БПЛА"
+      "last_event_ts": 1794297504,
+      "source_text": "10.11.2026 10:58 МСК\nСуджа и близлежащие Курская область Опасность по БПЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -447,6 +447,28 @@
       "source_text": "10.11.2026 10:21 МСК\nДубовое и близлежащие Белгородская область Опасность по БПЛА"
     },
     {
+      "key": "суджа|курская область",
+      "name": "Суджа",
+      "lat": 51.191,
+      "lon": 35.271,
+      "region": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794297504,
+      "source_text": "10.11.2026 10:58 МСК\nСуджа и близлежащие Курская область Опасность по БПЛА"
+    },
+    {
       "key": "белицкое|донецкая народная республика",
       "name": "Белицкое",
       "lat": 48.40642,
@@ -533,11 +555,49 @@
       "fill": "#ea580c",
       "last_event_ts": 1794296910,
       "source_text": "10.11.2026 10:48 МСК\nЛьгов и близлежащие Курская область Опасность по БПЛА"
+    },
+    {
+      "key": "акимовка|запорожская область",
+      "name": "Акимовка",
+      "lat": 46.7011,
+      "lon": 35.16334,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794297097,
+      "source_text": "10.11.2026 10:51 МСК\nАкимовка и близлежащие Запорожская область РФ Опасность по БПЛА"
     }
   ],
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301771,
+      "text": "Суджа и близлежащие\nКурская область\nОпасность по БПЛА",
+      "ts": 1794297504,
+      "time_label": "10.11.2026 10:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 301770,
+      "text": "Акимовка и близлежащие\nЗапорожская область РФ\nОпасность по БПЛА",
+      "ts": 1794297097,
+      "time_label": "10.11.2026 10:51 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 301769,
       "text": "Льгов и близлежащие\nКурская область\nОпасность по БПЛА",
@@ -1161,22 +1221,6 @@
       "time_label": "10.11.2026 02:19 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 301721,
-      "text": "От Лазурного в направлении Тарханкут тревога по БПЛА",
-      "ts": 1794266315,
-      "time_label": "10.11.2026 02:18 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 94549,
-      "text": "Новгородская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794266045,
-      "time_label": "10.11.2026 02:14 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -1186,14 +1230,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794296910,
-  "last_event_at": "2026-11-10T07:48:30Z",
-  "fetched_at": "2026-11-10T07:50:03.855971Z",
+  "timestamp": 1794297504,
+  "last_event_at": "2026-11-10T07:58:24Z",
+  "fetched_at": "2026-11-10T08:00:03.953211Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-10T07:50:03.855971Z",
-    "source_age_seconds": 93,
-    "city_count": 17,
+    "generated_at": "2026-11-10T08:00:03.953211Z",
+    "source_age_seconds": 99,
+    "city_count": 19,
     "region_count": 8,
     "feed_count": 80
   }
