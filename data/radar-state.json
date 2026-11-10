@@ -5,11 +5,39 @@
   "source_label": "RadarMap public state",
   "upstream_type": "state",
   "upstream_version": 23,
-  "regions": {},
+  "regions": {
+    "Запорожская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794285758,
+      "source_text": "10.11.2026 07:42 МСК\nТрасса Р - 280 Запорожская область РФ Опасность по БПЛА"
+    }
+  },
   "cities": [],
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 301748,
+      "text": "Трасса Р - 280\nЗапорожская область РФ\nОпасность по БПЛА",
+      "ts": 1794285758,
+      "time_label": "10.11.2026 07:42 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 94556,
       "text": "Белгородская область, Воронежская область, Ростовская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
@@ -641,14 +669,6 @@
       "time_label": "10.11.2026 00:32 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 106533,
-      "text": "Куньинский район\nПсковская область\nФиксация БПЛА",
-      "ts": 1794259829,
-      "time_label": "10.11.2026 00:30 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -658,15 +678,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794284418,
-  "last_event_at": "2026-11-10T04:20:18Z",
-  "fetched_at": "2026-11-10T04:40:03.289813Z",
+  "timestamp": 1794285758,
+  "last_event_at": "2026-11-10T04:42:38Z",
+  "fetched_at": "2026-11-10T04:50:04.131558Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-10T04:40:03.289813Z",
-    "source_age_seconds": 1185,
+    "generated_at": "2026-11-10T04:50:04.131558Z",
+    "source_age_seconds": 446,
     "city_count": 0,
-    "region_count": 0,
+    "region_count": 1,
     "feed_count": 80
   }
 }
