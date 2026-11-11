@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T12:05Z",
+ "generated_at": "2026-11-11T12:20Z",
  "data_mode": "СЛУХ / НЕПРОВЕРЕНО (вариант B)",
  "disclaimer": "Авто-детектор кандидатов в удары из ленты radar-map.ru. НЕ боевые данные, НЕ публикуется автоматически. Только для ручного/Hermes-подтверждения перед переносом в strikes.json.",
  "candidates": [
@@ -3147,11 +3147,18 @@
    "detail": "[Newsader] ВСУ ВЗОРВАЛИ УСТЬ-ЛУГУ: ПОРТ В ОГНЕ!",
    "source_url": "https://www.youtube.com/watch?v=MIdOsx8o5Ng",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "MIdOsx8o5Ng",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "jev": {
+    "strike": false,
+    "confidence": 0.92,
+    "by": "jev",
+    "ts": "2026-11-11T12:20Z"
+   },
+   "expired_reason": "jev: не сообщение об ударе по топливному объекту (conf 0.92, jev)"
   }
  ]
 }
