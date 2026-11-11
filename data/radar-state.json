@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794379683,
-      "source_text": "11.11.2026 09:48 МСК\nКурская область Опасность по БПЛА"
+      "last_event_ts": 1794380646,
+      "source_text": "11.11.2026 10:04 МСК\nКурск От Железногорска фиксации БПЛА Опасность по области"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -347,25 +347,6 @@
       "fill": "#e8e4c4",
       "last_event_ts": 1794379173,
       "source_text": "11.11.2026 09:39 МСК\nРеспублика Мордовия Пензенская область Саратовская область Волгоградская область внимание по бпла"
-    },
-    "Оренбургская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794366163,
-      "source_text": "11.11.2026 06:02 МСК\nОренбургская область Опасность по БПЛА"
     },
     "Саратовская область": {
       "bpla": false,
@@ -507,6 +488,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794341381,
       "source_text": "10.11.2026 23:09 МСК\nДонецк, Макеевка и близлежащие Тревога по БПЛА, ещё множественные фиксации ДНР"
+    },
+    {
+      "key": "курск|курская область",
+      "name": "Курск",
+      "lat": 51.72689,
+      "lon": 36.18457,
+      "region": "Курская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794380646,
+      "source_text": "11.11.2026 10:04 МСК\nКурск От Железногорска фиксации БПЛА Опасность по области"
     },
     {
       "key": "счастье|луганская народная республика",
@@ -2319,6 +2322,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 106898,
+      "text": "Оренбургская область\nОтбой опасности по БПЛА",
+      "ts": 1794380784,
+      "time_label": "11.11.2026 10:06 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 302339,
+      "text": "Курск\nОт Железногорска фиксации БПЛА\nОпасность по области",
+      "ts": 1794380646,
+      "time_label": "11.11.2026 10:04 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 302338,
       "text": "Бердянск\nБердянский район\nБлизлежащие трассы и нп\nОпасность по БПЛА\nЗапорожская область РФ",
       "ts": 1794380065,
@@ -2941,22 +2960,6 @@
       "time_label": "11.11.2026 07:24 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 302308,
-      "text": "Ленинградская область\nВолгоградская область\nРеспублика Адыгея\nотбой по бпла",
-      "ts": 1794371074,
-      "time_label": "11.11.2026 07:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 106873,
-      "text": "Краснодарский край\nРеспублика Адыгея\nОтбой опасности по БПЛА",
-      "ts": 1794370985,
-      "time_label": "11.11.2026 07:23 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -2966,15 +2969,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794380065,
-  "last_event_at": "2026-11-11T06:54:25Z",
-  "fetched_at": "2026-11-11T07:00:05.110995Z",
+  "timestamp": 1794380784,
+  "last_event_at": "2026-11-11T07:06:24Z",
+  "fetched_at": "2026-11-11T07:10:05.312298Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-11T07:00:05.110995Z",
-    "source_age_seconds": 340,
-    "city_count": 46,
-    "region_count": 24,
+    "generated_at": "2026-11-11T07:10:05.312298Z",
+    "source_age_seconds": 221,
+    "city_count": 47,
+    "region_count": 23,
     "feed_count": 80
   }
 }
