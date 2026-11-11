@@ -636,7 +636,7 @@
     "Самарская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -648,9 +648,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1794354786,
-      "source_text": "11.11.2026 02:53 МСК\nСамарская область внимание по бпла"
+      "fill": "#d8c06a",
+      "last_event_ts": 1794357720,
+      "source_text": "11.11.2026 03:42 МСК\nСамарская область Опасность по БПЛА"
     },
     "Саратовская область": {
       "bpla": false,
@@ -668,8 +668,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794354457,
-      "source_text": "11.11.2026 02:47 МСК\nРомановский район Самойловский район Балашовский район Саратовская область Фиксации БПЛА"
+      "last_event_ts": 1794357936,
+      "source_text": "11.11.2026 03:45 МСК\nКалининский район Саратовская область Фиксация БПЛА"
     },
     "Владимирская область": {
       "bpla": false,
@@ -5413,8 +5413,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -7554,6 +7554,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794355120,
       "source_text": "11.11.2026 02:58 МСК\nВыборгский район Ленинградская область Фиксация БПЛА"
+    },
+    "RUS.63.19_1": {
+      "gid_2": "RUS.63.19_1",
+      "name_ru": "Калининский район",
+      "region_ru": "Саратовская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794357936,
+      "source_text": "11.11.2026 03:45 МСК\nКалининский район Саратовская область Фиксация БПЛА"
     }
   },
   "airport_markers": [
@@ -7592,6 +7614,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 106825,
+      "text": "Калининский район\nСаратовская область\nФиксация БПЛА",
+      "ts": 1794357936,
+      "time_label": "11.11.2026 03:45 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 106824,
+      "text": "Самарская область\nОпасность по БПЛА",
+      "ts": 1794357720,
+      "time_label": "11.11.2026 03:42 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 302283,
       "text": "Ульяновская область\nвнимание по бпла",
@@ -8215,22 +8253,6 @@
       "time_label": "11.11.2026 02:01 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 106782,
-      "text": "Торжокский район\nТверская область\nФиксация 2 БПЛА",
-      "ts": 1794351650,
-      "time_label": "11.11.2026 02:00 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 106781,
-      "text": "Борисоглебск и близлежащие\nВоронежская область\nОпасность по БПЛА",
-      "ts": 1794351629,
-      "time_label": "11.11.2026 02:00 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -8240,13 +8262,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794357503,
-  "last_event_at": "2026-11-11T00:38:23Z",
-  "fetched_at": "2026-11-11T00:40:35.998318Z",
+  "timestamp": 1794357936,
+  "last_event_at": "2026-11-11T00:45:36Z",
+  "fetched_at": "2026-11-11T00:50:09.762274Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-11T00:40:35.998318Z",
-    "source_age_seconds": 132,
+    "generated_at": "2026-11-11T00:50:09.762274Z",
+    "source_age_seconds": 273,
     "city_count": 145,
     "region_count": 37,
     "feed_count": 80
