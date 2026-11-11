@@ -803,6 +803,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1794358300,
       "source_text": "11.11.2026 03:51 МСК\nРеспублика Карелия Опасность по БПЛА"
+    },
+    "Республика Башкортостан": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794366634,
+      "source_text": "11.11.2026 06:10 МСК\nРеспублика Башкортостан Опасность по БПЛА"
     }
   },
   "cities": [
@@ -7400,8 +7419,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -7499,6 +7518,17 @@
       "source_text": "▫️\nАэропорт\nУЛЬЯНОВСК\n(Баратаевка)\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ"
     },
     {
+      "key": "уфа",
+      "name": "УФА",
+      "match_text": "УФА",
+      "lat": 54.557499,
+      "lon": 55.874401,
+      "closed": true,
+      "last_event_ts": 1794366794,
+      "city": "Уфа",
+      "source_text": "▫️\nАэропорт\nУФА\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ"
+    },
+    {
       "key": "чебоксары",
       "name": "ЧЕБОКСАРЫ",
       "match_text": "ЧЕБОКСАРЫ",
@@ -7522,6 +7552,14 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 106853,
+      "text": "Республика Башкортостан\nОпасность по БПЛА",
+      "ts": 1794366634,
+      "time_label": "11.11.2026 06:10 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 302288,
       "text": "Оренбургская область\nвнимание по бпла",
@@ -8153,14 +8191,6 @@
       "time_label": "11.11.2026 02:33 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 106800,
-      "text": "Плюсский район\nПсковская область\nПродолжаются фиксации БПЛА",
-      "ts": 1794353591,
-      "time_label": "11.11.2026 02:33 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -8170,15 +8200,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794366348,
-  "last_event_at": "2026-11-11T03:05:48Z",
-  "fetched_at": "2026-11-11T03:11:02.496433Z",
-  "poll_interval_sec": 30,
+  "timestamp": 1794366634,
+  "last_event_at": "2026-11-11T03:10:34Z",
+  "fetched_at": "2026-11-11T03:20:51.884645Z",
+  "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-11T03:11:02.496433Z",
-    "source_age_seconds": 314,
+    "generated_at": "2026-11-11T03:20:51.884645Z",
+    "source_age_seconds": 617,
     "city_count": 136,
-    "region_count": 42,
+    "region_count": 43,
     "feed_count": 80
   }
 }
