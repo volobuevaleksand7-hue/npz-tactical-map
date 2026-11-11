@@ -158,6 +158,25 @@
       "last_event_ts": 1794385196,
       "source_text": "11.11.2026 11:19 МСК\n11/11/2026 11:15 МСК. Опасность по БПЛА сохраняется: 🔻 Брянская область; 🔻 Курская область; 🔻 Республика Башкортостан; 🔻 Республика Татарстан; 🔻 Чувашская Республика; 🔻 Республика Марий Эл; 🔻 Кировская область; 🔻 Удмуртская Республика; 🔻 Пермский край; 🔻 Свердловская область; 🔻 Челябинская область; 🔻 Тюменская область; 🔻 Ханты-Мансийский автономный округ — Югра; 🔻 Мурманская область. 📡 Локатор Ро…"
     },
+    "Автономная Республика Крым": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794404938,
+      "source_text": "11.11.2026 16:48 МСК\nРаздольненский район Стерегущее, Портовое, Раздольное Тревога по БПЛА с моря"
+    },
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -810,6 +829,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794404291,
       "source_text": "11.11.2026 16:38 МСК\nОмск Омская область Работа ПВО по БПЛА"
+    },
+    {
+      "key": "раздольное|автономная республика крым",
+      "name": "Раздольное",
+      "lat": 45.77083,
+      "lon": 33.48777,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794404938,
+      "source_text": "11.11.2026 16:48 МСК\nРаздольненский район Стерегущее, Портовое, Раздольное Тревога по БПЛА с моря"
     }
   ],
   "districts": {
@@ -948,6 +989,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 302435,
+      "text": "Раздольненский район\nСтерегущее, Портовое, Раздольное\nТревога по БПЛА с моря\nИ далее в тыл\nРеспублика Крым",
+      "ts": 1794404938,
+      "time_label": "11.11.2026 16:48 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 106937,
       "text": "Омск\nОмская область\nРабота ПВО по БПЛА",
@@ -1579,14 +1628,6 @@
       "time_label": "11.11.2026 12:36 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 106915,
-      "text": "Республика Марий Эл\nОтбой опасности по БПЛА",
-      "ts": 1794389755,
-      "time_label": "11.11.2026 12:35 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1596,15 +1637,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794404291,
-  "last_event_at": "2026-11-11T13:38:11Z",
-  "fetched_at": "2026-11-11T13:40:03.320967Z",
+  "timestamp": 1794404938,
+  "last_event_at": "2026-11-11T13:48:58Z",
+  "fetched_at": "2026-11-11T13:50:03.426985Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-11T13:40:03.320967Z",
-    "source_age_seconds": 112,
-    "city_count": 27,
-    "region_count": 11,
+    "generated_at": "2026-11-11T13:50:03.426985Z",
+    "source_age_seconds": 65,
+    "city_count": 28,
+    "region_count": 12,
     "feed_count": 80
   }
 }
