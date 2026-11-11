@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-11-11T04:37Z",
+    "generated_at": "2026-11-11T05:27Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:strike-pipeline"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -128,10 +128,10 @@
       "status": "down",
       "status_since": "2026-04-16",
       "est_output_pct": 0,
-      "damage": "16 апреля 2026 переработка остановлена после атаки БПЛА на порт Туапсе: выгрузка продукции стала невозможной из-за пожаров на терминале порта и в резервуарном парке нефтепродуктов (Reuters, со ссылкой на источники). Ранее морские дроны атаковали пирс нефтеперегрузки в порту (конец июля), повреждена транспортная инфраструктура порта. Сообщения об отдельном ударе по заводу 2 ноября 2026 года не подтверждены.",
+      "damage": "Атака беспилотников на портовую инфраструктуру Туапсе. Оперативный штаб Краснодарского края подтвердил атаку, повреждение портовой инфраструктуры и возгорание. По данным Reuters, порт приостановил экспорт нефтепродуктов, а местный НПЗ на следующий день полностью остановил переработку из-за повреждений порта.",
       "note": "Экспортно ориентированный завод с единственной установкой первичной переработки АВТ-12 (12 млн т/год); товарных автобензина и низкосернистого дизтоплива для внутреннего рынка не выпускает. Остановлен с 16 апреля 2026, официальных сроков возобновления нет. Прежняя запись о статусе с 2 ноября 2026 года опиралась на материал 2024 года и заменена.",
-      "source_url": "https://ru.themoscowtimes.com/2026/04/22/factbox-avarii-na-npz-i-drugikh-obektakh-tek-rf-v-2025-2026gg-a193338",
-      "confidence": "reported"
+      "source_url": "https://news.liga.net/politics/news/ukrainskaya-ataka-ostanovila-eksport-nefteproduktov-iz-tuapse-i-rabotu-npz-reuters",
+      "confidence": "confirmed"
     },
     {
       "id": "kuibyshev",
@@ -1144,6 +1144,11 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-11-11",
+      "text": "Удар по Туапсинский НПЗ (Туапсе): Атака беспилотников на портовую инфраструктуру Туапсе. Оперативный штаб Краснодарского края подтверд",
+      "source_url": "https://news.liga.net/politics/news/ukrainskaya-ataka-ostanovila-eksport-nefteproduktov-iz-tuapse-i-rabotu-npz-reuters"
+    },
     {
       "date": "2026-11-09",
       "text": "Забайкалье: Минэкономразвития края сообщило, что «Роснефть» ввела лимиты на АЗС по всей стране (30 л бензина в городе, 50 л на трассе); федерального подтверждения компании нет",
