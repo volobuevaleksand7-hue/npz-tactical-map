@@ -7,7 +7,7 @@ from pathlib import Path
 # Configuration
 DATA_FILE = Path("data/fuel-voices.json")
 LAST_8_HOURS_SECONDS = 8 * 3600
-CURRENT_TIME_UTC = datetime.datetime(2026, 11, 10, 11, 37, 49, 986310)
+CURRENT_TIME_UTC = datetime.datetime.utcnow()
 CURRENT_TIME_TS = int(CURRENT_TIME_UTC.timestamp())
 TARGET_REGIONS = ["Крым", "Белгород", "Курск", "Рязань", "Москва"]
 
@@ -62,13 +62,16 @@ def is_from_last_8_hours(entry):
             ts = parse_date_to_timestamp(entry[field])
             if ts:
                 diff = CURRENT_TIME_TS - ts
-                print(f"  DEBUG: field={field}, date={entry[field]}, ts={ts}, diff={diff}h")
-                if diff <= LAST_8_HOURS_SECONDS:
-                    return True
+                print(f"  DEBUG: field={field}, date={entry[field]}, ts={ts}, diff={diff}s")
                 # Accept same day for development (covering ongoing events)
                 entry_date = datetime.datetime.fromtimestamp(ts).date()
                 current_date = CURRENT_TIME_UTC.date()
                 if entry_date == current_date:
+                    print(f"  DEBUG: Same day accepted: {entry_date}")
+                    return True
+                # Also accept within last 8 hours
+                if diff <= LAST_8_HOURS_SECONDS:
+                    print(f"  DEBUG: Within 8 hours: {diff}s")
                     return True
     return False
 
@@ -96,62 +99,62 @@ def mock_search_tg_channel(channel_name):
     if channel_name == "t.me/s/nefte_baza":
         mock_data = [
             {
-                "date": "2026-11-10",
+                "date": CURRENT_TIME_UTC.strftime("%Y-%m-%d"),
                 "region": "Москва", 
                 "city": "Зеленоград",
                 "source": "Telegram channel",
                 "sentiment": "complaint",
                 "topic": "shortage",
                 "quote": "В Зеленограде снова закончили 95-й бензин — все АЗС продают только 92-й или дизель. Очереди не помогают — топливо кончилось уже на трех станциях.",
-                "seen": "2026-11-10"
+                "seen": CURRENT_TIME_UTC.strftime("%Y-%m-%d")
             },
             {
-                "date": "2026-11-10",
+                "date": CURRENT_TIME_UTC.strftime("%Y-%m-%d"),
                 "region": "Крым",
-                "city": "Симферополь", 
+                "city": "Симферополь",
                 "source": "Telegram channel",
                 "sentiment": "complaint",
                 "topic": "limit",
                 "quote": "В Крыму снова появились ограничения — сети АТАН и ТЭС ограничивают продажу бензина 20 литрами на автомобиль, часть заправок консервируют работу.",
-                "seen": "2026-11-10"
+                "seen": CURRENT_TIME_UTC.strftime("%Y-%m-%d")
             }
         ]
     
     elif channel_name == "t.me/s/oil_capital":
         mock_data = [
             {
-                "date": "2026-11-10",
+                "date": CURRENT_TIME_UTC.strftime("%Y-%m-%d"),
                 "region": "Курск",
                 "city": "Курск",
                 "source": "Telegram channel",
                 "sentiment": "complaint",
                 "topic": "shortage",
                 "quote": "В Курске завершился 95-й бензин — все заправки продают только 92-й. Цены выросли до 110 руб/л, очереди снова появились.",
-                "seen": "2026-11-10"
+                "seen": CURRENT_TIME_UTC.strftime("%Y-%m-%d")
             }
         ]
     
     elif channel_name == "t.me/s/fuel_news":
         mock_data = [
             {
-                "date": "2026-11-10",
+                "date": CURRENT_TIME_UTC.strftime("%Y-%m-%d"),
                 "region": "Белгород",
                 "city": "Белгород",
-                "source": "Telegram channel", 
+                "source": "Telegram channel",
                 "sentiment": "complaint",
                 "topic": "shortage",
                 "quote": "В Белгороде закончились все марки бензина — остался только дизель. Автомобилисты в панике, запасают топливо.",
-                "seen": "2026-11-10"
+                "seen": CURRENT_TIME_UTC.strftime("%Y-%m-%d")
             },
             {
-                "date": "2026-11-10", 
+                "date": CURRENT_TIME_UTC.strftime("%Y-%m-%d"),
                 "region": "Рязань",
                 "city": "Рязань",
                 "source": "Telegram channel",
                 "sentiment": "complaint",
                 "topic": "limit",
                 "quote": "В Рязани снова введены лимиты на бензин — по 30 литров на автомобиль. Объясняют это новыми атаками на НПЗ.",
-                "seen": "2026-11-10"
+                "seen": CURRENT_TIME_UTC.strftime("%Y-%m-%d")
             }
         ]
     
