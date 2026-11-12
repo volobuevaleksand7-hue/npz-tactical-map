@@ -25,6 +25,25 @@
       "last_event_ts": 1794460081,
       "source_text": "12.11.2026 08:08 МСК\nРеспублика Крым Опасность по БПЛА Особое внимание южный и центральный районы"
     },
+    "Луганская Народная Республика": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794460665,
+      "source_text": "12.11.2026 08:17 МСК\nСчастье, Станица Луганская и близлежащие ЛНР Опасность по БПЛА"
+    },
     "Пензенская область": {
       "bpla": false,
       "bplaDim": false,
@@ -45,10 +64,71 @@
       "source_text": "12.11.2026 06:49 МСК\nПензенская область Ракетная опасность"
     }
   },
-  "cities": [],
+  "cities": [
+    {
+      "key": "счастье|луганская народная республика",
+      "name": "Счастье",
+      "lat": 48.73784,
+      "lon": 39.23047,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794460665,
+      "source_text": "12.11.2026 08:17 МСК\nСчастье, Станица Луганская и близлежащие ЛНР Опасность по БПЛА"
+    },
+    {
+      "key": "станица луганская|луганская народная республика",
+      "name": "Станица Луганская",
+      "lat": 48.66247,
+      "lon": 39.48358,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794460665,
+      "source_text": "12.11.2026 08:17 МСК\nСчастье, Станица Луганская и близлежащие ЛНР Опасность по БПЛА"
+    }
+  ],
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 302646,
+      "text": "Счастье, Станица Луганская и близлежащие ЛНР\nОпасность по БПЛА",
+      "ts": 1794460665,
+      "time_label": "12.11.2026 08:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 302645,
+      "text": "ЛНР. Угроза атаки БПЛА.\nВ границах муниципальных округов: Краснодонский, Лутугинский, Славяносербский, и городов Луганск, Брянка, Кировск, Стаханов, Первомайск",
+      "ts": 1794460309,
+      "time_label": "12.11.2026 08:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 302644,
       "text": "Республика Крым\nОпасность по БПЛА\nОсобое внимание южный и центральный районы",
@@ -672,22 +752,6 @@
       "time_label": "12.11.2026 06:31 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 302601,
-      "text": "Керченский полуостров\nКерчь\nКрымский мост\nТревога по БПЛА",
-      "ts": 1794452757,
-      "time_label": "12.11.2026 06:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 302600,
-      "text": "Активность БПЛА  трассы Р280\nЗапорожская область РФ. Соблюдаем меры безопасности",
-      "ts": 1794452574,
-      "time_label": "12.11.2026 06:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -697,15 +761,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794460081,
-  "last_event_at": "2026-11-12T05:08:01Z",
-  "fetched_at": "2026-11-12T05:10:03.590270Z",
+  "timestamp": 1794460665,
+  "last_event_at": "2026-11-12T05:17:45Z",
+  "fetched_at": "2026-11-12T05:20:03.397874Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-12T05:10:03.590270Z",
-    "source_age_seconds": 122,
-    "city_count": 0,
-    "region_count": 2,
+    "generated_at": "2026-11-12T05:20:03.397874Z",
+    "source_age_seconds": 138,
+    "city_count": 2,
+    "region_count": 3,
     "feed_count": 80
   }
 }
