@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794464150,
-      "source_text": "12.11.2026 09:15 МСК\nТрасса Токмак - Бердянск ещё фиксации БПЛА от Токмак Запорожская область РФ"
+      "last_event_ts": 1794464669,
+      "source_text": "12.11.2026 09:24 МСК\nТрасса Приазовское - Приморск от Инзовка тревога по БПЛА Запорожская область РФ"
     },
     "Адыгея": {
       "bpla": false,
@@ -147,9 +147,9 @@
       "lat": 46.73123,
       "lon": 35.64082,
       "region": "Запорожская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -160,8 +160,30 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794463946,
-      "source_text": "12.11.2026 09:12 МСК\nБердянск, Осипенко и близлежащие тревога по БПЛА действует. С дальнейшим выходом в Азовское море Мелитополь, Приазовское ещё фиксации БПЛА. Возможно с дальнейшим выходом в Азовское море"
+      "last_event_ts": 1794464669,
+      "source_text": "12.11.2026 09:24 МСК\nТрасса Приазовское - Приморск от Инзовка тревога по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "приморск|запорожская область",
+      "name": "Приморск",
+      "lat": 46.73415,
+      "lon": 36.34599,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794464669,
+      "source_text": "12.11.2026 09:24 МСК\nТрасса Приазовское - Приморск от Инзовка тревога по БПЛА Запорожская область РФ"
     },
     {
       "key": "должанская|краснодарский край",
@@ -696,6 +718,30 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 302663,
+      "text": "Новоалексеевка Херсонская область РФ БПЛА направление Чонгар, АПП Джанкой",
+      "ts": 1794464727,
+      "time_label": "12.11.2026 09:25 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 302662,
+      "text": "Трасса Приазовское - Приморск от Инзовка тревога по БПЛА\nЗапорожская область РФ",
+      "ts": 1794464669,
+      "time_label": "12.11.2026 09:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 302661,
+      "text": "Трасса Р- 280\nЗапорожская область РФ\nОпасность по БПЛА",
+      "ts": 1794464370,
+      "time_label": "12.11.2026 09:19 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 302660,
       "text": "Ейск меры безопасности при БПЛА с направления Азовского моря\nИ близлежащие населенные пункты",
@@ -1311,30 +1357,6 @@
       "time_label": "12.11.2026 06:58 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 107038,
-      "text": "Воронежская область\nОтбой ракетной опасности",
-      "ts": 1794455855,
-      "time_label": "12.11.2026 06:57 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 302615,
-      "text": "Орловская область\nОтбой опасности БПЛА",
-      "ts": 1794455823,
-      "time_label": "12.11.2026 06:57 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 9333,
-      "text": "⬜️\nАэропорт\nКАЛУГА\n(Грабцево)\n✈️\nСНЯТЫ\nограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения вводили для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMAX",
-      "ts": 1794455796,
-      "time_label": "12.11.2026 06:56 МСК",
-      "source_id": "favt_info",
-      "source_label": "Росавиация"
     }
   ],
   "sources": [
@@ -1344,14 +1366,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794464335,
-  "last_event_at": "2026-11-12T06:18:55Z",
-  "fetched_at": "2026-11-12T06:20:04.060289Z",
+  "timestamp": 1794464727,
+  "last_event_at": "2026-11-12T06:25:27Z",
+  "fetched_at": "2026-11-12T06:30:03.629057Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-12T06:20:04.060289Z",
-    "source_age_seconds": 69,
-    "city_count": 18,
+    "generated_at": "2026-11-12T06:30:03.629057Z",
+    "source_age_seconds": 276,
+    "city_count": 19,
     "region_count": 7,
     "feed_count": 80
   }
