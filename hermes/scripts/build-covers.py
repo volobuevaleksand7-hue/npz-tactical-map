@@ -314,7 +314,9 @@ def lead_from_recent(date):
     ss = data["strikes"] if isinstance(data, dict) else data
     import datetime as _dt
     cutoff = (_dt.date.fromisoformat(date) - _dt.timedelta(days=1)).isoformat()
-    day = [s for s in ss if str(s.get("date", ""))[:10] >= cutoff]
+    # Верхняя граница обязательна: иначе ретро-пересборка обложки за 02.11
+    # видит удары 12.11 и ставит на старую дату сегодняшний лид.
+    day = [s for s in ss if cutoff <= str(s.get("date", ""))[:10] <= date]
     return pick_lead(day) if day else None
 
 
