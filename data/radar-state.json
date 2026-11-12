@@ -6,7 +6,7 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
-    "Севастополь": {
+    "Пензенская область": {
       "bpla": false,
       "bplaDim": false,
       "attention": false,
@@ -14,18 +14,18 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794461532,
-      "source_text": "12.11.2026 08:32 МСК\nСевастополь и близлежащие Меры безопасности Опасность по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1794455347,
+      "source_text": "12.11.2026 06:49 МСК\nПензенская область Ракетная опасность"
     },
-    "Ростовская область": {
+    "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
       "attention": false,
@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794461808,
-      "source_text": "12.11.2026 08:36 МСК\nРостовская область Опасность по БПЛА"
+      "last_event_ts": 1794462344,
+      "source_text": "12.11.2026 08:45 МСК\nНовая Полтавка и близлежащие Опасность по БПЛА Хорнет ДНР"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -63,7 +63,7 @@
       "last_event_ts": 1794460665,
       "source_text": "12.11.2026 08:17 МСК\nСчастье, Станица Луганская и близлежащие ЛНР Опасность по БПЛА"
     },
-    "Пензенская область": {
+    "Севастополь": {
       "bpla": false,
       "bplaDim": false,
       "attention": false,
@@ -71,19 +71,41 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1794455347,
-      "source_text": "12.11.2026 06:49 МСК\nПензенская область Ракетная опасность"
+      "fill": "#d8c06a",
+      "last_event_ts": 1794461532,
+      "source_text": "12.11.2026 08:32 МСК\nСевастополь и близлежащие Меры безопасности Опасность по БПЛА"
     }
   },
   "cities": [
+    {
+      "key": "станица луганская|луганская народная республика",
+      "name": "Станица Луганская",
+      "lat": 48.66247,
+      "lon": 39.48358,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794460665,
+      "source_text": "12.11.2026 08:17 МСК\nСчастье, Станица Луганская и близлежащие ЛНР Опасность по БПЛА"
+    },
     {
       "key": "счастье|луганская народная республика",
       "name": "Счастье",
@@ -127,28 +149,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1794461532,
       "source_text": "12.11.2026 08:32 МСК\nСевастополь и близлежащие Меры безопасности Опасность по БПЛА"
-    },
-    {
-      "key": "станица луганская|луганская народная республика",
-      "name": "Станица Луганская",
-      "lat": 48.66247,
-      "lon": 39.48358,
-      "region": "Луганская Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1794460665,
-      "source_text": "12.11.2026 08:17 МСК\nСчастье, Станица Луганская и близлежащие ЛНР Опасность по БПЛА"
     }
   ],
   "districts": {
@@ -177,6 +177,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 302651,
+      "text": "Новая Полтавка и близлежащие\nОпасность по БПЛА Хорнет\nДНР",
+      "ts": 1794462344,
+      "time_label": "12.11.2026 08:45 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 107057,
+      "text": "Ростовская область\nОтбой опасности по БПЛА",
+      "ts": 1794461974,
+      "time_label": "12.11.2026 08:39 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 302650,
       "text": "Ростовская область\nОпасность по БПЛА",
@@ -208,6 +224,14 @@
       "time_label": "12.11.2026 08:32 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 107055,
+      "text": "📡\nТочные данные 24/7 — благодаря каждому из вас.\nНаш радар живет без рекламы и существует исключительно на поддержке подписчиков. Мы не зарабатываем на безопасности, мы помогаем её обеспечить.\n🙌\nСпасибо всем, кто ценит наш труд. Ваша поддержка помогает нам быть в строю каждую ночь.\nПоддержать канал:\n👉\nhttps://clck.ru/3VgBJu",
+      "ts": 1794461435,
+      "time_label": "12.11.2026 08:30 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
     },
     {
       "msg_id": 302647,
@@ -344,6 +368,14 @@
       "time_label": "12.11.2026 07:59 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 9334,
+      "text": "⬜️\nАэропорты\n—\nПЕНЗА\n—\nСАРАНСК\n—\nСАРАТОВ\n(Гагарин)\n✈️\nСНЯТЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения вводили для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ",
+      "ts": 1794459525,
+      "time_label": "12.11.2026 07:58 МСК",
+      "source_id": "favt_info",
+      "source_label": "Росавиация"
     },
     {
       "msg_id": 302635,
@@ -658,6 +690,14 @@
       "source_label": "ЛПР"
     },
     {
+      "msg_id": 9333,
+      "text": "⬜️\nАэропорт\nКАЛУГА\n(Грабцево)\n✈️\nСНЯТЫ\nограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения вводили для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMAX",
+      "ts": 1794455796,
+      "time_label": "12.11.2026 06:56 МСК",
+      "source_id": "favt_info",
+      "source_label": "Росавиация"
+    },
+    {
       "msg_id": 302614,
       "text": "Воронежская область\nОтбой ракетной опасности",
       "ts": 1794455771,
@@ -714,6 +754,14 @@
       "source_label": "ЛПР"
     },
     {
+      "msg_id": 9332,
+      "text": "⛔️\nАэропорт\nСАРАТОВ\n(Гагарин)\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n🧑‍🧑‍🧒‍🧒\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация | MAX",
+      "ts": 1794455389,
+      "time_label": "12.11.2026 06:49 МСК",
+      "source_id": "favt_info",
+      "source_label": "Росавиация"
+    },
+    {
       "msg_id": 107034,
       "text": "Республика Мордовия\nРакетная опасность",
       "ts": 1794455386,
@@ -746,6 +794,14 @@
       "source_label": "ВРВ"
     },
     {
+      "msg_id": 9331,
+      "text": "▫️\nАэропорты\n—\nПЕНЗА\n—\nСАРАНСК\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ",
+      "ts": 1794455268,
+      "time_label": "12.11.2026 06:47 МСК",
+      "source_id": "favt_info",
+      "source_label": "Росавиация"
+    },
+    {
       "msg_id": 302608,
       "text": "Волгоградская область\nвнимание по бпла",
       "ts": 1794455067,
@@ -760,62 +816,6 @@
       "time_label": "12.11.2026 06:43 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 302606,
-      "text": "Липецкая область\nвнимание по бпла",
-      "ts": 1794454970,
-      "time_label": "12.11.2026 06:42 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 107031,
-      "text": "Волгоградская область\nРакетная опасность",
-      "ts": 1794454917,
-      "time_label": "12.11.2026 06:41 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 107030,
-      "text": "Ростовская область\nОтбой ракетной опасности",
-      "ts": 1794454870,
-      "time_label": "12.11.2026 06:41 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 107029,
-      "text": "Ростовская область\nОтбой опасности по БПЛА",
-      "ts": 1794454859,
-      "time_label": "12.11.2026 06:40 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 302605,
-      "text": "Ростовская область\nОтбой опасности по БПЛА",
-      "ts": 1794454847,
-      "time_label": "12.11.2026 06:40 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 107028,
-      "text": "Тамбовская область\nРакетная опасность",
-      "ts": 1794454828,
-      "time_label": "12.11.2026 06:40 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 107027,
-      "text": "Липецкая область\nРакетная опасность",
-      "ts": 1794454575,
-      "time_label": "12.11.2026 06:36 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -825,13 +825,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794461808,
-  "last_event_at": "2026-11-12T05:36:48Z",
-  "fetched_at": "2026-11-12T05:40:02.888468Z",
+  "timestamp": 1794462344,
+  "last_event_at": "2026-11-12T05:45:44Z",
+  "fetched_at": "2026-11-12T05:50:03.072243Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-12T05:40:02.888468Z",
-    "source_age_seconds": 194,
+    "generated_at": "2026-11-12T05:50:03.072243Z",
+    "source_age_seconds": 259,
     "city_count": 3,
     "region_count": 4,
     "feed_count": 80
