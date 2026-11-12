@@ -6,25 +6,6 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
-    "Ивановская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794429347,
-      "source_text": "11.11.2026 23:35 МСК\nИвановская область Опасность по БПЛА"
-    },
     "Севастополь": {
       "bpla": false,
       "bplaDim": false,
@@ -62,25 +43,6 @@
       "fill": "#d8c06a",
       "last_event_ts": 1794442041,
       "source_text": "12.11.2026 03:07 МСК\nЧертковский район Ростовская область Фиксации БПЛА"
-    },
-    "Владимирская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794429453,
-      "source_text": "11.11.2026 23:37 МСК\nВладимирская область - опасность по БПЛА. 📡 Локатор России - @locatorru"
     },
     "Белгородская область": {
       "bpla": false,
@@ -1198,50 +1160,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1794435291,
       "source_text": "12.11.2026 01:14 МСК\nНавля, Бяково, Синезёрский, Брянская область - фиксации БПЛА в сторону Карачев, Берёзовка. 📡 Локатор России - @locatorru"
-    },
-    {
-      "key": "шахтёрск|донецкая народная республика",
-      "name": "Шахтёрск",
-      "lat": 48.05657,
-      "lon": 38.43826,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1794399872,
-      "source_text": "11.11.2026 15:24 МСК\nШахтёрск, Торез, Снежное и близлежащие Опасность по БПЛА ДНР"
-    },
-    {
-      "key": "снежное|донецкая народная республика",
-      "name": "Снежное",
-      "lat": 48.02328,
-      "lon": 38.76205,
-      "region": "Донецкая Народная Республика",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1794399872,
-      "source_text": "11.11.2026 15:24 МСК\nШахтёрск, Торез, Снежное и близлежащие Опасность по БПЛА ДНР"
     },
     {
       "key": "раздольное|автономная республика крым",
@@ -2799,8 +2717,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -2822,6 +2740,38 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 107014,
+      "text": "Напоминаем\n, что наша онлайн\nкарта\nуже доступна.\nСейчас проект находится на этапе бета-тестирования, поэтому будем рады вашей обратной связи:\n👉\n@vrv_report_bot\n🔗\nКарта\n:\nradar-vrv.ru",
+      "ts": 1794443344,
+      "time_label": "12.11.2026 03:29 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 107013,
+      "text": "Ивановская область\nОтбой опасности по БПЛА",
+      "ts": 1794442896,
+      "time_label": "12.11.2026 03:21 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 107012,
+      "text": "Владимирская область\nОтбой опасности по БПЛА",
+      "ts": 1794442880,
+      "time_label": "12.11.2026 03:21 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 107011,
+      "text": "Ростовская область\nОпасность по МВШ",
+      "ts": 1794442786,
+      "time_label": "12.11.2026 03:19 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 302592,
       "text": "Мелитополь и близлежащие\nТревога по БПЛА\nЗапорожская область РФ",
@@ -3429,38 +3379,6 @@
       "time_label": "11.11.2026 23:50 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 94841,
-      "text": "Вельяминова, Карачевский район, Брянская область - фиксации БПЛА в сторону г.Орёл и района.\nСо стороны Сосково, Орловская область - фиксации БПЛА в сторону г.Орёл и района.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794430162,
-      "time_label": "11.11.2026 23:49 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 302560,
-      "text": "Ильский\nАфипский\nИ близлежайшие\nТревога по БПЛА\nКраснодарский край",
-      "ts": 1794429979,
-      "time_label": "11.11.2026 23:46 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 302559,
-      "text": "Апшеронский район опасность по БПЛА и далее в направлении Белореченск, Майкоп",
-      "ts": 1794429867,
-      "time_label": "11.11.2026 23:44 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 94840,
-      "text": "Владимирская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794429453,
-      "time_label": "11.11.2026 23:37 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -3470,15 +3388,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794442372,
-  "last_event_at": "2026-11-12T00:12:52Z",
-  "fetched_at": "2026-11-12T00:20:04.162690Z",
+  "timestamp": 1794443344,
+  "last_event_at": "2026-11-12T00:29:04Z",
+  "fetched_at": "2026-11-12T00:30:03.056590Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-12T00:20:04.162690Z",
-    "source_age_seconds": 432,
-    "city_count": 72,
-    "region_count": 21,
+    "generated_at": "2026-11-12T00:30:03.056590Z",
+    "source_age_seconds": 59,
+    "city_count": 70,
+    "region_count": 19,
     "feed_count": 80
   }
 }
