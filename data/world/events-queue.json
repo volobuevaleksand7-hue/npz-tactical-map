@@ -488,7 +488,7 @@
    "agent": "world-events",
    "checks": {
     "schema": "ok",
-    "urls_alive": "ok",
+    "urls_alive": "unknown",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
@@ -772,35 +772,17 @@
     }
    ],
    "found_at": "2026-11-12T11:36:14Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-11-iran-denies-talks-hormuz-closed",
-   "occurred_at": "2026-11-11",
-   "type": "other",
-   "region": "middle_east",
-   "status": "reported",
-   "title": "Иран опроверг переговоры с США и заявил о закрытии Ормузского пролива до выполнения требований",
-   "summary": "11 ноября Al Jazeera сообщила, что Иран опроверг проведение переговоров с США и заявил, что Ормузский пролив останется закрытым до выполнения его требований. Заявление исходит от иранской стороны; конкретные требования в доступном тексте не раскрыты.",
-   "fuel_effect": "Влияние не оценено.",
-   "title_en": "Iran denies talks with US and says Strait of Hormuz will stay closed until its demands are met",
-   "summary_en": "On 11 November Al Jazeera reported that Iran denied holding talks with the United States and said the Strait of Hormuz would remain closed until its demands are met. The statement comes from the Iranian side; the specific demands are not disclosed in the available text.",
-   "fuel_effect_en": "Impact not assessed.",
-   "lat": 26.5,
-   "lon": 56.5,
-   "precision": "zone",
-   "radius_km": 150,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "Al Jazeera",
-     "url": "https://www.aljazeera.com/news/2026/11/11/iran-denies-talks-with-us-says-hormuz-will-stay-shut-until-demands-are-met",
-     "date": "2026-11-11"
-    }
-   ],
-   "found_at": "2026-11-12T11:36:14Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "ok",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "needs_source",
+   "reject_reason": "нужен второй независимый издатель"
   }
  ],
- "validated_at": "2026-11-12T03:36:02Z"
+ "validated_at": "2026-11-12T11:37:04Z"
 }
