@@ -22,8 +22,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794460081,
-      "source_text": "12.11.2026 08:08 МСК\nРеспублика Крым Опасность по БПЛА Особое внимание южный и центральный районы"
+      "last_event_ts": 1794460908,
+      "source_text": "12.11.2026 08:21 МСК\nСевастополь, ЮБК Опасность по БПЛА"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -88,6 +88,28 @@
       "source_text": "12.11.2026 08:17 МСК\nСчастье, Станица Луганская и близлежащие ЛНР Опасность по БПЛА"
     },
     {
+      "key": "севастополь|севастополь",
+      "name": "Севастополь",
+      "lat": 44.60795,
+      "lon": 33.52134,
+      "region": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794460908,
+      "source_text": "12.11.2026 08:21 МСК\nСевастополь, ЮБК Опасность по БПЛА"
+    },
+    {
       "key": "станица луганская|луганская народная республика",
       "name": "Станица Луганская",
       "lat": 48.66247,
@@ -110,9 +132,40 @@
       "source_text": "12.11.2026 08:17 МСК\nСчастье, Станица Луганская и близлежащие ЛНР Опасность по БПЛА"
     }
   ],
-  "districts": {},
+  "districts": {
+    "UKR.20.1_1": {
+      "gid_2": "UKR.20.1_1",
+      "name_ru": "Севастополь",
+      "region_ru": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794460908,
+      "source_text": "12.11.2026 08:21 МСК\nСевастополь, ЮБК Опасность по БПЛА"
+    }
+  },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 302647,
+      "text": "Севастополь, ЮБК\nОпасность по БПЛА",
+      "ts": 1794460908,
+      "time_label": "12.11.2026 08:21 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 302646,
       "text": "Счастье, Станица Луганская и близлежащие ЛНР\nОпасность по БПЛА",
@@ -744,14 +797,6 @@
       "time_label": "12.11.2026 06:31 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 107025,
-      "text": "Воронежская область\nРакетная опасность",
-      "ts": 1794454285,
-      "time_label": "12.11.2026 06:31 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -761,14 +806,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794460665,
-  "last_event_at": "2026-11-12T05:17:45Z",
-  "fetched_at": "2026-11-12T05:20:03.397874Z",
+  "timestamp": 1794460908,
+  "last_event_at": "2026-11-12T05:21:48Z",
+  "fetched_at": "2026-11-12T05:30:03.777883Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-12T05:20:03.397874Z",
-    "source_age_seconds": 138,
-    "city_count": 2,
+    "generated_at": "2026-11-12T05:30:03.777883Z",
+    "source_age_seconds": 495,
+    "city_count": 3,
     "region_count": 3,
     "feed_count": 80
   }
