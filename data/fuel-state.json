@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-11-12T04:30:21Z",
+    "generated_at": "2026-11-12T16:10:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -48,7 +48,7 @@
       "status": "partial",
       "status_since": "2026-11-09",
       "est_output_pct": 20,
-      "damage": "9 ноября ночью попадание БПЛА на территорию КИНЕФ и пожар; губернатор Ленинградской области Александр Дрозденко подтвердил попадание в промзону Киришей, пожар локализован. The Moscow Times сообщил о погибшей женщине и возгорании на заводе, Radio Free Europe/Radio Liberty и UNITED24 также сообщили о пожаре на втором по мощности НПЗ России. В ночь на 11 ноября зафиксирована повторная атака БПЛА на Киришский НПЗ. Официальных данных о степени повреждения установок нет.",
+      "damage": "9 ноября ночью попадание БПЛА на территорию КИНЕФ и пожар; губернатор Ленинградской области Александр Дрозденко подтвердил попадание в промзону Киришей, пожар локализован. The Moscow Times сообщил о погибшей женщине и возгорании на заводе, Radio Free Europe/Radio Liberty и UNITED24 также сообщили о пожаре на втором по мощности НПЗ России. В ночь на 11 ноября мониторинговые каналы сообщали о повторной атаке на Киришский НПЗ; официального подтверждения попадания в промзону нет. Официальных данных о степени повреждения установок нет.",
       "note": "КИНЕФ — второй по мощности НПЗ России (20,1 млн т/год). К началу сентября 2026, по данным РБК, производство было восстановлено на 75% после атаки конца августа. Факт удара и пожара 9 ноября подтверждён несколькими независимыми источниками; оценка загрузки 20% остаётся предварительной — официальных данных о потере мощности после удара нет.",
       "source_url": "https://rg.ru/2026/11/09/reg-szfo/lokalizovan-pozhar-na-zavode-kinef-v-lenoblasti-posle-ataki-besilotnikov.html",
       "confidence": "confirmed"
@@ -581,7 +581,7 @@
       "type": "Балтика, нефтепродукты",
       "status": "hit",
       "status_since": "2026-11-11",
-      "note": "11 ноября атака БПЛА на порт Усть-Луга: крупный пожар на территории терминала Novatek, пожар был виден с территории Эстонии, пострадали три работника (Bloomberg, Kyiv Post, Ukrinform, The Maritime Executive). Данные о повреждении нефтеналивных мощностей и об остановке отгрузок официально не публиковались. Ранее терминал подвергался атаке в ночь на 1 сентября, после чего отгрузки восстанавливались; мощности оценивались в 65–70% от номинала."
+      "note": "11 ноября атака БПЛА на порт Усть-Луга: крупный пожар на территории терминала Novatek, пожар был виден с территории Эстонии, пострадали три работника (Bloomberg, Kyiv Post, Ukrinform, The Maritime Executive). 12 ноября пожар в порту локализован через сутки после атаки (Neftegaz.RU, oilcapital.ru). Данные о повреждении нефтеналивных мощностей и о возобновлении отгрузок официально не публиковались. Ранее терминал подвергался атаке в ночь на 1 сентября, после чего отгрузки восстанавливались; мощности оценивались в 65–70% от номинала."
     },
     {
       "id": "novorossiysk",
@@ -1145,6 +1145,16 @@
   ],
   "events": [
     {
+      "date": "2026-11-12",
+      "text": "Переработка: Генштаб ВСУ заявил о поражении всех пяти крупнейших НПЗ России с 30 октября, включая Омский НПЗ; независимого подтверждения оценок выбывших мощностей нет.",
+      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB1cEJlQlhockd4RVo0SFVuUzNwUDFwZUFsMXJrbUhnTmJFZmZBR3pueGNaOE1sbnRVV0Z0VDFKaVU5S2J5ZzA5M3pUMVRKZ0xpSjE0WjVObi1TaUc4blhzY1d6dEFzcVnSAWdBVV95cUxQdXBCZUJYaHJHeEVaNEhVblMzcFAxcGVBbDFya21IZ05iRWZmQUd6bnhjWjhNbG50VVdGdFQxSmlVOUtieWcwOTN6VDFUSmdMaUoxNFo1Tm4tU2lHOG5Yc2NXenRBc3FZ?oc=5"
+    },
+    {
+      "date": "2026-11-12",
+      "text": "Усть-Луга: пожар в порту локализован через сутки после атаки дронов; данных о возобновлении отгрузок нефтепродуктов и оценке повреждений нет.",
+      "source_url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQMU9Ddk5DMzE0cjZSRml1c2ZERWdFZUEzbWVUZlNRZVBiZzhLanJwaXlYUS1Pd0NQb19kSjR2NG9KSWRnTFBIcXdESUpqRUhtNDJMa184bDhVNTM5TzRhYU9GTkZKa3RwcDhnNF8zQkIySHNOTjBqb2NIRW42ek9SMklsaExHQQ?oc=5"
+    },
+    {
       "date": "2026-11-11",
       "text": "Удар по Усть-Луга: в ночь на 11 ноября атака БПЛА на порт, на территории терминала Novatek возник крупный пожар, пострадали три работника; официальных данных о повреждении нефтеналивных мощностей нет.",
       "source_url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE43SW5mVWVCTUI1WDRDYzVKRGI2aWxhYUNKQTRLblROT1FnT0psM3FiajgyYnpGSm1TUnRYWHVLT0c1VGQwQnR5SzJrNA?oc=5"
@@ -1181,18 +1191,8 @@
     },
     {
       "date": "2026-11-10",
-      "text": "Воронежская область: «Роснефть» вновь ограничила продажу бензина и дизельного топлива на своих АЗС",
-      "source_url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1SbExpbVJGV2ppMzdXbG1qX0pzYjRQNVAtZW8xTENMS0l0bGlobTU1TXZqbHFOMkwzOElfSGpGLWZrdXJkVm9jNGZQV2FNbnpXWTFnQ0dkQTQ"
-    },
-    {
-      "date": "2026-11-09",
-      "text": "Рынок: «Роснефть» вернула ограничения продажи топлива на своих АЗС в шести регионах (по данным «Новой газеты Европы»); ранее, 23 октября, лимиты на большинстве станций снимали.",
-      "source_url": "https://novayagazeta.eu/articles/2026/11/09/rosneft-vernula-ogranicheniia-na-svoikh-azs-v-shesti-regionakh-news"
-    },
-    {
-      "date": "2026-11-09",
-      "text": "Удар по Кинеф (Кириши): The Moscow Times сообщил, что при атаке на НПЗ в Ленинградской области погибла женщина и возник пожар; официальной оценки повреждений установок нет.",
-      "source_url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPZHAwMmZQb21JSGxXV3lUZWhabzNORzdNWENJZlRFZzIzcVQ2ak10Y1IxZFoyTnZ6bEg4el81aVRDTS1XZGdoLTlhbXZwbWJmY0dOVGp4VGJvbnY1M3hid0k3TlgxQ3EyYTBpMVdaempFZ25VdlRFN1E0b2duMkRLek91RFNOQzVnUDF3eDBrMzl5NGdQelNjMmxKdzJBeDVyRERlN1M2enpiRWpVRWtYRlBibzNtZWM4T2RXVDhDd09NZw?oc=5"
+      "text": "Переработка: Reuters со ссылкой на отраслевые источники оценил выбывшие мощности НПЗ России примерно в 30% после серии ударов; независимого подтверждения цифры нет.",
+      "source_url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPTXJUZnFVTVJmR25VaW9YQkhwMTJEM0FzTWVHLXRZOFpXV09zN18zd1RIOThGTHdiVUVmbVFnbnJqRUhfQzdSQzBDTHFLUUxtSEI3YkZyNFQ0RzdlQ3oxMVRHb1d2YUNBa3hIbWQ3VWxmYTBNaWpiVmdjOXB4ZDlzMFhQQk10a1FZWkhWem81TGNaS0JFc25FNUV6eFVhd2RIYldEQTlCU051VUFlalpnSlBoYzdOVFFFNVN4cjNjRjVuX05jNGc?oc=5"
     }
   ]
 }
