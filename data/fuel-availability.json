@@ -1,14 +1,21 @@
 {
   "meta": {
-    "generated_at": "2026-11-12T06:00:00Z",
-    "rotation_pass": "12.11 (133-я волна, 06:00Z): 12 самых старых регионов по updated — Вологодская, Ярославская, Коми, Москва, Башкортостан, Чукотский АО, Воронежская, Самарская, Хакасия, Адыгея, Новосибирская, Свердловская. По каждому сделан направленный поиск; плюс горячие события 01–12.11: возврат лимитов «Роснефти» (30 л город / 50 л трасса), лимит 40 л в Нижегородской обл., норма 30/50 л в Ленинградской обл., восстановление Воронежской обл.",
+    "generated_at": "2026-11-12T17:30:00Z",
+    "rotation_pass": "12.11 (134-я волна, 17:30Z): 12 самых старых регионов по updated — Хабаровский край, Калужская, Краснодарский край, Ингушетия, Тамбовская, Астраханская, Смоленская, Чеченская, Камчатский край, Удмуртия, Тульская, Иркутская. Обновлены по свежим источникам 07–12.11: Тамбовская (187 из 214 АЗС, лимиты Лукойл 30 / Роснефть 30-50), Тульская (Роснефть 30 л с 07.11), Калужская (возврат лимитов), Астраханская (лимитов нет), Иркутская (рост цен, лимит 50 л), Хабаровский (дизель 90 р), Краснодарский (Роснефть 30/50). Крым: новая волна дефицита, талоны АТАН, соцграфик; Севастополь — ограничения сняты. Биржа: СПбМТСБ за неделю к 30.10.",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
     "updated_by": "agent:fuel-availability",
-    "last_rotation_pass": "2026-11-12T06:00:00Z",
+    "last_rotation_pass": "2026-11-12T17:30:00Z",
     "update_notes": [
+      {
+        "date": "2026-11-12T17:30:00Z",
+        "action": "rotation_134_websearch_12old_6hot",
+        "regions_updated": 15,
+        "hot_topics_searches": 7,
+        "message": "134-я волна (12.11 17:30): 7 горячих поисков (лимиты «Роснефти», очереди/дефицит, «Лукойл», СПбМТСБ, Крым/АТАН, цены по регионам) + ротация 12 самых старых регионов (Хабаровский, Калужская, Краснодарский, Ингушетия, Тамбовская, Астраханская, Смоленская, Чеченская, Камчатский, Удмуртия, Тульская, Иркутская) + приоритетные Крым и Севастополь. Обновлены фактами: Тамбовская (187/214 АЗС, 27 закрыто, Лукойл 30 л, Роснефть АИ-95 30 л / АИ-92 50 л, чёт-нечёт отменён кроме трёх АЗС), Тульская (Роснефть 30 л с 07.11 → уровень limited), Калужская (11.11 сообщение о возврате лимитов; средняя цена бензина 70,79 р/л, ДТ 78,26 р/л), Астраханская (лимитов и очередей нет, АИ-95 72 р/л), Иркутская (АИ-95 71,3–72,4 р, ДТ до 88,4 р, лимит 50 л, канистры запрещены), Хабаровский (дизель ~90 р/л), Краснодарский (Роснефть 30/50 л подтверждены, Краснодар 103 АЗС, Сочи 49 АЗС). Крым переведён в severe: талоны/карты АТАН, график соцтоплива, часть АЗС законсервирована; Севастополь — ограничений нет, премиум до 130 р/л. Ингушетия, Чечня, Смоленская, Камчатский, Удмуртия — свежих материалов по АЗС за ноябрь нет, updated проставлен по факту проверки. Биржа: найдены данные СПбМТСБ за неделю к 30.10 (АИ-95 72,231 тыс р/т, АИ-92 66,479, зимний ДТ 77,887) — блок exchange обновлён."
+      },
       {
         "date": "2026-10-14T00:00:00Z",
         "action": "rotation_94_websearch_12old_4hot",
@@ -110,6 +117,24 @@
     ],
     "policy_events": [
       {
+        "date": "2026-11-12T00:00:00Z",
+        "region": "Республика Крым",
+        "text": "12.11 в Крыму топливо по социальным ценам распределяют по графику: «АТАН» с 08:00 отпускает только АИ-92, «ТЭС» с 14:00 — АИ-95, сначала вдоль «Тавриды», затем в городах и на побережье. Сеть «АТАН» ввела талоны и топливные карты, часть АЗС в Симферополе законсервирована.",
+        "source_url": "https://www.tourprom.ru/news/90342/"
+      },
+      {
+        "date": "2026-11-11T00:00:00Z",
+        "region": "Калужская область",
+        "text": "11.11 местное издание сообщило о возвращении лимитов на продажу бензина в Калужской области; детали и перечень сетей не раскрыты. За неделю 28.10–03.11 средняя цена бензина в регионе — 70,79 р/л, ДТ — 78,26 р/л.",
+        "source_url": "https://obninsk.name/news74163.htm"
+      },
+      {
+        "date": "2026-11-07T00:00:00Z",
+        "region": "Тульская область",
+        "text": "С 07.11 на АЗС «Роснефти» в Тульской области действует лимит 30 л на одну заправку; срок действия не объявлен, у других сетей ограничений нет.",
+        "source_url": "https://newstula.ru/fn_1989316.html"
+      },
+      {
         "date": "2026-11-09T00:00:00Z",
         "region": "Россия (национальное)",
         "text": "09.11 «Роснефть» вновь ввела ограничения на продажу бензина и дизеля: 30 л в городах и 50 л на трассах, канистры не отпускают. Ограничения подтверждены в Карелии, Бурятии, Архангельской, Новосибирской и Пензенской областях, Красноярском и Забайкальском краях; на АЗС сети в Москве и Петербурге также действуют лимиты.",
@@ -138,35 +163,17 @@
         "region": "Рязанская область",
         "text": "15.10 на Рязанском НПЗ возник пожар после массовой атаки беспилотников (по сообщению губернатора Павла Малкова). Данных о масштабе повреждений и влиянии на отпуск бензина на АЗС нет.",
         "source_url": "https://bankiros.ru/news/ehnergeticheskoe-peremirie-sorvalos-chto-budet-s-cenami-na-benzin-posle-ataki-na-ryazanskij-npz-22731"
-      },
-      {
-        "date": "2026-10-21T00:00:00Z",
-        "region": "Севастополь",
-        "text": "С 00:00 21.10 на АЗС ТЭС в Севастополе бензин АИ-92, АИ-95 и ДТ продаётся в свободной продаже без лимитов, не выше 100р/л (заявление губернатора). Онлайн-карта топлива прекращена с 17.10.",
-        "source_url": "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-21-oktyabrya-otmena-qr-kodov-ceny"
-      },
-      {
-        "date": "2026-10-17T00:00:00Z",
-        "region": "Севастополь",
-        "text": "QR-коды на продажу топлива отменены с 17.10, онлайн-карта топлива прекращена. Свободная продажа: ТЭС — АИ-92, АИ-95, ДТ не выше 100р/л, лимит 30л (канистры до 20л); АТАН — АИ-95, 9 АЗС, лимит 20л, канистры запрещены.",
-        "source_url": "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-17-oktyabrya-otmena-qr-kodov-ceny"
-      },
-      {
-        "date": "2026-10-07T00:00:00Z",
-        "region": "Россия (национальное)",
-        "text": "Росстат (данные на 05.10): средние розничные цены АИ-92 74.72 р/л, АИ-95 81.03 р/л, ДТ 86.72 р/л; за неделю АИ-92 и АИ-95 +0.3%, ДТ −0.06 р/л. Розничный показатель, не биржевая котировка.",
-        "source_url": "https://profile.ru/?p=1910172"
       }
     ]
   },
   "exchange": {
-    "ai95_spb_rub_t": 72500,
-    "ai92_spb_rub_t": 72000,
-    "diesel_spb_rub_t": 81000,
+    "ai95_spb_rub_t": 72231,
+    "ai92_spb_rub_t": 66479,
+    "diesel_spb_rub_t": 77887,
     "trend": "stable",
-    "updated": "2026-10-08T05:50:00Z",
-    "source_url": "https://driff.ru/fuel-dynamics/ | WebSearch 2026-10-08 (83-я волна)",
-    "notes": "08.10 (83-я волна, WebSearch): Биржевые цены стабильны. АИ-95 на СПбМТСБ ~72.5 тыс р/т (stable). Переход на зимний сортамент топлива с 1.10 пройден без скачков цен. Средние розничные цены: АИ-95 68-92р (по регионам), АИ-92 62-89р. Федеральные сети держат лимиты, стабилизация продолжается. Табу на канистры действует большинстве регионов."
+    "updated": "2026-10-30T11:29:00Z",
+    "source_url": "https://business-magazine.online/fn_1982754.html",
+    "notes": "Данные СПбМТСБ за неделю к 30.10 (Федеральный бизнес журнал): АИ-95 72,231 тыс р/т (+1,41%), АИ-92 66,479 тыс р/т (−3,11%), зимний ДТ 77,887 тыс р/т (−10,83%), межсезонный ДТ 62,446 тыс р/т (−5,74%). Разнонаправленная динамика — trend stable. 02–06.11 (Рейтер/The Moscow Times): объёмы первичной реализации на бирже упали на 5,3–5,7% (бензины 76,74 тыс т, ДТ 140,27 тыс т) из-за сокращения предложения; котировки за ноябрь не публиковались."
   },
   "regions": [
     {
@@ -799,26 +806,25 @@
       "lat": 48.48,
       "lon": 135.08,
       "level": "strained",
-      "updated": "2026-11-02T06:00:00Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "ДВК / Flagman / ННК",
           "status": "limited",
           "level": "strained",
           "limit_l": 30,
-          "note": "08.10 ротация 84: Стабильна без критических проблем. Независимые АЗС сняли ограничения. Ванинский/Советско-Гаванский районы исключение (очереди сохраняются). Северный завоз топлива по плану завершится до 20.10. Поставки контролируются. WebSearch 08.10."
+          "note": "12.11: дизель на АЗС Хабаровска около 90 р/л — цены снова выросли (06.11, «Новости Хабаровска»); в Комсомольске-на-Амуре топливо подорожало 07.11. Сообщений о новых лимитах нет, ограничения прежние."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 75.0,
-      "diesel_price_rub": 89.0,
+      "diesel_price_rub": 90.0,
       "source_urls": [
-        "https://gubernia.com/novaja-partija-topliva-postupit-v-vaninskij-i-sovetsko-gavanskij-rajony-na-jetoj-nedele/",
-        "https://www.korabel.ru/news/comments/v_ramkah_severnogo_zavoza_v_rayony_habarovskogo_kraya_dostavyat_34_5_tys_tonn_topliva.html",
-        "https://eanews.ru/rossiya/20260616153533/na-chasti-azs-habarovskogo-kraya-ogranichili-prodazhu-benzina",
-        "https://runews24.ru/khabarovsk/10/07/2026/konecz-toplivnogo-koshmara-vlasti-xabarovskogo-kraya-nazvali-datu-polnoj-stabilizaczii-na-azs"
+        "https://www.dvnovosti.ru/khab/2026/11/06/199103/",
+        "https://www.dvnovosti.ru/komsomolsk/2026/11/07/199132/",
+        "https://gubernia.com/novaja-partija-topliva-postupit-v-vaninskij-i-sovetsko-gavanskij-rajony-na-jetoj-nedele/"
       ],
-      "note": "08.10 ротация 84: Стабильна. Независимые сняли ограничения. Ванинский/Советско-Гаванский исключение. Северный завоз норма. WebSearch 08.10."
+      "note": "12.11: дизель в Хабаровске ~90 р/л, рост продолжается; Комсомольск-на-Амуре — тоже рост. Данных о новых лимитах нет. WebSearch 12.11."
     },
     {
       "region": "Забайкальский край",
@@ -847,58 +853,63 @@
       "region": "Калужская область",
       "lat": 54.51,
       "lon": 36.27,
-      "level": "critical",
-      "updated": "2026-11-02T06:00:00Z",
+      "level": "limited",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл / Роснефть",
           "status": "limited",
-          "level": "critical",
+          "level": "limited",
           "limit_l": 30,
-          "note": "08.10 ротация 84: Вторая волна продолжается. Система чет-нечет действует (с 23.09). Очереди 2-3 часа. Лимит 30л. Цены: АИ-92 75р, АИ-95 80р, ДТ 78р. Регион договаривается о дополнительных поставках. Критичная ситуация сохраняется. WebSearch 08.10."
+          "note": "11.11: местное издание сообщило о возвращении лимитов на бензин, детали не раскрыты (Obninsk.Name). 28.10–03.11: на независимых АЗС цены снизились (АИ-92 до −8,1%, АИ-95 до −10%), у крупных сетей бензин +1,2%, ДТ +0,8%; средняя цена бензина 70,79 р/л, ДТ 78,26 р/л (Калуга 24)."
         }
       ],
-      "queues_hours": 2.0,
+      "queues_hours": 1.0,
       "ai95_price_rub": 79.99,
-      "diesel_price_rub": 78.28,
+      "diesel_price_rub": 78.26,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/kaluzhskaya-oblast/ai95/",
-        "https://kaluganews.ru/fn_1960786.html",
-        "https://sovanews.tv/2026/09/23/v-dvuh-rossijskih-regionah-vernuli-ogranicheniya-na-prodazhu-benzina-s-23-sentyabrya/"
+        "https://obninsk.name/news74163.htm",
+        "https://kaluga24.tv/life/075768"
       ],
-      "note": "08.10 ротация 84: Чет-нечет (с 23.09). Очереди 2-3ч. Цены 75-80р. Критична. WebSearch 08.10."
+      "note": "12.11: СМИ сообщают о возврате лимитов (детали не раскрыты). Цены смешанные: независимые снижали, крупные сети поднимали. Средняя цена бензина 70,79 р/л. WebSearch 12.11."
     },
     {
       "region": "Краснодарский край",
       "lat": 45.04,
       "lon": 38.98,
       "level": "strained",
-      "updated": "2026-11-02T06:00:00Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
-          "name": "Краснодар (77 АЗС)",
+          "name": "Роснефть",
           "status": "limited",
           "level": "strained",
           "limit_l": 30,
-          "note": "08.10 ротация 84: Стабилизируется медленно. Цены: АИ-92 71.76р, АИ-95 71.6р-76р, ДТ 76-80р. Лимит 30л продолжает действовать. Очереди периодические на выходных. Поставки контролируются администрацией. WebSearch 08.10."
+          "note": "09.11: сеть возобновила лимиты на отпуск — 30 л на городских АЗС и 50 л на трассе; официального подтверждения компании нет, о покрытии края сообщило Минэкономразвития Забайкалья (Юга.ру)."
+        },
+        {
+          "name": "Краснодар (103 АЗС)",
+          "status": "open",
+          "level": "strained",
+          "limit_l": null,
+          "note": "09.11 в Краснодаре работали 103 АЗС (городской МЦУ); 12.11 в Сочи — 49 АЗС, все сорта в наличии (Турпром)."
         }
       ],
-      "queues_hours": 1.0,
+      "queues_hours": 0.5,
       "ai95_price_rub": 75.0,
       "diesel_price_rub": 80.0,
       "source_urls": [
-        "https://www.petrolplus.ru/fuelindex/krasnodarskiy-kray/ai95/",
-        "https://card-oil.ru/fuel-cost/krasnodarskij-kraj/",
-        "https://ruinformer.com/page/krym-protiv-krasnodara-gde-zapravljatsja-vygodnee-v-2026-m"
+        "https://www.yuga.ru/news/484660-rosneft-vnov-vvela-limity-na-prodazhu-topliva-kosnulis-li-ogranicheniya-krasnodarskogo-kraya/",
+        "https://www.tourprom.ru/news/90342/"
       ],
-      "note": "08.10 ротация 84: Цены 71-76р. Лимит 30л. Стабилизируется медленно. WebSearch 08.10."
+      "note": "12.11: лимиты «Роснефти» 30/50 л действуют и в крае; в Краснодаре 103 АЗС, в Сочи 49 АЗС — топливо есть. WebSearch 12.11."
     },
     {
       "region": "Ингушетия",
       "lat": 43.17,
       "lon": 44.82,
       "level": "critical",
-      "updated": "2026-11-02T06:00:00Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть / Частные",
@@ -923,26 +934,32 @@
       "region": "Тульская область",
       "lat": 54.2,
       "lon": 37.3,
-      "level": "calm",
-      "updated": "2026-11-03T06:00:00Z",
+      "level": "limited",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
-          "name": "Газпромнефть / Лукойл / Роснефть",
+          "name": "Роснефть",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 30,
+          "note": "с 07.11 не более 30 л за одну заправку; сотрудники АЗС срок действия ограничения не называют (Тульские новости)."
+        },
+        {
+          "name": "Газпромнефть / Лукойл / Тбойл",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "08.10 ротация 84: БЕЗ административных лимитов (один из редких в ЦФО). Цены ВЫСОКИЕ: АИ-95 ~86р (в топ дорогих ЦФО). АИ-92 81р, АИ-95 86р, АИ-98 97р. На большинстве АЗС топливо есть. Мониторинг ведется. Логистическая система стабильна. WebSearch 08.10."
+          "note": "лимитов нет; в конце октября цены в регионе снижались, включая частные заправки."
         }
       ],
-      "queues_hours": 0.1,
+      "queues_hours": 0.2,
       "ai95_price_rub": 86.29,
       "diesel_price_rub": 85.0,
       "source_urls": [
-        "https://tulapressa.ru/2026/10/litr-tulskogo-benzina-ai-95-odin-iz-samyx-dorogostoyashhix-v-cfo/",
-        "https://myslo.ru/news/tula/2026-08-13-benzin-desheveet-a-limity-vozvrashayutsya-chto-proishodit-na-azs-v-tule-i-sosednih-oblastyah",
-        "https://rosstat.gov.ru/storage/mediabank/83_03-06-2026.html"
+        "https://newstula.ru/fn_1989316.html",
+        "https://tulapressa.ru/2026/10/litr-tulskogo-benzina-ai-95-odin-iz-samyx-dorogostoyashhix-v-cfo/"
       ],
-      "note": "08.10 ротация 84: БЕЗ админ.лимитов. Цены ~86р (в топ дорогих ЦФО). Свободная продажа. WebSearch 08.10."
+      "note": "12.11: на АЗС «Роснефти» с 07.11 лимит 30 л, у остальных сетей ограничений нет. Цены ~86 р/л за АИ-95 (октябрь). WebSearch 12.11."
     },
     {
       "region": "Остальные регионы",
@@ -971,31 +988,32 @@
       "region": "Севастополь",
       "lat": 44.6,
       "lon": 33.5,
-      "level": "limited",
-      "updated": "2026-11-03T06:00:00Z",
+      "level": "strained",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
-          "name": "ТЭС / АТАН",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 20,
-          "note": "21.10 (губернатор Севастополя): с 00:00 на ТЭС — АИ-92, АИ-95, ДТ в свободной продаже без лимитов, не выше 100р/л. АТАН (9 АЗС) — АИ-95 не выше 100р/л, лимит 20л, канистры запрещены (данные 17.10). Онлайн-карта топлива прекращена."
+          "name": "ТЭС",
+          "status": "open",
+          "level": "calm",
+          "limit_l": null,
+          "note": "с 21.10 свободная продажа АИ-92, АИ-95 и ДТ без лимитов, цена не выше 100 р/л (заявление губернатора)."
+        },
+        {
+          "name": "АТАН",
+          "status": "open",
+          "level": "strained",
+          "limit_l": null,
+          "note": "11.11: ограничения в городе сняты, но свободная заправка премиального топлива доходит до 130 р/л (Турпром)."
         }
       ],
       "queues_hours": 0.1,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-21-oktyabrya-otmena-qr-kodov-ceny",
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-17-oktyabrya-otmena-qr-kodov-ceny",
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-11-oktyabrya-gde-kupit-ceny",
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-9-oktyabrya-gde-kupit-ceny",
-        "https://multigo.ru/autoTravel/poi/534d30e65a331c560a00000e",
-        "https://card-oil.ru/azs/tes/sevastopol/",
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-3-oktyabrya-gde-kupit-ceny",
-        "https://ruinformer.com/page/gubernator-sevastopolja-opublikoval-vazhnuju-informaciju-o-prodazhe-topliva-na-gorodskih-azs"
+        "https://www.tourprom.ru/news/90313",
+        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-21-oktyabrya-otmena-qr-kodov-ceny"
       ],
-      "note": "21.10: ТЭС с 00:00 — свободная продажа без лимитов (АИ-92, АИ-95, ДТ до 100р); АТАН — АИ-95 лимит 20л (данные 17.10). До 17.10: QR-коды, ТЭС QR 09–20, АТАН QR 10–16. WebSearch 26.10."
+      "note": "12.11: ограничений нет — ТЭС отпускает без лимитов до 100 р/л, АТАН снял ограничения, но премиальное топливо до 130 р/л. WebSearch 12.11."
     },
     {
       "region": "Татарстан",
@@ -1222,7 +1240,7 @@
       "lat": 52.3,
       "lon": 104.3,
       "level": "limited",
-      "updated": "2026-11-02T05:23:32Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "Иркутскнефть / Региональные",
@@ -1239,7 +1257,7 @@
         "https://www.petrolplus.ru/fuelindex/irkutskaya-oblast/",
         "https://www.petrolplus.ru/fuelindex/irkutskaya-oblast/diesel/"
       ],
-      "note": "25.09 ротация: Иркутск стабилизирован. Цены: АИ-92 68.0р, АИ-95 71.0р, ДТ 74.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+      "note": "Техническая запись-дубль (не связана ни с одной станцией в azs-stations). Актуальные данные — в записи «Иркутская область». Проверено WebSearch 12.11."
     },
     {
       "region": "Самарская область",
@@ -1692,29 +1710,33 @@
       "region": "Республика Крым",
       "lat": 44.7,
       "lon": 34.3,
-      "level": "limited",
-      "updated": "2026-11-05T17:30:00Z",
+      "level": "severe",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
-          "name": "АТАН/ТЭС/Formula",
+          "name": "АТАН",
           "status": "limited",
-          "level": "limited",
+          "level": "severe",
           "limit_l": 20,
-          "note": "21.10 (news.ru): АТАН Феодосия — АИ-92 свободно, АИ-95 лимит 20л, ДТ 30л (полный бак), с 08:00. ТЭС Ялта — АИ-95 лимит 20л с 18:00. 17.10: QR-коды в Севастополе отменены. 01.10: АТАН открыл свободные продажи АИ-95 по 100р с 30.09. Субсидированная цена до 100р."
+          "note": "10–12.11: дефицит усилился, сеть ввела талоны и топливные карты (приоритет предприятиям); АИ-95 по регулируемой цене 100 р/л; часть АЗС в Симферополе законсервирована; 12.11 с 08:00 отпускается только АИ-92."
+        },
+        {
+          "name": "ТЭС",
+          "status": "limited",
+          "level": "severe",
+          "limit_l": 20,
+          "note": "12.11: социальное топливо отпускается по графику — АИ-95 с 14:00, сначала вдоль «Тавриды», затем в городах и на побережье."
         }
       ],
-      "queues_hours": 0.1,
+      "queues_hours": 1.0,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-2-noyabrya-ceny-otmena-limitov",
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-21-oktyabrya-otmena-qr-kodov-ceny",
-        "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-15-oktyabrya-gde-kupit-ceny",
-        "https://www.bfm.ru/news/617299",
-        "https://krym.aif.ru/incidents/novosti-kryma-1-oktyabrya-bpla-qr-kody-na-benzin-svet-transport-pogoda",
-        "https://azs-crimea.ru/"
+        "https://intent.press/ru/news/obshchestvo/2026/v-krymu-snova-defitsit-benzina-na-azs-vvodiat-kartochki/",
+        "https://www.tourprom.ru/news/90342/",
+        "https://www.tourprom.ru/news/90313"
       ],
-      "note": "21.10 (news.ru): АТАН Феодосия — АИ-95 лимит 20л, ДТ 30л (полный бак), с 08:00; ТЭС Ялта — АИ-95 лимит 20л с 18:00. 17.10: QR-коды в Севастополе отменены. 01.10: АТАН открыл свободные продажи (100р), ТЭС по QR 09–16 (20л). 02.11 (news.ru, текст открыт): ТЭС, четыре АЗС Южного берега — АИ-95 примерно на 150 машин по 20 л; губернатор Севастополя — ограничения сняты почти на всех АЗС, цена не выше 100 р/л. Лимит 20 л на ТЭС (Ялта) сохраняется."
+      "note": "12.11: новая волна дефицита — на многих АЗС топлива нет, «АТАН» ввела талоны/карты, часть АЗС законсервирована; социальное топливо по графику (АТАН — АИ-92 с 08:00, ТЭС — АИ-95 с 14:00), АИ-95 100 р/л, канистры не отпускают. WebSearch 12.11."
     },
     {
       "region": "Челябинская область",
@@ -2177,81 +2199,86 @@
       "lat": 52.29,
       "lon": 104.3,
       "level": "limited",
-      "updated": "2026-11-06T17:30:00Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
-          "name": "Роснефть / Крайснефть",
+          "name": "Роснефть / БРК / ОМНИ / Газпромнефть",
           "status": "limited",
           "level": "limited",
-          "limit_l": 30,
-          "note": "01.10 ротация (77-я волна): КрайсНефть цены: АИ-92 55.85р, АИ-95 60.73р, ДТ 71.88р. Лимит 50л. Ручное распределение. Ситуация улучшается. WebSearch 01.10."
+          "limit_l": 50,
+          "note": "09–12.11: третье за неделю подорожание на 0,5–1 р/л. Цены на 12.11: АИ-92 67,6–68,7 р, АИ-95 71,3–72,4 р, ДТ 85,7–88,4 р. В регионе запрещён отпуск в канистры, для «Роснефти» действует лимит 50 л на машину, другие сети могут вводить свои ограничения."
         }
       ],
       "queues_hours": 0.3,
-      "ai95_price_rub": 60.73,
-      "diesel_price_rub": 71.88,
+      "ai95_price_rub": 71.3,
+      "diesel_price_rub": 85.7,
       "source_urls": [
-        "https://i38.ru/",
-        "https://ircity.ru/text/economics/2026/09/21/76652976/",
-        "https://sia.ru/?action=show_news&id=16832327&section=484"
+        "https://irkutskmedia.ru/news/2676988/",
+        "https://www.irk.ru/news/20261109/fuel/",
+        "https://fedpress.ru/news/38/society/3458912"
       ],
-      "note": "01.10: КрайсНефть цены 55.85р/60.73р. Лимит 50л. Улучшается. WebSearch 01.10."
+      "note": "12.11: топливо дорожает третью неделю подряд (АИ-95 71,3–72,4 р, ДТ до 88,4 р); канистры запрещены, лимит «Роснефти» 50 л. WebSearch 12.11."
     },
     {
       "region": "Тамбовская область",
       "lat": 52.73,
       "lon": 41.44,
-      "level": "calm",
-      "updated": "2026-11-02T06:00:00Z",
+      "level": "limited",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
-          "name": "Все АЗС",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "01.10 ротация: 177 АЗС работают в штатном режиме. Чет-нечет отменена (с 14.08). Ограничения ослаблены. WebSearch 01.10."
+          "name": "Лукойл",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 30,
+          "note": "09.11: не более 30 л бензина на один автомобиль."
+        },
+        {
+          "name": "Роснефть",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 30,
+          "note": "09.11: АИ-95 — не более 30 л, АИ-92 — не более 50 л на одно транспортное средство."
         }
       ],
       "queues_hours": 0.1,
       "ai95_price_rub": 69.15,
       "diesel_price_rub": 76.0,
       "source_urls": [
-        "https://brief24.ru/tambov/2026/8/23/297470",
-        "https://tambov.mk.ru/social/2026/09/01/v-tambovskoy-oblasti-pochti-vse-azs-rabotayut-v-shtatnom-rezhime.html"
+        "https://gazetamordovo.ru/news/society/2026-11-09/ogranicheniya-na-prodazhu-topliva-sohranyayutsya-v-tambovskoy-oblasti-350707",
+        "https://www.interfax-russia.ru/center/news/prodazhi-benzina-po-sheme-chet-nechet-eshche-deystvuyut-na-treh-azs-tambovskoy-oblasti"
       ],
-      "note": "01.10: 177 АЗС работают штатно. Ограничения ослаблены. Цены 69р. WebSearch 01.10."
+      "note": "12.11 (данные на 09.11): 187 АЗС из 214 продают топливо, 27 временно не работают; все три вида есть на 173 АЗС. «Чёт-нечёт» отменён с 23.10, кроме трёх АЗС в Жердевском и Мордовском округах. Лимиты «Лукойла» 30 л и «Роснефти» 30/50 л сохраняются по решению главы региона. WebSearch 12.11."
     },
     {
       "region": "Астраханская область",
       "lat": 46.35,
       "lon": 48.04,
-      "level": "limited",
-      "updated": "2026-11-02T06:00:00Z",
+      "level": "strained",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл / Газпром нефть",
-          "status": "limited",
-          "level": "limited",
-          "limit_l": 40,
-          "note": "01.10 ротация (77-я волна): Очереди 18-24 авто. График работы АЗС. Лимит 40л. Цены стабильны. WebSearch 01.10."
+          "status": "open",
+          "level": "strained",
+          "limit_l": null,
+          "note": "09.11 (Кавказский Узел, опрос водителей): очередей практически нет, ограничений на объём продажи нет, ажиотаж спал; АИ-92 66,5 р/л, АИ-95 72 р/л, АИ-100 97,8 р/л, ДТ ниже 78 р/л."
         }
       ],
-      "queues_hours": 0.5,
-      "ai95_price_rub": 75.0,
-      "diesel_price_rub": 80.0,
+      "queues_hours": 0.3,
+      "ai95_price_rub": 72.0,
+      "diesel_price_rub": 78.0,
       "source_urls": [
-        "https://www.kavkaz-uzel.eu/articles/424824",
-        "https://astrakhan.aif.ru/society/gde-zapravitsya-v-astrahani-26-sentyabrya-chetnye-nomera-grafik-raboty-azs",
-        "https://gdezapravka.ru/zapravki/astrahan"
+        "https://www.kavkaz-uzel.eu/articles/428206"
       ],
-      "note": "01.10: Очереди 18-24 авто. Лимит 40л. Цены 75р. WebSearch 01.10."
+      "note": "12.11: очередей нет, лимитов нет, цены выше докризисных: АИ-95 ~72 р/л, ДТ <78 р/л. WebSearch 12.11."
     },
     {
       "region": "Смоленская область",
       "lat": 54.78,
       "lon": 32.05,
       "level": "limited",
-      "updated": "2026-11-02T06:00:00Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "АЗС сети",
@@ -2265,18 +2292,19 @@
       "ai95_price_rub": 57.59,
       "diesel_price_rub": 65.4,
       "source_urls": [
+        "https://smolensk-i.ru/auto/v-smolenskoj-oblasti-pustili-fejk-o-deficzite-topliva_664407",
         "https://smol.aif.ru/society/do-krayov-ne-nalivat-pochemu-na-smolenskih-azs-ischez-benzin",
         "https://gdezapravka.ru/zapravki/smolensk",
         "https://www.rabochy-put.ru/news/211901-na-smolenskikh-zapravkakh-nablyudaetsya-defitsit-topliva.html"
       ],
-      "note": "01.10: Лимит 25л. Очереди. Цены 57-90р. Дефицит АИ-95. WebSearch 01.10."
+      "note": "12.11: новых сообщений по лимитам и очередям за ноябрь не найдено. 27.10 официально опровергнут поддельный документ о резервировании 40% запасов топлива и сокращении объёма дизеля на 80%; поставки под контролем властей с конца лета. Данные о лимите 25 л — от 01.10. WebSearch 12.11."
     },
     {
       "region": "Чеченская республика",
       "lat": 43.32,
       "lon": 45.69,
       "level": "critical",
-      "updated": "2026-11-02T06:00:00Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть / Частные",
@@ -2301,7 +2329,7 @@
       "lat": 53.04,
       "lon": 158.65,
       "level": "calm",
-      "updated": "2026-11-02T06:00:00Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "Газпромнефть/Лукойл/Роснефть",
@@ -2321,7 +2349,7 @@
         "http://council.gov.ru/events/news/72707/",
         "https://neftegaz.ru/news/transport-and-storage/893264-kamchatskiy-kray-poluchit-400-mln-rub-na-severnyy-zavoz-topliva-/"
       ],
-      "note": "01.10: Стабильна! Северный завоз по плану. Запасы 30+ дней. Цены 83р. WebSearch 01.10."
+      "note": "12.11: топливо с начала года дорожало более десяти раз, последнее повышение — 30.10; очередей и лимитов нет, поставки стабильны (камчатское издание, 05.11). Данные о ценах — от 01.10. WebSearch 12.11."
     },
     {
       "region": "Орловская область",
@@ -2375,7 +2403,7 @@
       "lat": 56.85,
       "lon": 53.2,
       "level": "calm",
-      "updated": "2026-11-02T06:00:00Z",
+      "updated": "2026-11-12T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл / Татнефть / Башнефть / Газпром",
@@ -2394,7 +2422,7 @@
         "https://udm.aif.ru/society/na-azs-v-udmurtii-uvelichili-limity-otpuska-benzina",
         "https://rg.ru/2026/09/24/reg-pfo/v-udmurtii-sniali-ogranicheniia-na-prodazhu-dizelnogo-topliva-na-riade-azs.html"
       ],
-      "note": "23.09 ротация: ВОССТАНОВИЛАСЬ! Поставки 1000+ т/день. Полная стабилизация. WebSearch 23.09."
+      "note": "12.11: 06.11 республика вошла в топ-10 регионов с самым дешёвым бензином (udm-info); сообщений о лимитах и очередях нет. Данные о поставках — от 23.09. WebSearch 12.11."
     },
     {
       "region": "Костромская область",
