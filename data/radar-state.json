@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1794485381,
-      "source_text": "12.11.2026 15:08 МСК\nКурахово ДНР ракетная опасность\n\n12.11.2026 15:09 МСК\nГорловка и близлежащие на восток Опасность по БПЛА и возможным ФПВ ДНР"
+      "last_event_ts": 1794485502,
+      "source_text": "12.11.2026 15:08 МСК\nКурахово ДНР ракетная опасность\n\n12.11.2026 15:11 МСК\nШахтёрск, Торез, Снежное и близлежащие Тревога по БПЛА ДНР"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -157,6 +157,25 @@
       "fill": "#dc2626",
       "last_event_ts": 1794482325,
       "source_text": "12.11.2026 14:18 МСК\nОтбой авиационной ракетной бомбовой, Ракетной опасности Запорожская область РФ ЛДНР Ростовская область Харьковская область РФ Воронежская область Волгоградская область Саратовская область"
+    },
+    "Ставропольский край": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794485367,
+      "source_text": "12.11.2026 15:09 МСК\nСтавропольский край Опасность по БПЛА Карта опасностей - radar-vrv.ru"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -823,6 +842,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794471564,
       "source_text": "12.11.2026 11:19 МСК\nКрасный Луч Ровеньки ЛНР и близлежащие Опасность по БПЛА"
+    },
+    {
+      "key": "шахтёрск|донецкая народная республика",
+      "name": "Шахтёрск",
+      "lat": 48.05657,
+      "lon": 38.43826,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794485502,
+      "source_text": "12.11.2026 15:11 МСК\nШахтёрск, Торез, Снежное и близлежащие Тревога по БПЛА ДНР"
     },
     {
       "key": "луганск|луганская народная республика",
@@ -1725,6 +1766,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794480955,
       "source_text": "12.11.2026 13:55 МСК\nСимферополь и близлежащие Республика Крым Опасность по БПЛА сохраняется"
+    },
+    {
+      "key": "снежное|донецкая народная республика",
+      "name": "Снежное",
+      "lat": 48.02328,
+      "lon": 38.76205,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794485502,
+      "source_text": "12.11.2026 15:11 МСК\nШахтёрск, Торез, Снежное и близлежащие Тревога по БПЛА ДНР"
     },
     {
       "key": "ахтарский|краснодарский край",
@@ -3162,12 +3225,28 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 302890,
+      "text": "Шахтёрск, Торез, Снежное и близлежащие\nТревога по БПЛА\nДНР",
+      "ts": 1794485502,
+      "time_label": "12.11.2026 15:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 302889,
       "text": "Горловка и близлежащие на восток\nОпасность по БПЛА и возможным ФПВ\nДНР",
       "ts": 1794485381,
       "time_label": "12.11.2026 15:09 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 107082,
+      "text": "Ставропольский край\nОпасность по БПЛА\nКарта опасностей -\nradar-vrv.ru",
+      "ts": 1794485367,
+      "time_label": "12.11.2026 15:09 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
     },
     {
       "msg_id": 302888,
@@ -3784,22 +3863,6 @@
       "time_label": "12.11.2026 13:50 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 107067,
-      "text": "Липецкая область\nРакетная опасность",
-      "ts": 1794480560,
-      "time_label": "12.11.2026 13:49 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 107066,
-      "text": "Орловская область\nРакетная опасность",
-      "ts": 1794480539,
-      "time_label": "12.11.2026 13:48 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -3809,15 +3872,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794485381,
-  "last_event_at": "2026-11-12T12:09:41Z",
-  "fetched_at": "2026-11-12T12:10:05.848336Z",
+  "timestamp": 1794485502,
+  "last_event_at": "2026-11-12T12:11:42Z",
+  "fetched_at": "2026-11-12T12:20:03.643267Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-12T12:10:05.848336Z",
-    "source_age_seconds": 24,
-    "city_count": 86,
-    "region_count": 14,
+    "generated_at": "2026-11-12T12:20:03.643267Z",
+    "source_age_seconds": 501,
+    "city_count": 88,
+    "region_count": 15,
     "feed_count": 80
   }
 }
