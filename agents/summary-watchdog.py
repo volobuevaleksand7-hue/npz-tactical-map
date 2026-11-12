@@ -302,6 +302,57 @@ def heal(day: str):
 
 
 # ---- main -------------------------------------------------------------------
+def edit_post_media(day: str) -> bool:
+    """Пересобрали обложку после публикации — заменить картинку в посте.
+    Работает для split-режима (фото без подписи). В caption-режиме не трогаем,
+    чтобы не потерять текст сводки."""
+    try:
+        st = json.loads((Path.home() / ".npz-bot" / "day-state.json").read_text(encoding="utf-8"))
+    except Exception as e:  # noqa: BLE001
+        log(f"edit media: state не прочитан: {e}")
+        return False
+    if st.get("date") != day:
+        log(f"edit media: state за {st.get('date')}, не {day} — пропуск")
+        return False
+    if st.get("mode") != "split":
+        log(f"edit media: режим {st.get('mode')} — пропуск (подпись не восстанавливаем)")
+        return False
+    mid = st.get("media_message_id")
+    photo = ROOT / "assets" / f"cover-{day}.png"
+    if not mid or not photo.exists():
+        log(f"edit media: нет message_id/файла ({mid}, {photo.exists()})")
+        return False
+    try:
+        token = (Path.home() / ".npz-bot" / "token").read_text(encoding="utf-8").strip()
+        chat = os.environ.get("NPZ_CHANNEL_ID", "-1004491068477")
+        boundary = "----npz" + os.urandom(8).hex()
+        parts = []
+
+        def field(name, value):
+            parts.append((f"--{boundary}\r\nContent-Disposition: form-data; name=\"{name}\"\r\n\r\n"
+                          f"{value}\r\n").encode())
+
+        field("chat_id", chat)
+        field("message_id", str(mid))
+        field("media", json.dumps({"type": "photo", "media": "attach://photo.png"}))
+        parts.append((f"--{boundary}\r\nContent-Disposition: form-data; name=\"photo.png\"; "
+                      "filename=\"photo.png\"\r\nContent-Type: image/png\r\n\r\n").encode())
+        parts.append(photo.read_bytes())
+        parts.append(b"\r\n")
+        parts.append((f"--{boundary}--\r\n").encode())
+        req = urllib.request.Request(
+            f"https://api.telegram.org/bot{token}/editMessageMedia",
+            data=b"".join(parts),
+            headers={"Content-Type": f"multipart/form-data; boundary={boundary}"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            d = json.loads(r.read())
+        log(f"edit media: пост {mid} за {day} обновлён (ok={d.get('ok')})")
+        return bool(d.get("ok"))
+    except Exception as e:  # noqa: BLE001
+        log(f"edit media: не удалось обновить пост за {day}: {e}")
+        return False
+
+
 def main() -> int:
     day = today()
     if "--test" in sys.argv:
@@ -350,6 +401,7 @@ def main() -> int:
         _, cover_ok = heal(day)
         if cover_ok:
             update_incidents([], day)
+            edit_post_media(day)
             log(f"обложку за {day} досоздал [{COVER_SRC}]")
             return 0
         if update_incidents(["cover-fallback"], day):
@@ -360,6 +412,8 @@ def main() -> int:
     # ===== «Тихая» обложка, а удары за день уже есть → пересобрать =====
     if problems == ["cover-quiet"]:
         _, cover_ok = heal(day)
+        if cover_ok:
+            edit_post_media(day)
         log(f"обложку за {day} пересобрал (был тихий вариант) [{COVER_SRC}]")
         return 0
 
