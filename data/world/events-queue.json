@@ -225,14 +225,14 @@
    "found_at": "2026-10-29T03:24:19Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "ok",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "needs_source",
-   "reject_reason": "нужен второй независимый издатель"
+   "verdict": "rejected",
+   "reject_reason": "schema"
   },
   {
    "id": "2026-10-29-hormuz-vessel-fire-ukmto-khasab",
@@ -748,5 +748,5 @@
    "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-11T19:35:52Z"
+ "validated_at": "2026-11-12T03:36:02Z"
 }
