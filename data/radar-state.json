@@ -174,8 +174,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794438032,
-      "source_text": "12.11.2026 02:00 МСК\nГО Домодедово ГО Бронницы Московская область Продолжаются фиксации и работа ПВО по БПЛА Меры безопасности"
+      "last_event_ts": 1794442165,
+      "source_text": "12.11.2026 03:09 МСК\nМО Лотошино Московская область Фиксация БПЛА"
     },
     "Брянская область": {
       "bpla": false,
@@ -231,8 +231,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794441213,
-      "source_text": "12.11.2026 02:53 МСК\nНововасильевка и близлежащие Запорожская область РФ Тревога по БПЛА на электротяге"
+      "last_event_ts": 1794442372,
+      "source_text": "12.11.2026 03:12 МСК\nМелитополь и близлежащие Тревога по БПЛА Запорожская область РФ"
     },
     "Смоленская область": {
       "bpla": false,
@@ -364,8 +364,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794438032,
-      "source_text": "12.11.2026 02:00 МСК\nГО Домодедово ГО Бронницы Московская область Продолжаются фиксации и работа ПВО по БПЛА Меры безопасности"
+      "last_event_ts": 1794442165,
+      "source_text": "12.11.2026 03:09 МСК\nМО Лотошино Московская область Фиксация БПЛА"
     },
     "Орловская область": {
       "bpla": false,
@@ -538,6 +538,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794410625,
       "source_text": "11.11.2026 18:23 МСК\nКлинцы Сураж И близлежащие Опасность по БПЛА Брянская область"
+    },
+    {
+      "key": "мелитополь|запорожская область",
+      "name": "Мелитополь",
+      "lat": 46.85754363636364,
+      "lon": 35.35915090909091,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794442372,
+      "source_text": "12.11.2026 03:12 МСК\nМелитополь и близлежащие Тревога по БПЛА Запорожская область РФ"
     },
     {
       "key": "сураж|брянская область",
@@ -1946,6 +1968,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794438032,
       "source_text": "12.11.2026 02:00 МСК\nГО Домодедово ГО Бронницы Московская область Продолжаются фиксации и работа ПВО по БПЛА Меры безопасности"
+    },
+    {
+      "key": "лотошино|московская область",
+      "name": "Лотошино",
+      "lat": 56.2269944,
+      "lon": 35.6413298,
+      "region": "Московская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794442165,
+      "source_text": "12.11.2026 03:09 МСК\nМО Лотошино Московская область Фиксация БПЛА"
     }
   ],
   "districts": {
@@ -2779,12 +2823,28 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 302592,
+      "text": "Мелитополь и близлежащие\nТревога по БПЛА\nЗапорожская область РФ",
+      "ts": 1794442372,
+      "time_label": "12.11.2026 03:12 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 302591,
       "text": "Кашары и далее на восток, юго-восток\nТревога по БПЛА\nРостовская область",
       "ts": 1794442185,
       "time_label": "12.11.2026 03:09 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 107010,
+      "text": "МО Лотошино\nМосковская область\nФиксация БПЛА",
+      "ts": 1794442165,
+      "time_label": "12.11.2026 03:09 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
     },
     {
       "msg_id": 107009,
@@ -3401,22 +3461,6 @@
       "time_label": "11.11.2026 23:37 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 106986,
-      "text": "Ивановская область\nОпасность по БПЛА",
-      "ts": 1794429347,
-      "time_label": "11.11.2026 23:35 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 106985,
-      "text": "Владимирская область\nОпасность по БПЛА",
-      "ts": 1794429341,
-      "time_label": "11.11.2026 23:35 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -3426,14 +3470,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794442185,
-  "last_event_at": "2026-11-12T00:09:45Z",
-  "fetched_at": "2026-11-12T00:10:03.009876Z",
+  "timestamp": 1794442372,
+  "last_event_at": "2026-11-12T00:12:52Z",
+  "fetched_at": "2026-11-12T00:20:04.162690Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-12T00:10:03.009876Z",
-    "source_age_seconds": 18,
-    "city_count": 70,
+    "generated_at": "2026-11-12T00:20:04.162690Z",
+    "source_age_seconds": 432,
+    "city_count": 72,
     "region_count": 21,
     "feed_count": 80
   }
