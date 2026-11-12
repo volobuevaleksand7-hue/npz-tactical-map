@@ -302,11 +302,28 @@ def lead_from_archive(date):
     return pick_lead(day) if day else None
 
 
+def lead_from_recent(date):
+    """Лид за последние 24 часа — тот же горизонт, что считает текст сводки.
+    09.11.2026: brief на утро часто ещё без сегодняшних ударов, а вчерашние
+    вечерние/ночные уже есть; без этого обложка врала «Без ударов», хотя в
+    тексте было 14 ударов за сутки."""
+    try:
+        data = json.loads(STRIKES.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    ss = data["strikes"] if isinstance(data, dict) else data
+    import datetime as _dt
+    cutoff = (_dt.date.fromisoformat(date) - _dt.timedelta(days=1)).isoformat()
+    day = [s for s in ss if str(s.get("date", ""))[:10] >= cutoff]
+    return pick_lead(day) if day else None
+
+
 def meta_for(date, brief):
     """Мета обложки. None = лида нет → обложку НЕ выдумываем (см. main)."""
     st = brief.get("strikes", [])
     vo = brief.get("voices", [])
-    lead = pick_lead(st) if st else lead_from_archive(date)
+    # 12.11.2026: сначала лид за 24 часа (как в тексте сводки), потом today-brief.
+    lead = lead_from_recent(date) or (pick_lead(st) if st else lead_from_archive(date))
     if lead:
         city = str(lead.get("city", "")).strip(); kind = classify(lead)
         src = lead.get("source_url", "")

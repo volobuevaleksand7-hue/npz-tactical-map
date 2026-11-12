@@ -104,6 +104,10 @@ def check(day: str, html: str):
         return ["card-missing"]           # нет карточки — обложку проверять незачем
     if f"cover-{day}.png" not in html:
         return ["cover-fallback"]
+    # 12.11.2026: «тихая» обложка («Без ударов») — не норма, если за день уже
+    # приехали удары. Иначе сайт/TG весь день живут с ложным заголовком.
+    if (ROOT / "assets" / f"cover-{day}.quiet").exists() and data_has_today(day):
+        return ["cover-quiet"]
     return []
 
 
@@ -351,6 +355,12 @@ def main() -> int:
         if update_incidents(["cover-fallback"], day):
             git_sync(f"watchdog: обложка за {day} — заглушка, Codex не смог (долг)")
         log(f"карточка за {day} на месте; обложка-заглушка, штатный генератор не смог")
+        return 0
+
+    # ===== «Тихая» обложка, а удары за день уже есть → пересобрать =====
+    if problems == ["cover-quiet"]:
+        _, cover_ok = heal(day)
+        log(f"обложку за {day} пересобрал (был тихий вариант) [{COVER_SRC}]")
         return 0
 
     # ===== Карточки нет, но события есть → КРИТИЧНО: самолечение =====
