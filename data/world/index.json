@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T19:35:41Z",
+ "generated_at": "2026-11-13T01:37:30Z",
  "methodology_version": "0.2",
  "brand": {
   "short": "ИТН",
@@ -8,21 +8,28 @@
   "en": "Fuel Tension Index"
  },
  "world": {
-  "value": 77,
-  "level": "critical",
-  "level_ru": "критично",
-  "delta_1d": 0,
-  "coverage": 1.0,
-  "regions_missing": []
+  "value": null,
+  "level": null,
+  "level_ru": "мало данных",
+  "delta_1d": null,
+  "coverage": 0.45,
+  "regions_missing": [
+   "north_america",
+   "middle_east",
+   "south_asia",
+   "latin_america",
+   "russia_cis",
+   "africa"
+  ]
  },
  "regions": {
   "north_america": {
    "name": "Северная Америка",
-   "value": 94,
-   "level": "critical",
-   "level_ru": "критично",
-   "delta_1d": -1,
-   "coverage": 0.5,
+   "value": null,
+   "level": null,
+   "level_ru": "мало данных",
+   "delta_1d": null,
+   "coverage": 0.45,
    "weight_world": 0.24,
    "components": [
     {
@@ -64,29 +71,29 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 96.0,
+     "score": 90.9,
      "weight": 0.1,
-     "raw": "Brent 107,03 $/барр. (p94); ULSD NYH 4,82 $/гал. (p98), процентиль к 10 годам",
-     "as_of": "2026-11-03",
+     "raw": "Brent 92,14 $/барр. (p87); ULSD NYH 4,20 $/гал. (p94), процентиль к 10 годам",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 98.6,
+     "score": 96.1,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 95,5 $/барр. (p99 к 10 годам)",
-     "as_of": "2026-11-03",
+     "raw": "ULSD×42 − Brent = 84,4 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 75.6,
+     "score": null,
      "weight": 0.05,
-     "raw": "GPR (7-дн. среднее) 158,8; p76 к 5 годам",
-     "as_of": "2026-11-02",
-     "source": "Caldara-Iacoviello GPR"
+     "raw": "нет ряда GPR",
+     "as_of": null,
+     "source": null
     },
     {
      "id": "phys_premium",
@@ -101,11 +108,11 @@
   },
   "east_asia": {
    "name": "Восточная Азия и АТР",
-   "value": 79,
+   "value": 78,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.65,
+   "delta_1d": -1,
+   "coverage": 0.6,
    "weight_world": 0.3,
    "components": [
     {
@@ -147,29 +154,29 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 96.0,
+     "score": 90.9,
      "weight": 0.1,
-     "raw": "Brent 107,03 $/барр. (p94); ULSD NYH 4,82 $/гал. (p98), процентиль к 10 годам",
-     "as_of": "2026-11-03",
+     "raw": "Brent 92,14 $/барр. (p87); ULSD NYH 4,20 $/гал. (p94), процентиль к 10 годам",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 98.6,
+     "score": 96.1,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 95,5 $/барр. (p99 к 10 годам)",
-     "as_of": "2026-11-03",
+     "raw": "ULSD×42 − Brent = 84,4 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 75.6,
+     "score": null,
      "weight": 0.05,
-     "raw": "GPR (7-дн. среднее) 158,8; p76 к 5 годам",
-     "as_of": "2026-11-02",
-     "source": "Caldara-Iacoviello GPR"
+     "raw": "нет ряда GPR",
+     "as_of": null,
+     "source": null
     },
     {
      "id": "phys_premium",
@@ -184,11 +191,11 @@
   },
   "europe": {
    "name": "Европа",
-   "value": 78,
+   "value": 77,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.8,
+   "delta_1d": -1,
+   "coverage": 0.75,
    "weight_world": 0.15,
    "components": [
     {
@@ -230,29 +237,29 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 96.0,
+     "score": 90.9,
      "weight": 0.1,
-     "raw": "Brent 107,03 $/барр. (p94); ULSD NYH 4,82 $/гал. (p98), процентиль к 10 годам",
-     "as_of": "2026-11-03",
+     "raw": "Brent 92,14 $/барр. (p87); ULSD NYH 4,20 $/гал. (p94), процентиль к 10 годам",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 98.6,
+     "score": 96.1,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 95,5 $/барр. (p99 к 10 годам)",
-     "as_of": "2026-11-03",
+     "raw": "ULSD×42 − Brent = 84,4 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 75.6,
+     "score": null,
      "weight": 0.05,
-     "raw": "GPR (7-дн. среднее) 158,8; p76 к 5 годам",
-     "as_of": "2026-11-02",
-     "source": "Caldara-Iacoviello GPR"
+     "raw": "нет ряда GPR",
+     "as_of": null,
+     "source": null
     },
     {
      "id": "phys_premium",
@@ -267,11 +274,11 @@
   },
   "middle_east": {
    "name": "Ближний Восток",
-   "value": 74,
-   "level": "crisis",
-   "level_ru": "кризис",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": null,
+   "level": null,
+   "level_ru": "мало данных",
+   "delta_1d": null,
+   "coverage": 0.45,
    "weight_world": 0.09,
    "components": [
     {
@@ -313,29 +320,29 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 96.0,
+     "score": 90.9,
      "weight": 0.1,
-     "raw": "Brent 107,03 $/барр. (p94); ULSD NYH 4,82 $/гал. (p98), процентиль к 10 годам",
-     "as_of": "2026-11-03",
+     "raw": "Brent 92,14 $/барр. (p87); ULSD NYH 4,20 $/гал. (p94), процентиль к 10 годам",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 98.6,
+     "score": 96.1,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 95,5 $/барр. (p99 к 10 годам)",
-     "as_of": "2026-11-03",
+     "raw": "ULSD×42 − Brent = 84,4 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 75.6,
+     "score": null,
      "weight": 0.05,
-     "raw": "GPR (7-дн. среднее) 158,8; p76 к 5 годам",
-     "as_of": "2026-11-02",
-     "source": "Caldara-Iacoviello GPR"
+     "raw": "нет ряда GPR",
+     "as_of": null,
+     "source": null
     },
     {
      "id": "phys_premium",
@@ -350,11 +357,11 @@
   },
   "south_asia": {
    "name": "Южная Азия",
-   "value": 74,
-   "level": "crisis",
-   "level_ru": "кризис",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": null,
+   "level": null,
+   "level_ru": "мало данных",
+   "delta_1d": null,
+   "coverage": 0.45,
    "weight_world": 0.07,
    "components": [
     {
@@ -396,29 +403,29 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 96.0,
+     "score": 90.9,
      "weight": 0.1,
-     "raw": "Brent 107,03 $/барр. (p94); ULSD NYH 4,82 $/гал. (p98), процентиль к 10 годам",
-     "as_of": "2026-11-03",
+     "raw": "Brent 92,14 $/барр. (p87); ULSD NYH 4,20 $/гал. (p94), процентиль к 10 годам",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 98.6,
+     "score": 96.1,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 95,5 $/барр. (p99 к 10 годам)",
-     "as_of": "2026-11-03",
+     "raw": "ULSD×42 − Brent = 84,4 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 75.6,
+     "score": null,
      "weight": 0.05,
-     "raw": "GPR (7-дн. среднее) 158,8; p76 к 5 годам",
-     "as_of": "2026-11-02",
-     "source": "Caldara-Iacoviello GPR"
+     "raw": "нет ряда GPR",
+     "as_of": null,
+     "source": null
     },
     {
      "id": "phys_premium",
@@ -433,11 +440,11 @@
   },
   "latin_america": {
    "name": "Латинская Америка",
-   "value": 44,
-   "level": "tense",
-   "level_ru": "напряжённо",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": null,
+   "level": null,
+   "level_ru": "мало данных",
+   "delta_1d": null,
+   "coverage": 0.45,
    "weight_world": 0.07,
    "components": [
     {
@@ -479,29 +486,29 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 96.0,
+     "score": 90.9,
      "weight": 0.1,
-     "raw": "Brent 107,03 $/барр. (p94); ULSD NYH 4,82 $/гал. (p98), процентиль к 10 годам",
-     "as_of": "2026-11-03",
+     "raw": "Brent 92,14 $/барр. (p87); ULSD NYH 4,20 $/гал. (p94), процентиль к 10 годам",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 98.6,
+     "score": 96.1,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 95,5 $/барр. (p99 к 10 годам)",
-     "as_of": "2026-11-03",
+     "raw": "ULSD×42 − Brent = 84,4 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 75.6,
+     "score": null,
      "weight": 0.05,
-     "raw": "GPR (7-дн. среднее) 158,8; p76 к 5 годам",
-     "as_of": "2026-11-02",
-     "source": "Caldara-Iacoviello GPR"
+     "raw": "нет ряда GPR",
+     "as_of": null,
+     "source": null
     },
     {
      "id": "phys_premium",
@@ -516,11 +523,11 @@
   },
   "russia_cis": {
    "name": "Россия и СНГ",
-   "value": 64,
-   "level": "crisis",
-   "level_ru": "кризис",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": null,
+   "level": null,
+   "level_ru": "мало данных",
+   "delta_1d": null,
+   "coverage": 0.45,
    "weight_world": 0.04,
    "components": [
     {
@@ -562,29 +569,29 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 96.0,
+     "score": 90.9,
      "weight": 0.1,
-     "raw": "Brent 107,03 $/барр. (p94); ULSD NYH 4,82 $/гал. (p98), процентиль к 10 годам",
-     "as_of": "2026-11-03",
+     "raw": "Brent 92,14 $/барр. (p87); ULSD NYH 4,20 $/гал. (p94), процентиль к 10 годам",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 98.6,
+     "score": 96.1,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 95,5 $/барр. (p99 к 10 годам)",
-     "as_of": "2026-11-03",
+     "raw": "ULSD×42 − Brent = 84,4 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 75.6,
+     "score": null,
      "weight": 0.05,
-     "raw": "GPR (7-дн. среднее) 158,8; p76 к 5 годам",
-     "as_of": "2026-11-02",
-     "source": "Caldara-Iacoviello GPR"
+     "raw": "нет ряда GPR",
+     "as_of": null,
+     "source": null
     },
     {
      "id": "phys_premium",
@@ -599,11 +606,11 @@
   },
   "africa": {
    "name": "Африка",
-   "value": 40,
-   "level": "tense",
-   "level_ru": "напряжённо",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": null,
+   "level": null,
+   "level_ru": "мало данных",
+   "delta_1d": null,
+   "coverage": 0.45,
    "weight_world": 0.04,
    "components": [
     {
@@ -645,29 +652,29 @@
     {
      "id": "prices",
      "label": "Цены нефти и дизеля",
-     "score": 96.0,
+     "score": 90.9,
      "weight": 0.1,
-     "raw": "Brent 107,03 $/барр. (p94); ULSD NYH 4,82 $/гал. (p98), процентиль к 10 годам",
-     "as_of": "2026-11-03",
+     "raw": "Brent 92,14 $/барр. (p87); ULSD NYH 4,20 $/гал. (p94), процентиль к 10 годам",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "diesel_crack",
      "label": "Дизельный крэк-спред",
-     "score": 98.6,
+     "score": 96.1,
      "weight": 0.05,
-     "raw": "ULSD×42 − Brent = 95,5 $/барр. (p99 к 10 годам)",
-     "as_of": "2026-11-03",
+     "raw": "ULSD×42 − Brent = 84,4 $/барр. (p96 к 10 годам)",
+     "as_of": "2026-11-11",
      "source": "FRED / EIA"
     },
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": 75.6,
+     "score": null,
      "weight": 0.05,
-     "raw": "GPR (7-дн. среднее) 158,8; p76 к 5 годам",
-     "as_of": "2026-11-02",
-     "source": "Caldara-Iacoviello GPR"
+     "raw": "нет ряда GPR",
+     "as_of": null,
+     "source": null
     },
     {
      "id": "phys_premium",
