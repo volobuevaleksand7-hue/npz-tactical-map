@@ -98,8 +98,27 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794586221,
-      "source_text": "13.11.2026 19:10 МСК\nГорловка и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794591332,
+      "source_text": "13.11.2026 20:35 МСК\nГорловка и близлежащие Опасность по БПЛА сохраняется ДНР"
+    },
+    "Луганская Народная Республика": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794591457,
+      "source_text": "13.11.2026 20:37 МСК\nНовоайдар и близлежащие Тревога по БПЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -327,8 +346,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794586221,
-      "source_text": "13.11.2026 19:10 МСК\nГорловка и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794591332,
+      "source_text": "13.11.2026 20:35 МСК\nГорловка и близлежащие Опасность по БПЛА сохраняется ДНР"
     },
     {
       "key": "мирное|запорожская область",
@@ -373,6 +392,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794584989,
       "source_text": "13.11.2026 18:49 МСК\nКаланчак, Ставки, Мирное и близлежащие тревога по БПЛА. Возможно пойдет на Армянск, Красноперекопск"
+    },
+    {
+      "key": "новоайдар|луганская народная республика",
+      "name": "Новоайдар",
+      "lat": 48.96402,
+      "lon": 39.00559,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794591457,
+      "source_text": "13.11.2026 20:37 МСК\nНовоайдар и близлежащие Тревога по БПЛА"
     }
   ],
   "districts": {
@@ -423,6 +464,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 303353,
+      "text": "Новоайдар и близлежащие\nТревога по БПЛА\nИ далее в направлении\nСчастье\nЛНР",
+      "ts": 1794591457,
+      "time_label": "13.11.2026 20:37 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 303352,
+      "text": "Горловка и близлежащие\nОпасность по БПЛА сохраняется\nДНР",
+      "ts": 1794591332,
+      "time_label": "13.11.2026 20:35 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 303351,
       "text": "В районе Днепропетровска самолёты противника.\nЛДНР\nЗапорожская область РФ\nВнимание к авиационной ракетной бомбовой орасности",
@@ -1046,22 +1103,6 @@
       "time_label": "13.11.2026 10:50 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 303286,
-      "text": "ЛНР\nОсобое внимание трассы\nОпасность по БПЛА",
-      "ts": 1794556057,
-      "time_label": "13.11.2026 10:47 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 303285,
-      "text": "Дорожное направление\nПриморск - Осипенко - Червоное Поле\nОпасность по БПЛА\nЗапорожская область РФ",
-      "ts": 1794556007,
-      "time_label": "13.11.2026 10:46 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1071,15 +1112,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794589336,
-  "last_event_at": "2026-11-13T17:02:16Z",
-  "fetched_at": "2026-11-13T17:30:05.384485Z",
+  "timestamp": 1794591457,
+  "last_event_at": "2026-11-13T17:37:37Z",
+  "fetched_at": "2026-11-13T17:40:03.553633Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-13T17:30:05.384485Z",
-    "source_age_seconds": 1669,
-    "city_count": 8,
-    "region_count": 10,
+    "generated_at": "2026-11-13T17:40:03.553633Z",
+    "source_age_seconds": 146,
+    "city_count": 9,
+    "region_count": 11,
     "feed_count": 80
   }
 }
