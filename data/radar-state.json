@@ -5,11 +5,62 @@
   "source_label": "RadarMap public state",
   "upstream_type": "state",
   "upstream_version": 23,
-  "regions": {},
-  "cities": [],
+  "regions": {
+    "Ростовская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794572004,
+      "source_text": "13.11.2026 15:13 МСК\nЗерноград И близлежащие Опасность по БПЛА Ростовская область"
+    }
+  },
+  "cities": [
+    {
+      "key": "зерноград|ростовская область",
+      "name": "Зерноград",
+      "lat": 46.84862,
+      "lon": 40.31164,
+      "region": "Ростовская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794572004,
+      "source_text": "13.11.2026 15:13 МСК\nЗерноград И близлежащие Опасность по БПЛА Ростовская область"
+    }
+  ],
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 303323,
+      "text": "Зерноград\nИ близлежащие\nОпасность по БПЛА\nРостовская область",
+      "ts": 1794572004,
+      "time_label": "13.11.2026 15:13 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 107682,
       "text": "Отбой опасности и внимания по БПЛА по ранее объявленным регионам\nСпасибо ПВО\n🤍",
@@ -113,6 +164,14 @@
       "time_label": "13.11.2026 14:12 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 303307,
+      "text": "Дорогие коллеги, мы произвели небольшое количество Граберов видео сигнала с гарантированной частотой обнаружения до 7.6 ГГц\nЦена 205.000 рублей\nОписание прибора и характеристики:\nhttps://t.me/lpr1_treugolnik/116475\nПо вопросам приобретения обращаться к нашему рекламному менеджеру:\n@Lpr1reklama\nвнимание по бпла",
+      "ts": 1794567414,
+      "time_label": "13.11.2026 13:56 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
     },
     {
       "msg_id": 303306,
@@ -633,22 +692,6 @@
       "time_label": "13.11.2026 09:17 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 303268,
-      "text": "Чеченская республика\nотбой по бпла",
-      "ts": 1794550552,
-      "time_label": "13.11.2026 09:15 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 95101,
-      "text": "13/11/2026 09:15 МСК.\nОпасность по БПЛА сохраняется:\n🔻\nБрянская область;\n🔻\nКурская область;\n🔻\nОрловская область;\n🔻\nУльяновская область;\n🔻\nСамарская область;\n🔻\nОренбургская область.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794550534,
-      "time_label": "13.11.2026 09:15 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -658,15 +701,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794571652,
-  "last_event_at": "2026-11-13T12:07:32Z",
-  "fetched_at": "2026-11-13T12:10:02.949585Z",
+  "timestamp": 1794572004,
+  "last_event_at": "2026-11-13T12:13:24Z",
+  "fetched_at": "2026-11-13T12:20:03.174058Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-13T12:10:02.949585Z",
-    "source_age_seconds": 150,
-    "city_count": 0,
-    "region_count": 0,
+    "generated_at": "2026-11-13T12:20:03.174058Z",
+    "source_age_seconds": 399,
+    "city_count": 1,
+    "region_count": 1,
     "feed_count": 80
   }
 }
