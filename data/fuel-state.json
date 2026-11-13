@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-11-13T00:07Z",
+    "generated_at": "2026-11-13T04:25:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:strike-pipeline"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -208,10 +208,10 @@
       "status": "down",
       "status_since": "2026-10-02",
       "est_output_pct": 0,
-      "damage": "Массированная атака БПЛА на Волгоградскую область, продолжавшаяся с вечера 12 ноября. Губернатор области сообщил о локальных возгораниях на предприятии в южной промышленной зоне города и на прилегающей территории в результате падения обломков дронов; по его данным, пострадавших и повреждений жилых объектов нет. По сообщениям украинских мониторинговых каналов, атака была направлена на Волгоградский НПЗ, на территории завода наблюдались пожар и дым, работа предприятия приостановлена. Официального ",
-      "note": "На 8 октября завод полностью остановлен после новой атаки. Завод производит ~4% российского топлива (15.7 млн т/год). Волна повторных ударов: данная атака не первая в 2026 году. Восстановление требует недель отсутствия новых ударов.",
-      "source_url": "https://t.me/astrapress/130941",
-      "confidence": "reported"
+      "damage": "Ночью 12–13 ноября Волгоградская область подверглась массированной атаке БПЛА. Губернатор Андрей Бочаров подтвердил возгорания в южной промышленной зоне города; по сообщениям СМИ и опубликованным видео, пожар возник на Волгоградском НПЗ «Лукойла». Завод остановлен после удара 2 октября; официальной оценки повреждений установок и сроков восстановления нет.",
+      "note": "На 8 октября завод был полностью остановлен после предыдущей атаки; 12–13 ноября зафиксирован повторный удар. Мощность — 15,7 млн т/год, около 4% российской переработки. Оценка выбывших мощностей остаётся расчётной: официальных данных о состоянии установок нет.",
+      "source_url": "https://kyivindependent.com/volgograd-oil-refinery-rostov-on-don-production-facility-in-flames-following-ukrainian-drone-attack/",
+      "confidence": "confirmed"
     },
     {
       "id": "omsk",
@@ -224,8 +224,8 @@
       "status": "partial",
       "status_since": "2026-11-11",
       "est_output_pct": 15,
-      "damage": "Во время многочасовой атаки беспилотников на Омск и Омскую область 11 ноября, помимо Омского НПЗ, загорелся логистический центр Ozon. Данные о площади и ущербе не приводились.",
-      "note": "Крупнейший НПЗ России (22 млн т/год). Завод остаётся частично загруженным с 7 июля 2026; оценка загрузки 15% — расчётная и не подтверждена официальными данными. Статус пересмотреть при появлении данных о запуске установок первичной переработки.",
+      "damage": "11 ноября Омск и область подверглись многочасовой атаке БПЛА: на территории НПЗ возник пожар, также загорелся логистический центр Ozon. 12 ноября Bloomberg и Quantum Commodity сообщили об ударе по крупнейшему НПЗ России; официальной оценки повреждений установок и выбывших мощностей нет.",
+      "note": "Крупнейший НПЗ России (22 млн т/год). Оценка загрузки 15% — расчётная и не подтверждена официальными данными. Статус пересмотреть при появлении данных о запуске установок первичной переработки.",
       "source_url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNQWh2T1ZacDlpbERmbVZzVUt1N0x6RHpPakdfekI4T0xYZEtBUW1tV1J6a0l4ZlRKMk1HTmdlWHhtZXRNeFBwRHA2WlpBQUZZX2FUWjVqcmdGV2hmQl9qbVZwcVdvSzEydHNpb3hwUzRDSjNQcExXalhFNnIyWTh2c0VuZGhXOTNBWV8yVXZRNVhxRVlrOWFz?oc=5",
       "confidence": "reported"
     },
@@ -636,7 +636,7 @@
       "type": "Тихий океан, нефть",
       "status": "operational",
       "status_since": null,
-      "note": "Экспорт в АТР, вне зоны БПЛА."
+      "note": "Экспорт в АТР, вне зоны БПЛА. 10 ноября Bloomberg сообщил о временной приостановке погрузки в порту на несколько дней; причины не раскрывались. Отгрузки нефти РФ за четыре недели к 8 ноября снизились до 3,63 млн баррелей в сутки, в том числе из-за простоя порта. Сообщений о повреждениях инфраструктуры нет."
     }
   ],
   "pipelines": [
@@ -1146,33 +1146,18 @@
   "events": [
     {
       "date": "2026-11-13",
-      "text": "Удар по Московский НПЗ (Капотня) (Москва): По данным мэра Москвы, за несколько часов силы ПВО уничтожили более 100 беспилотников на подлёте к с",
-      "source_url": "https://t.me/bazabazon/50759"
+      "text": "Волгоград: губернатор Андрей Бочаров подтвердил массированную атаку БПЛА и возгорания в южной промзоне города; по сообщениям СМИ и опубликованным видео, горел Волгоградский НПЗ «Лукойла». Оценки повреждений установок нет.",
+      "source_url": "https://kyivindependent.com/volgograd-oil-refinery-rostov-on-don-production-facility-in-flames-following-ukrainian-drone-attack/"
     },
     {
       "date": "2026-11-13",
-      "text": "Удар по Волгоградский НПЗ (Волгоград): Массированная атака БПЛА на Волгоградскую область, продолжавшаяся с вечера 12 ноября. Губернатор обл",
-      "source_url": "https://t.me/astrapress/130941"
+      "text": "Москва: по данным мэра, силы ПВО уничтожили более 100 беспилотников на подлёте к городу, аэропорты работали с ограничениями. Подтверждённых данных о поражении Московского НПЗ нет.",
+      "source_url": "https://t.me/bazabazon/50759"
     },
     {
       "date": "2026-11-12",
-      "text": "Удар по Волгоградский НПЗ (Волгоград): Атака БПЛА на Волгоградский НПЗ",
-      "source_url": "https://t.me/exilenova_plus/34511"
-    },
-    {
-      "date": "2026-11-12",
-      "text": "Удар по Лукойл-Нижегородская (Кстово) (Кстово): Атака БПЛА на промышленное предприятие в Кстовском районе",
-      "source_url": "https://novayagazeta.eu/articles/2026/11/01/kstovskii-npz-zagorelsia-posle-ataki-ukrainy-news"
-    },
-    {
-      "date": "2026-11-12",
-      "text": "Удар по Омский НПЗ (Омск): В Омске после атаки БПЛА загорелся логистический центр Ozon",
+      "text": "Омск: Bloomberg и Quantum Commodity сообщили об ударе по крупнейшему НПЗ России 11 ноября; официальной оценки повреждений установок и выбывших мощностей нет.",
       "source_url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNQWh2T1ZacDlpbERmbVZzVUt1N0x6RHpPakdfekI4T0xYZEtBUW1tV1J6a0l4ZlRKMk1HTmdlWHhtZXRNeFBwRHA2WlpBQUZZX2FUWjVqcmdGV2hmQl9qbVZwcVdvSzEydHNpb3hwUzRDSjNQcExXalhFNnIyWTh2c0VuZGhXOTNBWV8yVXZRNVhxRVlrOWFz?oc=5"
-    },
-    {
-      "date": "2026-11-12",
-      "text": "Переработка: Генштаб ВСУ заявил о поражении всех пяти крупнейших НПЗ России с 30 октября, включая Омский НПЗ; независимого подтверждения оценок выбывших мощностей нет.",
-      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB1cEJlQlhockd4RVo0SFVuUzNwUDFwZUFsMXJrbUhnTmJFZmZBR3pueGNaOE1sbnRVV0Z0VDFKaVU5S2J5ZzA5M3pUMVRKZ0xpSjE0WjVObi1TaUc4blhzY1d6dEFzcVnSAWdBVV95cUxQdXBCZUJYaHJHeEVaNEhVblMzcFAxcGVBbDFya21IZ05iRWZmQUd6bnhjWjhNbG50VVdGdFQxSmlVOUtieWcwOTN6VDFUSmdMaUoxNFo1Tm4tU2lHOG5Yc2NXenRBc3FZ?oc=5"
     },
     {
       "date": "2026-11-12",
@@ -1180,9 +1165,9 @@
       "source_url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQMU9Ddk5DMzE0cjZSRml1c2ZERWdFZUEzbWVUZlNRZVBiZzhLanJwaXlYUS1Pd0NQb19kSjR2NG9KSWRnTFBIcXdESUpqRUhtNDJMa184bDhVNTM5TzRhYU9GTkZKa3RwcDhnNF8zQkIySHNOTjBqb2NIRW42ek9SMklsaExHQQ?oc=5"
     },
     {
-      "date": "2026-11-11",
-      "text": "Удар по Усть-Луга: в ночь на 11 ноября атака БПЛА на порт, на территории терминала Novatek возник крупный пожар, пострадали три работника; официальных данных о повреждении нефтеналивных мощностей нет.",
-      "source_url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE43SW5mVWVCTUI1WDRDYzVKRGI2aWxhYUNKQTRLblROT1FnT0psM3FiajgyYnpGSm1TUnRYWHVLT0c1VGQwQnR5SzJrNA?oc=5"
+      "date": "2026-11-12",
+      "text": "Переработка: Генштаб ВСУ заявил о поражении всех пяти крупнейших НПЗ России с 30 октября, включая Омский НПЗ; независимого подтверждения оценок выбывших мощностей нет.",
+      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB1cEJlQlhockd4RVo0SFVuUzNwUDFwZUFsMXJrbUhnTmJFZmZBR3pueGNaOE1sbnRVV0Z0VDFKaVU5S2J5ZzA5M3pUMVRKZ0xpSjE0WjVObi1TaUc4blhzY1d6dEFzcVnSAWdBVV95cUxQdXBCZUJYaHJHeEVaNEhVblMzcFAxcGVBbDFya21IZ05iRWZmQUd6bnhjWjhNbG50VVdGdFQxSmlVOUtieWcwOTN6VDFUSmdMaUoxNFo1Tm4tU2lHOG5Yc2NXenRBc3FZ?oc=5"
     },
     {
       "date": "2026-11-11",
@@ -1191,13 +1176,13 @@
     },
     {
       "date": "2026-11-11",
-      "text": "Удар по Кинеф (Кириши): повторная атака БПЛА на Киришский НПЗ в ночь на 11 ноября после удара 9 ноября; масштаб повреждений не сообщался.",
-      "source_url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPeEs1bFBaWkxyd2x5WHRRLU9FUW0tQy1KNzRIYU9RUUtJQl9jUWtXVWhDZ3lBS1hUUGVwblptbW1XVVZHZzBBWWR2UURwNUtPaXROZDl1MGM2SHlZT282OENwUUY0Uk9qd1pfaFE1b0JqeUZpcEFGSVdja1JGanBHQWlNRTd5RnhNZUMtdG9SamtnNzQtZXVIendYVlBBMWJwYlE?oc=5"
+      "text": "Удар по Усть-Луга: в ночь на 11 ноября атака БПЛА на порт, на территории терминала Novatek возник крупный пожар, пострадали три работника; официальных данных о повреждении нефтеналивных мощностей нет.",
+      "source_url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE43SW5mVWVCTUI1WDRDYzVKRGI2aWxhYUNKQTRLblROT1FnT0psM3FiajgyYnpGSm1TUnRYWHVLT0c1VGQwQnR5SzJrNA?oc=5"
     },
     {
       "date": "2026-11-11",
-      "text": "Удар по Омский НПЗ (Омск): В районах Омска на фоне атаки БПЛА отключился свет",
-      "source_url": "https://t.me/astrapress/130838"
+      "text": "Удар по Кинеф (Кириши): повторная атака БПЛА на Киришский НПЗ в ночь на 11 ноября после удара 9 ноября; масштаб повреждений не сообщался.",
+      "source_url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPeEs1bFBaWkxyd2x5WHRRLU9FUW0tQy1KNzRIYU9RUUtJQl9jUWtXVWhDZ3lBS1hUUGVwblptbW1XVVZHZzBBWWR2UURwNUtPaXROZDl1MGM2SHlZT282OENwUUY0Uk9qd1pfaFE1b0JqeUZpcEFGSVdja1JGanBHQWlNRTd5RnhNZUMtdG9SamtnNzQtZXVIendYVlBBMWJwYlE?oc=5"
     },
     {
       "date": "2026-11-11",
@@ -1205,19 +1190,9 @@
       "source_url": "https://news.mail.ru/economics/71094636/"
     },
     {
-      "date": "2026-11-11",
-      "text": "Удар по Туапсинский НПЗ (Туапсе): Атака беспилотников на портовую инфраструктуру Туапсе. Оперативный штаб Краснодарского края подтверд",
-      "source_url": "https://news.liga.net/politics/news/ukrainskaya-ataka-ostanovila-eksport-nefteproduktov-iz-tuapse-i-rabotu-npz-reuters"
-    },
-    {
-      "date": "2026-11-11",
-      "text": "Рынок: агентство Reuters со ссылкой на источники сообщило, что за неделю удары нарушили работу девяти крупных НПЗ; оценка выбывшей переработки приведена в материале агентства (пересказ — Kyiv Independent)",
-      "source_url": "https://www.kyivindependent.com/russia-imposes-gasoline-sales-restrictions-amid-ukrainian-oil-refinery-attacks-russian-media-report/"
-    },
-    {
       "date": "2026-11-10",
-      "text": "Переработка: Reuters со ссылкой на отраслевые источники оценил выбывшие мощности НПЗ России примерно в 30% после серии ударов; независимого подтверждения цифры нет.",
-      "source_url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPTXJUZnFVTVJmR25VaW9YQkhwMTJEM0FzTWVHLXRZOFpXV09zN18zd1RIOThGTHdiVUVmbVFnbnJqRUhfQzdSQzBDTHFLUUxtSEI3YkZyNFQ0RzdlQ3oxMVRHb1d2YUNBa3hIbWQ3VWxmYTBNaWpiVmdjOXB4ZDlzMFhQQk10a1FZWkhWem81TGNaS0JFc25FNUV6eFVhd2RIYldEQTlCU051VUFlalpnSlBoYzdOVFFFNVN4cjNjRjVuX05jNGc?oc=5"
+      "text": "Экспорт: по данным Bloomberg, погрузка в порту Козьмино (ВСТО) приостанавливалась на несколько дней; причины не раскрывались, сообщений о повреждениях инфраструктуры нет.",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-11-10/russia-ships-less-crude-as-loadings-halted-at-key-pacific-port"
     }
   ]
 }
