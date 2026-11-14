@@ -101,6 +101,25 @@
       "last_event_ts": 1794645558,
       "source_text": "14.11.2026 11:39 МСК\nОрловская область Опасность по БПЛА"
     },
+    "Брянская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794646427,
+      "source_text": "14.11.2026 11:53 МСК\nСуземский район Брянская область Опасность по БПЛА"
+    },
     "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
@@ -136,8 +155,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1794645720,
-      "source_text": "14.11.2026 10:48 МСК\nХерсонская область РФ, Запорожская область РФ ЛДНР Харьковская область РФ Авиационная ракетная бомбовая опасность\n\n14.11.2026 11:42 МСК\nЯсиноватая, Макеевка и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794646366,
+      "source_text": "14.11.2026 10:48 МСК\nХерсонская область РФ, Запорожская область РФ ЛДНР Харьковская область РФ Авиационная ракетная бомбовая опасность\n\n14.11.2026 11:52 МСК\nДонецк и близлежащие Опасность по БПЛА сохраняется, ещё фиксации ДНР"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -400,8 +419,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794643546,
-      "source_text": "14.11.2026 11:05 МСК\nКрасногоровка, Донецк, Еленовка, Докучаевск, Старобешево и близлежащие Опасность по БПЛА, единичные фиксации ДНР"
+      "last_event_ts": 1794646366,
+      "source_text": "14.11.2026 11:52 МСК\nДонецк и близлежащие Опасность по БПЛА сохраняется, ещё фиксации ДНР"
     },
     {
       "key": "чаплынка|херсонская область",
@@ -778,6 +797,28 @@
       "fill": "#f0c4a0",
       "last_event_ts": 1794639898,
       "source_text": "14.11.2026 10:04 МСК\nПервомайский район, село Стахановка и близлежащие Республика Крым Внимание по БПЛА"
+    },
+    "RUS.8.25_1": {
+      "gid_2": "RUS.8.25_1",
+      "name_ru": "Суземский район",
+      "region_ru": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794646427,
+      "source_text": "14.11.2026 11:53 МСК\nСуземский район Брянская область Опасность по БПЛА"
     }
   },
   "airport_markers": [
@@ -794,6 +835,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 303534,
+      "text": "Суземский район\nБрянская область\nОпасность по БПЛА",
+      "ts": 1794646427,
+      "time_label": "14.11.2026 11:53 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 303533,
+      "text": "Донецк и близлежащие\nОпасность по БПЛА сохраняется, ещё фиксации\nДНР",
+      "ts": 1794646366,
+      "time_label": "14.11.2026 11:52 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 303532,
       "text": "Витино и близлежащие внимание по БПЛА на электротяге. Возможно ФПВ\nРеспублика Крым (Евпаторийский округ)",
@@ -1417,22 +1474,6 @@
       "time_label": "14.11.2026 06:41 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 107768,
-      "text": "ГО Жуковский\nМосковская область\nМеры безопасности",
-      "ts": 1794626918,
-      "time_label": "14.11.2026 06:28 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 107767,
-      "text": "Республика Адыгея\nОтбой опасности по БПЛА",
-      "ts": 1794626476,
-      "time_label": "14.11.2026 06:21 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1442,15 +1483,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794645935,
-  "last_event_at": "2026-11-14T08:45:35Z",
-  "fetched_at": "2026-11-14T08:50:02.788880Z",
+  "timestamp": 1794646427,
+  "last_event_at": "2026-11-14T08:53:47Z",
+  "fetched_at": "2026-11-14T09:00:04.061854Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-14T08:50:02.788880Z",
-    "source_age_seconds": 267,
+    "generated_at": "2026-11-14T09:00:04.061854Z",
+    "source_age_seconds": 377,
     "city_count": 19,
-    "region_count": 15,
+    "region_count": 16,
     "feed_count": 80
   }
 }
