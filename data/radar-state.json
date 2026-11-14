@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794615731,
-      "source_text": "14.11.2026 03:22 МСК\nНовороссийск Краснодарский край Работа ПВО по БПЛА Карта опасностей - radar-vrv.ru"
+      "last_event_ts": 1794618995,
+      "source_text": "14.11.2026 04:16 МСК\nТихорецк и близлежащие, тревога по БпЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794618375,
-      "source_text": "14.11.2026 04:06 МСК\nБрянская область Опасность по БпЛА"
+      "last_event_ts": 1794618568,
+      "source_text": "14.11.2026 04:09 МСК\nНивнянское, Луговец и близлежащие, тревога по БпЛА Брянская область"
     },
     "Херсонская область": {
       "bpla": false,
@@ -1666,6 +1666,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794618001,
       "source_text": "14.11.2026 04:00 МСК\nСураж и близлежащие, тревога по БпЛА Брянская область"
+    },
+    {
+      "key": "тихорецк|краснодарский край",
+      "name": "Тихорецк",
+      "lat": 45.854679,
+      "lon": 40.128124,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794618995,
+      "source_text": "14.11.2026 04:16 МСК\nТихорецк и близлежащие, тревога по БпЛА"
     }
   ],
   "districts": {
@@ -2971,6 +2993,30 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 303465,
+      "text": "ЛДНР\nХарьковская область РФ\nКурская область и близлежащие\nАвиационная, ракетная, бомбовая опасность\nАвиация с Ровенской области",
+      "ts": 1794619076,
+      "time_label": "14.11.2026 04:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 303464,
+      "text": "Тихорецк и близлежащие, тревога по БпЛА",
+      "ts": 1794618995,
+      "time_label": "14.11.2026 04:16 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 303463,
+      "text": "Нивнянское, Луговец и близлежащие, тревога по БпЛА\nБрянская область",
+      "ts": 1794618568,
+      "time_label": "14.11.2026 04:09 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 303462,
       "text": "Смоленская область\nвнимание по бпла",
       "ts": 1794618401,
@@ -3585,30 +3631,6 @@
       "time_label": "14.11.2026 00:52 МСК",
       "source_id": "locatorru",
       "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 107729,
-      "text": "Пензенская область\nОпасность по БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1794606760,
-      "time_label": "14.11.2026 00:52 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 107728,
-      "text": "Саратовская область\nОпасность по БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1794606753,
-      "time_label": "14.11.2026 00:52 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 303430,
-      "text": "Тамань и близлежащие, тревога по БпЛА",
-      "ts": 1794606741,
-      "time_label": "14.11.2026 00:52 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3618,14 +3640,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794618401,
-  "last_event_at": "2026-11-14T01:06:41Z",
-  "fetched_at": "2026-11-14T01:10:03.255082Z",
+  "timestamp": 1794619076,
+  "last_event_at": "2026-11-14T01:17:56Z",
+  "fetched_at": "2026-11-14T01:20:03.732998Z",
   "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-11-14T01:10:03.255082Z",
-    "source_age_seconds": 202,
-    "city_count": 59,
+    "generated_at": "2026-11-14T01:20:03.732998Z",
+    "source_age_seconds": 127,
+    "city_count": 60,
     "region_count": 19,
     "feed_count": 80
   }
