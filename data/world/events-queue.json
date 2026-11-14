@@ -297,14 +297,14 @@
    "found_at": "2026-10-30T03:28:18Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "ok",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "needs_source",
-   "reject_reason": "нужен второй независимый издатель"
+   "verdict": "rejected",
+   "reject_reason": "schema"
   },
   {
    "id": "2026-11-01-hormuz-irgc-two-tankers-mine-claim",
@@ -849,8 +849,17 @@
     }
    ],
    "found_at": "2026-11-14T03:36:00Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "ok",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "needs_source",
+   "reject_reason": "нужен второй независимый издатель"
   }
  ],
- "validated_at": "2026-11-13T19:36:04Z"
+ "validated_at": "2026-11-14T03:36:47Z"
 }
