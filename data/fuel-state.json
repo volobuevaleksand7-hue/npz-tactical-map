@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-11-13T16:30Z",
+    "generated_at": "2026-11-14T04:07:51Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -208,7 +208,7 @@
       "status": "down",
       "status_since": "2026-10-02",
       "est_output_pct": 0,
-      "damage": "В ночь на 13 ноября при массированной атаке БПЛА в южной промышленной зоне Волгограда возник пожар; губернатор области сообщил о возгорании предприятия. По данным СМИ и региональных властей, погибли четыре сотрудника предприятия, двое пострадали. Работа НПЗ и топливный рынок региона оцениваются как нарушенные, в городе отмечены очереди на АЗС. По оценке The Insider, с начала года завод как минимум четыре раза останавливал переработку.",
+      "damage": "В ночь на 13 ноября при массированной атаке БПЛА в южной промышленной зоне Волгограда возник пожар; губернатор области сообщил о возгорании предприятия. По данным СМИ и региональных властей, погибли четыре сотрудника предприятия, двое пострадали. Работа НПЗ и топливный рынок региона оцениваются как нарушенные, в городе отмечены очереди на АЗС. 13 ноября Генштаб ВСУ заявил о поражении установок и шести резервуаров завода — это заявление одной стороны, независимого подтверждения оценок нет. По оценке The Insider, с начала года завод как минимум четыре раза останавливал переработку.",
       "note": "На 8 октября завод был полностью остановлен после предыдущей атаки; 12–13 ноября зафиксирован повторный удар. Мощность — 15,7 млн т/год, около 4% российской переработки. Оценка выбывших мощностей остаётся расчётной: официальных данных о состоянии установок нет.",
       "source_url": "https://kyivindependent.com/volgograd-oil-refinery-rostov-on-don-production-facility-in-flames-following-ukrainian-drone-attack/",
       "confidence": "confirmed"
@@ -1154,19 +1154,24 @@
   ],
   "events": [
     {
-      "date": "2026-11-06",
-      "text": "Биржа: оптовые продажи бензина и дизтоплива за 2–6 ноября снизились примерно на 5,3–5,7% к предыдущей неделе; АИ-92 — 51,18 тыс. т, АИ-95 — 25,56 тыс. т. Цены за тонну по этим данным не установлены.",
-      "source_url": "https://ru.themoscowtimes.com/2026/11/06/birzhevye-optovye-prodazhi-benzina-i-diztopliva-v-rf-za-nedelyu-snizilis-na-53-57-a210692"
+      "date": "2026-11-13",
+      "text": "Волгоград: Генштаб ВСУ заявил о поражении установок и шести резервуаров Волгоградского НПЗ; заявление одной стороны, независимого подтверждения оценок нет. The Insider отмечает, что с начала года завод четырежды останавливал переработку.",
+      "source_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNa3F5bW9qTVJITnpvTXZzc05odnRkRlBZQ3pZYjYtb0J6VDFVQlduVmRzLVE4QlZsMWEzTHNFREdoVkltbmdtWWJWZ25SMXlUZjlTSmJBcExfRWJPbTFrZmpwWEJNRi02bW1RMlNFVHJFUUtKMHlQYXJ1b20wcmpiM0FwWThTTnJMektRV0VIQk9QRWJLRzdvWFlDOTZlTGZweG5MVGw5RklmY0nSAasBQVVfeXFMTWtxeW1vak1SSE56b012c3NOaHZ0ZEZQWUN6WWI2LW9CelQxVUJXblZkcy1ROEJWbDFhM0xzRURHaFZJbW5nbVliVmduUjF5VGY5U0piQXBMX0ViT20xa2ZqcFhCTUYtNm1tUTJTRVRyRVFLSjB5UGFydW9tMHJqYjNBcFk4U05yTHpLUVdFSEJPUEViS0c3b1hZQzk2ZUxmcHhuTFRsOUZJZmNJ?oc=5"
+    },
+    {
+      "date": "2026-11-13",
+      "text": "Биржа: по итогам недели биржевые цены на бензин снизились в пределах 3%; по отраслевым публикациям АИ-95 торговался около 72,2 тыс. руб. за тонну. На АЗС при этом сохраняются лимиты и очереди в отдельных регионах.",
+      "source_url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNcEdlWkJqY1lfNi01MGlUYzVaQnJZUG9lcktFUjhjTFViWW5fQVdqakhHZ1JYUE90LTlvQjZkWXJ6TTV4LVI1UURnN2wwYUlfSk1QVVliQ1YxQ2U3SEZPZEZqOWNTN3lBX1VxSnJQUzhvamNmLWVQZmpBamVjMDZ6UlRKUGFIQTFFSlJxZGR0WW1yTWJ2My1zRllRMklUQTQyRkprMHdn?oc=5"
+    },
+    {
+      "date": "2026-11-13",
+      "text": "Оценки: Bloomberg сообщил о девятом поражённом НПЗ России с начала ноября; The Bell фиксирует усиление бензинового кризиса. Независимой оценки выбывших мощностей нет, официальные данные не публиковались.",
+      "source_url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQUHJ5YldQTGVyTHFDSWdTN2U4c3lVd0dhN29wN2lkZnRGQWZBVERYbGR5c2N2anJUbzAtaGtXSndKNmhGNjdVNnFabjQ1U01MYnl6T0pnMFBvQmM3U29VdTc0bFhwYTZvTS1vcUdBT3dkUFB0SXNtY2lVRXhYcjBSYzNJN3ZnV1FX?oc=5"
     },
     {
       "date": "2026-11-13",
       "text": "Самарская область: губернатор сообщил об атаке БПЛА на промышленное предприятие; мониторинговые каналы сообщают об ударе по линейной производственно-диспетчерской станции «Самара» — шестой с начала октября. Подтверждённых данных о поражении НПЗ нет.",
       "source_url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE5SVnJOYnRPRGJsdzV0Q05qOTctMF9kUUI5dnU4M3JnZ1JJUl9yT0JGbElNRkJnWDJzbng4Xzl5MWc0RUU?oc=5"
-    },
-    {
-      "date": "2026-11-13",
-      "text": "Волгоград: четыре человека погибли при ночной атаке БПЛА на НПЗ; губернатор подтвердил массированную атаку и возгорания в южной промзоне города.",
-      "source_url": "https://t.me/radarrussiia/103347"
     },
     {
       "date": "2026-11-13",
@@ -1192,11 +1197,6 @@
       "date": "2026-11-12",
       "text": "Переработка: Генштаб ВСУ заявил о поражении всех пяти крупнейших НПЗ России с 30 октября, включая Омский НПЗ; независимого подтверждения оценок выбывших мощностей нет.",
       "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB1cEJlQlhockd4RVo0SFVuUzNwUDFwZUFsMXJrbUhnTmJFZmZBR3pueGNaOE1sbnRVV0Z0VDFKaVU5S2J5ZzA5M3pUMVRKZ0xpSjE0WjVObi1TaUc4blhzY1d6dEFzcVnSAWdBVV95cUxQdXBCZUJYaHJHeEVaNEhVblMzcFAxcGVBbDFya21IZ05iRWZmQUd6bnhjWjhNbG50VVdGdFQxSmlVOUtieWcwOTN6VDFUSmdMaUoxNFo1Tm4tU2lHOG5Yc2NXenRBc3FZ?oc=5"
-    },
-    {
-      "date": "2026-11-11",
-      "text": "Удар по Омский НПЗ (Омск): пожар на крупнейшем НПЗ России, атака продолжалась около восьми часов; официальной оценки повреждений установок и выбывших мощностей нет.",
-      "source_url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNRDRINWVzWFhkTXhpdXhnb01kMFZFQjJCcmFSY0JHOWZNZTlWU0hMX0EzQkxzaFVISHk0aUxtWXVuMzVXd21TaDhHWlhzVzZ6NnQ5T05CTnowWkdNaDZ6NmZfa082YnRaYkpCMGMtMzBnczEyX3dmMkNxdUtjcDM3b3RaclNKUUg5S0lBNDFFZk1jTUh0THFmajVCRUIyNGRjTG9LV0VrcEQ5UGRPRllvamhR?oc=5"
     },
     {
       "date": "2026-11-11",
