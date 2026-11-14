@@ -193,8 +193,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794668686,
-      "source_text": "14.11.2026 18:04 МСК\nАлексеевский район Тревога по БПЛА От Валуйского района Белгородской области"
+      "last_event_ts": 1794670601,
+      "source_text": "14.11.2026 18:36 МСК\nВалуйки, Вейделевка Тревога по Бпла и ФПФ"
     },
     "Калужская область": {
       "bpla": false,
@@ -862,8 +862,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794667783,
-      "source_text": "14.11.2026 17:49 МСК\nВалуйки Тревога по БПЛА"
+      "last_event_ts": 1794670601,
+      "source_text": "14.11.2026 18:36 МСК\nВалуйки, Вейделевка Тревога по Бпла и ФПФ"
     },
     {
       "key": "домодедово|московская область",
@@ -1091,9 +1091,9 @@
       "lat": 50.15106,
       "lon": 38.44898,
       "region": "Белгородская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1104,8 +1104,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794668758,
-      "source_text": "14.11.2026 18:05 МСК\nВейделевка и близлежащие, Белгородская область - фиксации БПЛА на Закутское, Новоалександровка, далее на Ольховатский район, Воронежской области. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1794670601,
+      "source_text": "14.11.2026 18:36 МСК\nВалуйки, Вейделевка Тревога по Бпла и ФПФ"
     }
   ],
   "districts": {
@@ -1223,9 +1223,9 @@
       "gid_2": "RUS.7.24_1",
       "name_ru": "Валуйский район",
       "region_ru": "Белгородская область",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -1238,8 +1238,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794668437,
-      "source_text": "14.11.2026 18:00 МСК\nВалуйский район, Белгородская область - опасность по БПЛА сохраняется. 📡 Локатор России - @locatorru"
+      "last_event_ts": 1794670156,
+      "source_text": "14.11.2026 18:29 МСК\nВалуйский район Продолжаются фиксации ударных бпла в тыл"
     },
     "RUS.7.18_1": {
       "gid_2": "RUS.7.18_1",
@@ -1618,6 +1618,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 303639,
+      "text": "Валуйки, Вейделевка\nТревога по Бпла и ФПФ",
+      "ts": 1794670601,
+      "time_label": "14.11.2026 18:36 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 303638,
+      "text": "Валуйский район\nПродолжаются фиксации ударных бпла в тыл",
+      "ts": 1794670156,
+      "time_label": "14.11.2026 18:29 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 303637,
       "text": "Валуйский район приграничье\nАктивность БПЛА разведки\nБелгородская область",
@@ -2241,22 +2257,6 @@
       "time_label": "14.11.2026 14:18 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 303575,
-      "text": "Брянская область\nОпасность по реактивным БПЛА",
-      "ts": 1794655103,
-      "time_label": "14.11.2026 14:18 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 95183,
-      "text": "Единичные фиксации БПЛА, возможно появление малоразмерных воздушных шаров.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794654929,
-      "time_label": "14.11.2026 14:15 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -2266,13 +2266,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794669671,
-  "last_event_at": "2026-11-14T15:21:11Z",
-  "fetched_at": "2026-11-14T15:30:03.911378Z",
+  "timestamp": 1794670601,
+  "last_event_at": "2026-11-14T15:36:41Z",
+  "fetched_at": "2026-11-14T15:40:03.536877Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-14T15:30:03.911378Z",
-    "source_age_seconds": 532,
+    "generated_at": "2026-11-14T15:40:03.536877Z",
+    "source_age_seconds": 202,
     "city_count": 37,
     "region_count": 15,
     "feed_count": 80
