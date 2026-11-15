@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-11-15T04:35:44Z",
+    "generated_at": "2026-11-15T16:10:00Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:fuel-market"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -46,11 +46,11 @@
       "lon": 32.06,
       "capacity_mt_year": 20.1,
       "status": "partial",
-      "status_since": "2026-11-09",
-      "est_output_pct": 20,
-      "damage": "9 ноября ночью попадание БПЛА на территорию КИНЕФ и пожар; губернатор Ленинградской области Александр Дрозденко подтвердил попадание в промзону Киришей, пожар локализован. The Moscow Times сообщил о погибшей женщине и возгорании на заводе, Radio Free Europe/Radio Liberty и UNITED24 также сообщили о пожаре на втором по мощности НПЗ России. В ночь на 11 ноября мониторинговые каналы сообщали о повторной атаке на Киришский НПЗ; официального подтверждения попадания в промзону нет. Официальных данных о степени повреждения установок нет.",
-      "note": "КИНЕФ — второй по мощности НПЗ России (20,1 млн т/год). К началу сентября 2026, по данным РБК, производство было восстановлено на 75% после атаки конца августа. Факт удара и пожара 9 ноября подтверждён несколькими независимыми источниками; оценка загрузки 20% остаётся предварительной — официальных данных о потере мощности после удара нет.",
-      "source_url": "https://rg.ru/2026/11/09/reg-szfo/lokalizovan-pozhar-na-zavode-kinef-v-lenoblasti-posle-ataki-besilotnikov.html",
+      "status_since": "2026-11-13",
+      "est_output_pct": 15,
+      "damage": "9 ноября ночью попадание БПЛА на территорию КИНЕФ и пожар; губернатор Ленинградской области подтвердил попадание в промзону Киришей, пожар локализован; The Moscow Times сообщил о погибшей женщине. В ночь на 13 ноября, по данным Neftegaz.RU, над Ленинградской областью сбито 113 БПЛА, зафиксированы попадания в Киришах. 14 ноября «Бумага» и «Активатика» сообщили, что завод вновь частично приостановил работу после этой атаки. Официальных данных о степени повреждения установок нет.",
+      "note": "КИНЕФ — второй по мощности НПЗ России (20,1 млн т/год). К началу сентября 2026, по данным РБК, производство было восстановлено на 75% после атаки конца августа. После удара 9 ноября и повторных попаданий 13 ноября завод работает с частичной загрузкой; оценка 15% — предварительная, официальных данных о выбывших мощностях нет.",
+      "source_url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQQWZjZ29qTURFUUstR3M1MER5VklOdy0zTkFjQko4aFdkOGxIbWxUaXExb3dtTWpKS1I3blFoZHJ1SzJXeG5EeXZ4R3ZUWUk0VEpjMEE4TXp3XzZmdXdOWU1VenBIM00tbm1TYkxCbnRrX3RJdlZSMnJQdzJDbUdDNmlZU2ltZ9IBiwFBVV95cUxNWmRISlZ1b0tZWGlYd0lvaWFPd3FQS0dpZzhHSFFjeVdBeU5rRFBOeTY3RVVoTzl6Rlc1Zmc0eGNWemlad3pvUk5FelR6TzRyMDZVUnl2b00xM2RrbHp3QUdlMmlaU3I0aVVJVWhNRjhDUGduUTBTTWtHOTdGUHRUV1NrV09QekdXYV9V?oc=5",
       "confidence": "confirmed"
     },
     {
@@ -240,10 +240,10 @@
       "status": "down",
       "status_since": "2026-09-13",
       "est_output_pct": 0,
-      "damage": "По сообщениям местных жителей, в ночь на 15 ноября в Нижнекамске произошла атака беспилотников на один из заводов города; в качестве вероятного объекта называют нефтехимический комплекс «Нижнекамскнефтехим» (Сибур). Официального подтверждения поражения объекта и данных о последствиях нет. Ночью в Татарстане объявлялась опасность по БПЛА.",
-      "note": "На 8 октября завод остановлен. ТАНЕКО — один из крупнейших и наиболее современных НПЗ России (мощность 17 млн т/год, ~5% выпуска топлива). Повторный удар затрудняет восстановление.",
+      "damage": "В ночь на 15 ноября промзона Нижнекамска подверглась массированной атаке БПЛА: возник пожар на «Нижнекамскнефтехиме» (Сибур), повреждены промышленные объекты и жилой дом, есть пострадавшие. Генштаб ВСУ заявил о поражении «Нижнекамскнефтехима», «ТАИФ-НК» и завода «Монолит»; ТАНЕКО в подтверждённом перечне целей не назван. Российские власти факт атаки на промзону признали, поражение конкретных установок не подтверждали.",
+      "note": "На 8 октября завод остановлен; данных о возобновлении работы нет. ТАНЕКО — один из крупнейших и наиболее современных НПЗ России (17 млн т/год, ~5% выпуска топлива). Атака 15 ноября пришлась на Нижнекамский промышленный узел, где помимо ТАНЕКО работают «Нижнекамскнефтехим» и «ТАИФ-НК»; подтверждённых данных о повреждении самого ТАНЕКО нет, оценка загрузки не пересматривалась.",
       "confidence": "reported",
-      "source_url": "https://t.me/exilenova_plus/34632"
+      "source_url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNaFlfd0dqUXdzQ3RQOHpmMWhtMWlwSWkyaF9sZnBpX3NQTmlleVFrWDR3UkJLVzdQUjBuTEdJWS1kQWdwNEJjbUFoTFNYbFlZUll4eUNUTFlVVGRDclBKUE5DWE5ma0lRLUZnY2hWZEVSRThsWUs1d1d0Mm9QeWN3LS1Db0M5c3VxNzBoTnJ6endqNVBUTjVNWkNHQW5abWdrVTNaV0tyeU9KcTBYTFHSAa4BQVVfeXFMTWhZX3dHalF3c0N0UDh6ZjFobTFpcElpMmhfbGZwaV9zUE5pZXlRa1g0d1JCS1c3UFIwbkxHSVktZEFncDRCY21BaExTWGxZWVJZeHlDVExZVVRkQ3JQSlBOQ1hOZmtJUS1GZ2NoVmRFUkU4bFlLNXdXdDJvUHljdy0tQ29DOXN1cTcwaE5yenp3ajVQVE41TVpDR0FuWm1na1UzWldLcnlPSnEwWExR?oc=5"
     },
     {
       "id": "ufa",
@@ -333,10 +333,10 @@
       "status": "down",
       "status_since": "2026-10-07",
       "est_output_pct": 0,
-      "damage": "Ночью 7 ноября 2026 Саратов подвергся атаке БПЛА: губернатор Роман Бусаргин сообщил о повреждениях объектов гражданской инфраструктуры и пострадавших (погибших, по его данным, нет). Украинские СМИ и мониторинговые каналы сообщили о возможном ударе по Саратовскому НПЗ и публиковали кадры дымовых столбов над промзоной; официального подтверждения поражения завода нет. Пожар на территории завода после атаки 7 ноября подтверждали LIGA.net, «Новая газета Европа» и Zerkalo со ссылкой на кадры с места; официальной оценки повреждений установок нет.",
-      "note": "На 8 октября — завод остановлен; данных о возобновлении работы не найдено. Завод поражался 5+ раз в 2026 году. Волна повторных ударов на вторичные установки (АВТ, гидротрейтинг); восстановление затруднено при санкциях.",
+      "damage": "Ночью 7 ноября 2026 Саратов подвергся атаке БПЛА: губернатор сообщил о повреждениях объектов гражданской инфраструктуры и пострадавших. Украинские СМИ и мониторинговые каналы сообщили о возможном ударе по Саратовскому НПЗ и публиковали кадры дымовых столбов над промзоной; пожар на территории завода после атаки 7 ноября подтверждали LIGA.net, «Новая газета Европа» и Zerkalo. 13 ноября Rubryka и Ukr.net опубликовали спутниковые снимки, по которым удару подверглись три установки завода; официальной оценки повреждений нет.",
+      "note": "На 8 октября — завод остановлен; к 15 ноября данных о возобновлении работы не найдено. Завод поражался 5+ раз в 2026 году. Волна повторных ударов на вторичные установки (АВТ, гидротрейтинг); восстановление затруднено при санкциях.",
       "confidence": "confirmed",
-      "source_url": "https://news.ru/russia/masshtabnaya-ataka-bpla-na-saratov-7-noyabrya-kuda-popali-skolko-zhertv-chto-s-npz"
+      "source_url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBWbk4wR3hYSG9CVTBJNFozQ3l5NFBlZW4zY2Iwd05IcHdSX2FSeVVTb0U4NDdNR3lYSGt1MVQxZE1zTEpnTTM4QWdLaks4NWlJaFdJOFZNWGZzRF9WSVBtTA?oc=5"
     },
     {
       "id": "orsk",
@@ -581,7 +581,7 @@
       "type": "Балтика, нефтепродукты",
       "status": "hit",
       "status_since": "2026-11-11",
-      "note": "11 ноября атака БПЛА на порт Усть-Луга: крупный пожар на территории терминала Novatek, пожар был виден с территории Эстонии, пострадали три работника (Bloomberg, Kyiv Post, Ukrinform, The Maritime Executive). 12 ноября пожар в порту локализован через сутки после атаки (Neftegaz.RU, oilcapital.ru). Данные о повреждении нефтеналивных мощностей и о возобновлении отгрузок официально не публиковались. Ранее терминал подвергался атаке в ночь на 1 сентября, после чего отгрузки восстанавливались; мощности оценивались в 65–70% от номинала."
+      "note": "11 ноября атака БПЛА на порт Усть-Луга: крупный пожар на территории терминала Novatek, пожар был виден с территории Эстонии, пострадали три работника (Bloomberg, Kyiv Post, Ukrinform, The Maritime Executive). По данным Генштаба ВСУ и СБУ, поражены пять нефтяных резервуаров. 12 ноября пожар локализован через сутки после атаки (Neftegaz.RU, oilcapital.ru); в тот же день UA.NEWS сообщил, что число загружаемых в порту танкеров сократилось почти вдвое. Отгрузка казахстанской нефти через Усть-Лугу приостановлена с сентября (INFOX.ru). Официальных данных о возобновлении отгрузок нет."
     },
     {
       "id": "novorossiysk",
@@ -1164,6 +1164,21 @@
   "events": [
     {
       "date": "2026-11-15",
+      "text": "Нижнекамск: промзона города подверглась массированной атаке БПЛА, загорелся «Нижнекамскнефтехим» (Сибур), повреждены промышленные объекты и жилой дом, есть пострадавшие. Генштаб ВСУ заявил о поражении «Нижнекамскнефтехима», «ТАИФ-НК» и завода «Монолит»; ТАНЕКО в перечне целей не назван. Российские власти подтвердили атаку на промзону, поражение конкретных установок не подтверждали.",
+      "source_url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNaFlfd0dqUXdzQ3RQOHpmMWhtMWlwSWkyaF9sZnBpX3NQTmlleVFrWDR3UkJLVzdQUjBuTEdJWS1kQWdwNEJjbUFoTFNYbFlZUll4eUNUTFlVVGRDclBKUE5DWE5ma0lRLUZnY2hWZEVSRThsWUs1d1d0Mm9QeWN3LS1Db0M5c3VxNzBoTnJ6endqNVBUTjVNWkNHQW5abWdrVTNaV0tyeU9KcTBYTFHSAa4BQVVfeXFMTWhZX3dHalF3c0N0UDh6ZjFobTFpcElpMmhfbGZwaV9zUE5pZXlRa1g0d1JCS1c3UFIwbkxHSVktZEFncDRCY21BaExTWGxZWVJZeHlDVExZVVRkQ3JQSlBOQ1hOZmtJUS1GZ2NoVmRFUkU4bFlLNXdXdDJvUHljdy0tQ29DOXN1cTcwaE5yenp3ajVQVE41TVpDR0FuWm1na1UzWldLcnlPSnEwWExR?oc=5"
+    },
+    {
+      "date": "2026-11-14",
+      "text": "Кириши: после попаданий в промзону в ночь на 13 ноября (над Ленинградской областью, по данным Neftegaz.RU, сбито 113 БПЛА) НПЗ «КИНЕФ» 14 ноября вновь частично приостановил работу — «Бумага», «Активатика». Официальной оценки выбывших мощностей нет.",
+      "source_url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQQWZjZ29qTURFUUstR3M1MER5VklOdy0zTkFjQko4aFdkOGxIbWxUaXExb3dtTWpKS1I3blFoZHJ1SzJXeG5EeXZ4R3ZUWUk0VEpjMEE4TXp3XzZmdXdOWU1VenBIM00tbm1TYkxCbnRrX3RJdlZSMnJQdzJDbUdDNmlZU2ltZ9IBiwFBVV95cUxNWmRISlZ1b0tZWGlYd0lvaWFPd3FQS0dpZzhHSFFjeVdBeU5rRFBOeTY3RVVoTzl6Rlc1Zmc0eGNWemlad3pvUk5FelR6TzRyMDZVUnl2b00xM2RrbHp3QUdlMmlaU3I0aVVJVWhNRjhDUGduUTBTTWtHOTdGUHRUV1NrV09QekdXYV9V?oc=5"
+    },
+    {
+      "date": "2026-11-12",
+      "text": "Усть-Луга: после атаки 11 ноября число загружаемых в порту танкеров сократилось почти вдвое (UA.NEWS); по данным Генштаба ВСУ и СБУ, поражены пять нефтяных резервуаров, пожар локализован через сутки. Отгрузка казахстанской нефти через порт приостановлена с сентября.",
+      "source_url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNeHNndERjcTJ2b2hjZlpGTU9PZHRTZnlWclpYdkdlbF9WcEJXS1Y2MU5MaUxNWXVSLVhzbkg1OEs4YnFIa1phWFpnS2lIdlhySGFsdGxDWkVRYTlZQUw3WnNmVE9GbUo1RXRpVUZLN2d1dWd3TFpWemZPTHFabHd0UHd4YnB2eEZqOTJmRFp4QVVfbHJWRS1OQlY4QjRrR3FkdTF6ZHdVOUtjRVhkS2w3VHJVUXVXTHNXQk9LNXlMZWE?oc=5"
+    },
+    {
+      "date": "2026-11-15",
       "text": "Иркутск: за неделю АЗС города восемь раз поднимали цены на бензин и дизель, к 15 ноября рост приостановился; «ОМНИ» сняла лимиты на всех станциях, «КрайсНефть» возобновила продажу бензина в канистры до 30 л, у БРК остаётся ограничение 20 л в сертифицированные канистры.",
       "source_url": "https://sia.ru/?section=484&action=show_news&id=16834777"
     },
@@ -1178,24 +1193,9 @@
       "source_url": "https://www.kavkaz-uzel.eu/articles/428337"
     },
     {
-      "date": "2026-11-15",
-      "text": "Нижнекамск: по сообщениям местных жителей, в ночь на 15 ноября атака БПЛА на промышленный завод; официального подтверждения поражения ТАНЕКО нет.",
-      "source_url": "https://t.me/exilenova_plus/34632"
-    },
-    {
       "date": "2026-11-13",
       "text": "Волгоград: Генштаб ВСУ заявил о поражении установок и шести резервуаров Волгоградского НПЗ; заявление одной стороны, независимого подтверждения оценок нет. The Insider отмечает, что с начала года завод четырежды останавливал переработку.",
       "source_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNa3F5bW9qTVJITnpvTXZzc05odnRkRlBZQ3pZYjYtb0J6VDFVQlduVmRzLVE4QlZsMWEzTHNFREdoVkltbmdtWWJWZ25SMXlUZjlTSmJBcExfRWJPbTFrZmpwWEJNRi02bW1RMlNFVHJFUUtKMHlQYXJ1b20wcmpiM0FwWThTTnJMektRV0VIQk9QRWJLRzdvWFlDOTZlTGZweG5MVGw5RklmY0nSAasBQVVfeXFMTWtxeW1vak1SSE56b012c3NOaHZ0ZEZQWUN6WWI2LW9CelQxVUJXblZkcy1ROEJWbDFhM0xzRURHaFZJbW5nbVliVmduUjF5VGY5U0piQXBMX0ViT20xa2ZqcFhCTUYtNm1tUTJTRVRyRVFLSjB5UGFydW9tMHJqYjNBcFk4U05yTHpLUVdFSEJPUEViS0c3b1hZQzk2ZUxmcHhuTFRsOUZJZmNJ?oc=5"
-    },
-    {
-      "date": "2026-11-13",
-      "text": "Биржа: по итогам недели биржевые цены на бензин снизились в пределах 3%; по отраслевым публикациям АИ-95 торговался около 72,2 тыс. руб. за тонну. На АЗС при этом сохраняются лимиты и очереди в отдельных регионах.",
-      "source_url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNcEdlWkJqY1lfNi01MGlUYzVaQnJZUG9lcktFUjhjTFViWW5fQVdqakhHZ1JYUE90LTlvQjZkWXJ6TTV4LVI1UURnN2wwYUlfSk1QVVliQ1YxQ2U3SEZPZEZqOWNTN3lBX1VxSnJQUzhvamNmLWVQZmpBamVjMDZ6UlRKUGFIQTFFSlJxZGR0WW1yTWJ2My1zRllRMklUQTQyRkprMHdn?oc=5"
-    },
-    {
-      "date": "2026-11-13",
-      "text": "Оценки: Bloomberg сообщил о девятом поражённом НПЗ России с начала ноября; The Bell фиксирует усиление бензинового кризиса. Независимой оценки выбывших мощностей нет, официальные данные не публиковались.",
-      "source_url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQUHJ5YldQTGVyTHFDSWdTN2U4c3lVd0dhN29wN2lkZnRGQWZBVERYbGR5c2N2anJUbzAtaGtXSndKNmhGNjdVNnFabjQ1U01MYnl6T0pnMFBvQmM3U29VdTc0bFhwYTZvTS1vcUdBT3dkUFB0SXNtY2lVRXhYcjBSYzNJN3ZnV1FX?oc=5"
     },
     {
       "date": "2026-11-13",
