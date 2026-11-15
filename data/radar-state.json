@@ -60,8 +60,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1794744332,
-      "source_text": "15.11.2026 15:05 МСК\nГорловка ДНР ракетная опасность\n\n15.11.2026 15:02 МСК\nСпартак, Донецк, Ясиноватая, Макеевка и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794745733,
+      "source_text": "15.11.2026 15:05 МСК\nГорловка ДНР ракетная опасность\n\n15.11.2026 15:28 МСК\nСелидово ДНР и близлежащие Опасность по БПЛА разведке"
     },
     "Брянская область": {
       "bpla": false,
@@ -349,9 +349,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -362,8 +362,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#dc2626",
-      "last_event_ts": 1794744332,
-      "source_text": "15.11.2026 15:05 МСК\nГорловка ДНР ракетная опасность\n\n15.11.2026 14:41 МСК\nГорловка и близлежащие Тревога по БПЛА и ФПВ сохраняется, ещё множественные фиксации с запада на город ДНР"
+      "last_event_ts": 1794745382,
+      "source_text": "15.11.2026 15:05 МСК\nГорловка ДНР ракетная опасность\n\n15.11.2026 15:23 МСК\nГорловка, Углегорск и близлежащие Опасность по БПЛА и ФПВ ДНР"
     },
     {
       "key": "свердловск|луганская народная республика",
@@ -714,8 +714,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794720397,
-      "source_text": "15.11.2026 08:26 МСК\nГорловка, Углегорск и близлежащие Опасность по БПЛА ДНР"
+      "last_event_ts": 1794745382,
+      "source_text": "15.11.2026 15:23 МСК\nГорловка, Углегорск и близлежащие Опасность по БПЛА и ФПВ ДНР"
     },
     {
       "key": "урзуф|донецкая народная республика",
@@ -1112,6 +1112,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794739261,
       "source_text": "15.11.2026 13:41 МСК\nКраснояружский Ракитянский районы Опасность по БПЛА"
+    },
+    {
+      "key": "селидово|донецкая народная республика",
+      "name": "Селидово",
+      "lat": 48.1465,
+      "lon": 37.3022,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794745733,
+      "source_text": "15.11.2026 15:28 МСК\nСелидово ДНР и близлежащие Опасность по БПЛА разведке"
     }
   ],
   "districts": {
@@ -1416,6 +1438,22 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 304190,
+      "text": "Селидово ДНР и близлежащие\nОпасность по БПЛА разведке",
+      "ts": 1794745733,
+      "time_label": "15.11.2026 15:28 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 304189,
+      "text": "Горловка, Углегорск и близлежащие\nОпасность по БПЛА и ФПВ\nДНР",
+      "ts": 1794745382,
+      "time_label": "15.11.2026 15:23 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 304188,
       "text": "Горловка ДНР ракетная опасность",
@@ -2039,22 +2077,6 @@
       "time_label": "15.11.2026 11:20 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 304119,
-      "text": "Кача\nБельбек\nОпасность по БПЛА",
-      "ts": 1794730807,
-      "time_label": "15.11.2026 11:20 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 304118,
-      "text": "Севастополь\nОпасность по БПЛА",
-      "ts": 1794730781,
-      "time_label": "15.11.2026 11:19 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2064,14 +2086,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794744332,
-  "last_event_at": "2026-11-15T12:05:32Z",
-  "fetched_at": "2026-11-15T12:20:03.622052Z",
+  "timestamp": 1794745733,
+  "last_event_at": "2026-11-15T12:28:53Z",
+  "fetched_at": "2026-11-15T12:30:03.801927Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-15T12:20:03.622052Z",
-    "source_age_seconds": 871,
-    "city_count": 39,
+    "generated_at": "2026-11-15T12:30:03.801927Z",
+    "source_age_seconds": 70,
+    "city_count": 40,
     "region_count": 13,
     "feed_count": 80
   }
