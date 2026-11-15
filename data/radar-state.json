@@ -307,8 +307,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794768692,
-      "source_text": "15.11.2026 21:51 МСК\nРыльск Рыльский район Курская область Тревога по БПЛА сохраняется"
+      "last_event_ts": 1794769460,
+      "source_text": "15.11.2026 22:04 МСК\nКурск Курчатов Зорино Халино И близлежащие Тревога по БПЛА Курская область"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -2108,7 +2108,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1794766077,
@@ -2905,6 +2905,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794766451,
       "source_text": "15.11.2026 21:14 МСК\nКалужская область Продолжаются фиксации групп БПЛА в вашем направлении от Брянской области"
+    },
+    {
+      "key": "халино|курская область",
+      "name": "Халино",
+      "lat": 51.74807,
+      "lon": 36.343323,
+      "region": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794769460,
+      "source_text": "15.11.2026 22:04 МСК\nКурск Курчатов Зорино Халино И близлежащие Тревога по БПЛА Курская область"
     }
   ],
   "districts": {
@@ -4607,6 +4629,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 304353,
+      "text": "1-ая Моква и далее в направлении Курск\nТревога по БПЛА\nКурская область",
+      "ts": 1794769523,
+      "time_label": "15.11.2026 22:05 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 304352,
+      "text": "Курск\nКурчатов\nЗорино\nХалино\nИ близлежащие\nТревога по БПЛА\nКурская область\nИ далее в тыл",
+      "ts": 1794769460,
+      "time_label": "15.11.2026 22:04 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 304351,
+      "text": "Рышково и близлежащие  далее в тыл\nКурская область\nТревога по БПЛА",
+      "ts": 1794769390,
+      "time_label": "15.11.2026 22:03 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 304350,
       "text": "Сельцо\nМеры безопасности при БПЛА!\nБрянская область",
       "ts": 1794769162,
@@ -5221,30 +5267,6 @@
       "time_label": "15.11.2026 20:53 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 304318,
-      "text": "Почепский район\nПогарский район\nБрянская область\nТревога по БПЛА сохраняется",
-      "ts": 1794765170,
-      "time_label": "15.11.2026 20:52 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 108203,
-      "text": "Калуга\nКалужская область\nРабота ПВО по БПЛА",
-      "ts": 1794765140,
-      "time_label": "15.11.2026 20:52 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 108202,
-      "text": "Ростовская область\nОтбой опасности по БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1794765139,
-      "time_label": "15.11.2026 20:52 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -5254,14 +5276,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794769162,
-  "last_event_at": "2026-11-15T18:59:22Z",
-  "fetched_at": "2026-11-15T19:00:04.332809Z",
+  "timestamp": 1794769523,
+  "last_event_at": "2026-11-15T19:05:23Z",
+  "fetched_at": "2026-11-15T19:10:03.515068Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-15T19:00:04.332809Z",
-    "source_age_seconds": 42,
-    "city_count": 111,
+    "generated_at": "2026-11-15T19:10:03.515068Z",
+    "source_age_seconds": 280,
+    "city_count": 112,
     "region_count": 24,
     "feed_count": 80
   }
