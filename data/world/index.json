@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T13:51:52Z",
+ "generated_at": "2026-11-16T19:35:21Z",
  "methodology_version": "0.2",
  "brand": {
   "short": "ИТН",
@@ -8,28 +8,21 @@
   "en": "Fuel Tension Index"
  },
  "world": {
-  "value": null,
-  "level": null,
-  "level_ru": "мало данных",
+  "value": 74,
+  "level": "crisis",
+  "level_ru": "кризис",
   "delta_1d": null,
-  "coverage": 0.45,
-  "regions_missing": [
-   "north_america",
-   "middle_east",
-   "south_asia",
-   "latin_america",
-   "russia_cis",
-   "africa"
-  ]
+  "coverage": 1.0,
+  "regions_missing": []
  },
  "regions": {
   "north_america": {
    "name": "Северная Америка",
-   "value": null,
-   "level": null,
-   "level_ru": "мало данных",
+   "value": 91,
+   "level": "critical",
+   "level_ru": "критично",
    "delta_1d": null,
-   "coverage": 0.45,
+   "coverage": 0.5,
    "weight_world": 0.24,
    "components": [
     {
@@ -89,11 +82,11 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": null,
+     "score": 62.8,
      "weight": 0.05,
-     "raw": "нет ряда GPR",
-     "as_of": null,
-     "source": null
+     "raw": "GPR (7-дн. среднее) 145,1; p63 к 5 годам",
+     "as_of": "2026-11-16",
+     "source": "Caldara-Iacoviello GPR"
     },
     {
      "id": "phys_premium",
@@ -108,11 +101,11 @@
   },
   "east_asia": {
    "name": "Восточная Азия и АТР",
-   "value": 77,
+   "value": 76,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.6,
+   "delta_1d": -1,
+   "coverage": 0.65,
    "weight_world": 0.3,
    "components": [
     {
@@ -172,11 +165,11 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": null,
+     "score": 62.8,
      "weight": 0.05,
-     "raw": "нет ряда GPR",
-     "as_of": null,
-     "source": null
+     "raw": "GPR (7-дн. среднее) 145,1; p63 к 5 годам",
+     "as_of": "2026-11-16",
+     "source": "Caldara-Iacoviello GPR"
     },
     {
      "id": "phys_premium",
@@ -191,11 +184,11 @@
   },
   "europe": {
    "name": "Европа",
-   "value": 74,
+   "value": 73,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 0,
-   "coverage": 0.75,
+   "delta_1d": -1,
+   "coverage": 0.8,
    "weight_world": 0.15,
    "components": [
     {
@@ -255,11 +248,11 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": null,
+     "score": 62.8,
      "weight": 0.05,
-     "raw": "нет ряда GPR",
-     "as_of": null,
-     "source": null
+     "raw": "GPR (7-дн. среднее) 145,1; p63 к 5 годам",
+     "as_of": "2026-11-16",
+     "source": "Caldara-Iacoviello GPR"
     },
     {
      "id": "phys_premium",
@@ -274,11 +267,11 @@
   },
   "middle_east": {
    "name": "Ближний Восток",
-   "value": null,
-   "level": null,
-   "level_ru": "мало данных",
+   "value": 72,
+   "level": "crisis",
+   "level_ru": "кризис",
    "delta_1d": null,
-   "coverage": 0.45,
+   "coverage": 0.5,
    "weight_world": 0.09,
    "components": [
     {
@@ -338,11 +331,11 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": null,
+     "score": 62.8,
      "weight": 0.05,
-     "raw": "нет ряда GPR",
-     "as_of": null,
-     "source": null
+     "raw": "GPR (7-дн. среднее) 145,1; p63 к 5 годам",
+     "as_of": "2026-11-16",
+     "source": "Caldara-Iacoviello GPR"
     },
     {
      "id": "phys_premium",
@@ -357,11 +350,11 @@
   },
   "south_asia": {
    "name": "Южная Азия",
-   "value": null,
-   "level": null,
-   "level_ru": "мало данных",
+   "value": 72,
+   "level": "crisis",
+   "level_ru": "кризис",
    "delta_1d": null,
-   "coverage": 0.45,
+   "coverage": 0.5,
    "weight_world": 0.07,
    "components": [
     {
@@ -421,11 +414,11 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": null,
+     "score": 62.8,
      "weight": 0.05,
-     "raw": "нет ряда GPR",
-     "as_of": null,
-     "source": null
+     "raw": "GPR (7-дн. среднее) 145,1; p63 к 5 годам",
+     "as_of": "2026-11-16",
+     "source": "Caldara-Iacoviello GPR"
     },
     {
      "id": "phys_premium",
@@ -440,11 +433,11 @@
   },
   "latin_america": {
    "name": "Латинская Америка",
-   "value": null,
-   "level": null,
-   "level_ru": "мало данных",
+   "value": 42,
+   "level": "tense",
+   "level_ru": "напряжённо",
    "delta_1d": null,
-   "coverage": 0.45,
+   "coverage": 0.5,
    "weight_world": 0.07,
    "components": [
     {
@@ -504,11 +497,11 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": null,
+     "score": 62.8,
      "weight": 0.05,
-     "raw": "нет ряда GPR",
-     "as_of": null,
-     "source": null
+     "raw": "GPR (7-дн. среднее) 145,1; p63 к 5 годам",
+     "as_of": "2026-11-16",
+     "source": "Caldara-Iacoviello GPR"
     },
     {
      "id": "phys_premium",
@@ -523,11 +516,11 @@
   },
   "russia_cis": {
    "name": "Россия и СНГ",
-   "value": null,
-   "level": null,
-   "level_ru": "мало данных",
+   "value": 61,
+   "level": "crisis",
+   "level_ru": "кризис",
    "delta_1d": null,
-   "coverage": 0.45,
+   "coverage": 0.5,
    "weight_world": 0.04,
    "components": [
     {
@@ -587,11 +580,11 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": null,
+     "score": 62.8,
      "weight": 0.05,
-     "raw": "нет ряда GPR",
-     "as_of": null,
-     "source": null
+     "raw": "GPR (7-дн. среднее) 145,1; p63 к 5 годам",
+     "as_of": "2026-11-16",
+     "source": "Caldara-Iacoviello GPR"
     },
     {
      "id": "phys_premium",
@@ -606,11 +599,11 @@
   },
   "africa": {
    "name": "Африка",
-   "value": null,
-   "level": null,
-   "level_ru": "мало данных",
+   "value": 37,
+   "level": "tense",
+   "level_ru": "напряжённо",
    "delta_1d": null,
-   "coverage": 0.45,
+   "coverage": 0.5,
    "weight_world": 0.04,
    "components": [
     {
@@ -670,11 +663,11 @@
     {
      "id": "georisk",
      "label": "Геополитический риск (GPR)",
-     "score": null,
+     "score": 62.8,
      "weight": 0.05,
-     "raw": "нет ряда GPR",
-     "as_of": null,
-     "source": null
+     "raw": "GPR (7-дн. среднее) 145,1; p63 к 5 годам",
+     "as_of": "2026-11-16",
+     "source": "Caldara-Iacoviello GPR"
     },
     {
      "id": "phys_premium",
