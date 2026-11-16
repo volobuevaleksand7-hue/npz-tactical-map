@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-11-16T15:07Z",
+    "generated_at": "2026-11-16T16:15Z",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Статусы и даты — из открытых новостей (Meduza/Moscow Times/The Bell/Kyiv Independent/Ukrainska Pravda/Reuters/Bloomberg/Euronews/GlobalPetrolPrices/Peak Oil News/CNN/FDD/RFE-RL/Business Recorder/Kyiv Independent/Pravda.com.ua/Al Jazeera/ABC News/S&P Global/The Moscow Times/RFE/RL/Kyiv Post/Novaya Gazeta Europe). Объёмы и баланс внутр./экспорт — расчётная оценка по паспортным мощностям и импортным данным. Точных real-time данных по остаткам топлива публично не существует.",
     "disclaimer": "Не является официальной/разведывательной информацией. OSINT-агрегация для аналитики. Все текстовые описания состояния и цифры — оценки на основе открытых источников.",
     "refresh_seconds": 300,
-    "updated_by": "agent:strike-pipeline"
+    "updated_by": "agent:npz-status"
   },
   "national_balance": {
     "refining_capacity_total_mt_year": 338.6,
@@ -395,12 +395,12 @@
       "lon": 38.573,
       "capacity_mt_year": 6.6,
       "status": "down",
-      "status_since": "2026-09-26",
+      "status_since": "2026-11-16",
       "est_output_pct": 0,
-      "damage": "Украинские дроны атаковали завод в ночь на 26 сентября. Подтверждены пожары на объекте, повреждены основные установки первичной переработки: АТ-4, АТ-5 и АТ-6 (мощности 0.3, 1.8 и 3.6 млн т/год соответственно). Есть погибшие и раненые, осколки упали на жилые районы. Завод полностью остановлен.",
-      "note": "На 8 октября: завод полностью остановлен после третьей атаки за два месяца. Волна повторных ударов нацелена на вторичные установки переработки, требующие 6-8 месяцев восстановления в условиях санкций.",
-      "source_url": "https://www.bloomberg.com/news/articles/2026-09-26/russia-s-ilsky-oil-refinery-ablaze-after-drone-strike-that-leaves-three-dead",
-      "confidence": "confirmed"
+      "damage": "Ночью 16 ноября поражены установки атмосферной перегонки АТ-5 и АТ-6 и комплекс производства бензина",
+      "note": "Удар 16 ноября — не менее третий по счёту в 2026 году; завод не возобновлял переработку после удара 26 сентября.",
+      "source_url": "https://english.nv.ua/russian-war/ukraine-strikes-key-processing-units-at-russia-s-ilsky-oil-refinery-general-staff-50659675.html",
+      "confidence": "reported"
     },
     {
       "id": "slavyansk",
@@ -1164,23 +1164,23 @@
   "events": [
     {
       "date": "2026-11-16",
-      "text": "Удар по ТАНЕКО (Нижнекамск) (Нижнекамск): В Нижнекамске повреждена установка первичной переработки НПЗ «ТАИФ-НК»",
-      "source_url": "https://t.me/exilenova_plus/34712"
+      "text": "Ильский: ночью 16 ноября в рамках рекордного по числу БПЛА налёта (Минобороны РФ заявило о 1 336 сбитых дронах в 16 регионах, около 600 — на подлёте к Московскому региону) поражены установки атмосферной перегонки АТ-5 и АТ-6 и комплекс производства бензина Ильского НПЗ. Данные Генштаба ВСУ; независимого подтверждения поражения конкретных установок нет.",
+      "source_url": "https://english.nv.ua/russian-war/ukraine-strikes-key-processing-units-at-russia-s-ilsky-oil-refinery-general-staff-50659675.html"
+    },
+    {
+      "date": "2026-11-16",
+      "text": "Азов (Ростовская обл.): утром 16 ноября при атаке БПЛА горела нефтебаза Flash Energy; губернатор Ростовской области сообщил о возгораниях на четырёх промышленных объектах города. По данным Генштаба ВСУ, поражены объекты топливной логистики.",
+      "source_url": "https://www.yahoo.com/news/world/articles/fuel-depot-azov-russia-reportedly-044849729.html"
+    },
+    {
+      "date": "2026-11-16",
+      "text": "The Moscow Times: оптовые продажи бензина в России упали на 31% после серии ударов по НПЗ; розничные ограничения и рост цен фиксируются в десятках регионов.",
+      "source_url": "https://www.msn.com/en-us/news/other/russian-wholesale-gasoline-sales-fall-31-after-refinery-strikes/ar-AA2hxYHB"
     },
     {
       "date": "2026-11-15",
       "text": "Нижнекамск: промзона города подверглась массированной атаке БПЛА, загорелся «Нижнекамскнефтехим» (Сибур), повреждены промышленные объекты и жилой дом, есть пострадавшие. Генштаб ВСУ заявил о поражении «Нижнекамскнефтехима», «ТАИФ-НК» и завода «Монолит»; ТАНЕКО в перечне целей не назван. Российские власти подтвердили атаку на промзону, поражение конкретных установок не подтверждали.",
       "source_url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNaFlfd0dqUXdzQ3RQOHpmMWhtMWlwSWkyaF9sZnBpX3NQTmlleVFrWDR3UkJLVzdQUjBuTEdJWS1kQWdwNEJjbUFoTFNYbFlZUll4eUNUTFlVVGRDclBKUE5DWE5ma0lRLUZnY2hWZEVSRThsWUs1d1d0Mm9QeWN3LS1Db0M5c3VxNzBoTnJ6endqNVBUTjVNWkNHQW5abWdrVTNaV0tyeU9KcTBYTFHSAa4BQVVfeXFMTWhZX3dHalF3c0N0UDh6ZjFobTFpcElpMmhfbGZwaV9zUE5pZXlRa1g0d1JCS1c3UFIwbkxHSVktZEFncDRCY21BaExTWGxZWVJZeHlDVExZVVRkQ3JQSlBOQ1hOZmtJUS1GZ2NoVmRFUkU4bFlLNXdXdDJvUHljdy0tQ29DOXN1cTcwaE5yenp3ajVQVE41TVpDR0FuWm1na1UzWldLcnlPSnEwWExR?oc=5"
-    },
-    {
-      "date": "2026-11-14",
-      "text": "Кириши: после попаданий в промзону в ночь на 13 ноября (над Ленинградской областью, по данным Neftegaz.RU, сбито 113 БПЛА) НПЗ «КИНЕФ» 14 ноября вновь частично приостановил работу — «Бумага», «Активатика». Официальной оценки выбывших мощностей нет.",
-      "source_url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQQWZjZ29qTURFUUstR3M1MER5VklOdy0zTkFjQko4aFdkOGxIbWxUaXExb3dtTWpKS1I3blFoZHJ1SzJXeG5EeXZ4R3ZUWUk0VEpjMEE4TXp3XzZmdXdOWU1VenBIM00tbm1TYkxCbnRrX3RJdlZSMnJQdzJDbUdDNmlZU2ltZ9IBiwFBVV95cUxNWmRISlZ1b0tZWGlYd0lvaWFPd3FQS0dpZzhHSFFjeVdBeU5rRFBOeTY3RVVoTzl6Rlc1Zmc0eGNWemlad3pvUk5FelR6TzRyMDZVUnl2b00xM2RrbHp3QUdlMmlaU3I0aVVJVWhNRjhDUGduUTBTTWtHOTdGUHRUV1NrV09QekdXYV9V?oc=5"
-    },
-    {
-      "date": "2026-11-12",
-      "text": "Усть-Луга: после атаки 11 ноября число загружаемых в порту танкеров сократилось почти вдвое (UA.NEWS); по данным Генштаба ВСУ и СБУ, поражены пять нефтяных резервуаров, пожар локализован через сутки. Отгрузка казахстанской нефти через порт приостановлена с сентября.",
-      "source_url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNeHNndERjcTJ2b2hjZlpGTU9PZHRTZnlWclpYdkdlbF9WcEJXS1Y2MU5MaUxNWXVSLVhzbkg1OEs4YnFIa1phWFpnS2lIdlhySGFsdGxDWkVRYTlZQUw3WnNmVE9GbUo1RXRpVUZLN2d1dWd3TFpWemZPTHFabHd0UHd4YnB2eEZqOTJmRFp4QVVfbHJWRS1OQlY4QjRrR3FkdTF6ZHdVOUtjRVhkS2w3VHJVUXVXTHNXQk9LNXlMZWE?oc=5"
     },
     {
       "date": "2026-11-15",
@@ -1189,13 +1189,13 @@
     },
     {
       "date": "2026-11-14",
-      "text": "Красноярский край: правительство края и «Красноярскнефтепродукт» при содействии УФАС подписали соглашение о предельных надбавках, прозрачности цен и согласованных объёмах поставок топлива; УФАС ожидает аналогичных соглашений в других регионах.",
-      "source_url": "https://ksonline.ru/626192/v-krasnoyarskom-krae-vozvrashhaetsya-regulirovanie-tsen-na-benzin/"
+      "text": "Кириши: после попаданий в промзону в ночь на 13 ноября (над Ленинградской областью, по данным Neftegaz.RU, сбито 113 БПЛА) НПЗ «КИНЕФ» 14 ноября вновь частично приостановил работу — «Бумага», «Активатика». Официальной оценки выбывших мощностей нет.",
+      "source_url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQQWZjZ29qTURFUUstR3M1MER5VklOdy0zTkFjQko4aFdkOGxIbWxUaXExb3dtTWpKS1I3blFoZHJ1SzJXeG5EeXZ4R3ZUWUk0VEpjMEE4TXp3XzZmdXdOWU1VenBIM00tbm1TYkxCbnRrX3RJdlZSMnJQdzJDbUdDNmlZU2ltZ9IBiwFBVV95cUxNWmRISlZ1b0tZWGlYd0lvaWFPd3FQS0dpZzhHSFFjeVdBeU5rRFBOeTY3RVVoTzl6Rlc1Zmc0eGNWemlad3pvUk5FelR6TzRyMDZVUnl2b00xM2RrbHp3QUdlMmlaU3I0aVVJVWhNRjhDUGduUTBTTWtHOTdGUHRUV1NrV09QekdXYV9V?oc=5"
     },
     {
       "date": "2026-11-14",
-      "text": "Астрахань: новая волна ажиотажа после слухов о перебоях из-за пожара на Волгоградском НПЗ — очереди и пустые колонки на части АЗС, закупки в канистры; официального подтверждения прекращения поставок и лимитов нет, к 10 ноября обстановка была стабильной.",
-      "source_url": "https://www.kavkaz-uzel.eu/articles/428337"
+      "text": "Красноярский край: правительство края и «Красноярскнефтепродукт» при содействии УФАС подписали соглашение о предельных надбавках, прозрачности цен и согласованных объёмах поставок топлива; УФАС ожидает аналогичных соглашений в других регионах.",
+      "source_url": "https://ksonline.ru/626192/v-krasnoyarskom-krae-vozvrashhaetsya-regulirovanie-tsen-na-benzin/"
     },
     {
       "date": "2026-11-13",
@@ -1204,18 +1204,13 @@
     },
     {
       "date": "2026-11-13",
-      "text": "Самарская область: губернатор сообщил об атаке БПЛА на промышленное предприятие; мониторинговые каналы сообщают об ударе по линейной производственно-диспетчерской станции «Самара» — шестой с начала октября. Подтверждённых данных о поражении НПЗ нет.",
-      "source_url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE5SVnJOYnRPRGJsdzV0Q05qOTctMF9kUUI5dnU4M3JnZ1JJUl9yT0JGbElNRkJnWDJzbng4Xzl5MWc0RUU?oc=5"
-    },
-    {
-      "date": "2026-11-13",
       "text": "Волгоград: губернатор Андрей Бочаров подтвердил массированную атаку БПЛА и возгорания в южной промзоне города; по сообщениям СМИ и опубликованным видео, горел Волгоградский НПЗ «Лукойла». Оценки повреждений установок нет.",
       "source_url": "https://kyivindependent.com/volgograd-oil-refinery-rostov-on-don-production-facility-in-flames-following-ukrainian-drone-attack/"
     },
     {
-      "date": "2026-11-10",
-      "text": "Reuters (10 ноября, со ссылкой на два источника в отрасли): атаки конца октября и начала ноября сократили мощности переработки в России примерно на 30%; поражено 9 из 35 крупнейших НПЗ. Выпуск около 700 тыс. т в сутки на конец октября против потенциала около 930 тыс. т. Официальных данных о выбывших мощностях нет.",
-      "source_url": "https://novayagazeta.eu/articles/2026/11/10/pererabotka-nefti-v-rossii-sokratilas-na-30-iz-za-novykh-ukrainskikh-atak-reuters-news"
+      "date": "2026-11-12",
+      "text": "Усть-Луга: после атаки 11 ноября число загружаемых в порту танкеров сократилось почти вдвое (UA.NEWS); по данным Генштаба ВСУ и СБУ, поражены пять нефтяных резервуаров, пожар локализован через сутки. Отгрузка казахстанской нефти через порт приостановлена с сентября.",
+      "source_url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNeHNndERjcTJ2b2hjZlpGTU9PZHRTZnlWclpYdkdlbF9WcEJXS1Y2MU5MaUxNWXVSLVhzbkg1OEs4YnFIa1phWFpnS2lIdlhySGFsdGxDWkVRYTlZQUw3WnNmVE9GbUo1RXRpVUZLN2d1dWd3TFpWemZPTHFabHd0UHd4YnB2eEZqOTJmRFp4QVVfbHJWRS1OQlY4QjRrR3FkdTF6ZHdVOUtjRVhkS2w3VHJVUXVXTHNXQk9LNXlMZWE?oc=5"
     }
   ]
 }
