@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794828817,
-      "source_text": "16.11.2026 14:33 МСК\nБрянская область Опасность по БПЛА сохраняется Далее в направлении Калужской области"
+      "last_event_ts": 1794830677,
+      "source_text": "16.11.2026 15:04 МСК\nСуземка и близлежащие Опасность по БПЛА Хорнет Брянская область"
     },
     "Калужская область": {
       "bpla": false,
@@ -166,16 +166,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794827357,
-      "source_text": "16.11.2026 14:09 МСК\nОрловская область повторно опасность по БПЛА от Брянской и Курской области"
+      "fill": "#dc2626",
+      "last_event_ts": 1794830413,
+      "source_text": "16.11.2026 15:00 МСК\nКурская область и близлежащие Авиационная ракетно бомбовая опасность\n\n16.11.2026 14:09 МСК\nОрловская область повторно опасность по БПЛА от Брянской и Курской области"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -1112,6 +1112,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1794828893,
       "source_text": "16.11.2026 14:34 МСК\nТаврово и близлежащие Опасность по БПЛА далее в направлении Разумное Белгородская область"
+    },
+    {
+      "key": "суземка|брянская область",
+      "name": "Суземка",
+      "lat": 52.316133,
+      "lon": 34.0759496,
+      "region": "Брянская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794830677,
+      "source_text": "16.11.2026 15:04 МСК\nСуземка и близлежащие Опасность по БПЛА Хорнет Брянская область"
     }
   ],
   "districts": {
@@ -1206,6 +1228,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 304697,
+      "text": "Суземка и близлежащие\nОпасность по БПЛА Хорнет\nБрянская область",
+      "ts": 1794830677,
+      "time_label": "16.11.2026 15:04 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 304696,
+      "text": "Курская область и близлежащие\nАвиационная ракетно бомбовая опасность",
+      "ts": 1794830413,
+      "time_label": "16.11.2026 15:00 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 304695,
       "text": "Азов\nБатайск и близлежащие\nМеры безопасности\nРостовская область",
@@ -1829,22 +1867,6 @@
       "time_label": "16.11.2026 11:27 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 304636,
-      "text": "Чаплинка и близлежащие опасность по ударным БПЛА\nХерсонская область РФ",
-      "ts": 1794817621,
-      "time_label": "16.11.2026 11:27 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 304635,
-      "text": "Шебекино\nТревога по БПЛА повторно",
-      "ts": 1794817483,
-      "time_label": "16.11.2026 11:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1854,14 +1876,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794830076,
-  "last_event_at": "2026-11-16T11:54:36Z",
-  "fetched_at": "2026-11-16T12:00:03.856088Z",
-  "poll_interval_sec": 35,
+  "timestamp": 1794830677,
+  "last_event_at": "2026-11-16T12:04:37Z",
+  "fetched_at": "2026-11-16T12:10:03.411932Z",
+  "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-16T12:00:03.856088Z",
-    "source_age_seconds": 327,
-    "city_count": 39,
+    "generated_at": "2026-11-16T12:10:03.411932Z",
+    "source_age_seconds": 326,
+    "city_count": 40,
     "region_count": 13,
     "feed_count": 80
   }
