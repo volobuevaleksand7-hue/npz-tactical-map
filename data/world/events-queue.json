@@ -338,14 +338,14 @@
    "found_at": "2026-11-02T11:35:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "unknown",
     "neutral_lexicon": "ok",
     "independent_sources": 2,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "duplicate:2026-10-30-hormuz-irgc-four-tankers-mine-claim"
+   "reject_reason": "schema, duplicate:2026-10-30-hormuz-irgc-four-tankers-mine-claim"
   },
   {
    "id": "2026-11-01-hormuz-selat-storm-tug-struck",
@@ -374,14 +374,14 @@
    "found_at": "2026-11-02T11:35:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "ok",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "needs_source",
-   "reject_reason": "нужен второй независимый издатель"
+   "verdict": "rejected",
+   "reject_reason": "schema"
   },
   {
    "id": "2026-11-02-arabian-gulf-tanker-two-projectiles-saudi",
@@ -861,5 +861,5 @@
    "reject_reason": "нужен второй независимый издатель"
   }
  ],
- "validated_at": "2026-11-15T19:34:35Z"
+ "validated_at": "2026-11-16T03:34:33Z"
 }
