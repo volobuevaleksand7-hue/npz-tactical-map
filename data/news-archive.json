@@ -175,30 +175,32 @@
     "lat": 62.04,
     "lon": 113.5,
     "level": "strained",
-    "updated": "2026-11-06T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
-      "name": "СибОйл/Лукойл/Роснефть",
-      "status": "limited",
+      "name": "СибОйл / Лукойл / Роснефть",
+      "status": "open",
       "level": "strained",
-      "limit_l": 20,
-      "note": "08.10 ротация 83: Лимит 20л на АИ-92, АИ-95 и ДТ (ДТ БЕЗ ограничений). На 6 АЗС «Саханефтегазсбыта» в Якутске (№1, 6, 1401 ОПТИ, 51, 62): лимит 20л. Мониторинг ежедневный. Поставки контролируются. Вторая волна затрагивает локально. WebSearch 08.10."
+      "limit_l": null,
+      "note": "15.11: две сети АЗС в Якутии сняли ограничения на отпуск топлива, в Мирном и Ленске снова наливают в канистры. 17.11 в Якутске заправки с топливом работают (сводка «Якутия24»)."
      }
     ],
-    "queues_hours": 0.5,
+    "queues_hours": 0.3,
     "ai95_price_rub": 84.15,
     "diesel_price_rub": 103.5,
     "source_urls": [
+     "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOd2NjQWVvZUZDY2hjbDFaVjdMZXBHb0RkZFI5eDlnODJqVmhldGNBaEpkQ1pQaWQxTFFxRjU1MXUxVjU1MEhsdGpHMGIzZ1l3bVEwM2hNTVF0UHRmbHJlbk9IVXY2TDR1MkRzQkhMQ1lCNVdtdHE3akhCYkVvUHd1Mmw5UmJ4Qzdta09R?oc=5",
+     "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTmFDaFVXOVI2SkVuN3dka0U0MllTSkZsV2htZ0xjcFpoUFVoMzU0R0k1c3ppRlUzdFlFNENpa3NHLUROMUgyZFpMbWV0cnJaSDlrMTRFRFJZT3lKbXlZb3c0cVZZeWxIdVF3b2E1dHViNUozdHk4d212V1h3S241MWNGWmFWa082TFlhaTJRcVJuUQ?oc=5",
      "https://www.yakutia.kp.ru/daily/277813.5/5299004"
     ],
-    "note": "08.10 ротация 83: Лимит 20л АИ. Поставки контролируются. Мониторинг ежедневный. WebSearch 08.10."
+    "note": "15.11: ограничения сняли две сети АЗС, канистры снова разрешены в Мирном и Ленске; 17.11 в Якутске топливо на АЗС есть. Ранее действовал лимит 20 л на бензин."
    },
    {
     "region": "Дагестан",
     "lat": 42.98,
     "lon": 47.5,
-    "level": "strained",
-    "updated": "2026-11-06T06:00:00Z",
+    "level": "limited",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Махачкала и Каспийск",
@@ -212,16 +214,17 @@
     "ai95_price_rub": 99,
     "diesel_price_rub": 98,
     "source_urls": [
+     "https://news.google.com/rss/articles/CBMiVEFVX3lxTE02d1BDQUNYekI4b3VFMUgxR19lVk0wSWlwRTc0Uzk1LXRSUmdaQnFkeENBWmhwM3Rjci1LYkQtUmR4SG1ablFiSGtUdXFJcGJhdVlUWQ?oc=5",
      "https://www.petrolplus.ru/fuelindex/respublika-dagestan"
     ],
-    "note": "08.10 ротация 83: Улучшилась. Цены высокие 97-99р. Лимит 20л. Очередей нет. WebSearch 08.10."
+    "note": "12.11: власти адресовали владельцам АЗС предложение снизить цены на бензин. Лимит 20 л на части заправок Махачкалы и Каспийска — по данным 08.10."
    },
    {
     "region": "Ульяновская область",
     "lat": 54.32,
     "lon": 48.39,
     "level": "limited",
-    "updated": "2026-11-06T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Все АЗС",
@@ -237,14 +240,14 @@
     "source_urls": [
      "https://russiabase.ru/prices?region=46"
     ],
-    "note": "08.10 ротация 83: Бессрочный лимит 40л/100л (с 25.06). Только в бак. Режим повышенной готовности. Цены норм 71р. WebSearch 08.10."
+    "note": "17.11 проверено: свежих сообщений по лимитам, очередям и ценам нет, данные 08.10 сохранены."
    },
    {
     "region": "Рязанская область",
     "lat": 54.62,
     "lon": 39.74,
     "level": "critical",
-    "updated": "2026-11-06T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Роснефть / Лукойл / Газпром нефть",
@@ -260,30 +263,32 @@
     "source_urls": [
      "https://rzn.mk.ru/social/2026/06/30/situaciya-s-benzinom-v-ryazani-30-iyunya-est-li-toplivo-na-azs-chto-govoryat-voditeli.html"
     ],
-    "note": "08.10 ротация 83: Критична! Половина АЗС без топлива. Очереди 1-2ч. Цены +33% (87р). НПЗ остановлена. WebSearch 08.10."
+    "note": "17.11 проверено: свежих данных по лимитам и очередям нет. 11.11 сообщалось о превышении нормы серы в бензине на АЗС под Рязанью."
    },
    {
     "region": "Тюменская область",
     "lat": 57.15,
     "lon": 65.53,
-    "level": "critical",
-    "updated": "2026-11-06T06:00:00Z",
+    "level": "strained",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Газпром нефть / Лукойл",
       "status": "limited",
-      "level": "critical",
+      "level": "strained",
       "limit_l": 40,
-      "note": "08.10 ротация 83: Очереди вернулись (04.09). На Лукойл ул. 30 лет Победы десятки авто в очереди. Утренние поставки исчезают за часы. Лимиты 40л бензина, 50л ДТ на городе / 200л ДТ на трассе. Цены +9.2% (антилидер роста, 85р). Антипинский НПЗ производит в основном ДТ. Критическая ситуация. WebSearch 08.10."
+      "note": "11.11: в Тюмени локально появлялись очереди; 13.11 после предупреждения УФАС сети снизили цены. Лимит 40 л — по данным августа, свежего подтверждения нет."
      }
     ],
-    "queues_hours": 2.0,
+    "queues_hours": 0.5,
     "ai95_price_rub": 85.0,
     "diesel_price_rub": 80.0,
     "source_urls": [
+     "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBhdkM4UHVRQmdxbHBmYXc5Vmg3YmYtc3dQdEdkX0ZyM1AwcUZsM1BlcDUxOEZwN1lMdjcwblBjcUIzSXNJR3lr?oc=5",
+     "https://news.google.com/rss/articles/CBMiogFBVV95cUxNZVhMOGlGTVlJTU5DV1pISTN3eWZWVC1xYXQ2OHFScUhZeEV5eGkxUl9oc1lsYjZ3Y28zZEMtSGpCTTVKemxlRnZDdl9nZEpHZ1lTbzN3RXM5dFI5R0VwQndVaXFQRl9NdXBvc0ZlWmZRQW81Ql9ib0VmeWw5QjNqWWZTclZuNkZlOUMzcDVKTmthc09OcTdyZzktUFJLSlZlUkE?oc=5",
      "https://tumen.bezformata.com/listnews/benzin-v-tyumeni-3/163330199"
     ],
-    "note": "08.10 ротация 83: Критична! Очереди вернулись. Лимиты 40-50л (город/трасса). Цены +9.2%. НПЗ сырьё ДТ. WebSearch 08.10."
+    "note": "11–13.11: локальные очереди в Тюмени, после предупреждения УФАС АЗС снизили цены. Актуального подтверждения лимитов нет."
    },
    {
     "region": "Вологодская область",
@@ -427,7 +432,7 @@
     "region": "Марий Эл",
     "lat": 56.63,
     "lon": 47.89,
-    "level": "strained",
+    "level": "limited",
     "updated": "2026-11-06T17:30:00Z",
     "networks": [
      {
@@ -724,7 +729,7 @@
     "lat": 45.04,
     "lon": 38.98,
     "level": "strained",
-    "updated": "2026-11-12T17:30:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Роснефть",
@@ -738,17 +743,18 @@
       "status": "open",
       "level": "strained",
       "limit_l": null,
-      "note": "09.11 в Краснодаре работали 103 АЗС (городской МЦУ); 12.11 в Сочи — 49 АЗС, все сорта в наличии (Турпром)."
+      "note": "17.11: в Сочи работают 49 АЗС вторую неделю подряд, все сорта в наличии; на М4 «Дон» в пределах края топливо есть, очередей нет."
      }
     ],
-    "queues_hours": 0.5,
+    "queues_hours": 0.3,
     "ai95_price_rub": 75.0,
     "diesel_price_rub": 80.0,
     "source_urls": [
+     "https://www.tourprom.ru/news/90432/",
      "https://www.yuga.ru/news/484660-rosneft-vnov-vvela-limity-na-prodazhu-topliva-kosnulis-li-ogranicheniya-krasnodarskogo-kraya/",
      "https://www.tourprom.ru/news/90342/"
     ],
-    "note": "12.11: лимиты «Роснефти» 30/50 л действуют и в крае; в Краснодаре 103 АЗС, в Сочи 49 АЗС — топливо есть. WebSearch 12.11."
+    "note": "17.11: в Сочи 49 АЗС, дефицитных сортов нет; на М4 «Дон» топливо на всём протяжении, очередей нет; лимиты «Роснефти» 30/50 л сохраняются. На «Лукойле» в канистры отпускают свободно."
    },
    {
     "region": "Ингушетия",
@@ -835,7 +841,7 @@
     "lat": 44.6,
     "lon": 33.5,
     "level": "strained",
-    "updated": "2026-11-14T05:28:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "ТЭС",
@@ -856,11 +862,11 @@
     "ai95_price_rub": 100.0,
     "diesel_price_rub": 100.0,
     "source_urls": [
+     "https://www.tourprom.ru/news/90432/",
      "https://www.tourprom.ru/news/90313",
-     "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-21-oktyabrya-otmena-qr-kodov-ceny",
-     "https://www.interfax.ru/amp/1128885"
+     "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-21-oktyabrya-otmena-qr-kodov-ceny"
     ],
-    "note": "13.11: ограничений нет, поставки стабильны; власти предупредили, что при сохранении искусственного ажиотажа (покупки по 200–400 л) лимиты вернут. ТЭС до 100 р/л, АТАН — премиум до 130 р/л."
+    "note": "16.11: губернатор заявил, что лимиты вернут, если не стихнет ажиотаж — отдельные водители заливают по 10–15 канистр за раз, проверяются случаи перепродажи. Поставки регулярные, свободная продажа сохраняется; субсидированное топливо 98–100 р/л, премиум до 130 р/л."
    },
    {
     "region": "Татарстан",
@@ -1082,30 +1088,6 @@
     "note": "25.09 ротация: Курган стабилизирован. Цены: АИ-92 65.0р, АИ-95 68.0р, ДТ 71.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
    },
    {
-    "region": "Иркутская область (уточнение №2)",
-    "lat": 52.3,
-    "lon": 104.3,
-    "level": "limited",
-    "updated": "2026-11-12T17:30:00Z",
-    "networks": [
-     {
-      "name": "Иркутскнефть / Региональные",
-      "status": "limited",
-      "level": "limited",
-      "limit_l": 30,
-      "note": "25.09 ротация: Иркутск стабилизирован. Цены: АИ-92 68.0р, АИ-95 71.0р, ДТ 74.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
-     }
-    ],
-    "queues_hours": 0.2,
-    "ai95_price_rub": 71.0,
-    "diesel_price_rub": 74.0,
-    "source_urls": [
-     "https://www.petrolplus.ru/fuelindex/irkutskaya-oblast/",
-     "https://www.petrolplus.ru/fuelindex/irkutskaya-oblast/diesel/"
-    ],
-    "note": "Техническая запись-дубль (не связана ни с одной станцией в azs-stations). Актуальные данные — в записи «Иркутская область». Проверено WebSearch 12.11."
-   },
-   {
     "region": "Самарская область",
     "lat": 53.2,
     "lon": 50.2,
@@ -1296,7 +1278,7 @@
     "lat": 51.72,
     "lon": 94.45,
     "level": "strained",
-    "updated": "2026-11-06T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "АЗС (Кызыл/регион)",
@@ -1314,7 +1296,7 @@
      "https://multigo.ru/benzin/51.719;94.4369/8",
      "https://card-oil.ru/fuel-cost/respublika-tyva/"
     ],
-    "note": "06.10: Поставки улучшились. Ситуация стабилизируется в Кызыле. WebSearch 06.10."
+    "note": "17.11 проверено: свежих сообщений по АЗС нет; последнее — 17.10, полиция сообщала о наличии топлива в Кызыле."
    },
    {
     "region": "Еврейская автономная область",
@@ -1439,7 +1421,7 @@
     "lat": 48.7,
     "lon": 44.5,
     "level": "strained",
-    "updated": "2026-11-14T05:28:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Лукойл / Газпром нефть / Роснефть",
@@ -1449,21 +1431,22 @@
       "note": "13.11: очереди 5–7 машин на колонку, местами выходят на проезжую часть; официальных лимитов не объявлено."
      }
     ],
-    "queues_hours": 1.0,
+    "queues_hours": 0.5,
     "ai95_price_rub": 76.03,
     "diesel_price_rub": 78.0,
     "source_urls": [
+     "https://www.kavkaz-uzel.eu/articles/428406",
      "https://novostivolgograda.ru/news/2026-11-13/azhiotazh-vernulsya-volgogradtsy-snova-shturmuyut-azs-5731681",
      "https://bloknot-volzhsky.ru/news/posle-ataki-bpla-voditeli-volzhskogo-vystroilis-v--2025882"
     ],
-    "note": "13.11: после ночной атаки БПЛА на объект ТЭК на юге Волгограда на АЗС вернулись очереди; лимиты не вводились, топливо есть."
+    "note": "16.11: комитет промышленной политики сообщил о стабилизации спроса; на части АЗС Волгограда сохраняется нехватка отдельных марок — где-то только АИ-92, где-то только АИ-95, больших очередей нет."
    },
    {
     "region": "Ростовская область",
     "lat": 47.23,
     "lon": 39.72,
     "level": "strained",
-    "updated": "2026-11-14T05:28:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Роснефть",
@@ -1487,14 +1470,15 @@
       "note": "06.11: ограничения на отпуск топлива сняты."
      }
     ],
-    "queues_hours": 0.5,
+    "queues_hours": 0.3,
     "ai95_price_rub": 71.25,
     "diesel_price_rub": 76.5,
     "source_urls": [
+     "https://www.tourprom.ru/news/90432/",
      "https://www.donnews.ru/limity-na-otpusk-benzina-vvela-rosneft-v-rostovskoy-oblasti",
      "https://donday-volgodonsk.ru/v-volgodonske-rosneft-vnov-vvela-limity-na-otpusk-topliva.html/amp"
     ],
-    "note": "06.11 сети «Газпром», «Роснефть» и «Лукойл» сняли лимиты, но с 09.11 «Роснефть» ввела их снова (30/50 л); в Волгодонске ограничения подтверждены 12.11."
+    "note": "17.11: на М4 «Дон» топливо есть на всём маршруте, очередей нет — сообщения навигаторов об обратном водители не подтверждают. На «Лукойле» между Каменск-Шахтинским и Ростовом ограничений нет, в канистры отпускают свободно; лимит «Роснефти» 30/50 л сохраняется."
    },
    {
     "region": "Северная Осетия - Алания",
@@ -1574,32 +1558,32 @@
     "lat": 44.7,
     "lon": 34.3,
     "level": "severe",
-    "updated": "2026-11-12T17:30:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "АТАН",
       "status": "limited",
       "level": "severe",
       "limit_l": 20,
-      "note": "10–12.11: дефицит усилился, сеть ввела талоны и топливные карты (приоритет предприятиям); АИ-95 по регулируемой цене 100 р/л; часть АЗС в Симферополе законсервирована; 12.11 с 08:00 отпускается только АИ-92."
+      "note": "17.11: с 08:00 отпускает АИ-92, АИ-95 и ДТ — единственный источник всех трёх сортов с утра. Талоны и топливные карты сетей не работают, расчёт наличными."
      },
      {
       "name": "ТЭС",
       "status": "limited",
       "level": "severe",
       "limit_l": 20,
-      "note": "12.11: социальное топливо отпускается по графику — АИ-95 с 14:00, сначала вдоль «Тавриды», затем в городах и на побережье."
+      "note": "17.11: АИ-95 по графику — с 14:00 на АЗС вдоль «Тавриды» (Симферопольский, Белогорский, Кировский, Ленинский районы), с 15:00 в Джанкое, Красноперекопске, Бахчисарае, Керчи, Симферополе, Феодосии, Евпатории и на ЮБК."
      }
     ],
     "queues_hours": 1.0,
     "ai95_price_rub": 100.0,
     "diesel_price_rub": 100.0,
     "source_urls": [
+     "https://www.tourprom.ru/news/90432/",
      "https://intent.press/ru/news/obshchestvo/2026/v-krymu-snova-defitsit-benzina-na-azs-vvodiat-kartochki/",
-     "https://www.tourprom.ru/news/90342/",
-     "https://www.tourprom.ru/news/90313"
+     "https://www.tourprom.ru/news/90342/"
     ],
-    "note": "12.11: новая волна дефицита — на многих АЗС топлива нет, «АТАН» ввела талоны/карты, часть АЗС законсервирована; социальное топливо по графику (АТАН — АИ-92 с 08:00, ТЭС — АИ-95 с 14:00), АИ-95 100 р/л, канистры не отпускают. WebSearch 12.11."
+    "note": "17.11: топливо по графику двух сетей — «АТАН» с 08:00 (АИ-92, АИ-95, ДТ), «ТЭС» с 14:00 по «Тавриде» и с 15:00 в городах и на ЮБК. Лимит 20 л в бак, канистры запрещены, талоны и карты не действуют, наличные обязательны. Актуальная карта — toplivo.rk.gov.ru."
    },
    {
     "region": "Челябинская область",
@@ -1783,7 +1767,7 @@
     "lat": 56.86,
     "lon": 35.91,
     "level": "limited",
-    "updated": "2026-11-06T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Сургутнефтегаз / Татнефть / сетевые",
@@ -1800,14 +1784,14 @@
      "https://tver.aif.ru/auto/trans/20-litrov-na-mashinu-na-kakih-tverskih-azs-deystvuyut-ogranicheniya-po-benzinu/",
      "https://lenta.ru/articles/2026/07/07/prodazha-benzina-ogranicheniya/"
     ],
-    "note": "05.10 ротация 79: Лимит 15-30л (по сетям). Корпоративные без ограничений. Цены норм. WebSearch 05.10."
+    "note": "17.11 проверено: свежих сообщений по лимитам и очередям нет, данные 05.10 сохранены."
    },
    {
     "region": "Ханты-Мансийский автономный округ - Югра",
     "lat": 61.0,
     "lon": 69.0,
     "level": "strained",
-    "updated": "2026-11-06T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Газпром нефть / Лукойл",
@@ -1828,18 +1812,18 @@
     "ai95_price_rub": 65.0,
     "diesel_price_rub": 85.0,
     "source_urls": [
+     "https://news.google.com/rss/articles/CBMixgFBVV95cUxOR1hibzB4RzhseHhGUWZMTDRJY1Vzd25GbVkxQnVGQlMxRWQ2dURQZTlUSnlZZzJVelNybktlWjFHRVdSanBCajk1Smlqak1jMG9BWFQ3LW1QenJnYWhLRGVQai1xUWNaSG03dE8tS2VXN2R0SEhaVWctZW1PaGd4WGRYaWJLaGdlNGQzOFNMQmlFRGV4ZEJQMkp3Q2pha2NGakNlM3Z3c3BwSkR5MmdUTTZTdXV2T2d6eVlORGxkUHFYUk1LUVE?oc=5",
      "https://www.petrolplus.ru/fuelindex/khanty-mansiyskiy-avtonomniy-okrug-yugra/",
-     "https://meduza.io/news/2026/06/23/ogranicheniya-na-prodazhu-benzina-vveli-v-hanty-mansiyskom-avtonomnom-okruge-glavnom-neftedobyvayuschem-regione-rossii",
-     "https://gdezapravka.ru/zapravki/khanty-mansiysk"
+     "https://meduza.io/news/2026/06/23/ogranicheniya-na-prodazhu-benzina-vveli-v-hanty-mansiyskom-avtonomnom-okruge-glavnom-neftedobyvayuschem-regione-rossii"
     ],
-    "note": "01.10 ротация: Лимиты 30-40л действуют. Поставки стабильны. WebSearch 01.10."
+    "note": "17.11: вышла ежедневная сводка цен по АЗС городов Югры (muksun.fm). Данных об изменении лимитов 30–40 л в этом прогоне не найдено."
    },
    {
     "region": "Омская область",
     "lat": 54.99,
     "lon": 73.37,
     "level": "calm",
-    "updated": "2026-11-06T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Газпромнефть / Лукойл / Местные сети",
@@ -1858,14 +1842,14 @@
      "https://fedpress.ru/news/55/society/3453334",
      "https://www.petrolplus.ru/fuelindex/omskaya-oblast/ai95/"
     ],
-    "note": "01.10: ЛИДЕР РФ! 61.54р/66.36р. Свободная продажа. Стабильна. WebSearch 01.10."
+    "note": "17.11 проверено: свежих сообщений по лимитам и очередям нет, данные 01.10 сохранены."
    },
    {
     "region": "Владимирская область",
     "lat": 56.12,
     "lon": 40.39,
     "level": "critical",
-    "updated": "2026-11-06T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Лукойл",
@@ -1887,70 +1871,48 @@
       "level": "calm",
       "limit_l": null,
       "note": "05.10 WebSearch: Только АИ-92"
+     },
+     {
+      "name": "Роснефть",
+      "status": "limited",
+      "level": "critical",
+      "limit_l": 30,
+      "note": "09.11: сеть установила лимиты на продажу топлива на своих АЗС в области."
      }
     ],
     "queues_hours": 2.0,
     "ai95_price_rub": 70.93,
     "diesel_price_rub": 81.03,
     "source_urls": [
+     "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5RZTZWLWQwdGxLdGdqNE52ZF9OMkE1eTh5OWJUSGE4SkhhYWZXZ0U5ZGF1STJENkRGMTUtM3BDSTViaURxUF9BZFhvaTNlQXhp?oc=5",
      "https://gdezapravka.ru/zapravki/oblast/vladimirskaya-oblast"
     ],
-    "note": "05.10 WebSearch: Критична. Очереди 2ч, только 14% АЗС работают."
-   },
-   {
-    "region": "Краснодарский край (Черноморское побережье)",
-    "lat": 43.4,
-    "lon": 39.5,
-    "level": "severe",
-    "updated": "2026-11-05T17:30:00Z",
-    "networks": [
-     {
-      "name": "Лукойл",
-      "status": "limited",
-      "level": "severe",
-      "limit_l": 30,
-      "note": "05.10 WebSearch: Основной оператор Сочи/Анапы"
-     },
-     {
-      "name": "Независимые",
-      "status": "closed",
-      "level": "critical",
-      "limit_l": null,
-      "note": "05.10 WebSearch: Практически исчерпаны"
-     }
-    ],
-    "queues_hours": 1.0,
-    "ai95_price_rub": 73.92,
-    "diesel_price_rub": 77.04,
-    "source_urls": [
-     "https://www.avtovzglyad.ru/obshestvo/dorogi/73280-2026-07-09-estli-benzin-vkrasnodarskom-krae-segodnya-realnyie-tsenyi-ocheredi-nazapravkah-isituatsiya-nayuge-rossii/"
-    ],
-    "note": "05.10 WebSearch: SEVERE. Туристический сезон, очереди."
+    "note": "09.11: «Роснефть» установила лимиты на продажу топлива на АЗС области. Свежих данных по очередям и наличию за 10–17.11 нет; прежняя оценка — критичная."
    },
    {
     "region": "Ставропольский край",
     "lat": 45.1,
     "lon": 43.7,
-    "level": "critical",
-    "updated": "2026-11-14T05:28:00Z",
+    "level": "strained",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Газпромнефть / Лукойл / Роснефть",
-      "status": "limited",
-      "level": "critical",
-      "limit_l": 35,
-      "note": "05.10 ротация 79: КРИТИЧНАЯ ситуация на курортах! Острый дефицит АИ-95. На федсетях только дизель 76р (если есть). Лимит 35л при наличии. Независимые АЗС 109-140р (спекуляция). Туристический сезон усугубляет. Временная мера из-за ремонтов НПЗ. WebSearch 05.10."
+      "status": "open",
+      "level": "strained",
+      "limit_l": null,
+      "note": "17.11: ограничения на объём отпуска сняты ещё в конце октября; на части АЗС по-прежнему отказывают в заправке канистр (жалобы на «Лукойл»), качество бензина вызывает претензии водителей."
      }
     ],
-    "queues_hours": 1.5,
+    "queues_hours": 0.3,
     "ai95_price_rub": 130.0,
     "diesel_price_rub": 76.0,
     "source_urls": [
+     "https://www.kavkaz-uzel.eu/articles/428413",
      "https://www.kommersant.ru/doc/8740546",
-     "https://atvmedia.ru/news/social/79667",
-     "https://runews24.ru/stavropol/21/09/2026/benzin-na-stavropole-vernetsya-v-normu-k-nachalu-oktyabrya-gubernator-nazval-sroki"
+     "https://atvmedia.ru/news/social/79667"
     ],
-    "note": "05.10 ротация 79: КРИТИЧНО! Дефицит АИ-95, только ДТ 76р. Независимые 109-140р. Лимит 35л. Туристический кризис. 09.10 ротация: октябрьских данных не найдено. Губернатор (21.09) ожидал стабилизацию к началу октября, подтверждения нет."
+    "note": "17.11: лимиты на объём продажи сняты в конце октября; на отдельных АЗС сохраняются ограничения на отпуск в канистры, водители жалуются на качество бензина."
    },
    {
     "region": "Донецкая обл.",
@@ -2118,7 +2080,7 @@
     "lat": 46.35,
     "lon": 48.04,
     "level": "strained",
-    "updated": "2026-11-12T17:30:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Лукойл / Газпром нефть",
@@ -2132,9 +2094,11 @@
     "ai95_price_rub": 72.0,
     "diesel_price_rub": 78.0,
     "source_urls": [
+     "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5ldFloNURJWGJvWG1NZjNpNUY4OXJiX0ttZV82LXpDREZWY1hoaUx6bFE3WTlvSXBldi1XVThEMkxEWWpsdXpOZHVTTFNHMUw2Y0tMTw?oc=5",
+     "https://news.google.com/rss/articles/CBMizgFBVV95cUxNU1VEZDF0UUoxVVg3X0g2UHlQTHQ3dTVEMUhPeHJRMlMySVluX0o4YTlvQlFVNWstSGo2UjlkZGdFd3JpU3J4TE9WcnJKdGFJZE5KWW94eDctWm5EcUpwNE5IalN4TWJsWF96cWVBOFlNLXg5VkdsdmEwVk83T19Qa2tkdWktVXY2d2xKdmo0R3dtNTZNM2JpT2lOOC1WTVNUaUpPNHFPa2RLMTdRa0JrNEFDODNVejJGeDgwbGdJWWRjT2NYR3FIQnBtbG01UdIBzgFBVV95cUxNU1VEZDF0UUoxVVg3X0g2UHlQTHQ3dTVEMUhPeHJRMlMySVluX0o4YTlvQlFVNWstSGo2UjlkZGdFd3JpU3J4TE9WcnJKdGFJZE5KWW94eDctWm5EcUpwNE5IalN4TWJsWF96cWVBOFlNLXg5VkdsdmEwVk83T19Qa2tkdWktVXY2d2xKdmo0R3dtNTZNM2JpT2lOOC1WTVNUaUpPNHFPa2RLMTdRa0JrNEFDODNVejJGeDgwbGdJWWRjT2NYR3FIQnBtbG01UQ?oc=5",
      "https://www.kavkaz-uzel.eu/articles/428206"
     ],
-    "note": "12.11: очередей нет, лимитов нет, цены выше докризисных: АИ-95 ~72 р/л, ДТ <78 р/л. WebSearch 12.11."
+    "note": "14.11: водители вновь сообщили об отсутствии бензина на части АЗС Астрахани — новая волна ажиотажного спроса."
    },
    {
     "region": "Смоленская область",
@@ -2243,23 +2207,24 @@
     "lat": 53.2,
     "lon": 45.0,
     "level": "limited",
-    "updated": "2026-11-12T06:00:00Z",
+    "updated": "2026-11-17T17:28:08Z",
     "networks": [
      {
       "name": "Все АЗС",
       "status": "limited",
       "level": "limited",
-      "limit_l": 30,
-      "note": "09.11: лимит «Роснефти» 30 л в городе, 50 л на трассе (BBC)."
+      "limit_l": 50,
+      "note": "17.11: оперштаб области вернул лимиты — не более 50 л бензина на одно транспортное средство и не более 200 л дизеля. По словам губернатора, около 75% АЗС полностью обеспечены всеми видами топлива."
      }
     ],
     "queues_hours": 0.3,
     "ai95_price_rub": 64.0,
     "diesel_price_rub": 78.0,
     "source_urls": [
+     "https://www.penzainform.ru/news/social/2026/11/17/v_penzenskoj_oblasti_snova_vvodyat_ogranicheniya_na_prodazhu_topliva.html",
      "https://www.bbc.com/russian/articles/crd6d65ql8wwo"
     ],
-    "note": "09.11: «Роснефть» ввела лимиты на продажу топлива в области — 30 л в городе и 50 л на трассе; прежний региональный лимит 100 л больше не соответствует обстановке."
+    "note": "17.11: ограничения возвращены решением регионального оперштаба — 50 л бензина на машину, 200 л ДТ; топливо есть примерно на 75% АЗС. Предыдущие лимиты отменяли 28.10."
    },
    {
     "region": "Удмуртская республика",
@@ -2411,6 +2376,60 @@
      "https://www.kommersant.ru/doc/8862601"
     ],
     "note": "10.10 WebSearch: октябрьских данных не найдено. Статус чет-нечет не подтверждён. Лимит 30л по последним сообщениям."
+   },
+   {
+    "region": "Иркутская область (уточнение №2)",
+    "lat": 52.3,
+    "lon": 104.3,
+    "level": "limited",
+    "updated": "2026-11-12T17:30:00Z",
+    "networks": [
+     {
+      "name": "Иркутскнефть / Региональные",
+      "status": "limited",
+      "level": "limited",
+      "limit_l": 30,
+      "note": "25.09 ротация: Иркутск стабилизирован. Цены: АИ-92 68.0р, АИ-95 71.0р, ДТ 74.0р. Очереди небольшие. Поставки контролируются. WebSearch 25.09."
+     }
+    ],
+    "queues_hours": 0.2,
+    "ai95_price_rub": 71.0,
+    "diesel_price_rub": 74.0,
+    "source_urls": [
+     "https://www.petrolplus.ru/fuelindex/irkutskaya-oblast/",
+     "https://www.petrolplus.ru/fuelindex/irkutskaya-oblast/diesel/"
+    ],
+    "note": "Техническая запись-дубль (не связана ни с одной станцией в azs-stations). Актуальные данные — в записи «Иркутская область». Проверено WebSearch 12.11."
+   },
+   {
+    "region": "Краснодарский край (Черноморское побережье)",
+    "lat": 43.4,
+    "lon": 39.5,
+    "level": "severe",
+    "updated": "2026-11-05T17:30:00Z",
+    "networks": [
+     {
+      "name": "Лукойл",
+      "status": "limited",
+      "level": "severe",
+      "limit_l": 30,
+      "note": "05.10 WebSearch: Основной оператор Сочи/Анапы"
+     },
+     {
+      "name": "Независимые",
+      "status": "closed",
+      "level": "critical",
+      "limit_l": null,
+      "note": "05.10 WebSearch: Практически исчерпаны"
+     }
+    ],
+    "queues_hours": 1.0,
+    "ai95_price_rub": 73.92,
+    "diesel_price_rub": 77.04,
+    "source_urls": [
+     "https://www.avtovzglyad.ru/obshestvo/dorogi/73280-2026-07-09-estli-benzin-vkrasnodarskom-krae-segodnya-realnyie-tsenyi-ocheredi-nazapravkah-isituatsiya-nayuge-rossii/"
+    ],
+    "note": "05.10 WebSearch: SEVERE. Туристический сезон, очереди."
    },
    {
     "region": "Рязанская область (уточнение)",
@@ -37252,6 +37271,21 @@
     },
     {
      "date": "2026-11-16",
+     "time": "день",
+     "city": "Рыльск",
+     "region": "Курская область",
+     "lat": 51.5667,
+     "lon": 34.6833,
+     "type": "drone",
+     "count": "",
+     "target": "объект энергетики, пожарный автомобиль, магазин и неработающая АЗС",
+     "casualties": "",
+     "detail": "Губернатор Курской области Александр Хинштейн сообщил, что 16 ноября БПЛА атаковали Рыльск: удар пришёлся по пожарному автомобилю, магазину и неработающей АЗС, предварительно повреждён объект энергетики, шли восстановительные работы. Пострадавших в этот день не было. Днём ранее в городе с беспилотников сбрасывали взрывные устройства, тогда сгорели четырёхквартирный дом и административное здание.",
+     "source_url": "https://www.interfax.ru/russia/1129283",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-16",
      "time": "06:21",
      "city": "Керчь (Крымский мост)",
      "region": "Республика Крым",
@@ -37369,6 +37403,21 @@
    "strikes": [
     {
      "date": "2026-11-17",
+     "time": "утро",
+     "city": "Уфа",
+     "region": "Республика Башкортостан",
+     "lat": 54.7388,
+     "lon": 55.9721,
+     "type": "drone",
+     "count": "более 50 над промзонами Уфы и Салавата",
+     "target": "промышленная зона Уфы: нефтеперерабатывающие и нефтехимические предприятия",
+     "casualties": "",
+     "detail": "В ночь и утром 17 ноября отражена массированная атака БПЛА на промышленные зоны Уфы и Салавата. Госкомитет по ЧС Башкирии сообщил, что сбито более 50 беспилотников, все заводы работают в штатном режиме, критических повреждений нет. Беспилотная опасность объявлялась около 04:00 мск, ограничения в аэропорту Уфы действовали до 08:10 мск. Отдельно сообщалось о пожаре на нефтезаводе в Уфе после падения сбитого дрона; официального подтверждения повреждений оборудования нет.",
+     "source_url": "https://www.interfax.ru/russia/1129456",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-11-17",
      "time": "05:48",
      "city": "Салават",
      "region": "Республика Башкортостан",
@@ -37418,6 +37467,126 @@
     {
      "date": "2026-11-17",
      "time": "ночь",
+     "city": "Ленино",
+     "region": "Республика Крым",
+     "lat": 45.2975,
+     "lon": 35.7742,
+     "type": "drone",
+     "count": "",
+     "target": "населённые пункты Ленинского района на востоке Крыма (поражённый объект не уточнён)",
+     "casualties": "2 погибших",
+     "detail": "Глава Крыма Сергей Аксёнов сообщил, что в результате атаки БПЛА в ночь на 17 ноября в Ленинском районе на востоке полуострова погибли два человека. Характер повреждений и поражённый объект не уточняются. В ту же ночь была повторно атакована переправа через Керченский пролив.",
+     "source_url": "https://www.interfax.ru/russia/1129462",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "ночь",
+     "city": "Брянск",
+     "region": "Брянская область",
+     "lat": 53.2434,
+     "lon": 34.3639,
+     "type": "drone",
+     "count": "",
+     "target": "городская застройка: автомобили и остекление многоквартирных домов (площадь Партизан, улицы Ромашина, Октябрьская, Спартаковская, Любезного, 2-я Мичурина, проезд Кирпичный)",
+     "casualties": "",
+     "detail": "После массированной ночной атаки БПЛА в Брянске повреждены три гражданских автомобиля и стеклопакеты в многоквартирных домах в нескольких районах города. Губернатор Егор Ковальчук сообщил, что пострадавших среди жителей нет.",
+     "source_url": "https://www.interfax.ru/russia/1129483",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "ночь",
+     "city": "Большое Полпино (Брянский район)",
+     "region": "Брянская область",
+     "lat": 53.2667,
+     "lon": 34.4667,
+     "type": "drone",
+     "count": "",
+     "target": "жилой сектор посёлка: удар БПЛА",
+     "casualties": "1 раненая (женщина 69 лет)",
+     "detail": "В результате удара БПЛА по посёлку Большое Полпино под Брянском травмы получила 69-летняя местная жительница, её доставили в больницу. Информация подтверждена губернатором Брянской области Егором Ковальчуком.",
+     "source_url": "https://www.interfax.ru/russia/1129483",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "ночь",
+     "city": "Коммуна (Навлинский район)",
+     "region": "Брянская область",
+     "lat": 52.845,
+     "lon": 34.452,
+     "type": "drone",
+     "count": "",
+     "target": "автомобиль на дороге у посёлка Коммуна",
+     "casualties": "1 раненый (водитель)",
+     "detail": "У посёлка Коммуна Навлинского района БПЛА атаковал автомобиль, ранение получил водитель. Данные приводит губернатор Брянской области Егор Ковальчук.",
+     "source_url": "https://www.interfax.ru/russia/1129483",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "",
+     "city": "Синицкое (Клетнянский район)",
+     "region": "Брянская область",
+     "lat": 53.41,
+     "lon": 33.18,
+     "type": "drone",
+     "count": "",
+     "target": "дорога у деревни Синицкое: подрыв на мине, сброшенной с БПЛА",
+     "casualties": "1 раненый (мужчина 63 лет)",
+     "detail": "На дороге у деревни Синицкое Клетнянского района 63-летний мужчина подорвался на мине, которую, по словам губернатора Егора Ковальчука, сбросили с беспилотника. Пострадавшего с тяжёлыми травмами доставили в больницу.",
+     "source_url": "https://t.me/astrapress/131387",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "ночь",
+     "city": "Новгородская область (населённый пункт не уточнён)",
+     "region": "Новгородская область",
+     "lat": 58.35,
+     "lon": 32.2,
+     "type": "drone",
+     "count": "",
+     "target": "жилой дом: повреждение при падении осколков БПЛА",
+     "casualties": "",
+     "detail": "В Новгородской области отражена ночная атака беспилотников. По словам губернатора Александра Дронова, при падении осколков БПЛА повреждён жилой дом, угрозы жизни людей нет, жильцов разместили в пункте временного пребывания, им обещана материальная помощь. Населённый пункт не называется.",
+     "source_url": "https://www.interfax.ru/russia/1129467",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "день",
+     "city": "Новая Таволжанка (Шебекинский округ)",
+     "region": "Белгородская область",
+     "lat": 50.372,
+     "lon": 36.868,
+     "type": "drone",
+     "count": "",
+     "target": "легковой автомобиль (удар FPV-дрона)",
+     "casualties": "2 раненых",
+     "detail": "В селе Новая Таволжанка Шебекинского округа FPV-дрон ударил по машине. У женщины проникающие ранения живота и груди, она в тяжёлом состоянии; мужчина получил осколочные ранения головы, тела и конечностей. Данные оперштаба Белгородской области.",
+     "source_url": "https://t.me/astrapress/131387",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "день",
+     "city": "Вознесеновка (Шебекинский округ)",
+     "region": "Белгородская область",
+     "lat": 50.345,
+     "lon": 36.94,
+     "type": "drone",
+     "count": "",
+     "target": "сельская территория: детонация дрона",
+     "casualties": "1 раненый",
+     "detail": "В селе Вознесеновка Шебекинского округа при детонации дрона ранение в ноги получил мужчина. В тот же день в Шебекинском, Валуйском, Белгородском, Ракитянском, Грайворонском и Краснояружском округах повреждены дома, машины и грузовики; в селе Гора-Подол сгорел частный дом.",
+     "source_url": "https://t.me/astrapress/131387",
+     "confidence": "confirmed"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "ночь",
      "city": "Керчь (Крымский мост)",
      "region": "Республика Крым",
      "lat": 45.309,
@@ -37445,6 +37614,21 @@
      "title": "Повторный удар по мосту через Миус на трассе Р-280",
      "detail": "По данным мониторингового канала, мост через Миус на трассе Р-280 поражён повторно, в тот же день, что и Крымский мост. Ранее мост был повреждён 8 ноября. Официальных подтверждений нет.",
      "source_url": "https://t.me/exilenova_plus/34777",
+     "confidence": "reported"
+    },
+    {
+     "date": "2026-11-17",
+     "time": "ночь",
+     "city": "Москва",
+     "region": "Москва",
+     "lat": 55.7558,
+     "lon": 37.6173,
+     "type": "drone",
+     "count": "55",
+     "target": "массированная атака БПЛА на Москву и Московскую область, работа аэропортов приостановлена",
+     "casualties": "",
+     "detail": "Мэр Москвы Сергей Собянин сообщил об уничтожении на подлёте к городу 55 беспилотников за ночь и утро 17 ноября. В момент сообщения не принимали и не отправляли самолёты Внуково, Домодедово и Жуковский. Данных о повреждениях городских объектов и пострадавших не приводилось, на местах падения обломков работали экстренные службы.",
+     "source_url": "https://www.interfax.ru/moscow/1129426",
      "confidence": "reported"
     }
    ],
