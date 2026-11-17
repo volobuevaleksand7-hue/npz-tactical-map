@@ -219,6 +219,13 @@ def select_strikes(date):
 
 # ───────────────────────────── тексты ─────────────────────────────
 
+try:
+    from urgent_gate import risky as _risky   # громкое утверждение без подтверждения (17.11.2026)
+except Exception:  # noqa: BLE001
+    def _risky(s):
+        return False
+
+
 def object_name(s, refs):
     text = (str(s.get("target", "")) + " " + str(s.get("title", ""))).lower()
     for rx, r in B.refinery_matchers(refs):
@@ -226,7 +233,7 @@ def object_name(s, refs):
             return r["name"]
     t = str(s.get("target") or "").strip()
     t = re.sub(r"\s*\((?:линейная[^)]*)\)", "", t, flags=re.I)  # «ЛПДС (линейная …) «Самара»» -> «ЛПДС «Самара»»
-    t = re.split(r",|;|\s+[—–]\s+", t)[0].strip()
+    t = re.split(r",|;|:\s|\s+[—–]\s+", t)[0].strip()
     t = re.sub(r"нефтеперерабатывающий завод", "НПЗ", t, flags=re.I)
     t = re.sub(r"\s*\([^)]*\)?\s*$", "", t)   # хвостовое пояснение «(ЦОД с суперкомпьютерами)» — в названии лишнее
     t = t[:1].upper() + t[1:]
@@ -723,7 +730,7 @@ def narration(date, sel, day, refs, build=None, broll=()):
         lead = dative_object(object_name(sel[0], refs)) if sel else "объекту"
         # хук: без даты (она на постере) и без «по данным открытых источников» — атрибуция и «ОЦЕНКА» теперь
         # в кадре на каждой сцене (строка контекста), а длинное интро держало общий план ~5 с
-        unconf = any(str(x.get("confidence")).lower() == "rumored" for x in sel)
+        unconf = any(str(x.get("confidence")).lower() == "rumored" or _risky(x) for x in sel)
         lines = [("intro", f"Срочно. По неподтверждённым данным, удар по {lead}." if unconf else f"Срочно. Удар по {lead}.")]
     else:
         # хук (10.10.2026): сразу цифра, без «Четвёртое октября.» — дата и так на постере и плашке
@@ -1272,7 +1279,10 @@ def tg_caption(date, sel, day, refs, clips, broll):
     n = len(day)
     n_fuel = sum(1 for s in day if s["cls"] == 2)
     tail = f", из них {n_fuel} — по топливу и энергетике" if n_fuel else ""
-    out = ([f"⚡ <b>Срочно: удар {span_rus(date)}</b>", ""] if URGENT else
+    unconf_tg = any(str(x.get("confidence")).lower() == "rumored" or _risky(x) for x in sel)
+    out = ([f"⚡ <b>Срочно{': сообщается об ударе' if unconf_tg else ': удар'} {span_rus(date)}</b>"
+            + ("\n<i>Не подтверждено: данные из открытых источников, официальных подтверждений нет.</i>" if unconf_tg else ""), ""]
+           if URGENT else
            [f"🎬 <b>{'Вечерняя сводка' if EVENING else 'Удары за сутки'} на {span_rus(date)}</b>: {n}{tail}.", ""])
     for s in sel:
         k = len(s.get("_group", [s]))

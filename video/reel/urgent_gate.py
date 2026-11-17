@@ -41,6 +41,25 @@ def log(*a):
     print("urgent_gate:", *a, flush=True)
 
 
+# 17.11.2026 (владелец: «ты текст хоть как-то модерируешь?»): «обрушился пролёт Крымского моста» ушёл в эфир
+# по одному каналу с confidence=reported. Громкое утверждение с одним источником и без официального
+# подтверждения — не «reported», а слух: нужен второй источник или кнопка владельца.
+RISKY_RX = re.compile(
+    r"обрушил|обрушен|рухнул|разрушен\w*\s+(?:полностью|мост|пролёт)|полностью\s+(?:уничтожен|разрушен)|"
+    r"уничтожен\w*\s+(?:полностью|мост|завод)|масштабн\w+\s+разрушен|погибл\w+\s+(?:более\s+)?\d{2,}|"
+    r"АЭС|ядерн|радиац|захват\w*\s+(?:города|посёлка)", re.I)
+NOCONF_RX = re.compile(r"официальн\w+\s+подтвержден\w+[^.]{0,60}не\s+(?:поступал|получен)|не\s+подтвержд", re.I)
+
+
+def risky(s):
+    """Громкое утверждение без подтверждения: confirmed — не трогаем; иначе RISKY_RX в тексте записи
+    или явная оговорка «официального подтверждения не поступало»."""
+    if str(s.get("confidence", "reported")).lower() == "confirmed":
+        return False
+    t = " ".join(str(s.get(k) or "") for k in ("title", "target", "detail"))
+    return bool(RISKY_RX.search(t) or NOCONF_RX.search(t))
+
+
 def strike_id(raw):
     """= strike_pipeline._strike_id / build_reel.strike_id."""
     import hashlib
@@ -156,6 +175,8 @@ def plan(rows, approved=(), now=None, deep=True):
         sid = strike_id(s)
         if sid in done:
             continue
+        if risky(s) and str(s.get("confidence", "reported")).lower() != "rumored":
+            s = dict(s, confidence="rumored", _risky=True)   # дальше — как слух: ≥2 источника или кнопка владельца
         if str(s.get("confidence", "reported")).lower() == "rumored" and sid not in approved:
             n = len(sources(s, deep))
             if n < 2:
