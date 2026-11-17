@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-17T08:05Z",
+ "generated_at": "2026-11-17T08:20Z",
  "data_mode": "СЛУХ / НЕПРОВЕРЕНО (вариант B)",
  "disclaimer": "Авто-детектор кандидатов в удары из ленты radar-map.ru. НЕ боевые данные, НЕ публикуется автоматически. Только для ручного/Hermes-подтверждения перед переносом в strikes.json.",
  "candidates": [
@@ -3205,11 +3205,18 @@
    "detail": "[Newsader] КРЫМСКИЙ МОСТ РУХНУЛ: ФЛАМИНГО ДОБИЛА АРКУ!",
    "source_url": "https://www.youtube.com/watch?v=dqbXedVVB3k",
    "confidence": "rumor",
-   "status": "candidate",
+   "status": "expired",
    "msg_id": "dqbXedVVB3k",
    "source_label": "Newsader",
    "source_id": "newsader",
-   "geocoded": false
+   "geocoded": false,
+   "jev": {
+    "strike": false,
+    "confidence": 0.96,
+    "by": "jev",
+    "ts": "2026-11-17T08:20Z"
+   },
+   "expired_reason": "jev: не сообщение об ударе по топливному объекту (conf 0.96, jev)"
   }
  ]
 }
