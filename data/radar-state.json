@@ -250,8 +250,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794885410,
-      "source_text": "17.11.2026 06:16 МСК\nКерченский залив Крымский Мост Таманский полуостров Тревога по БПЛА сохраняется Ещё фиксации БПЛА в Азовском море."
+      "last_event_ts": 1794885839,
+      "source_text": "17.11.2026 06:23 МСК\nСтаница Курчанская и близлежащие, тревога по БпЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -744,8 +744,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794885548,
-      "source_text": "17.11.2026 06:19 МСК\nБлаговещенский район Республика Башкортостан Ещё сбитие БПЛА"
+      "last_event_ts": 1794885748,
+      "source_text": "17.11.2026 06:22 МСК\nБлаговещенский район Республика Башкортостан Ещё сбитие БПЛА"
     },
     "Челябинская область": {
       "bpla": false,
@@ -3827,6 +3827,28 @@
       "source_text": "16.11.2026 21:55 МСК\nСлавяносербск, Старобельск, Новоайдар и близлежащие тревога по БПЛА Возможно повернут в направлении Счастье ЛНР"
     },
     {
+      "key": "курчанская|краснодарский край",
+      "name": "Курчанская",
+      "lat": 45.219315,
+      "lon": 37.568371,
+      "region": "Краснодарский край",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1794885839,
+      "source_text": "17.11.2026 06:23 МСК\nСтаница Курчанская и близлежащие, тревога по БпЛА"
+    },
+    {
       "key": "новокуйбышевск|самарская область",
       "name": "Новокуйбышевск",
       "lat": 53.09709,
@@ -5052,7 +5074,7 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
+      "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1794882515,
@@ -9347,8 +9369,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794885548,
-      "source_text": "17.11.2026 06:19 МСК\nБлаговещенский район Республика Башкортостан Ещё сбитие БПЛА"
+      "last_event_ts": 1794885748,
+      "source_text": "17.11.2026 06:22 МСК\nБлаговещенский район Республика Башкортостан Ещё сбитие БПЛА"
     },
     "RUS.68.14_1": {
       "gid_2": "RUS.68.14_1",
@@ -9435,8 +9457,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1794885351,
-      "source_text": "17.11.2026 06:15 МСК\nУфимский район Республика Башкортостан Фиксация БПЛА"
+      "last_event_ts": 1794885712,
+      "source_text": "17.11.2026 06:21 МСК\nУфимский район Республика Башкортостан Фиксация БПЛА"
     },
     "RUS.54.14_1": {
       "gid_2": "RUS.54.14_1",
@@ -9596,6 +9618,38 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 109128,
+      "text": "Благовещенский район\nРеспублика Башкортостан\nМеры безопасности!",
+      "ts": 1794885877,
+      "time_label": "17.11.2026 06:24 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 305121,
+      "text": "Станица Курчанская\nи близлежащие, тревога по БпЛА",
+      "ts": 1794885839,
+      "time_label": "17.11.2026 06:23 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 109127,
+      "text": "Благовещенский район\nРеспублика Башкортостан\nЕщё сбитие БПЛА",
+      "ts": 1794885748,
+      "time_label": "17.11.2026 06:22 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 109126,
+      "text": "Уфимский район\nРеспублика Башкортостан\nФиксация БПЛА",
+      "ts": 1794885712,
+      "time_label": "17.11.2026 06:21 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
     {
       "msg_id": 109125,
       "text": "Благовещенский район\nРеспублика Башкортостан\nЕщё сбитие БПЛА",
@@ -10203,38 +10257,6 @@
       "time_label": "17.11.2026 05:10 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 305098,
-      "text": "Унеча в направлении Жуковки-Дятьково продолжаются фиксации БпЛА",
-      "ts": 1794881393,
-      "time_label": "17.11.2026 05:09 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 109081,
-      "text": "Салават\nРеспублика Башкортостан\nРабота ПВО по БПЛА",
-      "ts": 1794881391,
-      "time_label": "17.11.2026 05:09 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 95599,
-      "text": "Арзамасский район, Ардатовский район, Нижегородская область - опасность по группе БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794881341,
-      "time_label": "17.11.2026 05:09 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 95598,
-      "text": "Челябинская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794881226,
-      "time_label": "17.11.2026 05:07 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -10244,14 +10266,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794885548,
-  "last_event_at": "2026-11-17T03:19:08Z",
-  "fetched_at": "2026-11-17T03:21:31.553061Z",
-  "poll_interval_sec": 50,
+  "timestamp": 1794885877,
+  "last_event_at": "2026-11-17T03:24:37Z",
+  "fetched_at": "2026-11-17T03:30:25.071136Z",
+  "poll_interval_sec": 40,
   "meta": {
-    "generated_at": "2026-11-17T03:21:31.553061Z",
-    "source_age_seconds": 143,
-    "city_count": 201,
+    "generated_at": "2026-11-17T03:30:25.071136Z",
+    "source_age_seconds": 348,
+    "city_count": 202,
     "region_count": 40,
     "feed_count": 80
   }
