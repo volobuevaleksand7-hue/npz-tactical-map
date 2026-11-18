@@ -52,16 +52,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1795009980,
-      "source_text": "18.11.2026 16:53 МСК\nОт Новониколаевка в направлении Каланчак БПЛА Батон (аналог наведения БПЛА Хорнет)"
+      "fill": "#dc2626",
+      "last_event_ts": 1795011011,
+      "source_text": "18.11.2026 17:10 МСК\nМелитополь и близлежащие Ракетная опасность Запорожская область РФ\n\n18.11.2026 16:53 МСК\nОт Новониколаевка в направлении Каланчак БПЛА Батон (аналог наведения БПЛА Хорнет)"
     },
     "Ростовская область": {
       "bpla": false,
@@ -109,16 +109,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1795004061,
-      "source_text": "18.11.2026 15:14 МСК\nХерсонская область РФ авиационная ракетная бомбовая опасность От Вознесенск на Николаев самолёты противника\n\n18.11.2026 13:00 МСК\nТрасса Чаплинка -Армянск - Красноперекопск и близлежащие населенные пункты Опасность по БПЛА Херсонская область РФ/ Республика Крым"
+      "fill": "#d8c06a",
+      "last_event_ts": 1794996000,
+      "source_text": "18.11.2026 13:00 МСК\nТрасса Чаплинка -Армянск - Красноперекопск и близлежащие населенные пункты Опасность по БПЛА Херсонская область РФ/ Республика Крым"
     },
     "Ставропольский край": {
       "bpla": false,
@@ -507,6 +507,28 @@
       "source_text": "18.11.2026 16:58 МСК\nЕйск и близлежащие Ракетная опасность Краснодарский край"
     },
     {
+      "key": "мелитополь|запорожская область",
+      "name": "Мелитополь",
+      "lat": 46.85754363636364,
+      "lon": 35.35915090909091,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1795011011,
+      "source_text": "18.11.2026 17:10 МСК\nМелитополь и близлежащие Ракетная опасность Запорожская область РФ"
+    },
+    {
       "key": "азовского моря|краснодарский край",
       "name": "Азовского моря",
       "lat": 46.7282552,
@@ -797,6 +819,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 305540,
+      "text": "Мелитополь и близлежащие\nРакетная опасность\nЗапорожская область РФ",
+      "ts": 1795011011,
+      "time_label": "18.11.2026 17:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305539,
+      "text": "От Бердянск в направлении Керчь и близлежащие ещё ракета",
+      "ts": 1795011003,
+      "time_label": "18.11.2026 17:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 305538,
       "text": "Темрюкский район, Приморско-Ахтарск и близлежащие ракетная тревога повторно с Азовского моря",
@@ -1420,22 +1458,6 @@
       "time_label": "18.11.2026 12:28 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305481,
-      "text": "Краснодарский край\nОтбой опасности БПЛА",
-      "ts": 1794994073,
-      "time_label": "18.11.2026 12:27 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 109245,
-      "text": "Армавир\nКраснодарский край\nФиксации БПЛА",
-      "ts": 1794993782,
-      "time_label": "18.11.2026 12:23 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1445,14 +1467,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795010952,
-  "last_event_at": "2026-11-18T14:09:12Z",
-  "fetched_at": "2026-11-18T14:10:03.495154Z",
+  "timestamp": 1795011011,
+  "last_event_at": "2026-11-18T14:10:11Z",
+  "fetched_at": "2026-11-18T14:20:04.021561Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-18T14:10:03.495154Z",
-    "source_age_seconds": 51,
-    "city_count": 22,
+    "generated_at": "2026-11-18T14:20:04.021561Z",
+    "source_age_seconds": 593,
+    "city_count": 23,
     "region_count": 10,
     "feed_count": 80
   }
