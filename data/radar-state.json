@@ -6,6 +6,25 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Адыгея": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1794962051,
+      "source_text": "18.11.2026 03:34 МСК\nКраснодарский край Республика Адыгея Опасность по БПЛА Карта опасностей - radar-vrv.ru"
+    },
     "Брянская область": {
       "bpla": false,
       "bplaDim": false,
@@ -117,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1794958123,
-      "source_text": "18.11.2026 02:28 МСК\nКерченский полуостров, Тамань, опасность по БПЛА"
+      "last_event_ts": 1794962051,
+      "source_text": "18.11.2026 03:34 МСК\nКраснодарский край Республика Адыгея Опасность по БПЛА Карта опасностей - radar-vrv.ru"
     },
     "Калужская область": {
       "bpla": false,
@@ -877,6 +896,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 109194,
+      "text": "Краснодарский край\nРеспублика Адыгея\nОпасность по БПЛА\nКарта опасностей -\nradar-vrv.ru",
+      "ts": 1794962051,
+      "time_label": "18.11.2026 03:34 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
       "msg_id": 305360,
       "text": "Новоайдар и близлежащие\nТревога по БПЛА\nИ далее в направлении\nСчастье\nЛНР",
       "ts": 1794959521,
@@ -1507,14 +1534,6 @@
       "time_label": "17.11.2026 20:59 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305302,
-      "text": "Керчь\nКрымский мост и близлежащие\nТревога по реактивным БПЛА, возможно ракета\nРеспублика Крым",
-      "ts": 1794938267,
-      "time_label": "17.11.2026 20:57 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1524,15 +1543,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794959521,
-  "last_event_at": "2026-11-17T23:52:01Z",
-  "fetched_at": "2026-11-18T00:30:03.130809Z",
+  "timestamp": 1794962051,
+  "last_event_at": "2026-11-18T00:34:11Z",
+  "fetched_at": "2026-11-18T00:40:02.833464Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-18T00:30:03.130809Z",
-    "source_age_seconds": 2282,
+    "generated_at": "2026-11-18T00:40:02.833464Z",
+    "source_age_seconds": 351,
     "city_count": 25,
-    "region_count": 13,
+    "region_count": 14,
     "feed_count": 80
   }
 }
