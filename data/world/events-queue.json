@@ -451,14 +451,14 @@
    "found_at": "2026-11-04T11:25:26Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "ok",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "needs_source",
-   "reject_reason": "нужен второй независимый издатель"
+   "verdict": "rejected",
+   "reject_reason": "schema"
   },
   {
    "id": "2026-11-02-hormuz-irgc-eleven-tankers-fire-claim",
@@ -1257,5 +1257,5 @@
    "reject_reason": "duplicate:2026-11-15-sudan-fuel-crisis-queues"
   }
  ],
- "validated_at": "2026-11-17T19:36:12Z"
+ "validated_at": "2026-11-18T03:33:20Z"
 }
