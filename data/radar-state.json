@@ -6,44 +6,6 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
-    "Брянская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794949662,
-      "source_text": "18.11.2026 00:07 МСК\nБрянская область, очередная группа БПЛА в направлении Калужской области. Тревога сохраняется"
-    },
-    "Курская область": {
-      "bpla": false,
-      "bplaDim": false,
-      "attention": false,
-      "danger": false,
-      "uab": false,
-      "uabDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
-      "bplaLaunchAnim": false,
-      "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1794948083,
-      "source_text": "17.11.2026 23:41 МСК\n17/11/2026 23:40 МСК. Опасность по БПЛА сохраняется: 🔻 Брянская область; 🔻 Смоленская область; 🔻 Калужская область; 🔻 Курская область; 🔻 Орловская область; 🔻 Ростовская область. 📡 Локатор России - @locatorru"
-    },
     "Орловская область": {
       "bpla": false,
       "bplaDim": false,
@@ -138,6 +100,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1794988262,
       "source_text": "18.11.2026 10:51 МСК\nГеническ и близлежащие Опасность по БПЛА на электротяге Херсонская область РФ"
+    },
+    "Ставропольский край": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": true,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#e8e4c4",
+      "last_event_ts": 1794994425,
+      "source_text": "18.11.2026 12:33 МСК\nСтавропольский край внимание по бпла"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -798,6 +779,22 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 305484,
+      "text": "Курская область\nБрянская область\nОтбой опасности БПЛА",
+      "ts": 1794994697,
+      "time_label": "18.11.2026 12:38 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305483,
+      "text": "Ставропольский край\nвнимание по бпла",
+      "ts": 1794994425,
+      "time_label": "18.11.2026 12:33 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 305482,
       "text": "Ставропольский край\nРеспублика Адыгея\nотбой по бпла",
       "ts": 1794994107,
@@ -1420,22 +1417,6 @@
       "time_label": "18.11.2026 08:20 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305431,
-      "text": "Участок трассы Чкалово- Новотроицкое - Новоалексеевка\nОсобое внимание по БПЛА с севера\nХерсонская  область РФ",
-      "ts": 1794979164,
-      "time_label": "18.11.2026 08:19 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305430,
-      "text": "Новотроицкое , Геническ Херсонской области РФ и близлежащие\nОпасность по БПЛА",
-      "ts": 1794979034,
-      "time_label": "18.11.2026 08:17 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1445,15 +1426,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1794994107,
-  "last_event_at": "2026-11-18T09:28:27Z",
-  "fetched_at": "2026-11-18T09:30:03.719847Z",
+  "timestamp": 1794994697,
+  "last_event_at": "2026-11-18T09:38:17Z",
+  "fetched_at": "2026-11-18T09:40:02.893952Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-18T09:30:03.719847Z",
-    "source_age_seconds": 96,
+    "generated_at": "2026-11-18T09:40:02.893952Z",
+    "source_age_seconds": 105,
     "city_count": 23,
-    "region_count": 10,
+    "region_count": 9,
     "feed_count": 80
   }
 }
