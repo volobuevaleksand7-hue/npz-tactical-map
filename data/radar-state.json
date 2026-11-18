@@ -98,8 +98,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795032529,
-      "source_text": "18.11.2026 23:08 МСК\nДмитровский район Орловская область Фиксация БПЛА"
+      "last_event_ts": 1795033140,
+      "source_text": "18.11.2026 23:19 МСК\nДмитровск и близлежащие, Орловская область - пролёт БПЛА в сторону примерно Орёл. 📡 Локатор России - @locatorru"
     },
     "Краснодарский край": {
       "bpla": false,
@@ -212,8 +212,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795031982,
-      "source_text": "18.11.2026 22:59 МСК\nЧертковский район Ростовская область Фиксации БПЛА"
+      "last_event_ts": 1795032762,
+      "source_text": "18.11.2026 23:12 МСК\nСевер Ростовской области Тревога по БПЛА сохраняется"
     },
     "Белгородская область": {
       "bpla": false,
@@ -364,8 +364,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#e8e4c4",
-      "last_event_ts": 1795024995,
-      "source_text": "18.11.2026 21:03 МСК\nСаратовская область Тамбовская область Пензенская область внимание по бпла"
+      "last_event_ts": 1795032690,
+      "source_text": "18.11.2026 23:11 МСК\nСаратовская область Пензенская область внимание по бпла"
     },
     "Тульская область": {
       "bpla": false,
@@ -1330,6 +1330,50 @@
       "fill": "#ea580c",
       "last_event_ts": 1795031627,
       "source_text": "18.11.2026 22:53 МСК\nИрмино и близлежащие Опасность по БПЛА ЛНР"
+    },
+    {
+      "key": "север|ростовская область",
+      "name": "Север",
+      "lat": 48.9236255,
+      "lon": 40.4006446,
+      "region": "Ростовская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795032762,
+      "source_text": "18.11.2026 23:12 МСК\nСевер Ростовской области Тревога по БПЛА сохраняется"
+    },
+    {
+      "key": "дмитровск|орловская область",
+      "name": "Дмитровск",
+      "lat": 52.509418,
+      "lon": 35.145725,
+      "region": "Орловская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795033140,
+      "source_text": "18.11.2026 23:19 МСК\nДмитровск и близлежащие, Орловская область - пролёт БПЛА в сторону примерно Орёл. 📡 Локатор России - @locatorru"
     }
   ],
   "districts": {
@@ -1479,8 +1523,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -1766,6 +1810,30 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 95734,
+      "text": "Дмитровск и близлежащие, Орловская область - пролёт БПЛА в сторону примерно Орёл.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1795033140,
+      "time_label": "18.11.2026 23:19 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
+      "msg_id": 305629,
+      "text": "Север Ростовской области\nТревога по БПЛА сохраняется",
+      "ts": 1795032762,
+      "time_label": "18.11.2026 23:12 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305628,
+      "text": "Саратовская область\nПензенская область\nвнимание по бпла",
+      "ts": 1795032690,
+      "time_label": "18.11.2026 23:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 109281,
       "text": "Дмитровский район\nОрловская область\nФиксация БПЛА",
@@ -2381,30 +2449,6 @@
       "time_label": "18.11.2026 21:03 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305574,
-      "text": "Саратовская область\nТамбовская область\nПензенская область\nвнимание по бпла",
-      "ts": 1795024995,
-      "time_label": "18.11.2026 21:03 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305573,
-      "text": "Лискинский\nОстрогожский районы\nВоронежская область\nТревога по БПЛА",
-      "ts": 1795024950,
-      "time_label": "18.11.2026 21:02 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 109266,
-      "text": "Воронежская область\nОпасность по БПЛА",
-      "ts": 1795024913,
-      "time_label": "18.11.2026 21:01 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -2414,14 +2458,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795032529,
-  "last_event_at": "2026-11-18T20:08:49Z",
-  "fetched_at": "2026-11-18T20:10:04.853612Z",
+  "timestamp": 1795033140,
+  "last_event_at": "2026-11-18T20:19:00Z",
+  "fetched_at": "2026-11-18T20:20:03.882416Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-18T20:10:04.853612Z",
-    "source_age_seconds": 75,
-    "city_count": 42,
+    "generated_at": "2026-11-18T20:20:03.882416Z",
+    "source_age_seconds": 63,
+    "city_count": 44,
     "region_count": 21,
     "feed_count": 80
   }
