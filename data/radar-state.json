@@ -41,8 +41,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795002751,
-      "source_text": "18.11.2026 14:52 МСК\nАнапа и близлежащие населенные пункты с Чёрного моря тревога по БПЛА"
+      "last_event_ts": 1795003686,
+      "source_text": "18.11.2026 15:08 МСК\nАнапский район Краснодарский край Работа ПВО по БПЛА"
     },
     "Запорожская область": {
       "bpla": false,
@@ -100,6 +100,25 @@
       "fill": "#d8c06a",
       "last_event_ts": 1794996000,
       "source_text": "18.11.2026 13:00 МСК\nТрасса Чаплинка -Армянск - Красноперекопск и близлежащие населенные пункты Опасность по БПЛА Херсонская область РФ/ Республика Крым"
+    },
+    "Луганская Народная Республика": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795003567,
+      "source_text": "18.11.2026 15:06 МСК\nБелое в направлении Луганск фиксация БПЛА Хорнет"
     },
     "Севастополь": {
       "bpla": false,
@@ -275,6 +294,28 @@
       "fill": "#ea580c",
       "last_event_ts": 1795001889,
       "source_text": "18.11.2026 14:38 МСК\nЭкстренная информация РСЧС (Краснодарский край): БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований: г. Геленджик, г. Анапа, г. Новороссийск, Абинский, Крымский, Темрюкский районы.18.11.2026"
+    },
+    {
+      "key": "белое|луганская народная республика",
+      "name": "Белое",
+      "lat": 48.49523,
+      "lon": 39.05051,
+      "region": "Луганская Народная Республика",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795003567,
+      "source_text": "18.11.2026 15:06 МСК\nБелое в направлении Луганск фиксация БПЛА Хорнет"
     }
   ],
   "districts": {
@@ -326,9 +367,9 @@
       "gid_2": "RUS.34.3_1",
       "name_ru": "Анапский район",
       "region_ru": "Краснодарский край",
-      "bpla": false,
+      "bpla": true,
       "bplaDim": false,
-      "danger": true,
+      "danger": false,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -336,13 +377,13 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": false,
-      "explosionOnRegion": false,
+      "pvo": true,
+      "explosionOnRegion": true,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1795002751,
-      "source_text": "18.11.2026 14:52 МСК\nАнапа и близлежащие населенные пункты с Чёрного моря тревога по БПЛА"
+      "last_event_ts": 1795003686,
+      "source_text": "18.11.2026 15:08 МСК\nАнапский район Краснодарский край Работа ПВО по БПЛА"
     },
     "RUS.34.13_1": {
       "gid_2": "RUS.34.13_1",
@@ -413,6 +454,30 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 109252,
+      "text": "Анапский район\nКраснодарский край\nРабота ПВО по БПЛА",
+      "ts": 1795003686,
+      "time_label": "18.11.2026 15:08 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 109251,
+      "text": "Анапский район\nКраснодарский край\nМеры безопасности",
+      "ts": 1795003638,
+      "time_label": "18.11.2026 15:07 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 305500,
+      "text": "Белое в направлении Луганск фиксация БПЛА Хорнет",
+      "ts": 1795003567,
+      "time_label": "18.11.2026 15:06 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 305499,
       "text": "Каховка артобстрел\nХерсонская область РФ",
@@ -1028,30 +1093,6 @@
       "time_label": "18.11.2026 09:17 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305447,
-      "text": "ЛДНР Запорожская область РФ\nАвиационно ракетно бомбовая опасность",
-      "ts": 1794982333,
-      "time_label": "18.11.2026 09:12 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305446,
-      "text": "Краснодарский край\nАвиационно ракетно бомбовая опасность ( рсчс)",
-      "ts": 1794982259,
-      "time_label": "18.11.2026 09:10 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 95700,
-      "text": "Краснодарский край, Республика Адыгея, Ставропольский край, Ростовская область - опасность по БПЛА сохраняется.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1794982061,
-      "time_label": "18.11.2026 09:07 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -1061,15 +1102,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795002819,
-  "last_event_at": "2026-11-18T11:53:39Z",
-  "fetched_at": "2026-11-18T12:00:04.207044Z",
+  "timestamp": 1795003686,
+  "last_event_at": "2026-11-18T12:08:06Z",
+  "fetched_at": "2026-11-18T12:10:02.883935Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-18T12:00:04.207044Z",
-    "source_age_seconds": 385,
-    "city_count": 7,
-    "region_count": 6,
+    "generated_at": "2026-11-18T12:10:02.883935Z",
+    "source_age_seconds": 116,
+    "city_count": 8,
+    "region_count": 7,
     "feed_count": 80
   }
 }
