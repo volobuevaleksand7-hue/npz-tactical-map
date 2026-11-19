@@ -14,16 +14,16 @@
       "uab": false,
       "uabDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1795070649,
-      "source_text": "19.11.2026 09:44 МСК\nОрловская область Опасность по БПЛА от Курской области"
+      "fill": "#dc2626",
+      "last_event_ts": 1795071481,
+      "source_text": "19.11.2026 09:58 МСК\nКурская область и близлежащие Авиационно ракетно бомбовая опасность\n\n19.11.2026 09:44 МСК\nОрловская область Опасность по БПЛА от Курской области"
     },
     "Орловская область": {
       "bpla": false,
@@ -117,8 +117,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795070400,
-      "source_text": "19.11.2026 09:40 МСК\nТарханкут и близлежащие Опасность по БПЛА Республика Крым"
+      "last_event_ts": 1795071209,
+      "source_text": "19.11.2026 09:53 МСК\nРеспублика Крым Опасность по БПЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -136,8 +136,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795070400,
-      "source_text": "19.11.2026 09:40 МСК\nТарханкут и близлежащие Опасность по БПЛА Республика Крым"
+      "last_event_ts": 1795071209,
+      "source_text": "19.11.2026 09:53 МСК\nРеспублика Крым Опасность по БПЛА"
     }
   },
   "cities": [
@@ -366,6 +366,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 305788,
+      "text": "Курская область и близлежащие\nАвиационно ракетно бомбовая опасность",
+      "ts": 1795071481,
+      "time_label": "19.11.2026 09:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305787,
+      "text": "Республика Крым\nОпасность по БПЛА",
+      "ts": 1795071209,
+      "time_label": "19.11.2026 09:53 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 305786,
       "text": "Орловская область\nОпасность по БПЛА от Курской области",
@@ -989,22 +1005,6 @@
       "time_label": "19.11.2026 06:51 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305748,
-      "text": "Пензенская область\nВолгоградская область\nотбой по бпла",
-      "ts": 1795060174,
-      "time_label": "19.11.2026 06:49 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 109372,
-      "text": "Альметьевск\nРеспублика Татарстан\nПродолжаются фиксации и работа ПВО по БПЛА",
-      "ts": 1795059678,
-      "time_label": "19.11.2026 06:41 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1014,13 +1014,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795070649,
-  "last_event_at": "2026-11-19T06:44:09Z",
-  "fetched_at": "2026-11-19T06:50:02.844459Z",
+  "timestamp": 1795071481,
+  "last_event_at": "2026-11-19T06:58:01Z",
+  "fetched_at": "2026-11-19T07:00:04.598842Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-19T06:50:02.844459Z",
-    "source_age_seconds": 353,
+    "generated_at": "2026-11-19T07:00:04.598842Z",
+    "source_age_seconds": 123,
     "city_count": 6,
     "region_count": 7,
     "feed_count": 80
