@@ -5,11 +5,130 @@
   "source_label": "RadarMap public state",
   "upstream_type": "state",
   "upstream_version": 23,
-  "regions": {},
+  "regions": {
+    "Курская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795069617,
+      "source_text": "19.11.2026 09:26 МСК\nОктябрьский, Курчатовский, Обоянский районы Курской области Опасность по БПЛА от Белгородской области"
+    }
+  },
   "cities": [],
-  "districts": {},
+  "districts": {
+    "RUS.37.13_1": {
+      "gid_2": "RUS.37.13_1",
+      "name_ru": "Курчатовский район",
+      "region_ru": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795069617,
+      "source_text": "19.11.2026 09:26 МСК\nОктябрьский, Курчатовский, Обоянский районы Курской области Опасность по БПЛА от Белгородской области"
+    },
+    "RUS.37.20_1": {
+      "gid_2": "RUS.37.20_1",
+      "name_ru": "Обоянский район",
+      "region_ru": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795069617,
+      "source_text": "19.11.2026 09:26 МСК\nОктябрьский, Курчатовский, Обоянский районы Курской области Опасность по БПЛА от Белгородской области"
+    },
+    "RUS.37.21_1": {
+      "gid_2": "RUS.37.21_1",
+      "name_ru": "Октябрьский район",
+      "region_ru": "Курская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795069617,
+      "source_text": "19.11.2026 09:26 МСК\nОктябрьский, Курчатовский, Обоянский районы Курской области Опасность по БПЛА от Белгородской области"
+    }
+  },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 305778,
+      "text": "Октябрьский, Курчатовский, Обоянский районы Курской области\nОпасность по БПЛА от Белгородской области и далее в тыл",
+      "ts": 1795069617,
+      "time_label": "19.11.2026 09:26 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305777,
+      "text": "А/дорога от Токмак до Мелитополя и далее трасса Р 280 Приазовское\nОпасность по БПЛА\nЗапорожская область РФ",
+      "ts": 1795069481,
+      "time_label": "19.11.2026 09:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305776,
+      "text": "ЛНР. Угроза атаки БПЛА.\nВ границах муниципальных округов: Антрацитовский, Перевальский, Свердловский и городов Ровеньки, Красный Луч, Алчевск",
+      "ts": 1795069367,
+      "time_label": "19.11.2026 09:22 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305775,
+      "text": "Республика Крым\nОтбой опасности БПЛА",
+      "ts": 1795069220,
+      "time_label": "19.11.2026 09:20 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 305774,
       "text": "От Мануйловки фиксация БПЛА в направлении трассы р280 Бердянск - Приазовское\nЗапорожская область РФ",
@@ -617,38 +736,6 @@
       "time_label": "19.11.2026 05:33 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305740,
-      "text": "Пензенская область\nСаратовская область\nотбой по бпла",
-      "ts": 1795055514,
-      "time_label": "19.11.2026 05:31 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 305739,
-      "text": "Ростовская область\nОтбой опасности по БПЛА",
-      "ts": 1795055381,
-      "time_label": "19.11.2026 05:29 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 109364,
-      "text": "Ростовская область\nОтбой опасности по БПЛА",
-      "ts": 1795055358,
-      "time_label": "19.11.2026 05:29 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 109363,
-      "text": "Альметьевск\nРеспублика Татарстан\nСбитие БПЛА",
-      "ts": 1795055145,
-      "time_label": "19.11.2026 05:25 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -658,15 +745,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795068806,
-  "last_event_at": "2026-11-19T06:13:26Z",
-  "fetched_at": "2026-11-19T06:20:03.693870Z",
+  "timestamp": 1795069617,
+  "last_event_at": "2026-11-19T06:26:57Z",
+  "fetched_at": "2026-11-19T06:30:03.373411Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-19T06:20:03.693870Z",
-    "source_age_seconds": 397,
+    "generated_at": "2026-11-19T06:30:03.373411Z",
+    "source_age_seconds": 186,
     "city_count": 0,
-    "region_count": 0,
+    "region_count": 1,
     "feed_count": 80
   }
 }
