@@ -232,7 +232,7 @@
       "rocketOnRegion": false,
       "fill": "#d8c06a",
       "last_event_ts": 1795094584,
-      "source_text": "19.11.2026 16:23 МСК\nСевер Северо-запад Республика Крым Опасность по БПЛА\n\n19.11.2026 13:59 МСК\nСевастополь Опасность по Фпв"
+      "source_text": "19.11.2026 16:23 МСК\nСевер Северо-запад Республика Крым Опасность по БПЛА"
     }
   },
   "cities": [
@@ -798,7 +798,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -806,7 +806,7 @@
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
       "last_event_ts": 1795089126,
-      "source_text": "19.11.2026 14:52 МСК\nСевастополь Опасность по БПЛА сохраняется\n\n19.11.2026 13:59 МСК\nСевастополь Опасность по Фпв"
+      "source_text": "19.11.2026 14:52 МСК\nСевастополь Опасность по БПЛА сохраняется"
     },
     {
       "key": "внуково|автономная республика крым",
@@ -1150,7 +1150,7 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -1160,7 +1160,7 @@
       "rocketOnRegion": false,
       "fill": "#ea580c",
       "last_event_ts": 1795089126,
-      "source_text": "19.11.2026 14:52 МСК\nСевастополь Опасность по БПЛА сохраняется\n\n19.11.2026 13:59 МСК\nСевастополь Опасность по Фпв"
+      "source_text": "19.11.2026 14:52 МСК\nСевастополь Опасность по БПЛА сохраняется"
     },
     "RUS.37.13_1": {
       "gid_2": "RUS.37.13_1",
@@ -1275,6 +1275,30 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 305936,
+      "text": "Белая Берёзка опасность БПЛА-разведчик\nБрянская область",
+      "ts": 1795096710,
+      "time_label": "19.11.2026 16:58 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305935,
+      "text": "Белая Берёзка обстрел\nСрочно в укрытия\nБрянская область",
+      "ts": 1795096394,
+      "time_label": "19.11.2026 16:53 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 305934,
+      "text": "Токмак и далее на Юг\nОпасность по БПЛА\nЗапорожская область РФ",
+      "ts": 1795096314,
+      "time_label": "19.11.2026 16:51 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 305933,
       "text": "Новотроицкое\nХерсонская область РФ\nТревога по БПЛА",
@@ -1890,30 +1914,6 @@
       "time_label": "19.11.2026 14:59 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 95835,
-      "text": "Оренбургская область - ракетная опасность!\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1795089561,
-      "time_label": "19.11.2026 14:59 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 305892,
-      "text": "Сельцо\nИ близлежащие\nТревога по БПЛА\nБрянская область",
-      "ts": 1795089544,
-      "time_label": "19.11.2026 14:59 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 9459,
-      "text": "▫️\nАэропорт\nУЛЬЯНОВСК\n(Баратаевка)\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ",
-      "ts": 1795089520,
-      "time_label": "19.11.2026 14:58 МСК",
-      "source_id": "favt_info",
-      "source_label": "Росавиация"
     }
   ],
   "sources": [
@@ -1923,13 +1923,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795096011,
-  "last_event_at": "2026-11-19T13:46:51Z",
-  "fetched_at": "2026-11-19T13:50:03.431242Z",
+  "timestamp": 1795096710,
+  "last_event_at": "2026-11-19T13:58:30Z",
+  "fetched_at": "2026-11-19T14:00:03.818450Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-19T13:50:03.431242Z",
-    "source_age_seconds": 192,
+    "generated_at": "2026-11-19T14:00:03.818450Z",
+    "source_age_seconds": 93,
     "city_count": 40,
     "region_count": 12,
     "feed_count": 80
