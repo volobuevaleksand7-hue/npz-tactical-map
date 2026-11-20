@@ -1460,44 +1460,16 @@
     }
    ],
    "found_at": "2026-11-20T19:20:15Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-20-kharg-island-tanker-convoy",
-   "occurred_at": "2026-11-20",
-   "type": "naval",
-   "region": "middle_east",
-   "status": "reported",
-   "title": "Иран сосредоточил более 14 танкеров у острова Харг для попытки прорыва морской блокады США",
-   "summary": "20 ноября Euronews со ссылкой на спутниковые снимки и данные отслеживания судов сообщил, что Иран сосредоточил более 14 нефтяных танкеров у острова Харг и планирует отправить их конвоем к выходу в Оманский залив в ближайшие дни. По данным TankerTrackers, имеющиеся сведения подтверждают возобновление иранского экспорта нефти; ранее СМИ сообщали о передаче иранского груза с судна на судно в Персидском заливе при отключенных системах AIS. Израильский Channel 14 и близкий к поддерживаемым Ираном группам Sabereen News сообщили о подготовке десятков танкеров к выходу в направлении Китая; независимого подтверждения этих данных нет.",
-   "fuel_effect": "Подготовка конвоя и сообщения о возобновлении экспорта указывают на возможное изменение объемов иранских поставок через Ормузский пролив, однако фактический грузопоток независимыми данными не подтвержден.",
-   "title_en": "Iran masses more than 14 tankers at Kharg Island in attempt to break US naval blockade",
-   "summary_en": "On 20 November Euronews, citing satellite imagery and ship-tracking data, reported that Iran had massed more than 14 oil tankers at Kharg Island and planned to send them in convoy toward the Sea of Oman exit in the coming days. According to TankerTrackers, available data confirm that Iran is resuming oil exports; media had earlier reported a ship-to-ship transfer of Iranian cargo in the Persian Gulf with AIS switched off. Israel's Channel 14 and Sabereen News, an outlet close to Iran-backed groups, reported that dozens of tankers were preparing to head toward China; there is no independent confirmation of those reports.",
-   "fuel_effect_en": "The convoy preparations and reports of resumed exports point to a possible change in the volume of Iranian supplies through the Strait of Hormuz, but actual flows are not confirmed by independent data.",
-   "lat": 29.24,
-   "lon": 50.32,
-   "precision": "zone",
-   "radius_km": 30,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "Euronews",
-     "url": "https://www.euronews.com/2026/11/20/iran-readies-tanker-convoy-at-kharg-island-to-test-us-oil-blockade",
-     "date": "2026-11-20"
-    },
-    {
-     "publisher": "The Maritime Executive",
-     "url": "https://maritime-executive.com/article/reports-claim-iran-is-preparing-oil-convoy-to-test-u-s-blockade",
-     "date": "2026-11-20"
-    },
-    {
-     "publisher": "Saudi Gazette",
-     "url": "https://saudigazette.com.sa/article/666407/world/iran-readies-tanker-convoy-at-kharg-island-to-test-us-oil-blockade",
-     "date": "2026-11-20"
-    }
-   ],
-   "found_at": "2026-11-20T19:20:15Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 3,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   },
   {
    "id": "2026-11-20-fujairah-oil-loadings-resume",
@@ -1529,7 +1501,16 @@
     }
    ],
    "found_at": "2026-11-20T19:20:15Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   },
   {
    "id": "2026-11-19-valero-port-arthur-refinery-blast",
@@ -1561,7 +1542,16 @@
     }
    ],
    "found_at": "2026-11-20T19:20:15Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 1,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   },
   {
    "id": "2026-11-19-north-dakota-ndpl-outage-force-majeure",
@@ -1598,66 +1588,16 @@
     }
    ],
    "found_at": "2026-11-20T19:20:15Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-18-libya-cooking-gas-queues",
-   "occurred_at": "2026-11-18",
-   "type": "shortage",
-   "region": "africa",
-   "status": "reported",
-   "title": "В Триполи многочасовые очереди за сжиженным газом",
-   "summary": "18 ноября TVC News сообщил, что жители Триполи проводят по два-три часа в очередях за бытовым газом на фоне затяжного дефицита. По данным государственной Brega Petroleum Marketing Company, дефицит был вызван перебоями в движении танкеров и графике их прибытия в ливийские порты; компания сообщила, что в субботу возобновила налив газа с танкера Derna для пополнения запасов.",
-   "fuel_effect": "Перебои с морскими поставками сжиженного газа привели к дефициту бытового топлива в Ливии.",
-   "title_en": "Multi-hour queues for cooking gas in Tripoli",
-   "summary_en": "On 18 November TVC News reported that residents of Tripoli were spending two to three hours in queues for cooking gas amid a prolonged shortage. According to the state-owned Brega Petroleum Marketing Company, the shortage was caused by disruptions to tanker movements and their arrival schedules at Libyan ports; the company said it resumed gas pumping from the tanker Derna on Saturday to replenish reserves.",
-   "fuel_effect_en": "Disruptions to seaborne LPG supplies have caused a shortage of household fuel in Libya.",
-   "lat": 32.8872,
-   "lon": 13.1913,
-   "precision": "zone",
-   "radius_km": 300,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "TVC News",
-     "url": "https://www.tvcnews.tv/libyans-lament-cooking-gas-shortage-as-residents-spend-hours-in-queues/",
-     "date": "2026-11-18"
-    }
-   ],
-   "found_at": "2026-11-20T19:20:15Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-20-suez-canal-carriers-return",
-   "occurred_at": "2026-11-20",
-   "type": "other",
-   "region": "middle_east",
-   "status": "confirmed",
-   "title": "Крупные контейнерные перевозчики возвращаются на Суэцкий канал",
-   "summary": "20 ноября Riviera Maritime Media сообщила, что Ocean Network Express возобновила транзиты через Суэцкий канал, а Maersk и Hapag-Lloyd 16 ноября объявили о переводе еще трех сервисов Gemini Cooperation с маршрута вокруг мыса Доброй Надежды на Суэц. Переход будет поэтапным с декабря 2026 по январь 2027 года; по данным Alphaliner, 63% контейнерных мощностей на направлении Дальний Восток — Европа в середине сентября — середине октября обслуживались через Красное море.",
-   "fuel_effect": "Возврат контейнеровозов на более короткий маршрут через Суэц меняет структуру бункерного спроса: рейс короче обхода Африки, что снижает расход топлива на рейс.",
-   "title_en": "Major container carriers return to the Suez Canal",
-   "summary_en": "On 20 November Riviera Maritime Media reported that Ocean Network Express had resumed transits through the Suez Canal, while Maersk and Hapag-Lloyd announced on 16 November that they would move three more Gemini Cooperation services from the Cape of Good Hope route to Suez. The transition will be phased between December 2026 and January 2027; according to Alphaliner, 63% of Far East-Europe container capacity was deployed on services using the Red Sea route between mid-September and mid-October.",
-   "fuel_effect_en": "The return of container ships to the shorter Suez route changes the structure of bunker demand: the voyage is shorter than the Cape of Good Hope detour, which reduces fuel consumption per voyage.",
-   "lat": 30.5,
-   "lon": 32.35,
-   "precision": "zone",
-   "radius_km": 80,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "safety4sea",
-     "url": "https://safety4sea.com/maersk-and-hapag-lloyd-to-shift-three-more-gemini-services-to-suez-canal/",
-     "date": "2026-11-20"
-    },
-    {
-     "publisher": "Riviera Maritime Media",
-     "url": "https://www.rivieramm.com/news-content-hub/full-suez-return-clouds-box-ship-outlook-as-one-becomes-latest-to-resume-transits-90632",
-     "date": "2026-11-20"
-    }
-   ],
-   "found_at": "2026-11-20T19:20:15Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 3,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   },
   {
    "id": "2026-11-18-orlen-qatarenergy-lng-talks",
@@ -1689,8 +1629,17 @@
     }
    ],
    "found_at": "2026-11-20T19:20:15Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 2,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-20T11:34:33Z"
+ "validated_at": "2026-11-20T19:34:03Z"
 }
