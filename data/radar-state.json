@@ -174,6 +174,27 @@
       "last_event_ts": 1795265507,
       "source_text": "21.11.2026 15:51 МСК\nПриморск на юго-восток фиксация БПЛА Запорожская область РФ"
     },
+    "Воронежская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795273977,
+      "source_text": "21.11.2026 18:12 МСК\nКантемировка И близлежащие Опасность по БПЛА Воронежская область"
+    },
     "Брянская область": {
       "bpla": false,
       "bplaDim": false,
@@ -1084,6 +1105,30 @@
       "fill": "#f0c4a0",
       "last_event_ts": 1795273485,
       "source_text": "21.11.2026 18:04 МСК\nОктябрьское Красногвардейский район Внимание по БПЛА Республика Крым"
+    },
+    {
+      "key": "кантемировка|воронежская область",
+      "name": "Кантемировка",
+      "lat": 49.702282,
+      "lon": 39.854115,
+      "region": "Воронежская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795273977,
+      "source_text": "21.11.2026 18:12 МСК\nКантемировка И близлежащие Опасность по БПЛА Воронежская область"
     }
   ],
   "districts": {
@@ -1306,6 +1351,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 306694,
+      "text": "Кантемировка\nИ близлежащие\nОпасность по БПЛА\nВоронежская область",
+      "ts": 1795273977,
+      "time_label": "21.11.2026 18:12 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 306693,
       "text": "Валуйский МО\nОпасность по БПЛА\nБелгородская область",
@@ -1937,14 +1990,6 @@
       "time_label": "21.11.2026 13:36 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 109714,
-      "text": "Краснодар и близлежащие\nКраснодарский край\nОпасность по БПЛА",
-      "ts": 1795257201,
-      "time_label": "21.11.2026 13:33 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1954,15 +1999,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795273602,
-  "last_event_at": "2026-11-21T15:06:42Z",
-  "fetched_at": "2026-11-21T15:10:03.585506Z",
+  "timestamp": 1795273977,
+  "last_event_at": "2026-11-21T15:12:57Z",
+  "fetched_at": "2026-11-21T15:20:04.133962Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-21T15:10:03.585506Z",
-    "source_age_seconds": 201,
-    "city_count": 37,
-    "region_count": 9,
+    "generated_at": "2026-11-21T15:20:04.133962Z",
+    "source_age_seconds": 427,
+    "city_count": 38,
+    "region_count": 10,
     "feed_count": 80
   }
 }
