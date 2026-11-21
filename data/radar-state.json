@@ -373,16 +373,16 @@
       "mvsh": false,
       "mvshDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1795302300,
-      "source_text": "22.11.2026 02:05 МСК\nОрёл и близлежащие, ракетная опасность от Навли. Навля, не попадите под сбитие ракет или реактивных БПЛА. 📡 Локатор России - @locatorru"
+      "fill": "#dc2626",
+      "last_event_ts": 1795304394,
+      "source_text": "22.11.2026 02:39 МСК\nБрянская область Орловская область Оббой ракетной опасности\n\n22.11.2026 02:05 МСК\nОрёл и близлежащие, ракетная опасность от Навли. Навля, не попадите под сбитие ракет или реактивных БПЛА. 📡 Локатор России - @locatorru"
     },
     "Карачаево-Черкесия": {
       "bpla": false,
@@ -499,16 +499,16 @@
       "mvsh": false,
       "mvshDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1795300504,
-      "source_text": "22.11.2026 01:35 МСК\nКалужская область Смоленская область Ракетная опасность от Брянской области\n\n21.11.2026 23:29 МСК\nСмоленская область, Калужская область - опасность по БПЛА от Брянской области. 📡 Локатор России - @locatorru"
+      "fill": "#d8c06a",
+      "last_event_ts": 1795292953,
+      "source_text": "21.11.2026 23:29 МСК\nСмоленская область, Калужская область - опасность по БПЛА от Брянской области. 📡 Локатор России - @locatorru"
     },
     "Ставропольский край": {
       "bpla": false,
@@ -6623,6 +6623,30 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 109826,
+      "text": "Калужская область\nОрловская область\nОтбой ракетной опасности",
+      "ts": 1795304767,
+      "time_label": "22.11.2026 02:46 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 307012,
+      "text": "Смоленская область\nКалужская область\nТульская область\nМосковская область\nИ остальные тыловые регионы\nотбой ракетной опасности\nотбой по бпла",
+      "ts": 1795304477,
+      "time_label": "22.11.2026 02:41 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 307011,
+      "text": "Брянская область\nОрловская область\nОббой ракетной опасности",
+      "ts": 1795304394,
+      "time_label": "22.11.2026 02:39 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 307010,
       "text": "Керченский полуостров\nКерчь\nКрымский мост\nКерченский пролив\nОт Азовского моря тревога по БПЛА\nТаманский полуостров\nАчуево и близлежащие\nТревога по БПЛА с Азовского моря",
       "ts": 1795304328,
@@ -7237,30 +7261,6 @@
       "time_label": "22.11.2026 01:26 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 306977,
-      "text": "Вогресовской мост Воронеж тревога по БПЛА",
-      "ts": 1795299939,
-      "time_label": "22.11.2026 01:25 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 306976,
-      "text": "Белая Глина и далее на Новопавловку\nОпасность по БПЛА\nКраснодарский край",
-      "ts": 1795299938,
-      "time_label": "22.11.2026 01:25 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 306975,
-      "text": "Саки, Сакская ТЭС, Новофедоровка тревога по БПЛА повторно",
-      "ts": 1795299862,
-      "time_label": "22.11.2026 01:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -7270,13 +7270,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795304328,
-  "last_event_at": "2026-11-21T23:38:48Z",
-  "fetched_at": "2026-11-21T23:40:03.209515Z",
-  "poll_interval_sec": 45,
+  "timestamp": 1795304767,
+  "last_event_at": "2026-11-21T23:46:07Z",
+  "fetched_at": "2026-11-21T23:50:02.991190Z",
+  "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-21T23:40:03.209515Z",
-    "source_age_seconds": 75,
+    "generated_at": "2026-11-21T23:50:02.991190Z",
+    "source_age_seconds": 235,
     "city_count": 170,
     "region_count": 33,
     "feed_count": 80
