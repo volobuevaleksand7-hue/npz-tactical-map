@@ -150,8 +150,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795268712,
-      "source_text": "21.11.2026 16:45 МСК\nЯсиноватая, Макеевка и близлежащие Тревога по БПЛА повторно, ещё фиксации ДНР"
+      "last_event_ts": 1795272386,
+      "source_text": "21.11.2026 17:46 МСК\nГорловка и близлежащие Тревога по БПЛА и ФПВ сохраняется ДНР"
     },
     "Запорожская область": {
       "bpla": false,
@@ -467,9 +467,9 @@
       "lat": 48.29986,
       "lon": 38.01709,
       "region": "Донецкая Народная Республика",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -482,8 +482,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1795267949,
-      "source_text": "21.11.2026 16:32 МСК\nГорловка и близлежащие Тревога по БПЛА и ФПВ сохраняется, запад ещё фиксации ДНР"
+      "last_event_ts": 1795272386,
+      "source_text": "21.11.2026 17:46 МСК\nГорловка и близлежащие Тревога по БПЛА и ФПВ сохраняется ДНР"
     },
     {
       "key": "белгород|белгородская область",
@@ -1230,10 +1230,58 @@
       "fill": "#ea580c",
       "last_event_ts": 1795242861,
       "source_text": "21.11.2026 09:34 МСК\nРакитянский район Белгородской области Опасность по БПЛА"
+    },
+    "UKR.4.20_1": {
+      "gid_2": "UKR.4.20_1",
+      "name_ru": "Симферопольский район",
+      "region_ru": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": true,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#f0c4a0",
+      "last_event_ts": 1795272381,
+      "source_text": "21.11.2026 17:46 МСК\nШирокое Журавлевка И близлежащие Внимание по БПЛА Симферопольский район Республика Крым"
     }
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 306688,
+      "text": "Горловка и близлежащие\nТревога по БПЛА и ФПВ сохраняется\nДНР",
+      "ts": 1795272386,
+      "time_label": "21.11.2026 17:46 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 306687,
+      "text": "Широкое\nЖуравлевка\nИ близлежащие\nВнимание по БПЛА\nСимферопольский район\nРеспублика Крым",
+      "ts": 1795272381,
+      "time_label": "21.11.2026 17:46 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 96045,
+      "text": "Огромное спасибо 10 нашим близким за помощь и поддержку канала!\n❤️\n🫡\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1795272098,
+      "time_label": "21.11.2026 17:41 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
     {
       "msg_id": 306686,
       "text": "Красный луч\nИ близлежащие\nОпасность по БПЛА Хорнет\nЛНР",
@@ -1849,30 +1897,6 @@
       "time_label": "21.11.2026 13:18 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 109711,
-      "text": "Новгородская область\nОтбой опасности по БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795256258,
-      "time_label": "21.11.2026 13:17 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 306617,
-      "text": "Таганрог и близлежащие\nОпасность по БПЛА\nРостовская область",
-      "ts": 1795256112,
-      "time_label": "21.11.2026 13:15 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 306616,
-      "text": "Горловка и близлежащие\nОпасность по БПЛА с запада\nДНР",
-      "ts": 1795256094,
-      "time_label": "21.11.2026 13:14 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1882,13 +1906,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795271260,
-  "last_event_at": "2026-11-21T14:27:40Z",
-  "fetched_at": "2026-11-21T14:40:05.051594Z",
+  "timestamp": 1795272386,
+  "last_event_at": "2026-11-21T14:46:26Z",
+  "fetched_at": "2026-11-21T14:50:03.507233Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-21T14:40:05.051594Z",
-    "source_age_seconds": 745,
+    "generated_at": "2026-11-21T14:50:03.507233Z",
+    "source_age_seconds": 217,
     "city_count": 36,
     "region_count": 9,
     "feed_count": 80
