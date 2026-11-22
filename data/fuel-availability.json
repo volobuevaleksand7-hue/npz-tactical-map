@@ -1,14 +1,21 @@
 {
   "meta": {
-    "generated_at": "2026-11-18T17:30:00Z",
-    "rotation_pass": "18.11 (137-я волна, 2026-11-18T17:30:00Z): ротация 12 самых старых регионов — Брянская, Алтайский край, Приморский, Мурманская, Марий Эл, Белгородская, Донецкая, Луганская, Псковская, Калмыкия, Орловская, Костромская. Обновлены фактами: Крым (18.11 график «АТАН»/«ТЭС», только АИ-92 у «ТЭС», 20 л, 100 р/л), Севастополь (лимитов нет), Краснодарский (Сочи 49 АЗС, Анапа 4 АЗС с лимитами 30/50), Ростовская (на М4 без очередей, на «Лукойле» пропадает 95-й), Волгоградская (17.11 нехватка отдельных марок), Пензенская (18.11 лимиты 50/200), Томская (18.11 «Роснефть» продлила 30/50), Воронежская (цены Воронежстата), Нижегородская (16.11 стабилизация, лимит 40 л), Забайкальский (18.11 кризис, «Нефтемаркет» 30/50), Иркутская (18.11 рост цен), Калининградская (16.11 цены), Мурманская (12.11 лимиты «Роснефти»), Калмыкия (10.11 дефицита нет, цены высокие), Орловская (11.11 «Газпром» снял лимиты, «Роснефть» держит), Приморский (13.11 цены Владивостока), Белгородская (15.11 рост цен). Брянская, Алтайский, Марий Эл, Донецкая, Луганская, Псковская, Костромская — свежих данных нет, updated по факту проверки. Удалены служебные записи, не садящиеся ни на одну станцию: «Редопологовская область», «Остальные регионы», «Иркутская область (уточнение №2)», «Краснодарский край (Черноморское побережье)», «Рязанская область (уточнение)». Биржа: свежих котировок СПбМТСБ после 13.11 не найдено, блок exchange не менялся.",
+    "generated_at": "2026-11-22T17:30:00Z",
+    "rotation_pass": "22.11 (138-я волна, 2026-11-22T17:30:00Z): ротация 12 самых старых регионов — Курская, Липецкая, Карелия, Вологодская, Ярославская, Коми, Москва, Башкортостан, Чукотский, Свердловская, Московская, Архангельская. Обновлены фактами: Севастополь (19.11 вернули лимиты «АТАН»/«ТЭС» — полный бак + 20 л в канистру), Крым (22.11 «АТАН» 92+ДТ с 08:00, «ТЭС» все сорта с 14:00), Астраханская (20.11 «Лукойл» 40 л), Липецкая (17.11 «Роснефть» 30 л + запрет канистр), Карелия (17.11 15 АЗС не работали), Башкортостан (20.11 Уфа +15% цены), Свердловская (18–19.11 пропадал ДТ, цены −9 р/л), Тульская и Москва (22.11 полный ассортимент только «Нефтьмагистраль»/«Тебойл»), Санкт-Петербург (19–22.11 лимиты, очереди, только наличные), Воронежская (20.11 90% АЗС восстановились, 22.11 пропадает ДТ), Волгоградская (17.11 нет АИ-95), Ставропольский (20–22.11 новая волна ажиотажа), Ростовская (20.11 перебои у независимых АЗС), Краснодарский (Сочи 49 АЗС на 20.11). Курская, Вологодская, Ярославская, Коми, Чукотский, Московская, Архангельская — свежих данных нет, updated по факту проверки. Удалены служебные записи, не садящиеся ни на одну станцию.",
     "data_mode": "ОЦЕНКА / ESTIMATE",
     "confidence": "Данные о статусе сетей АЗС, лимитах, очередях и ценах — из открытых источников (региональные СМИ, пресс-релизы сетей, биржевые сводки СПбМТСБ, WebSearch результаты). Не official.",
     "refresh_seconds": 240,
     "agent": "agent:fuel-availability",
     "updated_by": "agent:fuel-availability",
-    "last_rotation_pass": "2026-11-18T17:30:00Z",
+    "last_rotation_pass": "2026-11-22T17:30:00Z",
     "update_notes": [
+      {
+        "date": "2026-11-22T17:30:00Z",
+        "action": "rotation_138_websearch_12old_8hot",
+        "regions_updated": 22,
+        "hot_topics_searches": 12,
+        "message": "138-я волна (22.11): горячие поиски (Севастополь, Астрахань, СПб, Ставрополь, Ростовская, Воронежская, Крым/М4, СПбМТСБ) + ротация 12 самых старых регионов. Ключевые факты: Севастополь 19.11 — лимиты на «АТАН» и «ТЭС» (полный бак + 20 л в канистру, очереди), свободная продажа с 21.10 прекращена; Крым 22.11 — «АТАН» с 08:00 (92 и ДТ), «ТЭС» с 14:00 (все сорта), 20 л в бак, наличные; Астраханская — 20.11 «Лукойл» ограничил продажу до 40 л в одни руки (уровень повышен до limited); Липецкая — 17.11 «Роснефть» вернула 30 л и запрет канистр; Карелия — 17.11 не работали 15 АЗС; Башкортостан — 20.11 в Уфе цены на бензин +15% за неделю, Хабиров предупредил о риске дефицита; Свердловская — 18–19.11 на части АЗС Екатеринбурга пропадал ДТ, цены на независимых АЗС снизились до 9 р/л (уровень понижен до strained); Тульская и Москва — 22.11 полный ассортимент только на «Нефтьмагистрали» и «Тебойле»; СПб — 19.11 лимиты, очереди, часть АЗС только за наличные; Воронежская — 20.11 свыше 90% АЗС восстановились, 22.11 в Воронеже на части сетей снова нет ДТ; Волгоградская — 17.11 сохраняется нехватка АИ-95; Ставропольский — 20–22.11 новая волна ажиотажа без возврата лимитов; Ростовская — 20.11 перебои только у независимых АЗС. Биржа: свежих котировок СПбМТСБ после 13.11 не найдено, блок exchange не менялся. Удалены служебные записи «Редопологовская область», «Остальные регионы», «Иркутская область (уточнение №2)», «Краснодарский край (Черноморское побережье)», «Рязанская область (уточнение)» — они не садятся ни на одну станцию в azs-stations.regions_map."
+      },
       {
         "date": "2026-11-18T17:30:00Z",
         "action": "rotation_137_websearch_12old_8hot",
@@ -47,6 +54,24 @@
     ],
     "policy_events": [
       {
+        "date": "2026-11-19T00:00:00Z",
+        "region": "Севастополь",
+        "text": "С 19.11 в Севастополе вернули лимиты на продажу топлива: на АЗС «АТАН» и «ТЭС» — полный бак и не более 20 л в канистру. Причина — ажиотаж и перепродажа, отдельные водители заливали по 200–500 л за раз; на заправках очереди.",
+        "source_url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBWYWJVbzltRTBRWTQyN2s1MzVfSEhWYTRhSElydTMtUl9PYTlVa3UyUTZOb0lhV3ZXQ2dNOURQdjBJcXhQMFFj0gGbAUFVX3lxTE1XOEw0MENsWGVaenlsRVRfOVVFRmpaS3hKSWdyRW8xczRtUlZWUUxOM1R0dXV5RkdjSGRSNTlNYTlYU00tYnp3UGFvWXZHWUJtWHBWOUFybkhxdTNEWUliWmJ0eVF1RzdhcmVDU2xFMndDWjZUMzF2elBndVpZdnZscUNBUV8wUHdEWDlodkVtRDdqOFd3cFhZRHpF?oc=5"
+      },
+      {
+        "date": "2026-11-20T00:00:00Z",
+        "region": "Астраханская область",
+        "text": "20.11 на АЗС «Лукойла» в Астрахани введён лимит: не более 40 л бензина в одни руки. Ограничение введено после новой волны ажиотажного спроса; на других сетях сведений о лимитах нет.",
+        "source_url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNQTdjdk9XdU5NdTJ3RUpoT2FPR1lmQ2FsbWR1Z1hUU3NKVUFTVFMwb0t4aW5GUF8tVG5YdUs3MnNKLUJqN1loS19UYUZOaUZFRW5EV0hVbVNycUw2cFFveWhkTEJHZjZ0aG9MWlBmcFA2aDE2am9ZQ1NQTEI0N3N4UXdWSWhXWGQ1NUxyV0wwUDg?oc=5"
+      },
+      {
+        "date": "2026-11-17T00:00:00Z",
+        "region": "Липецкая область",
+        "text": "17.11 на АЗС «Роснефти» в Липецкой области вновь ввели ограничения: не более 30 л в бак и запрет заправки канистр. На АЗС других сетей ограничений нет, топливо в области есть.",
+        "source_url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1UZzZOY2FQMW9KaW5yMElQMlNEZ1dQR2FmQUktM0lPcTd3d3VNX3dLaGdOS0JoX3A2bmlrU2Z5QW41T2FISkFzU3dfX2x1ZGFjU3B1TmNKRQ?oc=5"
+      },
+      {
         "date": "2026-11-18T00:00:00Z",
         "region": "Республика Крым",
         "text": "18.11 топливо в Крыму отпускают по графику: «АТАН» с 08:00 — АИ-92, АИ-95 и ДТ, «ТЭС» с 14:00 — только АИ-92 (сначала вдоль «Тавриды», затем в городах). Цена субсидированного топлива — не выше 100 р/л, лимит 20 л в бак, канистры запрещены, талоны и топливные карты не действуют, расчёт наличными.",
@@ -75,18 +100,6 @@
         "region": "Ставропольский край",
         "text": "17.11 местные водители отметили, что ограничения на объём продажи топлива в крае сняты ещё в конце октября, но на части АЗС по-прежнему отказывают в заправке канистр, а качество бензина вызывает претензии.",
         "source_url": "https://www.kavkaz-uzel.eu/articles/428413"
-      },
-      {
-        "date": "2026-11-13T00:00:00Z",
-        "region": "Волгоградская область",
-        "text": "13.11 после ночной атаки БПЛА на объект ТЭК на юге Волгограда на АЗС города вернулись очереди (5–7 машин на колонку, местами до проезжей части). Официальных лимитов не вводилось, топливо в наличии.",
-        "source_url": "https://novostivolgograda.ru/news/2026-11-13/azhiotazh-vernulsya-volgogradtsy-snova-shturmuyut-azs-5731681"
-      },
-      {
-        "date": "2026-11-12T00:00:00Z",
-        "region": "Томская область",
-        "text": "12.11 «Роснефть» ввела в Томской области лимит отпуска: 30 л бензина и 50 л дизеля, не более 20 л в канистру для физлиц. 18.11 ограничения продлены; работают 134 из 146 АЗС.",
-        "source_url": "https://www.tomsk.ru/news/avto/rosneft-snova-vvela-limity-na-otpusk-benzina-i-dizelya-v-tomskoy-oblasti"
       }
     ]
   },
@@ -208,14 +221,14 @@
       "lat": 61.79,
       "lon": 34.35,
       "level": "limited",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "08.11: лимит 30 л в городах и 50 л на трассах, канистры не отпускают (глава республики, BBC)."
+          "note": "08.11: лимит 30 л в городах и 50 л на трассах, канистры не отпускают (глава республики, BBC). 17.11 в республике временно не работали 15 заправок."
         },
         {
           "name": "Газпромнефть/Лукойл",
@@ -229,10 +242,11 @@
       "ai95_price_rub": 69.0,
       "diesel_price_rub": 79.5,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5zM1U0dWdKM0ktRlZWdE12dW5jVEgybDNqZ0FrUndzbEhBZVAtbmVMdXF3aXlZbHpUOTJNRHBPVTEtMGZOcXZNcWZyU2hDcnZRaDdjRmhB?oc=5",
         "https://news.google.com/rss/articles/CBMitwFBVV95cUxOSUZMWHc2T0NnYWhDRlFFSHdROUhGYXNpLTQ1SGFpS0NiTUVmZkFZRHdlY3VlTmZfdUwxU09vc1dOcm1VOU5BNkhlNi16bXFkN2dscmkzd2dCR2VtcmgwOURSYURNWXRIdWJSN2Z1QXVJdWNzZDBULUQ5bUEtWkh5WHJGYWQtU2RmLUpITFp2QVN2M0RPSWI5OTktM1JEUHNMYTlrak81WWh6eno5NUNzRFB6OVJIVUk?oc=5",
         "https://www.bbc.com/russian/articles/crd6d65ql8wwo"
       ],
-      "note": "08.11: на части АЗС вновь введены ограничения отпуска; в республике объявлены лимиты 30 л в городах и 50 л на трассах."
+      "note": "17.11: в Карелии временно не работали 15 АЗС на фоне топливных проблем (КарелИнформ, «Фактор»). Лимит «Роснефти» 30/50 л сохраняется."
     },
     {
       "region": "Республика Саха (Якутия)",
@@ -359,7 +373,7 @@
       "lat": 59.22,
       "lon": 39.89,
       "level": "strained",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл",
@@ -522,7 +536,7 @@
       "lat": 57.63,
       "lon": 39.87,
       "level": "limited",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл / Газпромнефть / Роснефть",
@@ -545,7 +559,7 @@
       "lat": 61.67,
       "lon": 50.84,
       "level": "strained",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл",
@@ -582,7 +596,7 @@
       "lat": 55.75,
       "lon": 37.62,
       "level": "limited",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -604,24 +618,32 @@
           "level": "strained",
           "limit_l": 40,
           "note": "По данным 07.10: 30–60 л на части АЗС, запрет канистр сохраняется."
+        },
+        {
+          "name": "Нефтьмагистраль / Тебойл",
+          "status": "open",
+          "level": "calm",
+          "limit_l": null,
+          "note": "22.11: полный ассортимент топлива в городе — только на этих сетях."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 70.0,
       "diesel_price_rub": 75.0,
       "source_urls": [
+        "https://www.tourprom.ru/news/90539/",
         "https://msk1.ru/text/transport/2026/11/09/76753189/",
         "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPLWJfZE15WG9wWThaQ1hnRUF1NzZEZ3VuelVvaTBsNDdIMkFSLW1VWGlWWGMyNHNjQTVmTnFQWnRESTEzYnRmTm1rRjQ0UGQ4VjRiZEZnQ0FaamdrN3dXTjRWYXRwLWFmRlFib2hrZVpnM2h5a0NqOEVqSjVFYjlJUExnaldkY0dEUDk3S052SzBhUmtZM0V3U0F1QjRPSHZ2bENwdkY1TUdQeTlXMk9OR0NRN0pNUzBwVWdaWlIwTVBkOGlhMzZIY0NkVDM5R0pYeEE?oc=5",
         "https://news.google.com/rss/articles/CBMiSkFVX3lxTFByTXFjcUtpSDdqbHBwRWNzdkgzTkhZN0N0dHB1Sy1OVTlrZm1ZSVZWY3N6NDB5dkdWQVg5X0pSSm50cVBoeFpaMFZR?oc=5"
       ],
-      "note": "09–10.11: на АЗС «Роснефти» лимиты 30 л в городе и 50 л на трассе, канистры не отпускают; розница продолжает дорожать. У «Лукойла» и «Газпром нефти» ограничения сохраняются с октября."
+      "note": "22.11: полный ассортимент топлива в Москве есть только на «Нефтьмагистрали» и «Тебойле», на остальных сетях АИ-95 и дизель «через раз». Лимиты «Роснефти» 30/50 л и ограничения «Лукойла» сохраняются."
     },
     {
       "region": "Башкортостан",
       "lat": 54.74,
       "lon": 55.97,
       "level": "severe",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Газпромнефть/Лукойл",
@@ -635,16 +657,18 @@
       "ai95_price_rub": 77.0,
       "diesel_price_rub": 76.0,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5Tb1dOM3NtWm1ndlVqREQ2bXpTVnR5c3ZjM1FXQ0RyQk94aFhpVjBFT0k3VklVbW9lX2VWaVBnd2dQbVVod3BYM1BmT1dQRzhUN3RDb1Vn?oc=5",
+        "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5vLXl0YlJHVGI3X3ZuZmVoYWRJcVpEUHBxMjJPQ0E2R3UyM0hYdFdqRFZEdHpNVlJwNW91c1R6OE14d0dSb0pjOGZXVmRaY3MyZm1UZWlTMA?oc=5",
         "https://news.google.com/rss/articles/CBMixgFBVV95cUxPVjNQLXF3Z1JfM19KX3JuSkt5VFhWMURvZWFvOW9NcEh1SndsdW1md1FZWTAzMXFTdzVUakMwZ0VZQkNKbURuRG5aaEI4MWNtSE9KY2xTMTYwbE1EbTJGWkQyMDNEVFRvcTc1VlI0azNRWENIZnVHYzJmai1HMG1SMFBXZ2RuaS1iNWVyR3NZOTNBV2ItbGFFbUpKWmczTUFwdU5ySkxvc1pkUk1lRjFkSVZwbDFGVGc4b2UtS2lzWVM3aHhwSkE?oc=5"
       ],
-      "note": "11.11: глава республики заявил, что топливного кризиса не допустят, но обстановка зависит от атак на НПЗ; конкретных данных о снятии лимитов нет."
+      "note": "19–20.11: глава республики предупредил о риске дефицита топлива; в Уфе цены на бензин выросли примерно на 15% за неделю. Лимиты 30 л бензина и 60 л ДТ сохраняются."
     },
     {
       "region": "Чукотский автономный округ",
       "lat": 64.73,
       "lon": 177.51,
       "level": "calm",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Региональные АЗС",
@@ -667,7 +691,7 @@
       "lat": 51.66,
       "lon": 39.21,
       "level": "strained",
-      "updated": "2026-11-18T17:30:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -681,43 +705,47 @@
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "11.11: свыше 90% заправок области работают, региональные сети снижают цены."
+          "note": "20.11: свыше 90% заправок области восстановились после топливного кризиса; 22.11 на части сетевых АЗС Воронежа пропадает дизтопливо, на других — очереди."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 87.25,
       "diesel_price_rub": 86.02,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1RMzEtMlI4TzFQY3lwNkpJcHN0WWJEcDdMVWNwRTBqZ2d4UjNtRC1xX1kxNW1XbGJVaEp0R3BQTGt3OTkxeDJsM0FOWHFVX1gtM1M3R3JGQQ?oc=5",
+        "https://www.tourprom.ru/news/90539/",
         "https://bloknot-voronezh.ru/news/chto-proiskhodit-s-tsenami-na-benzin-v-voronezhe-p-2000329",
         "https://news.google.com/rss/articles/CBMilgFBVV95cUxOcE5sQjNPVmx6N3hCS2dmcWplUzByZWNkOEZDQUpQMmxyNG9NaEQ3aG5abGlNN2puem82MjV3ZmI2bVRXMHVTTl91cnljOFZoZV9fQ3ZtYlo4RGtjaTBZLTl2OXd6dS1hN2pxblFIY2hsR2g0VjBhcDVfNTZjQms1dVRyYnhhOHU4Y2FYMUI1WThzM2VmaVE?oc=5",
         "https://news.google.com/rss/articles/CBMinwFBVV95cUxQMzc2TmVROWtZTkpQTEFrWDI2a3BTSk9uUkVkMnN0SVE4VXgzSXdWemRWU1dneXZYUldvelp6WHR4U0tOaGNNUjhNMXJLQWlOOXFobGFCVlhVS3VpdnMtelVzRXl3azVSZ1MyOEJUeU54NHotVjNsY2EtVDhwWVRqMDd6SC1teUktelpEazlVTXVjQ3pfTGlBVm80dUxzbjQ?oc=5",
         "https://news.google.com/rss/articles/CBMiSkFVX3lxTFByTXFjcUtpSDdqbHBwRWNzdkgzTkhZN0N0dHB1Sy1OVTlrZm1ZSVZWY3N6NDB5dkdWQVg5X0pSSm50cVBoeFpaMFZR?oc=5",
         "https://abireg.ru/newsitem/119235-na-azs-rosnefti-v-voronezhskoy-oblasti-snova-vystroilis-ocheredi-na-fone-toplivnykh-limitov/"
       ],
-      "note": "18.11: Воронежстат — АИ-95 87,25 р/л, АИ-92 79,41, ДТ 86,02 (−0,98% за неделю), АИ-98 110,77. Губернатор сообщил, что часть компаний сокращает поставки в область. Лимиты «Роснефти» 30/50 л сохраняются."
+      "note": "18.11: дизтопливо на АЗС области подорожало за неделю рекордными темпами; Воронежстат — АИ-95 87,25 р/л, АИ-92 79,41, ДТ 86,02. 20.11 свыше 90% заправок области восстановились после кризиса, но 22.11 в Воронеже на части сетевых АЗС снова нет ДТ."
     },
     {
       "region": "Свердловская область",
       "lat": 56.84,
       "lon": 60.65,
-      "level": "severe",
-      "updated": "2026-11-12T06:00:00Z",
+      "level": "strained",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
-          "name": "Газпром нефть/Лукойл",
+          "name": "Газпром нефть / Лукойл",
           "status": "limited",
-          "level": "severe",
+          "level": "strained",
           "limit_l": null,
-          "note": "23.10 (ЕАНews): на части АЗС «Лукойла» топливо переставало поступать, на остальных очереди; 06.11 в Екатеринбурге выросли цены на АИ-92."
+          "note": "23.10–19.11: на части АЗС «Лукойла» топливо периодически пропадает, на остальных очереди; официальных данных о снятии лимитов нет."
         }
       ],
-      "queues_hours": 0.5,
+      "queues_hours": 0.4,
       "ai95_price_rub": 77.03,
       "diesel_price_rub": 81.0,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1sLVpEYjBDTzBQZGxPY1ktM2ZJdXhwLUNsQTZyM2xOdTQ5R3g4MUkyaEFpMTBXaTlPV3FqbnplR01PT2JWeU9hdUV2dGkySWxOMUF3TkVxdw?oc=5",
+        "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5vVXdiN2JHbUd5Q0hKNTJfN2oycXRSMnNVSGZpbmpnNlBTM1NkNnM4dTVzN3dFWnQzQ0ctbXlJbVVxMmZfbGt3bGdCaU5HWW1xNG9ZcldGZw?oc=5",
         "https://news.google.com/rss/articles/CBMicEFVX3lxTE5ZOXVsMlhGVzFmWkxPM2FIMWdMT2FTNDFwWmZPRTE2QThuTVNydk1YTktyaEZkZmxpVVdsVFp1LVRoTzhRRkpoU2hWUVJhbEd2SjF4RGZ4SWZuZURVaTFPVk9HUTlLeUxYTWJjQmtjczE?oc=5"
       ],
-      "note": "06–08.11: в Екатеринбурге АИ-92 подорожал на крупных заправках, локальные публикации сообщают о постепенном улучшении поставок; официальных данных о снятии лимитов нет."
+      "note": "18–19.11: на части АЗС Екатеринбурга временно пропало дизельное топливо; на независимых заправках цены на бензин снизились до 9 р/л за литр. Официальных сообщений о снятии лимитов нет."
     },
     {
       "region": "Хабаровский край",
@@ -798,7 +826,7 @@
       "lat": 45.04,
       "lon": 38.98,
       "level": "strained",
-      "updated": "2026-11-18T17:30:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -812,20 +840,21 @@
           "status": "open",
           "level": "strained",
           "limit_l": null,
-          "note": "18.11: в Сочи работают 49 АЗС, все сорта в наличии вторую неделю; 16.11 в Анапе работали 28 АЗС, на четырёх сохранялись лимиты — 30 л АИ-92/АИ-95 и 50 л ДТ; на М4 «Дон» топливо на всём протяжении, очередей нет."
+          "note": "20.11 (сводка мэрии Сочи): работают 49 АЗС, в наличии АИ-100 на 14, АИ-95 на 35, АИ-92 на 34, ДТ на 37, СУГ на 13 станциях — дефицитных сортов нет; 22.11 свежих данных нет."
         }
       ],
       "queues_hours": 0.3,
       "ai95_price_rub": 75.0,
       "diesel_price_rub": 80.0,
       "source_urls": [
+        "https://www.tourprom.ru/news/90539/",
         "https://www.tourprom.ru/news/90457/",
         "https://bloknotanapa.ru/news/toplivo-v-anape-16-noyabrya-limity-na-chetyryekh-a-2026479",
         "https://www.tourprom.ru/news/90432/",
         "https://www.yuga.ru/news/484660-rosneft-vnov-vvela-limity-na-prodazhu-topliva-kosnulis-li-ogranicheniya-krasnodarskogo-kraya/",
         "https://www.tourprom.ru/news/90342/"
       ],
-      "note": "18.11: в Сочи 49 АЗС, дефицитных сортов нет; в Анапе 16.11 работали 28 АЗС, на четырёх — лимит 30 л бензина и 50 л ДТ; на М4 «Дон» топливо везде, очередей нет. Лимиты «Роснефти» 30/50 л сохраняются."
+      "note": "22.11: в Сочи официальных сводок за выходные нет, по данным на 20.11 работали 49 АЗС, все сорта в наличии. В Анапе 16.11 работали 28 АЗС, на четырёх — лимит 30 л бензина и 50 л ДТ. Лимиты «Роснефти» 30/50 л сохраняются."
     },
     {
       "region": "Ингушетия",
@@ -858,7 +887,7 @@
       "lat": 54.2,
       "lon": 37.3,
       "level": "limited",
-      "updated": "2026-11-12T17:30:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -868,54 +897,65 @@
           "note": "с 07.11 не более 30 л за одну заправку; сотрудники АЗС срок действия ограничения не называют (Тульские новости)."
         },
         {
-          "name": "Газпромнефть / Лукойл / Тбойл",
+          "name": "Нефтьмагистраль / Тебойл",
           "status": "open",
           "level": "calm",
           "limit_l": null,
-          "note": "лимитов нет; в конце октября цены в регионе снижались, включая частные заправки."
+          "note": "22.11: полный ассортимент топлива в области — только на этих сетях."
+        },
+        {
+          "name": "Газпромнефть / Лукойл",
+          "status": "limited",
+          "level": "strained",
+          "limit_l": null,
+          "note": "22.11: полного ассортимента нет — АИ-95 «через раз», на части АЗС только АИ-92 и дизель."
         }
       ],
       "queues_hours": 0.2,
       "ai95_price_rub": 86.29,
       "diesel_price_rub": 85.0,
       "source_urls": [
+        "https://www.tourprom.ru/news/90539/",
         "https://newstula.ru/fn_1989316.html",
         "https://tulapressa.ru/2026/10/litr-tulskogo-benzina-ai-95-odin-iz-samyx-dorogostoyashhix-v-cfo/"
       ],
-      "note": "12.11: на АЗС «Роснефти» с 07.11 лимит 30 л, у остальных сетей ограничений нет. Цены ~86 р/л за АИ-95 (октябрь). WebSearch 12.11."
+      "note": "22.11: по отчёту водителей с М4 «Дон» полный ассортимент топлива в области есть только на «Нефтьмагистрали» и «Тебойле», на остальных сетях АИ-95 и дизель «через раз». Лимит «Роснефти» 30 л с 07.11 сохраняется."
     },
     {
       "region": "Севастополь",
       "lat": 44.6,
       "lon": 33.5,
-      "level": "strained",
-      "updated": "2026-11-18T17:30:00Z",
+      "level": "limited",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
-          "name": "ТЭС",
-          "status": "open",
-          "level": "calm",
-          "limit_l": null,
-          "note": "с 21.10 свободная продажа АИ-92, АИ-95 и ДТ без лимитов, цена не выше 100 р/л (заявление губернатора)."
+          "name": "АТАН",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 20,
+          "note": "19.11: после скупки топлива канистрами (до 200–500 л за раз) введён лимит — полный бак и не более 20 л в канистру; очереди."
         },
         {
-          "name": "АТАН",
-          "status": "open",
-          "level": "strained",
-          "limit_l": null,
-          "note": "11.11: ограничения в городе сняты, но свободная заправка премиального топлива доходит до 130 р/л (Турпром)."
+          "name": "ТЭС",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 20,
+          "note": "19.11: ограничение объёма отпуска — полный бак и до 20 л в канистру."
         }
       ],
-      "queues_hours": 0.2,
+      "queues_hours": 1.0,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNRS1NMHBkenIzek1DN2RZRU94Ui1vdksyeU82M1lrUWNldnZKSC1nclU0a2VZWHA5VzhzWGhtMl9PbFFmMUh4Q0wzMlF2NGxHREUwVG8yUGk0MHRUQVFmWkRmanhTT1N4LWk1OXVzcVZDVEl3dmgzZ2xDUk5ZWkl4Q0g3NksxVlBN?oc=5",
+        "https://news.google.com/rss/articles/CBMikAFBVV95cUxQMVBwdWMtalEtRTVONzdLTEp1cXZCaDVKN3hheXg2NjRtZl9WM1BfQ3pySGE4SEZCYllnYlpWTms5VWN3WkFnVEc0UjJLcXg2cnl6UGlsSGJTYjZxclNMOWNqdVFoZi1hQnBEejBoYmk0cmdEb0JhS0Juc2M2TzQwcm05UmM3RlBIV2ZrZFZnUkM?oc=5",
+        "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBWYWJVbzltRTBRWTQyN2s1MzVfSEhWYTRhSElydTMtUl9PYTlVa3UyUTZOb0lhV3ZXQ2dNOURQdjBJcXhQMFFj0gGbAUFVX3lxTE1XOEw0MENsWGVaenlsRVRfOVVFRmpaS3hKSWdyRW8xczRtUlZWUUxOM1R0dXV5RkdjSGRSNTlNYTlYU00tYnp3UGFvWXZHWUJtWHBWOUFybkhxdTNEWUliWmJ0eVF1RzdhcmVDU2xFMndDWjZUMzF2elBndVpZdnZscUNBUV8wUHdEWDlodkVtRDdqOFd3cFhZRHpF?oc=5",
         "https://www.tourprom.ru/news/90457/",
         "https://www.tourprom.ru/news/90432/",
         "https://www.tourprom.ru/news/90313",
         "https://news.ru/regions/situaciya-s-benzinom-v-krymu-i-sevastopole-21-oktyabrya-otmena-qr-kodov-ceny"
       ],
-      "note": "18.11: ограничений на отпуск топлива нет, свободная продажа сохраняется. 16.11 губернатор предупредил, что лимиты вернут при сохранении ажиотажа — отдельные водители заливают по 10–15 канистр за раз, проверяются случаи перепродажи."
+      "note": "19.11: свободная продажа, действовавшая с 21.10, прекращена — на АЗС «АТАН» и «ТЭС» вернули лимиты: полный бак и не более 20 л в канистру. Причина — ажиотаж и перепродажа, отдельные водители заливали по 200–500 л. На заправках очереди."
     },
     {
       "region": "Татарстан",
@@ -954,7 +994,7 @@
       "lat": 55.5,
       "lon": 37.5,
       "level": "strained",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл",
@@ -1071,7 +1111,7 @@
       "lat": 64.54,
       "lon": 40.52,
       "level": "limited",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл/Роснефть/РН-Северо-Запад",
@@ -1379,7 +1419,7 @@
       "lat": 59.93,
       "lon": 30.36,
       "level": "limited",
-      "updated": "2026-11-12T06:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -1390,17 +1430,17 @@
         },
         {
           "name": "Лукойл",
-          "status": "open",
-          "level": "calm",
+          "status": "limited",
+          "level": "strained",
           "limit_l": null,
-          "note": "09.11: ограничений нет (Фонтанка)."
+          "note": "19.11: лимиты и очереди на АЗС города, часть станций отпускает топливо только за наличные."
         },
         {
           "name": "Газпромнефть",
-          "status": "open",
-          "level": "calm",
+          "status": "limited",
+          "level": "strained",
           "limit_l": null,
-          "note": "09.11: ограничений нет (Фонтанка)."
+          "note": "19.11: ограничения на отпуск, на части АЗС отсутствует АИ-95."
         },
         {
           "name": "Татнефть",
@@ -1414,10 +1454,12 @@
       "ai95_price_rub": 69.0,
       "diesel_price_rub": 80.0,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMixgFBVV95cUxOWWMzU2lZUElVdFdjUDZ1aDM5UXU1d0RLeXdKVy1UMEhBcUxxRE1uQkJVQTRMakROZTFtTHlONTVzRHM2LUFQblhlX21OVTlwNUV3UTVJdm9fcVpYdFRWVTRKT1BGMWphR0I3MWRkVkZidnJETFhtSWd6VWxtNzZWVEczNG5IWU1ENVRKcm1jNUl5X0U1NTV6NUFIbnl5Tm1nMnFnenJ3aENkRlJvVlRyQkR3MldCNFhfNVo4bU9mcnAyOXFRREE?oc=5",
+        "https://news.google.com/rss/articles/CBMiywFBVV95cUxNSjkwX1RiNVlfZldZTlZ2S2FEVDM0dW9uQmx6WnY1bGZQV0ZRRDMzRGRLa29vcm44bmdKbDZSN3E2WjZTbHpqV3Q2U3ZHb3ZOMTBOT0E1enlKbWRWRkh4YU1za1Z6QjF4Z2d6TlV0dEsxdTVSQnR0cUY0TXctNnpHYm94bmUzOTJieHRXR3BEcXkwLXZ4MS1KSHVQak9zZXhfekRxRW1ER1dwSklGWUxBOTFQaW5waVVlU2xDR1MtRWNSbjJuNXNDMzRqbw?oc=5",
         "https://www.fontanka.ru/2026/11/09/76754792/",
         "https://news.google.com/rss/articles/CBMiugFBVV95cUxOaWJWRjNWYk44UU9EZzFDSzBKY0gtSFRaTFdWSzYzWDVuMjVfdlpaWWloVjVHT3dNXzdVN0UzcXlybDkyUmg2dkpSVFRQNUczM1pFM2RpNllfMnMwRlRFMHh0NHhtVTZFZWtDbjFmYktraVNYZlNvcEJTRDFQTjdaU1JTRUEzbzFPUm1EMlIwZmx6OXRpbnhuVVphZTFMZGo2Z181Y215Y0s0T3l1SThsX1ZlZTcyUGFTX3c?oc=5"
       ],
-      "note": "09.11: наличие подтверждалось на 76% АЗС по АИ-92, 73% по АИ-95 и 77% по ДТ; лимиты действуют на «Роснефти», «Лукойл», «Газпромнефть», «Тебойл», «Сургутнефтегаз» и «Татнефть» работают без ограничений (частично нет АИ-95). 11.11 отмечен рост ажиотажа."
+      "note": "19–22.11: на АЗС Петербурга лимиты, очереди и на части станций продажа только за наличные; 22.11 цены продолжили рост. Наличие АИ-95 неполное, лимит «Роснефти» 30 л сохраняется."
     },
     {
       "region": "Амурская область",
@@ -1471,7 +1513,7 @@
       "lat": 48.7,
       "lon": 44.5,
       "level": "strained",
-      "updated": "2026-11-18T17:30:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Лукойл / Газпром нефть / Роснефть",
@@ -1485,18 +1527,19 @@
       "ai95_price_rub": 76.03,
       "diesel_price_rub": 78.0,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5EWG9HRTR4aFRaS25CM0RIbTFPN3FsbWlrb1JFSEE3M0xHQUFKMXBCQ3ptcGVuaVdnVXBiQ3ZRTkc5Zm5OWEpXRTFqZl9YNERCSjF3eEdWdw?oc=5",
         "https://www.kavkaz-uzel.eu/articles/428406",
         "https://novostivolgograda.ru/news/2026-11-13/azhiotazh-vernulsya-volgogradtsy-snova-shturmuyut-azs-5731681",
         "https://bloknot-volzhsky.ru/news/posle-ataki-bpla-voditeli-volzhskogo-vystroilis-v--2025882"
       ],
-      "note": "17.11: повышенный спрос стабилизировался, очередь на заправках сократились до нескольких машин; на отдельных АЗС сохраняется нехватка марок — где-то только АИ-92, где-то только АИ-95, на части станций лишь ДТ. Официальных лимитов не вводилось."
+      "note": "17.11: нехватка бензина в Волгограде сохранилась после спада ажиотажного спроса — водители сообщают об отсутствии АИ-95, на отдельных АЗС остаётся только одна марка. Официальных лимитов не вводилось."
     },
     {
       "region": "Ростовская область",
       "lat": 47.23,
       "lon": 39.72,
       "level": "limited",
-      "updated": "2026-11-18T17:30:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Роснефть",
@@ -1524,12 +1567,13 @@
       "ai95_price_rub": 71.25,
       "diesel_price_rub": 76.5,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1Hb0R3ME9BNTdPcXMwalRWY1AtV0dEbF9nNW5aYXlsX1NCcVNkZ2hZRnU5WXAtM19Ra2FoRS1iNU1SaHZNbEktc21FUjdSYzdIQkp6QXBBQQ?oc=5",
         "https://www.tourprom.ru/news/90457/",
         "https://www.tourprom.ru/news/90432/",
         "https://www.donnews.ru/limity-na-otpusk-benzina-vvela-rosneft-v-rostovskoy-oblasti",
         "https://donday-volgodonsk.ru/v-volgodonske-rosneft-vnov-vvela-limity-na-otpusk-topliva.html/amp"
       ],
-      "note": "18.11: на М4 «Дон» топливо есть на всём маршруте, очередей нет. На «Лукойле» между Каменск-Шахтинским и Ростовом ограничений нет, но на части станций области стал пропадать АИ-95. Лимиты «Роснефти» 30/50 л сохраняются."
+      "note": "20.11: перебои с поставками топлива сохраняются у независимых АЗС области, сетевые операторы работают стабильно; на М4 «Дон» топливо есть на всём маршруте, очередей нет. Лимиты «Роснефти» 30/50 л сохраняются."
     },
     {
       "region": "Северная Осетия - Алания",
@@ -1609,33 +1653,34 @@
       "lat": 44.7,
       "lon": 34.3,
       "level": "severe",
-      "updated": "2026-11-18T17:30:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "АТАН",
           "status": "limited",
           "level": "severe",
           "limit_l": 20,
-          "note": "18.11: с 08:00 отпускает АИ-92, АИ-95 и ДТ — единственный источник всех трёх сортов; лимит 20 л в бак, канистры запрещены, талоны и топливные карты не действуют, оплата наличными."
+          "note": "22.11: с 08:00 отпускает АИ-92 и ДТ по субсидированной цене; лимит 20 л в бак, канистры запрещены, талоны и топливные карты не действуют, оплата наличными."
         },
         {
           "name": "ТЭС",
           "status": "limited",
           "level": "severe",
           "limit_l": 20,
-          "note": "18.11: только АИ-92 — с 14:00 на АЗС вдоль «Тавриды» (Симферопольский, Белогорский, Ленинский районы), с 15:00 в Красногвардейском, Нижнегорском, Бахчисарайском районах, Керчи, Симферополе, Феодосии и Евпатории. АИ-95 и ДТ в сводке сети на этот день нет."
+          "note": "22.11: с 14:00 — все три сорта на АЗС вдоль «Тавриды», с 15:00 — в районах, городах и на ЮБК; лимит 20 л в бак."
         }
       ],
       "queues_hours": 1.0,
       "ai95_price_rub": 100.0,
       "diesel_price_rub": 100.0,
       "source_urls": [
+        "https://www.tourprom.ru/news/90539/",
         "https://www.tourprom.ru/news/90457/",
         "https://www.tourprom.ru/news/90432/",
         "https://intent.press/ru/news/obshchestvo/2026/v-krymu-snova-defitsit-benzina-na-azs-vvodiat-kartochki/",
         "https://www.tourprom.ru/news/90342/"
       ],
-      "note": "18.11: субсидированное топливо по цене не выше 100 р/л; «АТАН» с 08:00 — АИ-92, АИ-95 и ДТ, «ТЭС» с 14:00 — только АИ-92. Лимит 20 л в бак, канистры запрещены, талоны и топливные карты не действуют, расчёт наличными. График и адреса — toplivo.rk.gov.ru."
+      "note": "22.11: соцтопливо на двух сетях — «АТАН» с 08:00 (АИ-92 и ДТ), «ТЭС» с 14:00 (все три сорта). По субсидированной цене — очереди, по 130–140 р/л без льготы свободнее. Лимит 20 л в бак, канистры запрещены, расчёт наличными. График и адреса — toplivo.rk.gov.ru."
     },
     {
       "region": "Челябинская область",
@@ -1947,25 +1992,27 @@
       "lat": 45.1,
       "lon": 43.7,
       "level": "strained",
-      "updated": "2026-11-17T17:28:08Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Газпромнефть / Лукойл / Роснефть",
           "status": "open",
           "level": "strained",
           "limit_l": null,
-          "note": "17.11: ограничения на объём отпуска сняты ещё в конце октября; на части АЗС по-прежнему отказывают в заправке канистр (жалобы на «Лукойл»), качество бензина вызывает претензии водителей."
+          "note": "17.11: ограничения на объём отпуска сняты в конце октября; 20–21.11 в крае новая волна ажиотажа, на части АЗС отказывают в заправке канистр, качество бензина вызывает претензии."
         }
       ],
       "queues_hours": 0.3,
       "ai95_price_rub": 130.0,
       "diesel_price_rub": 76.0,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5vOWx3Y1F4TzBOcXd1SWNmcm5NX2lOQXFxbENUcHlzWGdqR3BLTGx6YnJSbW5JQ2RqRlJQU3hBODhmblBXaHBlNG9CTHkzcjhtZEs4NGVsdw?oc=5",
+        "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5sbFZTZFNoV0JvclIzR0xTNHlWNWUtcExRUU9fMkhtZ0RTdTA2M2RNSHBTX0J3ZTBFbWtiakptdEtRdEk4NW1HaFM3T2RleXNxaGdVU0FxQQ?oc=5",
         "https://www.kavkaz-uzel.eu/articles/428413",
         "https://www.kommersant.ru/doc/8740546",
         "https://atvmedia.ru/news/social/79667"
       ],
-      "note": "17.11: лимиты на объём продажи сняты в конце октября; на отдельных АЗС сохраняются ограничения на отпуск в канистры, водители жалуются на качество бензина."
+      "note": "20–22.11: в крае новая волна ажиотажного спроса («бензиновая паника»); поставки идут, лимиты на объём продажи не возвращены, но на части АЗС по-прежнему отказывают в заправке канистр, есть жалобы на качество бензина."
     },
     {
       "region": "Донецкая обл.",
@@ -2134,26 +2181,35 @@
       "region": "Астраханская область",
       "lat": 46.35,
       "lon": 48.04,
-      "level": "strained",
-      "updated": "2026-11-17T17:28:08Z",
+      "level": "limited",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
-          "name": "Лукойл / Газпром нефть",
+          "name": "Лукойл",
+          "status": "limited",
+          "level": "limited",
+          "limit_l": 40,
+          "note": "20.11: на АЗС сети в Астрахани введён лимит — не более 40 л бензина в одни руки (Астрахань 24, Astrakhanpost)."
+        },
+        {
+          "name": "Газпром нефть",
           "status": "open",
           "level": "strained",
           "limit_l": null,
-          "note": "09.11 (Кавказский Узел, опрос водителей): очередей практически нет, ограничений на объём продажи нет, ажиотаж спал; АИ-92 66,5 р/л, АИ-95 72 р/л, АИ-100 97,8 р/л, ДТ ниже 78 р/л."
+          "note": "сведений о лимитах нет; 14.11 водители сообщали об отсутствии бензина на части АЗС города."
         }
       ],
       "queues_hours": 0.3,
       "ai95_price_rub": 72.0,
       "diesel_price_rub": 78.0,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMikAFBVV95cUxNQTdjdk9XdU5NdTJ3RUpoT2FPR1lmQ2FsbWR1Z1hUU3NKVUFTVFMwb0t4aW5GUF8tVG5YdUs3MnNKLUJqN1loS19UYUZOaUZFRW5EV0hVbVNycUw2cFFveWhkTEJHZjZ0aG9MWlBmcFA2aDE2am9ZQ1NQTEI0N3N4UXdWSWhXWGQ1NUxyV0wwUDg?oc=5",
+        "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9qcUlUS3paWEZBazBIX0xYUTRabFJzdFZxVW1iMVI2dWFZTmpZNEF3UlFhOUMxOUs4c0J2cE9rb3puUlpQSW9VajU3cExQYUpGNFdTU244WEM?oc=5",
         "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5ldFloNURJWGJvWG1NZjNpNUY4OXJiX0ttZV82LXpDREZWY1hoaUx6bFE3WTlvSXBldi1XVThEMkxEWWpsdXpOZHVTTFNHMUw2Y0tMTw?oc=5",
         "https://news.google.com/rss/articles/CBMizgFBVV95cUxNU1VEZDF0UUoxVVg3X0g2UHlQTHQ3dTVEMUhPeHJRMlMySVluX0o4YTlvQlFVNWstSGo2UjlkZGdFd3JpU3J4TE9WcnJKdGFJZE5KWW94eDctWm5EcUpwNE5IalN4TWJsWF96cWVBOFlNLXg5VkdsdmEwVk83T19Qa2tkdWktVXY2d2xKdmo0R3dtNTZNM2JpT2lOOC1WTVNUaUpPNHFPa2RLMTdRa0JrNEFDODNVejJGeDgwbGdJWWRjT2NYR3FIQnBtbG01UdIBzgFBVV95cUxNU1VEZDF0UUoxVVg3X0g2UHlQTHQ3dTVEMUhPeHJRMlMySVluX0o4YTlvQlFVNWstSGo2UjlkZGdFd3JpU3J4TE9WcnJKdGFJZE5KWW94eDctWm5EcUpwNE5IalN4TWJsWF96cWVBOFlNLXg5VkdsdmEwVk83T19Qa2tkdWktVXY2d2xKdmo0R3dtNTZNM2JpT2lOOC1WTVNUaUpPNHFPa2RLMTdRa0JrNEFDODNVejJGeDgwbGdJWWRjT2NYR3FIQnBtbG01UQ?oc=5",
         "https://www.kavkaz-uzel.eu/articles/428206"
       ],
-      "note": "14.11: водители вновь сообщили об отсутствии бензина на части АЗС Астрахани — новая волна ажиотажного спроса."
+      "note": "20–21.11: на заправках «Лукойла» в Астрахани вернули ограничение — до 40 л бензина в одни руки. Ранее, 14.11, водители сообщали об отсутствии бензина на части АЗС города."
     },
     {
       "region": "Смоленская область",
@@ -2400,7 +2456,7 @@
       "lat": 51.73,
       "lon": 36.18,
       "level": "limited",
-      "updated": "2026-11-10T18:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
           "name": "Сети",
@@ -2423,24 +2479,33 @@
       "lat": 52.61,
       "lon": 39.57,
       "level": "limited",
-      "updated": "2026-11-10T18:00:00Z",
+      "updated": "2026-11-22T17:30:00Z",
       "networks": [
         {
-          "name": "Газпромнефть / Лукойл / Роснефть",
+          "name": "Роснефть",
           "status": "limited",
           "level": "limited",
           "limit_l": 30,
-          "note": "Чет-нечет с 11.07 отменён 31.07 (по сообщению от 04.08); сети сами определяют объём отпуска. Возврат чет-нечет с 13.08 — по отдельным сообщениям, не подтверждено. Лимит 30л (по данным июля). Запрет канистр (по данным 20.09). WebSearch 10.10."
+          "note": "17.11: на АЗС сети вновь введены ограничения — 30 л в бак и запрет заправки канистр (Gorod48)."
+        },
+        {
+          "name": "Прочие сети",
+          "status": "open",
+          "level": "strained",
+          "limit_l": null,
+          "note": "22.11: по отчёту с трассы М4 заправка на «Роснефти» в области проходит без очередей, топливо есть."
         }
       ],
       "queues_hours": 0.5,
       "ai95_price_rub": 69.0,
       "diesel_price_rub": 93.0,
       "source_urls": [
+        "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1UZzZOY2FQMW9KaW5yMElQMlNEZ1dQR2FmQUktM0lPcTd3d3VNX3dLaGdOS0JoX3A2bmlrU2Z5QW41T2FISkFzU3dfX2x1ZGFjU3B1TmNKRQ?oc=5",
+        "https://www.tourprom.ru/news/90539/",
         "https://lipeck.bezformata.com/listnews/v-regione-16-sentyabrya/163804033",
         "https://www.kommersant.ru/doc/8862601"
       ],
-      "note": "10.10 WebSearch: октябрьских данных не найдено. Статус чет-нечет не подтверждён. Лимит 30л по последним сообщениям."
+      "note": "17.11: на АЗС «Роснефти» в области вернули лимит 30 л в бак и запрет канистр. 22.11 водители на М4 сообщают, что в Липецкой области топливо есть, очередей нет."
     },
     {
       "region": "Редопологовская область",
