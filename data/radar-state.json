@@ -87,8 +87,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795441274,
-      "source_text": "23.11.2026 16:41 МСК\nМыс Херсонес, Фиолент Бухта Казачья Севастополь С моря в направлении Фиолента фиксацииБПЛА\n\n23.11.2026 16:37 МСК\nКача Бельбек Севастополь Опасность по МВШ со сбросами"
+      "last_event_ts": 1795441882,
+      "source_text": "23.11.2026 16:51 МСК\nОт Фруктовое в направлении Верхнесадовое Севастополь Фиксации БПЛА\n\n23.11.2026 16:37 МСК\nКача Бельбек Севастополь Опасность по МВШ со сбросами"
     },
     "Белгородская область": {
       "bpla": false,
@@ -670,30 +670,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1795415354,
       "source_text": "23.11.2026 09:29 МСК\nСчастье и близлежащие ЛНР Особое внимание трассы Опасность по БПЛА"
-    },
-    {
-      "key": "бердянск|запорожская область",
-      "name": "Бердянск",
-      "lat": 46.755673,
-      "lon": 36.789317,
-      "region": "Запорожская область",
-      "bpla": false,
-      "bplaDim": false,
-      "danger": true,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "mvsh": false,
-      "mvshDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": false,
-      "fill": "#ea580c",
-      "last_event_ts": 1795398914,
-      "source_text": "23.11.2026 04:55 МСК\nБердянск и близлежащие, тревога по БпЛА"
     },
     {
       "key": "нововоронеж|воронежская область",
@@ -1342,6 +1318,30 @@
       "fill": "#ea580c",
       "last_event_ts": 1795441274,
       "source_text": "23.11.2026 16:41 МСК\nМыс Херсонес, Фиолент Бухта Казачья Севастополь С моря в направлении Фиолента фиксацииБПЛА"
+    },
+    {
+      "key": "фруктовое|севастополь",
+      "name": "Фруктовое",
+      "lat": 44.680179,
+      "lon": 33.603253,
+      "region": "Севастополь",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795441882,
+      "source_text": "23.11.2026 16:51 МСК\nОт Фруктовое в направлении Верхнесадовое Севастополь Фиксации БПЛА"
     }
   ],
   "districts": {
@@ -1708,6 +1708,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 307544,
+      "text": "От Фруктовое в направлении Верхнесадовое\nСевастополь\nФиксации БПЛА",
+      "ts": 1795441882,
+      "time_label": "23.11.2026 16:51 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 307543,
       "text": "Дорогие наши подписчики\nМы открыли территориальные каналы тревог для вашего удобства.\nНаши  каналы:\nНаш основной канал\n❗️\nhttps://t.me/kupolrussia\n‼️\nТульская область\n‼️\nhttps://t.me/KupolTula\n‼️\nМосковская область\n‼️\nhttps://t.me/KupolMoscow\n‼️\nКалужская область\n‼️\nhttps://t.me/KupolKaluga\n‼️\nСмоленская область\n‼️\nhttps://t.me/KupolSmolenskay\nНажимаем на свой регион и подписываемся.\nС уважением, команда\nКупол России!",
@@ -2339,14 +2347,6 @@
       "time_label": "23.11.2026 13:31 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 110062,
-      "text": "Костромская область\nОтбой опасности по БПЛА",
-      "ts": 1795428608,
-      "time_label": "23.11.2026 13:10 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -2356,13 +2356,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795441708,
-  "last_event_at": "2026-11-23T13:48:28Z",
-  "fetched_at": "2026-11-23T13:50:04.102499Z",
+  "timestamp": 1795441882,
+  "last_event_at": "2026-11-23T13:51:22Z",
+  "fetched_at": "2026-11-23T14:00:04.021640Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-23T13:50:04.102499Z",
-    "source_age_seconds": 96,
+    "generated_at": "2026-11-23T14:00:04.021640Z",
+    "source_age_seconds": 522,
     "city_count": 46,
     "region_count": 11,
     "feed_count": 80
