@@ -488,13 +488,13 @@
    "agent": "world-events",
    "checks": {
     "schema": "fail: старше 14 дней",
-    "urls_alive": "ok",
+    "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "schema, duplicate:2026-11-01-hormuz-irgc-two-tankers-mine-claim"
+   "reject_reason": "schema, dead_url, duplicate:2026-11-01-hormuz-irgc-two-tankers-mine-claim"
   },
   {
    "id": "2026-11-07-gulf-oman-huda-centcom",
@@ -1769,5 +1769,5 @@
    "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-23T03:34:34Z"
+ "validated_at": "2026-11-23T11:34:39Z"
 }
