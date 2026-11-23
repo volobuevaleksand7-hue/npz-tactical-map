@@ -488,13 +488,13 @@
    "agent": "world-events",
    "checks": {
     "schema": "fail: старше 14 дней",
-    "urls_alive": "fail",
+    "urls_alive": "ok",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "schema, dead_url, duplicate:2026-11-01-hormuz-irgc-two-tankers-mine-claim"
+   "reject_reason": "schema, duplicate:2026-11-01-hormuz-irgc-two-tankers-mine-claim"
   },
   {
    "id": "2026-11-07-gulf-oman-huda-centcom",
@@ -1769,80 +1769,6 @@
    "reject_reason": "dead_url"
   },
   {
-   "id": "2026-11-22-rabigh-refinery-houthi-claim",
-   "occurred_at": "2026-11-22",
-   "type": "strike",
-   "region": "middle_east",
-   "status": "reported",
-   "title": "Хуситы заявили об ударе по НПЗ Рабиг в Саудовской Аравии",
-   "summary": "22 ноября военный представитель хуситов Яхья Сариа заявил о двух операциях: ударе по НПЗ Рабиг на красноморском побережье Саудовской Аравии и по радиолокационному объекту в Вади ад-Давасир южнее Эр-Рияда. Данных о типе применённых средств и масштабе повреждений не приводилось; хуситы заявили о прямом попадании, независимого подтверждения нет. Возглавляемая Саудовской Аравией коалиция ранее в тот же день сообщила, что перехватила и уничтожила беспилотник, летевший в западный район страны, где расположены энергетические объекты; Рабиг находится примерно в 165 км к северу от Джидды, там работает НПЗ и нефтехимический комплекс Petro Rabigh (Saudi Aramco и Sumitomo Chemical).",
-   "fuel_effect": "Влияние не оценено.",
-   "title_en": "Houthis claim strike on Rabigh refinery in Saudi Arabia",
-   "summary_en": "On 22 November Houthi military spokesman Yahya Sarea announced two operations: a strike on the Rabigh refinery on Saudi Arabia's Red Sea coast and on a radar facility in Wadi ad-Dawasir south of Riyadh. No details were given on the weapons used or the extent of the damage; the Houthis claimed a direct hit, and there is no independent confirmation. The Saudi-led coalition said earlier the same day that it had intercepted and destroyed a drone flying towards the country's western region, which hosts energy facilities; Rabigh is about 165 km north of Jeddah and hosts the Petro Rabigh refinery and petrochemical complex (Saudi Aramco and Sumitomo Chemical).",
-   "fuel_effect_en": "Impact not assessed.",
-   "lat": 22.8,
-   "lon": 39.03,
-   "precision": "point",
-   "radius_km": 0,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "CNBC",
-     "url": "https://www.cnbc.com/2026/11/23/trump-iran-war-hormuz-saudi-.html",
-     "date": "2026-11-23"
-    },
-    {
-     "publisher": "Free Press Journal (Xinhua)",
-     "url": "https://www.freepressjournal.in/world/yemen-houthis-claim-strikes-on-saudi-arabias-rabigh-oil-refinery-and-radar-facility-near-riyadh-amid-escalating-tensions",
-     "date": "2026-11-22"
-    },
-    {
-     "publisher": "Middle East Eye",
-     "url": "https://www.middleeasteye.net/live-blog/live-blog-update/houthis-say-they-attacked-saudi-arabias-rabigh-oil-refinery",
-     "date": "2026-11-22"
-    }
-   ],
-   "found_at": "2026-11-23T19:24:35Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-22-hormuz-two-supertankers-mines-irgc",
-   "occurred_at": "2026-11-22",
-   "type": "attack_shipping",
-   "region": "middle_east",
-   "status": "reported",
-   "title": "КСИР заявил о подрыве двух супертанкеров на минах в Ормузском проливе",
-   "summary": "22 ноября ВМС Корпуса стражей исламской революции (КСИР) сообщили, что два супертанкера, шедшие по объявленным Ираном неразрешённым маршрутам, подорвались на морских минах и остановились — к северу от оманского острова Аль-Ганам и восточнее Ормузского пролива. Названия судов, данные о пострадавших и характере повреждений не приводились. Отдельно ВМС регулярной армии Ирана в тот же день заявили, что два нефтяных танкера загорелись после подрыва на минах восточнее пролива; совпадают ли эти сообщения, не уточнялось. КСИР также заявил об уничтожении американского беспилотника MQ-1 Predator восточнее пролива.",
-   "fuel_effect": "Влияние не оценено.",
-   "title_en": "IRGC says two supertankers struck mines in the Strait of Hormuz",
-   "summary_en": "On 22 November the navy of Iran's Islamic Revolutionary Guard Corps (IRGC) said two supertankers sailing on routes Iran has declared off-limits struck naval mines and came to a halt, north of Oman's Al Ghanam Island and east of the Strait of Hormuz. No vessel names, casualty figures or details of the damage were given. Separately, the navy of Iran's regular army said the same day that two oil tankers caught fire after striking mines east of the strait; it was not specified whether the two statements referred to the same vessels. The IRGC also said it destroyed a US MQ-1 Predator drone east of the strait.",
-   "fuel_effect_en": "Impact not assessed.",
-   "lat": 26.35,
-   "lon": 56.9,
-   "precision": "zone",
-   "radius_km": 80,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "Anews (Anadolu)",
-     "url": "https://www.anews.com.tr/middle-east/2026/11/22/iran-says-2-supertankers-struck-naval-mines-near-strait-of-hormuz",
-     "date": "2026-11-22"
-    },
-    {
-     "publisher": "The Hans India",
-     "url": "https://www.thehansindia.com/news/international/irans-irgc-says-two-violating-supertankers-exploded-after-hitting-mines-in-hormuz-strait-1144895",
-     "date": "2026-11-22"
-    },
-    {
-     "publisher": "National Herald India",
-     "url": "https://www.nationalheraldindia.com/international/irans-irgc-says-two-supertankers-struck-mines-in-strait-of-hormuz",
-     "date": "2026-11-23"
-    }
-   ],
-   "found_at": "2026-11-23T19:24:35Z",
-   "agent": "world-events"
-  },
-  {
    "id": "2026-11-23-libya-sharara-pipeline-closure",
    "occurred_at": "2026-11-23",
    "type": "outage",
@@ -1877,44 +1803,16 @@
     }
    ],
    "found_at": "2026-11-23T19:24:35Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-21-alabama-southern-natural-gas-pipeline-explosion",
-   "occurred_at": "2026-11-21",
-   "type": "outage",
-   "region": "north_america",
-   "status": "confirmed",
-   "title": "Взрыв и пожар на газопроводе Southern Natural Gas в Алабаме",
-   "summary": "Поздно вечером 21 ноября (около 23:30 по местному времени) на участке газопровода Southern Natural Gas близ Уорда в округе Самтер (штат Алабама) произошёл выброс газа с пожаром; пламя поднималось более чем на 30 метров и было видно за десятки километров. Пострадавших и повреждённых строений нет, жителей ближайших районов эвакуировали на ночь. Компания перекрыла и сбросила давление на участке, пожар потушен, причины расследуются. В уведомлении для грузоотправителей объявлен форс-мажор и снижена пропускная способность повреждённой ветки South Main Loop Line восточнее компрессорной станции York; по заявлению компании, поставки потребителям не прерваны. Southern Natural Gas — система протяжённостью около 6,9 тыс. миль, которой совместно владеют Kinder Morgan и Southern Company.",
-   "fuel_effect": "Участок магистрального газопровода выведен из строя, объявлен форс-мажор и сокращена пропускная способность; по данным оператора, поставки потребителям не прерваны.",
-   "title_en": "Explosion and fire on the Southern Natural Gas pipeline in Alabama",
-   "summary_en": "Late on 21 November (around 23:30 local time) a gas release and fire occurred on a section of the Southern Natural Gas pipeline near Ward in Sumter County, Alabama; flames rose more than 30 metres and were visible tens of kilometres away. There were no injuries and no structures were damaged, and residents of nearby areas were evacuated overnight. The company shut down and depressurised the section, the fire was extinguished and the cause is under investigation. A notice to shippers declared force majeure and cut capacity on the damaged South Main Loop Line east of the York compressor station; according to the company, customer deliveries were not affected. Southern Natural Gas is a roughly 6,900-mile system jointly owned by Kinder Morgan and Southern Company.",
-   "fuel_effect_en": "A section of the interstate gas pipeline is out of service, with force majeure declared and capacity reduced; according to the operator, customer deliveries were not interrupted.",
-   "lat": 32.36,
-   "lon": -88.28,
-   "precision": "point",
-   "radius_km": 0,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "CBS News",
-     "url": "https://www.cbsnews.com/news/natural-gas-pipeline-fire-ward-alabama/",
-     "date": "2026-11-22"
-    },
-    {
-     "publisher": "NBC News (AP)",
-     "url": "https://www.nbcnews.com/news/us-news/natural-gas-pipeline-fire-shoots-flames-air-alabama-cause-investigatio-rcna610717",
-     "date": "2026-11-22"
-    },
-    {
-     "publisher": "Yellowhammer News",
-     "url": "https://yellowhammernews.com/a-southern-natural-gas-pipeline-exploded-near-ward-in-sumter-county-late-saturday-heres-what-we-know/",
-     "date": "2026-11-23"
-    }
-   ],
-   "found_at": "2026-11-23T19:24:35Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 3,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   },
   {
    "id": "2026-11-23-pakistan-petrol-dealers-strike",
@@ -1946,8 +1844,17 @@
     }
    ],
    "found_at": "2026-11-23T19:24:35Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 2,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-23T11:34:39Z"
+ "validated_at": "2026-11-23T19:32:21Z"
 }
