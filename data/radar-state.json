@@ -87,8 +87,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795440482,
-      "source_text": "23.11.2026 16:28 МСК\nСевастополь Опасность по БПЛА\n\n23.11.2026 01:00 МСК\nКраснодарский край Тревога по МВШ от Крыма"
+      "last_event_ts": 1795441074,
+      "source_text": "23.11.2026 16:28 МСК\nСевастополь Опасность по БПЛА\n\n23.11.2026 16:37 МСК\nКача Бельбек Севастополь Опасность по МВШ со сбросами"
     },
     "Белгородская область": {
       "bpla": false,
@@ -792,6 +792,30 @@
       "source_text": "23.11.2026 07:40 МСК\nСураж и близлежащие Опасность по БПЛА Брянская область"
     },
     {
+      "key": "кача|автономная республика крым",
+      "name": "Кача",
+      "lat": 44.772916,
+      "lon": 33.543659,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": true,
+      "mvshDim": true,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795441074,
+      "source_text": "23.11.2026 16:37 МСК\nКача Бельбек Севастополь Опасность по МВШ со сбросами"
+    },
+    {
       "key": "докучаевск|донецкая народная республика",
       "name": "Докучаевск",
       "lat": 47.7522,
@@ -995,8 +1019,8 @@
       "attention": false,
       "uab": false,
       "uabDim": false,
-      "mvsh": false,
-      "mvshDim": false,
+      "mvsh": true,
+      "mvshDim": true,
       "fpv": false,
       "rocket": false,
       "rocket_level": false,
@@ -1004,8 +1028,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1795440482,
-      "source_text": "23.11.2026 16:28 МСК\nСевастополь Опасность по БПЛА"
+      "last_event_ts": 1795441074,
+      "source_text": "23.11.2026 16:28 МСК\nСевастополь Опасность по БПЛА\n\n23.11.2026 16:37 МСК\nКача Бельбек Севастополь Опасность по МВШ со сбросами"
     },
     {
       "key": "кремённая|луганская народная республика",
@@ -1630,12 +1654,20 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
-      "last_event_ts": 1795440482,
-      "source_text": "23.11.2026 16:28 МСК\nСевастополь Опасность по БПЛА"
+      "last_event_ts": 1795441074,
+      "source_text": "23.11.2026 16:28 МСК\nСевастополь Опасность по БПЛА\n\n23.11.2026 16:37 МСК\nКача Бельбек Севастополь Опасность по МВШ со сбросами"
     }
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 307539,
+      "text": "Кача\nБельбек\nСевастополь\nОпасность по МВШ со сбросами",
+      "ts": 1795441074,
+      "time_label": "23.11.2026 16:37 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 307538,
       "text": "Севастополь\nОпасность по БПЛА",
@@ -2267,14 +2299,6 @@
       "time_label": "23.11.2026 13:06 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 307491,
-      "text": "Новозыбков и близлежащие\nопасность по БПЛА\nБрянская область",
-      "ts": 1795428344,
-      "time_label": "23.11.2026 13:05 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2284,14 +2308,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795440482,
-  "last_event_at": "2026-11-23T13:28:02Z",
-  "fetched_at": "2026-11-23T13:30:03.557184Z",
+  "timestamp": 1795441074,
+  "last_event_at": "2026-11-23T13:37:54Z",
+  "fetched_at": "2026-11-23T13:40:03.866181Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-23T13:30:03.557184Z",
-    "source_age_seconds": 121,
-    "city_count": 43,
+    "generated_at": "2026-11-23T13:40:03.866181Z",
+    "source_age_seconds": 129,
+    "city_count": 44,
     "region_count": 11,
     "feed_count": 80
   }
