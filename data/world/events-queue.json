@@ -569,14 +569,14 @@
    "found_at": "2026-11-09T19:20:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 2,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "dead_url"
+   "reject_reason": "schema, dead_url"
   },
   {
    "id": "2026-11-08-khor-mor-gas-field-drone-halt",
@@ -610,14 +610,14 @@
    "found_at": "2026-11-09T19:20:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "unknown",
     "neutral_lexicon": "ok",
     "independent_sources": 1,
     "translation": "ok"
    },
-   "verdict": "needs_source",
-   "reject_reason": "нужен второй независимый издатель"
+   "verdict": "rejected",
+   "reject_reason": "schema"
   },
   {
    "id": "2026-11-07-us-sanctions-canada-iran-finance",
@@ -1769,5 +1769,5 @@
    "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-22T19:34:37Z"
+ "validated_at": "2026-11-23T03:34:34Z"
 }
