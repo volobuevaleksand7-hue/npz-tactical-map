@@ -72,7 +72,7 @@
     "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -86,9 +86,9 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1795510428,
-      "source_text": "24.11.2026 11:53 МСК\nШтормовое, Евпатория, Саки, Новофедоровка, Николаевка Возможно на Симферополь отбой опасности по БПЛА Режим повышенного внимания сохраняется"
+      "fill": "#d8c06a",
+      "last_event_ts": 1795511198,
+      "source_text": "24.11.2026 12:06 МСК\nСкадовский район, Скадовск и близлежащие опасность по БПЛА с севера"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -155,6 +155,30 @@
     }
   },
   "cities": [
+    {
+      "key": "скадовск|херсонская область",
+      "name": "Скадовск",
+      "lat": 46.11313,
+      "lon": 32.90978,
+      "region": "Херсонская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795511198,
+      "source_text": "24.11.2026 12:06 МСК\nСкадовский район, Скадовск и близлежащие опасность по БПЛА с севера"
+    },
     {
       "key": "симферополь|автономная республика крым",
       "name": "Симферополь",
@@ -612,9 +636,42 @@
       "source_text": "24.11.2026 11:54 МСК\nСтаница Луганская, Луганск, Счастье и близлежащие опасность по БПЛА"
     }
   ],
-  "districts": {},
+  "districts": {
+    "UKR.9.15_1": {
+      "gid_2": "UKR.9.15_1",
+      "name_ru": "Скадовский район",
+      "region_ru": "Херсонская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795511198,
+      "source_text": "24.11.2026 12:06 МСК\nСкадовский район, Скадовск и близлежащие опасность по БПЛА с севера"
+    }
+  },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 307713,
+      "text": "Скадовский район, Скадовск и близлежащие опасность по БПЛА с севера",
+      "ts": 1795511198,
+      "time_label": "24.11.2026 12:06 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 307712,
       "text": "Станица Луганская, Луганск, Счастье и близлежащие опасность по БПЛА",
@@ -1246,14 +1303,6 @@
       "time_label": "24.11.2026 07:24 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 307659,
-      "text": "Восточнее Осипенко, Бердянск фиксации БПЛА на юго-восток\nВосточнее Приазовское фиксации БПЛА на юго-восток\nЗапорожская область РФ",
-      "ts": 1795494074,
-      "time_label": "24.11.2026 07:21 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1263,14 +1312,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795510487,
-  "last_event_at": "2026-11-24T08:54:47Z",
-  "fetched_at": "2026-11-24T09:00:04.711957Z",
+  "timestamp": 1795511198,
+  "last_event_at": "2026-11-24T09:06:38Z",
+  "fetched_at": "2026-11-24T09:10:03.728672Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-24T09:00:04.711957Z",
-    "source_age_seconds": 317,
-    "city_count": 19,
+    "generated_at": "2026-11-24T09:10:03.728672Z",
+    "source_age_seconds": 205,
+    "city_count": 20,
     "region_count": 7,
     "feed_count": 80
   }
