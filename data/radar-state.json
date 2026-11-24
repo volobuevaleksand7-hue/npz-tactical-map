@@ -47,9 +47,78 @@
       "fill": "#d8c06a",
       "last_event_ts": 1795495962,
       "source_text": "24.11.2026 07:52 МСК\nВитино, Молочное, Заозёрное, Уютное, Евпатория и близлежащие Республика Крым Опасность по МВШ, в т.ч. со сбросами"
+    },
+    "Донецкая Народная Республика": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795505706,
+      "source_text": "24.11.2026 10:35 МСК\nАвдеевка, Ясиноватая, Макеевка и близлежащие Опасность по БПЛА ДНР"
     }
   },
   "cities": [
+    {
+      "key": "макеевка|донецкая народная республика",
+      "name": "Макеевка",
+      "lat": 48.04782,
+      "lon": 37.92576,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795505706,
+      "source_text": "24.11.2026 10:35 МСК\nАвдеевка, Ясиноватая, Макеевка и близлежащие Опасность по БПЛА ДНР"
+    },
+    {
+      "key": "авдеевка|донецкая народная республика",
+      "name": "Авдеевка",
+      "lat": 48.14019,
+      "lon": 37.75008,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795505706,
+      "source_text": "24.11.2026 10:35 МСК\nАвдеевка, Ясиноватая, Макеевка и близлежащие Опасность по БПЛА ДНР"
+    },
     {
       "key": "заозерное|автономная республика крым",
       "name": "Заозерное",
@@ -126,6 +195,14 @@
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 307694,
+      "text": "Авдеевка, Ясиноватая, Макеевка и близлежащие\nОпасность по БПЛА\nДНР",
+      "ts": 1795505706,
+      "time_label": "24.11.2026 10:35 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 110206,
       "text": "Отбой опасности и внимания по БПЛА по ранее объявленным регионам\nСпасибо ПВО\n🤍",
@@ -757,14 +834,6 @@
       "time_label": "24.11.2026 07:08 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 307653,
-      "text": "Калужская область\nМосковская область\nвнимание по бпла",
-      "ts": 1795493201,
-      "time_label": "24.11.2026 07:06 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -774,15 +843,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795504912,
-  "last_event_at": "2026-11-24T07:21:52Z",
-  "fetched_at": "2026-11-24T07:30:03.843806Z",
+  "timestamp": 1795505706,
+  "last_event_at": "2026-11-24T07:35:06Z",
+  "fetched_at": "2026-11-24T07:40:02.963388Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-24T07:30:03.843806Z",
-    "source_age_seconds": 491,
-    "city_count": 3,
-    "region_count": 2,
+    "generated_at": "2026-11-24T07:40:02.963388Z",
+    "source_age_seconds": 296,
+    "city_count": 5,
+    "region_count": 3,
     "feed_count": 80
   }
 }
