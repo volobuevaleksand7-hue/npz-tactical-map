@@ -111,6 +111,27 @@
       "last_event_ts": 1795495962,
       "source_text": "24.11.2026 07:52 МСК\nВитино, Молочное, Заозёрное, Уютное, Евпатория и близлежащие Республика Крым Опасность по МВШ, в т.ч. со сбросами"
     },
+    "Брянская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795511515,
+      "source_text": "24.11.2026 12:11 МСК\nБрянская область опасность по БПЛА (РСЧС)"
+    },
     "Краснодарский край": {
       "bpla": false,
       "bplaDim": false,
@@ -135,7 +156,7 @@
     "Донецкая Народная Республика": {
       "bpla": false,
       "bplaDim": false,
-      "attention": true,
+      "attention": false,
       "danger": false,
       "uab": false,
       "uabDim": false,
@@ -149,12 +170,36 @@
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#e8e4c4",
-      "last_event_ts": 1795510428,
-      "source_text": "24.11.2026 11:53 МСК\nШтормовое, Евпатория, Саки, Новофедоровка, Николаевка Возможно на Симферополь отбой опасности по БПЛА Режим повышенного внимания сохраняется"
+      "fill": "#d8c06a",
+      "last_event_ts": 1795511903,
+      "source_text": "24.11.2026 12:18 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ ДНР"
     }
   },
   "cities": [
+    {
+      "key": "горловка|донецкая народная республика",
+      "name": "Горловка",
+      "lat": 48.29986,
+      "lon": 38.01709,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795511903,
+      "source_text": "24.11.2026 12:18 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ ДНР"
+    },
     {
       "key": "скадовск|херсонская область",
       "name": "Скадовск",
@@ -664,6 +709,30 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 307715,
+      "text": "Горловка и близлежащие\nОпасность по БПЛА и ФПВ\nДНР",
+      "ts": 1795511903,
+      "time_label": "24.11.2026 12:18 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 307714,
+      "text": "Брянская область опасность по БПЛА (РСЧС)",
+      "ts": 1795511515,
+      "time_label": "24.11.2026 12:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 96375,
+      "text": "Брянская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1795511503,
+      "time_label": "24.11.2026 12:11 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
     {
       "msg_id": 307713,
       "text": "Скадовский район, Скадовск и близлежащие опасность по БПЛА с севера",
@@ -1279,30 +1348,6 @@
       "time_label": "24.11.2026 07:33 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 307662,
-      "text": "Трасса Приморск - Луначарское - Червоно Поле\nОпасность по БПЛА\nЗапорожская область РФ",
-      "ts": 1795494453,
-      "time_label": "24.11.2026 07:27 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 307661,
-      "text": "Николаевка, Береговое, мыс Лукулл\nРеспублика Крым\nИ далее в направлении Кача, Бельбек\nСевастополь\nС моря тревога по БПЛА",
-      "ts": 1795494280,
-      "time_label": "24.11.2026 07:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 307660,
-      "text": "Севастополь\nОпасность по БПЛА",
-      "ts": 1795494271,
-      "time_label": "24.11.2026 07:24 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1312,15 +1357,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795511198,
-  "last_event_at": "2026-11-24T09:06:38Z",
-  "fetched_at": "2026-11-24T09:10:03.728672Z",
+  "timestamp": 1795511903,
+  "last_event_at": "2026-11-24T09:18:23Z",
+  "fetched_at": "2026-11-24T09:20:04.132410Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-24T09:10:03.728672Z",
-    "source_age_seconds": 205,
-    "city_count": 20,
-    "region_count": 7,
+    "generated_at": "2026-11-24T09:20:04.132410Z",
+    "source_age_seconds": 101,
+    "city_count": 21,
+    "region_count": 8,
     "feed_count": 80
   }
 }
