@@ -45,8 +45,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795495962,
-      "source_text": "24.11.2026 07:52 МСК\nВитино, Молочное, Заозёрное, Уютное, Евпатория и близлежащие Республика Крым Опасность по МВШ, в т.ч. со сбросами"
+      "last_event_ts": 1795508334,
+      "source_text": "24.11.2026 11:18 МСК\nБельбек, Северная сторона Севастополь с моря с запада опасность по БПЛА. И близлежащие\n\n24.11.2026 07:52 МСК\nВитино, Молочное, Заозёрное, Уютное, Евпатория и близлежащие Республика Крым Опасность по МВШ, в т.ч. со сбросами"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -160,6 +160,30 @@
       "fill": "#ea580c",
       "last_event_ts": 1795507191,
       "source_text": "24.11.2026 10:59 МСК\nЕйск, Таганрог, Таганрогский залив Фиксации БПЛА в Азовском море в направлении. Возможно со сбросами ФПВ и мин"
+    },
+    {
+      "key": "севастополь|севастополь",
+      "name": "Севастополь",
+      "lat": 44.60795,
+      "lon": 33.52134,
+      "region": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795508334,
+      "source_text": "24.11.2026 11:18 МСК\nБельбек, Северная сторона Севастополь с моря с запада опасность по БПЛА. И близлежащие"
     },
     {
       "key": "иловайск|донецкая народная республика",
@@ -426,9 +450,50 @@
       "source_text": "24.11.2026 11:04 МСК\nИловайск, Амвросиевка и близлежащие Тревога по БПЛА ДНР"
     }
   ],
-  "districts": {},
+  "districts": {
+    "UKR.20.1_1": {
+      "gid_2": "UKR.20.1_1",
+      "name_ru": "Севастополь",
+      "region_ru": "Севастополь",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795508334,
+      "source_text": "24.11.2026 11:18 МСК\nБельбек, Северная сторона Севастополь с моря с запада опасность по БПЛА. И близлежащие"
+    }
+  },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 307704,
+      "text": "Бельбек, Северная сторона Севастополь с моря с запада опасность по БПЛА. И близлежащие",
+      "ts": 1795508334,
+      "time_label": "24.11.2026 11:18 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 307703,
+      "text": "Севастополь и близлежащие населенные пункты опасность по БПЛА",
+      "ts": 1795508219,
+      "time_label": "24.11.2026 11:16 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 307702,
       "text": "Иловайск, Амвросиевка и близлежащие\nТревога по БПЛА\nДНР",
@@ -1052,22 +1117,6 @@
       "time_label": "24.11.2026 07:14 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110178,
-      "text": "Оленинский район\nТверская область\nФиксация БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795493645,
-      "time_label": "24.11.2026 07:14 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110177,
-      "text": "ГО Наро-Фоминск\nМосковская область\nФиксации БПЛА",
-      "ts": 1795493605,
-      "time_label": "24.11.2026 07:13 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1077,14 +1126,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795507441,
-  "last_event_at": "2026-11-24T08:04:01Z",
-  "fetched_at": "2026-11-24T08:10:03.844649Z",
+  "timestamp": 1795508334,
+  "last_event_at": "2026-11-24T08:18:54Z",
+  "fetched_at": "2026-11-24T08:20:04.020965Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-24T08:10:03.844649Z",
-    "source_age_seconds": 362,
-    "city_count": 13,
+    "generated_at": "2026-11-24T08:20:04.020965Z",
+    "source_age_seconds": 70,
+    "city_count": 14,
     "region_count": 5,
     "feed_count": 80
   }
