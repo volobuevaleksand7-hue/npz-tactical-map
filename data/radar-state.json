@@ -276,8 +276,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795629630,
-      "source_text": "25.11.2026 21:00 МСК\nРостовская область Воронежская область Опасность по БПЛА от ЛНР"
+      "last_event_ts": 1795630207,
+      "source_text": "25.11.2026 21:10 МСК\nКрасный луч И близлежащие Тревога по БПЛА ЛНР"
     },
     "Ростовская область": {
       "bpla": false,
@@ -1027,6 +1027,30 @@
       "fill": "#ea580c",
       "last_event_ts": 1795626513,
       "source_text": "25.11.2026 20:08 МСК\nМежводное и близлежащие опасность по БПЛА с моря Черноморский район Республика Крым"
+    },
+    {
+      "key": "красный луч|луганская народная республика",
+      "name": "Красный Луч",
+      "lat": 48.13954,
+      "lon": 38.93715,
+      "region": "Луганская Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795630207,
+      "source_text": "25.11.2026 21:10 МСК\nКрасный луч И близлежащие Тревога по БПЛА ЛНР"
     },
     {
       "key": "скадовск|херсонская область",
@@ -2366,8 +2390,8 @@
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
-      "pvo": true,
-      "explosionOnRegion": true,
+      "pvo": false,
+      "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#ea580c",
@@ -2401,6 +2425,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 308265,
+      "text": "Красный луч\nИ близлежащие\nТревога по БПЛА\nЛНР",
+      "ts": 1795630207,
+      "time_label": "25.11.2026 21:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 308264,
       "text": "Осипенко, Бердянск и близлежащие тревога по БПЛА\nЗапорожская область РФ",
@@ -3032,14 +3064,6 @@
       "time_label": "25.11.2026 19:39 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 308206,
-      "text": "Экстренная информация РСЧС: БЕСПИЛОТНАЯ ОПАСНОСТЬ на территории муниципальных образований:Приморско-Ахтарский муниципальный округ, Брюховецкий, Ейский, Каневской, Щербиновский районы. 25.11.2026",
-      "ts": 1795624744,
-      "time_label": "25.11.2026 19:39 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -3049,14 +3073,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795630176,
-  "last_event_at": "2026-11-25T18:09:36Z",
-  "fetched_at": "2026-11-25T18:10:03.678874Z",
+  "timestamp": 1795630207,
+  "last_event_at": "2026-11-25T18:10:07Z",
+  "fetched_at": "2026-11-25T18:20:05.770783Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-25T18:10:03.678874Z",
-    "source_age_seconds": 27,
-    "city_count": 65,
+    "generated_at": "2026-11-25T18:20:05.770783Z",
+    "source_age_seconds": 598,
+    "city_count": 66,
     "region_count": 20,
     "feed_count": 80
   }
