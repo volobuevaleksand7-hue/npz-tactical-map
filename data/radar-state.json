@@ -69,6 +69,27 @@
       "last_event_ts": 1795560577,
       "source_text": "25.11.2026 01:49 МСК\nКрасный Луч Антрацит Ровеньки Тревога по БПЛА сохраняется"
     },
+    "Белгородская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795582877,
+      "source_text": "25.11.2026 08:01 МСК\nВалуйский район Опасность по БПЛА Белгородская область"
+    },
     "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
@@ -1000,6 +1021,30 @@
     }
   ],
   "districts": {
+    "RUS.7.24_1": {
+      "gid_2": "RUS.7.24_1",
+      "name_ru": "Валуйский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795582877,
+      "source_text": "25.11.2026 08:01 МСК\nВалуйский район Опасность по БПЛА Белгородская область"
+    },
     "UKR.26.16_1": {
       "gid_2": "UKR.26.16_1",
       "name_ru": "Бердянский район",
@@ -1047,20 +1092,25 @@
       "last_event_ts": 1795551538,
       "city": "Саратов",
       "source_text": "▫️\nАэропорты\n—\nСАРАТОВ\n(Гагарин)\n—\nТАМБОВ\n(Донское)\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ"
-    },
-    {
-      "key": "уфа",
-      "name": "УФА",
-      "match_text": "УФА",
-      "lat": 54.557499,
-      "lon": 55.874401,
-      "closed": true,
-      "last_event_ts": 1795569494,
-      "city": "Уфа",
-      "source_text": "▫️\nАэропорт\nУФА\n✈️\nВВЕДЕНЫ\nвременные ограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения необходимы для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMАХ"
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 110427,
+      "text": "Республика Башкортостан\nОтбой опасности по БПЛА",
+      "ts": 1795583330,
+      "time_label": "25.11.2026 08:08 МСК",
+      "source_id": "vrv_radar",
+      "source_label": "ВРВ"
+    },
+    {
+      "msg_id": 308016,
+      "text": "Валуйский район\nОпасность по БПЛА\nБелгородская область",
+      "ts": 1795582877,
+      "time_label": "25.11.2026 08:01 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 308015,
       "text": "Самарская область\nПензенская область\nУльяновская область\nОтбой опасности БПЛА\nотбой по бпла",
@@ -1684,22 +1734,6 @@
       "time_label": "25.11.2026 03:13 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 110383,
-      "text": "Сызрань\nСамарская область\nСбитие БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795565619,
-      "time_label": "25.11.2026 03:13 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110382,
-      "text": "Оренбургская область\nОпасность по БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795565497,
-      "time_label": "25.11.2026 03:11 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1709,15 +1743,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795582551,
-  "last_event_at": "2026-11-25T04:55:51Z",
-  "fetched_at": "2026-11-25T05:00:04.289913Z",
+  "timestamp": 1795583330,
+  "last_event_at": "2026-11-25T05:08:50Z",
+  "fetched_at": "2026-11-25T05:10:03.780515Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-25T05:00:04.289913Z",
-    "source_age_seconds": 253,
+    "generated_at": "2026-11-25T05:10:03.780515Z",
+    "source_age_seconds": 73,
     "city_count": 36,
-    "region_count": 6,
+    "region_count": 7,
     "feed_count": 80
   }
 }
