@@ -48,6 +48,27 @@
       "last_event_ts": 1795585320,
       "source_text": "25.11.2026 08:42 МСК\nАрмянск и близлежащие Опасность по БПЛА Республика Крым"
     },
+    "Белгородская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795586066,
+      "source_text": "25.11.2026 08:54 МСК\nШебекино Тревога по БПЛА"
+    },
     "Херсонская область": {
       "bpla": false,
       "bplaDim": false,
@@ -160,6 +181,30 @@
       "fill": "#ea580c",
       "last_event_ts": 1795585204,
       "source_text": "25.11.2026 08:40 МСК\nТрасса Р 280 Луначарское - Осипенко Опасность по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "шебекино|белгородская область",
+      "name": "Шебекино",
+      "lat": 50.41342,
+      "lon": 36.92537,
+      "region": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795586066,
+      "source_text": "25.11.2026 08:54 МСК\nШебекино Тревога по БПЛА"
     },
     {
       "key": "мелитополь|запорожская область",
@@ -357,6 +402,14 @@
     }
   ],
   "recent_messages": [
+    {
+      "msg_id": 308024,
+      "text": "Шебекино\nТревога по БПЛА",
+      "ts": 1795586066,
+      "time_label": "25.11.2026 08:54 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 308023,
       "text": "Дорожное и близлежащие\nОпасность по БПЛА Баба Яга\nДНР",
@@ -988,14 +1041,6 @@
       "time_label": "25.11.2026 03:28 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110386,
-      "text": "Сызранский район\nСамарская область\nФиксации БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795566527,
-      "time_label": "25.11.2026 03:28 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1005,15 +1050,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795585433,
-  "last_event_at": "2026-11-25T05:43:53Z",
-  "fetched_at": "2026-11-25T05:50:03.484781Z",
+  "timestamp": 1795586066,
+  "last_event_at": "2026-11-25T05:54:26Z",
+  "fetched_at": "2026-11-25T06:00:04.358930Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-25T05:50:03.484781Z",
-    "source_age_seconds": 370,
-    "city_count": 8,
-    "region_count": 5,
+    "generated_at": "2026-11-25T06:00:04.358930Z",
+    "source_age_seconds": 338,
+    "city_count": 9,
+    "region_count": 6,
     "feed_count": 80
   }
 }
