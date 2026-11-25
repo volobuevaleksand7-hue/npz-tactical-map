@@ -697,14 +697,14 @@
    "found_at": "2026-11-10T19:35:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 3,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "dead_url"
+   "reject_reason": "schema, dead_url"
   },
   {
    "id": "2026-11-10-hormuz-tanker-projectile-limah",
@@ -738,14 +738,14 @@
    "found_at": "2026-11-10T19:35:00Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "fail",
     "neutral_lexicon": "ok",
     "independent_sources": 2,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "dead_url"
+   "reject_reason": "schema, dead_url"
   },
   {
    "id": "2026-11-11-hormuz-irgc-two-tankers-mine-claim",
@@ -1979,80 +1979,6 @@
    "reject_reason": "dead_url"
   },
   {
-   "id": "2026-11-23-eu-22nd-sanctions-russia-oil-services",
-   "occurred_at": "2026-11-23",
-   "type": "sanctions",
-   "region": "europe",
-   "status": "confirmed",
-   "title": "Еврокомиссия предложила 22-й пакет санкций с запретом танкеров со страховкой РФ и услуг для НПЗ",
-   "summary": "Еврокомиссия 23 ноября представила 22-й пакет санкций против России. Пакет предусматривает запрет на танкеры, застрахованные в России, и на услуги европейских компаний по строительству, эксплуатации и ремонту российских энергообъектов, включая НПЗ; в список теневого флота добавлено более 70 судов. Для принятия пакета нужно единогласное одобрение всех 27 стран ЕС.",
-   "fuel_effect": "По оценке S&P Global, немедленный эффект ограничений будет ограниченным, поскольку европейские подрядчики ушли из российского нефтеперерабатывающего сектора после 2022 года.",
-   "title_en": "European Commission proposes 22nd sanctions package banning Russia-insured tankers and services for refineries",
-   "summary_en": "The European Commission presented its 22nd sanctions package against Russia on November 23. The package provides for a ban on tankers insured in Russia and on European companies' services for the construction, operation and repair of Russian energy facilities, including refineries; more than 70 vessels were added to the shadow fleet list. Adoption requires unanimous approval from all 27 EU member states.",
-   "fuel_effect_en": "According to S&P Global, the immediate effect of the restrictions will be limited because European contractors left the Russian refining sector after 2022.",
-   "lat": 50.8503,
-   "lon": 4.3517,
-   "precision": "point",
-   "radius_km": 0,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "Riviera Maritime Media",
-     "url": "https://www.rivieramm.com/news-content-hub/eu-proposes-ban-on-tankers-insured-in-russia-under-latest-sanctions-package-90678",
-     "date": "2026-11-24"
-    },
-    {
-     "publisher": "EU Today",
-     "url": "https://eutoday.net/eu-ban-russian-oil-refinery-repairs-ukraine-strikes/",
-     "date": "2026-11-23"
-    },
-    {
-     "publisher": "S&P Global (via Hellenic Shipping News)",
-     "url": "https://www.hellenicshippingnews.com/eu-moves-to-ban-tankers-insured-in-russia-repair-services-at-russian-refineries/",
-     "date": "2026-11-25"
-    }
-   ],
-   "found_at": "2026-11-25T03:26:25Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-24-iraq-federal-control-kurdish-oilfields",
-   "occurred_at": "2026-11-24",
-   "type": "other",
-   "region": "middle_east",
-   "status": "confirmed",
-   "title": "Премьер Ирака распорядился взять под федеральный контроль месторождения в районах, контролируемых Курдистаном",
-   "summary": "Премьер-министр Ирака Али аз-Заиди 24 ноября поручил Миннефти управлять месторождениями в провинциях Дияла, Киркук, Салах-эд-Дин и Найнава, находящимися под охраной курдских сил. Он также распорядился закрыть неофициальные пограничные переходы и разрешил экспорт нефти и нефтепродуктов только через федеральное министерство; курдская сторона отвергла это решение.",
-   "fuel_effect": "Издания отмечают риск усиления спора Багдада и Эрбиля об экспорте нефти; немедленного влияния на отгрузки не зафиксировано.",
-   "title_en": "Iraqi prime minister orders federal control of oilfields in areas under Kurdish control",
-   "summary_en": "Iraqi Prime Minister Ali al-Zaidi ordered the Oil Ministry on November 24 to manage oilfields in Diyala, Kirkuk, Salahuddin and Nineveh provinces that are under the protection of Kurdish forces. He also ordered the closure of unofficial border crossings and allowed crude oil and petroleum product exports only through the federal ministry; the Kurdish side rejected the decision.",
-   "fuel_effect_en": "Publications note the risk of a deepening dispute between Baghdad and Erbil over oil exports; no immediate impact on shipments has been recorded.",
-   "lat": 34.9,
-   "lon": 43.8,
-   "precision": "zone",
-   "radius_km": 250,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "Outlook India",
-     "url": "https://www.outlookindia.com/international/iraq-kurdish-region-oilfields-border-crossings-takeover",
-     "date": "2026-11-24"
-    },
-    {
-     "publisher": "Daily Sabah",
-     "url": "https://www.dailysabah.com/business/economy/iraqi-pm-orders-takeover-of-border-crossings-oilfields-under-krg-control",
-     "date": "2026-11-24"
-    },
-    {
-     "publisher": "Al Jazeera",
-     "url": "https://www.aljazeera.com/video/newsfeed/2026/11/24/iraq-targets-oil-smugglers-orders-kurdish-oilfield-takeover",
-     "date": "2026-11-24"
-    }
-   ],
-   "found_at": "2026-11-25T03:26:25Z",
-   "agent": "world-events"
-  },
-  {
    "id": "2026-11-24-iraq-opec-capacity-dispute",
    "occurred_at": "2026-11-24",
    "type": "opec",
@@ -2082,82 +2008,17 @@
     }
    ],
    "found_at": "2026-11-25T03:26:25Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-24-cuba-who-fuel-restrictions",
-   "occurred_at": "2026-11-24",
-   "type": "shortage",
-   "region": "latin_america",
-   "status": "confirmed",
-   "title": "Глава ВОЗ призвал отменить топливные ограничения США против Кубы",
-   "summary": "Генеральный директор ВОЗ Тедрос Адханом Гебрейесус 24 ноября в Гаване призвал снять топливные ограничения США против Кубы, заявив, что они вредят населению и системе здравоохранения. ВОЗ направит 2 млн долларов на программу иммунизации и медицинское оборудование; кубинские власти связывают ограничения с отключениями электроэнергии до 20 часов в сутки.",
-   "fuel_effect": "По данным кубинских властей, топливные ограничения привели к отключениям электроэнергии до 20 часов в сутки и перебоям в работе инфраструктуры.",
-   "title_en": "WHO chief calls for lifting US fuel restrictions on Cuba",
-   "summary_en": "WHO Director-General Tedros Adhanom Ghebreyesus called in Havana on November 24 for the lifting of US fuel restrictions on Cuba, saying they harm the population and the healthcare system. The WHO will provide $2 million for an immunization program and medical equipment; Cuban authorities link the restrictions to power outages of up to 20 hours a day.",
-   "fuel_effect_en": "According to Cuban authorities, the fuel restrictions have led to power outages of up to 20 hours a day and disruptions to infrastructure operations.",
-   "lat": 23.1136,
-   "lon": -82.3666,
-   "precision": "point",
-   "radius_km": 0,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "Al Jazeera",
-     "url": "https://www.aljazeera.com/news/2026/11/25/who-chief-urges-end-to-us-fuel-blockade-on-cuba",
-     "date": "2026-11-25"
-    },
-    {
-     "publisher": "CNBC TV18 (AP)",
-     "url": "https://www.cnbctv18.com/world/who-chief-calls-on-us-to-lift-oil-blockade-on-cuba-citing-health-impact-20040723.htm",
-     "date": "2026-11-24"
-    },
-    {
-     "publisher": "Radio Habana Cuba",
-     "url": "https://www.radiohc.cu/en/who-director-general-calls-for-an-end-to-the-blockade-against-cuba/",
-     "date": "2026-11-24"
-    }
-   ],
-   "found_at": "2026-11-25T03:26:25Z",
-   "agent": "world-events"
-  },
-  {
-   "id": "2026-11-24-hormuz-tugboat-blacklist",
-   "occurred_at": "2026-11-24",
-   "type": "other",
-   "region": "middle_east",
-   "status": "reported",
-   "title": "Иран внёс 26 буксиров в чёрный список Ормузского пролива; в перечне 266 судов",
-   "summary": "Управление Персидского залива по проливу (PGSA) 24 ноября добавило 26 буксиров в список судов, которым запрещён проход через Ормузский пролив без разрешения Ирана, сообщило полуофициальное агентство Tasnim. Всего в перечне теперь 266 судов; ранее власти предупреждали, что в список попадут и компании, обслуживающие танкеры.",
-   "fuel_effect": "Буксиры используются для отвода повреждённых танкеров и спасательных операций, поэтому ограничения усложняют обслуживание судов в проливе, сообщают издания.",
-   "title_en": "Iran adds 26 tugboats to Strait of Hormuz blacklist; list now has 266 vessels",
-   "summary_en": "The Persian Gulf Strait Authority (PGSA) added 26 tugboats on November 24 to its list of vessels barred from transiting the Strait of Hormuz without Iranian permission, the semi-official Tasnim news agency reported. The list now contains 266 vessels; the authority had earlier warned that companies servicing tankers would also be added.",
-   "fuel_effect_en": "Tugboats are used to tow damaged tankers and conduct salvage operations, so the restrictions complicate vessel servicing in the strait, publications report.",
-   "lat": 26.57,
-   "lon": 56.25,
-   "precision": "zone",
-   "radius_km": 100,
-   "photo": null,
-   "sources": [
-    {
-     "publisher": "gCaptain",
-     "url": "https://gcaptain.com/four-more-ships-attacked-as-iran-widens-hormuz-crackdown-to-tugboats/",
-     "date": "2026-11-24"
-    },
-    {
-     "publisher": "Hindustan Times",
-     "url": "https://www.hindustantimes.com/world-news/iran-expands-strait-of-hormuz-blacklist-to-tugboats-raising-pressure-on-tanker-support-services-101795571639473.html",
-     "date": "2026-11-24"
-    },
-    {
-     "publisher": "JKN News (Yonhap)",
-     "url": "https://news.jkn.co.kr/editions/english/post/1120657",
-     "date": "2026-11-25"
-    }
-   ],
-   "found_at": "2026-11-25T03:26:25Z",
-   "agent": "world-events"
+   "agent": "world-events",
+   "checks": {
+    "schema": "ok",
+    "urls_alive": "fail",
+    "neutral_lexicon": "ok",
+    "independent_sources": 2,
+    "translation": "ok"
+   },
+   "verdict": "rejected",
+   "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-24T19:33:56Z"
+ "validated_at": "2026-11-25T03:34:41Z"
 }
