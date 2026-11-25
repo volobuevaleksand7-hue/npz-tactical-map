@@ -129,8 +129,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795606531,
-      "source_text": "25.11.2026 14:35 МСК\nСевер Бердянск тревога по БПЛА. И близлежащие\n\n25.11.2026 14:10 МСК\nЗапорожская область РФ Опасность по МРШ со сбросами\n\n25.11.2026 14:24 МСК\nВладимировка Инзовка Приморск и близлежащие особое внимание трассы опасность по фпв Запорожская область РФ"
+      "last_event_ts": 1795616944,
+      "source_text": "25.11.2026 17:29 МСК\nБердянск, Осипенко и близлежащие опасность по БПЛА\n\n25.11.2026 14:10 МСК\nЗапорожская область РФ Опасность по МРШ со сбросами"
     },
     "Москва": {
       "bpla": false,
@@ -719,8 +719,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1795606531,
-      "source_text": "25.11.2026 14:35 МСК\nСевер Бердянск тревога по БПЛА. И близлежащие"
+      "last_event_ts": 1795616944,
+      "source_text": "25.11.2026 17:29 МСК\nБердянск, Осипенко и близлежащие опасность по БПЛА"
     },
     {
       "key": "новотроицкое|херсонская область",
@@ -944,9 +944,9 @@
       "lat": 46.919104,
       "lon": 36.821647999999996,
       "region": "Запорожская область",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -959,8 +959,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1795602987,
-      "source_text": "25.11.2026 13:36 МСК\nБердянск Осипенко и близлежащие Ещё фиксации БПЛА Хорнет Запорожская область РФ"
+      "last_event_ts": 1795616944,
+      "source_text": "25.11.2026 17:29 МСК\nБердянск, Осипенко и близлежащие опасность по БПЛА"
     },
     {
       "key": "ждановка|донецкая народная республика",
@@ -1120,7 +1120,7 @@
       "uabDim": false,
       "mvsh": false,
       "mvshDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -1216,7 +1216,7 @@
       "uabDim": false,
       "mvsh": false,
       "mvshDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -1465,6 +1465,29 @@
       "fill": "#ea580c",
       "last_event_ts": 1795609025,
       "source_text": "25.11.2026 15:17 МСК\nДебальцево, Углегорск, Енакиево и близлежащие Опасность по БПЛА сохраняется ДНР"
+    },
+    {
+      "key": "одесская область",
+      "name": "Одесская область",
+      "lat": 46.484207,
+      "lon": 30.731689,
+      "region": null,
+      "bpla": false,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": true,
+      "fill": "#ea580c",
+      "last_event_ts": null
     }
   ],
   "districts": {
@@ -1567,6 +1590,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 308175,
+      "text": "Бердянск, Осипенко и близлежащие опасность по БПЛА",
+      "ts": 1795616944,
+      "time_label": "25.11.2026 17:29 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 308174,
+      "text": "Противник готовит запуски БПЛА от Одесской области",
+      "ts": 1795616358,
+      "time_label": "25.11.2026 17:19 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 9544,
       "text": "⬜️\nАэропорт\nКАЛУГА\n(Грабцево)\n✈️\nСНЯТЫ\nограничения на прием и выпуск\nвоздушных судов.\n✈️\nОграничения вводили для обеспечения безопасности полетов.\n✈\nГоворит Росавиация\n|\nMAX",
@@ -2190,22 +2229,6 @@
       "time_label": "25.11.2026 14:36 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 308114,
-      "text": "Север Бердянск тревога по БПЛА. И близлежащие",
-      "ts": 1795606531,
-      "time_label": "25.11.2026 14:35 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 308113,
-      "text": "Трасса Р-280\nВладимировка-Инзовка-Приморск\nТревога по ФПВ\nЗапорожская область РФ",
-      "ts": 1795606436,
-      "time_label": "25.11.2026 14:33 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -2215,14 +2238,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795614901,
-  "last_event_at": "2026-11-25T13:55:01Z",
-  "fetched_at": "2026-11-25T14:20:03.488280Z",
+  "timestamp": 1795616944,
+  "last_event_at": "2026-11-25T14:29:04Z",
+  "fetched_at": "2026-11-25T14:30:03.340566Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-25T14:20:03.488280Z",
-    "source_age_seconds": 1502,
-    "city_count": 45,
+    "generated_at": "2026-11-25T14:30:03.340566Z",
+    "source_age_seconds": 59,
+    "city_count": 46,
     "region_count": 18,
     "feed_count": 80
   }
