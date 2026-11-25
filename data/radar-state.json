@@ -16,16 +16,16 @@
       "mvsh": false,
       "mvshDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1795601864,
-      "source_text": "25.11.2026 13:17 МСК\nОсипенко в направлении примерно Урзуф фиксация БПЛА противника Запорожская область РФ - ДНР"
+      "fill": "#dc2626",
+      "last_event_ts": 1795602092,
+      "source_text": "25.11.2026 13:21 МСК\nЗапорожская область РФ ЛДНР авиационная ракетно бомбовая опасность\n\n25.11.2026 13:17 МСК\nОсипенко в направлении примерно Урзуф фиксация БПЛА противника Запорожская область РФ - ДНР"
     },
     "Луганская Народная Республика": {
       "bpla": false,
@@ -37,16 +37,16 @@
       "mvsh": false,
       "mvshDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1795601183,
-      "source_text": "25.11.2026 13:06 МСК\nИвановка и близлежащие ЛНР опасность по БПЛА"
+      "fill": "#dc2626",
+      "last_event_ts": 1795602092,
+      "source_text": "25.11.2026 13:21 МСК\nЗапорожская область РФ ЛДНР авиационная ракетно бомбовая опасность\n\n25.11.2026 13:06 МСК\nИвановка и близлежащие ЛНР опасность по БПЛА"
     },
     "Севастополь": {
       "bpla": false,
@@ -207,14 +207,14 @@
       "fpv": false,
       "rocket": true,
       "rocket_level": true,
-      "aviation": false,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1795600311,
-      "source_text": "25.11.2026 12:33 МСК\nГорловка ДНР ракетная опасность\n\n25.11.2026 12:51 МСК\nАвдеевка, Спартак, Донецк и близлежащие Опасность по БПЛА ДНР\n\n25.11.2026 10:22 МСК\nГорняк, Курахово и близлежащие Опасность по БПЛА Баба Яга ДНР"
+      "last_event_ts": 1795602092,
+      "source_text": "25.11.2026 13:21 МСК\nЗапорожская область РФ ЛДНР авиационная ракетно бомбовая опасность\n\n25.11.2026 12:51 МСК\nАвдеевка, Спартак, Донецк и близлежащие Опасность по БПЛА ДНР"
     }
   },
   "cities": [
@@ -472,7 +472,7 @@
       "uabDim": false,
       "mvsh": false,
       "mvshDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -832,7 +832,7 @@
       "uabDim": false,
       "mvsh": false,
       "mvshDim": false,
-      "fpv": true,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -1039,6 +1039,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 308089,
+      "text": "Запорожская область РФ\nЛДНР\nприготовиться к пускам Уаб самолётами противника",
+      "ts": 1795602243,
+      "time_label": "25.11.2026 13:24 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 308088,
+      "text": "Запорожская область РФ\nЛДНР\nавиационная ракетно бомбовая опасность",
+      "ts": 1795602092,
+      "time_label": "25.11.2026 13:21 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 308087,
       "text": "Р - 280\nОсипенко и далее на юг\nЗапорожская область РФ\nопасность по ударным БПЛА",
@@ -1662,22 +1678,6 @@
       "time_label": "25.11.2026 08:10 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110428,
-      "text": "Оренбургская область\nОтбой опасности по БПЛА",
-      "ts": 1795583422,
-      "time_label": "25.11.2026 08:10 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110427,
-      "text": "Республика Башкортостан\nОтбой опасности по БПЛА",
-      "ts": 1795583330,
-      "time_label": "25.11.2026 08:08 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1687,13 +1687,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795601865,
-  "last_event_at": "2026-11-25T10:17:45Z",
-  "fetched_at": "2026-11-25T10:20:03.675497Z",
+  "timestamp": 1795602243,
+  "last_event_at": "2026-11-25T10:24:03Z",
+  "fetched_at": "2026-11-25T10:30:03.760115Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-25T10:20:03.675497Z",
-    "source_age_seconds": 138,
+    "generated_at": "2026-11-25T10:30:03.760115Z",
+    "source_age_seconds": 360,
     "city_count": 30,
     "region_count": 10,
     "feed_count": 80
