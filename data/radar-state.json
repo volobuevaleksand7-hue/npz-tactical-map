@@ -66,8 +66,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795586944,
-      "source_text": "25.11.2026 09:09 МСК\nВалуйский район Опасность по БПЛА повторно Белгородская область"
+      "last_event_ts": 1795587810,
+      "source_text": "25.11.2026 09:23 МСК\nБелгородский район Опасность по БПЛА"
     },
     "Херсонская область": {
       "bpla": false,
@@ -108,8 +108,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795585320,
-      "source_text": "25.11.2026 08:42 МСК\nАрмянск и близлежащие Опасность по БПЛА Республика Крым\n\n24.11.2026 14:44 МСК\nКача и близлежащие Внимание по мвш со сбросами"
+      "last_event_ts": 1795588154,
+      "source_text": "25.11.2026 09:29 МСК\nКерченский полуостров опасность по БПЛА\n\n24.11.2026 14:44 МСК\nКача и близлежащие Внимание по мвш со сбросами"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -255,6 +255,30 @@
       "source_text": "25.11.2026 08:11 МСК\nТокмак и близлежащих А/дороги в направлении трассы р 280 Опасность по БПЛА Запорожская область РФ"
     },
     {
+      "key": "керченский полуостров|автономная республика крым",
+      "name": "Керченский полуостров",
+      "lat": 45.250954,
+      "lon": 36.140668,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795588154,
+      "source_text": "25.11.2026 09:29 МСК\nКерченский полуостров опасность по БПЛА"
+    },
+    {
       "key": "армянск|автономная республика крым",
       "name": "Армянск",
       "lat": 46.10919,
@@ -327,6 +351,30 @@
       "last_event_ts": 1795586944,
       "source_text": "25.11.2026 09:09 МСК\nВалуйский район Опасность по БПЛА повторно Белгородская область"
     },
+    "RUS.7.4_1": {
+      "gid_2": "RUS.7.4_1",
+      "name_ru": "Белгородский район",
+      "region_ru": "Белгородская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795587810,
+      "source_text": "25.11.2026 09:23 МСК\nБелгородский район Опасность по БПЛА"
+    },
     "UKR.26.10_1": {
       "gid_2": "UKR.26.10_1",
       "name_ru": "Мелитопольский район",
@@ -354,6 +402,22 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 308032,
+      "text": "Керченский полуостров опасность по БПЛА",
+      "ts": 1795588154,
+      "time_label": "25.11.2026 09:29 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 308031,
+      "text": "Белгородский район\nОпасность по БПЛА",
+      "ts": 1795587810,
+      "time_label": "25.11.2026 09:23 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 308029,
       "text": "противник готовит запуск БПЛА от Николаевской области",
@@ -977,22 +1041,6 @@
       "time_label": "25.11.2026 03:30 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110392,
-      "text": "Кантемировский район\nВоронежская область\nФиксации БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795566630,
-      "time_label": "25.11.2026 03:30 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110391,
-      "text": "Староюрьевский район\nПервомайский район\nТамбовская область\nФиксации БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795566629,
-      "time_label": "25.11.2026 03:30 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1002,14 +1050,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795587272,
-  "last_event_at": "2026-11-25T06:14:32Z",
-  "fetched_at": "2026-11-25T06:20:04.283227Z",
+  "timestamp": 1795588154,
+  "last_event_at": "2026-11-25T06:29:14Z",
+  "fetched_at": "2026-11-25T06:30:04.115351Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-25T06:20:04.283227Z",
-    "source_age_seconds": 332,
-    "city_count": 7,
+    "generated_at": "2026-11-25T06:30:04.115351Z",
+    "source_age_seconds": 50,
+    "city_count": 8,
     "region_count": 6,
     "feed_count": 80
   }
