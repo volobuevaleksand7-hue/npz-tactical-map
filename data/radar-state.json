@@ -108,8 +108,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795592990,
-      "source_text": "25.11.2026 10:49 МСК\nНовотроицкое и близлежащие Особое внимание трасса Опасность по БПЛА Херсонская область РФ\n\n24.11.2026 18:34 МСК\nКаховка Новотроицкое Геническ И близлежащие Опасность по МВШ Херсонская область РФ"
+      "last_event_ts": 1795594295,
+      "source_text": "25.11.2026 11:11 МСК\nСкадовск Тревога по БПЛА Хорнет Херсонская область РФ\n\n24.11.2026 18:34 МСК\nКаховка Новотроицкое Геническ И близлежащие Опасность по МВШ Херсонская область РФ"
     },
     "Воронежская область": {
       "bpla": false,
@@ -342,6 +342,30 @@
       "source_text": "25.11.2026 08:35 МСК\nМелитополь Мелитопольский район Опасность по БПЛА Трассы особое внимание Запорожская область РФ"
     },
     {
+      "key": "скадовск|херсонская область",
+      "name": "Скадовск",
+      "lat": 46.11313,
+      "lon": 32.90978,
+      "region": "Херсонская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795594295,
+      "source_text": "25.11.2026 11:11 МСК\nСкадовск Тревога по БПЛА Хорнет Херсонская область РФ"
+    },
+    {
       "key": "курахово|донецкая народная республика",
       "name": "Курахово",
       "lat": 47.9847,
@@ -484,29 +508,6 @@
       "fill": "#ea580c",
       "last_event_ts": 1795588388,
       "source_text": "25.11.2026 09:33 МСК\nА/дорога Новопсков, Марковка ЛНР - Кантемировка Воронежская область Опасность по БПЛА"
-    },
-    {
-      "key": "николаевская область",
-      "name": "Николаевская область",
-      "lat": 46.975571,
-      "lon": 31.993811,
-      "region": null,
-      "bpla": false,
-      "bplaDim": false,
-      "danger": false,
-      "attention": false,
-      "uab": false,
-      "uabDim": false,
-      "mvsh": false,
-      "mvshDim": false,
-      "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
-      "pvo": false,
-      "bplaLaunchAnim": true,
-      "fill": "#ea580c",
-      "last_event_ts": null
     },
     {
       "key": "новотроицкое|херсонская область",
@@ -705,6 +706,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 308051,
+      "text": "Скадовск\nТревога по БПЛА Хорнет\nХерсонская область РФ",
+      "ts": 1795594295,
+      "time_label": "25.11.2026 11:11 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 308050,
       "text": "Козельск\nКалужская область\nФиксация БПЛА в направлении Тульская область",
@@ -1336,14 +1345,6 @@
       "time_label": "25.11.2026 04:14 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110405,
-      "text": "Республика Татарстан\nОтбой опасности по БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795569248,
-      "time_label": "25.11.2026 04:14 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1353,13 +1354,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795593716,
-  "last_event_at": "2026-11-25T08:01:56Z",
-  "fetched_at": "2026-11-25T08:10:03.565260Z",
+  "timestamp": 1795594295,
+  "last_event_at": "2026-11-25T08:11:35Z",
+  "fetched_at": "2026-11-25T08:20:03.416803Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-25T08:10:03.565260Z",
-    "source_age_seconds": 487,
+    "generated_at": "2026-11-25T08:20:03.416803Z",
+    "source_age_seconds": 508,
     "city_count": 17,
     "region_count": 9,
     "feed_count": 80
