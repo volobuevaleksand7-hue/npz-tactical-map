@@ -48,6 +48,27 @@
       "last_event_ts": 1795588388,
       "source_text": "25.11.2026 09:33 МСК\nА/дорога Новопсков, Марковка ЛНР - Кантемировка Воронежская область Опасность по БПЛА"
     },
+    "Калужская область": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795593716,
+      "source_text": "25.11.2026 11:01 МСК\nКозельск Калужская область Фиксация БПЛА в направлении Тульская область"
+    },
     "Белгородская область": {
       "bpla": false,
       "bplaDim": false,
@@ -558,6 +579,30 @@
       "fill": "#ea580c",
       "last_event_ts": 1795591375,
       "source_text": "25.11.2026 10:22 МСК\nГорняк, Курахово и близлежащие Опасность по БПЛА Баба Яга ДНР"
+    },
+    {
+      "key": "козельск|калужская область",
+      "name": "Козельск",
+      "lat": 54.0347222222222,
+      "lon": 35.7822222222222,
+      "region": "Калужская область",
+      "bpla": true,
+      "bplaDim": false,
+      "danger": false,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795593716,
+      "source_text": "25.11.2026 11:01 МСК\nКозельск Калужская область Фиксация БПЛА в направлении Тульская область"
     }
   ],
   "districts": {
@@ -660,6 +705,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 308050,
+      "text": "Козельск\nКалужская область\nФиксация БПЛА в направлении Тульская область",
+      "ts": 1795593716,
+      "time_label": "25.11.2026 11:01 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 308049,
       "text": "А/ дороги\nВознесеновка - Белянка\nНежеголь - Купино\nОпасность атаки ФПВ\nШебекинский район\nБелгородская область",
@@ -1291,14 +1344,6 @@
       "time_label": "25.11.2026 04:14 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110404,
-      "text": "Сызрань\nСамарская область\nФиксация БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795569191,
-      "time_label": "25.11.2026 04:13 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1308,15 +1353,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795593397,
-  "last_event_at": "2026-11-25T07:56:37Z",
-  "fetched_at": "2026-11-25T08:00:04.697814Z",
+  "timestamp": 1795593716,
+  "last_event_at": "2026-11-25T08:01:56Z",
+  "fetched_at": "2026-11-25T08:10:03.565260Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-25T08:00:04.697814Z",
-    "source_age_seconds": 207,
-    "city_count": 16,
-    "region_count": 8,
+    "generated_at": "2026-11-25T08:10:03.565260Z",
+    "source_age_seconds": 487,
+    "city_count": 17,
+    "region_count": 9,
     "feed_count": 80
   }
 }
