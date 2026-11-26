@@ -150,8 +150,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795658576,
-      "source_text": "26.11.2026 05:02 МСК\nКурганинск, Михайловская и близлежащие, тревога по БпЛА Краснодарский край"
+      "last_event_ts": 1795659921,
+      "source_text": "26.11.2026 05:25 МСК\nКурганинск, Армавир и близлежащие, тревога по БпЛА"
     },
     "Автономная Республика Крым": {
       "bpla": false,
@@ -394,16 +394,16 @@
       "mvsh": false,
       "mvshDim": false,
       "fpv": false,
-      "rocket": true,
-      "rocket_level": true,
+      "rocket": false,
+      "rocket_level": false,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#dc2626",
-      "last_event_ts": 1795659047,
-      "source_text": "26.11.2026 05:10 МСК\nБрянская область ракетная опасность\n\n26.11.2026 03:35 МСК\nБрянск Продолжаются пролеты БпЛА"
+      "fill": "#d8c06a",
+      "last_event_ts": 1795653324,
+      "source_text": "26.11.2026 03:35 МСК\nБрянск Продолжаются пролеты БпЛА"
     },
     "Республика Башкортостан": {
       "bpla": false,
@@ -3455,9 +3455,9 @@
       "lat": 44.99849,
       "lon": 41.11472,
       "region": "Краснодарский край",
-      "bpla": true,
+      "bpla": false,
       "bplaDim": false,
-      "danger": false,
+      "danger": true,
       "attention": false,
       "uab": false,
       "uabDim": false,
@@ -3470,8 +3470,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1795656139,
-      "source_text": "26.11.2026 04:22 МСК\nАрмавир Успенский район Новокубанский район Краснодарский край Фиксации БПЛА Карта опасностей - radar-vrv.ru"
+      "last_event_ts": 1795659921,
+      "source_text": "26.11.2026 05:25 МСК\nКурганинск, Армавир и близлежащие, тревога по БпЛА"
     },
     {
       "key": "локоть|курская область",
@@ -4358,8 +4358,8 @@
       "pvo": false,
       "bplaLaunchAnim": false,
       "fill": "#ea580c",
-      "last_event_ts": 1795658576,
-      "source_text": "26.11.2026 05:02 МСК\nКурганинск, Михайловская и близлежащие, тревога по БпЛА Краснодарский край"
+      "last_event_ts": 1795659921,
+      "source_text": "26.11.2026 05:25 МСК\nКурганинск, Армавир и близлежащие, тревога по БпЛА"
     },
     {
       "key": "отрадная|краснодарский край",
@@ -6869,6 +6869,22 @@
   ],
   "recent_messages": [
     {
+      "msg_id": 308586,
+      "text": "Курганинск, Армавир и близлежащие, тревога по БпЛА",
+      "ts": 1795659921,
+      "time_label": "26.11.2026 05:25 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 96622,
+      "text": "Брянская область - отбой ракетной опасности!\n📡\nЛокатор России -\n@locatorru",
+      "ts": 1795659782,
+      "time_label": "26.11.2026 05:23 МСК",
+      "source_id": "locatorru",
+      "source_label": "Локатор России"
+    },
+    {
       "msg_id": 96621,
       "text": "Невинномысск, Ставропольский край - опасность по БПЛА сохраняется.\n📡\nЛокатор России -\n@locatorru",
       "ts": 1795659489,
@@ -7491,22 +7507,6 @@
       "time_label": "26.11.2026 04:06 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110632,
-      "text": "Невинномысск\nСтавропольский край\nФиксация реактивной цели\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795654891,
-      "time_label": "26.11.2026 04:01 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110630,
-      "text": "Невинномысск\nСтавропольский край\nФиксации групп БПЛА\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795654748,
-      "time_label": "26.11.2026 03:59 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -7516,13 +7516,13 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795659489,
-  "last_event_at": "2026-11-26T02:18:09Z",
-  "fetched_at": "2026-11-26T02:20:05.939098Z",
+  "timestamp": 1795659921,
+  "last_event_at": "2026-11-26T02:25:21Z",
+  "fetched_at": "2026-11-26T02:30:04.306358Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-26T02:20:05.939098Z",
-    "source_age_seconds": 116,
+    "generated_at": "2026-11-26T02:30:04.306358Z",
+    "source_age_seconds": 283,
     "city_count": 163,
     "region_count": 29,
     "feed_count": 80
