@@ -31,6 +31,13 @@ opened: <дата МСК> — <кто/что завёл>
 
 <!-- INCIDENTS BELOW (newest first) -->
 
+## [OPEN] video-disk-2026-11-27
+status: OPEN
+opened: 2026-11-27 20:20 МСК — video-watchdog
+сервер за 2026-11-27: disk-low. свободно 2.8 ГБ
+Что сделать:
+- освободи место: `du -xh /root --max-depth=2 | sort -h | tail -20`; `video/cleanup.sh`; не трогать video/reel/cache/tts, /root/tts-models, data/
+
 ## [RESOLVED] video-disk-2026-11-27
 status: RESOLVED
 opened: 2026-11-27 08:20 МСК — video-watchdog
