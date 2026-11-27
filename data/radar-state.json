@@ -6,6 +6,27 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Севастополь": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#d8c06a",
+      "last_event_ts": 1795787325,
+      "source_text": "27.11.2026 16:48 МСК\nЯснополянское, Целинное, Красноармейское и близлежащие Опасность по БПЛА с севера Республика Крым"
+    },
     "Луганская Народная Республика": {
       "bpla": false,
       "bplaDim": false,
@@ -108,8 +129,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795781829,
-      "source_text": "27.11.2026 15:17 МСК\nОт Симферополь в направлении Белогорск, Судак, Феодосия опасность по МРШ. Возможно со сбросами БПЛА и ФПВ"
+      "last_event_ts": 1795787325,
+      "source_text": "27.11.2026 16:48 МСК\nЯснополянское, Целинное, Красноармейское и близлежащие Опасность по БПЛА с севера Республика Крым\n\n27.11.2026 15:17 МСК\nОт Симферополь в направлении Белогорск, Судак, Феодосия опасность по МРШ. Возможно со сбросами БПЛА и ФПВ"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -902,6 +923,14 @@
   "airport_markers": [],
   "recent_messages": [
     {
+      "msg_id": 309171,
+      "text": "Яснополянское, Целинное, Красноармейское\nи близлежащие\nОпасность по БПЛА с севера\nРеспублика Крым",
+      "ts": 1795787325,
+      "time_label": "27.11.2026 16:48 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
       "msg_id": 309170,
       "text": "Трасса\nМариуполь - Новоазовск - Таганрог тревога по БПЛА",
       "ts": 1795786697,
@@ -1532,14 +1561,6 @@
       "time_label": "27.11.2026 10:48 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 96752,
-      "text": "Коренево и близлежащие, Курская область - опасность по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1795765425,
-      "time_label": "27.11.2026 10:43 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
     }
   ],
   "sources": [
@@ -1549,15 +1570,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795786697,
-  "last_event_at": "2026-11-27T13:38:17Z",
-  "fetched_at": "2026-11-27T13:40:03.073813Z",
+  "timestamp": 1795787325,
+  "last_event_at": "2026-11-27T13:48:45Z",
+  "fetched_at": "2026-11-27T13:50:03.358363Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-27T13:40:03.073813Z",
-    "source_age_seconds": 106,
+    "generated_at": "2026-11-27T13:50:03.358363Z",
+    "source_age_seconds": 78,
     "city_count": 27,
-    "region_count": 8,
+    "region_count": 9,
     "feed_count": 80
   }
 }
