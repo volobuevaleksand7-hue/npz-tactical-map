@@ -16,16 +16,16 @@
       "mvsh": false,
       "mvshDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
+      "rocket": true,
+      "rocket_level": true,
       "aviation": false,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1795780568,
-      "source_text": "27.11.2026 14:56 МСК\nСвердловск и близлежащие Опасность по БПЛА ЛНР"
+      "fill": "#dc2626",
+      "last_event_ts": 1795781704,
+      "source_text": "27.11.2026 15:15 МСК\nЛДНР Запорожская область РФ Авиационная ракетная бомбовая опасность\n\n27.11.2026 14:56 МСК\nСвердловск и близлежащие Опасность по БПЛА ЛНР"
     },
     "Брянская область": {
       "bpla": false,
@@ -58,6 +58,27 @@
       "mvsh": false,
       "mvshDim": false,
       "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1795781704,
+      "source_text": "27.11.2026 15:15 МСК\nЛДНР Запорожская область РФ Авиационная ракетная бомбовая опасность\n\n27.11.2026 15:12 МСК\nБердянск Бердянский район Опасность по БПЛА Запорожская область РФ\n\n26.11.2026 15:50 МСК\nДорожное направление Приазовское - Владимировка - Инзовка - Приморск Опасность по МРШ со сбросами Запорожская область РФ"
+    },
+    "Автономная Республика Крым": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
       "rocket": false,
       "rocket_level": false,
       "aviation": false,
@@ -66,8 +87,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#d8c06a",
-      "last_event_ts": 1795777937,
-      "source_text": "27.11.2026 14:12 МСК\nБановка - Азов трасса Р-280 тревога по БПЛА. Высокая активность Запорожская область РФ\n\n26.11.2026 15:50 МСК\nДорожное направление Приазовское - Владимировка - Инзовка - Приморск Опасность по МРШ со сбросами Запорожская область РФ"
+      "last_event_ts": 1795781829,
+      "source_text": "27.11.2026 15:17 МСК\nОт Симферополь в направлении Белогорск, Судак, Феодосия опасность по МРШ. Возможно со сбросами БПЛА и ФПВ"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -492,6 +513,30 @@
       "source_text": "27.11.2026 14:52 МСК\nПогар и близлежащие опасность по БПЛА Дартс от ГГ Брянская область"
     },
     {
+      "key": "бердянск|запорожская область",
+      "name": "Бердянск",
+      "lat": 46.755673,
+      "lon": 36.789317,
+      "region": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795781526,
+      "source_text": "27.11.2026 15:12 МСК\nБердянск Бердянский район Опасность по БПЛА Запорожская область РФ"
+    },
+    {
       "key": "свердловск|луганская народная республика",
       "name": "Свердловск",
       "lat": 48.08964,
@@ -634,9 +679,57 @@
       "fill": "#ea580c",
       "last_event_ts": 1795769961,
       "source_text": "27.11.2026 11:59 МСК\nПервомайск в сторону Кировска тревога по БПЛА Марковка в сторону Богучар Воронежской области Тревога по БПЛА Хорнет"
+    },
+    {
+      "key": "симферополь|автономная республика крым",
+      "name": "Симферополь",
+      "lat": 44.95719,
+      "lon": 34.11079,
+      "region": "Автономная Республика Крым",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": true,
+      "mvshDim": true,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795781829,
+      "source_text": "27.11.2026 15:17 МСК\nОт Симферополь в направлении Белогорск, Судак, Феодосия опасность по МРШ. Возможно со сбросами БПЛА и ФПВ"
     }
   ],
   "districts": {
+    "UKR.26.16_1": {
+      "gid_2": "UKR.26.16_1",
+      "name_ru": "Бердянский район",
+      "region_ru": "Запорожская область",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795781526,
+      "source_text": "27.11.2026 15:12 МСК\nБердянск Бердянский район Опасность по БПЛА Запорожская область РФ"
+    },
     "RUS.7.4_1": {
       "gid_2": "RUS.7.4_1",
       "name_ru": "Белгородский район",
@@ -688,6 +781,62 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 309154,
+      "text": "От Симферополь в направлении Белогорск, Судак, Феодосия опасность по МРШ. Возможно со сбросами БПЛА и ФПВ",
+      "ts": 1795781829,
+      "time_label": "27.11.2026 15:17 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 309153,
+      "text": "Отбой ракетной опасности Донецк ДНР",
+      "ts": 1795781758,
+      "time_label": "27.11.2026 15:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 309152,
+      "text": "Симферополь в направлении Белогорск БПЛА",
+      "ts": 1795781717,
+      "time_label": "27.11.2026 15:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 309151,
+      "text": "ЛДНР\nЗапорожская область РФ\nАвиационная ракетная бомбовая опасность",
+      "ts": 1795781704,
+      "time_label": "27.11.2026 15:15 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 309150,
+      "text": "Донецк ракетная опасность\nДНР",
+      "ts": 1795781653,
+      "time_label": "27.11.2026 15:14 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 309149,
+      "text": "Бердянск\nБердянский район\nОпасность по БПЛА\nЗапорожская область РФ",
+      "ts": 1795781526,
+      "time_label": "27.11.2026 15:12 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 309148,
+      "text": "Трасса Р - 280\nТревога по БПЛА\nЗапорожская область РФ",
+      "ts": 1795781427,
+      "time_label": "27.11.2026 15:10 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 309147,
       "text": "Осипенко с севера и далее в направлении Урзуф, Ялта\nОпасность по БПЛА",
@@ -1271,62 +1420,6 @@
       "time_label": "27.11.2026 08:46 МСК",
       "source_id": "lpr1_treugolnik",
       "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 110916,
-      "text": "Краснодарский край\nРеспублика Адыгея\nОтбой опасности по БПЛА",
-      "ts": 1795758386,
-      "time_label": "27.11.2026 08:46 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110915,
-      "text": "Тульская область\nОтбой опасности по БПЛА",
-      "ts": 1795758377,
-      "time_label": "27.11.2026 08:46 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110914,
-      "text": "⚡️\nВ течение прошедшей ночи дежурными силами ПВО\nперехвачены и уничтожены 318 украинских беспилотных летательных аппаратов самолетного типа\nнад территориями Брянской, Белгородской, Калужской, Курской, Ленинградской, Новгородской, Орловской, Ростовской, Смоленской, Тульской областей и Республики Крым.\n🔹\nМинобороны России",
-      "ts": 1795758310,
-      "time_label": "27.11.2026 08:45 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 96748,
-      "text": "За прошедшую ночь силами противовоздушной обороны было уничтожено\n318 БПЛА\nнад территориями Брянской, Белгородской, Калужской, Курской, Ленинградской, Новгородской, Орловской, Ростовской, Смоленской, Тульской областей и Республики Крым.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1795758118,
-      "time_label": "27.11.2026 08:41 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 96747,
-      "text": "Калужская область, Орловская область, Тульская область, Московская область, Тверская область, Псковская область, Новгородская область, Ленинградская область - отбой опасности по БПЛА.\n📡\nЛокатор России -\n@locatorru",
-      "ts": 1795757969,
-      "time_label": "27.11.2026 08:39 МСК",
-      "source_id": "locatorru",
-      "source_label": "Локатор России"
-    },
-    {
-      "msg_id": 110913,
-      "text": "Тверская область\nОтбой опасности по БПЛА",
-      "ts": 1795757901,
-      "time_label": "27.11.2026 08:38 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 110912,
-      "text": "Новгородская область\nОтбой опасности по БПЛА",
-      "ts": 1795757897,
-      "time_label": "27.11.2026 08:38 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1336,15 +1429,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795781338,
-  "last_event_at": "2026-11-27T12:08:58Z",
-  "fetched_at": "2026-11-27T12:10:02.576502Z",
+  "timestamp": 1795781829,
+  "last_event_at": "2026-11-27T12:17:09Z",
+  "fetched_at": "2026-11-27T12:20:03.474356Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-27T12:10:02.576502Z",
-    "source_age_seconds": 64,
-    "city_count": 20,
-    "region_count": 7,
+    "generated_at": "2026-11-27T12:20:03.474356Z",
+    "source_age_seconds": 174,
+    "city_count": 22,
+    "region_count": 8,
     "feed_count": 80
   }
 }
