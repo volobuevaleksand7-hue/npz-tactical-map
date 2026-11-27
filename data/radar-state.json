@@ -6,6 +6,27 @@
   "upstream_type": "state",
   "upstream_version": 23,
   "regions": {
+    "Луганская Народная Республика": {
+      "bpla": false,
+      "bplaDim": false,
+      "attention": false,
+      "danger": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": true,
+      "pvo": false,
+      "explosionOnRegion": false,
+      "bplaLaunchAnim": false,
+      "rocketOnRegion": false,
+      "fill": "#dc2626",
+      "last_event_ts": 1795767834,
+      "source_text": "27.11.2026 11:23 МСК\nЗапорожская область РФ ЛДНР авиационная ракетно бомбовая опасность"
+    },
     "Запорожская область": {
       "bpla": false,
       "bplaDim": false,
@@ -16,16 +37,16 @@
       "mvsh": false,
       "mvshDim": false,
       "fpv": false,
-      "rocket": false,
-      "rocket_level": false,
-      "aviation": false,
+      "rocket": true,
+      "rocket_level": true,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
-      "fill": "#d8c06a",
-      "last_event_ts": 1795762584,
-      "source_text": "27.11.2026 09:56 МСК\nтрасса Р - 280 Червоное поле - Осипенко Запорожская область РФ опасность по БПЛА\n\n26.11.2026 15:50 МСК\nДорожное направление Приазовское - Владимировка - Инзовка - Приморск Опасность по МРШ со сбросами Запорожская область РФ"
+      "fill": "#dc2626",
+      "last_event_ts": 1795767834,
+      "source_text": "27.11.2026 11:23 МСК\nЗапорожская область РФ ЛДНР авиационная ракетно бомбовая опасность\n\n27.11.2026 09:56 МСК\nтрасса Р - 280 Червоное поле - Осипенко Запорожская область РФ опасность по БПЛА\n\n26.11.2026 15:50 МСК\nДорожное направление Приазовское - Владимировка - Инзовка - Приморск Опасность по МРШ со сбросами Запорожская область РФ"
     },
     "Донецкая Народная Республика": {
       "bpla": false,
@@ -39,14 +60,14 @@
       "fpv": false,
       "rocket": true,
       "rocket_level": true,
-      "aviation": false,
+      "aviation": true,
       "pvo": false,
       "explosionOnRegion": false,
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1795766862,
-      "source_text": "27.11.2026 11:07 МСК\nСеверск, Соледар ДНР ракетная опасность\n\n27.11.2026 10:48 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ повторно ДНР"
+      "last_event_ts": 1795767834,
+      "source_text": "27.11.2026 11:23 МСК\nЗапорожская область РФ ЛДНР авиационная ракетно бомбовая опасность\n\n27.11.2026 10:48 МСК\nГорловка и близлежащие Опасность по БПЛА и ФПВ повторно ДНР"
     },
     "Ростовская область": {
       "bpla": false,
@@ -360,6 +381,22 @@
   "districts": {},
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 309106,
+      "text": "🪂\nЗнакомьтесь —\nДневник Десантника\n: актуальные новости из самых горячих точек СВО.\nЕсли вам важно понимать, что происходит на самом деле — вы знаете, где искать\nинформацию\n.\nhttps://t.me/DnevnikDesantnika\nПодписывайтесь\nи следите за событиями без лишнего инфошума.\nвнимание по бпла",
+      "ts": 1795768150,
+      "time_label": "27.11.2026 11:29 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
+    {
+      "msg_id": 309105,
+      "text": "Запорожская область РФ\nЛДНР\nавиационная ракетно бомбовая опасность",
+      "ts": 1795767834,
+      "time_label": "27.11.2026 11:23 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 309104,
       "text": "Северск, Соледар ДНР ракетная опасность",
@@ -983,22 +1020,6 @@
       "time_label": "27.11.2026 05:41 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 309064,
-      "text": "Отбой ракетной опасности\nОрловская область",
-      "ts": 1795747235,
-      "time_label": "27.11.2026 05:40 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
-    },
-    {
-      "msg_id": 110885,
-      "text": "Орловская область\nОтбой ракетной опасности\nКарта опасностей -\nradar-vrv.ru",
-      "ts": 1795747159,
-      "time_label": "27.11.2026 05:39 МСК",
-      "source_id": "vrv_radar",
-      "source_label": "ВРВ"
     }
   ],
   "sources": [
@@ -1008,15 +1029,15 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795766862,
-  "last_event_at": "2026-11-27T08:07:42Z",
-  "fetched_at": "2026-11-27T08:20:03.327140Z",
+  "timestamp": 1795768150,
+  "last_event_at": "2026-11-27T08:29:10Z",
+  "fetched_at": "2026-11-27T08:30:03.323411Z",
   "poll_interval_sec": 35,
   "meta": {
-    "generated_at": "2026-11-27T08:20:03.327140Z",
-    "source_age_seconds": 741,
+    "generated_at": "2026-11-27T08:30:03.323411Z",
+    "source_age_seconds": 53,
     "city_count": 11,
-    "region_count": 4,
+    "region_count": 5,
     "feed_count": 80
   }
 }
