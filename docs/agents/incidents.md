@@ -33,11 +33,19 @@ opened: <дата МСК> — <кто/что завёл>
 
 ## [OPEN] video-disk-2026-11-28
 status: OPEN
+opened: 2026-11-28 09:50 МСК — video-watchdog
+сервер за 2026-11-28: disk-low. свободно 3.0 ГБ
+Что сделать:
+- освободи место: `du -xh /root --max-depth=2 | sort -h | tail -20`; `video/cleanup.sh`; не трогать video/reel/cache/tts, /root/tts-models, data/
+
+## [RESOLVED] video-disk-2026-11-28
+status: RESOLVED
 opened: 2026-11-28 03:00 МСК — video-watchdog
 сервер за 2026-11-28: disk-low. свободно 2.7 ГБ
 Что сделать:
 - освободи место: `du -xh /root --max-depth=2 | sort -h | tail -20`; `video/cleanup.sh`; не трогать video/reel/cache/tts, /root/tts-models, data/
 
+resolved: 2026-11-28 08:15 МСК — проблема исчезла (авто, сторож)
 ## [OPEN] video-disk-2026-11-27
 status: OPEN
 opened: 2026-11-27 20:20 МСК — video-watchdog
