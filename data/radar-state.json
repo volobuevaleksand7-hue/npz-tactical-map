@@ -108,8 +108,8 @@
       "bplaLaunchAnim": false,
       "rocketOnRegion": false,
       "fill": "#dc2626",
-      "last_event_ts": 1795857168,
-      "source_text": "28.11.2026 12:12 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n28.11.2026 10:59 МСК\nГорловка и близлежащие Тревога по БПЛА сохраняется ДНР"
+      "last_event_ts": 1795858208,
+      "source_text": "28.11.2026 12:12 МСК\nЛДНР Запорожская область РФ Авиационная ракетно бомбовая опасность\n\n28.11.2026 12:30 МСК\nХарцызск Зугрес и близлежащие ДНР опасность по БПЛА"
     },
     "Курская область": {
       "bpla": false,
@@ -303,6 +303,30 @@
       "source_text": "28.11.2026 12:27 МСК\nДорожное направление ТОКМАК -Мелитополь Опасность по БПЛА Запорожская область РФ"
     },
     {
+      "key": "харцызск|донецкая народная республика",
+      "name": "Харцызск",
+      "lat": 48.04277,
+      "lon": 38.14025,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795858208,
+      "source_text": "28.11.2026 12:30 МСК\nХарцызск Зугрес и близлежащие ДНР опасность по БПЛА"
+    },
+    {
       "key": "приморск|запорожская область",
       "name": "Приморск",
       "lat": 46.734536,
@@ -421,6 +445,30 @@
       "fill": "#ea580c",
       "last_event_ts": 1795852856,
       "source_text": "28.11.2026 11:00 МСК\nТрасса Р 280 Приазовское- Инзовка А/ дорога Ботиево Опасность по БПЛА Запорожская область РФ"
+    },
+    {
+      "key": "зугрес|донецкая народная республика",
+      "name": "Зугрес",
+      "lat": 48.01428,
+      "lon": 38.26599,
+      "region": "Донецкая Народная Республика",
+      "bpla": false,
+      "bplaDim": false,
+      "danger": true,
+      "attention": false,
+      "uab": false,
+      "uabDim": false,
+      "mvsh": false,
+      "mvshDim": false,
+      "fpv": false,
+      "rocket": false,
+      "rocket_level": false,
+      "aviation": false,
+      "pvo": false,
+      "bplaLaunchAnim": false,
+      "fill": "#ea580c",
+      "last_event_ts": 1795858208,
+      "source_text": "28.11.2026 12:30 МСК\nХарцызск Зугрес и близлежащие ДНР опасность по БПЛА"
     }
   ],
   "districts": {
@@ -499,6 +547,14 @@
   },
   "airport_markers": [],
   "recent_messages": [
+    {
+      "msg_id": 309632,
+      "text": "Харцызск\nЗугрес и близлежащие\nДНР\nопасность по БПЛА",
+      "ts": 1795858208,
+      "time_label": "28.11.2026 12:30 МСК",
+      "source_id": "lpr1_treugolnik",
+      "source_label": "ЛПР"
+    },
     {
       "msg_id": 309631,
       "text": "Дорожное направление\nТОКМАК -Мелитополь\nОпасность по БПЛА\nЗапорожская область РФ",
@@ -1130,14 +1186,6 @@
       "time_label": "28.11.2026 07:49 МСК",
       "source_id": "vrv_radar",
       "source_label": "ВРВ"
-    },
-    {
-      "msg_id": 309572,
-      "text": "Курская область\nОрловская область\nОтбой опасности БПЛА",
-      "ts": 1795841372,
-      "time_label": "28.11.2026 07:49 МСК",
-      "source_id": "lpr1_treugolnik",
-      "source_label": "ЛПР"
     }
   ],
   "sources": [
@@ -1147,14 +1195,14 @@
       "url": "https://radar-map.ru/"
     }
   ],
-  "timestamp": 1795858027,
-  "last_event_at": "2026-11-28T09:27:07Z",
-  "fetched_at": "2026-11-28T09:30:04.236402Z",
+  "timestamp": 1795858208,
+  "last_event_at": "2026-11-28T09:30:08Z",
+  "fetched_at": "2026-11-28T09:40:03.255963Z",
   "poll_interval_sec": 30,
   "meta": {
-    "generated_at": "2026-11-28T09:30:04.236402Z",
-    "source_age_seconds": 177,
-    "city_count": 12,
+    "generated_at": "2026-11-28T09:40:03.255963Z",
+    "source_age_seconds": 595,
+    "city_count": 14,
     "region_count": 6,
     "feed_count": 80
   }
