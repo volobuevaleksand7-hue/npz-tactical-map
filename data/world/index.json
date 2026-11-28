@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-27T19:35:35Z",
+ "generated_at": "2026-11-28T01:47:23Z",
  "methodology_version": "0.2",
  "brand": {
   "short": "ИТН",
@@ -8,21 +8,21 @@
   "en": "Fuel Tension Index"
  },
  "world": {
-  "value": 81,
-  "level": "critical",
-  "level_ru": "критично",
-  "delta_1d": 0,
+  "value": 68,
+  "level": "crisis",
+  "level_ru": "кризис",
+  "delta_1d": -13,
   "coverage": 1.0,
   "regions_missing": []
  },
  "regions": {
   "north_america": {
    "name": "Северная Америка",
-   "value": 88,
-   "level": "critical",
-   "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": 74,
+   "level": "crisis",
+   "level_ru": "кризис",
+   "delta_1d": -14,
+   "coverage": 0.65,
    "weight_world": 0.24,
    "components": [
     {
@@ -37,11 +37,11 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": null,
+     "score": 25.2,
      "weight": 0.15,
-     "raw": "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)",
-     "as_of": null,
-     "source": null
+     "raw": "доля статей о дефиците топлива 0,0003% (7-дн. среднее; p25 к 131 дн.)",
+     "as_of": "2026-11-27",
+     "source": "GDELT DOC 2.0"
     },
     {
      "id": "retail",
@@ -101,11 +101,11 @@
   },
   "east_asia": {
    "name": "Восточная Азия и АТР",
-   "value": 94,
+   "value": 77,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.65,
+   "delta_1d": -17,
+   "coverage": 0.8,
    "weight_world": 0.3,
    "components": [
     {
@@ -120,11 +120,11 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": null,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)",
-     "as_of": null,
-     "source": null
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 132 дн.)",
+     "as_of": "2026-11-28",
+     "source": "GDELT DOC 2.0"
     },
     {
      "id": "retail",
@@ -184,11 +184,11 @@
   },
   "europe": {
    "name": "Европа",
-   "value": 67,
+   "value": 57,
    "level": "crisis",
    "level_ru": "кризис",
-   "delta_1d": 0,
-   "coverage": 0.8,
+   "delta_1d": -10,
+   "coverage": 0.95,
    "weight_world": 0.15,
    "components": [
     {
@@ -203,11 +203,11 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": null,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)",
-     "as_of": null,
-     "source": null
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 131 дн.)",
+     "as_of": "2026-11-27",
+     "source": "GDELT DOC 2.0"
     },
     {
      "id": "retail",
@@ -267,11 +267,11 @@
   },
   "middle_east": {
    "name": "Ближний Восток",
-   "value": 95,
-   "level": "critical",
-   "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": 73,
+   "level": "crisis",
+   "level_ru": "кризис",
+   "delta_1d": -22,
+   "coverage": 0.65,
    "weight_world": 0.09,
    "components": [
     {
@@ -286,11 +286,11 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": null,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)",
-     "as_of": null,
-     "source": null
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 132 дн.)",
+     "as_of": "2026-11-28",
+     "source": "GDELT DOC 2.0"
     },
     {
      "id": "retail",
@@ -350,11 +350,11 @@
   },
   "south_asia": {
    "name": "Южная Азия",
-   "value": 95,
+   "value": 81,
    "level": "critical",
    "level_ru": "критично",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "delta_1d": -14,
+   "coverage": 0.65,
    "weight_world": 0.07,
    "components": [
     {
@@ -369,11 +369,11 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": null,
+     "score": 33.3,
      "weight": 0.15,
-     "raw": "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)",
-     "as_of": null,
-     "source": null
+     "raw": "доля статей о дефиците топлива 0,0005% (7-дн. среднее; p33 к 132 дн.)",
+     "as_of": "2026-11-28",
+     "source": "GDELT DOC 2.0"
     },
     {
      "id": "retail",
@@ -433,11 +433,11 @@
   },
   "latin_america": {
    "name": "Латинская Америка",
-   "value": 35,
+   "value": 48,
    "level": "tense",
    "level_ru": "напряжённо",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "delta_1d": 13,
+   "coverage": 0.65,
    "weight_world": 0.07,
    "components": [
     {
@@ -445,18 +445,18 @@
      "label": "Узкие места (проливы)",
      "score": 0.0,
      "weight": 0.3,
-     "raw": "Панамский канал: 13,0 танк./сут. при медиане года 13,0 (14-дн. среднее); Юкатанский пролив: 29,1 танк./сут. при медиане года 29,0 (7-дн. среднее)",
+     "raw": "Панамский канал: 13,0 танк./сут. при медиане года 13,0 (14-дн. среднее); Юкатанский пролив: 29,1 танк./сут. при медиане года 28,5 (7-дн. среднее)",
      "as_of": "2026-11-22",
      "source": "IMF PortWatch"
     },
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": null,
+     "score": 93.1,
      "weight": 0.15,
-     "raw": "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)",
-     "as_of": null,
-     "source": null
+     "raw": "доля статей о дефиците топлива 0,0003% (7-дн. среднее; p93 к 131 дн.)",
+     "as_of": "2026-11-27",
+     "source": "GDELT DOC 2.0"
     },
     {
      "id": "retail",
@@ -516,11 +516,11 @@
   },
   "russia_cis": {
    "name": "Россия и СНГ",
-   "value": 50,
-   "level": "crisis",
-   "level_ru": "кризис",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "value": 39,
+   "level": "tense",
+   "level_ru": "напряжённо",
+   "delta_1d": -11,
+   "coverage": 0.65,
    "weight_world": 0.04,
    "components": [
     {
@@ -535,11 +535,11 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": null,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)",
-     "as_of": null,
-     "source": null
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 132 дн.)",
+     "as_of": "2026-11-28",
+     "source": "GDELT DOC 2.0"
     },
     {
      "id": "retail",
@@ -599,11 +599,11 @@
   },
   "africa": {
    "name": "Африка",
-   "value": 47,
+   "value": 36,
    "level": "tense",
    "level_ru": "напряжённо",
-   "delta_1d": 0,
-   "coverage": 0.5,
+   "delta_1d": -11,
+   "coverage": 0.65,
    "weight_world": 0.04,
    "components": [
     {
@@ -618,11 +618,11 @@
     {
      "id": "shortage_news",
      "label": "Новости о дефиците топлива",
-     "score": null,
+     "score": 0.0,
      "weight": 0.15,
-     "raw": "ряд GDELT недоступен, < 30 дней истории или сбой источника (нули во всех регионах)",
-     "as_of": null,
-     "source": null
+     "raw": "доля статей о дефиците топлива 0,0000% (7-дн. среднее; p0 к 131 дн.)",
+     "as_of": "2026-11-27",
+     "source": "GDELT DOC 2.0"
     },
     {
      "id": "retail",
