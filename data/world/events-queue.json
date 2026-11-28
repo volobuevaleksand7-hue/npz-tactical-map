@@ -815,14 +815,14 @@
    "found_at": "2026-11-13T19:26:24Z",
    "agent": "world-events",
    "checks": {
-    "schema": "ok",
+    "schema": "fail: старше 14 дней",
     "urls_alive": "ok",
     "neutral_lexicon": "ok",
     "independent_sources": 2,
     "translation": "ok"
    },
    "verdict": "rejected",
-   "reject_reason": "duplicate:2026-11-11-hormuz-irgc-two-tankers-mine-claim"
+   "reject_reason": "schema, duplicate:2026-11-11-hormuz-irgc-two-tankers-mine-claim"
   },
   {
    "id": "2026-11-07-oman-navig8-tanker-fire",
@@ -2020,5 +2020,5 @@
    "reject_reason": "dead_url"
   }
  ],
- "validated_at": "2026-11-27T19:34:41Z"
+ "validated_at": "2026-11-28T03:34:40Z"
 }
